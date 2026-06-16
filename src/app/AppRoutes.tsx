@@ -9,14 +9,15 @@ import { LazyRoute } from "./routes/routeElements";
 
 const DentalTrendFinder = lazy(() => import("@/pages/DentalTrendFinder"));
 const ContentWorkspace = lazy(() => import("@/pages/ContentWorkspace"));
+const CrmHomepage = lazy(() => import("@/pages/CrmHomepage"));
 
 export default function AppRoutes() {
   return (
     <SessionContextProvider>
       <SidebarProvider>
         <Routes>
-          {/* Root Redirect to Patients Dashboard */}
-          <Route path="/" element={<Navigate to="/reactivation/customers" replace />} />
+          {/* Root page - CRM Homepage */}
+          <Route path="/" element={<LazyRoute><CrmHomepage /></LazyRoute>} />
 
           {/* Dental Clinic Landing Pages */}
 

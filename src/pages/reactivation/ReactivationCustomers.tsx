@@ -1624,7 +1624,7 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
 
     const newCustomer: Customer = {
       ...form,
-      id: form.id || String(Date.now()),
+      id: form.id || '',
       avatarColor: form.avatarColor || AVATAR_COLORS[Math.floor(Math.random() * AVATAR_COLORS.length)],
       problemTeeth: form.problemTeeth || [],
       xrays: form.xrays || [],

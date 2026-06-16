@@ -1657,7 +1657,7 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
     <>
       <Dialog open={open} onOpenChange={(v) => !v && onClose()}>
         <DialogContent
-          className="max-w-2xl border-0 p-0 overflow-y-auto max-h-[90vh] md:max-h-[85vh] max-sm:fixed max-sm:bottom-0 max-sm:top-auto max-sm:left-0 max-sm:translate-x-0 max-sm:translate-y-0 max-sm:w-full max-sm:max-w-full max-sm:rounded-t-2xl max-sm:rounded-b-none"
+          className="max-w-2xl border-0 p-0 overflow-hidden max-sm:fixed max-sm:bottom-0 max-sm:top-auto max-sm:left-0 max-sm:translate-x-0 max-sm:translate-y-0 max-sm:w-full max-sm:max-w-full max-sm:rounded-t-2xl max-sm:rounded-b-none max-sm:max-h-[92vh] max-sm:flex max-sm:flex-col"
           style={{ background: '#FFFFFF', border: '1px solid #E2E8F0' }}
           aria-describedby={undefined}
         >
@@ -1668,7 +1668,7 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.97, y: 8 }}
                 transition={{ duration: 0.2, ease: 'easeOut' }}
-                className="max-sm:flex max-sm:flex-col max-sm:h-full overflow-visible"
+                className="max-sm:flex max-sm:flex-col max-sm:h-full max-sm:max-h-[92vh] overflow-hidden"
               >
                 {/* Drag Handle for mobile bottom sheet */}
                 <div className="w-12 h-1 bg-slate-300 rounded-full mx-auto mt-3 mb-1 shrink-0 hidden max-sm:block" style={{ backgroundColor: '#CBD5E1' }} />
@@ -1745,7 +1745,7 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
 
                 {/* Body - General Tab */}
                 {activeTab === 'general' && (
-                  <div className="px-4 sm:px-6 py-4 space-y-4 overflow-y-visible flex-1">
+                  <div className="px-4 sm:px-6 py-4 space-y-4 overflow-y-auto max-h-[60vh] max-sm:max-h-[calc(92vh-170px)] scrollbar-none flex-1">
                     {/* Profile Photo Uploader + Basic Details */}
                     <div className="flex flex-col sm:flex-row items-center gap-4 bg-slate-50/50 border border-slate-200/60 p-4 rounded-xl">
                       {/* Avatar/Profile Photo selector */}
@@ -1990,7 +1990,7 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
 
                 {/* Body - Medical tab */}
                 {activeTab === 'medical' && (
-                  <div className="px-4 sm:px-6 py-4 space-y-5 overflow-y-visible flex-1">
+                  <div className="px-4 sm:px-6 py-4 space-y-5 overflow-y-auto max-h-[60vh] max-sm:max-h-[calc(92vh-170px)] scrollbar-none flex-1">
                     {/* Next Appointment */}
                     <div className="bg-slate-50 border border-slate-200/80 rounded-xl p-4 space-y-3">
                       <div className="flex items-center justify-between">
@@ -2155,7 +2155,7 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                       </div>
                       <p className="text-[10px] text-slate-500">Describe the medicine details (prescriptions will be printed to PDF with full instructions):</p>
                       <textarea
-                        rows={3}
+                        rows={5}
                         value={form.prescription || ''}
                         onChange={(e) => handleChange('prescription', e.target.value)}
                         placeholder="• Tab. Amoxicillin 500mg - 1 cap thrice daily for 5 days&#10;• Tab. Paracetamol 650mg - 1 tab SOS for pain"
@@ -2248,19 +2248,19 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                       </div>
 
                       {/* Quadrant filter controls */}
-                      <div className="flex bg-slate-100 p-0.5 rounded-lg border border-slate-200 gap-0.5 w-full overflow-x-auto scrollbar-none">
+                      <div className="flex bg-slate-100 p-0.5 rounded-lg border border-slate-200 gap-0.5 w-full">
                         {(['all', 'UR', 'UL', 'LL', 'LR'] as const).map((q) => (
                           <button
                             key={q}
                             type="button"
                             onClick={() => setActiveQuadrant(q)}
-                            className={`flex-1 min-w-[55px] py-1 rounded-md text-[10px] font-bold uppercase tracking-wider transition-all duration-150 text-center ${
+                            className={`flex-1 py-1 rounded-md text-[10px] font-bold uppercase tracking-wider transition-all duration-150 text-center ${
                               activeQuadrant === q
                                 ? 'bg-white text-indigo-600 shadow-sm border border-indigo-100'
                                 : 'text-slate-500 hover:text-slate-700'
                             }`}
                           >
-                            {q === 'all' ? 'Full Chart' : `${q} Quad`}
+                            {q === 'all' ? 'Full' : `${q}`}
                           </button>
                         ))}
                       </div>
@@ -2308,16 +2308,16 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                             </div>
                           </div>
                         ) : (
-                          <div className="w-full overflow-x-auto pb-2 scrollbar-thin">
-                            <div className="min-w-[450px] sm:min-w-0 w-full bg-slate-50 border border-slate-200 rounded-xl p-3 sm:p-4 flex flex-col gap-3 justify-center items-center relative">
-                              {/* Midline guides */}
-                              <div className="absolute top-0 bottom-0 left-1/2 w-px bg-slate-200 pointer-events-none" />
-                              <div className="absolute left-0 right-0 top-1/2 h-px bg-slate-200 pointer-events-none" />
+                          <div className="w-full pb-2">
+                            <div className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 sm:p-4 flex flex-col gap-3 justify-center items-center relative">
+                              {/* Midline guides (only visible on desktop when quadrants are side-by-side) */}
+                              <div className="absolute top-0 bottom-0 left-1/2 w-px bg-slate-200 pointer-events-none hidden sm:block" />
+                              <div className="absolute left-0 right-0 top-1/2 h-px bg-slate-200 pointer-events-none hidden sm:block" />
 
                               {/* UPPER ARCH */}
-                              <div className="flex items-center gap-1 sm:gap-2 justify-center w-full">
+                              <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-2 justify-center w-full">
                                 {/* Upper Right Quadrant (UR: 18 -> 11) */}
-                                <div className="flex items-center gap-[1px] sm:gap-1.5 justify-end flex-1">
+                                <div className="flex items-center gap-1 sm:gap-1.5 justify-center sm:justify-end flex-1 w-full sm:w-auto">
                                   {quad1.map((num) => {
                                     const isProblem = (form.problemTeeth || []).includes(num);
                                     return (
@@ -2326,7 +2326,7 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                                           <button
                                             type="button"
                                             onClick={() => handleToothToggle(num)}
-                                            className={`w-[20px] h-[20px] min-[380px]:w-[22px] min-[380px]:h-[22px] sm:w-8 sm:h-8 rounded flex items-center justify-center text-[8px] min-[380px]:text-[9px] sm:text-[10px] font-bold border transition-all duration-150 select-none ${
+                                            className={`w-7 h-7 min-[380px]:w-8 min-[380px]:h-8 rounded flex items-center justify-center text-[10px] font-bold border transition-all duration-150 select-none ${
                                               isProblem
                                                 ? 'bg-rose-50 border-rose-300 text-rose-600 shadow-sm'
                                                 : 'bg-white border-slate-200 hover:bg-slate-50 text-slate-600'
@@ -2343,11 +2343,11 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                                   })}
                                 </div>
 
-                                {/* midline divider */}
-                                <div className="w-[1px] h-8 bg-indigo-500/20" />
+                                {/* midline divider (desktop only) */}
+                                <div className="hidden sm:block w-[1px] h-8 bg-indigo-500/20" />
 
                                 {/* Upper Left Quadrant (UL: 21 -> 28) */}
-                                <div className="flex items-center gap-[1px] sm:gap-1.5 justify-start flex-1">
+                                <div className="flex items-center gap-1 sm:gap-1.5 justify-center sm:justify-start flex-1 w-full sm:w-auto">
                                   {quad2.map((num) => {
                                     const isProblem = (form.problemTeeth || []).includes(num);
                                     return (
@@ -2356,7 +2356,7 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                                           <button
                                             type="button"
                                             onClick={() => handleToothToggle(num)}
-                                            className={`w-[20px] h-[20px] min-[380px]:w-[22px] min-[380px]:h-[22px] sm:w-8 sm:h-8 rounded flex items-center justify-center text-[8px] min-[380px]:text-[9px] sm:text-[10px] font-bold border transition-all duration-150 select-none ${
+                                            className={`w-7 h-7 min-[380px]:w-8 min-[380px]:h-8 rounded flex items-center justify-center text-[10px] font-bold border transition-all duration-150 select-none ${
                                               isProblem
                                                 ? 'bg-rose-50 border-rose-300 text-rose-600 shadow-sm'
                                                 : 'bg-white border-slate-200 hover:bg-slate-50 text-slate-600'
@@ -2375,9 +2375,9 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                               </div>
 
                               {/* LOWER ARCH */}
-                              <div className="flex items-center gap-1 sm:gap-2 justify-center w-full">
+                              <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-2 justify-center w-full">
                                 {/* Lower Right Quadrant (LR: 48 -> 41) */}
-                                <div className="flex items-center gap-[1px] sm:gap-1.5 justify-end flex-1">
+                                <div className="flex items-center gap-1 sm:gap-1.5 justify-center sm:justify-end flex-1 w-full sm:w-auto">
                                   {quad4.map((num) => {
                                     const isProblem = (form.problemTeeth || []).includes(num);
                                     return (
@@ -2386,7 +2386,7 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                                           <button
                                             type="button"
                                             onClick={() => handleToothToggle(num)}
-                                            className={`w-[20px] h-[20px] min-[380px]:w-[22px] min-[380px]:h-[22px] sm:w-8 sm:h-8 rounded flex items-center justify-center text-[8px] min-[380px]:text-[9px] sm:text-[10px] font-bold border transition-all duration-150 select-none ${
+                                            className={`w-7 h-7 min-[380px]:w-8 min-[380px]:h-8 rounded flex items-center justify-center text-[10px] font-bold border transition-all duration-150 select-none ${
                                               isProblem
                                                 ? 'bg-rose-50 border-rose-300 text-rose-600 shadow-sm'
                                                 : 'bg-white border-slate-200 hover:bg-slate-50 text-slate-600'
@@ -2403,11 +2403,11 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                                   })}
                                 </div>
 
-                                {/* midline divider */}
-                                <div className="w-[1px] h-8 bg-indigo-500/20" />
+                                {/* midline divider (desktop only) */}
+                                <div className="hidden sm:block w-[1px] h-8 bg-indigo-500/20" />
 
                                 {/* Lower Left Quadrant (LL: 31 -> 38) */}
-                                <div className="flex items-center gap-[1px] sm:gap-1.5 justify-start flex-1">
+                                <div className="flex items-center gap-1 sm:gap-1.5 justify-center sm:justify-start flex-1 w-full sm:w-auto">
                                   {quad3.map((num) => {
                                     const isProblem = (form.problemTeeth || []).includes(num);
                                     return (
@@ -2416,7 +2416,7 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                                           <button
                                             type="button"
                                             onClick={() => handleToothToggle(num)}
-                                            className={`w-[20px] h-[20px] min-[380px]:w-[22px] min-[380px]:h-[22px] sm:w-8 sm:h-8 rounded flex items-center justify-center text-[8px] min-[380px]:text-[9px] sm:text-[10px] font-bold border transition-all duration-150 select-none ${
+                                            className={`w-7 h-7 min-[380px]:w-8 min-[380px]:h-8 rounded flex items-center justify-center text-[10px] font-bold border transition-all duration-150 select-none ${
                                               isProblem
                                                 ? 'bg-rose-50 border-rose-300 text-rose-600 shadow-sm'
                                                 : 'bg-white border-slate-200 hover:bg-slate-50 text-slate-600'
@@ -2677,7 +2677,7 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
 
                 {/* Body - Post Consultation tab */}
                 {activeTab === 'estimates' && (
-                  <div className="px-4 sm:px-6 py-4 space-y-5 overflow-y-visible flex-1 pb-6">
+                  <div className="px-4 sm:px-6 py-4 space-y-5 overflow-y-auto max-h-[60vh] max-sm:max-h-[calc(92vh-170px)] scrollbar-none flex-1 pb-6">
                     <div className="flex items-center justify-between bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5">
                       <div className="flex items-center gap-2">
                         <div className="w-2 h-2 rounded-full bg-indigo-500" />

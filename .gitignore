@@ -83,6 +83,9 @@ scratch/
 *.mp4
 *.jpg
 *.png
+!public/favicon*
+!public/apple-touch-icon.png
+!public/icon-*.png
 !public/assets/**/*
 !src/assets/**/*
 !public/videos/**/*.mp4

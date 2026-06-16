@@ -612,11 +612,13 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
           if (clinic.owner_id) {
             const { data: ownerProfile } = await supabase
               .from('profiles')
-              .select('full_name, email')
+              .select('first_name, last_name, email')
               .eq('id', clinic.owner_id)
               .single();
             if (ownerProfile) {
-              doctorName = ownerProfile.full_name || '';
+              const firstName = (ownerProfile as any).first_name || '';
+              const lastName = (ownerProfile as any).last_name || '';
+              doctorName = `${firstName} ${lastName}`.trim();
               doctorEmail = ownerProfile.email || '';
             }
           }
@@ -3318,11 +3320,13 @@ const ReactivationCustomers: React.FC = () => {
       if (clinic.owner_id) {
         const { data: ownerProfile } = await supabase
           .from('profiles')
-          .select('full_name, email')
+          .select('first_name, last_name, email')
           .eq('id', clinic.owner_id)
           .single();
         if (ownerProfile) {
-          doctorName = ownerProfile.full_name || 'Doctor';
+          const firstName = (ownerProfile as any).first_name || '';
+          const lastName = (ownerProfile as any).last_name || '';
+          doctorName = `${firstName} ${lastName}`.trim() || 'Doctor';
           doctorEmail = ownerProfile.email || '';
         }
       }

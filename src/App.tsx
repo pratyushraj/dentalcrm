@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { SplashScreen } from "@/components/mobile/SplashScreen";
 import AppToaster from "./components/AppToaster";
 import FacebookPixelTracker from "./components/FacebookPixelTracker";
 import GoogleAnalyticsTracker from "./components/GoogleAnalyticsTracker";
@@ -53,9 +52,7 @@ const App = () => {
   }, []);
 
   // Removed the temporary useEffect block for role update
-  const [showSplash, setShowSplash] = useState(true);
   const [appLoaded, setAppLoaded] = useState(false);
-  const [splashComplete, setSplashComplete] = useState(false);
 
   // Redirect hash-based public token URLs to path-based URLs (BrowserRouter uses pathname, not hash)
   useEffect(() => {
@@ -78,14 +75,7 @@ const App = () => {
     }
   }, [appLoaded]);
 
-  // Check if splash should be shown (only on first load)
-  useEffect(() => {
-    const hasSeenSplash = sessionStorage.getItem('hasSeenSplash');
-    if (hasSeenSplash) {
-      setShowSplash(false);
-      setSplashComplete(true);
-    }
-  }, []);
+
 
   // Handle OAuth errors and malformed OAuth URLs (before routing)
   useEffect(() => {
@@ -125,25 +115,12 @@ const App = () => {
     }
   }, []);
 
-  const handleSplashComplete = () => {
-    setShowSplash(false);
-    sessionStorage.setItem('hasSeenSplash', 'true');
-    // Wait for splash to fully fade out before showing app
-    setTimeout(() => {
-      setSplashComplete(true);
-    }, 250); // Slightly longer than splash fade-out duration
-  };
-
   return (
     <ErrorBoundary>
       <GlobalLoadingBar />
       <AppToaster />
-      {/* Splash Screen */}
-      {showSplash && <SplashScreen onComplete={handleSplashComplete} />}
 
-      {/* Main App - Only show after splash is completely gone */}
-      {splashComplete && (
-        <div className="min-h-dvh bg-[#020D0A]">
+      <div className="min-h-dvh bg-[#020D0A]">
           <RouterInstrumentation />
           <ScrollToTop />
           <NetworkStatusWrapper>
@@ -155,7 +132,6 @@ const App = () => {
             </TooltipProvider>
           </NetworkStatusWrapper>
         </div>
-      )}
     </ErrorBoundary>
   );
 };

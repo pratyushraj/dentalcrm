@@ -46,7 +46,10 @@ const getRedirectUrl = () => {
   return import.meta.env.VITE_APP_URL || 'http://localhost:8080';
 };
 
-export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey, {
+const safeSupabaseUrl = supabaseUrl || 'https://placeholder-project.supabase.co';
+const safeSupabaseAnonKey = supabaseAnonKey || 'placeholder-anon-key';
+
+export const supabase = createClient<Database>(safeSupabaseUrl, safeSupabaseAnonKey, {
   auth: {
     // Auto-refresh tokens
     autoRefreshToken: true,

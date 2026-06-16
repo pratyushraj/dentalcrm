@@ -36,7 +36,7 @@ export function validateEnv(): void {
       'See .env.example for reference.',
     ].join('\n');
 
-    // In dev, show a visible overlay. In prod, log and throw.
+    // In dev, show a visible overlay. In prod, log and warn.
     if (import.meta.env.DEV) {
       console.error(msg);
       // Show error in the DOM so devs see it immediately
@@ -50,8 +50,9 @@ export function validateEnv(): void {
           </div>
         `;
       }
+      throw new Error(`Missing env vars: ${missing.join(', ')}`);
+    } else {
+      console.warn(msg);
     }
-
-    throw new Error(`Missing env vars: ${missing.join(', ')}`);
   }
 }

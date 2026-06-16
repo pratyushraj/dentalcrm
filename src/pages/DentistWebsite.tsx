@@ -200,7 +200,7 @@ const PATIENT_CASES = [
     ],
     patientName: "Anjali S. (Patna)",
     testimonial: "I couldn't smile confidently for years. Dr. Aryan completed my veneers in just 2 sessions. Completely painless and life-changing.",
-    video: "/assets/yourdentist/posto_reel_insta_optimized.mp4",
+    video: "/assets/yourdentist/yourdentist_promo.mp4",
     thumbnail: "/assets/yourdentist/patient_happy_1.jpg"
   },
   {
@@ -213,7 +213,7 @@ const PATIENT_CASES = [
     ],
     patientName: "Dr. Smita Prasad (Patna)",
     testimonial: "As a doctor myself, I was highly critical of safety. The computerized implant surgery was painless, and the new teeth feel completely natural.",
-    video: "/assets/yourdentist/posto_reel_insta_optimized.mp4",
+    video: "/assets/yourdentist/yourdentist_promo.mp4",
     thumbnail: "/assets/yourdentist/patient_happy_2.png"
   },
   {
@@ -226,7 +226,7 @@ const PATIENT_CASES = [
     ],
     patientName: "Rishav Raj (Patna)",
     testimonial: "Clear veneers changed my life. Dr. Aryan explained everything so well. Gaps closed and teeth whitened in exactly 14 days as predicted.",
-    video: "/assets/yourdentist/simba_reel_optimized.mp4",
+    video: "/assets/yourdentist/yourdentist_promo.mp4",
     thumbnail: "/assets/yourdentist/patient_happy_4.jpg"
   }
 ];
@@ -816,7 +816,7 @@ export default function DentistWebsite() {
               </div>
 
               <a
-                href="https://instagram.com"
+                href="https://www.instagram.com/yourdentist_patna/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full py-2.5 bg-[#5b72ff] hover:bg-[#7a5cff] text-white rounded-xl text-[9px] font-black uppercase tracking-widest transition-all text-center block shadow-md shadow-[#5b72ff]/10"
@@ -828,9 +828,9 @@ export default function DentistWebsite() {
             {/* Reels Mockup Grid */}
             <div className="md:col-span-8 grid grid-cols-2 sm:grid-cols-3 gap-4">
               {[
-                { views: "450K+", type: "Clinic Tour", file: "/assets/yourdentist/posto_reel_insta_optimized.mp4", thumbnail: "/assets/yourdentist/clinic_in_action.jpg" },
-                { views: "820K+", type: "Patient Consult", file: "/assets/yourdentist/posto_reel_insta_optimized.mp4", thumbnail: "/assets/yourdentist/dr_with_patient_1.jpg" },
-                { views: "1.2M+", type: "Aesthetics", file: "/assets/yourdentist/simba_reel_optimized.mp4", thumbnail: "/assets/yourdentist/patient_happy_3.png" }
+                { views: "450K+", type: "Clinic Tour", file: "/assets/yourdentist/yourdentist_promo.mp4", thumbnail: "/assets/yourdentist/clinic_in_action.jpg" },
+                { views: "820K+", type: "Patient Consult", file: "/assets/yourdentist/yourdentist_promo.mp4", thumbnail: "/assets/yourdentist/dr_with_patient_1.jpg" },
+                { views: "1.2M+", type: "Aesthetics", file: "/assets/yourdentist/yourdentist_promo.mp4", thumbnail: "/assets/yourdentist/patient_happy_3.png" }
               ].map((reel, idx) => (
                 <div
                   key={idx}

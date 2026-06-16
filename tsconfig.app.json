@@ -1,0 +1,32 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "jsx": "react-jsx",
+    "types": ["vite/client"]
+  },
+  "include": ["src"],
+  "exclude": [
+    "node_modules",
+    "src/lib/onboarding",
+    "src/lib/collab",
+    "src/lib/deals",
+    "src/lib/brand",
+    "src/lib/backend",
+    "src/lib/contextual-tips",
+    "src/lib/contract",
+    "src/lib/trial.ts",
+    "src/lib/utils/analytics.ts",
+    "src/lib/utils/contractSummaryPDF.ts",
+    "src/lib/utils/contractValidation.ts",
+    "src/lib/utils/createCalendarEvent.ts",
+    "src/lib/utils/dealZipBundle.ts",
+    "src/lib/utils/exportPaymentsReport.ts",
+    "src/lib/utils/inputValidation.ts",
+    "src/lib/utils/touch-feedback.ts",
+    "src/lib/creatorProfileCompletion.ts",
+    "src/lib/subscription.ts",
+    "src/lib/sentry.ts"
+  ]
+}

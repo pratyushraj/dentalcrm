@@ -1,0 +1,89 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+.env
+.env.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+tsconfig.tsbuildinfo
+memory/
+MEMORY.md
+# package-lock.json (switched to npm to fix Vercel pnpm fetch bug)
+
+# Supabase
+supabase/.temp/
+
+# One-time migration SQL files (should not be in version control)
+*.sql
+!supabase/migrations/*.sql
+
+# One-time fix/setup docs
+*_FIX.md
+*_SETUP.md
+*_GUIDE.md
+*_SUMMARY.md
+*_REPORT.md
+APPLY_*.md
+RUN_*.md
+UPDATE_*.sql
+VERIFY_*.sql
+FIX_*.sql
+.vercel
+cursor_mac_id_modifier.sh
+server/.env
+*.env.bak
+
+# Local tooling / caches
+.pnpm-store/
+.tmp/
+.venv/
+.python-version
+
+# Test artifacts
+playwright-report/
+test-results/
+
+# Local audit artifacts
+reports/ui-audit-*/
+
+# Temp/output
+tmp/
+coverage/
+*.zip
+
+# Secrets / private exports (never commit)
+rzp.csv
+RENDER_ENV_VARIABLES.txt
+
+# Nested repos / local clones
+server/nanobot/
+.env*.local
+
+# Temporary scripts and assets
+scratch/
+*.mp4
+*.jpg
+*.png
+!public/assets/**/*
+!src/assets/**/*
+!public/videos/**/*.mp4
+!public/videos/*.mp4

@@ -1657,7 +1657,7 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
     <>
       <Dialog open={open} onOpenChange={(v) => !v && onClose()}>
         <DialogContent
-          className="max-w-2xl border-0 p-0 overflow-hidden max-sm:fixed max-sm:bottom-0 max-sm:top-auto max-sm:left-0 max-sm:translate-x-0 max-sm:translate-y-0 max-sm:w-full max-sm:max-w-full max-sm:rounded-t-2xl max-sm:rounded-b-none max-sm:max-h-[92vh] max-sm:flex max-sm:flex-col"
+          className="max-w-2xl border-0 p-0 overflow-y-auto max-h-[90vh] md:max-h-[85vh] max-sm:fixed max-sm:bottom-0 max-sm:top-auto max-sm:left-0 max-sm:translate-x-0 max-sm:translate-y-0 max-sm:w-full max-sm:max-w-full max-sm:rounded-t-2xl max-sm:rounded-b-none"
           style={{ background: '#FFFFFF', border: '1px solid #E2E8F0' }}
           aria-describedby={undefined}
         >
@@ -1668,7 +1668,7 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.97, y: 8 }}
                 transition={{ duration: 0.2, ease: 'easeOut' }}
-                className="max-sm:flex max-sm:flex-col max-sm:h-full max-sm:max-h-[92vh] overflow-hidden"
+                className="max-sm:flex max-sm:flex-col max-sm:h-full overflow-visible"
               >
                 {/* Drag Handle for mobile bottom sheet */}
                 <div className="w-12 h-1 bg-slate-300 rounded-full mx-auto mt-3 mb-1 shrink-0 hidden max-sm:block" style={{ backgroundColor: '#CBD5E1' }} />
@@ -1745,7 +1745,7 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
 
                 {/* Body - General Tab */}
                 {activeTab === 'general' && (
-                  <div className="px-4 sm:px-6 py-4 space-y-4 overflow-y-auto max-h-[60vh] max-sm:max-h-[calc(92vh-170px)] scrollbar-none flex-1">
+                  <div className="px-4 sm:px-6 py-4 space-y-4 overflow-y-visible flex-1">
                     {/* Profile Photo Uploader + Basic Details */}
                     <div className="flex flex-col sm:flex-row items-center gap-4 bg-slate-50/50 border border-slate-200/60 p-4 rounded-xl">
                       {/* Avatar/Profile Photo selector */}
@@ -1990,7 +1990,7 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
 
                 {/* Body - Medical tab */}
                 {activeTab === 'medical' && (
-                  <div className="px-4 sm:px-6 py-4 space-y-5 overflow-y-auto max-h-[60vh] max-sm:max-h-[calc(92vh-170px)] scrollbar-none flex-1">
+                  <div className="px-4 sm:px-6 py-4 space-y-5 overflow-y-visible flex-1">
                     {/* Next Appointment */}
                     <div className="bg-slate-50 border border-slate-200/80 rounded-xl p-4 space-y-3">
                       <div className="flex items-center justify-between">
@@ -2677,7 +2677,7 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
 
                 {/* Body - Post Consultation tab */}
                 {activeTab === 'estimates' && (
-                  <div className="px-4 sm:px-6 py-4 space-y-5 overflow-y-auto max-h-[60vh] max-sm:max-h-[calc(92vh-170px)] scrollbar-none flex-1 pb-6">
+                  <div className="px-4 sm:px-6 py-4 space-y-5 overflow-y-visible flex-1 pb-6">
                     <div className="flex items-center justify-between bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5">
                       <div className="flex items-center gap-2">
                         <div className="w-2 h-2 rounded-full bg-indigo-500" />

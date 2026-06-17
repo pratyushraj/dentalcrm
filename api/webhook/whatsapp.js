@@ -1,12 +1,11 @@
 import { createClient } from '@supabase/supabase-js';
-import type { VercelRequest, VercelResponse } from '@vercel/node';
 
 // Initialize Supabase Client with Service Role Key for backend administration
 const supabaseUrl = process.env.SUPABASE_URL || 'https://sqqocqujxlgoxbcnfbfb.supabase.co';
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
 const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
-export default async function handler(req: VercelRequest, res: VercelResponse) {
+export default async function handler(req, res) {
   // 1. Webhook Verification (Meta Verification GET request)
   if (req.method === 'GET') {
     const mode = req.query['hub.mode'];
@@ -55,7 +54,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
               for (const message of value.messages) {
                 // Parse message details
                 const fromPhone = message.from; // e.g. "917292984244"
-                const contact = value.contacts?.find((c: any) => c.wa_id === fromPhone);
+                const contact = value.contacts?.find((c) => c.wa_id === fromPhone);
                 const senderName = contact?.profile?.name || 'Patient';
                 const bodyText = message.text?.body || '';
                 const wamid = message.id;
@@ -100,7 +99,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       }
 
       return res.status(200).send('EVENT_RECEIVED');
-    } catch (err: any) {
+    } catch (err) {
       console.error('Webhook error:', err);
       return res.status(500).json({ error: err.message });
     }

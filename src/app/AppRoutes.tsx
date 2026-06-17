@@ -26,6 +26,9 @@ export default function AppRoutes() {
 
           {/* Reactivation Dashboard Portal Routes */}
           {ReactivationRoutes()}
+
+          {/* Fallback wildcard route */}
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
         <AddToHomeScreen />
       </SidebarProvider>

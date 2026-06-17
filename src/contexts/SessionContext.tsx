@@ -102,12 +102,13 @@ const getFallbackRedirectPath = (
   role: string | null | undefined,
   onboardingComplete?: boolean | null,
 ) => {
+  if (role === 'dentist' || role === 'receptionist') return '/reactivation/customers';
   if (role === 'brand') return onboardingComplete ? '/brand-dashboard' : '/brand-onboarding';
   if (role === 'admin') return '/admin';
   if (role === 'chartered_accountant') return '/ca-dashboard';
   if (role === 'lawyer') return '/lawyer-dashboard';
-  // Default to creator role and check onboarding status
-  return onboardingComplete ? '/creator-dashboard' : '/creator-onboarding';
+  // Default fallback for dental CRM
+  return '/reactivation/customers';
 };
 
 const isRecoveryAuthFlow = (hash: string, event?: string) =>
@@ -719,7 +720,7 @@ export const SessionContextProvider = ({ children }: { children: ReactNode }) =>
                       redirectPath = '/reset-password';
                       sessionStorage.setItem('is_recovery_flow', 'true');
                     }
-                    else if (isPratyush) redirectPath = '/creator-dashboard';
+                    else if (isPratyush) redirectPath = '/reactivation/customers';
                     else redirectPath = getFallbackRedirectPath(p?.role, p?.onboarding_complete);
                   } catch (error) {
                     debugWarn('[SessionContext] Error fetching profile in initializeSession, using metadata fallback:', error);
@@ -1057,7 +1058,7 @@ export const SessionContextProvider = ({ children }: { children: ReactNode }) =>
               const userEmail = session.user.email?.toLowerCase();
               const isPratyush = userEmail === 'pratyushraj@outlook.com';
               const p = (profileData as any);
-              if (isPratyush) targetPath = '/creator-dashboard';
+              if (isPratyush) targetPath = '/reactivation/customers';
               else targetPath = getFallbackRedirectPath(
                 p?.role || getMetadataRole(session.user),
                 p?.onboarding_complete ?? (getMetadataRole(session.user) === 'brand' ? false : null),

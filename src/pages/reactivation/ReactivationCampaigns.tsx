@@ -2,6 +2,9 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import CountUp from 'react-countup';
 import { useSession } from '@/contexts/SessionContext';
+import { supabase } from '@/lib/supabase';
+import { logWhatsAppMessage } from '@/utils/whatsappLogger';
+import { loadWhatsAppTemplates } from './ReactivationClinicSettings';
 import {
   RefreshCw,
   Sparkles,
@@ -193,7 +196,14 @@ const INDUSTRIES = [
   'Dental Clinic',
 ];
 
-const MOCK_CUSTOMERS: Customer[] = [];
+const MOCK_CUSTOMERS: Customer[] = [
+  { id: 'c1', name: 'Amit Patel', phone: '+91 98765 43210', lastVisit: '2025-12-10', status: 'Lapsed', city: 'Patna' },
+  { id: 'c2', name: 'Priya Sharma', phone: '+91 87654 32109', lastVisit: '2025-11-24', status: 'Active', city: 'Patna' },
+  { id: 'c3', name: 'Rajesh Kumar', phone: '+91 76543 21098', lastVisit: '2025-10-05', status: 'Lapsed', city: 'Patna' },
+  { id: 'c4', name: 'Sneha Reddy', phone: '+91 95432 10987', lastVisit: '2026-02-18', status: 'New', city: 'Patna' },
+  { id: 'c5', name: 'Vikram Singh', phone: '+91 91234 56789', lastVisit: '2025-08-30', status: 'Lapsed', city: 'Patna' },
+  { id: 'c6', name: 'Ananya Sen', phone: '+91 98123 45670', lastVisit: '2025-05-15', status: 'VIP', city: 'Patna' },
+];
 
 const GENERATED_MESSAGES: GeneratedMessage[] = [
   {
@@ -680,7 +690,42 @@ const CampaignPreviewCard: React.FC<CampaignPreviewCardProps> = ({
 // ─── Main Component ───────────────────────────────────────────────────────────
 
 const ReactivationCampaigns: React.FC = () => {
-  const { profile } = useSession();
+  const { profile, organizationId } = useSession();
+  const orgId = organizationId || 'default';
+  const templates = React.useMemo(() => loadWhatsAppTemplates(orgId), [orgId]);
+  const [selectedTemplateIndex, setSelectedTemplateIndex] = useState(0);
+  const [templateVariables, setTemplateVariables] = useState<string[]>([]);
+
+  // Parser to extract dynamic variable placeholders count
+  const getTemplateVariablesCount = (bodyText: string) => {
+    const matches = bodyText.match(/\{\{(\d+)\}\}/g);
+    if (!matches) return 0;
+    const nums = matches.map(m => parseInt(m.replace(/[\{\}]/g, ''), 10));
+    return Math.max(...nums, 0);
+  };
+
+  // Compiler to substitute dynamic values in live preview
+  const getCompiledTemplateBody = (bodyText: string, vars: string[]) => {
+    let compiled = bodyText;
+    vars.forEach((val, idx) => {
+      const placeholder = `{{${idx + 1}}}`;
+      const replacedValue = val.trim() || `[Variable ${idx + 1}]`;
+      compiled = compiled.split(placeholder).join(replacedValue);
+    });
+    return compiled;
+  };
+
+  // Re-initialize parameter inputs when template selection changes
+  useEffect(() => {
+    const currentTemplate = templates[selectedTemplateIndex];
+    if (currentTemplate) {
+      const count = getTemplateVariablesCount(currentTemplate.body);
+      setTemplateVariables(Array(count).fill(''));
+    } else {
+      setTemplateVariables([]);
+    }
+  }, [selectedTemplateIndex, templates]);
+
   const [step, setStep] = useState(1);
   const [form, setForm] = useState<CampaignForm>(() => {
     return {
@@ -766,12 +811,45 @@ const ReactivationCampaigns: React.FC = () => {
     });
   }, [form.businessName, form.offerDescription]);
 
+  const [campaignCustomers, setCampaignCustomers] = useState<Customer[]>(MOCK_CUSTOMERS);
+
+  // Load patients from Supabase if available
+  useEffect(() => {
+    if (!orgId || orgId === 'default') return;
+
+    async function fetchPatients() {
+      try {
+        const { data, error } = await supabase
+          .from('dental_patients')
+          .select('id, name, phone, last_visit, status')
+          .eq('clinic_id', orgId);
+
+        if (error) throw error;
+        if (data && data.length > 0) {
+          const mapped = data.map((d: any) => ({
+            id: d.id,
+            name: d.name,
+            phone: d.phone,
+            lastVisit: d.last_visit || '2025-12-01',
+            status: (d.status === 'Active' || d.status === 'Lapsed' || d.status === 'VIP' || d.status === 'New' ? d.status : 'Active') as any,
+            city: 'Patna',
+          }));
+          setCampaignCustomers(mapped);
+          setSelectedCustomers(new Set(mapped.map(c => c.id)));
+        }
+      } catch (err) {
+        console.error('Error loading patients in campaigns:', err);
+      }
+    }
+    fetchPatients();
+  }, [orgId]);
+
   // Step 2 — message generation state
   const [generatingStep, setGeneratingStep] = useState(0);
   const [generatingDone, setGeneratingDone] = useState(false);
 
   // Step 3 — broadcast state
-  const [selectedCustomers, setSelectedCustomers] = useState<Set<string>>(
+  const [selectedCustomers, setSelectedCustomers] = useState<Set<string>>(() => 
     new Set(MOCK_CUSTOMERS.map((c) => c.id))
   );
   const [scheduleType, setScheduleType] = useState<'now' | 'later'>('now');
@@ -826,6 +904,31 @@ const ReactivationCampaigns: React.FC = () => {
         const sent = selectedCustomers.size;
         setStats({ sent, delivered: 0, read: 0, replied: 0 });
 
+        // Log broadcast sends to WABA logs
+        selectedCustomers.forEach(custId => {
+          const cust = campaignCustomers.find(c => c.id === custId);
+          if (cust) {
+            try {
+              const currentTemplate = templates[selectedTemplateIndex];
+              const templateText = currentTemplate?.body || generatedMessages[0]?.content || '';
+              const compiledBody = getCompiledTemplateBody(templateText, templateVariables).split('{{Name}}').join(cust.name);
+              
+              logWhatsAppMessage(orgId, {
+                recipientName: cust.name,
+                recipientPhone: cust.phone,
+                templateName: currentTemplate?.name || 'reactivation_cleaning_offer',
+                body: compiledBody,
+                status: 'sent',
+                type: 'campaign',
+                direction: 'outbound',
+                variables: templateVariables
+              });
+            } catch (logErr) {
+              console.error('Failed to log broadcast message:', logErr);
+            }
+          }
+        });
+
         // Animate delivered
         setTimeout(() => {
           const delivered = Math.floor(sent * 0.965);
@@ -846,7 +949,7 @@ const ReactivationCampaigns: React.FC = () => {
         setBroadcastProgress(progress);
       }
     }, 80);
-  }, [selectedCustomers.size]);
+  }, [selectedCustomers.size, campaignCustomers, templates, selectedTemplateIndex, templateVariables, orgId]);
 
   useEffect(() => {
     return () => {
@@ -864,10 +967,10 @@ const ReactivationCampaigns: React.FC = () => {
   };
 
   const toggleAll = () => {
-    if (selectedCustomers.size === MOCK_CUSTOMERS.length) {
+    if (selectedCustomers.size === campaignCustomers.length) {
       setSelectedCustomers(new Set());
     } else {
-      setSelectedCustomers(new Set(MOCK_CUSTOMERS.map((c) => c.id)));
+      setSelectedCustomers(new Set(campaignCustomers.map((c) => c.id)));
     }
   };
 
@@ -1548,12 +1651,12 @@ const ReactivationCampaigns: React.FC = () => {
                         onClick={toggleAll}
                         className="flex items-center gap-2 text-[11px] font-medium text-slate-500 hover:text-slate-700 transition-colors"
                       >
-                        {selectedCustomers.size === MOCK_CUSTOMERS.length ? (
+                        {selectedCustomers.size === campaignCustomers.length ? (
                           <CheckSquare size={15} className="text-indigo-600" />
                         ) : (
                           <Square size={15} className="text-slate-400" />
                         )}
-                        {selectedCustomers.size === MOCK_CUSTOMERS.length
+                        {selectedCustomers.size === campaignCustomers.length
                           ? 'Deselect All'
                           : 'Select All'}
                       </button>
@@ -1563,7 +1666,7 @@ const ReactivationCampaigns: React.FC = () => {
                         <span className="text-[12px] font-semibold text-slate-800">
                           {selectedCustomers.size}{' '}
                           <span className="text-slate-500 font-normal">
-                            of {MOCK_CUSTOMERS.length} selected
+                            of {campaignCustomers.length} selected
                           </span>
                         </span>
                       </div>
@@ -1575,7 +1678,7 @@ const ReactivationCampaigns: React.FC = () => {
 
                   {/* Table */}
                   <div className="divide-y" style={{ borderColor: 'rgba(255,255,255,0.04)' }}>
-                    {MOCK_CUSTOMERS.map((customer) => {
+                    {campaignCustomers.map((customer) => {
                       const isSelected = selectedCustomers.has(customer.id);
                       return (
                         <motion.div
@@ -1718,31 +1821,79 @@ const ReactivationCampaigns: React.FC = () => {
                     )}
                   </div>
 
-                  {/* Template preview */}
+                  {/* Template selector and preview */}
                   <div>
                     <label className="text-[11px] text-slate-400 font-medium mb-2 block">
-                      WhatsApp Template
+                      Select WhatsApp Template
                     </label>
-                    <div
-                      className="flex items-center gap-3 px-4 py-3 rounded-xl"
+                    <select
+                      value={selectedTemplateIndex}
+                      onChange={(e) => setSelectedTemplateIndex(Number(e.target.value))}
+                      className="w-full px-3 py-2.5 mb-3 rounded-xl text-[12.5px] outline-none text-slate-200 cursor-pointer"
                       style={{
-                        background: 'rgba(16,185,129,0.06)',
-                        border: '1px solid rgba(16,185,129,0.15)',
+                        background: '#1e293b',
+                        border: '1px solid #334155',
                       }}
                     >
-                      <MessageCircle size={15} className="text-emerald-700 flex-shrink-0" />
-                      <div className="flex-1 min-w-0">
-                        <p className="text-[12px] font-semibold text-emerald-300">
-                          reactivation_v1_hi_IN
-                        </p>
-                        <p className="text-[10px] text-slate-400 truncate mt-0.5">
-                          Hi {'{{'} Name {'}}'} 👋 We miss you at Smile Dental...
+                      {templates.map((tpl, i) => (
+                        <option key={i} value={i} className="bg-slate-900 text-slate-100">
+                          {tpl.name} ({tpl.language})
+                        </option>
+                      ))}
+                    </select>
+
+                    {templateVariables.length > 0 && (
+                      <div className="mb-3 p-3.5 rounded-xl border border-slate-800 bg-slate-950/20 flex flex-col gap-2.5">
+                        <label className="text-[10px] text-indigo-400 font-bold uppercase tracking-wider">
+                          Fill Template Parameters
+                        </label>
+                        <div className="grid grid-cols-1 gap-2">
+                          {templateVariables.map((val, idx) => (
+                            <div key={idx} className="flex items-center gap-2">
+                              <span className="text-[11px] font-mono text-slate-500 w-8 font-bold">
+                                {"{{"}{idx + 1}{"}}"}
+                              </span>
+                              <input
+                                type="text"
+                                placeholder={`Enter value for {{${idx + 1}}}`}
+                                value={val}
+                                onChange={(e) => {
+                                  const next = [...templateVariables];
+                                  next[idx] = e.target.value;
+                                  setTemplateVariables(next);
+                                }}
+                                className="flex-1 px-3 py-1.5 rounded-lg text-[12px] outline-none text-slate-250 bg-slate-900 border border-slate-800/80 focus:border-indigo-500/50 transition-all duration-150"
+                              />
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {templates[selectedTemplateIndex] && (
+                      <div
+                        className="flex flex-col gap-2 px-4 py-3.5 rounded-xl text-left"
+                        style={{
+                          background: 'rgba(16,185,129,0.06)',
+                          border: '1px solid rgba(16,185,129,0.15)',
+                        }}
+                      >
+                        <div className="flex items-center justify-between gap-2">
+                          <div className="flex items-center gap-2">
+                            <MessageCircle size={14} className="text-emerald-400" />
+                            <p className="text-[12px] font-mono font-bold text-emerald-300 truncate max-w-[180px]">
+                              {templates[selectedTemplateIndex].name}
+                            </p>
+                          </div>
+                          <span className="text-[9.5px] font-bold px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                            {templates[selectedTemplateIndex].status}
+                          </span>
+                        </div>
+                        <p className="text-[11.5px] text-slate-300 leading-relaxed font-medium bg-slate-950/30 p-2.5 rounded-lg border border-slate-800/40 whitespace-pre-wrap">
+                          {getCompiledTemplateBody(templates[selectedTemplateIndex].body, templateVariables)}
                         </p>
                       </div>
-                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-emerald-500/15 text-emerald-700 border border-emerald-200 flex-shrink-0">
-                        APPROVED
-                      </span>
-                    </div>
+                    )}
                   </div>
                 </div>
 

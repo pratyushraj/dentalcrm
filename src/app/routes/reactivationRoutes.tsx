@@ -14,8 +14,9 @@ const ReactivationAnalytics = lazy(() => import('@/pages/reactivation/Reactivati
 const ReactivationAutomations = lazy(() => import('@/pages/reactivation/ReactivationAutomations'));
 const ReactivationReviews = lazy(() => import('@/pages/reactivation/ReactivationReviews'));
 const ReactivationLogin = lazy(() => import('@/pages/reactivation/ReactivationLogin'));
-const ReactivationScheduler = lazy(() => import('@/pages/reactivation/ReactivationScheduler'));
+const ReactivationSignup = lazy(() => import('@/pages/reactivation/ReactivationSignup'));
 const ReactivationClinicSettings = lazy(() => import('@/pages/reactivation/ReactivationClinicSettings'));
+const ReactivationSentMessages = lazy(() => import('@/pages/reactivation/ReactivationSentMessages'));
 
 // ─── Route definitions ────────────────────────────────────────────────────────
 
@@ -26,6 +27,14 @@ export const ReactivationRoutes = () => (
       element={
         <LazyRoute>
           <ReactivationLogin />
+        </LazyRoute>
+      }
+    />
+    <Route
+      path="/reactivation/signup"
+      element={
+        <LazyRoute>
+          <ReactivationSignup />
         </LazyRoute>
       }
     />
@@ -50,16 +59,6 @@ export const ReactivationRoutes = () => (
         <LazyRoute>
           <ReactivationLayout>
             <ReactivationCustomers />
-          </ReactivationLayout>
-        </LazyRoute>
-      }
-    />
-    <Route
-      path="/reactivation/scheduler"
-      element={
-        <LazyRoute>
-          <ReactivationLayout>
-            <ReactivationScheduler />
           </ReactivationLayout>
         </LazyRoute>
       }
@@ -110,6 +109,16 @@ export const ReactivationRoutes = () => (
         <LazyRoute>
           <ReactivationLayout>
             <ReactivationReviews />
+          </ReactivationLayout>
+        </LazyRoute>
+      }
+    />
+    <Route
+      path="/reactivation/sent-messages"
+      element={
+        <LazyRoute>
+          <ReactivationLayout>
+            <ReactivationSentMessages />
           </ReactivationLayout>
         </LazyRoute>
       }

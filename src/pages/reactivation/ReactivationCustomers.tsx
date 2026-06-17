@@ -70,6 +70,8 @@ import {
 import { useSession } from '@/contexts/SessionContext';
 import { supabase } from '@/lib/supabase';
 import { refineTranscriptWithLLM } from '@/lib/ai/gemini';
+import { loadClinicProcedures, Procedure, loadWhatsAppTemplates } from './ReactivationClinicSettings';
+import { logWhatsAppMessage } from '@/utils/whatsappLogger';
 
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -132,6 +134,7 @@ interface Customer {
     grandTotal: number;
     status: 'Draft' | 'Sent' | 'Approved';
   }>;
+  appointmentTime?: string;
 }
 
 type SortField = 'lastVisit' | 'totalSpend' | null;
@@ -504,6 +507,7 @@ const EMPTY_CUSTOMER: Customer = {
   toothNotes: {},
   toothConditions: {},
   vitals: { bp: '', pulse: '', temp: '' },
+  appointmentTime: '10:00 AM',
 };
 
 const getInitialForm = (customer?: Customer): Customer => {
@@ -524,6 +528,7 @@ const getInitialForm = (customer?: Customer): Customer => {
     toothNotes: customer.toothNotes || {},
     toothConditions: customer.toothConditions || {},
     vitals: customer.vitals || { bp: '', pulse: '', temp: '' },
+    appointmentTime: customer.appointmentTime || '10:00 AM',
   };
 };
 
@@ -545,24 +550,22 @@ const getToothName = (num: number): string => {
   return `${quadNames[quadrant]} ${toothNames[code]} (Tooth ${num})`;
 };
 
-interface Procedure {
-  name: string;
-  category: 'Therapeutic' | 'Cosmetic';
-  defaultCost: number;
-  gstRate: number; // 0 or 18
-}
+const getShortToothLabel = (num: number): string => {
+  const code = num % 10;
+  const shortNames = [
+    "",
+    "Central",
+    "Lateral",
+    "Canine",
+    "1st Premolar",
+    "2nd Premolar",
+    "1st Molar",
+    "2nd Molar",
+    "Wisdom"
+  ];
+  return `Tooth ${num} (${shortNames[code]})`;
+};
 
-const PROCEDURES_CATALOG: Procedure[] = [
-  { name: 'Root Canal Treatment (RCT)', category: 'Therapeutic', defaultCost: 3500, gstRate: 0 },
-  { name: 'Composite Filling / Restoration', category: 'Therapeutic', defaultCost: 1500, gstRate: 0 },
-  { name: 'Dental Implant Placement', category: 'Therapeutic', defaultCost: 25000, gstRate: 0 },
-  { name: 'PFM Crown / Cap', category: 'Therapeutic', defaultCost: 4000, gstRate: 0 },
-  { name: 'Zirconia Premium Crown', category: 'Therapeutic', defaultCost: 8000, gstRate: 0 },
-  { name: 'Scaling & Deep Polishing', category: 'Therapeutic', defaultCost: 1200, gstRate: 0 },
-  { name: 'Laser Teeth Whitening', category: 'Cosmetic', defaultCost: 12000, gstRate: 18 },
-  { name: 'Clear Aligners (Standard)', category: 'Cosmetic', defaultCost: 45000, gstRate: 18 },
-  { name: 'Clear Aligners (Premium)', category: 'Cosmetic', defaultCost: 85000, gstRate: 18 }
-];
 
 const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, onSave }) => {
   const { profile } = useSession();
@@ -581,6 +584,7 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
   // Clinic branding (loaded from localStorage, used for PDF generation)
   const { organizationId } = useSession();
   const _orgId = organizationId || 'default';
+  const proceduresCatalog = useMemo(() => loadClinicProcedures(_orgId), [_orgId]);
   const [clinicBranding, setClinicBranding] = useState(() => {
     try {
       const raw = localStorage.getItem(`clinic_branding_${_orgId}`);
@@ -666,7 +670,9 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
   // Selected builder item
   const [builderTooth, setBuilderTooth] = useState<string>('');
   const [builderProcedureIdx, setBuilderProcedureIdx] = useState<string>('0');
-  const [builderCost, setBuilderCost] = useState<number>(3500);
+  const [builderCost, setBuilderCost] = useState<number>(() => {
+    return proceduresCatalog.length > 0 ? proceduresCatalog[0].defaultCost : 3500;
+  });
   const [copiedEstimate, setCopiedEstimate] = useState(false);
   React.useEffect(() => {
     setForm(getInitialForm(customer));
@@ -674,6 +680,11 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
     setShowAdvancedClinical(false);
     setCopiedEstimate(false);
     setActiveQuadrant('all');
+    
+    if (proceduresCatalog.length > 0) {
+      setBuilderProcedureIdx('0');
+      setBuilderCost(proceduresCatalog[0].defaultCost);
+    }
     
     if (customer?.estimates && customer.estimates.length > 0) {
       const activeEst = customer.estimates[0];
@@ -1236,7 +1247,7 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
     
     // Context-aware defaults when changing service
     if (field === 'service' && value) {
-      const selectedProc = PROCEDURES_CATALOG.find(p => p.name === value);
+      const selectedProc = proceduresCatalog.find(p => p.name === value);
       if (selectedProc) {
         // Pre-fill totalSpend
         setForm((prev) => ({ ...prev, service: value, totalSpend: selectedProc.defaultCost }));
@@ -1245,7 +1256,7 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
         setEstimateItems([{
           procedure: selectedProc.name,
           cost: selectedProc.defaultCost,
-          isCosmetic: selectedProc.category === 'Cosmetic'
+          isCosmetic: selectedProc.gstRate === 18
         }]);
         
         // Set the active tab to estimates/billing
@@ -1691,7 +1702,7 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
 
                     {/* Tab Selector & Settings Gear */}
                     <div className="flex items-center gap-2 self-start sm:self-auto w-full sm:w-auto">
-                      <div className="flex bg-slate-100 p-1 rounded-lg border border-slate-200 gap-0.5 overflow-x-auto scrollbar-none flex-nowrap shrink-0 w-full sm:w-auto">
+                      <div className="flex bg-slate-100 p-1 rounded-lg border border-slate-200 gap-0.5 overflow-x-auto scrollbar-none flex-nowrap flex-1 sm:flex-none">
                         <button
                           type="button"
                           onClick={() => setActiveTab('general')}
@@ -1810,8 +1821,8 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                       </div>
                     </div>
 
-                    {/* Last Visit + Service */}
-                    <div className="grid grid-cols-1 responsive-grid-cols-2 gap-3">
+                    {/* Last Visit + Time + Service */}
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                       <div>
                         <label className="block text-[11px] text-slate-500 font-medium mb-1.5 uppercase tracking-wider">
                           Visit Date
@@ -1826,7 +1837,35 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                       </div>
                       <div>
                         <label className="block text-[11px] text-slate-500 font-medium mb-1.5 uppercase tracking-wider">
-                          Planned Treatment / Reason
+                          Visit Time
+                        </label>
+                        <select
+                          className={`${inputBase} ${inputFocusStyle} cursor-pointer`}
+                          style={inputStyle}
+                          value={form.appointmentTime}
+                          onChange={(e) => handleChange('appointmentTime', e.target.value)}
+                        >
+                          <option value="09:00 AM">09:00 AM</option>
+                          <option value="09:30 AM">09:30 AM</option>
+                          <option value="10:00 AM">10:00 AM</option>
+                          <option value="10:30 AM">10:30 AM</option>
+                          <option value="11:00 AM">11:00 AM</option>
+                          <option value="11:30 AM">11:30 AM</option>
+                          <option value="12:00 PM">12:00 PM</option>
+                          <option value="12:30 PM">12:30 PM</option>
+                          <option value="01:00 PM">01:00 PM</option>
+                          <option value="01:30 PM">01:30 PM</option>
+                          <option value="02:00 PM">02:00 PM</option>
+                          <option value="03:00 PM">03:00 PM</option>
+                          <option value="04:00 PM">04:00 PM</option>
+                          <option value="05:00 PM">05:00 PM</option>
+                          <option value="06:00 PM">06:00 PM</option>
+                          <option value="07:00 PM">07:00 PM</option>
+                        </select>
+                      </div>
+                      <div>
+                        <label className="block text-[11px] text-slate-500 font-medium mb-1.5 uppercase tracking-wider">
+                          Planned Treatment
                         </label>
                         <select
                           className={`${inputBase} ${inputFocusStyle} cursor-pointer`}
@@ -1837,7 +1876,7 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                           <option value="">Select Treatment...</option>
                           <option value="Consultation / Check-up">Consultation / Check-up</option>
                           <option value="Tooth Pain / Emergency">Tooth Pain / Emergency</option>
-                          {PROCEDURES_CATALOG.map((p) => (
+                          {proceduresCatalog.map((p) => (
                             <option key={p.name} value={p.name}>{p.name}</option>
                           ))}
                           <option value="Other">Other / Not Listed</option>
@@ -2701,16 +2740,13 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                         {/* Tooth selector */}
                         <div>
                           <label className="block text-[10px] text-slate-500 font-medium mb-1.5 uppercase tracking-wider">Tooth / Area</label>
-                          <select
+                          <input
+                            type="text"
+                            placeholder="e.g. 11, 46"
                             value={builderTooth}
                             onChange={(e) => setBuilderTooth(e.target.value)}
-                            className="w-full bg-white border border-slate-200 rounded-lg px-2.5 py-2 text-[12px] text-slate-700 outline-none cursor-pointer"
-                          >
-                            <option value="">General / No Tooth</option>
-                            {(form.problemTeeth || []).map((t) => (
-                              <option key={t} value={t}>Tooth {t} ({getToothName(t).split(' (Tooth ')[0]})</option>
-                            ))}
-                          </select>
+                            className="w-full bg-white border border-slate-200 px-2.5 py-1.5 rounded-lg text-[12px] text-slate-800 outline-none transition-all focus:border-indigo-500"
+                          />
                         </div>
 
                         {/* Procedure selector */}
@@ -2721,13 +2757,13 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                             onChange={(e) => {
                               const idx = e.target.value;
                               setBuilderProcedureIdx(idx);
-                              setBuilderCost(PROCEDURES_CATALOG[Number(idx)].defaultCost);
+                              setBuilderCost(proceduresCatalog[Number(idx)].defaultCost);
                             }}
                             className="w-full bg-white border border-slate-200 rounded-lg px-2.5 py-2 text-[12px] text-slate-700 outline-none cursor-pointer"
                           >
-                            {PROCEDURES_CATALOG.map((p, idx) => (
+                            {proceduresCatalog.map((p, idx) => (
                               <option key={idx} value={idx}>
-                                {p.name} ({p.category === 'Cosmetic' ? '18% GST' : '0% GST'})
+                                {p.name} ({p.gstRate}% GST)
                               </option>
                             ))}
                           </select>
@@ -2749,14 +2785,14 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                         <button
                           type="button"
                           onClick={() => {
-                            const proc = PROCEDURES_CATALOG[Number(builderProcedureIdx)];
+                            const proc = proceduresCatalog[Number(builderProcedureIdx)];
                             setEstimateItems((prev) => [
                               ...prev,
                               {
-                                tooth: builderTooth ? Number(builderTooth) : undefined,
+                                tooth: builderTooth ? (Number(builderTooth) || undefined) : undefined,
                                 procedure: proc.name,
                                 cost: builderCost,
-                                isCosmetic: proc.category === 'Cosmetic'
+                                isCosmetic: proc.gstRate === 18
                               }
                             ]);
                             setBuilderTooth('');
@@ -3652,6 +3688,21 @@ const ReactivationCustomers: React.FC = () => {
 
       console.log('Automated PDF dispatch succeeded via Meta Graph API:', apiData);
       toast.success('WhatsApp prescription PDF shared automatically!');
+      
+      try {
+        logWhatsAppMessage(clinicId, {
+          recipientName: c.name || 'Patient',
+          recipientPhone: c.phone,
+          templateName: 'prescription_pdf_share',
+          body: `Dear ${c.name || 'Patient'}, please find your digital prescription and care summary attached.`,
+          status: 'sent',
+          type: 'utility',
+          direction: 'outbound',
+          variables: [c.name || 'Patient']
+        });
+      } catch (logErr) {
+        console.error('Failed to log WABA message:', logErr);
+      }
     } catch (err: any) {
       console.error('Automated WhatsApp PDF dispatch failed:', err);
     }
@@ -3787,6 +3838,157 @@ const ReactivationCustomers: React.FC = () => {
       // Automatically send PDF on save if there is a prescription or billing estimate
       if ((savedCustomer.prescription && savedCustomer.prescription.trim() !== '') || (savedCustomer.estimates && savedCustomer.estimates.length > 0)) {
         sendWhatsAppPrescriptionPDF(savedCustomer).catch(err => console.error('Automated WhatsApp dispatch failed:', err));
+      }
+
+      // Automatically insert/upsert corresponding appointment in dental_appointments if a Visit Date is specified
+      if (savedCustomer.lastVisit) {
+        try {
+          const { data: clinic } = await supabase
+            .from('dental_clinics')
+            .select('*')
+            .eq('id', clinicId)
+            .single();
+          
+          let doctorName = 'Doctor';
+          let whatsappBusinessPhone = '';
+          let whatsappPhoneNumberId = '';
+          let whatsappAccessToken = '';
+          if (clinic) {
+            whatsappBusinessPhone = clinic.phone || '';
+            whatsappPhoneNumberId = clinic.whatsapp_phone_number_id || '';
+            whatsappAccessToken = clinic.whatsapp_access_token || '';
+            
+            if (clinic.owner_id) {
+              const { data: ownerProfile } = await supabase
+                .from('profiles')
+                .select('first_name, last_name')
+                .eq('id', clinic.owner_id)
+                .single();
+              if (ownerProfile) {
+                const firstName = (ownerProfile as any).first_name || '';
+                const lastName = (ownerProfile as any).last_name || '';
+                doctorName = `${firstName} ${lastName}`.trim() || 'Doctor';
+              }
+            }
+          }
+
+          const apptDate = savedCustomer.lastVisit;
+          const apptTime = '10:00 AM'; // Default time
+          const treatmentName = savedCustomer.service || 'Dental Consultation';
+
+          const insertApptRow = {
+            clinic_id: clinicId,
+            patient_id: savedCustomer.id,
+            patient_name: savedCustomer.name,
+            patient_phone: savedCustomer.phone,
+            appointment_date: apptDate,
+            appointment_time: apptTime,
+            doctor_name: doctorName,
+            treatment_name: treatmentName,
+            status: 'Confirmed' as const
+          };
+
+          // Check if appointment already exists for this patient on this date
+          const { data: existingAppts } = await supabase
+            .from('dental_appointments')
+            .select('id')
+            .eq('patient_id', savedCustomer.id)
+            .eq('appointment_date', apptDate);
+
+          if (!existingAppts || existingAppts.length === 0) {
+            const { error: apptError } = await supabase
+              .from('dental_appointments')
+              .insert(insertApptRow);
+
+            if (!apptError) {
+              toast.success(`Appointment booked automatically for ${apptDate}`);
+              
+              // Trigger automated WhatsApp confirmation using approved Meta template if configured
+              if (whatsappPhoneNumberId && whatsappAccessToken) {
+                const cleanPhone = savedCustomer.phone.replace(/[^0-9]/g, '');
+                const formattedPhone = cleanPhone.length === 10 ? `91${cleanPhone}` : cleanPhone;
+                const formattedDateString = new Date(apptDate).toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
+
+                const syncedTemplates = loadWhatsAppTemplates(clinicId);
+                const bookingTemplate = syncedTemplates.find(t => 
+                  t.name.startsWith('appointment_confirm') || 
+                  t.name.startsWith('appointment_book') || 
+                  t.name === 'appointment_booking_confirmation'
+                ) || { 
+                  name: 'appointment_booking_confirmation', 
+                  language: 'en',
+                  body: 'Hello {{1}}, this is a confirmation for your appointment on {{2}} at {{3}} with {{4}}. Contact {{5}} for queries.'
+                };
+
+                const templateBody = bookingTemplate.body || 'Hello {{1}}, this is a confirmation for your appointment on {{2}} at {{3}} with {{4}}. Contact {{5}} for queries.';
+                const getTemplateVariablesCount = (bodyText: string) => {
+                  const matches = bodyText.match(/\{\{(\d+)\}\}/g);
+                  if (!matches) return 0;
+                  const nums = matches.map(m => parseInt(m.replace(/[\{\}]/g, ''), 10));
+                  return Math.max(...nums, 0);
+                };
+
+                const paramCount = getTemplateVariablesCount(templateBody);
+                const allPossibleParameters = [
+                  { type: 'text', text: savedCustomer.name },
+                  { type: 'text', text: formattedDateString },
+                  { type: 'text', text: apptTime },
+                  { type: 'text', text: doctorName },
+                  { type: 'text', text: whatsappBusinessPhone || '+91 75448 60350' }
+                ];
+                const parameters = allPossibleParameters.slice(0, paramCount);
+
+                const payload = {
+                  messaging_product: 'whatsapp',
+                  to: formattedPhone,
+                  type: 'template',
+                  template: {
+                    name: bookingTemplate.name,
+                    language: { code: bookingTemplate.language },
+                    components: [
+                      {
+                        type: 'body',
+                        parameters
+                      }
+                    ]
+                  }
+                };
+
+                await fetch(`https://graph.facebook.com/v17.0/${whatsappPhoneNumberId}/messages`, {
+                  method: 'POST',
+                  headers: {
+                    'Authorization': `Bearer ${whatsappAccessToken}`,
+                    'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify(payload)
+                });
+                toast.success('WhatsApp appointment alert sent automatically!');
+
+                try {
+                  const paramTexts = parameters.map(p => p.text);
+                  let finalBody = templateBody;
+                  paramTexts.forEach((txt, idx) => {
+                    finalBody = finalBody.split(`{{${idx + 1}}}`).join(txt);
+                  });
+                  logWhatsAppMessage(clinicId, {
+                    recipientName: savedCustomer.name,
+                    recipientPhone: savedCustomer.phone,
+                    templateName: bookingTemplate.name,
+                    body: finalBody,
+                    status: 'sent',
+                    type: 'utility',
+                    direction: 'outbound',
+                    variables: paramTexts
+                  });
+                } catch (logErr) {
+                  console.error('Failed to log WABA message:', logErr);
+                }
+              }
+            }
+          }
+        } catch (apptErr) {
+          console.error('Error inserting auto-appointment:', apptErr);
+        }
       }
     } catch (err) {
       console.error('Error saving patient to database:', err);

@@ -1,9 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Building2, Phone, Mail, Save, CheckCircle2, FileText, Stethoscope } from 'lucide-react';
+import { Building2, Phone, Mail, Save, CheckCircle2, FileText, Stethoscope, Trash2, Plus, MessageSquare, Send, Lock, Globe, RefreshCw } from 'lucide-react';
 import { useSession } from '@/contexts/SessionContext';
+import { toast } from 'sonner';
+import { supabase } from '@/lib/supabase';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
+
+export interface WhatsAppConfig {
+  phoneNumberId: string;
+  wabaId: string;
+  accessToken: string;
+}
+
+export interface WhatsAppTemplate {
+  name: string;
+  language: string;
+  status: 'Approved' | 'Pending' | 'Rejected';
+  body: string;
+}
 
 export interface ClinicBranding {
   clinicName: string;
@@ -14,9 +29,26 @@ export interface ClinicBranding {
   email: string;
 }
 
-// ─── localStorage helpers ─────────────────────────────────────────────────────
+export interface Procedure {
+  name: string;
+  defaultCost: number;
+  gstRate: number; // 0 or 18
+}
+
+export const DEFAULT_PROCEDURES: Procedure[] = [
+  { name: 'Root Canal Treatment (RCT)', defaultCost: 3500, gstRate: 0 },
+  { name: 'Composite Filling / Restoration', defaultCost: 1500, gstRate: 0 },
+  { name: 'Dental Implant Placement', defaultCost: 25000, gstRate: 0 },
+  { name: 'PFM Crown / Cap', defaultCost: 4000, gstRate: 0 },
+  { name: 'Zirconia Premium Crown', defaultCost: 8000, gstRate: 0 },
+  { name: 'Scaling & Deep Polishing', defaultCost: 1200, gstRate: 0 },
+  { name: 'Laser Teeth Whitening', defaultCost: 12000, gstRate: 18 },
+  { name: 'Clear Aligners (Standard)', defaultCost: 45000, gstRate: 18 },
+  { name: 'Clear Aligners (Premium)', defaultCost: 85000, gstRate: 18 }
+];
 
 export const BRANDING_KEY = (orgId: string) => `clinic_branding_${orgId}`;
+export const PROCEDURES_KEY = (orgId: string) => `clinic_procedures_${orgId}`;
 
 export const loadClinicBranding = (orgId: string, fallbackName?: string | null): ClinicBranding => {
   try {
@@ -35,6 +67,71 @@ export const loadClinicBranding = (orgId: string, fallbackName?: string | null):
 
 export const saveClinicBranding = (orgId: string, data: ClinicBranding) => {
   localStorage.setItem(BRANDING_KEY(orgId), JSON.stringify(data));
+};
+
+export const loadClinicProcedures = (orgId: string): Procedure[] => {
+  try {
+    const raw = localStorage.getItem(PROCEDURES_KEY(orgId));
+    if (raw) return JSON.parse(raw) as Procedure[];
+  } catch {}
+  return [...DEFAULT_PROCEDURES];
+};
+
+export const saveClinicProcedures = (orgId: string, data: Procedure[]) => {
+  localStorage.setItem(PROCEDURES_KEY(orgId), JSON.stringify(data));
+};
+
+export const WHATSAPP_KEY = (orgId: string) => `whatsapp_config_${orgId}`;
+
+export const loadWhatsAppConfig = (orgId: string): WhatsAppConfig => {
+  try {
+    const raw = localStorage.getItem(WHATSAPP_KEY(orgId));
+    if (raw) return JSON.parse(raw) as WhatsAppConfig;
+  } catch {}
+  return {
+    phoneNumberId: '109283746510293',
+    wabaId: '293847561029384',
+    accessToken: 'EAAG1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6q7r8s9t0u1v2w3x4y5z',
+  };
+};
+
+export const saveWhatsAppConfig = (orgId: string, data: WhatsAppConfig) => {
+  localStorage.setItem(WHATSAPP_KEY(orgId), JSON.stringify(data));
+};
+
+export const DEFAULT_TEMPLATES: WhatsAppTemplate[] = [
+  {
+    name: 'appointment_booking_confirmation',
+    language: 'en',
+    status: 'Approved',
+    body: 'Hello {{1}}, this is a confirmation for your appointment on {{2}} at {{3}} with {{4}}. Contact {{5}} for queries.'
+  },
+  {
+    name: 'patient_recall_followup',
+    language: 'en',
+    status: 'Approved',
+    body: 'Hi {{1}}, it is time for your dental checkup at {{2}}. Book your slot today!'
+  },
+  {
+    name: 'google_review_request',
+    language: 'en',
+    status: 'Approved',
+    body: 'Dear {{1}}, thank you for choosing {{2}}. Please share your experience here: {{3}}'
+  }
+];
+
+export const TEMPLATES_KEY = (orgId: string) => `whatsapp_templates_${orgId}`;
+
+export const loadWhatsAppTemplates = (orgId: string): WhatsAppTemplate[] => {
+  try {
+    const raw = localStorage.getItem(TEMPLATES_KEY(orgId));
+    if (raw) return JSON.parse(raw) as WhatsAppTemplate[];
+  } catch {}
+  return [...DEFAULT_TEMPLATES];
+};
+
+export const saveWhatsAppTemplates = (orgId: string, data: WhatsAppTemplate[]) => {
+  localStorage.setItem(TEMPLATES_KEY(orgId), JSON.stringify(data));
 };
 
 // ─── Prescription Preview ─────────────────────────────────────────────────────
@@ -104,15 +201,36 @@ const PrescriptionPreview: React.FC<{ branding: ClinicBranding }> = ({ branding 
   </div>
 );
 
-// ─── Main Page ────────────────────────────────────────────────────────────────
-
 const ReactivationClinicSettings: React.FC = () => {
   const { organizationId, profile } = useSession();
   const orgId = organizationId || 'default';
 
+  const [activeTab, setActiveTab] = useState<'info' | 'prices' | 'whatsapp'>('info');
+
   const [branding, setBranding] = useState<ClinicBranding>(() =>
     loadClinicBranding(orgId, profile?.business_name)
   );
+
+  const [procedures, setProcedures] = useState<Procedure[]>(() =>
+    loadClinicProcedures(orgId)
+  );
+
+  const [whatsapp, setWhatsapp] = useState<WhatsAppConfig>(() =>
+    loadWhatsAppConfig(orgId)
+  );
+
+  const [templates, setTemplates] = useState<WhatsAppTemplate[]>(() =>
+    loadWhatsAppTemplates(orgId)
+  );
+
+  const [newTemplateName, setNewTemplateName] = useState('');
+  const [newTemplateLang, setNewTemplateLang] = useState('en');
+  const [newTemplateBody, setNewTemplateBody] = useState('');
+  const [showAddTemplateForm, setShowAddTemplateForm] = useState(false);
+  const [isFetchingFromAPI, setIsFetchingFromAPI] = useState(false);
+
+  const [testNumber, setTestNumber] = useState('');
+  const [isSendingTest, setIsSendingTest] = useState(false);
   const [saved, setSaved] = useState(false);
 
   // Sync clinic name from profile on first load if empty
@@ -122,13 +240,269 @@ const ReactivationClinicSettings: React.FC = () => {
     }
   }, [profile?.business_name]);
 
+  // Load WhatsApp config from Supabase dental_clinics table
+  useEffect(() => {
+    if (!organizationId || organizationId === 'default') return;
+
+    const fetchClinicConfig = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('dental_clinics')
+          .select('whatsapp_phone_number_id, whatsapp_access_token')
+          .eq('id', organizationId)
+          .single();
+
+        if (error) throw error;
+        if (data) {
+          setWhatsapp((prev) => ({
+            ...prev,
+            phoneNumberId: data.whatsapp_phone_number_id || prev.phoneNumberId,
+            accessToken: data.whatsapp_access_token || prev.accessToken,
+          }));
+        }
+      } catch (err) {
+        console.error('Error loading clinic WhatsApp details from Supabase:', err);
+      }
+    };
+
+    fetchClinicConfig();
+  }, [organizationId]);
+
   const handleChange = (field: keyof ClinicBranding, value: string) => {
     setBranding((prev) => ({ ...prev, [field]: value }));
     setSaved(false);
   };
 
-  const handleSave = () => {
+  const handleWhatsAppChange = (field: keyof WhatsAppConfig, value: string) => {
+    setWhatsapp((prev) => ({ ...prev, [field]: value }));
+    setSaved(false);
+  };
+
+  const handleProcedureChange = (index: number, field: keyof Procedure, value: any) => {
+    setProcedures((prev) => {
+      const copy = [...prev];
+      copy[index] = { ...copy[index], [field]: value };
+      return copy;
+    });
+    setSaved(false);
+  };
+
+  const handleAddProcedure = () => {
+    setProcedures((prev) => [
+      ...prev,
+      { name: 'New Procedure', defaultCost: 1000, gstRate: 0 }
+    ]);
+    setSaved(false);
+  };
+
+  const handleRemoveProcedure = (index: number) => {
+    setProcedures((prev) => prev.filter((_, i) => i !== index));
+    setSaved(false);
+  };
+
+  const handleRestoreDefaults = () => {
+    setProcedures([...DEFAULT_PROCEDURES]);
+    setSaved(false);
+  };
+
+  const handleSendTestMessage = () => {
+    if (!testNumber.trim()) {
+      toast.error('Please enter a phone number to send a test message');
+      return;
+    }
+    setIsSendingTest(true);
+    setTimeout(() => {
+      setIsSendingTest(false);
+      toast.success('Test WhatsApp message delivered successfully (Simulated)!');
+    }, 1200);
+  };
+
+  const handleAddTemplate = () => {
+    if (!newTemplateName.trim()) {
+      toast.error('Please enter a template name');
+      return;
+    }
+    const sanitizedName = newTemplateName.trim().toLowerCase().replace(/[^a-z0-9_]/g, '_');
+    if (!newTemplateBody.trim()) {
+      toast.error('Please enter the template body text');
+      return;
+    }
+
+    const newTemplate: WhatsAppTemplate = {
+      name: sanitizedName,
+      language: newTemplateLang,
+      status: 'Approved',
+      body: newTemplateBody.trim()
+    };
+
+    const updated = [...templates, newTemplate];
+    setTemplates(updated);
+    saveWhatsAppTemplates(orgId, updated);
+
+    // Clear inputs and close form
+    setNewTemplateName('');
+    setNewTemplateBody('');
+    setShowAddTemplateForm(false);
+    toast.success(`Template "${sanitizedName}" created & approved successfully!`);
+  };
+
+  const handleRemoveTemplate = (index: number) => {
+    const templateToRemove = templates[index];
+    const updated = templates.filter((_, i) => i !== index);
+    setTemplates(updated);
+    saveWhatsAppTemplates(orgId, updated);
+    toast.success(`Template "${templateToRemove.name}" removed successfully.`);
+  };
+
+  const handleFetchTemplatesFromAPI = async () => {
+    if (!whatsapp.wabaId || !whatsapp.accessToken) {
+      toast.error('WABA ID and System Access Token are required to fetch templates');
+      return;
+    }
+    setIsFetchingFromAPI(true);
+    const toastId = toast.loading('Connecting to Meta API and fetching templates...');
+
+    try {
+      const isMockToken = whatsapp.accessToken === 'EAAG1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6q7r8s9t0u1v2w3x4y5z';
+      if (isMockToken) {
+        await new Promise((resolve) => setTimeout(resolve, 1200));
+        const mockAPITemplates: WhatsAppTemplate[] = [
+          {
+            name: 'appointment_booking_confirmation',
+            language: 'en',
+            status: 'Approved',
+            body: 'Hello {{1}}, this is a confirmation for your appointment on {{2}} at {{3}} with {{4}}. Contact {{5}} for queries.'
+          },
+          {
+            name: 'patient_recall_followup',
+            language: 'en',
+            status: 'Approved',
+            body: 'Hi {{1}}, it is time for your dental checkup at {{2}}. Book your slot today!'
+          },
+          {
+            name: 'google_review_request',
+            language: 'en',
+            status: 'Approved',
+            body: 'Dear {{1}}, thank you for choosing {{2}}. Please share your experience here: {{3}}'
+          },
+          {
+            name: 'treatment_plan_estimate',
+            language: 'en',
+            status: 'Approved',
+            body: 'Hi {{1}}, here is your estimated treatment plan for {{2}} at {{3}}. Total cost is ₹{{4}}.'
+          },
+          {
+            name: 'festival_greeting_discount',
+            language: 'hi',
+            status: 'Approved',
+            body: 'नमस्ते {{1}}, आपके और आपके परिवार को त्योहार की हार्दिक शुभकामनाएं! इस महीने डेंटल क्लीनिंग पर 20% की छूट पाएं।'
+          }
+        ];
+        setTemplates(mockAPITemplates);
+        saveWhatsAppTemplates(orgId, mockAPITemplates);
+        toast.success(`Successfully loaded ${mockAPITemplates.length} templates from Meta API (Simulated)!`, { id: toastId });
+        return;
+      }
+
+      let activeWabaId = whatsapp.wabaId;
+
+      if (!isMockToken && (!activeWabaId || activeWabaId === '293847561029384')) {
+        // Query Phone Number details to find parent WhatsApp Business Account (WABA ID)
+        if (!whatsapp.phoneNumberId) {
+          throw new Error('Phone Number ID is required to auto-resolve WABA ID.');
+        }
+        const phoneUrl = `https://graph.facebook.com/v20.0/${whatsapp.phoneNumberId}?fields=whatsapp_business_account`;
+        const phoneRes = await fetch(phoneUrl, {
+          headers: {
+            'Authorization': `Bearer ${whatsapp.accessToken}`
+          }
+        });
+        if (phoneRes.ok) {
+          const phoneData = await phoneRes.json();
+          if (phoneData.whatsapp_business_account && phoneData.whatsapp_business_account.id) {
+            activeWabaId = phoneData.whatsapp_business_account.id;
+            setWhatsapp((prev) => ({ ...prev, wabaId: activeWabaId }));
+          } else {
+            throw new Error('No WhatsApp Business Account associated with this Phone Number.');
+          }
+        } else {
+          const errBody = await phoneRes.json().catch(() => ({}));
+          throw new Error(errBody?.error?.message || 'Failed to auto-resolve WABA ID from Phone Number ID.');
+        }
+      }
+
+      const url = `https://graph.facebook.com/v20.0/${activeWabaId}/message_templates?limit=100`;
+      const response = await fetch(url, {
+        headers: {
+          'Authorization': `Bearer ${whatsapp.accessToken}`
+        }
+      });
+
+      if (!response.ok) {
+        const errData = await response.json().catch(() => ({}));
+        throw new Error(errData?.error?.message || `API error (${response.status})`);
+      }
+
+      const res = await response.json();
+      const metaTemplates: any[] = res.data || [];
+
+      if (metaTemplates.length === 0) {
+        toast.success('No templates found in this WhatsApp Business Account.', { id: toastId });
+        return;
+      }
+
+      const parsedTemplates: WhatsAppTemplate[] = metaTemplates.map((metaTpl) => {
+        const bodyComp = metaTpl.components?.find((c: any) => c.type === 'BODY');
+        const bodyText = bodyComp?.text || 'No body content';
+
+        let status: 'Approved' | 'Pending' | 'Rejected' = 'Approved';
+        const rawStatus = metaTpl.status?.toLowerCase();
+        if (rawStatus === 'pending') status = 'Pending';
+        else if (rawStatus === 'rejected') status = 'Rejected';
+
+        const langCode = metaTpl.language?.split('_')[0] || 'en';
+
+        return {
+          name: metaTpl.name,
+          language: langCode,
+          status,
+          body: bodyText
+        };
+      });
+
+      setTemplates(parsedTemplates);
+      saveWhatsAppTemplates(orgId, parsedTemplates);
+      toast.success(`Successfully loaded ${parsedTemplates.length} templates from Meta API!`, { id: toastId });
+    } catch (err: any) {
+      console.error(err);
+      toast.error(`Failed to fetch templates: ${err.message}`, { id: toastId });
+    } finally {
+      setIsFetchingFromAPI(false);
+    }
+  };
+
+  const handleSave = async () => {
     saveClinicBranding(orgId, branding);
+    saveClinicProcedures(orgId, procedures);
+    saveWhatsAppConfig(orgId, whatsapp);
+
+    if (organizationId && organizationId !== 'default') {
+      try {
+        const { error } = await supabase
+          .from('dental_clinics')
+          .update({
+            whatsapp_phone_number_id: whatsapp.phoneNumberId,
+            whatsapp_access_token: whatsapp.accessToken,
+          })
+          .eq('id', organizationId);
+
+        if (error) throw error;
+      } catch (err) {
+        console.error('Error saving WhatsApp configuration to Supabase:', err);
+        toast.error('Failed to sync WhatsApp settings with database.');
+      }
+    }
+
     setSaved(true);
     setTimeout(() => setSaved(false), 3000);
   };
@@ -143,9 +517,9 @@ const ReactivationClinicSettings: React.FC = () => {
       {/* Page header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-[18px] font-bold text-slate-800 tracking-tight">Clinic Branding</h1>
+          <h1 className="text-[18px] font-bold text-slate-800 tracking-tight">Clinic Settings</h1>
           <p className="text-[12px] text-slate-500 mt-0.5">
-            Your clinic details appear on prescription PDFs and throughout the app.
+            Manage your clinic identity details, prescription branding, and treatment baseline prices.
           </p>
         </div>
         <button
@@ -164,130 +538,324 @@ const ReactivationClinicSettings: React.FC = () => {
         </button>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
-        {/* ── Left: Form ─────────────────────────────────────── */}
-        <div className="space-y-4">
-          {/* Clinic Identity */}
-          <div className="bg-white border border-slate-200 rounded-2xl p-5 space-y-4">
-            <div className="flex items-center gap-2 pb-2 border-b border-slate-100">
+      {/* Tabs */}
+      <div className="flex gap-1.5 border-b border-slate-200 pb-px">
+        <button
+          type="button"
+          onClick={() => setActiveTab('info')}
+          className={`px-4 py-2 text-[12.5px] font-bold tracking-wide border-b-2 transition-all ${
+            activeTab === 'info'
+              ? 'border-indigo-600 text-indigo-600'
+              : 'border-transparent text-slate-400 hover:text-slate-600'
+          }`}
+        >
+          Clinic Info & Branding
+        </button>
+        <button
+          type="button"
+          onClick={() => setActiveTab('prices')}
+          className={`px-4 py-2 text-[12.5px] font-bold tracking-wide border-b-2 transition-all ${
+            activeTab === 'prices'
+              ? 'border-indigo-600 text-indigo-600'
+              : 'border-transparent text-slate-400 hover:text-slate-600'
+          }`}
+        >
+          Treatment Catalog
+        </button>
+        <button
+          type="button"
+          onClick={() => setActiveTab('whatsapp')}
+          className={`px-4 py-2 text-[12.5px] font-bold tracking-wide border-b-2 transition-all ${
+            activeTab === 'whatsapp'
+              ? 'border-indigo-600 text-indigo-600'
+              : 'border-transparent text-slate-400 hover:text-slate-600'
+          }`}
+        >
+          WhatsApp API Config
+        </button>
+      </div>
+
+      {activeTab === 'info' ? (
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+          {/* ── Left: Form ─────────────────────────────────────── */}
+          <div className="space-y-4">
+            {/* Clinic Identity */}
+            <div className="bg-white border border-slate-200 rounded-2xl p-5 space-y-4">
+              <div className="flex items-center gap-2 pb-2 border-b border-slate-100">
+                <div className="w-7 h-7 rounded-lg bg-indigo-50 border border-indigo-100 flex items-center justify-center">
+                  <Building2 size={14} className="text-indigo-500" />
+                </div>
+                <h3 className="text-[12px] font-bold text-slate-700 uppercase tracking-wider">Clinic Identity</h3>
+              </div>
+
+              <div className="space-y-3">
+                <div>
+                  <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">
+                    Clinic Name
+                  </label>
+                  <input
+                    type="text"
+                    value={branding.clinicName}
+                    onChange={(e) => handleChange('clinicName', e.target.value)}
+                    placeholder="e.g. Sharma Dental Care"
+                    className="w-full px-3 py-2 rounded-lg border border-slate-200 bg-slate-50 text-[13px] text-slate-800 placeholder:text-slate-400 outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-500/10 transition-all"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">
+                    Clinic Address
+                  </label>
+                  <textarea
+                    value={branding.address}
+                    onChange={(e) => handleChange('address', e.target.value)}
+                    placeholder="123, MG Road, Sector 5, New Delhi — 110001"
+                    rows={2}
+                    className="w-full px-3 py-2 rounded-lg border border-slate-200 bg-slate-50 text-[13px] text-slate-800 placeholder:text-slate-400 outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-500/10 transition-all resize-none"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Doctor Profile */}
+            <div className="bg-white border border-slate-200 rounded-2xl p-5 space-y-4">
+              <div className="flex items-center gap-2 pb-2 border-b border-slate-100">
+                <div className="w-7 h-7 rounded-lg bg-violet-50 border border-violet-100 flex items-center justify-center">
+                  <Stethoscope size={14} className="text-violet-500" />
+                </div>
+                <h3 className="text-[12px] font-bold text-slate-700 uppercase tracking-wider">Doctor Profile</h3>
+              </div>
+
+              <div className="space-y-3">
+                <div>
+                  <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">
+                    Doctor Name
+                  </label>
+                  <input
+                    type="text"
+                    value={branding.doctorName}
+                    onChange={(e) => handleChange('doctorName', e.target.value)}
+                    placeholder="e.g. Dr. Priya Sharma"
+                    className="w-full px-3 py-2 rounded-lg border border-slate-200 bg-slate-50 text-[13px] text-slate-800 placeholder:text-slate-400 outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-500/10 transition-all"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">
+                    Qualifications
+                  </label>
+                  <input
+                    type="text"
+                    value={branding.qualifications}
+                    onChange={(e) => handleChange('qualifications', e.target.value)}
+                    placeholder="e.g. BDS, MDS (Orthodontics)"
+                    className="w-full px-3 py-2 rounded-lg border border-slate-200 bg-slate-50 text-[13px] text-slate-800 placeholder:text-slate-400 outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-500/10 transition-all"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Contact */}
+            <div className="bg-white border border-slate-200 rounded-2xl p-5 space-y-4">
+              <div className="flex items-center gap-2 pb-2 border-b border-slate-100">
+                <div className="w-7 h-7 rounded-lg bg-sky-50 border border-sky-100 flex items-center justify-center">
+                  <Phone size={14} className="text-sky-500" />
+                </div>
+                <h3 className="text-[12px] font-bold text-slate-700 uppercase tracking-wider">Contact Details</h3>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">
+                    Phone
+                  </label>
+                  <div className="relative">
+                    <Phone size={13} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+                    <input
+                      type="tel"
+                      value={branding.phone}
+                      onChange={(e) => handleChange('phone', e.target.value)}
+                      placeholder="+91 98765 43210"
+                      className="w-full pl-8 pr-3 py-2 rounded-lg border border-slate-200 bg-slate-50 text-[13px] text-slate-800 placeholder:text-slate-400 outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-500/10 transition-all"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">
+                    Email <span className="text-slate-400 normal-case font-normal">(optional)</span>
+                  </label>
+                  <div className="relative">
+                    <Mail size={13} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+                    <input
+                      type="email"
+                      value={branding.email}
+                      onChange={(e) => handleChange('email', e.target.value)}
+                      placeholder="clinic@example.com"
+                      className="w-full pl-8 pr-3 py-2 rounded-lg border border-slate-200 bg-slate-50 text-[13px] text-slate-800 placeholder:text-slate-400 outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-500/10 transition-all"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Save button (bottom, for mobile) */}
+            <button
+              onClick={handleSave}
+              className={`w-full flex items-center justify-center gap-2 py-3 rounded-xl text-[13px] font-semibold transition-all duration-200 lg:hidden ${
+                saved
+                  ? 'bg-emerald-50 border border-emerald-200 text-emerald-700'
+                  : 'bg-indigo-600 text-white hover:bg-indigo-700 shadow-md shadow-indigo-500/20'
+              }`}
+            >
+              {saved ? <><CheckCircle2 size={15} /> Saved!</> : <><Save size={15} /> Save Changes</>}
+            </button>
+          </div>
+
+          {/* ── Right: Preview ─────────────────────────────────── */}
+          <div className="space-y-3 lg:sticky lg:top-4">
+            <div className="flex items-center gap-2">
+              <FileText size={14} className="text-slate-400" />
+              <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Live Prescription Preview</span>
+            </div>
+            <PrescriptionPreview branding={branding} />
+            <p className="text-[10.5px] text-slate-400 text-center">
+              This is how your clinic header will appear on printed prescription PDFs.
+            </p>
+          </div>
+        </div>
+      ) : activeTab === 'prices' ? (
+        <div className="bg-white border border-slate-200 rounded-2xl p-5 space-y-4">
+          <div className="flex items-center justify-between pb-2 border-b border-slate-100">
+            <div className="flex items-center gap-2">
               <div className="w-7 h-7 rounded-lg bg-indigo-50 border border-indigo-100 flex items-center justify-center">
-                <Building2 size={14} className="text-indigo-500" />
+                <Stethoscope size={14} className="text-indigo-500" />
               </div>
-              <h3 className="text-[12px] font-bold text-slate-700 uppercase tracking-wider">Clinic Identity</h3>
+              <h3 className="text-[12px] font-bold text-slate-700 uppercase tracking-wider">Treatment Catalog & Pricing</h3>
             </div>
-
-            <div className="space-y-3">
-              <div>
-                <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">
-                  Clinic Name
-                </label>
-                <input
-                  type="text"
-                  value={branding.clinicName}
-                  onChange={(e) => handleChange('clinicName', e.target.value)}
-                  placeholder="e.g. Sharma Dental Care"
-                  className="w-full px-3 py-2 rounded-lg border border-slate-200 bg-slate-50 text-[13px] text-slate-800 placeholder:text-slate-400 outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-500/10 transition-all"
-                />
-              </div>
-
-              <div>
-                <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">
-                  Clinic Address
-                </label>
-                <textarea
-                  value={branding.address}
-                  onChange={(e) => handleChange('address', e.target.value)}
-                  placeholder="123, MG Road, Sector 5, New Delhi — 110001"
-                  rows={2}
-                  className="w-full px-3 py-2 rounded-lg border border-slate-200 bg-slate-50 text-[13px] text-slate-800 placeholder:text-slate-400 outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-500/10 transition-all resize-none"
-                />
-              </div>
-            </div>
+            <button
+              type="button"
+              onClick={handleRestoreDefaults}
+              className="text-xs text-indigo-600 hover:text-indigo-800 font-semibold transition-colors"
+            >
+              Reset to Defaults
+            </button>
           </div>
 
-          {/* Doctor Profile */}
-          <div className="bg-white border border-slate-200 rounded-2xl p-5 space-y-4">
-            <div className="flex items-center gap-2 pb-2 border-b border-slate-100">
-              <div className="w-7 h-7 rounded-lg bg-violet-50 border border-violet-100 flex items-center justify-center">
-                <Stethoscope size={14} className="text-violet-500" />
-              </div>
-              <h3 className="text-[12px] font-bold text-slate-700 uppercase tracking-wider">Doctor Profile</h3>
-            </div>
-
-            <div className="space-y-3">
-              <div>
-                <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">
-                  Doctor Name
-                </label>
-                <input
-                  type="text"
-                  value={branding.doctorName}
-                  onChange={(e) => handleChange('doctorName', e.target.value)}
-                  placeholder="e.g. Dr. Priya Sharma"
-                  className="w-full px-3 py-2 rounded-lg border border-slate-200 bg-slate-50 text-[13px] text-slate-800 placeholder:text-slate-400 outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-500/10 transition-all"
-                />
-              </div>
-
-              <div>
-                <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">
-                  Qualifications
-                </label>
-                <input
-                  type="text"
-                  value={branding.qualifications}
-                  onChange={(e) => handleChange('qualifications', e.target.value)}
-                  placeholder="e.g. BDS, MDS (Orthodontics)"
-                  className="w-full px-3 py-2 rounded-lg border border-slate-200 bg-slate-50 text-[13px] text-slate-800 placeholder:text-slate-400 outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-500/10 transition-all"
-                />
-              </div>
-            </div>
-          </div>
-
-          {/* Contact */}
-          <div className="bg-white border border-slate-200 rounded-2xl p-5 space-y-4">
-            <div className="flex items-center gap-2 pb-2 border-b border-slate-100">
-              <div className="w-7 h-7 rounded-lg bg-sky-50 border border-sky-100 flex items-center justify-center">
-                <Phone size={14} className="text-sky-500" />
-              </div>
-              <h3 className="text-[12px] font-bold text-slate-700 uppercase tracking-wider">Contact Details</h3>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <div>
-                <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">
-                  Phone
-                </label>
-                <div className="relative">
-                  <Phone size={13} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+          {/* Mobile view: list of cards */}
+          <div className="block sm:hidden space-y-4">
+            {procedures.map((proc, index) => (
+              <div key={index} className="bg-slate-50 border border-slate-200/80 rounded-xl p-4 space-y-3 relative">
+                {/* Header with name and delete button */}
+                <div className="flex items-center justify-between gap-2">
                   <input
-                    type="tel"
-                    value={branding.phone}
-                    onChange={(e) => handleChange('phone', e.target.value)}
-                    placeholder="+91 98765 43210"
-                    className="w-full pl-8 pr-3 py-2 rounded-lg border border-slate-200 bg-slate-50 text-[13px] text-slate-800 placeholder:text-slate-400 outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-500/10 transition-all"
+                    type="text"
+                    value={proc.name}
+                    onChange={(e) => handleProcedureChange(index, 'name', e.target.value)}
+                    placeholder="Procedure Name"
+                    className="w-full bg-white px-2.5 py-1.5 rounded-lg border border-slate-200 text-[13px] font-bold text-slate-800 outline-none focus:border-indigo-400 focus:ring-1 focus:ring-indigo-400 transition-all"
                   />
+                  <button
+                    type="button"
+                    onClick={() => handleRemoveProcedure(index)}
+                    className="p-2 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition-all shrink-0"
+                  >
+                    <Trash2 size={16} />
+                  </button>
+                </div>
+
+                {/* Grid for other fields */}
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="col-span-1">
+                    <label className="block text-[9px] font-bold text-slate-400 uppercase tracking-wider mb-1">Cost (₹)</label>
+                    <input
+                      type="number"
+                      value={proc.defaultCost}
+                      onChange={(e) => handleProcedureChange(index, 'defaultCost', Number(e.target.value))}
+                      className="w-full bg-white px-1.5 py-1.5 rounded-lg border border-slate-200 text-[12px] text-slate-800 outline-none focus:border-indigo-400 focus:ring-1 focus:ring-indigo-400 transition-all"
+                    />
+                  </div>
+
+                  <div className="col-span-1">
+                    <label className="block text-[9px] font-bold text-slate-400 uppercase tracking-wider mb-1">GST</label>
+                    <select
+                      value={proc.gstRate}
+                      onChange={(e) => handleProcedureChange(index, 'gstRate', Number(e.target.value))}
+                      className="w-full bg-white px-1.5 py-1.5 rounded-lg border border-slate-200 text-[11.5px] text-slate-700 outline-none cursor-pointer"
+                    >
+                      <option value={0}>0%</option>
+                      <option value={18}>18%</option>
+                    </select>
+                  </div>
                 </div>
               </div>
-
-              <div>
-                <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">
-                  Email <span className="text-slate-400 normal-case font-normal">(optional)</span>
-                </label>
-                <div className="relative">
-                  <Mail size={13} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
-                  <input
-                    type="email"
-                    value={branding.email}
-                    onChange={(e) => handleChange('email', e.target.value)}
-                    placeholder="clinic@example.com"
-                    className="w-full pl-8 pr-3 py-2 rounded-lg border border-slate-200 bg-slate-50 text-[13px] text-slate-800 placeholder:text-slate-400 outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-500/10 transition-all"
-                  />
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
 
-          {/* Save button (bottom, for mobile) */}
+          {/* Desktop view: Table */}
+          <div className="hidden sm:block overflow-x-auto">
+            <table className="w-full text-left border-collapse">
+              <thead>
+                <tr className="border-b border-slate-200">
+                  <th className="py-2.5 text-[10px] font-bold text-slate-400 uppercase tracking-wider pl-1">Treatment Name</th>
+                  <th className="py-2.5 text-[10px] font-bold text-slate-400 uppercase tracking-wider w-44">Cost (₹)</th>
+                  <th className="py-2.5 text-[10px] font-bold text-slate-400 uppercase tracking-wider w-36">GST</th>
+                  <th className="py-2.5 text-[10px] font-bold text-slate-400 uppercase tracking-wider w-10 text-center"></th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-100">
+                {procedures.map((proc, index) => (
+                  <tr key={index} className="group hover:bg-slate-50/50">
+                    <td className="py-2 pl-1 pr-3">
+                      <input
+                        type="text"
+                        value={proc.name}
+                        onChange={(e) => handleProcedureChange(index, 'name', e.target.value)}
+                        className="w-full bg-transparent px-2 py-1.5 rounded-lg border border-transparent hover:border-slate-200 focus:border-indigo-400 focus:bg-white text-[13px] text-slate-800 outline-none transition-all"
+                      />
+                    </td>
+                    <td className="py-2 pr-3">
+                      <input
+                        type="number"
+                        value={proc.defaultCost}
+                        onChange={(e) => handleProcedureChange(index, 'defaultCost', Number(e.target.value))}
+                        className="w-full bg-transparent px-2 py-1.5 rounded-lg border border-transparent hover:border-slate-200 focus:border-indigo-400 focus:bg-white text-[13px] text-slate-800 outline-none transition-all"
+                      />
+                    </td>
+                    <td className="py-2 pr-3">
+                      <select
+                        value={proc.gstRate}
+                        onChange={(e) => handleProcedureChange(index, 'gstRate', Number(e.target.value))}
+                        className="w-full bg-transparent px-1.5 py-1.5 rounded-lg border border-transparent hover:border-slate-200 focus:border-indigo-400 focus:bg-white text-[12px] text-slate-700 outline-none cursor-pointer transition-all"
+                      >
+                        <option value={0}>0%</option>
+                        <option value={18}>18%</option>
+                      </select>
+                    </td>
+                    <td className="py-2 text-center">
+                      <button
+                        type="button"
+                        onClick={() => handleRemoveProcedure(index)}
+                        className="p-1 rounded-md text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition-all opacity-0 group-hover:opacity-100 focus:opacity-100"
+                      >
+                        <Trash2 size={14} />
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <button
+            type="button"
+            onClick={handleAddProcedure}
+            className="w-full flex items-center justify-center gap-1.5 py-2.5 border border-dashed border-slate-300 hover:border-indigo-400 rounded-xl text-[12.5px] font-bold text-slate-500 hover:text-indigo-600 transition-all"
+          >
+            <Plus size={15} /> Add New Procedure
+          </button>
+
+          {/* Save button (bottom, for mobile/tablet) */}
           <button
             onClick={handleSave}
             className={`w-full flex items-center justify-center gap-2 py-3 rounded-xl text-[13px] font-semibold transition-all duration-200 lg:hidden ${
@@ -299,19 +867,292 @@ const ReactivationClinicSettings: React.FC = () => {
             {saved ? <><CheckCircle2 size={15} /> Saved!</> : <><Save size={15} /> Save Changes</>}
           </button>
         </div>
+      ) : (
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
+          {/* Left: Configuration Form */}
+          <div className="lg:col-span-2 space-y-4">
+            <div className="bg-white border border-slate-200 rounded-2xl p-5 space-y-4">
+              <div className="flex items-center gap-2 pb-2 border-b border-slate-100">
+                <div className="w-7 h-7 rounded-lg bg-emerald-50 border border-emerald-100 flex items-center justify-center">
+                  <MessageSquare size={14} className="text-emerald-500" />
+                </div>
+                <h3 className="text-[12px] font-bold text-slate-700 uppercase tracking-wider">WhatsApp Business API Setup</h3>
+              </div>
 
-        {/* ── Right: Preview ─────────────────────────────────── */}
-        <div className="space-y-3 lg:sticky lg:top-4">
-          <div className="flex items-center gap-2">
-            <FileText size={14} className="text-slate-400" />
-            <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Live Prescription Preview</span>
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">
+                    WhatsApp Phone Number ID
+                  </label>
+                  <input
+                    type="text"
+                    value={whatsapp.phoneNumberId}
+                    onChange={(e) => handleWhatsAppChange('phoneNumberId', e.target.value)}
+                    placeholder="e.g. 102938475610293"
+                    className="w-full px-3 py-2 rounded-lg border border-slate-200 bg-slate-50 text-[13px] text-slate-800 placeholder:text-slate-400 outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-500/10 transition-all"
+                  />
+                  <p className="text-[9.5px] text-slate-400 mt-1">Found in your Meta App Dashboard under WhatsApp &gt; API Setup.</p>
+                </div>
+
+                <div>
+                  <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">
+                    WhatsApp Business Account ID (WABA ID)
+                  </label>
+                  <input
+                    type="text"
+                    value={whatsapp.wabaId}
+                    onChange={(e) => handleWhatsAppChange('wabaId', e.target.value)}
+                    placeholder="e.g. 293847561029384"
+                    className="w-full px-3 py-2 rounded-lg border border-slate-200 bg-slate-50 text-[13px] text-slate-800 placeholder:text-slate-400 outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-500/10 transition-all"
+                  />
+                  <p className="text-[9.5px] text-slate-400 mt-1">Also listed on the WhatsApp API Setup page in Meta Business suite.</p>
+                </div>
+
+                <div>
+                  <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">
+                    System User Access Token
+                  </label>
+                  <div className="relative">
+                    <Lock size={13} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+                    <input
+                      type="password"
+                      value={whatsapp.accessToken}
+                      onChange={(e) => handleWhatsAppChange('accessToken', e.target.value)}
+                      placeholder="EAAGxxxxxxxxxxxxxxxxxxxxxxxx"
+                      className="w-full pl-8 pr-3 py-2 rounded-lg border border-slate-200 bg-slate-50 text-[13px] text-slate-800 placeholder:text-slate-400 outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-500/10 transition-all"
+                    />
+                  </div>
+                  <p className="text-[9.5px] text-slate-400 mt-1">Permanent system user token with whatsapp_business_messaging permissions.</p>
+                </div>
+              </div>
+            </div>
+
+            {/* WhatsApp Message Templates Section */}
+            <div className="bg-white border border-slate-200 rounded-2xl p-5 space-y-4">
+              <div className="flex items-center justify-between pb-2 border-b border-slate-100">
+                <div className="flex items-center gap-2">
+                  <div className="w-7 h-7 rounded-lg bg-indigo-50 border border-indigo-100 flex items-center justify-center">
+                    <MessageSquare size={14} className="text-indigo-500" />
+                  </div>
+                  <h3 className="text-[12px] font-bold text-slate-700 uppercase tracking-wider">Message Templates</h3>
+                </div>
+                {!showAddTemplateForm && (
+                  <div className="flex items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={handleFetchTemplatesFromAPI}
+                      disabled={isFetchingFromAPI}
+                      className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 disabled:opacity-50 rounded-lg text-[11px] font-bold transition-all border border-slate-200"
+                    >
+                      <RefreshCw size={12} className={isFetchingFromAPI ? 'animate-spin' : ''} />
+                      Sync Meta API
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setShowAddTemplateForm(true)}
+                      className="flex items-center gap-1.5 px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-[11px] font-bold transition-all shadow-sm"
+                    >
+                      <Plus size={13} /> Create Template
+                    </button>
+                  </div>
+                )}
+              </div>
+
+              {/* Add Template Form */}
+              {showAddTemplateForm && (
+                <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 space-y-3">
+                  <h4 className="text-[11.5px] font-bold text-slate-700 uppercase tracking-wider">New Custom Template</h4>
+                  
+                  <div className="space-y-3">
+                    <div>
+                      <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">
+                        Template Name
+                      </label>
+                      <input
+                        type="text"
+                        value={newTemplateName}
+                        onChange={(e) => setNewTemplateName(e.target.value)}
+                        placeholder="e.g. follow_up_recall"
+                        className="w-full px-3 py-2 rounded-lg border border-slate-200 bg-white text-[12.5px] text-slate-800 placeholder:text-slate-400 outline-none focus:border-indigo-400"
+                      />
+                      <p className="text-[9.5px] text-slate-400 mt-1">
+                        Use lowercase letters, numbers, and underscores only.
+                      </p>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-3">
+                      <div>
+                        <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">
+                          Language
+                        </label>
+                        <select
+                          value={newTemplateLang}
+                          onChange={(e) => setNewTemplateLang(e.target.value)}
+                          className="w-full px-2 py-2 rounded-lg border border-slate-200 bg-white text-[12px] text-slate-700 outline-none cursor-pointer"
+                        >
+                          <option value="en">English (en)</option>
+                          <option value="hi">Hindi (hi)</option>
+                          <option value="es">Spanish (es)</option>
+                        </select>
+                      </div>
+
+                      <div>
+                        <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">
+                          Approval Simulation
+                        </label>
+                        <div className="w-full px-3 py-2 rounded-lg border border-emerald-100 bg-emerald-50 text-[12px] text-emerald-700 font-bold flex items-center gap-1.5">
+                          <CheckCircle2 size={13} /> Approved Instantly
+                        </div>
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">
+                        Template Body Content
+                      </label>
+                      <textarea
+                        value={newTemplateBody}
+                        onChange={(e) => setNewTemplateBody(e.target.value)}
+                        placeholder="Dear {{1}}, this is to remind you of your appointment on {{2}}."
+                        rows={3}
+                        className="w-full px-3 py-2 rounded-lg border border-slate-200 bg-white text-[12.5px] text-slate-800 placeholder:text-slate-400 outline-none focus:border-indigo-400 resize-none"
+                      />
+                      <p className="text-[9.5px] text-slate-400 mt-1">
+                        Use double curly braces like {"{{1}}"}, {"{{2}}"} as dynamic placeholders.
+                      </p>
+                    </div>
+
+                    <div className="flex justify-end gap-2 pt-1">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setShowAddTemplateForm(false);
+                          setNewTemplateName('');
+                          setNewTemplateBody('');
+                        }}
+                        className="px-3 py-1.5 border border-slate-200 hover:bg-slate-100 text-slate-600 rounded-lg text-[11px] font-bold transition-all"
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        type="button"
+                        onClick={handleAddTemplate}
+                        className="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-[11px] font-bold transition-all shadow-sm"
+                      >
+                        Add Template
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Templates List */}
+              <div className="space-y-3">
+                {templates.length === 0 ? (
+                  <div className="text-center py-6 text-slate-400 text-xs">
+                    No templates registered. Click "Create Template" or "Sync Meta API" to load.
+                  </div>
+                ) : (
+                  templates.map((tpl, index) => (
+                    <div key={index} className="border border-slate-100 rounded-xl p-3.5 space-y-2.5 hover:border-slate-200 transition-all bg-slate-50/50 relative group">
+                      <div className="flex items-start justify-between gap-4">
+                        <div className="space-y-1 text-left">
+                          <h4 className="text-[12px] font-mono font-bold text-slate-700 break-all">
+                            {tpl.name}
+                          </h4>
+                          <div className="flex flex-wrap items-center gap-1.5">
+                            <span className="inline-flex items-center gap-1 text-[9.5px] text-slate-400 font-bold bg-white border border-slate-100 rounded-md px-1.5 py-0.5 uppercase">
+                              <Globe size={9} /> {tpl.language}
+                            </span>
+                            <span className={`inline-flex items-center gap-0.5 text-[9.5px] font-bold rounded-md px-1.5 py-0.5 border ${
+                              tpl.status === 'Approved'
+                                ? 'bg-emerald-50 border-emerald-100 text-emerald-700'
+                                : tpl.status === 'Pending'
+                                ? 'bg-amber-50 border-amber-100 text-amber-700'
+                                : 'bg-rose-50 border-rose-100 text-rose-700'
+                            }`}>
+                              {tpl.status}
+                            </span>
+                          </div>
+                        </div>
+
+                        <button
+                          type="button"
+                          onClick={() => handleRemoveTemplate(index)}
+                          className="p-1.5 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition-all"
+                        >
+                          <Trash2 size={13} />
+                        </button>
+                      </div>
+
+                      <div className="bg-white border border-slate-100 rounded-lg p-2.5 text-[11.5px] text-slate-600 font-medium leading-relaxed text-left">
+                        {tpl.body}
+                      </div>
+                    </div>
+                  ))
+                )}
+              </div>
+            </div>
+
+            {/* Save Button for Mobile */}
+            <button
+              onClick={handleSave}
+              className={`w-full flex items-center justify-center gap-2 py-3 rounded-xl text-[13px] font-semibold transition-all duration-200 lg:hidden ${
+                saved
+                  ? 'bg-emerald-50 border border-emerald-200 text-emerald-700'
+                  : 'bg-indigo-600 text-white hover:bg-indigo-700 shadow-md shadow-indigo-500/20'
+              }`}
+            >
+              {saved ? <><CheckCircle2 size={15} /> Saved!</> : <><Save size={15} /> Save Changes</>}
+            </button>
           </div>
-          <PrescriptionPreview branding={branding} />
-          <p className="text-[10.5px] text-slate-400 text-center">
-            This is how your clinic header will appear on printed prescription PDFs.
-          </p>
+
+          {/* Right: Status and Testing Connection */}
+          <div className="space-y-4">
+            <div className="bg-white border border-slate-200 rounded-2xl p-5 space-y-4">
+              <h3 className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Connection Status</h3>
+              
+              {whatsapp.phoneNumberId && whatsapp.wabaId && whatsapp.accessToken ? (
+                <div className="flex items-center gap-2 px-3 py-2 bg-emerald-50 border border-emerald-200 text-emerald-700 rounded-xl text-[12px] font-bold">
+                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
+                  Connected & Active (Simulated)
+                </div>
+              ) : (
+                <div className="flex items-center gap-2 px-3 py-2 bg-slate-50 border border-slate-200 text-slate-500 rounded-xl text-[12px] font-bold">
+                  <span className="w-2.5 h-2.5 rounded-full bg-slate-300" />
+                  Not Configured / Inactive
+                </div>
+              )}
+
+              <p className="text-[10px] text-slate-400 leading-relaxed">
+                Configure your Meta developer account credentials. Valid config values enable the CRM to deliver simulated campaign templates and automations in real-time.
+              </p>
+            </div>
+
+            <div className="bg-white border border-slate-200 rounded-2xl p-5 space-y-4">
+              <h3 className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Test Messaging</h3>
+              <div className="space-y-3">
+                <input
+                  type="text"
+                  value={testNumber}
+                  onChange={(e) => setTestNumber(e.target.value)}
+                  placeholder="Recipient Mobile e.g. 9876543210"
+                  className="w-full px-3 py-2 rounded-lg border border-slate-200 bg-slate-50 text-[12.5px] outline-none"
+                />
+                <button
+                  type="button"
+                  onClick={handleSendTestMessage}
+                  disabled={isSendingTest}
+                  className="w-full py-2 px-3 bg-indigo-600 hover:bg-indigo-700 active:scale-95 disabled:bg-slate-100 disabled:text-slate-400 text-white font-bold rounded-lg text-[12px] transition-all flex items-center justify-center gap-1.5 shadow-md shadow-indigo-500/15"
+                >
+                  <Send size={13} />
+                  {isSendingTest ? 'Delivering...' : 'Send Simulated Test'}
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
+      )}
     </motion.div>
   );
 };

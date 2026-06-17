@@ -14,6 +14,8 @@ import {
   CalendarDays,
   Settings,
   Download,
+  Send,
+  MessageSquare,
 } from 'lucide-react';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -39,9 +41,9 @@ const NAV_ITEMS: NavItem[] = [
     icon: Users,
   },
   {
-    label: 'Live Scheduler',
-    path: '/reactivation/scheduler',
-    icon: CalendarDays,
+    label: 'Sent Messages',
+    path: '/reactivation/sent-messages',
+    icon: MessageSquare,
   },
   {
     label: 'AI Receptionist',
@@ -66,7 +68,7 @@ const NAV_ITEMS: NavItem[] = [
 const PAGE_TITLES: Record<string, string> = {
   '/reactivation/receptionist': 'AI Receptionist',
   '/reactivation/customers': 'Patients',
-  '/reactivation/scheduler': 'Live Scheduler',
+  '/reactivation/sent-messages': 'Sent Messages',
   '/reactivation/reviews': 'Google Reviews',
   '/reactivation/settings': 'Clinic Settings',
   '/reactivation': 'Patients',

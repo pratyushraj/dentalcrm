@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { supabase } from '@/lib/supabase';
 import { useSession } from '@/contexts/SessionContext';
 import { toast } from 'sonner';
+import { loadWhatsAppTemplates } from './ReactivationClinicSettings';
 import {
   CalendarDays,
   Clock,
@@ -170,23 +171,46 @@ export default function ReactivationScheduler() {
         const formattedPhone = cleanPhone.length === 10 ? `91${cleanPhone}` : cleanPhone;
         const formattedDateString = new Date(apptDate).toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
 
+        const syncedTemplates = loadWhatsAppTemplates(clinicId);
+        const bookingTemplate = syncedTemplates.find(t => 
+          t.name.startsWith('appointment_confirm') || 
+          t.name.startsWith('appointment_book') || 
+          t.name === 'appointment_booking_confirmation'
+        ) || { 
+          name: 'appointment_booking_confirmation', 
+          language: 'en',
+          body: 'Hello {{1}}, this is a confirmation for your appointment on {{2}} at {{3}} with {{4}}. Contact {{5}} for queries.'
+        };
+
+        const templateBody = bookingTemplate.body || 'Hello {{1}}, this is a confirmation for your appointment on {{2}} at {{3}} with {{4}}. Contact {{5}} for queries.';
+        const getTemplateVariablesCount = (bodyText: string) => {
+          const matches = bodyText.match(/\{\{(\d+)\}\}/g);
+          if (!matches) return 0;
+          const nums = matches.map(m => parseInt(m.replace(/[\{\}]/g, ''), 10));
+          return Math.max(...nums, 0);
+        };
+
+        const paramCount = getTemplateVariablesCount(templateBody);
+        const allPossibleParameters = [
+          { type: 'text', text: manualName },
+          { type: 'text', text: formattedDateString },
+          { type: 'text', text: apptTime },
+          { type: 'text', text: doctorName },
+          { type: 'text', text: whatsappBusinessPhone || '+91 75448 60350' }
+        ];
+        const parameters = allPossibleParameters.slice(0, paramCount);
+
         const payload = {
           messaging_product: 'whatsapp',
           to: formattedPhone,
           type: 'template',
           template: {
-            name: 'appointment_booking_confirmation',
-            language: { code: 'en' },
+            name: bookingTemplate.name,
+            language: { code: bookingTemplate.language },
             components: [
               {
                 type: 'body',
-                parameters: [
-                  { type: 'text', text: manualName },
-                  { type: 'text', text: formattedDateString },
-                  { type: 'text', text: apptTime },
-                  { type: 'text', text: doctorName },
-                  { type: 'text', text: whatsappBusinessPhone || '+91 75448 60350' }
-                ]
+                parameters
               }
             ]
           }

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useSession } from '@/contexts/SessionContext';
 import { toast } from 'sonner';
 import { motion } from 'framer-motion';
@@ -182,6 +182,14 @@ const ReactivationLogin: React.FC = () => {
             </button>
 
           </form>
+
+          {/* Signup redirection */}
+          <div className="mt-4 text-center">
+            <span className="text-xs text-slate-500">Don't have a clinic registered? </span>
+            <Link to="/reactivation/signup" className="text-xs text-teal-400 hover:text-teal-300 font-bold underline">
+              Register clinic here
+            </Link>
+          </div>
 
           {/* Bottom security assurance */}
           <div className="mt-6 flex items-center justify-center gap-1.5 text-xs text-slate-500 border-t border-slate-800/60 pt-4">

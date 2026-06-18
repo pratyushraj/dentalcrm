@@ -266,7 +266,9 @@ Do not include any wrapper (like markdown code blocks \`\`\`json) or extra expla
 
 export const generateSmileTransformationPrompts = async (
   treatment: string,
-  notes: string
+  notes: string,
+  beforePhoto?: string | null,
+  afterPhoto?: string | null
 ): Promise<{ beforePrompt: string; afterPrompt: string }> => {
   const geminiKey = import.meta.env.VITE_GEMINI_API_KEY;
   const defaultPrompts = {
@@ -281,22 +283,62 @@ You are an expert AI dental imaging engineer.
 Your task is to write two detailed, realistic prompts for generating before-and-after photos of a patient's smile makeover.
 The prompts will be used in an image generator.
 
+If before/after reference photos are provided as images below, analyze the patient's dental structure, tooth alignment, gum levels, and general mouth appearance in those images. Write prompts that describe the visual characteristics of these specific teeth (e.g., exact gap widths, tooth shape, crookedness, fillings, whitening levels) so the generated images will look highly similar to the patient's actual mouth.
+
 Case details:
 - Treatment: "${treatment}"
 - Clinical Notes: "${notes}"
 
 Guidelines:
-1. Write a 'beforePrompt' focusing on the aesthetic defects (e.g. gaps, crookedness, plaque, yellow stains, missing teeth, or old fillings) as described in the case details. Make it look like a macro clinical mouth close-up.
-2. Write an 'afterPrompt' showing the teeth fully corrected, white, perfectly aligned, healthy, and beautiful.
-3. Keep descriptions highly descriptive, realistic, clean, and medical, focusing on the teeth and lips only (no full faces). Ensure no text is generated in the images.
+1. Write a 'beforePrompt' describing the exact dental issues (e.g. gaps, crookedness, plaque, stains) from the reference image and notes. Focus on close-up dental detail.
+2. Write an 'afterPrompt' describing the corrected, aligned, white, and healthy version of these exact teeth.
+3. Keep descriptions realistic, medical, clean, focusing on the teeth and lips (no text overlays, no full faces).
 
 Output format MUST be only a valid JSON object matching this structure:
 {
   "beforePrompt": "detailed prompt text...",
   "afterPrompt": "detailed prompt text..."
 }
-Do not include any wrapper (like markdown code blocks) or extra text. Just return the JSON object.
+Do not include any markdown wrappers. Return only the JSON object.
 `;
+
+  // Parse helper for data URL -> mime & raw base64
+  const parseBase64 = (dataUrl: string) => {
+    const matches = dataUrl.match(/^data:([a-zA-Z0-9]+\/[a-zA-Z0-9-.+]+);base64,(.+)$/);
+    if (!matches || matches.length < 3) return null;
+    return {
+      mimeType: matches[1],
+      data: matches[2]
+    };
+  };
+
+  const parts: any[] = [{ text: prompt }];
+
+  if (beforePhoto) {
+    const parsed = parseBase64(beforePhoto);
+    if (parsed) {
+      parts.push({ text: "\nReference BEFORE Image of patient teeth:\n" });
+      parts.push({
+        inlineData: {
+          mimeType: parsed.mimeType,
+          data: parsed.data
+        }
+      });
+    }
+  }
+
+  if (afterPhoto) {
+    const parsed = parseBase64(afterPhoto);
+    if (parsed) {
+      parts.push({ text: "\nReference AFTER Image of patient teeth:\n" });
+      parts.push({
+        inlineData: {
+          mimeType: parsed.mimeType,
+          data: parsed.data
+        }
+      });
+    }
+  }
 
   try {
     const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${geminiKey}`, {
@@ -305,7 +347,7 @@ Do not include any wrapper (like markdown code blocks) or extra text. Just retur
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        contents: [{ parts: [{ text: prompt }] }]
+        contents: [{ parts }]
       })
     });
     if (response.ok) {

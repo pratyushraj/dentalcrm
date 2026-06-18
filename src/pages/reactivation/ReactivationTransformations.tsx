@@ -194,7 +194,9 @@ export default function ReactivationTransformations() {
     try {
       const result = await generateSmileTransformationPrompts(
         treatmentLabel || activePatient.service || 'Smile Makeover',
-        activePatient.notes || 'Routine cosmetic dental care and aesthetic enhancement.'
+        activePatient.notes || 'Routine cosmetic dental care and aesthetic enhancement.',
+        beforePhoto,
+        afterPhoto
       );
       setBeforePrompt(result.beforePrompt);
       setAfterPrompt(result.afterPrompt);

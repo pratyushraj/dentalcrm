@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { supabase } from '@/lib/supabase';
 import { useSession } from '@/contexts/SessionContext';
-import { generateSmileTransformationCaptions } from '@/lib/ai/gemini';
+import { generateSmileTransformationCaptions, SmileTransformationAssets } from '@/lib/ai/gemini';
 import { toast } from 'sonner';
 import { 
   Sparkles, 
@@ -13,7 +13,8 @@ import {
   Image as ImageIcon,
   ChevronRight,
   RefreshCw,
-  Search
+  Search,
+  Palette
 } from 'lucide-react';
 
 interface Patient {
@@ -26,7 +27,7 @@ interface Patient {
   notes: string | null;
 }
 
-type FrameStyle = 'charcoal' | 'luxury_gold' | 'clean_medical';
+type FrameStyle = 'charcoal' | 'luxury_gold' | 'clean_medical' | 'ai_theme';
 
 export default function ReactivationTransformations() {
   const { organizationId } = useSession();
@@ -46,6 +47,10 @@ export default function ReactivationTransformations() {
   const [clinicName, setClinicName] = useState('Shree Ram Dental Clinic');
   const [treatmentLabel, setTreatmentLabel] = useState('');
   const [activeFrameStyle, setActiveFrameStyle] = useState<FrameStyle>('charcoal');
+
+  // AI Theme state
+  const [aiTheme, setAiTheme] = useState<SmileTransformationAssets['theme'] | null>(null);
+  const [useAiTheme, setUseAiTheme] = useState(false);
 
   // AI captions state
   const [captions, setCaptions] = useState<{ educational: string; emotional: string; short: string } | null>(null);
@@ -107,6 +112,9 @@ export default function ReactivationTransformations() {
       setAfterPhoto(activePatient.after_photo);
       setTreatmentLabel(activePatient.service || 'Smile Makeover');
       setCaptions(null); // Reset captions
+      setAiTheme(null); // Reset AI Theme
+      setUseAiTheme(false); // Reset AI Theme toggle
+      setActiveFrameStyle('charcoal'); // Revert frame style preset
     }
   }, [selectedPatientId, activePatient]);
 
@@ -159,10 +167,13 @@ export default function ReactivationTransformations() {
         activePatient.notes || 'Routine cosmetic dental care and aesthetic enhancement.',
         clinicName
       );
-      setCaptions(generated);
-      toast.success('AI Instagram captions generated successfully!');
+      setCaptions(generated.captions);
+      setAiTheme(generated.theme);
+      setUseAiTheme(true);
+      setActiveFrameStyle('ai_theme');
+      toast.success('AI Instagram captions & custom design theme generated!');
     } catch (e) {
-      toast.error('Failed to generate AI captions');
+      toast.error('Failed to generate AI captions and design');
     } finally {
       setIsGeneratingCaptions(false);
     }
@@ -188,7 +199,12 @@ export default function ReactivationTransformations() {
     canvas.height = 1080;
 
     // Apply background colors based on style
-    if (activeFrameStyle === 'charcoal') {
+    if (useAiTheme && aiTheme) {
+      const grad = ctx.createLinearGradient(0, 0, 0, 1080);
+      grad.addColorStop(0, aiTheme.backgroundGradientStart);
+      grad.addColorStop(1, aiTheme.backgroundGradientEnd);
+      ctx.fillStyle = grad;
+    } else if (activeFrameStyle === 'charcoal') {
       ctx.fillStyle = '#0F172A'; // slate-900
     } else if (activeFrameStyle === 'luxury_gold') {
       ctx.fillStyle = '#1E1B4B'; // deep purple/indigo
@@ -197,8 +213,12 @@ export default function ReactivationTransformations() {
     }
     ctx.fillRect(0, 0, 1080, 1080);
 
-    // Helper to draw gold borders / frames
-    if (activeFrameStyle === 'luxury_gold') {
+    // Helper to draw borders / frames
+    if (useAiTheme && aiTheme) {
+      ctx.strokeStyle = aiTheme.accentColor;
+      ctx.lineWidth = aiTheme.frameStyle === 'luxury' ? 12 : 8;
+      ctx.strokeRect(6, 6, 1068, 1068);
+    } else if (activeFrameStyle === 'luxury_gold') {
       ctx.strokeStyle = '#D97706'; // amber-600 gold border
       ctx.lineWidth = 12;
       ctx.strokeRect(6, 6, 1068, 1068);
@@ -214,7 +234,10 @@ export default function ReactivationTransformations() {
 
     // Header Branding text
     ctx.textBaseline = 'top';
-    if (activeFrameStyle === 'luxury_gold') {
+    if (useAiTheme && aiTheme) {
+      ctx.fillStyle = aiTheme.textColor;
+      ctx.font = aiTheme.fontFamily === 'serif' ? 'bold 44px Georgia, serif' : 'bold 40px sans-serif';
+    } else if (activeFrameStyle === 'luxury_gold') {
       ctx.fillStyle = '#F59E0B'; // Amber Gold
       ctx.font = 'bold 36px Georgia, serif';
     } else if (activeFrameStyle === 'charcoal') {
@@ -225,17 +248,20 @@ export default function ReactivationTransformations() {
       ctx.font = 'bold 34px sans-serif';
     }
     ctx.textAlign = 'center';
-    ctx.fillText(clinicName.toUpperCase(), 540, 50);
+    ctx.fillText(useAiTheme && aiTheme ? aiTheme.headerText.toUpperCase() : clinicName.toUpperCase(), 540, 45);
 
     // Treatment subtitle
-    if (activeFrameStyle === 'luxury_gold') {
+    if (useAiTheme && aiTheme) {
+      ctx.fillStyle = aiTheme.accentColor;
+      ctx.font = aiTheme.fontFamily === 'serif' ? 'italic 24px Georgia, serif' : 'bold 22px sans-serif';
+    } else if (activeFrameStyle === 'luxury_gold') {
       ctx.fillStyle = '#FBBF24'; // light gold
       ctx.font = 'italic 22px Georgia, serif';
     } else {
       ctx.fillStyle = '#6366F1'; // Indigo-500
       ctx.font = 'bold 20px sans-serif';
     }
-    ctx.fillText(treatmentLabel.toUpperCase(), 540, 100);
+    ctx.fillText(useAiTheme && aiTheme ? `${clinicName.toUpperCase()} • ${treatmentLabel.toUpperCase()}` : treatmentLabel.toUpperCase(), 540, 100);
 
     // Draw images
     const imgWidth = 490;
@@ -247,9 +273,11 @@ export default function ReactivationTransformations() {
     const drawPhoto = (imgSrc: string | null, x: number, badgeText: string) => {
       if (!imgSrc) {
         // Draw placeholder
-        ctx.fillStyle = activeFrameStyle === 'clean_medical' ? '#F1F5F9' : '#1E293B';
+        ctx.fillStyle = (useAiTheme && aiTheme) 
+          ? aiTheme.backgroundGradientStart 
+          : (activeFrameStyle === 'clean_medical' ? '#F1F5F9' : '#1E293B');
         ctx.fillRect(x, yOffset, imgWidth, imgHeight);
-        ctx.fillStyle = '#64748B';
+        ctx.fillStyle = useAiTheme && aiTheme ? aiTheme.textColor : '#64748B';
         ctx.font = '16px sans-serif';
         ctx.textAlign = 'center';
         ctx.fillText(`No ${badgeText} Photo Loaded`, x + imgWidth / 2, yOffset + imgHeight / 2);
@@ -262,7 +290,7 @@ export default function ReactivationTransformations() {
       const img = new Image();
       img.onload = () => {
         ctx.save();
-        // Create clipping region for rounded corners (optional)
+        // Create clipping region for rounded corners
         ctx.beginPath();
         ctx.roundRect(x, yOffset, imgWidth, imgHeight, 12);
         ctx.clip();
@@ -297,7 +325,9 @@ export default function ReactivationTransformations() {
       const paddingY = 10;
       
       // Draw badge backplate
-      ctx.fillStyle = text === 'BEFORE' ? '#EF4444' : '#10B981'; // Red for before, Green for after
+      ctx.fillStyle = text === 'BEFORE' 
+        ? (useAiTheme && aiTheme ? aiTheme.badgeBeforeBg : '#EF4444') 
+        : (useAiTheme && aiTheme ? aiTheme.badgeAfterBg : '#10B981');
       ctx.beginPath();
       ctx.roundRect(x + 15, y + 15, textWidth + paddingX * 2, 44, 8);
       ctx.fill();
@@ -314,15 +344,22 @@ export default function ReactivationTransformations() {
 
     // Footer overlay (branding details)
     ctx.textBaseline = 'bottom';
-    if (activeFrameStyle === 'luxury_gold') {
-      ctx.fillStyle = '#FBBF24';
-      ctx.font = 'italic 18px Georgia, serif';
+    if (useAiTheme && aiTheme) {
+      ctx.fillStyle = aiTheme.textColor;
+      ctx.font = aiTheme.fontFamily === 'serif' ? 'italic 16px Georgia, serif' : 'medium 15px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText(`✨ ${clinicName.toUpperCase()} SMILE GALLERY ✨`, 540, 1045);
     } else {
-      ctx.fillStyle = '#94A3B8';
-      ctx.font = 'medium 15px sans-serif';
+      if (activeFrameStyle === 'luxury_gold') {
+        ctx.fillStyle = '#FBBF24';
+        ctx.font = 'italic 18px Georgia, serif';
+      } else {
+        ctx.fillStyle = '#94A3B8';
+        ctx.font = 'medium 15px sans-serif';
+      }
+      ctx.textAlign = 'center';
+      ctx.fillText("✨ SMILE TRANSFORMATION GALLERY | DENTAL CRM ✨", 540, 1045);
     }
-    ctx.textAlign = 'center';
-    ctx.fillText("✨ SMILE TRANSFORMATION GALLERY | DENTAL CRM ✨", 540, 1045);
   };
 
   // Re-draw canvas when styling or image variables change
@@ -331,7 +368,8 @@ export default function ReactivationTransformations() {
     // Wait briefly for images to load, then redraw
     const t = setTimeout(drawCanvas, 350);
     return () => clearTimeout(t);
-  }, [beforePhoto, afterPhoto, clinicName, treatmentLabel, activeFrameStyle]);
+  }, [beforePhoto, afterPhoto, clinicName, treatmentLabel, activeFrameStyle, useAiTheme, aiTheme]);
+
 
   // Triggers canvas PNG download
   const handleDownload = () => {
@@ -482,11 +520,14 @@ export default function ReactivationTransformations() {
                   {/* Frame Styles Selector */}
                   <div>
                     <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block mb-1.5">Template Theme Style</label>
-                    <div className="grid grid-cols-3 gap-2">
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                       {(['charcoal', 'luxury_gold', 'clean_medical'] as FrameStyle[]).map(style => (
                         <button
                           key={style}
-                          onClick={() => setActiveFrameStyle(style)}
+                          onClick={() => {
+                            setUseAiTheme(false);
+                            setActiveFrameStyle(style);
+                          }}
                           className={`border rounded-lg p-2 text-[10px] font-bold capitalize transition cursor-pointer ${
                             activeFrameStyle === style
                               ? 'bg-indigo-600 text-white border-indigo-600'
@@ -496,7 +537,64 @@ export default function ReactivationTransformations() {
                           {style.replace('_', ' ')}
                         </button>
                       ))}
+                      <button
+                        key="ai_theme"
+                        onClick={() => {
+                          if (aiTheme) {
+                            setUseAiTheme(true);
+                            setActiveFrameStyle('ai_theme');
+                          } else {
+                            toast.info('Generating custom AI layout theme and captions...');
+                            handleGenerateCaptions();
+                          }
+                        }}
+                        className={`border rounded-lg p-2 text-[10px] font-bold capitalize transition cursor-pointer flex items-center justify-center gap-1 ${
+                          activeFrameStyle === 'ai_theme'
+                            ? 'bg-gradient-to-r from-violet-600 to-indigo-600 text-white border-transparent shadow-sm'
+                            : 'bg-slate-50 text-slate-600 border-slate-200 hover:bg-slate-100'
+                        }`}
+                      >
+                        <Sparkles size={11} className={activeFrameStyle === 'ai_theme' ? 'animate-pulse' : ''} />
+                        AI Smart Theme
+                      </button>
                     </div>
+
+                    {/* AI Theme Swatches preview */}
+                    {useAiTheme && aiTheme && (
+                      <div className="bg-slate-50 border border-slate-200 rounded-lg p-2.5 flex flex-col gap-2 mt-2">
+                        <div className="flex items-center justify-between">
+                          <span className="text-[10px] font-bold text-slate-600 flex items-center gap-1">
+                            <Palette size={12} className="text-violet-500" />
+                            AI Selected Palette:
+                          </span>
+                          <span className="text-[8px] bg-indigo-50 text-indigo-600 font-bold px-1.5 py-0.2 rounded border border-indigo-100 capitalize">
+                            {aiTheme.frameStyle} layout
+                          </span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <div className="flex items-center -space-x-1.5">
+                            {[
+                              aiTheme.backgroundGradientStart,
+                              aiTheme.backgroundGradientEnd,
+                              aiTheme.textColor,
+                              aiTheme.accentColor,
+                              aiTheme.badgeBeforeBg,
+                              aiTheme.badgeAfterBg
+                            ].map((c, i) => (
+                              <div
+                                key={i}
+                                className="w-5 h-5 rounded-full border border-white shadow-sm flex-shrink-0"
+                                style={{ backgroundColor: c }}
+                                title={c}
+                              />
+                            ))}
+                          </div>
+                          <span className="text-[9px] text-slate-400 italic truncate flex-1">
+                            Title: "{aiTheme.headerText}" ({aiTheme.fontFamily})
+                          </span>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </div>
 

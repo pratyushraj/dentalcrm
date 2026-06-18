@@ -151,24 +151,64 @@ Guidelines:
   return rawTranscript;
 };
 
+export interface SmileTransformationAssets {
+  captions: {
+    educational: string;
+    emotional: string;
+    short: string;
+  };
+  theme: {
+    backgroundGradientStart: string;
+    backgroundGradientEnd: string;
+    textColor: string;
+    accentColor: string;
+    badgeBeforeBg: string;
+    badgeAfterBg: string;
+    fontFamily: 'serif' | 'sans-serif';
+    headerText: string;
+    frameStyle: 'elegant' | 'modern' | 'luxury';
+  };
+}
+
 export const generateSmileTransformationCaptions = async (
   patientName: string,
   treatment: string,
   notes: string,
   clinicName: string
-): Promise<{ educational: string; emotional: string; short: string }> => {
+): Promise<SmileTransformationAssets> => {
   const geminiKey = import.meta.env.VITE_GEMINI_API_KEY;
-  if (!geminiKey) {
-    return {
+  const defaultAssets: SmileTransformationAssets = {
+    captions: {
       educational: `🦷 Transformative Care!\n\nHere is a stunning before & after smile transformation for ${patientName} after receiving ${treatment} at ${clinicName}. Quality dentistry makes all the difference! #dentist #smilemakeover #dentalclinic`,
       emotional: `✨ Reclaiming confidence one smile at a time!\n\n${patientName} is smiling brighter than ever after their custom ${treatment} makeover with us. True life-changing results! #confidence #smiletransform #dentalcare`,
       short: `Before vs After: ${treatment} 🤩\n\nStunning results for ${patientName} at ${clinicName}! Link in bio to book your consult. #makeover #viral #shreeram`
-    };
+    },
+    theme: {
+      backgroundGradientStart: '#0F172A',
+      backgroundGradientEnd: '#1E293B',
+      textColor: '#FFFFFF',
+      accentColor: '#38BDF8',
+      badgeBeforeBg: '#EF4444',
+      badgeAfterBg: '#10B981',
+      fontFamily: 'sans-serif',
+      headerText: 'SMILE TRANSFORMATION',
+      frameStyle: 'modern'
+    }
+  };
+
+  if (!geminiKey) {
+    return defaultAssets;
   }
 
   const prompt = `
-You are an expert Instagram copywriter specializing in dental clinic branding and smile transformation posts.
-Your task is to write 3 engaging, premium Instagram captions for a "Before & After" smile transformation post.
+You are an expert Instagram copywriter and aesthetic graphic designer specializing in dental clinic branding.
+Your task is to:
+1. Write 3 engaging, premium Instagram captions for a "Before & After" smile transformation post.
+2. Select a beautiful, custom design theme (color palette, typography style, headers, and frames) that perfectly matches the personality and style of this patient's case notes. For instance:
+   - For an elegant veneer case: Use a luxury/gold theme (e.g. deep plum or navy background with rich gold text and accent colors).
+   - For a clean orthodontic case: Use a clean modern blue/white/teal aesthetic.
+   - For a dramatic restoration: Use an emotional dark mode charcoal/amber look.
+   Provide exact hex codes and select a font family (serif or sans-serif) that complements this look.
 
 Details of the case:
 - Patient Name: "${patientName}"
@@ -176,17 +216,27 @@ Details of the case:
 - Doctor Clinical Notes: "${notes}"
 - Clinic Name: "${clinicName}"
 
-Please generate exactly 3 captions in different styles, and output them in a structured JSON format.
-Include emojis, trending hashtags, and call-to-actions.
-
-Output format must be ONLY a valid JSON object matching this structure:
+Please return exactly a JSON object matching this structure:
 {
-  "educational": "caption focusing on the clinical explanation, benefits of the procedure, and educational value for prospective patients",
-  "emotional": "caption focusing on the confidence, lifestyle boost, patient story, and transformation journey",
-  "short": "a quick, high-energy, viral, punchy caption with emojis and trending hashtags"
+  "captions": {
+    "educational": "caption focusing on the clinical explanation, benefits of the procedure, and educational value",
+    "emotional": "caption focusing on the confidence, lifestyle boost, patient story, and transformation journey",
+    "short": "a quick, high-energy, viral, punchy caption with emojis and hashtags"
+  },
+  "theme": {
+    "backgroundGradientStart": "Hex code (e.g. #0F172A) for gradient background starting color",
+    "backgroundGradientEnd": "Hex code (e.g. #1E293B) for gradient background ending color",
+    "textColor": "Hex code (e.g. #FFFFFF) for main text titles",
+    "accentColor": "Hex code (e.g. #38BDF8) for labels and subtitle highlights",
+    "badgeBeforeBg": "Hex code for the 'BEFORE' image badge (e.g. #EF4444 or matching dark accent)",
+    "badgeAfterBg": "Hex code for the 'AFTER' image badge (e.g. #10B981 or matching light accent)",
+    "fontFamily": "serif or sans-serif",
+    "headerText": "A custom short, bold title overlay (e.g. 'CONFIDENCE RESTORED', 'NATURAL BEAUTY', 'A NEW BEGINNING') - MAX 22 characters in uppercase",
+    "frameStyle": "elegant or modern or luxury"
+  }
 }
 
-Do not include any wrapper (like markdown code blocks \`\`\`json) or extra explanation. Just return the raw JSON object.
+Do not include any wrapper (like markdown code blocks \`\`\`json) or extra explanation. Return ONLY the raw JSON object.
 `;
 
   try {
@@ -208,13 +258,9 @@ Do not include any wrapper (like markdown code blocks \`\`\`json) or extra expla
       }
     }
   } catch (e) {
-    console.error("Gemini caption generation failed", e);
+    console.error("Gemini caption and theme generation failed", e);
   }
 
-  return {
-    educational: `🦷 Transformative Care!\n\nHere is a stunning before & after smile transformation for ${patientName} after receiving ${treatment} at ${clinicName}. Quality dentistry makes all the difference! #dentist #smilemakeover #dentalclinic`,
-    emotional: `✨ Reclaiming confidence one smile at a time!\n\n${patientName} is smiling brighter than ever after their custom ${treatment} makeover with us. True life-changing results! #confidence #smiletransform #dentalcare`,
-    short: `Before vs After: ${treatment} 🤩\n\nStunning results for ${patientName} at ${clinicName}! Link in bio to book your consult. #makeover #viral #shreeram`
-  };
+  return defaultAssets;
 };
 

@@ -151,3 +151,70 @@ Guidelines:
   return rawTranscript;
 };
 
+export const generateSmileTransformationCaptions = async (
+  patientName: string,
+  treatment: string,
+  notes: string,
+  clinicName: string
+): Promise<{ educational: string; emotional: string; short: string }> => {
+  const geminiKey = import.meta.env.VITE_GEMINI_API_KEY;
+  if (!geminiKey) {
+    return {
+      educational: `🦷 Transformative Care!\n\nHere is a stunning before & after smile transformation for ${patientName} after receiving ${treatment} at ${clinicName}. Quality dentistry makes all the difference! #dentist #smilemakeover #dentalclinic`,
+      emotional: `✨ Reclaiming confidence one smile at a time!\n\n${patientName} is smiling brighter than ever after their custom ${treatment} makeover with us. True life-changing results! #confidence #smiletransform #dentalcare`,
+      short: `Before vs After: ${treatment} 🤩\n\nStunning results for ${patientName} at ${clinicName}! Link in bio to book your consult. #makeover #viral #shreeram`
+    };
+  }
+
+  const prompt = `
+You are an expert Instagram copywriter specializing in dental clinic branding and smile transformation posts.
+Your task is to write 3 engaging, premium Instagram captions for a "Before & After" smile transformation post.
+
+Details of the case:
+- Patient Name: "${patientName}"
+- Dental Treatment/Service: "${treatment}"
+- Doctor Clinical Notes: "${notes}"
+- Clinic Name: "${clinicName}"
+
+Please generate exactly 3 captions in different styles, and output them in a structured JSON format.
+Include emojis, trending hashtags, and call-to-actions.
+
+Output format must be ONLY a valid JSON object matching this structure:
+{
+  "educational": "caption focusing on the clinical explanation, benefits of the procedure, and educational value for prospective patients",
+  "emotional": "caption focusing on the confidence, lifestyle boost, patient story, and transformation journey",
+  "short": "a quick, high-energy, viral, punchy caption with emojis and trending hashtags"
+}
+
+Do not include any wrapper (like markdown code blocks \`\`\`json) or extra explanation. Just return the raw JSON object.
+`;
+
+  try {
+    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${geminiKey}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        contents: [{ parts: [{ text: prompt }] }]
+      })
+    });
+    if (response.ok) {
+      const data = await response.json();
+      const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
+      if (text) {
+        const cleanJson = text.replace(/```json|```/g, "").trim();
+        return JSON.parse(cleanJson);
+      }
+    }
+  } catch (e) {
+    console.error("Gemini caption generation failed", e);
+  }
+
+  return {
+    educational: `🦷 Transformative Care!\n\nHere is a stunning before & after smile transformation for ${patientName} after receiving ${treatment} at ${clinicName}. Quality dentistry makes all the difference! #dentist #smilemakeover #dentalclinic`,
+    emotional: `✨ Reclaiming confidence one smile at a time!\n\n${patientName} is smiling brighter than ever after their custom ${treatment} makeover with us. True life-changing results! #confidence #smiletransform #dentalcare`,
+    short: `Before vs After: ${treatment} 🤩\n\nStunning results for ${patientName} at ${clinicName}! Link in bio to book your consult. #makeover #viral #shreeram`
+  };
+};
+

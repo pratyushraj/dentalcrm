@@ -16,6 +16,7 @@ import {
   Download,
   Send,
   MessageSquare,
+  Sparkles,
 } from 'lucide-react';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -46,6 +47,11 @@ const NAV_ITEMS: NavItem[] = [
     icon: MessageSquare,
   },
   {
+    label: 'Smile Gallery',
+    path: '/reactivation/transformations',
+    icon: Sparkles,
+  },
+  {
     label: 'AI Receptionist',
     path: '/reactivation/receptionist',
     icon: Bot,
@@ -69,6 +75,7 @@ const PAGE_TITLES: Record<string, string> = {
   '/reactivation/receptionist': 'AI Receptionist',
   '/reactivation/customers': 'Patients',
   '/reactivation/sent-messages': 'Sent Messages',
+  '/reactivation/transformations': 'Smile Gallery',
   '/reactivation/reviews': 'Google Reviews',
   '/reactivation/settings': 'Clinic Settings',
   '/reactivation': 'Patients',

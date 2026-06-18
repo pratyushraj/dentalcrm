@@ -264,3 +264,63 @@ Do not include any wrapper (like markdown code blocks \`\`\`json) or extra expla
   return defaultAssets;
 };
 
+export const generateSmileTransformationPrompts = async (
+  treatment: string,
+  notes: string
+): Promise<{ beforePrompt: string; afterPrompt: string }> => {
+  const geminiKey = import.meta.env.VITE_GEMINI_API_KEY;
+  const defaultPrompts = {
+    beforePrompt: `macro shot dental photography, close up of crooked teeth with noticeable gaps, plaque, realistic mouth interior, clinical lighting`,
+    afterPrompt: `macro shot dental photography, close up of perfectly aligned and bright white teeth, veneers, clean healthy pink gums, professional clinical lighting`
+  };
+
+  if (!geminiKey) return defaultPrompts;
+
+  const prompt = `
+You are an expert AI dental imaging engineer.
+Your task is to write two detailed, realistic prompts for generating before-and-after photos of a patient's smile makeover.
+The prompts will be used in an image generator.
+
+Case details:
+- Treatment: "${treatment}"
+- Clinical Notes: "${notes}"
+
+Guidelines:
+1. Write a 'beforePrompt' focusing on the aesthetic defects (e.g. gaps, crookedness, plaque, yellow stains, missing teeth, or old fillings) as described in the case details. Make it look like a macro clinical mouth close-up.
+2. Write an 'afterPrompt' showing the teeth fully corrected, white, perfectly aligned, healthy, and beautiful.
+3. Keep descriptions highly descriptive, realistic, clean, and medical, focusing on the teeth and lips only (no full faces). Ensure no text is generated in the images.
+
+Output format MUST be only a valid JSON object matching this structure:
+{
+  "beforePrompt": "detailed prompt text...",
+  "afterPrompt": "detailed prompt text..."
+}
+Do not include any wrapper (like markdown code blocks) or extra text. Just return the JSON object.
+`;
+
+  try {
+    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${geminiKey}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        contents: [{ parts: [{ text: prompt }] }]
+      })
+    });
+    if (response.ok) {
+      const data = await response.json();
+      const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
+      if (text) {
+        const cleanJson = text.replace(/```json|```/g, "").trim();
+        return JSON.parse(cleanJson);
+      }
+    }
+  } catch (e) {
+    console.error("Gemini image prompts generation failed", e);
+  }
+
+  return defaultPrompts;
+};
+
+

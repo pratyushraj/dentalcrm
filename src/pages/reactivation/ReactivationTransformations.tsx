@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { supabase } from '@/lib/supabase';
 import { useSession } from '@/contexts/SessionContext';
-import { generateSmileTransformationCaptions, SmileTransformationAssets } from '@/lib/ai/gemini';
+import { generateSmileTransformationCaptions, generateSmileTransformationPrompts, SmileTransformationAssets } from '@/lib/ai/gemini';
 import { toast } from 'sonner';
 import { 
   Sparkles, 
@@ -51,6 +51,12 @@ export default function ReactivationTransformations() {
   // AI Theme state
   const [aiTheme, setAiTheme] = useState<SmileTransformationAssets['theme'] | null>(null);
   const [useAiTheme, setUseAiTheme] = useState(false);
+
+  // AI Image generator state
+  const [beforePrompt, setBeforePrompt] = useState('');
+  const [afterPrompt, setAfterPrompt] = useState('');
+  const [isGeneratingPrompts, setIsGeneratingPrompts] = useState(false);
+  const [isGeneratingImages, setIsGeneratingImages] = useState(false);
 
   // AI captions state
   const [captions, setCaptions] = useState<{ educational: string; emotional: string; short: string } | null>(null);
@@ -115,6 +121,8 @@ export default function ReactivationTransformations() {
       setAiTheme(null); // Reset AI Theme
       setUseAiTheme(false); // Reset AI Theme toggle
       setActiveFrameStyle('charcoal'); // Revert frame style preset
+      setBeforePrompt(''); // Reset Before Prompt
+      setAfterPrompt(''); // Reset After Prompt
     }
   }, [selectedPatientId, activePatient]);
 
@@ -176,6 +184,85 @@ export default function ReactivationTransformations() {
       toast.error('Failed to generate AI captions and design');
     } finally {
       setIsGeneratingCaptions(false);
+    }
+  };
+
+  // Generate Image Prompts using Gemini
+  const handleGeneratePrompts = async () => {
+    if (!activePatient) return;
+    setIsGeneratingPrompts(true);
+    try {
+      const result = await generateSmileTransformationPrompts(
+        treatmentLabel || activePatient.service || 'Smile Makeover',
+        activePatient.notes || 'Routine cosmetic dental care and aesthetic enhancement.'
+      );
+      setBeforePrompt(result.beforePrompt);
+      setAfterPrompt(result.afterPrompt);
+      toast.success('AI image prompts generated!');
+    } catch (e) {
+      toast.error('Failed to generate image prompts.');
+    } finally {
+      setIsGeneratingPrompts(false);
+    }
+  };
+
+  // Helper to fetch and convert to Base64 to prevent CORS taint on Canvas
+  const fetchImageAsBase64 = async (promptText: string): Promise<string> => {
+    const seed = Math.floor(Math.random() * 1000000);
+    const finalPrompt = encodeURIComponent(`${promptText}, macro dental close-up photography, ultra-realistic clinical documentation style, 4k`);
+    const url = `https://image.pollinations.ai/prompt/${finalPrompt}?width=500&height=760&nologo=true&seed=${seed}`;
+    
+    const response = await fetch(url);
+    if (!response.ok) throw new Error('Failed to fetch generated image.');
+    const blob = await response.blob();
+    
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onloadend = () => resolve(reader.result as string);
+      reader.onerror = reject;
+      reader.readAsDataURL(blob);
+    });
+  };
+
+  // Fetch Before and After photos using Pollinations.ai API
+  const handleGenerateImages = async () => {
+    if (!beforePrompt.trim() || !afterPrompt.trim()) {
+      toast.error('Please generate or write prompts for both Before and After states.');
+      return;
+    }
+    setIsGeneratingImages(true);
+    try {
+      toast.info('Generating AI Before Photo...');
+      const beforeB64 = await fetchImageAsBase64(beforePrompt);
+      setBeforePhoto(beforeB64);
+      
+      toast.info('Generating AI After Photo...');
+      const afterB64 = await fetchImageAsBase64(afterPrompt);
+      setAfterPhoto(afterB64);
+
+      if (selectedPatientId) {
+        setIsSavingPhotos(true);
+        const { error } = await supabase
+          .from('dental_patients')
+          .update({
+            before_photo: beforeB64,
+            after_photo: afterB64
+          })
+          .eq('id', selectedPatientId);
+
+        if (error) {
+          toast.error('Images generated but database save failed: ' + error.message);
+        } else {
+          toast.success('AI Photos generated and updated successfully in Supabase!');
+          setPatients(prev => prev.map(p => p.id === selectedPatientId ? { ...p, before_photo: beforeB64, after_photo: afterB64 } : p));
+        }
+      }
+    } catch (e) {
+      console.error(e);
+      toast.error('Failed to generate AI images. Please try again.');
+    } finally {
+      setIsGeneratingImages(false);
+      setIsSavingPhotos(false);
     }
   };
 
@@ -674,6 +761,57 @@ export default function ReactivationTransformations() {
                       Saving photos directly to Supabase patient records...
                     </p>
                   )}
+                </div>
+
+                {/* AI Image Generation Panel */}
+                <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-sm flex flex-col gap-4">
+                  <h3 className="text-xs font-bold text-slate-700 border-b border-slate-100 pb-2 flex items-center justify-between">
+                    <span className="flex items-center gap-1.5">
+                      <Sparkles size={14} className="text-indigo-500 animate-pulse" />
+                      AI Before/After Image Generator
+                    </span>
+                    <button
+                      type="button"
+                      onClick={handleGeneratePrompts}
+                      disabled={isGeneratingPrompts}
+                      className="text-[10px] font-bold text-indigo-600 hover:text-indigo-700 flex items-center gap-1 cursor-pointer disabled:opacity-50"
+                    >
+                      {isGeneratingPrompts ? 'Generating...' : '✨ Auto-Fill Prompts'}
+                    </button>
+                  </h3>
+
+                  <div className="flex flex-col gap-3">
+                    <div>
+                      <label className="text-[10px] font-bold text-slate-500 uppercase tracking-wider block mb-1">Before Photo Prompt</label>
+                      <textarea
+                        rows={2}
+                        value={beforePrompt}
+                        onChange={(e) => setBeforePrompt(e.target.value)}
+                        placeholder="Describe the 'Before' dental state (e.g., crooked teeth, diastema gap)"
+                        className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-indigo-500 text-slate-700 resize-none"
+                      />
+                    </div>
+                    <div>
+                      <label className="text-[10px] font-bold text-slate-500 uppercase tracking-wider block mb-1">After Photo Prompt</label>
+                      <textarea
+                        rows={2}
+                        value={afterPrompt}
+                        onChange={(e) => setAfterPrompt(e.target.value)}
+                        placeholder="Describe the 'After' dental state (e.g., straight white teeth, veneers)"
+                        className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-indigo-500 text-slate-700 resize-none"
+                      />
+                    </div>
+
+                    <button
+                      type="button"
+                      onClick={handleGenerateImages}
+                      disabled={isGeneratingImages || !beforePrompt.trim() || !afterPrompt.trim()}
+                      className="w-full bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 text-white font-bold rounded-lg py-2.5 text-xs flex items-center justify-center gap-1.5 shadow-md transition active:scale-[0.98] cursor-pointer disabled:opacity-50"
+                    >
+                      <Sparkles size={13} className={isGeneratingImages ? "animate-spin" : ""} />
+                      {isGeneratingImages ? 'AI Model Generating Photos...' : 'Generate AI Photos'}
+                    </button>
+                  </div>
                 </div>
 
                 {/* Gemini AI Copy display panel */}

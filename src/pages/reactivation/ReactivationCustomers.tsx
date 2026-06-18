@@ -2202,17 +2202,31 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                       />
                       {/* Prescription Preset Suggestions */}
                       <div className="flex flex-wrap gap-1.5 mt-2">
-                        {[
-                          { label: 'Amoxicillin 500mg', text: '• Tab. Amoxicillin 500mg - 1 cap thrice daily for 5 days' },
-                          { label: 'Paracetamol 650mg', text: '• Tab. Paracetamol 650mg - 1 tab SOS for pain' },
-                          { label: 'Zerodol-SP', text: '• Tab. Zerodol-SP - 1 tab twice daily for 3 days' },
-                          { label: 'Pantocid 40mg', text: '• Tab. Pantocid 40mg - 1 tab once daily before food' },
-                          { label: 'Hexidine Mouthwash', text: '• Hexidine Mouthwash - rinse twice daily for 7 days' },
-                          { label: 'Mox-CL 625mg', text: '• Tab. Mox-CL 625mg - 1 tab twice daily for 5 days' },
-                          { label: 'Ketorol-DT', text: '• Tab. Ketorol-DT - 1 tab dissolved in water SOS' }
-                        ].map((preset) => (
+                        {(() => {
+                          let customMedications = [
+                            { label: 'Amoxicillin 500mg', text: '• Tab. Amoxicillin 500mg - 1 cap thrice daily for 5 days' },
+                            { label: 'Paracetamol 650mg', text: '• Tab. Paracetamol 650mg - 1 tab SOS for pain' },
+                            { label: 'Zerodol-SP', text: '• Tab. Zerodol-SP - 1 tab twice daily for 3 days' },
+                            { label: 'Pantocid 40mg', text: '• Tab. Pantocid 40mg - 1 tab once daily before food' },
+                            { label: 'Hexidine Mouthwash', text: '• Hexidine Mouthwash - rinse twice daily for 7 days' },
+                            { label: 'Mox-CL 625mg', text: '• Tab. Mox-CL 625mg - 1 tab twice daily for 5 days' },
+                            { label: 'Ketorol-DT', text: '• Tab. Ketorol-DT - 1 tab dissolved in water SOS' }
+                          ];
+                          try {
+                            const raw = localStorage.getItem(`clinic_medications_${_orgId}`);
+                            if (raw) {
+                              const parsed = JSON.parse(raw);
+                              if (Array.isArray(parsed) && parsed.length > 0) {
+                                customMedications = parsed;
+                              }
+                            }
+                          } catch (e) {
+                            console.error("Failed to load custom medications presets", e);
+                          }
+                          return customMedications;
+                        })().map((preset, index) => (
                           <button
-                            key={preset.label}
+                            key={index}
                             type="button"
                             onClick={() => {
                               const currentPrescription = form.prescription ? form.prescription.trim() : '';

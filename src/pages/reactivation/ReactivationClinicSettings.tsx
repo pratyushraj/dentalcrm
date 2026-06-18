@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Building2, Phone, Mail, Save, CheckCircle2, FileText, Stethoscope, Trash2, Plus, MessageSquare, Send, Lock, Globe, RefreshCw } from 'lucide-react';
+import { Building2, Phone, Mail, Save, CheckCircle2, FileText, Stethoscope, Trash2, Plus, MessageSquare, Send, Lock, Globe, RefreshCw, Pill } from 'lucide-react';
 import { useSession } from '@/contexts/SessionContext';
 import { toast } from 'sonner';
 import { supabase } from '@/lib/supabase';
@@ -79,6 +79,36 @@ export const loadClinicProcedures = (orgId: string): Procedure[] => {
 
 export const saveClinicProcedures = (orgId: string, data: Procedure[]) => {
   localStorage.setItem(PROCEDURES_KEY(orgId), JSON.stringify(data));
+};
+
+export interface Medication {
+  id: string;
+  label: string;
+  text: string;
+}
+
+export const DEFAULT_MEDICATIONS: Medication[] = [
+  { id: '1', label: 'Amoxicillin 500mg', text: '• Tab. Amoxicillin 500mg - 1 cap thrice daily for 5 days' },
+  { id: '2', label: 'Paracetamol 650mg', text: '• Tab. Paracetamol 650mg - 1 tab SOS for pain' },
+  { id: '3', label: 'Zerodol-SP', text: '• Tab. Zerodol-SP - 1 tab twice daily for 3 days' },
+  { id: '4', label: 'Pantocid 40mg', text: '• Tab. Pantocid 40mg - 1 tab once daily before food' },
+  { id: '5', label: 'Hexidine Mouthwash', text: '• Hexidine Mouthwash - rinse twice daily for 7 days' },
+  { id: '6', label: 'Mox-CL 625mg', text: '• Tab. Mox-CL 625mg - 1 tab twice daily for 5 days' },
+  { id: '7', label: 'Ketorol-DT', text: '• Tab. Ketorol-DT - 1 tab dissolved in water SOS' }
+];
+
+export const MEDICATIONS_KEY = (orgId: string) => `clinic_medications_${orgId}`;
+
+export const loadClinicMedications = (orgId: string): Medication[] => {
+  try {
+    const raw = localStorage.getItem(MEDICATIONS_KEY(orgId));
+    if (raw) return JSON.parse(raw) as Medication[];
+  } catch {}
+  return [...DEFAULT_MEDICATIONS];
+};
+
+export const saveClinicMedications = (orgId: string, data: Medication[]) => {
+  localStorage.setItem(MEDICATIONS_KEY(orgId), JSON.stringify(data));
 };
 
 export const WHATSAPP_KEY = (orgId: string) => `whatsapp_config_${orgId}`;
@@ -205,7 +235,7 @@ const ReactivationClinicSettings: React.FC = () => {
   const { organizationId, profile } = useSession();
   const orgId = organizationId || 'default';
 
-  const [activeTab, setActiveTab] = useState<'info' | 'prices' | 'whatsapp'>('info');
+  const [activeTab, setActiveTab] = useState<'info' | 'prices' | 'whatsapp' | 'medications'>('info');
 
   const [branding, setBranding] = useState<ClinicBranding>(() =>
     loadClinicBranding(orgId, profile?.business_name)
@@ -214,6 +244,13 @@ const ReactivationClinicSettings: React.FC = () => {
   const [procedures, setProcedures] = useState<Procedure[]>(() =>
     loadClinicProcedures(orgId)
   );
+
+  const [medications, setMedications] = useState<Medication[]>(() =>
+    loadClinicMedications(orgId)
+  );
+
+  const [newMedLabel, setNewMedLabel] = useState('');
+  const [newMedText, setNewMedText] = useState('');
 
   const [whatsapp, setWhatsapp] = useState<WhatsAppConfig>(() =>
     loadWhatsAppConfig(orgId)
@@ -484,6 +521,7 @@ const ReactivationClinicSettings: React.FC = () => {
   const handleSave = async () => {
     saveClinicBranding(orgId, branding);
     saveClinicProcedures(orgId, procedures);
+    saveClinicMedications(orgId, medications);
     saveWhatsAppConfig(orgId, whatsapp);
 
     if (organizationId && organizationId !== 'default') {
@@ -572,6 +610,17 @@ const ReactivationClinicSettings: React.FC = () => {
           }`}
         >
           WhatsApp API Config
+        </button>
+        <button
+          type="button"
+          onClick={() => setActiveTab('medications')}
+          className={`px-4 py-2 text-[12.5px] font-bold tracking-wide border-b-2 transition-all ${
+            activeTab === 'medications'
+              ? 'border-indigo-600 text-indigo-600'
+              : 'border-transparent text-slate-400 hover:text-slate-600'
+          }`}
+        >
+          Prescription Presets
         </button>
       </div>
 
@@ -867,7 +916,7 @@ const ReactivationClinicSettings: React.FC = () => {
             {saved ? <><CheckCircle2 size={15} /> Saved!</> : <><Save size={15} /> Save Changes</>}
           </button>
         </div>
-      ) : (
+      ) : activeTab === 'whatsapp' ? (
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
           {/* Left: Configuration Form */}
           <div className="lg:col-span-2 space-y-4">
@@ -1149,6 +1198,153 @@ const ReactivationClinicSettings: React.FC = () => {
                   {isSendingTest ? 'Delivering...' : 'Send Simulated Test'}
                 </button>
               </div>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start text-left">
+          {/* Left: Medications list config */}
+          <div className="lg:col-span-2 space-y-4">
+            <div className="bg-white border border-slate-200 rounded-2xl p-5 space-y-4">
+              <div className="flex items-center justify-between pb-2 border-b border-slate-100">
+                <div className="flex items-center gap-2">
+                  <div className="w-7 h-7 rounded-lg bg-indigo-50 border border-indigo-100 flex items-center justify-center">
+                    <Pill size={14} className="text-indigo-500 animate-pulse" />
+                  </div>
+                  <h3 className="text-[12px] font-bold text-slate-700 uppercase tracking-wider">Medications Preset Library</h3>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (window.confirm("Restore default dental medications? This will overwrite custom medications.")) {
+                      setMedications([...DEFAULT_MEDICATIONS]);
+                      setSaved(false);
+                      toast.success("Medications reset to defaults.");
+                    }
+                  }}
+                  className="text-xs text-indigo-600 hover:text-indigo-800 font-semibold transition-colors cursor-pointer"
+                >
+                  Reset to Defaults
+                </button>
+              </div>
+
+              {/* Add form */}
+              <div className="bg-slate-50 border border-slate-200/60 rounded-xl p-4 space-y-3">
+                <h4 className="text-[11px] font-bold text-slate-600 uppercase tracking-wider">Add New Medication Preset</h4>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-3 items-end">
+                  <div className="md:col-span-1">
+                    <label className="block text-[9.5px] font-bold text-slate-500 uppercase tracking-wider mb-1">Drug Label / Shortcut</label>
+                    <input
+                      type="text"
+                      value={newMedLabel}
+                      onChange={(e) => setNewMedLabel(e.target.value)}
+                      placeholder="e.g. Paracetamol 650mg"
+                      className="w-full bg-white border border-slate-200 rounded-lg px-3 py-1.8 text-xs focus:outline-none focus:border-indigo-500 text-slate-700"
+                    />
+                  </div>
+                  <div className="md:col-span-2 flex gap-3 items-end">
+                    <div className="flex-1">
+                      <label className="block text-[9.5px] font-bold text-slate-500 uppercase tracking-wider mb-1">Full Rx Instruction</label>
+                      <input
+                        type="text"
+                        value={newMedText}
+                        onChange={(e) => setNewMedText(e.target.value)}
+                        placeholder="e.g. • Tab. Paracetamol 650mg - 1 tab SOS for pain"
+                        className="w-full bg-white border border-slate-200 rounded-lg px-3 py-1.8 text-xs focus:outline-none focus:border-indigo-500 text-slate-700"
+                      />
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        if (!newMedLabel.trim() || !newMedText.trim()) {
+                          toast.error("Please fill in both the label and instruction details.");
+                          return;
+                        }
+                        const newItem: Medication = {
+                          id: Date.now().toString(),
+                          label: newMedLabel.trim(),
+                          text: newMedText.trim()
+                        };
+                        setMedications(prev => [...prev, newItem]);
+                        setNewMedLabel('');
+                        setNewMedText('');
+                        setSaved(false);
+                        toast.success("Medication added. Click 'Save Changes' to save.");
+                      }}
+                      className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-lg px-4 py-1.8 text-xs transition active:scale-95 cursor-pointer shadow-md shadow-indigo-500/10"
+                    >
+                      Add
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              {/* Grid / List of current presets */}
+              <div className="divide-y divide-slate-100 max-h-[420px] overflow-y-auto pr-1 scrollbar-thin">
+                {medications.length === 0 ? (
+                  <p className="text-center py-8 text-xs text-slate-400 font-medium">No medications configured. Click 'Reset to Defaults' or add custom ones above.</p>
+                ) : (
+                  medications.map((med) => (
+                    <div key={med.id} className="py-3 flex justify-between items-start gap-4 hover:bg-slate-50/50 px-2 rounded-lg transition">
+                      <div className="flex-1 min-w-0">
+                        <span className="text-[10px] font-bold text-slate-800 bg-indigo-50 border border-indigo-100 rounded px-1.5 py-0.2 select-none">{med.label}</span>
+                        <p className="text-xs text-slate-500 font-mono mt-1.5 leading-relaxed break-words">{med.text}</p>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setMedications(prev => prev.filter(m => m.id !== med.id));
+                          setSaved(false);
+                          toast.success("Medication preset deleted locally. Save to confirm.");
+                        }}
+                        className="p-1.5 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition"
+                      >
+                        <Trash2 size={13} />
+                      </button>
+                    </div>
+                  ))
+                )}
+              </div>
+            </div>
+
+            {/* Save Changes for Medications */}
+            <button
+              onClick={handleSave}
+              className={`w-full flex items-center justify-center gap-2 py-3 rounded-xl text-[13px] font-semibold transition-all duration-200 lg:hidden ${
+                saved
+                  ? 'bg-emerald-50 border border-emerald-200 text-emerald-700'
+                  : 'bg-indigo-600 text-white hover:bg-indigo-700 shadow-md shadow-indigo-500/20'
+              }`}
+            >
+              {saved ? <><CheckCircle2 size={15} /> Saved!</> : <><Save size={15} /> Save Changes</>}
+            </button>
+          </div>
+
+          {/* Right: Info and Quick Save panel */}
+          <div className="space-y-4">
+            <div className="bg-white border border-slate-200 rounded-2xl p-5 space-y-4">
+              <h3 className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Quick Information</h3>
+              <p className="text-[11.5px] text-slate-500 leading-relaxed font-sans">
+                These medication shortcuts will populate as clickable selection bubbles under the <strong>Prescription (Rx)</strong> textarea in the patient details file. 
+              </p>
+              <p className="text-[11.5px] text-slate-500 leading-relaxed font-sans mt-2">
+                Clicking any medication preset adds the full instruction automatically without requiring manual transcription or typing.
+              </p>
+            </div>
+
+            <div className="bg-white border border-slate-200 rounded-2xl p-5 space-y-4">
+              <h3 className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Save Changes</h3>
+              <button
+                type="button"
+                onClick={handleSave}
+                className={`w-full flex items-center justify-center gap-2 py-2.5 rounded-xl text-[12.5px] font-bold transition-all duration-200 ${
+                  saved
+                    ? 'bg-emerald-50 border border-emerald-200 text-emerald-700'
+                    : 'bg-indigo-600 hover:bg-indigo-700 text-white shadow-md shadow-indigo-500/15 cursor-pointer'
+                }`}
+              >
+                {saved ? <><CheckCircle2 size={14} /> Settings Saved</> : <><Save size={14} /> Save Presets</>}
+              </button>
             </div>
           </div>
         </div>

@@ -37,60 +37,102 @@ export default async function handler(req, res) {
             if (value && value.messages && value.messages.length > 0) {
               const phoneId = value.metadata?.phone_number_id;
               
-              if (!phoneId) continue;
+              if (phoneId) {
+                // Query clinic based on WABA Phone Number ID
+                const { data: clinic } = await supabase
+                  .from('dental_clinics')
+                  .select('id, name')
+                  .eq('whatsapp_phone_number_id', phoneId)
+                  .single();
 
-              // Query clinic based on WABA Phone Number ID
-              const { data: clinic } = await supabase
-                .from('dental_clinics')
-                .select('id, name')
-                .eq('whatsapp_phone_number_id', phoneId)
-                .single();
+                if (clinic) {
+                  for (const message of value.messages) {
+                    // Parse message details
+                    const fromPhone = message.from; // e.g. "917292984244"
+                    const contact = value.contacts?.find((c) => c.wa_id === fromPhone);
+                    const senderName = contact?.profile?.name || 'Patient';
+                    const bodyText = message.text?.body || '';
+                    const wamid = message.id;
+                    const timestampSec = message.timestamp;
+                    const timestampIso = timestampSec 
+                      ? new Date(parseInt(timestampSec) * 1000).toISOString()
+                      : new Date().toISOString();
 
-              if (!clinic) {
-                console.warn(`No clinic found matching whatsapp_phone_number_id: ${phoneId}`);
-                continue;
-              }
+                    // Format patient phone standard (slice last 10 digits)
+                    const cleanPhoneKey = fromPhone.replace(/\D/g, '').slice(-10);
 
-              for (const message of value.messages) {
-                // Parse message details
-                const fromPhone = message.from; // e.g. "917292984244"
-                const contact = value.contacts?.find((c) => c.wa_id === fromPhone);
-                const senderName = contact?.profile?.name || 'Patient';
-                const bodyText = message.text?.body || '';
-                const wamid = message.id;
-                const timestampSec = message.timestamp;
-                const timestampIso = timestampSec 
-                  ? new Date(parseInt(timestampSec) * 1000).toISOString()
-                  : new Date().toISOString();
+                    console.log(`Saving inbound message from ${senderName} (${fromPhone}): "${bodyText}"`);
 
-                // Format patient phone standard (slice last 10 digits)
-                const cleanPhoneKey = fromPhone.replace(/\D/g, '').slice(-10);
+                    // Insert into reactivation_audit_logs
+                    const { error: insertErr } = await supabase
+                      .from('reactivation_audit_logs')
+                      .insert({
+                        organization_id: clinic.id,
+                        action: 'waba_message',
+                        patient_id: cleanPhoneKey,
+                        created_at: timestampIso,
+                        details: {
+                          recipientName: senderName,
+                          recipientPhone: fromPhone,
+                          templateName: 'customer_incoming_reply',
+                          body: bodyText,
+                          status: 'replied',
+                          type: 'service',
+                          direction: 'inbound',
+                          wamid: wamid,
+                          variables: []
+                        }
+                      });
 
-                console.log(`Saving inbound message from ${senderName} (${fromPhone}): "${bodyText}"`);
-
-                // Insert into reactivation_audit_logs
-                const { error: insertErr } = await supabase
-                  .from('reactivation_audit_logs')
-                  .insert({
-                    organization_id: clinic.id,
-                    action: 'waba_message',
-                    patient_id: cleanPhoneKey,
-                    created_at: timestampIso,
-                    details: {
-                      recipientName: senderName,
-                      recipientPhone: fromPhone,
-                      templateName: 'customer_incoming_reply',
-                      body: bodyText,
-                      status: 'replied',
-                      type: 'service',
-                      direction: 'inbound',
-                      wamid: wamid,
-                      variables: []
+                    if (insertErr) {
+                      console.error('Error inserting webhook message into DB:', insertErr.message);
                     }
-                  });
+                  }
+                }
+              }
+            }
 
-                if (insertErr) {
-                  console.error('Error inserting webhook message into DB:', insertErr.message);
+            if (value && value.statuses && value.statuses.length > 0) {
+              const phoneId = value.metadata?.phone_number_id;
+              if (phoneId) {
+                const { data: clinic } = await supabase
+                  .from('dental_clinics')
+                  .select('id, name')
+                  .eq('whatsapp_phone_number_id', phoneId)
+                  .single();
+
+                if (clinic) {
+                  for (const statusObj of value.statuses) {
+                    const recipientPhone = statusObj.recipient_id;
+                    const cleanPhoneKey = recipientPhone ? recipientPhone.replace(/\D/g, '').slice(-10) : 'unknown';
+                    const wamid = statusObj.id;
+                    const statusStr = statusObj.status; // sent, delivered, read, failed
+                    const timestampSec = statusObj.timestamp;
+                    const timestampIso = timestampSec 
+                      ? new Date(parseInt(timestampSec) * 1000).toISOString()
+                      : new Date().toISOString();
+
+                    console.log(`Received status update for ${wamid} to ${recipientPhone}: ${statusStr}`);
+
+                    const { error: statusInsertErr } = await supabase
+                      .from('reactivation_audit_logs')
+                      .insert({
+                        organization_id: clinic.id,
+                        action: 'waba_status',
+                        patient_id: cleanPhoneKey,
+                        created_at: timestampIso,
+                        details: {
+                          recipientPhone,
+                          wamid,
+                          status: statusStr,
+                          errors: statusObj.errors || []
+                        }
+                      });
+
+                    if (statusInsertErr) {
+                      console.error('Error inserting status log into DB:', statusInsertErr.message);
+                    }
+                  }
                 }
               }
             }

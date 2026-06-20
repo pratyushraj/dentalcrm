@@ -832,16 +832,26 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
     return proceduresCatalog.length > 0 ? proceduresCatalog[0].defaultCost : 3500;
   });
   const [copiedEstimate, setCopiedEstimate] = useState(false);
+  const lastCustomerIdRef = React.useRef<string | undefined>(undefined);
+  const wasOpenRef = React.useRef<boolean>(false);
+
   React.useEffect(() => {
     setForm(getInitialForm(customer));
-    setActiveTab('general');
-    setShowAdvancedClinical(false);
-    setCopiedEstimate(false);
-    setActiveQuadrant('all');
     
-    if (proceduresCatalog.length > 0) {
-      setBuilderProcedureIdx('0');
-      setBuilderCost(proceduresCatalog[0].defaultCost);
+    const didOpenFresh = open && !wasOpenRef.current;
+    wasOpenRef.current = open;
+
+    if (customer?.id !== lastCustomerIdRef.current || didOpenFresh) {
+      setActiveTab('general');
+      setShowAdvancedClinical(false);
+      setCopiedEstimate(false);
+      setActiveQuadrant('all');
+      
+      if (proceduresCatalog.length > 0) {
+        setBuilderProcedureIdx('0');
+        setBuilderCost(proceduresCatalog[0].defaultCost);
+      }
+      lastCustomerIdRef.current = customer?.id;
     }
     
     if (customer?.estimates && customer.estimates.length > 0) {

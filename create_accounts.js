@@ -77,49 +77,69 @@ async function setupAccount(acc) {
   const orgId = crypto.randomUUID();
   console.log(`User created successfully. UserID: ${userId}, OrgID/ClinicID: ${orgId}`);
 
-  // 3. Update the profile
+  // 2.5 Insert organization record with owner_id = null first to break circular dependency
+  const { error: orgError } = await supabase
+    .from('organizations')
+    .insert({
+      id: orgId,
+      name: acc.businessName,
+      org_type: 'sme',
+      owner_id: null
+    });
+
+  if (orgError) {
+    console.error(`Error inserting organization:`, orgError);
+    return;
+  }
+  console.log(`Organization record created without owner_id.`);
+
+  // 3. Upsert the profile (to ensure the row is created if there is no DB trigger)
   const { error: profileError } = await supabase
     .from('profiles')
-    .update({
+    .upsert({
+      id: userId,
       first_name: acc.firstName,
       business_name: acc.businessName,
       role: 'dentist',
       onboarding_complete: true,
       phone: acc.phone,
       organization_id: orgId
-    })
-    .eq('id', userId);
+    });
 
   if (profileError) {
     console.error(`Error updating profile:`, profileError);
+    return;
+  }
+  console.log(`Profile created and linked to organization.`);
+
+  // 3.5 Update organization to set the owner_id now that the profile exists
+  const { error: orgUpdateError } = await supabase
+    .from('organizations')
+    .update({ owner_id: userId })
+    .eq('id', orgId);
+
+  if (orgUpdateError) {
+    console.error(`Error updating organization owner_id:`, orgUpdateError);
   } else {
-    console.log(`Profile updated.`);
+    console.log(`Organization owner_id linked back to profile.`);
   }
 
   // 4. Ensure dental_clinics entry exists
-  const { data: existingClinic } = await supabase
+  const { error: clinicInsertErr } = await supabase
     .from('dental_clinics')
-    .select('*')
-    .eq('id', orgId)
-    .single();
+    .insert({
+      id: orgId,
+      name: acc.businessName,
+      owner_id: userId,
+      doctor_name: acc.firstName,
+      phone: acc.phone,
+      email: acc.email
+    });
 
-  if (!existingClinic) {
-    const { error: clinicInsertErr } = await supabase
-      .from('dental_clinics')
-      .insert({
-        id: orgId,
-        name: acc.businessName,
-        owner_id: userId,
-        doctor_name: acc.firstName,
-        phone: acc.phone,
-        email: acc.email
-      });
-
-    if (clinicInsertErr) {
-      console.error(`Error inserting dental clinic:`, clinicInsertErr);
-    } else {
-      console.log(`Dental clinic record created.`);
-    }
+  if (clinicInsertErr) {
+    console.error(`Error inserting dental clinic:`, clinicInsertErr);
+  } else {
+    console.log(`Dental clinic record created.`);
   }
 
   return {

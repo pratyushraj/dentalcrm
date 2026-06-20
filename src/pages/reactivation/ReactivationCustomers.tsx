@@ -568,6 +568,75 @@ const getShortToothLabel = (num: number): string => {
   return `Tooth ${num} (${shortNames[code]})`;
 };
 
+// ─── Smile Gallery branded image generator ───────────────────────────────────
+const generateSmileGalleryImage = (opts: {
+  beforeSrc: string | null; afterSrc: string | null;
+  clinicName: string; treatmentLabel: string;
+  doctorName: string; qualifications: string; phone: string; logoSrc: string | null;
+}): Promise<string> => new Promise((resolve, reject) => {
+  const loadImg = (src: string | null): Promise<HTMLImageElement | null> =>
+    src ? new Promise((res) => { const i = new window.Image(); i.onload = () => res(i); i.onerror = () => res(null); i.src = src; }) : Promise.resolve(null);
+  Promise.all([loadImg(opts.beforeSrc), loadImg(opts.afterSrc), loadImg(opts.logoSrc)]).then(([before, after, logo]) => {
+    try {
+      const canvas = document.createElement('canvas');
+      canvas.width = 1080; canvas.height = 1080;
+      const ctx = canvas.getContext('2d')!;
+      ctx.fillStyle = '#FFFFFF'; ctx.fillRect(0, 0, 1080, 1080);
+      ctx.strokeStyle = '#E2E8F0'; ctx.lineWidth = 8; ctx.strokeRect(4, 4, 1072, 1072);
+      let logoW = 0;
+      if (logo) {
+        let w = logo.width, h = logo.height, r = w / h;
+        if (w > 110) { w = 110; h = w / r; } if (h > 80) { h = 80; w = h * r; }
+        ctx.drawImage(logo, 40, 45, w, h); logoW = w;
+      }
+      const tx = logoW > 0 ? 40 + logoW + 20 : 40;
+      ctx.fillStyle = '#0F172A'; ctx.font = 'bold 34px sans-serif'; ctx.textAlign = 'left'; ctx.textBaseline = 'top';
+      ctx.fillText(opts.clinicName.toUpperCase(), tx, 45);
+      ctx.fillStyle = '#6366F1'; ctx.font = 'bold 18px sans-serif';
+      ctx.fillText(opts.treatmentLabel.toUpperCase(), tx, 98);
+      ctx.fillStyle = '#FBBF24';
+      const drawStar = (cx: number, cy: number) => {
+        let rot = (Math.PI / 2) * 3; const step = Math.PI / 5;
+        ctx.beginPath(); ctx.moveTo(cx, cy - 12);
+        for (let i = 0; i < 5; i++) { ctx.lineTo(cx + Math.cos(rot)*12, cy + Math.sin(rot)*12); rot += step; ctx.lineTo(cx + Math.cos(rot)*6, cy + Math.sin(rot)*6); rot += step; }
+        ctx.closePath(); ctx.fill();
+      };
+      for (let i = 0; i < 5; i++) drawStar(900 + i * 28, 70);
+      const imgW = 490, imgH = 780, yOff = 180;
+      const drawPhoto = (img: HTMLImageElement | null, x: number, label: string) => {
+        ctx.save(); ctx.shadowColor = 'rgba(0,0,0,0.2)'; ctx.shadowBlur = 20; ctx.shadowOffsetY = 8;
+        ctx.fillStyle = '#F8FAFC'; ctx.beginPath(); (ctx as any).roundRect(x, yOff, imgW, imgH, 16); ctx.fill(); ctx.restore();
+        if (img) {
+          ctx.save(); ctx.beginPath(); (ctx as any).roundRect(x, yOff, imgW, imgH, 16); ctx.clip();
+          const ir = img.width/img.height, br = imgW/imgH; let sx=0,sy=0,sw=img.width,sh=img.height;
+          if (ir > br) { sw = img.height*br; sx = (img.width-sw)/2; } else { sh = img.width/br; sy = (img.height-sh)/2; }
+          ctx.drawImage(img, sx, sy, sw, sh, x, yOff, imgW, imgH); ctx.restore();
+        }
+        ctx.save(); ctx.strokeStyle = '#E2E8F0'; ctx.lineWidth = 3;
+        ctx.beginPath(); (ctx as any).roundRect(x, yOff, imgW, imgH, 16); ctx.stroke(); ctx.restore();
+        ctx.save(); ctx.font = 'bold 20px sans-serif';
+        const tw = ctx.measureText(label).width;
+        ctx.fillStyle = label === 'BEFORE' ? '#EF4444' : '#10B981';
+        ctx.beginPath(); (ctx as any).roundRect(x+20, yOff+20, tw+30, 38, 8); ctx.fill();
+        ctx.fillStyle = '#fff'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        ctx.fillText(label, x+20+(tw+30)/2, yOff+39); ctx.restore();
+      };
+      drawPhoto(before, 40, 'BEFORE'); drawPhoto(after, 550, 'AFTER');
+      ctx.save(); ctx.shadowColor = 'rgba(0,0,0,0.15)'; ctx.shadowBlur = 15; ctx.shadowOffsetY = 6;
+      ctx.fillStyle = '#F8FAFC'; ctx.strokeStyle = '#E2E8F0'; ctx.lineWidth = 2;
+      ctx.beginPath(); (ctx as any).roundRect(40, 980, 1000, 80, 12); ctx.fill();
+      ctx.shadowColor = 'transparent'; ctx.stroke(); ctx.restore();
+      ctx.save(); ctx.textBaseline = 'middle'; ctx.fillStyle = '#1E293B';
+      ctx.textAlign = 'left'; ctx.font = 'bold 22px sans-serif';
+      const dr = opts.doctorName ? `Dr. ${opts.doctorName.replace(/^dr\.?\s+/i,'')}` : '';
+      ctx.fillText(`🩺  ${dr || '✨  Transforming Smiles'}${opts.qualifications ? ` (${opts.qualifications})` : ''}`, 65, 1020);
+      ctx.textAlign = 'right';
+      if (opts.phone) ctx.fillText(`📞  ${opts.phone}`, 1015, 1020);
+      ctx.restore();
+      resolve(canvas.toDataURL('image/jpeg', 0.92));
+    } catch(e) { reject(e); }
+  }).catch(reject);
+});
 
 const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, onSave }) => {
   const { profile } = useSession();
@@ -4539,70 +4608,54 @@ const ReactivationCustomers: React.FC = () => {
 
       let imageUrl = "https://upload.wikimedia.org/wikipedia/commons/e/e0/Placeholder_LCa.png";
 
-      // Determine which photo(s) to send
-      const combinedPhoto = c.beforeAfterPhotos?.[0];  // pre-merged combined image
-      const beforePhoto = c.beforePhotos?.[0] || c.beforePhoto;
-      const afterPhoto = c.afterPhotos?.[0] || c.afterPhoto;
+      // Determine which photos the patient has
+      const beforeSrc = c.beforePhotos?.[0] || c.beforePhoto || null;
+      const afterSrc  = c.afterPhotos?.[0]  || c.afterPhoto  || null;
+      const combinedSrc = c.beforeAfterPhotos?.[0] || null;
 
-      // Resolve to a single base64 image to upload
-      const resolvePhotoBase64 = (): Promise<string | null> => new Promise((resolve) => {
-        // 1. Pre-combined before/after image — use as-is
-        if (combinedPhoto && combinedPhoto.startsWith('data:image')) {
-          return resolve(combinedPhoto);
-        }
-        // 2. Both before AND after available — stitch side-by-side on canvas
-        if (beforePhoto && afterPhoto && beforePhoto.startsWith('data:image') && afterPhoto.startsWith('data:image')) {
-          const before = new window.Image();
-          const after = new window.Image();
-          let loaded = 0;
-          const tryCompose = () => {
-            loaded++;
-            if (loaded < 2) return;
-            const h = Math.max(before.naturalHeight, after.naturalHeight);
-            const w = before.naturalWidth + after.naturalWidth;
-            const canvas = document.createElement('canvas');
-            canvas.width = w;
-            canvas.height = h + 40; // extra bar for labels
-            const ctx = canvas.getContext('2d')!;
-            ctx.fillStyle = '#111';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.drawImage(before, 0, 0, before.naturalWidth, h);
-            ctx.drawImage(after, before.naturalWidth, 0, after.naturalWidth, h);
-            // Labels
-            ctx.fillStyle = 'rgba(0,0,0,0.65)';
-            ctx.fillRect(0, h, canvas.width, 40);
-            ctx.font = 'bold 18px sans-serif';
-            ctx.fillStyle = '#f87171';
-            ctx.textAlign = 'center';
-            ctx.fillText('BEFORE', before.naturalWidth / 2, h + 26);
-            ctx.fillStyle = '#34d399';
-            ctx.fillText('AFTER', before.naturalWidth + after.naturalWidth / 2, h + 26);
-            resolve(canvas.toDataURL('image/jpeg', 0.88));
-          };
-          before.onload = tryCompose;
-          after.onload = tryCompose;
-          before.onerror = () => resolve(afterPhoto); // fallback to just after
-          after.onerror = () => resolve(beforePhoto);
-          before.src = beforePhoto;
-          after.src = afterPhoto;
-          return;
-        }
-        // 3. Only after photo
-        if (afterPhoto && afterPhoto.startsWith('data:image')) return resolve(afterPhoto);
-        // 4. Only before photo
-        if (beforePhoto && beforePhoto.startsWith('data:image')) return resolve(beforePhoto);
-        resolve(null);
-      });
-
-      const photoBase64 = await resolvePhotoBase64();
-
-      // Block if no usable photo found
-      if (!photoBase64) {
+      if (!beforeSrc && !afterSrc && !combinedSrc) {
         toast.error('No before/after photo found for this patient. Please upload a photo first.');
         return;
       }
 
-      toast.info('Uploading before/after smile photo...');
+      toast.info('Generating Smile Gallery image...');
+
+      // Generate branded Smile Gallery image (same as Smile Gallery page)
+      let photoBase64: string | null = null;
+      try {
+        photoBase64 = await generateSmileGalleryImage({
+          beforeSrc: combinedSrc ? null : beforeSrc,
+          afterSrc:  combinedSrc ? null : afterSrc,
+          clinicName:    clinicBranding.clinicName  || 'Dental Clinic',
+          treatmentLabel: c.service || 'Smile Makeover',
+          doctorName:    clinicBranding.doctorName  || '',
+          qualifications: clinicBranding.qualifications || '',
+          phone:         clinicBranding.phone        || '',
+          logoSrc:       clinicBranding.logoUrl      || null,
+        });
+        // If we have a combined pre-merged image, overlay it (just use combined as-is with a simple canvas)
+        if (combinedSrc && combinedSrc.startsWith('data:image')) {
+          photoBase64 = await generateSmileGalleryImage({
+            beforeSrc: combinedSrc, afterSrc: null,
+            clinicName: clinicBranding.clinicName || 'Dental Clinic',
+            treatmentLabel: c.service || 'Smile Makeover',
+            doctorName: clinicBranding.doctorName || '',
+            qualifications: clinicBranding.qualifications || '',
+            phone: clinicBranding.phone || '',
+            logoSrc: clinicBranding.logoUrl || null,
+          });
+        }
+      } catch (genErr) {
+        console.error('Smile Gallery generation failed, falling back to raw photo:', genErr);
+        photoBase64 = combinedSrc || afterSrc || beforeSrc;
+      }
+
+      if (!photoBase64) {
+        toast.error('Could not generate photo. Please try again.');
+        return;
+      }
+
+      toast.info('Uploading Smile Gallery image...');
       try {
         const uploadRes = await fetch('/api/waba/upload', {
           method: 'POST',
@@ -4613,10 +4666,10 @@ const ReactivationCustomers: React.FC = () => {
         if (uploadRes.ok && uploadData.publicUrl) {
           imageUrl = uploadData.publicUrl;
         } else {
-          console.error('Storage upload error for B&A photo:', uploadData.error || uploadData);
+          console.error('Storage upload error for Smile Gallery photo:', uploadData.error || uploadData);
         }
       } catch (uploadErr: any) {
-        console.error('Storage upload fetch error for B&A photo:', uploadErr);
+        console.error('Storage upload fetch error:', uploadErr);
       }
 
       const syncedTemplates = loadWhatsAppTemplates(clinicId);
@@ -4896,8 +4949,13 @@ const ReactivationCustomers: React.FC = () => {
         sendWhatsAppPrescriptionPDF(savedCustomer).catch(err => console.error('Automated WhatsApp dispatch failed:', err));
       }
 
-      // Automatically send Before/After photo on save if they exist (skip on autosave)
-      if (!isAutosave && ((savedCustomer.beforePhotos && savedCustomer.beforePhotos.length > 0) || (savedCustomer.afterPhotos && savedCustomer.afterPhotos.length > 0) || savedCustomer.beforePhoto || savedCustomer.afterPhoto)) {
+      // Automatically send Before/After (Smile Gallery branded) on save if photos exist (skip autosave)
+      if (!isAutosave && (
+        (savedCustomer.beforeAfterPhotos && savedCustomer.beforeAfterPhotos.length > 0) ||
+        (savedCustomer.beforePhotos && savedCustomer.beforePhotos.length > 0) ||
+        (savedCustomer.afterPhotos && savedCustomer.afterPhotos.length > 0) ||
+        savedCustomer.beforePhoto || savedCustomer.afterPhoto
+      )) {
         sendWhatsAppBeforeAfter(savedCustomer).catch(err => console.error('Automated WhatsApp B&A photo dispatch failed:', err));
       }
 

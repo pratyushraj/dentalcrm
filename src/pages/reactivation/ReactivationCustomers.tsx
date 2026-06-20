@@ -3466,15 +3466,20 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                             <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
                             Print Invoice PDF
                           </button>
-                          <select
-                            value={estimateStatus}
-                            onChange={(e) => setEstimateStatus(e.target.value as any)}
-                            className="text-[10px] font-bold uppercase tracking-wider text-indigo-600 bg-indigo-50 border border-indigo-200 px-2 py-0.5 rounded-md outline-none cursor-pointer"
-                          >
-                            <option value="Draft" style={{ background: '#fff', color: '#334155' }}>Draft</option>
-                            <option value="Sent" style={{ background: '#fff', color: '#334155' }}>Shared</option>
-                            <option value="Approved" style={{ background: '#fff', color: '#334155' }}>Approved</option>
-                          </select>
+                          <div className="flex items-center gap-1">
+                            <span className="text-[9.5px] font-bold text-slate-500 uppercase mr-1">Bill Paid:</span>
+                            <button
+                              type="button"
+                              onClick={() => setEstimateStatus(estimateStatus === 'Approved' ? 'Draft' : 'Approved')}
+                              className={`text-[9.5px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded-md transition-all duration-150 active:scale-95 border cursor-pointer ${
+                                estimateStatus === 'Approved'
+                                  ? 'bg-emerald-500 border-emerald-600 text-white shadow-sm'
+                                  : 'bg-rose-50 border-rose-200 text-rose-600'
+                              }`}
+                            >
+                              {estimateStatus === 'Approved' ? 'Yes' : 'No'}
+                            </button>
+                          </div>
                         </div>
                       </div>
 

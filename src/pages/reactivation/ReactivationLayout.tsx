@@ -278,14 +278,22 @@ const ReactivationLayout: React.FC<ReactivationLayoutProps> = ({ children }) => 
       try {
         const todayStr = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
         const { data, error } = await supabase
-          .from('dental_patients')
-          .select('id, name, phone, service, next_visit_date, appointmentTime')
+          .from('dental_appointments')
+          .select('id, patient_name, patient_phone, treatment_name, appointment_date, appointment_time')
           .eq('clinic_id', orgId)
-          .eq('next_visit_date', todayStr);
+          .eq('appointment_date', todayStr);
 
         if (error) throw error;
         if (data) {
-          setAppointments(data as Appointment[]);
+          const mapped: Appointment[] = (data as any[]).map(appt => ({
+            id: appt.id,
+            name: appt.patient_name || 'Patient',
+            phone: appt.patient_phone || '',
+            service: appt.treatment_name || 'Dental Consultation',
+            next_visit_date: appt.appointment_date,
+            appointmentTime: appt.appointment_time
+          }));
+          setAppointments(mapped);
         }
       } catch (err) {
         console.error('Failed to fetch today\'s appointments:', err);

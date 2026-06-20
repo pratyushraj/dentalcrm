@@ -4514,6 +4514,75 @@ const ReactivationCustomers: React.FC = () => {
       );
       const templateName = baTemplate?.name || 'googlereview';
 
+      // Load googleReviewUrl from local storage config
+      const localConfigRaw = localStorage.getItem(`whatsapp_config_${clinicId}`);
+      let googleReviewUrlStr = 'https://maps.app.goo.gl/KJ78ipBjeu7DfV4N9';
+      if (localConfigRaw) {
+        try {
+          const parsed = JSON.parse(localConfigRaw);
+          if (parsed.googleReviewUrl) {
+            googleReviewUrlStr = parsed.googleReviewUrl;
+          }
+        } catch {}
+      }
+
+      // Clean review URL to avoid iOS Google Maps deep link crashes
+      const cleanReviewUrl = (url: string) => {
+        let cleaned = url.trim();
+        try {
+          const urlObj = new URL(cleaned);
+          urlObj.searchParams.delete('g_st'); // remove the iOS-specific tracking/sharing param
+          cleaned = urlObj.toString();
+        } catch (e) {}
+
+        let suffix = cleaned;
+        if (cleaned.includes('maps.app.goo.gl/')) {
+          const parts = cleaned.split('maps.app.goo.gl/');
+          suffix = parts[parts.length - 1].split('?')[0];
+        } else if (cleaned.includes('g.page/r/')) {
+          const parts = cleaned.split('g.page/r/');
+          suffix = parts[parts.length - 1].split('?')[0];
+        }
+        return { full: cleaned, suffix };
+      };
+
+      const { full: cleanedUrl, suffix: urlSuffix } = cleanReviewUrl(googleReviewUrlStr);
+
+      const components: any[] = [
+        {
+          type: 'header',
+          parameters: [
+            {
+              type: 'image',
+              image: {
+                link: imageUrl
+              }
+            }
+          ]
+        },
+        {
+          type: 'body',
+          parameters: [
+            { type: 'text', text: c.name || 'Patient' }
+          ]
+        }
+      ];
+
+      // Add button parameters if the template uses a dynamic button URL
+      if (baTemplate && baTemplate.hasDynamicButton) {
+        components.push({
+          type: 'button',
+          sub_type: 'url',
+          index: '0',
+          parameters: [
+            {
+              type: 'text',
+              text: urlSuffix
+            }
+          ]
+        });
+      }
+
       const payload = {
         messaging_product: 'whatsapp',
         to: formattedPhone,
@@ -4521,25 +4590,7 @@ const ReactivationCustomers: React.FC = () => {
         template: {
           name: templateName,
           language: { code: 'en' },
-          components: [
-            {
-              type: 'header',
-              parameters: [
-                {
-                  type: 'image',
-                  image: {
-                    link: imageUrl
-                  }
-                }
-              ]
-            },
-            {
-              type: 'body',
-              parameters: [
-                { type: 'text', text: c.name || 'Patient' }
-              ]
-            }
-          ]
+          components
         }
       };
 

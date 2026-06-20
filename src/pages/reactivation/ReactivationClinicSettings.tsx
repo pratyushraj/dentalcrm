@@ -11,6 +11,7 @@ export interface WhatsAppConfig {
   phoneNumberId: string;
   wabaId: string;
   accessToken: string;
+  googleReviewUrl?: string;
 }
 
 export interface WhatsAppTemplate {
@@ -18,6 +19,7 @@ export interface WhatsAppTemplate {
   language: string;
   status: 'Approved' | 'Pending' | 'Rejected';
   body: string;
+  hasDynamicButton?: boolean;
 }
 
 export interface ClinicBranding {
@@ -118,12 +120,19 @@ export const WHATSAPP_KEY = (orgId: string) => `whatsapp_config_${orgId}`;
 export const loadWhatsAppConfig = (orgId: string): WhatsAppConfig => {
   try {
     const raw = localStorage.getItem(WHATSAPP_KEY(orgId));
-    if (raw) return JSON.parse(raw) as WhatsAppConfig;
+    if (raw) {
+      const config = JSON.parse(raw) as WhatsAppConfig;
+      if (!config.googleReviewUrl) {
+        config.googleReviewUrl = 'https://maps.app.goo.gl/KJ78ipBjeu7DfV4N9';
+      }
+      return config;
+    }
   } catch {}
   return {
     phoneNumberId: '109283746510293',
     wabaId: '293847561029384',
     accessToken: 'EAAG1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6q7r8s9t0u1v2w3x4y5z',
+    googleReviewUrl: 'https://maps.app.goo.gl/KJ78ipBjeu7DfV4N9',
   };
 };
 
@@ -525,6 +534,11 @@ const ReactivationClinicSettings: React.FC = () => {
         const bodyComp = metaTpl.components?.find((c: any) => c.type === 'BODY');
         const bodyText = bodyComp?.text || 'No body content';
 
+        const buttonsComp = metaTpl.components?.find((c: any) => c.type === 'BUTTONS');
+        const hasDynamicButton = buttonsComp?.buttons?.some((b: any) => 
+          b.type === 'URL' && b.url && b.url.includes('{{1}}')
+        ) || false;
+
         let status: 'Approved' | 'Pending' | 'Rejected' = 'Approved';
         const rawStatus = metaTpl.status?.toLowerCase();
         if (rawStatus === 'pending') status = 'Pending';
@@ -536,7 +550,8 @@ const ReactivationClinicSettings: React.FC = () => {
           name: metaTpl.name,
           language: langCode,
           status,
-          body: bodyText
+          body: bodyText,
+          hasDynamicButton
         };
       });
 
@@ -1061,6 +1076,23 @@ const ReactivationClinicSettings: React.FC = () => {
                     />
                   </div>
                   <p className="text-[9.5px] text-slate-400 mt-1">Permanent system user token with whatsapp_business_messaging permissions.</p>
+                </div>
+
+                <div>
+                  <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">
+                    Google Review / Maps Link (Custom Button URL)
+                  </label>
+                  <div className="relative">
+                    <Globe size={13} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+                    <input
+                      type="text"
+                      value={whatsapp.googleReviewUrl || ''}
+                      onChange={(e) => handleWhatsAppChange('googleReviewUrl', e.target.value)}
+                      placeholder="e.g. https://maps.app.goo.gl/KJ78ipBjeu7DfV4N9"
+                      className="w-full pl-8 pr-3 py-2 rounded-lg border border-slate-200 bg-slate-50 text-[13px] text-slate-800 placeholder:text-slate-400 outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-500/10 transition-all"
+                    />
+                  </div>
+                  <p className="text-[9.5px] text-slate-400 mt-1">Used for custom button review link in before/after smile dispatches. (Note: iOS tracking parameters like ?g_st=ic will be cleaned automatically to prevent Google Maps app crashes).</p>
                 </div>
               </div>
             </div>

@@ -4348,6 +4348,28 @@ const ReactivationCustomers: React.FC = () => {
       const cleanPhone = c.phone.replace(/[^0-9]/g, '');
       const formattedPhone = cleanPhone.length === 10 ? `91${cleanPhone}` : cleanPhone;
 
+      // Prevent duplicate sends within a 2-minute window to avoid spam
+      const { data: recentLogs } = await supabase
+        .from('reactivation_audit_logs')
+        .select('*')
+        .eq('organization_id', clinicId)
+        .eq('action', 'waba_message')
+        .order('created_at', { ascending: false })
+        .limit(3);
+
+      const isDuplicate = recentLogs?.some(log => {
+        const details = log.details || {};
+        const isSamePhone = details.recipientPhone === formattedPhone;
+        const isSameTemplate = details.templateName === 'prescription_pdf_share';
+        const isRecent = (new Date().getTime() - new Date(log.created_at).getTime()) < 2 * 60 * 1000; // 2 minutes
+        return isSamePhone && isSameTemplate && isRecent;
+      });
+
+      if (isDuplicate) {
+        console.warn('Skipping duplicate prescription PDF send to prevent spam.');
+        return;
+      }
+
       // Fetch doctor full name
       let doctorName = 'Doctor';
       let doctorEmail = '';
@@ -4845,6 +4867,28 @@ const ReactivationCustomers: React.FC = () => {
         t.name.toLowerCase().includes('review')
       );
       const templateName = baTemplate?.name || 'googlereview';
+
+      // Prevent duplicate sends within a 2-minute window to avoid spam
+      const { data: recentLogs } = await supabase
+        .from('reactivation_audit_logs')
+        .select('*')
+        .eq('organization_id', clinicId)
+        .eq('action', 'waba_message')
+        .order('created_at', { ascending: false })
+        .limit(3);
+
+      const isDuplicate = recentLogs?.some(log => {
+        const details = log.details || {};
+        const isSamePhone = details.recipientPhone === formattedPhone;
+        const isSameTemplate = details.templateName === templateName;
+        const isRecent = (new Date().getTime() - new Date(log.created_at).getTime()) < 2 * 60 * 1000; // 2 minutes
+        return isSamePhone && isSameTemplate && isRecent;
+      });
+
+      if (isDuplicate) {
+        console.warn('Skipping duplicate Before/After image template send to prevent spam.');
+        return;
+      }
 
       // Load googleReviewUrl from database first, then local storage config
       let googleReviewUrlStr = 'https://maps.app.goo.gl/KJ78ipBjeu7DfV4N9';

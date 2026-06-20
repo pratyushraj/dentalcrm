@@ -646,6 +646,17 @@ const generateSmileGalleryImage = (opts: {
   }).catch(reject);
 });
 
+const getProxyUrl = (src: string | null): string | null => {
+  if (!src) return null;
+  if (src.startsWith('data:')) return src; // already base64
+  if (src.includes('/public/creator-assets/')) {
+    const parts = src.split('/public/creator-assets/');
+    const filePath = parts[parts.length - 1];
+    return `${window.location.origin}/api/waba/view-image?file=${encodeURIComponent(filePath)}`;
+  }
+  return src;
+};
+
 const addSmileGalleryToPDF = async (
   doc: any,
   customer: Customer,
@@ -657,8 +668,8 @@ const addSmileGalleryToPDF = async (
     logoUrl?: string;
   }
 ) => {
-  const beforeSrc = customer.beforePhotos?.[0] || customer.beforePhoto || null;
-  const afterSrc = customer.afterPhotos?.[0] || customer.afterPhoto || null;
+  const beforeSrc = getProxyUrl(customer.beforePhotos?.[0] || customer.beforePhoto || null);
+  const afterSrc = getProxyUrl(customer.afterPhotos?.[0] || customer.afterPhoto || null);
   if (!beforeSrc && !afterSrc) return;
 
   try {
@@ -670,7 +681,7 @@ const addSmileGalleryToPDF = async (
       doctorName: clinicInfo.doctorName,
       qualifications: clinicInfo.qualifications,
       phone: clinicInfo.phone,
-      logoSrc: clinicInfo.logoUrl || null
+      logoSrc: getProxyUrl(clinicInfo.logoUrl || null)
     });
 
     const W = doc.internal.pageSize.getWidth();

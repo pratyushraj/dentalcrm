@@ -4766,9 +4766,7 @@ const ReactivationCustomers: React.FC = () => {
           parameters: [
             {
               type: 'image',
-              image: mediaId
-                ? { id: mediaId }      // ✅ Meta-hosted: most reliable
-                : { link: imageUrl }   // fallback: public URL
+              image: { link: imageUrl }
             }
           ]
         },

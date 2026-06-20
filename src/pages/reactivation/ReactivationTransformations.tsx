@@ -1346,9 +1346,7 @@ export default function ReactivationTransformations() {
                                     parameters: [
                                       { 
                                         type: 'image', 
-                                        image: uploadData.mediaId 
-                                          ? { id: uploadData.mediaId } 
-                                          : { link: uploadData.publicUrl } 
+                                        image: { link: uploadData.publicUrl } 
                                       }
                                     ] 
                                   },

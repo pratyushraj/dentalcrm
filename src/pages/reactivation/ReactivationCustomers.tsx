@@ -4452,6 +4452,124 @@ const ReactivationCustomers: React.FC = () => {
     }
   };
 
+  const sendWhatsAppBeforeAfter = async (c: Customer) => {
+    try {
+      if (!clinicId) return;
+
+      const { data: clinic } = await supabase
+        .from('dental_clinics')
+        .select('*')
+        .eq('id', clinicId)
+        .single();
+
+      if (!clinic || !clinic.whatsapp_phone_number_id || !clinic.whatsapp_access_token) {
+        console.warn('WhatsApp API not configured for this clinic, skipping before/after photo.');
+        return;
+      }
+
+      const wabaPhoneId = clinic.whatsapp_phone_number_id;
+      const wabaToken = clinic.whatsapp_access_token;
+      const cleanPhone = c.phone.replace(/[^0-9]/g, '');
+      const formattedPhone = cleanPhone.length === 10 ? `91${cleanPhone}` : cleanPhone;
+
+      let imageUrl = "https://upload.wikimedia.org/wikipedia/commons/e/e0/Placeholder_LCa.png";
+
+      const afterPhotoBase64 = c.afterPhotos?.[0] || c.beforePhotos?.[0] || c.beforePhoto || c.afterPhoto;
+      if (afterPhotoBase64 && afterPhotoBase64.startsWith('data:image')) {
+        const base64Data = afterPhotoBase64.replace(/^data:image\/\w+;base64,/, "");
+        const binaryString = window.atob(base64Data);
+        const len = binaryString.length;
+        const bytes = new Uint8Array(len);
+        for (let i = 0; i < len; i++) {
+          bytes[i] = binaryString.charCodeAt(i);
+        }
+        const fileBuffer = bytes.buffer;
+        const imageFileName = `before_after/post_${c.id || Date.now()}_${Date.now()}.jpg`;
+
+        toast.info('Uploading before/after smile photo to database storage...');
+        const { error: uploadError } = await supabase.storage
+          .from('creator-assets')
+          .upload(imageFileName, fileBuffer, {
+            contentType: 'image/jpeg',
+            upsert: true
+          });
+
+        if (!uploadError) {
+          const { data: { publicUrl } } = supabase.storage
+            .from('creator-assets')
+            .getPublicUrl(imageFileName);
+          imageUrl = publicUrl;
+        } else {
+          console.error("Storage upload error for B&A photo:", uploadError);
+        }
+      }
+
+      const payload = {
+        messaging_product: 'whatsapp',
+        to: formattedPhone,
+        type: 'template',
+        template: {
+          name: 'smile_makeover_google_review',
+          language: { code: 'en' },
+          components: [
+            {
+              type: 'header',
+              parameters: [
+                {
+                  type: 'image',
+                  image: {
+                    link: imageUrl
+                  }
+                }
+              ]
+            },
+            {
+              type: 'body',
+              parameters: [
+                { type: 'text', text: c.name || 'Patient' }
+              ]
+            }
+          ]
+        }
+      };
+
+      const apiRes = await fetch(`https://graph.facebook.com/v17.0/${wabaPhoneId}/messages`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${wabaToken}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      });
+
+      const apiData = await apiRes.json();
+      if (!apiRes.ok) {
+        throw new Error(apiData.error?.message || 'Meta API returned error');
+      }
+
+      console.log('Automated B&A image dispatch succeeded via Meta Graph API:', apiData);
+      toast.success('WhatsApp before/after smile gallery photo shared!');
+
+      try {
+        logWhatsAppMessage(clinicId, {
+          recipientName: c.name || 'Patient',
+          recipientPhone: c.phone,
+          templateName: 'smile_makeover_google_review',
+          body: `Hi ${c.name || 'Patient'}! Look at your incredible smile transformation! 🦷✨`,
+          status: 'sent',
+          type: 'campaign',
+          direction: 'outbound',
+          variables: [c.name || 'Patient']
+        });
+      } catch (logErr) {
+        console.error('Failed to log WABA message:', logErr);
+      }
+    } catch (err: any) {
+      console.error('Automated WhatsApp before/after dispatch failed:', err);
+      toast.error('Failed to send before/after photo: ' + err.message);
+    }
+  };
+
   const handleSave = useCallback(async (c: Customer, isAutosave = false) => {
     if (!clinicId) return;
 
@@ -4588,6 +4706,11 @@ const ReactivationCustomers: React.FC = () => {
       // Automatically send PDF on save if there is a prescription or billing estimate (skip on autosave)
       if (!isAutosave && ((savedCustomer.prescription && savedCustomer.prescription.trim() !== '') || (savedCustomer.estimates && savedCustomer.estimates.length > 0))) {
         sendWhatsAppPrescriptionPDF(savedCustomer).catch(err => console.error('Automated WhatsApp dispatch failed:', err));
+      }
+
+      // Automatically send Before/After photo on save if they exist (skip on autosave)
+      if (!isAutosave && ((savedCustomer.beforePhotos && savedCustomer.beforePhotos.length > 0) || (savedCustomer.afterPhotos && savedCustomer.afterPhotos.length > 0) || savedCustomer.beforePhoto || savedCustomer.afterPhoto)) {
+        sendWhatsAppBeforeAfter(savedCustomer).catch(err => console.error('Automated WhatsApp B&A photo dispatch failed:', err));
       }
 
       // Automatically insert/upsert corresponding appointment in dental_appointments if a Visit Date is specified
@@ -5141,19 +5264,34 @@ const ReactivationCustomers: React.FC = () => {
                       <p className="mt-3 text-[12px] text-slate-300 italic">No notes</p>
                     )}
 
-                    {customer.prescription && (
-                      <div className="mt-3 pt-3 border-t border-slate-100 flex justify-end">
-                        <span
-                          role="button"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            downloadPrescriptionPDF(customer);
-                          }}
-                          className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[10.5px] font-bold border border-teal-200 bg-teal-50 hover:bg-teal-100 text-teal-700 transition-all shadow-sm cursor-pointer"
-                        >
-                          <Download size={11} />
-                          Download Rx (Prescription)
-                        </span>
+                    {(customer.prescription || (customer.beforePhotos && customer.beforePhotos.length > 0) || (customer.afterPhotos && customer.afterPhotos.length > 0) || customer.beforePhoto || customer.afterPhoto) && (
+                      <div className="mt-3 pt-3 border-t border-slate-100 flex justify-end gap-2 flex-wrap">
+                        {customer.prescription && (
+                          <span
+                            role="button"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              downloadPrescriptionPDF(customer);
+                            }}
+                            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[10.5px] font-bold border border-teal-200 bg-teal-50 hover:bg-teal-100 text-teal-700 transition-all shadow-sm cursor-pointer"
+                          >
+                            <Download size={11} />
+                            Download Rx
+                          </span>
+                        )}
+                        {((customer.beforePhotos && customer.beforePhotos.length > 0) || (customer.afterPhotos && customer.afterPhotos.length > 0) || customer.beforePhoto || customer.afterPhoto) && (
+                          <span
+                            role="button"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              sendWhatsAppBeforeAfter(customer);
+                            }}
+                            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[10.5px] font-bold border border-indigo-200 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 transition-all shadow-sm cursor-pointer"
+                          >
+                            <Send size={11} />
+                            Send Before/After (WA)
+                          </span>
+                        )}
                       </div>
                     )}
                   </button>

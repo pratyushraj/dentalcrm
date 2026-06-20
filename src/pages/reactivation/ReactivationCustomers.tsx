@@ -4539,38 +4539,84 @@ const ReactivationCustomers: React.FC = () => {
 
       let imageUrl = "https://upload.wikimedia.org/wikipedia/commons/e/e0/Placeholder_LCa.png";
 
-      const afterPhotoBase64 = (c.beforeAfterPhotos && c.beforeAfterPhotos.length > 0)
-        ? c.beforeAfterPhotos[0]
-        : (c.afterPhotos?.[0] || c.beforePhotos?.[0] || c.beforePhoto || c.afterPhoto);
+      // Determine which photo(s) to send
+      const combinedPhoto = c.beforeAfterPhotos?.[0];  // pre-merged combined image
+      const beforePhoto = c.beforePhotos?.[0] || c.beforePhoto;
+      const afterPhoto = c.afterPhotos?.[0] || c.afterPhoto;
 
-      // Block silently if there are no actual photos — the API returns success with a placeholder
-      // but Meta does not deliver the message
-      if (!afterPhotoBase64 || !afterPhotoBase64.startsWith('data:image')) {
+      // Resolve to a single base64 image to upload
+      const resolvePhotoBase64 = (): Promise<string | null> => new Promise((resolve) => {
+        // 1. Pre-combined before/after image — use as-is
+        if (combinedPhoto && combinedPhoto.startsWith('data:image')) {
+          return resolve(combinedPhoto);
+        }
+        // 2. Both before AND after available — stitch side-by-side on canvas
+        if (beforePhoto && afterPhoto && beforePhoto.startsWith('data:image') && afterPhoto.startsWith('data:image')) {
+          const before = new window.Image();
+          const after = new window.Image();
+          let loaded = 0;
+          const tryCompose = () => {
+            loaded++;
+            if (loaded < 2) return;
+            const h = Math.max(before.naturalHeight, after.naturalHeight);
+            const w = before.naturalWidth + after.naturalWidth;
+            const canvas = document.createElement('canvas');
+            canvas.width = w;
+            canvas.height = h + 40; // extra bar for labels
+            const ctx = canvas.getContext('2d')!;
+            ctx.fillStyle = '#111';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(before, 0, 0, before.naturalWidth, h);
+            ctx.drawImage(after, before.naturalWidth, 0, after.naturalWidth, h);
+            // Labels
+            ctx.fillStyle = 'rgba(0,0,0,0.65)';
+            ctx.fillRect(0, h, canvas.width, 40);
+            ctx.font = 'bold 18px sans-serif';
+            ctx.fillStyle = '#f87171';
+            ctx.textAlign = 'center';
+            ctx.fillText('BEFORE', before.naturalWidth / 2, h + 26);
+            ctx.fillStyle = '#34d399';
+            ctx.fillText('AFTER', before.naturalWidth + after.naturalWidth / 2, h + 26);
+            resolve(canvas.toDataURL('image/jpeg', 0.88));
+          };
+          before.onload = tryCompose;
+          after.onload = tryCompose;
+          before.onerror = () => resolve(afterPhoto); // fallback to just after
+          after.onerror = () => resolve(beforePhoto);
+          before.src = beforePhoto;
+          after.src = afterPhoto;
+          return;
+        }
+        // 3. Only after photo
+        if (afterPhoto && afterPhoto.startsWith('data:image')) return resolve(afterPhoto);
+        // 4. Only before photo
+        if (beforePhoto && beforePhoto.startsWith('data:image')) return resolve(beforePhoto);
+        resolve(null);
+      });
+
+      const photoBase64 = await resolvePhotoBase64();
+
+      // Block if no usable photo found
+      if (!photoBase64) {
         toast.error('No before/after photo found for this patient. Please upload a photo first.');
         return;
       }
-      if (afterPhotoBase64.startsWith('data:image')) {
-        try {
-          const uploadRes = await fetch('/api/waba/upload', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-              image: afterPhotoBase64,
-              customerId: c.id
-            })
-          });
 
-          const uploadData = await uploadRes.json();
-          if (uploadRes.ok && uploadData.publicUrl) {
-            imageUrl = uploadData.publicUrl;
-          } else {
-            console.error("Storage upload error for B&A photo:", uploadData.error || uploadData);
-          }
-        } catch (uploadErr: any) {
-          console.error("Storage upload fetch error for B&A photo:", uploadErr);
+      toast.info('Uploading before/after smile photo...');
+      try {
+        const uploadRes = await fetch('/api/waba/upload', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ image: photoBase64, customerId: c.id })
+        });
+        const uploadData = await uploadRes.json();
+        if (uploadRes.ok && uploadData.publicUrl) {
+          imageUrl = uploadData.publicUrl;
+        } else {
+          console.error('Storage upload error for B&A photo:', uploadData.error || uploadData);
         }
+      } catch (uploadErr: any) {
+        console.error('Storage upload fetch error for B&A photo:', uploadErr);
       }
 
       const syncedTemplates = loadWhatsAppTemplates(clinicId);

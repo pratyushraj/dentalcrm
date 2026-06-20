@@ -160,7 +160,7 @@ export const DEFAULT_TEMPLATES: WhatsAppTemplate[] = [
     body: 'Dear {{1}}, thank you for choosing {{2}}. Please share your experience here: {{3}} . We appreciate your feedback!'
   },
   {
-    name: 'smile_makeover_google_review',
+    name: 'googlereview',
     language: 'en',
     status: 'Approved',
     body: 'Hi {{1}}! Look at your incredible smile transformation! 🦷✨ We would love it if you shared this before/after photo and your experience on our Google Reviews page: {{2}} . Thank you for helping us grow!'

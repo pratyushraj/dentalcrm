@@ -4509,7 +4509,7 @@ const ReactivationCustomers: React.FC = () => {
         to: formattedPhone,
         type: 'template',
         template: {
-          name: 'smile_makeover_google_review',
+          name: 'googlereview',
           language: { code: 'en' },
           components: [
             {
@@ -4554,7 +4554,7 @@ const ReactivationCustomers: React.FC = () => {
         logWhatsAppMessage(clinicId, {
           recipientName: c.name || 'Patient',
           recipientPhone: c.phone,
-          templateName: 'smile_makeover_google_review',
+          templateName: 'googlereview',
           body: `Hi ${c.name || 'Patient'}! Look at your incredible smile transformation! 🦷✨`,
           status: 'sent',
           type: 'campaign',

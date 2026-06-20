@@ -1290,19 +1290,7 @@ export default function ReactivationTransformations() {
 
                           const loadingToast = toast.loading('Sending Smile Gallery via WhatsApp...');
                           try {
-                            // 1. Capture branded canvas image
-                            const base64Image = canvas.toDataURL('image/jpeg', 0.92);
-
-                            // 2. Upload via serverless function (bypasses RLS)
-                            const uploadRes = await fetch('/api/waba/upload', {
-                              method: 'POST',
-                              headers: { 'Content-Type': 'application/json' },
-                              body: JSON.stringify({ image: base64Image, customerId: activePatient.id })
-                            });
-                            const uploadData = await uploadRes.json();
-                            if (!uploadRes.ok || !uploadData.publicUrl) throw new Error(uploadData.error || 'Upload failed');
-
-                            // 3. Fetch clinic WhatsApp config
+                            // 1. Fetch clinic WhatsApp config first
                             const { data: clinic } = await supabase
                               .from('dental_clinics')
                               .select('whatsapp_phone_number_id, whatsapp_access_token')
@@ -1315,6 +1303,24 @@ export default function ReactivationTransformations() {
 
                             const wabaPhoneId = clinic.whatsapp_phone_number_id;
                             const wabaToken = clinic.whatsapp_access_token.split('|')[0];
+
+                            // 2. Capture branded canvas image
+                            const base64Image = canvas.toDataURL('image/jpeg', 0.92);
+
+                            // 3. Upload via serverless function (bypasses RLS)
+                            const uploadRes = await fetch('/api/waba/upload', {
+                              method: 'POST',
+                              headers: { 'Content-Type': 'application/json' },
+                              body: JSON.stringify({ 
+                                image: base64Image, 
+                                customerId: activePatient.id,
+                                wabaPhoneId,
+                                wabaToken
+                              })
+                            });
+                            const uploadData = await uploadRes.json();
+                            if (!uploadRes.ok) throw new Error(uploadData.error || 'Upload failed');
+
                             const cleanPhone = activePatient.phone.replace(/[^0-9]/g, '');
                             const formattedPhone = cleanPhone.length === 10 ? `91${cleanPhone}` : cleanPhone;
 
@@ -1325,10 +1331,6 @@ export default function ReactivationTransformations() {
                               if (parts[2]) googleReviewUrl = parts[2];
                             }
                             try { const u = new URL(googleReviewUrl); u.searchParams.delete('g_st'); googleReviewUrl = u.toString(); } catch {}
-                            let urlSuffix = googleReviewUrl;
-                            if (googleReviewUrl.includes('maps.app.goo.gl/')) {
-                              urlSuffix = googleReviewUrl.split('maps.app.goo.gl/')[1]?.split('?')[0] || googleReviewUrl;
-                            }
 
                             // 5. Send via Meta API using googlereview template
                             const payload = {
@@ -1339,9 +1341,18 @@ export default function ReactivationTransformations() {
                                 name: 'googlereview',
                                 language: { code: 'en' },
                                 components: [
-                                  { type: 'header', parameters: [{ type: 'image', image: { link: uploadData.publicUrl } }] },
+                                  { 
+                                    type: 'header', 
+                                    parameters: [
+                                      { 
+                                        type: 'image', 
+                                        image: uploadData.mediaId 
+                                          ? { id: uploadData.mediaId } 
+                                          : { link: uploadData.publicUrl } 
+                                      }
+                                    ] 
+                                  },
                                   { type: 'body', parameters: [{ type: 'text', text: activePatient.name || 'Patient' }] }
-                                  // googlereview has a STATIC button URL — no button parameters needed
                                 ]
                               }
                             };

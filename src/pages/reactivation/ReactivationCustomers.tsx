@@ -575,7 +575,15 @@ const generateSmileGalleryImage = (opts: {
   doctorName: string; qualifications: string; phone: string; logoSrc: string | null;
 }): Promise<string> => new Promise((resolve, reject) => {
   const loadImg = (src: string | null): Promise<HTMLImageElement | null> =>
-    src ? new Promise((res) => { const i = new window.Image(); i.onload = () => res(i); i.onerror = () => res(null); i.src = src; }) : Promise.resolve(null);
+    src ? new Promise((res) => { 
+      const i = new window.Image(); 
+      if (!src.startsWith('data:')) {
+        i.crossOrigin = 'anonymous';
+      }
+      i.onload = () => res(i); 
+      i.onerror = () => res(null); 
+      i.src = src; 
+    }) : Promise.resolve(null);
   Promise.all([loadImg(opts.beforeSrc), loadImg(opts.afterSrc), loadImg(opts.logoSrc)]).then(([before, after, logo]) => {
     try {
       const canvas = document.createElement('canvas');
@@ -4648,6 +4656,20 @@ const ReactivationCustomers: React.FC = () => {
       } catch (genErr) {
         console.error('Smile Gallery generation failed, falling back to raw photo:', genErr);
         photoBase64 = combinedSrc || afterSrc || beforeSrc;
+      }
+
+      if (photoBase64 && !photoBase64.startsWith('data:')) {
+        try {
+          const fetchedRes = await fetch(photoBase64);
+          const fetchedBlob = await fetchedRes.blob();
+          photoBase64 = await new Promise((resolveResolve) => {
+            const reader = new FileReader();
+            reader.onloadend = () => resolveResolve(reader.result as string);
+            reader.readAsDataURL(fetchedBlob);
+          });
+        } catch (convErr) {
+          console.error('Failed to convert fallback image URL to base64:', convErr);
+        }
       }
 
       if (!photoBase64) {

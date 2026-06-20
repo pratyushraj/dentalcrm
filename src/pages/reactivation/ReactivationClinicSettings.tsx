@@ -544,7 +544,7 @@ const ReactivationClinicSettings: React.FC = () => {
         if (rawStatus === 'pending') status = 'Pending';
         else if (rawStatus === 'rejected') status = 'Rejected';
 
-        const langCode = metaTpl.language?.split('_')[0] || 'en';
+        const langCode = metaTpl.language || 'en';
 
         return {
           name: metaTpl.name,

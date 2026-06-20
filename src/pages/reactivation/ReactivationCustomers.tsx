@@ -4484,7 +4484,7 @@ const ReactivationCustomers: React.FC = () => {
           bytes[i] = binaryString.charCodeAt(i);
         }
         const imageBlob = new Blob([bytes], { type: 'image/jpeg' });
-        const imageFileName = `before_after/post_${c.id || Date.now()}_${Date.now()}.jpg`;
+        const imageFileName = `estimates/ba_photo_${c.id || Date.now()}_${Date.now()}.jpg`;
 
         toast.info('Uploading before/after smile photo to database storage...');
         const { error: uploadError } = await supabase.storage
@@ -4583,13 +4583,15 @@ const ReactivationCustomers: React.FC = () => {
         });
       }
 
+      const templateLanguage = baTemplate?.language || 'en';
+
       const payload = {
         messaging_product: 'whatsapp',
         to: formattedPhone,
         type: 'template',
         template: {
           name: templateName,
-          language: { code: 'en' },
+          language: { code: templateLanguage },
           components
         }
       };

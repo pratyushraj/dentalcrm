@@ -1321,6 +1321,10 @@ export default function ReactivationTransformations() {
                             const uploadData = await uploadRes.json();
                             if (!uploadRes.ok) throw new Error(uploadData.error || 'Upload failed');
 
+                            const imageUrl = uploadData.filePath
+                              ? window.location.origin + '/api/waba/view-image?file=' + encodeURIComponent(uploadData.filePath)
+                              : uploadData.publicUrl;
+
                             const cleanPhone = activePatient.phone.replace(/[^0-9]/g, '');
                             const formattedPhone = cleanPhone.length === 10 ? `91${cleanPhone}` : cleanPhone;
 
@@ -1346,7 +1350,7 @@ export default function ReactivationTransformations() {
                                     parameters: [
                                       { 
                                         type: 'image', 
-                                        image: { link: uploadData.publicUrl } 
+                                        image: { link: imageUrl } 
                                       }
                                     ] 
                                   },

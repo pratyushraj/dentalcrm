@@ -4696,7 +4696,10 @@ const ReactivationCustomers: React.FC = () => {
             mediaId = uploadData.mediaId;  // preferred: Meta-hosted media
             console.log('Using Meta media ID:', mediaId);
           }
-          if (uploadData.publicUrl) {
+          if (uploadData.filePath) {
+            imageUrl = window.location.origin + '/api/waba/view-image?file=' + encodeURIComponent(uploadData.filePath);
+            console.log('Using Vercel-hosted image proxy URL:', imageUrl);
+          } else if (uploadData.publicUrl) {
             imageUrl = uploadData.publicUrl;
           }
         } else {

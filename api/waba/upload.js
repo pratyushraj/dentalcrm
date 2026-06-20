@@ -84,7 +84,7 @@ export default async function handler(req, res) {
       }
     }
 
-    return res.status(200).json({ publicUrl, mediaId });
+    return res.status(200).json({ publicUrl, mediaId, filePath: uniqueFileName });
   } catch (err) {
     console.error('Upload handler crash:', err);
     return res.status(500).json({ error: 'Internal server error', details: err.message });

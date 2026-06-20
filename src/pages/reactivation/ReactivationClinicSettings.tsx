@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Building2, Phone, Mail, Save, CheckCircle2, FileText, Stethoscope, Trash2, Plus, MessageSquare, Send, Lock, Globe, RefreshCw, Pill } from 'lucide-react';
+import { Building2, Phone, Mail, Save, CheckCircle2, FileText, Stethoscope, Trash2, Plus, MessageSquare, Send, Lock, Globe, RefreshCw, Pill, Upload } from 'lucide-react';
 import { useSession } from '@/contexts/SessionContext';
 import { toast } from 'sonner';
 import { supabase } from '@/lib/supabase';
@@ -27,6 +27,7 @@ export interface ClinicBranding {
   address: string;
   phone: string;
   email: string;
+  logoUrl?: string; // base64 clinic logo
 }
 
 export interface Procedure {
@@ -62,6 +63,7 @@ export const loadClinicBranding = (orgId: string, fallbackName?: string | null):
     address: '',
     phone: '',
     email: '',
+    logoUrl: '',
   };
 };
 
@@ -146,7 +148,13 @@ export const DEFAULT_TEMPLATES: WhatsAppTemplate[] = [
     name: 'google_review_request',
     language: 'en',
     status: 'Approved',
-    body: 'Dear {{1}}, thank you for choosing {{2}}. Please share your experience here: {{3}}'
+    body: 'Dear {{1}}, thank you for choosing {{2}}. Please share your experience here: {{3}} . We appreciate your feedback!'
+  },
+  {
+    name: 'smile_makeover_google_review',
+    language: 'en',
+    status: 'Approved',
+    body: 'Hi {{1}}! Look at your incredible smile transformation! 🦷✨ We would love it if you shared this before/after photo and your experience on our Google Reviews page: {{2}} . Thank you for helping us grow!'
   }
 ];
 
@@ -177,16 +185,21 @@ const PrescriptionPreview: React.FC<{ branding: ClinicBranding }> = ({ branding 
       style={{ background: 'linear-gradient(135deg, #EEF2FF 0%, #F0F9FF 100%)', borderBottom: '2px solid #4F46E5' }}
     >
       <div className="flex items-start justify-between gap-4">
-        <div className="flex-1 min-w-0">
-          <h2 className="text-[18px] font-bold text-indigo-900 leading-tight tracking-tight truncate">
-            {branding.clinicName || <span className="text-slate-400 italic text-[15px]">Clinic Name</span>}
-          </h2>
-          <p className="text-[12px] text-indigo-700 mt-0.5 font-medium truncate">
-            {branding.doctorName || <span className="text-slate-400 italic font-normal">Doctor Name</span>}
-            {branding.qualifications && branding.doctorName && (
-              <span className="text-indigo-500 font-normal ml-1">· {branding.qualifications}</span>
-            )}
-          </p>
+        <div className="flex items-center gap-3.5 min-w-0 flex-1">
+          {branding.logoUrl && (
+            <img src={branding.logoUrl} alt="Logo" className="w-12 h-12 object-contain rounded-xl border border-indigo-100 bg-white p-1 shadow-sm shrink-0" />
+          )}
+          <div className="min-w-0 flex-1">
+            <h2 className="text-[18px] font-bold text-indigo-900 leading-tight tracking-tight truncate">
+              {branding.clinicName || <span className="text-slate-400 italic text-[15px]">Clinic Name</span>}
+            </h2>
+            <p className="text-[12px] text-indigo-700 mt-0.5 font-medium truncate">
+              {branding.doctorName || <span className="text-slate-400 italic font-normal">Doctor Name</span>}
+              {branding.qualifications && branding.doctorName && (
+                <span className="text-indigo-500 font-normal ml-1">· {branding.qualifications}</span>
+              )}
+            </p>
+          </div>
         </div>
         <div className="text-right text-[10px] text-slate-500 space-y-0.5 leading-snug shrink-0">
           {branding.phone && <div>📞 {branding.phone}</div>}
@@ -270,14 +283,23 @@ const ReactivationClinicSettings: React.FC = () => {
   const [isSendingTest, setIsSendingTest] = useState(false);
   const [saved, setSaved] = useState(false);
 
+  // Reload all states from local storage when organization ID changes (e.g. session loads)
+  useEffect(() => {
+    setBranding(loadClinicBranding(orgId, profile?.business_name));
+    setProcedures(loadClinicProcedures(orgId));
+    setMedications(loadClinicMedications(orgId));
+    setWhatsapp(loadWhatsAppConfig(orgId));
+    setTemplates(loadWhatsAppTemplates(orgId));
+  }, [orgId]);
+
   // Sync clinic name from profile on first load if empty
   useEffect(() => {
     if (!branding.clinicName && profile?.business_name) {
       setBranding((prev) => ({ ...prev, clinicName: profile.business_name || '' }));
     }
-  }, [profile?.business_name]);
+  }, [profile?.business_name, orgId]);
 
-  // Load WhatsApp config from Supabase dental_clinics table
+  // Load clinic details from Supabase dental_clinics table
   useEffect(() => {
     if (!organizationId || organizationId === 'default') return;
 
@@ -285,7 +307,7 @@ const ReactivationClinicSettings: React.FC = () => {
       try {
         const { data, error } = await supabase
           .from('dental_clinics')
-          .select('whatsapp_phone_number_id, whatsapp_access_token')
+          .select('whatsapp_phone_number_id, whatsapp_access_token, name, address, phone, doctor_name, qualifications, email, logo_url' as any)
           .eq('id', organizationId)
           .single();
 
@@ -296,9 +318,20 @@ const ReactivationClinicSettings: React.FC = () => {
             phoneNumberId: data.whatsapp_phone_number_id || prev.phoneNumberId,
             accessToken: data.whatsapp_access_token || prev.accessToken,
           }));
+
+          setBranding((prev) => ({
+            ...prev,
+            clinicName: data.name || prev.clinicName,
+            address: data.address || prev.address,
+            phone: data.phone || prev.phone,
+            doctorName: data.doctor_name || prev.doctorName,
+            qualifications: data.qualifications || prev.qualifications,
+            email: data.email || prev.email,
+            logoUrl: data.logo_url || prev.logoUrl,
+          }));
         }
       } catch (err) {
-        console.error('Error loading clinic WhatsApp details from Supabase:', err);
+        console.error('Error loading clinic details from Supabase:', err);
       }
     };
 
@@ -531,13 +564,20 @@ const ReactivationClinicSettings: React.FC = () => {
           .update({
             whatsapp_phone_number_id: whatsapp.phoneNumberId,
             whatsapp_access_token: whatsapp.accessToken,
-          })
+            name: branding.clinicName,
+            address: branding.address,
+            phone: branding.phone,
+            doctor_name: branding.doctorName,
+            qualifications: branding.qualifications,
+            email: branding.email,
+            logo_url: branding.logoUrl,
+          } as any)
           .eq('id', organizationId);
 
         if (error) throw error;
       } catch (err) {
-        console.error('Error saving WhatsApp configuration to Supabase:', err);
-        toast.error('Failed to sync WhatsApp settings with database.');
+        console.error('Error saving clinic configuration to Supabase:', err);
+        toast.error('Failed to sync settings with database.');
       }
     }
 
@@ -577,49 +617,53 @@ const ReactivationClinicSettings: React.FC = () => {
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-1.5 border-b border-slate-200 pb-px">
+      <div className="flex bg-slate-100 p-1.5 rounded-2xl border border-slate-200/50 mb-6 overflow-x-auto gap-1.5 scrollbar-none shrink-0 text-left">
         <button
           type="button"
           onClick={() => setActiveTab('info')}
-          className={`px-4 py-2 text-[12.5px] font-bold tracking-wide border-b-2 transition-all ${
+          className={`flex-1 min-w-[125px] flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer select-none ${
             activeTab === 'info'
-              ? 'border-indigo-600 text-indigo-600'
-              : 'border-transparent text-slate-400 hover:text-slate-600'
+              ? 'bg-white text-indigo-600 shadow-sm border border-slate-100'
+              : 'text-slate-500 hover:text-slate-700'
           }`}
         >
-          Clinic Info & Branding
+          <Building2 size={13} />
+          Clinic Info
         </button>
         <button
           type="button"
           onClick={() => setActiveTab('prices')}
-          className={`px-4 py-2 text-[12.5px] font-bold tracking-wide border-b-2 transition-all ${
+          className={`flex-1 min-w-[125px] flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer select-none ${
             activeTab === 'prices'
-              ? 'border-indigo-600 text-indigo-600'
-              : 'border-transparent text-slate-400 hover:text-slate-600'
+              ? 'bg-white text-indigo-600 shadow-sm border border-slate-100'
+              : 'text-slate-500 hover:text-slate-700'
           }`}
         >
-          Treatment Catalog
+          <Stethoscope size={13} />
+          Service Catalog
         </button>
         <button
           type="button"
           onClick={() => setActiveTab('whatsapp')}
-          className={`px-4 py-2 text-[12.5px] font-bold tracking-wide border-b-2 transition-all ${
+          className={`flex-1 min-w-[125px] flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer select-none ${
             activeTab === 'whatsapp'
-              ? 'border-indigo-600 text-indigo-600'
-              : 'border-transparent text-slate-400 hover:text-slate-600'
+              ? 'bg-white text-indigo-600 shadow-sm border border-slate-100'
+              : 'text-slate-500 hover:text-slate-700'
           }`}
         >
-          WhatsApp API Config
+          <MessageSquare size={13} />
+          WhatsApp API
         </button>
         <button
           type="button"
           onClick={() => setActiveTab('medications')}
-          className={`px-4 py-2 text-[12.5px] font-bold tracking-wide border-b-2 transition-all ${
+          className={`flex-1 min-w-[125px] flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer select-none ${
             activeTab === 'medications'
-              ? 'border-indigo-600 text-indigo-600'
-              : 'border-transparent text-slate-400 hover:text-slate-600'
+              ? 'bg-white text-indigo-600 shadow-sm border border-slate-100'
+              : 'text-slate-500 hover:text-slate-700'
           }`}
         >
+          <Pill size={13} />
           Prescription Presets
         </button>
       </div>
@@ -638,6 +682,51 @@ const ReactivationClinicSettings: React.FC = () => {
               </div>
 
               <div className="space-y-3">
+                {/* Clinic Logo Upload */}
+                <div>
+                  <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">
+                    Clinic Logo
+                  </label>
+                  <div className="flex items-center gap-4">
+                    <div className="w-16 h-16 rounded-xl border-2 border-dashed border-slate-200 bg-slate-50 flex items-center justify-center overflow-hidden flex-shrink-0">
+                      {branding.logoUrl ? (
+                        <img src={branding.logoUrl} alt="Logo" className="w-full h-full object-contain p-1" />
+                      ) : (
+                        <Building2 size={20} className="text-slate-300" />
+                      )}
+                    </div>
+                    <div className="flex-1">
+                      <label className="cursor-pointer inline-flex items-center gap-2 bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 text-indigo-700 text-[11px] font-bold px-3 py-2 rounded-lg transition">
+                        <Upload size={12} />
+                        {branding.logoUrl ? 'Replace Logo' : 'Upload Logo'}
+                        <input
+                          type="file"
+                          accept="image/*"
+                          className="hidden"
+                          onChange={(e) => {
+                            const file = e.target.files?.[0];
+                            if (!file) return;
+                            const reader = new FileReader();
+                            reader.onload = (ev) => {
+                              handleChange('logoUrl', ev.target?.result as string);
+                            };
+                            reader.readAsDataURL(file);
+                          }}
+                        />
+                      </label>
+                      {branding.logoUrl && (
+                        <button
+                          onClick={() => handleChange('logoUrl', '')}
+                          className="ml-2 text-[10px] text-red-500 hover:text-red-700 font-bold transition"
+                        >
+                          Remove
+                        </button>
+                      )}
+                      <p className="text-[9px] text-slate-400 mt-1.5">PNG or JPG · Used on transformation templates & prescriptions</p>
+                    </div>
+                  </div>
+                </div>
+
                 <div>
                   <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">
                     Clinic Name
@@ -1202,94 +1291,109 @@ const ReactivationClinicSettings: React.FC = () => {
           </div>
         </div>
       ) : (
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start text-left">
-          {/* Left: Medications list config */}
-          <div className="lg:col-span-2 space-y-4">
-            <div className="bg-white border border-slate-200 rounded-2xl p-5 space-y-4">
-              <div className="flex items-center justify-between pb-2 border-b border-slate-100">
-                <div className="flex items-center gap-2">
-                  <div className="w-7 h-7 rounded-lg bg-indigo-50 border border-indigo-100 flex items-center justify-center">
-                    <Pill size={14} className="text-indigo-500 animate-pulse" />
-                  </div>
-                  <h3 className="text-[12px] font-bold text-slate-700 uppercase tracking-wider">Medications Preset Library</h3>
+        <div className="space-y-6 text-left animate-fadeIn">
+          {/* Medications list config (Full Width) */}
+          <div className="bg-white border border-slate-200/80 rounded-2xl shadow-sm hover:shadow-md transition-shadow p-6 space-y-6">
+            <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+              <div className="flex items-center gap-3">
+                <div className="w-9 h-9 rounded-xl bg-indigo-50 border border-indigo-100 flex items-center justify-center shadow-sm">
+                  <Pill size={16} className="text-indigo-500 animate-pulse" />
                 </div>
-                <button
-                  type="button"
-                  onClick={() => {
-                    if (window.confirm("Restore default dental medications? This will overwrite custom medications.")) {
-                      setMedications([...DEFAULT_MEDICATIONS]);
-                      setSaved(false);
-                      toast.success("Medications reset to defaults.");
-                    }
-                  }}
-                  className="text-xs text-indigo-600 hover:text-indigo-800 font-semibold transition-colors cursor-pointer"
-                >
-                  Reset to Defaults
-                </button>
+                <div>
+                  <h3 className="text-[13px] font-bold text-slate-800 uppercase tracking-wider">Medications Preset Library</h3>
+                  <p className="text-[10px] text-slate-400 font-medium">Add or manage frequently used prescriptions</p>
+                </div>
               </div>
+              <button
+                type="button"
+                onClick={() => {
+                  if (window.confirm("Restore default dental medications? This will overwrite custom medications.")) {
+                    setMedications([...DEFAULT_MEDICATIONS]);
+                    setSaved(false);
+                    toast.success("Medications reset to defaults.");
+                  }
+                }}
+                className="text-xs text-indigo-600 hover:text-indigo-800 hover:bg-indigo-50 px-2.5 py-1.5 rounded-lg font-bold transition-all cursor-pointer border border-indigo-100/50"
+              >
+                Reset to Defaults
+              </button>
+            </div>
 
-              {/* Add form */}
-              <div className="bg-slate-50 border border-slate-200/60 rounded-xl p-4 space-y-3">
-                <h4 className="text-[11px] font-bold text-slate-600 uppercase tracking-wider">Add New Medication Preset</h4>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-3 items-end">
-                  <div className="md:col-span-1">
-                    <label className="block text-[9.5px] font-bold text-slate-500 uppercase tracking-wider mb-1">Drug Label / Shortcut</label>
+            {/* Add form */}
+            <div className="bg-slate-50/50 border border-slate-200/60 rounded-xl p-5 space-y-4 shadow-inner">
+              <h4 className="text-[11px] font-bold text-slate-700 uppercase tracking-wider flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-indigo-500"></span>
+                Add New Medication Preset
+              </h4>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
+                <div className="md:col-span-1">
+                  <label className="block text-[9.5px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">Drug Label / Shortcut</label>
+                  <input
+                    type="text"
+                    value={newMedLabel}
+                    onChange={(e) => setNewMedLabel(e.target.value)}
+                    placeholder="e.g. Paracetamol 650mg"
+                    className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 text-slate-700 font-medium shadow-sm transition-all"
+                  />
+                </div>
+                <div className="md:col-span-2 flex gap-3 items-end">
+                  <div className="flex-1">
+                    <label className="block text-[9.5px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">Full Rx Instruction</label>
                     <input
                       type="text"
-                      value={newMedLabel}
-                      onChange={(e) => setNewMedLabel(e.target.value)}
-                      placeholder="e.g. Paracetamol 650mg"
-                      className="w-full bg-white border border-slate-200 rounded-lg px-3 py-1.8 text-xs focus:outline-none focus:border-indigo-500 text-slate-700"
+                      value={newMedText}
+                      onChange={(e) => setNewMedText(e.target.value)}
+                      placeholder="e.g. • Tab. Paracetamol 650mg - 1 tab SOS for pain"
+                      className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 text-slate-700 font-medium shadow-sm transition-all"
                     />
                   </div>
-                  <div className="md:col-span-2 flex gap-3 items-end">
-                    <div className="flex-1">
-                      <label className="block text-[9.5px] font-bold text-slate-500 uppercase tracking-wider mb-1">Full Rx Instruction</label>
-                      <input
-                        type="text"
-                        value={newMedText}
-                        onChange={(e) => setNewMedText(e.target.value)}
-                        placeholder="e.g. • Tab. Paracetamol 650mg - 1 tab SOS for pain"
-                        className="w-full bg-white border border-slate-200 rounded-lg px-3 py-1.8 text-xs focus:outline-none focus:border-indigo-500 text-slate-700"
-                      />
-                    </div>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        if (!newMedLabel.trim() || !newMedText.trim()) {
-                          toast.error("Please fill in both the label and instruction details.");
-                          return;
-                        }
-                        const newItem: Medication = {
-                          id: Date.now().toString(),
-                          label: newMedLabel.trim(),
-                          text: newMedText.trim()
-                        };
-                        setMedications(prev => [...prev, newItem]);
-                        setNewMedLabel('');
-                        setNewMedText('');
-                        setSaved(false);
-                        toast.success("Medication added. Click 'Save Changes' to save.");
-                      }}
-                      className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-lg px-4 py-1.8 text-xs transition active:scale-95 cursor-pointer shadow-md shadow-indigo-500/10"
-                    >
-                      Add
-                    </button>
-                  </div>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      if (!newMedLabel.trim() || !newMedText.trim()) {
+                        toast.error("Please fill in both the label and instruction details.");
+                        return;
+                      }
+                      const newItem: Medication = {
+                        id: Date.now().toString(),
+                        label: newMedLabel.trim(),
+                        text: newMedText.trim()
+                      };
+                      setMedications(prev => [...prev, newItem]);
+                      setNewMedLabel('');
+                      setNewMedText('');
+                      setSaved(false);
+                      toast.success("Medication added. Click 'Save Changes' to save.");
+                    }}
+                    className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-lg px-4 py-2 text-xs transition-all active:scale-95 cursor-pointer shadow-md shadow-indigo-500/15 border border-indigo-700/10"
+                  >
+                    Add
+                  </button>
                 </div>
               </div>
+            </div>
 
-              {/* Grid / List of current presets */}
-              <div className="divide-y divide-slate-100 max-h-[420px] overflow-y-auto pr-1 scrollbar-thin">
-                {medications.length === 0 ? (
-                  <p className="text-center py-8 text-xs text-slate-400 font-medium">No medications configured. Click 'Reset to Defaults' or add custom ones above.</p>
-                ) : (
-                  medications.map((med) => (
-                    <div key={med.id} className="py-3 flex justify-between items-start gap-4 hover:bg-slate-50/50 px-2 rounded-lg transition">
-                      <div className="flex-1 min-w-0">
-                        <span className="text-[10px] font-bold text-slate-800 bg-indigo-50 border border-indigo-100 rounded px-1.5 py-0.2 select-none">{med.label}</span>
-                        <p className="text-xs text-slate-500 font-mono mt-1.5 leading-relaxed break-words">{med.text}</p>
-                      </div>
+            {/* Grid / List of current presets */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+              {medications.length === 0 ? (
+                <p className="col-span-full text-center py-12 text-xs text-slate-400 font-medium bg-slate-50/20 border border-dashed border-slate-200 rounded-xl">
+                  No medications configured. Click 'Reset to Defaults' or add custom ones above.
+                </p>
+              ) : (
+                medications.map((med) => (
+                  <div 
+                    key={med.id} 
+                    className="group border border-slate-100 hover:border-slate-200 bg-white rounded-xl p-4 flex flex-col justify-between gap-3 hover:shadow-sm transition-all duration-200"
+                  >
+                    <div className="min-w-0">
+                      <span className="inline-block text-[10px] font-bold text-indigo-700 bg-indigo-50/80 border border-indigo-100 rounded-lg px-2.5 py-0.8 select-none tracking-wide">
+                        {med.label}
+                      </span>
+                      <p className="text-[11.5px] text-slate-600 font-medium mt-2 leading-relaxed break-words pl-0.5">
+                        {med.text}
+                      </p>
+                    </div>
+                    <div className="flex justify-end pt-1 border-t border-slate-50">
                       <button
                         type="button"
                         onClick={() => {
@@ -1297,32 +1401,20 @@ const ReactivationClinicSettings: React.FC = () => {
                           setSaved(false);
                           toast.success("Medication preset deleted locally. Save to confirm.");
                         }}
-                        className="p-1.5 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition"
+                        className="p-1.5 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 active:scale-95 transition-all opacity-85 group-hover:opacity-100"
                       >
-                        <Trash2 size={13} />
+                        <Trash2 size={14} />
                       </button>
                     </div>
-                  ))
-                )}
-              </div>
+                  </div>
+                ))
+              )}
             </div>
-
-            {/* Save Changes for Medications */}
-            <button
-              onClick={handleSave}
-              className={`w-full flex items-center justify-center gap-2 py-3 rounded-xl text-[13px] font-semibold transition-all duration-200 lg:hidden ${
-                saved
-                  ? 'bg-emerald-50 border border-emerald-200 text-emerald-700'
-                  : 'bg-indigo-600 text-white hover:bg-indigo-700 shadow-md shadow-indigo-500/20'
-              }`}
-            >
-              {saved ? <><CheckCircle2 size={15} /> Saved!</> : <><Save size={15} /> Save Changes</>}
-            </button>
           </div>
 
-          {/* Right: Info and Quick Save panel */}
-          <div className="space-y-4">
-            <div className="bg-white border border-slate-200 rounded-2xl p-5 space-y-4">
+          {/* Bottom Grid: Info & Save */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="md:col-span-2 bg-white border border-slate-200 rounded-2xl p-5 space-y-3">
               <h3 className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Quick Information</h3>
               <p className="text-[11.5px] text-slate-500 leading-relaxed font-sans">
                 These medication shortcuts will populate as clickable selection bubbles under the <strong>Prescription (Rx)</strong> textarea in the patient details file. 
@@ -1332,8 +1424,11 @@ const ReactivationClinicSettings: React.FC = () => {
               </p>
             </div>
 
-            <div className="bg-white border border-slate-200 rounded-2xl p-5 space-y-4">
-              <h3 className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Save Changes</h3>
+            <div className="bg-white border border-slate-200 rounded-2xl p-5 flex flex-col justify-between space-y-4">
+              <div>
+                <h3 className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Confirm Settings</h3>
+                <p className="text-[10px] text-slate-400 mt-1">Make sure to save changes after modifying presets.</p>
+              </div>
               <button
                 type="button"
                 onClick={handleSave}

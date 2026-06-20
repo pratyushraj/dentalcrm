@@ -3,6 +3,7 @@ import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useSession } from '@/contexts/SessionContext';
 import { usePwaInstall } from '@/hooks/usePwaInstall';
+import { supabase } from '@/lib/supabase';
 import { toast } from 'sonner';
 import {
   Bot,
@@ -17,7 +18,19 @@ import {
   Send,
   MessageSquare,
   Sparkles,
+  Bell,
+  CheckCircle,
+  LogOut,
 } from 'lucide-react';
+
+interface Appointment {
+  id: string;
+  name: string;
+  phone: string;
+  service: string;
+  next_visit_date: string;
+  appointmentTime?: string;
+}
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -184,6 +197,17 @@ const ReactivationLayout: React.FC<ReactivationLayoutProps> = ({ children }) => 
     setIsStandalone(checkStandalone);
   }, []);
 
+  const handleLogout = async () => {
+    try {
+      const { error } = await supabase.auth.signOut();
+      if (error) throw error;
+      toast.success('Signed out successfully.');
+      navigate('/reactivation/login', { replace: true });
+    } catch (err: any) {
+      toast.error(err.message || 'Error signing out.');
+    }
+  };
+
   const handleInstallClick = async () => {
     if (canInstall) {
       const outcome = await promptInstall();
@@ -242,6 +266,37 @@ const ReactivationLayout: React.FC<ReactivationLayoutProps> = ({ children }) => 
   React.useEffect(() => {
     setIsSidebarOpen(false);
   }, [location.pathname]);
+
+  // Today's Appointments Notifications logic
+  const [appointments, setAppointments] = useState<Appointment[]>([]);
+  const [isNotifOpen, setIsNotifOpen] = useState(false);
+
+  useEffect(() => {
+    if (!session || !orgId || orgId === 'default') return;
+
+    const fetchTodaysAppointments = async () => {
+      try {
+        const todayStr = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
+        const { data, error } = await supabase
+          .from('dental_patients')
+          .select('id, name, phone, service, next_visit_date, appointmentTime')
+          .eq('clinic_id', orgId)
+          .eq('next_visit_date', todayStr);
+
+        if (error) throw error;
+        if (data) {
+          setAppointments(data as Appointment[]);
+        }
+      } catch (err) {
+        console.error('Failed to fetch today\'s appointments:', err);
+      }
+    };
+
+    fetchTodaysAppointments();
+    // Refresh every 5 minutes
+    const interval = setInterval(fetchTodaysAppointments, 5 * 60 * 1000);
+    return () => clearInterval(interval);
+  }, [session, orgId]);
 
   if (loading || (session && !profile)) {
     return (
@@ -318,9 +373,9 @@ const ReactivationLayout: React.FC<ReactivationLayoutProps> = ({ children }) => 
             ))}
           </div>
 
-          {/* Add Webapp Button (if not already running standalone) */}
-          {!isStandalone && (
-            <div className="p-4 border-t border-slate-100 bg-slate-50/50 mt-auto">
+          {/* Bottom Sidebar Action Container */}
+          <div className="p-4 border-t border-slate-100 bg-slate-50/50 mt-auto flex flex-col gap-2">
+            {!isStandalone && (
               <button
                 type="button"
                 onClick={handleInstallClick}
@@ -329,8 +384,17 @@ const ReactivationLayout: React.FC<ReactivationLayoutProps> = ({ children }) => 
                 <Download size={15} />
                 Add Webapp (App)
               </button>
-            </div>
-          )}
+            )}
+            
+            <button
+              type="button"
+              onClick={handleLogout}
+              className="w-full flex items-center justify-center gap-2 px-3 py-2.5 rounded-lg border border-rose-200 bg-white hover:bg-rose-50 text-[12.5px] font-bold text-rose-600 shadow-sm transition-all duration-150 active:scale-95 cursor-pointer"
+            >
+              <LogOut size={15} />
+              Sign Out
+            </button>
+          </div>
         </nav>
 
 
@@ -368,7 +432,76 @@ const ReactivationLayout: React.FC<ReactivationLayoutProps> = ({ children }) => 
           </div>
 
           {/* Right side chips */}
-          <div className="flex items-center gap-2 sm:gap-3">
+          <div className="flex items-center gap-2 sm:gap-3 relative">
+            {/* Notifications Bell */}
+            <div className="relative">
+              <button
+                onClick={() => setIsNotifOpen(!isNotifOpen)}
+                className={`p-2 rounded-xl border transition-all duration-150 flex items-center justify-center cursor-pointer relative ${
+                  isNotifOpen 
+                    ? 'bg-indigo-50 border-indigo-200 text-indigo-600' 
+                    : 'bg-white border-slate-200 text-slate-500 hover:text-slate-800 hover:bg-slate-50'
+                }`}
+              >
+                <Bell size={16} />
+                {appointments.length > 0 && (
+                  <span className="absolute -top-1.5 -right-1.5 min-w-4 h-4 bg-red-500 rounded-full text-[8.5px] font-bold text-white flex items-center justify-center px-1 shadow-sm">
+                    {appointments.length}
+                  </span>
+                )}
+              </button>
+
+              {/* Notification Dropdown Box */}
+              <AnimatePresence>
+                {isNotifOpen && (
+                  <>
+                    {/* Click-outside transparent overlay */}
+                    <div className="fixed inset-0 z-40" onClick={() => setIsNotifOpen(false)} />
+                    
+                    <motion.div
+                      initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                      transition={{ duration: 0.15 }}
+                      className="absolute right-0 mt-2 w-80 bg-white border border-slate-200 rounded-2xl shadow-xl z-50 overflow-hidden"
+                    >
+                      <div className="p-4 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
+                        <span className="text-xs font-bold text-slate-800">Today's Appointments</span>
+                        <span className="text-[10px] bg-indigo-50 text-indigo-600 px-2 py-0.5 rounded-full font-bold border border-indigo-100">
+                          {appointments.length} Visits
+                        </span>
+                      </div>
+                      
+                      <div className="max-h-64 overflow-y-auto divide-y divide-slate-100">
+                        {appointments.length === 0 ? (
+                          <div className="p-6 text-center">
+                            <CheckCircle size={24} className="text-emerald-500 mx-auto mb-2" />
+                            <p className="text-xs font-bold text-slate-700">All caught up!</p>
+                            <p className="text-[10px] text-slate-400 mt-0.5">No appointments scheduled for today.</p>
+                          </div>
+                        ) : (
+                          appointments.map((appt) => (
+                            <div key={appt.id} className="p-3.5 hover:bg-slate-50 transition duration-150 flex items-start justify-between gap-3">
+                              <div>
+                                <h4 className="text-xs font-bold text-slate-800">{appt.name}</h4>
+                                <p className="text-[10px] text-slate-500 mt-0.5">{appt.service}</p>
+                                <p className="text-[9px] text-slate-400 mt-1">📞 {appt.phone}</p>
+                              </div>
+                              {appt.appointmentTime && (
+                                <span className="text-[9px] font-bold text-indigo-600 bg-indigo-50 px-2 py-1 rounded-md border border-indigo-100 shrink-0">
+                                  {appt.appointmentTime}
+                                </span>
+                              )}
+                            </div>
+                          ))
+                        )}
+                      </div>
+                    </motion.div>
+                  </>
+                )}
+              </AnimatePresence>
+            </div>
+
             {/* Locked Clinic Branding Chip */}
             <div className="flex items-center gap-1.5 bg-indigo-500/10 border border-indigo-500/20 px-2.5 py-1.2 rounded-lg">
               <span className="text-[9px] uppercase font-bold text-indigo-500 tracking-widest hidden sm:inline shrink-0">Clinic:</span>
@@ -376,8 +509,6 @@ const ReactivationLayout: React.FC<ReactivationLayoutProps> = ({ children }) => 
                 {activeClinic}
               </span>
             </div>
-
-
           </div>
         </header>
 

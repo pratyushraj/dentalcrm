@@ -480,7 +480,7 @@ interface CustomerModalProps {
   open: boolean;
   onClose: () => void;
   customer?: Customer;
-  onSave: (c: Customer) => void;
+  onSave: (c: Customer, isAutosave?: boolean) => void;
 }
 
 const EMPTY_CUSTOMER: Customer = {
@@ -628,11 +628,12 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
 
           setClinicBranding({
             clinicName: clinic.name || 'Dental Clinic',
-            doctorName: doctorName || 'Doctor',
-            qualifications: clinic.timings_note || 'B.D.S., M.D.S. | Dental Specialist',
+            doctorName: clinic.doctor_name || doctorName || 'Doctor',
+            qualifications: clinic.qualifications || clinic.timings_note || 'B.D.S., M.D.S. | Dental Specialist',
             address: clinic.address || '',
             phone: clinic.phone || '',
-            email: doctorEmail || clinic.email || '',
+            email: clinic.email || doctorEmail || '',
+            logoUrl: clinic.logo_url || '',
           });
         }
       } catch (err) {
@@ -704,6 +705,7 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
     }
   }, [customer, open]);
 
+  // Calculation Hooks
   const calculatedSubtotal = useMemo(() => {
     return estimateItems.reduce((sum, item) => sum + item.cost, 0);
   }, [estimateItems]);
@@ -723,6 +725,112 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
   const calculatedGrandTotal = useMemo(() => {
     return calculatedSubtotal - calculatedDiscountAmount;
   }, [calculatedSubtotal, calculatedDiscountAmount]);
+
+  // Debounced Autosave Logic with Dirty checking
+  const [syncStatus, setSyncStatus] = useState<'saved' | 'saving' | 'dirty' | null>(null);
+  
+  const initialFormRef = React.useRef<Customer | null>(null);
+  const initialEstimateItemsRef = React.useRef<any[]>([]);
+  const initialDiscountRef = React.useRef<number>(0);
+  const initialStatusRef = React.useRef<string>('Draft');
+
+  React.useEffect(() => {
+    const initForm = getInitialForm(customer);
+    setForm(initForm);
+    initialFormRef.current = initForm;
+
+    setActiveTab('general');
+    setShowAdvancedClinical(false);
+    setCopiedEstimate(false);
+    setActiveQuadrant('all');
+    
+    if (proceduresCatalog.length > 0) {
+      setBuilderProcedureIdx('0');
+      setBuilderCost(proceduresCatalog[0].defaultCost);
+    }
+    
+    let itemsMapped: any[] = [];
+    let discount = 0;
+    let status: 'Draft' | 'Sent' | 'Approved' = 'Draft';
+
+    if (customer?.estimates && customer.estimates.length > 0) {
+      const activeEst = customer.estimates[0];
+      itemsMapped = (activeEst.items || []).map((it: any) => ({
+        tooth: it.tooth,
+        procedure: it.procedure || it.name || '',
+        cost: Number(it.cost !== undefined ? it.cost : (it.price !== undefined ? it.price : 0)),
+        isCosmetic: !!(it.isCosmetic || it.category === 'Cosmetic')
+      }));
+      discount = activeEst.discount || 0;
+      status = activeEst.status || 'Draft';
+    }
+    
+    setEstimateItems(itemsMapped);
+    initialEstimateItemsRef.current = itemsMapped;
+    
+    setEstimateDiscount(discount);
+    initialDiscountRef.current = discount;
+    
+    setEstimateStatus(status);
+    initialStatusRef.current = status;
+    
+    setSyncStatus(null);
+  }, [customer, open]);
+
+  React.useEffect(() => {
+    if (!form.name || !form.phone) return;
+
+    // Check if anything actually changed from loaded defaults
+    const hasFormChanged = initialFormRef.current ? JSON.stringify(form) !== JSON.stringify(initialFormRef.current) : false;
+    const hasItemsChanged = JSON.stringify(estimateItems) !== JSON.stringify(initialEstimateItemsRef.current);
+    const hasDiscountChanged = estimateDiscount !== initialDiscountRef.current;
+    const hasStatusChanged = estimateStatus !== initialStatusRef.current;
+
+    if (!hasFormChanged && !hasItemsChanged && !hasDiscountChanged && !hasStatusChanged) {
+      return;
+    }
+
+    setSyncStatus('dirty');
+    
+    const timer = setTimeout(() => {
+      setSyncStatus('saving');
+      
+      const estimateObj = {
+        id: customer?.estimates?.[0]?.id || `est_${Date.now()}`,
+        date: customer?.estimates?.[0]?.date || new Date().toISOString().split('T')[0],
+        items: estimateItems,
+        discount: estimateDiscount,
+        tax: calculatedGST,
+        grandTotal: calculatedGrandTotal,
+        status: estimateStatus
+      };
+
+      const newCustomer: Customer = {
+        ...form,
+        id: form.id || '',
+        avatarColor: form.avatarColor || AVATAR_COLORS[Math.floor(Math.random() * AVATAR_COLORS.length)],
+        problemTeeth: form.problemTeeth || [],
+        xrays: form.xrays || [],
+        allergies: form.allergies || [],
+        medicalConditions: form.medicalConditions || [],
+        toothNotes: form.toothNotes || {},
+        toothConditions: form.toothConditions || {},
+        vitals: form.vitals || { bp: '', pulse: '', temp: '' },
+        estimates: estimateItems.length > 0 ? [estimateObj] : (form.estimates || []),
+      };
+
+      // Update the current initial refs so that we don't trigger save again for the same state
+      initialFormRef.current = form;
+      initialEstimateItemsRef.current = estimateItems;
+      initialDiscountRef.current = estimateDiscount;
+      initialStatusRef.current = estimateStatus;
+
+      onSave(newCustomer, true);
+      setSyncStatus('saved');
+    }, 1500);
+
+    return () => clearTimeout(timer);
+  }, [form, estimateItems, estimateDiscount, estimateStatus, calculatedGST, calculatedGrandTotal]);
 
   const toggleNotesVoice = async () => {
     if (notesRecording) {
@@ -1342,6 +1450,274 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
     }));
   };
 
+  const downloadPrescriptionPDF = (c: Customer) => {
+    const patientName = c.name || 'Patient';
+    const patientPhone = c.phone || '';
+    const today = new Date().toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
+    const nextFollowUp = getNextVisitDate(c);
+
+    // Create A4 document
+    const doc = new jsPDF('p', 'mm', 'a4');
+    const W = doc.internal.pageSize.getWidth();
+
+    // colors
+    const PRIMARY_TEAL = [15, 118, 110];
+    const TEXT_DARK = [30, 41, 59];
+    const TEXT_MUTED = [100, 116, 139];
+    const ACCENT_GOLD = [217, 119, 6];
+    const BG_LIGHT = [248, 250, 252];
+    const BORDER_LIGHT = [226, 232, 240];
+
+    // 1. Top Bar
+    doc.setFillColor(PRIMARY_TEAL[0], PRIMARY_TEAL[1], PRIMARY_TEAL[2]);
+    doc.rect(0, 0, W, 12, 'F');
+
+    // 2. Accent
+    doc.setFillColor(ACCENT_GOLD[0], ACCENT_GOLD[1], ACCENT_GOLD[2]);
+    doc.rect(0, 12, W, 1.5, 'F');
+
+    // 3. Logo if available
+    if (clinicBranding.logoUrl) {
+      try {
+        doc.addImage(clinicBranding.logoUrl, 'PNG', 15, 18, 12, 12);
+      } catch (e) {
+        console.error("Failed to add logo to PDF:", e);
+      }
+    }
+
+    const headerTextX = clinicBranding.logoUrl ? 32 : 15;
+
+    // Clinic Info
+    doc.setTextColor(PRIMARY_TEAL[0], PRIMARY_TEAL[1], PRIMARY_TEAL[2]);
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(22);
+    doc.text(clinicBranding.clinicName || 'Dental Clinic', headerTextX, 28);
+
+    doc.setFontSize(11);
+    doc.setFont('helvetica', 'bold');
+    doc.setTextColor(TEXT_DARK[0], TEXT_DARK[1], TEXT_DARK[2]);
+    doc.text(clinicBranding.doctorName || 'Doctor', headerTextX, 34);
+
+    doc.setFontSize(9);
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor(TEXT_MUTED[0], TEXT_MUTED[1], TEXT_MUTED[2]);
+    const drQualifications = clinicBranding.qualifications || '';
+    if (drQualifications) {
+      doc.text(drQualifications, headerTextX, 38);
+    }
+    doc.text('Dental Surgeon & Specialist', headerTextX, drQualifications ? 42 : 38);
+
+    // Right Side Contact
+    doc.setTextColor(TEXT_DARK[0], TEXT_DARK[1], TEXT_DARK[2]);
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(10);
+    if (clinicBranding.phone) {
+      doc.text(clinicBranding.phone, W - 15, 28, { align: 'right' });
+    }
+
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor(TEXT_MUTED[0], TEXT_MUTED[1], TEXT_MUTED[2]);
+    doc.setFontSize(9);
+    if (clinicBranding.email) {
+      doc.text(clinicBranding.email, W - 15, 33, { align: 'right' });
+    }
+
+    if (clinicBranding.address) {
+      const addrLines = doc.splitTextToSize(clinicBranding.address, 70);
+      doc.text(addrLines, W - 15, 38, { align: 'right' });
+    }
+
+    doc.setDrawColor(BORDER_LIGHT[0], BORDER_LIGHT[1], BORDER_LIGHT[2]);
+    doc.setLineWidth(0.5);
+    doc.line(15, 50, W - 15, 50);
+
+    // Patient Details
+    doc.setFillColor(BG_LIGHT[0], BG_LIGHT[1], BG_LIGHT[2]);
+    doc.rect(15, 55, W - 30, 24, 'F');
+    doc.setDrawColor(BORDER_LIGHT[0], BORDER_LIGHT[1], BORDER_LIGHT[2]);
+    doc.rect(15, 55, W - 30, 24, 'S');
+
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(9);
+    doc.setTextColor(TEXT_MUTED[0], TEXT_MUTED[1], TEXT_MUTED[2]);
+    doc.text('PATIENT INFO', 20, 61);
+
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(11);
+    doc.setTextColor(TEXT_DARK[0], TEXT_DARK[1], TEXT_DARK[2]);
+    doc.text(patientName, 20, 67);
+
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(9);
+    doc.setTextColor(TEXT_MUTED[0], TEXT_MUTED[1], TEXT_MUTED[2]);
+    doc.text(`Mobile: ${patientPhone || '-'}`, 20, 72);
+
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(9);
+    doc.setTextColor(TEXT_MUTED[0], TEXT_MUTED[1], TEXT_MUTED[2]);
+    doc.text('CONSULTATION DATE', 130, 61);
+
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(10);
+    doc.setTextColor(TEXT_DARK[0], TEXT_DARK[1], TEXT_DARK[2]);
+    doc.text(today, 130, 67);
+
+    if (nextFollowUp) {
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(9);
+      doc.setTextColor(TEXT_MUTED[0], TEXT_MUTED[1], TEXT_MUTED[2]);
+      doc.text('FOLLOW UP DATE', 130, 72);
+
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(10);
+      doc.setTextColor(ACCENT_GOLD[0], ACCENT_GOLD[1], ACCENT_GOLD[2]);
+      const nextFollowUpFormatted = new Date(nextFollowUp).toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
+      doc.text(nextFollowUpFormatted, 162, 72);
+    }
+
+    doc.setTextColor(PRIMARY_TEAL[0], PRIMARY_TEAL[1], PRIMARY_TEAL[2]);
+    doc.setFontSize(26);
+    doc.setFont('helvetica', 'bold');
+    doc.text('Rx', 15, 95);
+
+    doc.setDrawColor(PRIMARY_TEAL[0], PRIMARY_TEAL[1], PRIMARY_TEAL[2]);
+    doc.setLineWidth(0.8);
+    doc.line(30, 93, W - 15, 93);
+
+    doc.setTextColor(TEXT_DARK[0], TEXT_DARK[1], TEXT_DARK[2]);
+    doc.setFontSize(11);
+    doc.setFont('helvetica', 'bold');
+    doc.text('PRESCRIBED MEDICATIONS & INSTRUCTIONS', 15, 103);
+
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(10);
+    doc.setTextColor(TEXT_DARK[0], TEXT_DARK[1], TEXT_DARK[2]);
+
+    const rxText = c.prescription || 'No prescription entered.';
+    let rxLinesFormatted: string[] = [];
+    try {
+      const trimmedRx = rxText.trim();
+      if (trimmedRx.startsWith('[') && trimmedRx.endsWith(']')) {
+        const meds = JSON.parse(trimmedRx);
+        if (Array.isArray(meds)) {
+          meds.forEach((med, idx) => {
+            const parts: string[] = [];
+            if (med.name) parts.push(med.name);
+            const details: string[] = [];
+            if (med.dosage) details.push(med.dosage);
+            if (med.frequency) details.push(med.frequency);
+            if (med.duration) details.push(med.duration);
+            let medStr = `${idx + 1}. ${parts.join(' ')}`;
+            if (details.length > 0) medStr += ` - ${details.join(', ')}`;
+            if (med.instructions) medStr += ` (${med.instructions})`;
+            rxLinesFormatted.push(medStr);
+          });
+        }
+      }
+    } catch (e) {}
+
+    if (rxLinesFormatted.length === 0) {
+      rxLinesFormatted = rxText.split('\n');
+    }
+
+    const rxLines = doc.splitTextToSize(rxLinesFormatted.join('\n'), W - 30);
+    doc.text(rxLines, 15, 111, { baseline: 'top' });
+
+    const rxHeight = rxLines.length * 6;
+    let currentY = 111 + rxHeight + 10;
+
+    const estimate = c.estimates?.[0];
+    const estimateItems = estimate?.items || [];
+    const calculatedSubtotal = estimate?.items?.reduce((sum, item) => sum + Number(item.cost || 0), 0) || 0;
+    const estimateDiscount = estimate?.discount || 0;
+    const calculatedDiscountAmount = (calculatedSubtotal * estimateDiscount) / 100;
+    const calculatedGrandTotal = calculatedSubtotal - calculatedDiscountAmount;
+
+    if (estimateItems.length > 0) {
+      doc.setDrawColor(BORDER_LIGHT[0], BORDER_LIGHT[1], BORDER_LIGHT[2]);
+      doc.setLineWidth(0.5);
+      doc.line(15, currentY - 5, W - 15, currentY - 5);
+
+      doc.setTextColor(PRIMARY_TEAL[0], PRIMARY_TEAL[1], PRIMARY_TEAL[2]);
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(12);
+      doc.text('Treatment Summary & Care Receipt', 15, currentY);
+
+      currentY += 6;
+
+      doc.setFillColor(PRIMARY_TEAL[0], PRIMARY_TEAL[1], PRIMARY_TEAL[2]);
+      doc.rect(15, currentY, W - 30, 8, 'F');
+
+      doc.setTextColor(255, 255, 255);
+      doc.setFontSize(9);
+      doc.setFont('helvetica', 'bold');
+      doc.text('PROCEDURE / TREATMENT DONE', 20, currentY + 5.5);
+      doc.text('TOOTH', 120, currentY + 5.5);
+      doc.text('AMOUNT (INR)', 160, currentY + 5.5);
+
+      currentY += 8;
+
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(9.5);
+      doc.setTextColor(TEXT_DARK[0], TEXT_DARK[1], TEXT_DARK[2]);
+
+      estimateItems.forEach((item, idx) => {
+        if (idx % 2 === 1) {
+          doc.setFillColor(BG_LIGHT[0], BG_LIGHT[1], BG_LIGHT[2]);
+          doc.rect(15, currentY, W - 30, 8, 'F');
+        }
+        doc.text(item.procedure, 20, currentY + 5.5);
+        doc.text(item.tooth ? `Tooth ${item.tooth}` : '-', 120, currentY + 5.5);
+        doc.text(`Rs. ${(item.cost || 0).toLocaleString('en-IN')}`, 160, currentY + 5.5);
+        currentY += 8;
+      });
+
+      doc.setDrawColor(BORDER_LIGHT[0], BORDER_LIGHT[1], BORDER_LIGHT[2]);
+      doc.line(15, currentY, W - 15, currentY);
+      currentY += 6;
+
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(9);
+      doc.setTextColor(TEXT_MUTED[0], TEXT_MUTED[1], TEXT_MUTED[2]);
+      doc.text(`Subtotal:`, 125, currentY);
+      doc.text(`Rs. ${calculatedSubtotal.toLocaleString('en-IN')}`, 190, currentY, { align: 'right' });
+
+      currentY += 5;
+      if (calculatedDiscountAmount > 0) {
+        doc.text(`Concession (${estimateDiscount}%):`, 125, currentY);
+        doc.setTextColor(ACCENT_GOLD[0], ACCENT_GOLD[1], ACCENT_GOLD[2]);
+        doc.text(`- Rs. ${calculatedDiscountAmount.toLocaleString('en-IN')}`, 190, currentY, { align: 'right' });
+        currentY += 5;
+      }
+
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(10.5);
+      doc.setTextColor(PRIMARY_TEAL[0], PRIMARY_TEAL[1], PRIMARY_TEAL[2]);
+      doc.text(`Final Amount (Paid):`, 125, currentY);
+      doc.text(`Rs. ${calculatedGrandTotal.toLocaleString('en-IN')}`, 190, currentY, { align: 'right' });
+    }
+
+    const footerY = 270;
+    doc.setDrawColor(BORDER_LIGHT[0], BORDER_LIGHT[1], BORDER_LIGHT[2]);
+    doc.setLineWidth(0.5);
+    doc.line(15, footerY - 15, W - 15, footerY - 15);
+
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(8);
+    doc.setTextColor(TEXT_MUTED[0], TEXT_MUTED[1], TEXT_MUTED[2]);
+    doc.text('This is a digitally generated prescription/receipt. No physical signature is required.', 15, footerY - 5);
+    doc.text(`${clinicBranding.clinicName || 'Clinic'} · Thank you for letting us care for your smile.`, 15, footerY);
+
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(9.5);
+    doc.setTextColor(TEXT_DARK[0], TEXT_DARK[1], TEXT_DARK[2]);
+    doc.text("Doctor's Signature", 150, footerY - 5);
+    doc.setDrawColor(TEXT_MUTED[0], TEXT_MUTED[1], TEXT_MUTED[2]);
+    doc.line(150, footerY - 1, 195, footerY - 1);
+
+    doc.save(`Rx_Estimate_${patientName.replace(/\s+/g, '_')}_${today.replace(/\s+/g, '-')}.pdf`);
+  };
+
   const generateDefaultPDF = () => {
     const patientName = form.name || 'Patient';
     const patientPhone = form.phone || '';
@@ -1368,25 +1744,36 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
     doc.setFillColor(ACCENT_GOLD[0], ACCENT_GOLD[1], ACCENT_GOLD[2]);
     doc.rect(0, 12, W, 1.5, 'F');
 
-    // 3. Clinic Info & Logo Placeholder/Icon
+    // 3. Logo if available
+    if (clinicBranding.logoUrl) {
+      try {
+        doc.addImage(clinicBranding.logoUrl, 'PNG', 15, 18, 12, 12);
+      } catch (e) {
+        console.error("Failed to add logo to PDF:", e);
+      }
+    }
+
+    const headerTextX = clinicBranding.logoUrl ? 32 : 15;
+
+    // Clinic Info & Logo Placeholder/Icon
     doc.setTextColor(PRIMARY_TEAL[0], PRIMARY_TEAL[1], PRIMARY_TEAL[2]);
     doc.setFont('helvetica', 'bold');
     doc.setFontSize(22);
-    doc.text(clinicBranding.clinicName || 'Dental Clinic', 15, 28);
+    doc.text(clinicBranding.clinicName || 'Dental Clinic', headerTextX, 28);
 
     doc.setFontSize(11);
     doc.setFont('helvetica', 'bold');
     doc.setTextColor(TEXT_DARK[0], TEXT_DARK[1], TEXT_DARK[2]);
-    doc.text(clinicBranding.doctorName || 'Doctor', 15, 34);
+    doc.text(clinicBranding.doctorName || 'Doctor', headerTextX, 34);
 
     doc.setFontSize(9);
     doc.setFont('helvetica', 'normal');
     doc.setTextColor(TEXT_MUTED[0], TEXT_MUTED[1], TEXT_MUTED[2]);
     const drQualifications = clinicBranding.qualifications || '';
     if (drQualifications) {
-      doc.text(drQualifications, 15, 38);
+      doc.text(drQualifications, headerTextX, 38);
     }
-    doc.text('Dental Surgeon & Specialist', 15, drQualifications ? 42 : 38);
+    doc.text('Dental Surgeon & Specialist', headerTextX, drQualifications ? 42 : 38);
 
     // Right Side Contact Info
     doc.setTextColor(TEXT_DARK[0], TEXT_DARK[1], TEXT_DARK[2]);
@@ -1653,7 +2040,7 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
   const inputBase =
     'w-full px-3 py-2.5 rounded-lg text-[13px] text-slate-800 placeholder:text-slate-400 outline-none transition-all duration-150 focus:ring-1 focus:ring-indigo-500/50';
   const inputStyle = {
-    background: '#F8FAFC',
+    background: '#FFFFFF',
     border: '1px solid #E2E8F0',
   };
   const inputFocusStyle = 'focus:border-indigo-500/40';
@@ -1690,8 +2077,23 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                 >
                   <DialogHeader className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-2 text-left">
                     <div className="text-left">
-                      <DialogTitle className="text-slate-800 text-[16px] font-semibold tracking-tight">
+                      <DialogTitle className="text-slate-800 text-[16px] font-semibold tracking-tight flex items-center gap-2">
                         {isEdit ? 'Patient Record' : 'Add Patient'}
+                        {syncStatus === 'saving' && (
+                          <span className="text-[10px] text-amber-500 font-bold bg-amber-50 border border-amber-100 rounded px-1.5 py-0.2 animate-pulse flex items-center gap-1 select-none">
+                            <span className="w-1.5 h-1.5 rounded-full bg-amber-500"></span> Saving...
+                          </span>
+                        )}
+                        {syncStatus === 'saved' && (
+                          <span className="text-[10px] text-emerald-600 font-bold bg-emerald-50 border border-emerald-100 rounded px-1.5 py-0.2 flex items-center gap-1 select-none">
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Synced
+                          </span>
+                        )}
+                        {syncStatus === 'dirty' && (
+                          <span className="text-[10px] text-slate-400 font-medium bg-slate-50 border border-slate-200 rounded px-1.5 py-0.2 flex items-center gap-1 select-none">
+                            <span className="w-1.5 h-1.5 rounded-full bg-slate-300"></span> Unsaved
+                          </span>
+                        )}
                       </DialogTitle>
                       <p className="text-slate-500 text-[12px] mt-0.5">
                         {isEdit
@@ -3122,10 +3524,338 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
 const ROWS_PER_PAGE = 10;
 
 const ReactivationCustomers: React.FC = () => {
-  const { organizationId } = useSession();
+  const { organizationId, profile } = useSession();
   const clinicId = organizationId || '';
   const [customers, setCustomers] = useState<Customer[]>([]);
   const [loading, setLoading] = useState(true);
+
+  // Clinic branding (loaded from Supabase / local storage)
+  const [clinicBranding, setClinicBranding] = useState(() => {
+    try {
+      const raw = localStorage.getItem(`clinic_branding_${clinicId}`);
+      if (raw) return JSON.parse(raw);
+    } catch {}
+    return {
+      clinicName: profile?.business_name || 'Dental Clinic',
+      doctorName: '',
+      qualifications: '',
+      address: '',
+      phone: '',
+      email: '',
+      logoUrl: '',
+    };
+  });
+
+  React.useEffect(() => {
+    if (!clinicId || clinicId === 'default') return;
+    async function loadClinicBranding() {
+      try {
+        const { data: clinic } = await supabase
+          .from('dental_clinics')
+          .select('*')
+          .eq('id', clinicId)
+          .single();
+
+        if (clinic) {
+          let doctorName = '';
+          let doctorEmail = '';
+          if (clinic.owner_id) {
+            const { data: ownerProfile } = await supabase
+              .from('profiles')
+              .select('first_name, last_name')
+              .eq('id', clinic.owner_id)
+              .single();
+            if (ownerProfile) {
+              const firstName = (ownerProfile as any).first_name || '';
+              const lastName = (ownerProfile as any).last_name || '';
+              doctorName = `${firstName} ${lastName}`.trim();
+            }
+          }
+
+          setClinicBranding({
+            clinicName: clinic.name || 'Dental Clinic',
+            doctorName: clinic.doctor_name || doctorName || 'Doctor',
+            qualifications: clinic.qualifications || clinic.timings_note || 'B.D.S., M.D.S. | Dental Specialist',
+            address: clinic.address || '',
+            phone: clinic.phone || '',
+            email: clinic.email || doctorEmail || '',
+            logoUrl: clinic.logo_url || '',
+          });
+        }
+      } catch (err) {
+        console.error('Error fetching clinic details for PDF:', err);
+      }
+    }
+    loadClinicBranding();
+  }, [clinicId]);
+
+  const downloadPrescriptionPDF = (c: Customer) => {
+    const patientName = c.name || 'Patient';
+    const patientPhone = c.phone || '';
+    const today = new Date().toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
+    const nextFollowUp = getNextVisitDate(c);
+
+    // Create A4 document
+    const doc = new jsPDF('p', 'mm', 'a4');
+    const W = doc.internal.pageSize.getWidth();
+
+    // colors
+    const PRIMARY_TEAL = [15, 118, 110];
+    const TEXT_DARK = [30, 41, 59];
+    const TEXT_MUTED = [100, 116, 139];
+    const ACCENT_GOLD = [217, 119, 6];
+    const BG_LIGHT = [248, 250, 252];
+    const BORDER_LIGHT = [226, 232, 240];
+
+    // 1. Top Bar
+    doc.setFillColor(PRIMARY_TEAL[0], PRIMARY_TEAL[1], PRIMARY_TEAL[2]);
+    doc.rect(0, 0, W, 12, 'F');
+
+    // 2. Accent
+    doc.setFillColor(ACCENT_GOLD[0], ACCENT_GOLD[1], ACCENT_GOLD[2]);
+    doc.rect(0, 12, W, 1.5, 'F');
+
+    // 3. Logo if available
+    if (clinicBranding.logoUrl) {
+      try {
+        doc.addImage(clinicBranding.logoUrl, 'PNG', 15, 18, 12, 12);
+      } catch (e) {
+        console.error("Failed to add logo to PDF:", e);
+      }
+    }
+
+    const headerTextX = clinicBranding.logoUrl ? 32 : 15;
+
+    // Clinic Info
+    doc.setTextColor(PRIMARY_TEAL[0], PRIMARY_TEAL[1], PRIMARY_TEAL[2]);
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(22);
+    doc.text(clinicBranding.clinicName || 'Dental Clinic', headerTextX, 28);
+
+    doc.setFontSize(11);
+    doc.setFont('helvetica', 'bold');
+    doc.setTextColor(TEXT_DARK[0], TEXT_DARK[1], TEXT_DARK[2]);
+    doc.text(clinicBranding.doctorName || 'Doctor', headerTextX, 34);
+
+    doc.setFontSize(9);
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor(TEXT_MUTED[0], TEXT_MUTED[1], TEXT_MUTED[2]);
+    const drQualifications = clinicBranding.qualifications || '';
+    if (drQualifications) {
+      doc.text(drQualifications, headerTextX, 38);
+    }
+    doc.text('Dental Surgeon & Specialist', headerTextX, drQualifications ? 42 : 38);
+
+    // Right Side Contact
+    doc.setTextColor(TEXT_DARK[0], TEXT_DARK[1], TEXT_DARK[2]);
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(10);
+    if (clinicBranding.phone) {
+      doc.text(clinicBranding.phone, W - 15, 28, { align: 'right' });
+    }
+
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor(TEXT_MUTED[0], TEXT_MUTED[1], TEXT_MUTED[2]);
+    doc.setFontSize(9);
+    if (clinicBranding.email) {
+      doc.text(clinicBranding.email, W - 15, 33, { align: 'right' });
+    }
+
+    if (clinicBranding.address) {
+      const addrLines = doc.splitTextToSize(clinicBranding.address, 70);
+      doc.text(addrLines, W - 15, 38, { align: 'right' });
+    }
+
+    doc.setDrawColor(BORDER_LIGHT[0], BORDER_LIGHT[1], BORDER_LIGHT[2]);
+    doc.setLineWidth(0.5);
+    doc.line(15, 50, W - 15, 50);
+
+    // Patient Details
+    doc.setFillColor(BG_LIGHT[0], BG_LIGHT[1], BG_LIGHT[2]);
+    doc.rect(15, 55, W - 30, 24, 'F');
+    doc.setDrawColor(BORDER_LIGHT[0], BORDER_LIGHT[1], BORDER_LIGHT[2]);
+    doc.rect(15, 55, W - 30, 24, 'S');
+
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(9);
+    doc.setTextColor(TEXT_MUTED[0], TEXT_MUTED[1], TEXT_MUTED[2]);
+    doc.text('PATIENT INFO', 20, 61);
+
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(11);
+    doc.setTextColor(TEXT_DARK[0], TEXT_DARK[1], TEXT_DARK[2]);
+    doc.text(patientName, 20, 67);
+
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(9);
+    doc.setTextColor(TEXT_MUTED[0], TEXT_MUTED[1], TEXT_MUTED[2]);
+    doc.text(`Mobile: ${patientPhone || '-'}`, 20, 72);
+
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(9);
+    doc.setTextColor(TEXT_MUTED[0], TEXT_MUTED[1], TEXT_MUTED[2]);
+    doc.text('CONSULTATION DATE', 130, 61);
+
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(10);
+    doc.setTextColor(TEXT_DARK[0], TEXT_DARK[1], TEXT_DARK[2]);
+    doc.text(today, 130, 67);
+
+    if (nextFollowUp) {
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(9);
+      doc.setTextColor(TEXT_MUTED[0], TEXT_MUTED[1], TEXT_MUTED[2]);
+      doc.text('FOLLOW UP DATE', 130, 72);
+
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(10);
+      doc.setTextColor(ACCENT_GOLD[0], ACCENT_GOLD[1], ACCENT_GOLD[2]);
+      const nextFollowUpFormatted = new Date(nextFollowUp).toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
+      doc.text(nextFollowUpFormatted, 162, 72);
+    }
+
+    doc.setTextColor(PRIMARY_TEAL[0], PRIMARY_TEAL[1], PRIMARY_TEAL[2]);
+    doc.setFontSize(26);
+    doc.setFont('helvetica', 'bold');
+    doc.text('Rx', 15, 95);
+
+    doc.setDrawColor(PRIMARY_TEAL[0], PRIMARY_TEAL[1], PRIMARY_TEAL[2]);
+    doc.setLineWidth(0.8);
+    doc.line(30, 93, W - 15, 93);
+
+    doc.setTextColor(TEXT_DARK[0], TEXT_DARK[1], TEXT_DARK[2]);
+    doc.setFontSize(11);
+    doc.setFont('helvetica', 'bold');
+    doc.text('PRESCRIBED MEDICATIONS & INSTRUCTIONS', 15, 103);
+
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(10);
+    doc.setTextColor(TEXT_DARK[0], TEXT_DARK[1], TEXT_DARK[2]);
+
+    const rxText = c.prescription || 'No prescription entered.';
+    let rxLinesFormatted: string[] = [];
+    try {
+      const trimmedRx = rxText.trim();
+      if (trimmedRx.startsWith('[') && trimmedRx.endsWith(']')) {
+        const meds = JSON.parse(trimmedRx);
+        if (Array.isArray(meds)) {
+          meds.forEach((med, idx) => {
+            const parts: string[] = [];
+            if (med.name) parts.push(med.name);
+            const details: string[] = [];
+            if (med.dosage) details.push(med.dosage);
+            if (med.frequency) details.push(med.frequency);
+            if (med.duration) details.push(med.duration);
+            let medStr = `${idx + 1}. ${parts.join(' ')}`;
+            if (details.length > 0) medStr += ` - ${details.join(', ')}`;
+            if (med.instructions) medStr += ` (${med.instructions})`;
+            rxLinesFormatted.push(medStr);
+          });
+        }
+      }
+    } catch (e) {}
+
+    if (rxLinesFormatted.length === 0) {
+      rxLinesFormatted = rxText.split('\n');
+    }
+
+    const rxLines = doc.splitTextToSize(rxLinesFormatted.join('\n'), W - 30);
+    doc.text(rxLines, 15, 111, { baseline: 'top' });
+
+    const rxHeight = rxLines.length * 6;
+    let currentY = 111 + rxHeight + 10;
+
+    const estimate = c.estimates?.[0];
+    const estimateItems = estimate?.items || [];
+    const calculatedSubtotal = estimate?.items?.reduce((sum, item) => sum + Number(item.cost || 0), 0) || 0;
+    const estimateDiscount = estimate?.discount || 0;
+    const calculatedDiscountAmount = (calculatedSubtotal * estimateDiscount) / 100;
+    const calculatedGrandTotal = calculatedSubtotal - calculatedDiscountAmount;
+
+    if (estimateItems.length > 0) {
+      doc.setDrawColor(BORDER_LIGHT[0], BORDER_LIGHT[1], BORDER_LIGHT[2]);
+      doc.setLineWidth(0.5);
+      doc.line(15, currentY - 5, W - 15, currentY - 5);
+
+      doc.setTextColor(PRIMARY_TEAL[0], PRIMARY_TEAL[1], PRIMARY_TEAL[2]);
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(12);
+      doc.text('Treatment Summary & Care Receipt', 15, currentY);
+
+      currentY += 6;
+
+      doc.setFillColor(PRIMARY_TEAL[0], PRIMARY_TEAL[1], PRIMARY_TEAL[2]);
+      doc.rect(15, currentY, W - 30, 8, 'F');
+
+      doc.setTextColor(255, 255, 255);
+      doc.setFontSize(9);
+      doc.setFont('helvetica', 'bold');
+      doc.text('PROCEDURE / TREATMENT DONE', 20, currentY + 5.5);
+      doc.text('TOOTH', 120, currentY + 5.5);
+      doc.text('AMOUNT (INR)', 160, currentY + 5.5);
+
+      currentY += 8;
+
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(9.5);
+      doc.setTextColor(TEXT_DARK[0], TEXT_DARK[1], TEXT_DARK[2]);
+
+      estimateItems.forEach((item, idx) => {
+        if (idx % 2 === 1) {
+          doc.setFillColor(BG_LIGHT[0], BG_LIGHT[1], BG_LIGHT[2]);
+          doc.rect(15, currentY, W - 30, 8, 'F');
+        }
+        doc.text(item.procedure, 20, currentY + 5.5);
+        doc.text(item.tooth ? `Tooth ${item.tooth}` : '-', 120, currentY + 5.5);
+        doc.text(`Rs. ${(item.cost || 0).toLocaleString('en-IN')}`, 160, currentY + 5.5);
+        currentY += 8;
+      });
+
+      doc.setDrawColor(BORDER_LIGHT[0], BORDER_LIGHT[1], BORDER_LIGHT[2]);
+      doc.line(15, currentY, W - 15, currentY);
+      currentY += 6;
+
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(9);
+      doc.setTextColor(TEXT_MUTED[0], TEXT_MUTED[1], TEXT_MUTED[2]);
+      doc.text(`Subtotal:`, 125, currentY);
+      doc.text(`Rs. ${calculatedSubtotal.toLocaleString('en-IN')}`, 190, currentY, { align: 'right' });
+
+      currentY += 5;
+      if (calculatedDiscountAmount > 0) {
+        doc.text(`Concession (${estimateDiscount}%):`, 125, currentY);
+        doc.setTextColor(ACCENT_GOLD[0], ACCENT_GOLD[1], ACCENT_GOLD[2]);
+        doc.text(`- Rs. ${calculatedDiscountAmount.toLocaleString('en-IN')}`, 190, currentY, { align: 'right' });
+        currentY += 5;
+      }
+
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(10.5);
+      doc.setTextColor(PRIMARY_TEAL[0], PRIMARY_TEAL[1], PRIMARY_TEAL[2]);
+      doc.text(`Final Amount (Paid):`, 125, currentY);
+      doc.text(`Rs. ${calculatedGrandTotal.toLocaleString('en-IN')}`, 190, currentY, { align: 'right' });
+    }
+
+    const footerY = 270;
+    doc.setDrawColor(BORDER_LIGHT[0], BORDER_LIGHT[1], BORDER_LIGHT[2]);
+    doc.setLineWidth(0.5);
+    doc.line(15, footerY - 15, W - 15, footerY - 15);
+
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(8);
+    doc.setTextColor(TEXT_MUTED[0], TEXT_MUTED[1], TEXT_MUTED[2]);
+    doc.text('This is a digitally generated prescription/receipt. No physical signature is required.', 15, footerY - 5);
+    doc.text(`${clinicBranding.clinicName || 'Clinic'} · Thank you for letting us care for your smile.`, 15, footerY);
+
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(9.5);
+    doc.setTextColor(TEXT_DARK[0], TEXT_DARK[1], TEXT_DARK[2]);
+    doc.text("Doctor's Signature", 150, footerY - 5);
+    doc.setDrawColor(TEXT_MUTED[0], TEXT_MUTED[1], TEXT_MUTED[2]);
+    doc.line(150, footerY - 1, 195, footerY - 1);
+
+    doc.save(`Rx_Estimate_${patientName.replace(/\s+/g, '_')}_${today.replace(/\s+/g, '-')}.pdf`);
+  };
 
   React.useEffect(() => {
     if (!clinicId) return;
@@ -3722,7 +4452,7 @@ const ReactivationCustomers: React.FC = () => {
     }
   };
 
-  const handleSave = useCallback(async (c: Customer) => {
+  const handleSave = useCallback(async (c: Customer, isAutosave = false) => {
     if (!clinicId) return;
 
     const dbRow = {
@@ -3802,6 +4532,9 @@ const ReactivationCustomers: React.FC = () => {
           };
           savedCustomer = mapped;
           setCustomers((prev) => [mapped, ...prev]);
+          if (isAutosave) {
+            setEditingCustomer(mapped);
+          }
         }
       } else {
         // Update patient in Supabase
@@ -3846,16 +4579,19 @@ const ReactivationCustomers: React.FC = () => {
           };
           savedCustomer = mapped;
           setCustomers((prev) => prev.map((x) => x.id === mapped.id ? mapped : x));
+          if (isAutosave) {
+            setEditingCustomer(mapped);
+          }
         }
       }
 
-      // Automatically send PDF on save if there is a prescription or billing estimate
-      if ((savedCustomer.prescription && savedCustomer.prescription.trim() !== '') || (savedCustomer.estimates && savedCustomer.estimates.length > 0)) {
+      // Automatically send PDF on save if there is a prescription or billing estimate (skip on autosave)
+      if (!isAutosave && ((savedCustomer.prescription && savedCustomer.prescription.trim() !== '') || (savedCustomer.estimates && savedCustomer.estimates.length > 0))) {
         sendWhatsAppPrescriptionPDF(savedCustomer).catch(err => console.error('Automated WhatsApp dispatch failed:', err));
       }
 
       // Automatically insert/upsert corresponding appointment in dental_appointments if a Visit Date is specified
-      if (savedCustomer.lastVisit) {
+      if (!isAutosave && savedCustomer.lastVisit) {
         try {
           const { data: clinic } = await supabase
             .from('dental_clinics')
@@ -4205,7 +4941,7 @@ const ReactivationCustomers: React.FC = () => {
           initial={{ opacity: 0, y: 6 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.25, delay: 0.1, ease: 'easeOut' }}
-          className="flex items-center gap-2.5 flex-wrap"
+          className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 items-center"
           style={{
             background: '#FFFFFF',
             border: '1px solid #E2E8F0',
@@ -4214,7 +4950,7 @@ const ReactivationCustomers: React.FC = () => {
           }}
         >
           {/* Search */}
-          <div className="relative flex-1 min-w-[200px] max-w-xs">
+          <div className="relative col-span-2 sm:col-span-2 lg:col-span-1 w-full">
             <Search
               size={14}
               className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none"
@@ -4232,68 +4968,76 @@ const ReactivationCustomers: React.FC = () => {
           </div>
 
           {/* Status filter */}
-          <Select
-            value={statusFilter}
-            onValueChange={(v) => { setStatusFilter(v); setPage(1); }}
-          >
-            <SelectTrigger className={selectTriggerClass}>
-              <SelectValue placeholder="All Statuses" />
-            </SelectTrigger>
-            <SelectContent
-              style={{ background: '#FFFFFF', border: '1px solid #E2E8F0' }}
-              className="text-slate-700"
+          <div className="col-span-1 lg:col-span-1 w-full">
+            <Select
+              value={statusFilter}
+              onValueChange={(v) => { setStatusFilter(v); setPage(1); }}
             >
-              <SelectItem value="All">All Statuses</SelectItem>
-              {STATUS_OPTIONS.map((s) => (
-                <SelectItem key={s} value={s}>{s}</SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+              <SelectTrigger className={`${selectTriggerClass} w-full`}>
+                <SelectValue placeholder="All Statuses" />
+              </SelectTrigger>
+              <SelectContent
+                style={{ background: '#FFFFFF', border: '1px solid #E2E8F0' }}
+                className="text-slate-700"
+              >
+                <SelectItem value="All">All Statuses</SelectItem>
+                {STATUS_OPTIONS.map((s) => (
+                  <SelectItem key={s} value={s}>{s}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
 
           {/* Service filter */}
-          <Select
-            value={serviceFilter}
-            onValueChange={(v) => { setServiceFilter(v); setPage(1); }}
-          >
-            <SelectTrigger className={`${selectTriggerClass} min-w-[150px]`}>
-              <SelectValue placeholder="All Services" />
-            </SelectTrigger>
-            <SelectContent
-              style={{ background: '#FFFFFF', border: '1px solid #E2E8F0' }}
-              className="text-slate-700 max-h-[260px] overflow-y-auto"
+          <div className="col-span-1 lg:col-span-1 w-full">
+            <Select
+              value={serviceFilter}
+              onValueChange={(v) => { setServiceFilter(v); setPage(1); }}
             >
-              {SERVICES.map((s) => (
-                <SelectItem key={s} value={s}>{s}</SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+              <SelectTrigger className={`${selectTriggerClass} w-full`}>
+                <SelectValue placeholder="All Services" />
+              </SelectTrigger>
+              <SelectContent
+                style={{ background: '#FFFFFF', border: '1px solid #E2E8F0' }}
+                className="text-slate-700 max-h-[260px] overflow-y-auto"
+              >
+                {SERVICES.map((s) => (
+                  <SelectItem key={s} value={s}>{s}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
 
           {/* Date range */}
-          <Select
-            value={dateRange}
-            onValueChange={(v) => { setDateRange(v); setPage(1); }}
-          >
-            <SelectTrigger className={selectTriggerClass}>
-              <SelectValue placeholder="Any time" />
-            </SelectTrigger>
-            <SelectContent
-              style={{ background: '#FFFFFF', border: '1px solid #E2E8F0' }}
-              className="text-slate-700"
+          <div className="col-span-1 lg:col-span-1 w-full">
+            <Select
+              value={dateRange}
+              onValueChange={(v) => { setDateRange(v); setPage(1); }}
             >
-              {DATE_RANGES.map((r) => (
-                <SelectItem key={r.value} value={r.value}>{r.label}</SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+              <SelectTrigger className={`${selectTriggerClass} w-full`}>
+                <SelectValue placeholder="Any time" />
+              </SelectTrigger>
+              <SelectContent
+                style={{ background: '#FFFFFF', border: '1px solid #E2E8F0' }}
+                className="text-slate-700"
+              >
+                {DATE_RANGES.map((r) => (
+                  <SelectItem key={r.value} value={r.value}>{r.label}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
 
           {/* Reset */}
-          <button
-            onClick={handleResetFilters}
-            className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-[12px] text-slate-400 hover:text-slate-600 transition-colors duration-150"
-          >
-            <RotateCcw size={13} />
-            Reset
-          </button>
+          <div className="col-span-1 lg:col-span-1 w-full">
+            <button
+              onClick={handleResetFilters}
+              className="flex items-center justify-center gap-1.5 px-3 h-9 rounded-lg text-[12px] font-medium text-slate-500 hover:text-slate-700 bg-slate-50 hover:bg-slate-100 transition-colors duration-150 border border-slate-200/60 w-full"
+            >
+              <RotateCcw size={13} />
+              Reset
+            </button>
+          </div>
         </motion.div>
 
         {/* ── Mobile Cards ───────────────────────────────────────────────── */}
@@ -4395,6 +5139,22 @@ const ReactivationCustomers: React.FC = () => {
                       </p>
                     ) : (
                       <p className="mt-3 text-[12px] text-slate-300 italic">No notes</p>
+                    )}
+
+                    {customer.prescription && (
+                      <div className="mt-3 pt-3 border-t border-slate-100 flex justify-end">
+                        <span
+                          role="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            downloadPrescriptionPDF(customer);
+                          }}
+                          className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[10.5px] font-bold border border-teal-200 bg-teal-50 hover:bg-teal-100 text-teal-700 transition-all shadow-sm cursor-pointer"
+                        >
+                          <Download size={11} />
+                          Download Rx (Prescription)
+                        </span>
+                      </div>
                     )}
                   </button>
                 );
@@ -4708,6 +5468,15 @@ const ReactivationCustomers: React.FC = () => {
                                   <MessageSquare size={13} className="text-slate-400" />
                                   Send Message
                                 </DropdownMenuItem>
+                                {customer.prescription && (
+                                  <DropdownMenuItem
+                                    onClick={() => downloadPrescriptionPDF(customer)}
+                                    className="gap-2.5 cursor-pointer hover:bg-slate-50 focus:bg-slate-50 text-teal-600 hover:text-teal-700 font-semibold"
+                                  >
+                                    <Download size={13} className="text-teal-500" />
+                                    Download Prescription
+                                  </DropdownMenuItem>
+                                )}
                                 <DropdownMenuSeparator className="bg-slate-200" />
                                 <DropdownMenuItem
                                   onClick={() => handleDelete(customer.id)}

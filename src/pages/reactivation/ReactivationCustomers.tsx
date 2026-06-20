@@ -4416,7 +4416,7 @@ const ReactivationCustomers: React.FC = () => {
         }
       };
 
-      const apiRes = await fetch(`https://graph.facebook.com/v17.0/${wabaPhoneId}/messages`, {
+      const apiRes = await fetch(`https://graph.facebook.com/v20.0/${wabaPhoneId}/messages`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${wabaToken}`,
@@ -4483,13 +4483,13 @@ const ReactivationCustomers: React.FC = () => {
         for (let i = 0; i < len; i++) {
           bytes[i] = binaryString.charCodeAt(i);
         }
-        const fileBuffer = bytes.buffer;
+        const imageBlob = new Blob([bytes], { type: 'image/jpeg' });
         const imageFileName = `before_after/post_${c.id || Date.now()}_${Date.now()}.jpg`;
 
         toast.info('Uploading before/after smile photo to database storage...');
         const { error: uploadError } = await supabase.storage
           .from('creator-assets')
-          .upload(imageFileName, fileBuffer, {
+          .upload(imageFileName, imageBlob, {
             contentType: 'image/jpeg',
             upsert: true
           });
@@ -4594,7 +4594,7 @@ const ReactivationCustomers: React.FC = () => {
         }
       };
 
-      const apiRes = await fetch(`https://graph.facebook.com/v17.0/${wabaPhoneId}/messages`, {
+      const apiRes = await fetch(`https://graph.facebook.com/v20.0/${wabaPhoneId}/messages`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${wabaToken}`,
@@ -4888,7 +4888,7 @@ const ReactivationCustomers: React.FC = () => {
                   }
                 };
 
-                await fetch(`https://graph.facebook.com/v17.0/${whatsappPhoneNumberId}/messages`, {
+                await fetch(`https://graph.facebook.com/v20.0/${whatsappPhoneNumberId}/messages`, {
                   method: 'POST',
                   headers: {
                     'Authorization': `Bearer ${whatsappAccessToken}`,

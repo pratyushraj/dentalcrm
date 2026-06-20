@@ -120,6 +120,8 @@ interface Customer {
     pulse?: string;
     temp?: string;
     nextVisitDate?: string;
+    age?: string;
+    gender?: string;
   };
   activeProgramId?: string;
   programEnrollmentDate?: string;
@@ -506,7 +508,7 @@ const EMPTY_CUSTOMER: Customer = {
   medicalConditions: [],
   toothNotes: {},
   toothConditions: {},
-  vitals: { bp: '', pulse: '', temp: '' },
+  vitals: { bp: '', pulse: '', temp: '', age: '', gender: '' },
   appointmentTime: '10:00 AM',
 };
 
@@ -527,7 +529,7 @@ const getInitialForm = (customer?: Customer): Customer => {
     medicalConditions: customer.medicalConditions || [],
     toothNotes: customer.toothNotes || {},
     toothConditions: customer.toothConditions || {},
-    vitals: customer.vitals || { bp: '', pulse: '', temp: '' },
+    vitals: { bp: '', pulse: '', temp: '', age: '', gender: '', ...( customer.vitals || {}) },
     appointmentTime: customer.appointmentTime || '10:00 AM',
   };
 };
@@ -2316,6 +2318,37 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                             value={form.phone}
                             onChange={(e) => handleChange('phone', e.target.value)}
                           />
+                        </div>
+                        <div>
+                          <label className="block text-[11px] text-slate-500 font-medium mb-1 uppercase tracking-wider">
+                            Age
+                          </label>
+                          <input
+                            type="number"
+                            min="1"
+                            max="120"
+                            className={`${inputBase} ${inputFocusStyle}`}
+                            style={inputStyle}
+                            placeholder="e.g. 32"
+                            value={form.vitals?.age || ''}
+                            onChange={(e) => handleChange('vitals', { ...form.vitals, age: e.target.value })}
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-[11px] text-slate-500 font-medium mb-1 uppercase tracking-wider">
+                            Gender
+                          </label>
+                          <select
+                            className={`${inputBase} ${inputFocusStyle} cursor-pointer`}
+                            style={inputStyle}
+                            value={form.vitals?.gender || ''}
+                            onChange={(e) => handleChange('vitals', { ...form.vitals, gender: e.target.value })}
+                          >
+                            <option value="">Select gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                          </select>
                         </div>
                       </div>
                     </div>

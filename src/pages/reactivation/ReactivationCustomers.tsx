@@ -4537,8 +4537,14 @@ const ReactivationCustomers: React.FC = () => {
       const afterPhotoBase64 = (c.beforeAfterPhotos && c.beforeAfterPhotos.length > 0)
         ? c.beforeAfterPhotos[0]
         : (c.afterPhotos?.[0] || c.beforePhotos?.[0] || c.beforePhoto || c.afterPhoto);
-      if (afterPhotoBase64 && afterPhotoBase64.startsWith('data:image')) {
-        toast.info('Uploading before/after smile photo to database storage...');
+
+      // Block silently if there are no actual photos — the API returns success with a placeholder
+      // but Meta does not deliver the message
+      if (!afterPhotoBase64 || !afterPhotoBase64.startsWith('data:image')) {
+        toast.error('No before/after photo found for this patient. Please upload a photo first.');
+        return;
+      }
+      if (afterPhotoBase64.startsWith('data:image')) {
         try {
           const uploadRes = await fetch('/api/waba/upload', {
             method: 'POST',
@@ -5422,7 +5428,7 @@ const ReactivationCustomers: React.FC = () => {
                           Download Rx
                         </span>
                       )}
-                      {((customer.beforePhotos && customer.beforePhotos.length > 0) || (customer.afterPhotos && customer.afterPhotos.length > 0) || customer.beforePhoto || customer.afterPhoto) && (
+                      {((customer.beforeAfterPhotos && customer.beforeAfterPhotos.length > 0) || (customer.beforePhotos && customer.beforePhotos.length > 0) || (customer.afterPhotos && customer.afterPhotos.length > 0) || customer.beforePhoto || customer.afterPhoto) && (
                         <span
                           role="button"
                           onClick={(e) => {

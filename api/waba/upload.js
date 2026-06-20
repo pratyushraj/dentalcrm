@@ -25,14 +25,42 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { image, customerId } = req.body;
+    const { image, pdf, customerId, fileName } = req.body;
 
+    // ── PDF upload ───────────────────────────────────────────────────────────
+    if (pdf) {
+      console.log('Uploading prescription PDF to Supabase storage via backend admin...');
+      const base64Data = pdf.replace(/^data:application\/pdf;base64,/, '');
+      const buffer = Buffer.from(base64Data, 'base64');
+      const uniqueFileName = `prescriptions/${fileName || `Rx_${customerId || Date.now()}_${Date.now()}.pdf`}`;
+
+      const { error: uploadError } = await supabase.storage
+        .from('creator-assets')
+        .upload(uniqueFileName, buffer, {
+          contentType: 'application/pdf',
+          upsert: true
+        });
+
+      if (uploadError) {
+        console.error('Supabase admin PDF upload error:', uploadError);
+        return res.status(500).json({ error: 'Failed to upload PDF', details: uploadError.message });
+      }
+
+      const { data: { publicUrl } } = supabase.storage
+        .from('creator-assets')
+        .getPublicUrl(uniqueFileName);
+
+      console.log('Admin PDF upload successful. Public URL:', publicUrl);
+      return res.status(200).json({ publicUrl });
+    }
+
+    // ── Image upload ─────────────────────────────────────────────────────────
     if (!image) {
-      return res.status(400).json({ error: 'Missing image parameter' });
+      return res.status(400).json({ error: 'Missing image or pdf parameter' });
     }
 
     console.log('Uploading B&A photo to Supabase storage via backend admin...');
-    const base64Data = image.replace(/^data:image\/\w+;base64,/, "");
+    const base64Data = image.replace(/^data:image\/\w+;base64,/, '');
     const buffer = Buffer.from(base64Data, 'base64');
     const uniqueFileName = `estimates/ba_photo_${customerId || Date.now()}_${Date.now()}.jpg`;
 

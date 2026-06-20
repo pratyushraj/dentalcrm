@@ -4427,23 +4427,28 @@ const ReactivationCustomers: React.FC = () => {
       doc.setDrawColor(TEXT_MUTED[0], TEXT_MUTED[1], TEXT_MUTED[2]);
       doc.line(150, footerY - 1, 195, footerY - 1);
 
-      // Upload to Supabase
+      // Upload via serverless function (uses service role key to bypass RLS)
       const pdfBuffer = doc.output('arraybuffer');
-      const uniqueFileName = `prescriptions/Rx_Estimate_${c.id || Date.now()}_${Date.now()}.pdf`;
-      
-      const { error: uploadError } = await supabase.storage
-        .from('creator-assets')
-        .upload(uniqueFileName, pdfBuffer, {
-          contentType: 'application/pdf',
-          upsert: true
-        });
+      const pdfBytes = new Uint8Array(pdfBuffer);
+      const pdfBase64 = `data:application/pdf;base64,${btoa(String.fromCharCode(...pdfBytes))}`;
+      const uniqueFileName = `Rx_Estimate_${c.id || Date.now()}_${Date.now()}.pdf`;
 
-      if (uploadError) throw uploadError;
+      const uploadRes = await fetch('/api/waba/upload', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          pdf: pdfBase64,
+          customerId: c.id,
+          fileName: uniqueFileName
+        })
+      });
 
-      // Get Public URL
-      const { data: { publicUrl } } = supabase.storage
-        .from('creator-assets')
-        .getPublicUrl(uniqueFileName);
+      const uploadData = await uploadRes.json();
+      if (!uploadRes.ok || !uploadData.publicUrl) {
+        throw new Error(uploadData.error || 'Failed to upload PDF');
+      }
+
+      const publicUrl = uploadData.publicUrl;
 
       // Send payload
       const payload = {

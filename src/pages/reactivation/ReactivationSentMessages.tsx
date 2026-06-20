@@ -357,7 +357,7 @@ export default function ReactivationSentMessages() {
         const res = await fetch(url, {
           method: 'POST',
           headers: {
-            'Authorization': `Bearer ${clinic.whatsapp_access_token}`,
+            'Authorization': `Bearer ${clinic.whatsapp_access_token.split('|')[0]}`,
             'Content-Type': 'application/json'
           },
           body: JSON.stringify(payload)

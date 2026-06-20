@@ -660,7 +660,6 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
 
   // RVG slider state
   const [xraySliderPos, setXraySliderPos] = useState(50);
-  const [teethPhotoSliderPos, setTeethPhotoSliderPos] = useState(50);
   const [activeQuadrant, setActiveQuadrant] = useState<'all' | 'UR' | 'UL' | 'LL' | 'LR'>('all');
 
   // Estimate builder states
@@ -733,48 +732,64 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
   const initialEstimateItemsRef = React.useRef<any[]>([]);
   const initialDiscountRef = React.useRef<number>(0);
   const initialStatusRef = React.useRef<string>('Draft');
+  
+  const lastInitializedIdRef = React.useRef<string | undefined>(undefined);
+  const wasOpenRef = React.useRef<boolean>(false);
 
   React.useEffect(() => {
-    const initForm = getInitialForm(customer);
-    setForm(initForm);
-    initialFormRef.current = initForm;
-
-    setActiveTab('general');
-    setShowAdvancedClinical(false);
-    setCopiedEstimate(false);
-    setActiveQuadrant('all');
-    
-    if (proceduresCatalog.length > 0) {
-      setBuilderProcedureIdx('0');
-      setBuilderCost(proceduresCatalog[0].defaultCost);
+    if (!open) {
+      wasOpenRef.current = false;
+      return;
     }
-    
-    let itemsMapped: any[] = [];
-    let discount = 0;
-    let status: 'Draft' | 'Sent' | 'Approved' = 'Draft';
 
-    if (customer?.estimates && customer.estimates.length > 0) {
-      const activeEst = customer.estimates[0];
-      itemsMapped = (activeEst.items || []).map((it: any) => ({
-        tooth: it.tooth,
-        procedure: it.procedure || it.name || '',
-        cost: Number(it.cost !== undefined ? it.cost : (it.price !== undefined ? it.price : 0)),
-        isCosmetic: !!(it.isCosmetic || it.category === 'Cosmetic')
-      }));
-      discount = activeEst.discount || 0;
-      status = activeEst.status || 'Draft';
+    const isNewOpen = !wasOpenRef.current;
+    const isDifferentCustomer = customer?.id !== lastInitializedIdRef.current;
+
+    if (isNewOpen || isDifferentCustomer) {
+      wasOpenRef.current = true;
+      lastInitializedIdRef.current = customer?.id;
+
+      const initForm = getInitialForm(customer);
+      setForm(initForm);
+      initialFormRef.current = initForm;
+
+      setActiveTab('general');
+      setShowAdvancedClinical(false);
+      setCopiedEstimate(false);
+      setActiveQuadrant('all');
+      
+      if (proceduresCatalog.length > 0) {
+        setBuilderProcedureIdx('0');
+        setBuilderCost(proceduresCatalog[0].defaultCost);
+      }
+      
+      let itemsMapped: any[] = [];
+      let discount = 0;
+      let status: 'Draft' | 'Sent' | 'Approved' = 'Draft';
+
+      if (customer?.estimates && customer.estimates.length > 0) {
+        const activeEst = customer.estimates[0];
+        itemsMapped = (activeEst.items || []).map((it: any) => ({
+          tooth: it.tooth,
+          procedure: it.procedure || it.name || '',
+          cost: Number(it.cost !== undefined ? it.cost : (it.price !== undefined ? it.price : 0)),
+          isCosmetic: !!(it.isCosmetic || it.category === 'Cosmetic')
+        }));
+        discount = activeEst.discount || 0;
+        status = activeEst.status || 'Draft';
+      }
+      
+      setEstimateItems(itemsMapped);
+      initialEstimateItemsRef.current = itemsMapped;
+      
+      setEstimateDiscount(discount);
+      initialDiscountRef.current = discount;
+      
+      setEstimateStatus(status);
+      initialStatusRef.current = status;
+      
+      setSyncStatus(null);
     }
-    
-    setEstimateItems(itemsMapped);
-    initialEstimateItemsRef.current = itemsMapped;
-    
-    setEstimateDiscount(discount);
-    initialDiscountRef.current = discount;
-    
-    setEstimateStatus(status);
-    initialStatusRef.current = status;
-    
-    setSyncStatus(null);
   }, [customer, open]);
 
   React.useEffect(() => {
@@ -2045,6 +2060,88 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
   };
   const inputFocusStyle = 'focus:border-indigo-500/40';
 
+  const getProcedureForDiagnosis = (diag: string) => {
+    let searchStr = '';
+    if (diag === 'Decayed / Cavity') searchStr = 'Composite';
+    else if (diag === 'Root Canal Needed') searchStr = 'Root Canal';
+    else if (diag === 'Crown / Bridge Needed') searchStr = 'Crown';
+    else if (diag === 'Dental Implant Needed') searchStr = 'Implant';
+    else return null;
+
+    const matched = proceduresCatalog.find(p => p.name.toLowerCase().includes(searchStr.toLowerCase()));
+    if (matched) return matched;
+    
+    // Fallback defaults if catalog is empty or doesn't match
+    if (diag === 'Decayed / Cavity') return { name: 'Composite Filling / Restoration', defaultCost: 1500, gstRate: 0 };
+    if (diag === 'Root Canal Needed') return { name: 'Root Canal Treatment (RCT)', defaultCost: 3500, gstRate: 0 };
+    if (diag === 'Crown / Bridge Needed') return { name: 'PFM Crown / Cap', defaultCost: 4000, gstRate: 0 };
+    if (diag === 'Dental Implant Needed') return { name: 'Dental Implant Placement', defaultCost: 25000, gstRate: 0 };
+    return null;
+  };
+
+  const handleUpdateToothCondition = (t: number, newDiag: string, newStat: string) => {
+    const toothVal = form.toothConditions?.[t];
+    let oldDiag = 'Decayed / Cavity';
+    let oldStat = 'Required';
+    
+    if (toothVal) {
+      if (typeof toothVal === 'object' && toothVal !== null) {
+        oldDiag = (toothVal as any).diagnosis || 'Decayed / Cavity';
+        oldStat = (toothVal as any).status || 'Required';
+      } else if (typeof toothVal === 'string') {
+        const lowerVal = toothVal.toLowerCase();
+        if (lowerVal.includes('completed') || lowerVal.includes('done') || lowerVal.includes('healthy')) {
+          oldDiag = 'Healthy / Normal';
+          oldStat = 'Completed / Done';
+        } else if (lowerVal.includes('pending') || lowerVal.includes('progress')) {
+          oldDiag = 'Decayed / Cavity';
+          oldStat = 'Pending / In Progress';
+        } else {
+          oldDiag = toothVal.replace(' Needed', '').replace(' (Required)', '');
+          oldStat = 'Required';
+        }
+      }
+    }
+
+    const conditions = { 
+      ...form.toothConditions, 
+      [t]: { diagnosis: newDiag, status: newStat } 
+    };
+    handleChange('toothConditions', conditions);
+
+    // If status was Completed and changed, or diagnosis changed while Completed, remove old billing item
+    if (oldStat === 'Completed / Done') {
+      const oldProc = getProcedureForDiagnosis(oldDiag);
+      if (oldProc) {
+        setEstimateItems(prev => prev.filter(
+          (item) => !(item.tooth === t && item.procedure === oldProc.name)
+        ));
+      }
+    }
+
+    // Add new billing item if new status is Completed / Done
+    if (newStat === 'Completed / Done') {
+      const newProc = getProcedureForDiagnosis(newDiag);
+      if (newProc) {
+        const alreadyExists = estimateItems.some(
+          (item) => item.tooth === t && item.procedure === newProc.name
+        );
+        if (!alreadyExists) {
+          const isCosmetic = newProc.name.toLowerCase().includes('aligner') || newProc.name.toLowerCase().includes('whitening');
+          setEstimateItems(prev => [
+            ...prev,
+            {
+              tooth: t,
+              procedure: newProc.name,
+              cost: newProc.defaultCost,
+              isCosmetic: isCosmetic
+            }
+          ]);
+        }
+      }
+    }
+  };
+
   // FDI World Dental Federation notation quadrants
   const quad1 = [18, 17, 16, 15, 14, 13, 12, 11];
   const quad2 = [21, 22, 23, 24, 25, 26, 27, 28];
@@ -2066,7 +2163,7 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.97, y: 8 }}
                 transition={{ duration: 0.2, ease: 'easeOut' }}
-                className="max-sm:flex max-sm:flex-col max-sm:h-full max-sm:max-h-[92vh] overflow-hidden"
+                className="w-full max-sm:flex max-sm:flex-col max-sm:h-full max-sm:max-h-[92vh] overflow-hidden"
               >
                 {/* Drag Handle for mobile bottom sheet */}
                 <div className="w-12 h-1 bg-slate-300 rounded-full mx-auto mt-3 mb-1 shrink-0 hidden max-sm:block" style={{ backgroundColor: '#CBD5E1' }} />
@@ -2103,8 +2200,8 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                     </div>
 
                     {/* Tab Selector & Settings Gear */}
-                    <div className="flex items-center gap-2 self-start sm:self-auto w-full sm:w-auto">
-                      <div className="flex bg-slate-100 p-1 rounded-lg border border-slate-200 gap-0.5 overflow-x-auto scrollbar-none flex-nowrap flex-1 sm:flex-none">
+                    <div className="flex items-center gap-2 self-start sm:self-auto w-full sm:w-auto min-w-0">
+                      <div className="flex bg-slate-100 p-1 rounded-lg border border-slate-200 gap-0.5 overflow-x-auto scrollbar-none flex-nowrap flex-1 sm:flex-none min-w-0">
                         <button
                           type="button"
                           onClick={() => setActiveTab('general')}
@@ -2158,7 +2255,7 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
 
                 {/* Body - General Tab */}
                 {activeTab === 'general' && (
-                  <div className="px-4 sm:px-6 py-4 space-y-4 overflow-y-auto max-h-[60vh] max-sm:max-h-[calc(92vh-170px)] scrollbar-none flex-1">
+                  <div className="px-4 sm:px-6 py-4 space-y-4 overflow-y-auto overflow-x-hidden max-h-[60vh] max-sm:max-h-[calc(92vh-170px)] scrollbar-none flex-1">
                     {/* Profile Photo Uploader + Basic Details */}
                     <div className="flex flex-col sm:flex-row items-center gap-4 bg-slate-50/50 border border-slate-200/60 p-4 rounded-xl">
                       {/* Avatar/Profile Photo selector */}
@@ -2431,7 +2528,7 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
 
                 {/* Body - Medical tab */}
                 {activeTab === 'medical' && (
-                  <div className="px-4 sm:px-6 py-4 space-y-5 overflow-y-auto max-h-[60vh] max-sm:max-h-[calc(92vh-170px)] scrollbar-none flex-1">
+                  <div className="px-4 sm:px-6 py-4 space-y-5 overflow-y-auto overflow-x-hidden max-h-[60vh] max-sm:max-h-[calc(92vh-170px)] scrollbar-none flex-1">
                     {/* Next Appointment */}
                     <div className="bg-slate-50 border border-slate-200/80 rounded-xl p-4 space-y-3">
                       <div className="flex items-center justify-between">
@@ -2503,63 +2600,6 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                         </div>
                       )}
 
-                      {/* Slider Compare sandbox for Teeth Photos */}
-                      {form.beforePhotos && form.beforePhotos.length > 0 && form.afterPhotos && form.afterPhotos.length > 0 && (
-                        <div className="bg-white border border-slate-200 rounded-xl p-3 space-y-2.5 mt-2">
-                          <div className="flex items-center justify-between">
-                            <span className="text-[10.5px] font-bold text-slate-800 uppercase tracking-wider flex items-center gap-1.5">
-                              <Sparkles size={11} className="text-indigo-400" />
-                              Before vs After Teeth Comparison
-                            </span>
-                          </div>
-                          
-                          <div className="relative aspect-[16/10] w-full rounded-xl overflow-hidden border border-slate-200 bg-neutral-900 select-none">
-                            {/* Before Image */}
-                            <img src={form.beforePhotos[0]} alt="Before treatment" className="absolute inset-0 w-full h-full object-cover" />
-                            
-                            {/* After Image */}
-                            <div 
-                              className="absolute inset-y-0 left-0 overflow-hidden" 
-                              style={{ width: `${teethPhotoSliderPos}%` }}
-                            >
-                              <img 
-                                src={form.afterPhotos[0]} 
-                                alt="After treatment" 
-                                className="absolute inset-y-0 left-0 w-full h-full object-cover"
-                                style={{ width: '100%', maxWidth: 'none' }} 
-                              />
-                            </div>
-                            
-                            {/* Slider Handle */}
-                            <div 
-                              className="absolute inset-y-0 w-1 bg-indigo-500 cursor-ew-resize flex items-center justify-center"
-                              style={{ left: `${teethPhotoSliderPos}%` }}
-                            >
-                              <div className="w-5 h-5 rounded-full bg-indigo-500 border border-white/25 flex items-center justify-center text-white text-[9px] shadow-lg">
-                                ↔
-                              </div>
-                            </div>
-                            
-                            {/* Invisible range inputs overlay */}
-                            <input 
-                              type="range" 
-                              min="0" 
-                              max="100" 
-                              value={teethPhotoSliderPos} 
-                              onChange={(e) => setTeethPhotoSliderPos(Number(e.target.value))}
-                              className="absolute inset-0 w-full h-full opacity-0 cursor-ew-resize"
-                            />
-                            
-                            {/* Labels */}
-                            <span className="absolute bottom-2 left-2 px-1.5 py-0.5 rounded bg-black/70 border border-white/10 text-[8.5px] font-bold text-rose-300">
-                              Before / Pre-Op
-                            </span>
-                            <span className="absolute bottom-2 right-2 px-1.5 py-0.5 rounded bg-black/70 border border-white/10 text-[8.5px] font-bold text-emerald-300">
-                              After / Post-Op
-                            </span>
-                          </div>
-                        </div>
-                      )}
                     </div>
 
 
@@ -2938,18 +2978,11 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                                         {getToothName(t).split(' (Tooth ')[0]}
                                       </span>
                                     </div>
-                                    
                                     <div className="flex items-center gap-1.5 flex-wrap">
                                       {/* Diagnosis select */}
                                       <select
                                         value={diagnosis}
-                                        onChange={(e) => {
-                                          const conditions = { 
-                                            ...form.toothConditions, 
-                                            [t]: { diagnosis: e.target.value, status } 
-                                          };
-                                          handleChange('toothConditions', conditions);
-                                        }}
+                                        onChange={(e) => handleUpdateToothCondition(t, e.target.value, status)}
                                         className="text-[10.5px] font-medium text-slate-700 bg-white border border-slate-200 hover:border-slate-300 px-2 py-1 rounded-md outline-none cursor-pointer"
                                       >
                                         <option value="Decayed / Cavity">Decayed / Cavity</option>
@@ -2963,13 +2996,7 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                                       {/* Status select */}
                                       <select
                                         value={status}
-                                        onChange={(e) => {
-                                          const conditions = { 
-                                            ...form.toothConditions, 
-                                            [t]: { diagnosis, status: e.target.value } 
-                                          };
-                                          handleChange('toothConditions', conditions);
-                                        }}
+                                        onChange={(e) => handleUpdateToothCondition(t, diagnosis, e.target.value)}
                                         className="text-[10.5px] font-medium text-slate-700 bg-white border border-slate-200 hover:border-slate-300 px-2 py-1 rounded-md outline-none cursor-pointer"
                                       >
                                         <option value="Required">Required</option>
@@ -3132,7 +3159,7 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
 
                 {/* Body - Post Consultation tab */}
                 {activeTab === 'estimates' && (
-                  <div className="px-4 sm:px-6 py-4 space-y-5 overflow-y-auto max-h-[60vh] max-sm:max-h-[calc(92vh-170px)] scrollbar-none flex-1 pb-6">
+                  <div className="px-4 sm:px-6 py-4 space-y-5 overflow-y-auto overflow-x-hidden max-h-[60vh] max-sm:max-h-[calc(92vh-170px)] scrollbar-none flex-1 pb-6">
                     <div className="flex items-center justify-between bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5">
                       <div className="flex items-center gap-2">
                         <div className="w-2 h-2 rounded-full bg-indigo-500" />
@@ -4089,7 +4116,7 @@ const ReactivationCustomers: React.FC = () => {
       }
 
       const wabaPhoneId = clinic.whatsapp_phone_number_id;
-      const wabaToken = clinic.whatsapp_access_token;
+      const wabaToken = clinic.whatsapp_access_token ? clinic.whatsapp_access_token.split('|')[0] : '';
       const cleanPhone = c.phone.replace(/[^0-9]/g, '');
       const formattedPhone = cleanPhone.length === 10 ? `91${cleanPhone}` : cleanPhone;
 
@@ -4468,7 +4495,7 @@ const ReactivationCustomers: React.FC = () => {
       }
 
       const wabaPhoneId = clinic.whatsapp_phone_number_id;
-      const wabaToken = clinic.whatsapp_access_token;
+      const wabaToken = clinic.whatsapp_access_token ? clinic.whatsapp_access_token.split('|')[0] : '';
       const cleanPhone = c.phone.replace(/[^0-9]/g, '');
       const formattedPhone = cleanPhone.length === 10 ? `91${cleanPhone}` : cleanPhone;
 
@@ -4512,16 +4539,26 @@ const ReactivationCustomers: React.FC = () => {
       );
       const templateName = baTemplate?.name || 'googlereview';
 
-      // Load googleReviewUrl from local storage config
-      const localConfigRaw = localStorage.getItem(`whatsapp_config_${clinicId}`);
+      // Load googleReviewUrl from database first, then local storage config
       let googleReviewUrlStr = 'https://maps.app.goo.gl/KJ78ipBjeu7DfV4N9';
-      if (localConfigRaw) {
-        try {
-          const parsed = JSON.parse(localConfigRaw);
-          if (parsed.googleReviewUrl) {
-            googleReviewUrlStr = parsed.googleReviewUrl;
-          }
-        } catch {}
+      let dbGoogleReviewUrl = '';
+      if (clinic?.whatsapp_access_token && clinic.whatsapp_access_token.includes('|')) {
+        const parts = clinic.whatsapp_access_token.split('|');
+        if (parts[2]) dbGoogleReviewUrl = parts[2];
+      }
+      
+      if (dbGoogleReviewUrl) {
+        googleReviewUrlStr = dbGoogleReviewUrl;
+      } else {
+        const localConfigRaw = localStorage.getItem(`whatsapp_config_${clinicId}`);
+        if (localConfigRaw) {
+          try {
+            const parsed = JSON.parse(localConfigRaw);
+            if (parsed.googleReviewUrl) {
+              googleReviewUrlStr = parsed.googleReviewUrl;
+            }
+          } catch {}
+        }
       }
 
       // Clean review URL to avoid iOS Google Maps deep link crashes
@@ -4790,7 +4827,7 @@ const ReactivationCustomers: React.FC = () => {
           if (clinic) {
             whatsappBusinessPhone = clinic.phone || '';
             whatsappPhoneNumberId = clinic.whatsapp_phone_number_id || '';
-            whatsappAccessToken = clinic.whatsapp_access_token || '';
+            whatsappAccessToken = (clinic.whatsapp_access_token || '').split('|')[0];
             
             if (clinic.owner_id) {
               const { data: ownerProfile } = await supabase

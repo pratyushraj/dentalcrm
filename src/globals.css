@@ -1356,3 +1356,10 @@ textarea:focus-visible,
     grid-column: span 1 / span 1 !important;
   }
 }
+
+/* Prevent iOS auto-zoom on form fields focus */
+@media screen and (max-width: 768px) {
+  input, select, textarea {
+    font-size: 16px !important;
+  }
+}

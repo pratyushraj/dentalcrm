@@ -287,7 +287,7 @@ export default function ReactivationReceptionist() {
           setWorkingHours(clinic.working_hours || '');
           setTimingsNote(clinic.timings_note || '');
           setWhatsappPhoneNumberId(clinic.whatsapp_phone_number_id || '');
-          setWhatsappAccessToken(clinic.whatsapp_access_token || '');
+          setWhatsappAccessToken((clinic.whatsapp_access_token || '').split('|')[0]);
           setWhatsappBusinessPhone(clinic.whatsapp_business_phone || '');
         }
 
@@ -486,6 +486,21 @@ export default function ReactivationReceptionist() {
     setTrainState('loading');
     try {
       if (clinicId) {
+        // Fetch existing token to preserve packed WABA ID and Google Review URL
+        const { data: existingClinic } = await supabase
+          .from('dental_clinics')
+          .select('whatsapp_access_token')
+          .eq('id', clinicId)
+          .single();
+
+        let packedToken = whatsappAccessToken;
+        if (existingClinic?.whatsapp_access_token && existingClinic.whatsapp_access_token.includes('|')) {
+          const parts = existingClinic.whatsapp_access_token.split('|');
+          const wabaId = parts[1] || '';
+          const reviewUrl = parts[2] || '';
+          packedToken = `${whatsappAccessToken}|${wabaId}|${reviewUrl}`;
+        }
+
         const { error } = await supabase
           .from('dental_clinics')
           .update({
@@ -495,7 +510,7 @@ export default function ReactivationReceptionist() {
             working_hours: workingHours,
             timings_note: timingsNote,
             whatsapp_phone_number_id: whatsappPhoneNumberId,
-            whatsapp_access_token: whatsappAccessToken,
+            whatsapp_access_token: packedToken,
             whatsapp_business_phone: whatsappBusinessPhone,
           })
           .eq('id', clinicId);

@@ -81,7 +81,7 @@ export default function ReactivationScheduler() {
           .single();
         if (clinic) {
           setWhatsappPhoneNumberId(clinic.whatsapp_phone_number_id || '');
-          setWhatsappAccessToken(clinic.whatsapp_access_token || '');
+          setWhatsappAccessToken((clinic.whatsapp_access_token || '').split('|')[0]);
           setWhatsappBusinessPhone(clinic.whatsapp_business_phone || '');
         }
 

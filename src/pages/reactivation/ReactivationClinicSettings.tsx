@@ -322,11 +322,34 @@ const ReactivationClinicSettings: React.FC = () => {
 
         if (error) throw error;
         if (data) {
-          setWhatsapp((prev) => ({
-            ...prev,
-            phoneNumberId: data.whatsapp_phone_number_id || prev.phoneNumberId,
-            accessToken: data.whatsapp_access_token || prev.accessToken,
-          }));
+          setWhatsapp((prev) => {
+            const rawToken = data.whatsapp_access_token || '';
+            let token = prev.accessToken;
+            // DB always wins — start with empty so hardcoded defaults don't bleed in
+            let dbWabaId = '';
+            let dbGoogleReviewUrl = '';
+
+            if (rawToken && rawToken.includes('|')) {
+              // Composite format: token|wabaId|googleReviewUrl
+              const parts = rawToken.split('|');
+              token = parts[0] || prev.accessToken;
+              dbWabaId = parts[1] || '';
+              dbGoogleReviewUrl = parts[2] || '';
+            } else if (rawToken) {
+              // Plain token stored (legacy) — keep prev wabaId/googleReviewUrl from localStorage
+              token = rawToken;
+              dbWabaId = prev.wabaId;
+              dbGoogleReviewUrl = prev.googleReviewUrl || '';
+            }
+
+            return {
+              ...prev,
+              phoneNumberId: data.whatsapp_phone_number_id || prev.phoneNumberId,
+              accessToken: token,
+              wabaId: dbWabaId,
+              googleReviewUrl: dbGoogleReviewUrl,
+            };
+          });
 
           setBranding((prev) => ({
             ...prev,
@@ -578,7 +601,7 @@ const ReactivationClinicSettings: React.FC = () => {
           .from('dental_clinics')
           .update({
             whatsapp_phone_number_id: whatsapp.phoneNumberId,
-            whatsapp_access_token: whatsapp.accessToken,
+            whatsapp_access_token: `${whatsapp.accessToken}|${whatsapp.wabaId || ''}|${whatsapp.googleReviewUrl || ''}`,
             name: branding.clinicName,
             address: branding.address,
             phone: branding.phone,

@@ -50,10 +50,17 @@ export const useDealAlertNotifications = () => {
   }, []);
 
   const pushApiBase = useMemo(() => {
-    if (typeof window === 'undefined') return getApiBaseUrl();
+    if (typeof window === 'undefined') return null;
     const host = window.location.hostname.toLowerCase();
+    
+    // Disable push notifications entirely on Dental CRM domains to avoid 404 GET console errors
+    if (host.includes('dental-crm') || host.includes('dentalcrm')) {
+      const override = String((import.meta as any)?.env?.VITE_PUSH_API_BASE_URL || '').trim();
+      if (!override) return null;
+      return override.replace(/\/$/, '');
+    }
+
     const isPublicHost =
-      host.endsWith('creatorarmour.com') ||
       host.endsWith('creatorarmour.com') ||
       host.endsWith('vercel.app');
     // On production Vercel, use RELATIVE paths so requests go through the
@@ -74,6 +81,7 @@ export const useDealAlertNotifications = () => {
   const hasVapidKey = !!import.meta.env.VITE_VAPID_PUBLIC_KEY;
 
   const syncSubscriptionStatus = useCallback(async () => {
+    if (!pushApiBase) return;
     if (!('Notification' in window) || !('serviceWorker' in navigator)) return;
     if (isLocalhostDev) return;
 
@@ -166,12 +174,13 @@ export const useDealAlertNotifications = () => {
       'Notification' in window &&
       'serviceWorker' in navigator &&
       'PushManager' in window &&
-      (!isLocalhostDev || hasLocalPushOverride);
+      (!isLocalhostDev || hasLocalPushOverride) &&
+      pushApiBase !== null;
     setIsSupported(supported);
     setPromptDismissed(localStorage.getItem(PROMPT_DISMISSED_KEY) === 'true');
     if (!supported) return;
     syncSubscriptionStatus().catch(() => {});
-  }, [syncSubscriptionStatus, isLocalhostDev, hasLocalPushOverride]);
+  }, [syncSubscriptionStatus, isLocalhostDev, hasLocalPushOverride, pushApiBase]);
 
   const dismissPrompt = useCallback(() => {
     localStorage.setItem(PROMPT_DISMISSED_KEY, 'true');

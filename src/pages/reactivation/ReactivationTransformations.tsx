@@ -1340,8 +1340,8 @@ export default function ReactivationTransformations() {
                                 language: { code: 'en' },
                                 components: [
                                   { type: 'header', parameters: [{ type: 'image', image: { link: uploadData.publicUrl } }] },
-                                  { type: 'body', parameters: [{ type: 'text', text: activePatient.name || 'Patient' }] },
-                                  { type: 'button', sub_type: 'url', index: '0', parameters: [{ type: 'text', text: urlSuffix }] }
+                                  { type: 'body', parameters: [{ type: 'text', text: activePatient.name || 'Patient' }] }
+                                  // googlereview has a STATIC button URL — no button parameters needed
                                 ]
                               }
                             };

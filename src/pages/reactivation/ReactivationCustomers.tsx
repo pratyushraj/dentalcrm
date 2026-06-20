@@ -4746,20 +4746,8 @@ const ReactivationCustomers: React.FC = () => {
         }
       ];
 
-      // Add button parameters if the template uses a dynamic button URL
-      if (baTemplate && baTemplate.hasDynamicButton) {
-        components.push({
-          type: 'button',
-          sub_type: 'url',
-          index: '0',
-          parameters: [
-            {
-              type: 'text',
-              text: urlSuffix
-            }
-          ]
-        });
-      }
+      // googlereview template has a STATIC button URL — do NOT add button parameters
+      // Adding button params to a static-URL template causes Meta 400 Invalid parameter
 
       const templateLanguage = baTemplate?.language || 'en';
 

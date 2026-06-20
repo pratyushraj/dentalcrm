@@ -1,8 +1,8 @@
 {
   "id": "/",
-  "name": "Creator Armour",
-  "short_name": "Creator Armour",
-  "description": "Close brand deals without Instagram DMs. Share a creator collab link, list packages, and receive structured brand offers.",
+  "name": "Dental Clinic",
+  "short_name": "Dental Clinic",
+  "description": "Intelligent patient recall system to re-engage dormant patients, prevent appointment no-shows, and scale clinic branch revenue.",
   "start_url": "/",
   "display": "standalone",
   "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],

@@ -4476,31 +4476,27 @@ const ReactivationCustomers: React.FC = () => {
 
       const afterPhotoBase64 = c.afterPhotos?.[0] || c.beforePhotos?.[0] || c.beforePhoto || c.afterPhoto;
       if (afterPhotoBase64 && afterPhotoBase64.startsWith('data:image')) {
-        const base64Data = afterPhotoBase64.replace(/^data:image\/\w+;base64,/, "");
-        const binaryString = window.atob(base64Data);
-        const len = binaryString.length;
-        const bytes = new Uint8Array(len);
-        for (let i = 0; i < len; i++) {
-          bytes[i] = binaryString.charCodeAt(i);
-        }
-        const imageBlob = new Blob([bytes], { type: 'image/jpeg' });
-        const imageFileName = `estimates/ba_photo_${c.id || Date.now()}_${Date.now()}.jpg`;
-
         toast.info('Uploading before/after smile photo to database storage...');
-        const { error: uploadError } = await supabase.storage
-          .from('creator-assets')
-          .upload(imageFileName, imageBlob, {
-            contentType: 'image/jpeg',
-            upsert: true
+        try {
+          const uploadRes = await fetch('/api/waba/upload', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              image: afterPhotoBase64,
+              customerId: c.id
+            })
           });
 
-        if (!uploadError) {
-          const { data: { publicUrl } } = supabase.storage
-            .from('creator-assets')
-            .getPublicUrl(imageFileName);
-          imageUrl = publicUrl;
-        } else {
-          console.error("Storage upload error for B&A photo:", uploadError);
+          const uploadData = await uploadRes.json();
+          if (uploadRes.ok && uploadData.publicUrl) {
+            imageUrl = uploadData.publicUrl;
+          } else {
+            console.error("Storage upload error for B&A photo:", uploadData.error || uploadData);
+          }
+        } catch (uploadErr: any) {
+          console.error("Storage upload fetch error for B&A photo:", uploadErr);
         }
       }
 

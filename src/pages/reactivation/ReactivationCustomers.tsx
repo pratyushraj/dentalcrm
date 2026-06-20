@@ -4504,12 +4504,22 @@ const ReactivationCustomers: React.FC = () => {
         }
       }
 
+      const syncedTemplates = loadWhatsAppTemplates(clinicId);
+      const baTemplate = syncedTemplates.find(t => 
+        t.name === 'googlereview' || 
+        t.name === 'smile_makeover_google_review' || 
+        t.name.toLowerCase().includes('smile') || 
+        t.name.toLowerCase().includes('makeover') ||
+        t.name.toLowerCase().includes('review')
+      );
+      const templateName = baTemplate?.name || 'googlereview';
+
       const payload = {
         messaging_product: 'whatsapp',
         to: formattedPhone,
         type: 'template',
         template: {
-          name: 'googlereview',
+          name: templateName,
           language: { code: 'en' },
           components: [
             {
@@ -4554,7 +4564,7 @@ const ReactivationCustomers: React.FC = () => {
         logWhatsAppMessage(clinicId, {
           recipientName: c.name || 'Patient',
           recipientPhone: c.phone,
-          templateName: 'googlereview',
+          templateName: templateName,
           body: `Hi ${c.name || 'Patient'}! Look at your incredible smile transformation! 🦷✨`,
           status: 'sent',
           type: 'campaign',

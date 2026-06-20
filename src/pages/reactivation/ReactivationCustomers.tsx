@@ -5274,36 +5274,45 @@ const ReactivationCustomers: React.FC = () => {
                       <p className="mt-3 text-[12px] text-slate-300 italic">No notes</p>
                     )}
 
-                    {(customer.prescription || (customer.beforePhotos && customer.beforePhotos.length > 0) || (customer.afterPhotos && customer.afterPhotos.length > 0) || customer.beforePhoto || customer.afterPhoto) && (
-                      <div className="mt-3 pt-3 border-t border-slate-100 flex justify-end gap-2 flex-wrap">
-                        {customer.prescription && (
-                          <span
-                            role="button"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              downloadPrescriptionPDF(customer);
-                            }}
-                            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[10.5px] font-bold border border-teal-200 bg-teal-50 hover:bg-teal-100 text-teal-700 transition-all shadow-sm cursor-pointer"
-                          >
-                            <Download size={11} />
-                            Download Rx
-                          </span>
-                        )}
-                        {((customer.beforePhotos && customer.beforePhotos.length > 0) || (customer.afterPhotos && customer.afterPhotos.length > 0) || customer.beforePhoto || customer.afterPhoto) && (
-                          <span
-                            role="button"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              sendWhatsAppBeforeAfter(customer);
-                            }}
-                            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[10.5px] font-bold border border-indigo-200 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 transition-all shadow-sm cursor-pointer"
-                          >
-                            <Send size={11} />
-                            Send Before/After (WA)
-                          </span>
-                        )}
-                      </div>
-                    )}
+                    <div className="mt-3 pt-3 border-t border-slate-100 flex justify-end gap-2 flex-wrap">
+                      {customer.prescription && (
+                        <span
+                          role="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            downloadPrescriptionPDF(customer);
+                          }}
+                          className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[10.5px] font-bold border border-teal-200 bg-teal-50 hover:bg-teal-100 text-teal-700 transition-all shadow-sm cursor-pointer"
+                        >
+                          <Download size={11} />
+                          Download Rx
+                        </span>
+                      )}
+                      {((customer.beforePhotos && customer.beforePhotos.length > 0) || (customer.afterPhotos && customer.afterPhotos.length > 0) || customer.beforePhoto || customer.afterPhoto) && (
+                        <span
+                          role="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            sendWhatsAppBeforeAfter(customer);
+                          }}
+                          className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[10.5px] font-bold border border-indigo-200 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 transition-all shadow-sm cursor-pointer"
+                        >
+                          <Send size={11} />
+                          Send Before/After (WA)
+                        </span>
+                      )}
+                      <span
+                        role="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleDelete(customer.id);
+                        }}
+                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[10.5px] font-bold border border-rose-200 bg-rose-50 hover:bg-rose-100 text-rose-700 transition-all shadow-sm cursor-pointer"
+                      >
+                        <Trash2 size={11} />
+                        Delete
+                      </span>
+                    </div>
                   </button>
                 );
               })

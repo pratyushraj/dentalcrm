@@ -4776,8 +4776,9 @@ const ReactivationCustomers: React.FC = () => {
         throw new Error(apiData.error?.message || 'Meta API returned error');
       }
 
-      console.log('Automated B&A image dispatch succeeded via Meta Graph API:', apiData);
-      toast.success('WhatsApp before/after smile gallery photo shared!');
+      console.log('✅ Smile Gallery dispatch succeeded:', apiData);
+      console.log('Image URL sent to Meta:', imageUrl);
+      toast.success(`Smile Gallery sent to ${c.name || 'patient'} via WhatsApp! 🦷✨`);
 
       try {
         logWhatsAppMessage(clinicId, {

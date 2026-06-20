@@ -23,7 +23,8 @@ import {
   Award,
   ArrowRight,
   Building2,
-  Instagram
+  Instagram,
+  Send
 } from 'lucide-react';
 
 interface Patient {
@@ -1278,7 +1279,95 @@ export default function ReactivationTransformations() {
                         <Sparkles size={12} />
                         Auto Post to Insta (Direct API)
                       </button>
+
+                      {/* WhatsApp Send Button */}
+                      <button
+                        type="button"
+                        onClick={async () => {
+                          const canvas = canvasRef.current;
+                          if (!canvas) { toast.error('Template graphic is empty or loading!'); return; }
+                          if (!activePatient?.phone) { toast.error('No phone number for this patient.'); return; }
+
+                          const loadingToast = toast.loading('Sending Smile Gallery via WhatsApp...');
+                          try {
+                            // 1. Capture branded canvas image
+                            const base64Image = canvas.toDataURL('image/jpeg', 0.92);
+
+                            // 2. Upload via serverless function (bypasses RLS)
+                            const uploadRes = await fetch('/api/waba/upload', {
+                              method: 'POST',
+                              headers: { 'Content-Type': 'application/json' },
+                              body: JSON.stringify({ image: base64Image, customerId: activePatient.id })
+                            });
+                            const uploadData = await uploadRes.json();
+                            if (!uploadRes.ok || !uploadData.publicUrl) throw new Error(uploadData.error || 'Upload failed');
+
+                            // 3. Fetch clinic WhatsApp config
+                            const { data: clinic } = await supabase
+                              .from('dental_clinics')
+                              .select('whatsapp_phone_number_id, whatsapp_access_token')
+                              .eq('id', clinicId)
+                              .single();
+
+                            if (!clinic?.whatsapp_phone_number_id || !clinic?.whatsapp_access_token) {
+                              throw new Error('WhatsApp API not configured. Go to Clinic Settings → WhatsApp API.');
+                            }
+
+                            const wabaPhoneId = clinic.whatsapp_phone_number_id;
+                            const wabaToken = clinic.whatsapp_access_token.split('|')[0];
+                            const cleanPhone = activePatient.phone.replace(/[^0-9]/g, '');
+                            const formattedPhone = cleanPhone.length === 10 ? `91${cleanPhone}` : cleanPhone;
+
+                            // 4. Get Google Review URL from packed token
+                            let googleReviewUrl = 'https://maps.app.goo.gl/KJ78ipBjeu7DfV4N9';
+                            if (clinic.whatsapp_access_token.includes('|')) {
+                              const parts = clinic.whatsapp_access_token.split('|');
+                              if (parts[2]) googleReviewUrl = parts[2];
+                            }
+                            try { const u = new URL(googleReviewUrl); u.searchParams.delete('g_st'); googleReviewUrl = u.toString(); } catch {}
+                            let urlSuffix = googleReviewUrl;
+                            if (googleReviewUrl.includes('maps.app.goo.gl/')) {
+                              urlSuffix = googleReviewUrl.split('maps.app.goo.gl/')[1]?.split('?')[0] || googleReviewUrl;
+                            }
+
+                            // 5. Send via Meta API using googlereview template
+                            const payload = {
+                              messaging_product: 'whatsapp',
+                              to: formattedPhone,
+                              type: 'template',
+                              template: {
+                                name: 'googlereview',
+                                language: { code: 'en' },
+                                components: [
+                                  { type: 'header', parameters: [{ type: 'image', image: { link: uploadData.publicUrl } }] },
+                                  { type: 'body', parameters: [{ type: 'text', text: activePatient.name || 'Patient' }] },
+                                  { type: 'button', sub_type: 'url', index: '0', parameters: [{ type: 'text', text: urlSuffix }] }
+                                ]
+                              }
+                            };
+
+                            const apiRes = await fetch(`https://graph.facebook.com/v20.0/${wabaPhoneId}/messages`, {
+                              method: 'POST',
+                              headers: { 'Authorization': `Bearer ${wabaToken}`, 'Content-Type': 'application/json' },
+                              body: JSON.stringify(payload)
+                            });
+                            const apiData = await apiRes.json();
+                            if (!apiRes.ok) throw new Error(apiData.error?.message || 'Meta API error');
+
+                            toast.dismiss(loadingToast);
+                            toast.success(`Smile Gallery sent to ${activePatient.name} on WhatsApp! 🦷✨`);
+                          } catch (err: any) {
+                            toast.dismiss(loadingToast);
+                            toast.error('Failed to send: ' + err.message);
+                          }
+                        }}
+                        className="w-full mt-1 border border-green-200 bg-green-50 hover:bg-green-100 text-green-700 text-[10px] font-bold rounded-xl py-2.5 flex items-center justify-center gap-1.5 transition active:scale-95 cursor-pointer"
+                      >
+                        <Send size={12} />
+                        Send Smile Gallery via WhatsApp
+                      </button>
                     </div>
+
                   </div>
                 )}
               </div>

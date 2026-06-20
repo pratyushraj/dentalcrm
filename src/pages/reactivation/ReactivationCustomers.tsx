@@ -5275,7 +5275,20 @@ const ReactivationCustomers: React.FC = () => {
                           </div>
                         </div>
                       </div>
-                      <StatusBadge status={customer.status} />
+                      <div className="flex items-center gap-2 shrink-0">
+                        <StatusBadge status={customer.status} />
+                        <span
+                          role="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleDelete(customer.id);
+                          }}
+                          className="w-7 h-7 rounded-lg bg-slate-50 hover:bg-rose-50 border border-slate-200 hover:border-rose-100 flex items-center justify-center text-slate-400 hover:text-rose-500 transition-all shadow-sm shrink-0 cursor-pointer"
+                          title="Delete Patient"
+                        >
+                          <Trash2 size={13} />
+                        </span>
+                      </div>
                     </div>
 
                     <div className="mt-4 grid grid-cols-3 gap-2 text-[12px]">
@@ -5352,17 +5365,6 @@ const ReactivationCustomers: React.FC = () => {
                           Send Before/After (WA)
                         </span>
                       )}
-                      <span
-                        role="button"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleDelete(customer.id);
-                        }}
-                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[10.5px] font-bold border border-rose-200 bg-rose-50 hover:bg-rose-100 text-rose-700 transition-all shadow-sm cursor-pointer"
-                      >
-                        <Trash2 size={11} />
-                        Delete
-                      </span>
                     </div>
                   </button>
                 );

@@ -4474,7 +4474,9 @@ const ReactivationCustomers: React.FC = () => {
 
       let imageUrl = "https://upload.wikimedia.org/wikipedia/commons/e/e0/Placeholder_LCa.png";
 
-      const afterPhotoBase64 = c.afterPhotos?.[0] || c.beforePhotos?.[0] || c.beforePhoto || c.afterPhoto;
+      const afterPhotoBase64 = (c.beforeAfterPhotos && c.beforeAfterPhotos.length > 0)
+        ? c.beforeAfterPhotos[0]
+        : (c.afterPhotos?.[0] || c.beforePhotos?.[0] || c.beforePhoto || c.afterPhoto);
       if (afterPhotoBase64 && afterPhotoBase64.startsWith('data:image')) {
         toast.info('Uploading before/after smile photo to database storage...');
         try {

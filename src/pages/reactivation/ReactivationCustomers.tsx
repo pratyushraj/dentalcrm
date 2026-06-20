@@ -646,6 +646,74 @@ const generateSmileGalleryImage = (opts: {
   }).catch(reject);
 });
 
+const addSmileGalleryToPDF = async (
+  doc: any,
+  customer: Customer,
+  clinicInfo: {
+    clinicName: string;
+    doctorName: string;
+    qualifications: string;
+    phone: string;
+    logoUrl?: string;
+  }
+) => {
+  const beforeSrc = customer.beforePhotos?.[0] || customer.beforePhoto || null;
+  const afterSrc = customer.afterPhotos?.[0] || customer.afterPhoto || null;
+  if (!beforeSrc && !afterSrc) return;
+
+  try {
+    const smileGalleryDataUrl = await generateSmileGalleryImage({
+      beforeSrc,
+      afterSrc,
+      clinicName: clinicInfo.clinicName,
+      treatmentLabel: customer.service || 'Smile Makeover',
+      doctorName: clinicInfo.doctorName,
+      qualifications: clinicInfo.qualifications,
+      phone: clinicInfo.phone,
+      logoSrc: clinicInfo.logoUrl || null
+    });
+
+    const W = doc.internal.pageSize.getWidth();
+    doc.addPage();
+
+    const PRIMARY_TEAL = [15, 118, 110];
+    const TEXT_MUTED = [100, 116, 139];
+    const ACCENT_GOLD = [217, 119, 6];
+    const BORDER_LIGHT = [226, 232, 240];
+
+    // Top Bar
+    doc.setFillColor(PRIMARY_TEAL[0], PRIMARY_TEAL[1], PRIMARY_TEAL[2]);
+    doc.rect(0, 0, W, 12, 'F');
+
+    // Accent Line
+    doc.setFillColor(ACCENT_GOLD[0], ACCENT_GOLD[1], ACCENT_GOLD[2]);
+    doc.rect(0, 12, W, 1.5, 'F');
+
+    // Title
+    doc.setTextColor(PRIMARY_TEAL[0], PRIMARY_TEAL[1], PRIMARY_TEAL[2]);
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(16);
+    doc.text('Smile Gallery - Before & After Transformation', 15, 25);
+
+    // Image (square 1080x1080 -> 160mm x 160mm)
+    doc.addImage(smileGalleryDataUrl, 'JPEG', 25, 32, 160, 160);
+
+    // Footer
+    const footerY = 270;
+    doc.setDrawColor(BORDER_LIGHT[0], BORDER_LIGHT[1], BORDER_LIGHT[2]);
+    doc.setLineWidth(0.5);
+    doc.line(15, footerY - 15, W - 15, footerY - 15);
+
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(8);
+    doc.setTextColor(TEXT_MUTED[0], TEXT_MUTED[1], TEXT_MUTED[2]);
+    doc.text('This is a digitally generated prescription/receipt. No physical signature is required.', 15, footerY - 5);
+    doc.text(`${clinicInfo.clinicName} · Thank you for letting us care for your smile.`, 15, footerY);
+  } catch (e) {
+    console.error("Failed to generate or add Smile Gallery to PDF:", e);
+  }
+};
+
 const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, onSave }) => {
   const { profile } = useSession();
   const {
@@ -1544,7 +1612,7 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
     }));
   };
 
-  const downloadPrescriptionPDF = (c: Customer) => {
+  const downloadPrescriptionPDF = async (c: Customer) => {
     const patientName = c.name || 'Patient';
     const patientPhone = c.phone || '';
     const today = new Date().toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
@@ -1809,10 +1877,18 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
     doc.setDrawColor(TEXT_MUTED[0], TEXT_MUTED[1], TEXT_MUTED[2]);
     doc.line(150, footerY - 1, 195, footerY - 1);
 
+    await addSmileGalleryToPDF(doc, c, {
+      clinicName: clinicBranding.clinicName,
+      doctorName: clinicBranding.doctorName,
+      qualifications: clinicBranding.qualifications,
+      phone: clinicBranding.phone,
+      logoUrl: clinicBranding.logoUrl
+    });
+
     doc.save(`Rx_Estimate_${patientName.replace(/\s+/g, '_')}_${today.replace(/\s+/g, '-')}.pdf`);
   };
 
-  const generateDefaultPDF = () => {
+  const generateDefaultPDF = async () => {
     const patientName = form.name || 'Patient';
     const patientPhone = form.phone || '';
     const today = new Date().toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
@@ -2098,6 +2174,14 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
     doc.text("Doctor's Signature", 150, footerY - 5);
     doc.setDrawColor(TEXT_MUTED[0], TEXT_MUTED[1], TEXT_MUTED[2]);
     doc.line(150, footerY - 1, 195, footerY - 1);
+
+    await addSmileGalleryToPDF(doc, form as Customer, {
+      clinicName: clinicBranding.clinicName,
+      doctorName: clinicBranding.doctorName,
+      qualifications: clinicBranding.qualifications,
+      phone: clinicBranding.phone,
+      logoUrl: clinicBranding.logoUrl
+    });
 
     doc.save(`Rx_Estimate_${patientName.replace(/\s+/g, '_')}_${today.replace(/\s+/g, '-')}.pdf`);
   };
@@ -3726,7 +3810,7 @@ const ReactivationCustomers: React.FC = () => {
     loadClinicBranding();
   }, [clinicId]);
 
-  const downloadPrescriptionPDF = (c: Customer) => {
+  const downloadPrescriptionPDF = async (c: Customer) => {
     const patientName = c.name || 'Patient';
     const patientPhone = c.phone || '';
     const today = new Date().toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
@@ -3990,6 +4074,14 @@ const ReactivationCustomers: React.FC = () => {
     doc.text("Doctor's Signature", 150, footerY - 5);
     doc.setDrawColor(TEXT_MUTED[0], TEXT_MUTED[1], TEXT_MUTED[2]);
     doc.line(150, footerY - 1, 195, footerY - 1);
+
+    await addSmileGalleryToPDF(doc, c, {
+      clinicName: clinicBranding.clinicName,
+      doctorName: clinicBranding.doctorName,
+      qualifications: clinicBranding.qualifications,
+      phone: clinicBranding.phone,
+      logoUrl: clinicBranding.logoUrl
+    });
 
     doc.save(`Rx_Estimate_${patientName.replace(/\s+/g, '_')}_${today.replace(/\s+/g, '-')}.pdf`);
   };
@@ -4504,6 +4596,14 @@ const ReactivationCustomers: React.FC = () => {
       doc.setDrawColor(TEXT_MUTED[0], TEXT_MUTED[1], TEXT_MUTED[2]);
       doc.line(150, footerY - 1, 195, footerY - 1);
 
+      await addSmileGalleryToPDF(doc, c, {
+        clinicName: clinicInfo.clinicName,
+        doctorName: clinicInfo.doctorName,
+        qualifications: clinicInfo.qualifications,
+        phone: clinicInfo.phone,
+        logoUrl: clinic.logo_url || ''
+      });
+
       // Upload via serverless function (uses service role key to bypass RLS)
       const pdfBuffer = doc.output('arraybuffer');
       const pdfBytes = new Uint8Array(pdfBuffer);
@@ -4711,6 +4811,7 @@ const ReactivationCustomers: React.FC = () => {
 
       const syncedTemplates = loadWhatsAppTemplates(clinicId);
       const baTemplate = syncedTemplates.find(t => 
+        t.name === 'clinical_image_record' ||
         t.name === 'googlereview' || 
         t.name === 'smile_makeover_google_review' || 
         t.name.toLowerCase().includes('smile') || 
@@ -4763,6 +4864,16 @@ const ReactivationCustomers: React.FC = () => {
 
       const { full: cleanedUrl, suffix: urlSuffix } = cleanReviewUrl(googleReviewUrlStr);
 
+      const bodyParameters = templateName === 'clinical_image_record' 
+        ? [
+            { type: 'text', text: c.name || 'Patient' },
+            { type: 'text', text: c.service || 'Smile Makeover' },
+            { type: 'text', text: clinic?.name || 'Dental Clinic' }
+          ]
+        : [
+            { type: 'text', text: c.name || 'Patient' }
+          ];
+
       const components: any[] = [
         {
           type: 'header',
@@ -4775,9 +4886,7 @@ const ReactivationCustomers: React.FC = () => {
         },
         {
           type: 'body',
-          parameters: [
-            { type: 'text', text: c.name || 'Patient' }
-          ]
+          parameters: bodyParameters
         }
       ];
 

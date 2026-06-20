@@ -4656,20 +4656,32 @@ const ReactivationCustomers: React.FC = () => {
       }
 
       toast.info('Uploading Smile Gallery image...');
+      let mediaId: string | null = null;
       try {
         const uploadRes = await fetch('/api/waba/upload', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ image: photoBase64, customerId: c.id })
+          body: JSON.stringify({
+            image: photoBase64,
+            customerId: c.id,
+            wabaPhoneId,
+            wabaToken
+          })
         });
         const uploadData = await uploadRes.json();
-        if (uploadRes.ok && uploadData.publicUrl) {
-          imageUrl = uploadData.publicUrl;
+        if (uploadRes.ok) {
+          if (uploadData.mediaId) {
+            mediaId = uploadData.mediaId;  // preferred: Meta-hosted media
+            console.log('Using Meta media ID:', mediaId);
+          }
+          if (uploadData.publicUrl) {
+            imageUrl = uploadData.publicUrl;
+          }
         } else {
-          console.error('Storage upload error for Smile Gallery photo:', uploadData.error || uploadData);
+          console.error('Upload error:', uploadData.error || uploadData);
         }
       } catch (uploadErr: any) {
-        console.error('Storage upload fetch error:', uploadErr);
+        console.error('Upload fetch error:', uploadErr);
       }
 
       const syncedTemplates = loadWhatsAppTemplates(clinicId);
@@ -4732,9 +4744,9 @@ const ReactivationCustomers: React.FC = () => {
           parameters: [
             {
               type: 'image',
-              image: {
-                link: imageUrl
-              }
+              image: mediaId
+                ? { id: mediaId }      // ✅ Meta-hosted: most reliable
+                : { link: imageUrl }   // fallback: public URL
             }
           ]
         },

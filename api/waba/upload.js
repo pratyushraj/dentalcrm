@@ -1,89 +1,92 @@
 import { createClient } from '@supabase/supabase-js';
+import FormData from 'form-data';
+import fetch from 'node-fetch';
 
-// Initialize Supabase Client with Service Role Key for backend administration
 const supabaseUrl = process.env.SUPABASE_URL || 'https://sqqocqujxlgoxbcnfbfb.supabase.co';
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
 const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
 export default async function handler(req, res) {
-  // Allow CORS
   res.setHeader('Access-Control-Allow-Credentials', true);
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
-  res.setHeader(
-    'Access-Control-Allow-Headers',
-    'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
-  );
+  res.setHeader('Access-Control-Allow-Headers', 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version');
 
-  if (req.method === 'OPTIONS') {
-    return res.status(200).end();
-  }
-
-  if (req.method !== 'POST') {
-    res.setHeader('Allow', ['POST']);
-    return res.status(405).end(`Method ${req.method} Not Allowed`);
-  }
+  if (req.method === 'OPTIONS') return res.status(200).end();
+  if (req.method !== 'POST') { res.setHeader('Allow', ['POST']); return res.status(405).end(); }
 
   try {
-    const { image, pdf, customerId, fileName } = req.body;
+    const { image, pdf, customerId, fileName, wabaPhoneId, wabaToken } = req.body;
 
     // ── PDF upload ───────────────────────────────────────────────────────────
     if (pdf) {
-      console.log('Uploading prescription PDF to Supabase storage via backend admin...');
+      console.log('Uploading prescription PDF to Supabase storage...');
       const base64Data = pdf.replace(/^data:application\/pdf;base64,/, '');
       const buffer = Buffer.from(base64Data, 'base64');
       const uniqueFileName = `prescriptions/${fileName || `Rx_${customerId || Date.now()}_${Date.now()}.pdf`}`;
 
       const { error: uploadError } = await supabase.storage
         .from('creator-assets')
-        .upload(uniqueFileName, buffer, {
-          contentType: 'application/pdf',
-          upsert: true
-        });
+        .upload(uniqueFileName, buffer, { contentType: 'application/pdf', upsert: true });
 
-      if (uploadError) {
-        console.error('Supabase admin PDF upload error:', uploadError);
-        return res.status(500).json({ error: 'Failed to upload PDF', details: uploadError.message });
-      }
+      if (uploadError) return res.status(500).json({ error: 'Failed to upload PDF', details: uploadError.message });
 
-      const { data: { publicUrl } } = supabase.storage
-        .from('creator-assets')
-        .getPublicUrl(uniqueFileName);
-
-      console.log('Admin PDF upload successful. Public URL:', publicUrl);
+      const { data: { publicUrl } } = supabase.storage.from('creator-assets').getPublicUrl(uniqueFileName);
+      console.log('PDF upload OK:', publicUrl);
       return res.status(200).json({ publicUrl });
     }
 
     // ── Image upload ─────────────────────────────────────────────────────────
-    if (!image) {
-      return res.status(400).json({ error: 'Missing image or pdf parameter' });
-    }
+    if (!image) return res.status(400).json({ error: 'Missing image or pdf parameter' });
 
-    console.log('Uploading B&A photo to Supabase storage via backend admin...');
     const base64Data = image.replace(/^data:image\/\w+;base64,/, '');
     const buffer = Buffer.from(base64Data, 'base64');
-    const uniqueFileName = `estimates/ba_photo_${customerId || Date.now()}_${Date.now()}.jpg`;
 
+    // 1. Upload to Supabase (backup / PDF viewer)
+    const uniqueFileName = `estimates/ba_photo_${customerId || Date.now()}_${Date.now()}.jpg`;
     const { error: uploadError } = await supabase.storage
       .from('creator-assets')
-      .upload(uniqueFileName, buffer, {
-        contentType: 'image/jpeg',
-        upsert: true
-      });
+      .upload(uniqueFileName, buffer, { contentType: 'image/jpeg', upsert: true });
 
-    if (uploadError) {
-      console.error('Supabase admin upload error:', uploadError);
-      return res.status(500).json({ error: 'Failed to upload image', details: uploadError.message });
+    let publicUrl = null;
+    if (!uploadError) {
+      const { data } = supabase.storage.from('creator-assets').getPublicUrl(uniqueFileName);
+      publicUrl = data.publicUrl;
+      console.log('Supabase upload OK:', publicUrl);
+    } else {
+      console.error('Supabase upload error:', uploadError.message);
     }
 
-    const { data: { publicUrl } } = supabase.storage
-      .from('creator-assets')
-      .getPublicUrl(uniqueFileName);
+    // 2. Upload to Meta Media API (most reliable for WhatsApp template headers)
+    let mediaId = null;
+    if (wabaPhoneId && wabaToken) {
+      try {
+        console.log('Uploading to Meta Media API...');
+        const form = new FormData();
+        form.append('messaging_product', 'whatsapp');
+        form.append('type', 'image/jpeg');
+        form.append('file', buffer, { filename: 'smile_gallery.jpg', contentType: 'image/jpeg' });
 
-    console.log('Admin upload successful. Public URL:', publicUrl);
-    return res.status(200).json({ publicUrl });
+        const metaRes = await fetch(`https://graph.facebook.com/v20.0/${wabaPhoneId}/media`, {
+          method: 'POST',
+          headers: { 'Authorization': `Bearer ${wabaToken}`, ...form.getHeaders() },
+          body: form
+        });
+        const metaData = await metaRes.json();
+        if (metaRes.ok && metaData.id) {
+          mediaId = metaData.id;
+          console.log('Meta media upload OK, id:', mediaId);
+        } else {
+          console.error('Meta media upload failed:', JSON.stringify(metaData));
+        }
+      } catch (metaErr) {
+        console.error('Meta media upload error:', metaErr.message);
+      }
+    }
+
+    return res.status(200).json({ publicUrl, mediaId });
   } catch (err) {
-    console.error('Admin upload handler crash:', err);
+    console.error('Upload handler crash:', err);
     return res.status(500).json({ error: 'Internal server error', details: err.message });
   }
 }

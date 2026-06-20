@@ -902,19 +902,19 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
   const initialStatusRef = React.useRef<string>('Draft');
   
   const lastInitializedIdRef = React.useRef<string | undefined>(undefined);
-  const wasOpenRef = React.useRef<boolean>(false);
+  const wasOpenAutosaveRef = React.useRef<boolean>(false);
 
   React.useEffect(() => {
     if (!open) {
-      wasOpenRef.current = false;
+      wasOpenAutosaveRef.current = false;
       return;
     }
 
-    const isNewOpen = !wasOpenRef.current;
+    const isNewOpen = !wasOpenAutosaveRef.current;
     const isDifferentCustomer = customer?.id !== lastInitializedIdRef.current;
 
     if (isNewOpen || isDifferentCustomer) {
-      wasOpenRef.current = true;
+      wasOpenAutosaveRef.current = true;
       lastInitializedIdRef.current = customer?.id;
 
       const initForm = getInitialForm(customer);

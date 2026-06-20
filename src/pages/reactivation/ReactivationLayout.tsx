@@ -471,7 +471,7 @@ const ReactivationLayout: React.FC<ReactivationLayoutProps> = ({ children }) => 
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: 10, scale: 0.95 }}
                       transition={{ duration: 0.15 }}
-                      className="absolute right-0 mt-2 w-80 bg-white border border-slate-200 rounded-2xl shadow-xl z-50 overflow-hidden"
+                      className="fixed sm:absolute top-16 sm:top-auto sm:right-0 sm:mt-2 left-4 right-4 sm:left-auto sm:w-80 bg-white border border-slate-200 rounded-2xl shadow-xl z-50 overflow-hidden"
                     >
                       <div className="p-4 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
                         <span className="text-xs font-bold text-slate-800">Today's Appointments</span>

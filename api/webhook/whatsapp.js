@@ -41,7 +41,7 @@ export default async function handler(req, res) {
                 // Query clinic based on WABA Phone Number ID
                 const { data: clinic } = await supabase
                   .from('dental_clinics')
-                  .select('id, name')
+                  .select('*')
                   .eq('whatsapp_phone_number_id', phoneId)
                   .single();
 
@@ -86,6 +86,50 @@ export default async function handler(req, res) {
 
                     if (insertErr) {
                       console.error('Error inserting webhook message into DB:', insertErr.message);
+                    }
+
+                    // Auto-reply logic if they clicked "Post Review" (Quick Reply button)
+                    const isPostReviewClick = 
+                      bodyText.trim().toLowerCase() === 'post review' ||
+                      message.button?.text?.toLowerCase() === 'post review' ||
+                      message.interactive?.button_reply?.title?.toLowerCase() === 'post review';
+
+                    if (isPostReviewClick) {
+                      let googleReviewUrl = 'https://maps.app.goo.gl/KJ78ipBjeu7DfV4N9';
+                      let token = '';
+                      if (clinic.whatsapp_access_token) {
+                        const parts = clinic.whatsapp_access_token.split('|');
+                        token = parts[0];
+                        if (parts[2]) {
+                          googleReviewUrl = parts[2];
+                        }
+                      }
+
+                      if (token) {
+                        console.log(`Sending automated Google Review link reply to ${fromPhone}...`);
+                        const replyPayload = {
+                          messaging_product: 'whatsapp',
+                          to: fromPhone,
+                          type: 'text',
+                          text: {
+                            body: `Thank you for your feedback! Please tap the link below to share your experience on Google:\n\n${googleReviewUrl}`
+                          }
+                        };
+
+                        try {
+                          const replyRes = await fetch(`https://graph.facebook.com/v20.0/${phoneId}/messages`, {
+                            method: 'POST',
+                            headers: {
+                              'Authorization': `Bearer ${token}`,
+                              'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(replyPayload)
+                          });
+                          console.log('Automated review reply response status:', replyRes.status);
+                        } catch (replyErr) {
+                          console.error('Failed to send automated review reply:', replyErr);
+                        }
+                      }
                     }
                   }
                 }

@@ -4854,9 +4854,28 @@ const ReactivationCustomers: React.FC = () => {
         console.error('Upload fetch error:', uploadErr);
       }
 
+      // Unpack composite whatsapp_access_token format: token|wabaId|googleReviewUrl|beforeAfterTemplateName
+      let dbBeforeAfterTemplateName = '';
+      if (clinic?.whatsapp_access_token && clinic.whatsapp_access_token.includes('|')) {
+        const parts = clinic.whatsapp_access_token.split('|');
+        if (parts[3]) dbBeforeAfterTemplateName = parts[3];
+      }
+      
+      if (!dbBeforeAfterTemplateName) {
+        const localConfigRaw = localStorage.getItem(`whatsapp_config_${clinicId}`);
+        if (localConfigRaw) {
+          try {
+            const parsed = JSON.parse(localConfigRaw);
+            if (parsed.beforeAfterTemplateName) {
+              dbBeforeAfterTemplateName = parsed.beforeAfterTemplateName;
+            }
+          } catch {}
+        }
+      }
+
+      const templateName = dbBeforeAfterTemplateName || 'googlereview';
       const syncedTemplates = loadWhatsAppTemplates(clinicId);
-      const baTemplate = syncedTemplates.find(t => t.name === 'clinical_image_record');
-      const templateName = 'clinical_image_record';
+      const baTemplate = syncedTemplates.find(t => t.name === templateName);
 
       // Prevent duplicate sends within a 2-minute window to avoid spam
       const { data: recentLogs } = await supabase
@@ -4950,8 +4969,20 @@ const ReactivationCustomers: React.FC = () => {
         }
       ];
 
-      // googlereview template has a STATIC button URL — do NOT add button parameters
-      // Adding button params to a static-URL template causes Meta 400 Invalid parameter
+      // Add button parameters if the template uses a dynamic button URL
+      if (templateName === 'smile_makeover_google_review' || (baTemplate && baTemplate.hasDynamicButton)) {
+        components.push({
+          type: 'button',
+          sub_type: 'url',
+          index: '0',
+          parameters: [
+            {
+              type: 'text',
+              text: urlSuffix
+            }
+          ]
+        });
+      }
 
       const templateLanguage = baTemplate?.language || 'en';
 
@@ -5142,13 +5173,8 @@ const ReactivationCustomers: React.FC = () => {
         sendWhatsAppPrescriptionPDF(savedCustomer).catch(err => console.error('Automated WhatsApp dispatch failed:', err));
       }
 
-      // Automatically send Before/After (Smile Gallery branded) on save if photos exist (skip autosave)
-      if (!isAutosave && (
-        (savedCustomer.beforeAfterPhotos && savedCustomer.beforeAfterPhotos.length > 0) ||
-        (savedCustomer.beforePhotos && savedCustomer.beforePhotos.length > 0) ||
-        (savedCustomer.afterPhotos && savedCustomer.afterPhotos.length > 0) ||
-        savedCustomer.beforePhoto || savedCustomer.afterPhoto
-      )) {
+      // Automatically send Before/After (Smile Gallery branded) on save if both before & after photos exist (skip autosave)
+      if (!isAutosave && savedCustomer.beforePhoto && savedCustomer.afterPhoto) {
         sendWhatsAppBeforeAfter(savedCustomer).catch(err => console.error('Automated WhatsApp B&A photo dispatch failed:', err));
       }
 

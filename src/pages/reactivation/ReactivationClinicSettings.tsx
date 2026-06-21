@@ -12,6 +12,7 @@ export interface WhatsAppConfig {
   wabaId: string;
   accessToken: string;
   googleReviewUrl?: string;
+  beforeAfterTemplateName?: string;
 }
 
 export interface WhatsAppTemplate {
@@ -125,6 +126,9 @@ export const loadWhatsAppConfig = (orgId: string): WhatsAppConfig => {
       if (!config.googleReviewUrl) {
         config.googleReviewUrl = 'https://maps.app.goo.gl/KJ78ipBjeu7DfV4N9';
       }
+      if (!config.beforeAfterTemplateName) {
+        config.beforeAfterTemplateName = 'googlereview';
+      }
       return config;
     }
   } catch {}
@@ -133,6 +137,7 @@ export const loadWhatsAppConfig = (orgId: string): WhatsAppConfig => {
     wabaId: '293847561029384',
     accessToken: 'EAAG1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6q7r8s9t0u1v2w3x4y5z',
     googleReviewUrl: 'https://maps.app.goo.gl/KJ78ipBjeu7DfV4N9',
+    beforeAfterTemplateName: 'googlereview',
   };
 };
 
@@ -164,6 +169,12 @@ export const DEFAULT_TEMPLATES: WhatsAppTemplate[] = [
     language: 'en',
     status: 'Approved',
     body: 'Hi {{1}}! Look at your incredible smile transformation! 🦷✨ We would love it if you shared this before/after photo and your experience on our Google Reviews page: {{2}} . Thank you for helping us grow!'
+  },
+  {
+    name: 'smile_makeover_google_review',
+    language: 'en',
+    status: 'Approved',
+    body: 'Hi {{1}}! Look at your incredible smile transformation! 🦷✨ We would love it if you shared this before/after photo and your experience on Google. Please tap the button below. Thank you for helping us grow!'
   }
 ];
 
@@ -328,18 +339,21 @@ const ReactivationClinicSettings: React.FC = () => {
             // DB always wins — start with empty so hardcoded defaults don't bleed in
             let dbWabaId = '';
             let dbGoogleReviewUrl = '';
+            let dbBeforeAfterTemplateName = 'googlereview';
 
             if (rawToken && rawToken.includes('|')) {
-              // Composite format: token|wabaId|googleReviewUrl
+              // Composite format: token|wabaId|googleReviewUrl|beforeAfterTemplateName
               const parts = rawToken.split('|');
               token = parts[0] || prev.accessToken;
               dbWabaId = parts[1] || '';
               dbGoogleReviewUrl = parts[2] || '';
+              dbBeforeAfterTemplateName = parts[3] || 'googlereview';
             } else if (rawToken) {
               // Plain token stored (legacy) — keep prev wabaId/googleReviewUrl from localStorage
               token = rawToken;
               dbWabaId = prev.wabaId;
               dbGoogleReviewUrl = prev.googleReviewUrl || '';
+              dbBeforeAfterTemplateName = prev.beforeAfterTemplateName || 'googlereview';
             }
 
             return {
@@ -348,6 +362,7 @@ const ReactivationClinicSettings: React.FC = () => {
               accessToken: token,
               wabaId: dbWabaId,
               googleReviewUrl: dbGoogleReviewUrl,
+              beforeAfterTemplateName: dbBeforeAfterTemplateName,
             };
           });
 
@@ -601,7 +616,7 @@ const ReactivationClinicSettings: React.FC = () => {
           .from('dental_clinics')
           .update({
             whatsapp_phone_number_id: whatsapp.phoneNumberId,
-            whatsapp_access_token: `${whatsapp.accessToken}|${whatsapp.wabaId || ''}|${whatsapp.googleReviewUrl || ''}`,
+            whatsapp_access_token: `${whatsapp.accessToken}|${whatsapp.wabaId || ''}|${whatsapp.googleReviewUrl || ''}|${whatsapp.beforeAfterTemplateName || 'googlereview'}`,
             name: branding.clinicName,
             address: branding.address,
             phone: branding.phone,
@@ -1116,6 +1131,30 @@ const ReactivationClinicSettings: React.FC = () => {
                     />
                   </div>
                   <p className="text-[9.5px] text-slate-400 mt-1">Used for custom button review link in before/after smile dispatches. (Note: iOS tracking parameters like ?g_st=ic will be cleaned automatically to prevent Google Maps app crashes).</p>
+                </div>
+
+                <div>
+                  <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">
+                    Before/After Photo Sharing Template
+                  </label>
+                  <div className="relative">
+                    <select
+                      value={whatsapp.beforeAfterTemplateName || 'googlereview'}
+                      onChange={(e) => handleWhatsAppChange('beforeAfterTemplateName', e.target.value)}
+                      className="w-full px-3 py-2.5 rounded-lg border border-slate-200 bg-slate-50 text-[13px] text-slate-800 outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-500/10 transition-all cursor-pointer font-medium"
+                    >
+                      <option value="googlereview">googlereview (Default Website Button)</option>
+                      <option value="smile_makeover_google_review">smile_makeover_google_review (Quick Reply Bot Reply)</option>
+                      <option value="clinical_image_record">clinical_image_record (Utility Category Standard)</option>
+                      {templates
+                        .filter(t => t.name !== 'googlereview' && t.name !== 'smile_makeover_google_review' && t.name !== 'clinical_image_record')
+                        .map(t => (
+                          <option key={t.name} value={t.name}>{t.name}</option>
+                        ))
+                      }
+                    </select>
+                  </div>
+                  <p className="text-[9.5px] text-slate-400 mt-1">Select which template is used when dispatching patient before/after smile photos automatically or manually.</p>
                 </div>
               </div>
             </div>

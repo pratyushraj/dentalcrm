@@ -4858,15 +4858,8 @@ const ReactivationCustomers: React.FC = () => {
       }
 
       const syncedTemplates = loadWhatsAppTemplates(clinicId);
-      const baTemplate = syncedTemplates.find(t => 
-        t.name === 'clinical_image_record' ||
-        t.name === 'googlereview' || 
-        t.name === 'smile_makeover_google_review' || 
-        t.name.toLowerCase().includes('smile') || 
-        t.name.toLowerCase().includes('makeover') ||
-        t.name.toLowerCase().includes('review')
-      );
-      const templateName = baTemplate?.name || 'googlereview';
+      const baTemplate = syncedTemplates.find(t => t.name === 'clinical_image_record');
+      const templateName = 'clinical_image_record';
 
       // Prevent duplicate sends within a 2-minute window to avoid spam
       const { data: recentLogs } = await supabase
@@ -4938,7 +4931,7 @@ const ReactivationCustomers: React.FC = () => {
         ? [
             { type: 'text', text: c.name || 'Patient' },
             { type: 'text', text: c.service || 'Smile Makeover' },
-            { type: 'text', text: clinic?.name || 'Dental Clinic' }
+            { type: 'text', text: clinicBranding.clinicName || clinic?.name || 'Dental Clinic' }
           ]
         : [
             { type: 'text', text: c.name || 'Patient' }

@@ -1549,9 +1549,6 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
           cost: selectedProc.defaultCost,
           isCosmetic: selectedProc.gstRate === 18
         }]);
-        
-        // Set the active tab to estimates/billing
-        setActiveTab('estimates');
       }
     }
   };

@@ -12,6 +12,7 @@ export interface WhatsAppConfig {
   wabaId: string;
   accessToken: string;
   googleReviewUrl?: string;
+  sendMode?: 'waba' | 'personal';
 }
 
 export interface WhatsAppTemplate {
@@ -125,6 +126,9 @@ export const loadWhatsAppConfig = (orgId: string): WhatsAppConfig => {
       if (!config.googleReviewUrl) {
         config.googleReviewUrl = 'https://maps.app.goo.gl/KJ78ipBjeu7DfV4N9';
       }
+      if (!config.sendMode) {
+        config.sendMode = 'waba';
+      }
       return config;
     }
   } catch {}
@@ -133,6 +137,7 @@ export const loadWhatsAppConfig = (orgId: string): WhatsAppConfig => {
     wabaId: '293847561029384',
     accessToken: 'EAAG1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6q7r8s9t0u1v2w3x4y5z',
     googleReviewUrl: 'https://maps.app.goo.gl/KJ78ipBjeu7DfV4N9',
+    sendMode: 'waba',
   };
 };
 
@@ -328,18 +333,21 @@ const ReactivationClinicSettings: React.FC = () => {
             // DB always wins — start with empty so hardcoded defaults don't bleed in
             let dbWabaId = '';
             let dbGoogleReviewUrl = '';
+            let dbSendMode: 'waba' | 'personal' = 'waba';
 
             if (rawToken && rawToken.includes('|')) {
-              // Composite format: token|wabaId|googleReviewUrl
+              // Composite format: token|wabaId|googleReviewUrl|sendMode
               const parts = rawToken.split('|');
               token = parts[0] || prev.accessToken;
               dbWabaId = parts[1] || '';
               dbGoogleReviewUrl = parts[2] || '';
+              dbSendMode = (parts[3] as 'waba' | 'personal') || 'waba';
             } else if (rawToken) {
-              // Plain token stored (legacy) — keep prev wabaId/googleReviewUrl from localStorage
+              // Plain token stored (legacy) — keep prev wabaId/googleReviewUrl/sendMode from localStorage
               token = rawToken;
               dbWabaId = prev.wabaId;
               dbGoogleReviewUrl = prev.googleReviewUrl || '';
+              dbSendMode = prev.sendMode || 'waba';
             }
 
             return {
@@ -348,6 +356,7 @@ const ReactivationClinicSettings: React.FC = () => {
               accessToken: token,
               wabaId: dbWabaId,
               googleReviewUrl: dbGoogleReviewUrl,
+              sendMode: dbSendMode,
             };
           });
 
@@ -601,7 +610,7 @@ const ReactivationClinicSettings: React.FC = () => {
           .from('dental_clinics')
           .update({
             whatsapp_phone_number_id: whatsapp.phoneNumberId,
-            whatsapp_access_token: `${whatsapp.accessToken}|${whatsapp.wabaId || ''}|${whatsapp.googleReviewUrl || ''}`,
+            whatsapp_access_token: `${whatsapp.accessToken}|${whatsapp.wabaId || ''}|${whatsapp.googleReviewUrl || ''}|${whatsapp.sendMode || 'waba'}`,
             name: branding.clinicName,
             address: branding.address,
             phone: branding.phone,
@@ -1058,35 +1067,78 @@ const ReactivationClinicSettings: React.FC = () => {
               <div className="space-y-4">
                 <div>
                   <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">
-                    WhatsApp Phone Number ID
+                    WhatsApp Integration Mode
+                  </label>
+                  <div className="grid grid-cols-2 gap-3">
+                    <button
+                      type="button"
+                      onClick={() => handleWhatsAppChange('sendMode', 'waba')}
+                      className={`flex items-center justify-center gap-2 py-2 px-3 rounded-lg border text-[12.5px] font-bold transition-all ${
+                        (whatsapp.sendMode || 'waba') === 'waba'
+                          ? 'bg-indigo-50 border-indigo-200 text-indigo-700 shadow-sm'
+                          : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'
+                      }`}
+                    >
+                      <span>Meta Cloud API (WABA)</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => handleWhatsAppChange('sendMode', 'personal')}
+                      className={`flex items-center justify-center gap-2 py-2 px-3 rounded-lg border text-[12.5px] font-bold transition-all ${
+                        whatsapp.sendMode === 'personal'
+                          ? 'bg-indigo-50 border-indigo-200 text-indigo-700 shadow-sm'
+                          : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'
+                      }`}
+                    >
+                      <span>Personal WhatsApp (Manual)</span>
+                    </button>
+                  </div>
+                  <p className="text-[9.5px] text-slate-400 mt-1">
+                    Choose "Meta Cloud API" for automated direct dispatches via Meta, or "Personal WhatsApp" to launch a pre-filled chat in your own browser/app.
+                  </p>
+                </div>
+
+                 <div>
+                  <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">
+                    WhatsApp Phone Number ID {whatsapp.sendMode === 'personal' && <span className="text-slate-400 font-normal italic">(Not required for Personal mode)</span>}
                   </label>
                   <input
                     type="text"
                     value={whatsapp.phoneNumberId}
                     onChange={(e) => handleWhatsAppChange('phoneNumberId', e.target.value)}
-                    placeholder="e.g. 102938475610293"
-                    className="w-full px-3 py-2 rounded-lg border border-slate-200 bg-slate-50 text-[13px] text-slate-800 placeholder:text-slate-400 outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-500/10 transition-all"
+                    placeholder={whatsapp.sendMode === 'personal' ? 'Not required for Personal mode' : 'e.g. 102938475610293'}
+                    disabled={whatsapp.sendMode === 'personal'}
+                    className={`w-full px-3 py-2 rounded-lg border border-slate-200 text-[13px] outline-none transition-all ${
+                      whatsapp.sendMode === 'personal'
+                        ? 'bg-slate-100/70 text-slate-400 cursor-not-allowed border-slate-200'
+                        : 'bg-slate-50 text-slate-800 focus:border-indigo-400 focus:ring-2 focus:ring-indigo-500/10'
+                    }`}
                   />
                   <p className="text-[9.5px] text-slate-400 mt-1">Found in your Meta App Dashboard under WhatsApp &gt; API Setup.</p>
                 </div>
 
                 <div>
                   <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">
-                    WhatsApp Business Account ID (WABA ID)
+                    WhatsApp Business Account ID (WABA ID) {whatsapp.sendMode === 'personal' && <span className="text-slate-400 font-normal italic">(Not required for Personal mode)</span>}
                   </label>
                   <input
                     type="text"
                     value={whatsapp.wabaId}
                     onChange={(e) => handleWhatsAppChange('wabaId', e.target.value)}
-                    placeholder="e.g. 293847561029384"
-                    className="w-full px-3 py-2 rounded-lg border border-slate-200 bg-slate-50 text-[13px] text-slate-800 placeholder:text-slate-400 outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-500/10 transition-all"
+                    placeholder={whatsapp.sendMode === 'personal' ? 'Not required for Personal mode' : 'e.g. 293847561029384'}
+                    disabled={whatsapp.sendMode === 'personal'}
+                    className={`w-full px-3 py-2 rounded-lg border border-slate-200 text-[13px] outline-none transition-all ${
+                      whatsapp.sendMode === 'personal'
+                        ? 'bg-slate-100/70 text-slate-400 cursor-not-allowed border-slate-200'
+                        : 'bg-slate-50 text-slate-800 focus:border-indigo-400 focus:ring-2 focus:ring-indigo-500/10'
+                    }`}
                   />
                   <p className="text-[9.5px] text-slate-400 mt-1">Also listed on the WhatsApp API Setup page in Meta Business suite.</p>
                 </div>
 
                 <div>
                   <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">
-                    System User Access Token
+                    System User Access Token {whatsapp.sendMode === 'personal' && <span className="text-slate-400 font-normal italic">(Not required for Personal mode)</span>}
                   </label>
                   <div className="relative">
                     <Lock size={13} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
@@ -1094,8 +1146,13 @@ const ReactivationClinicSettings: React.FC = () => {
                       type="password"
                       value={whatsapp.accessToken}
                       onChange={(e) => handleWhatsAppChange('accessToken', e.target.value)}
-                      placeholder="EAAGxxxxxxxxxxxxxxxxxxxxxxxx"
-                      className="w-full pl-8 pr-3 py-2 rounded-lg border border-slate-200 bg-slate-50 text-[13px] text-slate-800 placeholder:text-slate-400 outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-500/10 transition-all"
+                      placeholder={whatsapp.sendMode === 'personal' ? 'Not required for Personal mode' : 'EAAGxxxxxxxxxxxxxxxxxxxxxxxx'}
+                      disabled={whatsapp.sendMode === 'personal'}
+                      className={`w-full pl-8 pr-3 py-2 rounded-lg border border-slate-200 text-[13px] outline-none transition-all ${
+                        whatsapp.sendMode === 'personal'
+                          ? 'bg-slate-100/70 text-slate-400 cursor-not-allowed border-slate-200'
+                          : 'bg-slate-50 text-slate-800 focus:border-indigo-400 focus:ring-2 focus:ring-indigo-500/10'
+                      }`}
                     />
                   </div>
                   <p className="text-[9.5px] text-slate-400 mt-1">Permanent system user token with whatsapp_business_messaging permissions.</p>

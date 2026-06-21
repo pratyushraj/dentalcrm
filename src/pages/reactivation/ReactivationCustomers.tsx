@@ -4752,13 +4752,31 @@ const ReactivationCustomers: React.FC = () => {
         .eq('id', clinicId)
         .single();
 
-      if (!clinic || !clinic.whatsapp_phone_number_id || !clinic.whatsapp_access_token) {
-        console.warn('WhatsApp API not configured for this clinic, skipping before/after photo.');
+      let sendMode: 'waba' | 'personal' = 'waba';
+      if (clinic?.whatsapp_access_token && clinic.whatsapp_access_token.includes('|')) {
+        const parts = clinic.whatsapp_access_token.split('|');
+        if (parts[3] === 'personal') {
+          sendMode = 'personal';
+        }
+      } else {
+        const localConfigRaw = localStorage.getItem(`whatsapp_config_${clinicId}`);
+        if (localConfigRaw) {
+          try {
+            const parsed = JSON.parse(localConfigRaw);
+            if (parsed.sendMode === 'personal') {
+              sendMode = 'personal';
+            }
+          } catch {}
+        }
+      }
+
+      if (sendMode === 'waba' && (!clinic || !clinic.whatsapp_phone_number_id || !clinic.whatsapp_access_token)) {
+        toast.error('WhatsApp Business API is not configured. Please configure it in settings or select Personal WhatsApp mode.');
         return;
       }
 
-      const wabaPhoneId = clinic.whatsapp_phone_number_id;
-      const wabaToken = clinic.whatsapp_access_token ? clinic.whatsapp_access_token.split('|')[0] : '';
+      const wabaPhoneId = clinic?.whatsapp_phone_number_id || '';
+      const wabaToken = clinic?.whatsapp_access_token ? clinic.whatsapp_access_token.split('|')[0] : '';
       const cleanPhone = c.phone.replace(/[^0-9]/g, '');
       const formattedPhone = cleanPhone.length === 10 ? `91${cleanPhone}` : cleanPhone;
 
@@ -4962,6 +4980,35 @@ const ReactivationCustomers: React.FC = () => {
 
       // googlereview template has a STATIC button URL — do NOT add button parameters
       // Adding button params to a static-URL template causes Meta 400 Invalid parameter
+
+      if (sendMode === 'personal') {
+        const patientName = c.name || 'Patient';
+        const serviceName = c.service || 'Smile Makeover';
+        const clinicName = clinicBranding.clinicName || clinic?.name || 'Dental Clinic';
+
+        const messageText = `Dear *${patientName}*, your clinical records have been updated with the photographic tracking of your recent treatment (*${serviceName}*) at *${clinicName}*. Please find it attached below:\n\n📸 Smile Gallery: ${imageUrl}\n\n⭐ Share your feedback with us: ${googleReviewUrlStr}`;
+
+        const waUrl = `https://wa.me/${formattedPhone}?text=${encodeURIComponent(messageText)}`;
+        window.open(waUrl, '_blank');
+        
+        toast.success(`Opening WhatsApp chat for ${c.name || 'patient'} to send Smile Gallery manually! 🦷✨`);
+        
+        try {
+          logWhatsAppMessage(clinicId, {
+            recipientName: c.name || 'Patient',
+            recipientPhone: c.phone,
+            templateName: 'clinical_image_record',
+            body: messageText,
+            status: 'sent',
+            type: 'manual',
+            direction: 'outbound',
+            variables: [c.name || 'Patient']
+          });
+        } catch (logErr) {
+          console.error('Failed to log WABA message:', logErr);
+        }
+        return;
+      }
 
       const templateLanguage = baTemplate?.language || 'en';
 

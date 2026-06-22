@@ -5391,6 +5391,9 @@ const ReactivationCustomers: React.FC = () => {
   }, [clinicId]);
 
   const handleDelete = async (id: string) => {
+    const isConfirmed = window.confirm("Are you sure you want to delete this patient record? This action cannot be undone.");
+    if (!isConfirmed) return;
+
     try {
       const { error } = await supabase
         .from('dental_patients')
@@ -5403,6 +5406,7 @@ const ReactivationCustomers: React.FC = () => {
       const newSet = new Set(selectedIds);
       newSet.delete(id);
       setSelectedIds(newSet);
+      toast.success("Patient record deleted successfully.");
     } catch (err) {
       console.error('Error deleting patient from database:', err);
     }

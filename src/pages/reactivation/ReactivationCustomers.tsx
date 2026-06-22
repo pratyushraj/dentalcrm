@@ -5168,13 +5168,23 @@ const ReactivationCustomers: React.FC = () => {
         }
       }
 
-      // Automatically send PDF on save if there is a prescription or billing estimate (skip on autosave)
-      if (!isAutosave && ((savedCustomer.prescription && savedCustomer.prescription.trim() !== '') || (savedCustomer.estimates && savedCustomer.estimates.length > 0))) {
+      const oldCustomer = customers.find(x => x.id === savedCustomer.id);
+
+      // Automatically send PDF on save if there is a prescription or billing estimate and it is newly updated (skip on autosave)
+      const isPrescriptionNew = !oldCustomer || 
+        (savedCustomer.prescription !== oldCustomer.prescription) || 
+        (JSON.stringify(savedCustomer.estimates) !== JSON.stringify(oldCustomer.estimates));
+
+      if (!isAutosave && isPrescriptionNew && ((savedCustomer.prescription && savedCustomer.prescription.trim() !== '') || (savedCustomer.estimates && savedCustomer.estimates.length > 0))) {
         sendWhatsAppPrescriptionPDF(savedCustomer).catch(err => console.error('Automated WhatsApp dispatch failed:', err));
       }
 
-      // Automatically send Before/After (Smile Gallery branded) on save if both before & after photos exist (skip autosave)
-      if (!isAutosave && savedCustomer.beforePhoto && savedCustomer.afterPhoto) {
+      // Automatically send Before/After (Smile Gallery branded) on save if both before & after photos exist and are newly updated (skip autosave)
+      const isPhotoNew = !oldCustomer || 
+        (savedCustomer.beforePhoto !== oldCustomer.beforePhoto) || 
+        (savedCustomer.afterPhoto !== oldCustomer.afterPhoto);
+
+      if (!isAutosave && savedCustomer.beforePhoto && savedCustomer.afterPhoto && isPhotoNew) {
         sendWhatsAppBeforeAfter(savedCustomer).catch(err => console.error('Automated WhatsApp B&A photo dispatch failed:', err));
       }
 

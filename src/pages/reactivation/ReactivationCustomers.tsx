@@ -4117,7 +4117,7 @@ const ReactivationCustomers: React.FC = () => {
         setLoading(true);
         const { data, error } = await supabase
           .from('dental_patients')
-          .select('*')
+          .select('id, name, phone, last_visit, service, total_spend, status, notes, avatar_color, active_program_id, program_enrollment_date, program_current_step, program_status, created_at')
           .eq('clinic_id', clinicId)
           .order('created_at', { ascending: false });
 
@@ -4134,25 +4134,25 @@ const ReactivationCustomers: React.FC = () => {
             status: d.status,
             notes: d.notes,
             avatarColor: d.avatar_color,
-            problemTeeth: d.problem_teeth || [],
-            xrays: d.xrays || [],
-            beforeAfterPhotos: d.before_after_photos || [],
-            beforePhoto: d.before_photo,
-            beforePhotos: d.before_photos || (d.before_photo ? [d.before_photo] : []),
-            profilePhoto: d.profile_photo,
-            afterPhoto: d.after_photo,
-            afterPhotos: d.after_photos || (d.after_photo ? [d.after_photo] : []),
-            prescription: d.prescription,
-            allergies: d.allergies || [],
-            medicalConditions: d.medical_conditions || [],
-            toothNotes: d.tooth_notes || {},
-            toothConditions: d.tooth_conditions || {},
-            vitals: d.vitals || {},
+            problemTeeth: [],
+            xrays: [],
+            beforeAfterPhotos: [],
+            beforePhoto: '',
+            beforePhotos: [],
+            profilePhoto: '',
+            afterPhoto: '',
+            afterPhotos: [],
+            prescription: '',
+            allergies: [],
+            medicalConditions: [],
+            toothNotes: {},
+            toothConditions: {},
+            vitals: {},
             activeProgramId: d.active_program_id,
             programEnrollmentDate: d.program_enrollment_date,
             programCurrentStep: d.program_current_step,
             programStatus: d.program_status,
-            estimates: d.estimates || []
+            estimates: []
           }));
           setCustomers(mapped);
         } else {
@@ -4299,9 +4299,56 @@ const ReactivationCustomers: React.FC = () => {
     setModalOpen(true);
   };
 
-  const handleOpenEdit = (c: Customer) => {
-    setEditingCustomer(c);
-    setModalOpen(true);
+  const handleOpenEdit = async (c: Customer) => {
+    const toastId = toast.loading(`Loading patient details for ${c.name || 'patient'}...`);
+    try {
+      const { data, error } = await supabase
+        .from('dental_patients')
+        .select('*')
+        .eq('id', c.id)
+        .single();
+      
+      if (error) throw error;
+      if (data) {
+        const mapped: Customer = {
+          id: data.id,
+          name: data.name,
+          phone: data.phone,
+          lastVisit: data.last_visit,
+          service: data.service,
+          totalSpend: Number(data.total_spend || 0),
+          status: data.status,
+          notes: data.notes,
+          avatarColor: data.avatar_color,
+          problemTeeth: data.problem_teeth || [],
+          xrays: data.xrays || [],
+          beforeAfterPhotos: data.before_after_photos || [],
+          beforePhoto: data.before_photo,
+          beforePhotos: data.before_photos || (data.before_photo ? [data.before_photo] : []),
+          profilePhoto: data.profile_photo,
+          afterPhoto: data.after_photo,
+          afterPhotos: data.after_photos || (data.after_photo ? [data.after_photo] : []),
+          prescription: data.prescription,
+          allergies: data.allergies || [],
+          medicalConditions: data.medical_conditions || [],
+          toothNotes: data.tooth_notes || {},
+          toothConditions: data.tooth_conditions || {},
+          vitals: data.vitals || {},
+          activeProgramId: data.active_program_id,
+          programEnrollmentDate: data.program_enrollment_date,
+          programCurrentStep: data.program_current_step,
+          programStatus: data.program_status,
+          estimates: data.estimates || []
+        };
+        setEditingCustomer(mapped);
+        setModalOpen(true);
+      }
+    } catch (err: any) {
+      console.error('Failed to load patient details:', err);
+      toast.error('Error loading patient details: ' + err.message);
+    } finally {
+      toast.dismiss(toastId);
+    }
   };
 
   const handleCallPatient = (phone: string) => {

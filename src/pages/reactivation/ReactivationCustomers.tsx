@@ -1113,8 +1113,9 @@ const ReactivationCustomers: React.FC = () => {
       });
 
       const apiData = await apiRes.json();
-      if (!apiRes.ok) {
-        throw new Error(apiData.error?.message || apiData.error || 'Meta API returned error');
+      if (!apiRes.ok || apiData.ok === false) {
+        const errMsg = apiData.error?.message || apiData.error?.error?.message || JSON.stringify(apiData.error) || 'Meta API returned error';
+        throw new Error(errMsg);
       }
 
       toast.success('WhatsApp prescription PDF shared automatically!');
@@ -1417,8 +1418,9 @@ const ReactivationCustomers: React.FC = () => {
       });
 
       const apiData = await apiRes.json();
-      if (!apiRes.ok) {
-        throw new Error(apiData.error?.message || apiData.error || 'Meta API returned error');
+      if (!apiRes.ok || apiData.ok === false) {
+        const errMsg = apiData.error?.message || apiData.error?.error?.message || JSON.stringify(apiData.error) || 'Meta API returned error';
+        throw new Error(errMsg);
       }
 
       toast.success(`Smile Gallery sent to ${c.name || 'patient'} via WhatsApp! 🦷✨`);

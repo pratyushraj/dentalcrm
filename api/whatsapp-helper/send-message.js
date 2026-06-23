@@ -20,7 +20,7 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Missing wabaPhoneId, wabaToken, or payload' });
     }
 
-    const metaRes = await fetch(`https://graph.facebook.com/v20.0/${wabaPhoneId}/messages`, {
+    const metaRes = await fetch(`https://graph.facebook.com/v21.0/${wabaPhoneId}/messages`, {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${wabaToken}`,
@@ -32,10 +32,12 @@ export default async function handler(req, res) {
     const metaData = await metaRes.json();
     if (!metaRes.ok) {
       console.error('Meta API Error:', JSON.stringify(metaData));
-      return res.status(metaRes.status).json(metaData);
+      // Always return 200 from our endpoint with the error detail — never forward
+      // Meta's status code (e.g. 404) directly, which confuses the client.
+      return res.status(200).json({ ok: false, error: metaData });
     }
 
-    return res.status(200).json(metaData);
+    return res.status(200).json({ ok: true, ...metaData });
   } catch (err) {
     console.error('send-message crash:', err);
     return res.status(500).json({ error: 'Internal server error', details: err.message });

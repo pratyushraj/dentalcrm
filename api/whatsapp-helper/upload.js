@@ -58,7 +58,7 @@ export default async function handler(req, res) {
         form.append('type', 'image/jpeg');
         form.append('file', blob, 'smile_gallery.jpg');
 
-        const metaRes = await fetch(`https://graph.facebook.com/v20.0/${wabaPhoneId}/media`, {
+        const metaRes = await fetch(`https://graph.facebook.com/v21.0/${wabaPhoneId}/media`, {
           method: 'POST',
           headers: { 'Authorization': `Bearer ${wabaToken}` },
           body: form

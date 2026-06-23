@@ -1578,14 +1578,19 @@ const ReactivationCustomers: React.FC = () => {
         }
       }
 
-      const oldCustomer = customers.find(x => x.id === savedCustomer.id);
+      const oldCustomer = editingCustomer;
 
       // Automatically send PDF on save if there is a prescription or billing estimate and it is newly updated (skip on autosave)
-      const isPrescriptionNew = !oldCustomer || 
-        (savedCustomer.prescription !== oldCustomer.prescription) || 
-        (JSON.stringify(savedCustomer.estimates) !== JSON.stringify(oldCustomer.estimates));
+      const oldPrescription = editingCustomer?.prescription || '';
+      const newPrescription = savedCustomer.prescription || '';
+      const oldEstimatesStr = JSON.stringify(editingCustomer?.estimates || []);
+      const newEstimatesStr = JSON.stringify(savedCustomer.estimates || []);
 
-      if (!isAutosave && isPrescriptionNew && ((savedCustomer.prescription && savedCustomer.prescription.trim() !== '') || (savedCustomer.estimates && savedCustomer.estimates.length > 0))) {
+      const isPrescriptionNew = !editingCustomer || 
+        (newPrescription !== oldPrescription) || 
+        (newEstimatesStr !== oldEstimatesStr);
+
+      if (!isAutosave && isPrescriptionNew && ((newPrescription.trim() !== '') || (savedCustomer.estimates && savedCustomer.estimates.length > 0))) {
         sendWhatsAppPrescriptionPDF(savedCustomer).catch(err => console.error('Automated WhatsApp dispatch failed:', err));
       }
 
@@ -1776,7 +1781,7 @@ const ReactivationCustomers: React.FC = () => {
     } catch (err) {
       console.error('Error saving patient to database:', err);
     }
-  }, [clinicId]);
+  }, [clinicId, editingCustomer]);
 
   const handleDelete = async (id: string) => {
     const isConfirmed = window.confirm("Are you sure you want to delete this patient record? This action cannot be undone.");

@@ -1,14 +1,13 @@
-import { createClient } from '@supabase/supabase-js';
+// CommonJS
+const { createClient } = require('@supabase/supabase-js');
 
 const supabaseUrl = process.env.SUPABASE_URL || 'https://sqqocqujxlgoxbcnfbfb.supabase.co';
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY || process.env.VITE_SUPABASE_ANON_KEY || '';
 const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   const { file } = req.query;
-  if (!file) {
-    return res.status(400).send('Missing file parameter');
-  }
+  if (!file) return res.status(400).send('Missing file parameter');
 
   try {
     console.log(`Proxying image file from Supabase storage: ${file}`);
@@ -26,4 +25,4 @@ export default async function handler(req, res) {
     console.error('Image proxy handler crashed:', err);
     return res.status(500).send('Internal server error');
   }
-}
+};

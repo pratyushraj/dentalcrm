@@ -1,6 +1,5 @@
+// Uses Node 18+ built-in fetch – no node-fetch dependency needed
 import { createClient } from '@supabase/supabase-js';
-import FormData from 'form-data';
-import fetch from 'node-fetch';
 
 const supabaseUrl = process.env.SUPABASE_URL || 'https://sqqocqujxlgoxbcnfbfb.supabase.co';
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY || process.env.VITE_SUPABASE_ANON_KEY || '';
@@ -57,19 +56,20 @@ export default async function handler(req, res) {
       console.error('Supabase upload error:', uploadError.message);
     }
 
-    // 2. Upload to Meta Media API (most reliable for WhatsApp template headers)
+    // 2. Upload to Meta Media API using multipart form (Node 18+ built-in FormData + Blob)
     let mediaId = null;
     if (wabaPhoneId && wabaToken) {
       try {
         console.log('Uploading to Meta Media API...');
+        const blob = new Blob([buffer], { type: 'image/jpeg' });
         const form = new FormData();
         form.append('messaging_product', 'whatsapp');
         form.append('type', 'image/jpeg');
-        form.append('file', buffer, { filename: 'smile_gallery.jpg', contentType: 'image/jpeg' });
+        form.append('file', blob, 'smile_gallery.jpg');
 
         const metaRes = await fetch(`https://graph.facebook.com/v20.0/${wabaPhoneId}/media`, {
           method: 'POST',
-          headers: { 'Authorization': `Bearer ${wabaToken}`, ...form.getHeaders() },
+          headers: { 'Authorization': `Bearer ${wabaToken}` },
           body: form
         });
         const metaData = await metaRes.json();

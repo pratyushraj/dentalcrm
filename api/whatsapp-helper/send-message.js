@@ -1,4 +1,4 @@
-import fetch from 'node-fetch';
+// Uses Node 18+ built-in fetch – no node-fetch dependency needed
 
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Credentials', true);
@@ -12,11 +12,9 @@ export default async function handler(req, res) {
   try {
     let body = req.body;
     if (body && typeof body === 'string') {
-      try {
-        body = JSON.parse(body);
-      } catch (e) {}
+      try { body = JSON.parse(body); } catch (e) {}
     }
-    
+
     const { wabaPhoneId, wabaToken, payload } = body || {};
     if (!wabaPhoneId || !wabaToken || !payload) {
       return res.status(400).json({ error: 'Missing wabaPhoneId, wabaToken, or payload' });
@@ -33,13 +31,13 @@ export default async function handler(req, res) {
 
     const metaData = await metaRes.json();
     if (!metaRes.ok) {
-      console.error('Meta API Error Response:', JSON.stringify(metaData));
+      console.error('Meta API Error:', JSON.stringify(metaData));
       return res.status(metaRes.status).json(metaData);
     }
 
     return res.status(200).json(metaData);
   } catch (err) {
-    console.error('Send message handler crash:', err);
+    console.error('send-message crash:', err);
     return res.status(500).json({ error: 'Internal server error', details: err.message });
   }
 }

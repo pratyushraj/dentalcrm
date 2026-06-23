@@ -33,7 +33,35 @@ interface GoogleReview {
 
 // ─── Mock Data ────────────────────────────────────────────────────────────────
 
-const MOCK_REVIEWS: GoogleReview[] = [];
+const MOCK_REVIEWS: GoogleReview[] = [
+  {
+    id: 'r1',
+    commenterName: 'Ramesh Yadav',
+    rating: 5,
+    comment: 'Fantastic painless root canal treatment by Dr. Sharma. Highly recommended!',
+    timeAgo: '2 hours ago',
+    status: 'pending',
+    aiReplyDraft: 'Hi Ramesh, thank you so much for your kind words! We are thrilled to hear that you had a painless root canal experience. Dr. Sharma and the team look forward to seeing you at your next checkup!'
+  },
+  {
+    id: 'r2',
+    commenterName: 'Neha Patel',
+    rating: 5,
+    comment: 'Very clean clinic and professional staff. They explained the treatment estimate clearly before starting.',
+    timeAgo: '1 day ago',
+    status: 'replied',
+    aiReplyDraft: 'Hi Neha, thank you for the feedback! We make sure our clinic is clean and transparent for all our patients. See you soon!'
+  },
+  {
+    id: 'r3',
+    commenterName: 'Amit Roy',
+    rating: 2,
+    comment: 'The waiting time was almost 45 minutes even with an appointment.',
+    timeAgo: '3 days ago',
+    status: 'escalated',
+    aiReplyDraft: 'Hi Amit, we sincerely apologize for the delay during your visit. We had an emergency procedure run over time. We would love to make this up to you. Please contact our reception desk directly so we can prioritize your next slot.'
+  }
+];
 
 export default function ReactivationReviews() {
   const [reviews, setReviews] = useState<GoogleReview[]>(MOCK_REVIEWS);

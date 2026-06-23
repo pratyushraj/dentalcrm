@@ -13,6 +13,8 @@ export interface WhatsAppConfig {
   accessToken: string;
   googleReviewUrl?: string;
   beforeAfterTemplateName?: string;
+  prescriptionTemplateName?: string;
+  bookingTemplateName?: string;
 }
 
 export interface WhatsAppTemplate {
@@ -90,24 +92,85 @@ export interface Medication {
   id: string;
   label: string;
   text: string;
+  category?: string;
 }
 
 export const DEFAULT_MEDICATIONS: Medication[] = [
-  { id: '1', label: 'Amoxicillin 500mg', text: '• Tab. Amoxicillin 500mg - 1 cap thrice daily for 5 days' },
-  { id: '2', label: 'Paracetamol 650mg', text: '• Tab. Paracetamol 650mg - 1 tab SOS for pain' },
-  { id: '3', label: 'Zerodol-SP', text: '• Tab. Zerodol-SP - 1 tab twice daily for 3 days' },
-  { id: '4', label: 'Pantocid 40mg', text: '• Tab. Pantocid 40mg - 1 tab once daily before food' },
-  { id: '5', label: 'Hexidine Mouthwash', text: '• Hexidine Mouthwash - rinse twice daily for 7 days' },
-  { id: '6', label: 'Mox-CL 625mg', text: '• Tab. Mox-CL 625mg - 1 tab twice daily for 5 days' },
-  { id: '7', label: 'Ketorol-DT', text: '• Tab. Ketorol-DT - 1 tab dissolved in water SOS' }
+  { id: '1', label: 'Amoxicillin 500mg', text: '• Tab. Amoxicillin 500mg - 1 cap thrice daily for 5 days', category: 'Antibiotics' },
+  { id: '2', label: 'Paracetamol 650mg', text: '• Tab. Paracetamol 650mg - 1 tab SOS for pain', category: 'Pain killers' },
+  { id: '3', label: 'Zerodol-SP', text: '• Tab. Zerodol-SP - 1 tab twice daily for 3 days', category: 'Pain killers' },
+  { id: '4', label: 'Pantocid 40mg', text: '• Tab. Pantocid 40mg - 1 tab once daily before food', category: 'Others' },
+  { id: '5', label: 'Hexidine Mouthwash', text: '• Hexidine Mouthwash - rinse twice daily for 7 days', category: 'Mouthwash' },
+  { id: '6', label: 'Mox-CL 625mg', text: '• Tab. Mox-CL 625mg - 1 tab twice daily for 5 days', category: 'Antibiotics' },
+  { id: '7', label: 'Ketorol-DT', text: '• Tab. Ketorol-DT - 1 tab dissolved in water SOS', category: 'Pain killers' },
+  { id: '8', label: 'Sensodyne Toothpaste', text: '• Sensodyne Toothpaste - brush twice daily for sensitive teeth', category: 'Toothpaste' },
+  { id: '9', label: 'Metrogyl ER', text: '• Tab. Metrogyl ER - 1 tab twice daily for 5 days', category: 'Antibiotics' },
+  { id: '10', label: 'Flagyl ER', text: '• Tab. Flagyl ER - 1 tab twice daily for 5 days', category: 'Antibiotics' },
+  { id: '11', label: 'Augmentin 625mg', text: '• Tab. Augmentin 625mg - 1 tab twice daily for 5 days', category: 'Antibiotics' },
+  { id: '12', label: 'Clavam 625mg', text: '• Tab. Clavam 625mg - 1 tab twice daily for 5 days', category: 'Antibiotics' },
+  { id: '13', label: 'Indclav 625mg', text: '• Tab. Indclav 625mg - 1 tab twice daily for 5 days', category: 'Antibiotics' },
+  { id: '14', label: 'Mox CV 625mg', text: '• Tab. Mox CV 625mg - 1 tab twice daily for 5 days', category: 'Antibiotics' },
+  { id: '15', label: 'Zocef CV 250mg', text: '• Tab. Zocef CV 250mg - 1 tab twice daily for 5 days', category: 'Antibiotics' },
+  { id: '16', label: 'Sporidex CV 200mg', text: '• Tab. Sporidex CV 200mg - 1 tab twice daily for 5 days', category: 'Antibiotics' },
+  { id: '17', label: 'Zymoflam D', text: '• Tab. Zymoflam D - 1 tab twice daily for 5 days', category: 'Pain killers' },
+  { id: '18', label: 'Intagesic', text: '• Tab. Intagesic - 1 tab twice daily for 5 days', category: 'Pain killers' },
+  { id: '19', label: 'Lysoflam', text: '• Tab. Lysoflam - 1 tab twice daily for 5 days', category: 'Pain killers' },
+  { id: '20', label: 'Gudgesic SP', text: '• Tab. Gudgesic SP - 1 tab twice daily for 5 days', category: 'Pain killers' },
+  { id: '21', label: 'Enzoflam', text: '• Tab. Enzoflam - 1 tab twice daily for 5 days', category: 'Pain killers' },
+  { id: '22', label: 'Clohex ADS M/W', text: '• Clohex ADS Mouthwash - rinse twice daily for 7 days', category: 'Mouthwash' },
+  { id: '23', label: 'Vantej Aqua M/W', text: '• Vantej Aqua Mouthwash - rinse twice daily for 7 days', category: 'Mouthwash' },
+  { id: '24', label: 'Hydent 360 M/W', text: '• Hydent 360 Mouthwash - rinse twice daily for 7 days', category: 'Mouthwash' },
+  { id: '25', label: 'Coolora M/W', text: '• Coolora Mouthwash - rinse twice daily for 7 days', category: 'Mouthwash' },
+  { id: '26', label: 'Corahex M/W', text: '• Corahex Mouthwash - rinse twice daily for 7 days', category: 'Mouthwash' },
+  { id: '27', label: 'Paloxide M/W', text: '• Paloxide Mouthwash - rinse twice daily for 7 days', category: 'Mouthwash' },
+  { id: '28', label: 'Xyon-C M/W', text: '• Xyon-C Mouthwash - rinse twice daily for 7 days', category: 'Mouthwash' },
+  { id: '29', label: 'Gumex Gum Paint', text: '• Gumex Gum Paint - apply on gums thrice daily', category: 'Mouthwash' },
+  { id: '30', label: 'Logum Gel', text: '• Logum Gel - apply on painful ulcers/areas 10 minutes before food', category: 'Gels' },
+  { id: '31', label: 'Metrogyl DG Gel', text: '• Metrogyl DG Gel - massage gently on gums twice daily after brushing', category: 'Gels' },
+  { id: '32', label: 'Turbocoat Gel', text: '• Turbocoat Gel - apply on sensitive areas once daily after brushing', category: 'Gels' },
+  { id: '33', label: 'Vantej Toothpaste', text: '• Vantej Toothpaste - brush twice daily', category: 'Toothpaste' },
+  { id: '34', label: 'Reguard Toothpaste', text: '• Reguard Toothpaste - brush twice daily', category: 'Toothpaste' },
+  { id: '35', label: 'Perioguard Toothpaste', text: '• Perioguard Toothpaste - brush twice daily', category: 'Toothpaste' },
+  { id: '36', label: 'Hydent K Toothpaste', text: '• Hydent K Toothpaste - brush twice daily', category: 'Toothpaste' },
+  { id: '37', label: 'Glister Toothpaste', text: '• Glister Toothpaste - brush twice daily', category: 'Toothpaste' },
+  { id: '38', label: 'Snowdent Toothpaste', text: '• Snowdent Toothpaste - brush twice daily', category: 'Toothpaste' },
+  { id: '39', label: 'Remin Toothpaste', text: '• Remin Toothpaste - brush twice daily', category: 'Toothpaste' },
+  { id: '40', label: 'Toothmin Toothpaste', text: '• Toothmin Toothpaste - brush twice daily', category: 'Toothpaste' },
+  { id: '41', label: 'Enzoflam CT', text: '• Tab. Enzoflam CT - 1 tab twice daily for 5 days', category: 'Pain killers' },
+  { id: '42', label: 'Rantac RD', text: '• Tab. Rantac RD - 1 tab twice daily before food', category: 'Gas/Acidity' },
+  { id: '43', label: 'Ranidom-DOM', text: '• Tab. Ranidom-DOM - 1 tab twice daily before food', category: 'Gas/Acidity' },
+  { id: '44', label: 'Pan-40', text: '• Tab. Pan-40 - 1 tab once daily before food', category: 'Gas/Acidity' },
+  { id: '45', label: 'Cyra-D', text: '• Tab. Cyra-D - 1 tab once daily before food', category: 'Gas/Acidity' },
+  { id: '46', label: 'Rabeprazole 20mg', text: '• Tab. Rabeprazole 20mg - 1 tab once daily before food', category: 'Gas/Acidity' }
 ];
 
 export const MEDICATIONS_KEY = (orgId: string) => `clinic_medications_${orgId}`;
 
+export const migrateMedications = (meds: Medication[]): Medication[] => {
+  return meds.map(med => {
+    if (med.category) return med;
+    const matched = DEFAULT_MEDICATIONS.find(dm => dm.label.toLowerCase() === med.label.toLowerCase());
+    if (matched) return { ...med, category: matched.category };
+    
+    const text = (med.text || '').toLowerCase();
+    const label = (med.label || '').toLowerCase();
+    if (label.includes('gel') || text.includes('gel') || text.includes('apply on')) return { ...med, category: 'Gels' };
+    if (label.includes('mouthwash') || label.includes('m/w') || text.includes('mouthwash') || text.includes('rinse')) return { ...med, category: 'Mouthwash' };
+    if (label.includes('toothpaste') || label.includes('paste') || text.includes('toothpaste') || text.includes('brush')) return { ...med, category: 'Toothpaste' };
+    if (label.includes('pan-') || label.includes('pantocid') || label.includes('rantac') || label.includes('ranidom') || label.includes('cyra') || label.includes('rabeprazole') || text.includes('before food') || text.includes('acidity')) return { ...med, category: 'Gas/Acidity' };
+    if (label.includes('paracetamol') || label.includes('zerodol') || label.includes('ketorol') || label.includes('pain') || label.includes('enzoflam') || label.includes('intagesic') || label.includes('lysoflam') || label.includes('gudgesic') || label.includes('zymoflam') || label.includes('ct')) return { ...med, category: 'Pain killers' };
+    if (label.includes('amox') || label.includes('mox') || label.includes('clavam') || label.includes('aug') || label.includes('zocef') || label.includes('spori') || label.includes('metro') || label.includes('flagyl') || label.includes('antibiotic') || text.includes('cap') || text.includes('tab.')) return { ...med, category: 'Antibiotics' };
+    return { ...med, category: 'Others' };
+  });
+};
+
 export const loadClinicMedications = (orgId: string): Medication[] => {
   try {
     const raw = localStorage.getItem(MEDICATIONS_KEY(orgId));
-    if (raw) return JSON.parse(raw) as Medication[];
+    if (raw) {
+      const parsed = JSON.parse(raw) as Medication[];
+      return migrateMedications(parsed);
+    }
   } catch {}
   return [...DEFAULT_MEDICATIONS];
 };
@@ -127,7 +190,13 @@ export const loadWhatsAppConfig = (orgId: string): WhatsAppConfig => {
         config.googleReviewUrl = 'https://maps.app.goo.gl/KJ78ipBjeu7DfV4N9';
       }
       if (!config.beforeAfterTemplateName) {
-        config.beforeAfterTemplateName = 'googlereview';
+        config.beforeAfterTemplateName = 'clinical_image_record';
+      }
+      if (!config.prescriptionTemplateName) {
+        config.prescriptionTemplateName = 'prescription_pdf_share';
+      }
+      if (!config.bookingTemplateName) {
+        config.bookingTemplateName = 'booking';
       }
       return config;
     }
@@ -137,7 +206,9 @@ export const loadWhatsAppConfig = (orgId: string): WhatsAppConfig => {
     wabaId: '293847561029384',
     accessToken: 'EAAG1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6q7r8s9t0u1v2w3x4y5z',
     googleReviewUrl: 'https://maps.app.goo.gl/KJ78ipBjeu7DfV4N9',
-    beforeAfterTemplateName: 'googlereview',
+    beforeAfterTemplateName: 'clinical_image_record',
+    prescriptionTemplateName: 'prescription_pdf_share',
+    bookingTemplateName: 'booking',
   };
 };
 
@@ -147,10 +218,10 @@ export const saveWhatsAppConfig = (orgId: string, data: WhatsAppConfig) => {
 
 export const DEFAULT_TEMPLATES: WhatsAppTemplate[] = [
   {
-    name: 'appointment_booking_confirmation',
+    name: 'booking',
     language: 'en',
     status: 'Approved',
-    body: 'Hello {{1}}, this is a confirmation for your appointment on {{2}} at {{3}} with {{4}}. Contact {{5}} for queries.'
+    body: '🦷 Appointment Confirmed. Hi {{1}}, your appointment has been confirmed for {{2}} at {{3}}.'
   },
   {
     name: 'patient_recall_followup',
@@ -183,7 +254,19 @@ export const TEMPLATES_KEY = (orgId: string) => `whatsapp_templates_${orgId}`;
 export const loadWhatsAppTemplates = (orgId: string): WhatsAppTemplate[] => {
   try {
     const raw = localStorage.getItem(TEMPLATES_KEY(orgId));
-    if (raw) return JSON.parse(raw) as WhatsAppTemplate[];
+    if (raw) {
+      const list = JSON.parse(raw) as WhatsAppTemplate[];
+      return list.map(t => {
+        if (t.name === 'appointment_booking_confirmation') {
+          return {
+            ...t,
+            name: 'booking',
+            body: '🦷 Appointment Confirmed. Hi {{1}}, your appointment has been confirmed for {{2}} at {{3}}.'
+          };
+        }
+        return t;
+      });
+    }
   } catch {}
   return [...DEFAULT_TEMPLATES];
 };
@@ -284,6 +367,7 @@ const ReactivationClinicSettings: React.FC = () => {
 
   const [newMedLabel, setNewMedLabel] = useState('');
   const [newMedText, setNewMedText] = useState('');
+  const [newMedCategory, setNewMedCategory] = useState('Pain killers');
 
   const [whatsapp, setWhatsapp] = useState<WhatsAppConfig>(() =>
     loadWhatsAppConfig(orgId)
@@ -327,7 +411,7 @@ const ReactivationClinicSettings: React.FC = () => {
       try {
         const { data, error } = await supabase
           .from('dental_clinics')
-          .select('whatsapp_phone_number_id, whatsapp_access_token, name, address, phone, doctor_name, qualifications, email, logo_url' as any)
+          .select('whatsapp_phone_number_id, whatsapp_access_token, name, address, phone, doctor_name, qualifications, email, logo_url, waba_id, google_review_url, before_after_template_name, prescription_template_name, booking_template_name' as any)
           .eq('id', organizationId)
           .single();
 
@@ -336,33 +420,32 @@ const ReactivationClinicSettings: React.FC = () => {
           setWhatsapp((prev) => {
             const rawToken = data.whatsapp_access_token || '';
             let token = prev.accessToken;
-            // DB always wins — start with empty so hardcoded defaults don't bleed in
-            let dbWabaId = '';
-            let dbGoogleReviewUrl = '';
-            let dbBeforeAfterTemplateName = 'googlereview';
+            let dbWabaId = (data as any).waba_id || '';
+            let dbGoogleReviewUrl = (data as any).google_review_url || '';
+            let dbBeforeAfterTemplateName = (data as any).before_after_template_name || '';
+            let dbPrescriptionTemplateName = (data as any).prescription_template_name || '';
+            let dbBookingTemplateName = (data as any).booking_template_name || '';
 
+            // Fallback for legacy composite token
             if (rawToken && rawToken.includes('|')) {
-              // Composite format: token|wabaId|googleReviewUrl|beforeAfterTemplateName
               const parts = rawToken.split('|');
               token = parts[0] || prev.accessToken;
-              dbWabaId = parts[1] || '';
-              dbGoogleReviewUrl = parts[2] || '';
-              dbBeforeAfterTemplateName = parts[3] || 'googlereview';
+              if (!dbWabaId) dbWabaId = parts[1] || '';
+              if (!dbGoogleReviewUrl) dbGoogleReviewUrl = parts[2] || '';
+              if (!dbBeforeAfterTemplateName) dbBeforeAfterTemplateName = parts[3] || 'googlereview';
             } else if (rawToken) {
-              // Plain token stored (legacy) — keep prev wabaId/googleReviewUrl from localStorage
               token = rawToken;
-              dbWabaId = prev.wabaId;
-              dbGoogleReviewUrl = prev.googleReviewUrl || '';
-              dbBeforeAfterTemplateName = prev.beforeAfterTemplateName || 'googlereview';
             }
 
             return {
               ...prev,
               phoneNumberId: data.whatsapp_phone_number_id || prev.phoneNumberId,
               accessToken: token,
-              wabaId: dbWabaId,
-              googleReviewUrl: dbGoogleReviewUrl,
-              beforeAfterTemplateName: dbBeforeAfterTemplateName,
+              wabaId: dbWabaId || prev.wabaId,
+              googleReviewUrl: dbGoogleReviewUrl || prev.googleReviewUrl || '',
+              beforeAfterTemplateName: dbBeforeAfterTemplateName || prev.beforeAfterTemplateName || 'clinical_image_record',
+              prescriptionTemplateName: dbPrescriptionTemplateName || prev.prescriptionTemplateName || 'prescription_pdf_share',
+              bookingTemplateName: dbBookingTemplateName || prev.bookingTemplateName || 'booking',
             };
           });
 
@@ -379,6 +462,27 @@ const ReactivationClinicSettings: React.FC = () => {
         }
       } catch (err) {
         console.error('Error loading clinic details from Supabase:', err);
+      }
+
+      try {
+        const { data: logsData, error: logsError } = await supabase
+          .from('reactivation_audit_logs')
+          .select('details')
+          .eq('organization_id', organizationId)
+          .eq('action', 'clinic_medications')
+          .order('created_at', { ascending: false })
+          .limit(1);
+
+        if (!logsError && logsData && logsData.length > 0) {
+          const loadedMeds = logsData[0].details?.medications;
+          if (Array.isArray(loadedMeds) && loadedMeds.length > 0) {
+            const migrated = migrateMedications(loadedMeds);
+            setMedications(migrated);
+            localStorage.setItem(MEDICATIONS_KEY(orgId), JSON.stringify(migrated));
+          }
+        }
+      } catch (err) {
+        console.error('Error loading clinic medications from Supabase:', err);
       }
     };
 
@@ -616,7 +720,12 @@ const ReactivationClinicSettings: React.FC = () => {
           .from('dental_clinics')
           .update({
             whatsapp_phone_number_id: whatsapp.phoneNumberId,
-            whatsapp_access_token: `${whatsapp.accessToken}|${whatsapp.wabaId || ''}|${whatsapp.googleReviewUrl || ''}|${whatsapp.beforeAfterTemplateName || 'googlereview'}`,
+            whatsapp_access_token: whatsapp.accessToken,
+            waba_id: whatsapp.wabaId || null,
+            google_review_url: whatsapp.googleReviewUrl || null,
+            before_after_template_name: whatsapp.beforeAfterTemplateName || 'clinical_image_record',
+            prescription_template_name: whatsapp.prescriptionTemplateName || 'prescription_pdf_share',
+            booking_template_name: whatsapp.bookingTemplateName || 'booking',
             name: branding.clinicName,
             address: branding.address,
             phone: branding.phone,
@@ -628,6 +737,17 @@ const ReactivationClinicSettings: React.FC = () => {
           .eq('id', organizationId);
 
         if (error) throw error;
+
+        // Save medications library to Supabase log
+        const { error: medError } = await supabase
+          .from('reactivation_audit_logs')
+          .insert({
+            organization_id: organizationId,
+            action: 'clinic_medications',
+            details: { medications }
+          });
+
+        if (medError) throw medError;
       } catch (err) {
         console.error('Error saving clinic configuration to Supabase:', err);
         toast.error('Failed to sync settings with database.');
@@ -1139,10 +1259,11 @@ const ReactivationClinicSettings: React.FC = () => {
                   </label>
                   <div className="relative">
                     <select
-                      value={whatsapp.beforeAfterTemplateName || 'googlereview'}
+                      value={whatsapp.beforeAfterTemplateName || 'clinical_image_record'}
                       onChange={(e) => handleWhatsAppChange('beforeAfterTemplateName', e.target.value)}
                       className="w-full px-3 py-2.5 rounded-lg border border-slate-200 bg-slate-50 text-[13px] text-slate-800 outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-500/10 transition-all cursor-pointer font-medium"
                     >
+                      <option value="clinical_image_record">clinical_image_record (Utility Category Standard - Recommended)</option>
                       <option value="googlereview">googlereview (Default Website Button)</option>
                       <option value="smile_makeover_google_review">smile_makeover_google_review (Quick Reply Bot Reply)</option>
                       <option value="clinical_image_record">clinical_image_record (Utility Category Standard)</option>
@@ -1419,7 +1540,7 @@ const ReactivationClinicSettings: React.FC = () => {
                 <span className="w-1.5 h-1.5 rounded-full bg-indigo-500"></span>
                 Add New Medication Preset
               </h4>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
                 <div className="md:col-span-1">
                   <label className="block text-[9.5px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">Drug Label / Shortcut</label>
                   <input
@@ -1429,6 +1550,22 @@ const ReactivationClinicSettings: React.FC = () => {
                     placeholder="e.g. Paracetamol 650mg"
                     className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 text-slate-700 font-medium shadow-sm transition-all"
                   />
+                </div>
+                <div className="md:col-span-1">
+                  <label className="block text-[9.5px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">Category</label>
+                  <select
+                    value={newMedCategory}
+                    onChange={(e) => setNewMedCategory(e.target.value)}
+                    className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 text-slate-700 font-medium shadow-sm transition-all h-[34px] cursor-pointer"
+                  >
+                    <option value="Pain killers">Pain killers</option>
+                    <option value="Antibiotics">Antibiotics</option>
+                    <option value="Toothpaste">Toothpaste</option>
+                    <option value="Mouthwash">Mouthwash</option>
+                    <option value="Gels">Gels</option>
+                    <option value="Gas/Acidity">Gas/Acidity</option>
+                    <option value="Others">Others</option>
+                  </select>
                 </div>
                 <div className="md:col-span-2 flex gap-3 items-end">
                   <div className="flex-1">
@@ -1451,7 +1588,8 @@ const ReactivationClinicSettings: React.FC = () => {
                       const newItem: Medication = {
                         id: Date.now().toString(),
                         label: newMedLabel.trim(),
-                        text: newMedText.trim()
+                        text: newMedText.trim(),
+                        category: newMedCategory
                       };
                       setMedications(prev => [...prev, newItem]);
                       setNewMedLabel('');
@@ -1480,9 +1618,24 @@ const ReactivationClinicSettings: React.FC = () => {
                     className="group border border-slate-100 hover:border-slate-200 bg-white rounded-xl p-4 flex flex-col justify-between gap-3 hover:shadow-sm transition-all duration-200"
                   >
                     <div className="min-w-0">
-                      <span className="inline-block text-[10px] font-bold text-indigo-700 bg-indigo-50/80 border border-indigo-100 rounded-lg px-2.5 py-0.8 select-none tracking-wide">
-                        {med.label}
-                      </span>
+                      <div className="flex flex-wrap items-center gap-1.5">
+                        <span className="inline-block text-[10px] font-bold text-indigo-700 bg-indigo-50/80 border border-indigo-100 rounded-lg px-2.5 py-0.8 select-none tracking-wide">
+                          {med.label}
+                        </span>
+                        {med.category && (
+                          <span className={`inline-block text-[9px] font-bold px-1.5 py-0.2 rounded-md border uppercase tracking-wider ${
+                            med.category === 'Pain killers' ? 'bg-red-50 text-red-600 border-red-100' :
+                            med.category === 'Antibiotics' ? 'bg-blue-50 text-blue-600 border-blue-100' :
+                            med.category === 'Toothpaste' ? 'bg-amber-50 text-amber-600 border-amber-100' :
+                            med.category === 'Mouthwash' ? 'bg-emerald-50 text-emerald-600 border-emerald-100' :
+                            med.category === 'Gels' ? 'bg-purple-50 text-purple-600 border-purple-100' :
+                            med.category === 'Gas/Acidity' ? 'bg-orange-50 text-orange-600 border-orange-100' :
+                            'bg-slate-50 text-slate-500 border-slate-200'
+                          }`}>
+                            {med.category}
+                          </span>
+                        )}
+                      </div>
                       <p className="text-[11.5px] text-slate-600 font-medium mt-2 leading-relaxed break-words pl-0.5">
                         {med.text}
                       </p>

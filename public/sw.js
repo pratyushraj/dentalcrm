@@ -1,10 +1,10 @@
-// Service Worker v1.3.6 - Safer SPA caching
+// Service Worker v1.3.7 - Safer SPA caching
 // Precaches app shell for offline support
 
-const CACHE_NAME = 'creator-armour-v9';
-const STATIC_CACHE = 'creator-armour-static-v9';
-const IMAGE_CACHE = 'creator-armour-images-v9';
-const FONT_CACHE = 'creator-armour-fonts-v9';
+const CACHE_NAME = 'dental-crm-v2';
+const STATIC_CACHE = 'dental-crm-static-v2';
+const IMAGE_CACHE = 'dental-crm-images-v2';
+const FONT_CACHE = 'dental-crm-fonts-v2';
 
 // Files to precache for offline
 const PRECACHE_URLS = [
@@ -31,7 +31,7 @@ self.addEventListener('activate', (event) => {
     caches.keys().then((keys) =>
       Promise.all(
         keys
-          .filter((k) => k.startsWith('creator-armour-') && k !== STATIC_CACHE && k !== IMAGE_CACHE && k !== FONT_CACHE)
+          .filter((k) => (k.startsWith('dental-crm-') || k.startsWith('creator-armour-')) && k !== STATIC_CACHE && k !== IMAGE_CACHE && k !== FONT_CACHE)
           .map((k) => caches.delete(k))
       )
     )

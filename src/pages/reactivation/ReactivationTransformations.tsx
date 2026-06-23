@@ -1031,28 +1031,40 @@ export default function ReactivationTransformations() {
                           {beforePhoto ? '✓ Uploaded' : 'Empty'}
                         </span>
                       </div>
-                      <label className="relative w-full aspect-[3/4] cursor-pointer group">
-                        <div className={`w-full h-full rounded-xl overflow-hidden border-2 border-dashed transition-all ${
-                          beforePhoto ? 'border-red-300' : 'border-slate-200 hover:border-indigo-300'
-                        } bg-slate-50 flex items-center justify-center`}>
-                          {beforePhoto ? (
-                            <>
-                              <img src={beforePhoto} className="w-full h-full object-cover" alt="Before" />
-                              <div className="absolute inset-0 bg-slate-900/50 opacity-0 group-hover:opacity-100 transition flex items-center justify-center rounded-xl">
-                                <span className="text-[10px] text-white font-bold bg-white/20 backdrop-blur-sm px-2 py-1 rounded-lg">Replace</span>
-                              </div>
-                            </>
-                          ) : (
-                            <div className="flex flex-col items-center gap-1.5 p-3 text-center">
-                              <div className="w-8 h-8 rounded-xl bg-slate-100 flex items-center justify-center group-hover:bg-indigo-50 transition">
-                                <Upload size={14} className="text-slate-400 group-hover:text-indigo-500 transition" />
-                              </div>
-                              <span className="text-[9.5px] font-bold text-slate-400 group-hover:text-indigo-500 transition">Upload</span>
+                      <div className={`relative w-full aspect-[3/4] rounded-xl overflow-hidden border-2 border-dashed transition-all ${
+                        beforePhoto ? 'border-red-300' : 'border-slate-200'
+                      } bg-slate-50 group`}>
+                        {beforePhoto ? (
+                          <>
+                            <img src={beforePhoto} className="w-full h-full object-cover" alt="Before" />
+                            <div className="absolute inset-0 bg-slate-900/60 opacity-0 group-hover:opacity-100 transition flex flex-col items-center justify-center gap-2 rounded-xl p-2">
+                              <label className="cursor-pointer text-[10px] text-white font-bold bg-white/20 hover:bg-white/30 backdrop-blur-sm px-2.5 py-1.5 rounded-lg flex items-center gap-1 transition w-28 justify-center">
+                                <Upload size={12} />
+                                <span>Gallery</span>
+                                <input type="file" accept="image/*" className="hidden" onChange={(e) => { if (e.target.files?.[0]) handlePhotoUpload(e.target.files[0], 'before'); }} />
+                              </label>
+                              <label className="cursor-pointer text-[10px] text-white font-bold bg-white/20 hover:bg-white/30 backdrop-blur-sm px-2.5 py-1.5 rounded-lg flex items-center gap-1 transition w-28 justify-center">
+                                <Camera size={12} />
+                                <span>Camera</span>
+                                <input type="file" accept="image/*" capture="environment" className="hidden" onChange={(e) => { if (e.target.files?.[0]) handlePhotoUpload(e.target.files[0], 'before'); }} />
+                              </label>
                             </div>
-                          )}
-                        </div>
-                        <input type="file" accept="image/*" className="hidden" onChange={(e) => { if (e.target.files?.[0]) handlePhotoUpload(e.target.files[0], 'before'); }} />
-                      </label>
+                          </>
+                        ) : (
+                          <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 p-2 text-center">
+                            <label className="cursor-pointer border border-dashed border-slate-300 hover:border-indigo-500 bg-white hover:bg-indigo-50/50 rounded-lg py-2 px-3 flex items-center gap-1.5 transition-all w-32 justify-center">
+                              <Upload size={12} className="text-slate-500" />
+                              <span className="text-[10px] font-bold text-slate-600">Gallery</span>
+                              <input type="file" accept="image/*" className="hidden" onChange={(e) => { if (e.target.files?.[0]) handlePhotoUpload(e.target.files[0], 'before'); }} />
+                            </label>
+                            <label className="cursor-pointer border border-dashed border-slate-300 hover:border-indigo-500 bg-white hover:bg-indigo-50/50 rounded-lg py-2 px-3 flex items-center gap-1.5 transition-all w-32 justify-center">
+                              <Camera size={12} className="text-slate-500" />
+                              <span className="text-[10px] font-bold text-slate-600">Camera</span>
+                              <input type="file" accept="image/*" capture="environment" className="hidden" onChange={(e) => { if (e.target.files?.[0]) handlePhotoUpload(e.target.files[0], 'before'); }} />
+                            </label>
+                          </div>
+                        )}
+                      </div>
                     </div>
 
                     {/* After */}
@@ -1063,28 +1075,40 @@ export default function ReactivationTransformations() {
                           {afterPhoto ? '✓ Uploaded' : 'Empty'}
                         </span>
                       </div>
-                      <label className="relative w-full aspect-[3/4] cursor-pointer group">
-                        <div className={`w-full h-full rounded-xl overflow-hidden border-2 border-dashed transition-all ${
-                          afterPhoto ? 'border-emerald-300' : 'border-slate-200 hover:border-indigo-300'
-                        } bg-slate-50 flex items-center justify-center`}>
-                          {afterPhoto ? (
-                            <>
-                              <img src={afterPhoto} className="w-full h-full object-cover" alt="After" />
-                              <div className="absolute inset-0 bg-slate-900/50 opacity-0 group-hover:opacity-100 transition flex items-center justify-center rounded-xl">
-                                <span className="text-[10px] text-white font-bold bg-white/20 backdrop-blur-sm px-2 py-1 rounded-lg">Replace</span>
-                              </div>
-                            </>
-                          ) : (
-                            <div className="flex flex-col items-center gap-1.5 p-3 text-center">
-                              <div className="w-8 h-8 rounded-xl bg-slate-100 flex items-center justify-center group-hover:bg-indigo-50 transition">
-                                <Upload size={14} className="text-slate-400 group-hover:text-indigo-500 transition" />
-                              </div>
-                              <span className="text-[9.5px] font-bold text-slate-400 group-hover:text-indigo-500 transition">Upload</span>
+                      <div className={`relative w-full aspect-[3/4] rounded-xl overflow-hidden border-2 border-dashed transition-all ${
+                        afterPhoto ? 'border-emerald-300' : 'border-slate-200'
+                      } bg-slate-50 group`}>
+                        {afterPhoto ? (
+                          <>
+                            <img src={afterPhoto} className="w-full h-full object-cover" alt="After" />
+                            <div className="absolute inset-0 bg-slate-900/60 opacity-0 group-hover:opacity-100 transition flex flex-col items-center justify-center gap-2 rounded-xl p-2">
+                              <label className="cursor-pointer text-[10px] text-white font-bold bg-white/20 hover:bg-white/30 backdrop-blur-sm px-2.5 py-1.5 rounded-lg flex items-center gap-1 transition w-28 justify-center">
+                                <Upload size={12} />
+                                <span>Gallery</span>
+                                <input type="file" accept="image/*" className="hidden" onChange={(e) => { if (e.target.files?.[0]) handlePhotoUpload(e.target.files[0], 'after'); }} />
+                              </label>
+                              <label className="cursor-pointer text-[10px] text-white font-bold bg-white/20 hover:bg-white/30 backdrop-blur-sm px-2.5 py-1.5 rounded-lg flex items-center gap-1 transition w-28 justify-center">
+                                <Camera size={12} />
+                                <span>Camera</span>
+                                <input type="file" accept="image/*" capture="environment" className="hidden" onChange={(e) => { if (e.target.files?.[0]) handlePhotoUpload(e.target.files[0], 'after'); }} />
+                              </label>
                             </div>
-                          )}
-                        </div>
-                        <input type="file" accept="image/*" className="hidden" onChange={(e) => { if (e.target.files?.[0]) handlePhotoUpload(e.target.files[0], 'after'); }} />
-                      </label>
+                          </>
+                        ) : (
+                          <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 p-2 text-center">
+                            <label className="cursor-pointer border border-dashed border-slate-300 hover:border-indigo-500 bg-white hover:bg-indigo-50/50 rounded-lg py-2 px-3 flex items-center gap-1.5 transition-all w-32 justify-center">
+                              <Upload size={12} className="text-slate-500" />
+                              <span className="text-[10px] font-bold text-slate-600">Gallery</span>
+                              <input type="file" accept="image/*" className="hidden" onChange={(e) => { if (e.target.files?.[0]) handlePhotoUpload(e.target.files[0], 'after'); }} />
+                            </label>
+                            <label className="cursor-pointer border border-dashed border-slate-300 hover:border-indigo-500 bg-white hover:bg-indigo-50/50 rounded-lg py-2 px-3 flex items-center gap-1.5 transition-all w-32 justify-center">
+                              <Camera size={12} className="text-slate-500" />
+                              <span className="text-[10px] font-bold text-slate-600">Camera</span>
+                              <input type="file" accept="image/*" capture="environment" className="hidden" onChange={(e) => { if (e.target.files?.[0]) handlePhotoUpload(e.target.files[0], 'after'); }} />
+                            </label>
+                          </div>
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -1293,7 +1317,7 @@ export default function ReactivationTransformations() {
                             // 1. Fetch clinic WhatsApp config first
                             const { data: clinic } = await supabase
                               .from('dental_clinics')
-                              .select('whatsapp_phone_number_id, whatsapp_access_token')
+                              .select('name, whatsapp_phone_number_id, whatsapp_access_token, google_review_url, before_after_template_name')
                               .eq('id', clinicId)
                               .single();
 
@@ -1302,13 +1326,15 @@ export default function ReactivationTransformations() {
                             }
 
                             const wabaPhoneId = clinic.whatsapp_phone_number_id;
-                            const wabaToken = clinic.whatsapp_access_token.split('|')[0];
+                            const wabaToken = clinic.whatsapp_access_token.includes('|')
+                              ? clinic.whatsapp_access_token.split('|')[0]
+                              : clinic.whatsapp_access_token;
 
                             // 2. Capture branded canvas image
                             const base64Image = canvas.toDataURL('image/jpeg', 0.92);
 
                             // 3. Upload via serverless function (bypasses RLS)
-                            const uploadRes = await fetch('/api/waba/upload', {
+                            const uploadRes = await fetch('/api/whatsapp-helper/upload', {
                               method: 'POST',
                               headers: { 'Content-Type': 'application/json' },
                               body: JSON.stringify({ 
@@ -1322,50 +1348,140 @@ export default function ReactivationTransformations() {
                             if (!uploadRes.ok) throw new Error(uploadData.error || 'Upload failed');
 
                             const imageUrl = uploadData.filePath
-                              ? window.location.origin + '/api/waba/view-image?file=' + encodeURIComponent(uploadData.filePath)
+                              ? window.location.origin + '/api/whatsapp-helper/view-image?file=' + encodeURIComponent(uploadData.filePath)
                               : uploadData.publicUrl;
 
                             const cleanPhone = activePatient.phone.replace(/[^0-9]/g, '');
                             const formattedPhone = cleanPhone.length === 10 ? `91${cleanPhone}` : cleanPhone;
 
-                            // 4. Get Google Review URL from packed token
-                            let googleReviewUrl = 'https://maps.app.goo.gl/KJ78ipBjeu7DfV4N9';
+                            // 4. Get Google Review URL and Template Name directly or from packed token
+                            let googleReviewUrl = (clinic as any).google_review_url || 'https://maps.app.goo.gl/KJ78ipBjeu7DfV4N9';
+                            let dbBeforeAfterTemplateName = (clinic as any).before_after_template_name || '';
+
                             if (clinic.whatsapp_access_token.includes('|')) {
                               const parts = clinic.whatsapp_access_token.split('|');
-                              if (parts[2]) googleReviewUrl = parts[2];
+                              if (!googleReviewUrl || googleReviewUrl === 'https://maps.app.goo.gl/KJ78ipBjeu7DfV4N9') {
+                                if (parts[2]) googleReviewUrl = parts[2];
+                              }
+                              if (!dbBeforeAfterTemplateName) {
+                                if (parts[3]) dbBeforeAfterTemplateName = parts[3];
+                              }
                             }
                             try { const u = new URL(googleReviewUrl); u.searchParams.delete('g_st'); googleReviewUrl = u.toString(); } catch {}
 
-                            // 5. Send via Meta API using googlereview template
+                            if (!dbBeforeAfterTemplateName) {
+                              const localConfigRaw = localStorage.getItem(`whatsapp_config_${clinicId}`);
+                              if (localConfigRaw) {
+                                try {
+                                  const parsed = JSON.parse(localConfigRaw);
+                                  if (parsed.beforeAfterTemplateName) {
+                                    dbBeforeAfterTemplateName = parsed.beforeAfterTemplateName;
+                                  }
+                                } catch {}
+                              }
+                            }
+
+                            let templateName = dbBeforeAfterTemplateName;
+                            if (!templateName) {
+                              const nameLower = (clinic.name || clinicName || '').toLowerCase();
+                              if (nameLower.includes('shree ram') || nameLower.includes('your dentist')) {
+                                templateName = 'clinical_image_record';
+                              } else {
+                                templateName = 'googlereview';
+                              }
+                            }
+
+                            // Clean review URL to get suffix if needed
+                            let urlSuffix = googleReviewUrl;
+                            if (googleReviewUrl.includes('maps.app.goo.gl/')) {
+                              const parts = googleReviewUrl.split('maps.app.goo.gl/');
+                              urlSuffix = parts[parts.length - 1].split('?')[0];
+                            } else if (googleReviewUrl.includes('g.page/r/')) {
+                              const parts = googleReviewUrl.split('g.page/r/');
+                              urlSuffix = parts[parts.length - 1].split('?')[0];
+                            }
+
+                            const isClinicalImageRecord = templateName === 'clinical_image_record';
+                            const bodyParameters = isClinicalImageRecord
+                              ? [
+                                  { type: 'text', text: activePatient.name || 'Patient' },
+                                  { type: 'text', text: treatmentLabel || activePatient.service || 'Smile Makeover' },
+                                  { type: 'text', text: clinic.name || clinicName || 'Dental Clinic' }
+                                ]
+                              : [
+                                  { type: 'text', text: activePatient.name || 'Patient' }
+                                ];
+
+                            const components: any[] = [
+                              { 
+                                type: 'header', 
+                                parameters: [
+                                  { 
+                                    type: 'image', 
+                                    image: { link: imageUrl } 
+                                  }
+                                ] 
+                              },
+                              { 
+                                type: 'body', 
+                                parameters: bodyParameters 
+                              }
+                            ];
+
+                            // Add button parameters if the template uses a dynamic button URL
+                            let hasDynamicButton = templateName === 'smile_makeover_google_review';
+                            if (!hasDynamicButton) {
+                              try {
+                                const localTemplatesRaw = localStorage.getItem(`whatsapp_templates_${clinicId}`);
+                                if (localTemplatesRaw) {
+                                  const parsed = JSON.parse(localTemplatesRaw);
+                                  const matched = parsed.find((t: any) => t.name === templateName);
+                                  if (matched && matched.hasDynamicButton) {
+                                    hasDynamicButton = true;
+                                  }
+                                }
+                              } catch {}
+                            }
+
+                            if (hasDynamicButton) {
+                              components.push({
+                                type: 'button',
+                                sub_type: 'url',
+                                index: '0',
+                                parameters: [
+                                  {
+                                    type: 'text',
+                                    text: urlSuffix
+                                  }
+                                ]
+                              });
+                            }
+
+                            // 5. Send via Meta API
                             const payload = {
                               messaging_product: 'whatsapp',
                               to: formattedPhone,
                               type: 'template',
                               template: {
-                                name: 'googlereview',
+                                name: templateName,
                                 language: { code: 'en' },
-                                components: [
-                                  { 
-                                    type: 'header', 
-                                    parameters: [
-                                      { 
-                                        type: 'image', 
-                                        image: { link: imageUrl } 
-                                      }
-                                    ] 
-                                  },
-                                  { type: 'body', parameters: [{ type: 'text', text: activePatient.name || 'Patient' }] }
-                                ]
+                                components
                               }
                             };
 
-                            const apiRes = await fetch(`https://graph.facebook.com/v20.0/${wabaPhoneId}/messages`, {
+                            const apiRes = await fetch('/api/whatsapp-helper/send-message', {
                               method: 'POST',
-                              headers: { 'Authorization': `Bearer ${wabaToken}`, 'Content-Type': 'application/json' },
-                              body: JSON.stringify(payload)
+                              headers: {
+                                'Content-Type': 'application/json'
+                              },
+                              body: JSON.stringify({
+                                wabaPhoneId,
+                                wabaToken,
+                                payload
+                              })
                             });
                             const apiData = await apiRes.json();
-                            if (!apiRes.ok) throw new Error(apiData.error?.message || 'Meta API error');
+                            if (!apiRes.ok) throw new Error(apiData.error?.message || apiData.error || 'Meta API error');
 
                             toast.dismiss(loadingToast);
                             toast.success(`Smile Gallery sent to ${activePatient.name} on WhatsApp! 🦷✨`);

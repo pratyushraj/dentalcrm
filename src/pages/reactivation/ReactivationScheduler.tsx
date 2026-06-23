@@ -49,6 +49,8 @@ export default function ReactivationScheduler() {
   const [whatsappPhoneNumberId, setWhatsappPhoneNumberId] = useState('');
   const [whatsappAccessToken, setWhatsappAccessToken] = useState('');
   const [whatsappBusinessPhone, setWhatsappBusinessPhone] = useState('');
+  const [clinicName, setClinicName] = useState('');
+  const [bookingTemplateName, setBookingTemplateName] = useState('');
 
   const [appointments, setAppointments] = useState<Appointment[]>([]);
   const [patients, setPatients] = useState<Patient[]>([]);
@@ -83,6 +85,8 @@ export default function ReactivationScheduler() {
           setWhatsappPhoneNumberId(clinic.whatsapp_phone_number_id || '');
           setWhatsappAccessToken((clinic.whatsapp_access_token || '').split('|')[0]);
           setWhatsappBusinessPhone(clinic.whatsapp_business_phone || '');
+          setClinicName(clinic.name || '');
+          setBookingTemplateName((clinic as any).booking_template_name || '');
         }
 
         // Fetch all appointments ordered by date
@@ -172,14 +176,26 @@ export default function ReactivationScheduler() {
         const formattedDateString = new Date(apptDate).toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
 
         const syncedTemplates = loadWhatsAppTemplates(clinicId);
+        let fallbackBookingName = bookingTemplateName;
+        if (!fallbackBookingName) {
+          fallbackBookingName = 'booking';
+          const nameLower = (clinicName || '').toLowerCase();
+          if (nameLower.includes('shree ram')) {
+            fallbackBookingName = 'appointment_booking_confirmation';
+          }
+        }
+
         const bookingTemplate = syncedTemplates.find(t => 
+          t.name === 'booking' ||
           t.name.startsWith('appointment_confirm') || 
           t.name.startsWith('appointment_book') || 
           t.name === 'appointment_booking_confirmation'
         ) || { 
-          name: 'appointment_booking_confirmation', 
+          name: fallbackBookingName, 
           language: 'en',
-          body: 'Hello {{1}}, this is a confirmation for your appointment on {{2}} at {{3}} with {{4}}. Contact {{5}} for queries.'
+          body: fallbackBookingName === 'booking'
+            ? '🦷 Appointment Confirmed. Hi {{1}}, your appointment has been confirmed for {{2}} at {{3}}.'
+            : 'Hello {{1}}, this is a confirmation for your appointment on {{2}} at {{3}} with {{4}}. Contact {{5}} for queries.'
         };
 
         const templateBody = bookingTemplate.body || 'Hello {{1}}, this is a confirmation for your appointment on {{2}} at {{3}} with {{4}}. Contact {{5}} for queries.';
@@ -216,13 +232,16 @@ export default function ReactivationScheduler() {
           }
         };
 
-        const response = await fetch(`https://graph.facebook.com/v17.0/${whatsappPhoneNumberId}/messages`, {
+        const response = await fetch('/api/whatsapp-helper/send-message', {
           method: 'POST',
           headers: {
-            'Authorization': `Bearer ${whatsappAccessToken}`,
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify(payload)
+          body: JSON.stringify({
+            wabaPhoneId: whatsappPhoneNumberId,
+            wabaToken: whatsappAccessToken,
+            payload
+          })
         });
 
         const responseJson = await response.json();

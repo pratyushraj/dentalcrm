@@ -35,5 +35,21 @@
       "purpose": "maskable"
     }
   ],
-  "categories": ["business", "productivity", "finance", "legal"]
+  "categories": ["business", "health", "medical", "productivity"],
+  "screenshots": [
+    {
+      "src": "/dashboard_mobile_view.png",
+      "sizes": "375x812",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "CRM Patients List and Doctor Queue"
+    },
+    {
+      "src": "/client-portal-preview.png",
+      "sizes": "1440x900",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Client Portal Dashboard View"
+    }
+  ]
 }

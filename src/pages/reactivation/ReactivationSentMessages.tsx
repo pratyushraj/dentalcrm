@@ -345,7 +345,6 @@ export default function ReactivationSentMessages() {
           ? `91${activeGroup.recipientPhone}` 
           : activeGroup.recipientPhone.replace(/\D/g, '');
 
-        const url = `https://graph.facebook.com/v17.0/${clinic.whatsapp_phone_number_id}/messages`;
         const payload = {
           messaging_product: 'whatsapp',
           recipient_type: 'individual',
@@ -354,13 +353,16 @@ export default function ReactivationSentMessages() {
           text: { body: textToSend }
         };
 
-        const res = await fetch(url, {
+        const res = await fetch('/api/whatsapp-helper/send-message', {
           method: 'POST',
           headers: {
-            'Authorization': `Bearer ${clinic.whatsapp_access_token.split('|')[0]}`,
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify(payload)
+          body: JSON.stringify({
+            wabaPhoneId: clinic.whatsapp_phone_number_id,
+            wabaToken: clinic.whatsapp_access_token.split('|')[0],
+            payload
+          })
         });
 
         const data = await res.json();

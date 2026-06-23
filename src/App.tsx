@@ -22,33 +22,29 @@ const App = () => {
   // Enhanced accessibility with keyboard navigation
   useKeyboardNavigation();
 
-  // Service Worker Registration and Version Management
+  // Force unregister service worker to prevent route caching and 404 issues on APIs
   useEffect(() => {
     if (typeof window === "undefined" || !("serviceWorker" in navigator)) return;
 
-    // ONLY register service worker in production and NOT during prerendering to avoid caching/route conflicts
-    const isPrerender = typeof window !== 'undefined' && (window as any).__PRERENDER__;
-    if (import.meta.env.PROD && !isPrerender) {
-      navigator.serviceWorker.register('/sw.js')
-        .then((registration) => {
-          const previousVersion = window.localStorage.getItem('app_shell_version');
-          if (previousVersion !== APP_SHELL_VERSION) {
-            registration.update().catch(() => {});
-            window.localStorage.setItem('app_shell_version', APP_SHELL_VERSION);
-          }
-        })
-        .catch((error) => {
-          console.error('[App] Service worker registration failed:', error);
+    navigator.serviceWorker.getRegistrations().then(registrations => {
+      let unregisteredAny = false;
+      const unregisterPromises = registrations.map(registration => {
+        console.log('[App] Unregistering Service Worker:', registration.scope);
+        return registration.unregister().then(success => {
+          if (success) unregisteredAny = true;
         });
-    } else {
-      // In development or prerender mode, ensure any active service worker is removed to prevent cache interference
-      navigator.serviceWorker.getRegistrations().then(registrations => {
-        for (const registration of registrations) {
-          registration.unregister();
-          console.log('[App] Unregistered active Service Worker in development/prerender mode to prevent interference.');
+      });
+
+      Promise.all(unregisterPromises).then(() => {
+        if (unregisteredAny) {
+          console.log('[App] Successfully unregistered Service Worker. Reloading page...');
+          // Force reload to completely clear any intercepted routing state
+          window.location.reload();
         }
       });
-    }
+    }).catch(err => {
+      console.error('[App] Failed to query service worker registrations:', err);
+    });
   }, []);
 
   // Removed the temporary useEffect block for role update

@@ -21,6 +21,10 @@ import {
   Bell,
   CheckCircle,
   LogOut,
+  BarChart3,
+  Megaphone,
+  Workflow,
+  Filter,
 } from 'lucide-react';
 
 interface Appointment {
@@ -87,6 +91,11 @@ const NAV_ITEMS: NavItem[] = [
 const PAGE_TITLES: Record<string, string> = {
   '/reactivation/receptionist': 'AI Receptionist',
   '/reactivation/customers': 'Patients',
+  '/reactivation/campaigns': 'Campaigns',
+  '/reactivation/analytics': 'Analytics',
+  '/reactivation/segments': 'Patient Segments',
+  '/reactivation/automations': 'Automations',
+  '/reactivation/scheduler': 'Scheduler',
   '/reactivation/sent-messages': 'Sent Messages',
   '/reactivation/transformations': 'Smile Gallery',
   '/reactivation/reviews': 'Google Reviews',

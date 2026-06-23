@@ -1,6 +1,6 @@
-// CommonJS — no node-fetch needed, Node 18+ has global fetch
+// Uses Node 18+ built-in fetch — no node-fetch needed
 
-module.exports = async function handler(req, res) {
+export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Credentials', true);
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
@@ -40,4 +40,4 @@ module.exports = async function handler(req, res) {
     console.error('send-message crash:', err);
     return res.status(500).json({ error: 'Internal server error', details: err.message });
   }
-};
+}

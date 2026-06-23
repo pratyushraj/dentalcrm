@@ -1,11 +1,10 @@
-// CommonJS — uses Node 18+ built-in fetch and FormData
-const { createClient } = require('@supabase/supabase-js');
+import { createClient } from '@supabase/supabase-js';
 
 const supabaseUrl = process.env.SUPABASE_URL || 'https://sqqocqujxlgoxbcnfbfb.supabase.co';
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY || process.env.VITE_SUPABASE_ANON_KEY || '';
 const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
-module.exports = async function handler(req, res) {
+export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Credentials', true);
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
@@ -19,7 +18,6 @@ module.exports = async function handler(req, res) {
 
     // ── PDF upload ─────────────────────────────────────────────────────────
     if (pdf) {
-      console.log('Uploading prescription PDF to Supabase storage...');
       const base64Data = pdf.replace(/^data:application\/pdf;base64,/, '');
       const buffer = Buffer.from(base64Data, 'base64');
       const uniqueFileName = `prescriptions/${fileName || `Rx_${customerId || Date.now()}_${Date.now()}.pdf`}`;
@@ -31,7 +29,6 @@ module.exports = async function handler(req, res) {
       if (uploadError) return res.status(500).json({ error: 'Failed to upload PDF', details: uploadError.message });
 
       const { data: { publicUrl } } = supabase.storage.from('creator-assets').getPublicUrl(uniqueFileName);
-      console.log('PDF upload OK:', publicUrl);
       return res.status(200).json({ publicUrl });
     }
 
@@ -40,8 +37,8 @@ module.exports = async function handler(req, res) {
 
     const base64Data = image.replace(/^data:image\/\w+;base64,/, '');
     const buffer = Buffer.from(base64Data, 'base64');
-
     const uniqueFileName = `estimates/ba_photo_${customerId || Date.now()}_${Date.now()}.jpg`;
+
     const { error: uploadError } = await supabase.storage
       .from('creator-assets')
       .upload(uniqueFileName, buffer, { contentType: 'image/jpeg', upsert: true });
@@ -50,16 +47,11 @@ module.exports = async function handler(req, res) {
     if (!uploadError) {
       const { data } = supabase.storage.from('creator-assets').getPublicUrl(uniqueFileName);
       publicUrl = data.publicUrl;
-      console.log('Supabase upload OK:', publicUrl);
-    } else {
-      console.error('Supabase upload error:', uploadError.message);
     }
 
-    // Upload to Meta Media API
     let mediaId = null;
     if (wabaPhoneId && wabaToken) {
       try {
-        console.log('Uploading to Meta Media API...');
         const blob = new Blob([buffer], { type: 'image/jpeg' });
         const form = new FormData();
         form.append('messaging_product', 'whatsapp');
@@ -72,12 +64,7 @@ module.exports = async function handler(req, res) {
           body: form
         });
         const metaData = await metaRes.json();
-        if (metaRes.ok && metaData.id) {
-          mediaId = metaData.id;
-          console.log('Meta media upload OK, id:', mediaId);
-        } else {
-          console.error('Meta media upload failed:', JSON.stringify(metaData));
-        }
+        if (metaRes.ok && metaData.id) mediaId = metaData.id;
       } catch (metaErr) {
         console.error('Meta media upload error:', metaErr.message);
       }
@@ -88,4 +75,4 @@ module.exports = async function handler(req, res) {
     console.error('Upload handler crash:', err);
     return res.status(500).json({ error: 'Internal server error', details: err.message });
   }
-};
+}

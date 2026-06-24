@@ -17,4 +17,4 @@ Disallow: /signup/
 Disallow: /reset-password/
 Disallow: /forgot-password/
 
-Sitemap: https://yourdentistpatna.in/sitemap.xml
+Sitemap: https://dental-crm-gray.vercel.app/sitemap.xml

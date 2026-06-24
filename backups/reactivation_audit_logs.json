@@ -1,0 +1,2087 @@
+[
+  {
+    "id": "d713cb51-f2df-4c11-b728-be776701adde",
+    "organization_id": "fd9f532d-10c2-4429-8b1b-e2694314f373",
+    "user_id": null,
+    "patient_id": "7292984244",
+    "action": "waba_message",
+    "details": {
+      "body": "hi",
+      "type": "service",
+      "wamid": "wamid.HBgMOTE548601932944FQIAERgSRHNVJ9D2U3XH==",
+      "status": "sent",
+      "direction": "outbound",
+      "variables": [],
+      "templateName": "custom_reply",
+      "recipientName": "Pratyush Raj",
+      "recipientPhone": "7292984244"
+    },
+    "created_at": "2026-06-17T09:42:39.564+00:00"
+  },
+  {
+    "id": "380c1762-472c-48b5-9f60-d65fec1a3a90",
+    "organization_id": "fd9f532d-10c2-4429-8b1b-e2694314f373",
+    "user_id": null,
+    "patient_id": "7292984244",
+    "action": "waba_message",
+    "details": {
+      "body": "here is your prescriptipon",
+      "type": "service",
+      "wamid": "wamid.HBgMOTE790669210025FQIAERgSR06VMBON0REZP==",
+      "status": "sent",
+      "direction": "outbound",
+      "variables": [],
+      "templateName": "custom_reply",
+      "recipientName": "Pratyush Raj",
+      "recipientPhone": "7292984244"
+    },
+    "created_at": "2026-06-17T10:11:46.462+00:00"
+  },
+  {
+    "id": "dc78af36-7607-42b1-8d84-6eaa0eebb51c",
+    "organization_id": "fd9f532d-10c2-4429-8b1b-e2694314f373",
+    "user_id": null,
+    "patient_id": "7292984244",
+    "action": "waba_message",
+    "details": {
+      "body": "Hi Kumar! Look at your incredible smile transformation! 🦷✨",
+      "type": "campaign",
+      "wamid": "wamid.HBgMOTE822874063599FQIAERgSR1APQ7X3MWGR==",
+      "status": "sent",
+      "direction": "outbound",
+      "variables": [
+        "Kumar"
+      ],
+      "templateName": "googlereview",
+      "recipientName": "Kumar",
+      "recipientPhone": "7292984244"
+    },
+    "created_at": "2026-06-20T07:27:22.061+00:00"
+  },
+  {
+    "id": "1c949142-9848-4621-81f0-e11e86363f3f",
+    "organization_id": "fd9f532d-10c2-4429-8b1b-e2694314f373",
+    "user_id": null,
+    "patient_id": "7292984244",
+    "action": "waba_message",
+    "details": {
+      "body": "Hi Kumar! Look at your incredible smile transformation! 🦷✨",
+      "type": "campaign",
+      "wamid": "wamid.HBgMOTE336417243116FQIAERgSR8P54WIGF53W==",
+      "status": "sent",
+      "direction": "outbound",
+      "variables": [
+        "Kumar"
+      ],
+      "templateName": "googlereview",
+      "recipientName": "Kumar",
+      "recipientPhone": "7292984244"
+    },
+    "created_at": "2026-06-20T07:31:07.712+00:00"
+  },
+  {
+    "id": "3f83682a-6163-43a2-9ce4-f13ecbcbc548",
+    "organization_id": "fd9f532d-10c2-4429-8b1b-e2694314f373",
+    "user_id": null,
+    "patient_id": "7292984244",
+    "action": "waba_message",
+    "details": {
+      "body": "Hi Kumar! Look at your incredible smile transformation! 🦷✨",
+      "type": "campaign",
+      "wamid": "wamid.HBgMOTE570326055541FQIAERgSRLUINTJ55V9==",
+      "status": "sent",
+      "direction": "outbound",
+      "variables": [
+        "Kumar"
+      ],
+      "templateName": "googlereview",
+      "recipientName": "Kumar",
+      "recipientPhone": "7292984244"
+    },
+    "created_at": "2026-06-20T07:34:04.36+00:00"
+  },
+  {
+    "id": "1d63cdea-d58c-4a3b-b542-54a920694320",
+    "organization_id": "fd9f532d-10c2-4429-8b1b-e2694314f373",
+    "user_id": null,
+    "patient_id": "7779928770",
+    "action": "waba_message",
+    "details": {
+      "body": "Hello Sunty, this is a confirmation for your appointment on 21 Jun 2026 at 10:00 AM with Nilmani. Contact +917544860350 for queries.",
+      "type": "utility",
+      "wamid": "wamid.HBgMOTE830593455812FQIAERgSR94Q55K9P9OO==",
+      "status": "sent",
+      "direction": "outbound",
+      "variables": [
+        "Sunty",
+        "21 Jun 2026",
+        "10:00 AM",
+        "Nilmani",
+        "+917544860350"
+      ],
+      "templateName": "appointment_booking_confirmation",
+      "recipientName": "Sunty",
+      "recipientPhone": "7779928770"
+    },
+    "created_at": "2026-06-20T07:35:47.316+00:00"
+  },
+  {
+    "id": "d9e909e7-615c-4d19-bbd9-5bb497fdf955",
+    "organization_id": "fd9f532d-10c2-4429-8b1b-e2694314f373",
+    "user_id": null,
+    "patient_id": "7779928770",
+    "action": "waba_message",
+    "details": {
+      "body": "Hi Sunty! Look at your incredible smile transformation! 🦷✨",
+      "type": "campaign",
+      "wamid": "wamid.HBgMOTE766134247606FQIAERgSR7IIS2R8RBCL==",
+      "status": "sent",
+      "direction": "outbound",
+      "variables": [
+        "Sunty"
+      ],
+      "templateName": "googlereview",
+      "recipientName": "Sunty",
+      "recipientPhone": "7779928770"
+    },
+    "created_at": "2026-06-20T08:00:05.965+00:00"
+  },
+  {
+    "id": "46d4cea5-59cf-47b7-ba77-ed6c2c203414",
+    "organization_id": "fd9f532d-10c2-4429-8b1b-e2694314f373",
+    "user_id": null,
+    "patient_id": "7779928770",
+    "action": "waba_message",
+    "details": {
+      "body": "Hi Sunty! Look at your incredible smile transformation! 🦷✨",
+      "type": "campaign",
+      "wamid": "wamid.HBgMOTE607376742740FQIAERgSRLULH30UXS9P==",
+      "status": "sent",
+      "direction": "outbound",
+      "variables": [
+        "Sunty"
+      ],
+      "templateName": "googlereview",
+      "recipientName": "Sunty",
+      "recipientPhone": "7779928770"
+    },
+    "created_at": "2026-06-20T08:02:27.743+00:00"
+  },
+  {
+    "id": "fc787712-0083-4ae5-911c-11cfac3e44e7",
+    "organization_id": "fd9f532d-10c2-4429-8b1b-e2694314f373",
+    "user_id": null,
+    "patient_id": "7779928770",
+    "action": "waba_message",
+    "details": {
+      "body": "Hi Sunty! Look at your incredible smile transformation! 🦷✨",
+      "type": "campaign",
+      "wamid": "wamid.HBgMOTE713588124169FQIAERgSRKTMK3AUD9R==",
+      "status": "sent",
+      "direction": "outbound",
+      "variables": [
+        "Sunty"
+      ],
+      "templateName": "googlereview",
+      "recipientName": "Sunty",
+      "recipientPhone": "7779928770"
+    },
+    "created_at": "2026-06-20T08:04:40.958+00:00"
+  },
+  {
+    "id": "7074c53f-5a52-413f-aaaa-acb62507b33e",
+    "organization_id": "fd9f532d-10c2-4429-8b1b-e2694314f373",
+    "user_id": null,
+    "patient_id": "7779928770",
+    "action": "waba_message",
+    "details": {
+      "body": "Hi Sunty! Look at your incredible smile transformation! 🦷✨",
+      "type": "campaign",
+      "wamid": "wamid.HBgMOTE337398943668FQIAERgSRL7QRA7OJXFD==",
+      "status": "sent",
+      "direction": "outbound",
+      "variables": [
+        "Sunty"
+      ],
+      "templateName": "googlereview",
+      "recipientName": "Sunty",
+      "recipientPhone": "7779928770"
+    },
+    "created_at": "2026-06-20T08:05:39.023+00:00"
+  },
+  {
+    "id": "e90e072b-53e7-40e6-aa5a-6975b33a2905",
+    "organization_id": "fd9f532d-10c2-4429-8b1b-e2694314f373",
+    "user_id": null,
+    "patient_id": "7292984244",
+    "action": "waba_message",
+    "details": {
+      "body": "Hi Kumar! Look at your incredible smile transformation! 🦷✨",
+      "type": "campaign",
+      "wamid": "wamid.HBgMOTE837693827375FQIAERgSRM1JCQG2Q5Q==",
+      "status": "sent",
+      "direction": "outbound",
+      "variables": [
+        "Kumar"
+      ],
+      "templateName": "googlereview",
+      "recipientName": "Kumar",
+      "recipientPhone": "7292984244"
+    },
+    "created_at": "2026-06-20T08:05:54.664+00:00"
+  },
+  {
+    "id": "71941612-d15f-4efa-abef-cf7abd93b19c",
+    "organization_id": "fd9f532d-10c2-4429-8b1b-e2694314f373",
+    "user_id": null,
+    "patient_id": "7292984244",
+    "action": "waba_message",
+    "details": {
+      "body": "Hi Kumar! Look at your incredible smile transformation! 🦷✨",
+      "type": "campaign",
+      "wamid": "wamid.HBgMOTE375609801178FQIAERgSR8M0195G9DCF==",
+      "status": "sent",
+      "direction": "outbound",
+      "variables": [
+        "Kumar"
+      ],
+      "templateName": "googlereview",
+      "recipientName": "Kumar",
+      "recipientPhone": "7292984244"
+    },
+    "created_at": "2026-06-20T08:13:41.749+00:00"
+  },
+  {
+    "id": "3027752a-3daf-49a4-b0ef-e9cf57dd3671",
+    "organization_id": "fd9f532d-10c2-4429-8b1b-e2694314f373",
+    "user_id": null,
+    "patient_id": "7292984244",
+    "action": "waba_message",
+    "details": {
+      "body": "Hi Kumar! Look at your incredible smile transformation! 🦷✨",
+      "type": "campaign",
+      "wamid": "wamid.HBgMOTE929086730518FQIAERgSRQ5UN0RAD9ZA==",
+      "status": "sent",
+      "direction": "outbound",
+      "variables": [
+        "Kumar"
+      ],
+      "templateName": "googlereview",
+      "recipientName": "Kumar",
+      "recipientPhone": "7292984244"
+    },
+    "created_at": "2026-06-20T08:17:30.371+00:00"
+  },
+  {
+    "id": "b85f61e3-adb9-4d13-bb66-0968b639efae",
+    "organization_id": "fd9f532d-10c2-4429-8b1b-e2694314f373",
+    "user_id": null,
+    "patient_id": "7779928770",
+    "action": "waba_message",
+    "details": {
+      "body": "Hi Sunty! Look at your incredible smile transformation! 🦷✨",
+      "type": "campaign",
+      "wamid": "wamid.HBgMOTE238806394985FQIAERgSRO1RP5F23FG==",
+      "status": "sent",
+      "direction": "outbound",
+      "variables": [
+        "Sunty"
+      ],
+      "templateName": "googlereview",
+      "recipientName": "Sunty",
+      "recipientPhone": "7779928770"
+    },
+    "created_at": "2026-06-20T08:17:51.863+00:00"
+  },
+  {
+    "id": "a2736685-1ae3-4c0b-8ffd-ca35269eea00",
+    "organization_id": "fd9f532d-10c2-4429-8b1b-e2694314f373",
+    "user_id": null,
+    "patient_id": "7292984244",
+    "action": "waba_message",
+    "details": {
+      "body": "Hi Kumar! Look at your incredible smile transformation! 🦷✨",
+      "type": "campaign",
+      "wamid": "wamid.HBgMOTE371370687902FQIAERgSRQFV63H9XL1F==",
+      "status": "sent",
+      "direction": "outbound",
+      "variables": [
+        "Kumar"
+      ],
+      "templateName": "googlereview",
+      "recipientName": "Kumar",
+      "recipientPhone": "7292984244"
+    },
+    "created_at": "2026-06-20T08:23:25.194+00:00"
+  },
+  {
+    "id": "41c06591-ac7d-4dd6-97d0-5f038263878b",
+    "organization_id": "fd9f532d-10c2-4429-8b1b-e2694314f373",
+    "user_id": null,
+    "patient_id": "7779928770",
+    "action": "waba_message",
+    "details": {
+      "body": "Hi Sunty! Look at your incredible smile transformation! 🦷✨",
+      "type": "campaign",
+      "wamid": "wamid.HBgMOTE202007232972FQIAERgSRCIO2BVD0BI9==",
+      "status": "sent",
+      "direction": "outbound",
+      "variables": [
+        "Sunty"
+      ],
+      "templateName": "googlereview",
+      "recipientName": "Sunty",
+      "recipientPhone": "7779928770"
+    },
+    "created_at": "2026-06-20T08:23:34.559+00:00"
+  },
+  {
+    "id": "3f6e4baf-5600-4daa-84c3-8a081e56583b",
+    "organization_id": "fd9f532d-10c2-4429-8b1b-e2694314f373",
+    "user_id": null,
+    "patient_id": "7292984244",
+    "action": "waba_message",
+    "details": {
+      "body": "Hi Kumar! Look at your incredible smile transformation! 🦷✨",
+      "type": "campaign",
+      "wamid": "wamid.HBgMOTE500421904187FQIAERgSREEMNXTF7OFW==",
+      "status": "sent",
+      "direction": "outbound",
+      "variables": [
+        "Kumar"
+      ],
+      "templateName": "googlereview",
+      "recipientName": "Kumar",
+      "recipientPhone": "7292984244"
+    },
+    "created_at": "2026-06-20T08:29:59.187+00:00"
+  },
+  {
+    "id": "36393f28-64cd-4889-b3a0-c81880a30ed5",
+    "organization_id": "fd9f532d-10c2-4429-8b1b-e2694314f373",
+    "user_id": null,
+    "patient_id": "7292984244",
+    "action": "waba_message",
+    "details": {
+      "body": "Hi Kumar! Look at your incredible smile transformation! 🦷✨",
+      "type": "campaign",
+      "wamid": "wamid.HBgMOTE270665245893FQIAERgSRW3NBJ9W9Z1T==",
+      "status": "sent",
+      "direction": "outbound",
+      "variables": [
+        "Kumar"
+      ],
+      "templateName": "googlereview",
+      "recipientName": "Kumar",
+      "recipientPhone": "7292984244"
+    },
+    "created_at": "2026-06-20T08:34:11.252+00:00"
+  },
+  {
+    "id": "67f5ce4c-36fe-4533-b046-2e5af6a76ac3",
+    "organization_id": "fd9f532d-10c2-4429-8b1b-e2694314f373",
+    "user_id": null,
+    "patient_id": "7292984244",
+    "action": "waba_message",
+    "details": {
+      "body": "Hi Kumar! Look at your incredible smile transformation! 🦷✨",
+      "type": "campaign",
+      "wamid": "wamid.HBgMOTE988999831820FQIAERgSRMXABHBETYO==",
+      "status": "sent",
+      "direction": "outbound",
+      "variables": [
+        "Kumar"
+      ],
+      "templateName": "googlereview",
+      "recipientName": "Kumar",
+      "recipientPhone": "7292984244"
+    },
+    "created_at": "2026-06-20T08:42:38.244+00:00"
+  },
+  {
+    "id": "a3132873-407a-4dad-b9b1-599b2e1d1975",
+    "organization_id": "fd9f532d-10c2-4429-8b1b-e2694314f373",
+    "user_id": null,
+    "patient_id": "7779928770",
+    "action": "waba_message",
+    "details": {
+      "body": "Hi Sunty! Look at your incredible smile transformation! 🦷✨",
+      "type": "campaign",
+      "wamid": "wamid.HBgMOTE883429954729FQIAERgSR0O9RBYBZW4U==",
+      "status": "sent",
+      "direction": "outbound",
+      "variables": [
+        "Sunty"
+      ],
+      "templateName": "googlereview",
+      "recipientName": "Sunty",
+      "recipientPhone": "7779928770"
+    },
+    "created_at": "2026-06-20T08:43:48.371+00:00"
+  },
+  {
+    "id": "96788584-428e-4045-a1c1-a81382a39362",
+    "organization_id": "fd9f532d-10c2-4429-8b1b-e2694314f373",
+    "user_id": null,
+    "patient_id": "7292984244",
+    "action": "waba_message",
+    "details": {
+      "body": "Hi Kumar! Look at your incredible smile transformation! 🦷✨",
+      "type": "campaign",
+      "wamid": "wamid.HBgMOTE912388770405FQIAERgSRT4KTUEQIRBM==",
+      "status": "sent",
+      "direction": "outbound",
+      "variables": [
+        "Kumar"
+      ],
+      "templateName": "googlereview",
+      "recipientName": "Kumar",
+      "recipientPhone": "7292984244"
+    },
+    "created_at": "2026-06-20T08:48:29.811+00:00"
+  },
+  {
+    "id": "7915a395-13a1-4f8a-85f9-1ed7c2e8b0eb",
+    "organization_id": "fd9f532d-10c2-4429-8b1b-e2694314f373",
+    "user_id": null,
+    "patient_id": "7779928770",
+    "action": "waba_message",
+    "details": {
+      "body": "Hi Sunty! Look at your incredible smile transformation! 🦷✨",
+      "type": "campaign",
+      "wamid": "wamid.HBgMOTE873240492549FQIAERgSRU5APH4XKK4N==",
+      "status": "sent",
+      "direction": "outbound",
+      "variables": [
+        "Sunty"
+      ],
+      "templateName": "googlereview",
+      "recipientName": "Sunty",
+      "recipientPhone": "7779928770"
+    },
+    "created_at": "2026-06-20T08:48:51.68+00:00"
+  },
+  {
+    "id": "27d77125-79ac-4e65-ad9d-41f09c882b82",
+    "organization_id": "fd9f532d-10c2-4429-8b1b-e2694314f373",
+    "user_id": null,
+    "patient_id": "7779928770",
+    "action": "waba_message",
+    "details": {
+      "body": "Hi Sunty! Look at your incredible smile transformation! 🦷✨",
+      "type": "campaign",
+      "wamid": "wamid.HBgMOTE436474311278FQIAERgSRNB5O90RCGH==",
+      "status": "sent",
+      "direction": "outbound",
+      "variables": [
+        "Sunty"
+      ],
+      "templateName": "googlereview",
+      "recipientName": "Sunty",
+      "recipientPhone": "7779928770"
+    },
+    "created_at": "2026-06-20T08:51:14.443+00:00"
+  },
+  {
+    "id": "d91c7840-e3a2-4bc1-b68b-49ab1df5e56b",
+    "organization_id": "fd9f532d-10c2-4429-8b1b-e2694314f373",
+    "user_id": null,
+    "patient_id": "7292984244",
+    "action": "waba_message",
+    "details": {
+      "body": "Hi Kumar! Look at your incredible smile transformation! 🦷✨",
+      "type": "campaign",
+      "wamid": "wamid.HBgMOTE218169309796FQIAERgSRABALV7ZH8I==",
+      "status": "sent",
+      "direction": "outbound",
+      "variables": [
+        "Kumar"
+      ],
+      "templateName": "googlereview",
+      "recipientName": "Kumar",
+      "recipientPhone": "7292984244"
+    },
+    "created_at": "2026-06-20T09:18:21.337+00:00"
+  },
+  {
+    "id": "9ab4c217-e1c8-4f88-89bf-ef768165511f",
+    "organization_id": "fd9f532d-10c2-4429-8b1b-e2694314f373",
+    "user_id": null,
+    "patient_id": "7779928770",
+    "action": "waba_message",
+    "details": {
+      "body": "Hi Sunty! Look at your incredible smile transformation! 🦷✨",
+      "type": "campaign",
+      "wamid": "wamid.HBgMOTE765387560700FQIAERgSR7D8NAKAX4CJ==",
+      "status": "sent",
+      "direction": "outbound",
+      "variables": [
+        "Sunty"
+      ],
+      "templateName": "googlereview",
+      "recipientName": "Sunty",
+      "recipientPhone": "7779928770"
+    },
+    "created_at": "2026-06-20T09:18:41.309+00:00"
+  },
+  {
+    "id": "fe14fdff-f18d-4505-a425-d5d87afc13d4",
+    "organization_id": "fd9f532d-10c2-4429-8b1b-e2694314f373",
+    "user_id": null,
+    "patient_id": "7779928770",
+    "action": "waba_message",
+    "details": {
+      "body": "Dear Sunty, please find your digital prescription and care summary attached.",
+      "type": "utility",
+      "wamid": "wamid.HBgMOTE180738563342FQIAERgSRAI0W2YCHGY6==",
+      "status": "sent",
+      "direction": "outbound",
+      "variables": [
+        "Sunty"
+      ],
+      "templateName": "prescription_pdf_share",
+      "recipientName": "Sunty",
+      "recipientPhone": "7779928770"
+    },
+    "created_at": "2026-06-20T09:51:29.848+00:00"
+  },
+  {
+    "id": "dbd329bf-6818-4c47-ac88-4fb86dd0cc21",
+    "organization_id": "fd9f532d-10c2-4429-8b1b-e2694314f373",
+    "user_id": null,
+    "patient_id": "7779928770",
+    "action": "waba_message",
+    "details": {
+      "body": "Hi Sunty! Look at your incredible smile transformation! 🦷✨",
+      "type": "campaign",
+      "wamid": "wamid.HBgMOTE996323969106FQIAERgSRCDVYIOWZRS==",
+      "status": "sent",
+      "direction": "outbound",
+      "variables": [
+        "Sunty"
+      ],
+      "templateName": "googlereview",
+      "recipientName": "Sunty",
+      "recipientPhone": "7779928770"
+    },
+    "created_at": "2026-06-20T09:51:31.929+00:00"
+  },
+  {
+    "id": "499617a3-d6ca-476c-9c06-ffe804e206af",
+    "organization_id": "fd9f532d-10c2-4429-8b1b-e2694314f373",
+    "user_id": null,
+    "patient_id": "7779928770",
+    "action": "waba_message",
+    "details": {
+      "body": "Dear Sunty, please find your digital prescription and care summary attached.",
+      "type": "utility",
+      "wamid": "wamid.HBgMOTE517515386803FQIAERgSRAQ9E9WDORY6==",
+      "status": "sent",
+      "direction": "outbound",
+      "variables": [
+        "Sunty"
+      ],
+      "templateName": "prescription_pdf_share",
+      "recipientName": "Sunty",
+      "recipientPhone": "7779928770"
+    },
+    "created_at": "2026-06-20T09:52:26.277+00:00"
+  },
+  {
+    "id": "c66103b3-0734-478e-8ff7-12fb1d168a2a",
+    "organization_id": "fd9f532d-10c2-4429-8b1b-e2694314f373",
+    "user_id": null,
+    "patient_id": "7779928770",
+    "action": "waba_message",
+    "details": {
+      "body": "Hi Sunty! Look at your incredible smile transformation! 🦷✨",
+      "type": "campaign",
+      "wamid": "wamid.HBgMOTE533424005685FQIAERgSRGT0BB0DB30E==",
+      "status": "sent",
+      "direction": "outbound",
+      "variables": [
+        "Sunty"
+      ],
+      "templateName": "googlereview",
+      "recipientName": "Sunty",
+      "recipientPhone": "7779928770"
+    },
+    "created_at": "2026-06-20T09:52:28.71+00:00"
+  },
+  {
+    "id": "62407819-d60b-4d9f-8abf-d870ab7f3800",
+    "organization_id": "fd9f532d-10c2-4429-8b1b-e2694314f373",
+    "user_id": null,
+    "patient_id": "6204764714",
+    "action": "waba_message",
+    "details": {
+      "body": "Hi Pratyush, your appointment at Shree Ram Dental Care is confirmed!\n\n📅 Date: 20 Jun 2026 ⏰ Time: 10:00 AM 👩‍⚕️ Doctor: Nilmani\n\nPlease arrive 10 minutes early. For changes or queries, call us at +917544860350 for help",
+      "type": "utility",
+      "wamid": "wamid.HBgMOTE650482276807FQIAERgSRIMQRU35ZKW==",
+      "status": "sent",
+      "direction": "outbound",
+      "variables": [
+        "Pratyush",
+        "20 Jun 2026",
+        "10:00 AM",
+        "Nilmani",
+        "+917544860350"
+      ],
+      "templateName": "appointment_booking_confirmation",
+      "recipientName": "Pratyush",
+      "recipientPhone": "916204764714"
+    },
+    "created_at": "2026-06-20T10:06:41.226+00:00"
+  },
+  {
+    "id": "08708408-942f-42a2-9f0e-e0219faced07",
+    "organization_id": "fd9f532d-10c2-4429-8b1b-e2694314f373",
+    "user_id": null,
+    "patient_id": "6204764714",
+    "action": "waba_message",
+    "details": {
+      "body": "Hi Pratyush! Look at your incredible smile transformation! 🦷✨",
+      "type": "campaign",
+      "wamid": "wamid.HBgMOTE264597756411FQIAERgSRVN3EH3VI8H==",
+      "status": "sent",
+      "direction": "outbound",
+      "variables": [
+        "Pratyush"
+      ],
+      "templateName": "googlereview",
+      "recipientName": "Pratyush",
+      "recipientPhone": "916204764714"
+    },
+    "created_at": "2026-06-20T10:06:46.02+00:00"
+  },
+  {
+    "id": "806d53e7-e5af-4607-b561-b6b91a060153",
+    "organization_id": "fd9f532d-10c2-4429-8b1b-e2694314f373",
+    "user_id": null,
+    "patient_id": "7292984244",
+    "action": "waba_message",
+    "details": {
+      "body": "Hi Kumar! Look at your incredible smile transformation! 🦷✨",
+      "type": "campaign",
+      "wamid": "wamid.HBgMOTE774281284153FQIAERgSRA7Y5OZ8MFHB==",
+      "status": "sent",
+      "direction": "outbound",
+      "variables": [
+        "Kumar"
+      ],
+      "templateName": "googlereview",
+      "recipientName": "Kumar",
+      "recipientPhone": "7292984244"
+    },
+    "created_at": "2026-06-21T03:49:54.173+00:00"
+  },
+  {
+    "id": "cc618a83-2129-4df3-92f6-cbdf4fb8b2cc",
+    "organization_id": "fd9f532d-10c2-4429-8b1b-e2694314f373",
+    "user_id": null,
+    "patient_id": "7292984244",
+    "action": "waba_message",
+    "details": {
+      "body": "Hi Kumar! Look at your incredible smile transformation! 🦷✨",
+      "type": "campaign",
+      "wamid": "wamid.HBgMOTE115524959644FQIAERgSRLEZFQA1NIC==",
+      "status": "sent",
+      "direction": "outbound",
+      "variables": [
+        "Kumar"
+      ],
+      "templateName": "googlereview",
+      "recipientName": "Kumar",
+      "recipientPhone": "7292984244"
+    },
+    "created_at": "2026-06-21T03:49:54.238+00:00"
+  },
+  {
+    "id": "298b5d50-6511-4138-a89c-cef6921d2a92",
+    "organization_id": "c293137f-83af-410d-8178-ca2d12bd1538",
+    "user_id": null,
+    "patient_id": "6204764714",
+    "action": "waba_message",
+    "details": {
+      "body": "Dear *Pratyush*, your clinical records have been updated with the photographic tracking of your recent treatment (*Root Canal Treatment (RCT)*) at *Shree Ram Dental Care*. Please find it attached below:\n\n📸 Smile Gallery: https://upload.wikimedia.org/wikipedia/commons/e/e0/Placeholder_LCa.png\n\n⭐ Share your feedback with us: https://maps.app.goo.gl/KJ78ipBjeu7DfV4N9",
+      "type": "manual",
+      "wamid": "wamid.HBgMOTE522460657449FQIAERgSR7VF852M1NXD==",
+      "status": "sent",
+      "direction": "outbound",
+      "variables": [
+        "Pratyush"
+      ],
+      "templateName": "clinical_image_record",
+      "recipientName": "Pratyush",
+      "recipientPhone": "+91 6204 764 714"
+    },
+    "created_at": "2026-06-21T04:02:51.114+00:00"
+  },
+  {
+    "id": "e9c216b5-efb0-4870-84b0-015e4791e586",
+    "organization_id": "c293137f-83af-410d-8178-ca2d12bd1538",
+    "user_id": null,
+    "patient_id": "6204764714",
+    "action": "waba_message",
+    "details": {
+      "body": "Dear *Pratyush*, your clinical records have been updated with the photographic tracking of your recent treatment (*Root Canal Treatment (RCT)*) at *Shree Ram Dental Care*. Please find it attached below:\n\n📸 Smile Gallery: https://upload.wikimedia.org/wikipedia/commons/e/e0/Placeholder_LCa.png\n\n⭐ Share your feedback with us: https://maps.app.goo.gl/KJ78ipBjeu7DfV4N9",
+      "type": "manual",
+      "wamid": "wamid.HBgMOTE116928734813FQIAERgSRNYCHKIA5XG==",
+      "status": "sent",
+      "direction": "outbound",
+      "variables": [
+        "Pratyush"
+      ],
+      "templateName": "clinical_image_record",
+      "recipientName": "Pratyush",
+      "recipientPhone": "+91 6204 764 714"
+    },
+    "created_at": "2026-06-21T04:06:48.738+00:00"
+  },
+  {
+    "id": "f3fe80d5-1338-489e-963f-0fcbdeba93e4",
+    "organization_id": "fd9f532d-10c2-4429-8b1b-e2694314f373",
+    "user_id": null,
+    "patient_id": "7292984244",
+    "action": "waba_message",
+    "details": {
+      "body": "Hi Kumar! Look at your incredible smile transformation! 🦷✨",
+      "type": "campaign",
+      "wamid": "wamid.HBgMOTE521097434981FQIAERgSR235FVHCU1DH==",
+      "status": "sent",
+      "direction": "outbound",
+      "variables": [
+        "Kumar"
+      ],
+      "templateName": "googlereview",
+      "recipientName": "Kumar",
+      "recipientPhone": "7292984244"
+    },
+    "created_at": "2026-06-21T04:13:23.839+00:00"
+  },
+  {
+    "id": "4296d75a-e337-4fe7-906a-18aea1f96f68",
+    "organization_id": "fd9f532d-10c2-4429-8b1b-e2694314f373",
+    "user_id": null,
+    "patient_id": "7292984244",
+    "action": "waba_message",
+    "details": {
+      "body": "Hi Pratyush Raj, your appointment at Shree Ram Dental Care is confirmed!\n\n📅 Date: 21 Jun 2026 ⏰ Time: 10:00 AM 👩‍⚕️ Doctor: Nilmani\n\nPlease arrive 10 minutes early. For changes or queries, call us at +917544860350 for help",
+      "type": "utility",
+      "wamid": "wamid.HBgMOTE719484757991FQIAERgSR2Y1GHGLCC0P==",
+      "status": "sent",
+      "direction": "outbound",
+      "variables": [
+        "Pratyush Raj",
+        "21 Jun 2026",
+        "10:00 AM",
+        "Nilmani",
+        "+917544860350"
+      ],
+      "templateName": "appointment_booking_confirmation",
+      "recipientName": "Pratyush Raj",
+      "recipientPhone": "+917292984244"
+    },
+    "created_at": "2026-06-21T04:24:31.907+00:00"
+  },
+  {
+    "id": "dfc54aa1-b11f-47bb-ba45-a086b5379f8e",
+    "organization_id": "fd9f532d-10c2-4429-8b1b-e2694314f373",
+    "user_id": null,
+    "patient_id": "7292984244",
+    "action": "waba_message",
+    "details": {
+      "body": "Dear Pratyush Raj, please find your digital prescription and care summary attached.",
+      "type": "utility",
+      "wamid": "wamid.HBgMOTE827101929219FQIAERgSRT1MNB5IZCM==",
+      "status": "sent",
+      "direction": "outbound",
+      "variables": [
+        "Pratyush Raj"
+      ],
+      "templateName": "prescription_pdf_share",
+      "recipientName": "Pratyush Raj",
+      "recipientPhone": "+917292984244"
+    },
+    "created_at": "2026-06-21T04:24:32.726+00:00"
+  },
+  {
+    "id": "07c895d8-fe8f-4ff7-9e79-4943588ff8d3",
+    "organization_id": "fd9f532d-10c2-4429-8b1b-e2694314f373",
+    "user_id": null,
+    "patient_id": "7292984244",
+    "action": "waba_message",
+    "details": {
+      "body": "Hi Kumar! Look at your incredible smile transformation! 🦷✨",
+      "type": "campaign",
+      "wamid": "wamid.HBgMOTE457682142347FQIAERgSREJJZO9D5H07==",
+      "status": "sent",
+      "direction": "outbound",
+      "variables": [
+        "Kumar"
+      ],
+      "templateName": "clinical_image_record",
+      "recipientName": "Kumar",
+      "recipientPhone": "7292984244"
+    },
+    "created_at": "2026-06-21T08:43:02.102+00:00"
+  },
+  {
+    "id": "01c04e27-6b26-4267-b786-8c1299b9059c",
+    "organization_id": "fd9f532d-10c2-4429-8b1b-e2694314f373",
+    "user_id": null,
+    "patient_id": "9508243687",
+    "action": "waba_message",
+    "details": {
+      "body": "Hello Gulshan Kumar , this is a confirmation for your appointment on 21 Jun 2026 at 10:00 AM with Nilmani. Contact +917544860350 for queries.",
+      "type": "utility",
+      "wamid": "wamid.HBgMOTE739632451615FQIAERgSRVHJDDHTQZB==",
+      "status": "sent",
+      "direction": "outbound",
+      "variables": [
+        "Gulshan Kumar ",
+        "21 Jun 2026",
+        "10:00 AM",
+        "Nilmani",
+        "+917544860350"
+      ],
+      "templateName": "appointment_booking_confirmation",
+      "recipientName": "Gulshan Kumar ",
+      "recipientPhone": "9508243687"
+    },
+    "created_at": "2026-06-21T11:12:56.602+00:00"
+  },
+  {
+    "id": "6f132674-c65a-478c-897c-1a9406dd2625",
+    "organization_id": "fd9f532d-10c2-4429-8b1b-e2694314f373",
+    "user_id": null,
+    "patient_id": "9508243687",
+    "action": "waba_message",
+    "details": {
+      "body": "Hi Gulshan Kumar ! Look at your incredible smile transformation! 🦷✨",
+      "type": "campaign",
+      "wamid": "wamid.HBgMOTE813259852910FQIAERgSRM6UN7H8EW5==",
+      "status": "sent",
+      "direction": "outbound",
+      "variables": [
+        "Gulshan Kumar "
+      ],
+      "templateName": "googlereview",
+      "recipientName": "Gulshan Kumar ",
+      "recipientPhone": "9508243687"
+    },
+    "created_at": "2026-06-21T11:14:08.59+00:00"
+  },
+  {
+    "id": "efa7be0b-f12f-4400-81f4-16f6c64f5821",
+    "organization_id": "fd9f532d-10c2-4429-8b1b-e2694314f373",
+    "user_id": null,
+    "patient_id": "9508243687",
+    "action": "waba_message",
+    "details": {
+      "body": "Hi Gulshan Kumar ! Look at your incredible smile transformation! 🦷✨",
+      "type": "campaign",
+      "wamid": "wamid.HBgMOTE369369281194FQIAERgSRPPM65SCFT5G==",
+      "status": "sent",
+      "direction": "outbound",
+      "variables": [
+        "Gulshan Kumar "
+      ],
+      "templateName": "googlereview",
+      "recipientName": "Gulshan Kumar ",
+      "recipientPhone": "9508243687"
+    },
+    "created_at": "2026-06-21T11:16:49.449+00:00"
+  },
+  {
+    "id": "52b1301c-f0e2-4c1d-84ca-8a8f4a19bd45",
+    "organization_id": "fd9f532d-10c2-4429-8b1b-e2694314f373",
+    "user_id": null,
+    "patient_id": "9508243687",
+    "action": "waba_message",
+    "details": {
+      "body": "Hi Gulshan Kumar ! Look at your incredible smile transformation! 🦷✨",
+      "type": "campaign",
+      "wamid": "wamid.HBgMOTE591930381757FQIAERgSR31AEU81N9CZ==",
+      "status": "sent",
+      "direction": "outbound",
+      "variables": [
+        "Gulshan Kumar "
+      ],
+      "templateName": "googlereview",
+      "recipientName": "Gulshan Kumar ",
+      "recipientPhone": "9508243687"
+    },
+    "created_at": "2026-06-21T11:18:14.798+00:00"
+  },
+  {
+    "id": "18eb0479-653c-48ad-b1b3-fb896336b726",
+    "organization_id": "fd9f532d-10c2-4429-8b1b-e2694314f373",
+    "user_id": null,
+    "patient_id": "9508243687",
+    "action": "waba_message",
+    "details": {
+      "body": "Hi Gulshan Kumar ! Look at your incredible smile transformation! 🦷✨",
+      "type": "campaign",
+      "wamid": "wamid.HBgMOTE522255350299FQIAERgSR9VTP77XHWTE==",
+      "status": "sent",
+      "direction": "outbound",
+      "variables": [
+        "Gulshan Kumar "
+      ],
+      "templateName": "googlereview",
+      "recipientName": "Gulshan Kumar ",
+      "recipientPhone": "9508243687"
+    },
+    "created_at": "2026-06-21T11:19:48.383+00:00"
+  },
+  {
+    "id": "e08158f5-3d5d-4599-815b-71af9baa291b",
+    "organization_id": "fd9f532d-10c2-4429-8b1b-e2694314f373",
+    "user_id": null,
+    "patient_id": null,
+    "action": "clinic_medications",
+    "details": {
+      "medications": [
+        {
+          "id": "1",
+          "text": "• Tab. Amoxicillin 500mg - 1 cap thrice daily for 5 days",
+          "label": "Amoxicillin 500mg",
+          "category": "Antibiotics"
+        },
+        {
+          "id": "2",
+          "text": "• Tab. Paracetamol 650mg - 1 tab SOS for pain",
+          "label": "Paracetamol 650mg",
+          "category": "Pain killers"
+        },
+        {
+          "id": "3",
+          "text": "• Tab. Zerodol-SP - 1 tab twice daily for 3 days",
+          "label": "Zerodol-SP",
+          "category": "Pain killers"
+        },
+        {
+          "id": "4",
+          "text": "• Tab. Pantocid 40mg - 1 tab once daily before food",
+          "label": "Pantocid 40mg",
+          "category": "Others"
+        },
+        {
+          "id": "5",
+          "text": "• Hexidine Mouthwash - rinse twice daily for 7 days",
+          "label": "Hexidine Mouthwash",
+          "category": "Mouthwash"
+        },
+        {
+          "id": "6",
+          "text": "• Tab. Mox-CL 625mg - 1 tab twice daily for 5 days",
+          "label": "Mox-CL 625mg",
+          "category": "Antibiotics"
+        },
+        {
+          "id": "7",
+          "text": "• Tab. Ketorol-DT - 1 tab dissolved in water SOS",
+          "label": "Ketorol-DT",
+          "category": "Pain killers"
+        },
+        {
+          "id": "8",
+          "text": "• Sensodyne Toothpaste - brush twice daily for sensitive teeth",
+          "label": "Sensodyne Toothpaste",
+          "category": "Toothpaste"
+        },
+        {
+          "id": "9",
+          "text": "• Tab. Metrogyl ER - 1 tab twice daily for 5 days",
+          "label": "Metrogyl ER",
+          "category": "Antibiotics"
+        },
+        {
+          "id": "10",
+          "text": "• Tab. Flagyl ER - 1 tab twice daily for 5 days",
+          "label": "Flagyl ER",
+          "category": "Antibiotics"
+        },
+        {
+          "id": "11",
+          "text": "• Tab. Augmentin 625mg - 1 tab twice daily for 5 days",
+          "label": "Augmentin 625mg",
+          "category": "Antibiotics"
+        },
+        {
+          "id": "12",
+          "text": "• Tab. Clavam 625mg - 1 tab twice daily for 5 days",
+          "label": "Clavam 625mg",
+          "category": "Antibiotics"
+        },
+        {
+          "id": "13",
+          "text": "• Tab. Indclav 625mg - 1 tab twice daily for 5 days",
+          "label": "Indclav 625mg",
+          "category": "Antibiotics"
+        },
+        {
+          "id": "14",
+          "text": "• Tab. Mox CV 625mg - 1 tab twice daily for 5 days",
+          "label": "Mox CV 625mg",
+          "category": "Antibiotics"
+        },
+        {
+          "id": "15",
+          "text": "• Tab. Zocef CV 250mg - 1 tab twice daily for 5 days",
+          "label": "Zocef CV 250mg",
+          "category": "Antibiotics"
+        },
+        {
+          "id": "16",
+          "text": "• Tab. Sporidex CV 200mg - 1 tab twice daily for 5 days",
+          "label": "Sporidex CV 200mg",
+          "category": "Antibiotics"
+        },
+        {
+          "id": "17",
+          "text": "• Tab. Zymoflam D - 1 tab twice daily for 5 days",
+          "label": "Zymoflam D",
+          "category": "Pain killers"
+        },
+        {
+          "id": "18",
+          "text": "• Tab. Intagesic - 1 tab twice daily for 5 days",
+          "label": "Intagesic",
+          "category": "Pain killers"
+        },
+        {
+          "id": "19",
+          "text": "• Tab. Lysoflam - 1 tab twice daily for 5 days",
+          "label": "Lysoflam",
+          "category": "Pain killers"
+        },
+        {
+          "id": "20",
+          "text": "• Tab. Gudgesic SP - 1 tab twice daily for 5 days",
+          "label": "Gudgesic SP",
+          "category": "Pain killers"
+        },
+        {
+          "id": "21",
+          "text": "• Tab. Enzoflam - 1 tab twice daily for 5 days",
+          "label": "Enzoflam",
+          "category": "Pain killers"
+        },
+        {
+          "id": "22",
+          "text": "• Clohex ADS Mouthwash - rinse twice daily for 7 days",
+          "label": "Clohex ADS M/W",
+          "category": "Mouthwash"
+        },
+        {
+          "id": "23",
+          "text": "• Vantej Aqua Mouthwash - rinse twice daily for 7 days",
+          "label": "Vantej Aqua M/W",
+          "category": "Mouthwash"
+        },
+        {
+          "id": "24",
+          "text": "• Hydent 360 Mouthwash - rinse twice daily for 7 days",
+          "label": "Hydent 360 M/W",
+          "category": "Mouthwash"
+        },
+        {
+          "id": "25",
+          "text": "• Coolora Mouthwash - rinse twice daily for 7 days",
+          "label": "Coolora M/W",
+          "category": "Mouthwash"
+        },
+        {
+          "id": "26",
+          "text": "• Corahex Mouthwash - rinse twice daily for 7 days",
+          "label": "Corahex M/W",
+          "category": "Mouthwash"
+        },
+        {
+          "id": "27",
+          "text": "• Paloxide Mouthwash - rinse twice daily for 7 days",
+          "label": "Paloxide M/W",
+          "category": "Mouthwash"
+        },
+        {
+          "id": "28",
+          "text": "• Xyon-C Mouthwash - rinse twice daily for 7 days",
+          "label": "Xyon-C M/W",
+          "category": "Mouthwash"
+        },
+        {
+          "id": "29",
+          "text": "• Gumex Gum Paint - apply on gums thrice daily",
+          "label": "Gumex Gum Paint",
+          "category": "Mouthwash"
+        },
+        {
+          "id": "30",
+          "text": "• Logum Gel - apply on painful ulcers/areas 10 minutes before food",
+          "label": "Logum Gel",
+          "category": "Gels"
+        },
+        {
+          "id": "31",
+          "text": "• Metrogyl DG Gel - massage gently on gums twice daily after brushing",
+          "label": "Metrogyl DG Gel",
+          "category": "Gels"
+        },
+        {
+          "id": "32",
+          "text": "• Turbocoat Gel - apply on sensitive areas once daily after brushing",
+          "label": "Turbocoat Gel",
+          "category": "Gels"
+        },
+        {
+          "id": "33",
+          "text": "• Vantej Toothpaste - brush twice daily",
+          "label": "Vantej Toothpaste",
+          "category": "Toothpaste"
+        },
+        {
+          "id": "34",
+          "text": "• Reguard Toothpaste - brush twice daily",
+          "label": "Reguard Toothpaste",
+          "category": "Toothpaste"
+        },
+        {
+          "id": "35",
+          "text": "• Perioguard Toothpaste - brush twice daily",
+          "label": "Perioguard Toothpaste",
+          "category": "Toothpaste"
+        },
+        {
+          "id": "36",
+          "text": "• Hydent K Toothpaste - brush twice daily",
+          "label": "Hydent K Toothpaste",
+          "category": "Toothpaste"
+        },
+        {
+          "id": "37",
+          "text": "• Glister Toothpaste - brush twice daily",
+          "label": "Glister Toothpaste",
+          "category": "Toothpaste"
+        },
+        {
+          "id": "38",
+          "text": "• Snowdent Toothpaste - brush twice daily",
+          "label": "Snowdent Toothpaste",
+          "category": "Toothpaste"
+        },
+        {
+          "id": "39",
+          "text": "• Remin Toothpaste - brush twice daily",
+          "label": "Remin Toothpaste",
+          "category": "Toothpaste"
+        },
+        {
+          "id": "40",
+          "text": "• Toothmin Toothpaste - brush twice daily",
+          "label": "Toothmin Toothpaste",
+          "category": "Toothpaste"
+        },
+        {
+          "id": "41",
+          "text": "• Tab. Enzoflam CT - 1 tab twice daily for 5 days",
+          "label": "Enzoflam CT",
+          "category": "Pain killers"
+        },
+        {
+          "id": "42",
+          "text": "• Tab. Rantac RD - 1 tab twice daily before food",
+          "label": "Rantac RD",
+          "category": "Gas/Acidity"
+        },
+        {
+          "id": "43",
+          "text": "• Tab. Ranidom-DOM - 1 tab twice daily before food",
+          "label": "Ranidom-DOM",
+          "category": "Gas/Acidity"
+        },
+        {
+          "id": "44",
+          "text": "• Tab. Pan-40 - 1 tab once daily before food",
+          "label": "Pan-40",
+          "category": "Gas/Acidity"
+        },
+        {
+          "id": "45",
+          "text": "• Tab. Cyra-D - 1 tab once daily before food",
+          "label": "Cyra-D",
+          "category": "Gas/Acidity"
+        },
+        {
+          "id": "46",
+          "text": "• Tab. Rabeprazole 20mg - 1 tab once daily before food",
+          "label": "Rabeprazole 20mg",
+          "category": "Gas/Acidity"
+        }
+      ]
+    },
+    "created_at": "2026-06-23T07:39:03.744975+00:00"
+  },
+  {
+    "id": "32111d5a-d551-4e79-a8a2-d8f1fd37c8dd",
+    "organization_id": "c293137f-83af-410d-8178-ca2d12bd1538",
+    "user_id": null,
+    "patient_id": null,
+    "action": "clinic_medications",
+    "details": {
+      "medications": [
+        {
+          "id": "1",
+          "text": "• Tab. Amoxicillin 500mg - 1 cap thrice daily for 5 days",
+          "label": "Amoxicillin 500mg",
+          "category": "Antibiotics"
+        },
+        {
+          "id": "2",
+          "text": "• Tab. Paracetamol 650mg - 1 tab SOS for pain",
+          "label": "Paracetamol 650mg",
+          "category": "Pain killers"
+        },
+        {
+          "id": "3",
+          "text": "• Tab. Zerodol-SP - 1 tab twice daily for 3 days",
+          "label": "Zerodol-SP",
+          "category": "Pain killers"
+        },
+        {
+          "id": "4",
+          "text": "• Tab. Pantocid 40mg - 1 tab once daily before food",
+          "label": "Pantocid 40mg",
+          "category": "Others"
+        },
+        {
+          "id": "5",
+          "text": "• Hexidine Mouthwash - rinse twice daily for 7 days",
+          "label": "Hexidine Mouthwash",
+          "category": "Mouthwash"
+        },
+        {
+          "id": "6",
+          "text": "• Tab. Mox-CL 625mg - 1 tab twice daily for 5 days",
+          "label": "Mox-CL 625mg",
+          "category": "Antibiotics"
+        },
+        {
+          "id": "7",
+          "text": "• Tab. Ketorol-DT - 1 tab dissolved in water SOS",
+          "label": "Ketorol-DT",
+          "category": "Pain killers"
+        },
+        {
+          "id": "8",
+          "text": "• Sensodyne Toothpaste - brush twice daily for sensitive teeth",
+          "label": "Sensodyne Toothpaste",
+          "category": "Toothpaste"
+        },
+        {
+          "id": "9",
+          "text": "• Tab. Metrogyl ER - 1 tab twice daily for 5 days",
+          "label": "Metrogyl ER",
+          "category": "Antibiotics"
+        },
+        {
+          "id": "10",
+          "text": "• Tab. Flagyl ER - 1 tab twice daily for 5 days",
+          "label": "Flagyl ER",
+          "category": "Antibiotics"
+        },
+        {
+          "id": "11",
+          "text": "• Tab. Augmentin 625mg - 1 tab twice daily for 5 days",
+          "label": "Augmentin 625mg",
+          "category": "Antibiotics"
+        },
+        {
+          "id": "12",
+          "text": "• Tab. Clavam 625mg - 1 tab twice daily for 5 days",
+          "label": "Clavam 625mg",
+          "category": "Antibiotics"
+        },
+        {
+          "id": "13",
+          "text": "• Tab. Indclav 625mg - 1 tab twice daily for 5 days",
+          "label": "Indclav 625mg",
+          "category": "Antibiotics"
+        },
+        {
+          "id": "14",
+          "text": "• Tab. Mox CV 625mg - 1 tab twice daily for 5 days",
+          "label": "Mox CV 625mg",
+          "category": "Antibiotics"
+        },
+        {
+          "id": "15",
+          "text": "• Tab. Zocef CV 250mg - 1 tab twice daily for 5 days",
+          "label": "Zocef CV 250mg",
+          "category": "Antibiotics"
+        },
+        {
+          "id": "16",
+          "text": "• Tab. Sporidex CV 200mg - 1 tab twice daily for 5 days",
+          "label": "Sporidex CV 200mg",
+          "category": "Antibiotics"
+        },
+        {
+          "id": "17",
+          "text": "• Tab. Zymoflam D - 1 tab twice daily for 5 days",
+          "label": "Zymoflam D",
+          "category": "Pain killers"
+        },
+        {
+          "id": "18",
+          "text": "• Tab. Intagesic - 1 tab twice daily for 5 days",
+          "label": "Intagesic",
+          "category": "Pain killers"
+        },
+        {
+          "id": "19",
+          "text": "• Tab. Lysoflam - 1 tab twice daily for 5 days",
+          "label": "Lysoflam",
+          "category": "Pain killers"
+        },
+        {
+          "id": "20",
+          "text": "• Tab. Gudgesic SP - 1 tab twice daily for 5 days",
+          "label": "Gudgesic SP",
+          "category": "Pain killers"
+        },
+        {
+          "id": "21",
+          "text": "• Tab. Enzoflam - 1 tab twice daily for 5 days",
+          "label": "Enzoflam",
+          "category": "Pain killers"
+        },
+        {
+          "id": "22",
+          "text": "• Clohex ADS Mouthwash - rinse twice daily for 7 days",
+          "label": "Clohex ADS M/W",
+          "category": "Mouthwash"
+        },
+        {
+          "id": "23",
+          "text": "• Vantej Aqua Mouthwash - rinse twice daily for 7 days",
+          "label": "Vantej Aqua M/W",
+          "category": "Mouthwash"
+        },
+        {
+          "id": "24",
+          "text": "• Hydent 360 Mouthwash - rinse twice daily for 7 days",
+          "label": "Hydent 360 M/W",
+          "category": "Mouthwash"
+        },
+        {
+          "id": "25",
+          "text": "• Coolora Mouthwash - rinse twice daily for 7 days",
+          "label": "Coolora M/W",
+          "category": "Mouthwash"
+        },
+        {
+          "id": "26",
+          "text": "• Corahex Mouthwash - rinse twice daily for 7 days",
+          "label": "Corahex M/W",
+          "category": "Mouthwash"
+        },
+        {
+          "id": "27",
+          "text": "• Paloxide Mouthwash - rinse twice daily for 7 days",
+          "label": "Paloxide M/W",
+          "category": "Mouthwash"
+        },
+        {
+          "id": "28",
+          "text": "• Xyon-C Mouthwash - rinse twice daily for 7 days",
+          "label": "Xyon-C M/W",
+          "category": "Mouthwash"
+        },
+        {
+          "id": "29",
+          "text": "• Gumex Gum Paint - apply on gums thrice daily",
+          "label": "Gumex Gum Paint",
+          "category": "Mouthwash"
+        },
+        {
+          "id": "30",
+          "text": "• Logum Gel - apply on painful ulcers/areas 10 minutes before food",
+          "label": "Logum Gel",
+          "category": "Gels"
+        },
+        {
+          "id": "31",
+          "text": "• Metrogyl DG Gel - massage gently on gums twice daily after brushing",
+          "label": "Metrogyl DG Gel",
+          "category": "Gels"
+        },
+        {
+          "id": "32",
+          "text": "• Turbocoat Gel - apply on sensitive areas once daily after brushing",
+          "label": "Turbocoat Gel",
+          "category": "Gels"
+        },
+        {
+          "id": "33",
+          "text": "• Vantej Toothpaste - brush twice daily",
+          "label": "Vantej Toothpaste",
+          "category": "Toothpaste"
+        },
+        {
+          "id": "34",
+          "text": "• Reguard Toothpaste - brush twice daily",
+          "label": "Reguard Toothpaste",
+          "category": "Toothpaste"
+        },
+        {
+          "id": "35",
+          "text": "• Perioguard Toothpaste - brush twice daily",
+          "label": "Perioguard Toothpaste",
+          "category": "Toothpaste"
+        },
+        {
+          "id": "36",
+          "text": "• Hydent K Toothpaste - brush twice daily",
+          "label": "Hydent K Toothpaste",
+          "category": "Toothpaste"
+        },
+        {
+          "id": "37",
+          "text": "• Glister Toothpaste - brush twice daily",
+          "label": "Glister Toothpaste",
+          "category": "Toothpaste"
+        },
+        {
+          "id": "38",
+          "text": "• Snowdent Toothpaste - brush twice daily",
+          "label": "Snowdent Toothpaste",
+          "category": "Toothpaste"
+        },
+        {
+          "id": "39",
+          "text": "• Remin Toothpaste - brush twice daily",
+          "label": "Remin Toothpaste",
+          "category": "Toothpaste"
+        },
+        {
+          "id": "40",
+          "text": "• Toothmin Toothpaste - brush twice daily",
+          "label": "Toothmin Toothpaste",
+          "category": "Toothpaste"
+        },
+        {
+          "id": "41",
+          "text": "• Tab. Enzoflam CT - 1 tab twice daily for 5 days",
+          "label": "Enzoflam CT",
+          "category": "Pain killers"
+        },
+        {
+          "id": "42",
+          "text": "• Tab. Rantac RD - 1 tab twice daily before food",
+          "label": "Rantac RD",
+          "category": "Gas/Acidity"
+        },
+        {
+          "id": "43",
+          "text": "• Tab. Ranidom-DOM - 1 tab twice daily before food",
+          "label": "Ranidom-DOM",
+          "category": "Gas/Acidity"
+        },
+        {
+          "id": "44",
+          "text": "• Tab. Pan-40 - 1 tab once daily before food",
+          "label": "Pan-40",
+          "category": "Gas/Acidity"
+        },
+        {
+          "id": "45",
+          "text": "• Tab. Cyra-D - 1 tab once daily before food",
+          "label": "Cyra-D",
+          "category": "Gas/Acidity"
+        },
+        {
+          "id": "46",
+          "text": "• Tab. Rabeprazole 20mg - 1 tab once daily before food",
+          "label": "Rabeprazole 20mg",
+          "category": "Gas/Acidity"
+        }
+      ]
+    },
+    "created_at": "2026-06-23T07:39:04.183487+00:00"
+  },
+  {
+    "id": "a329c5ab-a167-4099-bfda-6a1f5ee30b09",
+    "organization_id": "8800a4c7-a1f5-4edd-8fe8-f698c5928478",
+    "user_id": null,
+    "patient_id": null,
+    "action": "clinic_medications",
+    "details": {
+      "medications": [
+        {
+          "id": "1",
+          "text": "• Tab. Amoxicillin 500mg - 1 cap thrice daily for 5 days",
+          "label": "Amoxicillin 500mg",
+          "category": "Antibiotics"
+        },
+        {
+          "id": "2",
+          "text": "• Tab. Paracetamol 650mg - 1 tab SOS for pain",
+          "label": "Paracetamol 650mg",
+          "category": "Pain killers"
+        },
+        {
+          "id": "3",
+          "text": "• Tab. Zerodol-SP - 1 tab twice daily for 3 days",
+          "label": "Zerodol-SP",
+          "category": "Pain killers"
+        },
+        {
+          "id": "4",
+          "text": "• Tab. Pantocid 40mg - 1 tab once daily before food",
+          "label": "Pantocid 40mg",
+          "category": "Others"
+        },
+        {
+          "id": "5",
+          "text": "• Hexidine Mouthwash - rinse twice daily for 7 days",
+          "label": "Hexidine Mouthwash",
+          "category": "Mouthwash"
+        },
+        {
+          "id": "6",
+          "text": "• Tab. Mox-CL 625mg - 1 tab twice daily for 5 days",
+          "label": "Mox-CL 625mg",
+          "category": "Antibiotics"
+        },
+        {
+          "id": "7",
+          "text": "• Tab. Ketorol-DT - 1 tab dissolved in water SOS",
+          "label": "Ketorol-DT",
+          "category": "Pain killers"
+        },
+        {
+          "id": "8",
+          "text": "• Sensodyne Toothpaste - brush twice daily for sensitive teeth",
+          "label": "Sensodyne Toothpaste",
+          "category": "Toothpaste"
+        },
+        {
+          "id": "9",
+          "text": "• Tab. Metrogyl ER - 1 tab twice daily for 5 days",
+          "label": "Metrogyl ER",
+          "category": "Antibiotics"
+        },
+        {
+          "id": "10",
+          "text": "• Tab. Flagyl ER - 1 tab twice daily for 5 days",
+          "label": "Flagyl ER",
+          "category": "Antibiotics"
+        },
+        {
+          "id": "11",
+          "text": "• Tab. Augmentin 625mg - 1 tab twice daily for 5 days",
+          "label": "Augmentin 625mg",
+          "category": "Antibiotics"
+        },
+        {
+          "id": "12",
+          "text": "• Tab. Clavam 625mg - 1 tab twice daily for 5 days",
+          "label": "Clavam 625mg",
+          "category": "Antibiotics"
+        },
+        {
+          "id": "13",
+          "text": "• Tab. Indclav 625mg - 1 tab twice daily for 5 days",
+          "label": "Indclav 625mg",
+          "category": "Antibiotics"
+        },
+        {
+          "id": "14",
+          "text": "• Tab. Mox CV 625mg - 1 tab twice daily for 5 days",
+          "label": "Mox CV 625mg",
+          "category": "Antibiotics"
+        },
+        {
+          "id": "15",
+          "text": "• Tab. Zocef CV 250mg - 1 tab twice daily for 5 days",
+          "label": "Zocef CV 250mg",
+          "category": "Antibiotics"
+        },
+        {
+          "id": "16",
+          "text": "• Tab. Sporidex CV 200mg - 1 tab twice daily for 5 days",
+          "label": "Sporidex CV 200mg",
+          "category": "Antibiotics"
+        },
+        {
+          "id": "17",
+          "text": "• Tab. Zymoflam D - 1 tab twice daily for 5 days",
+          "label": "Zymoflam D",
+          "category": "Pain killers"
+        },
+        {
+          "id": "18",
+          "text": "• Tab. Intagesic - 1 tab twice daily for 5 days",
+          "label": "Intagesic",
+          "category": "Pain killers"
+        },
+        {
+          "id": "19",
+          "text": "• Tab. Lysoflam - 1 tab twice daily for 5 days",
+          "label": "Lysoflam",
+          "category": "Pain killers"
+        },
+        {
+          "id": "20",
+          "text": "• Tab. Gudgesic SP - 1 tab twice daily for 5 days",
+          "label": "Gudgesic SP",
+          "category": "Pain killers"
+        },
+        {
+          "id": "21",
+          "text": "• Tab. Enzoflam - 1 tab twice daily for 5 days",
+          "label": "Enzoflam",
+          "category": "Pain killers"
+        },
+        {
+          "id": "22",
+          "text": "• Clohex ADS Mouthwash - rinse twice daily for 7 days",
+          "label": "Clohex ADS M/W",
+          "category": "Mouthwash"
+        },
+        {
+          "id": "23",
+          "text": "• Vantej Aqua Mouthwash - rinse twice daily for 7 days",
+          "label": "Vantej Aqua M/W",
+          "category": "Mouthwash"
+        },
+        {
+          "id": "24",
+          "text": "• Hydent 360 Mouthwash - rinse twice daily for 7 days",
+          "label": "Hydent 360 M/W",
+          "category": "Mouthwash"
+        },
+        {
+          "id": "25",
+          "text": "• Coolora Mouthwash - rinse twice daily for 7 days",
+          "label": "Coolora M/W",
+          "category": "Mouthwash"
+        },
+        {
+          "id": "26",
+          "text": "• Corahex Mouthwash - rinse twice daily for 7 days",
+          "label": "Corahex M/W",
+          "category": "Mouthwash"
+        },
+        {
+          "id": "27",
+          "text": "• Paloxide Mouthwash - rinse twice daily for 7 days",
+          "label": "Paloxide M/W",
+          "category": "Mouthwash"
+        },
+        {
+          "id": "28",
+          "text": "• Xyon-C Mouthwash - rinse twice daily for 7 days",
+          "label": "Xyon-C M/W",
+          "category": "Mouthwash"
+        },
+        {
+          "id": "29",
+          "text": "• Gumex Gum Paint - apply on gums thrice daily",
+          "label": "Gumex Gum Paint",
+          "category": "Mouthwash"
+        },
+        {
+          "id": "30",
+          "text": "• Logum Gel - apply on painful ulcers/areas 10 minutes before food",
+          "label": "Logum Gel",
+          "category": "Gels"
+        },
+        {
+          "id": "31",
+          "text": "• Metrogyl DG Gel - massage gently on gums twice daily after brushing",
+          "label": "Metrogyl DG Gel",
+          "category": "Gels"
+        },
+        {
+          "id": "32",
+          "text": "• Turbocoat Gel - apply on sensitive areas once daily after brushing",
+          "label": "Turbocoat Gel",
+          "category": "Gels"
+        },
+        {
+          "id": "33",
+          "text": "• Vantej Toothpaste - brush twice daily",
+          "label": "Vantej Toothpaste",
+          "category": "Toothpaste"
+        },
+        {
+          "id": "34",
+          "text": "• Reguard Toothpaste - brush twice daily",
+          "label": "Reguard Toothpaste",
+          "category": "Toothpaste"
+        },
+        {
+          "id": "35",
+          "text": "• Perioguard Toothpaste - brush twice daily",
+          "label": "Perioguard Toothpaste",
+          "category": "Toothpaste"
+        },
+        {
+          "id": "36",
+          "text": "• Hydent K Toothpaste - brush twice daily",
+          "label": "Hydent K Toothpaste",
+          "category": "Toothpaste"
+        },
+        {
+          "id": "37",
+          "text": "• Glister Toothpaste - brush twice daily",
+          "label": "Glister Toothpaste",
+          "category": "Toothpaste"
+        },
+        {
+          "id": "38",
+          "text": "• Snowdent Toothpaste - brush twice daily",
+          "label": "Snowdent Toothpaste",
+          "category": "Toothpaste"
+        },
+        {
+          "id": "39",
+          "text": "• Remin Toothpaste - brush twice daily",
+          "label": "Remin Toothpaste",
+          "category": "Toothpaste"
+        },
+        {
+          "id": "40",
+          "text": "• Toothmin Toothpaste - brush twice daily",
+          "label": "Toothmin Toothpaste",
+          "category": "Toothpaste"
+        },
+        {
+          "id": "41",
+          "text": "• Tab. Enzoflam CT - 1 tab twice daily for 5 days",
+          "label": "Enzoflam CT",
+          "category": "Pain killers"
+        },
+        {
+          "id": "42",
+          "text": "• Tab. Rantac RD - 1 tab twice daily before food",
+          "label": "Rantac RD",
+          "category": "Gas/Acidity"
+        },
+        {
+          "id": "43",
+          "text": "• Tab. Ranidom-DOM - 1 tab twice daily before food",
+          "label": "Ranidom-DOM",
+          "category": "Gas/Acidity"
+        },
+        {
+          "id": "44",
+          "text": "• Tab. Pan-40 - 1 tab once daily before food",
+          "label": "Pan-40",
+          "category": "Gas/Acidity"
+        },
+        {
+          "id": "45",
+          "text": "• Tab. Cyra-D - 1 tab once daily before food",
+          "label": "Cyra-D",
+          "category": "Gas/Acidity"
+        },
+        {
+          "id": "46",
+          "text": "• Tab. Rabeprazole 20mg - 1 tab once daily before food",
+          "label": "Rabeprazole 20mg",
+          "category": "Gas/Acidity"
+        }
+      ]
+    },
+    "created_at": "2026-06-23T08:39:32.7946+00:00"
+  },
+  {
+    "id": "7d17d5a1-e27c-4460-9cd7-50557657470f",
+    "organization_id": "8800a4c7-a1f5-4edd-8fe8-f698c5928478",
+    "user_id": null,
+    "patient_id": "7292984244",
+    "action": "waba_message",
+    "details": {
+      "body": "Hello Pratyush Raj, this is a confirmation for your appointment on 23 Jun 2026 at 10:00 AM with Dr. Sharma. Contact +916201478033 for queries.",
+      "type": "utility",
+      "wamid": "wamid.HBgMOTE997310211109FQIAERgSRZT8BCZM3OF==",
+      "status": "sent",
+      "direction": "outbound",
+      "variables": [
+        "Pratyush Raj",
+        "23 Jun 2026",
+        "10:00 AM",
+        "Dr. Sharma",
+        "+916201478033"
+      ],
+      "templateName": "appointment_booking_confirmation",
+      "recipientName": "Pratyush Raj",
+      "recipientPhone": "+917292984244"
+    },
+    "created_at": "2026-06-23T08:46:04.003+00:00"
+  },
+  {
+    "id": "f0e34841-3072-49b7-963f-e060355c6a58",
+    "organization_id": "8800a4c7-a1f5-4edd-8fe8-f698c5928478",
+    "user_id": null,
+    "patient_id": "7292984244",
+    "action": "waba_message",
+    "details": {
+      "body": "Hello Pratyush Raj, this is a confirmation for your appointment on 23 Jun 2026 at 10:00 AM with Dr. Sharma. Contact +916201478033 for queries.",
+      "type": "utility",
+      "wamid": "wamid.HBgMOTE610498127572FQIAERgSRNMXIIDWMFUC==",
+      "status": "sent",
+      "direction": "outbound",
+      "variables": [
+        "Pratyush Raj",
+        "23 Jun 2026",
+        "10:00 AM",
+        "Dr. Sharma",
+        "+916201478033"
+      ],
+      "templateName": "appointment_booking_confirmation",
+      "recipientName": "Pratyush Raj",
+      "recipientPhone": "+917292984244"
+    },
+    "created_at": "2026-06-23T08:48:09.458+00:00"
+  },
+  {
+    "id": "1bcb3ffa-e14d-4419-8d90-4b2dd1dd0738",
+    "organization_id": "8800a4c7-a1f5-4edd-8fe8-f698c5928478",
+    "user_id": null,
+    "patient_id": "7292984244",
+    "action": "waba_message",
+    "details": {
+      "body": "🦷 Appointment Confirmed – YOUR DENTIST\n\nHi Pratyush Raj,\n\nYour appointment with Dr. Aryan Parmar has been confirmed. ✅\n\n📅 Date: 23 Jun 2026\n⏰ Time: 10:00 AM\n📍 Clinic: YOUR DENTIST, Patliputra Colony, Patna\n\nPlease arrive 10 minutes before your scheduled slot.\n\nFor rescheduling or queries, call us at:\n📞 6201478033\n\nThank you for choosing YOUR DENTIST 🙂",
+      "type": "utility",
+      "wamid": "wamid.HBgMOTE213608608399FQIAERgSRBFPC334YYM==",
+      "status": "sent",
+      "direction": "outbound",
+      "variables": [
+        "Pratyush Raj",
+        "23 Jun 2026",
+        "10:00 AM"
+      ],
+      "templateName": "booking",
+      "recipientName": "Pratyush Raj",
+      "recipientPhone": "7292984244"
+    },
+    "created_at": "2026-06-23T08:52:33.726+00:00"
+  },
+  {
+    "id": "d97a1dc6-1416-43d2-bb96-85861831a32c",
+    "organization_id": "8800a4c7-a1f5-4edd-8fe8-f698c5928478",
+    "user_id": null,
+    "patient_id": "7292984244",
+    "action": "waba_message",
+    "details": {
+      "body": "Hi Pratyush Raj! Look at your incredible smile transformation! 🦷✨",
+      "type": "campaign",
+      "wamid": "wamid.HBgMOTE850382966213FQIAERgSRQB9QCTLKGA==",
+      "status": "sent",
+      "direction": "outbound",
+      "variables": [
+        "Pratyush Raj"
+      ],
+      "templateName": "googlereview",
+      "recipientName": "Pratyush Raj",
+      "recipientPhone": "7292984244"
+    },
+    "created_at": "2026-06-23T08:54:25.387+00:00"
+  },
+  {
+    "id": "7ab08ad2-b0f8-4464-8d14-2eab569e5aa5",
+    "organization_id": "8800a4c7-a1f5-4edd-8fe8-f698c5928478",
+    "user_id": null,
+    "patient_id": "7292984244",
+    "action": "waba_message",
+    "details": {
+      "body": "Hi Pratyush Raj! Look at your incredible smile transformation! 🦷✨",
+      "type": "campaign",
+      "wamid": "wamid.HBgMOTE712722877400FQIAERgSR6TYHO6940QW==",
+      "status": "sent",
+      "direction": "outbound",
+      "variables": [
+        "Pratyush Raj"
+      ],
+      "templateName": "googlereview",
+      "recipientName": "Pratyush Raj",
+      "recipientPhone": "7292984244"
+    },
+    "created_at": "2026-06-23T09:02:49.391+00:00"
+  },
+  {
+    "id": "cc4a2f98-77fa-478d-97b3-beb7dd793ab1",
+    "organization_id": "8800a4c7-a1f5-4edd-8fe8-f698c5928478",
+    "user_id": null,
+    "patient_id": "7292984244",
+    "action": "waba_message",
+    "details": {
+      "body": "Hi Pratyush Raj! Look at your incredible smile transformation! 🦷✨",
+      "type": "campaign",
+      "wamid": "wamid.HBgMOTE255464416100FQIAERgSRMIMRW424ODI==",
+      "status": "sent",
+      "direction": "outbound",
+      "variables": [
+        "Pratyush Raj"
+      ],
+      "templateName": "googlereview",
+      "recipientName": "Pratyush Raj",
+      "recipientPhone": "7292984244"
+    },
+    "created_at": "2026-06-23T09:20:09.234+00:00"
+  },
+  {
+    "id": "76ca4141-8f03-488f-a759-d856f4d30e52",
+    "organization_id": "8800a4c7-a1f5-4edd-8fe8-f698c5928478",
+    "user_id": null,
+    "patient_id": "7292984244",
+    "action": "waba_message",
+    "details": {
+      "body": "Hi Pratyush Raj! Look at your incredible smile transformation! 🦷✨",
+      "type": "campaign",
+      "wamid": "wamid.HBgMOTE772989919225FQIAERgSRK8OV7T5ZG2==",
+      "status": "sent",
+      "direction": "outbound",
+      "variables": [
+        "Pratyush Raj"
+      ],
+      "templateName": "googlereview",
+      "recipientName": "Pratyush Raj",
+      "recipientPhone": "7292984244"
+    },
+    "created_at": "2026-06-23T09:27:17.589+00:00"
+  },
+  {
+    "id": "42db70a6-c06a-4098-8239-5c0ccf7aeea4",
+    "organization_id": "8800a4c7-a1f5-4edd-8fe8-f698c5928478",
+    "user_id": null,
+    "patient_id": "7292984244",
+    "action": "waba_message",
+    "details": {
+      "body": "Hi Pratyush Raj! Look at your incredible smile transformation! 🦷✨",
+      "type": "campaign",
+      "wamid": "wamid.HBgMOTE826953839737FQIAERgSRQNSRAL78JXL==",
+      "status": "sent",
+      "direction": "outbound",
+      "variables": [
+        "Pratyush Raj"
+      ],
+      "templateName": "googlereview",
+      "recipientName": "Pratyush Raj",
+      "recipientPhone": "7292984244"
+    },
+    "created_at": "2026-06-23T09:35:18.183+00:00"
+  },
+  {
+    "id": "eb406985-d387-4570-a049-71ea1bc527f4",
+    "organization_id": "8800a4c7-a1f5-4edd-8fe8-f698c5928478",
+    "user_id": null,
+    "patient_id": "7292984244",
+    "action": "waba_message",
+    "details": {
+      "body": "Hi Pratyush Raj! Look at your incredible smile transformation! 🦷✨",
+      "type": "campaign",
+      "wamid": "wamid.HBgMOTE511993186175FQIAERgSR1ZXRO9NCYT5==",
+      "status": "sent",
+      "direction": "outbound",
+      "variables": [
+        "Pratyush Raj"
+      ],
+      "templateName": "googlereview",
+      "recipientName": "Pratyush Raj",
+      "recipientPhone": "7292984244"
+    },
+    "created_at": "2026-06-23T09:38:14.024+00:00"
+  },
+  {
+    "id": "c028776b-d910-41bf-9f0c-c86033f7163a",
+    "organization_id": "8800a4c7-a1f5-4edd-8fe8-f698c5928478",
+    "user_id": null,
+    "patient_id": "7292984244",
+    "action": "waba_message",
+    "details": {
+      "body": "Hi Pratyush Raj! Look at your incredible smile transformation! 🦷✨",
+      "type": "campaign",
+      "wamid": "wamid.HBgMOTE117045241108FQIAERgSR8YPOKUQJGFA==",
+      "status": "sent",
+      "direction": "outbound",
+      "variables": [
+        "Pratyush Raj"
+      ],
+      "templateName": "googlereview",
+      "recipientName": "Pratyush Raj",
+      "recipientPhone": "7292984244"
+    },
+    "created_at": "2026-06-23T09:38:48.998+00:00"
+  },
+  {
+    "id": "f89b2fed-264b-4b70-9366-0f914c1b10c6",
+    "organization_id": "8800a4c7-a1f5-4edd-8fe8-f698c5928478",
+    "user_id": null,
+    "patient_id": "7292984244",
+    "action": "waba_message",
+    "details": {
+      "body": "Hi Pratyush Raj! Look at your incredible smile transformation! 🦷✨",
+      "type": "campaign",
+      "wamid": "wamid.HBgMOTE593044447933FQIAERgSRI94DXHJHHM==",
+      "status": "sent",
+      "direction": "outbound",
+      "variables": [
+        "Pratyush Raj"
+      ],
+      "templateName": "clinical_image_record",
+      "recipientName": "Pratyush Raj",
+      "recipientPhone": "7292984244"
+    },
+    "created_at": "2026-06-23T09:41:26.441+00:00"
+  },
+  {
+    "id": "7af2a005-7afa-498f-af4d-3349cf277724",
+    "organization_id": "8800a4c7-a1f5-4edd-8fe8-f698c5928478",
+    "user_id": null,
+    "patient_id": "7292984244",
+    "action": "waba_message",
+    "details": {
+      "body": "🦷 Appointment Confirmed – YOUR DENTIST\n\nHi Pratyush Raj,\n\nYour appointment with Dr. Aryan Parmar has been confirmed. ✅\n\n📅 Date: 23 Jun 2026\n⏰ Time: 10:00 AM\n📍 Clinic: YOUR DENTIST, Patliputra Colony, Patna\n\nPlease arrive 10 minutes before your scheduled slot.\n\nFor rescheduling or queries, call us at:\n📞 6201478033\n\nThank you for choosing YOUR DENTIST 🙂",
+      "type": "utility",
+      "wamid": "wamid.HBgMOTE286101240318FQIAERgSRPVLM1ZW8X7A==",
+      "status": "sent",
+      "direction": "outbound",
+      "variables": [
+        "Pratyush Raj",
+        "23 Jun 2026",
+        "10:00 AM"
+      ],
+      "templateName": "booking",
+      "recipientName": "Pratyush Raj",
+      "recipientPhone": "+917292984244"
+    },
+    "created_at": "2026-06-23T09:47:36.09+00:00"
+  },
+  {
+    "id": "e606e965-e247-46da-9bd5-16d9f45c0139",
+    "organization_id": "8800a4c7-a1f5-4edd-8fe8-f698c5928478",
+    "user_id": null,
+    "patient_id": "7292984244",
+    "action": "waba_message",
+    "details": {
+      "body": "Dear Pratyush Raj, please find your digital prescription and care summary attached.",
+      "type": "utility",
+      "wamid": "wamid.HBgMOTE350637247413FQIAERgSR2E6EHHET8R==",
+      "status": "sent",
+      "direction": "outbound",
+      "variables": [
+        "Pratyush Raj"
+      ],
+      "templateName": "prescription_pdf_share",
+      "recipientName": "Pratyush Raj",
+      "recipientPhone": "+917292984244"
+    },
+    "created_at": "2026-06-23T10:09:41.052+00:00"
+  }
+]

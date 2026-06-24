@@ -68,6 +68,22 @@ export default function ReactivationSentMessages() {
       
       // Fetch actual appointments from the database
       if (clinicId && clinicId !== 'default') {
+        const { data: clinicData } = await supabase
+          .from('dental_clinics')
+          .select('*')
+          .eq('id', clinicId)
+          .single();
+
+        const clinicName = clinicData?.name || 'YOUR DENTIST';
+        const isShreeRam = clinicName.toLowerCase().includes('shree ram');
+        const defaultDoctor = isShreeRam ? 'Dr. Sharma' : (clinicData?.doctor_name || 'Dr. Aryan Parmar');
+        
+        let rawPhone = clinicData?.phone || '';
+        if (!rawPhone && clinicData?.whatsapp_business_phone) {
+          rawPhone = clinicData.whatsapp_business_phone;
+        }
+        const defaultPhone = isShreeRam ? '+91 75448 60350' : (rawPhone ? rawPhone.split(',')[0].trim() : '+91 62014 78033');
+
         const { data: appts } = await supabase
           .from('dental_appointments')
           .select('id, appointment_date, appointment_time, doctor_name, patient_id, created_at')
@@ -86,7 +102,7 @@ export default function ReactivationSentMessages() {
             const hasEstimates = patient.estimates && Array.isArray(patient.estimates) && patient.estimates.length > 0;
             
             if (hasPrescription || hasEstimates) {
-              const bodyText = `Dear ${patient.name}, please find your digital prescription and care summary attached.`;
+              const bodyText = `Dear ${patient.name}, please find your digital prescription and care summary attached from ${clinicName}.`;
               
               const isDummyPhone = patient.phone.includes('9876543210') || patient.phone.includes('9123456780') || patient.phone.includes('9988776655') || patient.phone.startsWith('+91 99999');
               const status = isDummyPhone ? 'failed' : 'delivered';
@@ -117,15 +133,15 @@ export default function ReactivationSentMessages() {
             
             const isDummyPhone = patientPhone.includes('9876543210') || patientPhone.includes('9123456780') || patientPhone.includes('9988776655') || patientPhone.startsWith('+91 99999');
             const status = isDummyPhone ? 'failed' : 'delivered';
-            const apptTime = appt.appointment_time || '11:30 AM';
-            const doctorName = appt.doctor_name || 'Dr. Sharma';
+            const apptTime = appt.appointment_time || '10:00 AM';
+            const doctorName = appt.doctor_name || defaultDoctor;
 
             return {
               id: appt.id,
               recipientName: patientName,
               recipientPhone: patientPhone,
               templateName: 'appointment_booking_confirmation',
-              body: `Hi ${patientName}, your appointment at Shree Ram Dental Care is confirmed!\n\n📅 Date: ${apptDateStr} ⏰ Time: ${apptTime} 👩‍⚕️ Doctor: ${doctorName}\n\nPlease arrive 10 minutes early. For changes or queries, call us at +91 75448 60350 for help`,
+              body: `Hi ${patientName}, your appointment at ${clinicName} is confirmed!\n\n📅 Date: ${apptDateStr} ⏰ Time: ${apptTime} 👩‍⚕️ Doctor: ${doctorName}\n\nPlease arrive 10 minutes early. For changes or queries, call us at ${defaultPhone} for help`,
               status, 
               timestamp: appt.created_at || new Date().toISOString(),
               type: 'utility',
@@ -145,34 +161,34 @@ export default function ReactivationSentMessages() {
           const uniquePatientLogs = dbPatientSentLogs.filter(log => !existingLocalIds.has(log.id));
           entries = [...uniquePatientLogs, ...entries];
         }
-      }
-      
-      // If we have actual database patients, inject a couple of custom logs corresponding to them
-      if (dbPatients.length > 0 && entries.length > 0) {
-        const alreadyHasDbPatient = entries.some(e => dbPatients.some(p => p.name === e.recipientName));
-        if (!alreadyHasDbPatient) {
-          dbPatients.slice(0, 3).forEach((patient, idx) => {
-            const hoursAgo = (idx + 1) * 4;
-            const logTime = new Date(Date.now() - hoursAgo * 60 * 60 * 1000);
-            
-            const newEntry: WhatsAppLogEntry = {
-              id: `real-${idx}`,
-              recipientName: patient.name,
-              recipientPhone: patient.phone,
-              templateName: 'appointment_booking_confirmation',
-              body: `Hi ${patient.name}, your appointment at Shree Ram Dental Care is confirmed!\n\n📅 Date: ${new Date(Date.now() + 86400000).toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' })} ⏰ Time: 11:30 AM 👩‍⚕️ Doctor: Dr. Sharma\n\nPlease arrive 10 minutes early. For changes or queries, call us at +91 75448 60350 for help`,
-              status: idx === 0 ? 'read' : 'delivered',
-              timestamp: logTime.toISOString(),
-              type: 'utility',
-              direction: 'outbound',
-              wamid: `wamid.HBgMOTE${Date.now() + idx}FQIAERgSRREAL${idx}==`,
-              isMock: true,
-            };
-            entries = [newEntry, ...entries];
-          });
+
+        // If we have actual database patients, inject a couple of custom logs corresponding to them
+        if (dbPatients.length > 0 && entries.length > 0) {
+          const alreadyHasDbPatient = entries.some(e => dbPatients.some(p => p.name === e.recipientName));
+          if (!alreadyHasDbPatient) {
+            dbPatients.slice(0, 3).forEach((patient, idx) => {
+              const hoursAgo = (idx + 1) * 4;
+              const logTime = new Date(Date.now() - hoursAgo * 60 * 60 * 1000);
+              
+              const newEntry: WhatsAppLogEntry = {
+                id: `real-${idx}`,
+                recipientName: patient.name,
+                recipientPhone: patient.phone,
+                templateName: 'appointment_booking_confirmation',
+                body: `Hi ${patient.name}, your appointment at ${clinicName} is confirmed!\n\n📅 Date: ${new Date(Date.now() + 86400000).toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' })} ⏰ Time: 10:00 AM 👩‍⚕️ Doctor: ${defaultDoctor}\n\nPlease arrive 10 minutes early. For changes or queries, call us at ${defaultPhone} for help`,
+                status: idx === 0 ? 'read' : 'delivered',
+                timestamp: logTime.toISOString(),
+                type: 'utility',
+                direction: 'outbound',
+                wamid: `wamid.HBgMOTE${Date.now() + idx}FQIAERgSRREAL${idx}==`,
+                isMock: true,
+              };
+              entries = [newEntry, ...entries];
+            });
+          }
         }
       }
-
+      
       setLogs(entries);
     } catch (e) {
       console.error('Error fetching real message logs:', e);

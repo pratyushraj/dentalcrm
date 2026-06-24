@@ -340,15 +340,15 @@ export default function DentistWebsite() {
         description="Premium dental clinic in Patna. Painless implants, laser whitening, root canals, and invisible aligners under Dr. Aryan Parmar."
         image="/assets/yourdentist/exterior_day.jpg"
         imageAlt="YOUR DENTIST Patna Clinic"
-        canonicalUrl="https://creatorarmour.com/dentist-website"
+        canonicalUrl="https://yourdentistpatna.in/"
         jsonLd={{
           "@context": "https://schema.org",
           "@type": "Dentist",
           "name": "YOUR DENTIST - Dr. Aryan Parmar",
-          "image": "https://creatorarmour.com/assets/yourdentist/exterior_day.jpg",
-          "@id": "https://creatorarmour.com/dentist-website#clinic",
-          "url": "https://creatorarmour.com/dentist-website",
-          "telephone": "+919876543210",
+          "image": "https://yourdentistpatna.in/assets/yourdentist/exterior_day.jpg",
+          "@id": "https://yourdentistpatna.in/#clinic",
+          "url": "https://yourdentistpatna.in/",
+          "telephone": "+916201478033",
           "priceRange": "INR",
           "address": {
             "@type": "PostalAddress",
@@ -507,7 +507,7 @@ export default function DentistWebsite() {
                   Book Appointment
                 </a>
                 <a
-                  href="https://wa.me/919876543210?text=Hi%20Dr.%20Aryan,%20I'd%20like%20to%20reserve%20a%20free%20smile%20assessment."
+                  href="https://wa.me/916201478033?text=Hi%20Dr.%20Aryan,%20I'd%20like%20to%20reserve%20a%20free%20smile%20assessment."
                   target="_blank"
                   rel="noopener noreferrer"
                   className="px-6 py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-full text-[10px] font-black uppercase tracking-widest transition-all text-center flex items-center justify-center gap-2 shadow-md"
@@ -1185,7 +1185,7 @@ export default function DentistWebsite() {
               <Phone className="h-5 w-5 text-neutral-900 shrink-0" />
               <div>
                 <p className="text-[8px] font-black text-neutral-400 uppercase tracking-widest">Clinic Helpline</p>
-                <p className="text-xs font-black text-neutral-900 mt-0.5">+91 98765 43210</p>
+                <p className="text-xs font-black text-neutral-900 mt-0.5">+91 62014 78033</p>
               </div>
             </div>
           </div>
@@ -1719,7 +1719,7 @@ export default function DentistWebsite() {
       <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-3 items-end">
         {/* Floating WhatsApp Action Capsule (Sticky on Mobile & Desktop) */}
         <a
-          href="https://wa.me/919876543210?text=Hi%20Dr.%20Aryan,%20I'd%20like%20to%20reserve%20a%20free%20smile%20assessment."
+          href="https://wa.me/916201478033?text=Hi%20Dr.%20Aryan,%20I'd%20like%20to%20reserve%20a%20free%20smile%20assessment."
           target="_blank"
           rel="noopener noreferrer"
           className="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-3 rounded-full flex items-center gap-2.5 shadow-2xl transition-transform hover:scale-105 active:scale-95 border border-emerald-500/20 text-xs font-black uppercase tracking-wider"
@@ -1779,7 +1779,7 @@ export default function DentistWebsite() {
                   <p className="text-[8px] font-black uppercase text-neutral-400 tracking-widest mb-2 text-left">Select inquiry topic:</p>
                   <div className="flex flex-wrap gap-1.5 justify-start">
                     <button
-                      onClick={() => triggerChatOption("Book Appointment", "Great! To book a Free Smile Assessment, please scroll down to our reservation form, or WhatsApp us directly at +91 98765 43210. 📅")}
+                      onClick={() => triggerChatOption("Book Appointment", "Great! To book a Free Smile Assessment, please scroll down to our reservation form, or WhatsApp us directly at +91 62014 78033. 📅")}
                       className="px-3 py-1.5 bg-neutral-50 hover:bg-neutral-100 text-neutral-800 text-[9px] font-black uppercase tracking-wider rounded-lg border border-neutral-200 transition-colors"
                     >
                       📅 Booking

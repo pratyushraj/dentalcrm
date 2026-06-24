@@ -17,4 +17,4 @@ Disallow: /signup/
 Disallow: /reset-password/
 Disallow: /forgot-password/
 
-Sitemap: https://creatorarmour.com/sitemap.xml
+Sitemap: https://yourdentistpatna.in/sitemap.xml

@@ -14,14 +14,18 @@ export const SERVICES = [
   'Root Canal',
   'Dental Implants',
   'Crown / Bridge',
-  'Braces Consultation',
-  'Orthodontic Review',
-  'Pediatric Dental',
-  'Oral Surgery',
+  'Braces & Aligners',
+  'Veneers (Porcelain)',
+  'Composite Veneer',
+  'Pulpectomy',
+  'Dental X-Ray',
   'Extraction',
+  'Oral Surgery',
+  'Pediatric Dental',
   'Gum Treatment',
   'Smile Design',
   'Dental Checkup',
+  'Medicine Bill',
 ];
 
 export const STATUS_OPTIONS: CustomerStatus[] = ['Active', 'Inactive', 'New Lead', 'Follow Up Needed'];

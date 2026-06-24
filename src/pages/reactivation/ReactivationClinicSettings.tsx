@@ -50,7 +50,14 @@ export const DEFAULT_PROCEDURES: Procedure[] = [
   { name: 'Scaling & Deep Polishing', defaultCost: 1200, gstRate: 0 },
   { name: 'Laser Teeth Whitening', defaultCost: 12000, gstRate: 18 },
   { name: 'Clear Aligners (Standard)', defaultCost: 45000, gstRate: 18 },
-  { name: 'Clear Aligners (Premium)', defaultCost: 85000, gstRate: 18 }
+  { name: 'Clear Aligners (Premium)', defaultCost: 85000, gstRate: 18 },
+  { name: 'Porcelain Veneer (per tooth)', defaultCost: 12000, gstRate: 18 },
+  { name: 'Composite Veneer (per tooth)', defaultCost: 2500, gstRate: 0 },
+  { name: 'Dental X-Ray (RVG)', defaultCost: 200, gstRate: 0 },
+  { name: 'Tooth Extraction (Standard)', defaultCost: 1000, gstRate: 0 },
+  { name: 'Pulpectomy (Child RCT)', defaultCost: 2000, gstRate: 0 },
+  { name: 'Orthodontic Braces (Metal)', defaultCost: 25000, gstRate: 18 },
+  { name: 'Medicine Bill', defaultCost: 500, gstRate: 0 }
 ];
 
 export const BRANDING_KEY = (orgId: string) => `clinic_branding_${orgId}`;

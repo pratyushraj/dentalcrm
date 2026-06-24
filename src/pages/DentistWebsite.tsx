@@ -477,37 +477,83 @@ export default function DentistWebsite() {
         image="/assets/yourdentist/exterior_day.jpg"
         imageAlt="YOUR DENTIST Patna Clinic"
         canonicalUrl="https://yourdentistpatna.in/"
-        jsonLd={{
-          "@context": "https://schema.org",
-          "@type": "Dentist",
-          "name": "YOUR DENTIST - Dr. Aryan Parmar",
-          "image": "https://yourdentistpatna.in/assets/yourdentist/exterior_day.jpg",
-          "@id": "https://yourdentistpatna.in/#clinic",
-          "url": "https://yourdentistpatna.in/",
-          "telephone": "+916201478033",
-          "priceRange": "INR",
-          "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "H/No 12, Pataliputra Colony",
-            "addressLocality": "Patna",
-            "addressRegion": "Bihar",
-            "postalCode": "800013",
-            "addressCountry": "IN"
-          },
-          "openingHoursSpecification": {
-            "@type": "OpeningHoursSpecification",
-            "dayOfWeek": [
-              "Monday",
-              "Tuesday",
-              "Wednesday",
-              "Thursday",
-              "Friday",
-              "Saturday"
+        jsonLd={[
+          {
+            "@context": "https://schema.org",
+            "@type": "Dentist",
+            "@id": "https://yourdentistpatna.in/#clinic",
+            "name": "YOUR DENTIST - Dr. Aryan Parmar",
+            "image": [
+              "https://yourdentistpatna.in/assets/yourdentist/exterior_day.jpg",
+              "https://yourdentistpatna.in/assets/yourdentist/interior_operatory.jpg"
             ],
-            "opens": "10:00",
-            "closes": "20:00"
+            "url": "https://yourdentistpatna.in/",
+            "telephone": "+916201478033",
+            "priceRange": "INR",
+            "geo": {
+              "@type": "GeoCoordinates",
+              "latitude": 25.6208,
+              "longitude": 85.1118
+            },
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "H/No 12, Pataliputra Colony",
+              "addressLocality": "Patna",
+              "addressRegion": "Bihar",
+              "postalCode": "800013",
+              "addressCountry": "IN"
+            },
+            "openingHoursSpecification": [
+              {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": [
+                  "Monday",
+                  "Tuesday",
+                  "Wednesday",
+                  "Thursday",
+                  "Friday",
+                  "Saturday"
+                ],
+                "opens": "10:00",
+                "closes": "20:00"
+              }
+            ],
+            "sameAs": [
+              "https://www.instagram.com/yourdentist_patna/"
+            ],
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": "4.9",
+              "reviewCount": "287"
+            },
+            "review": [
+              {
+                "@type": "Review",
+                "author": {
+                  "@type": "Person",
+                  "name": "Kumar"
+                },
+                "reviewRating": {
+                  "@type": "Rating",
+                  "ratingValue": "5"
+                },
+                "reviewBody": "Look at your incredible smile transformation! Got my smile makeover veneers done by Dr. Aryan Parmar. Painless and highly professional!"
+              },
+              {
+                "@type": "Review",
+                "author": {
+                  "@type": "Person",
+                  "name": "Amit Sharma"
+                },
+                "reviewRating": {
+                  "@type": "Rating",
+                  "ratingValue": "5"
+                },
+                "reviewBody": "Best clinic in Patna for dental implants. Dr. Aryan explained the computerized surgery in detail and the process was extremely smooth."
+              }
+            ]
           }
-        }}
+        ]}
       />
 
       <FAQSchema faqs={FAQS} />

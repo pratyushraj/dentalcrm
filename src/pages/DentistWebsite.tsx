@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { SEOHead } from '@/components/seo/SEOHead';
 import { FAQSchema } from '@/components/seo/SchemaMarkup';
 import { toast } from 'sonner';
+import { supabase } from '@/integrations/supabase/client';
 import {
   Sparkles,
   Star,
@@ -242,6 +243,7 @@ export default function DentistWebsite() {
   const [activeDentistIndex, setActiveDentistIndex] = useState<number>(0);
   const [timeString, setTimeString] = useState<string>('');
   const [scrolled, setScrolled] = useState<boolean>(false);
+  const [clinic, setClinic] = useState<any>(null);
 
   // Before/after compare slider position (0-100)
   const [sliderPosition, setSliderPosition] = useState<number>(50);
@@ -259,6 +261,24 @@ export default function DentistWebsite() {
     { sender: 'ai', text: "👋 Hi\nI'm Your Dentist Assistant.\nHow can I help you today?" }
   ]);
   const [isTyping, setIsTyping] = useState<boolean>(false);
+
+  useEffect(() => {
+    async function loadClinic() {
+      try {
+        const { data } = await (supabase as any)
+          .from('dental_clinics')
+          .select('*')
+          .eq('id', '8800a4c7-a1f5-4edd-8fe8-f698c5928478')
+          .single();
+        if (data) {
+          setClinic(data);
+        }
+      } catch (err) {
+        console.error('Failed to load clinic details:', err);
+      }
+    }
+    loadClinic();
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -297,14 +317,130 @@ export default function DentistWebsite() {
     return () => clearInterval(timer);
   }, []);
 
-  const handleBookingSubmit = (e: React.FormEvent) => {
+  const handleBookingSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!selectedDate || !selectedTime || !patientName || !patientPhone) {
       toast.error("Please fill in all details.");
       return;
     }
-    setBookingConfirmed(true);
-    toast.success("Free Smile Assessment Slot Reserved!");
+
+    const toastId = toast.loading("Reserving your dental appointment...");
+    try {
+      const clinicId = '8800a4c7-a1f5-4edd-8fe8-f698c5928478';
+
+      // 1. Search for existing patient by phone number
+      const cleanPhone = patientPhone.replace(/[^0-9]/g, '');
+      const { data: existingPatients } = await (supabase as any)
+        .from('dental_patients')
+        .select('id')
+        .eq('clinic_id', clinicId)
+        .ilike('phone', `%${cleanPhone.slice(-10)}%`);
+
+      let patientId = null;
+      if (existingPatients && existingPatients.length > 0) {
+        patientId = existingPatients[0].id;
+      } else {
+        // Create new patient record
+        const colors = ['bg-teal-500', 'bg-blue-500', 'bg-indigo-500', 'bg-purple-500', 'bg-rose-500'];
+        const avatarColor = colors[Math.floor(Math.random() * colors.length)];
+        const { data: newPatient, error: pErr } = await (supabase as any)
+          .from('dental_patients')
+          .insert([{
+            clinic_id: clinicId,
+            name: patientName,
+            phone: patientPhone,
+            status: 'New',
+            service: selectedService,
+            avatar_color: avatarColor
+          }])
+          .select()
+          .single();
+        if (pErr) throw pErr;
+        patientId = newPatient.id;
+      }
+
+      // 2. Determine doctor name from clinic settings/owner profiles
+      let doctorName = 'Dr. Aryan Parmar';
+      if (clinic) {
+        if (clinic.owner_id) {
+          const { data: ownerProfile } = await (supabase as any)
+            .from('profiles')
+            .select('first_name, last_name')
+            .eq('id', clinic.owner_id)
+            .single();
+          if (ownerProfile) {
+            doctorName = `${ownerProfile.first_name || ''} ${ownerProfile.last_name || ''}`.trim() || doctorName;
+          }
+        } else if (clinic.doctor_name) {
+          doctorName = clinic.doctor_name;
+        }
+      }
+
+      // 3. Save appointment details
+      const { error: apptErr } = await (supabase as any)
+        .from('dental_appointments')
+        .insert([{
+          clinic_id: clinicId,
+          patient_id: patientId,
+          patient_name: patientName,
+          patient_phone: patientPhone,
+          appointment_date: selectedDate,
+          appointment_time: selectedTime,
+          doctor_name: doctorName,
+          treatment_name: selectedService,
+          status: 'Confirmed'
+        }]);
+
+      if (apptErr) throw apptErr;
+
+      setBookingConfirmed(true);
+      toast.success("Free Smile Assessment Slot Reserved!");
+
+      // 4. Dispatch WhatsApp confirmation alert
+      if (clinic && clinic.whatsapp_phone_number_id && clinic.whatsapp_access_token) {
+        const wabaPhoneId = clinic.whatsapp_phone_number_id;
+        const wabaToken = clinic.whatsapp_access_token.split('|')[0];
+        const formattedPhone = cleanPhone.length === 10 ? `91${cleanPhone}` : cleanPhone;
+        const formattedDateString = new Date(selectedDate).toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
+
+        const rxTemplateName = clinic.booking_template_name || 'booking';
+
+        const payload = {
+          messaging_product: 'whatsapp',
+          to: formattedPhone,
+          type: 'template',
+          template: {
+            name: rxTemplateName,
+            language: { code: 'en' },
+            components: [
+              {
+                type: 'body',
+                parameters: [
+                  { type: 'text', text: patientName },
+                  { type: 'text', text: formattedDateString },
+                  { type: 'text', text: selectedTime }
+                ]
+              }
+            ]
+          }
+        };
+
+        fetch('/api/whatsapp-helper/send-message', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            wabaPhoneId,
+            wabaToken,
+            payload
+          })
+        }).catch(err => console.error('Automated WhatsApp booking alert failed:', err));
+      }
+    } catch (err: any) {
+      console.error('Booking submission failed:', err);
+      toast.error('Failed to reserve slot: ' + err.message);
+    } finally {
+      toast.dismiss(toastId);
+    }
   };
 
   const handleResetBooking = () => {

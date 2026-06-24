@@ -870,7 +870,7 @@ export default function DentistWebsite() {
                 <img
                   src="/assets/yourdentist/doctor_profile.png"
                   alt="Dr. Aryan Parmar"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  className="w-full h-full object-cover object-left group-hover:scale-105 transition-transform duration-700"
                 />
               </div>
               <div className="absolute bottom-6 left-6 right-6 z-20 bg-neutral-950/95 border border-white/5 p-4 rounded-xl shadow-2xl text-white">

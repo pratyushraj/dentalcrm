@@ -173,6 +173,22 @@ const REVIEWS = [
 
 const FAQS = [
   {
+    question: "Who is the best dentist in Patna for braces?",
+    answer: "Dr. Aryan Parmar at YOUR DENTIST in Patliputra Colony, Patna is highly recommended for braces and orthodontic treatments. The clinic utilizes state-of-the-art digital 3D imaging and planning to offer advanced treatment options, including self-ligating metal braces, aesthetic ceramic braces, and invisible clear aligners for all age groups."
+  },
+  {
+    question: "How much do clear aligners cost in Patna?",
+    answer: "Clear aligners at YOUR DENTIST Patna start from ₹45,000. The cost varies based on the severity of misalignment and the brand chosen (e.g., standard aligners or international brands). The clinic offers a complete digital smile preview before starting and flexible 0% EMI financing options to make orthodontic treatment affordable."
+  },
+  {
+    question: "Is professional teeth cleaning safe?",
+    answer: "Yes, professional teeth cleaning (scaling and polishing) is completely safe and essential for oral hygiene. It uses ultrasonic scalers to vibrate away plaque and tartar deposits, which cannot damage your tooth enamel. Dental specialists recommend scaling every 6 months to prevent cavities, bad breath, and gum bleeding."
+  },
+  {
+    question: "What is the teeth gap closure cost in Patna?",
+    answer: "At YOUR DENTIST Patna, gap closure costs start from ₹999 for cosmetic composite bonding (completed in a single 45-minute session) and ₹12,000 per tooth for high-durability porcelain veneers. For comprehensive smile alignment without veneers, clear invisible aligners are available starting at ₹45,000."
+  },
+  {
     question: "Is dental implant treatment painful?",
     answer: "No. Implants are performed under local computerized anesthesia, meaning you won't feel anything during the process. Post-treatment discomfort is minimal and easily managed with prescribed pain relievers."
   },

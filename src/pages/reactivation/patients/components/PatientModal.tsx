@@ -160,7 +160,10 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
       { label: 'Ranidom-DOM', text: '• Tab. Ranidom-DOM - 1 tab twice daily before food', category: 'Gas/Acidity' },
       { label: 'Pan-40', text: '• Tab. Pan-40 - 1 tab once daily before food', category: 'Gas/Acidity' },
       { label: 'Cyra-D', text: '• Tab. Cyra-D - 1 tab once daily before food', category: 'Gas/Acidity' },
-      { label: 'Rabeprazole 20mg', text: '• Tab. Rabeprazole 20mg - 1 tab once daily before food', category: 'Gas/Acidity' }
+      { label: 'Rabeprazole 20mg', text: '• Tab. Rabeprazole 20mg - 1 tab once daily before food', category: 'Gas/Acidity' },
+      { label: 'Lycowonder', text: '• Tab. Lycowonder - 1 tab once daily', category: 'Others' },
+      { label: 'Lycowonder Forte', text: '• Tab. Lycowonder Forte - 1 tab once daily', category: 'Others' },
+      { label: 'Fibrowonder', text: '• Tab. Fibrowonder - 1 tab once daily', category: 'Others' }
     ];
 
     return meds.map(med => {
@@ -2379,7 +2382,10 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                           { label: 'Ranidom-DOM', text: '• Tab. Ranidom-DOM - 1 tab twice daily before food', category: 'Gas/Acidity' },
                           { label: 'Pan-40', text: '• Tab. Pan-40 - 1 tab once daily before food', category: 'Gas/Acidity' },
                           { label: 'Cyra-D', text: '• Tab. Cyra-D - 1 tab once daily before food', category: 'Gas/Acidity' },
-                          { label: 'Rabeprazole 20mg', text: '• Tab. Rabeprazole 20mg - 1 tab once daily before food', category: 'Gas/Acidity' }
+                          { label: 'Rabeprazole 20mg', text: '• Tab. Rabeprazole 20mg - 1 tab once daily before food', category: 'Gas/Acidity' },
+                          { label: 'Lycowonder', text: '• Tab. Lycowonder - 1 tab once daily', category: 'Others' },
+                          { label: 'Lycowonder Forte', text: '• Tab. Lycowonder Forte - 1 tab once daily', category: 'Others' },
+                          { label: 'Fibrowonder', text: '• Tab. Fibrowonder - 1 tab once daily', category: 'Others' }
                         ];
                         if (medicationsList.length === 0) {
                           try {

@@ -161,7 +161,10 @@ export const DEFAULT_MEDICATIONS: Medication[] = [
   { id: '43', label: 'Ranidom-DOM', text: '• Tab. Ranidom-DOM - 1 tab twice daily before food', category: 'Gas/Acidity' },
   { id: '44', label: 'Pan-40', text: '• Tab. Pan-40 - 1 tab once daily before food', category: 'Gas/Acidity' },
   { id: '45', label: 'Cyra-D', text: '• Tab. Cyra-D - 1 tab once daily before food', category: 'Gas/Acidity' },
-  { id: '46', label: 'Rabeprazole 20mg', text: '• Tab. Rabeprazole 20mg - 1 tab once daily before food', category: 'Gas/Acidity' }
+  { id: '46', label: 'Rabeprazole 20mg', text: '• Tab. Rabeprazole 20mg - 1 tab once daily before food', category: 'Gas/Acidity' },
+  { id: '47', label: 'Lycowonder', text: '• Tab. Lycowonder - 1 tab once daily', category: 'Others' },
+  { id: '48', label: 'Lycowonder Forte', text: '• Tab. Lycowonder Forte - 1 tab once daily', category: 'Others' },
+  { id: '49', label: 'Fibrowonder', text: '• Tab. Fibrowonder - 1 tab once daily', category: 'Others' }
 ];
 
 export const MEDICATIONS_KEY = (orgId: string) => `clinic_medications_${orgId}`;

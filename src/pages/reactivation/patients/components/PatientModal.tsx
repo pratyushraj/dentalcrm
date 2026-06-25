@@ -88,7 +88,7 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
   } = useDealAlertNotifications();
   const isEdit = !!customer?.id;
   const [form, setForm] = useState<Customer>(() => getInitialForm(customer));
-  const [activeTab, setActiveTab] = useState<'general' | 'medical' | 'estimates'>('medical');
+  const [activeTab, setActiveTab] = useState<'general' | 'medical' | 'estimates'>('general');
   const [lightboxImg, setLightboxImg] = useState<string | null>(null);
   const [showVoiceSettingsModal, setShowVoiceSettingsModal] = useState(false);
   const [selectedRxCategory, setSelectedRxCategory] = useState<string>('All');
@@ -319,7 +319,7 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
     wasOpenRef.current = open;
 
     if (customer?.id !== lastCustomerIdRef.current || didOpenFresh) {
-      setActiveTab('medical');
+      setActiveTab('general');
       setShowAdvancedClinical(false);
       setCopiedEstimate(false);
       setActiveQuadrant('all');
@@ -398,7 +398,7 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
       setForm(initForm);
       initialFormRef.current = initForm;
 
-      setActiveTab('medical');
+      setActiveTab('general');
       setShowAdvancedClinical(false);
       setCopiedEstimate(false);
       setActiveQuadrant('all');
@@ -1860,6 +1860,20 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                     {/* Tab Selector & Settings Gear */}
                     <div className="flex items-center gap-2 self-start sm:self-auto w-full sm:w-auto min-w-0">
                       <div className="flex bg-slate-100/80 p-1 rounded-xl border border-slate-200/60 gap-1 overflow-x-auto scrollbar-none flex-nowrap flex-1 sm:flex-none min-w-0">
+                        {/* Tab 1: Before Tx */}
+                        <button
+                          type="button"
+                          onClick={() => setActiveTab('general')}
+                          className={`px-3 py-1.5 rounded-lg text-[10.5px] font-bold transition-all duration-150 flex items-center gap-1.5 shrink-0 ${
+                            activeTab === 'general'
+                              ? 'bg-white text-indigo-700 shadow-sm border border-slate-200/50'
+                              : 'text-slate-500 hover:text-slate-700 hover:bg-slate-50/50'
+                          }`}
+                        >
+                          <Camera size={11} className="text-indigo-500" />
+                          <span>Before Tx</span>
+                        </button>
+                        {/* Tab 2: Consultation */}
                         <button
                           type="button"
                           onClick={() => setActiveTab('medical')}
@@ -1872,6 +1886,7 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                           <Stethoscope size={11} className="text-indigo-500" />
                           <span>Consultation</span>
                         </button>
+                        {/* Tab 3: Billing */}
                         <button
                           type="button"
                           onClick={() => setActiveTab('estimates')}
@@ -1883,18 +1898,6 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                         >
                           <FileText size={11} className="text-indigo-500" />
                           <span>Billing</span>
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => setActiveTab('general')}
-                          className={`px-3 py-1.5 rounded-lg text-[10.5px] font-bold transition-all duration-150 flex items-center gap-1.5 shrink-0 ${
-                            activeTab === 'general'
-                              ? 'bg-white text-indigo-700 shadow-sm border border-slate-200/50'
-                              : 'text-slate-500 hover:text-slate-700 hover:bg-slate-50/50'
-                          }`}
-                        >
-                          <Camera size={11} className="text-indigo-500" />
-                          <span>Before Tx</span>
                         </button>
                       </div>
                       <button

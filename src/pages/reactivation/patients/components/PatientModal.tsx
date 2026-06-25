@@ -1813,7 +1813,12 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
           className="max-w-2xl border-0 p-0 overflow-hidden max-sm:fixed max-sm:bottom-0 max-sm:top-auto max-sm:left-0 max-sm:translate-x-0 max-sm:translate-y-0 max-sm:w-full max-sm:max-w-full max-sm:rounded-t-2xl max-sm:rounded-b-none max-sm:max-h-[92vh] max-sm:flex max-sm:flex-col"
           style={{ background: '#FFFFFF', border: '1px solid #E2E8F0' }}
           aria-describedby={undefined}
-          onCloseAutoFocus={(e) => e.preventDefault()}
+          onCloseAutoFocus={(e) => {
+            e.preventDefault();
+            if (document.activeElement instanceof HTMLElement) {
+              document.activeElement.blur();
+            }
+          }}
         >
           <AnimatePresence>
             {open && (
@@ -3715,7 +3720,12 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
           <DialogContent
             className="max-w-4xl p-1 border-0 overflow-hidden"
             style={{ background: '#FFFFFF', border: '1px solid #E2E8F0' }}
-            onCloseAutoFocus={(e) => e.preventDefault()}
+            onCloseAutoFocus={(e) => {
+              e.preventDefault();
+              if (document.activeElement instanceof HTMLElement) {
+                document.activeElement.blur();
+              }
+            }}
           >
             <div className="relative w-full h-[70vh] flex items-center justify-center p-4">
               <img src={lightboxImg} className="max-w-full max-h-full object-contain rounded-lg shadow-2xl" alt="Patient X-Ray Radiograph scan Zoom" />
@@ -3747,7 +3757,12 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
             className="max-w-md border-0 p-5 overflow-hidden"
             style={{ background: '#FFFFFF', border: '1px solid #E2E8F0' }}
             aria-describedby={undefined}
-            onCloseAutoFocus={(e) => e.preventDefault()}
+            onCloseAutoFocus={(e) => {
+              e.preventDefault();
+              if (document.activeElement instanceof HTMLElement) {
+                document.activeElement.blur();
+              }
+            }}
           >
             <div className="space-y-4">
               <div className="flex items-center justify-between pb-2 border-b border-slate-100">

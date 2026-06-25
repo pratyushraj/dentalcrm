@@ -404,7 +404,15 @@ export default function ReactivationScheduler() {
 
       {/* Booking Dialog Modal */}
       <Dialog open={isModalOpen} onOpenChange={(v) => !v && setIsModalOpen(false)}>
-        <DialogContent className="max-w-md border-0 p-0 overflow-hidden bg-white" onCloseAutoFocus={(e) => e.preventDefault()}>
+        <DialogContent
+          className="max-w-md border-0 p-0 overflow-hidden bg-white"
+          onCloseAutoFocus={(e) => {
+            e.preventDefault();
+            if (document.activeElement instanceof HTMLElement) {
+              document.activeElement.blur();
+            }
+          }}
+        >
           <DialogHeader className="px-6 pt-5 pb-3 border-b border-slate-100 text-left">
             <DialogTitle className="text-slate-800 text-[16px] font-semibold">Book Live Appointment</DialogTitle>
             <p className="text-[11px] text-slate-500 mt-0.5">Select a patient profile or enter manual details below</p>

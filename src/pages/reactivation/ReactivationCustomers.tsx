@@ -444,7 +444,7 @@ const ReactivationCustomers: React.FC = () => {
         setLoading(true);
         const { data, error } = await supabase
           .from('dental_patients')
-          .select('id, name, phone, last_visit, service, total_spend, status, notes, avatar_color, active_program_id, program_enrollment_date, program_current_step, program_status, created_at')
+          .select('id, name, phone, last_visit, service, total_spend, status, notes, avatar_color, active_program_id, program_enrollment_date, program_current_step, program_status, created_at, prescription, estimates, before_photo, after_photo, before_after_photos, before_photos, after_photos')
           .eq('clinic_id', clinicId)
           .order('created_at', { ascending: false });
 
@@ -463,13 +463,13 @@ const ReactivationCustomers: React.FC = () => {
             avatarColor: d.avatar_color,
             problemTeeth: [],
             xrays: [],
-            beforeAfterPhotos: [],
-            beforePhoto: '',
-            beforePhotos: [],
+            beforeAfterPhotos: d.before_after_photos || [],
+            beforePhoto: d.before_photo || '',
+            beforePhotos: d.before_photos || [],
             profilePhoto: '',
-            afterPhoto: '',
-            afterPhotos: [],
-            prescription: '',
+            afterPhoto: d.after_photo || '',
+            afterPhotos: d.after_photos || [],
+            prescription: d.prescription || '',
             allergies: [],
             medicalConditions: [],
             toothNotes: {},
@@ -479,7 +479,7 @@ const ReactivationCustomers: React.FC = () => {
             programEnrollmentDate: d.program_enrollment_date,
             programCurrentStep: d.program_current_step,
             programStatus: d.program_status,
-            estimates: []
+            estimates: d.estimates || []
           }));
           setCustomers(mapped);
         } else {

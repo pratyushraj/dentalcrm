@@ -2451,7 +2451,7 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                                               <MoreVertical size={16} />
                                             </button>
                                           </DropdownMenuTrigger>
-                                          <DropdownMenuContent align="end">
+                                          <DropdownMenuContent align="end" className="z-[40000]">
                                             <DropdownMenuItem
                                               className="text-rose-600 focus:text-rose-600 focus:bg-rose-50 cursor-pointer font-semibold text-[12px]"
                                               onClick={() => {

@@ -176,9 +176,9 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
     ];
 
     return meds.map(med => {
-      if (med.category) return med;
       const matched = defaultMeds.find(dm => dm.label.toLowerCase() === med.label.toLowerCase());
       if (matched) return { ...med, category: matched.category };
+      if (med.category && med.category !== 'Others') return med;
 
       const text = (med.text || '').toLowerCase();
       const label = (med.label || '').toLowerCase();

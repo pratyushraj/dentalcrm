@@ -2320,28 +2320,38 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
 
 
                     {/* Prescription (Rx) Editor */}
-                    <div className="bg-slate-50 border border-slate-200/80 rounded-xl p-4 space-y-2.5">
+                    <div className="bg-gradient-to-br from-slate-50 to-white border border-slate-200/80 rounded-xl p-4 space-y-2.5 shadow-sm">
                       <div className="flex items-center justify-between gap-2 flex-wrap">
-                        <span className="text-[11px] font-bold text-slate-800 uppercase tracking-wider font-sans">Prescription (Rx)</span>
+                        <div className="flex items-center gap-2">
+                          <div className="w-6 h-6 rounded-lg bg-indigo-100 border border-indigo-200 flex items-center justify-center text-indigo-500">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                          </div>
+                          <span className="text-[12px] font-bold text-slate-800 uppercase tracking-wider font-sans">Prescription (Rx)</span>
+                        </div>
                         <div className="flex items-center gap-1.5">
+                          {form.prescription && (
+                            <span className="text-[9px] font-bold text-emerald-600 bg-emerald-50 border border-emerald-200 rounded-full px-2 py-0.5 flex items-center gap-1">
+                              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block"></span>
+                              {form.prescription.split('\n').filter(l => l.trim()).length} lines
+                            </span>
+                          )}
                           {/* Print Rx PDF */}
                           <button
                             type="button"
                             onClick={generateDefaultPDF}
-                            className="flex items-center gap-1.5 px-2 py-0.5 rounded text-[9.5px] font-bold uppercase border bg-white border-slate-200 text-slate-600 hover:bg-teal-50 hover:border-teal-200 hover:text-teal-600 transition-all"
+                            className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[9.5px] font-bold uppercase border bg-white border-slate-200 text-slate-600 hover:bg-teal-50 hover:border-teal-300 hover:text-teal-600 transition-all shadow-sm"
                           >
                             <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
-                            Print Rx PDF
+                            Print Rx
                           </button>
                         </div>
                       </div>
-                      <p className="text-[10px] text-slate-500">Describe the medicine details (prescriptions will be printed to PDF with full instructions):</p>
                       <textarea
                         rows={5}
                         value={form.prescription || ''}
                         onChange={(e) => handleChange('prescription', e.target.value)}
-                        placeholder="Enter prescription details..."
-                        className="w-full px-3 py-2.5 bg-white border border-slate-200 rounded-lg text-[12.5px] font-mono leading-relaxed text-slate-700 outline-none focus:ring-1 focus:ring-indigo-500/50 focus:border-indigo-500"
+                        placeholder="Prescription details will appear here as you add medicines below…"
+                        className="w-full px-3 py-2.5 bg-white border border-slate-200 rounded-lg text-[12.5px] font-mono leading-relaxed text-slate-700 outline-none focus:ring-2 focus:ring-indigo-400/30 focus:border-indigo-400 transition-all resize-none"
                       />
                       {/* Prescription Preset Suggestions */}
                       {(() => {
@@ -2424,7 +2434,6 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                           if (!rxGrouped[cat]) rxGrouped[cat] = [];
                           rxGrouped[cat].push(med);
                         });
-                        // Filter medications based on active category and search query
                         const filteredMeds = rxMedList.filter(med => {
                           const matchesCat = selectedRxCategory === 'All' || med.category === selectedRxCategory;
                           const matchesSearch = !searchRxQuery.trim() || 
@@ -2433,7 +2442,6 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                           return matchesCat && matchesSearch;
                         });
 
-                        // Helper to find the details of the last line
                         const currentPrescription = form.prescription || '';
                         const prescriptionLines = currentPrescription.split('\n');
                         const lastLine = prescriptionLines[prescriptionLines.length - 1] || '';
@@ -2453,17 +2461,34 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                         else if (/four times daily/i.test(lastLine)) activeFreq = 'four times daily';
                         else if (/SOS/i.test(lastLine)) activeFreq = 'SOS';
 
+                        const catConfig: Record<string, { icon: string; activeBg: string; activeText: string; cardAccent: string; cardHover: string; countBg: string; countText: string }> = {
+                          'Pain killers': { icon: '💊', activeBg: 'bg-rose-500', activeText: 'text-white', cardAccent: 'border-l-rose-400', cardHover: 'hover:bg-rose-50/60 hover:border-rose-200', countBg: 'bg-rose-100', countText: 'text-rose-600' },
+                          'Antibiotics': { icon: '🦠', activeBg: 'bg-amber-500', activeText: 'text-white', cardAccent: 'border-l-amber-400', cardHover: 'hover:bg-amber-50/60 hover:border-amber-200', countBg: 'bg-amber-100', countText: 'text-amber-600' },
+                          'Multivitamins': { icon: '✨', activeBg: 'bg-emerald-500', activeText: 'text-white', cardAccent: 'border-l-emerald-400', cardHover: 'hover:bg-emerald-50/60 hover:border-emerald-200', countBg: 'bg-emerald-100', countText: 'text-emerald-600' },
+                          'Toothpaste': { icon: '🦷', activeBg: 'bg-sky-500', activeText: 'text-white', cardAccent: 'border-l-sky-400', cardHover: 'hover:bg-sky-50/60 hover:border-sky-200', countBg: 'bg-sky-100', countText: 'text-sky-600' },
+                          'Mouthwash': { icon: '💧', activeBg: 'bg-teal-500', activeText: 'text-white', cardAccent: 'border-l-teal-400', cardHover: 'hover:bg-teal-50/60 hover:border-teal-200', countBg: 'bg-teal-100', countText: 'text-teal-600' },
+                          'Gels': { icon: '🧴', activeBg: 'bg-violet-500', activeText: 'text-white', cardAccent: 'border-l-violet-400', cardHover: 'hover:bg-violet-50/60 hover:border-violet-200', countBg: 'bg-violet-100', countText: 'text-violet-600' },
+                          'Gas/Acidity': { icon: '🔥', activeBg: 'bg-orange-500', activeText: 'text-white', cardAccent: 'border-l-orange-400', cardHover: 'hover:bg-orange-50/60 hover:border-orange-200', countBg: 'bg-orange-100', countText: 'text-orange-600' },
+                          'Others': { icon: '📋', activeBg: 'bg-slate-600', activeText: 'text-white', cardAccent: 'border-l-slate-400', cardHover: 'hover:bg-slate-50/80 hover:border-slate-300', countBg: 'bg-slate-100', countText: 'text-slate-600' },
+                        };
+
+                        const getCardConfig = (cat: string) => catConfig[cat] || catConfig['Others'];
+
                         return (
-                          <div className="space-y-3.5 pt-2 border-t border-slate-200/60">
-                            {/* Inline Modifiers for the last added medicine */}
+                          <div className="space-y-3 pt-2.5 border-t border-slate-200/70">
+                            <div className="flex items-center gap-2">
+                              <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Quick Add Presets</span>
+                              <div className="flex-1 h-px bg-slate-200/60"></div>
+                            </div>
+
                             {lastLine.trim() && (
-                              <div className="bg-slate-100/50 border border-slate-200/60 rounded-xl p-3.5 space-y-3 shadow-inner">
+                              <div className="bg-gradient-to-r from-indigo-50 to-blue-50/50 border border-indigo-200/70 rounded-xl p-3 space-y-2.5 shadow-sm">
                                 <div className="flex items-center justify-between gap-2 flex-wrap">
-                                  <span className="text-[10px] font-bold text-slate-600 uppercase tracking-wider flex items-center gap-1.5">
-                                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                                    Modify Last Line
+                                  <span className="text-[9.5px] font-bold text-indigo-600 uppercase tracking-wider flex items-center gap-1.5">
+                                    <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-pulse inline-block"></span>
+                                    Edit Last Medicine
                                   </span>
-                                  <span className="text-[10px] text-slate-500 font-mono truncate max-w-[200px] sm:max-w-xs">{lastLine}</span>
+                                  <span className="text-[9px] text-indigo-500/70 font-mono bg-white/80 border border-indigo-200/50 rounded px-1.5 py-0.5 truncate max-w-[180px]">{lastLine.replace(/^[•\s\-\*]+/, '').trim()}</span>
                                 </div>
                                 
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
@@ -2572,87 +2597,110 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                             )}
 
                             {/* Search and Categories Filter */}
-                            <div className="space-y-2.5">
-                              <div className="flex gap-2 items-center">
-                                <div className="relative flex-1">
-                                  <span className="absolute left-3 top-[9px] text-slate-400">
-                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-                                  </span>
-                                  <input
-                                    type="text"
-                                    value={searchRxQuery}
-                                    onChange={(e) => setSearchRxQuery(e.target.value)}
-                                    placeholder="Search medicine presets (e.g. Paracetamol, Lycowonder, Zyclav)..."
-                                    className="w-full pl-8 pr-3 py-1.5 bg-white border border-slate-200 rounded-lg text-xs text-slate-700 outline-none focus:ring-1 focus:ring-indigo-500/50 shadow-sm"
-                                  />
-                                </div>
+                            <div className="space-y-2">
+                              {/* Search bar */}
+                              <div className="relative">
+                                <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none">
+                                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                                </span>
+                                <input
+                                  type="text"
+                                  value={searchRxQuery}
+                                  onChange={(e) => setSearchRxQuery(e.target.value)}
+                                  placeholder="Search medicines… (e.g. Zerodol, Lycowonder, Clohex)"
+                                  className="w-full pl-8 pr-8 py-1.5 bg-white border border-slate-200 rounded-lg text-[11px] text-slate-700 outline-none focus:ring-1 focus:ring-indigo-400/40 focus:border-indigo-400 shadow-sm placeholder:text-slate-400 transition-all"
+                                />
+                                {searchRxQuery && (
+                                  <button
+                                    type="button"
+                                    onClick={() => setSearchRxQuery('')}
+                                    className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 transition-colors"
+                                  >
+                                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                                  </button>
+                                )}
                               </div>
 
-                              {/* Category Horizonal Scroll list */}
-                              <div className="flex gap-1 overflow-x-auto pb-1 select-none scrollbar-none">
+                              {/* Category pills row - color coded with icons */}
+                              <div className="flex gap-1.5 overflow-x-auto pb-0.5 select-none" style={{ scrollbarWidth: 'none' }}>
+                                {/* All button */}
                                 <button
                                   type="button"
                                   onClick={() => setSelectedRxCategory('All')}
-                                  className={`px-3 py-1 rounded-full text-[10.5px] font-bold whitespace-nowrap transition-all border ${
+                                  className={`flex items-center gap-1 px-2.5 py-1 rounded-full text-[9.5px] font-bold whitespace-nowrap transition-all border flex-shrink-0 ${
                                     selectedRxCategory === 'All'
-                                      ? 'bg-slate-800 border-slate-800 text-white shadow-sm'
-                                      : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'
+                                      ? 'bg-slate-800 border-slate-900 text-white shadow-sm'
+                                      : 'bg-white border-slate-200 text-slate-500 hover:bg-slate-50 hover:border-slate-300'
                                   }`}
                                 >
-                                  All Presets
+                                  <span>🗂️</span>
+                                  <span>All</span>
+                                  <span className={`text-[8.5px] font-bold rounded-full px-1 min-w-[15px] text-center leading-[13px] ${selectedRxCategory === 'All' ? 'bg-white/20 text-white' : 'bg-slate-100 text-slate-500'}`}>{rxMedList.length}</span>
                                 </button>
-                                {rxMedCategories.map(cat => (
-                                  <button
-                                    key={cat}
-                                    type="button"
-                                    onClick={() => setSelectedRxCategory(cat)}
-                                    className={`px-3 py-1 rounded-full text-[10.5px] font-bold whitespace-nowrap transition-all border ${
-                                      selectedRxCategory === cat
-                                        ? 'bg-indigo-600 border-indigo-600 text-white shadow-sm'
-                                        : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'
-                                    }`}
-                                  >
-                                    {cat}
-                                  </button>
-                                ))}
+                                {rxMedCategories.map(cat => {
+                                  const cfg = catConfig[cat] || catConfig['Others'];
+                                  const count = (rxGrouped[cat] || []).length;
+                                  const isActive = selectedRxCategory === cat;
+                                  return (
+                                    <button
+                                      key={cat}
+                                      type="button"
+                                      onClick={() => setSelectedRxCategory(isActive ? 'All' : cat)}
+                                      className={`flex items-center gap-1 px-2.5 py-1 rounded-full text-[9.5px] font-bold whitespace-nowrap transition-all border flex-shrink-0 ${
+                                        isActive
+                                          ? `${cfg.activeBg} border-transparent ${cfg.activeText} shadow-sm`
+                                          : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50 hover:border-slate-300'
+                                      }`}
+                                    >
+                                      <span>{cfg.icon}</span>
+                                      <span>{cat}</span>
+                                      {count > 0 && (
+                                        <span className={`text-[8.5px] font-bold rounded-full px-1 min-w-[15px] text-center leading-[13px] ${isActive ? 'bg-white/25 text-white' : `${cfg.countBg} ${cfg.countText}`}`}>{count}</span>
+                                      )}
+                                    </button>
+                                  );
+                                })}
                               </div>
                             </div>
 
-                            {/* Preset Medicines Clickable Badges Grid */}
-                            <div className="max-h-[160px] overflow-y-auto border border-slate-200/60 bg-slate-50/20 rounded-xl p-3 scrollbar-thin">
+                            {/* Preset Medicines Clickable Grid */}
+                            <div className="max-h-[185px] overflow-y-auto rounded-xl border border-slate-200/70 bg-white/50 p-2" style={{ scrollbarWidth: 'thin' }}>
                               {filteredMeds.length === 0 ? (
-                                <p className="text-[11px] text-slate-400 text-center py-4">No matching medicines found.</p>
+                                <div className="flex flex-col items-center justify-center py-8 text-slate-400 gap-2">
+                                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                                  <p className="text-[11px]">No medicines found.</p>
+                                </div>
                               ) : (
-                                <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-                                  {filteredMeds.map((med, idx) => (
-                                    <button
-                                      key={idx}
-                                      type="button"
-                                      onClick={() => {
-                                        const current = form.prescription ? form.prescription.trim() : '';
-                                        if (current) {
-                                          handleChange('prescription', `${current}\n${med.text}`);
-                                        } else {
-                                          handleChange('prescription', med.text);
-                                        }
-                                      }}
-                                      className="group text-left p-2 rounded-lg border border-slate-200/70 hover:border-indigo-400 bg-white hover:bg-indigo-50/20 transition-all flex flex-col justify-between gap-1 shadow-sm hover:shadow cursor-pointer select-none"
-                                    >
-                                      <span className="text-[11px] font-bold text-slate-700 group-hover:text-indigo-600 transition-colors line-clamp-1">
-                                        {med.label}
-                                      </span>
-                                      <div className="flex items-center justify-between gap-1 flex-wrap w-full">
-                                        <span className="text-[9px] text-slate-400 font-mono truncate max-w-[120px] group-hover:text-indigo-500/80 transition-colors">
-                                          {med.text.replace(/^[•\s\-\*]+/g, '')}
-                                        </span>
-                                        {med.category && (
-                                          <span className="text-[8px] font-bold uppercase tracking-wider text-slate-400 group-hover:text-indigo-400 scale-90">
-                                            {med.category}
+                                <div className="grid grid-cols-2 md:grid-cols-3 gap-1.5">
+                                  {filteredMeds.map((med, idx) => {
+                                    const cfg = getCardConfig(med.category);
+                                    return (
+                                      <button
+                                        key={idx}
+                                        type="button"
+                                        title={med.text}
+                                        onClick={() => {
+                                          const current = form.prescription ? form.prescription.trim() : '';
+                                          if (current) {
+                                            handleChange('prescription', `${current}\n${med.text}`);
+                                          } else {
+                                            handleChange('prescription', med.text);
+                                          }
+                                        }}
+                                        className={`group text-left p-2.5 rounded-lg border border-l-[3px] ${cfg.cardAccent} border-slate-200/60 bg-white ${cfg.cardHover} transition-all flex flex-col gap-0.5 shadow-sm hover:shadow-md cursor-pointer select-none active:scale-[0.97]`}
+                                      >
+                                        <div className="flex items-start justify-between gap-1">
+                                          <span className="text-[10.5px] font-semibold text-slate-700 group-hover:text-slate-900 leading-tight line-clamp-1 flex-1">
+                                            {med.label}
                                           </span>
-                                        )}
-                                      </div>
-                                    </button>
-                                  ))}
+                                          <span className="text-[8px] shrink-0 opacity-0 group-hover:opacity-100 transition-all bg-slate-700 text-white rounded px-1 py-0.5 font-bold leading-tight">+</span>
+                                        </div>
+                                        <span className="text-[9px] text-slate-400 font-mono leading-snug line-clamp-1">
+                                          {med.text.replace(/^[•\s\-\*]+/, '').split(' - ').slice(1).join(' - ') || med.text.replace(/^[•\s\-\*]+/, '')}
+                                        </span>
+                                      </button>
+                                    );
+                                  })}
                                 </div>
                               )}
                             </div>

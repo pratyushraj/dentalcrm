@@ -93,6 +93,7 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
   const [selectedRxDays, setSelectedRxDays] = useState<string>('');
   const [selectedRxFrequency, setSelectedRxFrequency] = useState<string>('');
   const [medicationsList, setMedicationsList] = useState<any[]>([]);
+  const [searchRxQuery, setSearchRxQuery] = useState<string>('');
 
   // Clinic branding (loaded from localStorage, used for PDF generation)
   const { organizationId } = useSession();
@@ -2423,183 +2424,238 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                           if (!rxGrouped[cat]) rxGrouped[cat] = [];
                           rxGrouped[cat].push(med);
                         });
+                        // Filter medications based on active category and search query
+                        const filteredMeds = rxMedList.filter(med => {
+                          const matchesCat = selectedRxCategory === 'All' || med.category === selectedRxCategory;
+                          const matchesSearch = !searchRxQuery.trim() || 
+                            med.label.toLowerCase().includes(searchRxQuery.toLowerCase()) || 
+                            (med.text || '').toLowerCase().includes(searchRxQuery.toLowerCase());
+                          return matchesCat && matchesSearch;
+                        });
+
+                        // Helper to find the details of the last line
+                        const currentPrescription = form.prescription || '';
+                        const prescriptionLines = currentPrescription.split('\n');
+                        const lastLine = prescriptionLines[prescriptionLines.length - 1] || '';
+
+                        let activeDays = '';
+                        const daysMatch = lastLine.match(/for (\d+) days/i);
+                        if (daysMatch) {
+                          activeDays = daysMatch[1];
+                        } else if (/SOS/i.test(lastLine) && !/once|twice|thrice|four/i.test(lastLine)) {
+                          activeDays = 'SOS';
+                        }
+
+                        let activeFreq = '';
+                        if (/once daily/i.test(lastLine)) activeFreq = 'once daily';
+                        else if (/twice daily/i.test(lastLine)) activeFreq = 'twice daily';
+                        else if (/thrice daily/i.test(lastLine)) activeFreq = 'thrice daily';
+                        else if (/four times daily/i.test(lastLine)) activeFreq = 'four times daily';
+                        else if (/SOS/i.test(lastLine)) activeFreq = 'SOS';
+
                         return (
-                          <div className="grid grid-cols-2 sm:grid-cols-12 gap-2 mt-2">
-                            <select
-                              value={selectedRxCategory}
-                              onChange={(e) => setSelectedRxCategory(e.target.value)}
-                              className="col-span-1 sm:col-span-3 px-2 py-1.5 bg-white border border-slate-200 rounded-lg text-xs text-slate-700 outline-none focus:ring-1 focus:ring-indigo-500/50 cursor-pointer shadow-sm transition-all h-[34px]"
-                            >
-                              <option value="All">All Categories</option>
-                              {rxMedCategories.map(cat => (
-                                <option key={cat} value={cat}>{cat}</option>
-                              ))}
-                            </select>
-                            <select
-                              value={selectedRxDays}
-                              onChange={(e) => {
-                                const newDays = e.target.value;
-                                setSelectedRxDays(newDays);
+                          <div className="space-y-3.5 pt-2 border-t border-slate-200/60">
+                            {/* Inline Modifiers for the last added medicine */}
+                            {lastLine.trim() && (
+                              <div className="bg-slate-100/50 border border-slate-200/60 rounded-xl p-3.5 space-y-3 shadow-inner">
+                                <div className="flex items-center justify-between gap-2 flex-wrap">
+                                  <span className="text-[10px] font-bold text-slate-600 uppercase tracking-wider flex items-center gap-1.5">
+                                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                                    Modify Last Line
+                                  </span>
+                                  <span className="text-[10px] text-slate-500 font-mono truncate max-w-[200px] sm:max-w-xs">{lastLine}</span>
+                                </div>
                                 
-                                const current = form.prescription || '';
-                                if (current.trim()) {
-                                  const lines = current.split('\n');
-                                  const lastLine = lines[lines.length - 1];
-                                  let updatedLine = lastLine;
-                                  
-                                  if (newDays === 'SOS') {
-                                    if (/for \d+ days/i.test(lastLine)) {
-                                      if (/SOS/i.test(lastLine)) {
-                                        updatedLine = lastLine.replace(/\s*for \d+ days/i, '');
-                                      } else {
-                                        updatedLine = lastLine.replace(/for \d+ days/i, 'SOS');
-                                      }
-                                    } else if (!/SOS/i.test(lastLine)) {
-                                      updatedLine = `${lastLine} SOS`;
-                                    }
-                                  } else {
-                                    if (/for \d+ days/i.test(lastLine)) {
-                                      updatedLine = lastLine.replace(/for \d+ days/i, `for ${newDays} days`);
-                                    } else if (/SOS/i.test(lastLine)) {
-                                      if (/SOS$/i.test(lastLine.trim())) {
-                                        updatedLine = lastLine.replace(/SOS$/i, `for ${newDays} days SOS`);
-                                      } else if (!/for \d+ days/i.test(lastLine)) {
-                                        updatedLine = `${lastLine} for ${newDays} days`;
-                                      }
-                                    }
-                                  }
-                                  
-                                  if (updatedLine !== lastLine) {
-                                    lines[lines.length - 1] = updatedLine;
-                                    handleChange('prescription', lines.join('\n'));
-                                  }
-                                }
-                              }}
-                              className="col-span-1 sm:col-span-2 px-2 py-1.5 bg-white border border-slate-200 rounded-lg text-xs text-slate-700 outline-none focus:ring-1 focus:ring-indigo-500/50 cursor-pointer shadow-sm transition-all h-[34px]"
-                            >
-                              <option value="">Select Days</option>
-                              <option value="1">1 Day</option>
-                              <option value="2">2 Days</option>
-                              <option value="3">3 Days</option>
-                              <option value="4">4 Days</option>
-                              <option value="5">5 Days</option>
-                              <option value="7">7 Days</option>
-                              <option value="10">10 Days</option>
-                              <option value="14">14 Days</option>
-                              <option value="SOS">SOS</option>
-                            </select>
-                            <select
-                              value={selectedRxFrequency}
-                              onChange={(e) => {
-                                const newFreq = e.target.value;
-                                setSelectedRxFrequency(newFreq);
-                                
-                                const current = form.prescription || '';
-                                if (current.trim()) {
-                                  const lines = current.split('\n');
-                                  const lastLine = lines[lines.length - 1];
-                                  let updatedLine = lastLine;
-                                  
-                                  if (newFreq) {
-                                    if (newFreq === 'SOS') {
-                                      if (/(once|twice|thrice|four times)\s+daily/i.test(lastLine)) {
-                                        updatedLine = lastLine.replace(/(once|twice|thrice|four times)\s+daily/i, 'SOS');
-                                      }
-                                    } else {
-                                      if (/(once|twice|thrice|four times)\s+daily/i.test(lastLine)) {
-                                        updatedLine = lastLine.replace(/(once|twice|thrice|four times)\s+daily/i, newFreq);
-                                      } else if (/SOS/i.test(lastLine)) {
-                                        updatedLine = lastLine.replace(/SOS\s*(for\s+pain)?/i, newFreq);
-                                      }
-                                    }
-                                  }
-                                  
-                                  if (updatedLine !== lastLine) {
-                                    lines[lines.length - 1] = updatedLine;
-                                    handleChange('prescription', lines.join('\n'));
-                                  }
-                                }
-                              }}
-                              className="col-span-2 sm:col-span-3 px-2 py-1.5 bg-white border border-slate-200 rounded-lg text-xs text-slate-700 outline-none focus:ring-1 focus:ring-indigo-500/50 cursor-pointer shadow-sm transition-all h-[34px]"
-                            >
-                              <option value="">Select Frequency</option>
-                              <option value="once daily">Once Daily</option>
-                              <option value="twice daily">Twice Daily</option>
-                              <option value="thrice daily">Thrice Daily</option>
-                              <option value="four times daily">Four Times Daily</option>
-                              <option value="SOS">SOS</option>
-                            </select>
-                            <select
-                              value=""
-                              disabled={!selectedRxDays}
-                              onChange={(e) => {
-                                const rawText = e.target.value;
-                                if (!rawText) return;
-                                
-                                let selectedText = rawText;
-                                if (selectedRxFrequency) {
-                                  if (selectedRxFrequency === 'SOS') {
-                                    if (/(once|twice|thrice|four times)\s+daily/i.test(selectedText)) {
-                                      selectedText = selectedText.replace(/(once|twice|thrice|four times)\s+daily/i, 'SOS');
-                                    }
-                                  } else {
-                                    if (/(once|twice|thrice|four times)\s+daily/i.test(selectedText)) {
-                                      selectedText = selectedText.replace(/(once|twice|thrice|four times)\s+daily/i, selectedRxFrequency);
-                                    } else if (/SOS/i.test(selectedText)) {
-                                      selectedText = selectedText.replace(/SOS\s*(for\s+pain)?/i, selectedRxFrequency);
-                                    } else {
-                                      selectedText = `${selectedText} - ${selectedRxFrequency}`;
-                                    }
-                                  }
-                                }
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                                  {/* Days Pills */}
+                                  <div>
+                                    <span className="block text-[9px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Duration</span>
+                                    <div className="flex flex-wrap gap-1">
+                                      {['1', '2', '3', '4', '5', '7', '10', '14', 'SOS'].map(d => {
+                                        const isActive = activeDays === d;
+                                        return (
+                                          <button
+                                            key={d}
+                                            type="button"
+                                            onClick={() => {
+                                              const newDays = d;
+                                              const current = form.prescription || '';
+                                              if (!current.trim()) return;
+                                              const lines = current.split('\n');
+                                              const lastLine = lines[lines.length - 1];
+                                              let updatedLine = lastLine;
+                                              
+                                              if (newDays === 'SOS') {
+                                                if (/for \d+ days/i.test(lastLine)) {
+                                                  updatedLine = lastLine.replace(/\s*for \d+ days/i, '');
+                                                }
+                                                if (!/SOS/i.test(lastLine)) {
+                                                  updatedLine = `${updatedLine} SOS`;
+                                                }
+                                              } else {
+                                                if (/for \d+ days/i.test(lastLine)) {
+                                                  updatedLine = lastLine.replace(/for \d+ days/i, `for ${newDays} days`);
+                                                } else if (/SOS/i.test(lastLine)) {
+                                                  updatedLine = lastLine.replace(/SOS/i, `for ${newDays} days`);
+                                                } else {
+                                                  updatedLine = `${lastLine} for ${newDays} days`;
+                                                }
+                                              }
+                                              if (updatedLine !== lastLine) {
+                                                lines[lines.length - 1] = updatedLine;
+                                                handleChange('prescription', lines.join('\n'));
+                                              }
+                                            }}
+                                            className={`px-2 py-1 rounded-md text-[10.5px] font-bold transition-all border ${
+                                              isActive 
+                                                ? 'bg-slate-800 border-slate-800 text-white shadow-sm scale-105' 
+                                                : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-slate-800'
+                                            }`}
+                                          >
+                                            {d === 'SOS' ? 'SOS' : `${d} Days`}
+                                          </button>
+                                        );
+                                      })}
+                                    </div>
+                                  </div>
 
-                                if (selectedRxDays) {
-                                  if (selectedRxDays === 'SOS') {
-                                    if (/for \d+ days/i.test(selectedText)) {
-                                      if (/SOS/i.test(selectedText)) {
-                                        selectedText = selectedText.replace(/\s*for \d+ days/i, '');
-                                      } else {
-                                        selectedText = selectedText.replace(/for \d+ days/i, 'SOS');
-                                      }
-                                    } else if (!/SOS/i.test(selectedText)) {
-                                      selectedText = `${selectedText} SOS`;
-                                    }
-                                  } else {
-                                    if (/for \d+ days/i.test(selectedText)) {
-                                      selectedText = selectedText.replace(/for \d+ days/i, `for ${selectedRxDays} days`);
-                                    } else if (/SOS/i.test(selectedText) && !/for \d+ days/i.test(selectedText)) {
-                                      selectedText = `${selectedText} for ${selectedRxDays} days`;
-                                    } else if (!selectedText.toLowerCase().includes('daily') && !/apply/i.test(selectedText)) {
-                                      selectedText = `${selectedText} for ${selectedRxDays} days`;
-                                    }
-                                  }
-                                }
+                                  {/* Frequency Pills */}
+                                  <div>
+                                    <span className="block text-[9px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Frequency / Dosage</span>
+                                    <div className="flex flex-wrap gap-1">
+                                      {[
+                                        { label: '1-0-0', value: 'once daily' },
+                                        { label: '1-0-1', value: 'twice daily' },
+                                        { label: '1-1-1', value: 'thrice daily' },
+                                        { label: '1-1-1-1', value: 'four times daily' },
+                                        { label: 'SOS', value: 'SOS' }
+                                      ].map(f => {
+                                        const isActive = activeFreq === f.value;
+                                        return (
+                                          <button
+                                            key={f.label}
+                                            type="button"
+                                            onClick={() => {
+                                              const newFreq = f.value;
+                                              const current = form.prescription || '';
+                                              if (!current.trim()) return;
+                                              const lines = current.split('\n');
+                                              const lastLine = lines[lines.length - 1];
+                                              let updatedLine = lastLine;
+                                              
+                                              if (/(once|twice|thrice|four times)\s+daily/i.test(lastLine)) {
+                                                updatedLine = lastLine.replace(/(once|twice|thrice|four times)\s+daily/i, newFreq);
+                                              } else if (/SOS/i.test(lastLine)) {
+                                                updatedLine = lastLine.replace(/SOS/i, newFreq);
+                                              } else {
+                                                updatedLine = `${lastLine} - ${newFreq}`;
+                                              }
+                                              if (updatedLine !== lastLine) {
+                                                lines[lines.length - 1] = updatedLine;
+                                                handleChange('prescription', lines.join('\n'));
+                                              }
+                                            }}
+                                            className={`px-2 py-1 rounded-md text-[10.5px] font-bold transition-all border ${
+                                              isActive 
+                                                ? 'bg-slate-800 border-slate-800 text-white shadow-sm scale-105' 
+                                                : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-slate-800'
+                                            }`}
+                                          >
+                                            {f.label}
+                                          </button>
+                                        );
+                                      })}
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            )}
 
-                                const currentPrescription = form.prescription ? form.prescription.trim() : '';
-                                if (currentPrescription) {
-                                  handleChange('prescription', `${currentPrescription}\n${selectedText}`);
-                                } else {
-                                  handleChange('prescription', selectedText);
-                                }
-                              }}
-                              className="col-span-2 sm:col-span-4 px-2 py-1.5 bg-white border border-slate-200 rounded-lg text-xs text-slate-700 outline-none focus:ring-1 focus:ring-indigo-500/50 cursor-pointer shadow-sm transition-all h-[34px] disabled:bg-slate-50 disabled:text-slate-400 disabled:cursor-not-allowed"
-                            >
-                              <option value="">{selectedRxDays ? "Choose medicine..." : "Select days first..."}</option>
-                              {rxMedCategories.map(cat => {
-                                if (selectedRxCategory !== 'All' && selectedRxCategory !== cat) return null;
-                                const list = rxGrouped[cat] || [];
-                                if (list.length === 0) return null;
-                                return (
-                                  <optgroup key={cat} label={cat.toUpperCase()}>
-                                    {list.map((preset: any, idx: number) => (
-                                      <option key={idx} value={preset.text}>
-                                        {preset.label}
-                                      </option>
-                                    ))}
-                                  </optgroup>
-                                );
-                              })}
-                            </select>
+                            {/* Search and Categories Filter */}
+                            <div className="space-y-2.5">
+                              <div className="flex gap-2 items-center">
+                                <div className="relative flex-1">
+                                  <span className="absolute left-3 top-[9px] text-slate-400">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                                  </span>
+                                  <input
+                                    type="text"
+                                    value={searchRxQuery}
+                                    onChange={(e) => setSearchRxQuery(e.target.value)}
+                                    placeholder="Search medicine presets (e.g. Paracetamol, Lycowonder, Zyclav)..."
+                                    className="w-full pl-8 pr-3 py-1.5 bg-white border border-slate-200 rounded-lg text-xs text-slate-700 outline-none focus:ring-1 focus:ring-indigo-500/50 shadow-sm"
+                                  />
+                                </div>
+                              </div>
+
+                              {/* Category Horizonal Scroll list */}
+                              <div className="flex gap-1 overflow-x-auto pb-1 select-none scrollbar-none">
+                                <button
+                                  type="button"
+                                  onClick={() => setSelectedRxCategory('All')}
+                                  className={`px-3 py-1 rounded-full text-[10.5px] font-bold whitespace-nowrap transition-all border ${
+                                    selectedRxCategory === 'All'
+                                      ? 'bg-slate-800 border-slate-800 text-white shadow-sm'
+                                      : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'
+                                  }`}
+                                >
+                                  All Presets
+                                </button>
+                                {rxMedCategories.map(cat => (
+                                  <button
+                                    key={cat}
+                                    type="button"
+                                    onClick={() => setSelectedRxCategory(cat)}
+                                    className={`px-3 py-1 rounded-full text-[10.5px] font-bold whitespace-nowrap transition-all border ${
+                                      selectedRxCategory === cat
+                                        ? 'bg-indigo-600 border-indigo-600 text-white shadow-sm'
+                                        : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'
+                                    }`}
+                                  >
+                                    {cat}
+                                  </button>
+                                ))}
+                              </div>
+                            </div>
+
+                            {/* Preset Medicines Clickable Badges Grid */}
+                            <div className="max-h-[160px] overflow-y-auto border border-slate-200/60 bg-slate-50/20 rounded-xl p-3 scrollbar-thin">
+                              {filteredMeds.length === 0 ? (
+                                <p className="text-[11px] text-slate-400 text-center py-4">No matching medicines found.</p>
+                              ) : (
+                                <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+                                  {filteredMeds.map((med, idx) => (
+                                    <button
+                                      key={idx}
+                                      type="button"
+                                      onClick={() => {
+                                        const current = form.prescription ? form.prescription.trim() : '';
+                                        if (current) {
+                                          handleChange('prescription', `${current}\n${med.text}`);
+                                        } else {
+                                          handleChange('prescription', med.text);
+                                        }
+                                      }}
+                                      className="group text-left p-2 rounded-lg border border-slate-200/70 hover:border-indigo-400 bg-white hover:bg-indigo-50/20 transition-all flex flex-col justify-between gap-1 shadow-sm hover:shadow cursor-pointer select-none"
+                                    >
+                                      <span className="text-[11px] font-bold text-slate-700 group-hover:text-indigo-600 transition-colors line-clamp-1">
+                                        {med.label}
+                                      </span>
+                                      <div className="flex items-center justify-between gap-1 flex-wrap w-full">
+                                        <span className="text-[9px] text-slate-400 font-mono truncate max-w-[120px] group-hover:text-indigo-500/80 transition-colors">
+                                          {med.text.replace(/^[•\s\-\*]+/g, '')}
+                                        </span>
+                                        {med.category && (
+                                          <span className="text-[8px] font-bold uppercase tracking-wider text-slate-400 group-hover:text-indigo-400 scale-90">
+                                            {med.category}
+                                          </span>
+                                        )}
+                                      </div>
+                                    </button>
+                                  ))}
+                                </div>
+                              )}
+                            </div>
                           </div>
                         );
                       })()}

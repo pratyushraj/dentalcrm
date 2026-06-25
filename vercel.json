@@ -2,6 +2,10 @@
   "framework": "vite",
   "rewrites": [
     {
+      "source": "/api/push/:path*",
+      "destination": "https://creatorarmour-api.onrender.com/api/push/:path*"
+    },
+    {
       "source": "/((?!api/|assets/|favicon|sw\\.js|site\\.webmanifest|manifest\\.json).*)",
       "destination": "/index.html"
     }

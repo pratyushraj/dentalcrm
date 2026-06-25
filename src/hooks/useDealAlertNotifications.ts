@@ -53,12 +53,7 @@ export const useDealAlertNotifications = () => {
     if (typeof window === 'undefined') return null;
     const host = window.location.hostname.toLowerCase();
     
-    // Disable push notifications entirely on Dental CRM domains to avoid 404 GET console errors
-    if (host.includes('dental-crm') || host.includes('dentalcrm')) {
-      const override = String((import.meta as any)?.env?.VITE_PUSH_API_BASE_URL || '').trim();
-      if (!override) return null;
-      return override.replace(/\/$/, '');
-    }
+
 
     const isPublicHost =
       host.endsWith('creatorarmour.com') ||

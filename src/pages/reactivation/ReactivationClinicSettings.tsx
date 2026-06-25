@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Building2, Phone, Mail, Save, CheckCircle2, FileText, Stethoscope, Trash2, Plus, MessageSquare, Send, Lock, Globe, RefreshCw, Pill, Upload } from 'lucide-react';
+import { Building2, Phone, Mail, Save, CheckCircle2, FileText, Stethoscope, Trash2, Plus, MessageSquare, Send, Lock, Globe, RefreshCw, Pill, Upload, Bell, VolumeX, Clock, Settings } from 'lucide-react';
 import { useSession } from '@/contexts/SessionContext';
 import { toast } from 'sonner';
 import { supabase } from '@/lib/supabase';
+import { useDealAlertNotifications } from '@/hooks/useDealAlertNotifications';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -33,6 +34,18 @@ export interface ClinicBranding {
   phone: string;
   email: string;
   logoUrl?: string; // base64 clinic logo
+}
+
+export interface NotificationPrefs {
+  emailEnabled: boolean;
+  pushEnabled: boolean;
+  inAppEnabled: boolean;
+  doNotDisturb: boolean;
+  quietHoursStart: string;
+  quietHoursEnd: string;
+  newLeads: boolean;
+  appointmentReminders: boolean;
+  campaignAlerts: boolean;
 }
 
 export interface Procedure {
@@ -358,7 +371,64 @@ const ReactivationClinicSettings: React.FC = () => {
   const { organizationId, profile } = useSession();
   const orgId = organizationId || 'default';
 
-  const [activeTab, setActiveTab] = useState<'info' | 'prices' | 'whatsapp' | 'medications'>('info');
+  const [activeTab, setActiveTab] = useState<'info' | 'prices' | 'whatsapp' | 'medications' | 'notifications'>('info');
+
+  const {
+    permission: pushPermission,
+    isSupported: isPushSupported,
+    isSubscribed: isPushSubscribed,
+    enableNotifications: enablePushNotifications,
+    disableNotifications: disablePushNotifications,
+    sendTestPush
+  } = useDealAlertNotifications();
+
+  const [notificationPrefs, setNotificationPrefs] = useState<NotificationPrefs>({
+    emailEnabled: true,
+    pushEnabled: false,
+    inAppEnabled: true,
+    doNotDisturb: false,
+    quietHoursStart: '22:00',
+    quietHoursEnd: '08:00',
+    newLeads: true,
+    appointmentReminders: true,
+    campaignAlerts: true,
+  });
+
+  useEffect(() => {
+    const fetchPrefs = async () => {
+      try {
+        const { data: { session } } = await supabase.auth.getSession();
+        if (!session?.user?.id) return;
+        
+        const { data, error } = await supabase
+          .from('notification_preferences')
+          .select('*')
+          .eq('user_id', session.user.id)
+          .maybeSingle();
+
+        if (error) throw error;
+
+        if (data) {
+          const customPrefs = (data.preferences as any) || {};
+          setNotificationPrefs({
+            emailEnabled: data.email_enabled ?? true,
+            pushEnabled: data.push_enabled ?? false,
+            inAppEnabled: data.in_app_enabled ?? true,
+            doNotDisturb: data.do_not_disturb ?? false,
+            quietHoursStart: data.quiet_hours_start || '22:00',
+            quietHoursEnd: data.quiet_hours_end || '08:00',
+            newLeads: customPrefs.new_leads ?? true,
+            appointmentReminders: customPrefs.appointment_reminders ?? true,
+            campaignAlerts: customPrefs.campaign_alerts ?? true,
+          });
+        }
+      } catch (err) {
+        console.error('Error fetching notification preferences:', err);
+      }
+    };
+
+    fetchPrefs();
+  }, [profile]);
 
   const [branding, setBranding] = useState<ClinicBranding>(() =>
     loadClinicBranding(orgId, profile?.business_name)
@@ -755,6 +825,30 @@ const ReactivationClinicSettings: React.FC = () => {
           });
 
         if (medError) throw medError;
+
+        // Save notification preferences
+        const { data: { session } } = await supabase.auth.getSession();
+        if (session?.user?.id) {
+          const { error: prefsError } = await supabase
+            .from('notification_preferences')
+            .upsert({
+              user_id: session.user.id,
+              email_enabled: notificationPrefs.emailEnabled,
+              push_enabled: notificationPrefs.pushEnabled,
+              in_app_enabled: notificationPrefs.inAppEnabled,
+              do_not_disturb: notificationPrefs.doNotDisturb,
+              quiet_hours_start: notificationPrefs.quietHoursStart,
+              quiet_hours_end: notificationPrefs.quietHoursEnd,
+              preferences: {
+                new_leads: notificationPrefs.newLeads,
+                appointment_reminders: notificationPrefs.appointmentReminders,
+                campaign_alerts: notificationPrefs.campaignAlerts,
+              },
+              updated_at: new Date().toISOString()
+            }, { onConflict: 'user_id' });
+
+          if (prefsError) throw prefsError;
+        }
       } catch (err) {
         console.error('Error saving clinic configuration to Supabase:', err);
         toast.error('Failed to sync settings with database.');
@@ -845,6 +939,18 @@ const ReactivationClinicSettings: React.FC = () => {
         >
           <Pill size={13} />
           Prescription Presets
+        </button>
+        <button
+          type="button"
+          onClick={() => setActiveTab('notifications')}
+          className={`flex-1 min-w-[125px] flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer select-none ${
+            activeTab === 'notifications'
+              ? 'bg-white text-indigo-600 shadow-sm border border-slate-100'
+              : 'text-slate-500 hover:text-slate-700'
+          }`}
+        >
+          <Bell size={13} />
+          Notifications
         </button>
       </div>
 
@@ -1512,7 +1618,7 @@ const ReactivationClinicSettings: React.FC = () => {
             </div>
           </div>
         </div>
-      ) : (
+      ) : activeTab === 'medications' ? (
         <div className="space-y-6 text-left animate-fadeIn">
           {/* Medications list config (Full Width) */}
           <div className="bg-white border border-slate-200/80 rounded-2xl shadow-sm hover:shadow-md transition-shadow p-6 space-y-6">
@@ -1697,7 +1803,241 @@ const ReactivationClinicSettings: React.FC = () => {
             </div>
           </div>
         </div>
-      )}
+      ) : activeTab === 'notifications' ? (
+        <div className="space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            
+            {/* 1. Web Push Settings */}
+            <div className="bg-white border border-slate-200 rounded-2xl p-5 space-y-4">
+              <div className="flex items-center gap-2 pb-2 border-b border-slate-100">
+                <div className="w-7 h-7 rounded-lg bg-indigo-50 border border-indigo-100 flex items-center justify-center">
+                  <Bell size={14} className="text-indigo-500" />
+                </div>
+                <h3 className="text-[12px] font-bold text-slate-700 uppercase tracking-wider">Web Push Alerts</h3>
+              </div>
+
+              <div className="space-y-3">
+                <div className="flex items-center justify-between p-3.5 bg-slate-50 border border-slate-100 rounded-xl text-left">
+                  <div>
+                    <h4 className="text-xs font-bold text-slate-700">Browser Push Status</h4>
+                    <p className="text-[10px] text-slate-400 mt-0.5">
+                      {!isPushSupported 
+                        ? "Unsupported on this device/browser"
+                        : `Current permission: ${pushPermission}`
+                      }
+                    </p>
+                  </div>
+                  {isPushSupported && (
+                    <button
+                      type="button"
+                      onClick={async () => {
+                        if (isPushSubscribed) {
+                          await disablePushNotifications();
+                          setNotificationPrefs(prev => ({ ...prev, pushEnabled: false }));
+                        } else {
+                          const res = await enablePushNotifications();
+                          if (res?.success) {
+                            setNotificationPrefs(prev => ({ ...prev, pushEnabled: true }));
+                          }
+                        }
+                      }}
+                      className={`px-3 py-1.5 rounded-lg text-[10.5px] font-bold transition-all ${
+                        isPushSubscribed
+                          ? 'bg-rose-50 border border-rose-100 text-rose-600 hover:bg-rose-100/50'
+                          : 'bg-indigo-50 border border-indigo-100 text-indigo-600 hover:bg-indigo-100/50'
+                      }`}
+                    >
+                      {isPushSubscribed ? 'Turn Off' : 'Turn On'}
+                    </button>
+                  )}
+                </div>
+
+                {isPushSubscribed && (
+                  <button
+                    type="button"
+                    onClick={async () => {
+                      await sendTestPush();
+                    }}
+                    className="w-full flex items-center justify-center gap-1.5 py-2 border border-slate-200 hover:border-slate-300 text-slate-600 hover:text-slate-700 bg-white rounded-lg text-xs font-semibold transition-all"
+                  >
+                    Send Test Push Notification
+                  </button>
+                )}
+              </div>
+            </div>
+
+            {/* 2. DND / Quiet Hours */}
+            <div className="bg-white border border-slate-200 rounded-2xl p-5 space-y-4">
+              <div className="flex items-center gap-2 pb-2 border-b border-slate-100">
+                <div className="w-7 h-7 rounded-lg bg-rose-50 border border-rose-100 flex items-center justify-center">
+                  <VolumeX size={14} className="text-rose-500" />
+                </div>
+                <h3 className="text-[12px] font-bold text-slate-700 uppercase tracking-wider">Quiet Hours / DND</h3>
+              </div>
+
+              <div className="space-y-4 text-left">
+                <label className="flex items-center gap-3 p-3 bg-slate-50 border border-slate-100 rounded-xl cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={notificationPrefs.doNotDisturb}
+                    onChange={(e) => setNotificationPrefs(prev => ({ ...prev, doNotDisturb: e.target.checked }))}
+                    className="rounded text-indigo-600 focus:ring-indigo-500 border-slate-300 w-4 h-4 cursor-pointer"
+                  />
+                  <div>
+                    <h4 className="text-xs font-bold text-slate-700">Do Not Disturb</h4>
+                    <p className="text-[10px] text-slate-400">Mute all incoming notifications immediately</p>
+                  </div>
+                </label>
+
+                <div className="grid grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-[9.5px] font-bold text-slate-500 uppercase tracking-wider mb-1">
+                      Quiet Hours Start
+                    </label>
+                    <input
+                      type="time"
+                      disabled={notificationPrefs.doNotDisturb}
+                      value={notificationPrefs.quietHoursStart}
+                      onChange={(e) => setNotificationPrefs(prev => ({ ...prev, quietHoursStart: e.target.value }))}
+                      className="w-full px-3 py-2 rounded-lg border border-slate-200 bg-slate-50 text-[13px] text-slate-800 disabled:opacity-50 outline-none focus:border-indigo-400 transition-all"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[9.5px] font-bold text-slate-500 uppercase tracking-wider mb-1">
+                      Quiet Hours End
+                    </label>
+                    <input
+                      type="time"
+                      disabled={notificationPrefs.doNotDisturb}
+                      value={notificationPrefs.quietHoursEnd}
+                      onChange={(e) => setNotificationPrefs(prev => ({ ...prev, quietHoursEnd: e.target.value }))}
+                      className="w-full px-3 py-2 rounded-lg border border-slate-200 bg-slate-50 text-[13px] text-slate-800 disabled:opacity-50 outline-none focus:border-indigo-400 transition-all"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* 3. Channels */}
+            <div className="bg-white border border-slate-200 rounded-2xl p-5 space-y-4">
+              <div className="flex items-center gap-2 pb-2 border-b border-slate-100">
+                <div className="w-7 h-7 rounded-lg bg-amber-50 border border-amber-100 flex items-center justify-center">
+                  <Settings size={14} className="text-amber-500" />
+                </div>
+                <h3 className="text-[12px] font-bold text-slate-700 uppercase tracking-wider">Alert Channels</h3>
+              </div>
+
+              <div className="space-y-3 text-left">
+                <label className="flex items-center gap-3 p-3 hover:bg-slate-50 rounded-xl cursor-pointer transition-all">
+                  <input
+                    type="checkbox"
+                    checked={notificationPrefs.emailEnabled}
+                    onChange={(e) => setNotificationPrefs(prev => ({ ...prev, emailEnabled: e.target.checked }))}
+                    className="rounded text-indigo-600 focus:ring-indigo-500 border-slate-300 w-4 h-4 cursor-pointer"
+                  />
+                  <div>
+                    <h4 className="text-xs font-bold text-slate-700">Email Notifications</h4>
+                    <p className="text-[10px] text-slate-400">Receive summaries and urgent reports in your inbox</p>
+                  </div>
+                </label>
+
+                <label className="flex items-center gap-3 p-3 hover:bg-slate-50 rounded-xl cursor-pointer transition-all">
+                  <input
+                    type="checkbox"
+                    checked={notificationPrefs.inAppEnabled}
+                    onChange={(e) => setNotificationPrefs(prev => ({ ...prev, inAppEnabled: e.target.checked }))}
+                    className="rounded text-indigo-600 focus:ring-indigo-500 border-slate-300 w-4 h-4 cursor-pointer"
+                  />
+                  <div>
+                    <h4 className="text-xs font-bold text-slate-700">In-App Dashboard Alerts</h4>
+                    <p className="text-[10px] text-slate-400">Populate notifications under the top header bell icon</p>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            {/* 4. Events */}
+            <div className="bg-white border border-slate-200 rounded-2xl p-5 space-y-4">
+              <div className="flex items-center gap-2 pb-2 border-b border-slate-100">
+                <div className="w-7 h-7 rounded-lg bg-emerald-50 border border-emerald-100 flex items-center justify-center">
+                  <Bell size={14} className="text-emerald-500" />
+                </div>
+                <h3 className="text-[12px] font-bold text-slate-700 uppercase tracking-wider">Event Triggers</h3>
+              </div>
+
+              <div className="space-y-3 text-left">
+                <label className="flex items-center gap-3 p-3 hover:bg-slate-50 rounded-xl cursor-pointer transition-all">
+                  <input
+                    type="checkbox"
+                    checked={notificationPrefs.newLeads}
+                    onChange={(e) => setNotificationPrefs(prev => ({ ...prev, newLeads: e.target.checked }))}
+                    className="rounded text-indigo-600 focus:ring-indigo-500 border-slate-300 w-4 h-4 cursor-pointer"
+                  />
+                  <div>
+                    <h4 className="text-xs font-bold text-slate-700">New Website Leads</h4>
+                    <p className="text-[10px] text-slate-400">Notify as soon as a user books a checkup or submits a query</p>
+                  </div>
+                </label>
+
+                <label className="flex items-center gap-3 p-3 hover:bg-slate-50 rounded-xl cursor-pointer transition-all">
+                  <input
+                    type="checkbox"
+                    checked={notificationPrefs.appointmentReminders}
+                    onChange={(e) => setNotificationPrefs(prev => ({ ...prev, appointmentReminders: e.target.checked }))}
+                    className="rounded text-indigo-600 focus:ring-indigo-500 border-slate-300 w-4 h-4 cursor-pointer"
+                  />
+                  <div>
+                    <h4 className="text-xs font-bold text-slate-700">Daily Appointment Reminders</h4>
+                    <p className="text-[10px] text-slate-400">Notify every morning with a schedule of daily appointments</p>
+                  </div>
+                </label>
+
+                <label className="flex items-center gap-3 p-3 hover:bg-slate-50 rounded-xl cursor-pointer transition-all">
+                  <input
+                    type="checkbox"
+                    checked={notificationPrefs.campaignAlerts}
+                    onChange={(e) => setNotificationPrefs(prev => ({ ...prev, campaignAlerts: e.target.checked }))}
+                    className="rounded text-indigo-600 focus:ring-indigo-500 border-slate-300 w-4 h-4 cursor-pointer"
+                  />
+                  <div>
+                    <h4 className="text-xs font-bold text-slate-700">Campaign Activities</h4>
+                    <p className="text-[10px] text-slate-400">Notify when automation campaigns trigger custom patient follow-ups</p>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+          </div>
+
+          {/* Confirm & Save block */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="md:col-span-2 bg-white border border-slate-200 rounded-2xl p-5 space-y-3 text-left">
+              <h3 className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">About Preferences</h3>
+              <p className="text-[11.5px] text-slate-500 leading-relaxed font-sans">
+                Your notification preferences are saved securely and synchronized in real-time. Enabling web push lets you receive updates even when the CRM dashboard is minimized or closed.
+              </p>
+            </div>
+
+            <div className="bg-white border border-slate-200 rounded-2xl p-5 flex flex-col justify-between space-y-4">
+              <div className="text-left">
+                <h3 className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Confirm Settings</h3>
+                <p className="text-[10px] text-slate-400 mt-1">Make sure to save changes after modifying preferences.</p>
+              </div>
+              <button
+                type="button"
+                onClick={handleSave}
+                className={`w-full flex items-center justify-center gap-2 py-2.5 rounded-xl text-[12.5px] font-bold transition-all duration-200 ${
+                  saved
+                    ? 'bg-emerald-50 border border-emerald-200 text-emerald-700'
+                    : 'bg-indigo-600 hover:bg-indigo-700 text-white shadow-md shadow-indigo-500/15 cursor-pointer'
+                }`}
+              >
+                {saved ? <><CheckCircle2 size={14} /> Settings Saved</> : <><Save size={14} /> Save Preferences</>}
+              </button>
+            </div>
+          </div>
+        </div>
+      ) : null}
     </motion.div>
   );
 };

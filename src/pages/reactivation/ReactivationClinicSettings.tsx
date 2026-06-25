@@ -162,9 +162,9 @@ export const DEFAULT_MEDICATIONS: Medication[] = [
   { id: '44', label: 'Pan-40', text: '• Tab. Pan-40 - 1 tab once daily before food', category: 'Gas/Acidity' },
   { id: '45', label: 'Cyra-D', text: '• Tab. Cyra-D - 1 tab once daily before food', category: 'Gas/Acidity' },
   { id: '46', label: 'Rabeprazole 20mg', text: '• Tab. Rabeprazole 20mg - 1 tab once daily before food', category: 'Gas/Acidity' },
-  { id: '47', label: 'Lycowonder', text: '• Tab. Lycowonder - 1 tab once daily', category: 'Others' },
-  { id: '48', label: 'Lycowonder Forte', text: '• Tab. Lycowonder Forte - 1 tab once daily', category: 'Others' },
-  { id: '49', label: 'Fibrowonder', text: '• Tab. Fibrowonder - 1 tab once daily', category: 'Others' }
+  { id: '47', label: 'Lycowonder', text: '• Tab. Lycowonder - 1 tab once daily', category: 'Multivitamins' },
+  { id: '48', label: 'Lycowonder Forte', text: '• Tab. Lycowonder Forte - 1 tab once daily', category: 'Multivitamins' },
+  { id: '49', label: 'Fibrowonder', text: '• Tab. Fibrowonder - 1 tab once daily', category: 'Multivitamins' }
 ];
 
 export const MEDICATIONS_KEY = (orgId: string) => `clinic_medications_${orgId}`;
@@ -182,6 +182,7 @@ export const migrateMedications = (meds: Medication[]): Medication[] => {
     if (label.includes('toothpaste') || label.includes('paste') || text.includes('toothpaste') || text.includes('brush')) return { ...med, category: 'Toothpaste' };
     if (label.includes('pan-') || label.includes('pantocid') || label.includes('rantac') || label.includes('ranidom') || label.includes('cyra') || label.includes('rabeprazole') || text.includes('before food') || text.includes('acidity')) return { ...med, category: 'Gas/Acidity' };
     if (label.includes('paracetamol') || label.includes('zerodol') || label.includes('ketorol') || label.includes('pain') || label.includes('enzoflam') || label.includes('intagesic') || label.includes('lysoflam') || label.includes('gudgesic') || label.includes('zymoflam') || label.includes('ct')) return { ...med, category: 'Pain killers' };
+    if (label.includes('wonder') || label.includes('lyco') || label.includes('fibro') || label.includes('vitamin') || text.includes('multivitamin') || text.includes('vitamin')) return { ...med, category: 'Multivitamins' };
     if (label.includes('amox') || label.includes('mox') || label.includes('clavam') || label.includes('aug') || label.includes('zocef') || label.includes('spori') || label.includes('metro') || label.includes('flagyl') || label.includes('antibiotic') || text.includes('cap') || text.includes('tab.')) return { ...med, category: 'Antibiotics' };
     return { ...med, category: 'Others' };
   });
@@ -1736,6 +1737,7 @@ const ReactivationClinicSettings: React.FC = () => {
                   >
                     <option value="Pain killers">Pain killers</option>
                     <option value="Antibiotics">Antibiotics</option>
+                    <option value="Multivitamins">Multivitamins</option>
                     <option value="Toothpaste">Toothpaste</option>
                     <option value="Mouthwash">Mouthwash</option>
                     <option value="Gels">Gels</option>
@@ -1802,6 +1804,7 @@ const ReactivationClinicSettings: React.FC = () => {
                           <span className={`inline-block text-[9px] font-bold px-1.5 py-0.2 rounded-md border uppercase tracking-wider ${
                             med.category === 'Pain killers' ? 'bg-red-50 text-red-600 border-red-100' :
                             med.category === 'Antibiotics' ? 'bg-blue-50 text-blue-600 border-blue-100' :
+                            med.category === 'Multivitamins' ? 'bg-pink-50 text-pink-600 border-pink-100' :
                             med.category === 'Toothpaste' ? 'bg-amber-50 text-amber-600 border-amber-100' :
                             med.category === 'Mouthwash' ? 'bg-emerald-50 text-emerald-600 border-emerald-100' :
                             med.category === 'Gels' ? 'bg-purple-50 text-purple-600 border-purple-100' :

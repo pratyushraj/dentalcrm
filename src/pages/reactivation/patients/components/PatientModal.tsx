@@ -161,9 +161,9 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
       { label: 'Pan-40', text: '• Tab. Pan-40 - 1 tab once daily before food', category: 'Gas/Acidity' },
       { label: 'Cyra-D', text: '• Tab. Cyra-D - 1 tab once daily before food', category: 'Gas/Acidity' },
       { label: 'Rabeprazole 20mg', text: '• Tab. Rabeprazole 20mg - 1 tab once daily before food', category: 'Gas/Acidity' },
-      { label: 'Lycowonder', text: '• Tab. Lycowonder - 1 tab once daily', category: 'Others' },
-      { label: 'Lycowonder Forte', text: '• Tab. Lycowonder Forte - 1 tab once daily', category: 'Others' },
-      { label: 'Fibrowonder', text: '• Tab. Fibrowonder - 1 tab once daily', category: 'Others' }
+      { label: 'Lycowonder', text: '• Tab. Lycowonder - 1 tab once daily', category: 'Multivitamins' },
+      { label: 'Lycowonder Forte', text: '• Tab. Lycowonder Forte - 1 tab once daily', category: 'Multivitamins' },
+      { label: 'Fibrowonder', text: '• Tab. Fibrowonder - 1 tab once daily', category: 'Multivitamins' }
     ];
 
     return meds.map(med => {
@@ -178,6 +178,7 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
       if (label.includes('toothpaste') || label.includes('paste') || text.includes('toothpaste') || text.includes('brush')) return { ...med, category: 'Toothpaste' };
       if (label.includes('pan-') || label.includes('pantocid') || label.includes('rantac') || label.includes('ranidom') || label.includes('cyra') || label.includes('rabeprazole') || text.includes('before food') || text.includes('acidity')) return { ...med, category: 'Gas/Acidity' };
       if (label.includes('paracetamol') || label.includes('zerodol') || label.includes('ketorol') || label.includes('pain') || label.includes('enzoflam') || label.includes('intagesic') || label.includes('lysoflam') || label.includes('gudgesic') || label.includes('zymoflam') || label.includes('ct')) return { ...med, category: 'Pain killers' };
+      if (label.includes('wonder') || label.includes('lyco') || label.includes('fibro') || label.includes('vitamin') || text.includes('multivitamin') || text.includes('vitamin')) return { ...med, category: 'Multivitamins' };
       if (label.includes('amox') || label.includes('mox') || label.includes('clavam') || label.includes('aug') || label.includes('zocef') || label.includes('spori') || label.includes('metro') || label.includes('flagyl') || label.includes('antibiotic') || text.includes('cap') || text.includes('tab.')) return { ...med, category: 'Antibiotics' };
       return { ...med, category: 'Others' };
     });
@@ -760,38 +761,38 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
     
     Object.entries(wordToNum).forEach(([word, num]) => {
       // Forty / Pan / Pain / Pen / Form / For / Potty / Farty
-      const fortyRegex = new RegExp(`\\b(forty|farty|potty|pan|pain|pen|form|for)\\s*(?:number\\s*)?${word}\\b`, 'g');
+      const fortyRegex = new RegExp(`\\b(forty|farty|potty|pan|pain|pen|form|for)\\s*(?:number\s*)?${word}\\b`, 'g');
       cleaned = cleaned.replace(fortyRegex, `4${num}`);
       
       // Thirty / Tarty / Dirty / Taty
-      const thirtyRegex = new RegExp(`\\b(thirty|tarty|dirty|taty)\\s*(?:number\\s*)?${word}\\b`, 'g');
+      const thirtyRegex = new RegExp(`\\b(thirty|tarty|dirty|taty)\\s*(?:number\s*)?${word}\\b`, 'g');
       cleaned = cleaned.replace(thirtyRegex, `3${num}`);
       
       // Twenty / Tenty / Twenti
-      const twentyRegex = new RegExp(`\\b(twenty|tenty|twenti)\\s*(?:number\\s*)?${word}\\b`, 'g');
+      const twentyRegex = new RegExp(`\\b(twenty|tenty|twenti)\\s*(?:number\s*)?${word}\\b`, 'g');
       cleaned = cleaned.replace(twentyRegex, `2${num}`);
       
       // Teen / Ten / One / On
-      const teenRegex = new RegExp(`\\b(teen|ten|one|on)\\s*(?:number\\s*)?${word}\\b`, 'g');
+      const teenRegex = new RegExp(`\\b(teen|ten|one|on)\\s*(?:number\s*)?${word}\\b`, 'g');
       cleaned = cleaned.replace(teenRegex, `1${num}`);
     });
 
     // Numeric replacements
     const prefixes = ['forty', 'farty', 'potty', 'pan', 'pain', 'pen', 'form', 'for'];
     prefixes.forEach((pref) => {
-      cleaned = cleaned.replace(new RegExp(`\\b${pref}\\s*(?:number\\s*)?([1-8])\\b`, 'g'), '4$1');
+      cleaned = cleaned.replace(new RegExp(`\\b${pref}\\s*(?:number\s*)?([1-8])\\b`, 'g'), '4$1');
     });
     
     ['thirty', 'tarty', 'dirty', 'taty'].forEach((pref) => {
-      cleaned = cleaned.replace(new RegExp(`\\b${pref}\\s*(?:number\\s*)?([1-8])\\b`, 'g'), '3$1');
+      cleaned = cleaned.replace(new RegExp(`\\b${pref}\\s*(?:number\s*)?([1-8])\\b`, 'g'), '3$1');
     });
 
     ['twenty', 'tenty', 'twenti'].forEach((pref) => {
-      cleaned = cleaned.replace(new RegExp(`\\b${pref}\\s*(?:number\\s*)?([1-8])\\b`, 'g'), '2$1');
+      cleaned = cleaned.replace(new RegExp(`\\b${pref}\\s*(?:number\s*)?([1-8])\\b`, 'g'), '2$1');
     });
 
     ['teen', 'ten', 'one', 'on'].forEach((pref) => {
-      cleaned = cleaned.replace(new RegExp(`\\b${pref}\\s*(?:number\\s*)?([1-8])\\b`, 'g'), '1$1');
+      cleaned = cleaned.replace(new RegExp(`\\b${pref}\\s*(?:number\s*)?([1-8])\\b`, 'g'), '1$1');
     });
 
     // Fallback: if there is still "pan number" or "pain number" but no tooth digits, replace with "46"
@@ -2335,7 +2336,7 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                       />
                       {/* Prescription Preset Suggestions */}
                       {(() => {
-                        const rxMedCategories = ['Pain killers', 'Antibiotics', 'Toothpaste', 'Mouthwash', 'Gels', 'Gas/Acidity', 'Others'];
+                        const rxMedCategories = ['Pain killers', 'Antibiotics', 'Multivitamins', 'Toothpaste', 'Mouthwash', 'Gels', 'Gas/Acidity', 'Others'];
                         let rxMedList = medicationsList.length > 0 ? medicationsList : [
                           { label: 'Amoxicillin 500mg', text: '• Tab. Amoxicillin 500mg - 1 cap thrice daily for 5 days', category: 'Antibiotics' },
                           { label: 'Paracetamol 650mg', text: '• Tab. Paracetamol 650mg - 1 tab SOS for pain', category: 'Pain killers' },
@@ -2383,9 +2384,9 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                           { label: 'Pan-40', text: '• Tab. Pan-40 - 1 tab once daily before food', category: 'Gas/Acidity' },
                           { label: 'Cyra-D', text: '• Tab. Cyra-D - 1 tab once daily before food', category: 'Gas/Acidity' },
                           { label: 'Rabeprazole 20mg', text: '• Tab. Rabeprazole 20mg - 1 tab once daily before food', category: 'Gas/Acidity' },
-                          { label: 'Lycowonder', text: '• Tab. Lycowonder - 1 tab once daily', category: 'Others' },
-                          { label: 'Lycowonder Forte', text: '• Tab. Lycowonder Forte - 1 tab once daily', category: 'Others' },
-                          { label: 'Fibrowonder', text: '• Tab. Fibrowonder - 1 tab once daily', category: 'Others' }
+                          { label: 'Lycowonder', text: '• Tab. Lycowonder - 1 tab once daily', category: 'Multivitamins' },
+                          { label: 'Lycowonder Forte', text: '• Tab. Lycowonder Forte - 1 tab once daily', category: 'Multivitamins' },
+                          { label: 'Fibrowonder', text: '• Tab. Fibrowonder - 1 tab once daily', category: 'Multivitamins' }
                         ];
                         if (medicationsList.length === 0) {
                           try {

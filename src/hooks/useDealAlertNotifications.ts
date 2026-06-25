@@ -86,6 +86,7 @@ export const useDealAlertNotifications = () => {
     let browserSub: PushSubscription | null = null;
     try {
       const registration = await navigator.serviceWorker.register('/sw.js');
+      await navigator.serviceWorker.ready;
       // Force an update check to clear PWA cache for the new UI
       await registration.update();
 
@@ -203,6 +204,7 @@ export const useDealAlertNotifications = () => {
       }
 
       const registration = await navigator.serviceWorker.register('/sw.js');
+      await navigator.serviceWorker.ready;
 
       // Force refresh subscription so stale iOS/WebPush tokens are replaced.
       // This is especially important after VAPID key updates or APNS token expiry.

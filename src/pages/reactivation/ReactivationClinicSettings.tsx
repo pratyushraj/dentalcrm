@@ -1909,6 +1909,8 @@ const ReactivationClinicSettings: React.FC = () => {
                                 toast.error('Push notifications cannot be enabled on localhost without a secure tunnel override.');
                               } else if (reason === 'missing_vapid_key') {
                                 toast.error('VAPID public key configuration is missing.');
+                              } else if (reason === 'server_error_503') {
+                                toast.error('Notification server is suspended. Please check the Render dashboard for creatorarmour-api.');
                               } else {
                                 toast.error(`Failed to enable notifications: ${reason || 'Unknown error'}`);
                               }

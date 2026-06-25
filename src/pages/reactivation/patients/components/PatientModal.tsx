@@ -1806,6 +1806,20 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
   const quad4 = [48, 47, 46, 45, 44, 43, 42, 41];
   const quad3 = [31, 32, 33, 34, 35, 36, 37, 38];
 
+  const highlightMatch = (text: string, query: string) => {
+    if (!query.trim()) return text;
+    const parts = text.split(new RegExp(`(${query.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')})`, 'gi'));
+    return (
+      <span>
+        {parts.map((part, i) => 
+          part.toLowerCase() === query.toLowerCase()
+            ? <mark key={i} className="bg-amber-100 text-amber-900 font-bold p-0 rounded-sm">{part}</mark>
+            : part
+        )}
+      </span>
+    );
+  };
+
   return (
     <>
       <Dialog open={open} onOpenChange={(v) => !v && onClose()}>
@@ -2360,6 +2374,20 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                           >
                             <svg className="w-3 h-3 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5"><path strokeLinecap="round" strokeLinejoin="round" d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0110.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0l.229 1.503a1.5 1.5 0 01-1.488 1.727H7.599a1.5 1.5 0 01-1.488-1.727L6.34 18m11.32 0a2.01 2.01 0 01-.192-.612l-.646-4.243a2.01 2.01 0 011.08-2.01L19.5 9.5M6.34 18a2.01 2.01 0 00.192-.612l.646-4.243a2.01 2.01 0 00-1.08-2.01L4.5 9.5M19.5 9.5A2.25 2.25 0 0017.25 7.25H6.75A2.25 2.25 0 004.5 9.5m15 0v.115a8.32 8.32 0 01-.115 1.357m-14.77 0A8.32 8.32 0 014.5 9.615V9.5m11.25-3.5V5.25a2.25 2.25 0 00-2.25-2.25h-3A2.25 2.25 0 008.25 5.25v1.25" /></svg>
                             Print Rx
+                          </button>
+
+                          <button
+                            type="button"
+                            onClick={() => {
+                              if (confirm("Are you sure you want to clear the entire prescription?")) {
+                                handleChange('prescription', '');
+                                toast.success("Prescription cleared");
+                              }
+                            }}
+                            className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase border bg-white border-slate-200 text-rose-600 hover:bg-rose-50 hover:border-rose-200 transition-all shadow-sm"
+                          >
+                            <Trash2 size={11} className="text-rose-500" />
+                            <span>Clear</span>
                           </button>
                         </div>
                       </div>
@@ -2945,39 +2973,60 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                                           </div>
                                           
                                           <div className="min-w-0">
-                                            <h6 className="text-[11.5px] font-bold text-slate-800 truncate leading-snug">{med.label}</h6>
+                                            <h6 className="text-[11.5px] font-bold text-slate-800 truncate leading-snug">{highlightMatch(med.label, searchRxQuery)}</h6>
                                             <span className="inline-block text-[8.5px] font-semibold text-slate-400 bg-slate-50 border border-slate-100 rounded px-1.5 py-0.5 leading-none mt-0.5 uppercase tracking-wider">
                                               {med.category}
                                             </span>
                                           </div>
                                         </div>
 
-                                        <button
-                                          type="button"
-                                          onClick={() => {
-                                            const current = form.prescription ? form.prescription.trim() : '';
-                                            const lines = current.split('\n').filter(l => l.trim());
-                                            const isDuplicate = lines.some(line => 
-                                              line.toLowerCase().includes(med.label.toLowerCase())
+                                        {(() => {
+                                          const currentPrescription = form.prescription || '';
+                                          const prescriptionLines = currentPrescription.split('\n').filter(l => l.trim());
+                                          const isAlreadyAdded = prescriptionLines.some(line => 
+                                            line.toLowerCase().includes(med.label.toLowerCase())
+                                          );
+
+                                          if (isAlreadyAdded) {
+                                            return (
+                                              <div
+                                                className="w-7 h-7 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold text-xs shrink-0 select-none border border-emerald-100/50"
+                                                title="Already added to prescription"
+                                              >
+                                                <Check size={14} className="stroke-[3]" />
+                                              </div>
                                             );
-                                            
-                                            if (isDuplicate) {
-                                              toast.warning(`${med.label} is already in the prescription.`);
-                                              return;
-                                            }
-                                            
-                                            if (current) {
-                                              handleChange('prescription', `${current}\n${med.text}`);
-                                            } else {
-                                              handleChange('prescription', med.text);
-                                            }
-                                            toast.success(`${med.label} added to prescription`);
-                                          }}
-                                          className="w-7 h-7 rounded-lg bg-indigo-50 hover:bg-indigo-100 text-indigo-600 flex items-center justify-center transition-colors font-bold text-sm shrink-0"
-                                          title="Add item"
-                                        >
-                                          +
-                                        </button>
+                                          }
+
+                                          return (
+                                            <button
+                                              type="button"
+                                              onClick={() => {
+                                                const current = form.prescription ? form.prescription.trim() : '';
+                                                const lines = current.split('\n').filter(l => l.trim());
+                                                const isDuplicate = lines.some(line => 
+                                                  line.toLowerCase().includes(med.label.toLowerCase())
+                                                );
+                                                
+                                                if (isDuplicate) {
+                                                  toast.warning(`${med.label} is already in the prescription.`);
+                                                  return;
+                                                }
+                                                
+                                                if (current) {
+                                                  handleChange('prescription', `${current}\n${med.text}`);
+                                                } else {
+                                                  handleChange('prescription', med.text);
+                                                }
+                                                toast.success(`${med.label} added to prescription`);
+                                              }}
+                                              className="w-7 h-7 rounded-lg bg-indigo-50 hover:bg-indigo-100 text-indigo-600 flex items-center justify-center transition-colors font-bold text-sm shrink-0"
+                                              title="Add item"
+                                            >
+                                              +
+                                            </button>
+                                          );
+                                        })()}
                                       </div>
                                     );
                                   })}

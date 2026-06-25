@@ -73,7 +73,8 @@ export const useDealAlertNotifications = () => {
     return 'https://creatorarmour-api.onrender.com';
   }, []);
 
-  const hasVapidKey = !!import.meta.env.VITE_VAPID_PUBLIC_KEY;
+  const vapidPublicKey = (import.meta.env.VITE_VAPID_PUBLIC_KEY as string || 'BF1lFTjkooqETGnDHkiH74XjMCMj8QHiIl42LRnMD-fUFnXF3pYqXSqzMT93A0ftYzC93XnNOrBw_UkbHqUcoQk').trim();
+  const hasVapidKey = !!vapidPublicKey;
 
   const syncSubscriptionStatus = useCallback(async () => {
     if (!pushApiBase) return;
@@ -216,7 +217,7 @@ export const useDealAlertNotifications = () => {
 
       const subscription = await registration.pushManager.subscribe({
         userVisibleOnly: true,
-        applicationServerKey: urlBase64ToUint8Array((import.meta.env.VITE_VAPID_PUBLIC_KEY as string).trim()),
+        applicationServerKey: urlBase64ToUint8Array(vapidPublicKey),
       });
 
       const { data: sessionData } = await supabase.auth.getSession();

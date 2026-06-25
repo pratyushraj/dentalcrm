@@ -379,7 +379,8 @@ const ReactivationClinicSettings: React.FC = () => {
     isSubscribed: isPushSubscribed,
     enableNotifications: enablePushNotifications,
     disableNotifications: disablePushNotifications,
-    sendTestPush
+    sendTestPush,
+    isIOSNeedsInstall
   } = useDealAlertNotifications();
 
   const [notificationPrefs, setNotificationPrefs] = useState<NotificationPrefs>({
@@ -1921,6 +1922,21 @@ const ReactivationClinicSettings: React.FC = () => {
                   >
                     Send Test Push Notification
                   </button>
+                )}
+
+                {!isPushSupported && (
+                  <div className="p-3 bg-amber-50/50 border border-amber-100 rounded-xl text-left text-[11px] text-amber-800 leading-relaxed space-y-1">
+                    <p className="font-bold flex items-center gap-1">
+                      <span className="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+                      iPadOS / iOS Push Requirements:
+                    </p>
+                    <p>
+                      Apple requires webapps to be installed on the home screen to enable push alerts.
+                    </p>
+                    <p className="text-[10px] text-amber-700/90 mt-1.5">
+                      💡 Tap the browser share button (square with arrow) and choose <strong>"Add to Home Screen"</strong>, then launch the app from your home screen.
+                    </p>
+                  </div>
                 )}
               </div>
             </div>

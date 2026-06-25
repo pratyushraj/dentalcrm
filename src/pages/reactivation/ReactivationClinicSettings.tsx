@@ -410,39 +410,9 @@ const ReactivationClinicSettings: React.FC = () => {
   useEffect(() => {
     const fetchPrefs = async () => {
       let loaded = false;
-      try {
-        const { data: { session } } = await supabase.auth.getSession();
-        if (!session?.user?.id) return;
-        
-        const { data, error } = await supabase
-          .from('notification_preferences')
-          .select('*')
-          .eq('user_id', session.user.id)
-          .maybeSingle();
 
-        if (error) {
-          console.warn('notification_preferences table not available, using fallback.');
-        } else if (data) {
-          const customPrefs = (data.preferences as any) || {};
-          setNotificationPrefs({
-            emailEnabled: data.email_enabled ?? true,
-            pushEnabled: data.push_enabled ?? false,
-            inAppEnabled: data.in_app_enabled ?? true,
-            doNotDisturb: data.do_not_disturb ?? false,
-            quietHoursStart: data.quiet_hours_start || '22:00',
-            quietHoursEnd: data.quiet_hours_end || '08:00',
-            newLeads: customPrefs.new_leads ?? true,
-            appointmentReminders: customPrefs.appointment_reminders ?? true,
-            campaignAlerts: customPrefs.campaign_alerts ?? true,
-          });
-          loaded = true;
-        }
-      } catch (err) {
-        console.warn('Failed to load from notification_preferences table:', err);
-      }
-
-      // Fallback 1: reactivation_audit_logs
-      if (!loaded && organizationId && organizationId !== 'default') {
+      // Primary source: reactivation_audit_logs
+      if (organizationId && organizationId !== 'default') {
         try {
           const { data: logData, error: logError } = await supabase
             .from('reactivation_audit_logs')
@@ -462,7 +432,7 @@ const ReactivationClinicSettings: React.FC = () => {
         }
       }
 
-      // Fallback 2: localStorage
+      // Fallback: localStorage
       if (!loaded) {
         try {
           const local = localStorage.getItem(`notification_preferences_${orgId}`);
@@ -874,34 +844,9 @@ const ReactivationClinicSettings: React.FC = () => {
 
         if (medError) throw medError;
 
-        // Save notification preferences
+        // Save notification preferences to reactivation_audit_logs and localStorage
         const { data: { session } } = await supabase.auth.getSession();
         if (session?.user?.id) {
-          try {
-            const { error: prefsError } = await supabase
-              .from('notification_preferences')
-              .upsert({
-                user_id: session.user.id,
-                email_enabled: notificationPrefs.emailEnabled,
-                push_enabled: notificationPrefs.pushEnabled,
-                in_app_enabled: notificationPrefs.inAppEnabled,
-                do_not_disturb: notificationPrefs.doNotDisturb,
-                quiet_hours_start: notificationPrefs.quietHoursStart,
-                quiet_hours_end: notificationPrefs.quietHoursEnd,
-                preferences: {
-                  new_leads: notificationPrefs.newLeads,
-                  appointment_reminders: notificationPrefs.appointmentReminders,
-                  campaign_alerts: notificationPrefs.campaignAlerts,
-                },
-                updated_at: new Date().toISOString()
-              }, { onConflict: 'user_id' });
-
-            if (prefsError) throw prefsError;
-          } catch (e) {
-            console.warn('Upsert to notification_preferences table failed, using fallback.', e);
-          }
-
-          // Always backup to reactivation_audit_logs as a robust fallback
           try {
             await supabase
               .from('reactivation_audit_logs')

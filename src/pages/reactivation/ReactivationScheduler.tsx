@@ -206,11 +206,16 @@ export default function ReactivationScheduler() {
           return Math.max(...nums, 0);
         };
 
+        const isYourDentist = clinicId === '8800a4c7-a1f5-4edd-8fe8-f698c5928478';
+        const finalApptTime = (isYourDentist && bookingTemplate.name === 'booking')
+          ? `${apptTime}\n📍 Directions: https://maps.google.com/?q=YOUR+DENTIST+Tara+Kunj+Road+No+1F+Patliputra+Colony+Patna`
+          : apptTime;
+
         const paramCount = getTemplateVariablesCount(templateBody);
         const allPossibleParameters = [
           { type: 'text', text: manualName },
           { type: 'text', text: formattedDateString },
-          { type: 'text', text: apptTime },
+          { type: 'text', text: finalApptTime },
           { type: 'text', text: doctorName },
           { type: 'text', text: whatsappBusinessPhone || '+91 75448 60350' }
         ];

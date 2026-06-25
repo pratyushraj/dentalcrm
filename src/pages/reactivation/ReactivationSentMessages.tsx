@@ -125,6 +125,7 @@ export default function ReactivationSentMessages() {
         }
 
         if (appts && appts.length > 0) {
+          const bookingTemplate = clinicData?.booking_template_name || 'booking';
           const dbSentLogs: WhatsAppLogEntry[] = appts.map((appt: any) => {
             const patient = (patients || []).find((p: any) => p.id === appt.patient_id);
             const patientName = patient?.name || 'Patient';
@@ -136,12 +137,17 @@ export default function ReactivationSentMessages() {
             const apptTime = appt.appointment_time || '10:00 AM';
             const doctorName = appt.doctor_name || defaultDoctor;
 
+            // Map body matching template
+            const body = bookingTemplate === 'booking'
+              ? `🦷 Appointment Confirmed. Hi ${patientName}, your appointment has been confirmed for ${apptDateStr} at ${apptTime}.`
+              : `Hi ${patientName}, your appointment at ${clinicName} is confirmed!\n\n📅 Date: ${apptDateStr} ⏰ Time: ${apptTime} 👩‍⚕️ Doctor: ${doctorName}\n\nPlease arrive 10 minutes early. For changes or queries, call us at ${defaultPhone} for help`;
+
             return {
               id: appt.id,
               recipientName: patientName,
               recipientPhone: patientPhone,
-              templateName: 'appointment_booking_confirmation',
-              body: `Hi ${patientName}, your appointment at ${clinicName} is confirmed!\n\n📅 Date: ${apptDateStr} ⏰ Time: ${apptTime} 👩‍⚕️ Doctor: ${doctorName}\n\nPlease arrive 10 minutes early. For changes or queries, call us at ${defaultPhone} for help`,
+              templateName: bookingTemplate,
+              body,
               status, 
               timestamp: appt.created_at || new Date().toISOString(),
               type: 'utility',
@@ -151,9 +157,24 @@ export default function ReactivationSentMessages() {
             };
           });
 
-          // Filter out existing dbSentLogs from entries to prevent duplicate joins, then merge
+          // Filter out existing dbSentLogs from entries to prevent duplicate joins (comparing timestamp and phone if ID is different)
           const existingLocalIds = new Set(entries.map(e => e.id));
-          const uniqueDbLogs = dbSentLogs.filter(log => !existingLocalIds.has(log.id));
+          const uniqueDbLogs = dbSentLogs.filter(log => {
+            if (existingLocalIds.has(log.id)) return false;
+            
+            // Check if there is already an actual waba_message log for the same phone within 5 minutes
+            const logPhoneClean = log.recipientPhone.replace(/\D/g, '').slice(-10);
+            const hasDuplicateActualLog = entries.some(e => {
+              const ePhoneClean = e.recipientPhone.replace(/\D/g, '').slice(-10);
+              if (ePhoneClean !== logPhoneClean) return false;
+              
+              const diffMs = Math.abs(new Date(e.timestamp).getTime() - new Date(log.timestamp).getTime());
+              return diffMs < 5 * 60 * 1000; // 5 minutes
+            });
+            
+            return !hasDuplicateActualLog;
+          });
+
           const uniquePatientLogs = dbPatientSentLogs.filter(log => !existingLocalIds.has(log.id));
           entries = [...uniquePatientLogs, ...uniqueDbLogs, ...entries];
         } else if (dbPatientSentLogs.length > 0) {

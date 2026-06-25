@@ -1891,14 +1891,32 @@ const ReactivationClinicSettings: React.FC = () => {
                     <button
                       type="button"
                       onClick={async () => {
-                        if (isPushSubscribed) {
-                          await disablePushNotifications();
-                          setNotificationPrefs(prev => ({ ...prev, pushEnabled: false }));
-                        } else {
-                          const res = await enablePushNotifications();
-                          if (res?.success) {
-                            setNotificationPrefs(prev => ({ ...prev, pushEnabled: true }));
+                        try {
+                          if (isPushSubscribed) {
+                            await disablePushNotifications();
+                            setNotificationPrefs(prev => ({ ...prev, pushEnabled: false }));
+                            toast.success('Push notifications disabled.');
+                          } else {
+                            const res = await enablePushNotifications();
+                            if (res?.success) {
+                              setNotificationPrefs(prev => ({ ...prev, pushEnabled: true }));
+                              toast.success('Push notifications enabled successfully!');
+                            } else {
+                              const reason = res?.reason;
+                              if (reason === 'denied') {
+                                toast.error('Notification permission denied. Please allow notifications in your browser address bar/settings.');
+                              } else if (reason === 'localhost_disabled') {
+                                toast.error('Push notifications cannot be enabled on localhost without a secure tunnel override.');
+                              } else if (reason === 'missing_vapid_key') {
+                                toast.error('VAPID public key configuration is missing.');
+                              } else {
+                                toast.error(`Failed to enable notifications: ${reason || 'Unknown error'}`);
+                              }
+                            }
                           }
+                        } catch (err: any) {
+                          console.error(err);
+                          toast.error(`Error configuring notifications: ${err?.message || err}`);
                         }
                       }}
                       className={`px-3 py-1.5 rounded-lg text-[10.5px] font-bold transition-all ${

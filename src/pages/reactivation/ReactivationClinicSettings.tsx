@@ -241,7 +241,7 @@ export const DEFAULT_TEMPLATES: WhatsAppTemplate[] = [
     name: 'booking',
     language: 'en',
     status: 'Approved',
-    body: '🦷 Appointment Confirmed. Hi {{1}}, your appointment has been confirmed for {{2}} at {{3}}.'
+    body: '🦷 Appointment Confirmed – YOUR DENTIST\n\nHi {{1}},\n\nYour appointment with Dr. Aryan Parmar has been confirmed. ✅\n\n📅 Date: {{2}}\n⏰ Time: {{3}}\n📍 Clinic: YOUR DENTIST, Patliputra Colony, Patna\n\nPlease arrive 10 minutes before your scheduled slot.\n\nFor rescheduling or queries, call us at:\n📞 6201478033\n\nThank you for choosing YOUR DENTIST\n😊'
   },
   {
     name: 'patient_recall_followup',
@@ -281,7 +281,7 @@ export const loadWhatsAppTemplates = (orgId: string): WhatsAppTemplate[] => {
           return {
             ...t,
             name: 'booking',
-            body: '🦷 Appointment Confirmed. Hi {{1}}, your appointment has been confirmed for {{2}} at {{3}}.'
+            body: '🦷 Appointment Confirmed – YOUR DENTIST\n\nHi {{1}},\n\nYour appointment with Dr. Aryan Parmar has been confirmed. ✅\n\n📅 Date: {{2}}\n⏰ Time: {{3}}\n📍 Clinic: YOUR DENTIST, Patliputra Colony, Patna\n\nPlease arrive 10 minutes before your scheduled slot.\n\nFor rescheduling or queries, call us at:\n📞 6201478033\n\nThank you for choosing YOUR DENTIST\n😊'
           };
         }
         return t;

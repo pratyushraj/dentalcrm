@@ -194,7 +194,7 @@ export default function ReactivationScheduler() {
           name: fallbackBookingName, 
           language: 'en',
           body: fallbackBookingName === 'booking'
-            ? '🦷 Appointment Confirmed. Hi {{1}}, your appointment has been confirmed for {{2}} at {{3}}.'
+            ? '🦷 Appointment Confirmed – YOUR DENTIST\n\nHi {{1}},\n\nYour appointment with Dr. Aryan Parmar has been confirmed. ✅\n\n📅 Date: {{2}}\n⏰ Time: {{3}}\n📍 Clinic: YOUR DENTIST, Patliputra Colony, Patna\n\nPlease arrive 10 minutes before your scheduled slot.\n\nFor rescheduling or queries, call us at:\n📞 6201478033\n\nThank you for choosing YOUR DENTIST\n😊'
             : 'Hello {{1}}, this is a confirmation for your appointment on {{2}} at {{3}} with {{4}}. Contact {{5}} for queries.'
         };
 

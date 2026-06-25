@@ -2956,6 +2956,16 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                                           type="button"
                                           onClick={() => {
                                             const current = form.prescription ? form.prescription.trim() : '';
+                                            const lines = current.split('\n').filter(l => l.trim());
+                                            const isDuplicate = lines.some(line => 
+                                              line.toLowerCase().includes(med.label.toLowerCase())
+                                            );
+                                            
+                                            if (isDuplicate) {
+                                              toast.warning(`${med.label} is already in the prescription.`);
+                                              return;
+                                            }
+                                            
                                             if (current) {
                                               handleChange('prescription', `${current}\n${med.text}`);
                                             } else {

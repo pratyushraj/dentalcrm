@@ -123,7 +123,7 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
       { label: 'Amoxicillin 500mg', text: '• Tab. Amoxicillin 500mg - 1 cap thrice daily for 5 days', category: 'Antibiotics' },
       { label: 'Paracetamol 650mg', text: '• Tab. Paracetamol 650mg - 1 tab SOS for pain', category: 'Pain killers' },
       { label: 'Zerodol-SP', text: '• Tab. Zerodol-SP - 1 tab twice daily for 3 days', category: 'Pain killers' },
-      { label: 'Pantocid 40mg', text: '• Tab. Pantocid 40mg - 1 tab once daily before food', category: 'Others' },
+      { label: 'Pantocid 40mg', text: '• Tab. Pantocid 40mg - 1 tab once daily before food', category: 'Gas/Acidity' },
       { label: 'Hexidine Mouthwash', text: '• Hexidine Mouthwash - rinse twice daily for 7 days', category: 'Mouthwash' },
       { label: 'Mox-CL 625mg', text: '• Tab. Mox-CL 625mg - 1 tab twice daily for 5 days', category: 'Antibiotics' },
       { label: 'Ketorol-DT', text: '• Tab. Ketorol-DT - 1 tab dissolved in water SOS', category: 'Pain killers' },
@@ -2489,7 +2489,7 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                           { label: 'Amoxicillin 500mg', text: '• Tab. Amoxicillin 500mg - 1 cap thrice daily for 5 days', category: 'Antibiotics' },
                           { label: 'Paracetamol 650mg', text: '• Tab. Paracetamol 650mg - 1 tab SOS for pain', category: 'Pain killers' },
                           { label: 'Zerodol-SP', text: '• Tab. Zerodol-SP - 1 tab twice daily for 3 days', category: 'Pain killers' },
-                          { label: 'Pantocid 40mg', text: '• Tab. Pantocid 40mg - 1 tab once daily before food', category: 'Others' },
+                          { label: 'Pantocid 40mg', text: '• Tab. Pantocid 40mg - 1 tab once daily before food', category: 'Gas/Acidity' },
                           { label: 'Hexidine Mouthwash', text: '• Hexidine Mouthwash - rinse twice daily for 7 days', category: 'Mouthwash' },
                           { label: 'Mox-CL 625mg', text: '• Tab. Mox-CL 625mg - 1 tab twice daily for 5 days', category: 'Antibiotics' },
                           { label: 'Ketorol-DT', text: '• Tab. Ketorol-DT - 1 tab dissolved in water SOS', category: 'Pain killers' },
@@ -2986,45 +2986,14 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                               </div>
                             )}
 
-                            {/* Bottom Actions Row: AI Write, Voice Rx, Templates, Add Medicine */}
-                            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-2 border-t border-slate-100">
-                              <button
-                                type="button"
-                                onClick={runAIWrite}
-                                className="flex items-center justify-center gap-1.5 py-2 px-3 border border-indigo-100 rounded-xl bg-indigo-50/30 text-indigo-600 hover:bg-indigo-50 hover:border-indigo-200 transition-all font-bold text-[10.5px]"
-                              >
-                                <Sparkles size={12} className="text-indigo-500" />
-                                <span>AI Write</span>
-                              </button>
-                              
-                              <button
-                                type="button"
-                                onClick={() => toggleFieldScribe('prescription')}
-                                className={`flex items-center justify-center gap-1.5 py-2 px-3 border rounded-xl transition-all font-bold text-[10.5px] ${
-                                  activeFieldRecording === 'prescription'
-                                    ? 'bg-rose-500 border-rose-600 text-white animate-pulse'
-                                    : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-50'
-                                }`}
-                              >
-                                <Mic size={12} className={activeFieldRecording === 'prescription' ? 'text-white' : 'text-slate-400'} />
-                                <span>Voice Rx</span>
-                              </button>
-
-                              <button
-                                type="button"
-                                onClick={applyTemplate}
-                                className="flex items-center justify-center gap-1.5 py-2 px-3 border border-slate-200 rounded-xl bg-white text-slate-600 hover:bg-slate-50 transition-all font-bold text-[10.5px]"
-                              >
-                                <svg className="w-3.5 h-3.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2" /></svg>
-                                <span>Templates</span>
-                              </button>
-
+                            {/* Bottom Actions Row: Add Medicine */}
+                            <div className="pt-2 border-t border-slate-100 flex justify-end">
                               <button
                                 type="button"
                                 onClick={addNewCustomMed}
-                                className="flex items-center justify-center gap-1.5 py-2 px-3 border border-slate-200 rounded-xl bg-white text-slate-600 hover:bg-slate-50 transition-all font-bold text-[10.5px]"
+                                className="flex items-center justify-center gap-1.5 py-2 px-3.5 border border-slate-200 rounded-xl bg-white text-slate-700 hover:bg-slate-50 hover:border-slate-350 transition-all font-semibold text-[11px] shadow-sm"
                               >
-                                <Plus size={12} className="text-slate-400" />
+                                <Plus size={13} className="text-slate-500" />
                                 <span>Add Medicine</span>
                               </button>
                             </div>

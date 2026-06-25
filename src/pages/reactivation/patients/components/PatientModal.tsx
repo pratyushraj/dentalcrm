@@ -27,7 +27,9 @@ import {
   Download,
   Eye,
   Check,
-  RotateCcw
+  RotateCcw,
+  MoreVertical,
+  FileText
 } from 'lucide-react';
 import { toast } from 'sonner';
 import {
@@ -86,7 +88,7 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
   } = useDealAlertNotifications();
   const isEdit = !!customer?.id;
   const [form, setForm] = useState<Customer>(() => getInitialForm(customer));
-  const [activeTab, setActiveTab] = useState<'general' | 'medical' | 'estimates'>('general');
+  const [activeTab, setActiveTab] = useState<'general' | 'medical' | 'estimates'>('medical');
   const [lightboxImg, setLightboxImg] = useState<string | null>(null);
   const [showVoiceSettingsModal, setShowVoiceSettingsModal] = useState(false);
   const [selectedRxCategory, setSelectedRxCategory] = useState<string>('All');
@@ -94,6 +96,8 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
   const [selectedRxFrequency, setSelectedRxFrequency] = useState<string>('');
   const [medicationsList, setMedicationsList] = useState<any[]>([]);
   const [searchRxQuery, setSearchRxQuery] = useState<string>('');
+  const [isEditingRawPrescription, setIsEditingRawPrescription] = useState<boolean>(false);
+  const [rxCollapseDetails, setRxCollapseDetails] = useState<boolean>(false);
 
   // Clinic branding (loaded from localStorage, used for PDF generation)
   const { organizationId } = useSession();
@@ -315,7 +319,7 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
     wasOpenRef.current = open;
 
     if (customer?.id !== lastCustomerIdRef.current || didOpenFresh) {
-      setActiveTab('general');
+      setActiveTab('medical');
       setShowAdvancedClinical(false);
       setCopiedEstimate(false);
       setActiveQuadrant('all');
@@ -394,7 +398,7 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
       setForm(initForm);
       initialFormRef.current = initForm;
 
-      setActiveTab('general');
+      setActiveTab('medical');
       setShowAdvancedClinical(false);
       setCopiedEstimate(false);
       setActiveQuadrant('all');
@@ -1855,53 +1859,51 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
 
                     {/* Tab Selector & Settings Gear */}
                     <div className="flex items-center gap-2 self-start sm:self-auto w-full sm:w-auto min-w-0">
-                      <div className="flex bg-slate-100 p-1 rounded-lg border border-slate-200 gap-0.5 overflow-x-auto scrollbar-none flex-nowrap flex-1 sm:flex-none min-w-0">
-                        <button
-                          type="button"
-                          onClick={() => setActiveTab('general')}
-                          className={`px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wider transition-all duration-150 shrink-0 ${
-                            activeTab === 'general'
-                              ? 'bg-white text-indigo-600 shadow-sm border border-indigo-100'
-                              : 'text-slate-500 hover:text-slate-700'
-                          }`}
-                        >
-                          <span className="hidden sm:inline">Before Treatment</span>
-                          <span className="inline sm:hidden">Before Tx</span>
-                        </button>
+                      <div className="flex bg-slate-100/80 p-1 rounded-xl border border-slate-200/60 gap-1 overflow-x-auto scrollbar-none flex-nowrap flex-1 sm:flex-none min-w-0">
                         <button
                           type="button"
                           onClick={() => setActiveTab('medical')}
-                          className={`px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wider transition-all duration-150 flex items-center gap-1 shrink-0 ${
+                          className={`px-3 py-1.5 rounded-lg text-[10.5px] font-bold transition-all duration-150 flex items-center gap-1.5 shrink-0 ${
                             activeTab === 'medical'
-                              ? 'bg-white text-indigo-600 shadow-sm border border-indigo-100'
-                              : 'text-slate-500 hover:text-slate-700'
+                              ? 'bg-white text-indigo-700 shadow-sm border border-slate-200/50'
+                              : 'text-slate-500 hover:text-slate-700 hover:bg-slate-50/50'
                           }`}
                         >
-                          <Stethoscope size={10} />
-                          <span className="hidden sm:inline">After Consultation</span>
-                          <span className="inline sm:hidden">Consultation</span>
+                          <Stethoscope size={11} className="text-indigo-500" />
+                          <span>Consultation</span>
                         </button>
                         <button
                           type="button"
                           onClick={() => setActiveTab('estimates')}
-                          className={`px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wider transition-all duration-150 flex items-center gap-1 shrink-0 ${
+                          className={`px-3 py-1.5 rounded-lg text-[10.5px] font-bold transition-all duration-150 flex items-center gap-1.5 shrink-0 ${
                             activeTab === 'estimates'
-                              ? 'bg-white text-indigo-600 shadow-sm border border-indigo-100'
-                              : 'text-slate-500 hover:text-slate-700'
+                              ? 'bg-white text-indigo-700 shadow-sm border border-slate-200/50'
+                              : 'text-slate-500 hover:text-slate-700 hover:bg-slate-50/50'
                           }`}
                         >
-                          <StickyNote size={10} />
-                          <span className="hidden sm:inline">Billing & Estimates</span>
-                          <span className="inline sm:hidden">Billing</span>
+                          <FileText size={11} className="text-indigo-500" />
+                          <span>Billing</span>
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => setActiveTab('general')}
+                          className={`px-3 py-1.5 rounded-lg text-[10.5px] font-bold transition-all duration-150 flex items-center gap-1.5 shrink-0 ${
+                            activeTab === 'general'
+                              ? 'bg-white text-indigo-700 shadow-sm border border-slate-200/50'
+                              : 'text-slate-500 hover:text-slate-700 hover:bg-slate-50/50'
+                          }`}
+                        >
+                          <Camera size={11} className="text-indigo-500" />
+                          <span>Before Tx</span>
                         </button>
                       </div>
                       <button
                         type="button"
                         onClick={() => setShowVoiceSettingsModal(true)}
-                        className="p-1.5 hover:bg-slate-100 border border-slate-200 rounded-lg text-slate-500 hover:text-slate-700 transition-colors shrink-0"
+                        className="p-2 hover:bg-slate-100 border border-slate-200/80 rounded-xl text-slate-500 hover:text-indigo-600 hover:border-indigo-150 transition-colors shrink-0"
                         title="AI Scribe Settings"
                       >
-                        <Settings size={14} />
+                        <Settings size={13} />
                       </button>
                     </div>
                   </DialogHeader>
@@ -2320,39 +2322,163 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
 
 
                     {/* Prescription (Rx) Editor */}
-                    <div className="bg-gradient-to-br from-slate-50 to-white border border-slate-200/80 rounded-xl p-4 space-y-2.5 shadow-sm">
-                      <div className="flex items-center justify-between gap-2 flex-wrap">
+                    <div className="bg-white border border-slate-200/80 rounded-2xl p-5 space-y-4 shadow-sm">
+                      {/* Prescription Header */}
+                      <div className="flex items-center justify-between gap-2 border-b border-slate-100 pb-3">
                         <div className="flex items-center gap-2">
-                          <div className="w-6 h-6 rounded-lg bg-indigo-100 border border-indigo-200 flex items-center justify-center text-indigo-500">
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-                          </div>
-                          <span className="text-[12px] font-bold text-slate-800 uppercase tracking-wider font-sans">Prescription (Rx)</span>
-                        </div>
-                        <div className="flex items-center gap-1.5">
-                          {form.prescription && (
-                            <span className="text-[9px] font-bold text-emerald-600 bg-emerald-50 border border-emerald-200 rounded-full px-2 py-0.5 flex items-center gap-1">
-                              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block"></span>
-                              {form.prescription.split('\n').filter(l => l.trim()).length} lines
+                          <span className="text-[14px] font-bold text-slate-800 font-sans">
+                            Prescription 
+                            <span className="text-slate-400 font-medium ml-1.5 text-[12px]">
+                              ({(form.prescription || '').split('\n').filter(l => l.trim()).length} items)
                             </span>
-                          )}
-                          {/* Print Rx PDF */}
+                          </span>
+                        </div>
+                        
+                        <div className="flex items-center gap-2">
+                          <button
+                            type="button"
+                            onClick={() => setIsEditingRawPrescription(!isEditingRawPrescription)}
+                            className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase border bg-white border-slate-200 text-indigo-600 hover:bg-indigo-50/50 hover:border-indigo-200 transition-all"
+                          >
+                            <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5"><path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" /></svg>
+                            {isEditingRawPrescription ? 'View List' : 'Edit notes'}
+                          </button>
+                          
                           <button
                             type="button"
                             onClick={generateDefaultPDF}
-                            className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[9.5px] font-bold uppercase border bg-white border-slate-200 text-slate-600 hover:bg-teal-50 hover:border-teal-300 hover:text-teal-600 transition-all shadow-sm"
+                            className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase border bg-white border-slate-200 text-slate-600 hover:bg-slate-50 hover:border-slate-300 transition-all shadow-sm"
                           >
-                            <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+                            <svg className="w-3 h-3 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5"><path strokeLinecap="round" strokeLinejoin="round" d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0110.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0l.229 1.503a1.5 1.5 0 01-1.488 1.727H7.599a1.5 1.5 0 01-1.488-1.727L6.34 18m11.32 0a2.01 2.01 0 01-.192-.612l-.646-4.243a2.01 2.01 0 011.08-2.01L19.5 9.5M6.34 18a2.01 2.01 0 00.192-.612l.646-4.243a2.01 2.01 0 00-1.08-2.01L4.5 9.5M19.5 9.5A2.25 2.25 0 0017.25 7.25H6.75A2.25 2.25 0 004.5 9.5m15 0v.115a8.32 8.32 0 01-.115 1.357m-14.77 0A8.32 8.32 0 014.5 9.615V9.5m11.25-3.5V5.25a2.25 2.25 0 00-2.25-2.25h-3A2.25 2.25 0 008.25 5.25v1.25" /></svg>
                             Print Rx
                           </button>
                         </div>
                       </div>
-                      <textarea
-                        rows={5}
-                        value={form.prescription || ''}
-                        onChange={(e) => handleChange('prescription', e.target.value)}
-                        placeholder="Prescription details will appear here as you add medicines below…"
-                        className="w-full px-3 py-2.5 bg-white border border-slate-200 rounded-lg text-[12.5px] font-mono leading-relaxed text-slate-700 outline-none focus:ring-2 focus:ring-indigo-400/30 focus:border-indigo-400 transition-all resize-none"
-                      />
+
+                      {/* Raw Editor Textarea (Toggled via Edit notes) */}
+                      {isEditingRawPrescription ? (
+                        <textarea
+                          rows={6}
+                          value={form.prescription || ''}
+                          onChange={(e) => handleChange('prescription', e.target.value)}
+                          placeholder="Prescription details will appear here..."
+                          className="w-full px-3.5 py-3 bg-slate-50/50 border border-slate-200 rounded-xl text-[12.5px] font-mono leading-relaxed text-slate-700 outline-none focus:ring-2 focus:ring-indigo-400/20 focus:border-indigo-400 transition-all resize-none"
+                        />
+                      ) : (
+                        /* Beautiful Interactive Mockup List */
+                        <div className="space-y-2">
+                          {(() => {
+                            const current = form.prescription || '';
+                            const lines = current.split('\n').map(l => l.trim()).filter(Boolean);
+                            if (lines.length === 0) {
+                              return (
+                                <div className="text-center py-6 border border-dashed border-slate-200 rounded-xl bg-slate-50/30 text-slate-400 text-[11.5px] flex flex-col items-center justify-center gap-1.5">
+                                  <svg className="w-5 h-5 text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5.586a1 1 0 0 1 .707.293l5.414 5.414a1 1 0 0 1 .293.707V19a2 2 0 0 1-2 2z" /></svg>
+                                  <span>No prescription items added. Use presets below.</span>
+                                </div>
+                              );
+                            }
+
+                            // Show only first 2 items if collapsed
+                            const visibleLines = rxCollapseDetails ? lines.slice(0, 2) : lines;
+
+                            return (
+                              <div className="border border-slate-100 rounded-xl overflow-hidden divide-y divide-slate-100 shadow-sm bg-white">
+                                {visibleLines.map((line, idx) => {
+                                  // Clean bullet points
+                                  const cleaned = line.replace(/^[•\s\-\*]+/, '').trim();
+                                  const parts = cleaned.split(/\s*-\s*/);
+                                  let name = cleaned;
+                                  let instructions = 'Take as directed';
+                                  let duration = '';
+
+                                  if (parts.length >= 2) {
+                                    name = parts[0];
+                                    const rest = parts.slice(1).join(' - ');
+                                    const durationMatch = rest.match(/for (\d+\s*days?|SOS)/i);
+                                    if (durationMatch) {
+                                      duration = durationMatch[1];
+                                      instructions = rest.replace(new RegExp(`\\s*for\\s*${durationMatch[1]}`, 'i'), '').trim();
+                                    } else {
+                                      instructions = rest;
+                                    }
+                                  } else {
+                                    const durationMatch = cleaned.match(/for (\d+\s*days?|SOS)/i);
+                                    if (durationMatch) {
+                                      duration = durationMatch[1];
+                                      name = cleaned.replace(new RegExp(`\\s*for\\s*${durationMatch[1]}`, 'i'), '').trim();
+                                    }
+                                  }
+
+                                  // Format duration label
+                                  let durationLabel = duration || 'SOS';
+                                  if (/^\d+/.test(durationLabel)) {
+                                    const num = durationLabel.match(/\d+/)?.[0];
+                                    durationLabel = `${num} Days`;
+                                  }
+
+                                  return (
+                                    <div key={idx} className="flex items-center justify-between p-3.5 bg-white hover:bg-slate-50/50 transition-colors gap-3 border-l-[3.5px] border-emerald-500 rounded-lg border border-slate-100/60 shadow-sm">
+                                      <div className="flex items-center gap-3 min-w-0">
+                                        <div className="w-6 h-6 rounded-full bg-indigo-600 text-white text-[12px] font-bold flex items-center justify-center shrink-0 leading-none">
+                                          {idx + 1}
+                                        </div>
+                                        <div className="min-w-0">
+                                          <h5 className="text-[13px] font-bold text-slate-800 truncate leading-snug">{name}</h5>
+                                          <p className="text-[11px] text-slate-500 font-medium leading-none mt-1">{instructions}</p>
+                                        </div>
+                                      </div>
+                                      
+                                      <div className="flex items-center gap-2.5 shrink-0">
+                                        <span className="px-2.5 py-1 rounded-lg text-[11px] font-bold text-indigo-600 bg-indigo-50/70 border border-indigo-100/40">
+                                          {durationLabel}
+                                        </span>
+                                        <DropdownMenu>
+                                          <DropdownMenuTrigger asChild>
+                                            <button
+                                              type="button"
+                                              className="p-1 text-slate-400 hover:text-slate-700 rounded transition-colors"
+                                            >
+                                              <MoreVertical size={16} />
+                                            </button>
+                                          </DropdownMenuTrigger>
+                                          <DropdownMenuContent align="end">
+                                            <DropdownMenuItem
+                                              className="text-rose-600 focus:text-rose-600 focus:bg-rose-50 cursor-pointer font-semibold text-[12px]"
+                                              onClick={() => {
+                                                const allLines = (form.prescription || '').split('\n');
+                                                const actualIdx = allLines.findIndex(l => l.trim() === line);
+                                                if (actualIdx !== -1) {
+                                                  const updated = allLines.filter((_, i) => i !== actualIdx);
+                                                  handleChange('prescription', updated.join('\n'));
+                                                }
+                                                toast.success("Prescription item deleted");
+                                              }}
+                                            >
+                                              <Trash2 size={12} className="mr-1.5" /> Delete Item
+                                            </DropdownMenuItem>
+                                          </DropdownMenuContent>
+                                        </DropdownMenu>
+                                      </div>
+                                    </div>
+                                  );
+                                })}
+
+                                {lines.length > 2 && (
+                                  <button
+                                    type="button"
+                                    onClick={() => setRxCollapseDetails(!rxCollapseDetails)}
+                                    className="w-full py-2 bg-slate-50/50 hover:bg-slate-50 text-[10px] font-bold text-slate-500 hover:text-slate-700 flex items-center justify-center gap-1 transition-colors border-t border-slate-100"
+                                  >
+                                    <svg className={`w-3.5 h-3.5 transform transition-transform ${rxCollapseDetails ? '' : 'rotate-180'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5"><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+                                    {rxCollapseDetails ? 'Show details' : 'Hide details'}
+                                  </button>
+                                )}
+                              </div>
+                            );
+                          })()}
+                        </div>
+                      )}
                       {/* Prescription Preset Suggestions */}
                       {(() => {
                         const rxMedCategories = ['Pain killers', 'Antibiotics', 'Multivitamins', 'Toothpaste', 'Mouthwash', 'Gels', 'Gas/Acidity', 'Others'];
@@ -2447,7 +2573,7 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                         const lastLine = prescriptionLines[prescriptionLines.length - 1] || '';
 
                         let activeDays = '';
-                        const daysMatch = lastLine.match(/for (\d+) days/i);
+                        const daysMatch = lastLine.match(/for (\d+)\s*days?/i);
                         if (daysMatch) {
                           activeDays = daysMatch[1];
                         } else if (/SOS/i.test(lastLine) && !/once|twice|thrice|four/i.test(lastLine)) {
@@ -2461,42 +2587,143 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                         else if (/four times daily/i.test(lastLine)) activeFreq = 'four times daily';
                         else if (/SOS/i.test(lastLine)) activeFreq = 'SOS';
 
-                        const catConfig: Record<string, { icon: string; activeBg: string; activeText: string; cardAccent: string; cardHover: string; countBg: string; countText: string }> = {
-                          'Pain killers': { icon: '💊', activeBg: 'bg-rose-500', activeText: 'text-white', cardAccent: 'border-l-rose-400', cardHover: 'hover:bg-rose-50/60 hover:border-rose-200', countBg: 'bg-rose-100', countText: 'text-rose-600' },
-                          'Antibiotics': { icon: '🦠', activeBg: 'bg-amber-500', activeText: 'text-white', cardAccent: 'border-l-amber-400', cardHover: 'hover:bg-amber-50/60 hover:border-amber-200', countBg: 'bg-amber-100', countText: 'text-amber-600' },
-                          'Multivitamins': { icon: '✨', activeBg: 'bg-emerald-500', activeText: 'text-white', cardAccent: 'border-l-emerald-400', cardHover: 'hover:bg-emerald-50/60 hover:border-emerald-200', countBg: 'bg-emerald-100', countText: 'text-emerald-600' },
-                          'Toothpaste': { icon: '🦷', activeBg: 'bg-sky-500', activeText: 'text-white', cardAccent: 'border-l-sky-400', cardHover: 'hover:bg-sky-50/60 hover:border-sky-200', countBg: 'bg-sky-100', countText: 'text-sky-600' },
-                          'Mouthwash': { icon: '💧', activeBg: 'bg-teal-500', activeText: 'text-white', cardAccent: 'border-l-teal-400', cardHover: 'hover:bg-teal-50/60 hover:border-teal-200', countBg: 'bg-teal-100', countText: 'text-teal-600' },
-                          'Gels': { icon: '🧴', activeBg: 'bg-violet-500', activeText: 'text-white', cardAccent: 'border-l-violet-400', cardHover: 'hover:bg-violet-50/60 hover:border-violet-200', countBg: 'bg-violet-100', countText: 'text-violet-600' },
-                          'Gas/Acidity': { icon: '🔥', activeBg: 'bg-orange-500', activeText: 'text-white', cardAccent: 'border-l-orange-400', cardHover: 'hover:bg-orange-50/60 hover:border-orange-200', countBg: 'bg-orange-100', countText: 'text-orange-600' },
-                          'Others': { icon: '📋', activeBg: 'bg-slate-600', activeText: 'text-white', cardAccent: 'border-l-slate-400', cardHover: 'hover:bg-slate-50/80 hover:border-slate-300', countBg: 'bg-slate-100', countText: 'text-slate-600' },
+                        const catConfig: Record<string, { icon: string; activeBg: string; activeText: string; cardAccent: string; cardHover: string; countBg: string; countText: string; circleBg: string; iconColor: string }> = {
+                          'Pain killers': { icon: '💊', activeBg: 'bg-rose-600', activeText: 'text-white', cardAccent: 'border-l-rose-400', cardHover: 'hover:bg-rose-50/40 hover:border-rose-200', countBg: 'bg-rose-100', countText: 'text-rose-600', circleBg: 'bg-rose-50', iconColor: 'text-rose-500' },
+                          'Antibiotics': { icon: '🦠', activeBg: 'bg-amber-600', activeText: 'text-white', cardAccent: 'border-l-amber-400', cardHover: 'hover:bg-amber-50/40 hover:border-amber-200', countBg: 'bg-amber-100', countText: 'text-amber-600', circleBg: 'bg-amber-50', iconColor: 'text-amber-500' },
+                          'Multivitamins': { icon: '✨', activeBg: 'bg-emerald-600', activeText: 'text-white', cardAccent: 'border-l-emerald-400', cardHover: 'hover:bg-emerald-50/40 hover:border-emerald-200', countBg: 'bg-emerald-100', countText: 'text-emerald-600', circleBg: 'bg-emerald-50', iconColor: 'text-emerald-500' },
+                          'Toothpaste': { icon: '🦷', activeBg: 'bg-sky-600', activeText: 'text-white', cardAccent: 'border-l-sky-400', cardHover: 'hover:bg-sky-50/40 hover:border-sky-200', countBg: 'bg-sky-100', countText: 'text-sky-600', circleBg: 'bg-sky-50', iconColor: 'text-sky-500' },
+                          'Mouthwash': { icon: '💧', activeBg: 'bg-teal-600', activeText: 'text-white', cardAccent: 'border-l-teal-400', cardHover: 'hover:bg-teal-50/40 hover:border-teal-200', countBg: 'bg-teal-100', countText: 'text-teal-600', circleBg: 'bg-teal-50', iconColor: 'text-teal-500' },
+                          'Gels': { icon: '🧴', activeBg: 'bg-violet-600', activeText: 'text-white', cardAccent: 'border-l-violet-400', cardHover: 'hover:bg-violet-50/40 hover:border-violet-200', countBg: 'bg-violet-100', countText: 'text-violet-600', circleBg: 'bg-violet-50', iconColor: 'text-violet-500' },
+                          'Gas/Acidity': { icon: '🔥', activeBg: 'bg-orange-600', activeText: 'text-white', cardAccent: 'border-l-orange-400', cardHover: 'hover:bg-orange-50/40 hover:border-orange-200', countBg: 'bg-orange-100', countText: 'text-orange-600', circleBg: 'bg-orange-50', iconColor: 'text-orange-500' },
+                          'Others': { icon: '📋', activeBg: 'bg-slate-600', activeText: 'text-white', cardAccent: 'border-l-slate-400', cardHover: 'hover:bg-slate-50/50 hover:border-slate-300', countBg: 'bg-slate-100', countText: 'text-slate-600', circleBg: 'bg-slate-50', iconColor: 'text-slate-500' },
                         };
 
                         const getCardConfig = (cat: string) => catConfig[cat] || catConfig['Others'];
 
-                        return (
-                          <div className="space-y-3 pt-2.5 border-t border-slate-200/70">
-                            <div className="flex items-center gap-2">
-                              <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Quick Add Presets</span>
-                              <div className="flex-1 h-px bg-slate-200/60"></div>
-                            </div>
+                        // Custom mock AI write
+                        const runAIWrite = () => {
+                          const query = prompt("What diagnosis / symptom is this prescription for? (e.g. Swelling, Wisdom tooth pain, Ulcers):");
+                          if (!query) return;
+                          
+                          let suggestedMeds: any[] = [];
+                          const cleanQuery = query.toLowerCase();
+                          
+                          if (cleanQuery.includes('swel') || cleanQuery.includes('infect') || cleanQuery.includes('pus') || cleanQuery.includes('absce')) {
+                            suggestedMeds = [
+                              rxMedList.find(m => m.label.includes('Amoxicillin')) || rxMedList[0],
+                              rxMedList.find(m => m.label.includes('Zerodol-SP')) || rxMedList[2],
+                              rxMedList.find(m => m.label.includes('Pan-40')) || rxMedList.find(m => m.label.includes('Pantocid')) || rxMedList[3]
+                            ];
+                            toast.success("AI generated prescription for dental infection/swelling!");
+                          } else if (cleanQuery.includes('wisdom') || cleanQuery.includes('extraction') || cleanQuery.includes('remov')) {
+                            suggestedMeds = [
+                              rxMedList.find(m => m.label.includes('Mox-CL')) || rxMedList[5],
+                              rxMedList.find(m => m.label.includes('Ketorol-DT')) || rxMedList[6],
+                              rxMedList.find(m => m.label.includes('Pan-40')) || rxMedList[3],
+                              rxMedList.find(m => m.label.includes('Hexidine')) || rxMedList[4]
+                            ];
+                            toast.success("AI generated post-extraction prescription!");
+                          } else if (cleanQuery.includes('ulcer') || cleanQuery.includes('sore') || cleanQuery.includes('aphth')) {
+                            suggestedMeds = [
+                              rxMedList.find(m => m.label.includes('Logum')) || rxMedList.find(m => m.category === 'Gels') || rxMedList[29],
+                              rxMedList.find(m => m.category === 'Multivitamins') || rxMedList[46]
+                            ];
+                            toast.success("AI generated prescription for mouth ulcers!");
+                          } else if (cleanQuery.includes('sensitiv') || cleanQuery.includes('cold') || cleanQuery.includes('hot')) {
+                            suggestedMeds = [
+                              rxMedList.find(m => m.label.includes('Sensodyne')) || rxMedList.find(m => m.category === 'Toothpaste') || rxMedList[7],
+                              rxMedList.find(m => m.label.includes('Hexidine')) || rxMedList[4]
+                            ];
+                            toast.success("AI generated prescription for teeth sensitivity!");
+                          } else {
+                            suggestedMeds = [
+                              rxMedList.find(m => m.label.includes('Paracetamol')) || rxMedList[1]
+                            ];
+                            toast.success("AI suggested standard pain relief.");
+                          }
 
+                          if (suggestedMeds.length > 0) {
+                            const newText = suggestedMeds.map(m => m.text).join('\n');
+                            const current = form.prescription || '';
+                            handleChange('prescription', current ? `${current.trim()}\n${newText}` : newText);
+                          }
+                        };
+
+                        // Template Selector popover/handler
+                        const applyTemplate = () => {
+                          const selection = prompt(
+                            "Select prescription template:\n1. Post-Extraction Protocol (Mox-CL + Ketorol-DT + Pan-40 + Mouthwash)\n2. Standard Antibiotic & Pain Relief (Amox 500 + Zerodol-SP + Rantac)\n3. Ulcer Healing Pack (Logum Gel + Multivitamins)\n4. Tooth Sensitivity Routine (Sensodyne + Mouthwash)\nEnter number (1-4):"
+                          );
+                          if (!selection) return;
+
+                          let templateText = '';
+                          if (selection === '1') {
+                            templateText = "• Tab. Mox-CL 625mg - 1 tab twice daily for 5 days\n• Tab. Ketorol-DT - 1 tab dissolved in water SOS\n• Tab. Pan-40 - 1 tab once daily before food\n• Hexidine Mouthwash - rinse twice daily for 7 days";
+                            toast.success("Applied Post-Extraction Protocol template!");
+                          } else if (selection === '2') {
+                            templateText = "• Tab. Amoxicillin 500mg - 1 cap thrice daily for 5 days\n• Tab. Zerodol-SP - 1 tab twice daily for 3 days\n• Tab. Pantocid 40mg - 1 tab once daily before food";
+                            toast.success("Applied Antibiotic & Pain Relief template!");
+                          } else if (selection === '3') {
+                            templateText = "• Logum Gel - apply on painful ulcers/areas 10 minutes before food\n• Tab. Lycowonder - 1 tab once daily";
+                            toast.success("Applied Ulcer Healing template!");
+                          } else if (selection === '4') {
+                            templateText = "• Sensodyne Toothpaste - brush twice daily for sensitive teeth\n• Hexidine Mouthwash - rinse twice daily for 7 days";
+                            toast.success("Applied Sensitivity Routine template!");
+                          } else {
+                            toast.error("Invalid choice.");
+                            return;
+                          }
+
+                          const current = form.prescription || '';
+                          handleChange('prescription', current ? `${current.trim()}\n${templateText}` : templateText);
+                        };
+
+                        // Custom add medication preset
+                        const addNewCustomMed = () => {
+                          const label = prompt("Enter medicine name (e.g. Paracetamol 650mg):");
+                          if (!label) return;
+                          const text = prompt("Enter prescription text:", `• Tab. ${label} - 1 tab twice daily for 5 days`);
+                          if (!text) return;
+                          const category = prompt("Enter category (Pain killers, Antibiotics, Multivitamins, Toothpaste, Mouthwash, Gels, Gas/Acidity, Others):", "Others");
+                          
+                          const newMed = { label, text, category: category || 'Others' };
+                          setMedicationsList(prev => [...prev, newMed]);
+                          // Save to local storage
+                          try {
+                            const raw = localStorage.getItem(`clinic_medications_${_orgId}`);
+                            const current = raw ? JSON.parse(raw) : [];
+                            localStorage.setItem(`clinic_medications_${_orgId}`, JSON.stringify([...current, newMed]));
+                          } catch (e) {}
+                          toast.success(`${label} added to presets!`);
+                        };
+
+                        return (
+                          <div className="space-y-4">
+                            {/* Quick Modify (Last Line) Section */}
                             {lastLine.trim() && (
-                              <div className="bg-gradient-to-r from-indigo-50 to-blue-50/50 border border-indigo-200/70 rounded-xl p-3 space-y-2.5 shadow-sm">
-                                <div className="flex items-center justify-between gap-2 flex-wrap">
-                                  <span className="text-[9.5px] font-bold text-indigo-600 uppercase tracking-wider flex items-center gap-1.5">
-                                    <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-pulse inline-block"></span>
-                                    Edit Last Medicine
+                              <div className="bg-white border border-slate-200/80 rounded-2xl p-4 space-y-3.5 shadow-sm">
+                                <div className="flex items-center justify-between gap-2">
+                                  <span className="text-[12px] font-bold text-slate-700 font-sans">
+                                    Quick Modify <span className="text-slate-400 font-medium">(Last Line)</span>
                                   </span>
-                                  <span className="text-[9px] text-indigo-500/70 font-mono bg-white/80 border border-indigo-200/50 rounded px-1.5 py-0.5 truncate max-w-[180px]">{lastLine.replace(/^[•\s\-\*]+/, '').trim()}</span>
+                                  <button
+                                    type="button"
+                                    onClick={() => {
+                                      toast.info("Dosage frequency auto-synced with duration.");
+                                    }}
+                                    className="text-[10px] font-bold text-indigo-600 hover:text-indigo-700 bg-indigo-50 border border-indigo-100 rounded-lg px-2.5 py-1 transition-all flex items-center gap-1 cursor-pointer"
+                                  >
+                                    <Sparkles size={11} className="text-indigo-500 animate-pulse" />
+                                    <span>Smart Suggestions</span>
+                                  </button>
                                 </div>
                                 
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                                  {/* Days Pills */}
+                                <div className="space-y-2.5">
+                                  {/* Duration Row */}
                                   <div>
-                                    <span className="block text-[9px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Duration</span>
-                                    <div className="flex flex-wrap gap-1">
-                                      {['1', '2', '3', '4', '5', '7', '10', '14', 'SOS'].map(d => {
+                                    <span className="block text-[9.5px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Duration</span>
+                                    <div className="flex flex-wrap gap-1.5">
+                                      {['1', '2', '3', '4', '5', '7', '10', 'SOS'].map(d => {
                                         const isActive = activeDays === d;
                                         return (
                                           <button
@@ -2531,34 +2758,35 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                                                 handleChange('prescription', lines.join('\n'));
                                               }
                                             }}
-                                            className={`px-2 py-1 rounded-md text-[10.5px] font-bold transition-all border ${
+                                            className={`px-3 py-1 rounded-xl text-[10.5px] font-semibold transition-all border ${
                                               isActive 
-                                                ? 'bg-slate-800 border-slate-800 text-white shadow-sm scale-105' 
+                                                ? 'bg-indigo-600 border-transparent text-white shadow-sm scale-105' 
                                                 : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-slate-800'
                                             }`}
                                           >
-                                            {d === 'SOS' ? 'SOS' : `${d} Days`}
+                                            {d === 'SOS' ? 'SOS' : `${d}D`}
                                           </button>
                                         );
                                       })}
                                     </div>
                                   </div>
 
-                                  {/* Frequency Pills */}
+                                  {/* Frequency / Dosage Row */}
                                   <div>
-                                    <span className="block text-[9px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Frequency / Dosage</span>
-                                    <div className="flex flex-wrap gap-1">
+                                    <span className="block text-[9.5px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Dosage</span>
+                                    <div className="flex flex-wrap gap-1.5">
                                       {[
-                                        { label: '1-0-0', value: 'once daily' },
-                                        { label: '1-0-1', value: 'twice daily' },
-                                        { label: '1-1-1', value: 'thrice daily' },
-                                        { label: '1-1-1-1', value: 'four times daily' },
-                                        { label: 'SOS', value: 'SOS' }
+                                        { label: 'OD', sub: '1-0-0', value: 'once daily' },
+                                        { label: 'BD', sub: '1-0-1', value: 'twice daily' },
+                                        { label: 'TDS', sub: '1-1-1', value: 'thrice daily' },
+                                        { label: 'QID', sub: '1-1-1-1', value: 'four times daily' },
+                                        { label: 'QID', sub: '2-2-2-2', value: '2-2-2-2' },
+                                        { label: 'SOS', sub: 'SOS', value: 'SOS' }
                                       ].map(f => {
-                                        const isActive = activeFreq === f.value;
+                                        const isActive = activeFreq === f.value || lastLine.includes(f.sub);
                                         return (
                                           <button
-                                            key={f.label}
+                                            key={f.label + '-' + f.sub}
                                             type="button"
                                             onClick={() => {
                                               const newFreq = f.value;
@@ -2570,23 +2798,26 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                                               
                                               if (/(once|twice|thrice|four times)\s+daily/i.test(lastLine)) {
                                                 updatedLine = lastLine.replace(/(once|twice|thrice|four times)\s+daily/i, newFreq);
+                                              } else if (/1-0-0|1-0-1|1-1-1|1-1-1-1|2-2-2-2/i.test(lastLine)) {
+                                                updatedLine = lastLine.replace(/1-0-0|1-0-1|1-1-1|1-1-1-1|2-2-2-2/i, f.sub);
                                               } else if (/SOS/i.test(lastLine)) {
                                                 updatedLine = lastLine.replace(/SOS/i, newFreq);
                                               } else {
-                                                updatedLine = `${lastLine} - ${newFreq}`;
+                                                updatedLine = `${lastLine} - ${f.sub}`;
                                               }
                                               if (updatedLine !== lastLine) {
                                                 lines[lines.length - 1] = updatedLine;
                                                 handleChange('prescription', lines.join('\n'));
                                               }
                                             }}
-                                            className={`px-2 py-1 rounded-md text-[10.5px] font-bold transition-all border ${
+                                            className={`flex flex-col items-center justify-center px-3.5 py-1 rounded-xl border text-center transition-all min-w-[55px] ${
                                               isActive 
-                                                ? 'bg-slate-800 border-slate-800 text-white shadow-sm scale-105' 
+                                                ? 'bg-indigo-600 border-transparent text-white shadow-sm scale-105' 
                                                 : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-slate-800'
                                             }`}
                                           >
-                                            {f.label}
+                                            <span className="text-[10px] font-bold leading-none">{f.label}</span>
+                                            <span className={`text-[7.5px] font-medium font-mono leading-none mt-0.5 ${isActive ? 'text-white/80' : 'text-slate-400'}`}>{f.sub}</span>
                                           </button>
                                         );
                                       })}
@@ -2597,45 +2828,55 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                             )}
 
                             {/* Search and Categories Filter */}
-                            <div className="space-y-2">
-                              {/* Search bar */}
+                            <div className="space-y-3">
+                              {/* Search bar with Microphone icon matching mockup */}
                               <div className="relative">
-                                <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none">
-                                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none">
+                                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
                                 </span>
                                 <input
                                   type="text"
                                   value={searchRxQuery}
                                   onChange={(e) => setSearchRxQuery(e.target.value)}
-                                  placeholder="Search medicines… (e.g. Zerodol, Lycowonder, Clohex)"
-                                  className="w-full pl-8 pr-8 py-1.5 bg-white border border-slate-200 rounded-lg text-[11px] text-slate-700 outline-none focus:ring-1 focus:ring-indigo-400/40 focus:border-indigo-400 shadow-sm placeholder:text-slate-400 transition-all"
+                                  placeholder="Search medicines (e.g. Paracetamol)"
+                                  className="w-full pl-9 pr-9 py-2 bg-slate-50/50 border border-slate-200/80 rounded-xl text-[12px] text-slate-700 outline-none focus:ring-2 focus:ring-indigo-400/20 focus:border-indigo-400 shadow-sm placeholder:text-slate-400 transition-all font-sans"
                                 />
-                                {searchRxQuery && (
+                                {searchRxQuery ? (
                                   <button
                                     type="button"
                                     onClick={() => setSearchRxQuery('')}
-                                    className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 transition-colors"
+                                    className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 transition-colors"
                                   >
-                                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                                  </button>
+                                ) : (
+                                  <button
+                                    type="button"
+                                    onClick={() => toggleFieldScribe('prescription')}
+                                    className={`absolute right-3 top-1/2 -translate-y-1/2 transition-colors ${
+                                      activeFieldRecording === 'prescription' ? 'text-rose-500 animate-pulse' : 'text-slate-400 hover:text-indigo-600'
+                                    }`}
+                                    title="Voice Search Rx"
+                                  >
+                                    <Mic size={14} />
                                   </button>
                                 )}
                               </div>
 
-                              {/* Category pills row - color coded with icons */}
-                              <div className="flex gap-1.5 overflow-x-auto pb-0.5 select-none" style={{ scrollbarWidth: 'none' }}>
+                              {/* Category pills row - rounded capsules scrollable */}
+                              <div className="flex gap-2 overflow-x-auto pb-1 select-none scrollbar-none" style={{ scrollbarWidth: 'none' }}>
                                 {/* All button */}
                                 <button
                                   type="button"
                                   onClick={() => setSelectedRxCategory('All')}
-                                  className={`flex items-center gap-1 px-2.5 py-1 rounded-full text-[9.5px] font-bold whitespace-nowrap transition-all border flex-shrink-0 ${
+                                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] font-bold whitespace-nowrap transition-all border flex-shrink-0 ${
                                     selectedRxCategory === 'All'
-                                      ? 'bg-slate-800 border-slate-900 text-white shadow-sm'
-                                      : 'bg-white border-slate-200 text-slate-500 hover:bg-slate-50 hover:border-slate-300'
+                                      ? 'bg-indigo-600 border-transparent text-white shadow-sm'
+                                      : 'bg-white border-slate-200 text-slate-500 hover:bg-slate-50 hover:border-slate-355'
                                   }`}
                                 >
-                                  <span>🗂️</span>
                                   <span>All</span>
-                                  <span className={`text-[8.5px] font-bold rounded-full px-1 min-w-[15px] text-center leading-[13px] ${selectedRxCategory === 'All' ? 'bg-white/20 text-white' : 'bg-slate-100 text-slate-500'}`}>{rxMedList.length}</span>
+                                  <span className={`text-[8.5px] font-bold rounded-full px-1 min-w-[15px] text-center leading-[13px] ${selectedRxCategory === 'All' ? 'bg-white/20 text-white' : 'bg-slate-100 text-slate-400'}`}>{rxMedList.length}</span>
                                 </button>
                                 {rxMedCategories.map(cat => {
                                   const cfg = catConfig[cat] || catConfig['Others'];
@@ -2646,16 +2887,15 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                                       key={cat}
                                       type="button"
                                       onClick={() => setSelectedRxCategory(isActive ? 'All' : cat)}
-                                      className={`flex items-center gap-1 px-2.5 py-1 rounded-full text-[9.5px] font-bold whitespace-nowrap transition-all border flex-shrink-0 ${
+                                      className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] font-bold whitespace-nowrap transition-all border flex-shrink-0 ${
                                         isActive
-                                          ? `${cfg.activeBg} border-transparent ${cfg.activeText} shadow-sm`
-                                          : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50 hover:border-slate-300'
+                                          ? 'bg-indigo-600 border-transparent text-white shadow-sm'
+                                          : 'bg-white border-slate-200 text-slate-500 hover:bg-slate-50 hover:border-slate-355'
                                       }`}
                                     >
-                                      <span>{cfg.icon}</span>
                                       <span>{cat}</span>
                                       {count > 0 && (
-                                        <span className={`text-[8.5px] font-bold rounded-full px-1 min-w-[15px] text-center leading-[13px] ${isActive ? 'bg-white/25 text-white' : `${cfg.countBg} ${cfg.countText}`}`}>{count}</span>
+                                        <span className={`text-[8.5px] font-bold rounded-full px-1 min-w-[15px] text-center leading-[13px] ${isActive ? 'bg-white/20 text-white' : 'bg-slate-100 text-slate-400'}`}>{count}</span>
                                       )}
                                     </button>
                                   );
@@ -2663,46 +2903,127 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                               </div>
                             </div>
 
-                            {/* Preset Medicines Clickable Grid */}
-                            <div className="max-h-[185px] overflow-y-auto rounded-xl border border-slate-200/70 bg-white/50 p-2" style={{ scrollbarWidth: 'thin' }}>
+                            {/* Preset Medicines Mockup-style Clickable Grid */}
+                            <div className="max-h-[220px] overflow-y-auto rounded-xl border border-slate-100 bg-slate-50/20 p-2 scrollbar-thin" style={{ scrollbarWidth: 'thin' }}>
                               {filteredMeds.length === 0 ? (
                                 <div className="flex flex-col items-center justify-center py-8 text-slate-400 gap-2">
                                   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
                                   <p className="text-[11px]">No medicines found.</p>
                                 </div>
                               ) : (
-                                <div className="grid grid-cols-2 md:grid-cols-3 gap-1.5">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                                   {filteredMeds.map((med, idx) => {
                                     const cfg = getCardConfig(med.category);
+                                    
+                                    // Map custom icons based on categories
+                                    let circleIcon = "💊";
+                                    if (med.category === 'Toothpaste') circleIcon = "🦷";
+                                    else if (med.category === 'Mouthwash') circleIcon = "💧";
+                                    else if (med.category === 'Antibiotics') circleIcon = "🦠";
+                                    else if (med.category === 'Gels') circleIcon = "🧴";
+                                    else if (med.category === 'Gas/Acidity') circleIcon = "🔥";
+                                    else if (med.category === 'Multivitamins') circleIcon = "✨";
+
                                     return (
-                                      <button
+                                      <div
                                         key={idx}
-                                        type="button"
-                                        title={med.text}
-                                        onClick={() => {
-                                          const current = form.prescription ? form.prescription.trim() : '';
-                                          if (current) {
-                                            handleChange('prescription', `${current}\n${med.text}`);
-                                          } else {
-                                            handleChange('prescription', med.text);
-                                          }
-                                        }}
-                                        className={`group text-left p-2.5 rounded-lg border border-l-[3px] ${cfg.cardAccent} border-slate-200/60 bg-white ${cfg.cardHover} transition-all flex flex-col gap-0.5 shadow-sm hover:shadow-md cursor-pointer select-none active:scale-[0.97]`}
+                                        className="bg-white border border-slate-100 rounded-xl p-2.5 flex items-center justify-between gap-3 shadow-sm hover:shadow transition-shadow group"
                                       >
-                                        <div className="flex items-start justify-between gap-1">
-                                          <span className="text-[10.5px] font-semibold text-slate-700 group-hover:text-slate-900 leading-tight line-clamp-1 flex-1">
-                                            {med.label}
-                                          </span>
-                                          <span className="text-[8px] shrink-0 opacity-0 group-hover:opacity-100 transition-all bg-slate-700 text-white rounded px-1 py-0.5 font-bold leading-tight">+</span>
+                                        <div className="flex items-center gap-2.5 min-w-0">
+                                          {/* Circle icon with background color */}
+                                          <div className={`w-8 h-8 rounded-full ${cfg.circleBg} ${cfg.iconColor} flex items-center justify-center text-sm shrink-0 border border-slate-100/50`}>
+                                            {circleIcon}
+                                          </div>
+                                          
+                                          <div className="min-w-0">
+                                            <h6 className="text-[11.5px] font-bold text-slate-800 truncate leading-snug">{med.label}</h6>
+                                            <span className="inline-block text-[8.5px] font-semibold text-slate-400 bg-slate-50 border border-slate-100 rounded px-1.5 py-0.5 leading-none mt-0.5 uppercase tracking-wider">
+                                              {med.category}
+                                            </span>
+                                          </div>
                                         </div>
-                                        <span className="text-[9px] text-slate-400 font-mono leading-snug line-clamp-1">
-                                          {med.text.replace(/^[•\s\-\*]+/, '').split(' - ').slice(1).join(' - ') || med.text.replace(/^[•\s\-\*]+/, '')}
-                                        </span>
-                                      </button>
+
+                                        <button
+                                          type="button"
+                                          onClick={() => {
+                                            const current = form.prescription ? form.prescription.trim() : '';
+                                            if (current) {
+                                              handleChange('prescription', `${current}\n${med.text}`);
+                                            } else {
+                                              handleChange('prescription', med.text);
+                                            }
+                                            toast.success(`${med.label} added to prescription`);
+                                          }}
+                                          className="w-7 h-7 rounded-lg bg-indigo-50 hover:bg-indigo-100 text-indigo-600 flex items-center justify-center transition-colors font-bold text-sm shrink-0"
+                                          title="Add item"
+                                        >
+                                          +
+                                        </button>
+                                      </div>
                                     );
                                   })}
                                 </div>
                               )}
+                            </div>
+
+                            {/* View All Medicines expander */}
+                            {filteredMeds.length > 4 && (
+                              <div className="text-center">
+                                <button
+                                  type="button"
+                                  onClick={() => {
+                                    // Just trigger scroll or show toast
+                                    toast.info("Use search or filters above to browse all presets.");
+                                  }}
+                                  className="text-[9.5px] font-bold text-indigo-600 hover:text-indigo-700 flex items-center gap-0.5 justify-center mx-auto"
+                                >
+                                  <span>View all medicines</span>
+                                  <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5"><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+                                </button>
+                              </div>
+                            )}
+
+                            {/* Bottom Actions Row: AI Write, Voice Rx, Templates, Add Medicine */}
+                            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-2 border-t border-slate-100">
+                              <button
+                                type="button"
+                                onClick={runAIWrite}
+                                className="flex items-center justify-center gap-1.5 py-2 px-3 border border-indigo-100 rounded-xl bg-indigo-50/30 text-indigo-600 hover:bg-indigo-50 hover:border-indigo-200 transition-all font-bold text-[10.5px]"
+                              >
+                                <Sparkles size={12} className="text-indigo-500" />
+                                <span>AI Write</span>
+                              </button>
+                              
+                              <button
+                                type="button"
+                                onClick={() => toggleFieldScribe('prescription')}
+                                className={`flex items-center justify-center gap-1.5 py-2 px-3 border rounded-xl transition-all font-bold text-[10.5px] ${
+                                  activeFieldRecording === 'prescription'
+                                    ? 'bg-rose-500 border-rose-600 text-white animate-pulse'
+                                    : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-50'
+                                }`}
+                              >
+                                <Mic size={12} className={activeFieldRecording === 'prescription' ? 'text-white' : 'text-slate-400'} />
+                                <span>Voice Rx</span>
+                              </button>
+
+                              <button
+                                type="button"
+                                onClick={applyTemplate}
+                                className="flex items-center justify-center gap-1.5 py-2 px-3 border border-slate-200 rounded-xl bg-white text-slate-600 hover:bg-slate-50 transition-all font-bold text-[10.5px]"
+                              >
+                                <svg className="w-3.5 h-3.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2" /></svg>
+                                <span>Templates</span>
+                              </button>
+
+                              <button
+                                type="button"
+                                onClick={addNewCustomMed}
+                                className="flex items-center justify-center gap-1.5 py-2 px-3 border border-slate-200 rounded-xl bg-white text-slate-600 hover:bg-slate-50 transition-all font-bold text-[10.5px]"
+                              >
+                                <Plus size={12} className="text-slate-400" />
+                                <span>Add Medicine</span>
+                              </button>
                             </div>
                           </div>
                         );

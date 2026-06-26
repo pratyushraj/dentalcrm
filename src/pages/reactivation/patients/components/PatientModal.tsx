@@ -455,6 +455,18 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
     const timer = setTimeout(() => {
       setSyncStatus('saving');
       
+      // Auto-update status to 'Active' if prescription or estimates are added/modified during this session
+      let finalForm = { ...form };
+      const initialPrescription = initialFormRef.current?.prescription || '';
+      const currentPrescription = form.prescription || '';
+      const isPrescriptionAdded = currentPrescription.trim() !== '' && currentPrescription !== initialPrescription;
+      const isEstimatesAddedOrModified = estimateItems.length > 0 && hasItemsChanged;
+
+      if ((isPrescriptionAdded || isEstimatesAddedOrModified) && form.status !== 'Active') {
+        finalForm.status = 'Active';
+        setForm(prev => ({ ...prev, status: 'Active' }));
+      }
+      
       const estimateObj = {
         id: customer?.estimates?.[0]?.id || `est_${Date.now()}`,
         date: customer?.estimates?.[0]?.date || new Date().toISOString().split('T')[0],
@@ -466,21 +478,21 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
       };
 
       const newCustomer: Customer = {
-        ...form,
-        id: form.id || '',
-        avatarColor: form.avatarColor || AVATAR_COLORS[Math.floor(Math.random() * AVATAR_COLORS.length)],
-        problemTeeth: form.problemTeeth || [],
-        xrays: form.xrays || [],
-        allergies: form.allergies || [],
-        medicalConditions: form.medicalConditions || [],
-        toothNotes: form.toothNotes || {},
-        toothConditions: form.toothConditions || {},
-        vitals: form.vitals || { bp: '', pulse: '', temp: '' },
-        estimates: estimateItems.length > 0 ? [estimateObj] : (form.estimates || []),
+        ...finalForm,
+        id: finalForm.id || '',
+        avatarColor: finalForm.avatarColor || AVATAR_COLORS[Math.floor(Math.random() * AVATAR_COLORS.length)],
+        problemTeeth: finalForm.problemTeeth || [],
+        xrays: finalForm.xrays || [],
+        allergies: finalForm.allergies || [],
+        medicalConditions: finalForm.medicalConditions || [],
+        toothNotes: finalForm.toothNotes || {},
+        toothConditions: finalForm.toothConditions || {},
+        vitals: finalForm.vitals || { bp: '', pulse: '', temp: '' },
+        estimates: estimateItems.length > 0 ? [estimateObj] : (finalForm.estimates || []),
       };
 
       // Update the current initial refs so that we don't trigger save again for the same state
-      initialFormRef.current = form;
+      initialFormRef.current = finalForm;
       initialEstimateItemsRef.current = estimateItems;
       initialDiscountRef.current = estimateDiscount;
       initialStatusRef.current = estimateStatus;
@@ -1682,6 +1694,20 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
   };
 
   const handleSave = () => {
+    // Auto-update status to 'Active' if prescription or estimates are added/modified
+    let finalForm = { ...form };
+    const initialPrescription = customer?.prescription || '';
+    const currentPrescription = form.prescription || '';
+    const isPrescriptionAdded = currentPrescription.trim() !== '' && currentPrescription !== initialPrescription;
+    
+    const initialEstimatesCount = customer?.estimates?.length || 0;
+    const isEstimatesAddedOrModified = estimateItems.length > 0 && 
+      (initialEstimatesCount === 0 || JSON.stringify(estimateItems) !== JSON.stringify(customer?.estimates?.[0]?.items || []));
+
+    if ((isPrescriptionAdded || isEstimatesAddedOrModified) && form.status !== 'Active') {
+      finalForm.status = 'Active';
+    }
+
     // Generate/update estimate object if items exist
     const estimateObj = {
       id: customer?.estimates?.[0]?.id || `est_${Date.now()}`,
@@ -1694,7 +1720,7 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
     };
 
     const newCustomer: Customer = {
-      ...form,
+      ...finalForm,
       id: form.id || '',
       avatarColor: form.avatarColor || AVATAR_COLORS[Math.floor(Math.random() * AVATAR_COLORS.length)],
       problemTeeth: form.problemTeeth || [],

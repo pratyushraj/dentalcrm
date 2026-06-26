@@ -976,30 +976,30 @@ const ReactivationClinicSettings: React.FC = () => {
           {/* ── Left: Form ─────────────────────────────────────── */}
           <div className="space-y-4">
             {/* Clinic Identity */}
-            <div className="bg-white border border-slate-200 rounded-2xl p-5 space-y-4">
+            <div className="bg-white border border-slate-200 rounded-2xl p-5 space-y-4 shadow-sm">
               <div className="flex items-center gap-2 pb-2 border-b border-slate-100">
                 <div className="w-7 h-7 rounded-lg bg-indigo-50 border border-indigo-100 flex items-center justify-center">
                   <Building2 size={14} className="text-indigo-500" />
                 </div>
-                <h3 className="text-[12px] font-bold text-slate-700 uppercase tracking-wider">Clinic Identity</h3>
+                <h3 className="text-[11px] font-bold text-slate-700 uppercase tracking-wider">Clinic Identity</h3>
               </div>
 
-              <div className="space-y-3">
+              <div className="space-y-4">
                 {/* Clinic Logo Upload */}
                 <div>
-                  <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">
+                  <label className="block text-[11px] font-bold text-slate-600 uppercase tracking-wider mb-1.5">
                     Clinic Logo
                   </label>
                   <div className="flex items-center gap-4">
-                    <div className="w-16 h-16 rounded-xl border-2 border-dashed border-slate-200 bg-slate-50 flex items-center justify-center overflow-hidden flex-shrink-0">
+                    <div className="w-16 h-16 rounded-xl border border-dashed border-indigo-200 bg-indigo-50/10 flex items-center justify-center overflow-hidden flex-shrink-0">
                       {branding.logoUrl ? (
                         <img src={branding.logoUrl} alt="Logo" className="w-full h-full object-contain p-1" />
                       ) : (
-                        <Building2 size={20} className="text-slate-300" />
+                        <Building2 size={20} className="text-indigo-300" />
                       )}
                     </div>
                     <div className="flex-1">
-                      <label className="cursor-pointer inline-flex items-center gap-2 bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 text-indigo-700 text-[11px] font-bold px-3 py-2 rounded-lg transition">
+                      <label className="cursor-pointer inline-flex items-center gap-2 bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 text-indigo-700 text-[11px] font-bold px-3 py-2 rounded-lg transition active:scale-95 duration-150">
                         <Upload size={12} />
                         {branding.logoUrl ? 'Replace Logo' : 'Upload Logo'}
                         <input
@@ -1020,120 +1020,147 @@ const ReactivationClinicSettings: React.FC = () => {
                       {branding.logoUrl && (
                         <button
                           onClick={() => handleChange('logoUrl', '')}
-                          className="ml-2 text-[10px] text-red-500 hover:text-red-700 font-bold transition"
+                          className="ml-3 text-[10px] text-rose-600 hover:text-rose-700 font-bold uppercase transition"
                         >
                           Remove
                         </button>
                       )}
-                      <p className="text-[9px] text-slate-400 mt-1.5">PNG or JPG · Used on transformation templates & prescriptions</p>
+                      <p className="text-[9.5px] text-slate-400 mt-1.5 leading-relaxed">PNG or JPG · Used on transformation templates & prescriptions</p>
                     </div>
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">
+                  <label className="block text-[11px] font-bold text-slate-600 uppercase tracking-wider mb-1.5">
                     Clinic Name
                   </label>
-                  <input
-                    type="text"
-                    value={branding.clinicName}
-                    onChange={(e) => handleChange('clinicName', e.target.value)}
-                    placeholder="e.g. Sharma Dental Care"
-                    className="w-full px-3 py-2 rounded-lg border border-slate-200 bg-slate-50 text-[13px] text-slate-800 placeholder:text-slate-400 outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-500/10 transition-all"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">
-                    Clinic Address
-                  </label>
-                  <textarea
-                    value={branding.address}
-                    onChange={(e) => handleChange('address', e.target.value)}
-                    placeholder="123, MG Road, Sector 5, New Delhi — 110001"
-                    rows={2}
-                    className="w-full px-3 py-2 rounded-lg border border-slate-200 bg-slate-50 text-[13px] text-slate-800 placeholder:text-slate-400 outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-500/10 transition-all resize-none"
-                  />
-                </div>
-              </div>
-            </div>
-
-            {/* Doctor Profile */}
-            <div className="bg-white border border-slate-200 rounded-2xl p-5 space-y-4">
-              <div className="flex items-center gap-2 pb-2 border-b border-slate-100">
-                <div className="w-7 h-7 rounded-lg bg-violet-50 border border-violet-100 flex items-center justify-center">
-                  <Stethoscope size={14} className="text-violet-500" />
-                </div>
-                <h3 className="text-[12px] font-bold text-slate-700 uppercase tracking-wider">Doctor Profile</h3>
-              </div>
-
-              <div className="space-y-3">
-                <div>
-                  <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">
-                    Doctor Name
-                  </label>
-                  <input
-                    type="text"
-                    value={branding.doctorName}
-                    onChange={(e) => handleChange('doctorName', e.target.value)}
-                    placeholder="e.g. Dr. Priya Sharma"
-                    className="w-full px-3 py-2 rounded-lg border border-slate-200 bg-slate-50 text-[13px] text-slate-800 placeholder:text-slate-400 outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-500/10 transition-all"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">
-                    Qualifications
-                  </label>
-                  <input
-                    type="text"
-                    value={branding.qualifications}
-                    onChange={(e) => handleChange('qualifications', e.target.value)}
-                    placeholder="e.g. BDS, MDS (Orthodontics)"
-                    className="w-full px-3 py-2 rounded-lg border border-slate-200 bg-slate-50 text-[13px] text-slate-800 placeholder:text-slate-400 outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-500/10 transition-all"
-                  />
-                </div>
-              </div>
-            </div>
-
-            {/* Contact */}
-            <div className="bg-white border border-slate-200 rounded-2xl p-5 space-y-4">
-              <div className="flex items-center gap-2 pb-2 border-b border-slate-100">
-                <div className="w-7 h-7 rounded-lg bg-sky-50 border border-sky-100 flex items-center justify-center">
-                  <Phone size={14} className="text-sky-500" />
-                </div>
-                <h3 className="text-[12px] font-bold text-slate-700 uppercase tracking-wider">Contact Details</h3>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <div>
-                  <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">
-                    Phone
-                  </label>
-                  <div className="relative">
-                    <Phone size={13} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+                  <div className="flex items-stretch border border-slate-200 rounded-xl overflow-hidden focus-within:border-indigo-500 focus-within:ring-1 focus-within:ring-indigo-500/20 bg-white">
+                    <div className="bg-slate-50 border-r border-slate-200 px-3.5 flex items-center justify-center text-slate-400 shrink-0">
+                      <Building2 size={16} />
+                    </div>
                     <input
-                      type="tel"
-                      value={branding.phone}
-                      onChange={(e) => handleChange('phone', e.target.value)}
-                      placeholder="+91 98765 43210"
-                      className="w-full pl-8 pr-3 py-2 rounded-lg border border-slate-200 bg-slate-50 text-[13px] text-slate-800 placeholder:text-slate-400 outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-500/10 transition-all"
+                      type="text"
+                      value={branding.clinicName}
+                      onChange={(e) => handleChange('clinicName', e.target.value)}
+                      placeholder="e.g. Sharma Dental Care"
+                      className="flex-1 px-3.5 py-2.5 text-[13px] text-slate-800 placeholder:text-slate-400 bg-transparent outline-none w-full border-0"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">
-                    Email <span className="text-slate-400 normal-case font-normal">(optional)</span>
+                  <label className="block text-[11px] font-bold text-slate-600 uppercase tracking-wider mb-1.5">
+                    Clinic Address
                   </label>
-                  <div className="relative">
-                    <Mail size={13} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+                  <div className="flex items-stretch border border-slate-200 rounded-xl overflow-hidden focus-within:border-indigo-500 focus-within:ring-1 focus-within:ring-indigo-500/20 bg-white">
+                    <div className="bg-slate-50 border-r border-slate-200 px-3.5 flex items-center justify-center text-slate-400 shrink-0">
+                      <Globe size={16} />
+                    </div>
+                    <textarea
+                      value={branding.address}
+                      onChange={(e) => handleChange('address', e.target.value)}
+                      placeholder="123, MG Road, Sector 5, New Delhi — 110001"
+                      rows={2}
+                      className="flex-1 px-3.5 py-2 text-[13px] text-slate-800 placeholder:text-slate-400 bg-transparent outline-none w-full border-0 resize-none leading-relaxed"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Doctor Profile */}
+            <div className="bg-white border border-slate-200 rounded-2xl p-5 space-y-4 shadow-sm">
+              <div className="flex items-center gap-2 pb-2 border-b border-slate-100">
+                <div className="w-7 h-7 rounded-lg bg-violet-50 border border-violet-100 flex items-center justify-center">
+                  <Stethoscope size={14} className="text-violet-500" />
+                </div>
+                <h3 className="text-[11px] font-bold text-slate-700 uppercase tracking-wider">Doctor Profile</h3>
+              </div>
+
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-[11px] font-bold text-slate-600 uppercase tracking-wider mb-1.5">
+                    Doctor Name
+                  </label>
+                  <div className="flex items-stretch border border-slate-200 rounded-xl overflow-hidden focus-within:border-indigo-500 focus-within:ring-1 focus-within:ring-indigo-500/20 bg-white">
+                    <div className="bg-slate-50 border-r border-slate-200 px-3.5 flex items-center justify-center text-slate-400 shrink-0">
+                      <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+                        <circle cx="12" cy="7" r="4" />
+                      </svg>
+                    </div>
+                    <input
+                      type="text"
+                      value={branding.doctorName}
+                      onChange={(e) => handleChange('doctorName', e.target.value)}
+                      placeholder="e.g. Dr. Priya Sharma"
+                      className="flex-1 px-3.5 py-2.5 text-[13px] text-slate-800 placeholder:text-slate-400 bg-transparent outline-none w-full border-0"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-[11px] font-bold text-slate-600 uppercase tracking-wider mb-1.5">
+                    Qualifications
+                  </label>
+                  <div className="flex items-stretch border border-slate-200 rounded-xl overflow-hidden focus-within:border-indigo-500 focus-within:ring-1 focus-within:ring-indigo-500/20 bg-white">
+                    <div className="bg-slate-50 border-r border-slate-200 px-3.5 flex items-center justify-center text-slate-400 shrink-0">
+                      <Stethoscope size={16} />
+                    </div>
+                    <input
+                      type="text"
+                      value={branding.qualifications}
+                      onChange={(e) => handleChange('qualifications', e.target.value)}
+                      placeholder="e.g. BDS, MDS (Orthodontics)"
+                      className="flex-1 px-3.5 py-2.5 text-[13px] text-slate-800 placeholder:text-slate-400 bg-transparent outline-none w-full border-0"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Contact */}
+            <div className="bg-white border border-slate-200 rounded-2xl p-5 space-y-4 shadow-sm">
+              <div className="flex items-center gap-2 pb-2 border-b border-slate-100">
+                <div className="w-7 h-7 rounded-lg bg-sky-50 border border-sky-100 flex items-center justify-center">
+                  <Phone size={14} className="text-sky-500" />
+                </div>
+                <h3 className="text-[11px] font-bold text-slate-700 uppercase tracking-wider">Contact Details</h3>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-[11px] font-bold text-slate-600 uppercase tracking-wider mb-1.5">
+                    Phone
+                  </label>
+                  <div className="flex items-stretch border border-slate-200 rounded-xl overflow-hidden focus-within:border-indigo-500 focus-within:ring-1 focus-within:ring-indigo-500/20 bg-white">
+                    <div className="bg-slate-50 border-r border-slate-200 px-3.5 flex items-center justify-center text-slate-400 shrink-0">
+                      <Phone size={16} />
+                    </div>
+                    <input
+                      type="tel"
+                      value={branding.phone}
+                      onChange={(e) => handleChange('phone', e.target.value)}
+                      placeholder="+91 98765 43210"
+                      className="flex-1 px-3.5 py-2.5 text-[13px] text-slate-800 placeholder:text-slate-400 bg-transparent outline-none w-full border-0"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-[11px] font-bold text-slate-600 uppercase tracking-wider mb-1.5">
+                    Email <span className="text-slate-450 normal-case font-normal">(optional)</span>
+                  </label>
+                  <div className="flex items-stretch border border-slate-200 rounded-xl overflow-hidden focus-within:border-indigo-500 focus-within:ring-1 focus-within:ring-indigo-500/20 bg-white">
+                    <div className="bg-slate-50 border-r border-slate-200 px-3.5 flex items-center justify-center text-slate-400 shrink-0">
+                      <Mail size={16} />
+                    </div>
                     <input
                       type="email"
                       value={branding.email}
                       onChange={(e) => handleChange('email', e.target.value)}
                       placeholder="clinic@example.com"
-                      className="w-full pl-8 pr-3 py-2 rounded-lg border border-slate-200 bg-slate-50 text-[13px] text-slate-800 placeholder:text-slate-400 outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-500/10 transition-all"
+                      className="flex-1 px-3.5 py-2.5 text-[13px] text-slate-800 placeholder:text-slate-400 bg-transparent outline-none w-full border-0"
                     />
                   </div>
                 </div>
@@ -1166,18 +1193,18 @@ const ReactivationClinicSettings: React.FC = () => {
           </div>
         </div>
       ) : activeTab === 'prices' ? (
-        <div className="bg-white border border-slate-200 rounded-2xl p-5 space-y-4">
-          <div className="flex items-center justify-between pb-2 border-b border-slate-100">
+        <div className="bg-white border border-slate-200 rounded-2xl p-5 space-y-4 shadow-sm">
+          <div className="flex items-center justify-between pb-3 border-b border-slate-100">
             <div className="flex items-center gap-2">
               <div className="w-7 h-7 rounded-lg bg-indigo-50 border border-indigo-100 flex items-center justify-center">
                 <Stethoscope size={14} className="text-indigo-500" />
               </div>
-              <h3 className="text-[12px] font-bold text-slate-700 uppercase tracking-wider">Treatment Catalog & Pricing</h3>
+              <h3 className="text-[12.5px] font-bold text-slate-800 uppercase tracking-wider">Treatment Catalog & Pricing</h3>
             </div>
             <button
               type="button"
               onClick={handleRestoreDefaults}
-              className="text-xs text-indigo-600 hover:text-indigo-800 font-semibold transition-colors"
+              className="text-xs text-indigo-600 hover:text-indigo-800 font-bold bg-indigo-50 hover:bg-indigo-100/80 px-2.5 py-1.5 rounded-lg border border-indigo-100 transition-colors"
             >
               Reset to Defaults
             </button>
@@ -1186,7 +1213,7 @@ const ReactivationClinicSettings: React.FC = () => {
           {/* Mobile view: list of cards */}
           <div className="block sm:hidden space-y-4">
             {procedures.map((proc, index) => (
-              <div key={index} className="bg-slate-50 border border-slate-200/80 rounded-xl p-4 space-y-3 relative">
+              <div key={index} className="bg-slate-50 border border-slate-200/80 rounded-xl p-4 space-y-3 relative shadow-sm">
                 {/* Header with name and delete button */}
                 <div className="flex items-center justify-between gap-2">
                   <input
@@ -1194,12 +1221,12 @@ const ReactivationClinicSettings: React.FC = () => {
                     value={proc.name}
                     onChange={(e) => handleProcedureChange(index, 'name', e.target.value)}
                     placeholder="Procedure Name"
-                    className="w-full bg-white px-2.5 py-1.5 rounded-lg border border-slate-200 text-[13px] font-bold text-slate-800 outline-none focus:border-indigo-400 focus:ring-1 focus:ring-indigo-400 transition-all"
+                    className="w-full bg-white px-2.5 py-2 rounded-lg border border-slate-200 text-[13px] font-semibold text-slate-800 outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500/25 transition-all"
                   />
                   <button
                     type="button"
                     onClick={() => handleRemoveProcedure(index)}
-                    className="p-2 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition-all shrink-0"
+                    className="p-2 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition-all shrink-0 border border-transparent hover:border-rose-100"
                   >
                     <Trash2 size={16} />
                   </button>
@@ -1208,24 +1235,27 @@ const ReactivationClinicSettings: React.FC = () => {
                 {/* Grid for other fields */}
                 <div className="grid grid-cols-2 gap-3">
                   <div className="col-span-1">
-                    <label className="block text-[9px] font-bold text-slate-400 uppercase tracking-wider mb-1">Cost (₹)</label>
-                    <input
-                      type="number"
-                      value={proc.defaultCost}
-                      onChange={(e) => handleProcedureChange(index, 'defaultCost', Number(e.target.value))}
-                      className="w-full bg-white px-1.5 py-1.5 rounded-lg border border-slate-200 text-[12px] text-slate-800 outline-none focus:border-indigo-400 focus:ring-1 focus:ring-indigo-400 transition-all"
-                    />
+                    <label className="block text-[9px] font-bold text-slate-500 uppercase tracking-wider mb-1">Cost (₹)</label>
+                    <div className="flex items-stretch border border-slate-200 rounded-lg overflow-hidden bg-white focus-within:border-indigo-500 focus-within:ring-1 focus-within:ring-indigo-500/25">
+                      <div className="bg-slate-50 border-r border-slate-200 px-2 flex items-center justify-center text-slate-550 text-[11px] font-bold shrink-0">₹</div>
+                      <input
+                        type="number"
+                        value={proc.defaultCost}
+                        onChange={(e) => handleProcedureChange(index, 'defaultCost', Number(e.target.value))}
+                        className="w-full bg-transparent px-2 py-1.5 text-[12px] text-slate-800 outline-none border-0 font-mono font-semibold"
+                      />
+                    </div>
                   </div>
 
                   <div className="col-span-1">
-                    <label className="block text-[9px] font-bold text-slate-400 uppercase tracking-wider mb-1">GST</label>
+                    <label className="block text-[9px] font-bold text-slate-505 uppercase tracking-wider mb-1">GST / Tax</label>
                     <select
                       value={proc.gstRate}
                       onChange={(e) => handleProcedureChange(index, 'gstRate', Number(e.target.value))}
-                      className="w-full bg-white px-1.5 py-1.5 rounded-lg border border-slate-200 text-[11.5px] text-slate-700 outline-none cursor-pointer"
+                      className="w-full bg-white px-2 py-1.5 rounded-lg border border-slate-200 text-[12px] text-slate-700 outline-none cursor-pointer focus:border-indigo-500"
                     >
-                      <option value={0}>0%</option>
-                      <option value={18}>18%</option>
+                      <option value={0}>0% GST (Therapeutic)</option>
+                      <option value={18}>18% GST (Cosmetic)</option>
                     </select>
                   </div>
                 </div>
@@ -1234,50 +1264,55 @@ const ReactivationClinicSettings: React.FC = () => {
           </div>
 
           {/* Desktop view: Table */}
-          <div className="hidden sm:block overflow-x-auto">
+          <div className="hidden sm:block overflow-x-auto border border-slate-100 rounded-xl bg-slate-50/20">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="border-b border-slate-200">
-                  <th className="py-2.5 text-[10px] font-bold text-slate-400 uppercase tracking-wider pl-1">Treatment Name</th>
-                  <th className="py-2.5 text-[10px] font-bold text-slate-400 uppercase tracking-wider w-44">Cost (₹)</th>
-                  <th className="py-2.5 text-[10px] font-bold text-slate-400 uppercase tracking-wider w-36">GST</th>
-                  <th className="py-2.5 text-[10px] font-bold text-slate-400 uppercase tracking-wider w-10 text-center"></th>
+                <tr className="border-b border-slate-200/80 bg-slate-50/80">
+                  <th className="py-3 px-4.5 text-[10px] font-bold text-slate-500 uppercase tracking-wider pl-4">Treatment Name</th>
+                  <th className="py-3 px-4.5 text-[10px] font-bold text-slate-500 uppercase tracking-wider w-56">Baseline Cost (₹)</th>
+                  <th className="py-3 px-4.5 text-[10px] font-bold text-slate-500 uppercase tracking-wider w-48">Tax Rate</th>
+                  <th className="py-3 px-4.5 text-[10px] font-bold text-slate-500 uppercase tracking-wider w-12 text-center pr-4"></th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100">
+              <tbody className="divide-y divide-slate-100 bg-white">
                 {procedures.map((proc, index) => (
-                  <tr key={index} className="group hover:bg-slate-50/50">
-                    <td className="py-2 pl-1 pr-3">
+                  <tr key={index} className="group hover:bg-slate-50/40 transition-colors">
+                    <td className="py-2.5 pl-4 pr-3">
                       <input
                         type="text"
                         value={proc.name}
                         onChange={(e) => handleProcedureChange(index, 'name', e.target.value)}
-                        className="w-full bg-transparent px-2 py-1.5 rounded-lg border border-transparent hover:border-slate-200 focus:border-indigo-400 focus:bg-white text-[13px] text-slate-800 outline-none transition-all"
+                        className="w-full bg-transparent px-3 py-2 rounded-xl border border-transparent hover:border-slate-200 focus:border-indigo-500 focus:bg-white text-[13px] text-slate-800 outline-none transition-all font-medium"
                       />
                     </td>
-                    <td className="py-2 pr-3">
-                      <input
-                        type="number"
-                        value={proc.defaultCost}
-                        onChange={(e) => handleProcedureChange(index, 'defaultCost', Number(e.target.value))}
-                        className="w-full bg-transparent px-2 py-1.5 rounded-lg border border-transparent hover:border-slate-200 focus:border-indigo-400 focus:bg-white text-[13px] text-slate-800 outline-none transition-all"
-                      />
+                    <td className="py-2.5 pr-3">
+                      <div className="flex items-stretch border border-transparent hover:border-slate-200 rounded-xl overflow-hidden focus-within:border-indigo-500 focus-within:bg-white group-hover:border-slate-100/80 bg-transparent transition-all">
+                        <div className="bg-slate-50/30 border-r border-slate-200/50 px-3 flex items-center justify-center text-slate-400 font-bold text-[12px] shrink-0">₹</div>
+                        <input
+                          type="number"
+                          value={proc.defaultCost}
+                          onChange={(e) => handleProcedureChange(index, 'defaultCost', Number(e.target.value))}
+                          className="w-full bg-transparent px-3 py-2 text-[13px] text-slate-800 outline-none border-0 font-mono font-bold"
+                        />
+                      </div>
                     </td>
-                    <td className="py-2 pr-3">
+                    <td className="py-2.5 pr-3">
                       <select
                         value={proc.gstRate}
                         onChange={(e) => handleProcedureChange(index, 'gstRate', Number(e.target.value))}
-                        className="w-full bg-transparent px-1.5 py-1.5 rounded-lg border border-transparent hover:border-slate-200 focus:border-indigo-400 focus:bg-white text-[12px] text-slate-700 outline-none cursor-pointer transition-all"
+                        className={`w-full bg-transparent px-2.5 py-2 rounded-xl border border-transparent hover:border-slate-200 focus:border-indigo-500 focus:bg-white text-[12px] outline-none cursor-pointer transition-all font-semibold ${
+                          proc.gstRate === 18 ? 'text-indigo-600' : 'text-emerald-600'
+                        }`}
                       >
-                        <option value={0}>0%</option>
-                        <option value={18}>18%</option>
+                        <option value={0}>0% (Therapeutic Care)</option>
+                        <option value={18}>18% (Cosmetic Care)</option>
                       </select>
                     </td>
-                    <td className="py-2 text-center">
+                    <td className="py-2.5 text-center pr-4">
                       <button
                         type="button"
                         onClick={() => handleRemoveProcedure(index)}
-                        className="p-1 rounded-md text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition-all opacity-0 group-hover:opacity-100 focus:opacity-100"
+                        className="p-2 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition-all opacity-0 group-hover:opacity-100 focus:opacity-100 border border-transparent hover:border-rose-100"
                       >
                         <Trash2 size={14} />
                       </button>
@@ -1291,7 +1326,7 @@ const ReactivationClinicSettings: React.FC = () => {
           <button
             type="button"
             onClick={handleAddProcedure}
-            className="w-full flex items-center justify-center gap-1.5 py-2.5 border border-dashed border-slate-300 hover:border-indigo-400 rounded-xl text-[12.5px] font-bold text-slate-500 hover:text-indigo-600 transition-all"
+            className="w-full flex items-center justify-center gap-1.5 py-3 border border-dashed border-slate-300 hover:border-indigo-400 rounded-xl text-[12.5px] font-bold text-slate-500 hover:text-indigo-600 transition-all bg-slate-50/20 hover:bg-indigo-50/10 active:scale-[0.99] duration-150"
           >
             <Plus size={15} /> Add New Procedure
           </button>
@@ -1530,31 +1565,32 @@ const ReactivationClinicSettings: React.FC = () => {
               )}
 
               {/* Templates List */}
-              <div className="space-y-3">
+              <div className="space-y-3.5">
                 {templates.length === 0 ? (
-                  <div className="text-center py-6 text-slate-400 text-xs">
+                  <div className="text-center py-8 text-slate-400 text-xs">
                     No templates registered. Click "Create Template" or "Sync Meta API" to load.
                   </div>
                 ) : (
                   templates.map((tpl, index) => (
-                    <div key={index} className="border border-slate-100 rounded-xl p-3.5 space-y-2.5 hover:border-slate-200 transition-all bg-slate-50/50 relative group">
+                    <div key={index} className="border border-slate-200/60 rounded-xl p-4 space-y-3 hover:border-slate-300 transition-all bg-slate-50/30 relative group shadow-sm hover:shadow-md/50">
                       <div className="flex items-start justify-between gap-4">
-                        <div className="space-y-1 text-left">
-                          <h4 className="text-[12px] font-mono font-bold text-slate-700 break-all">
+                        <div className="space-y-1.5 text-left">
+                          <h4 className="text-[12px] font-mono font-bold text-slate-700 break-all bg-slate-100/60 px-2 py-0.5 rounded border border-slate-200/40 inline-block">
                             {tpl.name}
                           </h4>
-                          <div className="flex flex-wrap items-center gap-1.5">
-                            <span className="inline-flex items-center gap-1 text-[9.5px] text-slate-400 font-bold bg-white border border-slate-100 rounded-md px-1.5 py-0.5 uppercase">
-                              <Globe size={9} /> {tpl.language}
+                          <div className="flex flex-wrap items-center gap-2">
+                            <span className="inline-flex items-center gap-1 text-[9px] text-slate-500 font-bold bg-white border border-slate-200 rounded-md px-2 py-0.5 uppercase tracking-wide">
+                              <Globe size={10} /> {tpl.language}
                             </span>
-                            <span className={`inline-flex items-center gap-0.5 text-[9.5px] font-bold rounded-md px-1.5 py-0.5 border ${
+                            <span className={`inline-flex items-center gap-1 text-[9px] font-bold rounded-md px-2 py-0.5 border uppercase tracking-wider ${
                               tpl.status === 'Approved'
-                                ? 'bg-emerald-50 border-emerald-100 text-emerald-700'
+                                ? 'bg-emerald-50 border-emerald-250 text-emerald-700'
                                 : tpl.status === 'Pending'
-                                ? 'bg-amber-50 border-amber-100 text-amber-700'
-                                : 'bg-rose-50 border-rose-100 text-rose-700'
+                                ? 'bg-amber-50 border-amber-250 text-amber-700'
+                                : 'bg-rose-50 border-rose-250 text-rose-700'
                             }`}>
-                              {tpl.status}
+                              <div className={`w-1.5 h-1.5 rounded-full ${tpl.status === 'Approved' ? 'bg-emerald-500' : tpl.status === 'Pending' ? 'bg-amber-500 animate-pulse' : 'bg-rose-500'}`} />
+                              <span>{tpl.status}</span>
                             </span>
                           </div>
                         </div>
@@ -1562,13 +1598,13 @@ const ReactivationClinicSettings: React.FC = () => {
                         <button
                           type="button"
                           onClick={() => handleRemoveTemplate(index)}
-                          className="p-1.5 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition-all"
+                          className="p-1.5 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition-all border border-transparent hover:border-rose-100"
                         >
                           <Trash2 size={13} />
                         </button>
                       </div>
 
-                      <div className="bg-white border border-slate-100 rounded-lg p-2.5 text-[11.5px] text-slate-600 font-medium leading-relaxed text-left">
+                      <div className="bg-white border border-slate-200/50 rounded-lg p-3 text-[12px] text-slate-650 font-medium leading-relaxed text-left font-sans">
                         {tpl.body}
                       </div>
                     </div>
@@ -1737,7 +1773,7 @@ const ReactivationClinicSettings: React.FC = () => {
             </div>
 
             {/* Grid / List of current presets */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4.5">
               {medications.length === 0 ? (
                 <p className="col-span-full text-center py-12 text-xs text-slate-400 font-medium bg-slate-50/20 border border-dashed border-slate-200 rounded-xl">
                   No medications configured. Click 'Reset to Defaults' or add custom ones above.
@@ -1746,16 +1782,16 @@ const ReactivationClinicSettings: React.FC = () => {
                 medications.map((med) => (
                   <div 
                     key={med.id} 
-                    className="group border border-slate-100 hover:border-slate-200 bg-white rounded-xl p-4 flex flex-col justify-between gap-3 hover:shadow-sm transition-all duration-200"
+                    className="group border border-slate-200 hover:border-slate-350 bg-white rounded-xl p-4 flex flex-col justify-between gap-3 shadow-sm hover:shadow-md/50 transition-all duration-200"
                   >
                     <div className="min-w-0">
                       <div className="flex flex-wrap items-center gap-1.5">
-                        <span className="inline-block text-[10px] font-bold text-indigo-700 bg-indigo-50/80 border border-indigo-100 rounded-lg px-2.5 py-0.8 select-none tracking-wide">
+                        <span className="inline-block text-[10px] font-bold text-indigo-700 bg-indigo-50/80 border border-indigo-100 rounded-lg px-2.5 py-0.5 select-none tracking-wide">
                           {med.label}
                         </span>
                         {med.category && (
-                          <span className={`inline-block text-[9px] font-bold px-1.5 py-0.2 rounded-md border uppercase tracking-wider ${
-                            med.category === 'Pain killers' ? 'bg-red-50 text-red-600 border-red-100' :
+                          <span className={`inline-block text-[9px] font-bold px-1.5 py-0.5 rounded-md border uppercase tracking-wider ${
+                            med.category === 'Pain killers' ? 'bg-rose-50 text-rose-600 border-rose-100' :
                             med.category === 'Antibiotics' ? 'bg-blue-50 text-blue-600 border-blue-100' :
                             med.category === 'Multivitamins' ? 'bg-pink-50 text-pink-600 border-pink-100' :
                             med.category === 'Toothpaste' ? 'bg-amber-50 text-amber-600 border-amber-100' :
@@ -1768,11 +1804,11 @@ const ReactivationClinicSettings: React.FC = () => {
                           </span>
                         )}
                       </div>
-                      <p className="text-[11.5px] text-slate-600 font-medium mt-2 leading-relaxed break-words pl-0.5">
+                      <p className="text-[12px] text-slate-600 font-semibold mt-2.5 leading-relaxed break-words pl-0.5 font-sans">
                         {med.text}
                       </p>
                     </div>
-                    <div className="flex justify-end pt-1 border-t border-slate-50">
+                    <div className="flex justify-end pt-1.5 border-t border-slate-100">
                       <button
                         type="button"
                         onClick={() => {
@@ -1780,9 +1816,9 @@ const ReactivationClinicSettings: React.FC = () => {
                           setSaved(false);
                           toast.success("Medication preset deleted locally. Save to confirm.");
                         }}
-                        className="p-1.5 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 active:scale-95 transition-all opacity-85 group-hover:opacity-100"
+                        className="p-1.5 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 active:scale-95 transition-all opacity-85 group-hover:opacity-100 border border-transparent hover:border-rose-100"
                       >
-                        <Trash2 size={14} />
+                        <Trash2 size={13} />
                       </button>
                     </div>
                   </div>

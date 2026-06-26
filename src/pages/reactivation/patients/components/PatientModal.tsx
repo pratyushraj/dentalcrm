@@ -3635,71 +3635,93 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                 {/* Body - Post Consultation tab */}
                 {activeTab === 'estimates' && (
                   <div className="px-4 sm:px-6 py-4 space-y-5 overflow-y-auto overflow-x-hidden max-h-[60vh] max-sm:max-h-[calc(92vh-170px)] scrollbar-none flex-1 pb-6">
-                    <div className="flex items-center justify-between bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5">
+                    <div className="flex items-center justify-between bg-gradient-to-r from-indigo-50 to-slate-50 border border-indigo-100/80 rounded-xl px-4 py-3 shadow-sm">
                       <div className="flex items-center gap-2">
-                        <div className="w-2 h-2 rounded-full bg-indigo-500" />
-                        <span className="text-[11px] font-bold text-slate-700 uppercase tracking-wider">Treatment Summary Builder</span>
+                        <div className="w-2.5 h-2.5 rounded-full bg-indigo-500 shadow-sm shadow-indigo-500/30 animate-pulse" />
+                        <span className="text-[11px] font-bold text-slate-800 uppercase tracking-wider">Treatment Summary Builder</span>
                       </div>
+                      <span className="text-[10px] text-slate-400 font-medium">Create itemized estimates and digital receipts</span>
                     </div>
 
-                        {/* Add Item Builder */}
-                        <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 space-y-4">
-                      <div className="flex items-center gap-2">
-                        <div className="w-6 h-6 rounded bg-indigo-500/20 flex items-center justify-center">
-                          <Plus size={12} className="text-indigo-400" />
+                    {/* Add Item Builder */}
+                    <div className="bg-white border border-slate-200/80 rounded-xl p-5 space-y-4 shadow-sm hover:shadow-md/50 transition-all duration-200">
+                      <div className="flex items-center gap-2.5">
+                        <div className="w-8 h-8 rounded-lg bg-indigo-50 flex items-center justify-center text-indigo-500 border border-indigo-100/50">
+                          <Plus size={16} />
                         </div>
                         <div>
-                          <h4 className="text-[12px] font-bold text-slate-800 uppercase tracking-wider">Treatment Done</h4>
-                          <p className="text-[10px] text-slate-505 mt-0.5">Add the procedure completed after consultation</p>
+                          <h4 className="text-[13px] font-bold text-slate-800 uppercase tracking-wider">Treatment Done</h4>
+                          <p className="text-[10.5px] text-slate-505 mt-0.5">Add procedures completed during the consultation</p>
                         </div>
                       </div>
 
-                      <div className="grid grid-cols-1 responsive-grid-cols-3 md:grid-cols-4 gap-3 items-end">
+                      <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 items-end">
                         {/* Tooth selector */}
-                        <div>
-                          <label className="block text-[10px] text-slate-500 font-medium mb-1.5 uppercase tracking-wider">Tooth / Area</label>
-                          <input
-                            type="text"
-                            placeholder="e.g. 11, 46"
-                            value={builderTooth}
-                            onChange={(e) => setBuilderTooth(e.target.value)}
-                            className="w-full bg-white border border-slate-200 px-2.5 py-1.5 rounded-lg text-[12px] text-slate-800 outline-none transition-all focus:border-indigo-500"
-                          />
+                        <div className="sm:col-span-3">
+                          <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-1.5">Tooth / Area</label>
+                          <div className="flex items-stretch border border-slate-200 rounded-xl overflow-hidden focus-within:border-indigo-500 focus-within:ring-1 focus-within:ring-indigo-500/20 bg-white">
+                            <div className="bg-slate-50 border-r border-slate-200 px-3.5 flex items-center justify-center text-slate-400 shrink-0">
+                              <svg className="w-4.5 h-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="M12 2C8.5 2 6 4.5 6 8c0 3.5 1 5.5 1.5 7.5.3 1.2.3 2.5.1 3.7L7 21c-.2.9.7 1.5 1.4 1l2.1-1.5c1-.7 2.4-.7 3.4 0l2.1 1.5c.7.5 1.6-.1 1.4-1l-.6-1.8c-.2-1.2-.2-2.5.1-3.7.5-2 1.5-4 1.5-7.5 0-3.5-2.5-6-6-6Z" />
+                                <path d="M12 2v6" />
+                              </svg>
+                            </div>
+                            <input
+                              type="text"
+                              placeholder="e.g. 11, 46"
+                              value={builderTooth}
+                              onChange={(e) => setBuilderTooth(e.target.value)}
+                              className="flex-1 px-3.5 py-2.5 text-[13px] text-slate-800 placeholder:text-slate-400 bg-transparent outline-none w-full border-0"
+                            />
+                          </div>
                         </div>
 
                         {/* Procedure selector */}
-                        <div className="responsive-col-span-1 md:col-span-2">
-                          <label className="block text-[10px] text-slate-500 font-medium mb-1.5 uppercase tracking-wider">Procedure Done</label>
-                          <select
-                            value={builderProcedureIdx}
-                            onChange={(e) => {
-                              const idx = e.target.value;
-                              setBuilderProcedureIdx(idx);
-                              setBuilderCost(proceduresCatalog[Number(idx)].defaultCost);
-                            }}
-                            className="w-full bg-white border border-slate-200 rounded-lg px-2.5 py-2 text-[12px] text-slate-700 outline-none cursor-pointer"
-                          >
-                            {proceduresCatalog.map((p, idx) => (
-                              <option key={idx} value={idx}>
-                                {p.name} ({p.gstRate}% GST)
-                              </option>
-                            ))}
-                          </select>
+                        <div className="sm:col-span-6">
+                          <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-1.5">Procedure Done</label>
+                          <div className="relative flex items-stretch border border-slate-200 rounded-xl overflow-hidden focus-within:border-indigo-500 focus-within:ring-1 focus-within:ring-indigo-500/20 bg-white">
+                            <div className="bg-slate-50 border-r border-slate-200 px-3.5 flex items-center justify-center text-slate-400 shrink-0">
+                              <FileText size={16} />
+                            </div>
+                            <select
+                              value={builderProcedureIdx}
+                              onChange={(e) => {
+                                const idx = e.target.value;
+                                setBuilderProcedureIdx(idx);
+                                setBuilderCost(proceduresCatalog[Number(idx)].defaultCost);
+                              }}
+                              className="flex-1 px-3.5 py-2.5 pr-8 text-[13px] text-slate-800 bg-transparent outline-none w-full border-0 cursor-pointer appearance-none"
+                            >
+                              {proceduresCatalog.map((p, idx) => (
+                                <option key={idx} value={idx}>
+                                  {p.name} ({p.gstRate}% GST)
+                                </option>
+                              ))}
+                            </select>
+                            <div className="absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">
+                              <ChevronDown size={14} />
+                            </div>
+                          </div>
                         </div>
 
                         {/* Cost */}
-                        <div>
-                          <label className="block text-[10px] text-slate-500 font-medium mb-1.5 uppercase tracking-wider">Amount (₹)</label>
-                          <input
-                            type="number"
-                            value={builderCost}
-                            onChange={(e) => setBuilderCost(Number(e.target.value))}
-                            className="w-full bg-white border border-slate-200 px-2.5 py-1.5 rounded-lg text-[12px] text-slate-800 outline-none transition-all focus:border-indigo-500"
-                          />
+                        <div className="sm:col-span-3">
+                          <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-1.5">Amount</label>
+                          <div className="flex items-stretch border border-slate-200 rounded-xl overflow-hidden focus-within:border-indigo-500 focus-within:ring-1 focus-within:ring-indigo-500/20 bg-white">
+                            <div className="bg-slate-50 border-r border-slate-200 px-3.5 flex items-center justify-center text-slate-505 font-bold shrink-0 text-[13px]">
+                              ₹
+                            </div>
+                            <input
+                              type="number"
+                              value={builderCost}
+                              onChange={(e) => setBuilderCost(Number(e.target.value))}
+                              className="flex-1 px-3.5 py-2.5 text-[13px] text-slate-800 placeholder:text-slate-400 bg-transparent outline-none w-full border-0 font-mono"
+                            />
+                          </div>
                         </div>
                       </div>
 
-                      <div className="flex justify-end">
+                      <div className="flex justify-end pt-1">
                         <button
                           type="button"
                           onClick={() => {
@@ -3715,58 +3737,60 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                             ]);
                             setBuilderTooth('');
                           }}
-                          className="px-3.5 py-1.5 bg-indigo-500 hover:bg-indigo-600 text-white rounded-lg text-[11px] font-bold transition-all flex items-center gap-1 shadow-md shadow-indigo-500/20"
+                          className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-[12px] font-bold transition-all duration-150 flex items-center gap-1.5 shadow-md shadow-indigo-600/10 hover:shadow-indigo-600/20 active:scale-[0.98]"
                         >
-                          <Plus size={11} /> Add to Estimate
+                          <Plus size={14} /> Add to Estimate
                         </button>
                       </div>
                     </div>
 
                     {/* Estimate Items Table */}
-                    <div className="bg-white border border-slate-200 rounded-xl overflow-hidden">
-                      <div className="px-4 py-3 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
-                        <span className="text-[11px] font-bold text-slate-800 uppercase tracking-wider">Current Treatment Summary</span>
-                        <div className="flex items-center gap-2">
+                    <div className="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
+                      <div className="px-4.5 py-3 bg-slate-50/80 border-b border-slate-200 flex items-center justify-between flex-wrap gap-2.5">
+                        <span className="text-[11.5px] font-bold text-slate-800 uppercase tracking-wider">Current Treatment Summary</span>
+                        <div className="flex items-center gap-3">
                           <button
                             type="button"
                             onClick={generateDefaultPDF}
                             disabled={estimateItems.length === 0}
-                            className="flex items-center gap-1.5 px-2 py-0.5 rounded text-[9.5px] font-bold uppercase border bg-white border-slate-200 text-slate-600 hover:bg-emerald-50 hover:border-emerald-200 hover:text-emerald-600 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[10.5px] font-bold uppercase border bg-white border-slate-200 text-slate-700 hover:bg-emerald-50 hover:border-emerald-200 hover:text-emerald-600 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-sm"
                           >
-                            <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
-                            Print Invoice PDF
+                            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+                            Print Receipt PDF
                           </button>
-                          <div className="flex items-center gap-1">
-                            <span className="text-[9.5px] font-bold text-slate-500 uppercase mr-1">Bill Paid:</span>
+                          
+                          <div className="flex items-center gap-2">
+                            <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Bill Paid:</span>
                             <button
                               type="button"
                               onClick={() => setEstimateStatus(estimateStatus === 'Approved' ? 'Draft' : 'Approved')}
-                              className={`text-[9.5px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded-md transition-all duration-150 active:scale-95 border cursor-pointer ${
-                                estimateStatus === 'Approved'
-                                  ? 'bg-emerald-500 border-emerald-600 text-white shadow-sm'
-                                  : 'bg-rose-50 border-rose-200 text-rose-600'
+                              className={`flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider px-3 py-1.5 rounded-lg transition-all duration-200 border cursor-pointer ${
+                                  estimateStatus === 'Approved'
+                                  ? 'bg-emerald-50 text-emerald-700 border-emerald-200 hover:bg-emerald-100/80 shadow-sm'
+                                  : 'bg-amber-50 text-amber-700 border-amber-200 hover:bg-amber-100/80'
                               }`}
                             >
-                              {estimateStatus === 'Approved' ? 'Yes' : 'No'}
+                              <div className={`w-1.5 h-1.5 rounded-full ${estimateStatus === 'Approved' ? 'bg-emerald-500 animate-pulse' : 'bg-amber-500'}`} />
+                              <span>{estimateStatus === 'Approved' ? 'Paid' : 'Unpaid'}</span>
                             </button>
                           </div>
                         </div>
                       </div>
 
                       {estimateItems.length > 0 ? (
-                        <div className="divide-y divide-slate-100">
+                        <div className="divide-y divide-slate-100 max-h-[250px] overflow-y-auto">
                           {estimateItems.map((item, idx) => (
-                            <div key={idx} className="px-4 py-3 flex items-center justify-between text-[12px] hover:bg-slate-50 transition-colors">
+                            <div key={idx} className="px-4.5 py-3.5 flex items-center justify-between text-[12.5px] hover:bg-slate-50/50 transition-colors">
                               <div className="space-y-1">
-                                <div className="flex items-center gap-1.5">
+                                <div className="flex items-center gap-2">
                                   {item.tooth && (
-                                    <span className="text-[9px] font-bold text-rose-600 bg-rose-50 border border-rose-200 px-1 rounded">
-                                      T{item.tooth}
+                                    <span className="text-[10px] font-bold text-rose-600 bg-rose-50 border border-rose-100 px-1.5 py-0.5 rounded">
+                                      Tooth {item.tooth}
                                     </span>
                                   )}
-                                  <span className="text-slate-800 font-medium">{item.procedure}</span>
+                                  <span className="text-slate-800 font-semibold">{item.procedure}</span>
                                 </div>
-                                <div className="flex items-center gap-1.5 text-[10px] text-slate-500">
+                                <div className="flex items-center gap-1.5 text-[10.5px] text-slate-505">
                                   <span>{item.isCosmetic ? 'Cosmetic Dental (18% GST)' : 'Therapeutic Care (0% GST)'}</span>
                                 </div>
                               </div>
@@ -3776,7 +3800,7 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                                 <button
                                   type="button"
                                   onClick={() => setEstimateItems((prev) => prev.filter((_, i) => i !== idx))}
-                                  className="text-slate-400 hover:text-rose-600 transition-colors p-1"
+                                  className="text-slate-400 hover:text-rose-600 hover:bg-rose-50 p-1.5 rounded-lg transition-colors border border-transparent hover:border-rose-100"
                                 >
                                   <Trash2 size={13} />
                                 </button>
@@ -3785,33 +3809,33 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                           ))}
                         </div>
                       ) : (
-                        <div className="py-8 text-center text-[11px] text-slate-400 border-b border-slate-200">
-                          No treatment items added. Add procedures above to build the summary.
+                        <div className="py-10 text-center text-[12px] text-slate-400 border-b border-slate-100/50 bg-slate-50/20">
+                          No treatment items added. Use the builder above to log procedures.
                         </div>
                       )}
 
                       {/* Calculations summary panel */}
-                      <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 space-y-2.5">
-                        <div className="flex justify-between text-[11px] text-slate-500">
+                      <div className="bg-slate-50/50 border-t border-slate-200 p-4.5 space-y-3">
+                        <div className="flex justify-between text-[12px] text-slate-600">
                           <span>Subtotal</span>
-                          <span className="font-mono">₹{calculatedSubtotal.toLocaleString('en-IN')}</span>
+                          <span className="font-mono font-semibold">₹{calculatedSubtotal.toLocaleString('en-IN')}</span>
                         </div>
 
                         {/* Discount row */}
-                        <div className="flex items-center justify-between text-[11px] text-slate-600 gap-4">
+                        <div className="flex items-center justify-between text-[12px] text-slate-600 gap-4 flex-wrap">
                           <span className="flex items-center gap-1.5 shrink-0 font-medium">
                             Discount / Concession
                           </span>
-                          <div className="flex items-center gap-1 flex-wrap justify-end">
+                          <div className="flex items-center gap-1.5 flex-wrap justify-end">
                             {[0, 5, 10, 15, 20, 30].map((val) => (
                               <button
                                 key={val}
                                 type="button"
                                 onClick={() => setEstimateDiscount(val)}
-                                className={`px-2 py-0.5 rounded text-[10px] font-bold transition-all border ${
+                                className={`px-2.5 py-1 rounded-lg text-[10.5px] font-bold transition-all border ${
                                   estimateDiscount === val
-                                    ? 'bg-indigo-600 text-white border-indigo-600 shadow-sm'
-                                    : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-50'
+                                    ? 'bg-indigo-600 text-white border-indigo-600 shadow-sm shadow-indigo-600/10'
+                                    : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-50 hover:text-slate-800'
                                 }`}
                               >
                                 {val}%
@@ -3821,22 +3845,25 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                         </div>
 
                         {calculatedDiscountAmount > 0 && (
-                          <div className="flex justify-between text-[11px] text-rose-600">
+                          <div className="flex justify-between text-[12px] text-rose-600 font-medium">
                             <span>Discount Value</span>
                             <span className="font-mono">-₹{calculatedDiscountAmount.toLocaleString('en-IN')}</span>
                           </div>
                         )}
 
-                        <div className="flex justify-between text-[11px] text-slate-500">
-                          <span>GST <span className="text-[9px] text-slate-400">(Inclusive, Cosmetic)</span></span>
+                        <div className="flex justify-between text-[12px] text-slate-505">
+                          <span>GST <span className="text-[10px] text-slate-400">(Inclusive, Cosmetic)</span></span>
                           <span className="font-mono">₹{calculatedGST.toLocaleString('en-IN')}</span>
                         </div>
 
-                        <div className="h-px bg-slate-200 my-1.5" />
+                        <div className="h-px bg-slate-200 my-1" />
 
-                        <div className="flex justify-between text-[13px] font-bold text-slate-800">
-                          <span className="uppercase tracking-wider">Final Amount</span>
-                          <span className="font-mono text-indigo-600">₹{calculatedGrandTotal.toLocaleString('en-IN')}</span>
+                        <div className="flex justify-between items-center pt-1">
+                          <span className="text-[13px] font-bold text-slate-700 uppercase tracking-wider">Final Amount</span>
+                          <div className="text-right">
+                            <span className="font-mono text-[16px] font-extrabold text-indigo-600">₹{calculatedGrandTotal.toLocaleString('en-IN')}</span>
+                            <span className="block text-[8.5px] text-slate-400 font-medium mt-0.5">All Taxes Included</span>
+                          </div>
                         </div>
                       </div>
                     </div>

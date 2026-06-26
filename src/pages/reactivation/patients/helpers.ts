@@ -88,17 +88,6 @@ export function getNextVisitDate(customer: Customer): string | null {
   if (customer.vitals?.nextVisitDate) {
     return customer.vitals.nextVisitDate;
   }
-  if (customer.programStatus === 'Active' && customer.programEnrollmentDate) {
-    const step = Math.max(1, Number(customer.programCurrentStep || 1));
-    const baseRule = FOLLOW_UP_RULES.find((rule) => rule.match(customer));
-    const stepDays = baseRule ? baseRule.days : 30;
-    return addDays(customer.programEnrollmentDate, stepDays * step);
-  }
-
-  const rule = FOLLOW_UP_RULES.find((entry) => entry.match(customer));
-  if (rule) return addDays(customer.lastVisit, rule.days);
-
-  if (customer.status === 'Follow Up Needed') return addDays(customer.lastVisit, 7);
   return null;
 }
 

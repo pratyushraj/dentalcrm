@@ -29,7 +29,11 @@ import {
   Check,
   RotateCcw,
   MoreVertical,
-  FileText
+  FileText,
+  User,
+  Clock,
+  ChevronDown,
+  Save
 } from 'lucide-react';
 import { toast } from 'sonner';
 import {
@@ -1905,145 +1909,175 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
 
                     {/* Tab Selector & Settings Gear */}
                     <div className="flex items-center gap-2 self-start sm:self-auto w-full sm:w-auto min-w-0">
-                      <div className="flex bg-slate-100/80 p-1 rounded-xl border border-slate-200/60 gap-1 overflow-x-auto scrollbar-none flex-nowrap flex-1 sm:flex-none min-w-0">
+                      <div className="flex bg-slate-50 p-1 rounded-xl border border-slate-200/80 gap-1 overflow-x-auto scrollbar-none flex-nowrap flex-1 sm:flex-none min-w-0">
                         {/* Tab 1: Before Tx */}
                         <button
                           type="button"
                           onClick={() => setActiveTab('general')}
-                          className={`px-3 py-1.5 rounded-lg text-[10.5px] font-bold transition-all duration-150 flex items-center gap-1.5 shrink-0 ${
+                          className={`px-4 py-1.5 rounded-lg text-[12px] font-semibold transition-all duration-150 flex items-center gap-2 shrink-0 ${
                             activeTab === 'general'
-                              ? 'bg-white text-indigo-700 shadow-sm border border-slate-200/50'
-                              : 'text-slate-500 hover:text-slate-700 hover:bg-slate-50/50'
+                              ? 'bg-white text-indigo-600 shadow-sm border border-indigo-500'
+                              : 'text-slate-600 hover:text-slate-800 hover:bg-slate-100/50'
                           }`}
                         >
-                          <Camera size={11} className="text-indigo-500" />
+                          <Camera size={13} className="text-indigo-500" />
                           <span>Before Tx</span>
                         </button>
                         {/* Tab 2: Consultation */}
                         <button
                           type="button"
                           onClick={() => setActiveTab('medical')}
-                          className={`px-3 py-1.5 rounded-lg text-[10.5px] font-bold transition-all duration-150 flex items-center gap-1.5 shrink-0 ${
+                          className={`px-4 py-1.5 rounded-lg text-[12px] font-semibold transition-all duration-150 flex items-center gap-2 shrink-0 ${
                             activeTab === 'medical'
-                              ? 'bg-white text-indigo-700 shadow-sm border border-slate-200/50'
-                              : 'text-slate-500 hover:text-slate-700 hover:bg-slate-50/50'
+                              ? 'bg-white text-indigo-600 shadow-sm border border-indigo-500'
+                              : 'text-slate-600 hover:text-slate-800 hover:bg-slate-100/50'
                           }`}
                         >
-                          <Stethoscope size={11} className="text-indigo-500" />
+                          <Stethoscope size={13} className="text-indigo-500" />
                           <span>Consultation</span>
                         </button>
                         {/* Tab 3: Billing */}
                         <button
                           type="button"
                           onClick={() => setActiveTab('estimates')}
-                          className={`px-3 py-1.5 rounded-lg text-[10.5px] font-bold transition-all duration-150 flex items-center gap-1.5 shrink-0 ${
+                          className={`px-4 py-1.5 rounded-lg text-[12px] font-semibold transition-all duration-150 flex items-center gap-2 shrink-0 ${
                             activeTab === 'estimates'
-                              ? 'bg-white text-indigo-700 shadow-sm border border-slate-200/50'
-                              : 'text-slate-500 hover:text-slate-700 hover:bg-slate-50/50'
+                              ? 'bg-white text-indigo-600 shadow-sm border border-indigo-500'
+                              : 'text-slate-600 hover:text-slate-800 hover:bg-slate-100/50'
                           }`}
                         >
-                          <FileText size={11} className="text-indigo-500" />
+                          <FileText size={13} className="text-indigo-500" />
                           <span>Billing</span>
                         </button>
                       </div>
                       <button
                         type="button"
                         onClick={() => setShowVoiceSettingsModal(true)}
-                        className="p-2 hover:bg-slate-100 border border-slate-200/80 rounded-xl text-slate-500 hover:text-indigo-600 hover:border-indigo-150 transition-colors shrink-0"
+                        className="w-9 h-9 p-2 bg-white hover:bg-slate-50 border border-slate-200/80 rounded-xl text-slate-400 hover:text-indigo-600 hover:border-indigo-300 transition-all shrink-0 flex items-center justify-center shadow-sm"
                         title="AI Scribe Settings"
                       >
-                        <Settings size={13} />
+                        <Settings size={14} />
                       </button>
                     </div>
                   </DialogHeader>
                 </div>
-
                 {/* Body - General Tab */}
                 {activeTab === 'general' && (
                   <div className="px-4 sm:px-6 py-4 space-y-4 overflow-y-auto overflow-x-hidden max-h-[60vh] max-sm:max-h-[calc(92vh-170px)] scrollbar-none flex-1">
-                    {/* Profile Photo Uploader + Basic Details */}
-                    <div className="flex flex-col sm:flex-row items-center gap-4 bg-slate-50/50 border border-slate-200/60 p-4 rounded-xl">
-                      {/* Avatar/Profile Photo selector */}
-                      <div className="relative group shrink-0">
-                        {form.profilePhoto ? (
-                          <div className="w-16 h-16 rounded-full overflow-hidden border border-slate-200 bg-neutral-900 relative">
-                            <img src={form.profilePhoto} alt="Patient Face" className="w-full h-full object-cover" />
+                    {/* Full-width dashed profile photo upload container */}
+                    <div className="w-full">
+                      {form.profilePhoto ? (
+                        <div className="relative aspect-[16/6] w-full rounded-2xl overflow-hidden border border-slate-200 bg-neutral-900 group">
+                          <img src={form.profilePhoto} alt="Patient Profile" className="w-full h-full object-cover" />
+                          <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 flex flex-col items-center justify-center gap-2 transition-all duration-150">
+                            <span className="text-[12px] font-bold text-white">Patient Profile Photo</span>
                             <button
                               type="button"
                               onClick={() => handleChange('profilePhoto', '')}
-                              className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 flex items-center justify-center text-rose-400 text-[10px] font-bold uppercase transition-opacity duration-150 rounded-full"
+                              className="px-3 py-1.5 bg-rose-600 hover:bg-rose-700 text-white rounded-lg text-[10px] font-bold uppercase transition-colors"
                             >
-                              Remove
+                              Remove Photo
                             </button>
                           </div>
-                        ) : (
-                          <label className="w-16 h-16 rounded-full border border-dashed border-slate-300 hover:border-indigo-500 bg-white hover:bg-indigo-50/[0.04] flex flex-col items-center justify-center gap-0.5 cursor-pointer transition-all duration-150 group text-center shrink-0">
-                            <Camera size={16} className="text-slate-400 group-hover:text-indigo-500 transition-colors" />
-                            <span className="text-[9px] font-semibold text-slate-500 leading-tight">Add Photo</span>
-                            <input
-                              type="file"
-                              accept="image/*"
-                              capture="user"
-                              onChange={(e) => {
-                                const file = e.target.files?.[0];
-                                if (file) {
-                                  compressImage(file, (base64) => handleChange('profilePhoto', base64));
-                                }
-                              }}
-                              className="hidden"
-                            />
-                          </label>
-                        )}
-                      </div>
-
-                      {/* Name & Phone */}
-                      <div className="flex-1 w-full grid grid-cols-1 sm:grid-cols-2 gap-3">
-                        <div>
-                          <label className="block text-[11px] text-slate-500 font-medium mb-1 uppercase tracking-wider">
-                            Full Name <span className="text-red-400">*</span>
-                          </label>
+                        </div>
+                      ) : (
+                        <label className="w-full border border-dashed border-indigo-200 hover:border-indigo-400 bg-indigo-50/20 hover:bg-indigo-50/40 rounded-2xl py-6 flex flex-col items-center justify-center gap-1.5 cursor-pointer transition-all duration-150 group text-center">
+                          <div className="w-10 h-10 rounded-full bg-indigo-50 flex items-center justify-center text-indigo-600 shadow-sm border border-indigo-100/50">
+                            <Camera size={18} />
+                          </div>
+                          <span className="text-[12px] font-bold text-indigo-600">Add Photo</span>
+                          <span className="text-[10.5px] text-slate-500 mt-1">Upload patient photo (optional)</span>
+                          <span className="text-[9px] text-slate-400">JPG, PNG up to 5MB</span>
                           <input
-                            className={`${inputBase} ${inputFocusStyle}`}
-                            style={inputStyle}
+                            type="file"
+                            accept="image/*"
+                            capture="user"
+                            onChange={(e) => {
+                              const file = e.target.files?.[0];
+                              if (file) {
+                                compressImage(file, (base64) => handleChange('profilePhoto', base64));
+                              }
+                            }}
+                            className="hidden"
+                          />
+                        </label>
+                      )}
+                    </div>
+
+                    {/* Name & Phone Grid */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      {/* Full Name */}
+                      <div>
+                        <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                          Full Name <span className="text-rose-500">*</span>
+                        </label>
+                        <div className="flex items-stretch border border-slate-200 rounded-xl overflow-hidden focus-within:border-indigo-500 focus-within:ring-1 focus-within:ring-indigo-500/20 bg-white">
+                          <div className="bg-slate-50 border-r border-slate-200 px-3.5 flex items-center justify-center text-slate-400 shrink-0">
+                            <User size={16} />
+                          </div>
+                          <input
+                            className="flex-1 px-3.5 py-2.5 text-[13px] text-slate-800 placeholder:text-slate-400 bg-transparent outline-none w-full border-0"
                             placeholder="e.g. Rahul Sharma"
                             value={form.name}
                             onChange={(e) => handleChange('name', e.target.value)}
                           />
                         </div>
-                        <div>
-                          <label className="block text-[11px] text-slate-500 font-medium mb-1 uppercase tracking-wider">
-                            Phone <span className="text-red-400">*</span>
-                          </label>
+                      </div>
+
+                      {/* Phone */}
+                      <div>
+                        <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                          Phone <span className="text-rose-500">*</span>
+                        </label>
+                        <div className="flex items-stretch border border-slate-200 rounded-xl overflow-hidden focus-within:border-indigo-500 focus-within:ring-1 focus-within:ring-indigo-500/20 bg-white">
+                          <div className="bg-slate-50 border-r border-slate-200 px-3.5 flex items-center justify-center text-slate-400 shrink-0">
+                            <Phone size={16} />
+                          </div>
                           <input
-                            className={`${inputBase} ${inputFocusStyle}`}
-                            style={inputStyle}
+                            className="flex-1 px-3.5 py-2.5 text-[13px] text-slate-800 placeholder:text-slate-400 bg-transparent outline-none w-full border-0"
                             placeholder="+91 98765 43210"
                             value={form.phone}
                             onChange={(e) => handleChange('phone', e.target.value)}
                           />
                         </div>
-                        <div>
-                          <label className="block text-[11px] text-slate-500 font-medium mb-1 uppercase tracking-wider">
-                            Age
-                          </label>
+                      </div>
+                    </div>
+
+                    {/* Age & Gender Grid */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      {/* Age */}
+                      <div>
+                        <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                          Age
+                        </label>
+                        <div className="flex items-stretch border border-slate-200 rounded-xl overflow-hidden focus-within:border-indigo-500 focus-within:ring-1 focus-within:ring-indigo-500/20 bg-white relative">
+                          <div className="bg-slate-50 border-r border-slate-200 px-3.5 flex items-center justify-center text-slate-400 shrink-0">
+                            <Calendar size={16} />
+                          </div>
                           <input
                             type="number"
                             min="1"
                             max="120"
-                            className={`${inputBase} ${inputFocusStyle}`}
-                            style={inputStyle}
+                            className="flex-1 px-3.5 py-2.5 text-[13px] text-slate-800 placeholder:text-slate-400 bg-transparent outline-none w-full border-0 pr-8"
                             placeholder="e.g. 32"
                             value={form.vitals?.age || ''}
                             onChange={(e) => handleChange('vitals', { ...form.vitals, age: e.target.value })}
                           />
+                          <ChevronDown size={14} className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
                         </div>
-                        <div>
-                          <label className="block text-[11px] text-slate-500 font-medium mb-1 uppercase tracking-wider">
-                            Gender
-                          </label>
+                      </div>
+
+                      {/* Gender */}
+                      <div>
+                        <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                          Gender
+                        </label>
+                        <div className="flex items-stretch border border-slate-200 rounded-xl overflow-hidden focus-within:border-indigo-500 focus-within:ring-1 focus-within:ring-indigo-500/20 bg-white relative">
+                          <div className="bg-slate-50 border-r border-slate-200 px-3.5 flex items-center justify-center text-slate-400 shrink-0">
+                            <User size={16} />
+                          </div>
                           <select
-                            className={`${inputBase} ${inputFocusStyle} cursor-pointer`}
-                            style={inputStyle}
+                            className="flex-1 px-3.5 py-2.5 text-[13px] text-slate-800 bg-transparent outline-none w-full border-0 cursor-pointer appearance-none pr-8"
                             value={form.vitals?.gender || ''}
                             onChange={(e) => handleChange('vitals', { ...form.vitals, gender: e.target.value })}
                           >
@@ -2052,59 +2086,79 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                             <option value="Female">Female</option>
                             <option value="Other">Other</option>
                           </select>
+                          <ChevronDown size={14} className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
                         </div>
                       </div>
                     </div>
 
-                    {/* Last Visit + Time + Service */}
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    {/* Visit Date & Time Grid */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      {/* Visit Date */}
                       <div>
-                        <label className="block text-[11px] text-slate-500 font-medium mb-1.5 uppercase tracking-wider">
-                          Visit Date
+                        <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                          Visit Date <span className="text-rose-500">*</span>
                         </label>
-                        <input
-                          type="date"
-                          className={`${inputBase} ${inputFocusStyle}`}
-                          style={{ ...inputStyle, colorScheme: 'light' }}
-                          value={form.lastVisit}
-                          onChange={(e) => handleChange('lastVisit', e.target.value)}
-                        />
+                        <div className="flex items-stretch border border-slate-200 rounded-xl overflow-hidden focus-within:border-indigo-500 focus-within:ring-1 focus-within:ring-indigo-500/20 bg-white">
+                          <div className="bg-slate-50 border-r border-slate-200 px-3.5 flex items-center justify-center text-slate-400 shrink-0">
+                            <Calendar size={16} />
+                          </div>
+                          <input
+                            type="date"
+                            className="flex-1 px-3.5 py-2.5 text-[13px] text-slate-800 bg-transparent outline-none w-full border-0"
+                            style={{ colorScheme: 'light' }}
+                            value={form.lastVisit}
+                            onChange={(e) => handleChange('lastVisit', e.target.value)}
+                          />
+                        </div>
                       </div>
+
+                      {/* Visit Time */}
                       <div>
-                        <label className="block text-[11px] text-slate-500 font-medium mb-1.5 uppercase tracking-wider">
-                          Visit Time
+                        <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                          Visit Time <span className="text-rose-500">*</span>
                         </label>
-                        <select
-                          className={`${inputBase} ${inputFocusStyle} cursor-pointer`}
-                          style={inputStyle}
-                          value={form.appointmentTime}
-                          onChange={(e) => handleChange('appointmentTime', e.target.value)}
-                        >
-                          <option value="09:00 AM">09:00 AM</option>
-                          <option value="09:30 AM">09:30 AM</option>
-                          <option value="10:00 AM">10:00 AM</option>
-                          <option value="10:30 AM">10:30 AM</option>
-                          <option value="11:00 AM">11:00 AM</option>
-                          <option value="11:30 AM">11:30 AM</option>
-                          <option value="12:00 PM">12:00 PM</option>
-                          <option value="12:30 PM">12:30 PM</option>
-                          <option value="01:00 PM">01:00 PM</option>
-                          <option value="01:30 PM">01:30 PM</option>
-                          <option value="02:00 PM">02:00 PM</option>
-                          <option value="03:00 PM">03:00 PM</option>
-                          <option value="04:00 PM">04:00 PM</option>
-                          <option value="05:00 PM">05:00 PM</option>
-                          <option value="06:00 PM">06:00 PM</option>
-                          <option value="07:00 PM">07:00 PM</option>
-                        </select>
+                        <div className="flex items-stretch border border-slate-200 rounded-xl overflow-hidden focus-within:border-indigo-500 focus-within:ring-1 focus-within:ring-indigo-500/20 bg-white relative">
+                          <div className="bg-slate-50 border-r border-slate-200 px-3.5 flex items-center justify-center text-slate-400 shrink-0">
+                            <Clock size={16} />
+                          </div>
+                          <select
+                            className="flex-1 px-3.5 py-2.5 text-[13px] text-slate-800 bg-transparent outline-none w-full border-0 cursor-pointer appearance-none pr-8"
+                            value={form.appointmentTime}
+                            onChange={(e) => handleChange('appointmentTime', e.target.value)}
+                          >
+                            <option value="09:00 AM">09:00 AM</option>
+                            <option value="09:30 AM">09:30 AM</option>
+                            <option value="10:00 AM">10:00 AM</option>
+                            <option value="10:30 AM">10:30 AM</option>
+                            <option value="11:00 AM">11:00 AM</option>
+                            <option value="11:30 AM">11:30 AM</option>
+                            <option value="12:00 PM">12:00 PM</option>
+                            <option value="12:30 PM">12:30 PM</option>
+                            <option value="01:00 PM">01:00 PM</option>
+                            <option value="01:30 PM">01:30 PM</option>
+                            <option value="02:00 PM">02:00 PM</option>
+                            <option value="03:00 PM">03:00 PM</option>
+                            <option value="04:00 PM">04:00 PM</option>
+                            <option value="05:00 PM">05:00 PM</option>
+                            <option value="06:00 PM">06:00 PM</option>
+                            <option value="07:00 PM">07:00 PM</option>
+                          </select>
+                          <ChevronDown size={14} className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
+                        </div>
                       </div>
-                      <div>
-                        <label className="block text-[11px] text-slate-500 font-medium mb-1.5 uppercase tracking-wider">
-                          Planned Treatment
-                        </label>
+                    </div>
+
+                    {/* Planned Treatment (Full Width) */}
+                    <div>
+                      <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                        Planned Treatment
+                      </label>
+                      <div className="flex items-stretch border border-slate-200 rounded-xl overflow-hidden focus-within:border-indigo-500 focus-within:ring-1 focus-within:ring-indigo-500/20 bg-white relative">
+                        <div className="bg-slate-50 border-r border-slate-200 px-3.5 flex items-center justify-center text-slate-400 shrink-0">
+                          <Stethoscope size={16} />
+                        </div>
                         <select
-                          className={`${inputBase} ${inputFocusStyle} cursor-pointer`}
-                          style={inputStyle}
+                          className="flex-1 px-3.5 py-2.5 text-[13px] text-slate-800 bg-transparent outline-none w-full border-0 cursor-pointer appearance-none pr-8"
                           value={form.service}
                           onChange={(e) => handleChange('service', e.target.value)}
                         >
@@ -2116,54 +2170,67 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                           ))}
                           <option value="Other">Other / Not Listed</option>
                         </select>
+                        <ChevronDown size={14} className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
                       </div>
                     </div>
 
-                    {/* Spend + Status */}
-                    <div className="grid grid-cols-1 responsive-grid-cols-2 gap-3">
+                    {/* Spend & Visit Stage Grid */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      {/* Advance / Paid */}
                       <div>
-                        <label className="block text-[11px] text-slate-500 font-medium mb-1.5 uppercase tracking-wider">
+                        <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-1.5">
                           Advance / Paid (₹)
                         </label>
-                        <input
-                          type="number"
-                          className={`${inputBase} ${inputFocusStyle}`}
-                          style={inputStyle}
-                          placeholder="e.g. 12500"
-                          value={form.totalSpend || ''}
-                          onChange={(e) => handleChange('totalSpend', Number(e.target.value))}
-                        />
+                        <div className="flex items-stretch border border-slate-200 rounded-xl overflow-hidden focus-within:border-indigo-500 focus-within:ring-1 focus-within:ring-indigo-500/20 bg-white">
+                          <div className="bg-slate-50 border-r border-slate-200 px-3.5 flex items-center justify-center text-slate-400 font-bold shrink-0 text-[13px]">
+                            ₹
+                          </div>
+                          <input
+                            type="number"
+                            className="flex-1 px-3.5 py-2.5 text-[13px] text-slate-800 placeholder:text-slate-400 bg-transparent outline-none w-full border-0"
+                            placeholder="e.g. 12500"
+                            value={form.totalSpend || ''}
+                            onChange={(e) => handleChange('totalSpend', Number(e.target.value))}
+                          />
+                        </div>
                       </div>
+
+                      {/* Visit Stage */}
                       <div>
-                        <label className="block text-[11px] text-slate-500 font-medium mb-1.5 uppercase tracking-wider">
+                        <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-1.5">
                           Visit Stage
                         </label>
-                        <select
-                          className={`${inputBase} ${inputFocusStyle} cursor-pointer`}
-                          style={inputStyle}
-                          value={form.status}
-                          onChange={(e) => handleChange('status', e.target.value as CustomerStatus)}
-                        >
-                          {STATUS_OPTIONS.map((s) => (
-                            <option key={s} value={s} style={{ background: '#0D1220' }}>
-                              {s}
-                            </option>
-                          ))}
-                        </select>
+                        <div className="flex items-stretch border border-slate-200 rounded-xl overflow-hidden focus-within:border-indigo-500 focus-within:ring-1 focus-within:ring-indigo-500/20 bg-white relative">
+                          <div className="bg-slate-50 border-r border-slate-200 px-3.5 flex items-center justify-center text-slate-400 shrink-0">
+                            <User size={16} />
+                          </div>
+                          <select
+                            className="flex-1 px-3.5 py-2.5 text-[13px] text-slate-800 bg-transparent outline-none w-full border-0 cursor-pointer appearance-none pr-8"
+                            value={form.status}
+                            onChange={(e) => handleChange('status', e.target.value as CustomerStatus)}
+                          >
+                            {STATUS_OPTIONS.map((s) => (
+                              <option key={s} value={s} style={{ background: '#FFFFFF', color: '#1E293B' }}>
+                                {s}
+                              </option>
+                            ))}
+                          </select>
+                          <ChevronDown size={14} className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
+                        </div>
                       </div>
                     </div>
 
                     {/* Notes */}
                     <div>
                       <div className="flex items-center justify-between mb-1.5">
-                        <label className="block text-[11px] text-slate-500 font-medium uppercase tracking-wider">
-                          Complaint / Notes
+                        <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wider">
+                          Complaint / Notes (Optional)
                         </label>
                         <button
                           type="button"
                           onClick={toggleNotesVoice}
                           disabled={notesTranscribing}
-                          className={`flex items-center gap-1 px-2 py-0.5 rounded text-[9.5px] font-bold uppercase border transition-all ${
+                          className={`flex items-center gap-1 px-2.5 py-1 rounded-lg text-[9.5px] font-bold uppercase border transition-all ${
                             notesRecording
                               ? 'bg-rose-500 border-rose-600 text-white animate-pulse'
                               : notesTranscribing
@@ -2175,14 +2242,18 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                           {notesRecording ? 'Listening...' : notesTranscribing ? 'Transcribing...' : 'Scribe Notes'}
                         </button>
                       </div>
-                      <textarea
-                        className={`${inputBase} ${inputFocusStyle} resize-none`}
-                        style={inputStyle}
-                        rows={3}
-                        placeholder="Any complaint, pain, or front-desk note..."
-                        value={form.notes}
-                        onChange={(e) => handleChange('notes', e.target.value)}
-                      />
+                      <div className="flex items-stretch border border-slate-200 rounded-xl overflow-hidden focus-within:border-indigo-500 focus-within:ring-1 focus-within:ring-indigo-500/20 bg-white">
+                        <div className="bg-slate-50 border-r border-slate-200 px-3.5 pt-3.5 flex items-start justify-center text-slate-400 shrink-0">
+                          <FileText size={16} />
+                        </div>
+                        <textarea
+                          className="flex-1 px-3.5 py-2.5 text-[13px] text-slate-800 placeholder:text-slate-400 bg-transparent outline-none w-full border-0 resize-none"
+                          rows={3}
+                          placeholder="Any complaint, pain, or front-desk note..."
+                          value={form.notes}
+                          onChange={(e) => handleChange('notes', e.target.value)}
+                        />
+                      </div>
                       {/* Diagnosis Suggestions Tag Pills */}
                       <div className="flex flex-wrap gap-1.5 mt-2">
                         {['Toothache', 'Sensitivity', 'Swelling', 'Bleeding Gums', 'Missing Tooth', 'Cosmetic Aligners'].map((tag) => (
@@ -2196,7 +2267,7 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                                   handleChange('notes', `${currentNotes}, ${tag}`);
                                 }
                               } else {
-                                handleChange('notes', tag);
+                                  handleChange('notes', tag);
                               }
                             }}
                             className="px-2 py-0.5 rounded-full bg-slate-100 hover:bg-indigo-50 border border-slate-200 hover:border-indigo-200 text-[10px] font-semibold text-slate-600 hover:text-indigo-600 transition-colors cursor-pointer select-none"
@@ -3781,16 +3852,17 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                 >
                   <button
                     onClick={onClose}
-                    className="px-4 py-2 text-[13px] text-slate-500 hover:text-slate-700 rounded-lg transition-colors duration-150"
+                    className="px-4 py-2 border border-slate-200 text-slate-600 hover:bg-slate-50 rounded-xl text-[13px] font-semibold transition-all duration-150"
                   >
                     Cancel
                   </button>
                   <button
                     onClick={handleSave}
                     disabled={!form.name || !form.phone}
-                    className="px-5 py-2 text-[13px] font-semibold text-white rounded-lg transition-all duration-150 bg-indigo-600 hover:bg-indigo-700 disabled:bg-slate-200 disabled:text-slate-400 disabled:shadow-none disabled:cursor-not-allowed shadow-md shadow-indigo-500/20"
+                    className="px-5 py-2 text-[13px] font-semibold text-white rounded-xl transition-all duration-150 bg-indigo-600 hover:bg-indigo-700 disabled:bg-slate-200 disabled:text-slate-400 disabled:shadow-none disabled:cursor-not-allowed shadow-md shadow-indigo-500/20 flex items-center gap-2"
                   >
-                    {isEdit ? 'Save Changes' : 'Add Patient'}
+                    <Save size={14} />
+                    <span>{isEdit ? 'Save Changes' : 'Add Patient'}</span>
                   </button>
                 </div>
               </motion.div>

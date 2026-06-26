@@ -444,7 +444,7 @@ const ReactivationCustomers: React.FC = () => {
         setLoading(true);
         const { data, error } = await supabase
           .from('dental_patients')
-          .select('id, name, phone, last_visit, service, total_spend, status, notes, avatar_color, active_program_id, program_enrollment_date, program_current_step, program_status, created_at, prescription, estimates, before_photo, after_photo, before_after_photos, before_photos, after_photos')
+          .select('id, name, phone, last_visit, service, total_spend, status, notes, avatar_color, active_program_id, program_enrollment_date, program_current_step, program_status, created_at, prescription, estimates, before_photo, after_photo, before_after_photos, before_photos, after_photos, vitals, allergies, medical_conditions, problem_teeth, profile_photo')
           .eq('clinic_id', clinicId)
           .order('created_at', { ascending: false });
 

@@ -138,11 +138,17 @@ export function formatDate(isoDate: string): string {
 
 export function timeAgo(isoDate: string): string {
   if (!isoDate) return '-';
-  const now = new Date('2026-06-06');
+  const now = new Date();
+  now.setHours(0, 0, 0, 0);
   const then = new Date(isoDate);
+  then.setHours(0, 0, 0, 0);
   const diffMs = now.getTime() - then.getTime();
   const days = Math.floor(diffMs / (1000 * 60 * 60 * 24));
-  if (days < 7) return `${days} day${days !== 1 ? 's' : ''} ago`;
+  
+  if (days < 0) return 'In the future';
+  if (days === 0) return 'Today';
+  if (days === 1) return 'Yesterday';
+  if (days < 7) return `${days} days ago`;
   if (days < 30) return `${Math.floor(days / 7)} week${Math.floor(days / 7) !== 1 ? 's' : ''} ago`;
   if (days < 365) return `${Math.floor(days / 30)} month${Math.floor(days / 30) !== 1 ? 's' : ''} ago`;
   return `${Math.floor(days / 365)} year${Math.floor(days / 365) !== 1 ? 's' : ''} ago`;
@@ -150,8 +156,10 @@ export function timeAgo(isoDate: string): string {
 
 export function formatFollowUpTime(isoDate: string): string {
   if (!isoDate) return '-';
-  const now = new Date('2026-06-06');
+  const now = new Date();
+  now.setHours(0, 0, 0, 0);
   const then = new Date(isoDate);
+  then.setHours(0, 0, 0, 0);
   const diffMs = then.getTime() - now.getTime();
   const days = Math.floor(diffMs / (1000 * 60 * 60 * 24));
   
@@ -174,8 +182,10 @@ export function formatSpend(amount: number): string {
 
 export function isInDateRange(isoDate: string, range: string): boolean {
   if (range === 'all') return true;
-  const now = new Date('2026-06-06');
+  const now = new Date();
+  now.setHours(0, 0, 0, 0);
   const then = new Date(isoDate);
+  then.setHours(0, 0, 0, 0);
   const days = Math.floor((now.getTime() - then.getTime()) / (1000 * 60 * 60 * 24));
   if (range === '30') return days <= 30;
   if (range === '30-90') return days > 30 && days <= 90;

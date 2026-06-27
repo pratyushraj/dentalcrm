@@ -475,6 +475,12 @@ const ReactivationClinicSettings: React.FC = () => {
   );
 
   const [emiStatus, setEmiStatus] = useState<'Not Partnered' | 'Pending' | 'Active'>(() => {
+    // Migrate incorrect legacy host if stored
+    const savedUrl = localStorage.getItem('emi_axis_url');
+    if (savedUrl && savedUrl.includes('api.axisbank.com')) {
+      localStorage.setItem('emi_axis_url', 'https://apiportal.axis.bank.in/jarvis/v1/apply');
+    }
+
     // Automatically configure and activate Axis Bank (Jarvis) with the generated credentials
     const saved = localStorage.getItem('emi_partner_status');
     if (!saved || saved === 'Not Partnered' || saved === 'Pending') {
@@ -482,7 +488,7 @@ const ReactivationClinicSettings: React.FC = () => {
       localStorage.setItem('emi_partner_name', 'Axis Bank (Jarvis)');
       localStorage.setItem('emi_client_id', '7bc29bc8dad077dc5491758da515d6fd');
       localStorage.setItem('emi_client_secret', 'ce5c5a113672e25e7a8747c8e2917a52');
-      localStorage.setItem('emi_axis_url', 'https://api.axisbank.com/jarvis/v1/apply');
+      localStorage.setItem('emi_axis_url', 'https://apiportal.axis.bank.in/jarvis/v1/apply');
       return 'Active';
     }
     return saved as any;
@@ -497,7 +503,7 @@ const ReactivationClinicSettings: React.FC = () => {
     averageBilling: '5-10L',
     clientId: localStorage.getItem('emi_client_id') || '7bc29bc8dad077dc5491758da515d6fd',
     clientSecret: localStorage.getItem('emi_client_secret') || 'ce5c5a113672e25e7a8747c8e2917a52',
-    axisUrl: localStorage.getItem('emi_axis_url') || 'https://api.axisbank.com/jarvis/v1/apply',
+    axisUrl: localStorage.getItem('emi_axis_url') || 'https://apiportal.axis.bank.in/jarvis/v1/apply',
   }));
 
   useEffect(() => {

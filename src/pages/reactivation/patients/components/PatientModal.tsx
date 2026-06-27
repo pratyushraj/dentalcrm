@@ -4021,14 +4021,28 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                               );
                             })()}
 
-                            <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] bg-slate-50 rounded-xl px-3.5 py-2.5 border border-slate-200">
+                             <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] bg-slate-50 rounded-xl px-3.5 py-2.5 border border-slate-200">
                               <div className="flex items-center gap-1.5 text-slate-600 font-medium">
                                 <CheckSquare className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
                                 <span>Paperless KYC & digital Axis underwriting</span>
                               </div>
                               <button 
                                 type="button" 
-                                onClick={() => toast.success("EMI Application link sent successfully to the patient via SMS and WhatsApp.")}
+                                onClick={() => {
+                                  if (!form.phone) {
+                                    toast.error("Patient phone number is required to send the link.");
+                                    return;
+                                  }
+                                  const cleanPhone = (form.phone || '').replace(/[^0-9]/g, '');
+                                  const formattedPhone = cleanPhone.length === 10 ? `91${cleanPhone}` : cleanPhone;
+                                  const activePartner = localStorage.getItem('emi_partner_name') || 'Axis Bank (Jarvis)';
+                                  const crmOrigin = window.location.origin;
+                                  
+                                  const messageText = `Dear ${form.name || 'Patient'},\n\nTo pay for your treatment of ₹${calculatedGrandTotal.toLocaleString('en-IN')} at our clinic via easy monthly installments (EMI), please click the link below to check your eligibility and complete your digital application with ${activePartner}:\n\n🔗 ${crmOrigin}/api/v1/auth/callback\n\nThank you!\nYOUR DENTIST Patna`;
+                                  
+                                  window.open(`https://wa.me/${formattedPhone}?text=${encodeURIComponent(messageText)}`, '_blank', 'noopener,noreferrer');
+                                  toast.success("Opening WhatsApp with pre-filled Axis Bank eligibility application link!");
+                                }}
                                 className="w-full sm:w-auto text-center px-3.5 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-[10.5px] font-bold transition-all shadow-sm shadow-indigo-600/10 hover:shadow-indigo-600/20 active:scale-[0.98] cursor-pointer shrink-0"
                               >
                                 Apply Now

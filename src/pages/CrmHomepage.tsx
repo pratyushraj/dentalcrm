@@ -78,7 +78,12 @@ export default function CrmHomepage() {
             </div>
             <div>
               <span className="text-xs font-black uppercase tracking-widest leading-none block">DENTAL CRM</span>
-              <span className="text-[8px] text-neutral-500 font-bold uppercase tracking-wider mt-0.5 block">Managed by Creator Armour</span>
+              <span className="text-[8px] text-neutral-500 font-bold uppercase tracking-wider mt-0.5 block">
+                Managed by{' '}
+                <a href="https://creatorarmour.com" target="_blank" rel="noopener noreferrer" className="hover:text-neutral-300 transition-colors underline">
+                  Creator Armour
+                </a>
+              </span>
             </div>
           </div>
 
@@ -180,7 +185,17 @@ export default function CrmHomepage() {
           </div>
 
           <div className="flex flex-col sm:flex-row items-center gap-4 text-[9px] text-neutral-600 font-mono font-black uppercase tracking-widest">
-            <span>© 2026 YOUR DENTIST Patna. Managed by Creator Armour.</span>
+            <span>
+              © 2026{' '}
+              <a href="https://www.yourdentistpatna.in/" target="_blank" rel="noopener noreferrer" className="hover:text-neutral-400 transition-colors underline">
+                YOUR DENTIST Patna
+              </a>
+              . Managed by{' '}
+              <a href="https://creatorarmour.com" target="_blank" rel="noopener noreferrer" className="hover:text-neutral-400 transition-colors underline">
+                Creator Armour
+              </a>
+              .
+            </span>
             <span className="hidden sm:inline">&middot;</span>
             <Link to="/reactivation/login" className="hover:text-white transition-colors">Staff Login</Link>
           </div>

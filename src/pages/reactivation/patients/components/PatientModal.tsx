@@ -124,80 +124,97 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
 
   const migrateMedications = (meds: any[]): any[] => {
     const defaultMeds = [
-      { label: 'Amoxicillin 500mg', text: '• Tab. Amoxicillin 500mg - 1 cap thrice daily for 5 days', category: 'Antibiotics' },
-      { label: 'Paracetamol 650mg', text: '• Tab. Paracetamol 650mg - 1 tab SOS for pain', category: 'Pain killers' },
-      { label: 'Zerodol-SP', text: '• Tab. Zerodol-SP - 1 tab twice daily for 3 days', category: 'Pain killers' },
-      { label: 'Pantocid 40mg', text: '• Tab. Pantocid 40mg - 1 tab once daily before food', category: 'Gas/Acidity' },
-      { label: 'Hexidine Mouthwash', text: '• Hexidine Mouthwash - rinse twice daily for 7 days', category: 'Mouthwash' },
-      { label: 'Mox-CL 625mg', text: '• Tab. Mox-CL 625mg - 1 tab twice daily for 5 days', category: 'Antibiotics' },
-      { label: 'Ketorol-DT', text: '• Tab. Ketorol-DT - 1 tab dissolved in water SOS', category: 'Pain killers' },
-      { label: 'Sensodyne Toothpaste', text: '• Sensodyne Toothpaste - brush twice daily for sensitive teeth', category: 'Toothpaste' },
-      { label: 'Metrogyl ER', text: '• Tab. Metrogyl ER - 1 tab twice daily for 5 days', category: 'Antibiotics' },
-      { label: 'Flagyl ER', text: '• Tab. Flagyl ER - 1 tab twice daily for 5 days', category: 'Antibiotics' },
-      { label: 'Augmentin 625mg', text: '• Tab. Augmentin 625mg - 1 tab twice daily for 5 days', category: 'Antibiotics' },
-      { label: 'Clavam 625mg', text: '• Tab. Clavam 625mg - 1 tab twice daily for 5 days', category: 'Antibiotics' },
-      { label: 'Indclav 625mg', text: '• Tab. Indclav 625mg - 1 tab twice daily for 5 days', category: 'Antibiotics' },
-      { label: 'Mox CV 625mg', text: '• Tab. Mox CV 625mg - 1 tab twice daily for 5 days', category: 'Antibiotics' },
-      { label: 'Zocef CV 250mg', text: '• Tab. Zocef CV 250mg - 1 tab twice daily for 5 days', category: 'Antibiotics' },
-      { label: 'Sporidex CV 200mg', text: '• Tab. Sporidex CV 200mg - 1 tab twice daily for 5 days', category: 'Antibiotics' },
-      { label: 'Zymoflam D', text: '• Tab. Zymoflam D - 1 tab twice daily for 5 days', category: 'Pain killers' },
-      { label: 'Intagesic', text: '• Tab. Intagesic - 1 tab twice daily for 5 days', category: 'Pain killers' },
-      { label: 'Lysoflam', text: '• Tab. Lysoflam - 1 tab twice daily for 5 days', category: 'Pain killers' },
-      { label: 'Gudgesic SP', text: '• Tab. Gudgesic SP - 1 tab twice daily for 5 days', category: 'Pain killers' },
-      { label: 'Enzoflam', text: '• Tab. Enzoflam - 1 tab twice daily for 5 days', category: 'Pain killers' },
-      { label: 'Clohex ADS M/W', text: '• Clohex ADS Mouthwash - rinse twice daily for 7 days', category: 'Mouthwash' },
-      { label: 'Vantej Aqua M/W', text: '• Vantej Aqua Mouthwash - rinse twice daily for 7 days', category: 'Mouthwash' },
-      { label: 'Hydent 360 M/W', text: '• Hydent 360 Mouthwash - rinse twice daily for 7 days', category: 'Mouthwash' },
-      { label: 'Coolora M/W', text: '• Coolora Mouthwash - rinse twice daily for 7 days', category: 'Mouthwash' },
-      { label: 'Corahex M/W', text: '• Corahex Mouthwash - rinse twice daily for 7 days', category: 'Mouthwash' },
-      { label: 'Paloxide M/W', text: '• Paloxide Mouthwash - rinse twice daily for 7 days', category: 'Mouthwash' },
-      { label: 'Xyon-C M/W', text: '• Xyon-C Mouthwash - rinse twice daily for 7 days', category: 'Mouthwash' },
-      { label: 'Gumex Gum Paint', text: '• Gumex Gum Paint - apply on gums thrice daily', category: 'Mouthwash' },
-      { label: 'Logum Gel', text: '• Logum Gel - apply on painful ulcers/areas 10 minutes before food', category: 'Gels' },
-      { label: 'Metrogyl DG Gel', text: '• Metrogyl DG Gel - massage gently on gums twice daily after brushing', category: 'Gels' },
-      { label: 'Turbocoat Gel', text: '• Turbocoat Gel - apply on sensitive areas once daily after brushing', category: 'Gels' },
-      { label: 'Vantej Toothpaste', text: '• Vantej Toothpaste - brush twice daily', category: 'Toothpaste' },
-      { label: 'Reguard Toothpaste', text: '• Reguard Toothpaste - brush twice daily', category: 'Toothpaste' },
-      { label: 'Perioguard Toothpaste', text: '• Perioguard Toothpaste - brush twice daily', category: 'Toothpaste' },
-      { label: 'Hydent K Toothpaste', text: '• Hydent K Toothpaste - brush twice daily', category: 'Toothpaste' },
-      { label: 'Glister Toothpaste', text: '• Glister Toothpaste - brush twice daily', category: 'Toothpaste' },
-      { label: 'Snowdent Toothpaste', text: '• Snowdent Toothpaste - brush twice daily', category: 'Toothpaste' },
-      { label: 'Remin Toothpaste', text: '• Remin Toothpaste - brush twice daily', category: 'Toothpaste' },
-      { label: 'Toothmin Toothpaste', text: '• Toothmin Toothpaste - brush twice daily', category: 'Toothpaste' },
-      { label: 'Enzoflam CT', text: '• Tab. Enzoflam CT - 1 tab twice daily for 5 days', category: 'Pain killers' },
-      { label: 'Rantac RD', text: '• Tab. Rantac RD - 1 tab twice daily before food', category: 'Gas/Acidity' },
-      { label: 'Ranidom-DOM', text: '• Tab. Ranidom-DOM - 1 tab twice daily before food', category: 'Gas/Acidity' },
-      { label: 'Pan-40', text: '• Tab. Pan-40 - 1 tab once daily before food', category: 'Gas/Acidity' },
-      { label: 'Cyra-D', text: '• Tab. Cyra-D - 1 tab once daily before food', category: 'Gas/Acidity' },
-      { label: 'Rabeprazole 20mg', text: '• Tab. Rabeprazole 20mg - 1 tab once daily before food', category: 'Gas/Acidity' },
-      { label: 'Lycowonder', text: '• Tab. Lycowonder - 1 tab once daily', category: 'Multivitamins' },
-      { label: 'Lycowonder Forte', text: '• Tab. Lycowonder Forte - 1 tab once daily', category: 'Multivitamins' },
-      { label: 'Fibrowonder Multi Tab', text: '• Tab. Fibrowonder Multi Tab - 1 tab once daily', category: 'Multivitamins' },
-      { label: 'Gurodol Mouthwash', text: '• Gurodol Mouthwash - rinse twice daily', category: 'Mouthwash' },
-      { label: 'Rinse Off Mouthwash', text: '• Rinse Off Mouthwash - rinse twice daily', category: 'Mouthwash' },
-      { label: 'Rexidin SRS Mouthwash', text: '• Rexidin SRS Mouthwash - rinse twice daily', category: 'Mouthwash' },
-      { label: 'Keebiotic Tab', text: '• Tab. Keebiotic - 1 tab twice daily for 5 days', category: 'Antibiotics' },
-      { label: 'Rexidine Mouthwash', text: '• Rexidine Mouthwash - rinse twice daily', category: 'Mouthwash' },
-      { label: 'Gumsun Gum Paint', text: '• Gumsun Gum Paint - apply on gums thrice daily', category: 'Gels' },
-      { label: 'Paradontox Toothpaste', text: '• Paradontox Toothpaste - brush twice daily', category: 'Toothpaste' },
-      { label: 'Zyclav 375mg', text: '• Tab. Zyclav 375mg - 1 tab twice daily for 5 days', category: 'Antibiotics' }
+      { label: 'Amoxicillin 500mg', text: '• Tab. Amoxicillin 500mg - 1 cap thrice daily for 5 days', category: 'Antibiotics', price: 120 },
+      { label: 'Paracetamol 650mg', text: '• Tab. Paracetamol 650mg - 1 tab SOS for pain', category: 'Pain killers', price: 40 },
+      { label: 'Zerodol-SP', text: '• Tab. Zerodol-SP - 1 tab twice daily for 3 days', category: 'Pain killers', price: 80 },
+      { label: 'Pantocid 40mg', text: '• Tab. Pantocid 40mg - 1 tab once daily before food', category: 'Gas/Acidity', price: 50 },
+      { label: 'Hexidine Mouthwash', text: '• Hexidine Mouthwash - rinse twice daily for 7 days', category: 'Mouthwash', price: 110 },
+      { label: 'Mox-CL 625mg', text: '• Tab. Mox-CL 625mg - 1 tab twice daily for 5 days', category: 'Antibiotics', price: 140 },
+      { label: 'Ketorol-DT', text: '• Tab. Ketorol-DT - 1 tab dissolved in water SOS', category: 'Pain killers', price: 60 },
+      { label: 'Sensodyne Toothpaste', text: '• Sensodyne Toothpaste - brush twice daily for sensitive teeth', category: 'Toothpaste', price: 95 },
+      { label: 'Metrogyl ER', text: '• Tab. Metrogyl ER - 1 tab twice daily for 5 days', category: 'Antibiotics', price: 75 },
+      { label: 'Flagyl ER', text: '• Tab. Flagyl ER - 1 tab twice daily for 5 days', category: 'Antibiotics', price: 65 },
+      { label: 'Augmentin 625mg', text: '• Tab. Augmentin 625mg - 1 tab twice daily for 5 days', category: 'Antibiotics', price: 180 },
+      { label: 'Clavam 625mg', text: '• Tab. Clavam 625mg - 1 tab twice daily for 5 days', category: 'Antibiotics', price: 160 },
+      { label: 'Indclav 625mg', text: '• Tab. Indclav 625mg - 1 tab twice daily for 5 days', category: 'Antibiotics', price: 155 },
+      { label: 'Mox CV 625mg', text: '• Tab. Mox CV 625mg - 1 tab twice daily for 5 days', category: 'Antibiotics', price: 145 },
+      { label: 'Zocef CV 250mg', text: '• Tab. Zocef CV 250mg - 1 tab twice daily for 5 days', category: 'Antibiotics', price: 210 },
+      { label: 'Sporidex CV 200mg', text: '• Tab. Sporidex CV 200mg - 1 tab twice daily for 5 days', category: 'Antibiotics', price: 190 },
+      { label: 'Zymoflam D', text: '• Tab. Zymoflam D - 1 tab twice daily for 5 days', category: 'Pain killers', price: 90 },
+      { label: 'Intagesic', text: '• Tab. Intagesic - 1 tab twice daily for 5 days', category: 'Pain killers', price: 55 },
+      { label: 'Lysoflam', text: '• Tab. Lysoflam - 1 tab twice daily for 5 days', category: 'Pain killers', price: 85 },
+      { label: 'Gudgesic SP', text: '• Tab. Gudgesic SP - 1 tab twice daily for 5 days', category: 'Pain killers', price: 70 },
+      { label: 'Enzoflam', text: '• Tab. Enzoflam - 1 tab twice daily for 5 days', category: 'Pain killers', price: 95 },
+      { label: 'Clohex ADS M/W', text: '• Clohex ADS Mouthwash - rinse twice daily for 7 days', category: 'Mouthwash', price: 120 },
+      { label: 'Vantej Aqua M/W', text: '• Vantej Aqua Mouthwash - rinse twice daily for 7 days', category: 'Mouthwash', price: 130 },
+      { label: 'Hydent 360 M/W', text: '• Hydent 360 Mouthwash - rinse twice daily for 7 days', category: 'Mouthwash', price: 140 },
+      { label: 'Coolora M/W', text: '• Coolora Mouthwash - rinse twice daily for 7 days', category: 'Mouthwash', price: 90 },
+      { label: 'Corahex M/W', text: '• Corahex Mouthwash - rinse twice daily for 7 days', category: 'Mouthwash', price: 105 },
+      { label: 'Paloxide M/W', text: '• Paloxide Mouthwash - rinse twice daily for 7 days', category: 'Mouthwash', price: 115 },
+      { label: 'Xyon-C M/W', text: '• Xyon-C Mouthwash - rinse twice daily for 7 days', category: 'Mouthwash', price: 125 },
+      { label: 'Gumex Gum Paint', text: '• Gumex Gum Paint - apply on gums thrice daily', category: 'Mouthwash', price: 80 },
+      { label: 'Logum Gel', text: '• Logum Gel - apply on painful ulcers/areas 10 minutes before food', category: 'Gels', price: 70 },
+      { label: 'Metrogyl DG Gel', text: '• Metrogyl DG Gel - massage gently on gums twice daily after brushing', category: 'Gels', price: 85 },
+      { label: 'Turbocoat Gel', text: '• Turbocoat Gel - apply on sensitive areas once daily after brushing', category: 'Gels', price: 110 },
+      { label: 'Vantej Toothpaste', text: '• Vantej Toothpaste - brush twice daily', category: 'Toothpaste', price: 130 },
+      { label: 'Reguard Toothpaste', text: '• Reguard Toothpaste - brush twice daily', category: 'Toothpaste', price: 90 },
+      { label: 'Perioguard Toothpaste', text: '• Perioguard Toothpaste - brush twice daily', category: 'Toothpaste', price: 100 },
+      { label: 'Hydent K Toothpaste', text: '• Hydent K Toothpaste - brush twice daily', category: 'Toothpaste', price: 115 },
+      { label: 'Glister Toothpaste', text: '• Glister Toothpaste - brush twice daily', category: 'Toothpaste', price: 140 },
+      { label: 'Snowdent Toothpaste', text: '• Snowdent Toothpaste - brush twice daily', category: 'Toothpaste', price: 85 },
+      { label: 'Remin Toothpaste', text: '• Remin Toothpaste - brush twice daily', category: 'Toothpaste', price: 120 },
+      { label: 'Toothmin Toothpaste', text: '• Toothmin Toothpaste - brush twice daily', category: 'Toothpaste', price: 125 },
+      { label: 'Enzoflam CT', text: '• Tab. Enzoflam CT - 1 tab twice daily for 5 days', category: 'Pain killers', price: 100 },
+      { label: 'Rantac RD', text: '• Tab. Rantac RD - 1 tab twice daily before food', category: 'Gas/Acidity', price: 45 },
+      { label: 'Ranidom-DOM', text: '• Tab. Ranidom-DOM - 1 tab twice daily before food', category: 'Gas/Acidity', price: 55 },
+      { label: 'Pan-40', text: '• Tab. Pan-40 - 1 tab once daily before food', category: 'Gas/Acidity', price: 65 },
+      { label: 'Cyra-D', text: '• Tab. Cyra-D - 1 tab once daily before food', category: 'Gas/Acidity', price: 60 },
+      { label: 'Rabeprazole 20mg', text: '• Tab. Rabeprazole 20mg - 1 tab once daily before food', category: 'Gas/Acidity', price: 50 },
+      { label: 'Lycowonder', text: '• Tab. Lycowonder - 1 tab once daily', category: 'Multivitamins', price: 140 },
+      { label: 'Lycowonder Forte', text: '• Tab. Lycowonder Forte - 1 tab once daily', category: 'Multivitamins', price: 160 },
+      { label: 'Fibrowonder Multi Tab', text: '• Tab. Fibrowonder Multi Tab - 1 tab once daily', category: 'Multivitamins', price: 150 },
+      { label: 'Gurodol Mouthwash', text: '• Gurodol Mouthwash - rinse twice daily', category: 'Mouthwash', price: 95 },
+      { label: 'Rinse Off Mouthwash', text: '• Rinse Off Mouthwash - rinse twice daily', category: 'Mouthwash', price: 85 },
+      { label: 'Rexidin SRS Mouthwash', text: '• Rexidin SRS Mouthwash - rinse twice daily', category: 'Mouthwash', price: 135 },
+      { label: 'Keebiotic Tab', text: '• Tab. Keebiotic - 1 tab twice daily for 5 days', category: 'Antibiotics', price: 125 },
+      { label: 'Rexidine Mouthwash', text: '• Rexidine Mouthwash - rinse twice daily', category: 'Mouthwash', price: 110 },
+      { label: 'Gumsun Gum Paint', text: '• Gumsun Gum Paint - apply on gums thrice daily', category: 'Gels', price: 75 },
+      { label: 'Paradontox Toothpaste', text: '• Paradontox Toothpaste - brush twice daily', category: 'Toothpaste', price: 150 },
+      { label: 'Zyclav 375mg', text: '• Tab. Zyclav 375mg - 1 tab twice daily for 5 days', category: 'Antibiotics', price: 135 }
     ];
 
     return meds.map(med => {
       const matched = defaultMeds.find(dm => dm.label.toLowerCase() === med.label.toLowerCase());
-      if (matched) return { ...med, category: matched.category };
-      if (med.category && med.category !== 'Others') return med;
+      
+      // Dynamically assign realistic prices based on category if undefined or 0
+      let defaultPrice = 0;
+      const cat = med.category || (matched ? matched.category : 'Others');
+      if (cat === 'Antibiotics') defaultPrice = 120;
+      else if (cat === 'Pain killers') defaultPrice = 60;
+      else if (cat === 'Multivitamins') defaultPrice = 150;
+      else if (cat === 'Mouthwash') defaultPrice = 110;
+      else if (cat === 'Gels') defaultPrice = 85;
+      else if (cat === 'Toothpaste') defaultPrice = 95;
+      else if (cat === 'Gas/Acidity') defaultPrice = 50;
+      else defaultPrice = 40;
+
+      const price = med.price !== undefined ? med.price : (matched && matched.price !== undefined ? matched.price : defaultPrice);
+
+      if (matched) return { ...med, category: matched.category, price };
+      if (med.category && med.category !== 'Others') return { ...med, price };
 
       const text = (med.text || '').toLowerCase();
       const label = (med.label || '').toLowerCase();
-      if (label.includes('gel') || text.includes('gel') || text.includes('apply on')) return { ...med, category: 'Gels' };
-      if (label.includes('mouthwash') || label.includes('m/w') || text.includes('mouthwash') || text.includes('rinse')) return { ...med, category: 'Mouthwash' };
-      if (label.includes('toothpaste') || label.includes('paste') || text.includes('toothpaste') || text.includes('brush')) return { ...med, category: 'Toothpaste' };
-      if (label.includes('pan-') || label.includes('pantocid') || label.includes('rantac') || label.includes('ranidom') || label.includes('cyra') || label.includes('rabeprazole') || text.includes('before food') || text.includes('acidity')) return { ...med, category: 'Gas/Acidity' };
-      if (label.includes('paracetamol') || label.includes('zerodol') || label.includes('ketorol') || label.includes('pain') || label.includes('enzoflam') || label.includes('intagesic') || label.includes('lysoflam') || label.includes('gudgesic') || label.includes('zymoflam') || label.includes('ct')) return { ...med, category: 'Pain killers' };
-      if (label.includes('wonder') || label.includes('lyco') || label.includes('fibro') || label.includes('vitamin') || text.includes('multivitamin') || text.includes('vitamin')) return { ...med, category: 'Multivitamins' };
-      if (label.includes('amox') || label.includes('mox') || label.includes('clavam') || label.includes('aug') || label.includes('zocef') || label.includes('spori') || label.includes('metro') || label.includes('flagyl') || label.includes('antibiotic') || label.includes('zyclav') || label.includes('keebiotic') || text.includes('cap') || text.includes('tab.')) return { ...med, category: 'Antibiotics' };
-      return { ...med, category: 'Others' };
+      let computedCategory = 'Others';
+      if (label.includes('gel') || text.includes('gel') || text.includes('apply on')) computedCategory = 'Gels';
+      else if (label.includes('mouthwash') || label.includes('m/w') || text.includes('mouthwash') || text.includes('rinse')) computedCategory = 'Mouthwash';
+      else if (label.includes('toothpaste') || label.includes('paste') || text.includes('toothpaste') || text.includes('brush')) computedCategory = 'Toothpaste';
+      else if (label.includes('pan-') || label.includes('pantocid') || label.includes('rantac') || label.includes('ranidom') || label.includes('cyra') || label.includes('rabeprazole') || text.includes('before food') || text.includes('acidity')) computedCategory = 'Gas/Acidity';
+      else if (label.includes('paracetamol') || label.includes('zerodol') || label.includes('ketorol') || label.includes('pain') || label.includes('enzoflam') || label.includes('intagesic') || label.includes('lysoflam') || label.includes('gudgesic') || label.includes('zymoflam') || label.includes('ct')) computedCategory = 'Pain killers';
+      else if (label.includes('wonder') || label.includes('lyco') || label.includes('fibro') || label.includes('vitamin') || text.includes('multivitamin') || text.includes('vitamin')) computedCategory = 'Multivitamins';
+      else if (label.includes('amox') || label.includes('mox') || label.includes('clavam') || label.includes('aug') || label.includes('zocef') || label.includes('spori') || label.includes('metro') || label.includes('flagyl') || label.includes('antibiotic') || label.includes('zyclav') || label.includes('keebiotic') || text.includes('cap') || text.includes('tab.')) computedCategory = 'Antibiotics';
+      
+      return { ...med, category: computedCategory, price };
     });
   };
 
@@ -352,6 +369,59 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
       setEstimateStatus('Draft');
     }
   }, [customer, open]);
+
+  // Sync Rx Medicines to Billing estimateItems
+  const syncRxMedicinesToBilling = useCallback((showToastOnNoNew = false) => {
+    const rxText = form.prescription || '';
+    if (!rxText.trim()) {
+      if (showToastOnNoNew) {
+        toast.info("No prescription text found to sync medicines from.");
+      }
+      return;
+    }
+
+    const allMeds = medicationsList.length > 0 ? medicationsList : migrateMedications([]);
+    const lines = rxText.split('\n').map(l => l.trim()).filter(Boolean);
+
+    setEstimateItems(prev => {
+      const newItems: typeof estimateItems = [];
+      lines.forEach(line => {
+        const matchedMed = allMeds.find(med => 
+          line.toLowerCase().includes(med.label.toLowerCase())
+        );
+
+        if (matchedMed && matchedMed.price > 0) {
+          const procedureName = `[${matchedMed.label}] (Medicine)`;
+          const alreadyExists = prev.some(item => item.procedure === procedureName) ||
+                                newItems.some(item => item.procedure === procedureName);
+
+          if (!alreadyExists) {
+            newItems.push({
+              procedure: procedureName,
+              cost: matchedMed.price,
+              isCosmetic: false
+            });
+          }
+        }
+      });
+
+      if (newItems.length > 0) {
+        toast.success(`Synced ${newItems.length} medicine(s) from prescription to billing.`);
+        return [...prev, ...newItems];
+      } else {
+        if (showToastOnNoNew) {
+          toast.info("All medicines in the prescription are already in the billing list.");
+        }
+        return prev;
+      }
+    });
+  }, [form.prescription, medicationsList]);
+
+  useEffect(() => {
+    if (activeTab === 'estimates') {
+      syncRxMedicinesToBilling(false);
+    }
+  }, [activeTab, syncRxMedicinesToBilling]);
 
   // Calculation Hooks
   const calculatedSubtotal = useMemo(() => {
@@ -2819,8 +2889,10 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                           const text = prompt("Enter prescription text:", `• Tab. ${label} - 1 tab twice daily for 5 days`);
                           if (!text) return;
                           const category = prompt("Enter category (Pain killers, Antibiotics, Multivitamins, Toothpaste, Mouthwash, Gels, Gas/Acidity, Others):", "Others");
+                          const priceStr = prompt("Enter medicine price (₹):", "0");
+                          const price = Number(priceStr) || 0;
                           
-                          const newMed = { label, text, category: category || 'Others' };
+                          const newMed = { label, text, category: category || 'Others', price };
                           setMedicationsList(prev => [...prev, newMed]);
                           // Save to local storage
                           try {
@@ -3071,9 +3143,16 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                                           
                                           <div className="min-w-0">
                                             <h6 className="text-[11.5px] font-bold text-slate-800 truncate leading-snug">{highlightMatch(med.label, searchRxQuery)}</h6>
-                                            <span className="inline-block text-[8.5px] font-semibold text-slate-400 bg-slate-50 border border-slate-100 rounded px-1.5 py-0.5 leading-none mt-0.5 uppercase tracking-wider">
-                                              {med.category}
-                                            </span>
+                                            <div className="flex items-center gap-1.5 mt-0.5">
+                                              <span className="inline-block text-[8.5px] font-semibold text-slate-400 bg-slate-50 border border-slate-100 rounded px-1.5 py-0.5 leading-none uppercase tracking-wider">
+                                                {med.category}
+                                              </span>
+                                              {med.price > 0 && (
+                                                <span className="inline-block text-[8.5px] font-bold text-emerald-600 bg-emerald-50 border border-emerald-100 rounded px-1.5 py-0.5 leading-none font-mono">
+                                                  ₹{med.price}
+                                                </span>
+                                              )}
+                                            </div>
                                           </div>
                                         </div>
 
@@ -3115,7 +3194,20 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                                                 } else {
                                                   handleChange('prescription', med.text);
                                                 }
-                                                toast.success(`${med.label} added to prescription`);
+
+                                                if (med.price && med.price > 0) {
+                                                  setEstimateItems((prev) => [
+                                                    ...prev,
+                                                    {
+                                                      procedure: `${med.label} (Medicine)`,
+                                                      cost: med.price,
+                                                      isCosmetic: false
+                                                    }
+                                                  ]);
+                                                  toast.success(`${med.label} added to prescription and billing (₹${med.price})`);
+                                                } else {
+                                                  toast.success(`${med.label} added to prescription`);
+                                                }
                                               }}
                                               className="w-7 h-7 rounded-lg bg-indigo-50 hover:bg-indigo-100 text-indigo-600 flex items-center justify-center transition-colors font-bold text-sm shrink-0"
                                               title="Add item"
@@ -3651,7 +3743,7 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                         </div>
                         <div>
                           <h4 className="text-[13px] font-bold text-slate-800 uppercase tracking-wider">Treatment Done</h4>
-                          <p className="text-[10.5px] text-slate-505 mt-0.5">Add procedures completed during the consultation</p>
+                          <p className="text-[10.5px] text-slate-500 mt-0.5">Add procedures completed during the consultation</p>
                         </div>
                       </div>
 
@@ -3661,7 +3753,7 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                           <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-1.5">Tooth / Area</label>
                           <div className="flex items-stretch border border-slate-200 rounded-xl overflow-hidden focus-within:border-indigo-500 focus-within:ring-1 focus-within:ring-indigo-500/20 bg-white">
                             <div className="bg-slate-50 border-r border-slate-200 px-3.5 flex items-center justify-center text-slate-400 shrink-0">
-                              <svg className="w-4.5 h-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                                 <path d="M12 2C8.5 2 6 4.5 6 8c0 3.5 1 5.5 1.5 7.5.3 1.2.3 2.5.1 3.7L7 21c-.2.9.7 1.5 1.4 1l2.1-1.5c1-.7 2.4-.7 3.4 0l2.1 1.5c.7.5 1.6-.1 1.4-1l-.6-1.8c-.2-1.2-.2-2.5.1-3.7.5-2 1.5-4 1.5-7.5 0-3.5-2.5-6-6-6Z" />
                                 <path d="M12 2v6" />
                               </svg>
@@ -3708,7 +3800,7 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                         <div className="sm:col-span-3">
                           <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-1.5">Amount</label>
                           <div className="flex items-stretch border border-slate-200 rounded-xl overflow-hidden focus-within:border-indigo-500 focus-within:ring-1 focus-within:ring-indigo-500/20 bg-white">
-                            <div className="bg-slate-50 border-r border-slate-200 px-3.5 flex items-center justify-center text-slate-505 font-bold shrink-0 text-[13px]">
+                            <div className="bg-slate-50 border-r border-slate-200 px-3.5 flex items-center justify-center text-slate-500 font-bold shrink-0 text-[13px]">
                               ₹
                             </div>
                             <input
@@ -3746,9 +3838,18 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
 
                     {/* Estimate Items Table */}
                     <div className="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
-                      <div className="px-4.5 py-3 bg-slate-50/80 border-b border-slate-200 flex items-center justify-between flex-wrap gap-2.5">
+                      <div className="px-4 sm:px-6 py-3 bg-slate-50/80 border-b border-slate-200 flex items-center justify-between flex-wrap gap-2.5">
                         <span className="text-[11.5px] font-bold text-slate-800 uppercase tracking-wider">Current Treatment Summary</span>
                         <div className="flex items-center gap-3">
+                          <button
+                            type="button"
+                            onClick={() => syncRxMedicinesToBilling(true)}
+                            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[10.5px] font-bold uppercase border bg-white border-slate-200 text-slate-700 hover:bg-indigo-50 hover:border-indigo-200 hover:text-indigo-600 transition-all shadow-sm cursor-pointer"
+                          >
+                            <RefreshCw size={11} />
+                            Sync Rx Meds
+                          </button>
+
                           <button
                             type="button"
                             onClick={generateDefaultPDF}
@@ -3780,7 +3881,7 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                       {estimateItems.length > 0 ? (
                         <div className="divide-y divide-slate-100 max-h-[250px] overflow-y-auto">
                           {estimateItems.map((item, idx) => (
-                            <div key={idx} className="px-4.5 py-3.5 flex items-center justify-between text-[12.5px] hover:bg-slate-50/50 transition-colors">
+                            <div key={idx} className="px-4 sm:px-6 py-3.5 flex items-center justify-between text-[12.5px] hover:bg-slate-50/50 transition-colors">
                               <div className="space-y-1">
                                 <div className="flex items-center gap-2">
                                   {item.tooth && (
@@ -3790,7 +3891,7 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                                   )}
                                   <span className="text-slate-800 font-semibold">{item.procedure}</span>
                                 </div>
-                                <div className="flex items-center gap-1.5 text-[10.5px] text-slate-505">
+                                <div className="flex items-center gap-1.5 text-[10.5px] text-slate-500">
                                   <span>{item.isCosmetic ? 'Cosmetic Dental (18% GST)' : 'Therapeutic Care (0% GST)'}</span>
                                 </div>
                               </div>
@@ -3815,7 +3916,7 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                       )}
 
                       {/* Calculations summary panel */}
-                      <div className="bg-slate-50/50 border-t border-slate-200 p-4.5 space-y-3">
+                      <div className="bg-slate-50/50 border-t border-slate-200 p-4 sm:p-6 space-y-3">
                         <div className="flex justify-between text-[12px] text-slate-600">
                           <span>Subtotal</span>
                           <span className="font-mono font-semibold">₹{calculatedSubtotal.toLocaleString('en-IN')}</span>
@@ -3851,7 +3952,7 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                           </div>
                         )}
 
-                        <div className="flex justify-between text-[12px] text-slate-505">
+                        <div className="flex justify-between text-[12px] text-slate-500">
                           <span>GST <span className="text-[10px] text-slate-400">(Inclusive, Cosmetic)</span></span>
                           <span className="font-mono">₹{calculatedGST.toLocaleString('en-IN')}</span>
                         </div>
@@ -3867,6 +3968,100 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                         </div>
                       </div>
                     </div>
+
+                    {/* NBFC EMI Financing Option */}
+                    {calculatedGrandTotal >= 3000 && (
+                      <div className="bg-gradient-to-tr from-indigo-50/70 via-white to-slate-50 border border-indigo-150 rounded-2xl p-5 space-y-4 shadow-sm text-left">
+                        {localStorage.getItem('emi_partner_status') === 'Active' ? (
+                          <>
+                            {(() => {
+                              const activePartner = localStorage.getItem('emi_partner_name') || 'LiquiLoans';
+                              const plans = activePartner === 'Axis Bank (Jarvis)' 
+                                ? [
+                                    { months: 6, label: '6 Months', rate: '0% Interest' },
+                                    { months: 12, label: '12 Months', rate: '0% Interest' },
+                                    { months: 18, label: '18 Months', rate: 'No Cost EMI' },
+                                    { months: 24, label: '24 Months', rate: 'Low Cost EMI' }
+                                  ]
+                                : [
+                                    { months: 3, label: '3 Months', rate: '0% Interest' },
+                                    { months: 6, label: '6 Months', rate: '0% Interest' },
+                                    { months: 9, label: '9 Months', rate: 'No Cost EMI' }
+                                  ];
+                              return (
+                                <>
+                                  <div className="flex items-center justify-between">
+                                    <div className="flex items-center gap-2.5">
+                                      <div className="w-8 h-8 rounded-lg bg-indigo-500/10 flex items-center justify-center text-indigo-655 border border-indigo-100">
+                                        <Zap size={16} className="text-indigo-600 animate-pulse" />
+                                      </div>
+                                      <div>
+                                        <h4 className="text-[13px] font-bold text-slate-800 uppercase tracking-wider">{activePartner === 'Axis Bank (Jarvis)' ? 'Axis Bank Personal Loan / EMI' : '0% Interest Dental EMI'}</h4>
+                                        <p className="text-[10px] text-slate-400 font-medium">Partnered with {activePartner}</p>
+                                      </div>
+                                    </div>
+                                    <span className="px-2.5 py-1 rounded-full text-[9px] font-bold uppercase bg-emerald-50 border border-emerald-200 text-emerald-700 tracking-wider">
+                                      Instant Approval
+                                    </span>
+                                  </div>
+
+                                  <div className={`grid gap-3 grid-cols-2 md:grid-cols-${plans.length}`}>
+                                    {plans.map((plan) => {
+                                      const monthlyAmount = Math.round(calculatedGrandTotal / plan.months);
+                                      return (
+                                        <div key={plan.months} className="bg-white border border-slate-200 hover:border-indigo-300 rounded-xl p-3 text-center space-y-1 hover:shadow-sm transition-all duration-150 cursor-pointer group">
+                                          <span className="block text-[10px] font-bold uppercase tracking-wider text-slate-400 group-hover:text-indigo-500">{plan.label}</span>
+                                          <span className="block text-[13px] font-black text-slate-800 font-mono">₹{monthlyAmount.toLocaleString('en-IN')}<span className="text-[9px] font-bold text-slate-400">/mo</span></span>
+                                          <span className="inline-block text-[8px] font-bold px-1.5 py-0.5 rounded bg-indigo-50 text-indigo-600">{plan.rate}</span>
+                                        </div>
+                                      );
+                                    })}
+                                  </div>
+                                </>
+                              );
+                            })()}
+
+                            <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] bg-slate-50 rounded-xl px-3.5 py-2.5 border border-slate-200">
+                              <div className="flex items-center gap-1.5 text-slate-600 font-medium">
+                                <CheckSquare className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
+                                <span>Paperless KYC & digital Axis underwriting</span>
+                              </div>
+                              <button 
+                                type="button" 
+                                onClick={() => toast.success("EMI Application link sent successfully to the patient via SMS and WhatsApp.")}
+                                className="w-full sm:w-auto text-center px-3.5 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-[10.5px] font-bold transition-all shadow-sm shadow-indigo-600/10 hover:shadow-indigo-600/20 active:scale-[0.98] cursor-pointer shrink-0"
+                              >
+                                Apply Now
+                              </button>
+                            </div>
+                          </>
+                        ) : (
+                          <>
+                            <div className="flex items-center justify-between">
+                              <div className="flex items-center gap-2.5">
+                                <div className="w-8 h-8 rounded-lg bg-indigo-500/10 flex items-center justify-center text-indigo-655 border border-indigo-100">
+                                  <Zap size={16} className="text-indigo-600 animate-pulse" />
+                                </div>
+                                <div>
+                                  <h4 className="text-[13px] font-bold text-slate-800 uppercase tracking-wider">0% Interest Dental EMI</h4>
+                                  <p className="text-[10px] text-slate-400 font-medium">Financing not configured yet</p>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="p-4 bg-slate-50 rounded-xl border border-dashed border-slate-200 text-center space-y-3">
+                              <p className="text-[11.5px] text-slate-500 leading-relaxed max-w-md mx-auto font-medium">
+                                Offer low-cost treatment financing to your patients. Go to Clinic Settings to choose an NBFC partner and activate the 0% interest EMI integration.
+                              </p>
+                              <div className="text-center">
+                                <span className="text-[10.5px] font-bold text-indigo-600 bg-indigo-50 border border-indigo-100 px-3 py-1.5 rounded-lg">
+                                  NBFC Partnership Setup Required
+                                </span>
+                              </div>
+                            </div>
+                          </>
+                        )}
+                      </div>
+                    )}
                   </div>
                 )}
 

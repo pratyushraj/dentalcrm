@@ -690,12 +690,48 @@ const ReactivationCustomers: React.FC = () => {
     window.open(`https://wa.me/${digits}?text=${message}`, '_blank', 'noopener,noreferrer');
   };
 
-  const handleMarkSeen = (id: string) => {
+  const handleMarkSeen = async (id: string) => {
+    const todayString = new Date().toISOString().split('T')[0];
+    const customerObj = customers.find((c) => c.id === id);
+    const currentVitals = customerObj?.vitals || {};
+    // Explicitly set nextVisitDate to empty string so it's removed from the upcoming list
+    const updatedVitals = { ...currentVitals, nextVisitDate: '' };
+
+    // 1. Optimistically update local state immediately (fast UI, works offline too)
     setDismissedAppointmentIds((prev) => {
       const next = new Set(prev);
       next.add(id);
       return next;
     });
+    setCustomers((prev) =>
+      prev.map((c) => (c.id === id ? { ...c, lastVisit: todayString, vitals: updatedVitals } : c))
+    );
+
+    try {
+      // 2. Persist update in Supabase 'dental_patients' table
+      const { error } = await supabase
+        .from('dental_patients')
+        .update({ 
+          last_visit: todayString,
+          vitals: updatedVitals
+        })
+        .eq('id', id);
+
+      if (error) throw error;
+      toast.success("Patient marked as seen!");
+    } catch (err) {
+      console.error("Error marking patient as seen:", err);
+      // Revert local state on failure
+      setCustomers((prev) =>
+        prev.map((c) => (c.id === id ? { ...c, lastVisit: customerObj?.lastVisit ?? c.lastVisit, vitals: currentVitals } : c))
+      );
+      setDismissedAppointmentIds((prev) => {
+        const next = new Set(prev);
+        next.delete(id);
+        return next;
+      });
+      toast.error("Failed to mark patient as seen. Please try again.");
+    }
   };
 
   const sendWhatsAppPrescriptionPDF = async (c: Customer) => {

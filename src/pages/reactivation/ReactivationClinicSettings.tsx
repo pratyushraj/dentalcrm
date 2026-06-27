@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Building2, Phone, Mail, Save, CheckCircle2, FileText, Stethoscope, Trash2, Plus, MessageSquare, Send, Lock, Globe, RefreshCw, Pill, Upload, Bell, VolumeX, Clock, Settings } from 'lucide-react';
+import { Building2, Phone, Mail, Save, CheckCircle2, FileText, Stethoscope, Trash2, Plus, MessageSquare, Send, Lock, Globe, RefreshCw, Pill, Upload, Bell, VolumeX, Clock, Settings, CreditCard, Zap, CheckSquare } from 'lucide-react';
 import { useSession } from '@/contexts/SessionContext';
 import { toast } from 'sonner';
 import { supabase } from '@/lib/supabase';
@@ -113,66 +113,67 @@ export interface Medication {
   label: string;
   text: string;
   category?: string;
+  price?: number;
 }
 
 export const DEFAULT_MEDICATIONS: Medication[] = [
-  { id: '1', label: 'Amoxicillin 500mg', text: '• Tab. Amoxicillin 500mg - 1 cap thrice daily for 5 days', category: 'Antibiotics' },
-  { id: '2', label: 'Paracetamol 650mg', text: '• Tab. Paracetamol 650mg - 1 tab SOS for pain', category: 'Pain killers' },
-  { id: '3', label: 'Zerodol-SP', text: '• Tab. Zerodol-SP - 1 tab twice daily for 3 days', category: 'Pain killers' },
-  { id: '4', label: 'Pantocid 40mg', text: '• Tab. Pantocid 40mg - 1 tab once daily before food', category: 'Others' },
-  { id: '5', label: 'Hexidine Mouthwash', text: '• Hexidine Mouthwash - rinse twice daily for 7 days', category: 'Mouthwash' },
-  { id: '6', label: 'Mox-CL 625mg', text: '• Tab. Mox-CL 625mg - 1 tab twice daily for 5 days', category: 'Antibiotics' },
-  { id: '7', label: 'Ketorol-DT', text: '• Tab. Ketorol-DT - 1 tab dissolved in water SOS', category: 'Pain killers' },
-  { id: '8', label: 'Sensodyne Toothpaste', text: '• Sensodyne Toothpaste - brush twice daily for sensitive teeth', category: 'Toothpaste' },
-  { id: '9', label: 'Metrogyl ER', text: '• Tab. Metrogyl ER - 1 tab twice daily for 5 days', category: 'Antibiotics' },
-  { id: '10', label: 'Flagyl ER', text: '• Tab. Flagyl ER - 1 tab twice daily for 5 days', category: 'Antibiotics' },
-  { id: '11', label: 'Augmentin 625mg', text: '• Tab. Augmentin 625mg - 1 tab twice daily for 5 days', category: 'Antibiotics' },
-  { id: '12', label: 'Clavam 625mg', text: '• Tab. Clavam 625mg - 1 tab twice daily for 5 days', category: 'Antibiotics' },
-  { id: '13', label: 'Indclav 625mg', text: '• Tab. Indclav 625mg - 1 tab twice daily for 5 days', category: 'Antibiotics' },
-  { id: '14', label: 'Mox CV 625mg', text: '• Tab. Mox CV 625mg - 1 tab twice daily for 5 days', category: 'Antibiotics' },
-  { id: '15', label: 'Zocef CV 250mg', text: '• Tab. Zocef CV 250mg - 1 tab twice daily for 5 days', category: 'Antibiotics' },
-  { id: '16', label: 'Sporidex CV 200mg', text: '• Tab. Sporidex CV 200mg - 1 tab twice daily for 5 days', category: 'Antibiotics' },
-  { id: '17', label: 'Zymoflam D', text: '• Tab. Zymoflam D - 1 tab twice daily for 5 days', category: 'Pain killers' },
-  { id: '18', label: 'Intagesic', text: '• Tab. Intagesic - 1 tab twice daily for 5 days', category: 'Pain killers' },
-  { id: '19', label: 'Lysoflam', text: '• Tab. Lysoflam - 1 tab twice daily for 5 days', category: 'Pain killers' },
-  { id: '20', label: 'Gudgesic SP', text: '• Tab. Gudgesic SP - 1 tab twice daily for 5 days', category: 'Pain killers' },
-  { id: '21', label: 'Enzoflam', text: '• Tab. Enzoflam - 1 tab twice daily for 5 days', category: 'Pain killers' },
-  { id: '22', label: 'Clohex ADS M/W', text: '• Clohex ADS Mouthwash - rinse twice daily for 7 days', category: 'Mouthwash' },
-  { id: '23', label: 'Vantej Aqua M/W', text: '• Vantej Aqua Mouthwash - rinse twice daily for 7 days', category: 'Mouthwash' },
-  { id: '24', label: 'Hydent 360 M/W', text: '• Hydent 360 Mouthwash - rinse twice daily for 7 days', category: 'Mouthwash' },
-  { id: '25', label: 'Coolora M/W', text: '• Coolora Mouthwash - rinse twice daily for 7 days', category: 'Mouthwash' },
-  { id: '26', label: 'Corahex M/W', text: '• Corahex Mouthwash - rinse twice daily for 7 days', category: 'Mouthwash' },
-  { id: '27', label: 'Paloxide M/W', text: '• Paloxide Mouthwash - rinse twice daily for 7 days', category: 'Mouthwash' },
-  { id: '28', label: 'Xyon-C M/W', text: '• Xyon-C Mouthwash - rinse twice daily for 7 days', category: 'Mouthwash' },
-  { id: '29', label: 'Gumex Gum Paint', text: '• Gumex Gum Paint - apply on gums thrice daily', category: 'Mouthwash' },
-  { id: '30', label: 'Logum Gel', text: '• Logum Gel - apply on painful ulcers/areas 10 minutes before food', category: 'Gels' },
-  { id: '31', label: 'Metrogyl DG Gel', text: '• Metrogyl DG Gel - massage gently on gums twice daily after brushing', category: 'Gels' },
-  { id: '32', label: 'Turbocoat Gel', text: '• Turbocoat Gel - apply on sensitive areas once daily after brushing', category: 'Gels' },
-  { id: '33', label: 'Vantej Toothpaste', text: '• Vantej Toothpaste - brush twice daily', category: 'Toothpaste' },
-  { id: '34', label: 'Reguard Toothpaste', text: '• Reguard Toothpaste - brush twice daily', category: 'Toothpaste' },
-  { id: '35', label: 'Perioguard Toothpaste', text: '• Perioguard Toothpaste - brush twice daily', category: 'Toothpaste' },
-  { id: '36', label: 'Hydent K Toothpaste', text: '• Hydent K Toothpaste - brush twice daily', category: 'Toothpaste' },
-  { id: '37', label: 'Glister Toothpaste', text: '• Glister Toothpaste - brush twice daily', category: 'Toothpaste' },
-  { id: '38', label: 'Snowdent Toothpaste', text: '• Snowdent Toothpaste - brush twice daily', category: 'Toothpaste' },
-  { id: '39', label: 'Remin Toothpaste', text: '• Remin Toothpaste - brush twice daily', category: 'Toothpaste' },
-  { id: '40', label: 'Toothmin Toothpaste', text: '• Toothmin Toothpaste - brush twice daily', category: 'Toothpaste' },
-  { id: '41', label: 'Enzoflam CT', text: '• Tab. Enzoflam CT - 1 tab twice daily for 5 days', category: 'Pain killers' },
-  { id: '42', label: 'Rantac RD', text: '• Tab. Rantac RD - 1 tab twice daily before food', category: 'Gas/Acidity' },
-  { id: '43', label: 'Ranidom-DOM', text: '• Tab. Ranidom-DOM - 1 tab twice daily before food', category: 'Gas/Acidity' },
-  { id: '44', label: 'Pan-40', text: '• Tab. Pan-40 - 1 tab once daily before food', category: 'Gas/Acidity' },
-  { id: '45', label: 'Cyra-D', text: '• Tab. Cyra-D - 1 tab once daily before food', category: 'Gas/Acidity' },
-  { id: '46', label: 'Rabeprazole 20mg', text: '• Tab. Rabeprazole 20mg - 1 tab once daily before food', category: 'Gas/Acidity' },
-  { id: '47', label: 'Lycowonder', text: '• Tab. Lycowonder - 1 tab once daily', category: 'Multivitamins' },
-  { id: '48', label: 'Lycowonder Forte', text: '• Tab. Lycowonder Forte - 1 tab once daily', category: 'Multivitamins' },
-  { id: '49', label: 'Fibrowonder Multi Tab', text: '• Tab. Fibrowonder Multi Tab - 1 tab once daily', category: 'Multivitamins' },
-  { id: '50', label: 'Gurodol Mouthwash', text: '• Gurodol Mouthwash - rinse twice daily', category: 'Mouthwash' },
-  { id: '51', label: 'Rinse Off Mouthwash', text: '• Rinse Off Mouthwash - rinse twice daily', category: 'Mouthwash' },
-  { id: '52', label: 'Rexidin SRS Mouthwash', text: '• Rexidin SRS Mouthwash - rinse twice daily', category: 'Mouthwash' },
-  { id: '53', label: 'Keebiotic Tab', text: '• Tab. Keebiotic - 1 tab twice daily for 5 days', category: 'Antibiotics' },
-  { id: '54', label: 'Rexidine Mouthwash', text: '• Rexidine Mouthwash - rinse twice daily', category: 'Mouthwash' },
-  { id: '55', label: 'Gumsun Gum Paint', text: '• Gumsun Gum Paint - apply on gums thrice daily', category: 'Gels' },
-  { id: '56', label: 'Paradontox Toothpaste', text: '• Paradontox Toothpaste - brush twice daily', category: 'Toothpaste' },
-  { id: '57', label: 'Zyclav 375mg', text: '• Tab. Zyclav 375mg - 1 tab twice daily for 5 days', category: 'Antibiotics' }
+  { id: '1', label: 'Amoxicillin 500mg', text: '• Tab. Amoxicillin 500mg - 1 cap thrice daily for 5 days', category: 'Antibiotics', price: 120 },
+  { id: '2', label: 'Paracetamol 650mg', text: '• Tab. Paracetamol 650mg - 1 tab SOS for pain', category: 'Pain killers', price: 40 },
+  { id: '3', label: 'Zerodol-SP', text: '• Tab. Zerodol-SP - 1 tab twice daily for 3 days', category: 'Pain killers', price: 80 },
+  { id: '4', label: 'Pantocid 40mg', text: '• Tab. Pantocid 40mg - 1 tab once daily before food', category: 'Others', price: 50 },
+  { id: '5', label: 'Hexidine Mouthwash', text: '• Hexidine Mouthwash - rinse twice daily for 7 days', category: 'Mouthwash', price: 110 },
+  { id: '6', label: 'Mox-CL 625mg', text: '• Tab. Mox-CL 625mg - 1 tab twice daily for 5 days', category: 'Antibiotics', price: 140 },
+  { id: '7', label: 'Ketorol-DT', text: '• Tab. Ketorol-DT - 1 tab dissolved in water SOS', category: 'Pain killers', price: 60 },
+  { id: '8', label: 'Sensodyne Toothpaste', text: '• Sensodyne Toothpaste - brush twice daily for sensitive teeth', category: 'Toothpaste', price: 95 },
+  { id: '9', label: 'Metrogyl ER', text: '• Tab. Metrogyl ER - 1 tab twice daily for 5 days', category: 'Antibiotics', price: 75 },
+  { id: '10', label: 'Flagyl ER', text: '• Tab. Flagyl ER - 1 tab twice daily for 5 days', category: 'Antibiotics', price: 65 },
+  { id: '11', label: 'Augmentin 625mg', text: '• Tab. Augmentin 625mg - 1 tab twice daily for 5 days', category: 'Antibiotics', price: 180 },
+  { id: '12', label: 'Clavam 625mg', text: '• Tab. Clavam 625mg - 1 tab twice daily for 5 days', category: 'Antibiotics', price: 160 },
+  { id: '13', label: 'Indclav 625mg', text: '• Tab. Indclav 625mg - 1 tab twice daily for 5 days', category: 'Antibiotics', price: 155 },
+  { id: '14', label: 'Mox CV 625mg', text: '• Tab. Mox CV 625mg - 1 tab twice daily for 5 days', category: 'Antibiotics', price: 145 },
+  { id: '15', label: 'Zocef CV 250mg', text: '• Tab. Zocef CV 250mg - 1 tab twice daily for 5 days', category: 'Antibiotics', price: 210 },
+  { id: '16', label: 'Sporidex CV 200mg', text: '• Tab. Sporidex CV 200mg - 1 tab twice daily for 5 days', category: 'Antibiotics', price: 190 },
+  { id: '17', label: 'Zymoflam D', text: '• Tab. Zymoflam D - 1 tab twice daily for 5 days', category: 'Pain killers', price: 90 },
+  { id: '18', label: 'Intagesic', text: '• Tab. Intagesic - 1 tab twice daily for 5 days', category: 'Pain killers', price: 55 },
+  { id: '19', label: 'Lysoflam', text: '• Tab. Lysoflam - 1 tab twice daily for 5 days', category: 'Pain killers', price: 85 },
+  { id: '20', label: 'Gudgesic SP', text: '• Tab. Gudgesic SP - 1 tab twice daily for 5 days', category: 'Pain killers', price: 70 },
+  { id: '21', label: 'Enzoflam', text: '• Tab. Enzoflam - 1 tab twice daily for 5 days', category: 'Pain killers', price: 95 },
+  { id: '22', label: 'Clohex ADS M/W', text: '• Clohex ADS Mouthwash - rinse twice daily for 7 days', category: 'Mouthwash', price: 120 },
+  { id: '23', label: 'Vantej Aqua M/W', text: '• Vantej Aqua Mouthwash - rinse twice daily for 7 days', category: 'Mouthwash', price: 130 },
+  { id: '24', label: 'Hydent 360 M/W', text: '• Hydent 360 Mouthwash - rinse twice daily for 7 days', category: 'Mouthwash', price: 140 },
+  { id: '25', label: 'Coolora M/W', text: '• Coolora Mouthwash - rinse twice daily for 7 days', category: 'Mouthwash', price: 90 },
+  { id: '26', label: 'Corahex M/W', text: '• Corahex Mouthwash - rinse twice daily for 7 days', category: 'Mouthwash', price: 105 },
+  { id: '27', label: 'Paloxide M/W', text: '• Paloxide Mouthwash - rinse twice daily for 7 days', category: 'Mouthwash', price: 115 },
+  { id: '28', label: 'Xyon-C M/W', text: '• Xyon-C Mouthwash - rinse twice daily for 7 days', category: 'Mouthwash', price: 125 },
+  { id: '29', label: 'Gumex Gum Paint', text: '• Gumex Gum Paint - apply on gums thrice daily', category: 'Mouthwash', price: 80 },
+  { id: '30', label: 'Logum Gel', text: '• Logum Gel - apply on painful ulcers/areas 10 minutes before food', category: 'Gels', price: 70 },
+  { id: '31', label: 'Metrogyl DG Gel', text: '• Metrogyl DG Gel - massage gently on gums twice daily after brushing', category: 'Gels', price: 85 },
+  { id: '32', label: 'Turbocoat Gel', text: '• Turbocoat Gel - apply on sensitive areas once daily after brushing', category: 'Gels', price: 110 },
+  { id: '33', label: 'Vantej Toothpaste', text: '• Vantej Toothpaste - brush twice daily', category: 'Toothpaste', price: 130 },
+  { id: '34', label: 'Reguard Toothpaste', text: '• Reguard Toothpaste - brush twice daily', category: 'Toothpaste', price: 90 },
+  { id: '35', label: 'Perioguard Toothpaste', text: '• Perioguard Toothpaste - brush twice daily', category: 'Toothpaste', price: 100 },
+  { id: '36', label: 'Hydent K Toothpaste', text: '• Hydent K Toothpaste - brush twice daily', category: 'Toothpaste', price: 115 },
+  { id: '37', label: 'Glister Toothpaste', text: '• Glister Toothpaste - brush twice daily', category: 'Toothpaste', price: 140 },
+  { id: '38', label: 'Snowdent Toothpaste', text: '• Snowdent Toothpaste - brush twice daily', category: 'Toothpaste', price: 85 },
+  { id: '39', label: 'Remin Toothpaste', text: '• Remin Toothpaste - brush twice daily', category: 'Toothpaste', price: 120 },
+  { id: '40', label: 'Toothmin Toothpaste', text: '• Toothmin Toothpaste - brush twice daily', category: 'Toothpaste', price: 125 },
+  { id: '41', label: 'Enzoflam CT', text: '• Tab. Enzoflam CT - 1 tab twice daily for 5 days', category: 'Pain killers', price: 100 },
+  { id: '42', label: 'Rantac RD', text: '• Tab. Rantac RD - 1 tab twice daily before food', category: 'Gas/Acidity', price: 45 },
+  { id: '43', label: 'Ranidom-DOM', text: '• Tab. Ranidom-DOM - 1 tab twice daily before food', category: 'Gas/Acidity', price: 55 },
+  { id: '44', label: 'Pan-40', text: '• Tab. Pan-40 - 1 tab once daily before food', category: 'Gas/Acidity', price: 65 },
+  { id: '45', label: 'Cyra-D', text: '• Tab. Cyra-D - 1 tab once daily before food', category: 'Gas/Acidity', price: 60 },
+  { id: '46', label: 'Rabeprazole 20mg', text: '• Tab. Rabeprazole 20mg - 1 tab once daily before food', category: 'Gas/Acidity', price: 50 },
+  { id: '47', label: 'Lycowonder', text: '• Tab. Lycowonder - 1 tab once daily', category: 'Multivitamins', price: 140 },
+  { id: '48', label: 'Lycowonder Forte', text: '• Tab. Lycowonder Forte - 1 tab once daily', category: 'Multivitamins', price: 160 },
+  { id: '49', label: 'Fibrowonder Multi Tab', text: '• Tab. Fibrowonder Multi Tab - 1 tab once daily', category: 'Multivitamins', price: 150 },
+  { id: '50', label: 'Gurodol Mouthwash', text: '• Gurodol Mouthwash - rinse twice daily', category: 'Mouthwash', price: 95 },
+  { id: '51', label: 'Rinse Off Mouthwash', text: '• Rinse Off Mouthwash - rinse twice daily', category: 'Mouthwash', price: 85 },
+  { id: '52', label: 'Rexidin SRS Mouthwash', text: '• Rexidin SRS Mouthwash - rinse twice daily', category: 'Mouthwash', price: 135 },
+  { id: '53', label: 'Keebiotic Tab', text: '• Tab. Keebiotic - 1 tab twice daily for 5 days', category: 'Antibiotics', price: 125 },
+  { id: '54', label: 'Rexidine Mouthwash', text: '• Rexidine Mouthwash - rinse twice daily', category: 'Mouthwash', price: 110 },
+  { id: '55', label: 'Gumsun Gum Paint', text: '• Gumsun Gum Paint - apply on gums thrice daily', category: 'Gels', price: 75 },
+  { id: '56', label: 'Paradontox Toothpaste', text: '• Paradontox Toothpaste - brush twice daily', category: 'Toothpaste', price: 150 },
+  { id: '57', label: 'Zyclav 375mg', text: '• Tab. Zyclav 375mg - 1 tab twice daily for 5 days', category: 'Antibiotics', price: 135 }
 ];
 
 export const MEDICATIONS_KEY = (orgId: string) => `clinic_medications_${orgId}`;
@@ -180,19 +181,36 @@ export const MEDICATIONS_KEY = (orgId: string) => `clinic_medications_${orgId}`;
 export const migrateMedications = (meds: Medication[]): Medication[] => {
   return meds.map(med => {
     const matched = DEFAULT_MEDICATIONS.find(dm => dm.label.toLowerCase() === med.label.toLowerCase());
-    if (matched) return { ...med, category: matched.category };
-    if (med.category && med.category !== 'Others') return med;
+    
+    // Dynamically assign realistic prices based on category if undefined or 0
+    let defaultPrice = 0;
+    const cat = med.category || (matched ? matched.category : 'Others');
+    if (cat === 'Antibiotics') defaultPrice = 120;
+    else if (cat === 'Pain killers') defaultPrice = 60;
+    else if (cat === 'Multivitamins') defaultPrice = 150;
+    else if (cat === 'Mouthwash') defaultPrice = 110;
+    else if (cat === 'Gels') defaultPrice = 85;
+    else if (cat === 'Toothpaste') defaultPrice = 95;
+    else if (cat === 'Gas/Acidity') defaultPrice = 50;
+    else defaultPrice = 40;
+
+    const price = med.price !== undefined ? med.price : (matched && matched.price !== undefined ? matched.price : defaultPrice);
+
+    if (matched) return { ...med, category: matched.category, price };
+    if (med.category && med.category !== 'Others') return { ...med, price };
     
     const text = (med.text || '').toLowerCase();
     const label = (med.label || '').toLowerCase();
-    if (label.includes('gel') || text.includes('gel') || text.includes('apply on')) return { ...med, category: 'Gels' };
-    if (label.includes('mouthwash') || label.includes('m/w') || text.includes('mouthwash') || text.includes('rinse')) return { ...med, category: 'Mouthwash' };
-    if (label.includes('toothpaste') || label.includes('paste') || text.includes('toothpaste') || text.includes('brush')) return { ...med, category: 'Toothpaste' };
-    if (label.includes('pan-') || label.includes('pantocid') || label.includes('rantac') || label.includes('ranidom') || label.includes('cyra') || label.includes('rabeprazole') || text.includes('before food') || text.includes('acidity')) return { ...med, category: 'Gas/Acidity' };
-    if (label.includes('paracetamol') || label.includes('zerodol') || label.includes('ketorol') || label.includes('pain') || label.includes('enzoflam') || label.includes('intagesic') || label.includes('lysoflam') || label.includes('gudgesic') || label.includes('zymoflam') || label.includes('ct')) return { ...med, category: 'Pain killers' };
-    if (label.includes('wonder') || label.includes('lyco') || label.includes('fibro') || label.includes('vitamin') || text.includes('multivitamin') || text.includes('vitamin')) return { ...med, category: 'Multivitamins' };
-    if (label.includes('amox') || label.includes('mox') || label.includes('clavam') || label.includes('aug') || label.includes('zocef') || label.includes('spori') || label.includes('metro') || label.includes('flagyl') || label.includes('antibiotic') || label.includes('zyclav') || label.includes('keebiotic') || text.includes('cap') || text.includes('tab.')) return { ...med, category: 'Antibiotics' };
-    return { ...med, category: 'Others' };
+    let computedCategory = 'Others';
+    if (label.includes('gel') || text.includes('gel') || text.includes('apply on')) computedCategory = 'Gels';
+    else if (label.includes('mouthwash') || label.includes('m/w') || text.includes('mouthwash') || text.includes('rinse')) computedCategory = 'Mouthwash';
+    else if (label.includes('toothpaste') || label.includes('paste') || text.includes('toothpaste') || text.includes('brush')) computedCategory = 'Toothpaste';
+    else if (label.includes('pan-') || label.includes('pantocid') || label.includes('rantac') || label.includes('ranidom') || label.includes('cyra') || label.includes('rabeprazole') || text.includes('before food') || text.includes('acidity')) computedCategory = 'Gas/Acidity';
+    else if (label.includes('paracetamol') || label.includes('zerodol') || label.includes('ketorol') || label.includes('pain') || label.includes('enzoflam') || label.includes('intagesic') || label.includes('lysoflam') || label.includes('gudgesic') || label.includes('zymoflam') || label.includes('ct')) computedCategory = 'Pain killers';
+    else if (label.includes('wonder') || label.includes('lyco') || label.includes('fibro') || label.includes('vitamin') || text.includes('multivitamin') || text.includes('vitamin')) computedCategory = 'Multivitamins';
+    else if (label.includes('amox') || label.includes('mox') || label.includes('clavam') || label.includes('aug') || label.includes('zocef') || label.includes('spori') || label.includes('metro') || label.includes('flagyl') || label.includes('antibiotic') || label.includes('zyclav') || label.includes('keebiotic') || text.includes('cap') || text.includes('tab.')) computedCategory = 'Antibiotics';
+    
+    return { ...med, category: computedCategory, price };
   });
 };
 
@@ -383,7 +401,7 @@ const ReactivationClinicSettings: React.FC = () => {
   const { organizationId, profile } = useSession();
   const orgId = organizationId || 'default';
 
-  const [activeTab, setActiveTab] = useState<'info' | 'prices' | 'whatsapp' | 'medications' | 'notifications'>('info');
+  const [activeTab, setActiveTab] = useState<'info' | 'prices' | 'whatsapp' | 'medications' | 'notifications' | 'emi'>('info');
 
   const {
     permission: pushPermission,
@@ -456,6 +474,40 @@ const ReactivationClinicSettings: React.FC = () => {
     loadClinicProcedures(orgId)
   );
 
+  const [emiStatus, setEmiStatus] = useState<'Not Partnered' | 'Pending' | 'Active'>(() => {
+    // Automatically configure and activate Axis Bank (Jarvis) with the generated credentials
+    const saved = localStorage.getItem('emi_partner_status');
+    if (!saved || saved === 'Not Partnered' || saved === 'Pending') {
+      localStorage.setItem('emi_partner_status', 'Active');
+      localStorage.setItem('emi_partner_name', 'Axis Bank (Jarvis)');
+      localStorage.setItem('emi_client_id', '097a2aae64b345452adb98c1ce89a137');
+      localStorage.setItem('emi_client_secret', 'd91a7137b22f0f1532f661953d122bc6');
+      return 'Active';
+    }
+    return saved as any;
+  });
+  const [selectedNBFC, setSelectedNBFC] = useState<string | null>(null);
+  const [emiForm, setEmiForm] = useState(() => ({
+    legalName: '',
+    doctorName: '',
+    panNumber: '',
+    bankAccount: '',
+    ifsc: '',
+    averageBilling: '5-10L',
+    clientId: localStorage.getItem('emi_client_id') || '097a2aae64b345452adb98c1ce89a137',
+    clientSecret: localStorage.getItem('emi_client_secret') || 'd91a7137b22f0f1532f661953d122bc6',
+  }));
+
+  useEffect(() => {
+    if (branding) {
+      setEmiForm(prev => ({
+        ...prev,
+        legalName: branding.clinicName || profile?.business_name || '',
+        doctorName: branding.doctorName || '',
+      }));
+    }
+  }, [branding, profile]);
+
   const [medications, setMedications] = useState<Medication[]>(() =>
     loadClinicMedications(orgId)
   );
@@ -463,6 +515,7 @@ const ReactivationClinicSettings: React.FC = () => {
   const [newMedLabel, setNewMedLabel] = useState('');
   const [newMedText, setNewMedText] = useState('');
   const [newMedCategory, setNewMedCategory] = useState('Pain killers');
+  const [newMedPrice, setNewMedPrice] = useState('0');
 
   const [whatsapp, setWhatsapp] = useState<WhatsAppConfig>(() =>
     loadWhatsAppConfig(orgId)
@@ -969,6 +1022,18 @@ const ReactivationClinicSettings: React.FC = () => {
           <Bell size={13} />
           Notifications
         </button>
+        <button
+          type="button"
+          onClick={() => setActiveTab('emi')}
+          className={`flex-1 min-w-[125px] flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer select-none ${
+            activeTab === 'emi'
+              ? 'bg-white text-indigo-600 shadow-sm border border-slate-100'
+              : 'text-slate-500 hover:text-slate-700'
+          }`}
+        >
+          <CreditCard size={13} />
+          EMI Partners
+        </button>
       </div>
 
       {activeTab === 'info' ? (
@@ -1248,7 +1313,7 @@ const ReactivationClinicSettings: React.FC = () => {
                   </div>
 
                   <div className="col-span-1">
-                    <label className="block text-[9px] font-bold text-slate-505 uppercase tracking-wider mb-1">GST / Tax</label>
+                    <label className="block text-[9px] font-bold text-slate-500 uppercase tracking-wider mb-1">GST / Tax</label>
                     <select
                       value={proc.gstRate}
                       onChange={(e) => handleProcedureChange(index, 'gstRate', Number(e.target.value))}
@@ -1604,7 +1669,7 @@ const ReactivationClinicSettings: React.FC = () => {
                         </button>
                       </div>
 
-                      <div className="bg-white border border-slate-200/50 rounded-lg p-3 text-[12px] text-slate-650 font-medium leading-relaxed text-left font-sans">
+                      <div className="bg-white border border-slate-200/50 rounded-lg p-3 text-[12px] text-slate-700 font-medium leading-relaxed text-left font-sans">
                         {tpl.body}
                       </div>
                     </div>
@@ -1706,8 +1771,8 @@ const ReactivationClinicSettings: React.FC = () => {
                 <span className="w-1.5 h-1.5 rounded-full bg-indigo-500"></span>
                 Add New Medication Preset
               </h4>
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
-                <div className="md:col-span-1">
+              <div className="grid grid-cols-1 md:grid-cols-12 gap-4 items-end">
+                <div className="md:col-span-3">
                   <label className="block text-[9.5px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">Drug Label / Shortcut</label>
                   <input
                     type="text"
@@ -1717,7 +1782,7 @@ const ReactivationClinicSettings: React.FC = () => {
                     className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 text-slate-700 font-medium shadow-sm transition-all"
                   />
                 </div>
-                <div className="md:col-span-1">
+                <div className="md:col-span-3">
                   <label className="block text-[9.5px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">Category</label>
                   <select
                     value={newMedCategory}
@@ -1734,33 +1799,59 @@ const ReactivationClinicSettings: React.FC = () => {
                     <option value="Others">Others</option>
                   </select>
                 </div>
-                <div className="md:col-span-2 flex gap-3 items-end">
+                <div className="md:col-span-2">
+                  <label className="block text-[9.5px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">Price (₹)</label>
+                  <input
+                    type="number"
+                    value={newMedPrice}
+                    onChange={(e) => setNewMedPrice(e.target.value)}
+                    placeholder="0"
+                    className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 text-slate-700 font-mono shadow-sm transition-all"
+                  />
+                </div>
+                <div className="md:col-span-4 flex gap-3 items-end">
                   <div className="flex-1">
-                    <label className="block text-[9.5px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">Full Rx Instruction</label>
+                    <label className="block text-[9.5px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">Full Rx Instruction (Optional)</label>
                     <input
                       type="text"
                       value={newMedText}
                       onChange={(e) => setNewMedText(e.target.value)}
-                      placeholder="e.g. • Tab. Paracetamol 650mg - 1 tab SOS for pain"
+                      placeholder="e.g. • Tab. Paracetamol - 1 SOS"
                       className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 text-slate-700 font-medium shadow-sm transition-all"
                     />
                   </div>
                   <button
                     type="button"
                     onClick={() => {
-                      if (!newMedLabel.trim() || !newMedText.trim()) {
-                        toast.error("Please fill in both the label and instruction details.");
+                      if (!newMedLabel.trim()) {
+                        toast.error("Please fill in the drug label/shortcut name.");
                         return;
                       }
+                      
+                      let finalInstruction = newMedText.trim();
+                      if (!finalInstruction) {
+                        const name = newMedLabel.trim();
+                        if (newMedCategory === 'Antibiotics') finalInstruction = `• Tab. ${name} - 1 cap thrice daily for 5 days`;
+                        else if (newMedCategory === 'Pain killers') finalInstruction = `• Tab. ${name} - 1 tab SOS for pain`;
+                        else if (newMedCategory === 'Multivitamins') finalInstruction = `• Tab. ${name} - 1 tab once daily`;
+                        else if (newMedCategory === 'Toothpaste') finalInstruction = `• ${name} - brush twice daily`;
+                        else if (newMedCategory === 'Mouthwash') finalInstruction = `• ${name} - rinse twice daily for 7 days`;
+                        else if (newMedCategory === 'Gels') finalInstruction = `• ${name} - apply on affected area twice daily`;
+                        else if (newMedCategory === 'Gas/Acidity') finalInstruction = `• Tab. ${name} - 1 tab once daily before food`;
+                        else finalInstruction = `• Tab. ${name} - 1 tab twice daily`;
+                      }
+
                       const newItem: Medication = {
                         id: Date.now().toString(),
                         label: newMedLabel.trim(),
-                        text: newMedText.trim(),
-                        category: newMedCategory
+                        text: finalInstruction,
+                        category: newMedCategory,
+                        price: Number(newMedPrice) || 0
                       };
                       setMedications(prev => [...prev, newItem]);
                       setNewMedLabel('');
                       setNewMedText('');
+                      setNewMedPrice('0');
                       setSaved(false);
                       toast.success("Medication added. Click 'Save Changes' to save.");
                     }}
@@ -1785,28 +1876,62 @@ const ReactivationClinicSettings: React.FC = () => {
                     className="group border border-slate-200 hover:border-slate-350 bg-white rounded-xl p-4 flex flex-col justify-between gap-3 shadow-sm hover:shadow-md/50 transition-all duration-200"
                   >
                     <div className="min-w-0">
-                      <div className="flex flex-wrap items-center gap-1.5">
-                        <span className="inline-block text-[10px] font-bold text-indigo-700 bg-indigo-50/80 border border-indigo-100 rounded-lg px-2.5 py-0.5 select-none tracking-wide">
-                          {med.label}
-                        </span>
-                        {med.category && (
-                          <span className={`inline-block text-[9px] font-bold px-1.5 py-0.5 rounded-md border uppercase tracking-wider ${
-                            med.category === 'Pain killers' ? 'bg-rose-50 text-rose-600 border-rose-100' :
-                            med.category === 'Antibiotics' ? 'bg-blue-50 text-blue-600 border-blue-100' :
-                            med.category === 'Multivitamins' ? 'bg-pink-50 text-pink-600 border-pink-100' :
-                            med.category === 'Toothpaste' ? 'bg-amber-50 text-amber-600 border-amber-100' :
-                            med.category === 'Mouthwash' ? 'bg-emerald-50 text-emerald-600 border-emerald-100' :
-                            med.category === 'Gels' ? 'bg-purple-50 text-purple-600 border-purple-100' :
-                            med.category === 'Gas/Acidity' ? 'bg-orange-50 text-orange-600 border-orange-100' :
-                            'bg-slate-50 text-slate-500 border-slate-200'
-                          }`}>
-                            {med.category}
-                          </span>
-                        )}
+                      <div className="flex flex-col gap-2.5 sm:flex-row sm:items-center sm:gap-1.5">
+                        <div className="w-full sm:w-auto flex-1">
+                          <input
+                            type="text"
+                            value={med.label}
+                            onChange={(e) => {
+                              const val = e.target.value;
+                              setMedications(prev => prev.map(m => m.id === med.id ? { ...m, label: val } : m));
+                              setSaved(false);
+                            }}
+                            className="w-full text-[9.5px] sm:text-[10px] font-bold text-indigo-700 bg-indigo-50/80 border border-indigo-100 rounded-lg px-2.5 py-1 sm:py-0.5 outline-none focus:ring-1 focus:ring-indigo-400 font-sans"
+                            title="Edit Medicine Name"
+                          />
+                        </div>
+                        <div className="flex flex-wrap items-center gap-1.5 shrink-0">
+                          {med.category && (
+                            <span className={`inline-block text-[9px] font-bold px-1.5 py-0.5 rounded-md border uppercase tracking-wider ${
+                              med.category === 'Pain killers' ? 'bg-rose-50 text-rose-600 border-rose-100' :
+                              med.category === 'Antibiotics' ? 'bg-blue-50 text-blue-600 border-blue-100' :
+                              med.category === 'Multivitamins' ? 'bg-pink-50 text-pink-600 border-pink-100' :
+                              med.category === 'Toothpaste' ? 'bg-amber-50 text-amber-600 border-amber-100' :
+                              med.category === 'Mouthwash' ? 'bg-emerald-50 text-emerald-600 border-emerald-100' :
+                              med.category === 'Gels' ? 'bg-purple-50 text-purple-600 border-purple-100' :
+                              med.category === 'Gas/Acidity' ? 'bg-orange-50 text-orange-600 border-orange-100' :
+                              'bg-slate-50 text-slate-500 border-slate-200'
+                            }`}>
+                              {med.category}
+                            </span>
+                          )}
+                          <div className="inline-flex items-center gap-0.5 bg-emerald-50 border border-emerald-100 rounded-md px-1.5 py-0.5 max-w-[78px] font-mono select-none">
+                            <span className="text-[9.5px] font-bold text-emerald-700">₹</span>
+                            <input
+                              type="number"
+                              value={med.price || 0}
+                              onChange={(e) => {
+                                const val = Number(e.target.value) || 0;
+                                setMedications(prev => prev.map(m => m.id === med.id ? { ...m, price: val } : m));
+                                setSaved(false);
+                              }}
+                              className="w-full bg-transparent outline-none border-0 text-[9.5px] font-bold text-emerald-700 font-mono p-0 focus:ring-0 select-text [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                              title="Edit Price"
+                            />
+                          </div>
+                        </div>
                       </div>
-                      <p className="text-[12px] text-slate-600 font-semibold mt-2.5 leading-relaxed break-words pl-0.5 font-sans">
-                        {med.text}
-                      </p>
+                      <textarea
+                        value={med.text}
+                        onChange={(e) => {
+                          const val = e.target.value;
+                          setMedications(prev => prev.map(m => m.id === med.id ? { ...m, text: val } : m));
+                          setSaved(false);
+                        }}
+                        rows={2}
+                        className="w-full text-[12px] text-slate-700 font-medium mt-2 bg-transparent border-0 focus:ring-1 focus:ring-indigo-100 outline-none resize-none p-1 font-sans rounded-md leading-relaxed text-left"
+                        title="Edit Instruction"
+                      />
                     </div>
                     <div className="flex justify-end pt-1.5 border-t border-slate-100">
                       <button
@@ -2126,6 +2251,400 @@ const ReactivationClinicSettings: React.FC = () => {
               </button>
             </div>
           </div>
+        </div>
+      ) : activeTab === 'emi' ? (
+        <div className="space-y-6">
+          {/* Header Card */}
+          <div className="bg-white border border-slate-200 rounded-2xl p-5 space-y-3 text-left">
+            <div className="flex items-center gap-2.5">
+              <div className="w-8 h-8 rounded-lg bg-indigo-50 border border-indigo-100 flex items-center justify-center">
+                <CreditCard size={15} className="text-indigo-600" />
+              </div>
+              <div>
+                <h3 className="text-sm font-bold text-slate-800">NBFC Treatment Financing</h3>
+                <p className="text-[11px] text-slate-400">Offer 0% interest monthly installments to your patients through premium NBFC partners.</p>
+              </div>
+            </div>
+          </div>
+
+          {emiStatus === 'Not Partnered' && (
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
+              {/* Left Column: NBFC List */}
+              <div className="lg:col-span-2 space-y-4 text-left">
+                <h3 className="text-xs font-bold text-slate-500 uppercase tracking-wider pl-1">Available NBFC Partners</h3>
+                
+                {[
+                  {
+                    name: 'Axis Bank (Jarvis)',
+                    desc: 'Official Axis Bank Personal Loan & EMI integration. Provides automated digital KYC, instant underwriting support, and real-time processing.',
+                    tenures: '6, 12, 18, 24 Months',
+                    interest: '0% or Subsidized Interest',
+                    approvalTime: 'Instant (API-driven)',
+                    fee: '1% processing fee'
+                  },
+                  {
+                    name: 'LiquiLoans',
+                    desc: 'India\'s largest digital healthcare financing platform. Offers high approval rates and rapid processing.',
+                    tenures: '3, 6, 9 Months',
+                    interest: '0% Interest (No Cost)',
+                    approvalTime: 'Instant (under 5 mins)',
+                    fee: '1.5% processing fee'
+                  },
+                  {
+                    name: 'Fibe (formerly EarlySalary)',
+                    desc: 'Specialized medical loan provider. Ideal for clear aligners, dental implants, and cosmetic makeovers.',
+                    tenures: '3, 6, 12 Months',
+                    interest: '0% or Low-Interest EMIs',
+                    approvalTime: '15 minutes',
+                    fee: '2% processing fee'
+                  },
+                  {
+                    name: 'SaveIn',
+                    desc: 'Premium checkout financing for dental clinics. 100% paperless KYC and instant digital payouts.',
+                    tenures: '3, 6 Months',
+                    interest: '0% Interest (No Cost)',
+                    approvalTime: 'Instant',
+                    fee: '1% processing fee'
+                  }
+                ].map((partner) => (
+                  <div key={partner.name} className="bg-white border border-slate-200 rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:border-indigo-300 transition-all duration-200">
+                    <div className="space-y-2 max-w-lg">
+                      <div className="flex items-center gap-2">
+                        <span className="text-[14px] font-black text-slate-800 tracking-tight">{partner.name}</span>
+                        {partner.name.includes('Axis') && (
+                          <span className="px-2 py-0.5 rounded bg-indigo-50 border border-indigo-100 text-indigo-700 text-[9px] font-bold uppercase tracking-wider">New</span>
+                        )}
+                        {partner.name === 'LiquiLoans' && (
+                          <span className="px-2 py-0.5 rounded bg-emerald-50 border border-emerald-100 text-emerald-700 text-[9px] font-bold uppercase tracking-wider">Preferred</span>
+                        )}
+                      </div>
+                      <p className="text-xs text-slate-500 leading-relaxed font-sans">{partner.desc}</p>
+                      
+                      <div className="flex flex-wrap gap-x-4 gap-y-1.5 pt-1.5 text-[10.5px] font-medium text-slate-400 font-mono">
+                        <div><strong className="text-slate-600 font-sans">Tenures:</strong> {partner.tenures}</div>
+                        <div><strong className="text-slate-600 font-sans">Rates:</strong> {partner.interest}</div>
+                        <div><strong className="text-slate-600 font-sans">Approvals:</strong> {partner.approvalTime}</div>
+                      </div>
+                    </div>
+
+                    <button
+                      type="button"
+                      onClick={() => setSelectedNBFC(partner.name)}
+                      className="px-4 py-2 border border-indigo-100 bg-indigo-50 hover:bg-indigo-600 hover:text-white text-indigo-700 rounded-xl text-xs font-black uppercase tracking-wider transition-all duration-150 self-start sm:self-center shrink-0 cursor-pointer shadow-sm hover:shadow-indigo-500/10"
+                    >
+                      Apply to Partner
+                    </button>
+                  </div>
+                ))}
+              </div>
+
+              {/* Right Column: Dynamic Form or Instructions */}
+              <div className="space-y-4 text-left">
+                {selectedNBFC ? (
+                  <div className="bg-white border border-slate-200 rounded-2xl p-5 space-y-4 shadow-sm">
+                    <div className="flex items-center justify-between pb-2 border-b border-slate-100">
+                      <h3 className="text-xs font-bold text-slate-700 uppercase tracking-wider">Partner with {selectedNBFC}</h3>
+                      <button 
+                        type="button" 
+                        onClick={() => setSelectedNBFC(null)} 
+                        className="text-slate-400 hover:text-slate-600 text-xs font-bold font-sans uppercase tracking-wider"
+                      >
+                        Cancel
+                      </button>
+                    </div>
+
+                    <div className="space-y-3.5">
+                      {selectedNBFC === 'Axis Bank (Jarvis)' && (
+                        <div className="p-3 bg-indigo-50 border border-indigo-100 rounded-xl space-y-2">
+                          <h4 className="text-[10px] font-black text-indigo-700 uppercase tracking-wider">Developer Portal Setup</h4>
+                          <p className="text-[10px] text-indigo-600 leading-relaxed font-sans">
+                            Paste the OAuth Redirect URL below into your Axis Developer Portal application settings.
+                          </p>
+                          <div className="flex gap-1.5 items-center bg-white border border-indigo-200 px-2 py-1.5 rounded-lg">
+                            <input 
+                              type="text" 
+                              readOnly 
+                              value={`${window.location.origin}/api/v1/auth/callback`} 
+                              className="w-full bg-transparent outline-none border-0 text-[10px] font-mono text-slate-700 font-semibold"
+                            />
+                            <button
+                              type="button"
+                              onClick={() => {
+                                navigator.clipboard.writeText(`${window.location.origin}/api/v1/auth/callback`);
+                                toast.success("Redirect URL copied!");
+                              }}
+                              className="text-[9px] font-bold text-indigo-600 hover:text-indigo-850 uppercase shrink-0"
+                            >
+                              Copy
+                            </button>
+                          </div>
+                        </div>
+                      )}
+
+                      <div>
+                        <label className="block text-[9.5px] font-bold text-slate-500 uppercase tracking-wider mb-1">Clinic Legal Name</label>
+                        <input
+                          type="text"
+                          value={emiForm.legalName}
+                          onChange={(e) => setEmiForm(prev => ({ ...prev, legalName: e.target.value }))}
+                          className="w-full px-3 py-2 border border-slate-200 bg-slate-50 rounded-lg text-xs font-medium text-slate-800 outline-none focus:border-indigo-400 transition-all"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-[9.5px] font-bold text-slate-500 uppercase tracking-wider mb-1">Doctor Name / MDS Reg No.</label>
+                        <input
+                          type="text"
+                          value={emiForm.doctorName}
+                          onChange={(e) => setEmiForm(prev => ({ ...prev, doctorName: e.target.value }))}
+                          className="w-full px-3 py-2 border border-slate-200 bg-slate-50 rounded-lg text-xs font-medium text-slate-800 outline-none focus:border-indigo-400 transition-all"
+                        />
+                      </div>
+
+                      {selectedNBFC === 'Axis Bank (Jarvis)' ? (
+                        <>
+                          <div>
+                            <label className="block text-[9.5px] font-bold text-slate-500 uppercase tracking-wider mb-1">Axis Client ID / App ID</label>
+                            <input
+                              type="text"
+                              placeholder="e.g., jarvis_client_id_..."
+                              value={emiForm.clientId}
+                              onChange={(e) => setEmiForm(prev => ({ ...prev, clientId: e.target.value }))}
+                              className="w-full px-3 py-2 border border-slate-200 bg-slate-50 rounded-lg text-xs font-medium text-slate-800 outline-none focus:border-indigo-400 transition-all font-mono"
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-[9.5px] font-bold text-slate-500 uppercase tracking-wider mb-1">Axis Client Secret / Key</label>
+                            <input
+                              type="password"
+                              placeholder="••••••••••••••••"
+                              value={emiForm.clientSecret}
+                              onChange={(e) => setEmiForm(prev => ({ ...prev, clientSecret: e.target.value }))}
+                              className="w-full px-3 py-2 border border-slate-200 bg-slate-50 rounded-lg text-xs font-medium text-slate-800 outline-none focus:border-indigo-400 transition-all font-mono"
+                            />
+                          </div>
+                        </>
+                      ) : (
+                        <div>
+                          <label className="block text-[9.5px] font-bold text-slate-500 uppercase tracking-wider mb-1">PAN Card Number</label>
+                          <input
+                            type="text"
+                            placeholder="ABCDE1234F"
+                            value={emiForm.panNumber}
+                            onChange={(e) => setEmiForm(prev => ({ ...prev, panNumber: e.target.value.toUpperCase() }))}
+                            className="w-full px-3 py-2 border border-slate-200 bg-slate-50 rounded-lg text-xs font-medium text-slate-800 outline-none focus:border-indigo-400 transition-all font-mono"
+                          />
+                        </div>
+                      )}
+
+                      <div className="grid grid-cols-2 gap-3">
+                        <div>
+                          <label className="block text-[9.5px] font-bold text-slate-500 uppercase tracking-wider mb-1">Settlement Bank A/C</label>
+                          <input
+                            type="text"
+                            placeholder="0123456789"
+                            value={emiForm.bankAccount}
+                            onChange={(e) => setEmiForm(prev => ({ ...prev, bankAccount: e.target.value }))}
+                            className="w-full px-3 py-2 border border-slate-200 bg-slate-50 rounded-lg text-xs font-medium text-slate-800 outline-none focus:border-indigo-400 transition-all font-mono"
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-[9.5px] font-bold text-slate-500 uppercase tracking-wider mb-1">Bank IFSC Code</label>
+                          <input
+                            type="text"
+                            placeholder="HDFC0001234"
+                            value={emiForm.ifsc}
+                            onChange={(e) => setEmiForm(prev => ({ ...prev, ifsc: e.target.value.toUpperCase() }))}
+                            className="w-full px-3 py-2 border border-slate-200 bg-slate-50 rounded-lg text-xs font-medium text-slate-800 outline-none focus:border-indigo-400 transition-all font-mono"
+                          />
+                        </div>
+                      </div>
+
+                      <div>
+                        <label className="block text-[9.5px] font-bold text-slate-500 uppercase tracking-wider mb-1">Monthly Billing Volume</label>
+                        <select
+                          value={emiForm.averageBilling}
+                          onChange={(e) => setEmiForm(prev => ({ ...prev, averageBilling: e.target.value }))}
+                          className="w-full px-3 py-2 border border-slate-200 bg-slate-50 rounded-lg text-xs font-medium text-slate-800 outline-none focus:border-indigo-400 transition-all"
+                        >
+                          <option value="Under 2L">Under ₹2 Lakhs</option>
+                          <option value="2-5L">₹2 Lakhs - ₹5 Lakhs</option>
+                          <option value="5-10L">₹5 Lakhs - ₹10 Lakhs</option>
+                          <option value="Above 10L">Above ₹10 Lakhs</option>
+                        </select>
+                      </div>
+
+                      <button
+                        type="button"
+                        onClick={() => {
+                          if (!emiForm.legalName || !emiForm.doctorName || !emiForm.bankAccount || !emiForm.ifsc || (selectedNBFC === 'Axis Bank (Jarvis)' && (!emiForm.clientId || !emiForm.clientSecret))) {
+                            toast.error("Please fill in all onboarding and credential details before applying.");
+                            return;
+                          }
+                          localStorage.setItem('emi_partner_status', 'Pending');
+                          localStorage.setItem('emi_partner_name', selectedNBFC || 'LiquiLoans');
+                          if (selectedNBFC === 'Axis Bank (Jarvis)') {
+                            localStorage.setItem('emi_client_id', emiForm.clientId);
+                            localStorage.setItem('emi_client_secret', emiForm.clientSecret);
+                          }
+                          setEmiStatus('Pending');
+                          toast.success(`Onboarding credentials submitted for ${selectedNBFC}! Verification pending.`);
+                        }}
+                        className="w-full flex items-center justify-center gap-2 py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-black uppercase tracking-wider transition-all shadow-md shadow-indigo-600/10 cursor-pointer"
+                      >
+                        Submit Integration Credentials
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-3.5">
+                    <h3 className="text-xs font-bold text-slate-700 uppercase tracking-wider">How onboarding works</h3>
+                    <div className="space-y-3 text-xs text-slate-500 leading-relaxed font-sans">
+                      <p className="flex gap-2">
+                        <span className="w-5 h-5 rounded-full bg-indigo-50 border border-indigo-100 flex items-center justify-center text-[10px] font-bold text-indigo-650 shrink-0">1</span>
+                        <span>Select one of the preferred NBFC partners and submit your clinic registration/bank settlement details.</span>
+                      </p>
+                      <p className="flex gap-2">
+                        <span className="w-5 h-5 rounded-full bg-indigo-50 border border-indigo-100 flex items-center justify-center text-[10px] font-bold text-indigo-650 shrink-0">2</span>
+                        <span>The NBFC verifies documents (KYC, doctor license) and issues a digital merchant account in 24 hours.</span>
+                      </p>
+                      <p className="flex gap-2">
+                        <span className="w-5 h-5 rounded-full bg-indigo-50 border border-indigo-100 flex items-center justify-center text-[10px] font-bold text-indigo-650 shrink-0">3</span>
+                        <span>Once verified, 0% EMI options are automatically unlocked inside your patient checkout/treatment builder!</span>
+                      </p>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+
+          {emiStatus === 'Pending' && (
+            <div className="max-w-2xl mx-auto bg-white border border-slate-200 rounded-2xl p-6 text-center space-y-5 shadow-sm text-left">
+              <div className="flex flex-col items-center text-center space-y-3">
+                <div className="w-12 h-12 rounded-full bg-amber-50 border border-amber-100 flex items-center justify-center text-amber-500 animate-pulse">
+                  <RefreshCw size={24} />
+                </div>
+                <h3 className="text-sm font-black text-slate-800 uppercase tracking-wider">Partnership Verification In Progress</h3>
+                <p className="text-xs text-slate-500 font-sans leading-relaxed max-w-md">
+                  Your registration details are currently being screened by the NBFC credit risk team. Verification takes 24-48 business hours.
+                </p>
+              </div>
+
+              <div className="bg-slate-50 border border-slate-200 rounded-xl p-4.5 space-y-3">
+                <h4 className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Onboarding Checklist</h4>
+                <div className="space-y-2 text-xs font-sans text-slate-600">
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 size={13} className="text-emerald-500" />
+                    <span>Clinic registration details received</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-3.5 h-3.5 rounded-full border-2 border-amber-400 border-t-transparent animate-spin" />
+                    <span className="text-slate-800 font-medium">NBFC Document validation (In Progress)</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-slate-400">
+                    <div className="w-3 h-3 rounded-full border border-slate-300" />
+                    <span>API keys generation & sandbox activation</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-3 justify-center pt-2">
+                <button
+                  type="button"
+                  onClick={() => {
+                    localStorage.setItem('emi_partner_status', 'Active');
+                    setEmiStatus('Active');
+                    toast.success("Sandbox Integration activated successfully! Patient treatment builder EMIs are now enabled.");
+                  }}
+                  className="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-black uppercase tracking-wider transition-all duration-150 cursor-pointer shadow-md shadow-emerald-600/10"
+                >
+                  Skip Review & Auto-Approve (For Demo Testing)
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    localStorage.setItem('emi_partner_status', 'Not Partnered');
+                    setEmiStatus('Not Partnered');
+                    setSelectedNBFC(null);
+                    toast.info("Partnership request reset.");
+                  }}
+                  className="px-4 py-2.5 border border-slate-200 text-slate-500 hover:bg-slate-50 rounded-xl text-xs font-bold transition-all duration-150"
+                >
+                  Reset Form
+                </button>
+              </div>
+            </div>
+          )}
+
+          {emiStatus === 'Active' && (
+            <div className="max-w-3xl mx-auto bg-white border border-slate-200 rounded-2xl p-6 shadow-sm text-left space-y-6">
+              <div className="flex items-center justify-between pb-4 border-b border-slate-100 flex-wrap gap-3">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-9 h-9 rounded-xl bg-emerald-50 border border-emerald-100 flex items-center justify-center text-emerald-600 shadow-sm">
+                    <CheckSquare size={16} />
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-bold text-slate-800">NBFC Integration Active</h3>
+                    <p className="text-[10px] text-slate-400">Merchant integration fully configured with {localStorage.getItem('emi_partner_name') || 'LiquiLoans'}</p>
+                  </div>
+                </div>
+                
+                <span className="px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-[10px] font-black uppercase tracking-wider">
+                  Live & Checkout-Ready
+                </span>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="border border-slate-200/80 rounded-xl p-4 space-y-2 bg-slate-50/50">
+                  <span className="text-[9.5px] font-bold text-slate-400 uppercase tracking-wider block">Merchant Details</span>
+                  <div className="text-xs space-y-1.5 text-slate-600 font-sans">
+                    <div><strong>Clinic Name:</strong> {emiForm.legalName || branding?.clinicName || 'Clinic'}</div>
+                    <div><strong>License / Reg No:</strong> {emiForm.doctorName || branding?.doctorName || 'Doctor'}</div>
+                    {localStorage.getItem('emi_partner_name') === 'Axis Bank (Jarvis)' ? (
+                      <div><strong>Client ID / App ID:</strong> {emiForm.clientId || localStorage.getItem('emi_client_id')}</div>
+                    ) : (
+                      <div><strong>PAN/GSTIN ID:</strong> {emiForm.panNumber || 'ABCDE1234F'}</div>
+                    )}
+                  </div>
+                </div>
+
+                <div className="border border-slate-200/80 rounded-xl p-4 space-y-2 bg-slate-50/50">
+                  <span className="text-[9.5px] font-bold text-slate-400 uppercase tracking-wider block">Settlement Account</span>
+                  <div className="text-xs space-y-1.5 text-slate-600 font-sans">
+                    <div><strong>Settlement Type:</strong> T+1 Next-Day Payout</div>
+                    <div><strong>Bank A/C:</strong> {emiForm.bankAccount || 'XXXXXXXX1234'}</div>
+                    <div><strong>IFSC Code:</strong> {emiForm.ifsc || 'HDFC0001234'}</div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="p-4 bg-indigo-50 border border-indigo-100 rounded-xl space-y-2">
+                <h4 className="text-[11px] font-bold text-indigo-700 uppercase tracking-wider">Patient Checkout Settings</h4>
+                <p className="text-[11px] text-indigo-600 leading-relaxed font-sans">
+                  Whenever treatment plans or receipts are generated in the patient details modal, patients will see monthly breakup tables for active {localStorage.getItem('emi_partner_name') || 'LiquiLoans'} plans. Launch any patient card to review the live integration.
+                </p>
+              </div>
+
+              <div className="flex justify-end pt-2">
+                <button
+                  type="button"
+                  onClick={() => {
+                    localStorage.setItem('emi_partner_status', 'Not Partnered');
+                    localStorage.removeItem('emi_partner_name');
+                    localStorage.removeItem('emi_client_id');
+                    localStorage.removeItem('emi_client_secret');
+                    setEmiStatus('Not Partnered');
+                    setSelectedNBFC(null);
+                    toast.info("NBFC integration deactivated.");
+                  }}
+                  className="px-4 py-2 bg-rose-50 border border-rose-100 hover:bg-rose-100/50 text-rose-600 text-xs font-black uppercase tracking-wider rounded-xl transition-all duration-150 cursor-pointer"
+                >
+                  Deactivate Partner
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       ) : null}
     </motion.div>

@@ -4038,7 +4038,7 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                                   const activePartner = localStorage.getItem('emi_partner_name') || 'Axis Bank (Jarvis)';
                                   const crmOrigin = window.location.origin;
                                   
-                                  const messageText = `Dear ${form.name || 'Patient'},\n\nTo pay for your treatment of ₹${calculatedGrandTotal.toLocaleString('en-IN')} at our clinic via easy monthly installments (EMI), please click the link below to check your eligibility and complete your digital application with ${activePartner}:\n\n🔗 ${crmOrigin}/api/v1/auth/callback\n\nThank you!\nYOUR DENTIST Patna`;
+                                  const messageText = `Dear ${form.name || 'Patient'},\n\nTo pay for your treatment of ₹${calculatedGrandTotal.toLocaleString('en-IN')} at our clinic via easy monthly installments (EMI), please click the link below to check your eligibility and complete your digital application with ${activePartner}:\n\n🔗 ${crmOrigin}/emi/callback\n\nThank you!\nYOUR DENTIST Patna`;
                                   
                                   window.open(`https://wa.me/${formattedPhone}?text=${encodeURIComponent(messageText)}`, '_blank', 'noopener,noreferrer');
                                   toast.success("Opening WhatsApp with pre-filled Axis Bank eligibility application link!");

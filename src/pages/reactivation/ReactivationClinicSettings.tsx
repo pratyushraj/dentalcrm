@@ -2364,13 +2364,13 @@ const ReactivationClinicSettings: React.FC = () => {
                             <input 
                               type="text" 
                               readOnly 
-                              value={`${window.location.origin}/api/v1/auth/callback`} 
+                              value={`${window.location.origin}/emi/callback`} 
                               className="w-full bg-transparent outline-none border-0 text-[10px] font-mono text-slate-700 font-semibold"
                             />
                             <button
                               type="button"
                               onClick={() => {
-                                navigator.clipboard.writeText(`${window.location.origin}/api/v1/auth/callback`);
+                                navigator.clipboard.writeText(`${window.location.origin}/emi/callback`);
                                 toast.success("Redirect URL copied!");
                               }}
                               className="text-[9px] font-bold text-indigo-600 hover:text-indigo-850 uppercase shrink-0"

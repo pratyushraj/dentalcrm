@@ -482,6 +482,7 @@ const ReactivationClinicSettings: React.FC = () => {
       localStorage.setItem('emi_partner_name', 'Axis Bank (Jarvis)');
       localStorage.setItem('emi_client_id', '7bc29bc8dad077dc5491758da515d6fd');
       localStorage.setItem('emi_client_secret', 'ce5c5a113672e25e7a8747c8e2917a52');
+      localStorage.setItem('emi_axis_url', 'https://api.axisbank.com/jarvis/v1/apply');
       return 'Active';
     }
     return saved as any;
@@ -496,6 +497,7 @@ const ReactivationClinicSettings: React.FC = () => {
     averageBilling: '5-10L',
     clientId: localStorage.getItem('emi_client_id') || '7bc29bc8dad077dc5491758da515d6fd',
     clientSecret: localStorage.getItem('emi_client_secret') || 'ce5c5a113672e25e7a8747c8e2917a52',
+    axisUrl: localStorage.getItem('emi_axis_url') || 'https://api.axisbank.com/jarvis/v1/apply',
   }));
 
   useEffect(() => {
@@ -2423,6 +2425,16 @@ const ReactivationClinicSettings: React.FC = () => {
                               className="w-full px-3 py-2 border border-slate-200 bg-slate-50 rounded-lg text-xs font-medium text-slate-800 outline-none focus:border-indigo-400 transition-all font-mono"
                             />
                           </div>
+                          <div>
+                            <label className="block text-[9.5px] font-bold text-slate-500 uppercase tracking-wider mb-1">Axis Application URL / Endpoint</label>
+                            <input
+                              type="text"
+                              placeholder="e.g., https://api.axisbank.com/jarvis/v1/apply"
+                              value={emiForm.axisUrl}
+                              onChange={(e) => setEmiForm(prev => ({ ...prev, axisUrl: e.target.value }))}
+                              className="w-full px-3 py-2 border border-slate-200 bg-slate-50 rounded-lg text-xs font-medium text-slate-800 outline-none focus:border-indigo-400 transition-all font-mono"
+                            />
+                          </div>
                         </>
                       ) : (
                         <div>
@@ -2486,6 +2498,7 @@ const ReactivationClinicSettings: React.FC = () => {
                           if (selectedNBFC === 'Axis Bank (Jarvis)') {
                             localStorage.setItem('emi_client_id', emiForm.clientId);
                             localStorage.setItem('emi_client_secret', emiForm.clientSecret);
+                            localStorage.setItem('emi_axis_url', emiForm.axisUrl || 'https://api.axisbank.com/jarvis/v1/apply');
                           }
                           setEmiStatus('Pending');
                           toast.success(`Onboarding credentials submitted for ${selectedNBFC}! Verification pending.`);

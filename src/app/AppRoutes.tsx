@@ -10,6 +10,7 @@ const DentalTrendFinder = lazy(() => import("@/pages/DentalTrendFinder"));
 const ContentWorkspace = lazy(() => import("@/pages/ContentWorkspace"));
 const CrmHomepage = lazy(() => import("@/pages/CrmHomepage"));
 const EmiCallbackPage = lazy(() => import("@/pages/EmiCallbackPage"));
+const EmiOnboardPage = lazy(() => import("@/pages/EmiOnboardPage"));
 
 export default function AppRoutes() {
   return (
@@ -29,6 +30,7 @@ export default function AppRoutes() {
           <Route path="/dental-trends" element={<LazyRoute><DentalTrendFinder /></LazyRoute>} />
           <Route path="/dentist-proposal" element={<LazyRoute><ContentWorkspace /></LazyRoute>} />
           <Route path="/emi/callback" element={<LazyRoute><EmiCallbackPage /></LazyRoute>} />
+          <Route path="/emi/onboard" element={<LazyRoute><EmiOnboardPage /></LazyRoute>} />
 
           {/* Reactivation Dashboard Portal Routes */}
           {ReactivationRoutes()}

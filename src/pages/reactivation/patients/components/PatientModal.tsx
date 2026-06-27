@@ -3972,10 +3972,10 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                     {/* NBFC EMI Financing Option */}
                     {calculatedGrandTotal >= 3000 && (
                       <div className="bg-gradient-to-tr from-indigo-50/70 via-white to-slate-50 border border-indigo-150 rounded-2xl p-5 space-y-4 shadow-sm text-left">
-                        {localStorage.getItem('emi_partner_status') === 'Active' ? (
+                        {localStorage.getItem('emi_partner_status') !== 'Not Partnered' ? (
                           <>
                             {(() => {
-                              const activePartner = localStorage.getItem('emi_partner_name') || 'LiquiLoans';
+                              const activePartner = localStorage.getItem('emi_partner_name') || 'Axis Bank (Jarvis)';
                               const plans = activePartner === 'Axis Bank (Jarvis)' 
                                 ? [
                                     { months: 6, label: '6 Months', rate: '0% Interest' },

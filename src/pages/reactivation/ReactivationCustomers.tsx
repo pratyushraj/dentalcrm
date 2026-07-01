@@ -2318,8 +2318,12 @@ const ReactivationCustomers: React.FC = () => {
                         <div className="text-slate-400 text-[9px] uppercase tracking-wider">
                           {customer.lastVisit && new Date(customer.lastVisit).getTime() > Date.now() ? 'Appt date' : 'Last visit'}
                         </div>
-                        <div className="text-slate-700 font-medium mt-0.5 text-[11px] leading-tight truncate">{formatDate(customer.lastVisit)}</div>
-                        <div className="text-slate-400 text-[10px] mt-0.5 truncate">{timeAgo(customer.lastVisit)}</div>
+                        <div className="text-slate-700 font-medium mt-0.5 text-[11px] leading-tight truncate">
+                          {formatDate(customer.lastVisit)} {customer.vitals?.appointmentTime ? `@ ${customer.vitals.appointmentTime}` : ''}
+                        </div>
+                        <div className="text-slate-400 text-[10px] mt-0.5 truncate">
+                          {timeAgo(customer.lastVisit)}
+                        </div>
                       </div>
                       <div className="rounded-xl bg-indigo-50/40 border border-indigo-100/60 px-2 py-2">
                         <div className="text-indigo-400 text-[9px] uppercase tracking-wider">Follow-Up</div>
@@ -2587,7 +2591,7 @@ const ReactivationCustomers: React.FC = () => {
                           <td className="px-3 py-3.5">
                             <div className="flex flex-col gap-0.5">
                               <span className="text-[12px] text-slate-700 font-medium">
-                                {formatDate(customer.lastVisit)}
+                                {formatDate(customer.lastVisit)} {customer.vitals?.appointmentTime ? `@ ${customer.vitals.appointmentTime}` : ''}
                               </span>
                               <span className="text-[11px] text-slate-400 font-semibold">
                                 {customer.lastVisit && new Date(customer.lastVisit).getTime() > Date.now() ? 'Appointment' : timeAgo(customer.lastVisit)}

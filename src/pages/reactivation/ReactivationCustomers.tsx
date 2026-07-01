@@ -2573,7 +2573,7 @@ const ReactivationCustomers: React.FC = () => {
                           >
                             <DropdownMenu>
                               <DropdownMenuTrigger asChild>
-                                <button className="w-7 h-7 rounded-lg flex items-center justify-center text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-all duration-150 opacity-100 sm:opacity-0 sm:group-hover:opacity-100">
+                                <button className="w-7 h-7 rounded-lg flex items-center justify-center text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-all duration-150 opacity-100">
                                   <MoreHorizontal size={15} />
                                 </button>
                               </DropdownMenuTrigger>

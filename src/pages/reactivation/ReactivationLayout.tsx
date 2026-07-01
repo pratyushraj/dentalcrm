@@ -50,6 +50,71 @@ interface ReactivationLayoutProps {
   children: ReactNode;
 }
 
+// ─── Bottom Nav Config (mobile/iPad) ──────────────────────────────────────────
+
+const BOTTOM_NAV_ITEMS: NavItem[] = [
+  { label: 'Patients',  path: '/reactivation/customers',     icon: Users },
+  { label: 'Messages',  path: '/reactivation/sent-messages', icon: MessageSquare },
+  { label: 'Gallery',   path: '/reactivation/transformations', icon: Sparkles },
+  { label: 'AI',        path: '/reactivation/receptionist',  icon: Bot, badge: 'AI' },
+  { label: 'Settings',  path: '/reactivation/settings',      icon: Settings },
+];
+
+// ─── Bottom Tab Bar ───────────────────────────────────────────────────────────
+
+const BottomTabBar: React.FC = () => {
+  const location = useLocation();
+  return (
+    <nav
+      className="xl:hidden fixed bottom-0 inset-x-0 z-50 flex items-stretch bg-white border-t border-slate-200"
+      style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}
+    >
+      {BOTTOM_NAV_ITEMS.map((item) => {
+        const isActive = location.pathname === item.path || location.pathname.startsWith(item.path + '/');
+        const Icon = item.icon;
+        return (
+          <NavLink
+            key={item.path}
+            to={item.path}
+            className="flex-1"
+          >
+            {({ isActive: linkActive }) => (
+              <motion.div
+                whileTap={{ scale: 0.88 }}
+                transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+                className={`flex flex-col items-center justify-center gap-1 py-2.5 select-none cursor-pointer ${
+                  isActive ? 'text-indigo-600' : 'text-slate-400'
+                }`}
+              >
+                <div className="relative">
+                  <Icon size={22} strokeWidth={isActive ? 2.2 : 1.8} />
+                  {item.badge && (
+                    <span className="absolute -top-1 -right-2 text-[7px] font-black bg-indigo-500 text-white px-1 rounded tracking-wider">
+                      {item.badge}
+                    </span>
+                  )}
+                  {isActive && (
+                    <motion.div
+                      layoutId="bottom-tab-indicator"
+                      className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-indigo-500"
+                      transition={{ type: 'spring', stiffness: 500, damping: 35 }}
+                    />
+                  )}
+                </div>
+                <span className={`text-[10px] font-semibold leading-none ${
+                  isActive ? 'text-indigo-600' : 'text-slate-400'
+                }`}>
+                  {item.label}
+                </span>
+              </motion.div>
+            )}
+          </NavLink>
+        );
+      })}
+    </nav>
+  );
+};
+
 // ─── Nav Config ───────────────────────────────────────────────────────────────
 
 const NAV_ITEMS: NavItem[] = [
@@ -424,11 +489,11 @@ const ReactivationLayout: React.FC<ReactivationLayoutProps> = ({ children }) => 
           className="flex-shrink-0 flex items-center justify-between px-4 sm:px-6 h-14 bg-white border-b border-slate-200"
         >
           <div className="flex items-center gap-2">
-            {/* Hamburger button */}
+            {/* Hamburger button — only on lg screens where sidebar is off by default but no bottom nav */}
             <button
               onClick={() => setIsSidebarOpen(true)}
               aria-label="Open Sidebar"
-              className="p-1 rounded-md text-slate-500 hover:text-slate-800 hover:bg-slate-100 lg:hidden"
+              className="p-1 rounded-md text-slate-500 hover:text-slate-800 hover:bg-slate-100 hidden lg:flex xl:hidden"
             >
               <Menu size={20} />
             </button>
@@ -531,7 +596,7 @@ const ReactivationLayout: React.FC<ReactivationLayoutProps> = ({ children }) => 
 
         {/* Scrollable content area */}
         <main
-          className="flex-1 overflow-y-auto bg-[#F1F5F9] p-4 sm:p-6"
+          className="flex-1 overflow-y-auto bg-[#F1F5F9] p-4 sm:p-6 xl:pb-6 pb-24"
         >
           <AnimatePresence mode="wait">
             <motion.div
@@ -547,6 +612,7 @@ const ReactivationLayout: React.FC<ReactivationLayoutProps> = ({ children }) => 
           </AnimatePresence>
         </main>
       </div>
+      <BottomTabBar />
     </div>
   );
 };

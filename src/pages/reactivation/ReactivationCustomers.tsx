@@ -2315,7 +2315,9 @@ const ReactivationCustomers: React.FC = () => {
 
                     <div className="mt-4 grid grid-cols-3 gap-2 text-[12px]">
                       <div className="rounded-xl bg-slate-50 border border-slate-200 px-2 py-2">
-                        <div className="text-slate-400 text-[9px] uppercase tracking-wider">Last visit</div>
+                        <div className="text-slate-400 text-[9px] uppercase tracking-wider">
+                          {customer.lastVisit && new Date(customer.lastVisit).getTime() > Date.now() ? 'Appt date' : 'Last visit'}
+                        </div>
                         <div className="text-slate-700 font-medium mt-0.5 text-[11px] leading-tight truncate">{formatDate(customer.lastVisit)}</div>
                         <div className="text-slate-400 text-[10px] mt-0.5 truncate">{timeAgo(customer.lastVisit)}</div>
                       </div>
@@ -2581,14 +2583,14 @@ const ReactivationCustomers: React.FC = () => {
                             </span>
                           </td>
 
-                          {/* Last Visit */}
+                          {/* Last Visit / Appointment */}
                           <td className="px-3 py-3.5">
                             <div className="flex flex-col gap-0.5">
                               <span className="text-[12px] text-slate-700 font-medium">
                                 {formatDate(customer.lastVisit)}
                               </span>
-                              <span className="text-[11px] text-slate-400">
-                                {timeAgo(customer.lastVisit)}
+                              <span className="text-[11px] text-slate-400 font-semibold">
+                                {customer.lastVisit && new Date(customer.lastVisit).getTime() > Date.now() ? 'Appointment' : timeAgo(customer.lastVisit)}
                               </span>
                             </div>
                           </td>

@@ -92,6 +92,39 @@ export const CARE_PROGRAMS: CareProgramTemplate[] = [
       { day: 2, message: 'Hi {name}, how is the back pain? Avoid forward bending and sitting on low chairs. Apply hot fermentation if helpful.', subLabel: 'Posture compliance' },
       { day: 10, message: 'Hi {name}, as your acute spasm reduces, let us introduce gentle core stretching exercises. Let us know if pain radiates down your leg.', subLabel: 'Sciatica monitoring' }
     ]
+  },
+
+  // 🧪 Dermatology & Skin Care Programs
+  {
+    id: 'chemical_peel',
+    name: '7-Day Post-Chemical Peel Care',
+    category: 'Dermatology',
+    description: 'Guidelines on sun protection, hydration, and skin peeling cycles.',
+    steps: [
+      { day: 1, message: 'Hi {name}, how is your skin feeling? Remember to apply soothing cream and sunscreen hourly. Avoid makeup and direct sun exposure today.', subLabel: 'Immediate post-peel checklist' },
+      { day: 3, message: 'Hi {name}, is the peeling starting? Do not peel or scratch. Wash gently with a soap-free cleanser and apply sunscreen.', subLabel: 'Peeling cycle guidance' },
+      { day: 7, message: 'Hi {name}, your post-peel skin should be refreshed! Let us schedule a review to check your texture improvement.', subLabel: 'Final texture review' }
+    ]
+  },
+  {
+    id: 'laser_hair',
+    name: '6-Week Laser Hair Reduction compliance',
+    category: 'Dermatology',
+    description: 'Targeted hair follicle growth cycle compliance tracker.',
+    steps: [
+      { day: 2, message: 'Hi {name}, how is the treated area? Apply soothing lotion. Do not pluck or wax; only shave if needed.', subLabel: 'Immediate laser care' },
+      { day: 30, message: 'Hi {name}, your next LHR session is due in 2 weeks. Let us book a slot to keep the hair follicles targeted in the growth phase!', subLabel: 'Pre-session scheduling' }
+    ]
+  },
+  {
+    id: 'botox_precautions',
+    name: '14-Day Botox Compliance Check',
+    category: 'Dermatology',
+    description: 'Precautions checklist and settling period review post-injection.',
+    steps: [
+      { day: 1, message: 'Hi {name}, how is the injection site? Remember to avoid lying flat for 4 hours and keep your face straight. Avoid intense workouts.', subLabel: 'Botox post-op precautions' },
+      { day: 14, message: 'Hi {name}, your Botox treatment should be fully settled. Let us schedule a touch-up or post-treatment assessment visit.', subLabel: 'Final settling review' }
+    ]
   }
 ];
 
@@ -162,5 +195,32 @@ export const FOLLOW_UP_RULES: Array<{
     match: (customer) => /consultation|checkup|second opinion/i.test(customer.service),
     days: 15,
     label: 'Recall visit',
+  },
+
+  // Dermatology Rules
+  {
+    match: (customer) => /chemical peel|acne|microdermabrasion|facial/i.test(customer.service),
+    days: 7,
+    label: 'Peel check',
+  },
+  {
+    match: (customer) => /laser|lhr|tattoo/i.test(customer.service),
+    days: 30,
+    label: 'Laser follow-up',
+  },
+  {
+    match: (customer) => /botox|filler|anti-aging|threads/i.test(customer.service),
+    days: 14,
+    label: 'Botox review',
+  },
+  {
+    match: (customer) => /pigmentation|melasma|glow/i.test(customer.service),
+    days: 15,
+    label: 'Skin review',
+  },
+  {
+    match: (customer) => /prp|hair transplant/i.test(customer.service),
+    days: 30,
+    label: 'PRP review',
   },
 ];

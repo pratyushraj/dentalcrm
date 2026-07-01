@@ -390,7 +390,7 @@ const ReactivationLayout: React.FC<ReactivationLayoutProps> = ({ children }) => 
   }
 
   return (
-    <div className="flex h-screen overflow-hidden bg-[#F8FAFC]">
+    <div className="flex h-dvh overflow-hidden bg-[#F8FAFC]">
       {/* Backdrop overlay for mobile */}
       <AnimatePresence>
         {isSidebarOpen && (

@@ -20,9 +20,16 @@ body {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   user-select: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   /* overscroll-behavior-y: contain is handled in the main scroller block (#root) */
   /* iOS PWA: prevent hardcoded background mismatch */
   background-color: #020D0A;
+}
+
+/* Remove 300ms tap delay on all interactive elements */
+button, a, [role="button"], [role="tab"], [role="option"], label {
+  touch-action: manipulation;
 }
   .animate-loading-bar {
     animation: loading-slide 1.5s ease-in-out infinite;

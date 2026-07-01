@@ -2193,8 +2193,8 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                           </div>
                           <select
                             className="flex-1 px-3.5 py-2.5 text-[13px] text-slate-800 bg-transparent outline-none w-full border-0 cursor-pointer appearance-none pr-8"
-                            value={form.appointmentTime}
-                            onChange={(e) => handleChange('appointmentTime', e.target.value)}
+                            value={form.vitals?.appointmentTime || '09:00 AM'}
+                            onChange={(e) => handleChange('vitals', { ...form.vitals, appointmentTime: e.target.value })}
                           >
                             <option value="09:00 AM">09:00 AM</option>
                             <option value="09:30 AM">09:30 AM</option>

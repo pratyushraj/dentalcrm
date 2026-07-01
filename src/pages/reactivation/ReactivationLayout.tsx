@@ -295,8 +295,6 @@ const ReactivationLayout: React.FC<ReactivationLayoutProps> = ({ children }) => 
     }
   };
 
-  const activeClinic = profile?.business_name || 'Dental Clinic';
-
   // Read clinic name from localStorage for sidebar display
   const orgId = organizationId || 'default';
   const [sidebarClinicName, setSidebarClinicName] = React.useState(() => {
@@ -309,6 +307,8 @@ const ReactivationLayout: React.FC<ReactivationLayoutProps> = ({ children }) => 
     } catch {}
     return profile?.business_name || 'Dental Clinic';
   });
+
+  const activeClinic = sidebarClinicName;
 
   // Refresh clinic name on every route change (user may have just saved settings)
   React.useEffect(() => {

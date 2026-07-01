@@ -1220,6 +1220,64 @@ const ReactivationCustomers: React.FC = () => {
     }
   };
 
+  const triggerManualApptWhatsApp = async (c: Customer) => {
+    try {
+      if (!clinicId) return;
+      const apptDate = getNextVisitDate(c);
+      if (!apptDate) {
+        toast.error(`Please set a follow-up date for ${c.name} first.`);
+        return;
+      }
+
+      // Fetch clinic configuration
+      const { data: clinic } = await supabase
+        .from('dental_clinics')
+        .select('*')
+        .eq('id', clinicId)
+        .single();
+
+      if (!clinic) {
+        toast.error('Clinic configuration not found.');
+        return;
+      }
+
+      const whatsappPhoneNumberId = clinic.whatsapp_phone_number_id || '';
+      const whatsappAccessToken = clinic.whatsapp_access_token ? clinic.whatsapp_access_token.split('|')[0] : '';
+      const whatsappBusinessPhone = clinic.whatsapp_business_phone || clinic.phone || '';
+
+      // Extract doctor name
+      let doctorName = clinic.doctor_name || 'Doctor';
+      if (clinic.owner_id && !clinic.doctor_name) {
+        const { data: ownerProfile } = await supabase
+          .from('profiles')
+          .select('first_name, last_name')
+          .eq('id', clinic.owner_id)
+          .single();
+        if (ownerProfile) {
+          const firstName = (ownerProfile as any).first_name || '';
+          const lastName = (ownerProfile as any).last_name || '';
+          doctorName = `${firstName} ${lastName}`.trim() || 'Doctor';
+        }
+      }
+
+      setApptWhatsAppPrompt({
+        customer: c,
+        apptDate,
+        apptTime: c.vitals?.appointmentTime || '09:00 AM',
+        doctorName,
+        treatmentName: c.service || 'Consultation / Check-up',
+        whatsappPhoneNumberId,
+        whatsappAccessToken,
+        whatsappBusinessPhone,
+        clinicName: clinic.name || '',
+        clinicId,
+      });
+    } catch (err) {
+      console.error('Manual appointment prompt trigger failed:', err);
+      toast.error('Failed to prepare appointment message.');
+    }
+  };
+
   const sendWhatsAppBeforeAfter = async (c: Customer) => {
     try {
       if (!clinicId) return;
@@ -2329,6 +2387,19 @@ const ReactivationCustomers: React.FC = () => {
                           </span>
                         </>
                       )}
+                      {getNextVisitDate(customer) && (
+                        <span
+                          role="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            triggerManualApptWhatsApp(customer);
+                          }}
+                          className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[10.5px] font-bold border border-indigo-200 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 transition-all shadow-sm cursor-pointer"
+                        >
+                          <MessageSquare size={11} />
+                          Send Appt (WA)
+                        </span>
+                      )}
                       {((customer.beforeAfterPhotos && customer.beforeAfterPhotos.length > 0) || (customer.beforePhotos && customer.beforePhotos.length > 0) || (customer.afterPhotos && customer.afterPhotos.length > 0) || customer.beforePhoto || customer.afterPhoto) && (
                         <span
                           role="button"
@@ -2666,6 +2737,15 @@ const ReactivationCustomers: React.FC = () => {
                                       Send Prescription (WA)
                                     </DropdownMenuItem>
                                   </>
+                                )}
+                                {getNextVisitDate(customer) && (
+                                  <DropdownMenuItem
+                                    onClick={() => triggerManualApptWhatsApp(customer)}
+                                    className="gap-2.5 cursor-pointer hover:bg-slate-50 focus:bg-slate-50 text-indigo-600 hover:text-indigo-700 font-semibold"
+                                  >
+                                    <MessageSquare size={13} className="text-indigo-500" />
+                                    Send Appt (WA)
+                                  </DropdownMenuItem>
                                 )}
                                 <DropdownMenuItem
                                   className="gap-2.5 cursor-pointer hover:bg-slate-50 focus:bg-slate-50"

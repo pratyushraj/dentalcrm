@@ -528,6 +528,9 @@ const ReactivationCustomers: React.FC = () => {
     clinicId: string;
   }>(null);
 
+  // Track when Rx was last sent per patient to detect accidental double-sends
+  const rxSentAt = React.useRef<Map<string, number>>(new Map());
+
   const stats = useMemo(() => {
     const total = customers.length;
     const active = customers.filter((c) => c.status === 'Active').length;
@@ -755,9 +758,28 @@ const ReactivationCustomers: React.FC = () => {
     }
   };
 
-  const sendWhatsAppPrescriptionPDF = async (c: Customer) => {
+  const sendWhatsAppPrescriptionPDF = async (c: Customer, skipDuplicateCheck = false) => {
     try {
       if (!clinicId) return;
+
+      // ⚠️ Warn dentist if Rx was already sent in the last 10 minutes
+      const lastSentAt = rxSentAt.current.get(c.id);
+      const tenMinutes = 10 * 60 * 1000;
+      if (!skipDuplicateCheck && lastSentAt && (Date.now() - lastSentAt) < tenMinutes) {
+        const minutesAgo = Math.max(1, Math.round((Date.now() - lastSentAt) / 60000));
+        toast.warning(
+          `Prescription already sent to ${c.name} ${minutesAgo} min ago`,
+          {
+            description: 'Are you sure you want to send it again?',
+            duration: 8000,
+            action: {
+              label: 'Send Anyway',
+              onClick: () => sendWhatsAppPrescriptionPDF(c, true),
+            },
+          }
+        );
+        return;
+      }
 
       // 1. Fetch clinic configuration
       const { data: clinic } = await supabase
@@ -1175,7 +1197,9 @@ const ReactivationCustomers: React.FC = () => {
         throw new Error(errMsg);
       }
 
-      toast.success('WhatsApp prescription PDF shared automatically!');
+      toast.success('WhatsApp prescription PDF shared successfully!');
+      // Record send time to detect accidental double-sends
+      rxSentAt.current.set(c.id, Date.now());
       
       try {
         logWhatsAppMessage(clinicId, {

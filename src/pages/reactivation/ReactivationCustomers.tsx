@@ -515,6 +515,18 @@ const ReactivationCustomers: React.FC = () => {
   const [page, setPage] = useState(1);
   const [modalOpen, setModalOpen] = useState(false);
   const [editingCustomer, setEditingCustomer] = useState<Customer | undefined>(undefined);
+  const [apptWhatsAppPrompt, setApptWhatsAppPrompt] = useState<null | {
+    customer: Customer;
+    apptDate: string;
+    apptTime: string;
+    doctorName: string;
+    treatmentName: string;
+    whatsappPhoneNumberId: string;
+    whatsappAccessToken: string;
+    whatsappBusinessPhone: string;
+    clinicName: string;
+    clinicId: string;
+  }>(null);
 
   const stats = useMemo(() => {
     const total = customers.length;
@@ -1724,9 +1736,22 @@ const ReactivationCustomers: React.FC = () => {
               .insert(insertApptRow);
 
             if (!apptError) {
-              toast.success(`Appointment booked automatically for ${apptDate}`);
-              
-              // Trigger automated WhatsApp confirmation using approved Meta template if configured (Commented out to keep manual only)
+              toast.success(`Appointment saved for ${apptDate}`);
+              // Ask the dentist if they want to send WhatsApp confirmation (manual only)
+              setApptWhatsAppPrompt({
+                customer: savedCustomer,
+                apptDate,
+                apptTime,
+                doctorName,
+                treatmentName,
+                whatsappPhoneNumberId,
+                whatsappAccessToken,
+                whatsappBusinessPhone,
+                clinicName: clinic?.name || '',
+                clinicId: clinicId || '',
+              });
+
+              // (Automated send kept commented out — everything is manual)
               /*
               if (whatsappPhoneNumberId && whatsappAccessToken) {
                 const cleanPhone = savedCustomer.phone.replace(/[^0-9]/g, '');
@@ -2801,6 +2826,119 @@ const ReactivationCustomers: React.FC = () => {
         customer={editingCustomer}
         onSave={handleSave}
       />
+
+      {/* ── WhatsApp Appointment Prompt ─────────────────────────────────────── */}
+      <AnimatePresence>
+        {apptWhatsAppPrompt && (
+          <motion.div
+            key="appt-wa-prompt"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[200] flex items-end sm:items-center justify-center p-4"
+            style={{ background: 'rgba(15,23,42,0.55)', backdropFilter: 'blur(4px)' }}
+            onClick={() => setApptWhatsAppPrompt(null)}
+          >
+            <motion.div
+              initial={{ opacity: 0, y: 40, scale: 0.97 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 20, scale: 0.97 }}
+              transition={{ duration: 0.22, ease: 'easeOut' }}
+              className="w-full max-w-sm rounded-2xl p-5 shadow-2xl"
+              style={{ background: '#FFFFFF', border: '1px solid #E2E8F0' }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Icon + title */}
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-10 h-10 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center shrink-0">
+                  <MessageSquare size={18} className="text-emerald-600" />
+                </div>
+                <div>
+                  <p className="text-[14px] font-bold text-slate-800">Send appointment message?</p>
+                  <p className="text-[11.5px] text-slate-500 mt-0.5">via WhatsApp to {apptWhatsAppPrompt.customer.name}</p>
+                </div>
+              </div>
+
+              {/* Appointment summary */}
+              <div className="rounded-xl bg-slate-50 border border-slate-200 px-4 py-3 mb-4 space-y-1">
+                <div className="flex items-center gap-2 text-[12px] text-slate-600">
+                  <span className="text-slate-400 w-16 shrink-0">Patient</span>
+                  <span className="font-semibold text-slate-800">{apptWhatsAppPrompt.customer.name}</span>
+                </div>
+                <div className="flex items-center gap-2 text-[12px] text-slate-600">
+                  <span className="text-slate-400 w-16 shrink-0">Date</span>
+                  <span className="font-semibold text-slate-800">{new Date(apptWhatsAppPrompt.apptDate).toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' })}</span>
+                </div>
+                <div className="flex items-center gap-2 text-[12px] text-slate-600">
+                  <span className="text-slate-400 w-16 shrink-0">Time</span>
+                  <span className="font-semibold text-slate-800">{apptWhatsAppPrompt.apptTime}</span>
+                </div>
+                <div className="flex items-center gap-2 text-[12px] text-slate-600">
+                  <span className="text-slate-400 w-16 shrink-0">Treatment</span>
+                  <span className="font-semibold text-slate-800">{apptWhatsAppPrompt.treatmentName}</span>
+                </div>
+              </div>
+
+              {/* Action buttons */}
+              <div className="flex gap-2">
+                <button
+                  onClick={() => setApptWhatsAppPrompt(null)}
+                  className="flex-1 py-2.5 rounded-xl text-[13px] font-semibold text-slate-600 bg-slate-100 hover:bg-slate-200 transition-colors"
+                >
+                  Skip
+                </button>
+                <button
+                  onClick={async () => {
+                    const p = apptWhatsAppPrompt;
+                    setApptWhatsAppPrompt(null);
+                    try {
+                      const cleanPhone = p.customer.phone.replace(/[^0-9]/g, '');
+                      const formattedPhone = cleanPhone.length === 10 ? `91${cleanPhone}` : cleanPhone;
+                      const formattedDateString = new Date(p.apptDate).toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
+                      const syncedTemplates = loadWhatsAppTemplates(p.clinicId);
+                      const bookingTemplate = syncedTemplates.find(t =>
+                        t.name === 'booking' ||
+                        t.name.startsWith('appointment_confirm') ||
+                        t.name.startsWith('appointment_book') ||
+                        t.name === 'appointment_booking_confirmation'
+                      ) || { name: 'booking', language: 'en', body: '🦷 Appointment Confirmed\n\nHi {{1}}, your appointment has been confirmed.\n\n📅 Date: {{2}}\n⏰ Time: {{3}}\n\nThank you for choosing {{4}}!' };
+                      const templateBody = bookingTemplate.body || '';
+                      const paramCount = (() => { const m = templateBody.match(/\{\{(\d+)\}\}/g); if (!m) return 0; return Math.max(...m.map(x => parseInt(x.replace(/[{}]/g,''),10)),0); })();
+                      const allParams = [
+                        { type: 'text', text: p.customer.name },
+                        { type: 'text', text: formattedDateString },
+                        { type: 'text', text: p.apptTime },
+                        { type: 'text', text: p.doctorName },
+                        { type: 'text', text: p.whatsappBusinessPhone || '' },
+                      ];
+                      const parameters = allParams.slice(0, paramCount);
+                      const payload = {
+                        messaging_product: 'whatsapp',
+                        to: formattedPhone,
+                        type: 'template',
+                        template: { name: bookingTemplate.name, language: { code: bookingTemplate.language }, components: [{ type: 'body', parameters }] }
+                      };
+                      await fetch('/api/whatsapp-helper/send-message', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ wabaPhoneId: p.whatsappPhoneNumberId, wabaToken: p.whatsappAccessToken, payload })
+                      });
+                      toast.success(`WhatsApp confirmation sent to ${p.customer.name}!`);
+                    } catch (err) {
+                      console.error('WhatsApp appointment send failed:', err);
+                      toast.error('Failed to send WhatsApp message.');
+                    }
+                  }}
+                  className="flex-1 py-2.5 rounded-xl text-[13px] font-semibold text-white bg-emerald-500 hover:bg-emerald-600 transition-colors flex items-center justify-center gap-1.5"
+                >
+                  <MessageSquare size={13} />
+                  Send WhatsApp
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </TooltipProvider>
   );
 };

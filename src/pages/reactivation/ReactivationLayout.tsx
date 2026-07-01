@@ -591,6 +591,15 @@ const ReactivationLayout: React.FC<ReactivationLayoutProps> = ({ children }) => 
                 {activeClinic}
               </span>
             </div>
+
+            {/* Quick Sign Out Button in Header for Mobile/Tablet */}
+            <button
+              onClick={handleLogout}
+              title="Sign Out"
+              className="xl:hidden p-2 rounded-xl border border-rose-200 bg-rose-50/50 text-rose-600 hover:bg-rose-100/60 active:scale-95 flex items-center justify-center cursor-pointer transition-all duration-150"
+            >
+              <LogOut size={16} />
+            </button>
           </div>
         </header>
 

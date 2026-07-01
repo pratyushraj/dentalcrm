@@ -2306,7 +2306,7 @@ const ReactivationCustomers: React.FC = () => {
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.28, delay: 0.14, ease: 'easeOut' }}
-          className="hidden md:block rounded-2xl overflow-hidden flex-1"
+          className="hidden md:block rounded-2xl overflow-hidden flex-1 min-w-0 w-full max-w-full"
           style={{
             background: '#FFFFFF',
             border: '1px solid #E2E8F0',

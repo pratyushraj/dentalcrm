@@ -56,7 +56,6 @@ const BOTTOM_NAV_ITEMS: NavItem[] = [
   { label: 'Patients',  path: '/reactivation/customers',     icon: Users },
   { label: 'Messages',  path: '/reactivation/sent-messages', icon: MessageSquare },
   { label: 'Gallery',   path: '/reactivation/transformations', icon: Sparkles },
-  { label: 'AI',        path: '/reactivation/receptionist',  icon: Bot, badge: 'AI' },
   { label: 'Settings',  path: '/reactivation/settings',      icon: Settings },
 ];
 
@@ -132,12 +131,6 @@ const NAV_ITEMS: NavItem[] = [
     label: 'Smile Gallery',
     path: '/reactivation/transformations',
     icon: Sparkles,
-  },
-  {
-    label: 'AI Receptionist',
-    path: '/reactivation/receptionist',
-    icon: Bot,
-    badge: 'AI',
   },
   {
     label: 'Google Reviews',

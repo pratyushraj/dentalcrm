@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useCallback } from 'react';
+import React, { useState, useMemo, useCallback, useEffect } from 'react';
 import { useDealAlertNotifications } from '@/hooks/useDealAlertNotifications';
 import { jsPDF } from 'jspdf';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -496,6 +496,15 @@ const ReactivationCustomers: React.FC = () => {
   }, [clinicId]);
 
   const [search, setSearch] = useState('');
+  const [localSearch, setLocalSearch] = useState('');
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setSearch(localSearch);
+    }, 200);
+    return () => clearTimeout(handler);
+  }, [localSearch]);
+
   const [statusFilter, setStatusFilter] = useState('All');
   const [serviceFilter, setServiceFilter] = useState('All Services');
   const [dateRange, setDateRange] = useState('all');
@@ -2045,8 +2054,8 @@ const ReactivationCustomers: React.FC = () => {
                 border: '1px solid #E2E8F0',
               }}
               placeholder="Search name or phone…"
-              value={search}
-              onChange={(e) => { setSearch(e.target.value); setPage(1); }}
+              value={localSearch}
+              onChange={(e) => { setLocalSearch(e.target.value); setPage(1); }}
             />
           </div>
 

@@ -2312,8 +2312,8 @@ const ReactivationCustomers: React.FC = () => {
             border: '1px solid #E2E8F0',
           }}
         >
-          <div className="overflow-x-auto">
-            <table className="w-full border-collapse">
+          <div className="overflow-x-auto w-full" style={{ WebkitOverflowScrolling: 'touch' }}>
+            <table className="w-full min-w-[1100px] border-collapse">
               <thead>
                 <tr style={{ borderBottom: '1px solid #E2E8F0', background: '#F8FAFC' }}>
                   {/* Checkbox */}

@@ -1635,9 +1635,12 @@ const ReactivationCustomers: React.FC = () => {
         (newPrescription !== oldPrescription) || 
         (newEstimatesStr !== oldEstimatesStr);
 
+      // Automated sends commented out as requested to keep everything manual via buttons
+      /*
       if (!isAutosave && isPrescriptionNew && ((newPrescription.trim() !== '') || (savedCustomer.estimates && savedCustomer.estimates.length > 0))) {
         sendWhatsAppPrescriptionPDF(savedCustomer).catch(err => console.error('Automated WhatsApp dispatch failed:', err));
       }
+      */
 
       // Automatically send Before/After (Smile Gallery branded) on save if both before & after photos exist and are newly updated (skip autosave)
       const oldBeforePhotos = oldCustomer?.beforePhotos || (oldCustomer?.beforePhoto ? [oldCustomer.beforePhoto] : []);
@@ -1652,11 +1655,13 @@ const ReactivationCustomers: React.FC = () => {
 
       const isPhotoNew = !oldCustomer || isBeforeChanged || isAfterChanged;
 
+      /*
       if (!isAutosave && 
           ((savedCustomer.beforePhoto && savedCustomer.afterPhoto) || (newBeforePhotos.length > 0 && newAfterPhotos.length > 0)) && 
           isPhotoNew) {
         sendWhatsAppBeforeAfter(savedCustomer).catch(err => console.error('Automated WhatsApp B&A photo dispatch failed:', err));
       }
+      */
 
       // Automatically insert/upsert corresponding appointment in dental_appointments if a Visit Date is specified
       if (!isAutosave && savedCustomer.lastVisit) {
@@ -1721,7 +1726,8 @@ const ReactivationCustomers: React.FC = () => {
             if (!apptError) {
               toast.success(`Appointment booked automatically for ${apptDate}`);
               
-              // Trigger automated WhatsApp confirmation using approved Meta template if configured
+              // Trigger automated WhatsApp confirmation using approved Meta template if configured (Commented out to keep manual only)
+              /*
               if (whatsappPhoneNumberId && whatsappAccessToken) {
                 const cleanPhone = savedCustomer.phone.replace(/[^0-9]/g, '');
                 const formattedPhone = cleanPhone.length === 10 ? `91${cleanPhone}` : cleanPhone;
@@ -1822,6 +1828,7 @@ const ReactivationCustomers: React.FC = () => {
                   console.error('Failed to log WABA message:', logErr);
                 }
               }
+              */
             }
           }
         } catch (apptErr) {

@@ -44,6 +44,7 @@ export interface Customer {
     nextVisitDate?: string;
     age?: string;
     gender?: string;
+    appointmentTime?: string;
   };
   activeProgramId?: string;
   programEnrollmentDate?: string;

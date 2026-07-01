@@ -2387,19 +2387,17 @@ const ReactivationCustomers: React.FC = () => {
                           </span>
                         </>
                       )}
-                      {getNextVisitDate(customer) && (
-                        <span
-                          role="button"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            triggerManualApptWhatsApp(customer);
-                          }}
-                          className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[10.5px] font-bold border border-indigo-200 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 transition-all shadow-sm cursor-pointer"
-                        >
-                          <MessageSquare size={11} />
-                          Send Appt (WA)
-                        </span>
-                      )}
+                      <span
+                        role="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          triggerManualApptWhatsApp(customer);
+                        }}
+                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[10.5px] font-bold border border-indigo-200 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 transition-all shadow-sm cursor-pointer"
+                      >
+                        <MessageSquare size={11} />
+                        Send Appt (WA)
+                      </span>
                       {((customer.beforeAfterPhotos && customer.beforeAfterPhotos.length > 0) || (customer.beforePhotos && customer.beforePhotos.length > 0) || (customer.afterPhotos && customer.afterPhotos.length > 0) || customer.beforePhoto || customer.afterPhoto) && (
                         <span
                           role="button"
@@ -2738,15 +2736,13 @@ const ReactivationCustomers: React.FC = () => {
                                     </DropdownMenuItem>
                                   </>
                                 )}
-                                {getNextVisitDate(customer) && (
-                                  <DropdownMenuItem
-                                    onClick={() => triggerManualApptWhatsApp(customer)}
-                                    className="gap-2.5 cursor-pointer hover:bg-slate-50 focus:bg-slate-50 text-indigo-600 hover:text-indigo-700 font-semibold"
-                                  >
-                                    <MessageSquare size={13} className="text-indigo-500" />
-                                    Send Appt (WA)
-                                  </DropdownMenuItem>
-                                )}
+                                <DropdownMenuItem
+                                  onClick={() => triggerManualApptWhatsApp(customer)}
+                                  className="gap-2.5 cursor-pointer hover:bg-slate-50 focus:bg-slate-50 text-indigo-600 hover:text-indigo-700 font-semibold"
+                                >
+                                  <MessageSquare size={13} className="text-indigo-500" />
+                                  Send Appt (WA)
+                                </DropdownMenuItem>
                                 <DropdownMenuItem
                                   className="gap-2.5 cursor-pointer hover:bg-slate-50 focus:bg-slate-50"
                                 >

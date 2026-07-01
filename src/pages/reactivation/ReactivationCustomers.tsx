@@ -528,6 +528,10 @@ const ReactivationCustomers: React.FC = () => {
     clinicId: string;
   }>(null);
 
+  const [rxWhatsAppPrompt, setRxWhatsAppPrompt] = useState<null | {
+    customer: Customer;
+  }>(null);
+
   // Track when Rx was last sent per patient to detect accidental double-sends
   const rxSentAt = React.useRef<Map<string, number>>(new Map());
 
@@ -759,6 +763,29 @@ const ReactivationCustomers: React.FC = () => {
   };
 
   const sendWhatsAppPrescriptionPDF = async (c: Customer, skipDuplicateCheck = false) => {
+    // ⚠️ Warn dentist if Rx was already sent in the last 10 minutes
+    const lastSentAt = rxSentAt.current.get(c.id);
+    const tenMinutes = 10 * 60 * 1000;
+    if (!skipDuplicateCheck && lastSentAt && (Date.now() - lastSentAt) < tenMinutes) {
+      const minutesAgo = Math.max(1, Math.round((Date.now() - lastSentAt) / 60000));
+      toast.warning(
+        `Prescription already sent to ${c.name} ${minutesAgo} min ago`,
+        {
+          description: 'Are you sure you want to send it again?',
+          duration: 8000,
+          action: {
+            label: 'Send Anyway',
+            onClick: () => executeSendWhatsAppPrescriptionPDF(c),
+          },
+        }
+      );
+      return;
+    }
+
+    setRxWhatsAppPrompt({ customer: c });
+  };
+
+  const executeSendWhatsAppPrescriptionPDF = async (c: Customer) => {
     try {
       if (!clinicId) return;
 
@@ -3039,6 +3066,91 @@ const ReactivationCustomers: React.FC = () => {
                 >
                   <MessageSquare size={13} />
                   Send WhatsApp
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+
+        {/* ── WhatsApp Prescription Prompt ─────────────────────────────────────── */}
+        {rxWhatsAppPrompt && (
+          <motion.div
+            key="rx-wa-prompt"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[200] flex items-end sm:items-center justify-center p-4"
+            style={{ background: 'rgba(15,23,42,0.55)', backdropFilter: 'blur(4px)' }}
+            onClick={() => setRxWhatsAppPrompt(null)}
+          >
+            <motion.div
+              initial={{ opacity: 0, y: 40, scale: 0.97 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 20, scale: 0.97 }}
+              transition={{ duration: 0.22, ease: 'easeOut' }}
+              className="w-full max-w-sm rounded-2xl p-5 shadow-2xl"
+              style={{ background: '#FFFFFF', border: '1px solid #E2E8F0' }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Icon + title */}
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-10 h-10 rounded-xl bg-teal-50 border border-teal-200 flex items-center justify-center shrink-0">
+                  <Send size={18} className="text-teal-600" />
+                </div>
+                <div>
+                  <p className="text-[14px] font-bold text-slate-800">Send prescription message?</p>
+                  <p className="text-[11.5px] text-slate-500 mt-0.5">via WhatsApp to {rxWhatsAppPrompt.customer.name}</p>
+                </div>
+              </div>
+
+              {/* Summary */}
+              <div className="rounded-xl bg-slate-50 border border-slate-200 px-4 py-3 mb-4 space-y-1.5">
+                <div className="flex items-center gap-2 text-[12px] text-slate-600">
+                  <span className="text-slate-400 w-16 shrink-0">Patient</span>
+                  <span className="font-semibold text-slate-800">{rxWhatsAppPrompt.customer.name}</span>
+                </div>
+                <div className="flex items-center gap-2 text-[12px] text-slate-600">
+                  <span className="text-slate-400 w-16 shrink-0">Treatment</span>
+                  <span className="font-semibold text-slate-800">{rxWhatsAppPrompt.customer.service || 'Consultation'}</span>
+                </div>
+                <div className="flex items-start gap-2 text-[12px] text-slate-600">
+                  <span className="text-slate-400 w-16 shrink-0">Prescription</span>
+                  <span className="font-semibold text-slate-700 max-h-16 overflow-y-auto w-full leading-tight pr-1">
+                    {rxWhatsAppPrompt.customer.prescription ? (
+                      rxWhatsAppPrompt.customer.prescription.trim().startsWith('[') ? (
+                        (() => {
+                          try {
+                            const parsed = JSON.parse(rxWhatsAppPrompt.customer.prescription);
+                            if (Array.isArray(parsed)) {
+                              return parsed.map((m: any, i: number) => `${i + 1}. ${m.name || ''} (${m.frequency || ''})`).join('\n');
+                            }
+                          } catch {}
+                          return rxWhatsAppPrompt.customer.prescription;
+                        })()
+                      ) : rxWhatsAppPrompt.customer.prescription
+                    ) : 'No prescription details.'}
+                  </span>
+                </div>
+              </div>
+
+              {/* Action buttons */}
+              <div className="flex gap-2">
+                <button
+                  onClick={() => setRxWhatsAppPrompt(null)}
+                  className="flex-1 py-2.5 rounded-xl text-[13px] font-semibold text-slate-600 bg-slate-100 hover:bg-slate-200 transition-colors"
+                >
+                  Skip
+                </button>
+                <button
+                  onClick={async () => {
+                    const c = rxWhatsAppPrompt.customer;
+                    setRxWhatsAppPrompt(null);
+                    executeSendWhatsAppPrescriptionPDF(c);
+                  }}
+                  className="flex-1 py-2.5 rounded-xl text-[13px] font-semibold text-white bg-teal-500 hover:bg-teal-600 transition-colors flex items-center justify-center gap-1.5"
+                >
+                  <Send size={13} />
+                  Send Prescription
                 </button>
               </div>
             </motion.div>

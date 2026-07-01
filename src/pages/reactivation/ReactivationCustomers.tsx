@@ -444,7 +444,7 @@ const ReactivationCustomers: React.FC = () => {
         setLoading(true);
         const { data, error } = await supabase
           .from('dental_patients')
-          .select('id, name, phone, last_visit, service, total_spend, status, notes, avatar_color, active_program_id, program_enrollment_date, program_current_step, program_status, created_at, prescription, estimates, before_photo, after_photo, before_after_photos, before_photos, after_photos, vitals, allergies, medical_conditions, problem_teeth, profile_photo')
+          .select('id, name, phone, last_visit, service, total_spend, status, notes, avatar_color, active_program_id, program_enrollment_date, program_current_step, program_status, created_at, prescription, estimates, before_photo, after_photo, before_after_photos, before_photos, after_photos, vitals, allergies, medical_conditions, problem_teeth, profile_photo, appointment_time')
           .eq('clinic_id', clinicId)
           .order('created_at', { ascending: false });
 
@@ -479,7 +479,8 @@ const ReactivationCustomers: React.FC = () => {
             programEnrollmentDate: d.program_enrollment_date,
             programCurrentStep: d.program_current_step,
             programStatus: d.program_status,
-            estimates: d.estimates || []
+            estimates: d.estimates || [],
+            appointmentTime: d.appointment_time
           }));
           setCustomers(mapped);
         } else {
@@ -1557,7 +1558,8 @@ const ReactivationCustomers: React.FC = () => {
       program_enrollment_date: c.programEnrollmentDate || null,
       program_current_step: c.programCurrentStep || null,
       program_status: c.programStatus || null,
-      estimates: c.estimates || []
+      estimates: c.estimates || [],
+      appointment_time: c.appointmentTime || null
     };
 
     try {
@@ -1602,7 +1604,8 @@ const ReactivationCustomers: React.FC = () => {
             programEnrollmentDate: data.program_enrollment_date,
             programCurrentStep: data.program_current_step,
             programStatus: data.program_status,
-            estimates: data.estimates || []
+            estimates: data.estimates || [],
+            appointmentTime: data.appointment_time
           };
           savedCustomer = mapped;
           setCustomers((prev) => [mapped, ...prev]);
@@ -1649,7 +1652,8 @@ const ReactivationCustomers: React.FC = () => {
             programEnrollmentDate: data.program_enrollment_date,
             programCurrentStep: data.program_current_step,
             programStatus: data.program_status,
-            estimates: data.estimates || []
+            estimates: data.estimates || [],
+            appointmentTime: data.appointment_time
           };
           savedCustomer = mapped;
           setCustomers((prev) => prev.map((x) => x.id === mapped.id ? mapped : x));

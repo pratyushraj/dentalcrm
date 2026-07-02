@@ -74,6 +74,57 @@ import { generateSmileGalleryImage, getProxyUrl, addSmileGalleryToPDF } from '..
 import { CARE_PROGRAMS } from '../carePrograms';
 import { AVATAR_COLORS, STATUS_OPTIONS } from '../constants';
 
+// Specialty constants
+const ORTHO_JOINTS: Record<number, string> = {
+  1: 'Left Knee',
+  2: 'Right Knee',
+  3: 'Left Hip',
+  4: 'Right Hip',
+  5: 'Spine / Back',
+  6: 'Left Shoulder',
+  7: 'Right Shoulder',
+  8: 'Left Ankle',
+  9: 'Right Ankle',
+  10: 'Left Wrist / Hand',
+  11: 'Right Wrist / Hand'
+};
+
+const DERMO_REGIONS: Record<number, string> = {
+  1: 'Face / Cheeks',
+  2: 'Forehead',
+  3: 'Nose / T-Zone',
+  4: 'Neck / Throat',
+  5: 'Chest / Upper Trunk',
+  6: 'Back',
+  7: 'Scalp / Head',
+  8: 'Left Arm / Hand',
+  9: 'Right Arm / Hand',
+  10: 'Left Leg / Foot',
+  11: 'Right Leg / Foot'
+};
+
+const ORTHO_MEDS = [
+  { label: 'Tab. Zerodol-SP', text: '• Tab. Zerodol-SP (Aceclofenac + Paracetamol + Serratiopeptidase) - 1 tab twice daily after meals for 3-5 days', category: 'Pain killers', price: 90 },
+  { label: 'Tab. Ultracet', text: '• Tab. Ultracet (Tramadol + Paracetamol) - 1 tab twice daily or SOS for severe pain', category: 'Pain killers', price: 120 },
+  { label: 'Tab. Etoshine 90mg', text: '• Tab. Etoshine 90mg (Etoricoxib) - 1 tab once daily for 5 days', category: 'Pain killers', price: 110 },
+  { label: 'Tab. Pan-D', text: '• Tab. Pan-D (Pantoprazole + Domperidone) - 1 tab once daily before food in the morning', category: 'Gas/Acidity', price: 75 },
+  { label: 'Tab. Shelcal 500', text: '• Tab. Shelcal 500 (Calcium + Vit. D3) - 1 tab once daily after dinner for 30 days', category: 'Supplements', price: 95 },
+  { label: 'Tab. Myospaz Forte', text: '• Tab. Myospaz Forte (Muscle Relaxant) - 1 tab twice daily for 5 days', category: 'Anti-inflammatory', price: 85 },
+  { label: 'Cap. Nurokind-Gold', text: '• Cap. Nurokind-Gold - 1 cap once daily after breakfast for 15 days', category: 'Supplements', price: 130 },
+  { label: 'Volini Gel (Local Apply)', text: '• Volini Gel / local anti-inflammatory gel - Apply gently 3-4 times daily on affected region', category: 'Others', price: 65 }
+];
+
+const DERMO_MEDS = [
+  { label: 'Tab. Limcee 500mg', text: '• Tab. Limcee 500mg (Vitamin C) - Chew 1 tab once daily for 30 days', category: 'Supplements', price: 40 },
+  { label: 'Tab. Allegra 120mg', text: '• Tab. Allegra 120mg (Fexofenadine) - 1 tab once daily at bedtime for 10 days', category: 'Others', price: 110 },
+  { label: 'Cap. Isotroin 20mg', text: '• Cap. Isotroin 20mg (Isotretinoin) - 1 cap once daily with dinner (strict medical supervision)', category: 'Oral Retinoids', price: 280 },
+  { label: 'Clindamycin Phosphate Gel', text: '• Clindamycin Phosphate Gel (1%) - Apply on acne lesions twice daily after face wash', category: 'Topicals', price: 140 },
+  { label: 'Sunscreen Gel SPF 50+', text: '• Matte Sunscreen Gel SPF 50+ - Apply generously on face and exposed areas 20 minutes before sun exposure', category: 'Sunscreen', price: 390 },
+  { label: 'Salicylic Acid Face Wash', text: '• Salicylic Acid Face Wash (2%) - Wash face twice daily', category: 'Skin Wash', price: 210 },
+  { label: 'Tab. Kenazole 200mg', text: '• Tab. Kenazole 200mg (Ketoconazole) - 1 tab once daily for 14 days', category: 'Others', price: 130 },
+  { label: 'Ketoconazole 2% Shampoo', text: '• Ketoconazole 2% Anti-dandruff shampoo - Use twice a week to wash scalp. Leave for 5 mins before rinsing', category: 'Hair care', price: 250 }
+];
+
 // Custom interfaces needed for modal
 interface CustomerModalProps {
   open: boolean;
@@ -121,6 +172,22 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
       email: '',
     };
   });
+
+  const clinicNameLower = (clinicBranding?.clinicName || '').toLowerCase();
+  const isOrtho = clinicNameLower.includes('anvaya') || clinicNameLower.includes('ortho') || clinicNameLower.includes('bone') || clinicNameLower.includes('joint');
+  const isDermo = clinicNameLower.includes('skin') || clinicNameLower.includes('solve') || clinicNameLower.includes('dermo') || clinicNameLower.includes('aesthetic');
+
+  const getRegionLabel = (id: number) => {
+    if (isOrtho) return ORTHO_JOINTS[id] || `Joint #${id}`;
+    if (isDermo) return DERMO_REGIONS[id] || `Area #${id}`;
+    return getToothName(id);
+  };
+
+  const getRegionIcon = () => {
+    if (isOrtho) return '🦵';
+    if (isDermo) return '👤';
+    return '🦷';
+  };
 
   const migrateMedications = (meds: any[]): any[] => {
     const defaultMeds = [
@@ -3309,8 +3376,38 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                         )}
                       </div>
 
-                      {/* Quadrant filter controls */}
-                      <div className="flex bg-slate-100 p-0.5 rounded-lg border border-slate-200 gap-0.5 w-full">
+                      {/* Dynamic mapping selector grid */}
+                      {isOrtho || isDermo ? (
+                        <div className="w-full bg-slate-50 border border-slate-200 rounded-xl p-4 flex flex-col items-center gap-3">
+                          <div className="text-[11px] font-bold text-slate-700 tracking-wider uppercase">
+                            {isOrtho ? 'Select Affected Joints / Regions' : 'Select Affected Skin Regions'}
+                          </div>
+                          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 w-full py-2">
+                            {Object.entries(isOrtho ? ORTHO_JOINTS : DERMO_REGIONS).map(([numStr, name]) => {
+                              const num = parseInt(numStr, 10);
+                              const isProblem = (form.problemTeeth || []).includes(num);
+                              return (
+                                <button
+                                  key={num}
+                                  type="button"
+                                  onClick={() => handleToothToggle(num)}
+                                  className={`px-3 py-3 rounded-xl flex items-center gap-2.5 border transition-all duration-150 select-none shadow-sm text-left ${
+                                    isProblem
+                                      ? 'bg-rose-50 border-rose-300 text-rose-600 ring-2 ring-rose-500/20 font-bold'
+                                      : 'bg-white border-slate-200 hover:bg-slate-50 text-slate-655 font-medium'
+                                  }`}
+                                >
+                                  <span className="text-[14px]">{isOrtho ? '🦵' : '👤'}</span>
+                                  <span className="text-[12px] leading-tight">{name}</span>
+                                </button>
+                              );
+                            })}
+                          </div>
+                        </div>
+                      ) : (
+                        <>
+                          {/* Quadrant filter controls */}
+                          <div className="flex bg-slate-100 p-0.5 rounded-lg border border-slate-200 gap-0.5 w-full">
                         {(['all', 'UR', 'UL', 'LL', 'LR'] as const).map((q) => (
                           <button
                             key={q}
@@ -3499,32 +3596,39 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                           </div>
                         )}
                       </div>
+                    </>
+                  )}
 
                       {/* Selected teeth details */}
                       {form.problemTeeth && form.problemTeeth.length > 0 ? (
                         <div className="space-y-3 bg-rose-50/[0.3] border border-rose-100 rounded-xl p-4">
                           <div className="flex items-center justify-between">
-                            <span className="text-[10.5px] font-bold uppercase tracking-widest text-rose-400">Tooth-Specific Chart Details</span>
-                            <span className="text-[9.5px] text-slate-450 font-medium">({form.problemTeeth.length} flagged teeth)</span>
+                            <span className="text-[10.5px] font-bold uppercase tracking-widest text-rose-455 text-rose-400">
+                              {isOrtho ? 'Joint-Specific Map Details' : isDermo ? 'Skin-Specific Region Details' : 'Tooth-Specific Chart Details'}
+                            </span>
+                            <span className="text-[9.5px] text-slate-455 font-medium">
+                              ({form.problemTeeth.length} {isOrtho ? 'flagged joints' : isDermo ? 'flagged areas' : 'flagged teeth'})
+                            </span>
                           </div>
                           
                           <div className="space-y-3">
                             {form.problemTeeth.map((t) => {
                               const toothVal = form.toothConditions?.[t];
-                              let diagnosis = 'Decayed / Cavity';
+                              const defaultDiagnosis = isOrtho ? 'Joint Pain / Inflammation' : isDermo ? 'Skin Rash / Inflammation' : 'Decayed / Cavity';
+                              let diagnosis = defaultDiagnosis;
                               let status = 'Required';
                               
                               if (toothVal) {
                                 if (typeof toothVal === 'object' && toothVal !== null) {
-                                  diagnosis = (toothVal as any).diagnosis || 'Decayed / Cavity';
+                                  diagnosis = (toothVal as any).diagnosis || defaultDiagnosis;
                                   status = (toothVal as any).status || 'Required';
                                 } else if (typeof toothVal === 'string') {
                                   const lowerVal = toothVal.toLowerCase();
-                                  if (lowerVal.includes('completed') || lowerVal.includes('done') || lowerVal.includes('healthy')) {
-                                    diagnosis = 'Healthy / Normal';
+                                  if (lowerVal.includes('completed') || lowerVal.includes('done') || lowerVal.includes('healthy') || lowerVal.includes('normal')) {
+                                    diagnosis = isOrtho || isDermo ? 'Normal / Healthy' : 'Healthy / Normal';
                                     status = 'Completed / Done';
                                   } else if (lowerVal.includes('pending') || lowerVal.includes('progress')) {
-                                    diagnosis = 'Decayed / Cavity';
+                                    diagnosis = defaultDiagnosis;
                                     status = 'Pending / In Progress';
                                   } else {
                                     diagnosis = toothVal.replace(' Needed', '').replace(' (Required)', '');
@@ -3539,11 +3643,13 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                                     <div className="flex items-center gap-2">
                                       <span className="text-[12px] font-bold text-rose-700 bg-rose-50 border border-rose-200 px-2 py-0.5 rounded flex items-center gap-1 shrink-0">
-                                        🦷 Tooth {t}
+                                        {getRegionIcon()} {getRegionLabel(t)}
                                       </span>
-                                      <span className="text-[11px] text-slate-500 truncate max-w-[200px]" title={getToothName(t)}>
-                                        {getToothName(t).split(' (Tooth ')[0]}
-                                      </span>
+                                      {!isOrtho && !isDermo && (
+                                        <span className="text-[11px] text-slate-500 truncate max-w-[200px]" title={getToothName(t)}>
+                                          {getToothName(t).split(' (Tooth ')[0]}
+                                        </span>
+                                      )}
                                     </div>
                                     <div className="flex items-center gap-1.5 flex-wrap">
                                       {/* Diagnosis select */}
@@ -3552,12 +3658,34 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                                         onChange={(e) => handleUpdateToothCondition(t, e.target.value, status)}
                                         className="text-[10.5px] font-medium text-slate-700 bg-white border border-slate-200 hover:border-slate-300 px-2 py-1 rounded-md outline-none cursor-pointer"
                                       >
-                                        <option value="Decayed / Cavity">Decayed / Cavity</option>
-                                        <option value="Root Canal Needed">Root Canal Needed</option>
-                                        <option value="Crown / Bridge Needed">Crown / Bridge Needed</option>
-                                        <option value="Dental Implant Needed">Dental Implant Needed</option>
-                                        <option value="Missing Tooth">Missing Tooth</option>
-                                        <option value="Healthy / Normal">Healthy / Normal</option>
+                                        {isOrtho ? (
+                                          <>
+                                            <option value="Joint Pain / Inflammation">Joint Pain / Inflammation</option>
+                                            <option value="Osteoarthritis">Osteoarthritis</option>
+                                            <option value="Ligament Tear / Sprain">Ligament Tear / Sprain</option>
+                                            <option value="Fracture / Injury">Fracture / Injury</option>
+                                            <option value="Meniscal Injury">Meniscal Injury</option>
+                                            <option value="Normal / Healthy">Normal / Healthy</option>
+                                          </>
+                                        ) : isDermo ? (
+                                          <>
+                                            <option value="Skin Rash / Inflammation">Skin Rash / Inflammation</option>
+                                            <option value="Acne Vulgaris">Acne Vulgaris</option>
+                                            <option value="Eczema / Dermatitis">Eczema / Dermatitis</option>
+                                            <option value="Psoriasis">Psoriasis</option>
+                                            <option value="Fungal Infection">Fungal Infection</option>
+                                            <option value="Normal / Healthy">Normal / Healthy</option>
+                                          </>
+                                        ) : (
+                                          <>
+                                            <option value="Decayed / Cavity">Decayed / Cavity</option>
+                                            <option value="Root Canal Needed">Root Canal Needed</option>
+                                            <option value="Crown / Bridge Needed">Crown / Bridge Needed</option>
+                                            <option value="Dental Implant Needed">Dental Implant Needed</option>
+                                            <option value="Missing Tooth">Missing Tooth</option>
+                                            <option value="Healthy / Normal">Healthy / Normal</option>
+                                          </>
+                                        )}
                                       </select>
 
                                       {/* Status select */}
@@ -3576,7 +3704,7 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                                   {/* Note text input */}
                                   <input
                                     type="text"
-                                    placeholder="Enter pathology or treatment notes..."
+                                    placeholder={isOrtho ? "Enter pain details, range of motion or treatment notes..." : isDermo ? "Enter rash details, flare intensity or treatment notes..." : "Enter pathology or treatment notes..."}
                                     value={note}
                                     onChange={(e) => {
                                       const notes = { ...form.toothNotes, [t]: e.target.value };
@@ -3591,7 +3719,11 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                         </div>
                       ) : (
                         <div className="bg-slate-50 border border-dashed border-slate-200 rounded-xl py-3.5 text-center text-slate-400 text-[11px]">
-                          No teeth selected. Click teeth in the chart above to mark problems.
+                          {isOrtho 
+                            ? 'No joints selected. Click joints in the map above to mark problems.' 
+                            : isDermo 
+                              ? 'No regions selected. Click regions in the map above to mark problems.' 
+                              : 'No teeth selected. Click teeth in the chart above to mark problems.'}
                         </div>
                       )}
                     </div>

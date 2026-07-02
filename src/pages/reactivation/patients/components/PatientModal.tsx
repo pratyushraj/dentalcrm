@@ -1462,7 +1462,7 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
       doc.setFontSize(9);
       doc.setFont('helvetica', 'bold');
       doc.text('PROCEDURE / TREATMENT DONE', 20, currentY + 5.5);
-      doc.text('TOOTH', 120, currentY + 5.5);
+      doc.text(isOrtho ? 'JOINT / REGION' : isDermo ? 'SKIN AREA' : 'TOOTH', 120, currentY + 5.5);
       doc.text('AMOUNT (INR)', 160, currentY + 5.5);
 
       currentY += 8;
@@ -1477,7 +1477,7 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
           doc.rect(15, currentY, W - 30, 8, 'F');
         }
         doc.text(item.procedure, 20, currentY + 5.5);
-        doc.text(item.tooth ? `Tooth ${item.tooth}` : '-', 120, currentY + 5.5);
+        doc.text(item.tooth ? (isOrtho || isDermo ? getRegionLabel(item.tooth) : `Tooth ${item.tooth}`) : '-', 120, currentY + 5.5);
         doc.text(`Rs. ${(item.cost || 0).toLocaleString('en-IN')}`, 160, currentY + 5.5);
         currentY += 8;
       });
@@ -1751,7 +1751,7 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
       doc.setFontSize(9);
       doc.setFont('helvetica', 'bold');
       doc.text('PROCEDURE / TREATMENT DONE', 20, currentY + 5.5);
-      doc.text('TOOTH', 120, currentY + 5.5);
+      doc.text(isOrtho ? 'JOINT / REGION' : isDermo ? 'SKIN AREA' : 'TOOTH', 120, currentY + 5.5);
       doc.text('AMOUNT (INR)', 160, currentY + 5.5);
 
       currentY += 8;
@@ -1770,7 +1770,7 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
         
         doc.setTextColor(TEXT_DARK[0], TEXT_DARK[1], TEXT_DARK[2]);
         doc.text(item.procedure, 20, currentY + 5.5);
-        doc.text(item.tooth ? `Tooth ${item.tooth}` : '-', 120, currentY + 5.5);
+        doc.text(item.tooth ? (isOrtho || isDermo ? getRegionLabel(item.tooth) : `Tooth ${item.tooth}`) : '-', 120, currentY + 5.5);
         doc.text(`Rs. ${item.cost.toLocaleString('en-IN')}`, 160, currentY + 5.5);
         currentY += 8;
       });

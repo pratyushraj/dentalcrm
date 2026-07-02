@@ -59,6 +59,13 @@ export default function ReactivationTransformations() {
   const [isSavingPhotos, setIsSavingPhotos] = useState(false);
 
   const [clinicName, setClinicName] = useState('Shree Ram Dental Clinic');
+
+  // Specialty detection — derived from clinic name (set from DB)
+  const isOrtho = clinicName.toLowerCase().includes('anvaya') || clinicName.toLowerCase().includes('ortho') || clinicName.toLowerCase().includes('bone') || clinicName.toLowerCase().includes('joint');
+  const isDermo = clinicName.toLowerCase().includes('skin') || clinicName.toLowerCase().includes('solve') || clinicName.toLowerCase().includes('dermo') || clinicName.toLowerCase().includes('aesthetic');
+  const galleryLabel = isOrtho ? 'Results Gallery' : isDermo ? 'Results Gallery' : 'Smile Gallery';
+  const studioLabel = isOrtho ? 'Before & After Recovery Studio' : isDermo ? 'Before & After Treatment Studio' : 'Before & After Studio';
+  const defaultTreatment = isOrtho ? 'Joint Recovery' : isDermo ? 'Skin Treatment' : 'Smile Makeover';
   const [clinicLogo, setClinicLogo] = useState<string | null>(null);
   const [doctorName, setDoctorName] = useState('');
   const [qualifications, setQualifications] = useState('');
@@ -223,7 +230,7 @@ export default function ReactivationTransformations() {
     if (activePatient) {
       setBeforePhoto(activePatient.before_photo);
       setAfterPhoto(activePatient.after_photo);
-      setTreatmentLabel(activePatient.service || 'Smile Makeover');
+      setTreatmentLabel(activePatient.service || defaultTreatment);
       setCaptions(null);
       setAiTheme(null);
       setUseAiTheme(false);
@@ -603,7 +610,7 @@ export default function ReactivationTransformations() {
       ctx.fillText(`🩺  ${drText}${degreeText}`, 65, footerY + footerHeight / 2);
     } else {
       ctx.font = 'italic 18px sans-serif';
-      ctx.fillText(`✨  Transforming Smiles, Enhancing Confidence`, 65, footerY + footerHeight / 2);
+      ctx.fillText(isOrtho ? `🏥  Restoring Movement, Rebuilding Lives` : isDermo ? `✨  Transforming Skin, Enhancing Confidence` : `✨  Transforming Smiles, Enhancing Confidence`, 65, footerY + footerHeight / 2);
     }
 
     // Right side: Phone number
@@ -630,7 +637,7 @@ export default function ReactivationTransformations() {
     const url = canvas.toDataURL('image/png');
     const a = document.createElement('a');
     a.href = url;
-    a.download = `Smile_Transformation_${activePatient?.name.replace(/\s+/g, '_') || 'Patient'}.png`;
+    a.download = `${isOrtho ? 'Recovery' : isDermo ? 'Skin_Treatment' : 'Smile_Transformation'}_${activePatient?.name.replace(/\s+/g, '_') || 'Patient'}.png`;
     a.click();
     toast.success('Transformation image downloaded!');
   };
@@ -658,8 +665,8 @@ export default function ReactivationTransformations() {
               <Award size={15} className="text-white" />
             </div>
             <div>
-              <h2 className="text-sm font-bold text-slate-800 leading-none">Smile Gallery</h2>
-              <p className="text-[10px] text-slate-400 mt-0.5">Before & After Studio</p>
+              <h2 className="text-sm font-bold text-slate-800 leading-none">{galleryLabel}</h2>
+              <p className="text-[10px] text-slate-400 mt-0.5">{studioLabel}</p>
             </div>
           </div>
           <div className="relative">
@@ -722,7 +729,7 @@ export default function ReactivationTransformations() {
                     </div>
                     <div className="flex-1 min-w-0">
                       <h3 className={`text-[12px] font-bold truncate ${isSelected ? 'text-indigo-950' : 'text-slate-800'}`}>{p.name}</h3>
-                      <p className={`text-[10px] truncate mt-0.5 ${isSelected ? 'text-indigo-600' : 'text-slate-400'}`}>{p.service || 'Smile Transformation'}</p>
+                      <p className={`text-[10px] truncate mt-0.5 ${isSelected ? 'text-indigo-600' : 'text-slate-400'}`}>{p.service || defaultTreatment}</p>
                       <div className="flex items-center gap-1.5 mt-2">
                         <div className="flex items-center gap-1">
                           <span className={`text-[8px] font-bold px-2 py-0.5 rounded-md uppercase tracking-wider ${hasBefore ? 'bg-red-50 text-red-500 border border-red-100' : 'bg-slate-50 text-slate-400 border border-slate-100'}`}>
@@ -1312,7 +1319,7 @@ export default function ReactivationTransformations() {
                           if (!canvas) { toast.error('Template graphic is empty or loading!'); return; }
                           if (!activePatient?.phone) { toast.error('No phone number for this patient.'); return; }
 
-                          const loadingToast = toast.loading('Sending Smile Gallery via WhatsApp...');
+                          const loadingToast = toast.loading(`Sending ${galleryLabel} via WhatsApp...`);
                           try {
                             // 1. Fetch clinic WhatsApp config first
                             const { data: clinic } = await supabase

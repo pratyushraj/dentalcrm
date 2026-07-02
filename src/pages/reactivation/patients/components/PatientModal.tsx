@@ -3375,7 +3375,7 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                     <div className="space-y-3">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
-                          <h4 className="text-[12px] font-bold text-slate-800 uppercase tracking-wider">Interactive Dental Chart</h4>
+                          <h4 className="text-[12px] font-bold text-slate-800 uppercase tracking-wider">{isOrtho ? 'Interactive Joint Map' : isDermo ? 'Interactive Skin Map' : 'Interactive Dental Chart'}</h4>
                           <button
                             type="button"
                             onClick={() => toggleFieldScribe('teeth')}
@@ -3389,7 +3389,7 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                             }`}
                           >
                             <Mic size={9} className={isTranscribing === 'teeth' ? 'animate-spin' : ''} />
-                            {activeFieldRecording === 'teeth' ? 'Listening...' : isTranscribing === 'teeth' ? 'Transcribing...' : 'Scribe Chart'}
+                            {activeFieldRecording === 'teeth' ? 'Listening...' : isTranscribing === 'teeth' ? 'Transcribing...' : isOrtho ? 'Scribe Joints' : isDermo ? 'Scribe Regions' : 'Scribe Chart'}
                           </button>
                         </div>
                         {form.problemTeeth && form.problemTeeth.length > 0 && (

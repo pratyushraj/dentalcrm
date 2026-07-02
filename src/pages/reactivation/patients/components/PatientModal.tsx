@@ -2393,7 +2393,12 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                       </div>
                       {/* Diagnosis Suggestions Tag Pills */}
                       <div className="flex flex-wrap gap-1.5 mt-2">
-                        {['Toothache', 'Sensitivity', 'Swelling', 'Bleeding Gums', 'Missing Tooth', 'Cosmetic Aligners'].map((tag) => (
+                        {(isOrtho 
+                          ? ['Knee Pain', 'Hip Pain', 'Back Pain', 'Shoulder Pain', 'Joint Swelling', 'Stiffness / Injury']
+                          : isDermo 
+                            ? ['Acne Flare-up', 'Skin Rash', 'Itching', 'Dry Skin / Eczema', 'Hair Fall', 'Dark Spots']
+                            : ['Toothache', 'Sensitivity', 'Swelling', 'Bleeding Gums', 'Missing Tooth', 'Cosmetic Aligners']
+                        ).map((tag) => (
                           <button
                             key={tag}
                             type="button"
@@ -2419,7 +2424,7 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                     <div className="space-y-3 pt-2">
                       <div>
                         <h4 className="text-[12px] font-bold text-slate-800 uppercase tracking-wider">Before Photos (Optional)</h4>
-                        <p className="text-[10px] text-slate-500 mt-0.5">Attach clinical photographs showing teeth condition before treatment</p>
+                        <p className="text-[10px] text-slate-500 mt-0.5">Attach clinical photographs showing "+( "joint/bone" if isOrtho else "skin" if isDermo else "teeth" )+" condition before treatment</p>
                       </div>
 
                       {/* Uploader dropzone */}
@@ -3882,21 +3887,40 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                       <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 items-end">
                         {/* Tooth selector */}
                         <div className="sm:col-span-3">
-                          <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-1.5">Tooth / Area</label>
-                          <div className="flex items-stretch border border-slate-200 rounded-xl overflow-hidden focus-within:border-indigo-500 focus-within:ring-1 focus-within:ring-indigo-500/20 bg-white">
-                            <div className="bg-slate-50 border-r border-slate-200 px-3.5 flex items-center justify-center text-slate-400 shrink-0">
-                              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                                <path d="M12 2C8.5 2 6 4.5 6 8c0 3.5 1 5.5 1.5 7.5.3 1.2.3 2.5.1 3.7L7 21c-.2.9.7 1.5 1.4 1l2.1-1.5c1-.7 2.4-.7 3.4 0l2.1 1.5c.7.5 1.6-.1 1.4-1l-.6-1.8c-.2-1.2-.2-2.5.1-3.7.5-2 1.5-4 1.5-7.5 0-3.5-2.5-6-6-6Z" />
-                                <path d="M12 2v6" />
-                              </svg>
+                          <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                            {isOrtho ? 'Joint / Area' : isDermo ? 'Skin Area' : 'Tooth / Area'}
+                          </label>
+                          <div className="flex items-stretch border border-slate-200 rounded-xl overflow-hidden focus-within:border-indigo-500 focus-within:ring-1 focus-within:ring-indigo-500/20 bg-white relative">
+                            <div className="bg-slate-50 border-r border-slate-200 px-3.5 flex items-center justify-center text-slate-400 shrink-0 text-[13px]">
+                              {isOrtho ? '🦵' : isDermo ? '👤' : '🦷'}
                             </div>
-                            <input
-                              type="text"
-                              placeholder="e.g. 11, 46"
-                              value={builderTooth}
-                              onChange={(e) => setBuilderTooth(e.target.value)}
-                              className="flex-1 px-3.5 py-2.5 text-[13px] text-slate-800 placeholder:text-slate-400 bg-transparent outline-none w-full border-0"
-                            />
+                            {isOrtho || isDermo ? (
+                              <select
+                                value={builderTooth}
+                                onChange={(e) => setBuilderTooth(e.target.value)}
+                                className="flex-1 px-3.5 py-2.5 pr-8 text-[13px] text-slate-800 bg-transparent outline-none w-full border-0 cursor-pointer appearance-none"
+                              >
+                                <option value="">General / None</option>
+                                {(form.problemTeeth || []).map((t) => (
+                                  <option key={t} value={t}>
+                                    {getRegionLabel(t)}
+                                  </option>
+                                ))}
+                              </select>
+                            ) : (
+                              <input
+                                type="text"
+                                placeholder="e.g. 11, 46"
+                                value={builderTooth}
+                                onChange={(e) => setBuilderTooth(e.target.value)}
+                                className="flex-1 px-3.5 py-2.5 text-[13px] text-slate-800 placeholder:text-slate-400 bg-transparent outline-none w-full border-0"
+                              />
+                            )}
+                            {(isOrtho || isDermo) && (
+                              <div className="absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">
+                                <ChevronDown size={14} />
+                              </div>
+                            )}
                           </div>
                         </div>
 
@@ -4018,13 +4042,13 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                                 <div className="flex items-center gap-2">
                                   {item.tooth && (
                                     <span className="text-[10px] font-bold text-rose-600 bg-rose-50 border border-rose-100 px-1.5 py-0.5 rounded">
-                                      Tooth {item.tooth}
+                                      {isOrtho || isDermo ? getRegionLabel(item.tooth) : `Tooth ${item.tooth}`}
                                     </span>
                                   )}
                                   <span className="text-slate-800 font-semibold">{item.procedure}</span>
                                 </div>
                                 <div className="flex items-center gap-1.5 text-[10.5px] text-slate-500">
-                                  <span>{item.isCosmetic ? 'Cosmetic Dental (18% GST)' : 'Therapeutic Care (0% GST)'}</span>
+                                  <span>{item.isCosmetic ? (isOrtho || isDermo ? 'Aesthetic/Cosmetic (18% GST)' : 'Cosmetic Dental (18% GST)') : 'Therapeutic Care (0% GST)'}</span>
                                 </div>
                               </div>
 

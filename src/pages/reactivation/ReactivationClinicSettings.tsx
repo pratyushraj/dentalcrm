@@ -73,6 +73,31 @@ export const DEFAULT_PROCEDURES: Procedure[] = [
   { name: 'Medicine Bill', defaultCost: 500, gstRate: 0 }
 ];
 
+export const DEFAULT_ORTHO_PROCEDURES: Procedure[] = [
+  { name: 'Orthopaedic Consultation', defaultCost: 500, gstRate: 0 },
+  { name: 'Total Knee Replacement (TKR)', defaultCost: 120000, gstRate: 0 },
+  { name: 'Total Hip Replacement (THR)', defaultCost: 150000, gstRate: 0 },
+  { name: 'Arthroscopic Ligament Repair', defaultCost: 65000, gstRate: 0 },
+  { name: 'Joint Viscosupplementation Injection', defaultCost: 8000, gstRate: 0 },
+  { name: 'Fracture Closed Reduction & Plaster', defaultCost: 4500, gstRate: 0 },
+  { name: 'BMD (Bone Mineral Density) Scan', defaultCost: 1500, gstRate: 0 },
+  { name: 'Physiotherapy Mobilization Session', defaultCost: 800, gstRate: 0 },
+  { name: 'Digital X-Ray / Ortho Imaging', defaultCost: 500, gstRate: 0 },
+  { name: 'Medicine Bill', defaultCost: 500, gstRate: 0 }
+];
+
+export const DEFAULT_DERMO_PROCEDURES: Procedure[] = [
+  { name: 'Dermatology Consultation', defaultCost: 600, gstRate: 0 },
+  { name: 'Chemical Peel / Skin Resurfacing', defaultCost: 2500, gstRate: 18 },
+  { name: 'Laser Hair Reduction (Session)', defaultCost: 6000, gstRate: 18 },
+  { name: 'Acne Scar Microneedling RF', defaultCost: 4500, gstRate: 18 },
+  { name: 'Botox / Anti-Wrinkle Injection', defaultCost: 15000, gstRate: 18 },
+  { name: 'Hydrafacial / Skin Polishing', defaultCost: 3500, gstRate: 18 },
+  { name: 'Skin Grafting / Cyst Excision', defaultCost: 12000, gstRate: 0 },
+  { name: 'Hair Transplant Session', defaultCost: 45000, gstRate: 18 },
+  { name: 'Medicine Bill', defaultCost: 500, gstRate: 0 }
+];
+
 export const BRANDING_KEY = (orgId: string) => `clinic_branding_${orgId}`;
 export const PROCEDURES_KEY = (orgId: string) => `clinic_procedures_${orgId}`;
 
@@ -101,6 +126,12 @@ export const loadClinicProcedures = (orgId: string): Procedure[] => {
     const raw = localStorage.getItem(PROCEDURES_KEY(orgId));
     if (raw) return JSON.parse(raw) as Procedure[];
   } catch {}
+  const branding = loadClinicBranding(orgId);
+  const clinicNameLower = (branding?.clinicName || '').toLowerCase();
+  const isOrtho = clinicNameLower.includes('anvaya') || clinicNameLower.includes('ortho') || clinicNameLower.includes('bone') || clinicNameLower.includes('joint');
+  const isDermo = clinicNameLower.includes('skin') || clinicNameLower.includes('solve') || clinicNameLower.includes('dermo') || clinicNameLower.includes('aesthetic');
+  if (isOrtho) return [...DEFAULT_ORTHO_PROCEDURES];
+  if (isDermo) return [...DEFAULT_DERMO_PROCEDURES];
   return [...DEFAULT_PROCEDURES];
 };
 

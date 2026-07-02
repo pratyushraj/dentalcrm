@@ -2301,7 +2301,9 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                         >
                           <option value="">Select Treatment...</option>
                           <option value="Consultation / Check-up">Consultation / Check-up</option>
-                          <option value="Tooth Pain / Emergency">Tooth Pain / Emergency</option>
+                          <option value={isOrtho ? "Joint Pain / Emergency" : isDermo ? "Skin Rash / Emergency" : "Tooth Pain / Emergency"}>
+                            {isOrtho ? "Joint Pain / Emergency" : isDermo ? "Skin Rash / Emergency" : "Tooth Pain / Emergency"}
+                          </option>
                           {proceduresCatalog.map((p) => (
                             <option key={p.name} value={p.name}>{p.name}</option>
                           ))}

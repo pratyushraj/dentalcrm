@@ -66,7 +66,7 @@ import {
 import { useSession } from '@/contexts/SessionContext';
 import { supabase } from '@/lib/supabase';
 import { refineTranscriptWithLLM } from '@/lib/ai/gemini';
-import { loadClinicProcedures, Procedure, loadWhatsAppTemplates } from '../../ReactivationClinicSettings';
+import { loadClinicProcedures, Procedure, loadWhatsAppTemplates, DEFAULT_ORTHO_PROCEDURES, DEFAULT_DERMO_PROCEDURES } from '../../ReactivationClinicSettings';
 import { logWhatsAppMessage } from '@/utils/whatsappLogger';
 import { Customer, CustomerStatus } from '../types';
 import { getInitialForm, getToothName, getShortToothLabel, getNextVisitDate } from '../helpers';
@@ -157,7 +157,6 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
   // Clinic branding (loaded from localStorage, used for PDF generation)
   const { organizationId } = useSession();
   const _orgId = organizationId || 'default';
-  const proceduresCatalog = useMemo(() => loadClinicProcedures(_orgId), [_orgId]);
   const [clinicBranding, setClinicBranding] = useState(() => {
     try {
       const raw = localStorage.getItem(`clinic_branding_${_orgId}`);
@@ -176,6 +175,17 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
   const clinicNameLower = (clinicBranding?.clinicName || '').toLowerCase();
   const isOrtho = clinicNameLower.includes('anvaya') || clinicNameLower.includes('ortho') || clinicNameLower.includes('bone') || clinicNameLower.includes('joint');
   const isDermo = clinicNameLower.includes('skin') || clinicNameLower.includes('solve') || clinicNameLower.includes('dermo') || clinicNameLower.includes('aesthetic');
+
+  const proceduresCatalog = useMemo(() => {
+    const list = loadClinicProcedures(_orgId);
+    // If the list is the default dental procedures, but the clinic is Ortho or Dermo, return the correct catalog!
+    const isDefaultDentalList = list.length > 0 && list.some(p => p.name === 'Root Canal Treatment (RCT)');
+    if (isDefaultDentalList) {
+      if (isOrtho) return DEFAULT_ORTHO_PROCEDURES;
+      if (isDermo) return DEFAULT_DERMO_PROCEDURES;
+    }
+    return list;
+  }, [_orgId, isOrtho, isDermo]);
 
   const getRegionLabel = (id: number) => {
     if (isOrtho) return ORTHO_JOINTS[id] || `Joint #${id}`;

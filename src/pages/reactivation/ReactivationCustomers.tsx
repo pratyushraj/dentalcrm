@@ -117,6 +117,20 @@ const ReactivationCustomers: React.FC = () => {
     };
   });
 
+  // Specialty detection (same logic as PatientModal)
+  const effectiveClinicName = (
+    clinicBranding?.clinicName && clinicBranding.clinicName !== 'Dental Clinic'
+      ? clinicBranding.clinicName
+      : profile?.business_name || clinicBranding?.clinicName || ''
+  ).toLowerCase();
+  const isOrtho = effectiveClinicName.includes('anvaya') || effectiveClinicName.includes('ortho') || effectiveClinicName.includes('bone') || effectiveClinicName.includes('joint');
+  const isDermo = effectiveClinicName.includes('skin') || effectiveClinicName.includes('solve') || effectiveClinicName.includes('dermo') || effectiveClinicName.includes('aesthetic');
+
+  const ORTHO_JOINTS: Record<number, string> = { 1: 'Left Knee', 2: 'Right Knee', 3: 'Left Hip', 4: 'Right Hip', 5: 'Spine / Back', 6: 'Left Shoulder', 7: 'Right Shoulder', 8: 'Left Ankle', 9: 'Right Ankle', 10: 'Left Wrist / Hand', 11: 'Right Wrist / Hand' };
+  const DERMO_REGIONS: Record<number, string> = { 1: 'Face / Cheeks', 2: 'Forehead', 3: 'Chin / Jawline', 4: 'Neck', 5: 'Back', 6: 'Chest', 7: 'Arms', 8: 'Legs', 9: 'Scalp', 10: 'Hands', 11: 'Full Body' };
+  const getRegionLabel = (id: number) => isOrtho ? (ORTHO_JOINTS[id] || `Joint #${id}`) : isDermo ? (DERMO_REGIONS[id] || `Area #${id}`) : `Tooth ${id}`;
+  const regionIcon = isOrtho ? '🦵' : isDermo ? '👤' : '🦷';
+  const regionWord = isOrtho ? 'Joints' : isDermo ? 'Areas' : 'Teeth';
   React.useEffect(() => {
     if (!clinicId || clinicId === 'default') return;
     async function loadClinicBranding() {
@@ -2361,7 +2375,7 @@ const ReactivationCustomers: React.FC = () => {
                       <div className="text-[13px] text-slate-700 mt-1">{customer.service}</div>
                       {customer.problemTeeth && customer.problemTeeth.length > 0 && (
                         <div className="mt-1 text-[11px] text-rose-400 font-semibold">
-                          Teeth: {customer.problemTeeth.join(', ')}
+                          {regionIcon} {regionWord}: {customer.problemTeeth.map(t => getRegionLabel(t)).join(', ')}
                         </div>
                       )}
                     </div>
@@ -2635,7 +2649,7 @@ const ReactivationCustomers: React.FC = () => {
                               <span className="text-[12px] text-slate-600">{customer.service}</span>
                               {customer.problemTeeth && customer.problemTeeth.length > 0 && (
                                 <span className="text-[10px] text-rose-400 font-semibold tracking-wide flex items-center gap-1 mt-0.5">
-                                  🦷 Teeth: {customer.problemTeeth.join(', ')}
+                                  {regionIcon} {regionWord}: {customer.problemTeeth.map((t: number) => getRegionLabel(t)).join(', ')}
                                 </span>
                               )}
                               {customer.xrays && customer.xrays.length > 0 && (

@@ -371,7 +371,7 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
           setClinicBranding({
             clinicName: clinic.name || 'Dental Clinic',
             doctorName: clinic.doctor_name || doctorName || 'Doctor',
-            qualifications: clinic.qualifications || clinic.timings_note || 'B.D.S., M.D.S. | Dental Specialist',
+            qualifications: clinic.qualifications || clinic.timings_note || (isOrtho ? 'M.B.B.S., M.S. (Ortho) | Orthopaedic Specialist' : isDermo ? 'M.B.B.S., M.D. (Derm) | Dermatology Specialist' : 'B.D.S., M.D.S. | Dental Specialist'),
             address: clinic.address || '',
             phone: clinic.phone || '',
             email: clinic.email || doctorEmail || '',
@@ -1334,7 +1334,7 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
     if (drQualifications) {
       doc.text(drQualifications, headerTextX, 38);
     }
-    doc.text('Dental Surgeon & Specialist', headerTextX, drQualifications ? 42 : 38);
+    doc.text(isOrtho ? 'Orthopaedic Surgeon & Joint Specialist' : isDermo ? 'Dermatologist & Skin Specialist' : 'Dental Surgeon & Specialist', headerTextX, drQualifications ? 42 : 38);
 
     // Right Side Contact
     doc.setTextColor(TEXT_DARK[0], TEXT_DARK[1], TEXT_DARK[2]);
@@ -1610,7 +1610,7 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
     if (drQualifications) {
       doc.text(drQualifications, headerTextX, 38);
     }
-    doc.text('Dental Surgeon & Specialist', headerTextX, drQualifications ? 42 : 38);
+    doc.text(isOrtho ? 'Orthopaedic Surgeon & Joint Specialist' : isDermo ? 'Dermatologist & Skin Specialist' : 'Dental Surgeon & Specialist', headerTextX, drQualifications ? 42 : 38);
 
     // Right Side Contact Info
     doc.setTextColor(TEXT_DARK[0], TEXT_DARK[1], TEXT_DARK[2]);
@@ -4173,7 +4173,7 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                                         <Zap size={16} className="text-indigo-600 animate-pulse" />
                                       </div>
                                       <div>
-                                        <h4 className="text-[13px] font-bold text-slate-800 uppercase tracking-wider">{activePartner === 'Axis Bank (Jarvis)' ? 'Axis Bank Personal Loan / EMI' : '0% Interest Dental EMI'}</h4>
+                                        <h4 className="text-[13px] font-bold text-slate-800 uppercase tracking-wider">{activePartner === 'Axis Bank (Jarvis)' ? 'Axis Bank Personal Loan / EMI' : isOrtho ? '0% Interest Ortho EMI' : isDermo ? '0% Interest Skin Care EMI' : '0% Interest Dental EMI'}</h4>
                                         <p className="text-[10px] text-slate-400 font-medium">Partnered with {activePartner}</p>
                                       </div>
                                     </div>
@@ -4222,7 +4222,7 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                                     targetLink = `${crmOrigin}/emi/onboard?client_id=${clientId}&name=${nameUrlParam}&amount=${calculatedGrandTotal}`;
                                   }
                                   
-                                  const messageText = `Dear ${form.name || 'Patient'},\n\nTo pay for your treatment of ₹${calculatedGrandTotal.toLocaleString('en-IN')} at our clinic via easy monthly installments (EMI), please click the link below to check your eligibility and complete your digital application with ${activePartner}:\n\n🔗 ${targetLink}\n\nThank you!\nYOUR DENTIST Patna`;
+                                  const messageText = `Dear ${form.name || 'Patient'},\n\nTo pay for your treatment of ₹${calculatedGrandTotal.toLocaleString('en-IN')} at our clinic via easy monthly installments (EMI), please click the link below to check your eligibility and complete your digital application with ${activePartner}:\n\n🔗 ${targetLink}\n\nThank you!\n${clinicBranding.clinicName || 'Our Clinic'}`;
                                   
                                   window.open(`https://wa.me/${formattedPhone}?text=${encodeURIComponent(messageText)}`, '_blank', 'noopener,noreferrer');
                                   toast.success("Opening WhatsApp with pre-filled Axis Bank eligibility application link!");
@@ -4241,7 +4241,7 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                                   <Zap size={16} className="text-indigo-600 animate-pulse" />
                                 </div>
                                 <div>
-                                  <h4 className="text-[13px] font-bold text-slate-800 uppercase tracking-wider">0% Interest Dental EMI</h4>
+                                  <h4 className="text-[13px] font-bold text-slate-800 uppercase tracking-wider">{isOrtho ? '0% Interest Ortho EMI' : isDermo ? '0% Interest Skin Care EMI' : '0% Interest Dental EMI'}</h4>
                                   <p className="text-[10px] text-slate-400 font-medium">Financing not configured yet</p>
                                 </div>
                               </div>

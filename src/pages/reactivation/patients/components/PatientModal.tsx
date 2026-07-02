@@ -172,9 +172,18 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
     };
   });
 
-  const clinicNameLower = (clinicBranding?.clinicName || '').toLowerCase();
-  const isOrtho = clinicNameLower.includes('anvaya') || clinicNameLower.includes('ortho') || clinicNameLower.includes('bone') || clinicNameLower.includes('joint');
-  const isDermo = clinicNameLower.includes('skin') || clinicNameLower.includes('solve') || clinicNameLower.includes('dermo') || clinicNameLower.includes('aesthetic');
+  // Use both saved branding AND profile business_name to detect specialty
+  // (clinicBranding may default to 'Dental Clinic' if profile wasn't loaded yet on mount)
+  const effectiveClinicName = (
+    clinicBranding?.clinicName &&
+    clinicBranding.clinicName !== 'Dental Clinic'
+      ? clinicBranding.clinicName
+      : profile?.business_name || clinicBranding?.clinicName || ''
+  ).toLowerCase();
+  const isOrtho = effectiveClinicName.includes('anvaya') || effectiveClinicName.includes('ortho') || effectiveClinicName.includes('bone') || effectiveClinicName.includes('joint');
+  const isDermo = effectiveClinicName.includes('skin') || effectiveClinicName.includes('solve') || effectiveClinicName.includes('dermo') || effectiveClinicName.includes('aesthetic');
+  // Keep clinicNameLower in sync for any legacy references
+  const clinicNameLower = effectiveClinicName;
 
   const proceduresCatalog = useMemo(() => {
     const list = loadClinicProcedures(_orgId);

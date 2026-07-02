@@ -3394,7 +3394,7 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                                   className={`px-3 py-3 rounded-xl flex items-center gap-2.5 border transition-all duration-150 select-none shadow-sm text-left ${
                                     isProblem
                                       ? 'bg-rose-50 border-rose-300 text-rose-600 ring-2 ring-rose-500/20 font-bold'
-                                      : 'bg-white border-slate-200 hover:bg-slate-50 text-slate-655 font-medium'
+                                      : 'bg-white border-slate-200 hover:bg-slate-50 text-slate-700 font-medium'
                                   }`}
                                 >
                                   <span className="text-[14px]">{isOrtho ? '🦵' : '👤'}</span>
@@ -3603,10 +3603,10 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                       {form.problemTeeth && form.problemTeeth.length > 0 ? (
                         <div className="space-y-3 bg-rose-50/[0.3] border border-rose-100 rounded-xl p-4">
                           <div className="flex items-center justify-between">
-                            <span className="text-[10.5px] font-bold uppercase tracking-widest text-rose-455 text-rose-400">
+                            <span className="text-[10.5px] font-bold uppercase tracking-widest text-rose-400">
                               {isOrtho ? 'Joint-Specific Map Details' : isDermo ? 'Skin-Specific Region Details' : 'Tooth-Specific Chart Details'}
                             </span>
-                            <span className="text-[9.5px] text-slate-455 font-medium">
+                            <span className="text-[9.5px] text-slate-500 font-medium">
                               ({form.problemTeeth.length} {isOrtho ? 'flagged joints' : isDermo ? 'flagged areas' : 'flagged teeth'})
                             </span>
                           </div>

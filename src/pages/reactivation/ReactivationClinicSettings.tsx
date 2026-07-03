@@ -517,8 +517,8 @@ const ReactivationClinicSettings: React.FC = () => {
     if (!saved || saved === 'Not Partnered' || saved === 'Pending') {
       localStorage.setItem('emi_partner_status', 'Active');
       localStorage.setItem('emi_partner_name', 'Axis Bank (Jarvis)');
-      localStorage.setItem('emi_client_id', '7bc29bc8dad077dc5491758da515d6fd');
-      localStorage.setItem('emi_client_secret', 'ce5c5a113672e25e7a8747c8e2917a52');
+      localStorage.setItem('emi_client_id', 'de01ee08f2ec9266649435867d87da8d');
+      localStorage.setItem('emi_client_secret', 'a305d7abd56ae3aad432e593c0fbecf6');
       localStorage.setItem('emi_axis_url', 'https://apiportal.axis.bank.in/jarvis/v1/apply');
       return 'Active';
     }
@@ -532,8 +532,8 @@ const ReactivationClinicSettings: React.FC = () => {
     bankAccount: '',
     ifsc: '',
     averageBilling: '5-10L',
-    clientId: localStorage.getItem('emi_client_id') || '7bc29bc8dad077dc5491758da515d6fd',
-    clientSecret: localStorage.getItem('emi_client_secret') || 'ce5c5a113672e25e7a8747c8e2917a52',
+    clientId: localStorage.getItem('emi_client_id') || 'de01ee08f2ec9266649435867d87da8d',
+    clientSecret: localStorage.getItem('emi_client_secret') || 'a305d7abd56ae3aad432e593c0fbecf6',
     axisUrl: localStorage.getItem('emi_axis_url') || 'https://apiportal.axis.bank.in/jarvis/v1/apply',
   }));
 

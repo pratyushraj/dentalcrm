@@ -4217,7 +4217,7 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                                   
                                   let targetLink = `${crmOrigin}/emi/callback`;
                                   if (activePartner === 'Axis Bank (Jarvis)') {
-                                    const clientId = localStorage.getItem('emi_client_id') || '7bc29bc8dad077dc5491758da515d6fd';
+                                    const clientId = localStorage.getItem('emi_client_id') || 'de01ee08f2ec9266649435867d87da8d';
                                     const nameUrlParam = encodeURIComponent(form.name || 'Patient');
                                     targetLink = `${crmOrigin}/emi/onboard?client_id=${clientId}&name=${nameUrlParam}&amount=${calculatedGrandTotal}`;
                                   }

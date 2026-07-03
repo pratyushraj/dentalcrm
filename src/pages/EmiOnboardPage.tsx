@@ -33,8 +33,17 @@ export default function EmiOnboardPage() {
   }, [step, timer]);
 
   const callAxisAPI = async (path: string, payload: any) => {
-    const clientId = localStorage.getItem('emi_client_id') || '7bc29bc8dad077dc5491758da515d6fd';
-    const clientSecret = localStorage.getItem('emi_client_secret') || 'ce5c5a113672e25e7a8747c8e2917a52';
+    const params = new URLSearchParams(window.location.search);
+    const urlClientId = params.get('client_id');
+    
+    let clientId = urlClientId || localStorage.getItem('emi_client_id') || 'de01ee08f2ec9266649435867d87da8d';
+    let clientSecret = localStorage.getItem('emi_client_secret') || 'a305d7abd56ae3aad432e593c0fbecf6';
+    
+    if (clientId === 'de01ee08f2ec9266649435867d87da8d') {
+      clientSecret = 'a305d7abd56ae3aad432e593c0fbecf6';
+    } else if (clientId === 'de01ee08f2ec9266649435867d87da8d') {
+      clientSecret = 'ce5c5a113672e25e7a8747c8e2917a52';
+    }
     
     const response = await fetch('/api/axis-helper/gateway', {
       method: 'POST',
@@ -184,7 +193,7 @@ export default function EmiOnboardPage() {
       setTimeout(() => {
         const params = new URLSearchParams(window.location.search);
         // Redirect back to our callback page
-        window.location.href = `/emi/callback?client_id=${params.get('client_id') || '7bc29bc8dad077dc5491758da515d6fd'}&status=approved`;
+        window.location.href = `/emi/callback?client_id=${params.get('client_id') || 'de01ee08f2ec9266649435867d87da8d'}&status=approved`;
       }, 1500);
 
     } catch (err) {
@@ -200,7 +209,7 @@ export default function EmiOnboardPage() {
             setLoadingText('Registering E-NACH mandate...');
             setTimeout(() => {
               const params = new URLSearchParams(window.location.search);
-              window.location.href = `/emi/callback?client_id=${params.get('client_id') || '7bc29bc8dad077dc5491758da515d6fd'}&status=approved`;
+              window.location.href = `/emi/callback?client_id=${params.get('client_id') || 'de01ee08f2ec9266649435867d87da8d'}&status=approved`;
             }, 1000);
           }, 1000);
         }, 1000);

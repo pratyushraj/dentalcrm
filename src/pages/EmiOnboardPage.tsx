@@ -46,7 +46,7 @@ export default function EmiOnboardPage() {
         payload,
         clientId,
         clientSecret,
-        testId: '3' // Axis test success code
+        testId: '1' // Axis test success code
       })
     });
     return response.json();

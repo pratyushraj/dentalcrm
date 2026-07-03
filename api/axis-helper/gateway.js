@@ -37,7 +37,7 @@ export default async function handler(req, res) {
       'x-fapi-serviceId': 'OpenAPI',
       'x-fapi-serviceVersion': '1.0',
       'requestId': `REQ_${Date.now()}`,
-      'X-AXIS-TEST-ID': testId || '3' // Default to 3 (Success/Approved) if not specified
+      'X-AXIS-TEST-ID': testId || '1' // Default to 1 (Success/Approved) if not specified
     };
 
     const targetUrl = `https://apiportal.axis.bank.in/gateway/los/open-api/v3${path}`;

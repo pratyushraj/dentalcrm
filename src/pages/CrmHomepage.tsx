@@ -196,6 +196,7 @@ export default function CrmHomepage() {
               </a>
               .
             </span>
+            <Link to="/yourdentist/blog" className="hover:text-[#5b72ff] text-neutral-400 transition-colors underline">Patient Guides</Link>
             <span className="hidden sm:inline">&middot;</span>
             <Link to="/reactivation/login" className="hover:text-white transition-colors">Staff Login</Link>
           </div>

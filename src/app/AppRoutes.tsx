@@ -11,6 +11,8 @@ const ContentWorkspace = lazy(() => import("@/pages/ContentWorkspace"));
 const CrmHomepage = lazy(() => import("@/pages/CrmHomepage"));
 const EmiCallbackPage = lazy(() => import("@/pages/EmiCallbackPage"));
 const EmiOnboardPage = lazy(() => import("@/pages/EmiOnboardPage"));
+const BlogHub = lazy(() => import("@/pages/yourdentist/BlogHub"));
+const BlogArticlePage = lazy(() => import("@/pages/yourdentist/BlogArticlePage"));
 
 export default function AppRoutes() {
   return (
@@ -26,6 +28,10 @@ export default function AppRoutes() {
               </LazyRoute>
             } 
           />
+
+          {/* YOUR DENTIST Patna SEO Patient Guides */}
+          <Route path="/yourdentist/blog" element={<LazyRoute><BlogHub /></LazyRoute>} />
+          <Route path="/yourdentist/blog/:slug" element={<LazyRoute><BlogArticlePage /></LazyRoute>} />
 
           <Route path="/dental-trends" element={<LazyRoute><DentalTrendFinder /></LazyRoute>} />
           <Route path="/dentist-proposal" element={<LazyRoute><ContentWorkspace /></LazyRoute>} />

@@ -1812,7 +1812,7 @@ const ReactivationCustomers: React.FC = () => {
           }
 
           const apptDate = savedCustomer.lastVisit;
-          const apptTime = '10:00 AM'; // Default time
+          const apptTime = savedCustomer.vitals?.appointmentTime || '10:00 AM';
           const treatmentName = savedCustomer.service || 'Dental Consultation';
 
           const insertApptRow = {

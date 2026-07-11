@@ -1,14 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Star, Check, Copy, ExternalLink, Sparkles, AlertCircle, Building2, Smile, Activity } from 'lucide-react';
-import { createClient } from '@supabase/supabase-js';
+import { Star, Check, Copy, ExternalLink, Sparkles, AlertCircle, Smile, Activity } from 'lucide-react';
 import confetti from 'canvas-confetti';
-
-// Initialize Supabase using client variables
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || '';
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || '';
-const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 interface ClinicConfig {
   id: string;
@@ -61,7 +54,7 @@ export default function ReviewAssistant() {
         { id: 'explain', label: 'Detailed explanation' },
       ];
 
-  // Fetch clinic details on mount
+  // Fetch clinic details via serverless API (bypasses RLS for public pages)
   useEffect(() => {
     async function loadClinic() {
       if (!clientId) {
@@ -69,13 +62,9 @@ export default function ReviewAssistant() {
         return;
       }
       try {
-        const { data, error } = await supabase
-          .from('dental_clinics')
-          .select('id, name, phone, doctor_name, google_review_url')
-          .eq('id', clientId)
-          .single();
-
-        if (!error && data) {
+        const res = await fetch(`/api/clinic/public-profile?clinic_id=${clientId}`);
+        if (res.ok) {
+          const data = await res.json();
           setClinic(data as ClinicConfig);
         }
       } catch (err) {

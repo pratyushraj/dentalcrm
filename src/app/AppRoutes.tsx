@@ -13,6 +13,7 @@ const EmiCallbackPage = lazy(() => import("@/pages/EmiCallbackPage"));
 const EmiOnboardPage = lazy(() => import("@/pages/EmiOnboardPage"));
 const BlogHub = lazy(() => import("@/pages/yourdentist/BlogHub"));
 const BlogArticlePage = lazy(() => import("@/pages/yourdentist/BlogArticlePage"));
+const ReviewAssistant = lazy(() => import("@/pages/yourdentist/ReviewAssistant"));
 
 export default function AppRoutes() {
   return (
@@ -28,6 +29,9 @@ export default function AppRoutes() {
               </LazyRoute>
             } 
           />
+
+          {/* Review Assistant Landing Page */}
+          <Route path="/review/assist" element={<LazyRoute><ReviewAssistant /></LazyRoute>} />
 
           {/* YOUR DENTIST Patna SEO Patient Guides */}
           <Route path="/yourdentist/blog" element={<LazyRoute><BlogHub /></LazyRoute>} />

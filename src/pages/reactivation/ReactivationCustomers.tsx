@@ -70,7 +70,7 @@ import {
 import { useSession } from '@/contexts/SessionContext';
 import { supabase } from '@/lib/supabase';
 import { refineTranscriptWithLLM } from '@/lib/ai/gemini';
-import { loadClinicProcedures, Procedure, loadWhatsAppTemplates } from './ReactivationClinicSettings';
+import { loadClinicProcedures, Procedure, loadWhatsAppTemplates, loadWhatsAppConfig } from './ReactivationClinicSettings';
 import { logWhatsAppMessage } from '@/utils/whatsappLogger';
 
 
@@ -802,6 +802,25 @@ const ReactivationCustomers: React.FC = () => {
   const executeSendWhatsAppPrescriptionPDF = async (c: Customer) => {
     try {
       if (!clinicId) return;
+
+      // ── Personal WhatsApp mode: open wa.me link instead of Meta API ──
+      const waConfig = loadWhatsAppConfig(clinicId);
+      if (waConfig.usePersonalWhatsApp) {
+        const cleanPhone = c.phone.replace(/[^0-9]/g, '');
+        const formattedPhone = cleanPhone.length === 10 ? `91${cleanPhone}` : cleanPhone;
+        const meds = (() => {
+          if (!c.prescription) return 'No prescription';
+          try {
+            const parsed = JSON.parse(c.prescription);
+            if (Array.isArray(parsed)) return parsed.map((m: any, i: number) => `${i+1}. ${m.name || ''} (${m.frequency || ''})`).join('\n');
+          } catch {}
+          return c.prescription;
+        })();
+        const msgText = `🦷 *Prescription — ${c.name}*\n\n${meds}\n\n📋 Treatment: ${c.service || 'Consultation'}\n\nThank you for visiting us!`;
+        window.open(`https://wa.me/${formattedPhone}?text=${encodeURIComponent(msgText)}`, '_blank');
+        toast.success(`WhatsApp opened for ${c.name}! Tap Send to deliver.`);
+        return;
+      }
 
       // 1. Fetch clinic configuration
       const { data: clinic } = await supabase
@@ -3023,6 +3042,17 @@ const ReactivationCustomers: React.FC = () => {
                       const cleanPhone = p.customer.phone.replace(/[^0-9]/g, '');
                       const formattedPhone = cleanPhone.length === 10 ? `91${cleanPhone}` : cleanPhone;
                       const formattedDateString = new Date(p.apptDate).toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
+
+                      // ── Personal WhatsApp mode ──────────────────────────
+                      const waConfig = loadWhatsAppConfig(p.clinicId);
+                      if (waConfig.usePersonalWhatsApp) {
+                        const msgText = `🦷 *Appointment Confirmed!*\n\nHi ${p.customer.name}, your appointment has been confirmed.\n\n📅 Date: ${formattedDateString}\n⏰ Time: ${p.apptTime}\n🔬 Treatment: ${p.treatmentName}\n\nPlease arrive 10 minutes early. See you soon!`;
+                        window.open(`https://wa.me/${formattedPhone}?text=${encodeURIComponent(msgText)}`, '_blank');
+                        toast.success(`WhatsApp opened for ${p.customer.name}! Tap Send.`);
+                        return;
+                      }
+
+                      // ── Official API ────────────────────────────────────
                       const syncedTemplates = loadWhatsAppTemplates(p.clinicId);
                       const bookingTemplate = syncedTemplates.find(t =>
                         t.name === 'booking' ||

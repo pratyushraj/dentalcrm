@@ -16,6 +16,8 @@ export interface WhatsAppConfig {
   beforeAfterTemplateName?: string;
   prescriptionTemplateName?: string;
   bookingTemplateName?: string;
+  /** When true, all WhatsApp sends open a wa.me link on your personal WhatsApp instead of Meta API */
+  usePersonalWhatsApp?: boolean;
 }
 
 export interface WhatsAppTemplate {
@@ -279,6 +281,9 @@ export const loadWhatsAppConfig = (orgId: string): WhatsAppConfig => {
       if (!config.bookingTemplateName) {
         config.bookingTemplateName = 'booking';
       }
+      if (config.usePersonalWhatsApp === undefined) {
+        config.usePersonalWhatsApp = false;
+      }
       return config;
     }
   } catch {}
@@ -290,6 +295,7 @@ export const loadWhatsAppConfig = (orgId: string): WhatsAppConfig => {
     beforeAfterTemplateName: 'clinical_image_record',
     prescriptionTemplateName: 'prescription_pdf_share',
     bookingTemplateName: 'booking',
+    usePersonalWhatsApp: false,
   };
 };
 
@@ -1451,12 +1457,71 @@ const ReactivationClinicSettings: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
           {/* Left: Configuration Form */}
           <div className="lg:col-span-2 space-y-4">
-            <div className="bg-white border border-slate-200 rounded-2xl p-5 space-y-4">
+
+            {/* ── WhatsApp Mode Toggle ───────────────────────────────────── */}
+            <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
+              <div className="flex items-center gap-2 pb-3 border-b border-slate-100 mb-4">
+                <div className="w-7 h-7 rounded-lg bg-green-50 border border-green-100 flex items-center justify-center">
+                  <MessageSquare size={14} className="text-green-500" />
+                </div>
+                <h3 className="text-[12px] font-bold text-slate-700 uppercase tracking-wider">WhatsApp Mode</h3>
+              </div>
+
+              {/* Mode cards */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {/* Official API option */}
+                <button
+                  type="button"
+                  onClick={() => { setWhatsapp(prev => ({ ...prev, usePersonalWhatsApp: false })); }}
+                  className={`relative flex flex-col items-start gap-1.5 rounded-xl border-2 p-4 text-left transition-all ${
+                    !whatsapp.usePersonalWhatsApp
+                      ? 'border-indigo-400 bg-indigo-50/60 shadow-sm'
+                      : 'border-slate-200 bg-white hover:border-slate-300'
+                  }`}
+                >
+                  {!whatsapp.usePersonalWhatsApp && (
+                    <span className="absolute top-2.5 right-2.5 w-4 h-4 rounded-full bg-indigo-500 flex items-center justify-center">
+                      <svg width="8" height="6" viewBox="0 0 8 6" fill="none"><path d="M1 3l2 2 4-4" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                    </span>
+                  )}
+                  <span className="text-[13px] font-bold text-slate-800">📡 Official WhatsApp API</span>
+                  <span className="text-[11px] text-slate-500 leading-snug">Automated, background sends via Meta WABA. Requires approved templates.</span>
+                </button>
+
+                {/* Personal WhatsApp option */}
+                <button
+                  type="button"
+                  onClick={() => { setWhatsapp(prev => ({ ...prev, usePersonalWhatsApp: true })); }}
+                  className={`relative flex flex-col items-start gap-1.5 rounded-xl border-2 p-4 text-left transition-all ${
+                    whatsapp.usePersonalWhatsApp
+                      ? 'border-green-400 bg-green-50/60 shadow-sm'
+                      : 'border-slate-200 bg-white hover:border-slate-300'
+                  }`}
+                >
+                  {whatsapp.usePersonalWhatsApp && (
+                    <span className="absolute top-2.5 right-2.5 w-4 h-4 rounded-full bg-green-500 flex items-center justify-center">
+                      <svg width="8" height="6" viewBox="0 0 8 6" fill="none"><path d="M1 3l2 2 4-4" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                    </span>
+                  )}
+                  <span className="text-[13px] font-bold text-slate-800">📱 Personal WhatsApp</span>
+                  <span className="text-[11px] text-slate-500 leading-snug">Opens wa.me link. You tap Send manually. No Meta setup needed — free & instant.</span>
+                </button>
+              </div>
+
+              {whatsapp.usePersonalWhatsApp && (
+                <div className="mt-3 rounded-lg bg-green-50 border border-green-200 px-3 py-2.5 text-[11px] text-green-700 flex items-start gap-2">
+                  <span className="text-base leading-none mt-0.5">💡</span>
+                  <span><strong>How it works:</strong> When you click "Send WhatsApp" on a patient, WhatsApp will open on your phone/browser with the message pre-filled. Just tap Send.</span>
+                </div>
+              )}
+            </div>
+
+            <div className={`bg-white border border-slate-200 rounded-2xl p-5 space-y-4 ${ whatsapp.usePersonalWhatsApp ? 'opacity-40 pointer-events-none' : '' }`}>
               <div className="flex items-center gap-2 pb-2 border-b border-slate-100">
                 <div className="w-7 h-7 rounded-lg bg-emerald-50 border border-emerald-100 flex items-center justify-center">
                   <MessageSquare size={14} className="text-emerald-500" />
                 </div>
-                <h3 className="text-[12px] font-bold text-slate-700 uppercase tracking-wider">WhatsApp Business API Setup</h3>
+                <h3 className="text-[12px] font-bold text-slate-700 uppercase tracking-wider">WhatsApp Business API Setup {whatsapp.usePersonalWhatsApp && <span className="ml-2 text-[9px] text-slate-400 font-normal normal-case">(not needed for Personal WA)</span>}</h3>
               </div>
 
               <div className="space-y-4">

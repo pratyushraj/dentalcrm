@@ -2395,6 +2395,30 @@ const ReactivationClinicSettings: React.FC = () => {
                     fee: '1.5% processing fee'
                   },
                   {
+                    name: 'KreditBee',
+                    desc: 'Instant personal loans up to ₹4 Lakhs for salaried and self-employed individuals with quick documentation and high loan disbursal rates.',
+                    tenures: '3, 6, 12, 18 Months',
+                    interest: '1.0% - 2.5% Monthly Interest',
+                    approvalTime: 'Under 10 mins',
+                    fee: '1.5% processing fee'
+                  },
+                  {
+                    name: 'MoneyTap',
+                    desc: 'India\'s first app-based personal credit line. Flexibly borrow as low as ₹3,000 up to ₹5 Lakhs, and pay interest only on the amount used.',
+                    tenures: '3, 6, 12, 24, 36 Months',
+                    interest: '1.25% Monthly Interest',
+                    approvalTime: '4 minutes',
+                    fee: '2% processing fee'
+                  },
+                  {
+                    name: 'InCred',
+                    desc: 'Customized personal loans and business financing solutions up to ₹10 Lakhs. Ideal for high-ticket implants, orthopedics, and multi-stage dental surgery.',
+                    tenures: '12, 24, 36, 48 Months',
+                    interest: '0% or subsidized interest options',
+                    approvalTime: '12-24 Hours',
+                    fee: '1% processing fee'
+                  },
+                  {
                     name: 'Fibe (formerly EarlySalary)',
                     desc: 'Specialized medical loan provider. Ideal for clear aligners, dental implants, and cosmetic makeovers.',
                     tenures: '3, 6, 12 Months',

@@ -2,12 +2,37 @@ import React, { useState, useEffect } from 'react';
 import { ShieldCheck, ArrowRight, CheckCircle2, Lock, FileText, ChevronDown, ChevronUp, AlertCircle } from 'lucide-react';
 import { toast } from 'sonner';
 
+// Partner branding config — extend this as new lenders go live
+const PARTNER_CONFIG: Record<string, { label: string; shortLabel: string; color: string; hoverColor: string; logoChar: string; bgClass: string; grievanceEmail: string; grievancePhone: string; }> = {
+  'LendSure AI': {
+    label: 'LendSure AI',
+    shortLabel: 'LendSure',
+    color: '#16a34a',
+    hoverColor: '#15803d',
+    logoChar: 'L',
+    bgClass: 'bg-green-600',
+    grievanceEmail: 'support@lendsureai.com',
+    grievancePhone: '1800-123-5678'
+  },
+  default: {
+    label: 'Axis Bank Jarvis',
+    shortLabel: 'Axis',
+    color: '#8A004B',
+    hoverColor: '#a6005b',
+    logoChar: 'A',
+    bgClass: 'bg-[#8A004B]',
+    grievanceEmail: 'grievance@axisbank.com',
+    grievancePhone: '1800-419-5555'
+  }
+};
+
 export default function EmiOnboardPage() {
   const [patientName, setPatientName] = useState('Patient');
   const [amount, setAmount] = useState('0');
   const [rawAmount, setRawAmount] = useState(0);
   const [appId, setAppId] = useState('');
   const [partnerName, setPartnerName] = useState('Axis Bank Jarvis');
+  const [brand, setBrand] = useState(PARTNER_CONFIG['default']);
 
   // step 0 = KFS / Consent, 1 = PAN+Aadhaar, 2 = OTP, 3 = Underwriting
   const [step, setStep] = useState(0);
@@ -37,7 +62,11 @@ export default function EmiOnboardPage() {
       setRawAmount(n);
       setAmount(n.toLocaleString('en-IN'));
     }
-    if (partnerParam) setPartnerName(decodeURIComponent(partnerParam));
+    if (partnerParam) {
+      const decoded = decodeURIComponent(partnerParam);
+      setPartnerName(decoded);
+      setBrand(PARTNER_CONFIG[decoded] || PARTNER_CONFIG['default']);
+    }
   }, []);
 
   useEffect(() => {
@@ -130,8 +159,8 @@ export default function EmiOnboardPage() {
       {/* Top Header */}
       <div className="w-full max-w-md flex items-center justify-between mb-6 px-2">
         <div className="flex items-center gap-2">
-          <div className="w-6 h-6 rounded bg-[#8A004B] flex items-center justify-center text-white text-[10px] font-bold">A</div>
-          <span className="text-[11px] font-black uppercase tracking-wider text-slate-350">Axis Bank <span className="text-[#8A004B] font-bold">Jarvis</span></span>
+          <div className={`w-6 h-6 rounded flex items-center justify-center text-white text-[10px] font-bold`} style={{ backgroundColor: brand.color }}>{brand.logoChar}</div>
+          <span className="text-[11px] font-black uppercase tracking-wider text-slate-300">{brand.label}</span>
         </div>
         <div className="flex items-center gap-1 text-[10px] text-slate-500 font-mono">
           <Lock size={10} />
@@ -175,9 +204,9 @@ export default function EmiOnboardPage() {
                   { label: 'EMI – 18 Months', value: `₹${emi18.toLocaleString('en-IN')} /month` },
                   { label: 'Prepayment Charges', value: 'Nil (after 3 EMIs)' },
                   { label: 'Late Payment Penalty', value: '2% per month on overdue amount' },
-                  { label: 'Regulated Entity (RE)', value: 'Axis Bank Ltd. (RBI Licensed)' },
+                  { label: 'Regulated Entity (RE)', value: partnerName === 'LendSure AI' ? 'LendSure AI (RBI Registered LSP)' : 'Axis Bank Ltd. (RBI Licensed)' },
                   { label: 'Lending Service Provider (LSP)', value: partnerName },
-                  { label: 'Grievance Officer', value: 'grievance@axisbank.com · 1800-419-5555' },
+                  { label: 'Grievance Officer', value: `${brand.grievanceEmail} · ${brand.grievancePhone}` },
                   { label: 'Cooling-off Period', value: '3 days from loan disbursement' },
                 ].slice(0, kfsExpanded ? undefined : 6).map(({ label, value }) => (
                   <div key={label} className="flex items-start justify-between px-4 py-2 gap-4">
@@ -200,7 +229,7 @@ export default function EmiOnboardPage() {
             <div className="flex items-start gap-2.5 bg-amber-500/5 border border-amber-500/20 rounded-xl px-3.5 py-2.5">
               <AlertCircle size={13} className="text-amber-400 shrink-0 mt-0.5" />
               <p className="text-[10px] text-amber-300/80 leading-relaxed">
-                Loan funds will be disbursed <strong>directly to your dental clinic</strong>. No amount passes through any third-party account. Your repayments will go directly to Axis Bank. Per RBI DL Directions 2025.
+                Loan funds will be disbursed <strong>directly to your dental clinic</strong>. No amount passes through any third-party account. Your repayments will go directly to {brand.label}. Per RBI DL Directions 2025.
               </p>
             </div>
 
@@ -219,7 +248,7 @@ export default function EmiOnboardPage() {
                   id: 'consentBureau',
                   checked: consentBureau,
                   onChange: () => setConsentBureau(!consentBureau),
-                  label: 'I authorise Axis Bank to pull my CIBIL / credit bureau report for underwriting and credit decisioning purposes.'
+                  label: `I authorise ${brand.label} to pull my CIBIL / credit bureau report for underwriting and credit decisioning purposes.`
                 },
                 {
                   id: 'consentData',
@@ -231,7 +260,7 @@ export default function EmiOnboardPage() {
                   id: 'consentTerms',
                   checked: consentTerms,
                   onChange: () => setConsentTerms(!consentTerms),
-                  label: `I agree to the Axis Bank loan terms & conditions and confirm this consent was given by me voluntarily at ${consentTimestamp}.`
+                  label: `I agree to the ${brand.label} loan terms & conditions and confirm this consent was given by me voluntarily at ${consentTimestamp}.`
                 }
               ].map(({ id, checked, onChange, label }) => (
                 <label key={id} className="flex items-start gap-2.5 cursor-pointer group" htmlFor={id}>
@@ -295,7 +324,7 @@ export default function EmiOnboardPage() {
               <p className="text-[9.5px] text-green-400/80">Your consent was recorded at {consentTimestamp}. Data processed under DPDP Act 2023.</p>
             </div>
 
-            <button type="submit" className="w-full flex items-center justify-center gap-1.5 py-3 bg-[#8A004B] hover:bg-[#a6005b] active:scale-[0.99] text-white rounded-xl text-xs font-bold uppercase transition-all duration-150 shadow-md shadow-[#8A004B]/15">
+            <button type="submit" className="w-full flex items-center justify-center gap-1.5 py-3 active:scale-[0.99] text-white rounded-xl text-xs font-bold uppercase transition-all duration-150 shadow-md" style={{ backgroundColor: brand.color }}>
               Verify & Proceed <ArrowRight size={13} />
             </button>
           </form>
@@ -321,7 +350,7 @@ export default function EmiOnboardPage() {
               <span>Aadhaar secure validation</span>
               {timer > 0 ? <span>Resend OTP in {timer}s</span> : <button type="button" onClick={() => { setTimer(30); toast.success('New OTP sent successfully!'); }} className="text-[#8A004B] hover:underline font-bold">Resend OTP</button>}
             </div>
-            <button type="submit" className="w-full flex items-center justify-center gap-1.5 py-3 bg-[#8A004B] hover:bg-[#a6005b] active:scale-[0.99] text-white rounded-xl text-xs font-bold uppercase transition-all duration-150 shadow-md shadow-[#8A004B]/15">
+            <button type="submit" className="w-full flex items-center justify-center gap-1.5 py-3 active:scale-[0.99] text-white rounded-xl text-xs font-bold uppercase transition-all duration-150 shadow-md" style={{ backgroundColor: brand.color }}>
               Verify OTP & Authorize Loan <ShieldCheck size={13} />
             </button>
           </form>
@@ -332,7 +361,7 @@ export default function EmiOnboardPage() {
           <div className="py-8 space-y-6 flex flex-col items-center justify-center text-center">
             <div className="relative flex items-center justify-center">
               <div className="w-16 h-16 rounded-full border-4 border-indigo-500/20 border-t-indigo-500 animate-spin" />
-              <div className="absolute w-8 h-8 rounded-full bg-[#8A004B] animate-pulse flex items-center justify-center text-[10px] text-white font-bold">A</div>
+              <div className="absolute w-8 h-8 rounded-full animate-pulse flex items-center justify-center text-[10px] text-white font-bold" style={{ backgroundColor: brand.color }}>{brand.logoChar}</div>
             </div>
             <div className="space-y-2">
               <h3 className="text-sm font-black text-white uppercase tracking-wider">{loadingText}</h3>
@@ -346,9 +375,9 @@ export default function EmiOnboardPage() {
 
       {/* Footer */}
       <div className="mt-8 text-center text-[10px] text-slate-500 space-y-1">
-        <p>© 2026 Axis Bank. All Rights Reserved.</p>
+        <p>© 2026 {brand.label}. All Rights Reserved.</p>
         <p className="max-w-xs leading-relaxed mx-auto">
-          Regulated by the Reserve Bank of India · Digital Lending Directions 2025 · Grievance: grievance@axisbank.com
+          Regulated by the Reserve Bank of India · Digital Lending Directions 2025 · Grievance: {brand.grievanceEmail}
         </p>
       </div>
     </div>

@@ -4219,7 +4219,8 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                                   if (activePartner === 'Axis Bank (Jarvis)' || activePartner === 'LendSure AI') {
                                     const clientId = localStorage.getItem('emi_client_id') || 'de01ee08f2ec9266649435867d87da8d';
                                     const nameUrlParam = encodeURIComponent(form.name || 'Patient');
-                                    targetLink = `${crmOrigin}/emi/onboard?client_id=${clientId}&name=${nameUrlParam}&amount=${calculatedGrandTotal}`;
+                                    const partnerParam = encodeURIComponent(activePartner);
+                                    targetLink = `${crmOrigin}/emi/onboard?client_id=${clientId}&name=${nameUrlParam}&amount=${calculatedGrandTotal}&partner=${partnerParam}`;
                                   }
                                   
                                   const messageText = `Dear ${form.name || 'Patient'},\n\nTo pay for your treatment of ₹${calculatedGrandTotal.toLocaleString('en-IN')} at our clinic via easy monthly installments (EMI), please click the link below to check your eligibility and complete your digital application with ${activePartner}:\n\n🔗 ${targetLink}\n\nThank you!\n${clinicBranding.clinicName || 'Our Clinic'}`;

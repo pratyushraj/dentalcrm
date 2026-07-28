@@ -58,13 +58,13 @@ export default function EmiOnboardPage() {
 
   const isLendSure = partnerName.toLowerCase().includes('lendsure');
 
-  // Generate dynamic mock offers based on treatment amount
+  // Neutral placeholder offers — populated dynamically from LendSure API response in production
   const offers: LenderOffer[] = [
     {
       id: 'offer-1',
-      lenderName: 'HDFC Bank Ltd.',
-      logoBg: 'bg-blue-600',
-      logoChar: 'H',
+      lenderName: 'Partner Bank A',
+      logoBg: 'bg-indigo-600',
+      logoChar: 'A',
       badge: '0% No-Cost EMI',
       interestRate: '0% p.a.',
       tenure: '12 Months',
@@ -75,9 +75,9 @@ export default function EmiOnboardPage() {
     },
     {
       id: 'offer-2',
-      lenderName: 'LiquiLoans (NBFC Partner)',
+      lenderName: 'Partner NBFC B',
       logoBg: 'bg-emerald-600',
-      logoChar: 'L',
+      logoChar: 'B',
       badge: 'Instant Pre-Approval',
       interestRate: '0% Subsidized',
       tenure: '9 Months',
@@ -87,9 +87,9 @@ export default function EmiOnboardPage() {
     },
     {
       id: 'offer-3',
-      lenderName: 'ICICI Bank Health Financing',
-      logoBg: 'bg-orange-600',
-      logoChar: 'I',
+      lenderName: 'Partner NBFC C',
+      logoBg: 'bg-slate-800',
+      logoChar: 'C',
       badge: 'Flexible Tenure',
       interestRate: '11.5% p.a.',
       tenure: '18 Months',
@@ -329,7 +329,7 @@ export default function EmiOnboardPage() {
                 <p className="text-xs text-slate-500 mt-0.5">Select a financing plan to complete approval</p>
               </div>
               <span className="px-2.5 py-1 rounded-md bg-amber-50 border border-amber-200 text-amber-800 text-[10px] font-bold uppercase tracking-wider">
-                [Demo Offers]
+                [Placeholder Offers]
               </span>
             </div>
 
@@ -411,7 +411,7 @@ export default function EmiOnboardPage() {
       <footer className="w-full max-w-xl mx-auto mt-8 text-center text-xs text-slate-500 space-y-2 py-4 border-t border-slate-200/60">
         <p className="font-semibold text-slate-600">Financing technology powered by LendSure AI</p>
         <p className="text-[11px] text-slate-400">
-          © 2026 Clinaza Health Technologies Ltd. · For clinic support, contact support@clinaza.com
+          © 2026 Clinaza Health Technologies Ltd. · Clinic Partner Support Portal
         </p>
       </footer>
     </div>

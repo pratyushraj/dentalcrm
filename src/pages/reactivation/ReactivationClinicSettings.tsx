@@ -2385,62 +2385,6 @@ const ReactivationClinicSettings: React.FC = () => {
                     interest: '0% Interest & Subsidized Plans',
                     approvalTime: 'Instant (< 60 seconds)',
                     fee: '1% processing fee'
-                  },
-                  {
-                    name: 'Axis Bank (Jarvis)',
-                    desc: 'Official Axis Bank Personal Loan & EMI integration. Provides automated digital KYC, instant underwriting support, and real-time processing.',
-                    tenures: '6, 12, 18, 24 Months',
-                    interest: '0% or Subsidized Interest',
-                    approvalTime: 'Instant (API-driven)',
-                    fee: '1% processing fee'
-                  },
-                  {
-                    name: 'LiquiLoans',
-                    desc: 'India\'s largest digital healthcare financing platform. Offers high approval rates and rapid processing.',
-                    tenures: '3, 6, 9 Months',
-                    interest: '0% Interest (No Cost)',
-                    approvalTime: 'Instant (under 5 mins)',
-                    fee: '1.5% processing fee'
-                  },
-                  {
-                    name: 'KreditBee',
-                    desc: 'Instant personal loans up to ₹4 Lakhs for salaried and self-employed individuals with quick documentation and high loan disbursal rates.',
-                    tenures: '3, 6, 12, 18 Months',
-                    interest: '1.0% - 2.5% Monthly Interest',
-                    approvalTime: 'Under 10 mins',
-                    fee: '1.5% processing fee'
-                  },
-                  {
-                    name: 'MoneyTap',
-                    desc: 'India\'s first app-based personal credit line. Flexibly borrow as low as ₹3,000 up to ₹5 Lakhs, and pay interest only on the amount used.',
-                    tenures: '3, 6, 12, 24, 36 Months',
-                    interest: '1.25% Monthly Interest',
-                    approvalTime: '4 minutes',
-                    fee: '2% processing fee'
-                  },
-                  {
-                    name: 'InCred',
-                    desc: 'Customized personal loans and business financing solutions up to ₹10 Lakhs. Ideal for high-ticket implants, orthopedics, and multi-stage dental surgery.',
-                    tenures: '12, 24, 36, 48 Months',
-                    interest: '0% or subsidized interest options',
-                    approvalTime: '12-24 Hours',
-                    fee: '1% processing fee'
-                  },
-                  {
-                    name: 'Fibe (formerly EarlySalary)',
-                    desc: 'Specialized medical loan provider. Ideal for clear aligners, dental implants, and cosmetic makeovers.',
-                    tenures: '3, 6, 12 Months',
-                    interest: '0% or Low-Interest EMIs',
-                    approvalTime: '15 minutes',
-                    fee: '2% processing fee'
-                  },
-                  {
-                    name: 'SaveIn',
-                    desc: 'Premium checkout financing for dental clinics. 100% paperless KYC and instant digital payouts.',
-                    tenures: '3, 6 Months',
-                    interest: '0% Interest (No Cost)',
-                    approvalTime: 'Instant',
-                    fee: '1% processing fee'
                   }
                 ].map((partner) => (
                   <div key={partner.name} className={`relative rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 transition-all duration-200 ${

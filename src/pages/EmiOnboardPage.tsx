@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ShieldCheck, ArrowRight, CheckCircle2, Lock, Building2, ChevronRight, AlertCircle, Sparkles, Check, Info } from 'lucide-react';
+import { ShieldCheck, ArrowRight, CheckCircle2, Lock, Sparkles, ChevronRight, Info, Building2, Check, CreditCard, Shield, Activity } from 'lucide-react';
 import { toast } from 'sonner';
 
 interface LenderOffer {
@@ -58,13 +58,13 @@ export default function EmiOnboardPage() {
 
   const isLendSure = partnerName.toLowerCase().includes('lendsure');
 
-  // Real healthcare NBFC & Banking partners integrated via LendSure AI multi-lender engine
+  // Neutral placeholder offers — populated dynamically from LendSure API response in production
   const offers: LenderOffer[] = [
     {
       id: 'offer-1',
-      lenderName: 'LiquiLoans (NDX P2P Private Limited)',
-      logoBg: 'bg-emerald-600',
-      logoChar: 'L',
+      lenderName: 'Partner Bank A',
+      logoBg: 'bg-gradient-to-tr from-indigo-600 to-violet-600 text-white',
+      logoChar: 'A',
       badge: '0% No-Cost EMI',
       interestRate: '0% p.a.',
       tenure: '12 Months',
@@ -75,9 +75,9 @@ export default function EmiOnboardPage() {
     },
     {
       id: 'offer-2',
-      lenderName: 'Fibe (EarlySalary Services Ltd.)',
-      logoBg: 'bg-blue-600',
-      logoChar: 'F',
+      lenderName: 'Partner NBFC B',
+      logoBg: 'bg-gradient-to-tr from-emerald-600 to-teal-600 text-white',
+      logoChar: 'B',
       badge: 'Instant Pre-Approval',
       interestRate: '0% Subsidized',
       tenure: '9 Months',
@@ -87,26 +87,14 @@ export default function EmiOnboardPage() {
     },
     {
       id: 'offer-3',
-      lenderName: 'InCred Financial Services Ltd.',
-      logoBg: 'bg-purple-600',
-      logoChar: 'I',
-      badge: 'High Ticket Medical EMI',
-      interestRate: '10.5% p.a.',
-      tenure: '18 Months',
-      monthlyEmi: Math.round((rawAmount * 1.08) / 18),
-      totalRepayment: Math.round(rawAmount * 1.08),
-      processingFee: Math.round(rawAmount * 0.01),
-    },
-    {
-      id: 'offer-4',
-      lenderName: 'Axis Bank Ltd. (Medical Financing)',
-      logoBg: 'bg-[#8A004B]',
-      logoChar: 'A',
-      badge: 'Direct Bank Sanction',
+      lenderName: 'Partner NBFC C',
+      logoBg: 'bg-gradient-to-tr from-slate-700 to-slate-900 text-white',
+      logoChar: 'C',
+      badge: 'Flexible Tenure',
       interestRate: '11.5% p.a.',
-      tenure: '24 Months',
-      monthlyEmi: Math.round((rawAmount * 1.12) / 24),
-      totalRepayment: Math.round(rawAmount * 1.12),
+      tenure: '18 Months',
+      monthlyEmi: Math.round((rawAmount * 1.09) / 18),
+      totalRepayment: Math.round(rawAmount * 1.09),
       processingFee: Math.round(rawAmount * 0.015),
     }
   ];
@@ -149,71 +137,94 @@ export default function EmiOnboardPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col justify-between p-4 sm:p-6 font-sans text-slate-800 antialiased">
+    <div className="min-h-screen bg-slate-950 flex flex-col justify-between p-4 sm:p-6 font-sans text-slate-100 antialiased relative overflow-hidden selection:bg-emerald-500 selection:text-white">
       
+      {/* Background Decorative Glow */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-96 bg-gradient-to-b from-emerald-500/10 via-indigo-500/5 to-transparent blur-3xl pointer-events-none -z-10" />
+
       {/* Top Clinaza Header */}
-      <header className="w-full max-w-xl mx-auto flex items-center justify-between py-4 px-2 border-b border-slate-200/80 mb-6">
-        <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-indigo-600 to-violet-600 flex items-center justify-center text-white font-black text-sm shadow-md shadow-indigo-500/20">
-            C
+      <header className="w-full max-w-xl mx-auto flex items-center justify-between py-4 px-2 border-b border-slate-800/80 mb-6">
+        <div className="flex items-center gap-3">
+          <div className="w-9 h-9 rounded-2xl bg-gradient-to-tr from-indigo-500 via-purple-500 to-emerald-500 p-0.5 shadow-lg shadow-indigo-500/20">
+            <div className="w-full h-full bg-slate-950 rounded-[14px] flex items-center justify-center text-white font-black text-sm">
+              C
+            </div>
           </div>
           <div>
-            <h1 className="text-base font-black text-slate-900 tracking-tight leading-none">Clinaza</h1>
-            <p className="text-[10px] font-semibold text-slate-500 mt-0.5">Healthcare Operating System</p>
+            <div className="flex items-center gap-2">
+              <h1 className="text-base font-black text-white tracking-tight leading-none">Clinaza</h1>
+              <span className="px-1.5 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[9px] font-bold uppercase tracking-wider">HealthPay</span>
+            </div>
+            <p className="text-[10.5px] font-semibold text-slate-400 mt-1">Healthcare Operating System</p>
           </div>
         </div>
 
-        <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 border border-slate-200 text-[10.5px] font-bold text-slate-600">
-          <Lock size={12} className="text-emerald-600" />
-          <span>256-Bit Encrypted</span>
+        <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-[10.5px] font-bold text-slate-300 shadow-inner">
+          <Lock size={12} className="text-emerald-400" />
+          <span>256-Bit SSL Encrypted</span>
         </div>
       </header>
 
       {/* Main Container Card */}
-      <main className="w-full max-w-xl mx-auto bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-xl shadow-slate-200/50 space-y-6">
+      <main className="w-full max-w-xl mx-auto bg-slate-900/90 backdrop-blur-2xl border border-slate-800/90 rounded-3xl p-6 sm:p-8 shadow-2xl shadow-black/80 space-y-6 relative">
 
         {/* Header Titles */}
-        <div className="text-center space-y-2 pb-4 border-b border-slate-100">
-          <h2 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
+        <div className="text-center space-y-2.5 pb-5 border-b border-slate-800/70">
+          <h2 className="text-xl sm:text-2xl font-black text-white tracking-tight">
             Clinaza Treatment Financing
           </h2>
           {isLendSure ? (
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-bold">
-              <Sparkles size={13} className="text-emerald-600" />
+            <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-400 text-xs font-bold shadow-sm">
+              <Sparkles size={13} className="text-emerald-400 animate-pulse" />
               <span>Financing powered by LendSure AI</span>
             </div>
           ) : (
-            <p className="text-xs text-slate-500 font-medium">Official Bank Direct EMI Integration</p>
+            <p className="text-xs text-slate-400 font-medium">Official Bank Direct EMI Integration</p>
           )}
         </div>
 
         {/* Treatment Plan Summary Box */}
-        <div className="bg-slate-50 border border-slate-200/80 rounded-2xl p-4 sm:p-5 flex items-center justify-between gap-4">
-          <div>
-            <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Patient Treatment Plan</span>
-            <h3 className="text-sm font-bold text-slate-900 mt-0.5">{patientName}</h3>
-            <p className="text-xs text-slate-500 mt-0.5">Dental / Aesthetic Procedure</p>
+        <div className="bg-slate-950/70 border border-slate-800/80 rounded-2xl p-4 sm:p-5 flex items-center justify-between gap-4 shadow-inner">
+          <div className="space-y-0.5">
+            <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1">
+              <Activity size={12} className="text-indigo-400" />
+              Patient Treatment Plan
+            </span>
+            <h3 className="text-base font-bold text-white tracking-tight">{patientName}</h3>
+            <p className="text-xs text-slate-400">Dental / Aesthetic Procedure</p>
           </div>
           <div className="text-right">
-            <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Total Bill</span>
-            <div className="text-lg font-black text-emerald-600 font-mono">₹{amount}</div>
+            <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Total Treatment Bill</span>
+            <div className="text-xl font-black text-emerald-400 font-mono tracking-tight">₹{amount}</div>
           </div>
         </div>
 
         {/* Interactive Stepper Indicator */}
-        <div className="grid grid-cols-4 gap-1 sm:gap-2 text-center text-[9.5px] font-bold uppercase tracking-wider">
-          <div className={`py-1.5 rounded-lg border transition-all ${step === 0 ? 'bg-indigo-600 text-white border-indigo-600' : step > 0 ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : 'bg-slate-100 text-slate-400 border-slate-200'}`}>
-            1. Consent
-          </div>
-          <div className={`py-1.5 rounded-lg border transition-all ${step === 1 ? 'bg-indigo-600 text-white border-indigo-600' : step > 1 ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : 'bg-slate-100 text-slate-400 border-slate-200'}`}>
-            2. Match
-          </div>
-          <div className={`py-1.5 rounded-lg border transition-all ${step === 2 ? 'bg-indigo-600 text-white border-indigo-600' : step > 2 ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : 'bg-slate-100 text-slate-400 border-slate-200'}`}>
-            3. Offers
-          </div>
-          <div className={`py-1.5 rounded-lg border transition-all ${step === 3 ? 'bg-indigo-600 text-white border-indigo-600' : 'bg-slate-100 text-slate-400 border-slate-200'}`}>
-            4. Approval
-          </div>
+        <div className="grid grid-cols-4 gap-1.5 text-center text-[9.5px] font-bold uppercase tracking-wider">
+          {[
+            { num: 1, label: 'Consent' },
+            { num: 2, label: 'Match' },
+            { num: 3, label: 'Offers' },
+            { num: 4, label: 'Approval' },
+          ].map((s, idx) => {
+            const isActive = step === idx;
+            const isCompleted = step > idx;
+            return (
+              <div
+                key={s.label}
+                className={`py-2 px-1 rounded-xl border transition-all duration-200 flex items-center justify-center gap-1 ${
+                  isActive
+                    ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white border-emerald-500 shadow-md shadow-emerald-600/20'
+                    : isCompleted
+                    ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30'
+                    : 'bg-slate-950/50 text-slate-400 border-slate-800/80'
+                }`}
+              >
+                {isCompleted ? <Check size={11} className="stroke-[3]" /> : <span>{s.num}.</span>}
+                <span>{s.label}</span>
+              </div>
+            );
+          })}
         </div>
 
         {/* ─── STEP 0: CONSENT & BASIC DETAILS ─────────────────────────────────── */}
@@ -221,32 +232,35 @@ export default function EmiOnboardPage() {
           <form onSubmit={handleConsentSubmit} className="space-y-6">
             
             {/* Input Details */}
-            <div className="space-y-4">
-              <h4 className="text-xs font-bold text-slate-700 uppercase tracking-wider">1. Basic Verification Details</h4>
+            <div className="space-y-3.5">
+              <h4 className="text-[11px] font-bold text-slate-300 uppercase tracking-wider flex items-center gap-1.5">
+                <CreditCard size={13} className="text-indigo-400" />
+                1. Basic Verification Details
+              </h4>
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">PAN Card Number</label>
+                  <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">PAN Card Number</label>
                   <input
                     type="text"
                     maxLength={10}
                     placeholder="ABCDE1234F"
                     value={pan}
                     onChange={(e) => setPan(e.target.value.toUpperCase())}
-                    className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs font-semibold font-mono text-slate-900 placeholder:text-slate-400 outline-none focus:border-indigo-600 focus:bg-white transition-all uppercase"
+                    className="w-full px-4 py-3 bg-slate-950/80 border border-slate-800 rounded-xl text-xs font-semibold font-mono text-white placeholder:text-slate-400 outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-all uppercase"
                     required
                   />
                 </div>
 
                 <div>
-                  <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">Mobile Number</label>
+                  <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Mobile Number</label>
                   <input
                     type="tel"
                     maxLength={10}
                     placeholder="9876543210"
                     value={mobile}
                     onChange={(e) => setMobile(e.target.value.replace(/[^0-9]/g, ''))}
-                    className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs font-semibold font-mono text-slate-900 placeholder:text-slate-400 outline-none focus:border-indigo-600 focus:bg-white transition-all"
+                    className="w-full px-4 py-3 bg-slate-950/80 border border-slate-800 rounded-xl text-xs font-semibold font-mono text-white placeholder:text-slate-400 outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-all"
                     required
                   />
                 </div>
@@ -254,41 +268,44 @@ export default function EmiOnboardPage() {
             </div>
 
             {/* Data Sharing Notice */}
-            <div className="flex items-start gap-3 bg-emerald-50/70 border border-emerald-200 rounded-2xl p-4">
-              <Info size={16} className="text-emerald-600 shrink-0 mt-0.5" />
-              <p className="text-xs text-emerald-950 leading-relaxed font-medium">
+            <div className="flex items-start gap-3 bg-emerald-500/10 border border-emerald-500/20 rounded-2xl p-4">
+              <Info size={16} className="text-emerald-400 shrink-0 mt-0.5" />
+              <p className="text-xs text-emerald-200/90 leading-relaxed font-medium">
                 Your information will be securely shared with LendSure AI and applicable lending partners for processing your financing request.
               </p>
             </div>
 
             {/* Required Consents */}
-            <div className="space-y-3 pt-2">
-              <h4 className="text-xs font-bold text-slate-700 uppercase tracking-wider">2. Mandatory Privacy Consents</h4>
+            <div className="space-y-3">
+              <h4 className="text-[11px] font-bold text-slate-300 uppercase tracking-wider flex items-center gap-1.5">
+                <Shield size={13} className="text-emerald-400" />
+                2. Mandatory Privacy Consents
+              </h4>
 
               {/* Consent Item 1 */}
-              <label htmlFor="consentEligibility" className="flex items-start gap-3 p-3.5 rounded-2xl border border-slate-200 hover:border-slate-300 bg-white cursor-pointer transition-all">
+              <label htmlFor="consentEligibility" className="flex items-start gap-3 p-4 rounded-2xl border border-slate-800/90 hover:border-slate-700 bg-slate-950/60 cursor-pointer transition-all group">
                 <input
                   type="checkbox"
                   id="consentEligibility"
                   checked={consentEligibility}
                   onChange={(e) => setConsentEligibility(e.target.checked)}
-                  className="mt-0.5 w-4 h-4 text-emerald-600 rounded border-slate-300 focus:ring-emerald-500 shrink-0 cursor-pointer"
+                  className="mt-0.5 w-4 h-4 text-emerald-500 rounded border-slate-700 bg-slate-900 focus:ring-emerald-500 shrink-0 cursor-pointer"
                 />
-                <span className="text-xs text-slate-600 leading-relaxed font-medium">
+                <span className="text-xs text-slate-300 leading-relaxed font-medium group-hover:text-slate-200 transition-colors">
                   I consent to my information being shared with LendSure AI and its applicable lending partners for checking my eligibility for treatment financing and presenting eligible loan offers.
                 </span>
               </label>
 
               {/* Consent Item 2 */}
-              <label htmlFor="consentBankTerms" className="flex items-start gap-3 p-3.5 rounded-2xl border border-slate-200 hover:border-slate-300 bg-white cursor-pointer transition-all">
+              <label htmlFor="consentBankTerms" className="flex items-start gap-3 p-4 rounded-2xl border border-slate-800/90 hover:border-slate-700 bg-slate-950/60 cursor-pointer transition-all group">
                 <input
                   type="checkbox"
                   id="consentBankTerms"
                   checked={consentBankTerms}
                   onChange={(e) => setConsentBankTerms(e.target.checked)}
-                  className="mt-0.5 w-4 h-4 text-emerald-600 rounded border-slate-300 focus:ring-emerald-500 shrink-0 cursor-pointer"
+                  className="mt-0.5 w-4 h-4 text-emerald-500 rounded border-slate-700 bg-slate-900 focus:ring-emerald-500 shrink-0 cursor-pointer"
                 />
-                <span className="text-xs text-slate-600 leading-relaxed font-medium">
+                <span className="text-xs text-slate-300 leading-relaxed font-medium group-hover:text-slate-200 transition-colors">
                   I understand that loan approval, interest rate, tenure, fees and other terms will be determined by the respective bank/NBFC. I will be shown the applicable loan terms and Key Fact Statement before accepting any loan.
                 </span>
               </label>
@@ -298,10 +315,10 @@ export default function EmiOnboardPage() {
             <button
               type="submit"
               disabled={!consentEligibility || !consentBankTerms}
-              className={`w-full flex items-center justify-center gap-2 py-3.5 rounded-2xl text-xs font-bold uppercase tracking-wider transition-all duration-200 shadow-lg ${
+              className={`w-full flex items-center justify-center gap-2 py-4 rounded-2xl text-xs font-bold uppercase tracking-wider transition-all duration-200 shadow-xl ${
                 consentEligibility && consentBankTerms
-                  ? 'bg-emerald-600 hover:bg-emerald-700 active:scale-[0.99] text-white shadow-emerald-600/20 cursor-pointer'
-                  : 'bg-slate-100 text-slate-400 border border-slate-200 cursor-not-allowed shadow-none'
+                  ? 'bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 active:scale-[0.99] text-white shadow-emerald-500/25 cursor-pointer'
+                  : 'bg-slate-900 text-slate-400 border border-slate-800 cursor-not-allowed shadow-none'
               }`}
             >
               Check Financing Options
@@ -314,18 +331,18 @@ export default function EmiOnboardPage() {
         {step === 1 && (
           <div className="py-12 space-y-6 flex flex-col items-center justify-center text-center">
             <div className="relative flex items-center justify-center">
-              <div className="w-20 h-20 rounded-full border-4 border-emerald-100 border-t-emerald-600 animate-spin" />
-              <div className="absolute w-10 h-10 rounded-full bg-emerald-600 flex items-center justify-center text-white font-black text-xs shadow-md">
+              <div className="w-20 h-20 rounded-full border-4 border-emerald-500/20 border-t-emerald-500 animate-spin" />
+              <div className="absolute w-10 h-10 rounded-full bg-gradient-to-tr from-emerald-500 to-teal-500 flex items-center justify-center text-white font-black text-xs shadow-lg shadow-emerald-500/30">
                 L
               </div>
             </div>
 
             <div className="space-y-2">
-              <span className="px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-[10px] font-bold uppercase tracking-wider">
+              <span className="px-3.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-[10px] font-bold uppercase tracking-wider">
                 LendSure AI Multi-Lender Ecosystem
               </span>
-              <h3 className="text-base font-bold text-slate-900">{loadingText}</h3>
-              <p className="text-xs text-slate-500 max-w-xs leading-relaxed mx-auto font-medium">
+              <h3 className="text-base font-bold text-white">{loadingText}</h3>
+              <p className="text-xs text-slate-400 max-w-xs leading-relaxed mx-auto font-medium">
                 Scanning pre-approved medical loan limits from multiple regulated banking partners...
               </p>
             </div>
@@ -337,55 +354,55 @@ export default function EmiOnboardPage() {
           <div className="space-y-5">
             <div className="flex items-center justify-between">
               <div>
-                <h4 className="text-sm font-bold text-slate-900">Eligible Bank & NBFC Offers</h4>
-                <p className="text-xs text-slate-500 mt-0.5">Select a financing plan to complete approval</p>
+                <h4 className="text-sm font-bold text-white">Eligible Bank & NBFC Offers</h4>
+                <p className="text-xs text-slate-400 mt-0.5">Select a financing plan to complete approval</p>
               </div>
-              <span className="px-2.5 py-1 rounded-md bg-emerald-50 border border-emerald-200 text-emerald-800 text-[10px] font-bold uppercase tracking-wider">
-                [LendSure AI Matched]
+              <span className="px-2.5 py-1 rounded-md bg-amber-500/10 border border-amber-500/30 text-amber-300 text-[10px] font-bold uppercase tracking-wider">
+                [Placeholder Offers]
               </span>
             </div>
 
-            <div className="space-y-3">
+            <div className="space-y-3.5">
               {offers.map((offer) => (
                 <div
                   key={offer.id}
                   onClick={() => handleSelectOffer(offer)}
                   className={`group relative p-4 sm:p-5 rounded-2xl border transition-all duration-200 cursor-pointer ${
                     offer.isRecommended
-                      ? 'bg-gradient-to-r from-emerald-50/50 via-white to-slate-50 border-emerald-300 shadow-md shadow-emerald-600/5 hover:border-emerald-500'
-                      : 'bg-white border-slate-200 hover:border-slate-300 hover:bg-slate-50/50'
+                      ? 'bg-gradient-to-r from-slate-900 via-slate-950 to-slate-900 border-emerald-500/50 shadow-lg shadow-emerald-500/10 hover:border-emerald-400'
+                      : 'bg-slate-950/60 border-slate-800 hover:border-slate-700 hover:bg-slate-950'
                   }`}
                 >
                   {offer.isRecommended && (
-                    <div className="absolute -top-2.5 right-4 px-2.5 py-0.5 rounded-full bg-emerald-600 text-white text-[9px] font-bold uppercase tracking-wider shadow-sm">
+                    <div className="absolute -top-2.5 right-4 px-3 py-0.5 rounded-full bg-gradient-to-r from-emerald-500 to-teal-500 text-white text-[9px] font-bold uppercase tracking-wider shadow-sm">
                       Recommended
                     </div>
                   )}
 
                   <div className="flex items-start justify-between gap-4">
-                    <div className="flex items-center gap-3">
-                      <div className={`w-10 h-10 rounded-xl ${offer.logoBg} flex items-center justify-center text-white font-black text-sm shadow-sm`}>
+                    <div className="flex items-center gap-3.5">
+                      <div className={`w-11 h-11 rounded-2xl ${offer.logoBg} flex items-center justify-center font-black text-sm shadow-md`}>
                         {offer.logoChar}
                       </div>
                       <div>
-                        <h5 className="text-xs sm:text-sm font-bold text-slate-900">{offer.lenderName}</h5>
-                        <span className="inline-block mt-0.5 text-[10px] font-semibold text-slate-500">
+                        <h5 className="text-xs sm:text-sm font-bold text-white">{offer.lenderName}</h5>
+                        <span className="inline-block mt-0.5 text-[10px] font-semibold text-slate-400">
                           {offer.badge} · {offer.interestRate}
                         </span>
                       </div>
                     </div>
 
                     <div className="text-right">
-                      <div className="text-sm sm:text-base font-black text-slate-900 font-mono">
+                      <div className="text-sm sm:text-base font-black text-emerald-400 font-mono">
                         ₹{offer.monthlyEmi.toLocaleString('en-IN')}<span className="text-[10px] text-slate-400 font-normal font-sans">/mo</span>
                       </div>
-                      <span className="text-[10px] text-slate-500 font-medium">Tenure: {offer.tenure}</span>
+                      <span className="text-[10px] text-slate-400 font-medium">Tenure: {offer.tenure}</span>
                     </div>
                   </div>
 
-                  <div className="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500">
-                    <div>Processing Fee: <strong className="text-slate-700">₹{offer.processingFee}</strong></div>
-                    <div className="flex items-center gap-1 font-bold text-emerald-600 group-hover:translate-x-0.5 transition-transform">
+                  <div className="mt-3.5 pt-3 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-slate-400">
+                    <div>Processing Fee: <strong className="text-slate-200">₹{offer.processingFee}</strong></div>
+                    <div className="flex items-center gap-1 font-bold text-emerald-400 group-hover:translate-x-1 transition-transform">
                       Select Plan <ChevronRight size={13} />
                     </div>
                   </div>
@@ -402,16 +419,16 @@ export default function EmiOnboardPage() {
         {/* ─── STEP 3: LENDER KYC & DISBURSAL HANDSHAKE ─────────────────────── */}
         {step === 3 && selectedOffer && (
           <div className="py-8 space-y-6 text-center">
-            <div className="w-14 h-14 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto shadow-inner">
-              <CheckCircle2 size={32} />
+            <div className="w-16 h-16 rounded-3xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center justify-center mx-auto shadow-inner">
+              <CheckCircle2 size={34} />
             </div>
 
             <div className="space-y-2">
-              <span className="px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-[10px] font-bold uppercase tracking-wider">
+              <span className="px-3.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-[10px] font-bold uppercase tracking-wider">
                 Redirecting to {selectedOffer.lenderName}
               </span>
-              <h3 className="text-base font-bold text-slate-900">Offer Selected Successfully</h3>
-              <p className="text-xs text-slate-500 max-w-sm leading-relaxed mx-auto">
+              <h3 className="text-base font-bold text-white">Offer Selected Successfully</h3>
+              <p className="text-xs text-slate-400 max-w-sm leading-relaxed mx-auto">
                 Opening {selectedOffer.lenderName}'s secure portal to complete digital KYC, view your Key Fact Statement (KFS), and finalize disbursement...
               </p>
             </div>
@@ -420,8 +437,8 @@ export default function EmiOnboardPage() {
       </main>
 
       {/* Footer */}
-      <footer className="w-full max-w-xl mx-auto mt-8 text-center text-xs text-slate-500 space-y-2 py-4 border-t border-slate-200/60">
-        <p className="font-semibold text-slate-600">Financing technology powered by LendSure AI</p>
+      <footer className="w-full max-w-xl mx-auto mt-8 text-center text-xs text-slate-400 space-y-2 py-4 border-t border-slate-800/60">
+        <p className="font-semibold text-slate-300">Financing technology powered by LendSure AI</p>
         <p className="text-[11px] text-slate-400">
           © 2026 Clinaza Health Technologies Ltd. · Clinic Partner Support Portal
         </p>

@@ -2380,7 +2380,7 @@ const ReactivationClinicSettings: React.FC = () => {
                 {[
                   {
                     name: 'LendSure AI',
-                    desc: 'AI-native unified lending control ecosystem. Consolidates multiple digital credit lanes with instant paperless KYC, real-time risk decisioning, and immediate clinic payouts.',
+                    desc: 'AI-native unified lending control ecosystem built for India. Single integration, multiple NBFC credit lanes, instant KYC & underwriting — get patients approved in under 60 seconds with zero paperwork.',
                     tenures: '3, 6, 12, 18, 24 Months',
                     interest: '0% Interest & Subsidized Plans',
                     approvalTime: 'Instant (< 60 seconds)',
@@ -2443,10 +2443,20 @@ const ReactivationClinicSettings: React.FC = () => {
                     fee: '1% processing fee'
                   }
                 ].map((partner) => (
-                  <div key={partner.name} className="bg-white border border-slate-200 rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:border-indigo-300 transition-all duration-200">
+                  <div key={partner.name} className={`relative rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 transition-all duration-200 ${
+                    partner.name === 'LendSure AI'
+                      ? 'bg-gradient-to-tr from-indigo-50 via-white to-purple-50 border-2 border-indigo-300 shadow-md shadow-indigo-100 hover:border-indigo-400'
+                      : 'bg-white border border-slate-200 hover:border-indigo-300'
+                  }`}>
                     <div className="space-y-2 max-w-lg">
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-2 flex-wrap">
                         <span className="text-[14px] font-black text-slate-800 tracking-tight">{partner.name}</span>
+                        {partner.name === 'LendSure AI' && (
+                          <>
+                            <span className="px-2 py-0.5 rounded-full bg-indigo-600 text-white text-[9px] font-bold uppercase tracking-wider">🏆 Featured</span>
+                            <span className="px-2 py-0.5 rounded-full bg-purple-50 border border-purple-200 text-purple-700 text-[9px] font-bold uppercase tracking-wider">AI-Native</span>
+                          </>
+                        )}
                         {partner.name.includes('Axis') && (
                           <span className="px-2 py-0.5 rounded bg-indigo-50 border border-indigo-100 text-indigo-700 text-[9px] font-bold uppercase tracking-wider">New</span>
                         )}

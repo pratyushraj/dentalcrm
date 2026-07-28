@@ -23,6 +23,7 @@ import {
   Mic,
   Volume2,
   Settings,
+  ExternalLink,
   Camera,
   Download,
   Eye,

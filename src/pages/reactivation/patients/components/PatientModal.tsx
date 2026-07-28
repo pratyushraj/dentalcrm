@@ -4214,10 +4214,6 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                                 </>
                               );
                             })()}
-                              >
-                                Apply Now
-                              </button>
-                            </div>
                           </>
                         ) : (
                           <>

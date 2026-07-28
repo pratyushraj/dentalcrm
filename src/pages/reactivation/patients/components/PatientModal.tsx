@@ -4153,7 +4153,7 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                           <>
                             {(() => {
                               const activePartner = localStorage.getItem('emi_partner_name') || 'Axis Bank (Jarvis)';
-                              const plans = activePartner === 'Axis Bank (Jarvis)' 
+                              const plans = (activePartner === 'Axis Bank (Jarvis)' || activePartner === 'LendSure AI') 
                                 ? [
                                     { months: 6, label: '6 Months', rate: '0% Interest' },
                                     { months: 12, label: '12 Months', rate: '0% Interest' },
@@ -4173,7 +4173,7 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                                         <Zap size={16} className="text-indigo-600 animate-pulse" />
                                       </div>
                                       <div>
-                                        <h4 className="text-[13px] font-bold text-slate-800 uppercase tracking-wider">{activePartner === 'Axis Bank (Jarvis)' ? 'Axis Bank Personal Loan / EMI' : isOrtho ? '0% Interest Ortho EMI' : isDermo ? '0% Interest Skin Care EMI' : '0% Interest Dental EMI'}</h4>
+                                        <h4 className="text-[13px] font-bold text-slate-800 uppercase tracking-wider">{(activePartner === 'Axis Bank (Jarvis)' || activePartner === 'LendSure AI') ? `${activePartner} Personal Loan / EMI` : isOrtho ? '0% Interest Ortho EMI' : isDermo ? '0% Interest Skin Care EMI' : '0% Interest Dental EMI'}</h4>
                                         <p className="text-[10px] text-slate-400 font-medium">Partnered with {activePartner}</p>
                                       </div>
                                     </div>
@@ -4216,7 +4216,7 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                                   const crmOrigin = window.location.origin;
                                   
                                   let targetLink = `${crmOrigin}/emi/callback`;
-                                  if (activePartner === 'Axis Bank (Jarvis)') {
+                                  if (activePartner === 'Axis Bank (Jarvis)' || activePartner === 'LendSure AI') {
                                     const clientId = localStorage.getItem('emi_client_id') || 'de01ee08f2ec9266649435867d87da8d';
                                     const nameUrlParam = encodeURIComponent(form.name || 'Patient');
                                     targetLink = `${crmOrigin}/emi/onboard?client_id=${clientId}&name=${nameUrlParam}&amount=${calculatedGrandTotal}`;
@@ -4225,7 +4225,7 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                                   const messageText = `Dear ${form.name || 'Patient'},\n\nTo pay for your treatment of ₹${calculatedGrandTotal.toLocaleString('en-IN')} at our clinic via easy monthly installments (EMI), please click the link below to check your eligibility and complete your digital application with ${activePartner}:\n\n🔗 ${targetLink}\n\nThank you!\n${clinicBranding.clinicName || 'Our Clinic'}`;
                                   
                                   window.open(`https://wa.me/${formattedPhone}?text=${encodeURIComponent(messageText)}`, '_blank', 'noopener,noreferrer');
-                                  toast.success("Opening WhatsApp with pre-filled Axis Bank eligibility application link!");
+                                  toast.success(`Opening WhatsApp with pre-filled ${activePartner} eligibility application link!`);
                                 }}
                                 className="w-full sm:w-auto text-center px-3.5 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-[10.5px] font-bold transition-all shadow-sm shadow-indigo-600/10 hover:shadow-indigo-600/20 active:scale-[0.98] cursor-pointer shrink-0"
                               >

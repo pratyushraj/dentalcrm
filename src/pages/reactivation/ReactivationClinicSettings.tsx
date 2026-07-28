@@ -2379,6 +2379,14 @@ const ReactivationClinicSettings: React.FC = () => {
                 
                 {[
                   {
+                    name: 'LendSure AI',
+                    desc: 'AI-native unified lending control ecosystem. Consolidates multiple digital credit lanes with instant paperless KYC, real-time risk decisioning, and immediate clinic payouts.',
+                    tenures: '3, 6, 12, 18, 24 Months',
+                    interest: '0% Interest & Subsidized Plans',
+                    approvalTime: 'Instant (< 60 seconds)',
+                    fee: '1% processing fee'
+                  },
+                  {
                     name: 'Axis Bank (Jarvis)',
                     desc: 'Official Axis Bank Personal Loan & EMI integration. Provides automated digital KYC, instant underwriting support, and real-time processing.',
                     tenures: '6, 12, 18, 24 Months',

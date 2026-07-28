@@ -1,131 +1,133 @@
 import React, { useEffect, useState } from 'react';
-import { CheckCircle2, Zap, ArrowRight, X } from 'lucide-react';
+import { CheckCircle2, Zap, ArrowRight, X, ShieldCheck, Sparkles, Building2 } from 'lucide-react';
 
 export default function EmiCallbackPage() {
+  const [lenderName, setLenderName] = useState('Partner Bank');
+  const [status, setStatus] = useState('approved');
   const [isMerchantFlow, setIsMerchantFlow] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Detect if this is the dentist/merchant OAuth authorize flow
     const params = new URLSearchParams(window.location.search);
-    if (params.has('code') || params.has('state') || params.has('client_id')) {
-      setIsMerchantFlow(true);
-    }
+    const lenderParam = params.get('lender');
+    const statusParam = params.get('status');
+    const isCodeParam = params.has('code') || params.has('state');
+    
+    if (lenderParam) setLenderName(decodeURIComponent(lenderParam));
+    if (statusParam) setStatus(statusParam);
+    if (isCodeParam) setIsMerchantFlow(true);
     
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 1500);
+    }, 1200);
 
     return () => clearTimeout(timer);
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#020D0A] flex items-center justify-center p-4 font-sans text-slate-100">
-      {/* Background glow */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[400px] h-[400px] rounded-full bg-indigo-500/10 blur-[80px]" />
-      </div>
+    <div className="min-h-screen bg-slate-950 flex flex-col justify-between p-4 sm:p-6 font-sans text-slate-100 antialiased relative overflow-hidden">
+      
+      {/* Background Decorative Glow */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-96 bg-gradient-to-b from-emerald-500/10 via-indigo-500/5 to-transparent blur-3xl pointer-events-none -z-10" />
 
-      <div className="relative w-full max-w-md bg-slate-900/40 backdrop-blur-xl border border-slate-800 rounded-3xl p-6 md:p-8 text-center space-y-6 shadow-2xl">
+      {/* Header */}
+      <header className="w-full max-w-md mx-auto flex items-center justify-between py-4 px-2 mb-4">
+        <div className="flex items-center gap-2.5">
+          <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-indigo-500 via-purple-500 to-emerald-500 p-0.5 shadow-lg shadow-indigo-500/20">
+            <div className="w-full h-full bg-slate-950 rounded-[10px] flex items-center justify-center text-white font-black text-xs">
+              C
+            </div>
+          </div>
+          <div>
+            <h1 className="text-sm font-black text-white tracking-tight leading-none">Clinaza</h1>
+            <p className="text-[10px] font-semibold text-slate-400 mt-0.5">Healthcare Operating System</p>
+          </div>
+        </div>
+
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-400 text-[10px] font-bold">
+          <Sparkles size={11} />
+          <span>LendSure AI Tech</span>
+        </div>
+      </header>
+
+      {/* Main Container Card */}
+      <div className="relative w-full max-w-md mx-auto bg-slate-900/90 backdrop-blur-2xl border border-slate-800 rounded-3xl p-6 sm:p-8 text-center space-y-6 shadow-2xl shadow-black/80">
         {loading ? (
           <div className="py-12 space-y-4 flex flex-col items-center justify-center">
-            <div className="w-12 h-12 rounded-full border-4 border-indigo-500/20 border-t-indigo-500 animate-spin" />
-            <p className="text-xs text-slate-400 font-mono tracking-wider uppercase">Verifying Axis Secure Connection...</p>
+            <div className="w-12 h-12 rounded-full border-4 border-emerald-500/20 border-t-emerald-500 animate-spin" />
+            <p className="text-xs text-slate-400 font-mono tracking-wider uppercase">Verifying Authorization Status...</p>
           </div>
         ) : (
           <>
             {/* Header Icon */}
             <div className="flex justify-center">
               <div className="relative">
-                <div className="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 shadow-lg shadow-emerald-500/5">
-                  <CheckCircle2 size={32} className="animate-bounce" />
+                <div className="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 shadow-lg shadow-emerald-500/20">
+                  <CheckCircle2 size={34} />
                 </div>
-                <div className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-indigo-600 border border-indigo-400 flex items-center justify-center">
-                  <Zap size={10} className="text-white" />
+                <div className="absolute -top-1 -right-1 w-6 h-6 rounded-full bg-gradient-to-tr from-emerald-500 to-teal-500 flex items-center justify-center shadow-md">
+                  <Zap size={11} className="text-white fill-white" />
                 </div>
               </div>
             </div>
 
-            {isMerchantFlow ? (
-              // Dentist / API Connected flow
-              <div className="space-y-4">
-                <div className="space-y-1">
-                  <span className="text-[10px] font-bold text-indigo-400 uppercase tracking-widest font-mono">Axis Jarvis Live</span>
-                  <h2 className="text-lg md:text-xl font-extrabold tracking-tight text-white">CRM Integration Connected</h2>
-                </div>
-                <p className="text-xs text-slate-400 leading-relaxed">
-                  Your Axis Bank Jarvis Personal Loan application has authorized successfully. Live payment widgets and EMI eligibility checks are now active on your checkout dashboard.
-                </p>
+            <div className="space-y-4">
+              <div className="space-y-1.5">
+                <span className="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[10px] font-bold uppercase tracking-wider">
+                  Status: {status.toUpperCase()}
+                </span>
+                <h2 className="text-lg sm:text-xl font-black tracking-tight text-white">
+                  Financing Application Registered
+                </h2>
+              </div>
+              
+              <p className="text-xs text-slate-300 leading-relaxed max-w-xs mx-auto font-medium">
+                Your treatment financing request with <strong className="text-white">{lenderName}</strong> has been successfully authorized via LendSure AI.
+              </p>
 
-                <div className="bg-slate-950/40 border border-slate-800/80 rounded-2xl p-4 text-left space-y-2 text-[11px] font-mono text-slate-350">
-                  <div className="flex justify-between">
-                    <span className="text-slate-500">API Status:</span>
-                    <span className="text-emerald-400 font-bold uppercase">Connected</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-slate-500">Environment:</span>
-                    <span>Production</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-slate-500">Auth Method:</span>
-                    <span>OAuth 2.0 / Client Creds</span>
-                  </div>
+              <div className="bg-slate-950/70 border border-slate-800 rounded-2xl p-4 text-left space-y-2 text-xs font-mono text-slate-300 shadow-inner">
+                <div className="flex justify-between items-center py-0.5">
+                  <span className="text-slate-500">Selected Lender:</span>
+                  <span className="text-emerald-400 font-bold">{lenderName}</span>
                 </div>
-
-                <div className="pt-2">
-                  <button
-                    onClick={() => window.close()}
-                    className="w-full py-3 bg-indigo-600 hover:bg-indigo-700 active:scale-[0.99] text-white rounded-xl text-xs font-bold tracking-wider uppercase transition-all duration-150 shadow-md shadow-indigo-600/15"
-                  >
-                    Return to CRM Settings
-                  </button>
-                  <p className="text-[9.5px] text-slate-500 mt-2.5 font-sans">
-                    You can safely close this browser window now.
-                  </p>
+                <div className="flex justify-between items-center py-0.5">
+                  <span className="text-slate-500">Financing Engine:</span>
+                  <span className="text-white">LendSure AI Aggregator</span>
+                </div>
+                <div className="flex justify-between items-center py-0.5">
+                  <span className="text-slate-500">KYC & Consent:</span>
+                  <span className="text-emerald-400 font-bold">VERIFIED</span>
                 </div>
               </div>
-            ) : (
-              // Patient Loan Approved flow
-              <div className="space-y-4">
-                <div className="space-y-1">
-                  <span className="text-[10px] font-bold text-emerald-400 uppercase tracking-widest font-mono">KYC Completed</span>
-                  <h2 className="text-lg md:text-xl font-extrabold tracking-tight text-white">Financing Approved</h2>
-                </div>
-                <p className="text-xs text-slate-400 leading-relaxed">
-                  Congratulations! Your digital verification with Axis Bank is complete. Your treatment plan financing has been approved and authorized.
+
+              <div className="pt-2">
+                <button
+                  onClick={() => {
+                    if (window.opener) {
+                      window.close();
+                    } else {
+                      window.location.href = '/reactivation/patients';
+                    }
+                  }}
+                  className="w-full py-3.5 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 active:scale-[0.99] text-white rounded-2xl text-xs font-bold tracking-wider uppercase transition-all shadow-lg shadow-emerald-500/20 cursor-pointer"
+                >
+                  Return to Patient Dashboard
+                </button>
+                <p className="text-[10px] text-slate-500 mt-2 font-medium">
+                  The clinic coordinator can now view your approved status in real-time.
                 </p>
-
-                <div className="bg-slate-950/40 border border-slate-800/80 rounded-2xl p-4 text-left space-y-2.5 text-xs text-slate-300">
-                  <div className="flex justify-between">
-                    <span className="text-slate-500">Merchant Name:</span>
-                    <span className="font-semibold text-white">YOUR DENTIST Patna</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-slate-500">Loan Status:</span>
-                    <span className="text-emerald-400 font-bold uppercase">Pre-Approved</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-slate-500">KYC Status:</span>
-                    <span className="text-emerald-400 font-bold uppercase">Verified (Aadhaar)</span>
-                  </div>
-                </div>
-
-                <div className="pt-2">
-                  <button
-                    onClick={() => window.close()}
-                    className="w-full py-3 bg-indigo-600 hover:bg-indigo-700 active:scale-[0.99] text-white rounded-xl text-xs font-bold tracking-wider uppercase transition-all duration-150 shadow-md shadow-indigo-600/15"
-                  >
-                    Done & Close Page
-                  </button>
-                  <p className="text-[9.5px] text-slate-500 mt-2.5 font-sans">
-                    Please inform your coordinator that you have completed the verification.
-                  </p>
-                </div>
               </div>
-            )}
+            </div>
           </>
         )}
       </div>
+
+      {/* Footer */}
+      <footer className="w-full max-w-md mx-auto mt-6 text-center text-xs text-slate-500 py-2">
+        <p className="text-[11px] text-slate-400">
+          Financing technology powered by LendSure AI · © 2026 Clinaza
+        </p>
+      </footer>
     </div>
   );
 }

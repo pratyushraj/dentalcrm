@@ -4150,92 +4150,88 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                     {calculatedGrandTotal >= 3000 && (
                       <div className="bg-gradient-to-tr from-indigo-50/70 via-white to-slate-50 border border-indigo-150 rounded-2xl p-5 space-y-4 shadow-sm text-left">
                         {localStorage.getItem('emi_partner_status') !== 'Not Partnered' ? (
-                          <>
-                            {(() => {
-                              let storedPartner = localStorage.getItem('emi_partner_name');
-                              const activePartner = (!storedPartner || storedPartner === 'Axis Bank (Jarvis)') ? 'LendSure AI' : storedPartner;
-                              const plans = (activePartner === 'Axis Bank (Jarvis)' || activePartner === 'LendSure AI') 
-                                ? [
-                                    { months: 6, label: '6 Months', rate: '0% Interest' },
-                                    { months: 12, label: '12 Months', rate: '0% Interest' },
-                                    { months: 18, label: '18 Months', rate: 'No Cost EMI' },
-                                    { months: 24, label: '24 Months', rate: 'Low Cost EMI' }
-                                  ]
-                                : [
-                                    { months: 3, label: '3 Months', rate: '0% Interest' },
-                                    { months: 6, label: '6 Months', rate: '0% Interest' },
-                                    { months: 9, label: '9 Months', rate: 'No Cost EMI' }
-                                  ];
-                              return (
-                                <>
-                                  <div className="flex items-center justify-between">
-                                    <div className="flex items-center gap-2.5">
-                                      <div className="w-8 h-8 rounded-lg bg-indigo-500/10 flex items-center justify-center text-indigo-655 border border-indigo-100">
-                                        <Zap size={16} className="text-indigo-600 animate-pulse" />
-                                      </div>
-                                      <div>
-                                        <h4 className="text-[13px] font-bold text-slate-800 uppercase tracking-wider">{(activePartner === 'Axis Bank (Jarvis)' || activePartner === 'LendSure AI') ? `${activePartner} Personal Loan / EMI` : isOrtho ? '0% Interest Ortho EMI' : isDermo ? '0% Interest Skin Care EMI' : '0% Interest Dental EMI'}</h4>
-                                        <p className="text-[10px] text-slate-400 font-medium">Partnered with {activePartner}</p>
-                                      </div>
+                          (() => {
+                            const storedPartner = localStorage.getItem('emi_partner_name');
+                            const activePartner = (!storedPartner || storedPartner === 'Axis Bank (Jarvis)') ? 'LendSure AI' : storedPartner;
+                            const plans = (activePartner === 'Axis Bank (Jarvis)' || activePartner === 'LendSure AI') 
+                              ? [
+                                  { months: 6, label: '6 Months', rate: '0% Interest' },
+                                  { months: 12, label: '12 Months', rate: '0% Interest' },
+                                  { months: 18, label: '18 Months', rate: 'No Cost EMI' },
+                                  { months: 24, label: '24 Months', rate: 'Low Cost EMI' }
+                                ]
+                              : [
+                                  { months: 3, label: '3 Months', rate: '0% Interest' },
+                                  { months: 6, label: '6 Months', rate: '0% Interest' },
+                                  { months: 9, label: '9 Months', rate: 'No Cost EMI' }
+                                ];
+                            return (
+                              <>
+                                <div className="flex items-center justify-between">
+                                  <div className="flex items-center gap-2.5">
+                                    <div className="w-8 h-8 rounded-lg bg-indigo-500/10 flex items-center justify-center text-indigo-655 border border-indigo-100">
+                                      <Zap size={16} className="text-indigo-600 animate-pulse" />
                                     </div>
-                                    <span className="px-2.5 py-1 rounded-full text-[9px] font-bold uppercase bg-emerald-50 border border-emerald-200 text-emerald-700 tracking-wider">
-                                      Instant Approval
-                                    </span>
+                                    <div>
+                                      <h4 className="text-[13px] font-bold text-slate-800 uppercase tracking-wider">{(activePartner === 'Axis Bank (Jarvis)' || activePartner === 'LendSure AI') ? `${activePartner} Personal Loan / EMI` : isOrtho ? '0% Interest Ortho EMI' : isDermo ? '0% Interest Skin Care EMI' : '0% Interest Dental EMI'}</h4>
+                                      <p className="text-[10px] text-slate-400 font-medium">Partnered with {activePartner}</p>
+                                    </div>
                                   </div>
+                                  <span className="px-2.5 py-1 rounded-full text-[9px] font-bold uppercase bg-emerald-50 border border-emerald-200 text-emerald-700 tracking-wider">
+                                    Instant Approval
+                                  </span>
+                                </div>
 
-                                  <div className={`grid gap-3 grid-cols-2 md:grid-cols-${plans.length}`}>
-                                    {plans.map((plan) => {
-                                      const monthlyAmount = Math.round(calculatedGrandTotal / plan.months);
-                                      return (
-                                        <div key={plan.months} className="bg-white border border-slate-200 hover:border-indigo-300 rounded-xl p-3 text-center space-y-1 hover:shadow-sm transition-all duration-150 cursor-pointer group">
-                                          <span className="block text-[10px] font-bold uppercase tracking-wider text-slate-400 group-hover:text-indigo-500">{plan.label}</span>
-                                          <span className="block text-[13px] font-black text-slate-800 font-mono">₹{monthlyAmount.toLocaleString('en-IN')}<span className="text-[9px] font-bold text-slate-400">/mo</span></span>
-                                          <span className="inline-block text-[8px] font-bold px-1.5 py-0.5 rounded bg-indigo-50 text-indigo-600">{plan.rate}</span>
-                                        </div>
-                                      );
-                                    })}
+                                <div className={`grid gap-3 grid-cols-2 md:grid-cols-${plans.length}`}>
+                                  {plans.map((plan) => {
+                                    const monthlyAmount = Math.round(calculatedGrandTotal / plan.months);
+                                    return (
+                                      <div key={plan.months} className="bg-white border border-slate-200 hover:border-indigo-300 rounded-xl p-3 text-center space-y-1 hover:shadow-sm transition-all duration-150 cursor-pointer group">
+                                        <span className="block text-[10px] font-bold uppercase tracking-wider text-slate-400 group-hover:text-indigo-500">{plan.label}</span>
+                                        <span className="block text-[13px] font-black text-slate-800 font-mono">₹{monthlyAmount.toLocaleString('en-IN')}<span className="text-[9px] font-bold text-slate-400">/mo</span></span>
+                                        <span className="inline-block text-[8px] font-bold px-1.5 py-0.5 rounded bg-indigo-50 text-indigo-600">{plan.rate}</span>
+                                      </div>
+                                    );
+                                  })}
+                                </div>
+
+                                <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] bg-slate-50 rounded-xl px-3.5 py-2.5 border border-slate-200">
+                                  <div className="flex items-center gap-1.5 text-slate-600 font-medium">
+                                    <CheckSquare className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
+                                    <span>Paperless KYC & digital {activePartner} multi-lender engine</span>
                                   </div>
-                                </>
-                              );
-                            })()}
-
-                             <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] bg-slate-50 rounded-xl px-3.5 py-2.5 border border-slate-200">
-                              <div className="flex items-center gap-1.5 text-slate-600 font-medium">
-                                <CheckSquare className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
-                                <span>Paperless KYC & digital {activePartner} multi-lender engine</span>
-                              </div>
-                              <button 
-                                type="button" 
-                                onClick={() => {
-                                  if (!form.phone) {
-                                    toast.error("Patient phone number is required to send the link.");
-                                    return;
-                                  }
-                                  const cleanPhone = (form.phone || '').replace(/[^0-9]/g, '');
-                                  const formattedPhone = cleanPhone.length === 10 ? `91${cleanPhone}` : cleanPhone;
-                                  let storedPartner = localStorage.getItem('emi_partner_name');
-                              const activePartner = (!storedPartner || storedPartner === 'Axis Bank (Jarvis)') ? 'LendSure AI' : storedPartner;
-                                  const crmOrigin = window.location.origin;
-                                  
-                                  let targetLink = `${crmOrigin}/emi/callback`;
-                                  if (activePartner === 'Axis Bank (Jarvis)' || activePartner === 'LendSure AI') {
-                                    const clientId = localStorage.getItem('emi_client_id') || 'de01ee08f2ec9266649435867d87da8d';
-                                    const nameUrlParam = encodeURIComponent(form.name || 'Patient');
-                                    const partnerParam = encodeURIComponent(activePartner);
-                                    targetLink = `${crmOrigin}/emi/onboard?client_id=${clientId}&name=${nameUrlParam}&amount=${calculatedGrandTotal}&partner=${partnerParam}`;
-                                  }
-                                  
-                                  const messageText = `Dear ${form.name || 'Patient'},\n\nTo pay for your treatment of ₹${calculatedGrandTotal.toLocaleString('en-IN')} at our clinic via easy monthly installments (EMI), please click the link below to check your eligibility and complete your digital application with ${activePartner}:\n\n🔗 ${targetLink}\n\nThank you!\n${clinicBranding.clinicName || 'Our Clinic'}`;
-                                  
-                                  window.open(`https://wa.me/${formattedPhone}?text=${encodeURIComponent(messageText)}`, '_blank', 'noopener,noreferrer');
-                                  toast.success(`Opening WhatsApp with pre-filled ${activePartner} eligibility application link!`);
-                                }}
-                                className="w-full sm:w-auto text-center px-3.5 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-[10.5px] font-bold transition-all shadow-sm shadow-indigo-600/10 hover:shadow-indigo-600/20 active:scale-[0.98] cursor-pointer shrink-0"
-                              >
-                                Apply Now
-                              </button>
-                            </div>
-                          </>
+                                  <button 
+                                    type="button" 
+                                    onClick={() => {
+                                      if (!form.phone) {
+                                        toast.error("Patient phone number is required to send the link.");
+                                        return;
+                                      }
+                                      const cleanPhone = (form.phone || '').replace(/[^0-9]/g, '');
+                                      const formattedPhone = cleanPhone.length === 10 ? `91${cleanPhone}` : cleanPhone;
+                                      const crmOrigin = window.location.origin;
+                                      
+                                      let targetLink = `${crmOrigin}/emi/callback`;
+                                      if (activePartner === 'Axis Bank (Jarvis)' || activePartner === 'LendSure AI') {
+                                        const clientId = localStorage.getItem('emi_client_id') || 'de01ee08f2ec9266649435867d87da8d';
+                                        const nameUrlParam = encodeURIComponent(form.name || 'Patient');
+                                        const partnerParam = encodeURIComponent(activePartner);
+                                        targetLink = `${crmOrigin}/emi/onboard?client_id=${clientId}&name=${nameUrlParam}&amount=${calculatedGrandTotal}&partner=${partnerParam}`;
+                                      }
+                                      
+                                      const messageText = `Dear ${form.name || 'Patient'},\n\nTo pay for your treatment of ₹${calculatedGrandTotal.toLocaleString('en-IN')} at our clinic via easy monthly installments (EMI), please click the link below to check your eligibility and complete your digital application with ${activePartner}:\n\n🔗 ${targetLink}\n\nThank you!\n${clinicBranding.clinicName || 'Our Clinic'}`;
+                                      
+                                      window.open(`https://wa.me/${formattedPhone}?text=${encodeURIComponent(messageText)}`, '_blank', 'noopener,noreferrer');
+                                      toast.success(`Opening WhatsApp with pre-filled ${activePartner} eligibility application link!`);
+                                    }}
+                                    className="w-full sm:w-auto text-center px-3.5 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-[10.5px] font-bold transition-all shadow-sm shadow-indigo-600/10 hover:shadow-indigo-600/20 active:scale-[0.98] cursor-pointer shrink-0"
+                                  >
+                                    Apply Now
+                                  </button>
+                                </div>
+                              </>
+                            );
+                          })()
                         ) : (
                           <>
                             <div className="flex items-center justify-between">

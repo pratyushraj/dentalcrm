@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { ShieldCheck, ArrowRight, CheckCircle2, Lock, Sparkles, ChevronRight, Info, Building2, Check, CreditCard, Shield, Activity } from 'lucide-react';
+import { ShieldCheck, ArrowRight, CheckCircle2, Lock, Sparkles, ChevronRight, Info, Building2, Check, CreditCard, Shield, Activity, Cpu } from 'lucide-react';
 import { toast } from 'sonner';
+import { ocenService } from '../services/ocenService';
 
 interface LenderOffer {
   id: string;
@@ -24,7 +25,7 @@ export default function EmiOnboardPage() {
 
   // Steps: 
   // 0: Consent & Details (PAN/Mobile)
-  // 1: Lender Matching (LendSure AI multi-lender engine)
+  // 1: Lender Matching (LendSure AI / OCEN 4.0 engine)
   // 2: Lender Offers Selection
   // 3: Lender KYC & KFS Approval (Finalizing with chosen bank/NBFC)
   const [step, setStep] = useState(0);
@@ -37,7 +38,7 @@ export default function EmiOnboardPage() {
   const [consentBankTerms, setConsentBankTerms] = useState(false);
 
   const [selectedOffer, setSelectedOffer] = useState<LenderOffer | null>(null);
-  const [loadingText, setLoadingText] = useState('Connecting to LendSure AI eligibility engine...');
+  const [loadingText, setLoadingText] = useState('Initializing OCEN 4.0 & LendSure AI protocol...');
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -58,7 +59,7 @@ export default function EmiOnboardPage() {
 
   const isLendSure = partnerName.toLowerCase().includes('lendsure');
 
-  // Neutral placeholder offers — populated dynamically from LendSure API response in production
+  // Neutral placeholder offers — populated dynamically from OCEN 4.0 / LendSure API response
   const offers: LenderOffer[] = [
     {
       id: 'offer-1',
@@ -99,7 +100,7 @@ export default function EmiOnboardPage() {
     }
   ];
 
-  const handleConsentSubmit = (e: React.FormEvent) => {
+  const handleConsentSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!consentEligibility || !consentBankTerms) {
       toast.error('Please accept both consent items to check your financing options.');
@@ -112,12 +113,17 @@ export default function EmiOnboardPage() {
 
     setStep(1); // Proceed to Lender Matching
     
-    // Simulate LendSure AI real-time multi-lender aggregation
-    setLoadingText('Connecting to LendSure AI tech ecosystem...');
+    // Call OCEN 4.0 Service
+    await ocenService.createLoanApplication({
+      borrower: { name: patientName, mobile, pan },
+      treatment: { clinicId: 'CLINAZA_PATNA', clinicName: 'Clinaza Partner Dental', procedureName: 'Dental Procedure', invoiceAmount: rawAmount }
+    });
+
+    setLoadingText('Connecting to OCEN 4.0 Loan Agent Protocol...');
     setTimeout(() => {
-      setLoadingText('Searching pre-approved credit lanes across bank partners...');
+      setLoadingText('Fetching ULI / Account Aggregator financial profiles...');
       setTimeout(() => {
-        setLoadingText('Retrieving real-time zero-subsidized EMI offers...');
+        setLoadingText('Aggregating real-time capital provider offers...');
         setTimeout(() => {
           setStep(2); // Show offers
         }, 1000);

@@ -4219,10 +4219,8 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                                         targetLink = `${crmOrigin}/emi/onboard?client_id=${clientId}&name=${nameUrlParam}&amount=${calculatedGrandTotal}&partner=${partnerParam}`;
                                       }
                                       
-                                      const messageText = `Dear ${form.name || 'Patient'},\n\nTo pay for your treatment of ₹${calculatedGrandTotal.toLocaleString('en-IN')} at our clinic via easy monthly installments (EMI), please click the link below to check your eligibility and complete your digital application with ${activePartner}:\n\n🔗 ${targetLink}\n\nThank you!\n${clinicBranding.clinicName || 'Our Clinic'}`;
-                                      
-                                      window.open(`https://wa.me/${formattedPhone}?text=${encodeURIComponent(messageText)}`, '_blank', 'noopener,noreferrer');
-                                      toast.success(`Opening WhatsApp with pre-filled ${activePartner} eligibility application link!`);
+                                      window.open(targetLink, '_blank', 'noopener,noreferrer');
+                                      toast.success(`Opening ${activePartner} eligibility application...`);
                                     }}
                                     className="w-full sm:w-auto text-center px-3.5 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-[10.5px] font-bold transition-all shadow-sm shadow-indigo-600/10 hover:shadow-indigo-600/20 active:scale-[0.98] cursor-pointer shrink-0"
                                   >

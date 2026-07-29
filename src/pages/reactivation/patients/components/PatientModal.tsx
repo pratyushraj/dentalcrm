@@ -4152,7 +4152,8 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                         {localStorage.getItem('emi_partner_status') !== 'Not Partnered' ? (
                           <>
                             {(() => {
-                              const activePartner = localStorage.getItem('emi_partner_name') || 'LendSure AI';
+                              let storedPartner = localStorage.getItem('emi_partner_name');
+                              const activePartner = (!storedPartner || storedPartner === 'Axis Bank (Jarvis)') ? 'LendSure AI' : storedPartner;
                               const plans = (activePartner === 'Axis Bank (Jarvis)' || activePartner === 'LendSure AI') 
                                 ? [
                                     { months: 6, label: '6 Months', rate: '0% Interest' },
@@ -4201,7 +4202,7 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                              <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] bg-slate-50 rounded-xl px-3.5 py-2.5 border border-slate-200">
                               <div className="flex items-center gap-1.5 text-slate-600 font-medium">
                                 <CheckSquare className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
-                                <span>Paperless KYC & digital {localStorage.getItem('emi_partner_name') || 'LendSure AI'} multi-lender engine</span>
+                                <span>Paperless KYC & digital {activePartner} multi-lender engine</span>
                               </div>
                               <button 
                                 type="button" 
@@ -4212,7 +4213,8 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                                   }
                                   const cleanPhone = (form.phone || '').replace(/[^0-9]/g, '');
                                   const formattedPhone = cleanPhone.length === 10 ? `91${cleanPhone}` : cleanPhone;
-                                  const activePartner = localStorage.getItem('emi_partner_name') || 'LendSure AI';
+                                  let storedPartner = localStorage.getItem('emi_partner_name');
+                              const activePartner = (!storedPartner || storedPartner === 'Axis Bank (Jarvis)') ? 'LendSure AI' : storedPartner;
                                   const crmOrigin = window.location.origin;
                                   
                                   let targetLink = `${crmOrigin}/emi/callback`;

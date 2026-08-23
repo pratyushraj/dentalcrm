@@ -503,5 +503,91 @@ export const BLOGS: BlogArticle[] = [
         </ul>
       </div>
     )
+  },
+  {
+    slug: "clear-aligners-cost-on-emi-india",
+    title: "Invisible Clear Aligners Cost on EMI in India: Price Comparison & Monthly Plans",
+    category: "Orthodontics",
+    readTime: "5 min read",
+    publishDate: "August 24, 2026",
+    author: "Clinaza Medical Desk",
+    summary: "Compare clear aligner costs in India from ₹45,000 to ₹1,80,000. Learn how to get invisible aligners on low monthly EMIs starting at ₹2,500/month.",
+    featuredImage: "/assets/clinic-hero-real.png",
+    metaDescription: "Looking for clear aligners cost on EMI in India? Compare prices for invisible aligners and learn how monthly EMI financing works at partner clinics.",
+    faqs: [
+      {
+        question: "What is the starting monthly EMI for clear aligners in India?",
+        answer: "Monthly EMIs for clear aligners start at around ₹2,500/month for a 24-month tenure or ₹5,000/month for a 12-month tenure depending on complexity."
+      },
+      {
+        question: "Are clear aligners eligible for Clinaza financing?",
+        answer: "Yes, clear aligners for both mild crowding and complex bite alignment are fully eligible for embedded patient financing from ₹45,000 to ₹1,80,000."
+      }
+    ],
+    content: (
+      <div className="space-y-6">
+        <p className="text-lg leading-relaxed text-neutral-700">
+          Invisible clear aligners have become the preferred choice for adults and teens seeking discreet orthodontic correction. With <strong>Clinaza patient financing</strong>, patients can start aligner treatment without paying the full amount upfront.
+        </p>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Clear Aligners Price & Monthly EMI Breakdown</h2>
+        <div className="overflow-x-auto my-6">
+          <table className="min-w-full divide-y divide-neutral-200 border border-neutral-100">
+            <thead className="bg-neutral-50">
+              <tr>
+                <th className="px-6 py-3 text-left text-xs font-bold text-neutral-500 uppercase">Aligner Brand / Case Type</th>
+                <th className="px-6 py-3 text-left text-xs font-bold text-neutral-500 uppercase">Est. Total Cost</th>
+                <th className="px-6 py-3 text-left text-xs font-bold text-neutral-500 uppercase">12 Months (Est.)</th>
+                <th className="px-6 py-3 text-left text-xs font-bold text-neutral-500 uppercase">24 Months (Est.)</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-neutral-200 text-xs">
+              <tr>
+                <td className="px-6 py-4 font-bold text-neutral-800">Mild Correction (Single Arch)</td>
+                <td className="px-6 py-4 text-[#0867E8] font-bold">₹45,000 - ₹65,000</td>
+                <td className="px-6 py-4 text-neutral-600">₹4,050 / mo</td>
+                <td className="px-6 py-4 text-neutral-600">₹2,180 / mo</td>
+              </tr>
+              <tr>
+                <td className="px-6 py-4 font-bold text-neutral-800">Standard Indian Aligner (Both Arches)</td>
+                <td className="px-6 py-4 text-[#0867E8] font-bold">₹70,000 - ₹1,20,000</td>
+                <td className="px-6 py-4 text-neutral-600">₹6,300 / mo</td>
+                <td className="px-6 py-4 text-neutral-600">₹3,400 / mo</td>
+              </tr>
+              <tr>
+                <td className="px-6 py-4 font-bold text-neutral-800">Premium Imported Aligners</td>
+                <td className="px-6 py-4 text-[#0867E8] font-bold">₹1,50,000 - ₹2,20,000</td>
+                <td className="px-6 py-4 text-neutral-600">₹13,500 / mo</td>
+                <td className="px-6 py-4 text-neutral-600">₹7,290 / mo</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    )
+  },
+  {
+    slug: "root-canal-and-crown-cost-on-emi-india",
+    title: "Root Canal & Zirconia Crown Cost on EMI: Complete Payment Breakdown",
+    category: "Endodontics",
+    readTime: "4 min read",
+    publishDate: "August 24, 2026",
+    author: "Clinaza Medical Desk",
+    summary: "Learn how much a Root Canal Treatment (RCT) + Zirconia Crown costs in India and how multi-tooth root canals qualify for easy monthly EMIs.",
+    featuredImage: "/assets/doctor-consult-real.png",
+    metaDescription: "Need a root canal and crown on EMI? Check costs for RCT + Zirconia crowns in India and see how monthly payment plans work at partner clinics.",
+    faqs: [
+      {
+        question: "Can I get a root canal treatment on EMI?",
+        answer: "Yes, when total treatment estimates (such as multiple RCTs or RCT + Zirconia Crown) reach ₹30,000 or above, patients can access Clinaza point-of-care EMI options."
+      }
+    ],
+    content: (
+      <div className="space-y-6">
+        <p className="text-lg leading-relaxed text-neutral-700">
+          A Root Canal Treatment (RCT) is essential to save infected natural teeth. When paired with high-durability Zirconia or Ceramic crowns across multiple teeth, total costs can quickly cross ₹30,000–₹60,000. <strong>Clinaza point-of-care financing</strong> helps patients cover treatment costs without delay.
+        </p>
+      </div>
+    )
   }
 ];

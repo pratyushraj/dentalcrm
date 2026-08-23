@@ -13,7 +13,10 @@ import {
   ChevronDown,
   UserCheck,
   Landmark,
-  Lock
+  Lock,
+  Package,
+  Truck,
+  Award
 } from 'lucide-react';
 import { toast } from 'sonner';
 import { SEOHead } from '@/components/seo/SEOHead';
@@ -44,6 +47,21 @@ export default function CrmHomepage() {
     incomeProof: 'Salary Slips / Bank Statement Available'
   });
   const [patientSubmitted, setPatientSubmitted] = useState(false);
+
+  // EMI Calculator state
+  const [emiAmount, setEmiAmount] = useState(100000);
+  const [emiTenure, setEmiTenure] = useState(12);
+  const [emiRate, setEmiRate] = useState(0); // 0 = 0% interest (subvention scheme)
+
+  const calcEMI = (principal: number, months: number, annualRate: number) => {
+    if (annualRate === 0) return Math.floor(principal / months);
+    const r = annualRate / 12 / 100;
+    return Math.round((principal * r * Math.pow(1 + r, months)) / (Math.pow(1 + r, months) - 1));
+  };
+
+  const monthlyEMI = calcEMI(emiAmount, emiTenure, emiRate);
+  const totalPayable = emiRate === 0 ? emiAmount : monthlyEMI * emiTenure;
+  const totalInterest = totalPayable - emiAmount;
 
   const handlePatientEligibilitySubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -367,6 +385,61 @@ export default function CrmHomepage() {
                 </div>
               </div>
             </div>
+
+            {/* ── FREE CLINIC BRANDING STICKER KIT SECTION ── */}
+            <div className="bg-[#F5F9FC] border border-blue-100 p-6 sm:p-8 rounded-3xl space-y-6 text-left max-w-5xl mx-auto">
+              <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+                <div className="md:col-span-6 space-y-4">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#0f7a75]/10 rounded-full text-[10px] font-bold text-[#0f7a75]">
+                    <Package size={14} /> FREE FOR ONBOARDED PARTNER CLINICS
+                  </div>
+                  <h3 className="text-xl sm:text-3xl font-black text-[#0B2450] leading-tight">
+                    Get Free "EMI Available Here" Stickers for Your Clinic
+                  </h3>
+                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                    Build instant patient trust before they even step inside. Every onboarded Clinaza partner clinic receives a complimentary physical branding kit including high-quality weather-resistant glass door decals and reception counter stands.
+                  </p>
+
+                  <ul className="space-y-2.5 pt-1">
+                    {[
+                      { icon: Award, title: 'Glass Door Decal', desc: 'Premium weatherproof vinyl "EMI Available Here" round sticker' },
+                      { icon: Truck, title: 'Reception Counter Standee', desc: 'Acrylic desk display with patient QR code for 2-min check' },
+                      { icon: CheckCircle2, title: 'Free Express Shipping', desc: 'Delivered directly to your clinic address across India' }
+                    ].map((item, idx) => (
+                      <li key={idx} className="flex items-start gap-3 text-xs text-slate-700 font-medium">
+                        <item.icon size={16} className="text-[#0867E8] shrink-0 mt-0.5" />
+                        <div>
+                          <strong className="text-[#0B2450] block">{item.title}</strong>
+                          <span className="text-[11px] text-slate-500">{item.desc}</span>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <div className="pt-2">
+                    <a
+                      href="#partner-form"
+                      onClick={() => setFormType('clinic')}
+                      className="inline-flex items-center gap-2 px-6 py-3.5 bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-black uppercase tracking-widest rounded-xl transition-all shadow-md shadow-[#0867E8]/20"
+                    >
+                      Get Free Clinic Kit With Partnership &rarr;
+                    </a>
+                  </div>
+                </div>
+
+                {/* Real Sticker Photo */}
+                <div className="md:col-span-6 relative">
+                  <img
+                    src="/assets/clinaza-clinic-sticker.jpg"
+                    alt="Clinaza EMI Available Here official glass door decal sticker on clinic front entrance"
+                    className="w-full h-auto rounded-2xl border border-slate-200 shadow-xl object-cover aspect-[4/3]"
+                  />
+                  <div className="absolute top-4 right-4 bg-[#0B2450]/90 backdrop-blur-md text-white px-3 py-1.5 rounded-xl text-[10px] font-bold shadow-md">
+                    Official Decal Design
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -386,6 +459,128 @@ export default function CrmHomepage() {
                 <span className="text-[10px] font-medium text-slate-500 block">{cat.tag}</span>
               </div>
             ))}
+          </div>
+        </section>
+
+        {/* ── 5.5 EMI CALCULATOR ── */}
+        <section aria-label="EMI Calculator" className="py-16 px-6 bg-[#F7FAFC] border-y border-slate-200/60">
+          <div className="max-w-4xl mx-auto space-y-10">
+            <div className="text-center space-y-2">
+              <span className="text-[10px] font-black text-[#0f7a75] uppercase tracking-widest">PATIENT COST PLANNER</span>
+              <h2 className="text-2xl sm:text-4xl font-black text-[#0B2450]">EMI Calculator</h2>
+              <p className="text-xs sm:text-sm text-slate-600">Estimate monthly payments for your treatment. Final terms set by the lender.</p>
+            </div>
+
+            <div className="bg-white border border-slate-200 rounded-3xl shadow-sm overflow-hidden">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
+
+                {/* Left: Controls */}
+                <div className="p-6 sm:p-8 space-y-7 border-b md:border-b-0 md:border-r border-slate-100">
+
+                  {/* Treatment Amount */}
+                  <div className="space-y-3">
+                    <div className="flex justify-between items-center">
+                      <label className="text-xs font-black text-[#0B2450] uppercase tracking-wider">Treatment Amount</label>
+                      <span className="text-sm font-black text-[#0867E8]">₹{emiAmount.toLocaleString('en-IN')}</span>
+                    </div>
+                    <input
+                      type="range"
+                      min={30000}
+                      max={300000}
+                      step={5000}
+                      value={emiAmount}
+                      onChange={e => setEmiAmount(Number(e.target.value))}
+                      className="w-full h-2 bg-slate-200 rounded-full appearance-none cursor-pointer accent-[#0867E8]"
+                      aria-label="Treatment amount slider"
+                    />
+                    <div className="flex justify-between text-[10px] text-slate-400 font-bold">
+                      <span>₹30,000</span>
+                      <span>₹3,00,000</span>
+                    </div>
+                  </div>
+
+                  {/* Tenure */}
+                  <div className="space-y-3">
+                    <label className="text-xs font-black text-[#0B2450] uppercase tracking-wider block">Repayment Tenure</label>
+                    <div className="grid grid-cols-4 gap-2">
+                      {[3, 6, 12, 24].map(t => (
+                        <button
+                          key={t}
+                          onClick={() => setEmiTenure(t)}
+                          className={`py-2.5 rounded-xl text-xs font-black border transition-all ${
+                            emiTenure === t
+                              ? 'bg-[#0867E8] text-white border-[#0867E8] shadow-md'
+                              : 'bg-[#F7FAFC] text-[#0B2450] border-slate-200 hover:border-[#0867E8]'
+                          }`}
+                        >
+                          {t}M
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Interest Rate */}
+                  <div className="space-y-3">
+                    <label className="text-xs font-black text-[#0B2450] uppercase tracking-wider block">Interest Scheme</label>
+                    <div className="grid grid-cols-2 gap-2">
+                      {[
+                        { label: '0% Interest', sublabel: 'Subvention / No-Cost', rate: 0 },
+                        { label: '12% p.a.', sublabel: 'Standard Lender Rate', rate: 12 }
+                      ].map(opt => (
+                        <button
+                          key={opt.rate}
+                          onClick={() => setEmiRate(opt.rate)}
+                          className={`py-3 rounded-xl text-left px-3.5 border transition-all ${
+                            emiRate === opt.rate
+                              ? 'bg-[#0f7a75] text-white border-[#0f7a75] shadow-md'
+                              : 'bg-[#F7FAFC] text-[#0B2450] border-slate-200 hover:border-[#0f7a75]'
+                          }`}
+                        >
+                          <span className="text-xs font-black block">{opt.label}</span>
+                          <span className={`text-[10px] font-medium ${emiRate === opt.rate ? 'text-white/80' : 'text-slate-500'}`}>{opt.sublabel}</span>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Right: Result */}
+                <div className="p-6 sm:p-8 flex flex-col justify-between space-y-6">
+                  <div className="space-y-5">
+                    <div className="bg-gradient-to-br from-[#0867E8] to-[#0f7a75] rounded-2xl p-6 text-white text-center space-y-1">
+                      <p className="text-[10px] font-bold uppercase tracking-widest text-white/70">Estimated Monthly EMI</p>
+                      <p className="text-4xl sm:text-5xl font-black">₹{monthlyEMI.toLocaleString('en-IN')}</p>
+                      <p className="text-[11px] text-white/80 font-medium">per month × {emiTenure} months</p>
+                    </div>
+
+                    <div className="space-y-2.5">
+                      {[
+                        { label: 'Principal Amount', value: `₹${emiAmount.toLocaleString('en-IN')}`, accent: false },
+                        { label: 'Total Interest', value: totalInterest === 0 ? '₹0 (0% Scheme)' : `₹${totalInterest.toLocaleString('en-IN')}`, accent: false },
+                        { label: 'Total Payable', value: `₹${totalPayable.toLocaleString('en-IN')}`, accent: true },
+                      ].map((row, idx) => (
+                        <div key={idx} className={`flex justify-between items-center px-4 py-3 rounded-xl text-xs font-bold ${row.accent ? 'bg-[#0867E8]/8 border border-[#0867E8]/20 text-[#0B2450]' : 'bg-[#F7FAFC] border border-slate-100 text-slate-600'}`}>
+                          <span>{row.label}</span>
+                          <span className={row.accent ? 'text-[#0867E8]' : ''}>{row.value}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="space-y-3">
+                    <button
+                      onClick={() => setShowEligibilityModal(true)}
+                      className="w-full py-3.5 bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-black uppercase tracking-widest rounded-xl transition-all shadow-md flex items-center justify-center gap-2"
+                    >
+                      <ShieldCheck size={15} /> Check My Eligibility →
+                    </button>
+                    <p className="text-[10px] text-slate-400 text-center leading-relaxed">
+                      Indicative estimate only. Actual EMI, interest rate, and tenure subject to lender approval and eligibility.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -620,10 +815,10 @@ export default function CrmHomepage() {
                     </div>
                   </div>
 
-                  {/* Soft-Eligibility Summary Card */}
+                  {/* Initial Eligibility Assessment Summary Card */}
                   <div className="bg-[#F7FAFC] border border-slate-200 p-3.5 rounded-2xl space-y-1 text-xs">
                     <span className="text-[10px] font-mono font-bold text-[#0756C7] uppercase tracking-wider block">
-                      ✓ Soft Eligibility Check Summary
+                      ✓ Initial Eligibility Assessment Complete
                     </span>
                     <div className="text-[11px] text-slate-700 space-y-0.5 pt-1 font-medium">
                       <p>👤 <strong>Patient:</strong> {patientData.name || 'Not provided'} ({patientData.city || 'City'})</p>
@@ -631,6 +826,9 @@ export default function CrmHomepage() {
                       <p>📊 <strong>CIBIL Range:</strong> {patientData.cibilScore}</p>
                       <p>📄 <strong>Selected Proof:</strong> {patientData.incomeProof}</p>
                     </div>
+                    <p className="text-[10px] text-slate-500 pt-1 leading-relaxed border-t border-slate-200 mt-2">
+                      Final approval, interest rate and loan amount are subject to lender assessment.
+                    </p>
                   </div>
 
                   {/* Document Requirements Checklist */}

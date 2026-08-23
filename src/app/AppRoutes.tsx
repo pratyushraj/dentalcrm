@@ -14,6 +14,7 @@ const EmiOnboardPage = lazy(() => import("@/pages/EmiOnboardPage"));
 const BlogHub = lazy(() => import("@/pages/yourdentist/BlogHub"));
 const BlogArticlePage = lazy(() => import("@/pages/yourdentist/BlogArticlePage"));
 const ReviewAssistant = lazy(() => import("@/pages/yourdentist/ReviewAssistant"));
+const CityLandingPage = lazy(() => import("@/pages/CityLandingPage"));
 
 export default function AppRoutes() {
   return (
@@ -36,6 +37,9 @@ export default function AppRoutes() {
           {/* Clinaza SEO Patient & Clinic Guides */}
           <Route path="/blog" element={<LazyRoute><BlogHub /></LazyRoute>} />
           <Route path="/blog/:slug" element={<LazyRoute><BlogArticlePage /></LazyRoute>} />
+
+          {/* City-specific Landing Pages – all Indian cities */}
+          <Route path="/cities/:city" element={<LazyRoute><CityLandingPage /></LazyRoute>} />
 
           {/* Legacy Redirects for SEO Continuity */}
           <Route path="/yourdentist/blog" element={<Navigate to="/blog" replace />} />

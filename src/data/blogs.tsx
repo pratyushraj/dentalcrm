@@ -310,5 +310,92 @@ export const BLOGS: BlogArticle[] = [
         </ol>
       </div>
     )
+  },
+  {
+    slug: "dental-treatment-emi-cost-calculator-india",
+    title: "Dental Treatments on EMI in India: Cost, 0% Interest & Monthly Plans",
+    category: "Patient Financing",
+    readTime: "6 min read",
+    publishDate: "August 23, 2026",
+    author: "Clinaza Research Team",
+    summary: "Complete guide on dental treatment EMI in India. Learn how to get 0% interest EMI for Dental Implants, Aligners, Braces, and Full Mouth Rehabilitation (₹30,000 to ₹3,00,000).",
+    featuredImage: "/assets/clinaza-logo.jpg",
+    metaDescription: "Looking for dental treatment on EMI in India? Compare monthly EMI plans for implants, aligners, braces, and crowns (₹30k to ₹3L) with 0% interest financing.",
+    faqs: [
+      {
+        question: "Can I get dental treatment on EMI in India?",
+        answer: "Yes. Clinaza connects patients directly at clinic checkouts with RBI-regulated Banks and NBFCs offering zero-down-payment or 0% interest EMI options for procedures ranging from ₹30,000 to ₹3,00,000."
+      },
+      {
+        question: "Which dental treatments are eligible for EMI financing?",
+        answer: "High-value treatments including Dental Implants, Clear Aligners, Braces, Porcelain Veneers, Root Canals with Crowns, Full Mouth Rehabilitation, and Orthopaedic/Specialty procedures qualify."
+      },
+      {
+        question: "What documents are required for dental loan EMI approval?",
+        answer: "Basic digital KYC: PAN Card, Aadhaar Card (eKYC), proof of income (salary slips, bank statement, or ITR), and bank details for automated e-NACH monthly debit."
+      }
+    ],
+    content: (
+      <div className="space-y-6">
+        <p className="text-lg leading-relaxed text-neutral-700">
+          Dental procedures like <strong>Dental Implants, Clear Aligners, and Smile Makeovers</strong> are essential investments in your health and self-confidence. However, upfront costs ranging from <strong>₹30,000 to ₹3,00,000</strong> often cause patients to postpone necessary care.
+        </p>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Dental Treatment EMI Options & Estimated Monthly Costs</h2>
+        <div className="overflow-x-auto my-6">
+          <table className="min-w-full divide-y divide-neutral-200 border border-neutral-100">
+            <thead className="bg-neutral-50">
+              <tr>
+                <th className="px-6 py-3 text-left text-xs font-bold text-neutral-500 uppercase">Treatment</th>
+                <th className="px-6 py-3 text-left text-xs font-bold text-neutral-500 uppercase">Total Estimate</th>
+                <th className="px-6 py-3 text-left text-xs font-bold text-neutral-500 uppercase">12-Month EMI</th>
+                <th className="px-6 py-3 text-left text-xs font-bold text-neutral-500 uppercase">24-Month EMI</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-neutral-200 text-xs">
+              <tr>
+                <td className="px-6 py-4 font-bold text-neutral-800">Single Tooth Implant + Crown</td>
+                <td className="px-6 py-4 text-[#0867E8] font-bold">₹35,000 - ₹55,000</td>
+                <td className="px-6 py-4 text-neutral-600">₹2,916 / mo</td>
+                <td className="px-6 py-4 text-neutral-600">₹1,458 / mo</td>
+              </tr>
+              <tr>
+                <td className="px-6 py-4 font-bold text-neutral-800">Clear Aligners (Both Arches)</td>
+                <td className="px-6 py-4 text-[#0867E8] font-bold">₹60,000 - ₹1,80,000</td>
+                <td className="px-6 py-4 text-neutral-600">₹5,000 / mo</td>
+                <td className="px-6 py-4 text-neutral-600">₹2,500 / mo</td>
+              </tr>
+              <tr>
+                <td className="px-6 py-4 font-bold text-neutral-800">Ceramic / Metal Braces</td>
+                <td className="px-6 py-4 text-[#0867E8] font-bold">₹30,000 - ₹75,000</td>
+                <td className="px-6 py-4 text-neutral-600">₹2,500 / mo</td>
+                <td className="px-6 py-4 text-neutral-600">₹1,250 / mo</td>
+              </tr>
+              <tr>
+                <td className="px-6 py-4 font-bold text-neutral-800">Full Mouth Rehabilitation</td>
+                <td className="px-6 py-4 text-[#0867E8] font-bold">₹1,50,000 - ₹3,00,000</td>
+                <td className="px-6 py-4 text-neutral-600">₹12,500 / mo</td>
+                <td className="px-6 py-4 text-neutral-600">₹6,250 / mo</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">How Clinaza Embedded Financing Works at Clinics</h2>
+        <p className="text-neutral-700 leading-relaxed">
+          Through <strong>Clinaza</strong>, partnered dental clinics provide point-of-care financing options funded by RBI-regulated Banks and NBFCs. Patients can check eligibility within 2 minutes directly at the clinic desk using basic KYC details.
+        </p>
+
+        <div className="bg-[#F5F9FC] border border-blue-100 p-6 rounded-2xl space-y-3 my-6">
+          <h3 className="text-base font-bold text-[#0B2450]">Key Benefits of Clinaza Patient Financing:</h3>
+          <ul className="list-disc pl-5 space-y-2 text-xs text-neutral-700">
+            <li><strong>0% Interest Schemes:</strong> No extra burden on monthly patient budgets.</li>
+            <li><strong>100% Digital & Paperless:</strong> Instant pre-approval directly on mobile.</li>
+            <li><strong>Flexible Tenures:</strong> Choose between 3, 6, 9, 12, or 24 monthly installments.</li>
+            <li><strong>Zero Clinic Collection Burden:</strong> EMIs auto-debited via secure e-NACH.</li>
+          </ul>
+        </div>
+      </div>
+    )
   }
 ];

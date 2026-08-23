@@ -4,17 +4,8 @@ Allow: /sitemap.xml
 Allow: /llms.txt
 Allow: /llms-full.txt
 
-# Block search engines from private areas
+# Block search engines from private dashboard areas
+Disallow: /reactivation/
 Disallow: /api/
-Disallow: /admin/
-Disallow: /admin-dashboard/
-Disallow: /creator-dashboard/
-Disallow: /creator-onboarding/
-Disallow: /creator-profile/
-Disallow: /settings/
-Disallow: /login/
-Disallow: /signup/
-Disallow: /reset-password/
-Disallow: /forgot-password/
 
-Sitemap: https://dental-crm-gray.vercel.app/sitemap.xml
+Sitemap: https://dental-crm-red.vercel.app/sitemap.xml

@@ -61,7 +61,13 @@ export default function CrmHomepage() {
   const monthlyEMI = calcEMI(emiAmount, emiTenure, emiRate);
   const totalPayable = monthlyEMI * emiTenure;
   const totalInterest = totalPayable - emiAmount;
-
+  // Analytics event tracking placeholder function
+  const trackEvent = (eventName: string, payload?: Record<string, any>) => {
+    if (typeof window !== 'undefined' && (window as any).gtag) {
+      (window as any).gtag('event', eventName, payload);
+    }
+    console.log(`[Analytics Event]: ${eventName}`, payload || {});
+  };
   const handlePatientEligibilitySubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!patientData.name || !patientData.mobile || !patientData.city) {
@@ -237,6 +243,7 @@ export default function CrmHomepage() {
                 <button
                   type="button"
                   onClick={() => {
+                    trackEvent('click_hero_check_eligibility');
                     setShowEligibilityModal(true);
                     setEligibilityStep(1);
                   }}
@@ -246,7 +253,10 @@ export default function CrmHomepage() {
                 </button>
                 <a
                   href="#partner-form"
-                  onClick={() => setFormType('clinic')}
+                  onClick={() => {
+                    trackEvent('click_hero_partner_with_clinaza');
+                    setFormType('clinic');
+                  }}
                   className="w-full sm:w-auto px-5 py-3.5 bg-[#F7FAFC] hover:bg-slate-100 text-[#0B2450] border border-slate-200 text-xs font-black uppercase tracking-wider rounded-xl transition-all flex items-center justify-center gap-2"
                 >
                   Partner With Clinaza <ArrowRight size={14} />
@@ -392,14 +402,15 @@ export default function CrmHomepage() {
         <section aria-label="Eligibility Prompt" className="py-12 px-4 sm:px-6 max-w-4xl mx-auto">
           <div className="bg-gradient-to-br from-[#0B2450] to-[#0867E8] text-white p-7 sm:p-9 rounded-3xl text-center space-y-4 shadow-xl">
             <span className="text-[10px] font-black text-[#12A8A0] uppercase tracking-widest block">INSTANT PRE-CHECK</span>
-            <h3 className="text-xl sm:text-3xl font-black">Want to know if your patient may qualify?</h3>
+            <h3 className="text-xl sm:text-3xl font-black">See if your patient may be eligible for financing</h3>
             <p className="text-xs sm:text-sm text-blue-100 max-w-xl mx-auto leading-relaxed">
-              Check initial eligibility in under 2 minutes based on estimated credit range and income type.
+              Initial assessment only. Final approval, loan amount and interest rate are decided by the financing partner.
             </p>
             <div className="pt-2">
               <button
                 type="button"
                 onClick={() => {
+                  trackEvent('click_mid_check_eligibility');
                   setShowEligibilityModal(true);
                   setEligibilityStep(1);
                 }}
@@ -409,7 +420,7 @@ export default function CrmHomepage() {
               </button>
             </div>
             <p className="text-[10px] text-blue-200/80 max-w-md mx-auto leading-tight">
-              *Initial assessment only. Final loan approval, sanctioned amount, and interest rate are determined by the financing partner.
+              *Initial assessment only. Final loan approval, loan amount, and interest rate are determined independently by the financing partner.
             </p>
           </div>
         </section>
@@ -494,6 +505,7 @@ export default function CrmHomepage() {
                   <div className="space-y-2">
                     <button
                       onClick={() => {
+                        trackEvent('click_calc_check_eligibility');
                         setShowEligibilityModal(true);
                         setEligibilityStep(1);
                       }}
@@ -515,14 +527,20 @@ export default function CrmHomepage() {
             <h2 className="text-2xl sm:text-4xl font-black text-[#0B2450]">Why Clinics Use Clinaza</h2>
           </div>
 
+          {/* Prominent ₹0 Clinic Fees Highlight Badge */}
+          <div className="bg-gradient-to-r from-[#0f7a75]/10 to-[#0867E8]/10 border border-[#0f7a75]/30 p-5 rounded-2xl text-center max-w-2xl mx-auto shadow-2xs">
+            <span className="text-2xl font-black text-[#0f7a75] block">₹0 Clinic Fees</span>
+            <p className="text-xs font-bold text-[#0B2450] mt-0.5">No upfront fee or EMI collection responsibility for the clinic.</p>
+          </div>
+
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-left">
             {[
-              { title: 'No upfront fee', desc: 'Free setup and branding materials for onboarded clinics.' },
-              { title: 'No EMI collection burden', desc: 'No chasing patients for repayments — handled by NBFC.' },
-              { title: 'Financing by partners', desc: 'All loans funded and serviced by RBI-regulated lenders.' },
-              { title: 'Higher ticket conversions', desc: 'Helps patients manage higher treatment costs easily.' },
-              { title: 'Digital application', desc: 'Paperless 100% online point-of-care pre-assessment.' },
-              { title: 'Multiple financing options', desc: 'Connected network of lenders for better approval rates.' }
+              { title: '₹0 Upfront Fee', desc: 'Free setup and branding materials for onboarded clinics.' },
+              { title: 'No EMI Collection Burden', desc: 'No chasing patients for repayments — handled entirely by NBFC.' },
+              { title: 'Financing by Partners', desc: 'All loans funded and serviced by RBI-regulated lenders.' },
+              { title: 'Higher Ticket Conversions', desc: 'Helps eligible patients manage higher treatment costs easily.' },
+              { title: 'Digital Application', desc: 'Paperless 100% online point-of-care pre-assessment.' },
+              { title: 'Multiple Financing Options', desc: 'Connected network of lenders for better eligibility matching.' }
             ].map((item, idx) => (
               <div key={idx} className="bg-[#F7FAFC] border border-slate-200 p-5 rounded-2xl space-y-1.5 shadow-2xs">
                 <div className="flex items-center gap-2">
@@ -911,11 +929,11 @@ export default function CrmHomepage() {
                 {formType === 'clinic' ? 'CLINIC PARTNER APPLICATION' : 'NBFC & LENDER PARTNERSHIP'}
               </span>
               <h2 className="text-2xl sm:text-3xl font-black text-[#0B2450]">
-                {formType === 'clinic' ? 'Ready to offer EMI options to your patients?' : 'Partner with Clinaza as a Capital Provider'}
+                {formType === 'clinic' ? 'Ready to help more patients say YES to treatment?' : 'Partner with Clinaza as a Capital Provider'}
               </h2>
-              <p className="text-xs text-slate-600">
+              <p className="text-xs font-medium text-slate-600">
                 {formType === 'clinic'
-                  ? "Tell us about your clinic and we'll get in touch."
+                  ? 'Offer financing through Clinaza. Tell us about your clinic and we will get in touch.'
                   : 'Access high-intent healthcare treatment financing demand through our clinic network.'}
               </p>
             </div>

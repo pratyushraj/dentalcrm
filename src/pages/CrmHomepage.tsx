@@ -37,8 +37,11 @@ export default function CrmHomepage() {
     mobile: '',
     city: '',
     treatment: 'Dental Implants',
-    amount: '₹50,000',
-    preferredClinic: ''
+    amount: '₹50,000 - ₹1,00,000',
+    preferredClinic: '',
+    cibilScore: '700+ (Good / Excellent)',
+    employmentType: 'Salaried Professional',
+    incomeProof: 'Salary Slips / Bank Statement Available'
   });
   const [patientSubmitted, setPatientSubmitted] = useState(false);
 
@@ -508,31 +511,67 @@ export default function CrmHomepage() {
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="space-y-1">
-                      <label htmlFor="patient-amount" className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Treatment Amount (Approx.)</label>
-                      <select
-                        id="patient-amount"
-                        value={patientData.amount}
-                        onChange={e => setPatientData({ ...patientData, amount: e.target.value })}
-                        className="w-full px-4 py-2.5 bg-[#F7FAFC] border border-slate-200 rounded-xl text-xs text-[#0B2450] focus:outline-none focus:border-[#0867E8]"
-                      >
-                        <option value="₹30,000 - ₹50,000">₹30,000 - ₹50,000</option>
-                        <option value="₹50,000 - ₹1,00,000">₹50,000 - ₹1,00,000</option>
-                        <option value="₹1,00,000 - ₹2,00,000">₹1,00,000 - ₹2,00,000</option>
-                        <option value="₹2,00,000 - ₹3,00,000">₹2,00,000 - ₹3,00,000</option>
-                      </select>
-                    </div>
-                    <div className="space-y-1">
-                      <label htmlFor="patient-clinic" className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Preferred Clinic (Optional)</label>
-                      <input
-                        id="patient-clinic"
-                        type="text"
-                        placeholder="e.g. City Care Dental"
-                        value={patientData.preferredClinic}
-                        onChange={e => setPatientData({ ...patientData, preferredClinic: e.target.value })}
-                        className="w-full px-4 py-2.5 bg-[#F7FAFC] border border-slate-200 rounded-xl text-xs text-[#0B2450] placeholder-slate-400 focus:outline-none focus:border-[#0867E8]"
-                      />
+                  {/* Soft-Eligibility Screening Questions Section */}
+                  <div className="bg-[#F5F9FC] border border-blue-100 p-4 rounded-2xl space-y-3">
+                    <span className="text-[10px] font-mono font-bold text-[#0756C7] uppercase tracking-wider block">
+                      ⚡ Soft Eligibility Quick Check
+                    </span>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                      {/* Q1: CIBIL Score Estimate */}
+                      <div className="space-y-1">
+                        <label htmlFor="patient-cibil" className="text-[9px] font-bold text-slate-600 uppercase tracking-wider block">
+                          1. Estimated CIBIL Score
+                        </label>
+                        <select
+                          id="patient-cibil"
+                          value={patientData.cibilScore}
+                          onChange={e => setPatientData({ ...patientData, cibilScore: e.target.value })}
+                          className="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs text-[#0B2450] focus:outline-none focus:border-[#0867E8]"
+                        >
+                          <option value="750+ (Excellent)">750+ (Excellent)</option>
+                          <option value="700 - 749 (Good)">700 - 749 (Good)</option>
+                          <option value="650 - 699 (Fair)">650 - 699 (Fair)</option>
+                          <option value="Below 650 / New to Credit">Below 650 / New to Credit</option>
+                          <option value="Don't know / Never checked">Don't know / Never checked</option>
+                        </select>
+                      </div>
+
+                      {/* Q2: Employment Type */}
+                      <div className="space-y-1">
+                        <label htmlFor="patient-employment" className="text-[9px] font-bold text-slate-600 uppercase tracking-wider block">
+                          2. Employment Type
+                        </label>
+                        <select
+                          id="patient-employment"
+                          value={patientData.employmentType}
+                          onChange={e => setPatientData({ ...patientData, employmentType: e.target.value })}
+                          className="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs text-[#0B2450] focus:outline-none focus:border-[#0867E8]"
+                        >
+                          <option value="Salaried Professional">Salaried Professional</option>
+                          <option value="Self-Employed / Business Owner">Self-Employed / Business Owner</option>
+                          <option value="Professional (Doctor/CA/Lawyer)">Professional (Doctor/CA/Lawyer)</option>
+                          <option value="Retired / Homemaker / Student">Retired / Homemaker / Student</option>
+                        </select>
+                      </div>
+
+                      {/* Q3: Proof Document Available */}
+                      <div className="space-y-1">
+                        <label htmlFor="patient-[#income-proof]" className="text-[9px] font-bold text-slate-600 uppercase tracking-wider block">
+                          3. Income Proof Available
+                        </label>
+                        <select
+                          id="patient-income-proof"
+                          value={patientData.incomeProof}
+                          onChange={e => setPatientData({ ...patientData, incomeProof: e.target.value })}
+                          className="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs text-[#0B2450] focus:outline-none focus:border-[#0867E8]"
+                        >
+                          <option value="Salary Slips (Last 3 Months)">Salary Slips (Last 3 Months)</option>
+                          <option value="Business ITR (Last 2 Years)">Business ITR (Last 2 Years)</option>
+                          <option value="Bank Statement (Last 6 Months)">Bank Statement (Last 6 Months)</option>
+                          <option value="Aadhaar + PAN Only">Aadhaar + PAN Only</option>
+                        </select>
+                      </div>
                     </div>
                   </div>
 
@@ -557,6 +596,18 @@ export default function CrmHomepage() {
                       <p className="text-slate-600 leading-relaxed text-[11px]">
                         Document requirements (PAN, Aadhaar eKYC, Bank Statements) are determined directly by the lending partner and processed via encrypted API endpoints.
                       </p>
+                    </div>
+                  </div>
+
+                  {/* Soft-Eligibility Summary Card */}
+                  <div className="bg-[#F5F9FC] border border-blue-100 p-3.5 rounded-2xl space-y-1 text-xs">
+                    <span className="text-[10px] font-mono font-bold text-[#0756C7] uppercase tracking-wider block">
+                      ✓ Soft Eligibility Check Complete
+                    </span>
+                    <div className="text-[11px] text-slate-700 space-y-0.5 pt-1 font-medium">
+                      <p>📊 <strong>CIBIL Range:</strong> {patientData.cibilScore}</p>
+                      <p>💼 <strong>Employment:</strong> {patientData.employmentType}</p>
+                      <p>📄 <strong>Proof Type:</strong> {patientData.incomeProof}</p>
                     </div>
                   </div>
 

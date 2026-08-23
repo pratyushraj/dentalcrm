@@ -74,6 +74,22 @@ export default function CrmHomepage() {
       toast.error('Please fill in required fields');
       return;
     }
+    const isPotentiallyEligible = !patientData.cibilScore.includes('Below 650');
+    if (isPotentiallyEligible) {
+      trackEvent('eligibility_completed', {
+        cibil: patientData.cibilScore,
+        employment: patientData.employmentType,
+        treatment: patientData.treatment,
+        status: 'potentially_eligible'
+      });
+    } else {
+      trackEvent('eligibility_not_eligible', {
+        cibil: patientData.cibilScore,
+        employment: patientData.employmentType,
+        treatment: patientData.treatment,
+        status: 'sub_prime'
+      });
+    }
     setEligibilityStep(2);
   };
 
@@ -84,6 +100,11 @@ export default function CrmHomepage() {
       return;
     }
     setIsSubmitting(true);
+    trackEvent('clinic_form_submitted', {
+      formType,
+      city: formData.city,
+      category: formData.category
+    });
     setTimeout(() => {
       setIsSubmitting(false);
       setSubmitted(true);
@@ -244,6 +265,7 @@ export default function CrmHomepage() {
                   type="button"
                   onClick={() => {
                     trackEvent('click_hero_check_eligibility');
+                    trackEvent('eligibility_started', { source: 'hero_cta' });
                     setShowEligibilityModal(true);
                     setEligibilityStep(1);
                   }}
@@ -411,6 +433,7 @@ export default function CrmHomepage() {
                 type="button"
                 onClick={() => {
                   trackEvent('click_mid_check_eligibility');
+                  trackEvent('eligibility_started', { source: 'mid_banner' });
                   setShowEligibilityModal(true);
                   setEligibilityStep(1);
                 }}
@@ -449,7 +472,10 @@ export default function CrmHomepage() {
                       max={300000}
                       step={5000}
                       value={emiAmount}
-                      onChange={e => setEmiAmount(Number(e.target.value))}
+                      onChange={e => {
+                        setEmiAmount(Number(e.target.value));
+                        trackEvent('calculator_used', { amount: Number(e.target.value), tenure: emiTenure });
+                      }}
                       className="w-full h-2 bg-slate-200 rounded-full appearance-none cursor-pointer accent-[#0867E8]"
                       aria-label="Treatment amount slider"
                     />
@@ -849,6 +875,13 @@ export default function CrmHomepage() {
                       )}`}
                       target="_blank"
                       rel="noopener noreferrer"
+                      onClick={() => {
+                        trackEvent('eligibility_whatsapp_sent', {
+                          name: patientData.name,
+                          treatment: patientData.treatment,
+                          cibil: patientData.cibilScore
+                        });
+                      }}
                       className="w-2/3 py-3.5 bg-[#0f7a75] hover:bg-[#0c635f] text-white font-black text-xs uppercase tracking-wider rounded-xl transition-all shadow-md flex items-center justify-center gap-2"
                     >
                       <MessageSquare size={16} /> Send Documents on WhatsApp &rarr;
@@ -945,7 +978,7 @@ export default function CrmHomepage() {
                 <p className="text-xs text-slate-600">Our partnership team will reach out within 24 hours.</p>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-4" noValidate>
+              <form onSubmit={handleSubmit} className="space-y-4" noValidate onFocus={() => trackEvent('clinic_form_started', { formType })}>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-1">
                     <label htmlFor="doctor-name" className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">

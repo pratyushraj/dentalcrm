@@ -12,7 +12,8 @@ import {
   HelpCircle,
   ChevronDown,
   UserCheck,
-  Landmark
+  Landmark,
+  Lock
 } from 'lucide-react';
 import { toast } from 'sonner';
 import { SEOHead } from '@/components/seo/SEOHead';
@@ -29,6 +30,26 @@ export default function CrmHomepage() {
   const [submitted, setSubmitted] = useState(false);
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
   const [formType, setFormType] = useState<'clinic' | 'lender'>('clinic');
+  const [showEligibilityModal, setShowEligibilityModal] = useState(false);
+  const [eligibilityStep, setEligibilityStep] = useState<1 | 2>(1);
+  const [patientData, setPatientData] = useState({
+    name: '',
+    mobile: '',
+    city: '',
+    treatment: 'Dental Implants',
+    amount: '₹50,000',
+    preferredClinic: ''
+  });
+  const [patientSubmitted, setPatientSubmitted] = useState(false);
+
+  const handlePatientEligibilitySubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!patientData.name || !patientData.mobile || !patientData.city) {
+      toast.error('Please fill in required fields');
+      return;
+    }
+    setEligibilityStep(2);
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -369,24 +390,28 @@ export default function CrmHomepage() {
               ))}
             </div>
 
-            {/* Patient CTA Banner */}
-            <div className="bg-white border border-slate-200 p-7 rounded-3xl text-center space-y-4 shadow-sm max-w-xl mx-auto">
+            {/* Patient CTA Banner — "Check Eligibility" */}
+            <div className="bg-white border border-slate-200 p-8 rounded-3xl text-center space-y-4 shadow-sm max-w-xl mx-auto">
               <div className="space-y-1">
-                <h3 className="text-base font-black text-[#0B2450]">Need financing for your treatment?</h3>
-                <p className="text-xs text-slate-600">Ask your clinic if Clinaza financing is available.</p>
+                <h3 className="text-lg font-black text-[#0B2450]">Need financing for your treatment?</h3>
+                <p className="text-xs text-slate-600">Check your eligibility in a few simple steps.</p>
               </div>
               <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
-                <a
-                  href="#partner-form"
-                  onClick={() => setFormType('clinic')}
-                  className="w-full sm:w-auto px-6 py-3 bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-black uppercase tracking-wider rounded-xl transition-all shadow-md shadow-[#0867E8]/20 flex items-center justify-center gap-1.5"
+                <button
+                  type="button"
+                  onClick={() => {
+                    setShowEligibilityModal(true);
+                    setEligibilityStep(1);
+                    setPatientSubmitted(false);
+                  }}
+                  className="w-full sm:w-auto px-7 py-3.5 bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-black uppercase tracking-wider rounded-xl transition-all shadow-md shadow-[#0867E8]/20 flex items-center justify-center gap-1.5 transform hover:-translate-y-0.5"
                 >
-                  Ask Your Clinic About Clinaza <ArrowRight size={14} />
-                </a>
+                  Check Eligibility &rarr;
+                </button>
                 <a
-                  href="https://wa.me/917292984244?text=Hi%20Clinaza%2C%20I%20want%20to%20check%20if%20my%20clinic%20offers%20Clinaza%20financing"
+                  href="https://wa.me/917292984244?text=Hi%20Clinaza%2C%20I%20want%20to%20check%20if%20my%20treatment%20is%20eligible%20for%20EMI%20financing"
                   target="_blank" rel="noopener noreferrer"
-                  className="w-full sm:w-auto px-5 py-3 bg-[#F7FAFC] hover:bg-slate-100 text-[#0B2450] border border-slate-200 text-xs font-bold rounded-xl transition-all flex items-center justify-center gap-2"
+                  className="w-full sm:w-auto px-6 py-3.5 bg-[#F7FAFC] hover:bg-slate-100 text-[#0B2450] border border-slate-200 text-xs font-bold rounded-xl transition-all flex items-center justify-center gap-2"
                 >
                   <MessageSquare size={14} className="text-[#0f7a75]" />
                   WhatsApp Us
@@ -395,6 +420,203 @@ export default function CrmHomepage() {
             </div>
           </div>
         </section>
+
+        {/* ── PATIENT ELIGIBILITY 2-STEP MODAL ── */}
+        {showEligibilityModal && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-in fade-in">
+            <div className="bg-white border border-slate-200 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative space-y-6 text-left">
+              <button
+                type="button"
+                onClick={() => setShowEligibilityModal(false)}
+                className="absolute top-5 right-5 text-slate-400 hover:text-slate-600 p-1.5 rounded-full hover:bg-slate-100 transition-colors"
+                aria-label="Close modal"
+              >
+                <X size={18} />
+              </button>
+
+              {/* Modal Header */}
+              <div className="space-y-1">
+                <span className="text-[10px] font-black text-[#0f7a75] uppercase tracking-widest block">PATIENT FINANCING CHECK</span>
+                <h3 className="text-xl font-black text-[#0B2450]">
+                  {eligibilityStep === 1 ? 'Check Financing Eligibility' : 'Upload Documents Securely'}
+                </h3>
+                <p className="text-xs text-slate-500">
+                  {eligibilityStep === 1
+                    ? 'Step 1 of 2: Basic treatment & contact details'
+                    : 'Step 2 of 2: Lender documentation requirements'}
+                </p>
+              </div>
+
+              {eligibilityStep === 1 ? (
+                <form onSubmit={handlePatientEligibilitySubmit} className="space-y-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="space-y-1">
+                      <label htmlFor="patient-name" className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Full Name *</label>
+                      <input
+                        id="patient-name"
+                        type="text"
+                        required
+                        placeholder="e.g. Ankit Sharma"
+                        value={patientData.name}
+                        onChange={e => setPatientData({ ...patientData, name: e.target.value })}
+                        className="w-full px-4 py-2.5 bg-[#F7FAFC] border border-slate-200 rounded-xl text-xs text-[#0B2450] placeholder-slate-400 focus:outline-none focus:border-[#0867E8]"
+                      />
+                    </div>
+                    <div className="space-y-1">
+                      <label htmlFor="patient-mobile" className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Mobile Number *</label>
+                      <input
+                        id="patient-mobile"
+                        type="tel"
+                        required
+                        placeholder="e.g. 9876543210"
+                        value={patientData.mobile}
+                        onChange={e => setPatientData({ ...patientData, mobile: e.target.value })}
+                        className="w-full px-4 py-2.5 bg-[#F7FAFC] border border-slate-200 rounded-xl text-xs text-[#0B2450] placeholder-slate-400 focus:outline-none focus:border-[#0867E8]"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="space-y-1">
+                      <label htmlFor="patient-city" className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">City *</label>
+                      <input
+                        id="patient-city"
+                        type="text"
+                        required
+                        placeholder="e.g. Mumbai / Delhi"
+                        value={patientData.city}
+                        onChange={e => setPatientData({ ...patientData, city: e.target.value })}
+                        className="w-full px-4 py-2.5 bg-[#F7FAFC] border border-slate-200 rounded-xl text-xs text-[#0B2450] placeholder-slate-400 focus:outline-none focus:border-[#0867E8]"
+                      />
+                    </div>
+                    <div className="space-y-1">
+                      <label htmlFor="patient-treatment" className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Treatment Needed</label>
+                      <select
+                        id="patient-treatment"
+                        value={patientData.treatment}
+                        onChange={e => setPatientData({ ...patientData, treatment: e.target.value })}
+                        className="w-full px-4 py-2.5 bg-[#F7FAFC] border border-slate-200 rounded-xl text-xs text-[#0B2450] focus:outline-none focus:border-[#0867E8]"
+                      >
+                        <option value="Dental Implants">Dental Implants</option>
+                        <option value="Aligners & Braces">Aligners & Braces</option>
+                        <option value="Crowns & Makeovers">Crowns & Makeovers</option>
+                        <option value="Orthopaedics">Orthopaedics</option>
+                        <option value="IVF & Fertility">IVF & Fertility</option>
+                        <option value="Ophthalmology / LASIK">Ophthalmology / LASIK</option>
+                        <option value="Other Surgery">Other Surgery</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="space-y-1">
+                      <label htmlFor="patient-amount" className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Treatment Amount (Approx.)</label>
+                      <select
+                        id="patient-amount"
+                        value={patientData.amount}
+                        onChange={e => setPatientData({ ...patientData, amount: e.target.value })}
+                        className="w-full px-4 py-2.5 bg-[#F7FAFC] border border-slate-200 rounded-xl text-xs text-[#0B2450] focus:outline-none focus:border-[#0867E8]"
+                      >
+                        <option value="₹30,000 - ₹50,000">₹30,000 - ₹50,000</option>
+                        <option value="₹50,000 - ₹1,00,000">₹50,000 - ₹1,00,000</option>
+                        <option value="₹1,00,000 - ₹2,00,000">₹1,00,000 - ₹2,00,000</option>
+                        <option value="₹2,00,000 - ₹3,00,000">₹2,00,000 - ₹3,00,000</option>
+                      </select>
+                    </div>
+                    <div className="space-y-1">
+                      <label htmlFor="patient-clinic" className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Preferred Clinic (Optional)</label>
+                      <input
+                        id="patient-clinic"
+                        type="text"
+                        placeholder="e.g. City Care Dental"
+                        value={patientData.preferredClinic}
+                        onChange={e => setPatientData({ ...patientData, preferredClinic: e.target.value })}
+                        className="w-full px-4 py-2.5 bg-[#F7FAFC] border border-slate-200 rounded-xl text-xs text-[#0B2450] placeholder-slate-400 focus:outline-none focus:border-[#0867E8]"
+                      />
+                    </div>
+                  </div>
+
+                  <button
+                    type="submit"
+                    className="w-full py-3.5 bg-[#0867E8] hover:bg-[#0756C7] text-white font-black text-xs uppercase tracking-widest rounded-xl transition-all shadow-md flex items-center justify-center gap-2"
+                  >
+                    Proceed to Eligibility & Documents &rarr;
+                  </button>
+
+                  <p className="text-[10px] text-slate-500 text-center leading-relaxed">
+                    Your information will be used only for evaluating your financing request and shared with relevant lending partners with your consent.
+                  </p>
+                </form>
+              ) : (
+                <div className="space-y-5">
+                  {/* Security Notice */}
+                  <div className="bg-[#F5F9FC] border border-blue-100 p-4 rounded-2xl flex items-start gap-3 text-left">
+                    <Lock size={18} className="text-[#0756C7] shrink-0 mt-0.5" />
+                    <div className="space-y-1 text-xs">
+                      <span className="font-bold text-[#0B2450] block">Secure Lender Direct Portal</span>
+                      <p className="text-slate-600 leading-relaxed text-[11px]">
+                        Document requirements (PAN, Aadhaar eKYC, Bank Statements) are determined directly by the lending partner and processed via encrypted API endpoints.
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Document Requirements Checklist */}
+                  <div className="space-y-2">
+                    <span className="text-[10px] font-mono font-bold text-slate-500 uppercase tracking-wider block">Standard Lender Verification Requirements:</span>
+                    <ul className="space-y-2">
+                      {[
+                        { title: 'PAN Card', desc: 'For instant credit bureau (CIBIL) evaluation' },
+                        { title: 'Aadhaar / Official ID', desc: 'For digital eKYC verification' },
+                        { title: 'Salary Slips or ITR', desc: 'Income eligibility verification (if requested by lender)' },
+                        { title: 'Bank Statement / e-NACH', desc: 'For monthly auto-debit EMI setup' }
+                      ].map((doc, idx) => (
+                        <li key={idx} className="flex items-center justify-between p-3 bg-[#F7FAFC] border border-slate-200/80 rounded-xl text-xs">
+                          <div>
+                            <span className="font-bold text-[#0B2450] block">{doc.title}</span>
+                            <span className="text-[10px] text-slate-500">{doc.desc}</span>
+                          </div>
+                          <span className="text-[10px] font-bold text-[#0f7a75] bg-[#0f7a75]/10 px-2.5 py-1 rounded-full shrink-0">Lender API</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  {patientSubmitted ? (
+                    <div className="bg-[#F5F9FC] border border-[#0f7a75]/40 p-4 rounded-2xl text-center space-y-2">
+                      <CheckCircle2 size={32} className="text-[#0f7a75] mx-auto" />
+                      <h4 className="text-sm font-black text-[#0B2450]">Request Submitted!</h4>
+                      <p className="text-xs text-slate-600">Our clinic coordinator will guide you through the lender verification process.</p>
+                    </div>
+                  ) : (
+                    <div className="flex gap-3">
+                      <button
+                        type="button"
+                        onClick={() => setEligibilityStep(1)}
+                        className="w-1/3 py-3 bg-slate-100 hover:bg-slate-200 text-[#0B2450] font-bold text-xs rounded-xl transition-all"
+                      >
+                        &larr; Back
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setPatientSubmitted(true);
+                          toast.success('Financing eligibility request logged! Our partner clinic will guide your application.');
+                        }}
+                        className="w-2/3 py-3 bg-[#0867E8] hover:bg-[#0756C7] text-white font-black text-xs uppercase tracking-wider rounded-xl transition-all shadow-md"
+                      >
+                        Submit To Partner Clinic &rarr;
+                      </button>
+                    </div>
+                  )}
+
+                  <p className="text-[10px] text-slate-400 text-center">
+                    Clinaza does not store unencrypted financial documents in public databases. All sensitive verification is handled by compliant lending partners.
+                  </p>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
 
         {/* ── 7. COMPREHENSIVE FAQ ── */}
         <section aria-label="Frequently Asked Questions" className="py-16 px-6 max-w-4xl mx-auto space-y-8">

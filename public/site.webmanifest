@@ -1,13 +1,13 @@
 {
   "id": "/",
-  "name": "Dental Clinic",
-  "short_name": "Dental Clinic",
-  "description": "Intelligent patient recall system to re-engage dormant patients, prevent appointment no-shows, and scale clinic branch revenue.",
+  "name": "Clinaza — Embedded Healthcare Patient Financing",
+  "short_name": "Clinaza",
+  "description": "Embedded patient financing platform connecting dental clinics with RBI-regulated NBFCs for instant treatment EMI loans.",
   "start_url": "/",
   "display": "standalone",
   "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
-  "background_color": "#061318",
-  "theme_color": "#061318",
+  "background_color": "#ffffff",
+  "theme_color": "#0867E8",
   "orientation": "portrait-primary",
   "icons": [
     {
@@ -35,21 +35,5 @@
       "purpose": "maskable"
     }
   ],
-  "categories": ["business", "health", "medical", "productivity"],
-  "screenshots": [
-    {
-      "src": "/dashboard_mobile_view.png",
-      "sizes": "375x812",
-      "type": "image/png",
-      "form_factor": "narrow",
-      "label": "CRM Patients List and Doctor Queue"
-    },
-    {
-      "src": "/client-portal-preview.png",
-      "sizes": "1440x900",
-      "type": "image/png",
-      "form_factor": "wide",
-      "label": "Client Portal Dashboard View"
-    }
-  ]
+  "categories": ["finance", "health", "medical", "business"]
 }

@@ -588,80 +588,79 @@ export default function CrmHomepage() {
                 </form>
               ) : (
                 <div className="space-y-5">
-                  {/* Security Notice */}
+                  {/* WhatsApp Verification Notice */}
                   <div className="bg-[#F5F9FC] border border-blue-100 p-4 rounded-2xl flex items-start gap-3 text-left">
-                    <Lock size={18} className="text-[#0756C7] shrink-0 mt-0.5" />
+                    <MessageSquare size={20} className="text-[#0f7a75] shrink-0 mt-0.5" />
                     <div className="space-y-1 text-xs">
-                      <span className="font-bold text-[#0B2450] block">Secure Lender Direct Portal</span>
+                      <span className="font-bold text-[#0B2450] block">Send Documents via WhatsApp</span>
                       <p className="text-slate-600 leading-relaxed text-[11px]">
-                        Document requirements (PAN, Aadhaar eKYC, Bank Statements) are determined directly by the lending partner and processed via encrypted API endpoints.
+                        Since API connections are handled offline, please send your KYC documents directly to our Clinaza financing desk on WhatsApp for instant eligibility processing.
                       </p>
                     </div>
                   </div>
 
                   {/* Soft-Eligibility Summary Card */}
-                  <div className="bg-[#F5F9FC] border border-blue-100 p-3.5 rounded-2xl space-y-1 text-xs">
+                  <div className="bg-[#F7FAFC] border border-slate-200 p-3.5 rounded-2xl space-y-1 text-xs">
                     <span className="text-[10px] font-mono font-bold text-[#0756C7] uppercase tracking-wider block">
-                      ✓ Soft Eligibility Check Complete
+                      ✓ Soft Eligibility Check Summary
                     </span>
                     <div className="text-[11px] text-slate-700 space-y-0.5 pt-1 font-medium">
+                      <p>👤 <strong>Patient:</strong> {patientData.name || 'Not provided'} ({patientData.city || 'City'})</p>
+                      <p>🦷 <strong>Treatment:</strong> {patientData.treatment}</p>
                       <p>📊 <strong>CIBIL Range:</strong> {patientData.cibilScore}</p>
-                      <p>💼 <strong>Employment:</strong> {patientData.employmentType}</p>
-                      <p>📄 <strong>Proof Type:</strong> {patientData.incomeProof}</p>
+                      <p>📄 <strong>Selected Proof:</strong> {patientData.incomeProof}</p>
                     </div>
                   </div>
 
                   {/* Document Requirements Checklist */}
                   <div className="space-y-2">
-                    <span className="text-[10px] font-mono font-bold text-slate-500 uppercase tracking-wider block">Standard Lender Verification Requirements:</span>
+                    <span className="text-[10px] font-mono font-bold text-slate-500 uppercase tracking-wider block">Documents to send on WhatsApp:</span>
                     <ul className="space-y-2">
                       {[
-                        { title: 'PAN Card', desc: 'For instant credit bureau (CIBIL) evaluation' },
-                        { title: 'Aadhaar / Official ID', desc: 'For digital eKYC verification' },
-                        { title: 'Salary Slips or ITR', desc: 'Income eligibility verification (if requested by lender)' },
-                        { title: 'Bank Statement / e-NACH', desc: 'For monthly auto-debit EMI setup' }
+                        { title: 'PAN Card Copy', desc: 'For credit score evaluation' },
+                        { title: 'Aadhaar / Photo ID', desc: 'Identity & address verification' },
+                        { title: 'Income Proof', desc: patientData.incomeProof }
                       ].map((doc, idx) => (
-                        <li key={idx} className="flex items-center justify-between p-3 bg-[#F7FAFC] border border-slate-200/80 rounded-xl text-xs">
+                        <li key={idx} className="flex items-center justify-between p-3 bg-white border border-slate-200 rounded-xl text-xs shadow-2xs">
                           <div>
                             <span className="font-bold text-[#0B2450] block">{doc.title}</span>
                             <span className="text-[10px] text-slate-500">{doc.desc}</span>
                           </div>
-                          <span className="text-[10px] font-bold text-[#0f7a75] bg-[#0f7a75]/10 px-2.5 py-1 rounded-full shrink-0">Lender API</span>
+                          <span className="text-[10px] font-bold text-[#0f7a75] bg-[#0f7a75]/10 px-2.5 py-1 rounded-full shrink-0">Send on WA</span>
                         </li>
                       ))}
                     </ul>
                   </div>
 
-                  {patientSubmitted ? (
-                    <div className="bg-[#F5F9FC] border border-[#0f7a75]/40 p-4 rounded-2xl text-center space-y-2">
-                      <CheckCircle2 size={32} className="text-[#0f7a75] mx-auto" />
-                      <h4 className="text-sm font-black text-[#0B2450]">Request Submitted!</h4>
-                      <p className="text-xs text-slate-600">Our clinic coordinator will guide you through the lender verification process.</p>
-                    </div>
-                  ) : (
-                    <div className="flex gap-3">
-                      <button
-                        type="button"
-                        onClick={() => setEligibilityStep(1)}
-                        className="w-1/3 py-3 bg-slate-100 hover:bg-slate-200 text-[#0B2450] font-bold text-xs rounded-xl transition-all"
-                      >
-                        &larr; Back
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setPatientSubmitted(true);
-                          toast.success('Financing eligibility request logged! Our partner clinic will guide your application.');
-                        }}
-                        className="w-2/3 py-3 bg-[#0867E8] hover:bg-[#0756C7] text-white font-black text-xs uppercase tracking-wider rounded-xl transition-all shadow-md"
-                      >
-                        Submit To Partner Clinic &rarr;
-                      </button>
-                    </div>
-                  )}
+                  <div className="flex gap-3 pt-1">
+                    <button
+                      type="button"
+                      onClick={() => setEligibilityStep(1)}
+                      className="w-1/3 py-3 bg-slate-100 hover:bg-slate-200 text-[#0B2450] font-bold text-xs rounded-xl transition-all"
+                    >
+                      &larr; Edit Details
+                    </button>
+                    <a
+                      href={`https://wa.me/917292984244?text=${encodeURIComponent(
+                        `Hi Clinaza, I want to check my financing eligibility.\n\n` +
+                        `Name: ${patientData.name || 'N/A'}\n` +
+                        `City: ${patientData.city || 'N/A'}\n` +
+                        `Treatment: ${patientData.treatment}\n` +
+                        `CIBIL Range: ${patientData.cibilScore}\n` +
+                        `Employment: ${patientData.employmentType}\n` +
+                        `Income Proof: ${patientData.incomeProof}\n\n` +
+                        `I am ready to share my documents for verification.`
+                      )}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-2/3 py-3.5 bg-[#0f7a75] hover:bg-[#0c635f] text-white font-black text-xs uppercase tracking-wider rounded-xl transition-all shadow-md flex items-center justify-center gap-2"
+                    >
+                      <MessageSquare size={16} /> Send Documents on WhatsApp &rarr;
+                    </a>
+                  </div>
 
                   <p className="text-[10px] text-slate-400 text-center">
-                    Clinaza does not store unencrypted financial documents in public databases. All sensitive verification is handled by compliant lending partners.
+                    Your documents are reviewed privately by Clinaza & partnered NBFC desk officers only.
                   </p>
                 </div>
               )}

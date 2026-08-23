@@ -17,28 +17,18 @@ import { SEOHead } from '@/components/seo/SEOHead';
 
 export default function CrmHomepage() {
   const [formData, setFormData] = useState({
-    clinicName: '',
     doctorName: '',
+    clinicName: '',
     phone: '',
     city: '',
-    categories: [] as string[],
-    monthlyVolume: '10-30 patients'
+    category: 'Dental Implants & Aligners'
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
-  const handleCategoryToggle = (cat: string) => {
-    setFormData(prev => ({
-      ...prev,
-      categories: prev.categories.includes(cat)
-        ? prev.categories.filter(c => c !== cat)
-        : [...prev.categories, cat]
-    }));
-  };
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.clinicName || !formData.doctorName || !formData.phone || !formData.city) {
+    if (!formData.doctorName || !formData.clinicName || !formData.phone || !formData.city) {
       toast.error('Please fill in all required fields');
       return;
     }
@@ -98,7 +88,7 @@ export default function CrmHomepage() {
   return (
     <div className="min-h-screen bg-white text-[#0B2450] font-sora antialiased overflow-x-hidden selection:bg-[#0867E8] selection:text-white">
       <SEOHead
-        title="CLINAZA — Healthcare Financing Infrastructure for Clinics & Hospitals"
+        title="CLINAZA — Embedded Healthcare Patient Financing Infrastructure"
         description="Don't let treatment cost stop your patients. Offer financing options for eligible patients from ₹30K–₹3L through Clinaza's lending partners."
         keywords={['clinaza', 'patient financing', 'dental emi', 'healthcare lending', 'medical loan india', 'point of care financing', 'clinic emi option', 'embedded finance', 'dental implants financing']}
         image="https://dental-crm-red.vercel.app/assets/clinaza-logo.jpg"
@@ -120,7 +110,6 @@ export default function CrmHomepage() {
             <img src="/assets/clinaza-logo.jpg" alt="CLINAZA" className="h-10 w-auto rounded-xl border border-slate-200 shadow-sm group-hover:scale-105 transition-transform" />
             <div className="hidden sm:block">
               <span className="text-xs font-black tracking-widest text-[#0B2450] block">CLINAZA</span>
-              {/* Contrast: #0f7a75 on white = 4.68:1 — passes AA */}
               <span className="text-[9px] font-bold tracking-wider text-[#0f7a75] block uppercase">EMI FOR BETTER HEALTH</span>
             </div>
           </Link>
@@ -133,9 +122,10 @@ export default function CrmHomepage() {
               <MessageSquare size={14} className="text-[#0f7a75]" />
               WhatsApp Us
             </a>
+            {/* Prominent High-Contrast Primary CTA */}
             <a
               href="#partner-form"
-              className="px-5 py-2.5 bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-black uppercase tracking-wider rounded-xl transition-all shadow-md shadow-[#0867E8]/20 flex items-center gap-1.5"
+              className="px-6 py-3 bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-black uppercase tracking-widest rounded-xl transition-all shadow-lg shadow-[#0867E8]/30 flex items-center gap-2 transform hover:-translate-y-0.5"
             >
               Partner With Clinaza <ArrowRight size={14} />
             </a>
@@ -145,7 +135,8 @@ export default function CrmHomepage() {
 
       <main>
         {/* ── SECTION 1: HERO (WHITE) ── */}
-        <section aria-label="Hero" className="relative pt-16 pb-20 sm:pt-24 sm:pb-28 px-6 text-center max-w-5xl mx-auto space-y-8">
+        <section aria-label="Hero" className="relative pt-14 pb-20 sm:pt-20 sm:pb-24 px-6 text-center max-w-5xl mx-auto space-y-8">
+          {/* Label above main hero headline */}
           <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#F5F9FC] border border-blue-100 rounded-full text-xs font-bold tracking-wider text-[#0756C7] shadow-sm">
             <Building2 className="h-4 w-4 text-[#0f7a75]" />
             <span>FOR DENTAL CLINICS & HOSPITALS</span>
@@ -170,15 +161,19 @@ export default function CrmHomepage() {
             Help eligible patients finance treatments from <strong className="text-[#0B2450]">₹30,000–₹3,00,000</strong> through Clinaza's lending partners.
           </p>
 
-          <div className="inline-block bg-[#F7FAFC] border border-[#12A8A0]/30 px-8 py-3.5 rounded-2xl shadow-sm">
+          <div className="inline-block bg-[#F7FAFC] border border-[#12A8A0]/30 px-8 py-3.5 rounded-2xl shadow-sm space-y-1">
             <span className="text-xs font-mono font-bold text-slate-500 block uppercase tracking-widest">PATIENT FINANCING RANGE</span>
             <span className="text-xl sm:text-3xl font-mono font-black text-[#0867E8]">₹30,000 – ₹3,00,000</span>
+            {/* Lender disclaimer */}
+            <span className="text-[10px] text-slate-500 block max-w-md mx-auto pt-1 leading-tight">
+              Financing is subject to lender eligibility, approval and applicable terms. Clinaza does not guarantee loan approval.
+            </span>
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-2">
             <a
               href="#partner-form"
-              className="w-full sm:w-auto px-8 py-4 bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-black uppercase tracking-widest rounded-2xl transition-all flex items-center justify-center gap-2.5 shadow-lg shadow-[#0867E8]/25 group"
+              className="w-full sm:w-auto px-9 py-4 bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-black uppercase tracking-widest rounded-2xl transition-all flex items-center justify-center gap-2.5 shadow-xl shadow-[#0867E8]/30 group"
             >
               Partner With Clinaza
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -193,7 +188,6 @@ export default function CrmHomepage() {
             </a>
           </div>
 
-          {/* Trust line — slate-500 on white passes AA at small sizes */}
           <p className="text-xs text-slate-500 font-medium max-w-xl mx-auto pt-2">
             Bank/NBFC financing &bull; Digital process &bull; Clinic-focused support<br />
             <span className="italic text-[11px]">Financing handled by our lending partners. Eligibility and approval subject to lender policies.</span>
@@ -204,7 +198,6 @@ export default function CrmHomepage() {
         <section aria-label="The Problem" className="py-20 px-6 bg-[#F5F9FC] border-y border-blue-50">
           <div className="max-w-5xl mx-auto space-y-12">
             <div className="text-center space-y-3">
-              {/* #0f7a75 on #F5F9FC ≈ 4.5:1 — passes AA */}
               <span className="text-[10px] font-black text-[#0f7a75] uppercase tracking-widest">THE CLINIC CHALLENGE</span>
               <h2 className="text-2xl sm:text-4xl font-black text-[#0B2450]">Patients Want Treatment. Cost Makes Them Wait.</h2>
               <p className="text-sm text-slate-600 max-w-2xl mx-auto">High upfront treatment estimates lead to postponement and lost clinic revenue.</p>
@@ -234,7 +227,6 @@ export default function CrmHomepage() {
         {/* ── SECTION 3: HOW IT WORKS (WHITE) ── */}
         <section aria-label="How Clinaza Works" className="py-20 px-6 max-w-6xl mx-auto space-y-12">
           <div className="text-center space-y-3">
-            {/* #0756C7 on white = 5.6:1 — passes AA */}
             <span className="text-[10px] font-black text-[#0756C7] uppercase tracking-widest">STEP-BY-STEP WORKFLOW</span>
             <h2 className="text-2xl sm:text-4xl font-black text-[#0B2450]">How Clinaza Works For Your Clinic</h2>
           </div>
@@ -249,93 +241,7 @@ export default function CrmHomepage() {
           </div>
         </section>
 
-        {/* ── FOR PATIENTS SECTION (LIGHT BLUE #F5F9FC) ── */}
-        <section aria-label="For Patients" className="py-20 px-6 bg-[#F5F9FC] border-y border-blue-50">
-          <div className="max-w-5xl mx-auto space-y-12">
-            <div className="text-center space-y-3">
-              <span className="text-[10px] font-black text-[#0f7a75] uppercase tracking-widest flex items-center justify-center gap-1.5">
-                <UserCheck size={14} aria-hidden="true" /> FOR PATIENTS
-              </span>
-              <h2 className="text-2xl sm:text-4xl font-black text-[#0B2450]">Make Your Treatment More Manageable</h2>
-              <p className="text-xs sm:text-sm text-slate-600 max-w-2xl mx-auto leading-relaxed">
-                Found the right treatment but worried about the upfront cost? <br />
-                Clinaza can help eligible patients explore financing options through its lending partners.
-              </p>
-            </div>
-
-            {/* Patient Workflow Steps */}
-            <div className="space-y-4">
-              <h3 className="text-xs font-black text-[#0B2450] uppercase tracking-widest text-center">How It Works</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                {patientSteps.map((s, idx) => (
-                  <div key={idx} className="bg-white border border-slate-200 p-6 rounded-3xl space-y-3 text-left shadow-sm">
-                    <span className="text-2xl block" role="img" aria-label={s.title}>{s.emoji}</span>
-                    <span className="text-[10px] font-mono font-bold text-[#0756C7] uppercase tracking-wider block">Step 0{s.num}</span>
-                    <h4 className="text-sm font-black text-[#0B2450]">{s.title}</h4>
-                    <p className="text-xs text-slate-600 leading-relaxed">{s.desc}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Patient CTA Banner */}
-            <div className="bg-white border border-slate-200/90 p-8 rounded-3xl text-center space-y-5 shadow-sm max-w-2xl mx-auto">
-              <div className="space-y-1">
-                <h3 className="text-lg font-black text-[#0B2450]">Need financing for your treatment?</h3>
-                <p className="text-xs text-slate-600">Ask your clinic if Clinaza financing is available.</p>
-              </div>
-              <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
-                <a
-                  href="#partner-form"
-                  className="w-full sm:w-auto px-6 py-3 bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-black uppercase tracking-wider rounded-xl transition-all shadow-md shadow-[#0867E8]/20 flex items-center justify-center gap-1.5"
-                >
-                  Check With Clinaza <ArrowRight size={14} />
-                </a>
-                <a
-                  href="https://wa.me/917292984244?text=Hi%20Clinaza%2C%20I%20want%20to%20check%20if%20my%20treatment%20is%20eligible%20for%20EMI%20financing"
-                  target="_blank" rel="noopener noreferrer"
-                  className="w-full sm:w-auto px-6 py-3 bg-[#F7FAFC] hover:bg-slate-100 text-[#0B2450] border border-slate-200 text-xs font-bold rounded-xl transition-all flex items-center justify-center gap-2"
-                >
-                  <MessageSquare size={14} className="text-[#0f7a75]" />
-                  WhatsApp Us
-                </a>
-              </div>
-            </div>
-
-            {/* Patient FAQ Accordion */}
-            <div className="max-w-3xl mx-auto space-y-4 pt-4">
-              <div className="flex items-center justify-center gap-2 text-[#0f7a75]">
-                <HelpCircle size={18} aria-hidden="true" />
-                <h3 className="text-xs font-black uppercase tracking-widest text-[#0B2450]">Frequently Asked Questions</h3>
-              </div>
-              <div className="space-y-3">
-                {faqs.map((faq, idx) => {
-                  const isOpen = activeFaq === idx;
-                  return (
-                    <div key={idx} className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm transition-all">
-                      <button
-                        type="button"
-                        onClick={() => setActiveFaq(isOpen ? null : idx)}
-                        aria-expanded={isOpen}
-                        className="w-full px-6 py-4 flex justify-between items-center text-left hover:bg-slate-50/80 transition-colors"
-                      >
-                        <span className="text-xs sm:text-sm font-bold text-[#0B2450]">{faq.q}</span>
-                        <ChevronDown size={16} className={`text-slate-400 transition-transform duration-200 shrink-0 ${isOpen ? 'rotate-180 text-[#0756C7]' : ''}`} aria-hidden="true" />
-                      </button>
-                      {isOpen && (
-                        <div className="px-6 pb-4 pt-1 text-xs text-slate-600 leading-relaxed border-t border-slate-100 bg-[#F7FAFC]">
-                          {faq.a}
-                        </div>
-                      )}
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ── SECTION 4: TREATMENT CATEGORIES (LIGHT GREY-BLUE #F7FAFC) ── */}
+        {/* ── SECTION 4: TREATMENT CATEGORIES (MOVED HIGHER FOR CLINIC AUDIENCE) ── */}
         <section aria-label="Treatment Categories" className="py-20 px-6 bg-[#F7FAFC] border-y border-slate-200/60">
           <div className="max-w-5xl mx-auto space-y-12">
             <div className="text-center space-y-3">
@@ -382,7 +288,92 @@ export default function CrmHomepage() {
           </div>
         </section>
 
-        {/* ── SECTION 5: WHY PARTNER (WHITE) ── */}
+        {/* ── SECTION 5: FOR PATIENTS (FOLLOWS HIGH-VALUE HEALTHCARE) ── */}
+        <section aria-label="For Patients" className="py-20 px-6 bg-white">
+          <div className="max-w-5xl mx-auto space-y-12">
+            <div className="text-center space-y-3">
+              <span className="text-[10px] font-black text-[#0f7a75] uppercase tracking-widest flex items-center justify-center gap-1.5">
+                <UserCheck size={14} aria-hidden="true" /> FOR PATIENTS
+              </span>
+              <h2 className="text-2xl sm:text-4xl font-black text-[#0B2450]">Need Treatment But Worried About the Cost?</h2>
+              <p className="text-xs sm:text-sm text-slate-600 max-w-2xl mx-auto leading-relaxed">
+                Explore financing options for eligible treatments through Clinaza's lending partners.
+              </p>
+            </div>
+
+            {/* Patient Workflow Steps */}
+            <div className="space-y-4">
+              <h3 className="text-xs font-black text-[#0B2450] uppercase tracking-widest text-center">How It Works</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {patientSteps.map((s, idx) => (
+                  <div key={idx} className="bg-[#F7FAFC] border border-slate-200 p-6 rounded-3xl space-y-3 text-left shadow-sm">
+                    <span className="text-2xl block" role="img" aria-label={s.title}>{s.emoji}</span>
+                    <span className="text-[10px] font-mono font-bold text-[#0756C7] uppercase tracking-wider block">Step 0{s.num}</span>
+                    <h4 className="text-sm font-black text-[#0B2450]">{s.title}</h4>
+                    <p className="text-xs text-slate-600 leading-relaxed">{s.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Patient CTA Banner — "Ask Your Clinic About Clinaza" */}
+            <div className="bg-[#F5F9FC] border border-blue-100 p-8 rounded-3xl text-center space-y-5 shadow-sm max-w-2xl mx-auto">
+              <div className="space-y-1">
+                <h3 className="text-lg font-black text-[#0B2450]">Need financing for your treatment?</h3>
+                <p className="text-xs text-slate-600">Ask your clinic if Clinaza financing is available.</p>
+              </div>
+              <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
+                <a
+                  href="#partner-form"
+                  className="w-full sm:w-auto px-7 py-3 bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-black uppercase tracking-wider rounded-xl transition-all shadow-md shadow-[#0867E8]/20 flex items-center justify-center gap-1.5"
+                >
+                  Ask Your Clinic About Clinaza <ArrowRight size={14} />
+                </a>
+                <a
+                  href="https://wa.me/917292984244?text=Hi%20Clinaza%2C%20I%20want%20to%20check%20if%20my%20clinic%20offers%20Clinaza%20financing"
+                  target="_blank" rel="noopener noreferrer"
+                  className="w-full sm:w-auto px-6 py-3 bg-white hover:bg-slate-50 text-[#0B2450] border border-slate-200 text-xs font-bold rounded-xl transition-all flex items-center justify-center gap-2"
+                >
+                  <MessageSquare size={14} className="text-[#0f7a75]" />
+                  WhatsApp Us
+                </a>
+              </div>
+            </div>
+
+            {/* Patient FAQ Accordion */}
+            <div className="max-w-3xl mx-auto space-y-4 pt-4">
+              <div className="flex items-center justify-center gap-2 text-[#0f7a75]">
+                <HelpCircle size={18} aria-hidden="true" />
+                <h3 className="text-xs font-black uppercase tracking-widest text-[#0B2450]">Frequently Asked Questions</h3>
+              </div>
+              <div className="space-y-3">
+                {faqs.map((faq, idx) => {
+                  const isOpen = activeFaq === idx;
+                  return (
+                    <div key={idx} className="bg-[#F7FAFC] border border-slate-200 rounded-2xl overflow-hidden shadow-sm transition-all">
+                      <button
+                        type="button"
+                        onClick={() => setActiveFaq(isOpen ? null : idx)}
+                        aria-expanded={isOpen}
+                        className="w-full px-6 py-4 flex justify-between items-center text-left hover:bg-slate-100/60 transition-colors"
+                      >
+                        <span className="text-xs sm:text-sm font-bold text-[#0B2450]">{faq.q}</span>
+                        <ChevronDown size={16} className={`text-slate-400 transition-transform duration-200 shrink-0 ${isOpen ? 'rotate-180 text-[#0756C7]' : ''}`} aria-hidden="true" />
+                      </button>
+                      {isOpen && (
+                        <div className="px-6 pb-4 pt-1 text-xs text-slate-600 leading-relaxed border-t border-slate-200/60 bg-white">
+                          {faq.a}
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── SECTION 6: WHY CLINICS PARTNER WITH CLINAZA ── */}
         <section aria-label="Why Clinics Partner With Clinaza" className="py-20 px-6 max-w-5xl mx-auto space-y-12">
           <div className="text-center space-y-3">
             <span className="text-[10px] font-black text-[#0f7a75] uppercase tracking-widest">CLINIC PARTNER ADVANTAGE</span>
@@ -401,14 +392,14 @@ export default function CrmHomepage() {
             <h3 className="text-xl sm:text-3xl font-black">Want to offer financing at your clinic?</h3>
             <a
               href="#partner-form"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-white text-[#0B2450] hover:bg-slate-100 text-xs font-black uppercase tracking-widest rounded-2xl transition-all shadow-lg"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-white text-[#0B2450] hover:bg-slate-100 text-xs font-black uppercase tracking-widest rounded-2xl transition-all shadow-lg transform hover:-translate-y-0.5"
             >
               Become a Clinaza Partner &rarr;
             </a>
           </div>
         </section>
 
-        {/* ── SECTION 6: TRUST SECTION (LIGHT BLUE #F5F9FC) ── */}
+        {/* ── SECTION 7: TRUST SECTION ── */}
         <section aria-label="How Financing Works" className="py-16 px-6 bg-[#F5F9FC] border-y border-slate-200/60">
           <div className="max-w-4xl mx-auto bg-white border border-slate-200 p-8 rounded-3xl space-y-4 text-left shadow-sm">
             <div className="flex items-center gap-2">
@@ -421,12 +412,12 @@ export default function CrmHomepage() {
           </div>
         </section>
 
-        {/* ── SECTION 7: PARTNER FORM (WHITE) ── */}
-        <section id="partner-form" aria-label="Clinic Partner Registration" className="py-20 px-6 max-w-3xl mx-auto">
-          <div className="bg-[#F7FAFC] border border-slate-200 rounded-3xl p-6 sm:p-12 shadow-xl space-y-8 text-left">
+        {/* ── SECTION 8: STREAMLINED PARTNER FORM (5 ESSENTIAL FIELDS) ── */}
+        <section id="partner-form" aria-label="Clinic Partner Registration" className="py-20 px-6 max-w-2xl mx-auto">
+          <div className="bg-[#F7FAFC] border border-slate-200 rounded-3xl p-6 sm:p-10 shadow-xl space-y-6 text-left">
             <div className="text-center space-y-2">
               <span className="text-[10px] font-black text-[#0f7a75] uppercase tracking-widest">GET STARTED</span>
-              <h2 className="text-2xl sm:text-4xl font-black text-[#0B2450]">Ready to offer EMI options to your patients?</h2>
+              <h2 className="text-2xl sm:text-3xl font-black text-[#0B2450]">Ready to offer EMI options to your patients?</h2>
               <p className="text-xs text-slate-600">Tell us about your clinic and we'll get in touch.</p>
             </div>
 
@@ -437,22 +428,10 @@ export default function CrmHomepage() {
                 <p className="text-xs text-slate-600">Our clinic onboarding team will contact you on WhatsApp/Phone shortly.</p>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-6" noValidate>
+              <form onSubmit={handleSubmit} className="space-y-4" noValidate>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="space-y-1.5">
-                    <label htmlFor="clinic-name" className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Clinic / Hospital Name *</label>
-                    <input
-                      id="clinic-name"
-                      type="text"
-                      required
-                      placeholder="e.g. Apollo Dental / City Care Clinic"
-                      value={formData.clinicName}
-                      onChange={e => setFormData({ ...formData, clinicName: e.target.value })}
-                      className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl text-xs text-[#0B2450] placeholder-slate-400 focus:outline-none focus:border-[#0867E8]"
-                    />
-                  </div>
-                  <div className="space-y-1.5">
-                    <label htmlFor="doctor-name" className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Doctor / Administrator Name *</label>
+                  <div className="space-y-1">
+                    <label htmlFor="doctor-name" className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Your Name *</label>
                     <input
                       id="doctor-name"
                       type="text"
@@ -463,11 +442,23 @@ export default function CrmHomepage() {
                       className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl text-xs text-[#0B2450] placeholder-slate-400 focus:outline-none focus:border-[#0867E8]"
                     />
                   </div>
+                  <div className="space-y-1">
+                    <label htmlFor="clinic-name" className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Clinic / Hospital Name *</label>
+                    <input
+                      id="clinic-name"
+                      type="text"
+                      required
+                      placeholder="e.g. Apollo Dental Care"
+                      value={formData.clinicName}
+                      onChange={e => setFormData({ ...formData, clinicName: e.target.value })}
+                      className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl text-xs text-[#0B2450] placeholder-slate-400 focus:outline-none focus:border-[#0867E8]"
+                    />
+                  </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="space-y-1.5">
-                    <label htmlFor="phone-number" className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Phone / WhatsApp Number *</label>
+                  <div className="space-y-1">
+                    <label htmlFor="phone-number" className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Phone Number *</label>
                     <input
                       id="phone-number"
                       type="tel"
@@ -478,7 +469,7 @@ export default function CrmHomepage() {
                       className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl text-xs text-[#0B2450] placeholder-slate-400 focus:outline-none focus:border-[#0867E8]"
                     />
                   </div>
-                  <div className="space-y-1.5">
+                  <div className="space-y-1">
                     <label htmlFor="clinic-city" className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">City *</label>
                     <input
                       id="clinic-city"
@@ -492,55 +483,32 @@ export default function CrmHomepage() {
                   </div>
                 </div>
 
-                <div className="space-y-2">
-                  <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider block">Treatment Categories Offered</span>
-                  <div className="flex flex-wrap gap-2" role="group" aria-label="Treatment categories">
-                    {['Dental Implants & Aligners', 'Orthopaedics', 'Ophthalmology', 'IVF', 'Elective Surgeries'].map((cat) => {
-                      const active = formData.categories.includes(cat);
-                      return (
-                        <button
-                          type="button"
-                          key={cat}
-                          onClick={() => handleCategoryToggle(cat)}
-                          aria-pressed={active}
-                          className={`px-3 py-2 rounded-xl text-xs font-medium border transition-all ${
-                            active
-                              ? 'bg-[#0867E8] border-[#0867E8] text-white font-bold'
-                              : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300'
-                          }`}
-                        >
-                          {cat}
-                        </button>
-                      );
-                    })}
-                  </div>
-                </div>
-
-                <div className="space-y-1.5">
-                  <label htmlFor="monthly-volume" className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Approx. Monthly Patient Volume</label>
+                <div className="space-y-1">
+                  <label htmlFor="treatment-speciality" className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Treatment Speciality</label>
                   <select
-                    id="monthly-volume"
-                    value={formData.monthlyVolume}
-                    onChange={e => setFormData({ ...formData, monthlyVolume: e.target.value })}
+                    id="treatment-speciality"
+                    value={formData.category}
+                    onChange={e => setFormData({ ...formData, category: e.target.value })}
                     className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl text-xs text-[#0B2450] focus:outline-none focus:border-[#0867E8]"
                   >
-                    <option value="Under 10 patients">Under 10 patients</option>
-                    <option value="10-30 patients">10-30 patients</option>
-                    <option value="30-100 patients">30-100 patients</option>
-                    <option value="100+ patients">100+ patients</option>
+                    <option value="Dental Implants & Aligners">Dental Implants & Aligners</option>
+                    <option value="Orthopaedics">Orthopaedics</option>
+                    <option value="Ophthalmology">Ophthalmology</option>
+                    <option value="IVF & Fertility">IVF & Fertility</option>
+                    <option value="Elective Surgeries">Elective Surgeries & Other</option>
                   </select>
                 </div>
 
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full py-4 bg-[#0867E8] hover:bg-[#0756C7] disabled:opacity-60 text-white font-black text-xs uppercase tracking-widest rounded-xl transition-all shadow-lg shadow-[#0867E8]/20 flex items-center justify-center gap-2"
+                  className="w-full py-4 bg-[#0867E8] hover:bg-[#0756C7] disabled:opacity-60 text-white font-black text-xs uppercase tracking-widest rounded-xl transition-all shadow-xl shadow-[#0867E8]/25 flex items-center justify-center gap-2 transform hover:-translate-y-0.5"
                 >
-                  {isSubmitting ? 'Submitting…' : 'Get Started & Become A Partner'}
+                  {isSubmitting ? 'Submitting…' : 'Become a Clinaza Partner'}
                   <Send size={14} aria-hidden="true" />
                 </button>
 
-                <p className="text-center text-xs text-slate-500 font-mono">
+                <p className="text-center text-xs text-slate-500 font-mono pt-1">
                   Or WhatsApp us directly:{' '}
                   <a href="https://wa.me/917292984244" target="_blank" rel="noopener noreferrer" className="text-[#0f7a75] font-bold underline">
                     7292984244

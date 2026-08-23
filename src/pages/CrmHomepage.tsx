@@ -197,48 +197,58 @@ export default function CrmHomepage() {
 
       <main>
         {/* ── 1. HERO (WHITE) ── */}
-        <section aria-label="Hero" className="relative pt-12 pb-16 sm:pt-16 sm:pb-20 px-6 text-center max-w-5xl mx-auto space-y-7">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#F5F9FC] border border-blue-100 rounded-full text-xs font-bold tracking-wider text-[#0756C7] shadow-sm">
-            <Building2 className="h-4 w-4 text-[#0f7a75]" />
-            <span>FOR DENTAL CLINICS & HOSPITALS</span>
-          </div>
+        <section aria-label="Hero" className="relative pt-12 pb-16 sm:pt-16 sm:pb-20 px-6 max-w-5xl mx-auto space-y-7">
+          {/* Real Authentic Medical Photography (Non-AI Look) */}
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center pt-2 text-left">
+            <div className="md:col-span-7 space-y-6">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#F5F9FC] border border-blue-100 rounded-full text-xs font-bold tracking-wider text-[#0756C7] shadow-sm">
+                <Building2 className="h-4 w-4 text-[#0f7a75]" />
+                <span>FOR DENTAL CLINICS & HOSPITALS</span>
+              </div>
 
-          <div className="flex justify-center">
-            <img
-              src="/assets/clinaza-logo.jpg"
-              alt="CLINAZA — EMI FOR BETTER HEALTH"
-              className="h-24 sm:h-32 w-auto rounded-3xl border border-slate-200 shadow-xl object-contain p-2 bg-white"
-            />
-          </div>
+              <h1 className="text-3xl sm:text-5xl font-black tracking-tight leading-[1.15] text-[#0B2450]">
+                Don't Let Treatment Cost <br />
+                <span className="bg-gradient-to-r from-[#0867E8] via-[#0088FF] to-[#12A8A0] bg-clip-text text-transparent">
+                  Stop Your Patients.
+                </span>
+              </h1>
 
-          <h1 className="text-4xl sm:text-6xl font-black tracking-tight leading-[1.1] text-[#0B2450] max-w-4xl mx-auto">
-            Don't Let Treatment Cost <br />
-            <span className="bg-gradient-to-r from-[#0867E8] via-[#0088FF] to-[#12A8A0] bg-clip-text text-transparent">
-              Stop Your Patients.
-            </span>
-          </h1>
+              <p className="text-sm sm:text-lg text-slate-600 font-medium leading-relaxed max-w-xl">
+                Help eligible patients finance treatments from <strong className="text-[#0B2450]">₹30,000–₹3,00,000</strong> through Clinaza's lending partners.
+              </p>
 
-          <p className="text-base sm:text-xl text-slate-600 font-medium max-w-3xl mx-auto leading-relaxed">
-            Help eligible patients finance treatments from <strong className="text-[#0B2450]">₹30,000–₹3,00,000</strong> through Clinaza's lending partners.
-          </p>
+              <div className="flex flex-col sm:flex-row gap-3.5 pt-1">
+                <a
+                  href="#partner-form"
+                  onClick={() => setFormType('clinic')}
+                  className="px-8 py-3.5 bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-black uppercase tracking-widest rounded-xl transition-all flex items-center justify-center gap-2.5 shadow-xl shadow-[#0867E8]/25 group transform hover:-translate-y-0.5"
+                >
+                  Partner With Clinaza
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </a>
+                <a
+                  href="https://wa.me/917292984244?text=Hi%20Clinaza%20team%2C%20I%20want%20to%20offer%20patient%20financing%20at%20my%20clinic"
+                  target="_blank" rel="noopener noreferrer"
+                  className="px-7 py-3.5 bg-[#F7FAFC] hover:bg-slate-100 text-[#0B2450] border border-slate-200 text-xs font-black uppercase tracking-widest rounded-xl transition-all flex items-center justify-center gap-2"
+                >
+                  <MessageSquare className="h-4 w-4 text-[#0f7a75]" />
+                  WhatsApp Us
+                </a>
+              </div>
+            </div>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-2">
-            <a
-              href="#partner-form"
-              onClick={() => setFormType('clinic')}
-              className="w-full sm:w-auto px-9 py-4 bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-black uppercase tracking-widest rounded-2xl transition-all flex items-center justify-center gap-2.5 shadow-xl shadow-[#0867E8]/30 group transform hover:-translate-y-0.5"
-            >
-              Partner With Clinaza
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </a>
-            <a
-              href="https://wa.me/917292984244?text=Hi%20Clinaza%20team%2C%20I%20want%20to%20offer%20patient%20financing%20at%20my%20clinic"
-              target="_blank" rel="noopener noreferrer"
-              className="w-full sm:w-auto px-8 py-4 bg-[#F7FAFC] hover:bg-slate-100 text-[#0B2450] border border-slate-200 text-xs font-black uppercase tracking-widest rounded-2xl transition-all flex items-center justify-center gap-2"
-            >
-              <MessageSquare className="h-4 w-4 text-[#0f7a75]" />
-              WhatsApp Us
-            </a>
+            {/* Authentic Clinic Photo */}
+            <div className="md:col-span-5 relative">
+              <img
+                src="/assets/clinic-hero-real.png"
+                alt="Modern authentic dental clinic treatment room in India"
+                className="w-full h-auto rounded-3xl border border-slate-200 shadow-xl object-cover aspect-[4/3]"
+              />
+              <div className="absolute -bottom-3 -left-3 bg-white border border-slate-200 px-4 py-2.5 rounded-2xl shadow-lg flex items-center gap-2.5">
+                <span className="w-2.5 h-2.5 rounded-full bg-[#0f7a75] animate-pulse"></span>
+                <span className="text-xs font-bold text-[#0B2450]">Point-of-Care EMI Ready</span>
+              </div>
+            </div>
           </div>
 
           {/* ── 1. TRUST STRIP (RIGHT BELOW HERO) ── */}
@@ -329,21 +339,32 @@ export default function CrmHomepage() {
             </div>
 
             {/* ── 3. WHAT THE CLINIC DOESN'T HAVE TO DO ── */}
-            <div className="bg-white border border-slate-200 p-7 rounded-3xl space-y-5 text-left shadow-sm max-w-4xl mx-auto">
-              <div className="border-b border-slate-100 pb-4">
-                <span className="text-[10px] font-mono font-bold text-[#0756C7] uppercase tracking-wider block">ZERO OPERATIONAL BURDEN</span>
-                <h3 className="text-lg font-black text-[#0B2450]">You focus on treatment. We support the financing journey.</h3>
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                {whatClinicDoesntDo.map((item, idx) => (
-                  <div key={idx} className="flex items-center gap-3 bg-[#FFF5F5] border border-rose-100 p-3.5 rounded-2xl">
-                    <X size={16} className="text-rose-500 shrink-0" aria-hidden="true" />
-                    <span className="text-xs font-bold text-slate-700">{item}</span>
+            <div className="bg-white border border-slate-200 p-6 sm:p-8 rounded-3xl space-y-6 text-left shadow-sm max-w-5xl mx-auto">
+              <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+                <div className="md:col-span-5">
+                  <img
+                    src="/assets/doctor-consult-real.png"
+                    alt="Authentic Indian doctor discussing treatment plan on tablet with patient in clinic"
+                    className="w-full h-auto rounded-2xl border border-slate-200 shadow-md object-cover aspect-[4/3]"
+                  />
+                </div>
+                <div className="md:col-span-7 space-y-4">
+                  <div>
+                    <span className="text-[10px] font-mono font-bold text-[#0756C7] uppercase tracking-wider block">ZERO OPERATIONAL BURDEN</span>
+                    <h3 className="text-lg font-black text-[#0B2450]">You focus on treatment. We support the financing journey.</h3>
                   </div>
-                ))}
-              </div>
-              <div className="pt-2 text-center text-xs font-bold text-[#0756C7] bg-[#F5F9FC] py-3 px-4 rounded-2xl border border-blue-100">
-                Clinaza + Lending Partner &rarr; Seamless Point-of-Care Financing Process
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    {whatClinicDoesntDo.map((item, idx) => (
+                      <div key={idx} className="flex items-center gap-2.5 bg-[#FFF5F5] border border-rose-100 p-3 rounded-2xl">
+                        <X size={15} className="text-rose-500 shrink-0" aria-hidden="true" />
+                        <span className="text-xs font-bold text-slate-700">{item}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="text-center text-xs font-bold text-[#0756C7] bg-[#F5F9FC] py-3 px-4 rounded-xl border border-blue-100">
+                    Clinaza + Lending Partner &rarr; Seamless Point-of-Care Financing Process
+                  </div>
+                </div>
               </div>
             </div>
           </div>

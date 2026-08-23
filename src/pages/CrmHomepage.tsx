@@ -131,36 +131,36 @@ export default function CrmHomepage() {
 
   const comprehensiveFaqs = [
     {
-      q: 'Who provides the loan?',
-      a: 'The loan is funded and serviced directly by RBI-regulated Banks, NBFCs, or licensed lending partners connected through Clinaza\'s infrastructure platform.'
+      q: 'What is Clinaza?',
+      a: 'Clinaza is an embedded healthcare patient financing platform that connects clinics with RBI-regulated Banks and NBFCs, allowing patients to pay for high-ticket treatments in flexible monthly EMIs.'
+    },
+    {
+      q: 'Which treatments are eligible for EMI?',
+      a: 'High-value planned procedures ranging from ₹30,000 to ₹3,00,000 including Dental Implants, Clear Aligners, Braces, Crowns, Orthopaedic surgeries, IVF/Fertility, and LASIK/Ophthalmology.'
+    },
+    {
+      q: 'What is the financing amount limit?',
+      a: 'Financing options typically range from ₹30,000 up to ₹3,00,000, tailored to patient eligibility and treatment estimate.'
     },
     {
       q: 'What documents does the patient need?',
-      a: 'Basic digital KYC: PAN card, Aadhaar card (eKYC), proof of income/bank statement (if required by lender), and bank details for e-NACH auto-debit.'
+      a: 'Basic digital KYC: PAN card, Aadhaar card (eKYC), proof of income (salary slip, bank statement, or ITR), and bank account details for e-NACH auto-debit setup.'
     },
     {
-      q: 'What is the minimum and maximum amount?',
-      a: 'Financing options range from ₹30,000 to ₹3,00,000, tailored to patient eligibility and treatment cost.'
+      q: 'Does the clinic pay any upfront fee?',
+      a: 'No upfront fees for clinics. Partner clinics receive physical branding kits, QR standees, and onboarding support free of charge.'
     },
     {
-      q: 'What interest rates and tenures are available?',
-      a: 'Tenures typically range from 3 to 24 months. Interest rates, subventions, or 0% EMI schemes are determined by the lending partner and clinic arrangement.'
+      q: 'Who manages the loan and repayments?',
+      a: 'Zero clinic involvement. The loan is funded, serviced, and collected directly by the RBI-regulated lending partner via automated monthly e-NACH auto-debit.'
     },
     {
-      q: 'How long does loan approval take?',
-      a: 'The digital application process is completed at point-of-care, with instant or near-instant pre-approval decisions from lending partner APIs.'
+      q: 'What determines the interest rate & terms?',
+      a: 'Interest rates (typically ~15% p.a. standard or subvention options) and tenures (3–24 months) are set directly by the lending partner based on credit assessment.'
     },
     {
-      q: 'Does every patient qualify?',
-      a: 'No. Approval is subject to the independent lending partner’s credit policy, bureau score (CIBIL), and income verification. Clinaza does not guarantee approval.'
-    },
-    {
-      q: 'Does the clinic have to manage repayments or collections?',
-      a: 'Zero clinic involvement. Repayments are automatically collected by the NBFC via e-NACH auto-debit directly from the patient’s bank account.'
-    },
-    {
-      q: 'What happens if a patient’s application is rejected?',
-      a: 'If an application is declined by one lender, Clinaza can route the application to alternate lending partners or the patient can choose direct payment with the clinic.'
+      q: 'Is loan approval guaranteed?',
+      a: 'No. Clinaza facilitates the application process. Final loan approval, interest rate, and sanctioned amount are determined independently by the financing partner based on patient credit eligibility.'
     }
   ];
 
@@ -214,121 +214,145 @@ export default function CrmHomepage() {
 
       <main>
         {/* ── 1. HERO (WHITE) ── */}
-        <section aria-label="Hero" className="relative pt-12 pb-16 sm:pt-16 sm:pb-20 px-6 max-w-5xl mx-auto space-y-7">
-          {/* Real Authentic Medical Photography (Non-AI Look) */}
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center pt-2 text-left">
-            <div className="md:col-span-7 space-y-6">
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#F5F9FC] border border-blue-100 rounded-full text-xs font-bold tracking-wider text-[#0756C7] shadow-sm">
-                <Building2 className="h-4 w-4 text-[#0f7a75]" />
+        <section aria-label="Hero" className="relative pt-8 sm:pt-14 pb-12 sm:pb-16 px-4 sm:px-6 max-w-5xl mx-auto space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center text-left">
+            <div className="md:col-span-7 space-y-4 sm:space-y-5">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#F5F9FC] border border-blue-100 rounded-full text-[11px] font-bold text-[#0756C7] shadow-2xs">
+                <Building2 className="h-3.5 w-3.5 text-[#0f7a75]" />
                 <span>FOR DENTAL CLINICS & HOSPITALS</span>
               </div>
 
-              <h1 className="text-3xl sm:text-5xl font-black tracking-tight leading-[1.15] text-[#0B2450]">
+              <h1 className="text-2.5xl sm:text-5xl font-black tracking-tight leading-[1.18] text-[#0B2450]">
                 Don't Let Treatment Cost <br />
                 <span className="bg-gradient-to-r from-[#0867E8] via-[#0088FF] to-[#12A8A0] bg-clip-text text-transparent">
-                  Stop Your Patients.
+                  Stop Your Patients
                 </span>
               </h1>
 
-              <p className="text-sm sm:text-lg text-slate-600 font-medium leading-relaxed max-w-xl">
-                Help eligible patients finance treatments from <strong className="text-[#0B2450]">₹30,000–₹3,00,000</strong> through Clinaza's lending partners.
+              <p className="text-xs sm:text-base text-slate-600 font-medium leading-relaxed max-w-xl">
+                Help eligible patients access financing for dental treatments from <strong className="text-[#0B2450]">₹30,000 to ₹3 lakh</strong> and pay through EMIs.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-3.5 pt-1">
+              <div className="flex flex-col sm:flex-row gap-3 pt-1">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setShowEligibilityModal(true);
+                    setEligibilityStep(1);
+                  }}
+                  className="w-full sm:w-auto px-6 py-3.5 bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-black uppercase tracking-wider rounded-xl transition-all flex items-center justify-center gap-2 shadow-lg shadow-[#0867E8]/25 transform active:scale-95"
+                >
+                  <ShieldCheck size={16} /> Check Patient Eligibility
+                </button>
                 <a
                   href="#partner-form"
                   onClick={() => setFormType('clinic')}
-                  className="px-8 py-3.5 bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-black uppercase tracking-widest rounded-xl transition-all flex items-center justify-center gap-2.5 shadow-xl shadow-[#0867E8]/25 group transform hover:-translate-y-0.5"
+                  className="w-full sm:w-auto px-5 py-3.5 bg-[#F7FAFC] hover:bg-slate-100 text-[#0B2450] border border-slate-200 text-xs font-black uppercase tracking-wider rounded-xl transition-all flex items-center justify-center gap-2"
                 >
-                  Partner With Clinaza
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </a>
-                <a
-                  href="https://wa.me/917292984244?text=Hi%20Clinaza%20team%2C%20I%20want%20to%20offer%20patient%20financing%20at%20my%20clinic"
-                  target="_blank" rel="noopener noreferrer"
-                  className="px-7 py-3.5 bg-[#F7FAFC] hover:bg-slate-100 text-[#0B2450] border border-slate-200 text-xs font-black uppercase tracking-widest rounded-xl transition-all flex items-center justify-center gap-2"
-                >
-                  <MessageSquare className="h-4 w-4 text-[#0f7a75]" />
-                  WhatsApp Us
+                  Partner With Clinaza <ArrowRight size={14} />
                 </a>
               </div>
+
+              <p className="text-[10px] text-slate-400 font-medium pt-1">
+                ⚡ Quick assessment &middot; No obligation &middot; Final approval by lender &middot; <span className="text-[#0f7a75] font-bold">Clinaza connects clinics with financing partners.</span>
+              </p>
             </div>
 
             {/* Authentic Clinic Photo */}
-            <div className="md:col-span-5 relative">
+            <div className="md:col-span-5 relative mt-2 md:mt-0">
               <img
                 src="/assets/clinic-hero-real.png"
                 alt="Modern authentic dental clinic treatment room in India"
-                className="w-full h-auto rounded-3xl border border-slate-200 shadow-xl object-cover aspect-[4/3]"
+                className="w-full h-auto rounded-2xl sm:rounded-3xl border border-slate-200 shadow-lg object-cover aspect-[4/3]"
               />
-              <div className="absolute -bottom-3 -left-3 bg-white border border-slate-200 px-4 py-2.5 rounded-2xl shadow-lg flex items-center gap-2.5">
-                <span className="w-2.5 h-2.5 rounded-full bg-[#0f7a75] animate-pulse"></span>
-                <span className="text-xs font-bold text-[#0B2450]">Point-of-Care EMI Ready</span>
+              <div className="absolute -bottom-2.5 -left-2.5 sm:-bottom-3 sm:-left-3 bg-white/95 backdrop-blur-md border border-slate-200 px-3.5 py-2 rounded-xl sm:rounded-2xl shadow-md flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-[#0f7a75] animate-pulse"></span>
+                <span className="text-[11px] font-bold text-[#0B2450]">Point-of-Care EMI Ready</span>
               </div>
             </div>
           </div>
 
           {/* ── 1. TRUST STRIP (RIGHT BELOW HERO) ── */}
           <div className="pt-6 border-t border-slate-100 max-w-4xl mx-auto">
-            <p className="text-[10px] font-black uppercase tracking-widest text-[#0f7a75] mb-4">WHY CLINICS CHOOSE CLINAZA</p>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-left">
+            <p className="text-[10px] font-black uppercase tracking-widest text-[#0f7a75] mb-3 text-center sm:text-left">WHY CLINICS CHOOSE CLINAZA</p>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 text-left">
               {[
                 '₹30K–₹3L financing options',
                 'Bank/NBFC lending partners',
                 '100% Digital application',
                 'Clinic-focused support'
               ].map((item, idx) => (
-                <div key={idx} className="bg-[#F7FAFC] border border-slate-200/80 px-3.5 py-3 rounded-2xl flex items-center gap-2 shadow-2xs">
-                  <CheckCircle2 size={16} className="text-[#0f7a75] shrink-0" aria-hidden="true" />
-                  <span className="text-xs font-bold text-[#0B2450] leading-snug">{item}</span>
+                <div key={idx} className="bg-[#F7FAFC] border border-slate-200/80 px-3 py-2.5 rounded-xl flex items-center gap-2">
+                  <CheckCircle2 size={14} className="text-[#0f7a75] shrink-0" aria-hidden="true" />
+                  <span className="text-[11px] font-bold text-[#0B2450] leading-tight">{item}</span>
                 </div>
               ))}
             </div>
-            <p className="text-[10px] text-slate-500 text-center pt-3 leading-tight">
-              Financing is subject to lender eligibility, approval and applicable terms. Clinaza does not guarantee loan approval.
-            </p>
           </div>
         </section>
 
-        {/* ── 2. PROBLEM ── */}
-        <section aria-label="The Problem" className="py-16 px-6 bg-[#F5F9FC] border-y border-blue-50">
-          <div className="max-w-5xl mx-auto space-y-10">
+        {/* ── 2. PROBLEM & CLINIC VALUE ("TURN I'LL DO IT LATER INTO LET'S START") ── */}
+        <section aria-label="The Problem & Value" className="py-12 sm:py-16 px-4 sm:px-6 bg-[#F5F9FC] border-y border-blue-50">
+          <div className="max-w-5xl mx-auto space-y-8">
             <div className="text-center space-y-2">
-              <span className="text-[10px] font-black text-[#0f7a75] uppercase tracking-widest">THE CLINIC CHALLENGE</span>
-              <h2 className="text-2xl sm:text-4xl font-black text-[#0B2450]">Patients Want Treatment. Cost Makes Them Wait.</h2>
-              <p className="text-xs sm:text-sm text-slate-600 max-w-2xl mx-auto">High upfront treatment estimates lead to postponement and lost clinic revenue.</p>
+              <span className="text-[10px] font-black text-[#0f7a75] uppercase tracking-widest">CLINIC CONVERSION IMPACT</span>
+              <h2 className="text-2xl sm:text-4xl font-black text-[#0B2450]">Turn "I'll do it later" into "Let's start."</h2>
+              <p className="text-xs sm:text-sm text-slate-600 max-w-2xl mx-auto">Help more patients say YES to necessary high-ticket treatment plans.</p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-              {[
-                { quote: `"I'll do it next month."`, desc: 'Patients delay essential procedures due to temporary cash flow constraints.' },
-                { quote: `"It's too expensive right now."`, desc: 'High-ticket estimates (Implants, Aligners, Surgeries) exceed monthly budgets.' },
-                { quote: `"Can I pay in installments?"`, desc: 'Patients actively seek flexible installment options before committing.' }
-              ].map((card, idx) => (
-                <div key={idx} className="bg-white border border-slate-200/80 p-6 rounded-3xl space-y-3 text-left shadow-sm">
-                  <span className="text-xl sm:text-2xl font-serif italic font-bold text-[#0867E8] block">{card.quote}</span>
-                  <p className="text-xs text-slate-600 font-medium leading-relaxed">{card.desc}</p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+              {/* Without Financing */}
+              <div className="bg-white border border-rose-100 p-6 rounded-2xl space-y-4 text-left shadow-2xs">
+                <div className="flex items-center gap-2 text-rose-600 font-black text-xs uppercase tracking-wider">
+                  <X size={16} /> Without Financing
                 </div>
-              ))}
-            </div>
+                <ul className="space-y-3 text-xs text-slate-700 font-medium">
+                  <li className="flex items-start gap-2.5">
+                    <span className="text-rose-500 font-bold">•</span> High upfront treatment estimates paralyze decision-making
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <span className="text-rose-500 font-bold">•</span> Patients postpone treatment plans for months or walk away
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <span className="text-rose-500 font-bold">•</span> Treatment delays lead to worsening health & lost clinic revenue
+                  </li>
+                </ul>
+              </div>
 
-            <div className="bg-white border border-blue-100 p-5 rounded-2xl text-center shadow-sm">
-              <p className="text-xs sm:text-sm font-bold text-[#0B2450]">
-                💡 <span className="text-[#0f7a75]">Clinaza</span> helps your clinic offer a financing option at the point of treatment.
-              </p>
+              {/* With Clinaza */}
+              <div className="bg-white border border-[#0f7a75]/30 p-6 rounded-2xl space-y-4 text-left shadow-sm">
+                <div className="flex items-center gap-2 text-[#0f7a75] font-black text-xs uppercase tracking-wider">
+                  <Check size={16} /> With Clinaza
+                </div>
+                <ul className="space-y-3 text-xs text-slate-700 font-medium">
+                  <li className="flex items-start gap-2.5">
+                    <span className="text-[#0f7a75] font-bold">✓</span> Flexible financing option for eligible patients right at checkout
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <span className="text-[#0f7a75] font-bold">✓</span> High-value procedures (Implants, Aligners) become affordable
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <span className="text-[#0f7a75] font-bold">✓</span> Zero clinic burden — NBFC handles collections directly
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* ── 3. HOW CLINAZA WORKS ── */}
-        <section aria-label="How Clinaza Works" className="py-16 px-6 max-w-6xl mx-auto space-y-10">
+        {/* ── 3. HOW CLINAZA WORKS (SIMPLE 3-STEP) ── */}
+        <section aria-label="How Clinaza Works" className="py-12 sm:py-16 px-4 sm:px-6 max-w-5xl mx-auto space-y-8">
           <div className="text-center space-y-2">
-            <span className="text-[10px] font-black text-[#0756C7] uppercase tracking-widest">STEP-BY-STEP WORKFLOW</span>
-            <h2 className="text-2xl sm:text-4xl font-black text-[#0B2450]">How Clinaza Works For Your Clinic</h2>
+            <span className="text-[10px] font-black text-[#0756C7] uppercase tracking-widest">SIMPLE WORKFLOW</span>
+            <h2 className="text-2xl sm:text-4xl font-black text-[#0B2450]">How Clinaza Works</h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-            {steps.map((step, idx) => (
-              <div key={idx} className="bg-[#F7FAFC] border border-slate-200/70 p-6 rounded-3xl space-y-3 text-left shadow-sm">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            {[
+              { num: '01', title: 'Patient Chooses Treatment', desc: 'Patient discusses treatment and total estimate with your clinic.' },
+              { num: '02', title: 'Check Financing Eligibility', desc: 'Clinaza helps the patient apply with a suitable financing partner in minutes.' },
+              { num: '03', title: 'Treatment Goes Ahead', desc: 'Once approved and disbursed, patient receives care and pays lender in EMIs.' }
+            ].map((step, idx) => (
+              <div key={idx} className="bg-[#F7FAFC] border border-slate-200/80 p-6 rounded-2xl space-y-3 text-left shadow-2xs">
                 <span className="text-3xl font-mono font-black text-[#0f7a75] block">{step.num}</span>
                 <h3 className="text-sm font-black text-[#0B2450]">{step.title}</h3>
                 <p className="text-xs text-slate-600 leading-relaxed">{step.desc}</p>
@@ -337,146 +361,72 @@ export default function CrmHomepage() {
           </div>
         </section>
 
-        {/* ── 4. BENEFITS FOR CLINICS (INCLUDES "WHAT THE CLINIC DOESN'T HAVE TO DO") ── */}
-        <section aria-label="Why Clinics Partner With Clinaza" className="py-16 px-6 bg-[#F7FAFC] border-y border-slate-200/60">
-          <div className="max-w-5xl mx-auto space-y-12">
-            <div className="text-center space-y-2">
-              <span className="text-[10px] font-black text-[#0f7a75] uppercase tracking-widest">CLINIC PARTNER ADVANTAGE</span>
-              <h2 className="text-2xl sm:text-4xl font-black text-[#0B2450]">More Treatments. Better Patient Conversions.</h2>
+        {/* ── 4. TREATMENT CATEGORIES (CONCISE) ── */}
+        <section aria-label="Supported Treatments" className="py-12 sm:py-16 px-4 sm:px-6 bg-[#F7FAFC] border-y border-slate-200/60">
+          <div className="max-w-5xl mx-auto space-y-8 text-center">
+            <div className="space-y-2">
+              <span className="text-[10px] font-black text-[#0f7a75] uppercase tracking-widest">ELIGIBLE PROCEDURES</span>
+              <h2 className="text-2xl sm:text-4xl font-black text-[#0B2450]">Supported Treatments</h2>
+              <p className="text-xs sm:text-sm text-slate-600">Treatment financing available for procedure estimates from ₹30,000 to ₹3,00,000.</p>
             </div>
 
-            {/* Benefit Highlights */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-              {clinicBenefits.map((b, idx) => (
-                <div key={idx} className="bg-white border border-slate-200/80 p-5 rounded-3xl flex items-start gap-3 text-left shadow-sm">
-                  <Check className="text-[#0f7a75] h-5 w-5 shrink-0 mt-0.5" aria-hidden="true" />
-                  <span className="text-xs font-semibold text-[#0B2450] leading-relaxed">{b}</span>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3">
+              {[
+                { emoji: '🦷', name: 'Dental Implants' },
+                { emoji: '😁', name: 'Braces & Aligners' },
+                { emoji: '👑', name: 'Crowns & Bridges' },
+                { emoji: '✨', name: 'Smile Makeovers' },
+                { emoji: '🏥', name: 'Full Mouth Rehab' },
+                { emoji: '🦴', name: 'Other Eligible Treatments' }
+              ].map((cat, idx) => (
+                <div key={idx} className="bg-white border border-slate-200 p-4 rounded-2xl space-y-2 text-center shadow-2xs">
+                  <span className="text-2xl block" role="img" aria-label={cat.name}>{cat.emoji}</span>
+                  <h3 className="text-xs font-black text-[#0B2450] leading-tight">{cat.name}</h3>
                 </div>
               ))}
             </div>
-
-            {/* ── 3. WHAT THE CLINIC DOESN'T HAVE TO DO ── */}
-            <div className="bg-white border border-slate-200 p-6 sm:p-8 rounded-3xl space-y-6 text-left shadow-sm max-w-5xl mx-auto">
-              <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
-                <div className="md:col-span-5">
-                  <img
-                    src="/assets/doctor-consult-real.png"
-                    alt="Authentic Indian doctor discussing treatment plan on tablet with patient in clinic"
-                    className="w-full h-auto rounded-2xl border border-slate-200 shadow-md object-cover aspect-[4/3]"
-                  />
-                </div>
-                <div className="md:col-span-7 space-y-4">
-                  <div>
-                    <span className="text-[10px] font-mono font-bold text-[#0756C7] uppercase tracking-wider block">ZERO OPERATIONAL BURDEN</span>
-                    <h3 className="text-lg font-black text-[#0B2450]">You focus on treatment. We support the financing journey.</h3>
-                  </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    {whatClinicDoesntDo.map((item, idx) => (
-                      <div key={idx} className="flex items-center gap-2.5 bg-[#FFF5F5] border border-rose-100 p-3 rounded-2xl">
-                        <X size={15} className="text-rose-500 shrink-0" aria-hidden="true" />
-                        <span className="text-xs font-bold text-slate-700">{item}</span>
-                      </div>
-                    ))}
-                  </div>
-                  <div className="text-center text-xs font-bold text-[#0756C7] bg-[#F5F9FC] py-3 px-4 rounded-xl border border-blue-100">
-                    Clinaza + Lending Partner &rarr; Seamless Point-of-Care Financing Process
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* ── FREE CLINIC BRANDING STICKER KIT SECTION ── */}
-            <div className="bg-[#F5F9FC] border border-blue-100 p-6 sm:p-8 rounded-3xl space-y-6 text-left max-w-5xl mx-auto">
-              <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-                <div className="md:col-span-6 space-y-4">
-                  <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#0f7a75]/10 rounded-full text-[10px] font-bold text-[#0f7a75]">
-                    <Package size={14} /> FREE FOR ONBOARDED PARTNER CLINICS
-                  </div>
-                  <h3 className="text-xl sm:text-3xl font-black text-[#0B2450] leading-tight">
-                    Get Free "EMI Available Here" Stickers for Your Clinic
-                  </h3>
-                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                    Build instant patient trust before they even step inside. Every onboarded Clinaza partner clinic receives a complimentary physical branding kit including high-quality weather-resistant glass door decals and reception counter stands.
-                  </p>
-
-                  <ul className="space-y-2.5 pt-1">
-                    {[
-                      { icon: Award, title: 'Glass Door Decal', desc: 'Premium weatherproof vinyl "EMI Available Here" round sticker' },
-                      { icon: Truck, title: 'Reception Counter Standee', desc: 'Acrylic desk display with patient QR code for 2-min check' },
-                      { icon: CheckCircle2, title: 'Free Express Shipping', desc: 'Delivered directly to your clinic address across India' }
-                    ].map((item, idx) => (
-                      <li key={idx} className="flex items-start gap-3 text-xs text-slate-700 font-medium">
-                        <item.icon size={16} className="text-[#0867E8] shrink-0 mt-0.5" />
-                        <div>
-                          <strong className="text-[#0B2450] block">{item.title}</strong>
-                          <span className="text-[11px] text-slate-500">{item.desc}</span>
-                        </div>
-                      </li>
-                    ))}
-                  </ul>
-
-                  <div className="pt-2">
-                    <a
-                      href="#partner-form"
-                      onClick={() => setFormType('clinic')}
-                      className="inline-flex items-center gap-2 px-6 py-3.5 bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-black uppercase tracking-widest rounded-xl transition-all shadow-md shadow-[#0867E8]/20"
-                    >
-                      Get Free Clinic Kit With Partnership &rarr;
-                    </a>
-                  </div>
-                </div>
-
-                {/* Real Sticker Photo */}
-                <div className="md:col-span-6 relative">
-                  <img
-                    src="/assets/clinaza-clinic-sticker.jpg"
-                    alt="Clinaza EMI Available Here official glass door decal sticker on clinic front entrance"
-                    className="w-full h-auto rounded-2xl border border-slate-200 shadow-xl object-cover aspect-[4/3]"
-                  />
-                  <div className="absolute top-4 right-4 bg-[#0B2450]/90 backdrop-blur-md text-white px-3 py-1.5 rounded-xl text-[10px] font-bold shadow-md">
-                    Official Decal Design
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
         </section>
 
-        {/* ── 5. TREATMENT CATEGORIES ("WHO IS IT FOR?") ── */}
-        <section aria-label="Who Is It For" className="py-16 px-6 max-w-5xl mx-auto space-y-10">
-          <div className="text-center space-y-2">
-            <span className="text-[10px] font-black text-[#0f7a75] uppercase tracking-widest">SUPPORTED PROCEDURES</span>
-            <h2 className="text-2xl sm:text-4xl font-black text-[#0B2450]">Who Is It For?</h2>
-            <p className="text-xs sm:text-sm text-slate-600">Ideal for high-value planned treatments supported by our lending partners:</p>
-          </div>
-
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-            {categories.map((cat, idx) => (
-              <div key={idx} className="bg-[#F7FAFC] border border-slate-200/90 p-5 rounded-3xl space-y-2 text-left shadow-sm hover:border-[#0867E8] transition-colors">
-                <span className="text-3xl block" role="img" aria-label={cat.name}>{cat.emoji}</span>
-                <h3 className="text-xs font-black text-[#0B2450]">{cat.name}</h3>
-                <span className="text-[10px] font-medium text-slate-500 block">{cat.tag}</span>
-              </div>
-            ))}
+        {/* ── 5. EARLY ELIGIBILITY CHECKER PROMPT ── */}
+        <section aria-label="Eligibility Prompt" className="py-12 px-4 sm:px-6 max-w-4xl mx-auto">
+          <div className="bg-gradient-to-br from-[#0B2450] to-[#0867E8] text-white p-7 sm:p-9 rounded-3xl text-center space-y-4 shadow-xl">
+            <span className="text-[10px] font-black text-[#12A8A0] uppercase tracking-widest block">INSTANT PRE-CHECK</span>
+            <h3 className="text-xl sm:text-3xl font-black">Want to know if your patient may qualify?</h3>
+            <p className="text-xs sm:text-sm text-blue-100 max-w-xl mx-auto leading-relaxed">
+              Check initial eligibility in under 2 minutes based on estimated credit range and income type.
+            </p>
+            <div className="pt-2">
+              <button
+                type="button"
+                onClick={() => {
+                  setShowEligibilityModal(true);
+                  setEligibilityStep(1);
+                }}
+                className="px-8 py-3.5 bg-white text-[#0B2450] hover:bg-slate-100 text-xs font-black uppercase tracking-wider rounded-xl transition-all shadow-md active:scale-95 inline-flex items-center gap-2"
+              >
+                <ShieldCheck size={16} className="text-[#0867E8]" /> Check Patient Eligibility
+              </button>
+            </div>
+            <p className="text-[10px] text-blue-200/80 max-w-md mx-auto leading-tight">
+              *Initial assessment only. Final loan approval, sanctioned amount, and interest rate are determined by the financing partner.
+            </p>
           </div>
         </section>
 
-        {/* ── 5.5 EMI CALCULATOR ── */}
-        <section aria-label="EMI Calculator" className="py-16 px-6 bg-[#F7FAFC] border-y border-slate-200/60">
-          <div className="max-w-4xl mx-auto space-y-10">
+        {/* ── 6. EMI CALCULATOR ── */}
+        <section aria-label="EMI Calculator" className="py-12 sm:py-16 px-4 sm:px-6 bg-[#F7FAFC] border-y border-slate-200/60">
+          <div className="max-w-4xl mx-auto space-y-8">
             <div className="text-center space-y-2">
-              <span className="text-[10px] font-black text-[#0f7a75] uppercase tracking-widest">PATIENT COST PLANNER</span>
-              <h2 className="text-2xl sm:text-4xl font-black text-[#0B2450]">EMI Calculator</h2>
-              <p className="text-xs sm:text-sm text-slate-600">Estimate monthly payments for your treatment. Final terms set by the lender.</p>
+              <span className="text-[10px] font-black text-[#0f7a75] uppercase tracking-widest">COST PLANNER</span>
+              <h2 className="text-2xl sm:text-4xl font-black text-[#0B2450]">See What the EMI Could Look Like</h2>
+              <p className="text-xs sm:text-sm text-slate-600">Indicative estimate only. Actual rate depends on lender assessment.</p>
             </div>
 
             <div className="bg-white border border-slate-200 rounded-3xl shadow-sm overflow-hidden">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
-
                 {/* Left: Controls */}
-                <div className="p-6 sm:p-8 space-y-7 border-b md:border-b-0 md:border-r border-slate-100">
-
-                  {/* Treatment Amount */}
+                <div className="p-6 sm:p-8 space-y-6 border-b md:border-b-0 md:border-r border-slate-100">
                   <div className="space-y-3">
                     <div className="flex justify-between items-center">
                       <label className="text-xs font-black text-[#0B2450] uppercase tracking-wider">Treatment Amount</label>
@@ -498,7 +448,6 @@ export default function CrmHomepage() {
                     </div>
                   </div>
 
-                  {/* Tenure */}
                   <div className="space-y-3">
                     <label className="text-xs font-black text-[#0B2450] uppercase tracking-wider block">Repayment Tenure</label>
                     <div className="grid grid-cols-4 gap-2">
@@ -517,26 +466,24 @@ export default function CrmHomepage() {
                       ))}
                     </div>
                   </div>
-
-
                 </div>
 
                 {/* Right: Result */}
                 <div className="p-6 sm:p-8 flex flex-col justify-between space-y-6">
-                  <div className="space-y-5">
-                    <div className="bg-gradient-to-br from-[#0867E8] to-[#0f7a75] rounded-2xl p-6 text-white text-center space-y-1">
-                      <p className="text-[10px] font-bold uppercase tracking-widest text-white/70">Estimated Monthly EMI</p>
-                      <p className="text-4xl sm:text-5xl font-black">₹{monthlyEMI.toLocaleString('en-IN')}</p>
-                      <p className="text-[11px] text-white/80 font-medium">per month × {emiTenure} months</p>
+                  <div className="space-y-4">
+                    <div className="bg-gradient-to-br from-[#0867E8] to-[#0f7a75] rounded-2xl p-5 text-white text-center space-y-1">
+                      <p className="text-[10px] font-bold uppercase tracking-widest text-white/70">Indicative Monthly EMI</p>
+                      <p className="text-3xl sm:text-4xl font-black">₹{monthlyEMI.toLocaleString('en-IN')}</p>
+                      <p className="text-[10px] text-white/80 font-medium">per month &times; {emiTenure} months</p>
                     </div>
 
-                    <div className="space-y-2.5">
+                    <div className="space-y-2">
                       {[
                         { label: 'Principal Amount', value: `₹${emiAmount.toLocaleString('en-IN')}`, accent: false },
                         { label: 'Est. Interest (15% p.a.)', value: `₹${totalInterest.toLocaleString('en-IN')}`, accent: false },
                         { label: 'Est. Total Payable', value: `₹${totalPayable.toLocaleString('en-IN')}`, accent: true },
                       ].map((row, idx) => (
-                        <div key={idx} className={`flex justify-between items-center px-4 py-3 rounded-xl text-xs font-bold ${row.accent ? 'bg-[#0867E8]/8 border border-[#0867E8]/20 text-[#0B2450]' : 'bg-[#F7FAFC] border border-slate-100 text-slate-600'}`}>
+                        <div key={idx} className={`flex justify-between items-center px-3.5 py-2.5 rounded-xl text-xs font-bold ${row.accent ? 'bg-[#0867E8]/8 border border-[#0867E8]/20 text-[#0B2450]' : 'bg-[#F7FAFC] border border-slate-100 text-slate-600'}`}>
                           <span>{row.label}</span>
                           <span className={row.accent ? 'text-[#0867E8]' : ''}>{row.value}</span>
                         </div>
@@ -544,16 +491,16 @@ export default function CrmHomepage() {
                     </div>
                   </div>
 
-                  <div className="space-y-3">
+                  <div className="space-y-2">
                     <button
-                      onClick={() => setShowEligibilityModal(true)}
-                      className="w-full py-3.5 bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-black uppercase tracking-widest rounded-xl transition-all shadow-md flex items-center justify-center gap-2"
+                      onClick={() => {
+                        setShowEligibilityModal(true);
+                        setEligibilityStep(1);
+                      }}
+                      className="w-full py-3 bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-black uppercase tracking-wider rounded-xl transition-all shadow-md flex items-center justify-center gap-2"
                     >
-                      <ShieldCheck size={15} /> Check My Eligibility →
+                      <ShieldCheck size={15} /> Check Patient Eligibility →
                     </button>
-                    <p className="text-[10px] text-slate-400 text-center leading-relaxed">
-                      ⚠️ Estimated at 15% p.a. Actual EMI, interest rate &amp; tenure are set by the lender at the time of approval.
-                    </p>
                   </div>
                 </div>
               </div>
@@ -561,57 +508,92 @@ export default function CrmHomepage() {
           </div>
         </section>
 
-        {/* ── 6. PATIENT FINANCING ── */}
-        <section aria-label="For Patients" className="py-16 px-6 bg-[#F5F9FC] border-y border-blue-50">
-          <div className="max-w-5xl mx-auto space-y-10">
-            <div className="text-center space-y-2">
-              <span className="text-[10px] font-black text-[#0f7a75] uppercase tracking-widest flex items-center justify-center gap-1.5">
-                <UserCheck size={14} aria-hidden="true" /> FOR PATIENTS
-              </span>
-              <h2 className="text-2xl sm:text-4xl font-black text-[#0B2450]">Need Treatment But Worried About the Cost?</h2>
-              <p className="text-xs sm:text-sm text-slate-600 max-w-2xl mx-auto leading-relaxed">
-                Explore financing options for eligible treatments through Clinaza's lending partners.
-              </p>
-            </div>
+        {/* ── 7. WHY CLINICS USE CLINAZA ── */}
+        <section aria-label="Why Clinics Use Clinaza" className="py-12 sm:py-16 px-4 sm:px-6 max-w-5xl mx-auto space-y-8">
+          <div className="text-center space-y-2">
+            <span className="text-[10px] font-black text-[#0f7a75] uppercase tracking-widest">FOR CLINIC OWNERS</span>
+            <h2 className="text-2xl sm:text-4xl font-black text-[#0B2450]">Why Clinics Use Clinaza</h2>
+          </div>
 
-            {/* Patient Workflow Steps */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-              {patientSteps.map((s, idx) => (
-                <div key={idx} className="bg-white border border-slate-200 p-5 rounded-3xl space-y-3 text-left shadow-sm">
-                  <span className="text-2xl block" role="img" aria-label={s.title}>{s.emoji}</span>
-                  <span className="text-[10px] font-mono font-bold text-[#0756C7] uppercase tracking-wider block">Step 0{s.num}</span>
-                  <h3 className="text-xs font-black text-[#0B2450]">{s.title}</h3>
-                  <p className="text-[11px] text-slate-600 leading-relaxed">{s.desc}</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-left">
+            {[
+              { title: 'No upfront fee', desc: 'Free setup and branding materials for onboarded clinics.' },
+              { title: 'No EMI collection burden', desc: 'No chasing patients for repayments — handled by NBFC.' },
+              { title: 'Financing by partners', desc: 'All loans funded and serviced by RBI-regulated lenders.' },
+              { title: 'Higher ticket conversions', desc: 'Helps patients manage higher treatment costs easily.' },
+              { title: 'Digital application', desc: 'Paperless 100% online point-of-care pre-assessment.' },
+              { title: 'Multiple financing options', desc: 'Connected network of lenders for better approval rates.' }
+            ].map((item, idx) => (
+              <div key={idx} className="bg-[#F7FAFC] border border-slate-200 p-5 rounded-2xl space-y-1.5 shadow-2xs">
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 size={16} className="text-[#0f7a75] shrink-0" />
+                  <strong className="text-xs font-black text-[#0B2450]">{item.title}</strong>
                 </div>
-              ))}
-            </div>
-
-            {/* Patient CTA Banner — "Check Eligibility" */}
-            <div className="bg-white border border-slate-200 p-8 rounded-3xl text-center space-y-4 shadow-sm max-w-xl mx-auto">
-              <div className="space-y-1">
-                <h3 className="text-lg font-black text-[#0B2450]">Need financing for your treatment?</h3>
-                <p className="text-xs text-slate-600">Check your eligibility in a few simple steps.</p>
+                <p className="text-[11px] text-slate-600 pl-6 leading-relaxed">{item.desc}</p>
               </div>
-              <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
-                <button
-                  type="button"
-                  onClick={() => {
-                    setShowEligibilityModal(true);
-                    setEligibilityStep(1);
-                    setPatientSubmitted(false);
-                  }}
-                  className="w-full sm:w-auto px-7 py-3.5 bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-black uppercase tracking-wider rounded-xl transition-all shadow-md shadow-[#0867E8]/20 flex items-center justify-center gap-1.5 transform hover:-translate-y-0.5"
-                >
-                  Check Eligibility &rarr;
-                </button>
-                <a
-                  href="https://wa.me/917292984244?text=Hi%20Clinaza%2C%20I%20want%20to%20check%20if%20my%20treatment%20is%20eligible%20for%20EMI%20financing"
-                  target="_blank" rel="noopener noreferrer"
-                  className="w-full sm:w-auto px-6 py-3.5 bg-[#F7FAFC] hover:bg-slate-100 text-[#0B2450] border border-slate-200 text-xs font-bold rounded-xl transition-all flex items-center justify-center gap-2"
-                >
-                  <MessageSquare size={14} className="text-[#0f7a75]" />
-                  WhatsApp Us
-                </a>
+            ))}
+          </div>
+
+          {/* Sticky Clinic CTA Banner */}
+          <div className="bg-[#F5F9FC] border border-blue-100 p-6 rounded-3xl text-center space-y-3 shadow-2xs max-w-xl mx-auto">
+            <h3 className="text-base font-black text-[#0B2450]">Want to offer EMI to your patients?</h3>
+            <a
+              href="#partner-form"
+              onClick={() => setFormType('clinic')}
+              className="inline-flex items-center gap-2 px-7 py-3 bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-black uppercase tracking-wider rounded-xl transition-all shadow-md"
+            >
+              Partner With Clinaza &rarr;
+            </a>
+          </div>
+        </section>
+
+        {/* ── 8. STICKER KIT SECTION ── */}
+        <section aria-label="Clinic Sticker Kit" className="py-12 px-4 sm:px-6 bg-[#F7FAFC] border-y border-slate-200/60">
+          <div className="max-w-5xl mx-auto">
+            <div className="bg-white border border-slate-200 p-6 sm:p-8 rounded-3xl space-y-6 text-left max-w-5xl mx-auto shadow-xs">
+              <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+                <div className="md:col-span-6 space-y-4">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#0f7a75]/10 rounded-full text-[10px] font-bold text-[#0f7a75]">
+                    <Package size={14} /> FREE FOR ONBOARDED CLINICS
+                  </div>
+                  <h3 className="text-xl sm:text-2xl font-black text-[#0B2450] leading-tight">
+                    Get Free "EMI Available Here" Glass Door Stickers
+                  </h3>
+                  <p className="text-xs text-slate-600 leading-relaxed">
+                    Build instant patient trust at your clinic entrance. Every onboarded partner clinic receives a physical branding kit including weatherproof glass door decals and counter QR displays.
+                  </p>
+                  <ul className="space-y-2">
+                    {[
+                      { icon: Award, title: 'Glass Door Decal', desc: 'Premium weatherproof vinyl round sticker' },
+                      { icon: Truck, title: 'Free Express Delivery', desc: 'Shipped to your clinic address across India' }
+                    ].map((item, idx) => (
+                      <li key={idx} className="flex items-start gap-2.5 text-xs text-slate-700 font-medium">
+                        <item.icon size={15} className="text-[#0867E8] shrink-0 mt-0.5" />
+                        <div>
+                          <strong className="text-[#0B2450] block">{item.title}</strong>
+                          <span className="text-[10px] text-slate-500">{item.desc}</span>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                  <div>
+                    <a
+                      href="#partner-form"
+                      onClick={() => setFormType('clinic')}
+                      className="inline-flex items-center gap-2 px-5 py-3 bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-black uppercase tracking-wider rounded-xl transition-all shadow-sm"
+                    >
+                      Get Free Clinic Kit &rarr;
+                    </a>
+                  </div>
+                </div>
+
+                <div className="md:col-span-6 relative">
+                  <img
+                    src="/assets/clinaza-clinic-sticker.jpg"
+                    alt="Clinaza EMI Available Here official glass door decal sticker"
+                    className="w-full h-auto rounded-2xl border border-slate-200 shadow-md object-cover aspect-[4/3]"
+                  />
+                </div>
               </div>
             </div>
           </div>

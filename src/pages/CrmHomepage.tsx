@@ -51,16 +51,15 @@ export default function CrmHomepage() {
   // EMI Calculator state
   const [emiAmount, setEmiAmount] = useState(100000);
   const [emiTenure, setEmiTenure] = useState(12);
-  const [emiRate, setEmiRate] = useState(0); // 0 = 0% interest (subvention scheme)
+  const [emiRate, setEmiRate] = useState(12); // Standard lender rate
 
   const calcEMI = (principal: number, months: number, annualRate: number) => {
-    if (annualRate === 0) return Math.floor(principal / months);
     const r = annualRate / 12 / 100;
     return Math.round((principal * r * Math.pow(1 + r, months)) / (Math.pow(1 + r, months) - 1));
   };
 
   const monthlyEMI = calcEMI(emiAmount, emiTenure, emiRate);
-  const totalPayable = emiRate === 0 ? emiAmount : monthlyEMI * emiTenure;
+  const totalPayable = monthlyEMI * emiTenure;
   const totalInterest = totalPayable - emiAmount;
 
   const handlePatientEligibilitySubmit = (e: React.FormEvent) => {
@@ -519,29 +518,7 @@ export default function CrmHomepage() {
                     </div>
                   </div>
 
-                  {/* Interest Rate */}
-                  <div className="space-y-3">
-                    <label className="text-xs font-black text-[#0B2450] uppercase tracking-wider block">Interest Scheme</label>
-                    <div className="grid grid-cols-2 gap-2">
-                      {[
-                        { label: '0% Interest', sublabel: 'Subvention / No-Cost', rate: 0 },
-                        { label: '12% p.a.', sublabel: 'Standard Lender Rate', rate: 12 }
-                      ].map(opt => (
-                        <button
-                          key={opt.rate}
-                          onClick={() => setEmiRate(opt.rate)}
-                          className={`py-3 rounded-xl text-left px-3.5 border transition-all ${
-                            emiRate === opt.rate
-                              ? 'bg-[#0f7a75] text-white border-[#0f7a75] shadow-md'
-                              : 'bg-[#F7FAFC] text-[#0B2450] border-slate-200 hover:border-[#0f7a75]'
-                          }`}
-                        >
-                          <span className="text-xs font-black block">{opt.label}</span>
-                          <span className={`text-[10px] font-medium ${emiRate === opt.rate ? 'text-white/80' : 'text-slate-500'}`}>{opt.sublabel}</span>
-                        </button>
-                      ))}
-                    </div>
-                  </div>
+
                 </div>
 
                 {/* Right: Result */}

@@ -1126,7 +1126,7 @@ export default function CrmHomepage() {
           </div>
           <nav aria-label="Footer navigation" className="flex flex-col sm:flex-row items-center gap-4 text-[10px] text-slate-500 font-mono uppercase tracking-widest">
             <span>© 2026 CLINAZA Technologies. All Rights Reserved.</span>
-            <Link to="/yourdentist/blog" className="hover:text-[#0f7a75] transition-colors underline">Patient Guides</Link>
+            <Link to="/blog" className="hover:text-[#0f7a75] transition-colors underline">Patient Guides</Link>
             <span className="hidden sm:inline" aria-hidden="true">&middot;</span>
             <Link to="/reactivation/login" className="hover:text-[#0B2450] transition-colors">Clinic Staff Portal</Link>
           </nav>

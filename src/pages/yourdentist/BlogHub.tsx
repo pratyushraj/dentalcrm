@@ -111,19 +111,22 @@ export default function BlogHub() {
                     <span className="flex items-center gap-1"><Clock size={12} /> {blog.readTime}</span>
                   </div>
                   <h2 className="text-base sm:text-lg font-black text-white leading-snug group-hover:text-[#5b72ff] transition-colors">
-                    <Link to={`/yourdentist/blog/${blog.slug}`}>{blog.title}</Link>
+                    <Link to={`/blog/${blog.slug}`}>{blog.title}</Link>
                   </h2>
                   <p className="text-xs text-neutral-400 leading-relaxed line-clamp-2">
                     {blog.summary}
                   </p>
                 </div>
 
-                <Link
-                  to={`/yourdentist/blog/${blog.slug}`}
-                  className="inline-flex items-center gap-1.5 text-xs font-black uppercase text-[#5b72ff] group-hover:text-white transition-colors"
-                >
-                  Read Article <ArrowRight size={14} />
-                </Link>
+                <div className="pt-4 border-t border-white/5 flex items-center justify-between">
+                  <span className="text-[10px] text-neutral-500 font-bold">By {blog.author}</span>
+                  <Link 
+                    to={`/blog/${blog.slug}`} 
+                    className="inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-wider text-[#5b72ff] group-hover:translate-x-1 transition-all"
+                  >
+                    Read Guide <ArrowRight size={14} />
+                  </Link>
+                </div>
               </div>
             </article>
           ))}

@@ -33,9 +33,13 @@ export default function AppRoutes() {
           {/* Review Assistant Landing Page */}
           <Route path="/review/assist" element={<LazyRoute><ReviewAssistant /></LazyRoute>} />
 
-          {/* YOUR DENTIST Patna SEO Patient Guides */}
-          <Route path="/yourdentist/blog" element={<LazyRoute><BlogHub /></LazyRoute>} />
-          <Route path="/yourdentist/blog/:slug" element={<LazyRoute><BlogArticlePage /></LazyRoute>} />
+          {/* Clinaza SEO Patient & Clinic Guides */}
+          <Route path="/blog" element={<LazyRoute><BlogHub /></LazyRoute>} />
+          <Route path="/blog/:slug" element={<LazyRoute><BlogArticlePage /></LazyRoute>} />
+
+          {/* Legacy Redirects for SEO Continuity */}
+          <Route path="/yourdentist/blog" element={<Navigate to="/blog" replace />} />
+          <Route path="/yourdentist/blog/:slug" element={<Navigate to="/blog" replace />} />
 
           <Route path="/dental-trends" element={<LazyRoute><DentalTrendFinder /></LazyRoute>} />
           <Route path="/dentist-proposal" element={<LazyRoute><ContentWorkspace /></LazyRoute>} />

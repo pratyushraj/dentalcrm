@@ -9,7 +9,7 @@ export default function BlogArticlePage() {
   const article = BLOGS.find((b) => b.slug === slug);
 
   if (!article) {
-    return <Navigate to="/yourdentist/blog" replace />;
+    return <Navigate to="/blog" replace />;
   }
 
   // Generate Google-compliant FAQ Schema dynamically
@@ -29,10 +29,10 @@ export default function BlogArticlePage() {
   return (
     <div className="min-h-screen bg-[#fafafa] text-neutral-900 font-sora antialiased selection:bg-[#5b72ff] selection:text-white">
       <SEOHead
-        title={`${article.title} | YOUR DENTIST Patna`}
+        title={`${article.title} | Clinaza Patient Guides`}
         description={article.metaDescription}
-        keywords={[article.category.toLowerCase(), 'patna dentist', 'dental care patna', 'dr aryan parmar']}
-        canonicalUrl={`https://dental-crm-gray.vercel.app/yourdentist/blog/${article.slug}`}
+        keywords={[article.category.toLowerCase(), 'clinaza financing', 'dental care emi india']}
+        canonicalUrl={`https://clinaza.in/blog/${article.slug}`}
         type="article"
         publishedTime={article.publishDate}
         author={article.author}
@@ -43,7 +43,7 @@ export default function BlogArticlePage() {
       {/* Clean Light Header */}
       <header className="border-b border-neutral-200/60 bg-white/80 backdrop-blur-md sticky top-0 z-50">
         <div className="max-w-4xl mx-auto px-6 h-20 flex justify-between items-center">
-          <Link to="/yourdentist/blog" className="flex items-center gap-2">
+          <Link to="/blog" className="flex items-center gap-2">
             <ChevronLeft size={16} className="text-neutral-500" />
             <span className="text-xs font-bold uppercase tracking-wider text-neutral-600 hover:text-[#5b72ff] transition-colors">All Articles</span>
           </Link>

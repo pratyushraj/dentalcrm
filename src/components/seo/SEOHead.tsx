@@ -30,11 +30,11 @@ export const SEOHead: React.FC<SEOHeadProps> = ({
   title,
   description,
   keywords = [],
-  image = 'https://creatorarmour.com/og-preview.png',
+  image = 'https://dental-crm-red.vercel.app/assets/clinaza-logo.jpg',
   type = 'website',
   publishedTime,
   modifiedTime,
-  author = 'Creator Armour',
+  author = 'Clinaza',
   canonicalUrl,
   robots = 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
   imageAlt,
@@ -47,7 +47,7 @@ export const SEOHead: React.FC<SEOHeadProps> = ({
   videoThumbnail,
 }) => {
   const location = useLocation();
-  const baseUrl = 'https://creatorarmour.com';
+  const baseUrl = 'https://dental-crm-red.vercel.app';
   const currentUrl = canonicalUrl || `${baseUrl}${location.pathname}`;
 
   useEffect(() => {
@@ -105,7 +105,7 @@ export const SEOHead: React.FC<SEOHeadProps> = ({
       updateMetaTag('og:image:alt', imageAlt);
     }
     updateMetaTag('og:url', currentUrl);
-    updateMetaTag('og:site_name', 'Creator Armour');
+    updateMetaTag('og:site_name', 'Clinaza');
     updateMetaTag('og:locale', locale);
 
     // Article-specific OG tags

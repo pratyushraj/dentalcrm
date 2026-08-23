@@ -8,4 +8,4 @@ Allow: /llms-full.txt
 Disallow: /reactivation/
 Disallow: /api/
 
-Sitemap: https://dental-crm-red.vercel.app/sitemap.xml
+Sitemap: https://clinaza.in/sitemap.xml

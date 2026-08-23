@@ -30,7 +30,7 @@ export const SEOHead: React.FC<SEOHeadProps> = ({
   title,
   description,
   keywords = [],
-  image = 'https://dental-crm-red.vercel.app/assets/clinaza-logo.jpg',
+  image = 'https://clinaza.in/assets/clinaza-logo.jpg',
   type = 'website',
   publishedTime,
   modifiedTime,
@@ -47,7 +47,7 @@ export const SEOHead: React.FC<SEOHeadProps> = ({
   videoThumbnail,
 }) => {
   const location = useLocation();
-  const baseUrl = 'https://dental-crm-red.vercel.app';
+  const baseUrl = 'https://clinaza.in';
   const currentUrl = canonicalUrl || `${baseUrl}${location.pathname}`;
 
   useEffect(() => {

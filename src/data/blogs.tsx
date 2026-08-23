@@ -389,12 +389,118 @@ export const BLOGS: BlogArticle[] = [
         <div className="bg-[#F5F9FC] border border-blue-100 p-6 rounded-2xl space-y-3 my-6">
           <h3 className="text-base font-bold text-[#0B2450]">Key Benefits of Clinaza Patient Financing:</h3>
           <ul className="list-disc pl-5 space-y-2 text-xs text-neutral-700">
-            <li><strong>0% Interest Schemes:</strong> No extra burden on monthly patient budgets.</li>
+            <li><strong>Est. 15% p.a. Standard Rate:</strong> Transparent monthly breakdown for patient planning.</li>
             <li><strong>100% Digital & Paperless:</strong> Instant pre-approval directly on mobile.</li>
             <li><strong>Flexible Tenures:</strong> Choose between 3, 6, 9, 12, or 24 monthly installments.</li>
             <li><strong>Zero Clinic Collection Burden:</strong> EMIs auto-debited via secure e-NACH.</li>
           </ul>
         </div>
+      </div>
+    )
+  },
+  {
+    slug: "dental-implants-cost-on-emi-india",
+    title: "Dental Implants Cost on EMI in India: Monthly Breakdown & Financing Guide",
+    category: "Dental Implants",
+    readTime: "6 min read",
+    publishDate: "August 24, 2026",
+    author: "Clinaza Medical Desk",
+    summary: "Discover how dental implant financing works in India. Calculate monthly EMI costs for single tooth and full-mouth implants from ₹1,450/month.",
+    featuredImage: "/assets/clinic-hero-real.png",
+    metaDescription: "Looking for dental implants cost on EMI in India? Learn how single tooth and full-mouth implant EMIs work with Clinaza financing partners.",
+    faqs: [
+      {
+        question: "Can I get dental implants on EMI in India?",
+        answer: "Yes, eligible patients can access point-of-care EMI financing from ₹30,000 to ₹3,00,000 through Clinaza partnered clinics and RBI-regulated Banks/NBFCs."
+      },
+      {
+        question: "What is the monthly EMI for a single dental implant?",
+        answer: "For a single tooth implant costing ₹35,000, monthly EMIs start at approximately ₹1,458/month for a 24-month tenure or ₹2,916/month for a 12-month tenure."
+      }
+    ],
+    content: (
+      <div className="space-y-6">
+        <p className="text-lg leading-relaxed text-neutral-700">
+          Dental implants are the gold standard for replacing missing teeth. However, high upfront estimates often force patients to postpone treatment. With <strong>embedded patient financing platforms like Clinaza</strong>, clinics across India can now offer flexible monthly EMI options.
+        </p>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Dental Implants Cost & Estimated EMI Breakdown</h2>
+        <div className="overflow-x-auto my-6">
+          <table className="min-w-full divide-y divide-neutral-200 border border-neutral-100">
+            <thead className="bg-neutral-50">
+              <tr>
+                <th className="px-6 py-3 text-left text-xs font-bold text-neutral-500 uppercase">Procedure Type</th>
+                <th className="px-6 py-3 text-left text-xs font-bold text-neutral-500 uppercase">Est. Total Cost</th>
+                <th className="px-6 py-3 text-left text-xs font-bold text-neutral-500 uppercase">12 Months (Est.)</th>
+                <th className="px-6 py-3 text-left text-xs font-bold text-neutral-500 uppercase">24 Months (Est.)</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-neutral-200 text-xs">
+              <tr>
+                <td className="px-6 py-4 font-bold text-neutral-800">Single Tooth Implant + Crown</td>
+                <td className="px-6 py-4 text-[#0867E8] font-bold">₹35,000 - ₹50,000</td>
+                <td className="px-6 py-4 text-neutral-600">₹3,150 / mo</td>
+                <td className="px-6 py-4 text-neutral-600">₹1,700 / mo</td>
+              </tr>
+              <tr>
+                <td className="px-6 py-4 font-bold text-neutral-800">Multiple Implants (3-4 Teeth)</td>
+                <td className="px-6 py-4 text-[#0867E8] font-bold">₹90,000 - ₹1,40,000</td>
+                <td className="px-6 py-4 text-neutral-600">₹8,100 / mo</td>
+                <td className="px-6 py-4 text-neutral-600">₹4,370 / mo</td>
+              </tr>
+              <tr>
+                <td className="px-6 py-4 font-bold text-neutral-800">Full Mouth All-on-4 / All-on-6</td>
+                <td className="px-6 py-4 text-[#0867E8] font-bold">₹1,80,000 - ₹3,00,000</td>
+                <td className="px-6 py-4 text-neutral-600">₹16,200 / mo</td>
+                <td className="px-6 py-4 text-neutral-600">₹8,750 / mo</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">How to Apply for Dental Implant Financing</h2>
+        <ol className="list-decimal pl-6 space-y-3 text-neutral-700">
+          <li><strong>Consult Your Partner Clinic:</strong> Get a detailed implant treatment plan and total estimate.</li>
+          <li><strong>Check Eligibility:</strong> Perform a 2-minute soft credit check directly at the clinic.</li>
+          <li><strong>Submit KYC:</strong> Share PAN, Aadhaar, and income proof for digital verification.</li>
+          <li><strong>Start Treatment:</strong> Pay the lender in easy monthly auto-debited EMIs.</li>
+        </ol>
+      </div>
+    )
+  },
+  {
+    slug: "how-clinics-offer-patient-emi-financing-india",
+    title: "How Dental Clinics Offer EMI Financing to Patients Without Taking Credit Risk",
+    category: "Clinic Growth",
+    readTime: "5 min read",
+    publishDate: "August 24, 2026",
+    author: "Clinaza Partner Team",
+    summary: "Learn how dental clinics in India partner with Clinaza and RBI-regulated NBFCs to offer point-of-care EMI financing with ₹0 clinic fees.",
+    featuredImage: "/assets/doctor-consult-real.png",
+    metaDescription: "Want to offer EMI financing at your dental clinic? Learn how Clinaza helps clinics offer point-of-care patient financing with zero credit risk.",
+    faqs: [
+      {
+        question: "Does the clinic bear credit risk if a patient defaults?",
+        answer: "No. The financing agreement is directly between the patient and the RBI-regulated lending partner. The clinic takes zero credit or collection risk."
+      },
+      {
+        question: "Is there any setup fee for dental clinics?",
+        answer: "No, Clinaza provides free clinic onboarding, digital tools, and physical glass door decal stickers with ₹0 clinic setup fees."
+      }
+    ],
+    content: (
+      <div className="space-y-6">
+        <p className="text-lg leading-relaxed text-neutral-700">
+          Patients routinely postpone dental implants, clear aligners, and crown restorations due to cash flow concerns. By introducing <strong>point-of-care EMI financing through Clinaza</strong>, clinics turn patient hesitation into immediate treatment acceptance.
+        </p>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Why Top Clinics Partner With Clinaza</h2>
+        <ul className="list-disc pl-6 space-y-3 text-neutral-700">
+          <li><strong>₹0 Upfront Fees:</strong> Zero subscription or onboarding charges for clinics.</li>
+          <li><strong>Zero EMI Collection Burden:</strong> Monthly repayments are collected directly by NBFCs via e-NACH auto-debit.</li>
+          <li><strong>Instant Point-of-Care Assessment:</strong> Quick 2-minute digital pre-check on mobile devices.</li>
+          <li><strong>Higher Conversion on High-Ticket Plans:</strong> Make ₹50,000–₹3,00,000 procedures affordable.</li>
+        </ul>
       </div>
     )
   }

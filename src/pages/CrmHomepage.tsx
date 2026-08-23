@@ -51,7 +51,7 @@ export default function CrmHomepage() {
   // EMI Calculator state
   const [emiAmount, setEmiAmount] = useState(100000);
   const [emiTenure, setEmiTenure] = useState(12);
-  const [emiRate, setEmiRate] = useState(12); // Standard lender rate
+  const [emiRate, setEmiRate] = useState(15); // Estimated lender rate
 
   const calcEMI = (principal: number, months: number, annualRate: number) => {
     const r = annualRate / 12 / 100;
@@ -533,8 +533,8 @@ export default function CrmHomepage() {
                     <div className="space-y-2.5">
                       {[
                         { label: 'Principal Amount', value: `₹${emiAmount.toLocaleString('en-IN')}`, accent: false },
-                        { label: 'Total Interest', value: totalInterest === 0 ? '₹0 (0% Scheme)' : `₹${totalInterest.toLocaleString('en-IN')}`, accent: false },
-                        { label: 'Total Payable', value: `₹${totalPayable.toLocaleString('en-IN')}`, accent: true },
+                        { label: 'Est. Interest (15% p.a.)', value: `₹${totalInterest.toLocaleString('en-IN')}`, accent: false },
+                        { label: 'Est. Total Payable', value: `₹${totalPayable.toLocaleString('en-IN')}`, accent: true },
                       ].map((row, idx) => (
                         <div key={idx} className={`flex justify-between items-center px-4 py-3 rounded-xl text-xs font-bold ${row.accent ? 'bg-[#0867E8]/8 border border-[#0867E8]/20 text-[#0B2450]' : 'bg-[#F7FAFC] border border-slate-100 text-slate-600'}`}>
                           <span>{row.label}</span>
@@ -552,7 +552,7 @@ export default function CrmHomepage() {
                       <ShieldCheck size={15} /> Check My Eligibility →
                     </button>
                     <p className="text-[10px] text-slate-400 text-center leading-relaxed">
-                      Indicative estimate only. Actual EMI, interest rate, and tenure subject to lender approval and eligibility.
+                      ⚠️ Estimated at 15% p.a. Actual EMI, interest rate &amp; tenure are set by the lender at the time of approval.
                     </p>
                   </div>
                 </div>

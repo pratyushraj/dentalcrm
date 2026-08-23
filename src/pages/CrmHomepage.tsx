@@ -7,7 +7,10 @@ import {
   MessageSquare, 
   Building2, 
   Check,
-  Send
+  Send,
+  HelpCircle,
+  ChevronDown,
+  UserCheck
 } from 'lucide-react';
 import { toast } from 'sonner';
 import { SEOHead } from '@/components/seo/SEOHead';
@@ -63,6 +66,33 @@ export default function CrmHomepage() {
     'Financing handled entirely by lending partners',
     '100% digital, paperless application process',
     'Dedicated support from the Clinaza team'
+  ];
+  const [activeFaq, setActiveFaq] = useState<number | null>(null);
+
+  const patientSteps = [
+    { num: '1', emoji: '🦷', title: 'Choose your treatment', desc: 'Discuss your treatment plan and total cost with your clinic.' },
+    { num: '2', emoji: '📋', title: 'Apply for financing', desc: 'Complete the simple digital application with required KYC documents.' },
+    { num: '3', emoji: '✅', title: 'Get an eligibility decision', desc: 'The lending partner reviews your application instantly.' },
+    { num: '4', emoji: '💳', title: 'Pay through EMIs', desc: 'If approved, repay the lender according to the agreed repayment schedule.' }
+  ];
+
+  const faqs = [
+    {
+      q: 'Is everyone eligible?',
+      a: 'Eligibility is determined by the lending partner based on credit evaluation, income verification, and lender policies.'
+    },
+    {
+      q: 'How much can I finance?',
+      a: 'Financing options may range from ₹30,000 to ₹3,00,000, subject to lender approval.'
+    },
+    {
+      q: 'Does Clinaza provide the loan?',
+      a: 'Clinaza facilitates access to financing; the loan is provided by the applicable bank/NBFC/lending partner.'
+    },
+    {
+      q: 'Can I choose any treatment?',
+      a: 'Financing availability depends on the treatment, clinic, and lending partner.'
+    }
   ];
 
   return (
@@ -216,6 +246,92 @@ export default function CrmHomepage() {
                 <p className="text-xs text-slate-600 leading-relaxed">{step.desc}</p>
               </div>
             ))}
+          </div>
+        </section>
+
+        {/* ── FOR PATIENTS SECTION (LIGHT BLUE #F5F9FC) ── */}
+        <section aria-label="For Patients" className="py-20 px-6 bg-[#F5F9FC] border-y border-blue-50">
+          <div className="max-w-5xl mx-auto space-y-12">
+            <div className="text-center space-y-3">
+              <span className="text-[10px] font-black text-[#0f7a75] uppercase tracking-widest flex items-center justify-center gap-1.5">
+                <UserCheck size={14} aria-hidden="true" /> FOR PATIENTS
+              </span>
+              <h2 className="text-2xl sm:text-4xl font-black text-[#0B2450]">Make Your Treatment More Manageable</h2>
+              <p className="text-xs sm:text-sm text-slate-600 max-w-2xl mx-auto leading-relaxed">
+                Found the right treatment but worried about the upfront cost? <br />
+                Clinaza can help eligible patients explore financing options through its lending partners.
+              </p>
+            </div>
+
+            {/* Patient Workflow Steps */}
+            <div className="space-y-4">
+              <h3 className="text-xs font-black text-[#0B2450] uppercase tracking-widest text-center">How It Works</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {patientSteps.map((s, idx) => (
+                  <div key={idx} className="bg-white border border-slate-200 p-6 rounded-3xl space-y-3 text-left shadow-sm">
+                    <span className="text-2xl block" role="img" aria-label={s.title}>{s.emoji}</span>
+                    <span className="text-[10px] font-mono font-bold text-[#0756C7] uppercase tracking-wider block">Step 0{s.num}</span>
+                    <h4 className="text-sm font-black text-[#0B2450]">{s.title}</h4>
+                    <p className="text-xs text-slate-600 leading-relaxed">{s.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Patient CTA Banner */}
+            <div className="bg-white border border-slate-200/90 p-8 rounded-3xl text-center space-y-5 shadow-sm max-w-2xl mx-auto">
+              <div className="space-y-1">
+                <h3 className="text-lg font-black text-[#0B2450]">Need financing for your treatment?</h3>
+                <p className="text-xs text-slate-600">Ask your clinic if Clinaza financing is available.</p>
+              </div>
+              <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
+                <a
+                  href="#partner-form"
+                  className="w-full sm:w-auto px-6 py-3 bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-black uppercase tracking-wider rounded-xl transition-all shadow-md shadow-[#0867E8]/20 flex items-center justify-center gap-1.5"
+                >
+                  Check With Clinaza <ArrowRight size={14} />
+                </a>
+                <a
+                  href="https://wa.me/917292984244?text=Hi%20Clinaza%2C%20I%20want%20to%20check%20if%20my%20treatment%20is%20eligible%20for%20EMI%20financing"
+                  target="_blank" rel="noopener noreferrer"
+                  className="w-full sm:w-auto px-6 py-3 bg-[#F7FAFC] hover:bg-slate-100 text-[#0B2450] border border-slate-200 text-xs font-bold rounded-xl transition-all flex items-center justify-center gap-2"
+                >
+                  <MessageSquare size={14} className="text-[#0f7a75]" />
+                  WhatsApp Us
+                </a>
+              </div>
+            </div>
+
+            {/* Patient FAQ Accordion */}
+            <div className="max-w-3xl mx-auto space-y-4 pt-4">
+              <div className="flex items-center justify-center gap-2 text-[#0f7a75]">
+                <HelpCircle size={18} aria-hidden="true" />
+                <h3 className="text-xs font-black uppercase tracking-widest text-[#0B2450]">Frequently Asked Questions</h3>
+              </div>
+              <div className="space-y-3">
+                {faqs.map((faq, idx) => {
+                  const isOpen = activeFaq === idx;
+                  return (
+                    <div key={idx} className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm transition-all">
+                      <button
+                        type="button"
+                        onClick={() => setActiveFaq(isOpen ? null : idx)}
+                        aria-expanded={isOpen}
+                        className="w-full px-6 py-4 flex justify-between items-center text-left hover:bg-slate-50/80 transition-colors"
+                      >
+                        <span className="text-xs sm:text-sm font-bold text-[#0B2450]">{faq.q}</span>
+                        <ChevronDown size={16} className={`text-slate-400 transition-transform duration-200 shrink-0 ${isOpen ? 'rotate-180 text-[#0756C7]' : ''}`} aria-hidden="true" />
+                      </button>
+                      {isOpen && (
+                        <div className="px-6 pb-4 pt-1 text-xs text-slate-600 leading-relaxed border-t border-slate-100 bg-[#F7FAFC]">
+                          {faq.a}
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
           </div>
         </section>
 

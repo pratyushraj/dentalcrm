@@ -22,6 +22,7 @@ import { SEOHead } from '@/components/seo/SEOHead';
 export default function PitchDeckPage() {
   const [currentSlide, setCurrentSlide] = useState(1);
   const totalSlides = 10;
+  const touchStartX = React.useRef<number | null>(null);
 
   const nextSlide = () => {
     if (currentSlide < totalSlides) setCurrentSlide(currentSlide + 1);
@@ -31,26 +32,48 @@ export default function PitchDeckPage() {
     if (currentSlide > 1) setCurrentSlide(currentSlide - 1);
   };
 
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return;
+    const delta = touchStartX.current - e.changedTouches[0].clientX;
+    if (Math.abs(delta) > 50) {
+      if (delta > 0) nextSlide();
+      else prevSlide();
+    }
+    touchStartX.current = null;
+  };
+
   return (
     <div className="min-h-screen bg-slate-900 text-white font-sans flex flex-col justify-between selection:bg-[#0867E8] selection:text-white">
       <SEOHead 
         title="Clinaza x Vrozart — Strategic Partnership Deck"
         description="Investor and Partnership Presentation for Clinaza Healthcare Financing Infrastructure"
+        image="https://clinaza.in/deck-og.png"
       />
 
       {/* Top Bar Navigation */}
-      <header className="px-6 py-4 border-b border-slate-800 bg-slate-950/80 backdrop-blur-md flex items-center justify-between sticky top-0 z-50">
-        <div className="flex items-center gap-3">
-          <div className="h-8 w-8 rounded-xl bg-gradient-to-tr from-[#0867E8] to-[#12A8A0] flex items-center justify-center font-black text-white text-xs">
+      <header className="px-4 sm:px-6 py-3 sm:py-4 border-b border-slate-800 bg-slate-950/80 backdrop-blur-md flex items-center justify-between sticky top-0 z-50">
+        <div className="flex items-center gap-2.5">
+          <div className="h-7 w-7 sm:h-8 sm:w-8 rounded-xl bg-gradient-to-tr from-[#0867E8] to-[#12A8A0] flex items-center justify-center font-black text-white text-xs shrink-0">
             C
           </div>
           <div>
-            <h1 className="text-xs font-black tracking-wider uppercase text-white">CLINAZA <span className="text-slate-400 font-normal">| Strategic Deck</span></h1>
-            <p className="text-[10px] text-slate-400 font-mono">Partner Presentation for Vrozart</p>
+            <h1 className="text-[11px] sm:text-xs font-black tracking-wider uppercase text-white leading-tight">CLINAZA <span className="text-slate-400 font-normal">| Deck</span></h1>
+            <p className="text-[9px] sm:text-[10px] text-slate-400 font-mono hidden sm:block">Partner Presentation for Vrozart</p>
           </div>
         </div>
 
-        {/* Slide Counter & Indicators */}
+        {/* Mobile: slide counter pill */}
+        <div className="flex sm:hidden items-center gap-2">
+          <span className="px-3 py-1 bg-slate-800 text-xs font-mono text-slate-300 rounded-full">
+            {currentSlide} / {totalSlides}
+          </span>
+        </div>
+
+        {/* Desktop: Slide Indicators */}
         <div className="hidden sm:flex items-center gap-2">
           {Array.from({ length: totalSlides }).map((_, idx) => (
             <button
@@ -73,46 +96,51 @@ export default function PitchDeckPage() {
         <div className="flex items-center gap-2">
           <button 
             onClick={() => window.print()}
-            className="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold rounded-lg flex items-center gap-1.5 transition-all"
+            className="px-2.5 sm:px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold rounded-lg flex items-center gap-1.5 transition-all"
           >
-            <Download size={14} /> Export PDF
+            <Download size={13} /> <span className="hidden sm:inline">Export PDF</span><span className="sm:hidden">PDF</span>
           </button>
         </div>
       </header>
 
       {/* Main Slide Viewer Canvas */}
-      <main className="flex-1 flex items-center justify-center p-4 sm:p-8 max-w-6xl mx-auto w-full">
-        <div className="w-full aspect-[16/9] max-h-[720px] bg-white text-slate-900 rounded-3xl shadow-2xl overflow-hidden flex flex-col justify-between relative border border-slate-200 print:shadow-none print:aspect-auto print:max-h-none print:w-full">
+      <main className="flex-1 flex items-center justify-center p-3 sm:p-8 max-w-6xl mx-auto w-full">
+        {/* Mobile: responsive scrollable container | Desktop: fixed 16:9 canvas */}
+        <div
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+          className="w-full bg-white text-slate-900 rounded-2xl sm:rounded-3xl shadow-2xl relative border border-slate-200 print:shadow-none print:w-full
+                     aspect-auto min-h-[460px] sm:aspect-[16/9] sm:max-h-[720px] overflow-y-auto sm:overflow-hidden flex flex-col justify-between">
           
           {/* SLIDE 1: COVER */}
           {currentSlide === 1 && (
-            <div className="h-full p-8 sm:p-14 flex flex-col justify-between bg-gradient-to-br from-white via-slate-50 to-blue-50/50">
-              <div className="flex justify-between items-start">
+            <div className="h-full p-5 sm:p-14 flex flex-col justify-between bg-gradient-to-br from-white via-slate-50 to-blue-50/50 min-h-[460px] sm:min-h-0">
+              <div className="flex flex-col sm:flex-row sm:justify-between items-start gap-3 sm:gap-0">
                 <div className="flex items-center gap-2.5">
-                  <div className="h-10 w-10 rounded-2xl bg-[#0867E8] flex items-center justify-center text-white font-black text-lg shadow-lg shadow-[#0867E8]/20">
+                  <div className="h-9 w-9 sm:h-10 sm:w-10 rounded-2xl bg-[#0867E8] flex items-center justify-center text-white font-black text-base sm:text-lg shadow-lg shadow-[#0867E8]/20">
                     C
                   </div>
                   <div>
-                    <span className="text-xl font-black tracking-tight text-[#0B2450] block">CLINAZA</span>
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-[#0f7a75]">Healthcare Financing Layer</span>
+                    <span className="text-lg sm:text-xl font-black tracking-tight text-[#0B2450] block">CLINAZA</span>
+                    <span className="text-[9px] sm:text-[10px] font-bold uppercase tracking-widest text-[#0f7a75]">Healthcare Financing Layer</span>
                   </div>
                 </div>
-                <div className="px-3 py-1 bg-blue-50 border border-blue-200 rounded-full text-[11px] font-mono font-bold text-[#0867E8]">
+                <div className="px-3 py-1 bg-blue-50 border border-blue-200 rounded-full text-[10px] sm:text-[11px] font-mono font-bold text-[#0867E8]">
                   CONFIDENTIAL &middot; PARTNERSHIP DECK
                 </div>
               </div>
 
-              <div className="space-y-6 max-w-2xl">
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#0f7a75]/10 text-[#0f7a75] rounded-full text-xs font-bold">
+              <div className="space-y-4 sm:space-y-6 max-w-2xl my-6 sm:my-0">
+                <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#0f7a75]/10 text-[#0f7a75] rounded-full text-[11px] sm:text-xs font-bold">
                   <span>Partnership Opportunity with Vrozart</span>
                 </div>
-                <h1 className="text-4xl sm:text-6xl font-black text-[#0B2450] tracking-tight leading-[1.1]">
+                <h1 className="text-3xl sm:text-6xl font-black text-[#0B2450] tracking-tight leading-[1.1]">
                   EMI for <br />
                   <span className="bg-gradient-to-r from-[#0867E8] to-[#12A8A0] bg-clip-text text-transparent">
                     Better Health
                   </span>
                 </h1>
-                <p className="text-base sm:text-lg text-slate-600 font-medium leading-relaxed">
+                <p className="text-sm sm:text-lg text-slate-600 font-medium leading-relaxed">
                   Building the point-of-care financing infrastructure connecting dental clinics, patients, and regulated lenders across India.
                 </p>
               </div>
@@ -124,9 +152,9 @@ export default function PitchDeckPage() {
             </div>
           )}
 
-          {/* SLIDE 2: THE PROBLEM */}
+          {/* SLIDE 2: MARKET FRICTION / PROBLEM */}
           {currentSlide === 2 && (
-            <div className="h-full p-8 sm:p-14 flex flex-col justify-between">
+            <div className="h-full p-5 sm:p-14 flex flex-col justify-between space-y-4 sm:space-y-0">
               <div className="space-y-2">
                 <span className="text-xs font-mono font-bold text-[#0867E8] uppercase tracking-widest">01 / MARKET FRICTION</span>
                 <h2 className="text-3xl sm:text-4xl font-black text-[#0B2450]">The Healthcare Affordability Gap</h2>
@@ -173,7 +201,7 @@ export default function PitchDeckPage() {
 
           {/* SLIDE 3: CLINAZA SOLUTION */}
           {currentSlide === 3 && (
-            <div className="h-full p-8 sm:p-14 flex flex-col justify-between">
+            <div className="h-full p-5 sm:p-14 flex flex-col justify-between space-y-4 sm:space-y-0">
               <div className="space-y-2">
                 <span className="text-xs font-mono font-bold text-[#0f7a75] uppercase tracking-widest">02 / OUR ARCHITECTURE</span>
                 <h2 className="text-3xl sm:text-4xl font-black text-[#0B2450]">The Clinaza Operating Model</h2>
@@ -571,33 +599,36 @@ export default function PitchDeckPage() {
       </main>
 
       {/* Footer Navigation Bar */}
-      <footer className="px-6 py-4 border-t border-slate-800 bg-slate-950 flex items-center justify-between">
+      <footer className="px-4 sm:px-6 py-3 sm:py-4 border-t border-slate-800 bg-slate-950 flex items-center justify-between gap-3">
         <button
           onClick={prevSlide}
           disabled={currentSlide === 1}
-          className={`px-4 py-2 text-xs font-bold rounded-xl flex items-center gap-2 transition-all ${
+          className={`px-4 sm:px-5 py-3 sm:py-2 text-xs font-bold rounded-xl flex items-center gap-2 transition-all flex-1 sm:flex-none justify-center sm:justify-start ${
             currentSlide === 1 
-              ? 'opacity-40 cursor-not-allowed text-slate-500' 
+              ? 'opacity-40 cursor-not-allowed text-slate-500 bg-slate-900' 
               : 'bg-slate-800 hover:bg-slate-700 text-white'
           }`}
         >
-          <ChevronLeft size={16} /> Previous Slide
+          <ChevronLeft size={16} /> <span className="hidden sm:inline">Previous</span><span className="sm:hidden">Prev</span>
         </button>
 
-        <div className="text-xs text-slate-400 font-mono hidden sm:block">
-          Use Left / Right navigation buttons to present
+        <div className="text-[10px] text-slate-500 font-mono text-center hidden sm:block">
+          Use buttons or swipe to present
+        </div>
+        <div className="text-[10px] text-slate-500 font-mono text-center sm:hidden">
+          Swipe ← → to navigate
         </div>
 
         <button
           onClick={nextSlide}
           disabled={currentSlide === totalSlides}
-          className={`px-5 py-2 text-xs font-bold rounded-xl flex items-center gap-2 transition-all ${
+          className={`px-4 sm:px-6 py-3 sm:py-2 text-xs font-bold rounded-xl flex items-center gap-2 transition-all flex-1 sm:flex-none justify-center sm:justify-start ${
             currentSlide === totalSlides 
-              ? 'opacity-40 cursor-not-allowed text-slate-500' 
+              ? 'opacity-40 cursor-not-allowed text-slate-500 bg-slate-900' 
               : 'bg-[#0867E8] hover:bg-[#0756C7] text-white shadow-lg shadow-[#0867E8]/20'
           }`}
         >
-          Next Slide <ChevronRight size={16} />
+          Next <ChevronRight size={16} />
         </button>
       </footer>
     </div>

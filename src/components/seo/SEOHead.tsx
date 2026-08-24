@@ -30,7 +30,7 @@ export const SEOHead: React.FC<SEOHeadProps> = ({
   title,
   description,
   keywords = [],
-  image = 'https://clinaza.in/assets/clinaza-logo.jpg',
+  image = 'https://clinaza.in/og-preview.png',
   type = 'website',
   publishedTime,
   modifiedTime,

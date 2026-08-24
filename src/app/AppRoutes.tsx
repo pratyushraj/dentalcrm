@@ -15,6 +15,7 @@ const BlogHub = lazy(() => import("@/pages/yourdentist/BlogHub"));
 const BlogArticlePage = lazy(() => import("@/pages/yourdentist/BlogArticlePage"));
 const ReviewAssistant = lazy(() => import("@/pages/yourdentist/ReviewAssistant"));
 const CityLandingPage = lazy(() => import("@/pages/CityLandingPage"));
+const PitchDeckPage = lazy(() => import("@/pages/PitchDeckPage"));
 
 export default function AppRoutes() {
   return (
@@ -40,6 +41,9 @@ export default function AppRoutes() {
 
           {/* City-specific Landing Pages – all Indian cities */}
           <Route path="/cities/:city" element={<LazyRoute><CityLandingPage /></LazyRoute>} />
+
+          {/* Vrozart Partnership Pitch Deck */}
+          <Route path="/deck" element={<LazyRoute><PitchDeckPage /></LazyRoute>} />
 
           {/* Legacy Redirects for SEO Continuity */}
           <Route path="/yourdentist/blog" element={<Navigate to="/blog" replace />} />

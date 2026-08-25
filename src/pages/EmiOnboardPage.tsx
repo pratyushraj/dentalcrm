@@ -16,6 +16,7 @@ interface LenderOffer {
   totalRepayment: number;
   processingFee: number;
   minCibil: number | string;
+  sortRate: number;
   isRecommended?: boolean;
 }
 
@@ -65,9 +66,23 @@ export default function EmiOnboardPage() {
 
   const isLendSure = partnerName.toLowerCase().includes('lendsure');
 
-  // Helper to build the complete list of 14 direct partner lenders from the Marcadeo brief
+  // Helper to build the complete list of 13 direct partner lenders from the Marcadeo brief sorted by interest rate (low to high)
   const buildLenderOffers = (amount: number, resultsMap?: Map<string, string>): LenderOffer[] => {
     const list: LenderOffer[] = [
+      {
+        id: 'offer-salaryontime',
+        lenderName: 'Salary On Time Loan',
+        logoBg: 'bg-gradient-to-tr from-indigo-600 to-cyan-500 text-white',
+        logoChar: 'ST',
+        badge: 'Low Salaried Approval',
+        interestRate: '7.50%–30% p.a.',
+        tenure: '12 Months',
+        monthlyEmi: Math.round((amount * 1.15) / 12),
+        totalRepayment: Math.round(amount * 1.15),
+        processingFee: Math.round(amount * 0.035),
+        minCibil: '600',
+        sortRate: 7.5,
+      },
       {
         id: 'offer-cashvia',
         lenderName: 'Cashvia Personal Loan',
@@ -80,32 +95,7 @@ export default function EmiOnboardPage() {
         totalRepayment: Math.round(amount * 1.12),
         processingFee: Math.round(amount * 0.03),
         minCibil: '600',
-      },
-      {
-        id: 'offer-atmcred',
-        lenderName: 'ATM Cred Personal Loan',
-        logoBg: 'bg-gradient-to-tr from-cyan-600 to-blue-600 text-white',
-        logoChar: 'AC',
-        badge: 'Low CIBIL Approval',
-        interestRate: '18% – 36% p.a.',
-        tenure: '12 Months',
-        monthlyEmi: Math.round((amount * 1.18) / 12),
-        totalRepayment: Math.round(amount * 1.18),
-        processingFee: Math.round(amount * 0.035),
-        minCibil: '500',
-      },
-      {
-        id: 'offer-surya',
-        lenderName: 'Surya Personal Loan',
-        logoBg: 'bg-gradient-to-tr from-amber-500 to-yellow-600 text-white',
-        logoChar: 'SU',
-        badge: 'High Approval Rate',
-        interestRate: '18% – 36% p.a.',
-        tenure: '12 Months',
-        monthlyEmi: Math.round((amount * 1.18) / 12),
-        totalRepayment: Math.round(amount * 1.18),
-        processingFee: Math.round(amount * 0.03),
-        minCibil: '600',
+        sortRate: 12.0,
       },
       {
         id: 'offer-jupiter',
@@ -119,6 +109,35 @@ export default function EmiOnboardPage() {
         totalRepayment: Math.round(amount * 1.15),
         processingFee: Math.round(amount * 0.025),
         minCibil: '650',
+        sortRate: 12.0,
+      },
+      {
+        id: 'offer-atmcred',
+        lenderName: 'ATM Cred Personal Loan',
+        logoBg: 'bg-gradient-to-tr from-cyan-600 to-blue-600 text-white',
+        logoChar: 'AC',
+        badge: 'Low CIBIL Approval',
+        interestRate: '18% – 36% p.a.',
+        tenure: '12 Months',
+        monthlyEmi: Math.round((amount * 1.18) / 12),
+        totalRepayment: Math.round(amount * 1.18),
+        processingFee: Math.round(amount * 0.035),
+        minCibil: '500',
+        sortRate: 18.0,
+      },
+      {
+        id: 'offer-surya',
+        lenderName: 'Surya Personal Loan',
+        logoBg: 'bg-gradient-to-tr from-amber-500 to-yellow-600 text-white',
+        logoChar: 'SU',
+        badge: 'High Approval Rate',
+        interestRate: '18% – 36% p.a.',
+        tenure: '12 Months',
+        monthlyEmi: Math.round((amount * 1.18) / 12),
+        totalRepayment: Math.round(amount * 1.18),
+        processingFee: Math.round(amount * 0.03),
+        minCibil: '600',
+        sortRate: 18.0,
       },
       {
         id: 'offer-hero',
@@ -132,6 +151,7 @@ export default function EmiOnboardPage() {
         totalRepayment: amount,
         processingFee: 0,
         minCibil: '700',
+        sortRate: 18.0,
       },
       {
         id: 'offer-digicredit',
@@ -145,6 +165,7 @@ export default function EmiOnboardPage() {
         totalRepayment: Math.round(amount * 1.18),
         processingFee: Math.round(amount * 0.03),
         minCibil: '650',
+        sortRate: 18.0,
       },
       {
         id: 'offer-mmb',
@@ -158,6 +179,7 @@ export default function EmiOnboardPage() {
         totalRepayment: Math.round(amount * 1.18),
         processingFee: Math.round(amount * 0.025),
         minCibil: '600',
+        sortRate: 18.0,
       },
       {
         id: 'offer-tap4credit',
@@ -171,6 +193,7 @@ export default function EmiOnboardPage() {
         totalRepayment: Math.round(amount * 1.20),
         processingFee: Math.round(amount * 0.03),
         minCibil: '650',
+        sortRate: 18.0,
         isRecommended: true,
       },
       {
@@ -185,6 +208,7 @@ export default function EmiOnboardPage() {
         totalRepayment: Math.round(amount * 1.18),
         processingFee: Math.round(amount * 0.03),
         minCibil: '600',
+        sortRate: 18.0,
       },
       {
         id: 'offer-timepecash',
@@ -198,6 +222,7 @@ export default function EmiOnboardPage() {
         totalRepayment: Math.round(amount * 1.15),
         processingFee: Math.round(amount * 0.03),
         minCibil: '600',
+        sortRate: 18.0,
       },
       {
         id: 'offer-dhancash',
@@ -211,6 +236,7 @@ export default function EmiOnboardPage() {
         totalRepayment: Math.round(amount * 1.24),
         processingFee: Math.round(amount * 0.04),
         minCibil: '650',
+        sortRate: 24.0,
       },
       {
         id: 'offer-creditsea',
@@ -224,23 +250,12 @@ export default function EmiOnboardPage() {
         totalRepayment: Math.round(amount * 1.24),
         processingFee: 0,
         minCibil: '500',
-      },
-      {
-        id: 'offer-salaryontime',
-        lenderName: 'Salary On Time Loan',
-        logoBg: 'bg-gradient-to-tr from-indigo-600 to-cyan-500 text-white',
-        logoChar: 'ST',
-        badge: 'Low Salaried Approval',
-        interestRate: '7.50%–30% p.a.',
-        tenure: '12 Months',
-        monthlyEmi: Math.round((amount * 1.15) / 12),
-        totalRepayment: Math.round(amount * 1.15),
-        processingFee: Math.round(amount * 0.035),
-        minCibil: '600',
+        sortRate: 24.0,
       }
     ];
 
-    return list;
+    // Sort interest rate: low to high
+    return list.sort((a, b) => a.sortRate - b.sortRate);
   };
 
   const offers = buildLenderOffers(rawAmount);

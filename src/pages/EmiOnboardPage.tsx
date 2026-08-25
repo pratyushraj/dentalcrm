@@ -44,10 +44,14 @@ export default function EmiOnboardPage() {
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const nameParam = params.get('name');
+    const mobileParam = params.get('mobile');
+    const panParam = params.get('pan');
     const amountParam = params.get('amount');
     const partnerParam = params.get('partner');
     
     if (nameParam) setPatientName(decodeURIComponent(nameParam));
+    if (mobileParam) setMobile(decodeURIComponent(mobileParam));
+    if (panParam) setPan(decodeURIComponent(panParam).toUpperCase());
     if (amountParam) {
       const n = Number(amountParam);
       setRawAmount(n);

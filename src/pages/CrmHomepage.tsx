@@ -86,7 +86,7 @@ export default function CrmHomepage() {
     setShowEligibilityModal(false);
     
     // Direct redirect to live API checkout portal
-    window.location.href = `/emi/onboard?name=${encodeURIComponent(patientData.name)}&amount=75000`;
+    window.location.href = `/emi/onboard?name=${encodeURIComponent(patientData.name)}&mobile=${encodeURIComponent(patientData.mobile)}&amount=75000`;
   };
 
   const handleSubmit = (e: React.FormEvent) => {

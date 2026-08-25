@@ -722,38 +722,25 @@ export default function CrmHomepage() {
                     </div>
                   </div>
 
-                  {/* Treatment + Amount */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div className="space-y-1">
-                      <label htmlFor="patient-treatment" className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Treatment Needed</label>
-                      <select
-                        id="patient-treatment"
-                        value={patientData.treatment}
-                        onChange={e => setPatientData({ ...patientData, treatment: e.target.value })}
-                        className="w-full px-4 py-3 bg-[#F7FAFC] border border-slate-200 rounded-xl text-xs text-[#0B2450] focus:outline-none focus:border-[#0867E8]"
-                      >
-                        <option value="Dental Implants">Dental Implants</option>
-                        <option value="Aligners & Braces">Aligners & Braces</option>
-                        <option value="Crowns & Makeovers">Crowns & Makeovers</option>
-                        <option value="Orthopaedics">Orthopaedics</option>
-                        <option value="IVF & Fertility">IVF & Fertility</option>
-                        <option value="Ophthalmology / LASIK">Ophthalmology / LASIK</option>
-                        <option value="Other Surgery">Other Surgery</option>
-                      </select>
-                    </div>
-                    <div className="space-y-1">
-                      <label htmlFor="treatment-amount" className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Treatment Bill Amount (₹)</label>
-                      <input
-                        id="treatment-amount"
-                        type="number"
-                        min={5000}
-                        placeholder="e.g. 75000"
-                        value={patientData.treatmentAmount || ''}
-                        onChange={e => setPatientData({ ...patientData, treatmentAmount: Number(e.target.value) })}
-                        className="w-full px-4 py-3 bg-[#F7FAFC] border border-slate-200 rounded-xl text-xs text-[#0B2450] placeholder-slate-400 focus:outline-none focus:border-[#0867E8] font-mono"
-                      />
-                    </div>
+                  {/* Treatment */}
+                  <div className="space-y-1">
+                    <label htmlFor="patient-treatment" className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Treatment Needed</label>
+                    <select
+                      id="patient-treatment"
+                      value={patientData.treatment}
+                      onChange={e => setPatientData({ ...patientData, treatment: e.target.value })}
+                      className="w-full px-4 py-3 bg-[#F7FAFC] border border-slate-200 rounded-xl text-xs text-[#0B2450] focus:outline-none focus:border-[#0867E8]"
+                    >
+                      <option value="Dental Implants">Dental Implants</option>
+                      <option value="Aligners & Braces">Aligners & Braces</option>
+                      <option value="Crowns & Makeovers">Crowns & Makeovers</option>
+                      <option value="Orthopaedics">Orthopaedics</option>
+                      <option value="IVF & Fertility">IVF & Fertility</option>
+                      <option value="Ophthalmology / LASIK">Ophthalmology / LASIK</option>
+                      <option value="Other Surgery">Other Surgery</option>
+                    </select>
                   </div>
+
 
                   {/* Divider */}
                   <div className="flex items-center gap-3 py-0.5">

@@ -485,8 +485,7 @@ export default function EmiOnboardPage() {
                     </div>
                   </div>
 
-                  <div className="mt-3.5 pt-3 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-slate-400">
-                    <div>Processing Fee: <strong className="text-slate-200">₹{offer.processingFee}</strong></div>
+                  <div className="mt-3.5 pt-3 border-t border-slate-800/80 flex items-center justify-end text-[11px] text-slate-400">
                     <div className="flex items-center gap-1 font-bold text-emerald-400 group-hover:translate-x-1 transition-transform">
                       Select Plan <ChevronRight size={13} />
                     </div>

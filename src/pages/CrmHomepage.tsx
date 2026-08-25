@@ -74,23 +74,19 @@ export default function CrmHomepage() {
       toast.error('Please fill in required fields');
       return;
     }
-    const isPotentiallyEligible = !patientData.cibilScore.includes('Below 650');
-    if (isPotentiallyEligible) {
-      trackEvent('eligibility_completed', {
-        cibil: patientData.cibilScore,
-        employment: patientData.employmentType,
-        treatment: patientData.treatment,
-        status: 'potentially_eligible'
-      });
-    } else {
-      trackEvent('eligibility_not_eligible', {
-        cibil: patientData.cibilScore,
-        employment: patientData.employmentType,
-        treatment: patientData.treatment,
-        status: 'sub_prime'
-      });
-    }
-    setEligibilityStep(2);
+
+    trackEvent('eligibility_completed', {
+      cibil: patientData.cibilScore,
+      employment: patientData.employmentType,
+      treatment: patientData.treatment,
+      status: 'redirecting_to_api_checkout'
+    });
+
+    toast.success('Connecting to Clinaza Multi-Lender API Engine...');
+    setShowEligibilityModal(false);
+    
+    // Direct redirect to live API checkout portal
+    window.location.href = `/emi/onboard?name=${encodeURIComponent(patientData.name)}&amount=75000`;
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -803,13 +799,13 @@ export default function CrmHomepage() {
 
                   <button
                     type="submit"
-                    className="w-full py-3.5 bg-[#0867E8] hover:bg-[#0756C7] text-white font-black text-xs uppercase tracking-widest rounded-xl transition-all shadow-md flex items-center justify-center gap-2"
+                    className="w-full py-3.5 bg-[#0867E8] hover:bg-[#0756C7] text-white font-black text-xs uppercase tracking-widest rounded-xl transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer active:scale-95"
                   >
-                    Proceed to Eligibility & Documents &rarr;
+                    Proceed to Digital Loan API Application &rarr;
                   </button>
 
                   <p className="text-[10px] text-slate-500 text-center leading-relaxed">
-                    Your information will be used only for evaluating your financing request and shared with relevant lending partners with your consent.
+                    Your information will be securely queried live against Clinaza partnered bank/NBFC APIs with your consent.
                   </p>
                 </form>
               ) : (

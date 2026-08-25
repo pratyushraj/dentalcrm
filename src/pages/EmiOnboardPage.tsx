@@ -260,24 +260,6 @@ export default function EmiOnboardPage() {
         {/* ─── STEP 0: CONSENT & BASIC DETAILS ─────────────────────────────────── */}
         {step === 0 && (
           <form onSubmit={handleConsentSubmit} className="space-y-6">
-            
-            {/* Auto-Fill Demo Data Helper Button */}
-            <div className="flex items-center justify-between bg-indigo-500/10 border border-indigo-500/20 rounded-2xl px-4 py-2.5">
-              <span className="text-[11px] font-semibold text-indigo-300">Testing or demonstrating?</span>
-              <button
-                type="button"
-                onClick={() => {
-                  setPan('ABCDE1234F');
-                  setMobile('9876543210');
-                  setConsentEligibility(true);
-                  setConsentBankTerms(true);
-                  toast.success('Demo data filled & consents accepted!');
-                }}
-                className="px-3 py-1 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-[10.5px] font-bold uppercase tracking-wider transition-all shadow-sm active:scale-95 flex items-center gap-1.5 cursor-pointer"
-              >
-                <span>⚡ Auto-Fill Demo Data</span>
-              </button>
-            </div>
 
             {/* Input Details */}
             <div className="space-y-3.5">

@@ -15,6 +15,7 @@ interface LenderOffer {
   monthlyEmi: number;
   totalRepayment: number;
   processingFee: number;
+  minCibil: number | string;
   isRecommended?: boolean;
 }
 
@@ -77,6 +78,7 @@ export default function EmiOnboardPage() {
       monthlyEmi: Math.round(rawAmount / 12),
       totalRepayment: rawAmount,
       processingFee: 0,
+      minCibil: 700,
       isRecommended: true
     },
     {
@@ -90,6 +92,7 @@ export default function EmiOnboardPage() {
       monthlyEmi: Math.round(rawAmount / 9),
       totalRepayment: rawAmount,
       processingFee: Math.round(rawAmount * 0.01),
+      minCibil: 500,
     },
     {
       id: 'offer-tap4credit',
@@ -102,6 +105,7 @@ export default function EmiOnboardPage() {
       monthlyEmi: Math.round((rawAmount * 1.09) / 18),
       totalRepayment: Math.round(rawAmount * 1.09),
       processingFee: Math.round(rawAmount * 0.015),
+      minCibil: 650,
     }
   ];
 
@@ -161,6 +165,7 @@ export default function EmiOnboardPage() {
           monthlyEmi: Math.round((rawAmount * 1.09) / 18),
           totalRepayment: Math.round(rawAmount * 1.09),
           processingFee: Math.round(rawAmount * 0.015),
+          minCibil: 650,
           isRecommended: true,
         });
       }
@@ -177,6 +182,7 @@ export default function EmiOnboardPage() {
           monthlyEmi: Math.round(rawAmount / 9),
           totalRepayment: rawAmount,
           processingFee: Math.round(rawAmount * 0.01),
+          minCibil: 600,
         });
       }
 
@@ -192,6 +198,7 @@ export default function EmiOnboardPage() {
           monthlyEmi: Math.round(rawAmount / 12),
           totalRepayment: rawAmount,
           processingFee: 0,
+          minCibil: 500,
         });
       }
     });
@@ -215,12 +222,26 @@ export default function EmiOnboardPage() {
     setStep(3); // Proceed to lender KYC & KFS completion
 
     setTimeout(() => {
-      const params = new URLSearchParams(window.location.search);
-      const clientId = params.get('client_id') || 'de01ee08f2ec9266649435867d87da8d';
+      // Map lender ID to affiliate tracking UTM links from Personal Loan Brief Excel
+      let trackingUrl = '';
+      if (offer.id === 'offer-cashvia') {
+        trackingUrl = 'https://partners.marcadeo.com/click?oid=294&uid=1895&lid=242';
+      } else if (offer.id === 'offer-tap4credit') {
+        trackingUrl = 'https://partners.marcadeo.com/click?oid=393&uid=1895&lid=420';
+      } else if (offer.id === 'offer-creditsea') {
+        trackingUrl = 'https://partners.marcadeo.com/click?oid=454&uid=1895&lid=523';
+      } else if (offer.id === 'offer-hero') {
+        trackingUrl = 'https://partners.marcadeo.com/click?oid=344&uid=1895&lid=335';
+      } else {
+        // Fallback to default callback
+        const params = new URLSearchParams(window.location.search);
+        const clientId = params.get('client_id') || 'de01ee08f2ec9266649435867d87da8d';
+        window.location.href = `/emi/callback?client_id=${clientId}&status=approved&lender=${encodeURIComponent(offer.lenderName)}&mobile=${encodeURIComponent(mobile)}`;
+        return;
+      }
 
-      // All three lenders are push APIs — lead already submitted.
-      // Show the lender-specific next-steps confirmation screen.
-      window.location.href = `/emi/callback?client_id=${clientId}&status=approved&lender=${encodeURIComponent(offer.lenderName)}&mobile=${encodeURIComponent(mobile)}`;
+      // Append mobile number or click reference to tracking link to identify lead if supported
+      window.location.href = `${trackingUrl}&aff_sub=${encodeURIComponent(mobile)}`;
     }, 2000);
   };
 
@@ -474,9 +495,14 @@ export default function EmiOnboardPage() {
                       </div>
                       <div>
                         <h5 className="text-xs sm:text-sm font-bold text-white">{offer.lenderName}</h5>
-                        <span className="inline-block mt-0.5 text-[10px] font-semibold text-slate-400">
-                          {offer.badge} · {offer.interestRate}
-                        </span>
+                        <div className="flex flex-wrap items-center gap-2 mt-1">
+                          <span className="inline-block text-[10px] font-semibold text-slate-400">
+                            {offer.badge} · {offer.interestRate}
+                          </span>
+                          <span className="px-1.5 py-0.5 rounded bg-slate-800 border border-slate-700 text-slate-300 text-[9px] font-bold">
+                            Min CIBIL: {offer.minCibil}+
+                          </span>
+                        </div>
                       </div>
                     </div>
 

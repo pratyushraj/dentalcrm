@@ -81,12 +81,8 @@ export default function CrmHomepage() {
       cibil: patientData.cibilScore,
       employment: patientData.employmentType,
       treatment: patientData.treatment,
-      status: 'redirecting_to_api_checkout'
     });
 
-    toast.success('Connecting to Clinaza Multi-Lender API Engine...');
-    setShowEligibilityModal(false);
-    
     // Send email notification to funnyraj10@gmail.com
     emailNotificationService.sendNotification('New Patient Eligibility Form Checked', {
       patientName: patientData.name,
@@ -94,12 +90,13 @@ export default function CrmHomepage() {
       cibilScoreRange: patientData.cibilScore,
       employmentType: patientData.employmentType,
       treatmentNeeded: patientData.treatment,
-      treatmentAmount: 75000
+      monthlyIncome: patientData.incomeProof,
+      loanAmountRange: patientData.amount,
     });
 
-    // Direct redirect to live API checkout portal — amount omitted so onboard page asks patient
-    const amountParam = patientData.treatmentAmount > 0 ? `&amount=${patientData.treatmentAmount}` : '';
-    window.location.href = `/emi/onboard?name=${encodeURIComponent(patientData.name)}&mobile=${encodeURIComponent(patientData.mobile)}${amountParam}`;
+    toast.success(`✅ Details saved for ${patientData.name}! Our team will follow up shortly.`);
+    setPatientSubmitted(true);
+    setShowEligibilityModal(false);
   };
 
   const handleSubmit = (e: React.FormEvent) => {

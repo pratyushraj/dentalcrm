@@ -213,12 +213,15 @@ export default function EmiOnboardPage() {
   const handleSelectOffer = (offer: LenderOffer) => {
     setSelectedOffer(offer);
     setStep(3); // Proceed to lender KYC & KFS completion
-    
+
     setTimeout(() => {
       const params = new URLSearchParams(window.location.search);
       const clientId = params.get('client_id') || 'de01ee08f2ec9266649435867d87da8d';
-      window.location.href = `/emi/callback?client_id=${clientId}&status=approved&lender=${encodeURIComponent(offer.lenderName)}`;
-    }, 2500);
+
+      // All three lenders are push APIs — lead already submitted.
+      // Show the lender-specific next-steps confirmation screen.
+      window.location.href = `/emi/callback?client_id=${clientId}&status=approved&lender=${encodeURIComponent(offer.lenderName)}&mobile=${encodeURIComponent(mobile)}`;
+    }, 2000);
   };
 
   return (

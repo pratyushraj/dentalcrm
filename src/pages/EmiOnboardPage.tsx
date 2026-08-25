@@ -414,10 +414,6 @@ export default function EmiOnboardPage() {
       toast.error('Please accept both consent items to check your financing options.');
       return;
     }
-    if (pan.length !== 10) {
-      toast.error('Please enter a valid 10-character PAN number.');
-      return;
-    }
 
     setStep(1); // Proceed to Lender Matching
     
@@ -614,46 +610,18 @@ export default function EmiOnboardPage() {
                 1. Basic Verification Details
               </h4>
               
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                <div>
-                  <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">PAN Card Number</label>
-                  <input
-                    type="text"
-                    maxLength={10}
-                    placeholder="ABCDE1234F"
-                    value={pan}
-                    onChange={(e) => setPan(e.target.value.toUpperCase())}
-                    className="w-full px-4 py-3 bg-slate-950/80 border border-slate-800 rounded-xl text-xs font-semibold font-mono text-white placeholder:text-slate-400 outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-all uppercase"
-                    required
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Mobile Number</label>
-                  <input
-                    type="tel"
-                    maxLength={10}
-                    placeholder="9876543210"
-                    value={mobile}
-                    onChange={(e) => setMobile(e.target.value.replace(/[^0-9]/g, ''))}
-                    className="w-full px-4 py-3 bg-slate-950/80 border border-slate-800 rounded-xl text-xs font-semibold font-mono text-white placeholder:text-slate-400 outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-all"
-                    required
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Estimated CIBIL Score</label>
-                  <select
-                    value={cibilScore}
-                    onChange={(e) => setCibilScore(e.target.value)}
-                    className="w-full px-4 py-3 bg-slate-950/80 border border-slate-800 rounded-xl text-xs font-semibold text-white outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-all cursor-pointer"
-                  >
-                    <option value="750">750+ (Excellent)</option>
-                    <option value="700">700 - 750 (Good)</option>
-                    <option value="650">600 - 700 (Fair)</option>
-                    <option value="550">Below 600 (Needs Improvement)</option>
-                  </select>
-                </div>
+              <div className="w-full">
+                <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Estimated CIBIL Score</label>
+                <select
+                  value={cibilScore}
+                  onChange={(e) => setCibilScore(e.target.value)}
+                  className="w-full px-4 py-3 bg-slate-950/80 border border-slate-800 rounded-xl text-xs font-semibold text-white outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-all cursor-pointer"
+                >
+                  <option value="750">750+ (Excellent)</option>
+                  <option value="700">700 - 750 (Good)</option>
+                  <option value="650">600 - 700 (Fair)</option>
+                  <option value="550">Below 600 (Needs Improvement)</option>
+                </select>
               </div>
             </div>
 

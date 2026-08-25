@@ -747,8 +747,6 @@ export default function CrmHomepage() {
                         </div>
                         <a
                           href={lender.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
                           className="shrink-0 ml-3 px-3.5 py-2 bg-[#0867E8] hover:bg-[#0756C7] text-white text-[10px] font-black uppercase tracking-wider rounded-xl transition-all shadow-sm active:scale-95"
                         >
                           Apply →

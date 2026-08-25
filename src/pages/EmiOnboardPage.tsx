@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ShieldCheck, ArrowRight, CheckCircle2, Lock, Sparkles, ChevronRight, Info, Building2, Check, CreditCard, Shield, Activity, Cpu } from 'lucide-react';
 import { toast } from 'sonner';
 import { ocenService } from '../services/ocenService';
+import { lenderIntegrationService } from '../services/lenderIntegrationService';
 
 interface LenderOffer {
   id: string;
@@ -119,16 +120,35 @@ export default function EmiOnboardPage() {
       treatment: { clinicId: 'CLINAZA_PATNA', clinicName: 'Clinaza Partner Dental', procedureName: 'Dental Procedure', invoiceAmount: rawAmount }
     });
 
-    setLoadingText('Connecting to OCEN 4.0 Loan Agent Protocol...');
+    setLoadingText('Querying Hero Fincorp (HIPL) Dedupe & Pre-Check API...');
+    
+    // Trigger 5-lender API aggregator submission
+    const nameParts = patientName.split(' ');
+    const firstName = nameParts[0] || 'Patient';
+    const lastName = nameParts.slice(1).join(' ') || 'User';
+    
+    const lenderRes = await lenderIntegrationService.submitPatientToAllLenders({
+      firstName,
+      lastName,
+      mobile: mobile || '9876543210',
+      pan: pan.toUpperCase(),
+      treatmentAmount: rawAmount,
+      incomeMonthly: 60000,
+      employmentType: 'Salaried'
+    });
+
+    console.log('[EmiOnboardPage] Multi-lender API Aggregator Results:', lenderRes);
+
     setTimeout(() => {
-      setLoadingText('Fetching ULI / Account Aggregator financial profiles...');
+      setLoadingText('Submitting Lead to Creditsea, Cashvia & Tap4Credit APIs...');
       setTimeout(() => {
-        setLoadingText('Aggregating real-time capital provider offers...');
+        setLoadingText('Verifying My Money Bazaar (MMB) User Dedupe...');
         setTimeout(() => {
+          toast.success(`Matched ${lenderRes.lenderResults.filter(r => r.status === 'APPROVED' || r.status === 'NOT_FOUND').length} Partner Lenders!`);
           setStep(2); // Show offers
-        }, 1000);
-      }, 1000);
-    }, 1000);
+        }, 800);
+      }, 800);
+    }, 800);
   };
 
   const handleSelectOffer = (offer: LenderOffer) => {

@@ -4,6 +4,7 @@ import { toast } from 'sonner';
 import { ocenService } from '../services/ocenService';
 import { lenderIntegrationService } from '../services/lenderIntegrationService';
 import { emailNotificationService } from '../services/emailNotificationService';
+import { SEOHead } from '@/components/seo/SEOHead';
 
 interface LenderOffer {
   id: string;
@@ -524,6 +525,11 @@ export default function EmiOnboardPage() {
 
   return (
     <div className="min-h-screen bg-slate-950 flex flex-col justify-between p-4 sm:p-6 font-sans text-slate-100 antialiased relative overflow-hidden selection:bg-emerald-500 selection:text-white">
+      <SEOHead
+        title="Clinaza Patient Onboarding — Point-of-Care Financing"
+        description="Check treatment loan eligibility and choose custom monthly EMIs directly at checkout."
+        image="https://clinaza.in/og-preview.png"
+      />
       
       {/* Background Decorative Glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-96 bg-gradient-to-b from-emerald-500/10 via-indigo-500/5 to-transparent blur-3xl pointer-events-none -z-10" />

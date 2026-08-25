@@ -425,7 +425,7 @@ export default function EmiOnboardPage() {
   const applyPreScreenFilter = (allOffers: LenderOffer[]): LenderOffer[] => {
     return allOffers.filter(offer => {
       // Q1: Employment type filter
-      const salaryOnlyIds = ['offer-salaryontime', 'offer-surya', 'offer-timepecash', 'offer-digicredit'];
+      const salaryOnlyIds = ['offer-salaryontime'];
       if (employmentType === 'self-employed' && salaryOnlyIds.includes(offer.id)) return false;
       if (employmentType === 'unemployed') return false;
 

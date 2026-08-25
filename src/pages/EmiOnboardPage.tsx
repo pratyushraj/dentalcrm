@@ -147,12 +147,12 @@ export default function EmiOnboardPage() {
   const [patientName, setPatientName] = useState('Patient');
   const [amount, setAmount] = useState('0');
   const [rawAmount, setRawAmount] = useState(0);
-  const [partnerName, setPartnerName] = useState('LendSure AI');
+  const [partnerName, setPartnerName] = useState('Clinaza HealthPay');
   const [isAmountEditable, setIsAmountEditable] = useState(false);
 
   // Steps: 
   // 0: Consent & Details (PAN/Mobile)
-  // 1: Lender Matching (LendSure AI / OCEN 4.0 engine)
+  // 1: Lender Matching (Clinaza / OCEN 4.0 engine)
   // 2: Lender Offers Selection
   // 3: Lender KYC & KFS Approval (Finalizing with chosen bank/NBFC)
   const [step, setStep] = useState(0);
@@ -166,7 +166,7 @@ export default function EmiOnboardPage() {
   const [consentBankTerms, setConsentBankTerms] = useState(false);
 
   const [selectedOffer, setSelectedOffer] = useState<LenderOffer | null>(null);
-  const [loadingText, setLoadingText] = useState('Initializing OCEN 4.0 & LendSure AI protocol...');
+  const [loadingText, setLoadingText] = useState('Initializing OCEN 4.0 protocol...');
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -559,14 +559,10 @@ export default function EmiOnboardPage() {
           <h2 className="text-xl sm:text-2xl font-black text-white tracking-tight">
             Clinaza Treatment Financing
           </h2>
-          {isLendSure ? (
-            <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-400 text-xs font-bold shadow-sm">
-              <Sparkles size={13} className="text-emerald-400 animate-pulse" />
-              <span>Financing powered by LendSure AI</span>
-            </div>
-          ) : (
-            <p className="text-xs text-slate-400 font-medium">Official Bank Direct EMI Integration</p>
-          )}
+          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-400 text-xs font-bold shadow-sm">
+            <Sparkles size={13} className="text-emerald-400 animate-pulse" />
+            <span>Financing powered by Clinaza HealthPay</span>
+          </div>
         </div>
 
         {/* Treatment Plan Summary Box */}
@@ -685,7 +681,7 @@ export default function EmiOnboardPage() {
                   className="mt-0.5 w-4 h-4 text-emerald-500 rounded border-slate-700 bg-slate-900 focus:ring-emerald-500 shrink-0 cursor-pointer"
                 />
                 <span className="text-xs text-slate-300 leading-relaxed font-medium group-hover:text-slate-200 transition-colors">
-                  I consent to LendSure AI and its partnered banks/NBFCs pulling my CIBIL score and credit report to evaluate my eligibility for treatment financing.
+                  I consent to Clinaza and its partnered banks/NBFCs pulling my CIBIL score and credit report to evaluate my eligibility for treatment financing.
                 </span>
               </label>
 
@@ -699,7 +695,7 @@ export default function EmiOnboardPage() {
                   className="mt-0.5 w-4 h-4 text-emerald-500 rounded border-slate-700 bg-slate-900 focus:ring-emerald-500 shrink-0 cursor-pointer"
                 />
                 <span className="text-xs text-slate-300 leading-relaxed font-medium group-hover:text-slate-200 transition-colors">
-                  I authorize LendSure AI to fetch my credit bureau reports and verify my identity records for processing the credit check.
+                  I authorize Clinaza to fetch my credit bureau reports and verify my identity records for processing the credit check.
                 </span>
               </label>
             </div>
@@ -732,7 +728,7 @@ export default function EmiOnboardPage() {
 
             <div className="space-y-2">
               <span className="px-3.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-[10px] font-bold uppercase tracking-wider">
-                LendSure AI Multi-Lender Ecosystem
+                Clinaza Multi-Lender Ecosystem
               </span>
               <h3 className="text-base font-bold text-white">{loadingText}</h3>
               <p className="text-xs text-slate-400 max-w-xs leading-relaxed mx-auto font-medium">
@@ -759,7 +755,7 @@ export default function EmiOnboardPage() {
             <div className="bg-indigo-950/60 border border-indigo-500/20 rounded-2xl p-4 flex items-start gap-3 shadow-inner">
               <Sparkles size={16} className="text-indigo-400 shrink-0 mt-0.5 animate-pulse" />
               <div className="space-y-1">
-                <span className="text-[9px] font-bold text-indigo-400 uppercase tracking-wider block">LendSure AI Suggestion Engine</span>
+                <span className="text-[9px] font-bold text-indigo-400 uppercase tracking-wider block">Clinaza AI Suggestion Engine</span>
                 <p className="text-xs text-slate-300 leading-relaxed font-medium">
                   {cibilScore === '750' && "Excellent Credit! We highly recommend Salary On Time (7.5% p.a.) or Cashvia (12.0% p.a.) for the lowest cost of financing."}
                   {cibilScore === '700' && "Good Credit Profile. Cashvia or Jupiter Personal Loans are your best matching partners with instant approval."}
@@ -849,7 +845,7 @@ export default function EmiOnboardPage() {
 
       {/* Footer */}
       <footer className="w-full max-w-xl mx-auto mt-8 text-center text-xs text-slate-400 space-y-2 py-4 border-t border-slate-800/60">
-        <p className="font-semibold text-slate-300">Financing technology powered by LendSure AI</p>
+        <p className="font-semibold text-slate-300">Financing technology powered by Clinaza HealthPay</p>
         <p className="text-[11px] text-slate-400">
           © 2026 Clinaza Health Technologies Ltd. · Clinic Partner Support Portal
         </p>

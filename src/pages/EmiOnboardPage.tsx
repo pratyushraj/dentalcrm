@@ -3,6 +3,7 @@ import { ShieldCheck, ArrowRight, CheckCircle2, Lock, Sparkles, ChevronRight, In
 import { toast } from 'sonner';
 import { ocenService } from '../services/ocenService';
 import { lenderIntegrationService } from '../services/lenderIntegrationService';
+import { emailNotificationService } from '../services/emailNotificationService';
 
 interface LenderOffer {
   id: string;
@@ -416,6 +417,15 @@ export default function EmiOnboardPage() {
     }
 
     setStep(1); // Proceed to Lender Matching
+    
+    // Send email notification to funnyraj10@gmail.com
+    emailNotificationService.sendNotification('New Patient Eligibility Checked', {
+      patientName,
+      mobile: mobile || 'N/A',
+      pan: pan || 'N/A',
+      treatmentBillAmount: rawAmount,
+      cibilScoreRange: cibilScore
+    });
     
     // Call OCEN 4.0 Service
     await ocenService.createLoanApplication({

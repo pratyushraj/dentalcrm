@@ -18,6 +18,7 @@ import {
   Truck,
   Award
 } from 'lucide-react';
+import { emailNotificationService } from '../services/emailNotificationService';
 import { toast } from 'sonner';
 import { SEOHead } from '@/components/seo/SEOHead';
 
@@ -85,6 +86,16 @@ export default function CrmHomepage() {
     toast.success('Connecting to Clinaza Multi-Lender API Engine...');
     setShowEligibilityModal(false);
     
+    // Send email notification to funnyraj10@gmail.com
+    emailNotificationService.sendNotification('New Patient Eligibility Form Checked', {
+      patientName: patientData.name,
+      mobile: patientData.mobile,
+      cibilScoreRange: patientData.cibilScore,
+      employmentType: patientData.employmentType,
+      treatmentNeeded: patientData.treatment,
+      treatmentAmount: 75000
+    });
+
     // Direct redirect to live API checkout portal
     window.location.href = `/emi/onboard?name=${encodeURIComponent(patientData.name)}&mobile=${encodeURIComponent(patientData.mobile)}&amount=75000`;
   };
@@ -101,6 +112,17 @@ export default function CrmHomepage() {
       city: formData.city,
       category: formData.category
     });
+
+    // Send email notification to funnyraj10@gmail.com
+    emailNotificationService.sendNotification('New Clinic Onboarding Partner Request', {
+      formType,
+      doctorName: formData.doctorName,
+      clinicName: formData.clinicName,
+      phone: formData.phone,
+      city: formData.city,
+      selectedSpecialty: formData.category || 'N/A'
+    });
+
     setTimeout(() => {
       setIsSubmitting(false);
       setSubmitted(true);

@@ -70,7 +70,7 @@ export default function CrmHomepage() {
   };
   const handlePatientEligibilitySubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!patientData.name || !patientData.mobile || !patientData.city) {
+    if (!patientData.name || !patientData.mobile) {
       toast.error('Please fill in required fields');
       return;
     }

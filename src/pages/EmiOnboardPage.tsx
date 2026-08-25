@@ -21,25 +21,43 @@ interface LenderOffer {
 }
 
 const LenderLogo = ({ id }: { id: string }) => {
+  const [error, setError] = React.useState(false);
+
+  if (error) {
+    return (
+      <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+      </svg>
+    );
+  }
+
   switch (id) {
     case 'offer-salaryontime':
       return (
-        <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
+        <img 
+          src="https://www.salaryontime.com/_next/static/media/logo.0prgo0-8s6a-y.png" 
+          alt="Salary On Time" 
+          className="w-10 h-10 object-contain rounded-lg"
+          onError={() => setError(true)}
+        />
       );
     case 'offer-cashvia':
       return (
-        <svg className="w-6 h-6 text-white" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M13 10V3L4 14h7v7l9-11h-7z" />
-        </svg>
+        <img 
+          src="https://cashvia.in/assets/cashvia_logo_icon.png" 
+          alt="Cashvia" 
+          className="w-8 h-8 object-contain rounded-lg"
+          onError={() => setError(true)}
+        />
       );
     case 'offer-jupiter':
       return (
-        <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-          <circle cx="12" cy="12" r="7" />
-          <path strokeLinecap="round" d="M5 12h14M12 5v14" />
-        </svg>
+        <img 
+          src="https://jupiter.money/assets/images/website-v2/jupiter-logo.svg" 
+          alt="Jupiter" 
+          className="w-8 h-8 object-contain"
+          onError={() => setError(true)}
+        />
       );
     case 'offer-atmcred':
       return (
@@ -57,9 +75,12 @@ const LenderLogo = ({ id }: { id: string }) => {
       );
     case 'offer-hero':
       return (
-        <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6M9 6v12M15 6v12" />
-        </svg>
+        <img 
+          src="https://www.herofincorp.com/images/logo.webp" 
+          alt="Hero Fincorp" 
+          className="w-8 h-8 object-contain rounded-lg"
+          onError={() => setError(true)}
+        />
       );
     case 'offer-digicredit':
       return (
@@ -78,9 +99,12 @@ const LenderLogo = ({ id }: { id: string }) => {
       );
     case 'offer-tap4credit':
       return (
-        <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239a9 9 0 0112.573 0M4.239 5.188a9 9 0 010 12.573" />
-        </svg>
+        <img 
+          src="https://tap4credit.in/favicon/favicon.svg" 
+          alt="Tap4Credit" 
+          className="w-8 h-8 object-contain"
+          onError={() => setError(true)}
+        />
       );
     case 'offer-myfloat':
       return (
@@ -102,9 +126,12 @@ const LenderLogo = ({ id }: { id: string }) => {
       );
     case 'offer-creditsea':
       return (
-        <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
-        </svg>
+        <img 
+          src="https://www.creditsea.com/_next/static/media/logo.c59c5d80.svg" 
+          alt="Creditsea" 
+          className="w-8 h-8 object-contain"
+          onError={() => setError(true)}
+        />
       );
     default:
       return (

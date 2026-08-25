@@ -220,6 +220,13 @@ export default function CrmHomepage() {
             </div>
           </Link>
           <div className="flex items-center gap-4">
+            <Link
+              to="/emi/onboard?name=Patient&amount=50000"
+              className="hidden sm:flex items-center gap-1.5 px-3 py-2 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-xs font-bold text-emerald-700 rounded-xl transition-all"
+            >
+              <ShieldCheck size={14} className="text-emerald-600" />
+              Patient Loan API
+            </Link>
             <a
               href="https://wa.me/917292984244?text=Hi%20Clinaza%20team%2C%20I%20want%20to%20offer%20patient%20financing%20at%20my%20clinic"
               target="_blank" rel="noopener noreferrer"

@@ -147,60 +147,89 @@ export default function EmiOnboardPage() {
       employmentType: 'Salaried'
     });
 
-    console.log('[EmiOnboardPage] Multi-lender API Aggregator Results:', lenderRes);
-
-    // Build dynamic offers list purely from live API responses
+    console.log('[EmiOnboardPage] Multi-lender API Aggregator Results:', lenderRes);    // Always show all 5 primary lender options, using live API results to show real-time "Pre-Approved" or "Apply" status badges
     const generatedOffers: LenderOffer[] = [];
+    const resultsMap = new Map(lenderRes.lenderResults.map(r => [r.lenderId, r.status]));
 
-    lenderRes.lenderResults.forEach((res) => {
-      if (res.lenderId === 'tap4credit' && (res.status === 'APPROVED' || res.status === 'EXISTS')) {
-        generatedOffers.push({
-          id: 'offer-tap4credit',
-          lenderName: 'Tap4Credit (Live API Approved)',
-          logoBg: 'bg-gradient-to-tr from-purple-600 to-pink-600 text-white',
-          logoChar: 'T4C',
-          badge: 'Live Partner Disbursal',
-          interestRate: '11.5% p.a.',
-          tenure: '18 Months',
-          monthlyEmi: Math.round((rawAmount * 1.09) / 18),
-          totalRepayment: Math.round(rawAmount * 1.09),
-          processingFee: Math.round(rawAmount * 0.015),
-          minCibil: 650,
-          isRecommended: true,
-        });
-      }
+    // 1. Tap4Credit (650+)
+    const tapStatus = resultsMap.get('tap4credit');
+    generatedOffers.push({
+      id: 'offer-tap4credit',
+      lenderName: 'Tap4Credit',
+      logoBg: 'bg-gradient-to-tr from-purple-600 to-pink-600 text-white',
+      logoChar: 'T4C',
+      badge: tapStatus === 'APPROVED' || tapStatus === 'EXISTS' ? 'Live API Pre-Approved' : 'Direct Apply Partner',
+      interestRate: '11.5% p.a.',
+      tenure: '18 Months',
+      monthlyEmi: Math.round((rawAmount * 1.09) / 18),
+      totalRepayment: Math.round(rawAmount * 1.09),
+      processingFee: Math.round(rawAmount * 0.015),
+      minCibil: 650,
+      isRecommended: true,
+    });
 
-      if (res.lenderId === 'cashvia' && res.status === 'APPROVED') {
-        generatedOffers.push({
-          id: 'offer-cashvia',
-          lenderName: 'Cashvia / Digicredit (Live API Verified)',
-          logoBg: 'bg-gradient-to-tr from-emerald-600 to-teal-600 text-white',
-          logoChar: 'CV',
-          badge: 'Instant Pre-Approval',
-          interestRate: '0% Subsidized',
-          tenure: '9 Months',
-          monthlyEmi: Math.round(rawAmount / 9),
-          totalRepayment: rawAmount,
-          processingFee: Math.round(rawAmount * 0.01),
-          minCibil: 600,
-        });
-      }
+    // 2. Cashvia / DigiCredit (600+)
+    const cashviaStatus = resultsMap.get('cashvia');
+    generatedOffers.push({
+      id: 'offer-cashvia',
+      lenderName: 'Cashvia / Digicredit',
+      logoBg: 'bg-gradient-to-tr from-emerald-600 to-teal-600 text-white',
+      logoChar: 'CV',
+      badge: cashviaStatus === 'APPROVED' ? 'Live API Pre-Approved' : 'Direct Apply Partner',
+      interestRate: '12% – 36% p.a.',
+      tenure: '9 Months',
+      monthlyEmi: Math.round(rawAmount / 9),
+      totalRepayment: rawAmount,
+      processingFee: Math.round(rawAmount * 0.02),
+      minCibil: 600,
+    });
 
-      if (res.lenderId === 'creditsea' && res.status === 'APPROVED') {
-        generatedOffers.push({
-          id: 'offer-creditsea',
-          lenderName: 'Creditsea (Partner Lead Created)',
-          logoBg: 'bg-gradient-to-tr from-blue-600 to-indigo-600 text-white',
-          logoChar: 'CS',
-          badge: 'Digital Onboarding Link',
-          interestRate: '0% p.a.',
-          tenure: '12 Months',
-          monthlyEmi: Math.round(rawAmount / 12),
-          totalRepayment: rawAmount,
-          processingFee: 0,
-          minCibil: 500,
-        });
-      }
+    // 3. Creditsea (500+)
+    const creditseaStatus = resultsMap.get('creditsea');
+    generatedOffers.push({
+      id: 'offer-creditsea',
+      lenderName: 'Creditsea',
+      logoBg: 'bg-gradient-to-tr from-blue-600 to-indigo-600 text-white',
+      logoChar: 'CS',
+      badge: creditseaStatus === 'APPROVED' ? 'Live API Pre-Approved' : 'Direct Apply Partner',
+      interestRate: '24% – 36% p.a.',
+      tenure: '12 Months',
+      monthlyEmi: Math.round(rawAmount / 12),
+      totalRepayment: rawAmount,
+      processingFee: 0,
+      minCibil: 500,
+    });
+
+    // 4. Hero Fincorp (700+)
+    const heroStatus = resultsMap.get('herofincorp');
+    generatedOffers.push({
+      id: 'offer-hero',
+      lenderName: 'Hero Fincorp (HIPL)',
+      logoBg: 'bg-gradient-to-tr from-indigo-700 to-violet-800 text-white',
+      logoChar: 'H',
+      badge: heroStatus === 'APPROVED' ? 'Live API Pre-Approved' : 'Direct Apply Partner',
+      interestRate: '18% – 30% p.a.',
+      tenure: '12 Months',
+      monthlyEmi: Math.round(rawAmount / 12),
+      totalRepayment: rawAmount,
+      processingFee: Math.round(rawAmount * 0.02),
+      minCibil: 700,
+    });
+
+    // 5. MyMoneyBazaar (600+)
+    const mmbStatus = resultsMap.get('mmb');
+    generatedOffers.push({
+      id: 'offer-mmb',
+      lenderName: 'MyMoneyBazaar (MMB)',
+      logoBg: 'bg-gradient-to-tr from-amber-600 to-orange-600 text-white',
+      logoChar: 'MB',
+      badge: mmbStatus === 'APPROVED' ? 'Live API Pre-Approved' : 'Direct Apply Partner',
+      interestRate: '18% – 36% p.a.',
+      tenure: '12 Months',
+      monthlyEmi: Math.round(rawAmount / 12),
+      totalRepayment: rawAmount,
+      processingFee: Math.round(rawAmount * 0.02),
+      minCibil: 600,
     });
 
     setLiveOffers(generatedOffers);
@@ -232,6 +261,8 @@ export default function EmiOnboardPage() {
         trackingUrl = 'https://partners.marcadeo.com/click?oid=454&uid=1895&lid=523';
       } else if (offer.id === 'offer-hero') {
         trackingUrl = 'https://partners.marcadeo.com/click?oid=344&uid=1895&lid=335';
+      } else if (offer.id === 'offer-mmb') {
+        trackingUrl = 'https://partners.marcadeo.com/click?oid=353&uid=1895&lid=347';
       } else {
         // Fallback to default callback
         const params = new URLSearchParams(window.location.search);

@@ -42,6 +42,7 @@ export default function CrmHomepage() {
     city: '',
     treatment: 'Dental Implants',
     amount: '₹50,000 - ₹1,00,000',
+    treatmentAmount: 0,
     preferredClinic: '',
     cibilScore: '700+ (Good / Excellent)',
     employmentType: 'Salaried Professional',
@@ -96,8 +97,9 @@ export default function CrmHomepage() {
       treatmentAmount: 75000
     });
 
-    // Direct redirect to live API checkout portal
-    window.location.href = `/emi/onboard?name=${encodeURIComponent(patientData.name)}&mobile=${encodeURIComponent(patientData.mobile)}&amount=75000`;
+    // Direct redirect to live API checkout portal — amount omitted so onboard page asks patient
+    const amountParam = patientData.treatmentAmount > 0 ? `&amount=${patientData.treatmentAmount}` : '';
+    window.location.href = `/emi/onboard?name=${encodeURIComponent(patientData.name)}&mobile=${encodeURIComponent(patientData.mobile)}${amountParam}`;
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -239,7 +241,7 @@ export default function CrmHomepage() {
           </Link>
           <div className="flex items-center gap-4">
             <Link
-              to="/emi/onboard?name=Patient&amount=50000"
+              to="/emi/onboard"
               className="hidden sm:flex items-center gap-1.5 px-3 py-2 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-xs font-bold text-emerald-700 rounded-xl transition-all"
             >
               <ShieldCheck size={14} className="text-emerald-600" />
@@ -684,45 +686,44 @@ export default function CrmHomepage() {
               {/* Modal Header */}
               <div className="space-y-1">
                 <span className="text-[10px] font-black text-[#0f7a75] uppercase tracking-widest block">PATIENT FINANCING CHECK</span>
-                <h3 className="text-xl font-black text-[#0B2450]">
-                  {eligibilityStep === 1 ? 'Check Financing Eligibility' : 'Upload Documents Securely'}
-                </h3>
-                <p className="text-xs text-slate-500">
-                  {eligibilityStep === 1
-                    ? 'Step 1 of 2: Basic treatment & contact details'
-                    : 'Step 2 of 2: Lender documentation requirements'}
-                </p>
+                <h3 className="text-xl font-black text-[#0B2450]">Check Financing Eligibility</h3>
+                <p className="text-xs text-slate-500">Fill in the details below to find matching lenders</p>
               </div>
 
               {eligibilityStep === 1 ? (
-                <form onSubmit={handlePatientEligibilitySubmit} className="space-y-4">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <div className="space-y-1">
-                        <label htmlFor="patient-name" className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Full Name *</label>
-                        <input
-                          id="patient-name"
-                          type="text"
-                          required
-                          placeholder="e.g. Ankit Sharma"
-                          value={patientData.name}
-                          onChange={e => setPatientData({ ...patientData, name: e.target.value })}
-                          className="w-full px-4 py-3 bg-[#F7FAFC] border border-slate-200 rounded-xl text-xs text-[#0B2450] placeholder-slate-400 focus:outline-none focus:border-[#0867E8]"
-                        />
-                      </div>
-                      <div className="space-y-1">
-                        <label htmlFor="patient-mobile" className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Mobile Number *</label>
-                        <input
-                          id="patient-mobile"
-                          type="tel"
-                          required
-                          placeholder="e.g. 9876543210"
-                          value={patientData.mobile}
-                          onChange={e => setPatientData({ ...patientData, mobile: e.target.value })}
-                          className="w-full px-4 py-3 bg-[#F7FAFC] border border-slate-200 rounded-xl text-xs text-[#0B2450] placeholder-slate-400 focus:outline-none focus:border-[#0867E8]"
-                        />
-                      </div>
-                    </div>
+                <form onSubmit={handlePatientEligibilitySubmit} className="space-y-4 max-h-[70vh] overflow-y-auto pr-1">
 
+
+                  {/* Name + Mobile */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div className="space-y-1">
+                      <label htmlFor="patient-name" className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Full Name *</label>
+                      <input
+                        id="patient-name"
+                        type="text"
+                        required
+                        placeholder="e.g. Ankit Sharma"
+                        value={patientData.name}
+                        onChange={e => setPatientData({ ...patientData, name: e.target.value })}
+                        className="w-full px-4 py-3 bg-[#F7FAFC] border border-slate-200 rounded-xl text-xs text-[#0B2450] placeholder-slate-400 focus:outline-none focus:border-[#0867E8]"
+                      />
+                    </div>
+                    <div className="space-y-1">
+                      <label htmlFor="patient-mobile" className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Mobile Number *</label>
+                      <input
+                        id="patient-mobile"
+                        type="tel"
+                        required
+                        placeholder="e.g. 9876543210"
+                        value={patientData.mobile}
+                        onChange={e => setPatientData({ ...patientData, mobile: e.target.value })}
+                        className="w-full px-4 py-3 bg-[#F7FAFC] border border-slate-200 rounded-xl text-xs text-[#0B2450] placeholder-slate-400 focus:outline-none focus:border-[#0867E8]"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Treatment + Amount */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div className="space-y-1">
                       <label htmlFor="patient-treatment" className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Treatment Needed</label>
                       <select
@@ -740,14 +741,131 @@ export default function CrmHomepage() {
                         <option value="Other Surgery">Other Surgery</option>
                       </select>
                     </div>
+                    <div className="space-y-1">
+                      <label htmlFor="treatment-amount" className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Treatment Bill Amount (₹)</label>
+                      <input
+                        id="treatment-amount"
+                        type="number"
+                        min={5000}
+                        placeholder="e.g. 75000"
+                        value={patientData.treatmentAmount || ''}
+                        onChange={e => setPatientData({ ...patientData, treatmentAmount: Number(e.target.value) })}
+                        className="w-full px-4 py-3 bg-[#F7FAFC] border border-slate-200 rounded-xl text-xs text-[#0B2450] placeholder-slate-400 focus:outline-none focus:border-[#0867E8] font-mono"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Divider */}
+                  <div className="flex items-center gap-3 py-0.5">
+                    <div className="flex-1 h-px bg-slate-200" />
+                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider whitespace-nowrap">Patient Profile Questions</span>
+                    <div className="flex-1 h-px bg-slate-200" />
+                  </div>
+
+                  {/* Q1: Employment */}
+                  <div className="space-y-1.5">
+                    <label className="text-[10px] font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1.5">
+                      <span className="w-4 h-4 rounded-full bg-blue-100 text-[#0867E8] flex items-center justify-center text-[9px] font-black">1</span>
+                      Employment Status
+                    </label>
+                    <div className="grid grid-cols-2 gap-2">
+                      {[
+                        { val: 'salaried', label: '🏢 Salaried', sub: 'MNC / Govt / Private' },
+                        { val: 'self-employed', label: '🏪 Self-Employed', sub: 'Business / Freelancer' },
+                        { val: 'doctor', label: '👨‍⚕️ Doctor / Professional', sub: 'Practice Owner' },
+                        { val: 'unemployed', label: '❌ Unemployed', sub: 'No active income' },
+                      ].map(opt => (
+                        <button key={opt.val} type="button"
+                          onClick={() => setPatientData({ ...patientData, employmentType: opt.val })}
+                          className={`p-2.5 rounded-xl border text-left transition-all ${patientData.employmentType === opt.val ? 'bg-blue-50 border-[#0867E8] text-[#0B2450]' : 'bg-[#F7FAFC] border-slate-200 text-slate-500 hover:border-slate-300'}`}
+                        >
+                          <div className="text-[11px] font-bold">{opt.label}</div>
+                          <div className="text-[10px] text-slate-400 mt-0.5">{opt.sub}</div>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Q2: Monthly Income */}
+                  <div className="space-y-1.5">
+                    <label className="text-[10px] font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1.5">
+                      <span className="w-4 h-4 rounded-full bg-blue-100 text-[#0867E8] flex items-center justify-center text-[9px] font-black">2</span>
+                      Monthly Take-Home Income
+                    </label>
+                    <div className="grid grid-cols-2 gap-2">
+                      {[
+                        { val: '10000', label: 'Below ₹15,000' },
+                        { val: '20000', label: '₹15K – ₹30,000' },
+                        { val: '45000', label: '₹30K – ₹60,000' },
+                        { val: '80000', label: 'Above ₹60,000' },
+                      ].map(opt => (
+                        <button key={opt.val} type="button"
+                          onClick={() => setPatientData({ ...patientData, incomeProof: opt.val })}
+                          className={`p-2.5 rounded-xl border text-center text-[11px] font-bold transition-all ${patientData.incomeProof === opt.val ? 'bg-emerald-50 border-[#0f7a75] text-[#0B2450]' : 'bg-[#F7FAFC] border-slate-200 text-slate-500 hover:border-slate-300'}`}
+                        >
+                          {opt.label}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Q3: CIBIL Score */}
+                  <div className="space-y-1.5">
+                    <label className="text-[10px] font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1.5">
+                      <span className="w-4 h-4 rounded-full bg-blue-100 text-[#0867E8] flex items-center justify-center text-[9px] font-black">3</span>
+                      Approximate CIBIL Score
+                    </label>
+                    <div className="grid grid-cols-2 gap-2">
+                      {[
+                        { val: '750', label: '750+ Excellent' },
+                        { val: '700', label: '700–750 Good' },
+                        { val: '650', label: '600–700 Fair' },
+                        { val: '550', label: 'Below 600 Poor' },
+                      ].map(opt => (
+                        <button key={opt.val} type="button"
+                          onClick={() => setPatientData({ ...patientData, cibilScore: opt.val })}
+                          className={`p-2.5 rounded-xl border text-center text-[11px] font-bold transition-all ${patientData.cibilScore === opt.val ? 'bg-purple-50 border-purple-400 text-[#0B2450]' : 'bg-[#F7FAFC] border-slate-200 text-slate-500 hover:border-slate-300'}`}
+                        >
+                          {opt.label}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Q4: Loan Amount Range */}
+                  <div className="space-y-1.5">
+                    <label className="text-[10px] font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1.5">
+                      <span className="w-4 h-4 rounded-full bg-blue-100 text-[#0867E8] flex items-center justify-center text-[9px] font-black">4</span>
+                      Loan Amount Looking For
+                    </label>
+                    <div className="grid grid-cols-2 gap-2">
+                      {[
+                        { val: 'under-25000', label: 'Under ₹25,000' },
+                        { val: '25000-100000', label: '₹25K – ₹1 Lakh' },
+                        { val: '100000-300000', label: '₹1L – ₹3 Lakh' },
+                        { val: 'above-300000', label: 'Above ₹3 Lakh' },
+                      ].map(opt => (
+                        <button key={opt.val} type="button"
+                          onClick={() => setPatientData({ ...patientData, amount: opt.val })}
+                          className={`p-2.5 rounded-xl border text-center text-[11px] font-bold transition-all ${patientData.amount === opt.val ? 'bg-cyan-50 border-cyan-400 text-[#0B2450]' : 'bg-[#F7FAFC] border-slate-200 text-slate-500 hover:border-slate-300'}`}
+                        >
+                          {opt.label}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
 
                   <button
                     type="submit"
-                    className="w-full py-4 bg-[#0867E8] hover:bg-[#0756C7] text-white font-black text-xs uppercase tracking-widest rounded-xl transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer active:scale-95 mt-2"
+                    disabled={!patientData.name || !patientData.mobile}
+                    className={`w-full py-4 font-black text-xs uppercase tracking-widest rounded-xl transition-all shadow-md flex items-center justify-center gap-2 active:scale-95 ${
+                      patientData.name && patientData.mobile
+                        ? 'bg-[#0867E8] hover:bg-[#0756C7] text-white cursor-pointer'
+                        : 'bg-slate-200 text-slate-400 cursor-not-allowed'
+                    }`}
                   >
-                    Proceed to Digital Loan API Application &rarr;
+                    Find Matching Lenders →
                   </button>
-
                   <p className="text-[10px] text-slate-500 text-center leading-relaxed">
                     Your information will be securely queried live against Clinaza partnered bank/NBFC APIs with your consent.
                   </p>

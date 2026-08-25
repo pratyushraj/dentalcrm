@@ -156,12 +156,19 @@ export default function EmiOnboardPage() {
   // 1: Lender Matching (Clinaza / OCEN 4.0 engine)
   // 2: Lender Offers Selection
   // 3: Lender KYC & KFS Approval (Finalizing with chosen bank/NBFC)
+  // Steps: 0=Consent, 0.5=Pre-Screen, 1=Matching, 2=Offers, 3=KYC
   const [step, setStep] = useState(0);
   
   const [pan, setPan] = useState('');
   const [mobile, setMobile] = useState('');
   const [cibilScore, setCibilScore] = useState('750');
   
+  // Pre-screening answers (Q1–Q4)
+  const [employmentType, setEmploymentType] = useState('');
+  const [monthlyIncome, setMonthlyIncome] = useState('');
+  const [loanAmountRange, setLoanAmountRange] = useState('');
+  // Note: cibilScore already captures Q3
+
   // Consents (un-checked by default)
   const [consentEligibility, setConsentEligibility] = useState(false);
   const [consentBankTerms, setConsentBankTerms] = useState(false);
@@ -414,6 +421,33 @@ export default function EmiOnboardPage() {
 
   const [liveOffers, setLiveOffers] = useState<LenderOffer[]>([]);
 
+  // Filter lenders by pre-screening answers
+  const applyPreScreenFilter = (allOffers: LenderOffer[]): LenderOffer[] => {
+    return allOffers.filter(offer => {
+      // Q1: Employment type filter
+      const salaryOnlyIds = ['offer-salaryontime', 'offer-surya', 'offer-hero', 'offer-timepecash', 'offer-digicredit'];
+      if (employmentType === 'self-employed' && salaryOnlyIds.includes(offer.id)) return false;
+      if (employmentType === 'unemployed') return false;
+
+      // Q2: Monthly income filter
+      const minIncome = Number(monthlyIncome);
+      if (minIncome > 0) {
+        if (minIncome < 15000 && ['offer-salaryontime','offer-surya','offer-timepecash','offer-cashvia','offer-atmcred','offer-creditsea','offer-myfloat','offer-dhancash','offer-tap4credit','offer-hero'].includes(offer.id)) return false;
+        if (minIncome < 30000 && ['offer-salaryontime','offer-surya','offer-timepecash'].includes(offer.id)) return false;
+      }
+
+      // Q4: Loan amount range filter — hide lenders with too-low caps
+      if (loanAmountRange === 'above-300000') {
+        if (['offer-digicredit','offer-myfloat','offer-creditsea'].includes(offer.id)) return false;
+      }
+      if (loanAmountRange === '100000-300000') {
+        if (['offer-digicredit','offer-myfloat'].includes(offer.id)) return false;
+      }
+
+      return true;
+    });
+  };
+
   const handleConsentSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!consentEligibility || !consentBankTerms) {
@@ -421,7 +455,7 @@ export default function EmiOnboardPage() {
       return;
     }
 
-    setStep(1); // Proceed to Lender Matching
+    setStep(0.5); // Proceed to Pre-Screening Questions
     
     // Send email notification to funnyraj10@gmail.com
     emailNotificationService.sendNotification('New Patient Eligibility Checked', {
@@ -588,15 +622,16 @@ export default function EmiOnboardPage() {
         </div>
 
         {/* Interactive Stepper Indicator */}
-        <div className="grid grid-cols-4 gap-1.5 text-center text-[9.5px] font-bold uppercase tracking-wider">
+        <div className="grid grid-cols-5 gap-1 text-center text-[8.5px] font-bold uppercase tracking-wider">
           {[
-            { num: 1, label: 'Consent' },
-            { num: 2, label: 'Match' },
-            { num: 3, label: 'Offers' },
-            { num: 4, label: 'Approval' },
-          ].map((s, idx) => {
-            const isActive = step === idx;
-            const isCompleted = step > idx;
+            { num: 1, label: 'Consent', stepVal: 0 },
+            { num: 2, label: 'Profile', stepVal: 0.5 },
+            { num: 3, label: 'Match', stepVal: 1 },
+            { num: 4, label: 'Offers', stepVal: 2 },
+            { num: 5, label: 'Apply', stepVal: 3 },
+          ].map((s) => {
+            const isActive = step === s.stepVal;
+            const isCompleted = step > s.stepVal;
             return (
               <div
                 key={s.label}
@@ -608,7 +643,7 @@ export default function EmiOnboardPage() {
                     : 'bg-slate-950/50 text-slate-400 border-slate-800/80'
                 }`}
               >
-                {isCompleted ? <Check size={11} className="stroke-[3]" /> : <span>{s.num}.</span>}
+                {isCompleted ? <Check size={10} className="stroke-[3]" /> : <span>{s.num}.</span>}
                 <span>{s.label}</span>
               </div>
             );
@@ -720,6 +755,199 @@ export default function EmiOnboardPage() {
               <ArrowRight size={15} />
             </button>
           </form>
+        )}
+
+        {/* ─── STEP 0.5: PRE-SCREENING QUESTIONS ──────────────────────────── */}
+        {step === 0.5 && (
+          <div className="space-y-6">
+            <div className="text-center space-y-1.5">
+              <span className="px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/25 text-indigo-400 text-[10px] font-bold uppercase tracking-wider">Step 2 of 5 — Quick Profile</span>
+              <h3 className="text-base font-bold text-white mt-2">Tell us about yourself</h3>
+              <p className="text-xs text-slate-400 leading-relaxed">We'll use this to show only lenders you're most likely to get approved by.</p>
+            </div>
+
+            <div className="space-y-4">
+
+              {/* Q1: Employment Type */}
+              <div className="space-y-2">
+                <label className="block text-[10px] font-bold text-slate-300 uppercase tracking-wider flex items-center gap-1.5">
+                  <span className="w-4 h-4 rounded-full bg-indigo-500/20 text-indigo-400 flex items-center justify-center text-[9px] font-black">1</span>
+                  What is your current employment status?
+                </label>
+                <div className="grid grid-cols-2 gap-2">
+                  {[
+                    { val: 'salaried', label: '🏢 Salaried', sub: 'MNC / Govt / Private' },
+                    { val: 'self-employed', label: '🏪 Self-Employed', sub: 'Business / Freelancer' },
+                    { val: 'doctor', label: '👨‍⚕️ Doctor / Professional', sub: 'Practice Owner' },
+                    { val: 'unemployed', label: '❌ Unemployed', sub: 'No active income' },
+                  ].map(opt => (
+                    <button
+                      key={opt.val}
+                      type="button"
+                      onClick={() => setEmploymentType(opt.val)}
+                      className={`p-3 rounded-xl border text-left transition-all duration-150 ${
+                        employmentType === opt.val
+                          ? 'bg-indigo-500/15 border-indigo-400 text-white'
+                          : 'bg-slate-950/60 border-slate-800 text-slate-400 hover:border-slate-700'
+                      }`}
+                    >
+                      <div className="text-xs font-bold">{opt.label}</div>
+                      <div className="text-[10px] text-slate-500 mt-0.5">{opt.sub}</div>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Q2: Monthly Income */}
+              <div className="space-y-2">
+                <label className="block text-[10px] font-bold text-slate-300 uppercase tracking-wider flex items-center gap-1.5">
+                  <span className="w-4 h-4 rounded-full bg-indigo-500/20 text-indigo-400 flex items-center justify-center text-[9px] font-black">2</span>
+                  What is your approximate monthly take-home income?
+                </label>
+                <div className="grid grid-cols-2 gap-2">
+                  {[
+                    { val: '10000', label: 'Below ₹15,000' },
+                    { val: '20000', label: '₹15,000 – ₹30,000' },
+                    { val: '45000', label: '₹30,000 – ₹60,000' },
+                    { val: '80000', label: 'Above ₹60,000' },
+                  ].map(opt => (
+                    <button
+                      key={opt.val}
+                      type="button"
+                      onClick={() => setMonthlyIncome(opt.val)}
+                      className={`p-3 rounded-xl border text-center text-xs font-bold transition-all duration-150 ${
+                        monthlyIncome === opt.val
+                          ? 'bg-emerald-500/15 border-emerald-400 text-white'
+                          : 'bg-slate-950/60 border-slate-800 text-slate-400 hover:border-slate-700'
+                      }`}
+                    >
+                      {opt.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Q3: CIBIL Score */}
+              <div className="space-y-2">
+                <label className="block text-[10px] font-bold text-slate-300 uppercase tracking-wider flex items-center gap-1.5">
+                  <span className="w-4 h-4 rounded-full bg-indigo-500/20 text-indigo-400 flex items-center justify-center text-[9px] font-black">3</span>
+                  What is your approximate CIBIL credit score?
+                </label>
+                <div className="grid grid-cols-2 gap-2">
+                  {[
+                    { val: '750', label: '750+ Excellent', color: 'emerald' },
+                    { val: '700', label: '700–750 Good', color: 'teal' },
+                    { val: '650', label: '600–700 Fair', color: 'amber' },
+                    { val: '550', label: 'Below 600 Poor', color: 'rose' },
+                  ].map(opt => (
+                    <button
+                      key={opt.val}
+                      type="button"
+                      onClick={() => setCibilScore(opt.val)}
+                      className={`p-3 rounded-xl border text-center text-xs font-bold transition-all duration-150 ${
+                        cibilScore === opt.val
+                          ? 'bg-purple-500/15 border-purple-400 text-white'
+                          : 'bg-slate-950/60 border-slate-800 text-slate-400 hover:border-slate-700'
+                      }`}
+                    >
+                      {opt.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Q4: Loan Amount Needed */}
+              <div className="space-y-2">
+                <label className="block text-[10px] font-bold text-slate-300 uppercase tracking-wider flex items-center gap-1.5">
+                  <span className="w-4 h-4 rounded-full bg-indigo-500/20 text-indigo-400 flex items-center justify-center text-[9px] font-black">4</span>
+                  How much loan are you looking for?
+                </label>
+                <div className="grid grid-cols-2 gap-2">
+                  {[
+                    { val: 'under-25000', label: 'Under ₹25,000' },
+                    { val: '25000-100000', label: '₹25K – ₹1 Lakh' },
+                    { val: '100000-300000', label: '₹1L – ₹3 Lakh' },
+                    { val: 'above-300000', label: 'Above ₹3 Lakh' },
+                  ].map(opt => (
+                    <button
+                      key={opt.val}
+                      type="button"
+                      onClick={() => setLoanAmountRange(opt.val)}
+                      className={`p-3 rounded-xl border text-center text-xs font-bold transition-all duration-150 ${
+                        loanAmountRange === opt.val
+                          ? 'bg-cyan-500/15 border-cyan-400 text-white'
+                          : 'bg-slate-950/60 border-slate-800 text-slate-400 hover:border-slate-700'
+                      }`}
+                    >
+                      {opt.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+            </div>
+
+            {/* CTA */}
+            <button
+              type="button"
+              disabled={!employmentType || !monthlyIncome || !cibilScore || !loanAmountRange}
+              onClick={async () => {
+                if (employmentType === 'unemployed') {
+                  toast.error('Unfortunately, most lenders require an active income source. Please consult with your clinic for alternative payment plans.');
+                  return;
+                }
+                setStep(1);
+                emailNotificationService.sendNotification('New Patient Eligibility Checked', {
+                  patientName,
+                  mobile: mobile || 'N/A',
+                  pan: pan || 'N/A',
+                  treatmentBillAmount: rawAmount,
+                  cibilScoreRange: cibilScore,
+                  employmentType,
+                  monthlyIncome,
+                  loanAmountRange,
+                });
+                await ocenService.createLoanApplication({
+                  borrower: { name: patientName, mobile, pan },
+                  treatment: { clinicId: 'CLINAZA_PATNA', clinicName: 'Clinaza Partner Dental', procedureName: 'Dental Procedure', invoiceAmount: rawAmount }
+                });
+                setLoadingText('Querying Hero Fincorp (HIPL) Dedupe & Pre-Check API...');
+                const nameParts = patientName.split(' ');
+                const firstName = nameParts[0] || 'Patient';
+                const lastName = nameParts.slice(1).join(' ') || 'User';
+                const lenderRes = await lenderIntegrationService.submitPatientToAllLenders({
+                  firstName, lastName,
+                  mobile: mobile || '9876543210',
+                  pan: pan.toUpperCase(),
+                  treatmentAmount: rawAmount,
+                  incomeMonthly: Number(monthlyIncome) || 60000,
+                  employmentType: employmentType === 'salaried' ? 'Salaried' : 'Self-Employed'
+                });
+                const resultsMap = new Map(lenderRes.lenderResults.map(r => [r.lenderId, r.status]));
+                const allOffers = buildLenderOffers(rawAmount, resultsMap);
+                const filtered = applyPreScreenFilter(allOffers);
+                setLiveOffers(filtered);
+                setTimeout(() => {
+                  setLoadingText('Submitting Lead to Creditsea, Cashvia & Tap4Credit APIs...');
+                  setTimeout(() => {
+                    setLoadingText('Verifying My Money Bazaar (MMB) User Dedupe...');
+                    setTimeout(() => {
+                      toast.success(`Matched ${filtered.length} Eligible Lenders for Your Profile!`);
+                      setStep(2);
+                    }, 800);
+                  }, 800);
+                }, 800);
+              }}
+              className={`w-full flex items-center justify-center gap-2 py-4 rounded-2xl text-xs font-bold uppercase tracking-wider transition-all duration-200 shadow-xl ${
+                employmentType && monthlyIncome && cibilScore && loanAmountRange
+                  ? 'bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 active:scale-[0.99] text-white shadow-indigo-500/25 cursor-pointer'
+                  : 'bg-slate-900 text-slate-400 border border-slate-800 cursor-not-allowed shadow-none'
+              }`}
+            >
+              Find My Matching Lenders
+              <ArrowRight size={15} />
+            </button>
+          </div>
         )}
 
         {/* ─── STEP 1: LENDER MATCHING ENGINE ───────────────────────────────── */}

@@ -673,8 +673,8 @@ export default function CrmHomepage() {
               </div>
 
               {eligibilityStep === 1 ? (
-                  <div className="space-y-4">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <form onSubmit={handlePatientEligibilitySubmit} className="space-y-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div className="space-y-1">
                         <label htmlFor="patient-name" className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Full Name *</label>
                         <input
@@ -718,7 +718,6 @@ export default function CrmHomepage() {
                         <option value="Other Surgery">Other Surgery</option>
                       </select>
                     </div>
-                  </div>
 
                   <button
                     type="submit"

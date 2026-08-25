@@ -20,6 +20,101 @@ interface LenderOffer {
   isRecommended?: boolean;
 }
 
+const LenderLogo = ({ id }: { id: string }) => {
+  switch (id) {
+    case 'offer-salaryontime':
+      return (
+        <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      );
+    case 'offer-cashvia':
+      return (
+        <svg className="w-6 h-6 text-white" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M13 10V3L4 14h7v7l9-11h-7z" />
+        </svg>
+      );
+    case 'offer-jupiter':
+      return (
+        <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+          <circle cx="12" cy="12" r="7" />
+          <path strokeLinecap="round" d="M5 12h14M12 5v14" />
+        </svg>
+      );
+    case 'offer-atmcred':
+      return (
+        <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+          <rect x="3" y="5" width="18" height="14" rx="3" />
+          <path strokeLinecap="round" d="M3 10h18M7 15h2M11 15h4" />
+        </svg>
+      );
+    case 'offer-surya':
+      return (
+        <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+          <circle cx="12" cy="12" r="5" />
+          <path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+        </svg>
+      );
+    case 'offer-hero':
+      return (
+        <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6M9 6v12M15 6v12" />
+        </svg>
+      );
+    case 'offer-digicredit':
+      return (
+        <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+          <rect x="4" y="4" width="16" height="16" rx="4" />
+          <circle cx="9" cy="9" r="1.5" />
+          <circle cx="15" cy="15" r="1.5" />
+          <path d="M9 10.5v3M15 10.5v3M10.5 9h3M10.5 15h3" />
+        </svg>
+      );
+    case 'offer-mmb':
+      return (
+        <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+        </svg>
+      );
+    case 'offer-tap4credit':
+      return (
+        <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239a9 9 0 0112.573 0M4.239 5.188a9 9 0 010 12.573" />
+        </svg>
+      );
+    case 'offer-myfloat':
+      return (
+        <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M3 10h18M3 14h18m-9-9v14" />
+        </svg>
+      );
+    case 'offer-timepecash':
+      return (
+        <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      );
+    case 'offer-dhancash':
+      return (
+        <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
+        </svg>
+      );
+    case 'offer-creditsea':
+      return (
+        <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+        </svg>
+      );
+    default:
+      return (
+        <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+        </svg>
+      );
+  }
+};
+
 export default function EmiOnboardPage() {
   const [patientName, setPatientName] = useState('Patient');
   const [amount, setAmount] = useState('0');
@@ -611,8 +706,8 @@ export default function EmiOnboardPage() {
 
                   <div className="flex items-start justify-between gap-4">
                     <div className="flex items-center gap-3.5">
-                      <div className={`w-11 h-11 rounded-2xl ${offer.logoBg} flex items-center justify-center font-black text-sm shadow-md`}>
-                        {offer.logoChar}
+                      <div className={`w-11 h-11 rounded-2xl ${offer.logoBg} flex items-center justify-center shadow-md`}>
+                        <LenderLogo id={offer.id} />
                       </div>
                       <div>
                         <h5 className="text-xs sm:text-sm font-bold text-white">{offer.lenderName}</h5>

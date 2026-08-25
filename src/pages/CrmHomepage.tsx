@@ -36,19 +36,53 @@ export default function CrmHomepage() {
   const [formType, setFormType] = useState<'clinic' | 'lender'>('clinic');
   const [showEligibilityModal, setShowEligibilityModal] = useState(false);
   const [eligibilityStep, setEligibilityStep] = useState<1 | 2>(1);
+  const [showLenderResults, setShowLenderResults] = useState(false);
   const [patientData, setPatientData] = useState({
     name: '',
     mobile: '',
     city: '',
     treatment: 'Dental Implants',
-    amount: '₹50,000 - ₹1,00,000',
+    amount: '',
     treatmentAmount: 0,
     preferredClinic: '',
-    cibilScore: '700+ (Good / Excellent)',
-    employmentType: 'Salaried Professional',
-    incomeProof: 'Salary Slips / Bank Statement Available'
+    cibilScore: '',
+    employmentType: '',
+    incomeProof: ''
   });
   const [patientSubmitted, setPatientSubmitted] = useState(false);
+
+  // All 13 lenders with filtering metadata
+  const ALL_LENDERS = [
+    { id: 'salaryontime', name: 'Salary On Time', rate: '7.5%–30% p.a.', minCibil: 600, salaryOnly: true, minIncome: 30000, url: 'https://partners.marcadeo.com/click?oid=448&uid=1895&lid=516', badge: 'Lowest Rate', color: 'bg-indigo-50 border-indigo-200 text-indigo-700' },
+    { id: 'cashvia', name: 'Cashvia', rate: '12%–36% p.a.', minCibil: 600, salaryOnly: false, minIncome: 15000, url: 'https://partners.marcadeo.com/click?oid=294&uid=1895&lid=242', badge: 'Best Approval Rate', color: 'bg-emerald-50 border-emerald-200 text-emerald-700' },
+    { id: 'jupiter', name: 'Jupiter', rate: '12%–30% p.a.', minCibil: 650, salaryOnly: false, minIncome: 20000, url: 'https://partners.marcadeo.com/click?oid=442&uid=1895&lid=509', badge: 'Up to ₹5 Lakh', color: 'bg-purple-50 border-purple-200 text-purple-700' },
+    { id: 'atmcred', name: 'ATM Cred', rate: '18%–36% p.a.', minCibil: 500, salaryOnly: false, minIncome: 15000, url: 'https://partners.marcadeo.com/click?oid=447&uid=1895&lid=515', badge: '500+ CIBIL OK', color: 'bg-cyan-50 border-cyan-200 text-cyan-700' },
+    { id: 'surya', name: 'Surya', rate: '18%–36% p.a.', minCibil: 600, salaryOnly: true, minIncome: 30000, url: 'https://partners.marcadeo.com/click?oid=449&uid=1895&lid=517', badge: 'High Approval', color: 'bg-amber-50 border-amber-200 text-amber-700' },
+    { id: 'hero', name: 'Hero Fincorp', rate: '18%–30% p.a.', minCibil: 700, salaryOnly: true, minIncome: 15000, url: 'https://partners.marcadeo.com/click?oid=344&uid=1895&lid=335', badge: 'Zero Cost EMI', color: 'bg-blue-50 border-blue-200 text-blue-700' },
+    { id: 'digicredit', name: 'DigiCredit', rate: '18%–36% p.a.', minCibil: 600, salaryOnly: false, minIncome: 15000, url: 'https://partners.marcadeo.com/click?oid=371&uid=1895&lid=385', badge: 'Instant Disbursal', color: 'bg-teal-50 border-teal-200 text-teal-700' },
+    { id: 'mmb', name: 'MyMoneyBazaar', rate: '18%–36% p.a.', minCibil: 600, salaryOnly: false, minIncome: 12000, url: 'https://partners.marcadeo.com/click?oid=353&uid=1895&lid=347', badge: 'Multi-Lender', color: 'bg-orange-50 border-orange-200 text-orange-700' },
+    { id: 'tap4credit', name: 'Tap4Credit', rate: '18%–36% p.a.', minCibil: 650, salaryOnly: false, minIncome: 15000, url: 'https://partners.marcadeo.com/click?oid=393&uid=1895&lid=420', badge: 'Digital KYC', color: 'bg-pink-50 border-pink-200 text-pink-700' },
+    { id: 'myfloat', name: 'MyFloat', rate: '28%–55% p.a.', minCibil: 0, salaryOnly: false, minIncome: 0, url: 'https://partners.marcadeo.com/click?oid=289&uid=1895&lid=238', badge: 'No Hard Cutoff', color: 'bg-lime-50 border-lime-200 text-lime-700' },
+    { id: 'timepecash', name: 'TimePeCash', rate: '18%–36% p.a.', minCibil: 600, salaryOnly: true, minIncome: 30000, url: 'https://web.timepecash.com/?referrer=OISAID63', badge: 'Low Income OK', color: 'bg-fuchsia-50 border-fuchsia-200 text-fuchsia-700' },
+    { id: 'dhancash', name: 'DhanCash', rate: '24%–36% p.a.', minCibil: 650, salaryOnly: false, minIncome: 15000, url: 'https://partners.marcadeo.com/click?oid=464&uid=1895&lid=535', badge: 'Flexible EMI', color: 'bg-green-50 border-green-200 text-green-700' },
+    { id: 'creditsea', name: 'Creditsea', rate: '24%–36% p.a.', minCibil: 650, salaryOnly: false, minIncome: 15000, url: 'https://partners.marcadeo.com/click?oid=454&uid=1895&lid=523', badge: 'Digital KYC', color: 'bg-sky-50 border-sky-200 text-sky-700' },
+  ];
+
+  const getMatchedLenders = () => {
+    const cibil = Number(patientData.cibilScore) || 0;
+    const income = Number(patientData.incomeProof) || 0;
+    const isSalaried = patientData.employmentType === 'salaried';
+    const loanRange = patientData.amount;
+
+    return ALL_LENDERS.filter(l => {
+      if (patientData.employmentType === 'unemployed') return false;
+      if (l.salaryOnly && !isSalaried && patientData.employmentType !== 'doctor') return false;
+      if (cibil > 0 && l.minCibil > 0 && cibil < l.minCibil) return false;
+      if (income > 0 && l.minIncome > 0 && income < l.minIncome) return false;
+      if (loanRange === 'above-300000' && ['digicredit','myfloat','creditsea'].includes(l.id)) return false;
+      return true;
+    });
+  };
 
   // EMI Calculator state
   const [emiAmount, setEmiAmount] = useState(100000);
@@ -83,7 +117,7 @@ export default function CrmHomepage() {
       treatment: patientData.treatment,
     });
 
-    // Send email notification to funnyraj10@gmail.com
+    // Send email notification
     emailNotificationService.sendNotification('New Patient Eligibility Form Checked', {
       patientName: patientData.name,
       mobile: patientData.mobile,
@@ -94,9 +128,8 @@ export default function CrmHomepage() {
       loanAmountRange: patientData.amount,
     });
 
-    toast.success(`✅ Details saved for ${patientData.name}! Our team will follow up shortly.`);
-    setPatientSubmitted(true);
-    setShowEligibilityModal(false);
+    // Show lender results inside modal
+    setShowLenderResults(true);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -670,10 +703,10 @@ export default function CrmHomepage() {
         {/* ── PATIENT ELIGIBILITY 2-STEP MODAL ── */}
         {showEligibilityModal && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-in fade-in">
-            <div className="bg-white border border-slate-200 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative space-y-6 text-left">
+            <div className="bg-white border border-slate-200 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative space-y-5 text-left">
               <button
                 type="button"
-                onClick={() => setShowEligibilityModal(false)}
+                onClick={() => { setShowEligibilityModal(false); setShowLenderResults(false); }}
                 className="absolute top-5 right-5 text-slate-400 hover:text-slate-600 p-1.5 rounded-full hover:bg-slate-100 transition-colors"
                 aria-label="Close modal"
               >
@@ -683,13 +716,59 @@ export default function CrmHomepage() {
               {/* Modal Header */}
               <div className="space-y-1">
                 <span className="text-[10px] font-black text-[#0f7a75] uppercase tracking-widest block">PATIENT FINANCING CHECK</span>
-                <h3 className="text-xl font-black text-[#0B2450]">Check Financing Eligibility</h3>
-                <p className="text-xs text-slate-500">Fill in the details below to find matching lenders</p>
+                <h3 className="text-xl font-black text-[#0B2450]">
+                  {showLenderResults ? `${getMatchedLenders().length} Lenders Matched` : 'Check Financing Eligibility'}
+                </h3>
+                <p className="text-xs text-slate-500">
+                  {showLenderResults
+                    ? `Based on ${patientData.name}'s profile — share a link for them to apply directly`
+                    : 'Fill in the details below to find matching lenders'}
+                </p>
               </div>
+
+              {showLenderResults ? (
+                /* ── RESULTS VIEW ── */
+                <div className="space-y-3 max-h-[65vh] overflow-y-auto pr-1">
+                  {getMatchedLenders().length === 0 ? (
+                    <div className="text-center py-8 space-y-2">
+                      <div className="text-3xl">😔</div>
+                      <p className="text-sm font-bold text-slate-600">No lenders matched this profile</p>
+                      <p className="text-xs text-slate-400">Try adjusting the profile answers</p>
+                    </div>
+                  ) : (
+                    getMatchedLenders().map(lender => (
+                      <div key={lender.id} className={`flex items-center justify-between p-3.5 rounded-2xl border ${lender.color}`}>
+                        <div className="space-y-0.5">
+                          <div className="flex items-center gap-2">
+                            <span className="text-sm font-black text-[#0B2450]">{lender.name}</span>
+                            <span className="text-[9px] font-bold px-2 py-0.5 rounded-full bg-white/70 border border-current">{lender.badge}</span>
+                          </div>
+                          <p className="text-[11px] font-medium opacity-80">{lender.rate}</p>
+                        </div>
+                        <a
+                          href={lender.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="shrink-0 ml-3 px-3.5 py-2 bg-[#0867E8] hover:bg-[#0756C7] text-white text-[10px] font-black uppercase tracking-wider rounded-xl transition-all shadow-sm active:scale-95"
+                        >
+                          Apply →
+                        </a>
+                      </div>
+                    ))
+                  )}
+                  <button
+                    type="button"
+                    onClick={() => setShowLenderResults(false)}
+                    className="w-full py-3 text-xs font-bold text-slate-500 hover:text-slate-700 border border-slate-200 rounded-xl hover:bg-slate-50 transition-all mt-1"
+                  >
+                    ← Edit Patient Profile
+                  </button>
+                </div>
+              ) : (
+              <>
 
               {eligibilityStep === 1 ? (
                 <form onSubmit={handlePatientEligibilitySubmit} className="space-y-4 max-h-[70vh] overflow-y-auto pr-1">
-
 
                   {/* Name + Mobile */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -941,6 +1020,8 @@ export default function CrmHomepage() {
                     Your documents are reviewed privately by Clinaza & partnered NBFC desk officers only.
                   </p>
                 </div>
+              )}
+              </>
               )}
             </div>
           </div>

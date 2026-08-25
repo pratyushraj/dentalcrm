@@ -157,6 +157,7 @@ export default function EmiOnboardPage() {
   
   const [pan, setPan] = useState('');
   const [mobile, setMobile] = useState('');
+  const [cibilScore, setCibilScore] = useState('750');
   
   // Consents (un-checked by default)
   const [consentEligibility, setConsentEligibility] = useState(false);
@@ -316,7 +317,6 @@ export default function EmiOnboardPage() {
         processingFee: Math.round(amount * 0.03),
         minCibil: '650',
         sortRate: 18.0,
-        isRecommended: true,
       },
       {
         id: 'offer-myfloat',
@@ -376,8 +376,32 @@ export default function EmiOnboardPage() {
       }
     ];
 
-    // Sort interest rate: low to high
-    return list.sort((a, b) => a.sortRate - b.sortRate);
+    // Dynamic CIBIL recommendations mapping
+    const score = Number(cibilScore);
+    const mappedList = list.map(offer => {
+      let isRecommended = false;
+      if (score >= 750) {
+        // Excellent CIBIL: Best matching premium loans
+        isRecommended = ['offer-salaryontime', 'offer-cashvia', 'offer-jupiter'].includes(offer.id);
+      } else if (score >= 700) {
+        // Good CIBIL: Mid-high tier loans
+        isRecommended = ['offer-cashvia', 'offer-jupiter', 'offer-hero'].includes(offer.id);
+      } else if (score >= 600) {
+        // Fair CIBIL: Reliable subprime options
+        isRecommended = ['offer-digicredit', 'offer-tap4credit', 'offer-creditsea'].includes(offer.id);
+      } else {
+        // Low CIBIL: Specialized bad credit lenders
+        isRecommended = ['offer-atmcred', 'offer-surya', 'offer-dhancash'].includes(offer.id);
+      }
+      return { ...offer, isRecommended };
+    });
+
+    // Sort by recommended status first, then by interest rate (low to high)
+    return mappedList.sort((a, b) => {
+      if (a.isRecommended && !b.isRecommended) return -1;
+      if (!a.isRecommended && b.isRecommended) return 1;
+      return a.sortRate - b.sortRate;
+    });
   };
 
   const offers = buildLenderOffers(rawAmount);
@@ -590,7 +614,7 @@ export default function EmiOnboardPage() {
                 1. Basic Verification Details
               </h4>
               
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div>
                   <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">PAN Card Number</label>
                   <input
@@ -616,6 +640,20 @@ export default function EmiOnboardPage() {
                     required
                   />
                 </div>
+
+                <div>
+                  <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Estimated CIBIL Score</label>
+                  <select
+                    value={cibilScore}
+                    onChange={(e) => setCibilScore(e.target.value)}
+                    className="w-full px-4 py-3 bg-slate-950/80 border border-slate-800 rounded-xl text-xs font-semibold text-white outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-all cursor-pointer"
+                  >
+                    <option value="750">750+ (Excellent)</option>
+                    <option value="700">700 - 750 (Good)</option>
+                    <option value="650">600 - 700 (Fair)</option>
+                    <option value="550">Below 600 (Needs Improvement)</option>
+                  </select>
+                </div>
               </div>
             </div>
 
@@ -623,7 +661,7 @@ export default function EmiOnboardPage() {
             <div className="flex items-start gap-3 bg-emerald-500/10 border border-emerald-500/20 rounded-2xl p-4">
               <Info size={16} className="text-emerald-400 shrink-0 mt-0.5" />
               <p className="text-xs text-emerald-200/90 leading-relaxed font-medium">
-                Your information will be securely shared with LendSure AI and applicable lending partners for processing your financing request.
+                Your estimated CIBIL score helps us filter and suggest the most matching lender with the highest approval rate.
               </p>
             </div>
 
@@ -644,7 +682,7 @@ export default function EmiOnboardPage() {
                   className="mt-0.5 w-4 h-4 text-emerald-500 rounded border-slate-700 bg-slate-900 focus:ring-emerald-500 shrink-0 cursor-pointer"
                 />
                 <span className="text-xs text-slate-300 leading-relaxed font-medium group-hover:text-slate-200 transition-colors">
-                  I consent to my information being shared with LendSure AI and its applicable lending partners for checking my eligibility for treatment financing and presenting eligible loan offers.
+                  I consent to LendSure AI and its partnered banks/NBFCs pulling my CIBIL score and credit report to evaluate my eligibility for treatment financing.
                 </span>
               </label>
 
@@ -658,7 +696,7 @@ export default function EmiOnboardPage() {
                   className="mt-0.5 w-4 h-4 text-emerald-500 rounded border-slate-700 bg-slate-900 focus:ring-emerald-500 shrink-0 cursor-pointer"
                 />
                 <span className="text-xs text-slate-300 leading-relaxed font-medium group-hover:text-slate-200 transition-colors">
-                  I understand that loan approval, interest rate, tenure, fees and other terms will be determined by the respective bank/NBFC. I will be shown the applicable loan terms and Key Fact Statement before accepting any loan.
+                  I authorize LendSure AI to fetch my credit bureau reports and verify my identity records for processing the credit check.
                 </span>
               </label>
             </div>
@@ -712,6 +750,20 @@ export default function EmiOnboardPage() {
               <span className="px-2.5 py-1 rounded-md bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-[10px] font-bold uppercase tracking-wider flex items-center gap-1">
                 <CheckCircle2 size={11} /> 5 Lender APIs Verified
               </span>
+            </div>
+
+            {/* Custom Recommendation Banner based on CIBIL */}
+            <div className="bg-indigo-950/60 border border-indigo-500/20 rounded-2xl p-4 flex items-start gap-3 shadow-inner">
+              <Sparkles size={16} className="text-indigo-400 shrink-0 mt-0.5 animate-pulse" />
+              <div className="space-y-1">
+                <span className="text-[9px] font-bold text-indigo-400 uppercase tracking-wider block">LendSure AI Suggestion Engine</span>
+                <p className="text-xs text-slate-300 leading-relaxed font-medium">
+                  {cibilScore === '750' && "Excellent Credit! We highly recommend Salary On Time (7.5% p.a.) or Cashvia (12.0% p.a.) for the lowest cost of financing."}
+                  {cibilScore === '700' && "Good Credit Profile. Cashvia or Jupiter Personal Loans are your best matching partners with instant approval."}
+                  {cibilScore === '650' && "Fair Credit Profile. Tap4Credit or DigiCredit offer the highest likelihood of approval with minimal documentation."}
+                  {cibilScore === '550' && "Credit Score Needs Improvement. ATM Cred and Surya Personal Loan are specialized in low-CIBIL approvals."}
+                </p>
+              </div>
             </div>
 
             <div className="space-y-3.5">

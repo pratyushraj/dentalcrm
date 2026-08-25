@@ -148,6 +148,7 @@ export default function EmiOnboardPage() {
   const [amount, setAmount] = useState('0');
   const [rawAmount, setRawAmount] = useState(0);
   const [partnerName, setPartnerName] = useState('LendSure AI');
+  const [isAmountEditable, setIsAmountEditable] = useState(false);
 
   // Steps: 
   // 0: Consent & Details (PAN/Mobile)
@@ -182,6 +183,9 @@ export default function EmiOnboardPage() {
       const n = Number(amountParam);
       setRawAmount(n);
       setAmount(n.toLocaleString('en-IN'));
+      setIsAmountEditable(false);
+    } else {
+      setIsAmountEditable(true);
     }
     if (partnerParam) {
       setPartnerName(decodeURIComponent(partnerParam));
@@ -620,18 +624,39 @@ export default function EmiOnboardPage() {
                 1. Basic Verification Details
               </h4>
               
-              <div className="w-full">
-                <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Estimated CIBIL Score</label>
-                <select
-                  value={cibilScore}
-                  onChange={(e) => setCibilScore(e.target.value)}
-                  className="w-full px-4 py-3 bg-slate-950/80 border border-slate-800 rounded-xl text-xs font-semibold text-white outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-all cursor-pointer"
-                >
-                  <option value="750">750+ (Excellent)</option>
-                  <option value="700">700 - 750 (Good)</option>
-                  <option value="650">600 - 700 (Fair)</option>
-                  <option value="550">Below 600 (Needs Improvement)</option>
-                </select>
+              <div className={isAmountEditable ? "grid grid-cols-1 sm:grid-cols-2 gap-4" : "w-full"}>
+                <div>
+                  <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Estimated CIBIL Score</label>
+                  <select
+                    value={cibilScore}
+                    onChange={(e) => setCibilScore(e.target.value)}
+                    className="w-full px-4 py-3 bg-slate-950/80 border border-slate-800 rounded-xl text-xs font-semibold text-white outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-all cursor-pointer"
+                  >
+                    <option value="750">750+ (Excellent)</option>
+                    <option value="700">700 - 750 (Good)</option>
+                    <option value="650">600 - 700 (Fair)</option>
+                    <option value="550">Below 600 (Needs Improvement)</option>
+                  </select>
+                </div>
+
+                {isAmountEditable && (
+                  <div>
+                    <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Treatment Bill Amount (₹)</label>
+                    <input
+                      type="number"
+                      min={1000}
+                      placeholder="Enter amount (e.g. 75000)"
+                      value={rawAmount || ''}
+                      onChange={(e) => {
+                        const val = Number(e.target.value);
+                        setRawAmount(val);
+                        setAmount(val.toLocaleString('en-IN'));
+                      }}
+                      className="w-full px-4 py-3 bg-slate-950/80 border border-slate-800 rounded-xl text-xs font-semibold font-mono text-white placeholder:text-slate-400 outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-all"
+                      required
+                    />
+                  </div>
+                )}
               </div>
             </div>
 

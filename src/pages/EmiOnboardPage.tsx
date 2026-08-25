@@ -65,49 +65,185 @@ export default function EmiOnboardPage() {
 
   const isLendSure = partnerName.toLowerCase().includes('lendsure');
 
-  // Real Partner Lender Offers — populated from Integrated Lender APIs (Hero Fincorp, Creditsea, Tap4Credit)
-  const offers: LenderOffer[] = [
-    {
-      id: 'offer-hero',
-      lenderName: 'Hero Fincorp (HIPL)',
-      logoBg: 'bg-gradient-to-tr from-blue-600 to-indigo-600 text-white',
-      logoChar: 'H',
-      badge: '0% No-Cost EMI',
-      interestRate: '0% Subsidized',
-      tenure: '12 Months',
-      monthlyEmi: Math.round(rawAmount / 12),
-      totalRepayment: rawAmount,
-      processingFee: 0,
-      minCibil: 700,
-      isRecommended: true
-    },
-    {
-      id: 'offer-creditsea',
-      lenderName: 'Creditsea',
-      logoBg: 'bg-gradient-to-tr from-teal-600 to-emerald-600 text-white',
-      logoChar: 'CS',
-      badge: 'Instant Pre-Approval',
-      interestRate: '0% p.a.',
-      tenure: '9 Months',
-      monthlyEmi: Math.round(rawAmount / 9),
-      totalRepayment: rawAmount,
-      processingFee: Math.round(rawAmount * 0.01),
-      minCibil: 500,
-    },
-    {
-      id: 'offer-tap4credit',
-      lenderName: 'Tap4Credit',
-      logoBg: 'bg-gradient-to-tr from-purple-600 to-pink-600 text-white',
-      logoChar: 'T4C',
-      badge: 'Flexible Tenure',
-      interestRate: '11.5% p.a.',
-      tenure: '18 Months',
-      monthlyEmi: Math.round((rawAmount * 1.09) / 18),
-      totalRepayment: Math.round(rawAmount * 1.09),
-      processingFee: Math.round(rawAmount * 0.015),
-      minCibil: 650,
-    }
-  ];
+  // Helper to build the complete list of 14 direct partner lenders from the Marcadeo brief
+  const buildLenderOffers = (amount: number, resultsMap?: Map<string, string>): LenderOffer[] => {
+    const list: LenderOffer[] = [
+      {
+        id: 'offer-cashvia',
+        lenderName: 'Cashvia Personal Loan',
+        logoBg: 'bg-gradient-to-tr from-emerald-600 to-teal-600 text-white',
+        logoChar: 'CV',
+        badge: resultsMap?.get('cashvia') === 'APPROVED' ? 'Live API Pre-Approved' : 'Best Approval Rate',
+        interestRate: '12% – 36% p.a.',
+        tenure: '12 Months',
+        monthlyEmi: Math.round((amount * 1.12) / 12),
+        totalRepayment: Math.round(amount * 1.12),
+        processingFee: Math.round(amount * 0.03),
+        minCibil: '600',
+      },
+      {
+        id: 'offer-atmcred',
+        lenderName: 'ATM Cred Personal Loan',
+        logoBg: 'bg-gradient-to-tr from-cyan-600 to-blue-600 text-white',
+        logoChar: 'AC',
+        badge: 'Low CIBIL Approval',
+        interestRate: '18% – 36% p.a.',
+        tenure: '12 Months',
+        monthlyEmi: Math.round((amount * 1.18) / 12),
+        totalRepayment: Math.round(amount * 1.18),
+        processingFee: Math.round(amount * 0.035),
+        minCibil: '500',
+      },
+      {
+        id: 'offer-surya',
+        lenderName: 'Surya Personal Loan',
+        logoBg: 'bg-gradient-to-tr from-amber-500 to-yellow-600 text-white',
+        logoChar: 'SU',
+        badge: 'High Approval Rate',
+        interestRate: '18% – 36% p.a.',
+        tenure: '12 Months',
+        monthlyEmi: Math.round((amount * 1.18) / 12),
+        totalRepayment: Math.round(amount * 1.18),
+        processingFee: Math.round(amount * 0.03),
+        minCibil: '600',
+      },
+      {
+        id: 'offer-jupiter',
+        lenderName: 'Jupiter Personal Loan',
+        logoBg: 'bg-gradient-to-tr from-purple-700 to-indigo-800 text-white',
+        logoChar: 'JU',
+        badge: 'Loan Upto 5 Lakh',
+        interestRate: '12% – 30% p.a.',
+        tenure: '18 Months',
+        monthlyEmi: Math.round((amount * 1.15) / 18),
+        totalRepayment: Math.round(amount * 1.15),
+        processingFee: Math.round(amount * 0.025),
+        minCibil: '650',
+      },
+      {
+        id: 'offer-hero',
+        lenderName: 'Hero Fincorp (HIPL)',
+        logoBg: 'bg-gradient-to-tr from-blue-700 to-violet-800 text-white',
+        logoChar: 'H',
+        badge: resultsMap?.get('herofincorp') === 'APPROVED' ? 'Live API Pre-Approved' : 'Zero Cost Subsidized',
+        interestRate: '18% – 30% p.a.',
+        tenure: '12 Months',
+        monthlyEmi: Math.round(amount / 12),
+        totalRepayment: amount,
+        processingFee: 0,
+        minCibil: '700',
+      },
+      {
+        id: 'offer-digicredit',
+        lenderName: 'DigiCredit Personal Loan',
+        logoBg: 'bg-gradient-to-tr from-teal-700 to-green-600 text-white',
+        logoChar: 'DC',
+        badge: 'Instant Digital Disbursal',
+        interestRate: '18% – 36% p.a.',
+        tenure: '12 Months',
+        monthlyEmi: Math.round((amount * 1.18) / 12),
+        totalRepayment: Math.round(amount * 1.18),
+        processingFee: Math.round(amount * 0.03),
+        minCibil: '650',
+      },
+      {
+        id: 'offer-mmb',
+        lenderName: 'MyMoneyBazaar (MMB)',
+        logoBg: 'bg-gradient-to-tr from-orange-600 to-amber-600 text-white',
+        logoChar: 'MB',
+        badge: resultsMap?.get('mmb') === 'APPROVED' ? 'Live API Pre-Approved' : 'Multi-Lender Pre-Check',
+        interestRate: '18% – 36% p.a.',
+        tenure: '12 Months',
+        monthlyEmi: Math.round((amount * 1.18) / 12),
+        totalRepayment: Math.round(amount * 1.18),
+        processingFee: Math.round(amount * 0.025),
+        minCibil: '600',
+      },
+      {
+        id: 'offer-tap4credit',
+        lenderName: 'Tap4Credit',
+        logoBg: 'bg-gradient-to-tr from-pink-600 to-purple-600 text-white',
+        logoChar: 'T4C',
+        badge: resultsMap?.get('tap4credit') === 'APPROVED' || resultsMap?.get('tap4credit') === 'EXISTS' ? 'Live API Pre-Approved' : 'Zero Processing Fee Options',
+        interestRate: '18% – 36% p.a.',
+        tenure: '18 Months',
+        monthlyEmi: Math.round((amount * 1.20) / 18),
+        totalRepayment: Math.round(amount * 1.20),
+        processingFee: Math.round(amount * 0.03),
+        minCibil: '650',
+        isRecommended: true,
+      },
+      {
+        id: 'offer-myfloat',
+        lenderName: 'MyFloat Personal Loan',
+        logoBg: 'bg-gradient-to-tr from-emerald-500 to-lime-600 text-white',
+        logoChar: 'MF',
+        badge: 'Best Approval Rate',
+        interestRate: '18% – 36% p.a.',
+        tenure: '12 Months',
+        monthlyEmi: Math.round((amount * 1.18) / 12),
+        totalRepayment: Math.round(amount * 1.18),
+        processingFee: Math.round(amount * 0.03),
+        minCibil: '600',
+      },
+      {
+        id: 'offer-timepecash',
+        lenderName: 'TimePeCash Personal Loan',
+        logoBg: 'bg-gradient-to-tr from-fuchsia-600 to-rose-600 text-white',
+        logoChar: 'TC',
+        badge: 'Low Income Approval',
+        interestRate: '18% – 36% p.a.',
+        tenure: '9 Months',
+        monthlyEmi: Math.round((amount * 1.15) / 9),
+        totalRepayment: Math.round(amount * 1.15),
+        processingFee: Math.round(amount * 0.03),
+        minCibil: '600',
+      },
+      {
+        id: 'offer-dhancash',
+        lenderName: 'DhanCash Personal Loan',
+        logoBg: 'bg-gradient-to-tr from-green-700 to-emerald-800 text-white',
+        logoChar: 'DH',
+        badge: 'Flexible EMI Plans',
+        interestRate: '24% – 36% p.a.',
+        tenure: '12 Months',
+        monthlyEmi: Math.round((amount * 1.24) / 12),
+        totalRepayment: Math.round(amount * 1.24),
+        processingFee: Math.round(amount * 0.04),
+        minCibil: '650',
+      },
+      {
+        id: 'offer-creditsea',
+        lenderName: 'Creditsea',
+        logoBg: 'bg-gradient-to-tr from-sky-600 to-blue-700 text-white',
+        logoChar: 'CS',
+        badge: resultsMap?.get('creditsea') === 'APPROVED' ? 'Live API Pre-Approved' : 'Digital KYC Approval',
+        interestRate: '24% – 36% p.a.',
+        tenure: '12 Months',
+        monthlyEmi: Math.round((amount * 1.24) / 12),
+        totalRepayment: Math.round(amount * 1.24),
+        processingFee: 0,
+        minCibil: '500',
+      },
+      {
+        id: 'offer-salaryontime',
+        lenderName: 'Salary On Time Loan',
+        logoBg: 'bg-gradient-to-tr from-indigo-600 to-cyan-500 text-white',
+        logoChar: 'ST',
+        badge: 'Low Salaried Approval',
+        interestRate: '7.50%–30% p.a.',
+        tenure: '12 Months',
+        monthlyEmi: Math.round((amount * 1.15) / 12),
+        totalRepayment: Math.round(amount * 1.15),
+        processingFee: Math.round(amount * 0.035),
+        minCibil: '600',
+      }
+    ];
+
+    return list;
+  };
+
+  const offers = buildLenderOffers(rawAmount);
 
   const [liveOffers, setLiveOffers] = useState<LenderOffer[]>([]);
 
@@ -147,90 +283,11 @@ export default function EmiOnboardPage() {
       employmentType: 'Salaried'
     });
 
-    console.log('[EmiOnboardPage] Multi-lender API Aggregator Results:', lenderRes);    // Always show all 5 primary lender options, using live API results to show real-time "Pre-Approved" or "Apply" status badges
-    const generatedOffers: LenderOffer[] = [];
+    console.log('[EmiOnboardPage] Multi-lender API Aggregator Results:', lenderRes);
     const resultsMap = new Map(lenderRes.lenderResults.map(r => [r.lenderId, r.status]));
 
-    // 1. Tap4Credit (650+)
-    const tapStatus = resultsMap.get('tap4credit');
-    generatedOffers.push({
-      id: 'offer-tap4credit',
-      lenderName: 'Tap4Credit',
-      logoBg: 'bg-gradient-to-tr from-purple-600 to-pink-600 text-white',
-      logoChar: 'T4C',
-      badge: tapStatus === 'APPROVED' || tapStatus === 'EXISTS' ? 'Live API Pre-Approved' : 'Direct Apply Partner',
-      interestRate: '11.5% p.a.',
-      tenure: '18 Months',
-      monthlyEmi: Math.round((rawAmount * 1.09) / 18),
-      totalRepayment: Math.round(rawAmount * 1.09),
-      processingFee: Math.round(rawAmount * 0.015),
-      minCibil: 650,
-      isRecommended: true,
-    });
-
-    // 2. Cashvia / DigiCredit (600+)
-    const cashviaStatus = resultsMap.get('cashvia');
-    generatedOffers.push({
-      id: 'offer-cashvia',
-      lenderName: 'Cashvia / Digicredit',
-      logoBg: 'bg-gradient-to-tr from-emerald-600 to-teal-600 text-white',
-      logoChar: 'CV',
-      badge: cashviaStatus === 'APPROVED' ? 'Live API Pre-Approved' : 'Direct Apply Partner',
-      interestRate: '12% – 36% p.a.',
-      tenure: '9 Months',
-      monthlyEmi: Math.round(rawAmount / 9),
-      totalRepayment: rawAmount,
-      processingFee: Math.round(rawAmount * 0.02),
-      minCibil: 600,
-    });
-
-    // 3. Creditsea (500+)
-    const creditseaStatus = resultsMap.get('creditsea');
-    generatedOffers.push({
-      id: 'offer-creditsea',
-      lenderName: 'Creditsea',
-      logoBg: 'bg-gradient-to-tr from-blue-600 to-indigo-600 text-white',
-      logoChar: 'CS',
-      badge: creditseaStatus === 'APPROVED' ? 'Live API Pre-Approved' : 'Direct Apply Partner',
-      interestRate: '24% – 36% p.a.',
-      tenure: '12 Months',
-      monthlyEmi: Math.round(rawAmount / 12),
-      totalRepayment: rawAmount,
-      processingFee: 0,
-      minCibil: 500,
-    });
-
-    // 4. Hero Fincorp (700+)
-    const heroStatus = resultsMap.get('herofincorp');
-    generatedOffers.push({
-      id: 'offer-hero',
-      lenderName: 'Hero Fincorp (HIPL)',
-      logoBg: 'bg-gradient-to-tr from-indigo-700 to-violet-800 text-white',
-      logoChar: 'H',
-      badge: heroStatus === 'APPROVED' ? 'Live API Pre-Approved' : 'Direct Apply Partner',
-      interestRate: '18% – 30% p.a.',
-      tenure: '12 Months',
-      monthlyEmi: Math.round(rawAmount / 12),
-      totalRepayment: rawAmount,
-      processingFee: Math.round(rawAmount * 0.02),
-      minCibil: 700,
-    });
-
-    // 5. MyMoneyBazaar (600+)
-    const mmbStatus = resultsMap.get('mmb');
-    generatedOffers.push({
-      id: 'offer-mmb',
-      lenderName: 'MyMoneyBazaar (MMB)',
-      logoBg: 'bg-gradient-to-tr from-amber-600 to-orange-600 text-white',
-      logoChar: 'MB',
-      badge: mmbStatus === 'APPROVED' ? 'Live API Pre-Approved' : 'Direct Apply Partner',
-      interestRate: '18% – 36% p.a.',
-      tenure: '12 Months',
-      monthlyEmi: Math.round(rawAmount / 12),
-      totalRepayment: rawAmount,
-      processingFee: Math.round(rawAmount * 0.02),
-      minCibil: 600,
-    });
+    // Generate dynamic offers list for all 14 lenders with API pre-approval statuses injected
+    const generatedOffers = buildLenderOffers(rawAmount, resultsMap);
 
     setLiveOffers(generatedOffers);
 
@@ -255,14 +312,32 @@ export default function EmiOnboardPage() {
       let trackingUrl = '';
       if (offer.id === 'offer-cashvia') {
         trackingUrl = 'https://partners.marcadeo.com/click?oid=294&uid=1895&lid=242';
-      } else if (offer.id === 'offer-tap4credit') {
-        trackingUrl = 'https://partners.marcadeo.com/click?oid=393&uid=1895&lid=420';
-      } else if (offer.id === 'offer-creditsea') {
-        trackingUrl = 'https://partners.marcadeo.com/click?oid=454&uid=1895&lid=523';
+      } else if (offer.id === 'offer-atmcred') {
+        trackingUrl = 'https://partners.marcadeo.com/click?oid=447&uid=1895&lid=515';
+      } else if (offer.id === 'offer-surya') {
+        trackingUrl = 'https://partners.marcadeo.com/click?oid=449&uid=1895&lid=517';
+      } else if (offer.id === 'offer-jupiter') {
+        trackingUrl = 'https://partners.marcadeo.com/click?oid=442&uid=1895&lid=509';
       } else if (offer.id === 'offer-hero') {
         trackingUrl = 'https://partners.marcadeo.com/click?oid=344&uid=1895&lid=335';
+      } else if (offer.id === 'offer-digicredit') {
+        trackingUrl = 'https://partners.marcadeo.com/click?oid=371&uid=1895&lid=385';
       } else if (offer.id === 'offer-mmb') {
         trackingUrl = 'https://partners.marcadeo.com/click?oid=353&uid=1895&lid=347';
+      } else if (offer.id === 'offer-tap4credit') {
+        trackingUrl = 'https://partners.marcadeo.com/click?oid=393&uid=1895&lid=420';
+      } else if (offer.id === 'offer-myfloat') {
+        trackingUrl = 'https://partners.marcadeo.com/click?oid=289&uid=1895&lid=238';
+      } else if (offer.id === 'offer-timepecash') {
+        // Direct website redirect with partner referral code
+        window.location.href = `https://web.timepecash.com/?referrer=OISAID63&mobile=${encodeURIComponent(mobile)}`;
+        return;
+      } else if (offer.id === 'offer-dhancash') {
+        trackingUrl = 'https://partners.marcadeo.com/click?oid=464&uid=1895&lid=535';
+      } else if (offer.id === 'offer-creditsea') {
+        trackingUrl = 'https://partners.marcadeo.com/click?oid=454&uid=1895&lid=523';
+      } else if (offer.id === 'offer-salaryontime') {
+        trackingUrl = 'https://partners.marcadeo.com/click?oid=448&uid=1895&lid=516';
       } else {
         // Fallback to default callback
         const params = new URLSearchParams(window.location.search);

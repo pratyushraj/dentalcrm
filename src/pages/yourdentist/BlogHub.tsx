@@ -9,7 +9,7 @@ export default function BlogHub() {
     '@context': 'https://schema.org',
     '@type': 'Dentist',
     'name': 'YOUR DENTIST Patna',
-    'image': 'https://dental-crm-gray.vercel.app/assets/yourdentist/clinic_in_action.jpg',
+    'image': 'https://clinaza.in/og-preview.png',
     'telePhone': '+91 6201478033',
     'email': 'yourdentistpatna@gmail.com',
     'address': {
@@ -25,7 +25,7 @@ export default function BlogHub() {
       'latitude': '25.6200',
       'longitude': '85.1100'
     },
-    'url': 'https://dental-crm-gray.vercel.app/yourdentist/blog',
+    'url': 'https://clinaza.in/blog',
     'priceRange': '$$',
     'openingHoursSpecification': [
       {
@@ -44,9 +44,9 @@ export default function BlogHub() {
     <div className="min-h-screen bg-neutral-950 text-white font-sora antialiased selection:bg-white selection:text-neutral-950">
       <SEOHead
         title="YOUR DENTIST Patna | Oral Health Guides & Patient Resources"
-        description="Read patient guides on braces, clear aligner costs, and dental treatments in Patna by Dr. Aryan Parmar. 0% interest EMI options available."
+        description="Read patient guides on braces, clear aligner costs, and dental treatments in Patna by Dr. Aryan Parmar. Flexible EMI financing options available."
         keywords={['best dentist in patna', 'braces cost patna', 'clear aligners patna', 'dental clinic patna', 'teeth gap treatment']}
-        canonicalUrl="https://dental-crm-gray.vercel.app/yourdentist/blog"
+        canonicalUrl="https://clinaza.in/blog"
         jsonLd={localBusinessSchema}
       />
 

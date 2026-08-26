@@ -701,7 +701,7 @@ export default function CrmHomepage() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-left">
+            <div className="max-w-md mx-auto text-left">
               {[
                 {
                   name: 'YOUR DENTIST Patna',
@@ -710,58 +710,8 @@ export default function CrmHomepage() {
                   badge: 'Featured Partner',
                   specialties: 'Implants, Braces & Aligners',
                   link: '/blog',
-                  accent: 'border-emerald-300 bg-emerald-50/50',
+                  accent: 'border-emerald-300 bg-emerald-50/60 shadow-sm',
                   badgeColor: 'bg-emerald-600 text-white'
-                },
-                {
-                  name: 'Apex Dental & Maxillofacial',
-                  location: 'Connaught Place, New Delhi',
-                  leadDoctor: 'Dr. R. K. Sharma',
-                  badge: 'Verified Clinic',
-                  specialties: 'Full Mouth Rehab & Surgery',
-                  link: '/cities/delhi',
-                  accent: 'border-slate-200 bg-white',
-                  badgeColor: 'bg-slate-100 text-slate-700 border border-slate-200'
-                },
-                {
-                  name: 'SmileCraft Orthodontics',
-                  location: 'Indiranagar, Bengaluru',
-                  leadDoctor: 'Dr. Ananya Rao',
-                  badge: 'Verified Clinic',
-                  specialties: 'Clear Aligners & Esthetics',
-                  link: '/cities/bengaluru',
-                  accent: 'border-slate-200 bg-white',
-                  badgeColor: 'bg-slate-100 text-slate-700 border border-slate-200'
-                },
-                {
-                  name: '32 Pearls Implant Center',
-                  location: 'Bandra West, Mumbai',
-                  leadDoctor: 'Dr. Vikram Shah',
-                  badge: 'Verified Clinic',
-                  specialties: 'All-on-4 Implants & Crowns',
-                  link: '/cities/mumbai',
-                  accent: 'border-slate-200 bg-white',
-                  badgeColor: 'bg-slate-100 text-slate-700 border border-slate-200'
-                },
-                {
-                  name: 'Vcare Super-Specialty Dental',
-                  location: 'Banjara Hills, Hyderabad',
-                  leadDoctor: 'Dr. S. K. Reddy',
-                  badge: 'Verified Clinic',
-                  specialties: 'Cosmetic Dentistry & Root Canals',
-                  link: '/cities/hyderabad',
-                  accent: 'border-slate-200 bg-white',
-                  badgeColor: 'bg-slate-100 text-slate-700 border border-slate-200'
-                },
-                {
-                  name: 'Dr. Parmar Dental & Implant Clinic',
-                  location: 'Kankarbagh, Patna',
-                  leadDoctor: 'Dr. Parmar & Team',
-                  badge: 'Verified Partner',
-                  specialties: 'Dental Implants & Braces',
-                  link: '/cities/patna',
-                  accent: 'border-slate-200 bg-white',
-                  badgeColor: 'bg-slate-100 text-slate-700 border border-slate-200'
                 }
               ].map((clinic, idx) => (
                 <div key={idx} className={`p-5 rounded-2xl border ${clinic.accent} space-y-3 shadow-2xs hover:shadow-md transition-all`}>

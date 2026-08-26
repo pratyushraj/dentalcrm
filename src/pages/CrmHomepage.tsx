@@ -701,17 +701,73 @@ export default function CrmHomepage() {
               </p>
             </div>
 
-            <div className="max-w-md mx-auto text-left">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-left">
               {[
                 {
                   name: 'YOUR DENTIST Patna',
                   location: 'Patliputra Colony, Patna',
-                  leadDoctor: 'Dr. Aryan Parmar',
-                  badge: 'Featured Partner',
+                  phone: '062014 78033',
+                  rating: '5.0 ★ (Primary Partner)',
                   specialties: 'Implants, Braces & Aligners',
                   link: '/blog',
-                  accent: 'border-emerald-300 bg-emerald-50/60 shadow-sm',
+                  accent: 'border-emerald-400 bg-emerald-50/70 shadow-sm',
+                  badge: 'Featured Partner',
                   badgeColor: 'bg-emerald-600 text-white'
+                },
+                {
+                  name: 'YouthONN Multispeciality Dental',
+                  location: 'Nehru Nagar Rd, Patliputra, Patna',
+                  phone: '077397 46086',
+                  rating: '5.0 ★ (133 reviews)',
+                  specialties: 'Multispeciality Dental Care',
+                  link: '/cities/patna',
+                  accent: 'border-slate-200 bg-white',
+                  badge: 'Partner Clinic',
+                  badgeColor: 'bg-slate-100 text-slate-700 border border-slate-200'
+                },
+                {
+                  name: 'Mundeshwari Dental Hub & Implant',
+                  location: 'Rajeev Nagar Main Rd, Patna',
+                  phone: '085441 65535',
+                  rating: '5.0 ★ (153 reviews)',
+                  specialties: 'Implant Centre & Surgery',
+                  link: '/cities/patna',
+                  accent: 'border-slate-200 bg-white',
+                  badge: 'Partner Clinic',
+                  badgeColor: 'bg-slate-100 text-slate-700 border border-slate-200'
+                },
+                {
+                  name: 'Pratima Dental Hospital & Cosmetic',
+                  location: 'Ashiana - Digha Rd, Patna',
+                  phone: '074628 36028',
+                  rating: '4.8 ★ (113 reviews)',
+                  specialties: 'Hospital & Cosmetic Dentistry',
+                  link: '/cities/patna',
+                  accent: 'border-slate-200 bg-white',
+                  badge: 'Partner Clinic',
+                  badgeColor: 'bg-slate-100 text-slate-700 border border-slate-200'
+                },
+                {
+                  name: 'Tooth Care Centre Multispeciality',
+                  location: 'Ravi Chowk, Keshri Market, Patna',
+                  phone: '089589 30230',
+                  rating: '5.0 ★ (77 reviews)',
+                  specialties: 'Multispeciality Care',
+                  link: '/cities/patna',
+                  accent: 'border-slate-200 bg-white',
+                  badge: 'Partner Clinic',
+                  badgeColor: 'bg-slate-100 text-slate-700 border border-slate-200'
+                },
+                {
+                  name: 'Smile Support Dental Clinic',
+                  location: 'Rd No. 10, Near Pankaj Kirana, Patna',
+                  phone: '080849 88949',
+                  rating: '5.0 ★ (22 reviews)',
+                  specialties: 'General & Orthodontic Care',
+                  link: '/cities/patna',
+                  accent: 'border-slate-200 bg-white',
+                  badge: 'Partner Clinic',
+                  badgeColor: 'bg-slate-100 text-slate-700 border border-slate-200'
                 }
               ].map((clinic, idx) => (
                 <div key={idx} className={`p-5 rounded-2xl border ${clinic.accent} space-y-3 shadow-2xs hover:shadow-md transition-all`}>
@@ -728,8 +784,9 @@ export default function CrmHomepage() {
                   </div>
 
                   <div className="pt-1 border-t border-slate-100 text-[11px] space-y-1">
-                    <p className="text-slate-600"><span className="font-bold text-[#0B2450]">Lead Dentist:</span> {clinic.leadDoctor}</p>
-                    <p className="text-slate-500"><span className="font-bold text-[#0B2450]">Focus:</span> {clinic.specialties}</p>
+                    <p className="text-slate-600"><span className="font-bold text-[#0B2450]">Rating:</span> {clinic.rating}</p>
+                    <p className="text-slate-500"><span className="font-bold text-[#0B2450]">Phone / Contact:</span> {clinic.phone}</p>
+                    <p className="text-slate-500"><span className="font-bold text-[#0B2450]">Services:</span> {clinic.specialties}</p>
                   </div>
 
                   <div className="pt-1 flex items-center justify-between">
@@ -737,11 +794,11 @@ export default function CrmHomepage() {
                       ✓ Clinaza EMI Accepted
                     </span>
                     <Link to={clinic.link} className="text-[10px] font-bold text-[#0867E8] hover:underline flex items-center gap-0.5">
-                      Explore &rarr;
+                      Check EMI &rarr;
                     </Link>
                   </div>
                 </div>
-              ))}
+              )}
             </div>
 
             <div className="pt-2 flex flex-wrap items-center justify-center gap-2 text-xs font-bold text-slate-500">

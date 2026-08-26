@@ -798,7 +798,7 @@ export default function CrmHomepage() {
                     </Link>
                   </div>
                 </div>
-              )}
+              ))}
             </div>
 
             <div className="pt-2 flex flex-wrap items-center justify-center gap-2 text-xs font-bold text-slate-500">

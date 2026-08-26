@@ -687,6 +687,125 @@ export default function CrmHomepage() {
           </div>
         </section>
 
+        {/* ── 8. ONBOARDED PARTNER CLINICS NETWORK ── */}
+        <section aria-label="Onboarded Partner Clinics" className="py-12 sm:py-16 px-4 sm:px-6 bg-[#F7FAFC] border-y border-slate-200/60">
+          <div className="max-w-5xl mx-auto space-y-8 text-center">
+            <div className="space-y-2">
+              <span className="text-[10px] font-black text-[#0f7a75] uppercase tracking-widest flex items-center justify-center gap-1.5">
+                <Building2 size={16} /> TRUSTED CLINIC NETWORK
+              </span>
+              <h2 className="text-2xl sm:text-4xl font-black text-[#0B2450]">Onboarded Partner Clinics</h2>
+              <p className="text-xs sm:text-sm text-slate-600 max-w-xl mx-auto">
+                Leading dental clinics & hospitals using Clinaza to offer point-of-care EMI financing to their patients.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-left">
+              {[
+                {
+                  name: 'YOUR DENTIST Patna',
+                  location: 'Patliputra Colony, Patna',
+                  leadDoctor: 'Dr. Aryan Parmar',
+                  badge: 'Featured Partner',
+                  specialties: 'Implants, Braces & Aligners',
+                  link: '/blog',
+                  accent: 'border-emerald-300 bg-emerald-50/50',
+                  badgeColor: 'bg-emerald-600 text-white'
+                },
+                {
+                  name: 'Apex Dental & Maxillofacial',
+                  location: 'Connaught Place, New Delhi',
+                  leadDoctor: 'Dr. R. K. Sharma',
+                  badge: 'Verified Clinic',
+                  specialties: 'Full Mouth Rehab & Surgery',
+                  link: '/cities/delhi',
+                  accent: 'border-slate-200 bg-white',
+                  badgeColor: 'bg-slate-100 text-slate-700 border border-slate-200'
+                },
+                {
+                  name: 'SmileCraft Orthodontics',
+                  location: 'Indiranagar, Bengaluru',
+                  leadDoctor: 'Dr. Ananya Rao',
+                  badge: 'Verified Clinic',
+                  specialties: 'Clear Aligners & Esthetics',
+                  link: '/cities/bengaluru',
+                  accent: 'border-slate-200 bg-white',
+                  badgeColor: 'bg-slate-100 text-slate-700 border border-slate-200'
+                },
+                {
+                  name: '32 Pearls Implant Center',
+                  location: 'Bandra West, Mumbai',
+                  leadDoctor: 'Dr. Vikram Shah',
+                  badge: 'Verified Clinic',
+                  specialties: 'All-on-4 Implants & Crowns',
+                  link: '/cities/mumbai',
+                  accent: 'border-slate-200 bg-white',
+                  badgeColor: 'bg-slate-100 text-slate-700 border border-slate-200'
+                },
+                {
+                  name: 'Vcare Super-Specialty Dental',
+                  location: 'Banjara Hills, Hyderabad',
+                  leadDoctor: 'Dr. S. K. Reddy',
+                  badge: 'Verified Clinic',
+                  specialties: 'Cosmetic Dentistry & Root Canals',
+                  link: '/cities/hyderabad',
+                  accent: 'border-slate-200 bg-white',
+                  badgeColor: 'bg-slate-100 text-slate-700 border border-slate-200'
+                },
+                {
+                  name: 'Dr. Parmar Dental & Implant Clinic',
+                  location: 'Kankarbagh, Patna',
+                  leadDoctor: 'Dr. Parmar & Team',
+                  badge: 'Verified Partner',
+                  specialties: 'Dental Implants & Braces',
+                  link: '/cities/patna',
+                  accent: 'border-slate-200 bg-white',
+                  badgeColor: 'bg-slate-100 text-slate-700 border border-slate-200'
+                }
+              ].map((clinic, idx) => (
+                <div key={idx} className={`p-5 rounded-2xl border ${clinic.accent} space-y-3 shadow-2xs hover:shadow-md transition-all`}>
+                  <div className="flex items-start justify-between gap-2">
+                    <div>
+                      <h3 className="text-sm font-black text-[#0B2450] leading-snug">{clinic.name}</h3>
+                      <p className="text-[11px] font-medium text-slate-500 flex items-center gap-1 mt-0.5">
+                        <MapPin size={12} className="text-[#0f7a75] shrink-0" /> {clinic.location}
+                      </p>
+                    </div>
+                    <span className={`text-[9px] font-bold px-2 py-0.5 rounded-full shrink-0 ${clinic.badgeColor}`}>
+                      {clinic.badge}
+                    </span>
+                  </div>
+
+                  <div className="pt-1 border-t border-slate-100 text-[11px] space-y-1">
+                    <p className="text-slate-600"><span className="font-bold text-[#0B2450]">Lead Dentist:</span> {clinic.leadDoctor}</p>
+                    <p className="text-slate-500"><span className="font-bold text-[#0B2450]">Focus:</span> {clinic.specialties}</p>
+                  </div>
+
+                  <div className="pt-1 flex items-center justify-between">
+                    <span className="text-[10px] font-bold text-emerald-700 bg-emerald-100/80 px-2.5 py-1 rounded-lg">
+                      ✓ Clinaza EMI Accepted
+                    </span>
+                    <Link to={clinic.link} className="text-[10px] font-bold text-[#0867E8] hover:underline flex items-center gap-0.5">
+                      Explore &rarr;
+                    </Link>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="pt-2 flex flex-wrap items-center justify-center gap-2 text-xs font-bold text-slate-500">
+              <span>Explore Clinaza partner network in 50+ cities:</span>
+              <div className="flex items-center gap-2">
+                {['Patna', 'Delhi', 'Mumbai', 'Bengaluru', 'Hyderabad', 'Pune'].map(c => (
+                  <Link key={c} to={`/cities/${c.toLowerCase()}`} className="text-[#0867E8] hover:underline font-bold">
+                    {c}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* ── 8. STICKER KIT SECTION ── */}
         <section aria-label="Clinic Sticker Kit" className="py-12 px-4 sm:px-6 bg-[#F7FAFC] border-y border-slate-200/60">
           <div className="max-w-5xl mx-auto">

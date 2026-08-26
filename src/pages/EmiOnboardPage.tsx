@@ -563,6 +563,16 @@ export default function EmiOnboardPage() {
         title="Clinaza Patient Onboarding — Point-of-Care Financing"
         description="Check treatment loan eligibility and choose custom monthly EMIs directly at checkout."
         image="https://clinaza.in/og-preview.png"
+        canonicalUrl="https://clinaza.in/emi/onboard"
+        keywords={['clinaza emi onboard', 'patient loan check', 'medical emi checkout', 'dental loan approval']}
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "WebApplication",
+          "name": "Clinaza Patient Financing Checkout",
+          "url": "https://clinaza.in/emi/onboard",
+          "applicationCategory": "FinanceApplication",
+          "operatingSystem": "All"
+        }}
       />
       
       {/* Background Decorative Glow */}

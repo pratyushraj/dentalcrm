@@ -245,18 +245,57 @@ export default function CrmHomepage() {
     <div className="min-h-screen bg-white text-[#0B2450] font-sora antialiased overflow-x-hidden selection:bg-[#0867E8] selection:text-white">
       <SEOHead
         title="CLINAZA — Embedded Healthcare Patient Financing Infrastructure"
-        description="Don't let treatment cost stop your patients. Offer financing options for eligible patients from ₹30K–₹3L through Clinaza's lending partners."
-        keywords={['clinaza', 'patient financing', 'dental emi', 'healthcare lending', 'medical loan india', 'point of care financing', 'clinic emi option', 'embedded finance', 'dental implants financing']}
-        image="https://dental-crm-red.vercel.app/assets/clinaza-logo.jpg"
-        canonicalUrl="https://dental-crm-red.vercel.app/"
-        jsonLd={{
-          "@context": "https://schema.org",
-          "@type": "FinancialService",
-          "name": "Clinaza",
-          "description": "Embedded patient financing infrastructure enabling clinics to offer point-of-care EMI loans.",
-          "url": "https://dental-crm-red.vercel.app/",
-          "logo": "https://dental-crm-red.vercel.app/assets/clinaza-logo.jpg"
-        }}
+        description="Don't let treatment cost stop your patients. Offer flexible EMI financing for eligible patients (₹30K–₹3L) directly at your clinic checkout."
+        keywords={[
+          'clinaza', 'patient financing', 'dental emi', 'healthcare lending', 
+          'medical loan india', 'point of care financing', 'clinic emi option', 
+          'embedded finance', 'dental implants financing', 'clear aligners emi'
+        ]}
+        image="https://clinaza.in/og-preview.png"
+        canonicalUrl="https://clinaza.in/"
+        jsonLd={[
+          {
+            "@context": "https://schema.org",
+            "@type": "FinancialService",
+            "name": "Clinaza",
+            "description": "Embedded patient financing infrastructure enabling healthcare clinics & hospitals to offer point-of-care EMI loans.",
+            "url": "https://clinaza.in/",
+            "logo": "https://clinaza.in/assets/clinaza-logo.jpg",
+            "image": "https://clinaza.in/og-preview.png",
+            "areaServed": "IN",
+            "serviceType": "Healthcare Patient Financing Infrastructure"
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "How does Clinaza patient financing work?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Clinaza connects clinic patients directly with regulated lending partners to offer flexible monthly EMI options for treatments ranging from ₹30,000 to ₹3,00,000."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What treatments are covered under Clinaza EMI?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Clinaza supports dental implants, clear aligners, crowns & makeovers, orthopaedics, IVF, ophthalmology/LASIK, and other elective surgeries."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Does Clinaza require clinic integration?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "No complex IT setup is required. Clinics can start offering financing instantly using the Clinaza partner link or checkout widget."
+                }
+              }
+            ]
+          }
+        ]}
       />
 
       {/* ── Header ── */}

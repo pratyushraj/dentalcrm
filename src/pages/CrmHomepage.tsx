@@ -293,7 +293,32 @@ export default function CrmHomepage() {
                   "@type": "Answer",
                   "text": "No complex IT setup is required. Clinics can start offering financing instantly using the Clinaza partner link or checkout widget."
                 }
+              },
+              {
+                "@type": "Question",
+                "name": "Which clinics in Patna offer Clinaza EMI financing?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Clinaza partner clinics in Patna include YOUR DENTIST Patna, PRODENT, Facio Dental, Smile Dental Clinic, Smile Point Dental Care, YouthONN Multispeciality Dental, Mundeshwari Dental Hub, and Pratima Dental Hospital among others."
+                }
               }
+            ]
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            "name": "Clinaza Partner Dental Clinics",
+            "description": "Dental clinics across India offering Clinaza point-of-care EMI patient financing",
+            "itemListElement": [
+              { "@type": "ListItem", "position": 1, "name": "YOUR DENTIST Patna", "url": "https://clinaza.in/blog" },
+              { "@type": "ListItem", "position": 2, "name": "PRODENT Patna", "url": "https://clinaza.in/cities/patna" },
+              { "@type": "ListItem", "position": 3, "name": "GuMzy Dental Gurgaon", "url": "https://clinaza.in/cities/gurgaon" },
+              { "@type": "ListItem", "position": 4, "name": "Facio Dental Patna", "url": "https://clinaza.in/cities/patna" },
+              { "@type": "ListItem", "position": 5, "name": "Smile Dental Clinic Patna", "url": "https://clinaza.in/cities/patna" },
+              { "@type": "ListItem", "position": 6, "name": "Smile Point Dental Care Patna", "url": "https://clinaza.in/cities/patna" },
+              { "@type": "ListItem", "position": 7, "name": "YouthONN Multispeciality Dental Patna", "url": "https://clinaza.in/cities/patna" },
+              { "@type": "ListItem", "position": 8, "name": "Mundeshwari Dental Hub & Implant Patna", "url": "https://clinaza.in/cities/patna" },
+              { "@type": "ListItem", "position": 9, "name": "Pratima Dental Hospital Patna", "url": "https://clinaza.in/cities/patna" }
             ]
           }
         ]}

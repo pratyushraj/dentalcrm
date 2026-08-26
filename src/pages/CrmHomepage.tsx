@@ -715,6 +715,61 @@ export default function CrmHomepage() {
                   badgeColor: 'bg-emerald-600 text-white'
                 },
                 {
+                  name: 'PRODENT',
+                  location: 'West Boring Canal Rd, Anandpuri, Patna',
+                  phone: '084290 57093',
+                  rating: '4.9 ★ (95 reviews)',
+                  specialties: 'Multispeciality Dental Clinic',
+                  link: '/cities/patna',
+                  accent: 'border-slate-200 bg-white',
+                  badge: 'Partner Clinic',
+                  badgeColor: 'bg-slate-100 text-slate-700 border border-slate-200'
+                },
+                {
+                  name: 'GuMzy Dental',
+                  location: 'Gurgaon, Haryana',
+                  phone: 'Direct Partner Desk',
+                  rating: '5.0 ★ (30 reviews)',
+                  specialties: 'Painless RCT & Aesthetics',
+                  link: '/cities/gurgaon',
+                  accent: 'border-slate-200 bg-white',
+                  badge: 'Partner Clinic',
+                  badgeColor: 'bg-slate-100 text-slate-700 border border-slate-200'
+                },
+                {
+                  name: 'Facio Dental',
+                  location: 'Patna, Bihar',
+                  phone: 'Direct Partner Desk',
+                  rating: '4.5 ★ (417 reviews)',
+                  specialties: 'Complex Orthodontics & Surgery',
+                  link: '/cities/patna',
+                  accent: 'border-slate-200 bg-white',
+                  badge: 'Partner Clinic',
+                  badgeColor: 'bg-slate-100 text-slate-700 border border-slate-200'
+                },
+                {
+                  name: 'Smile Dental Clinic Patna',
+                  location: 'Pillar 39, Ashok Rajpath, Patna',
+                  phone: '062028 26097',
+                  rating: '5.0 ★ (104 reviews)',
+                  specialties: 'Dental Implants & Scaling',
+                  link: '/cities/patna',
+                  accent: 'border-slate-200 bg-white',
+                  badge: 'Partner Clinic',
+                  badgeColor: 'bg-slate-100 text-slate-700 border border-slate-200'
+                },
+                {
+                  name: 'Smile Point Dental Care',
+                  location: 'Patna, Bihar',
+                  phone: 'Direct Partner Desk',
+                  rating: '4.9 ★ (308 reviews)',
+                  specialties: 'Painless RCT & Advanced Care',
+                  link: '/cities/patna',
+                  accent: 'border-slate-200 bg-white',
+                  badge: 'Partner Clinic',
+                  badgeColor: 'bg-slate-100 text-slate-700 border border-slate-200'
+                },
+                {
                   name: 'YouthONN Multispeciality Dental',
                   location: 'Nehru Nagar Rd, Patliputra, Patna',
                   phone: '077397 46086',
@@ -742,28 +797,6 @@ export default function CrmHomepage() {
                   phone: '074628 36028',
                   rating: '4.8 ★ (113 reviews)',
                   specialties: 'Hospital & Cosmetic Dentistry',
-                  link: '/cities/patna',
-                  accent: 'border-slate-200 bg-white',
-                  badge: 'Partner Clinic',
-                  badgeColor: 'bg-slate-100 text-slate-700 border border-slate-200'
-                },
-                {
-                  name: 'Tooth Care Centre Multispeciality',
-                  location: 'Ravi Chowk, Keshri Market, Patna',
-                  phone: '089589 30230',
-                  rating: '5.0 ★ (77 reviews)',
-                  specialties: 'Multispeciality Care',
-                  link: '/cities/patna',
-                  accent: 'border-slate-200 bg-white',
-                  badge: 'Partner Clinic',
-                  badgeColor: 'bg-slate-100 text-slate-700 border border-slate-200'
-                },
-                {
-                  name: 'Smile Support Dental Clinic',
-                  location: 'Rd No. 10, Near Pankaj Kirana, Patna',
-                  phone: '080849 88949',
-                  rating: '5.0 ★ (22 reviews)',
-                  specialties: 'General & Orthodontic Care',
                   link: '/cities/patna',
                   accent: 'border-slate-200 bg-white',
                   badge: 'Partner Clinic',

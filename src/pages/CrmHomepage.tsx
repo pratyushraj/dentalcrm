@@ -16,7 +16,8 @@ import {
   Lock,
   Package,
   Truck,
-  Award
+  Award,
+  MapPin
 } from 'lucide-react';
 import { emailNotificationService } from '../services/emailNotificationService';
 import { toast } from 'sonner';

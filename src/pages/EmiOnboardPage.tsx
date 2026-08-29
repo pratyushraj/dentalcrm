@@ -152,14 +152,12 @@ export default function EmiOnboardPage() {
   const [isAmountEditable, setIsAmountEditable] = useState(false);
 
   // Steps: 
+  // Steps: 
   // 0: Consent & Details (PAN/Mobile)
   // 1: Lender Matching (Clinaza / OCEN 4.0 engine)
   // 2: Lender Offers Selection
   // 3: Lender KYC & KFS Approval (Finalizing with chosen bank/NBFC)
-  // Steps: 0=Consent, 0.5=Pre-Screen, 1=Matching, 2=Offers, 3=KYC
   const [step, setStep] = useState(0);
-  
-  const [pan, setPan] = useState('');
   const [mobile, setMobile] = useState('');
   const [cibilScore, setCibilScore] = useState('750');
   

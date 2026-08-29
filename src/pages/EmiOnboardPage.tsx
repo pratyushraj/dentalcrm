@@ -160,6 +160,7 @@ export default function EmiOnboardPage() {
   const [step, setStep] = useState(0);
   const [mobile, setMobile] = useState('');
   const [cibilScore, setCibilScore] = useState('750');
+  const [pan, setPan] = useState("");
   
   // Pre-screening answers (Q1–Q4)
   const [employmentType, setEmploymentType] = useState('');

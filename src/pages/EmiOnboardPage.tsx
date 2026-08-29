@@ -410,7 +410,7 @@ export default function EmiOnboardPage() {
     });
 
     // Sort by recommended status first, then by interest rate (low to high)
-    return mappedList.sort((a, b) => {
+    return mappedList.filter(offer => offer.id === 'offer-jupiter').sort((a, b) => {
       if (a.isRecommended && !b.isRecommended) return -1;
       if (!a.isRecommended && b.isRecommended) return 1;
       return a.sortRate - b.sortRate;
@@ -510,51 +510,9 @@ export default function EmiOnboardPage() {
   };
 
   const handleSelectOffer = (offer: LenderOffer) => {
-    setSelectedOffer(offer);
-    setStep(3); // Proceed to lender KYC & KFS completion
-
-    setTimeout(() => {
-      // Map lender ID to affiliate tracking UTM links from Personal Loan Brief Excel
-      let trackingUrl = '';
-      if (offer.id === 'offer-cashvia') {
-        trackingUrl = 'https://partners.marcadeo.com/click?oid=294&uid=1895&lid=242';
-      } else if (offer.id === 'offer-atmcred') {
-        trackingUrl = 'https://partners.marcadeo.com/click?oid=447&uid=1895&lid=515';
-      } else if (offer.id === 'offer-surya') {
-        trackingUrl = 'https://partners.marcadeo.com/click?oid=449&uid=1895&lid=517';
-      } else if (offer.id === 'offer-jupiter') {
-        trackingUrl = 'https://partners.marcadeo.com/click?oid=442&uid=1895&lid=509';
-      } else if (offer.id === 'offer-hero') {
-        trackingUrl = 'https://partners.marcadeo.com/click?oid=344&uid=1895&lid=335';
-      } else if (offer.id === 'offer-digicredit') {
-        trackingUrl = 'https://partners.marcadeo.com/click?oid=371&uid=1895&lid=385';
-      } else if (offer.id === 'offer-mmb') {
-        trackingUrl = 'https://partners.marcadeo.com/click?oid=353&uid=1895&lid=347';
-      } else if (offer.id === 'offer-tap4credit') {
-        trackingUrl = 'https://partners.marcadeo.com/click?oid=393&uid=1895&lid=420';
-      } else if (offer.id === 'offer-myfloat') {
-        trackingUrl = 'https://partners.marcadeo.com/click?oid=289&uid=1895&lid=238';
-      } else if (offer.id === 'offer-timepecash') {
-        // Direct website redirect with partner referral code
-        window.location.href = `https://web.timepecash.com/?referrer=OISAID63&mobile=${encodeURIComponent(mobile)}`;
-        return;
-      } else if (offer.id === 'offer-dhancash') {
-        trackingUrl = 'https://partners.marcadeo.com/click?oid=464&uid=1895&lid=535';
-      } else if (offer.id === 'offer-creditsea') {
-        trackingUrl = 'https://partners.marcadeo.com/click?oid=454&uid=1895&lid=523';
-      } else if (offer.id === 'offer-salaryontime') {
-        trackingUrl = 'https://partners.marcadeo.com/click?oid=448&uid=1895&lid=516';
-      } else {
-        // Fallback to default callback
-        const params = new URLSearchParams(window.location.search);
-        const clientId = params.get('client_id') || 'de01ee08f2ec9266649435867d87da8d';
-        window.location.href = `/emi/callback?client_id=${clientId}&status=approved&lender=${encodeURIComponent(offer.lenderName)}&mobile=${encodeURIComponent(mobile)}`;
-        return;
-      }
-
-      // Append mobile number or click reference to tracking link to identify lead if supported
-      window.location.href = `${trackingUrl}&aff_sub=${encodeURIComponent(mobile)}`;
-    }, 2000);
+    // Immediate redirect to Jupiter
+    const trackingUrl = 'https://partners.marcadeo.com/click?oid=442&uid=1895&lid=509';
+    window.location.href = `${trackingUrl}&aff_sub=${encodeURIComponent(mobile)}`;
   };
 
   return (
@@ -837,124 +795,17 @@ export default function EmiOnboardPage() {
                 </div>
               </div>
 
-              {/* Q3: CIBIL Score */}
-              <div className="space-y-2">
-                <label className="block text-[10px] font-bold text-slate-300 uppercase tracking-wider flex items-center gap-1.5">
-                  <span className="w-4 h-4 rounded-full bg-indigo-500/20 text-indigo-400 flex items-center justify-center text-[9px] font-black">3</span>
-                  What is your approximate CIBIL credit score?
-                </label>
-                <div className="grid grid-cols-2 gap-2">
-                  {[
-                    { val: '750', label: '750+ Excellent', color: 'emerald' },
-                    { val: '700', label: '700–750 Good', color: 'teal' },
-                    { val: '650', label: '600–700 Fair', color: 'amber' },
-                    { val: '550', label: 'Below 600 Poor', color: 'rose' },
-                  ].map(opt => (
-                    <button
-                      key={opt.val}
-                      type="button"
-                      onClick={() => setCibilScore(opt.val)}
-                      className={`p-3 rounded-xl border text-center text-xs font-bold transition-all duration-150 ${
-                        cibilScore === opt.val
-                          ? 'bg-purple-500/15 border-purple-400 text-white'
-                          : 'bg-slate-950/60 border-slate-800 text-slate-400 hover:border-slate-700'
-                      }`}
-                    >
-                      {opt.label}
-                    </button>
-                  ))}
-                </div>
-              </div>
 
-              {/* Q4: Loan Amount Needed */}
-              <div className="space-y-2">
-                <label className="block text-[10px] font-bold text-slate-300 uppercase tracking-wider flex items-center gap-1.5">
-                  <span className="w-4 h-4 rounded-full bg-indigo-500/20 text-indigo-400 flex items-center justify-center text-[9px] font-black">4</span>
-                  How much loan are you looking for?
-                </label>
-                <div className="grid grid-cols-2 gap-2">
-                  {[
-                    { val: 'under-25000', label: 'Under ₹25,000' },
-                    { val: '25000-100000', label: '₹25K – ₹1 Lakh' },
-                    { val: '100000-300000', label: '₹1L – ₹3 Lakh' },
-                    { val: 'above-300000', label: 'Above ₹3 Lakh' },
-                  ].map(opt => (
-                    <button
-                      key={opt.val}
-                      type="button"
-                      onClick={() => setLoanAmountRange(opt.val)}
-                      className={`p-3 rounded-xl border text-center text-xs font-bold transition-all duration-150 ${
-                        loanAmountRange === opt.val
-                          ? 'bg-cyan-500/15 border-cyan-400 text-white'
-                          : 'bg-slate-950/60 border-slate-800 text-slate-400 hover:border-slate-700'
-                      }`}
-                    >
-                      {opt.label}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-            </div>
-
-            {/* CTA */}
+            {/* CTA - Redirect directly to Jupiter */}
             <button
               type="button"
-              disabled={!employmentType || !monthlyIncome || !cibilScore || !loanAmountRange}
-              onClick={async () => {
-                if (employmentType === 'unemployed') {
-                  toast.error('Unfortunately, most lenders require an active income source. Please consult with your clinic for alternative payment plans.');
-                  return;
-                }
-                setStep(1);
-                emailNotificationService.sendNotification('New Patient Eligibility Checked', {
-                  patientName,
-                  mobile: mobile || 'N/A',
-                  pan: pan || 'N/A',
-                  treatmentBillAmount: rawAmount,
-                  cibilScoreRange: cibilScore,
-                  employmentType,
-                  monthlyIncome,
-                  loanAmountRange,
-                });
-                await ocenService.createLoanApplication({
-                  borrower: { name: patientName, mobile, pan },
-                  treatment: { clinicId: 'CLINAZA_PATNA', clinicName: 'Clinaza Partner Dental', procedureName: 'Dental Procedure', invoiceAmount: rawAmount }
-                });
-                setLoadingText('Querying Hero Fincorp (HIPL) Dedupe & Pre-Check API...');
-                const nameParts = patientName.split(' ');
-                const firstName = nameParts[0] || 'Patient';
-                const lastName = nameParts.slice(1).join(' ') || 'User';
-                const lenderRes = await lenderIntegrationService.submitPatientToAllLenders({
-                  firstName, lastName,
-                  mobile: mobile || '9876543210',
-                  pan: pan.toUpperCase(),
-                  treatmentAmount: rawAmount,
-                  incomeMonthly: Number(monthlyIncome) || 60000,
-                  employmentType: employmentType === 'salaried' ? 'Salaried' : 'Self-Employed'
-                });
-                const resultsMap = new Map(lenderRes.lenderResults.map(r => [r.lenderId, r.status]));
-                const allOffers = buildLenderOffers(rawAmount, resultsMap);
-                const filtered = applyPreScreenFilter(allOffers);
-                setLiveOffers(filtered);
-                setTimeout(() => {
-                  setLoadingText('Submitting Lead to Creditsea, Cashvia & Tap4Credit APIs...');
-                  setTimeout(() => {
-                    setLoadingText('Verifying My Money Bazaar (MMB) User Dedupe...');
-                    setTimeout(() => {
-                      toast.success(`Matched ${filtered.length} Eligible Lenders for Your Profile!`);
-                      setStep(2);
-                    }, 800);
-                  }, 800);
-                }, 800);
+              onClick={() => {
+                const mobileParam = encodeURIComponent(mobile || '9876543210');
+                window.location.href = `https://partners.marcadeo.com/click?oid=442&uid=1895&lid=509&aff_sub=${mobileParam}`;
               }}
-              className={`w-full flex items-center justify-center gap-2 py-4 rounded-2xl text-xs font-bold uppercase tracking-wider transition-all duration-200 shadow-xl ${
-                employmentType && monthlyIncome && cibilScore && loanAmountRange
-                  ? 'bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 active:scale-[0.99] text-white shadow-indigo-500/25 cursor-pointer'
-                  : 'bg-slate-900 text-slate-400 border border-slate-800 cursor-not-allowed shadow-none'
-              }`}
+              className="w-full flex items-center justify-center gap-2 py-4 rounded-2xl text-xs font-bold uppercase tracking-wider transition-all duration-200 shadow-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 active:scale-[0.99] text-white shadow-emerald-500/25 cursor-pointer"
             >
-              Find My Matching Lenders
+              Check Loan Eligibility
               <ArrowRight size={15} />
             </button>
           </div>

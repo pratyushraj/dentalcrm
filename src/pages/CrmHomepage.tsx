@@ -75,7 +75,7 @@ export default function CrmHomepage() {
     const isSalaried = patientData.employmentType === 'salaried';
     const loanRange = patientData.amount;
 
-    return ALL_LENDERS.filter(l => {
+    return ALL_LENDERS.filter(l => l.id === 'jupiter').filter(l => {
       if (patientData.employmentType === 'unemployed') return false;
       if (l.salaryOnly && !isSalaried && patientData.employmentType !== 'doctor') return false;
       if (cibil > 0 && l.minCibil > 0 && cibil < l.minCibil) return false;

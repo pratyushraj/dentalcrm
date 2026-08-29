@@ -662,23 +662,54 @@ export default function EmiOnboardPage() {
 
         {/* Direct Jupiter CTA — no patient finance form or questions */}
         {step === 0 && (
-          <div className="space-y-5 text-center">
-            <div className="space-y-2">
+          <form
+            className="space-y-5"
+            onSubmit={(event) => {
+              event.preventDefault();
+              const mobileParam = encodeURIComponent(mobile);
+              window.location.href = `https://partners.marcadeo.com/click?oid=442&uid=1895&lid=509&aff_sub=${mobileParam}`;
+            }}
+          >
+            <div className="space-y-2 text-center">
               <h3 className="text-lg font-bold text-white">Treatment financing</h3>
-              <p className="text-sm text-slate-400">Continue to Jupiter to check available loan options.</p>
+              <p className="text-sm text-slate-400">Enter your details to continue securely with Jupiter.</p>
+            </div>
+            <div className="space-y-4">
+              <div>
+                <label htmlFor="patientName" className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Patient name</label>
+                <input
+                  id="patientName"
+                  type="text"
+                  value={patientName === 'Patient' ? '' : patientName}
+                  onChange={(event) => setPatientName(event.target.value)}
+                  placeholder="Enter patient name"
+                  required
+                  className="w-full px-4 py-3 bg-slate-950/80 border border-slate-800 rounded-xl text-sm font-semibold text-white placeholder:text-slate-500 outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500"
+                />
+              </div>
+              <div>
+                <label htmlFor="mobile" className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Mobile number</label>
+                <input
+                  id="mobile"
+                  type="tel"
+                  inputMode="numeric"
+                  pattern="[0-9]{10}"
+                  value={mobile}
+                  onChange={(event) => setMobile(event.target.value.replace(/\D/g, '').slice(0, 10))}
+                  placeholder="10-digit mobile number"
+                  required
+                  className="w-full px-4 py-3 bg-slate-950/80 border border-slate-800 rounded-xl text-sm font-semibold text-white placeholder:text-slate-500 outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500"
+                />
+              </div>
             </div>
             <button
-              type="button"
-              onClick={() => {
-                const mobileParam = encodeURIComponent(mobile || '9876543210');
-                window.location.href = `https://partners.marcadeo.com/click?oid=442&uid=1895&lid=509&aff_sub=${mobileParam}`;
-              }}
+              type="submit"
               className="w-full flex items-center justify-center gap-2 py-4 rounded-2xl text-xs font-bold uppercase tracking-wider transition-all duration-200 shadow-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 active:scale-[0.99] text-white shadow-emerald-500/25 cursor-pointer"
             >
               Check Loan Eligibility
               <ArrowRight size={15} />
             </button>
-          </div>
+          </form>
         )}
 
         {/* ─── STEP 1: LENDER MATCHING ENGINE ───────────────────────────────── */}

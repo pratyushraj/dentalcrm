@@ -577,13 +577,12 @@ export default function EmiOnboardPage() {
         </div>
 
         {/* Interactive Stepper Indicator */}
-        <div className="grid grid-cols-5 gap-1 text-center text-[8.5px] font-bold uppercase tracking-wider">
+        <div className="grid grid-cols-4 gap-1 text-center text-[8.5px] font-bold uppercase tracking-wider">
           {[
             { num: 1, label: 'Consent', stepVal: 0 },
-            { num: 2, label: 'Profile', stepVal: 0.5 },
-            { num: 3, label: 'Match', stepVal: 1 },
-            { num: 4, label: 'Offers', stepVal: 2 },
-            { num: 5, label: 'Apply', stepVal: 3 },
+            { num: 2, label: 'Match', stepVal: 1 },
+            { num: 3, label: 'Offers', stepVal: 2 },
+            { num: 4, label: 'Apply', stepVal: 3 },
           ].map((s) => {
             const isActive = step === s.stepVal;
             const isCompleted = step > s.stepVal;

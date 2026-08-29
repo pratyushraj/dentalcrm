@@ -410,7 +410,7 @@ export default function EmiOnboardPage() {
     });
 
     // Sort by recommended status first, then by interest rate (low to high)
-    return mappedList.filter(offer => offer.id === 'offer-jupiter').sort((a, b) => {
+    return mappedList.sort((a, b) => {
       if (a.isRecommended && !b.isRecommended) return -1;
       if (!a.isRecommended && b.isRecommended) return 1;
       return a.sortRate - b.sortRate;
@@ -510,9 +510,51 @@ export default function EmiOnboardPage() {
   };
 
   const handleSelectOffer = (offer: LenderOffer) => {
-    // Immediate redirect to Jupiter
-    const trackingUrl = 'https://partners.marcadeo.com/click?oid=442&uid=1895&lid=509';
-    window.location.href = `${trackingUrl}&aff_sub=${encodeURIComponent(mobile)}`;
+    setSelectedOffer(offer);
+    setStep(3); // Proceed to lender KYC & KFS completion
+
+    setTimeout(() => {
+      // Map lender ID to affiliate tracking UTM links from Personal Loan Brief Excel
+      let trackingUrl = '';
+      if (offer.id === 'offer-cashvia') {
+        trackingUrl = 'https://partners.marcadeo.com/click?oid=294&uid=1895&lid=242';
+      } else if (offer.id === 'offer-atmcred') {
+        trackingUrl = 'https://partners.marcadeo.com/click?oid=447&uid=1895&lid=515';
+      } else if (offer.id === 'offer-surya') {
+        trackingUrl = 'https://partners.marcadeo.com/click?oid=449&uid=1895&lid=517';
+      } else if (offer.id === 'offer-jupiter') {
+        trackingUrl = 'https://partners.marcadeo.com/click?oid=442&uid=1895&lid=509';
+      } else if (offer.id === 'offer-hero') {
+        trackingUrl = 'https://partners.marcadeo.com/click?oid=344&uid=1895&lid=335';
+      } else if (offer.id === 'offer-digicredit') {
+        trackingUrl = 'https://partners.marcadeo.com/click?oid=371&uid=1895&lid=385';
+      } else if (offer.id === 'offer-mmb') {
+        trackingUrl = 'https://partners.marcadeo.com/click?oid=353&uid=1895&lid=347';
+      } else if (offer.id === 'offer-tap4credit') {
+        trackingUrl = 'https://partners.marcadeo.com/click?oid=393&uid=1895&lid=420';
+      } else if (offer.id === 'offer-myfloat') {
+        trackingUrl = 'https://partners.marcadeo.com/click?oid=289&uid=1895&lid=238';
+      } else if (offer.id === 'offer-timepecash') {
+        // Direct website redirect with partner referral code
+        window.location.href = `https://web.timepecash.com/?referrer=OISAID63&mobile=${encodeURIComponent(mobile)}`;
+        return;
+      } else if (offer.id === 'offer-dhancash') {
+        trackingUrl = 'https://partners.marcadeo.com/click?oid=464&uid=1895&lid=535';
+      } else if (offer.id === 'offer-creditsea') {
+        trackingUrl = 'https://partners.marcadeo.com/click?oid=454&uid=1895&lid=523';
+      } else if (offer.id === 'offer-salaryontime') {
+        trackingUrl = 'https://partners.marcadeo.com/click?oid=448&uid=1895&lid=516';
+      } else {
+        // Fallback to default callback
+        const params = new URLSearchParams(window.location.search);
+        const clientId = params.get('client_id') || 'de01ee08f2ec9266649435867d87da8d';
+        window.location.href = `/emi/callback?client_id=${clientId}&status=approved&lender=${encodeURIComponent(offer.lenderName)}&mobile=${encodeURIComponent(mobile)}`;
+        return;
+      }
+
+      // Append mobile number or click reference to tracking link to identify lead if supported
+      window.location.href = `${trackingUrl}&aff_sub=${encodeURIComponent(mobile)}`;
+    }, 2000);
   };
 
   return (
@@ -618,185 +660,13 @@ export default function EmiOnboardPage() {
           })}
         </div>
 
-        {/* ─── STEP 0: CONSENT & BASIC DETAILS ─────────────────────────────────── */}
+        {/* Direct Jupiter CTA — no patient finance form or questions */}
         {step === 0 && (
-          <form onSubmit={handleConsentSubmit} className="space-y-6">
-
-            {/* Input Details */}
-            <div className="space-y-3.5">
-              <h4 className="text-[11px] font-bold text-slate-300 uppercase tracking-wider flex items-center gap-1.5">
-                <CreditCard size={13} className="text-indigo-400" />
-                1. Basic Verification Details
-              </h4>
-              
-              <div className={isAmountEditable ? "grid grid-cols-1 sm:grid-cols-2 gap-4" : "w-full"}>
-                <div>
-                  <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Estimated CIBIL Score</label>
-                  <select
-                    value={cibilScore}
-                    onChange={(e) => setCibilScore(e.target.value)}
-                    className="w-full px-4 py-3 bg-slate-950/80 border border-slate-800 rounded-xl text-xs font-semibold text-white outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-all cursor-pointer"
-                  >
-                    <option value="750">750+ (Excellent)</option>
-                    <option value="700">700 - 750 (Good)</option>
-                    <option value="650">600 - 700 (Fair)</option>
-                    <option value="550">Below 600 (Needs Improvement)</option>
-                  </select>
-                </div>
-
-                {isAmountEditable && (
-                  <div>
-                    <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Treatment Bill Amount (₹)</label>
-                    <input
-                      type="number"
-                      min={1000}
-                      placeholder="Enter amount (e.g. 75000)"
-                      value={rawAmount || ''}
-                      onChange={(e) => {
-                        const val = Number(e.target.value);
-                        setRawAmount(val);
-                        setAmount(val.toLocaleString('en-IN'));
-                      }}
-                      className="w-full px-4 py-3 bg-slate-950/80 border border-slate-800 rounded-xl text-xs font-semibold font-mono text-white placeholder:text-slate-400 outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-all"
-                      required
-                    />
-                  </div>
-                )}
-              </div>
+          <div className="space-y-5 text-center">
+            <div className="space-y-2">
+              <h3 className="text-lg font-bold text-white">Treatment financing</h3>
+              <p className="text-sm text-slate-400">Continue to Jupiter to check available loan options.</p>
             </div>
-
-            {/* Data Sharing Notice */}
-            <div className="flex items-start gap-3 bg-emerald-500/10 border border-emerald-500/20 rounded-2xl p-4">
-              <Info size={16} className="text-emerald-400 shrink-0 mt-0.5" />
-              <p className="text-xs text-emerald-200/90 leading-relaxed font-medium">
-                Your estimated CIBIL score helps us filter and suggest the most matching lender with the highest approval rate.
-              </p>
-            </div>
-
-            {/* Required Consents */}
-            <div className="space-y-3">
-              <h4 className="text-[11px] font-bold text-slate-300 uppercase tracking-wider flex items-center gap-1.5">
-                <Shield size={13} className="text-emerald-400" />
-                2. Mandatory Privacy Consents
-              </h4>
-
-              {/* Consent Item 1 */}
-              <label htmlFor="consentEligibility" className="flex items-start gap-3 p-4 rounded-2xl border border-slate-800/90 hover:border-slate-700 bg-slate-950/60 cursor-pointer transition-all group">
-                <input
-                  type="checkbox"
-                  id="consentEligibility"
-                  checked={consentEligibility}
-                  onChange={(e) => setConsentEligibility(e.target.checked)}
-                  className="mt-0.5 w-4 h-4 text-emerald-500 rounded border-slate-700 bg-slate-900 focus:ring-emerald-500 shrink-0 cursor-pointer"
-                />
-                <span className="text-xs text-slate-300 leading-relaxed font-medium group-hover:text-slate-200 transition-colors">
-                  I consent to Clinaza and its partnered banks/NBFCs pulling my CIBIL score and credit report to evaluate my eligibility for treatment financing.
-                </span>
-              </label>
-
-              {/* Consent Item 2 */}
-              <label htmlFor="consentBankTerms" className="flex items-start gap-3 p-4 rounded-2xl border border-slate-800/90 hover:border-slate-700 bg-slate-950/60 cursor-pointer transition-all group">
-                <input
-                  type="checkbox"
-                  id="consentBankTerms"
-                  checked={consentBankTerms}
-                  onChange={(e) => setConsentBankTerms(e.target.checked)}
-                  className="mt-0.5 w-4 h-4 text-emerald-500 rounded border-slate-700 bg-slate-900 focus:ring-emerald-500 shrink-0 cursor-pointer"
-                />
-                <span className="text-xs text-slate-300 leading-relaxed font-medium group-hover:text-slate-200 transition-colors">
-                  I authorize Clinaza to fetch my credit bureau reports and verify my identity records for processing the credit check.
-                </span>
-              </label>
-            </div>
-
-            {/* CTA Button */}
-            <button
-              type="submit"
-              disabled={!consentEligibility || !consentBankTerms}
-              className={`w-full flex items-center justify-center gap-2 py-4 rounded-2xl text-xs font-bold uppercase tracking-wider transition-all duration-200 shadow-xl ${
-                consentEligibility && consentBankTerms
-                  ? 'bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 active:scale-[0.99] text-white shadow-emerald-500/25 cursor-pointer'
-                  : 'bg-slate-900 text-slate-400 border border-slate-800 cursor-not-allowed shadow-none'
-              }`}
-            >
-              Check Financing Options
-              <ArrowRight size={15} />
-            </button>
-          </form>
-        )}
-
-        {/* ─── STEP 0.5: PRE-SCREENING QUESTIONS ──────────────────────────── */}
-        {step === 0.5 && (
-          <div className="space-y-6">
-            <div className="text-center space-y-1.5">
-              <span className="px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/25 text-indigo-400 text-[10px] font-bold uppercase tracking-wider">Step 2 of 5 — Quick Profile</span>
-              <h3 className="text-base font-bold text-white mt-2">Tell us about yourself</h3>
-              <p className="text-xs text-slate-400 leading-relaxed">We'll use this to show only lenders you're most likely to get approved by.</p>
-            </div>
-
-            <div className="space-y-4">
-
-              {/* Q1: Employment Type */}
-              <div className="space-y-2">
-                <label className="block text-[10px] font-bold text-slate-300 uppercase tracking-wider flex items-center gap-1.5">
-                  <span className="w-4 h-4 rounded-full bg-indigo-500/20 text-indigo-400 flex items-center justify-center text-[9px] font-black">1</span>
-                  What is your current employment status?
-                </label>
-                <div className="grid grid-cols-2 gap-2">
-                  {[
-                    { val: 'salaried', label: '🏢 Salaried', sub: 'MNC / Govt / Private' },
-                    { val: 'self-employed', label: '🏪 Self-Employed', sub: 'Business / Freelancer' },
-                    { val: 'doctor', label: '👨‍⚕️ Doctor / Professional', sub: 'Practice Owner' },
-                    { val: 'unemployed', label: '❌ Unemployed', sub: 'No active income' },
-                  ].map(opt => (
-                    <button
-                      key={opt.val}
-                      type="button"
-                      onClick={() => setEmploymentType(opt.val)}
-                      className={`p-3 rounded-xl border text-left transition-all duration-150 ${
-                        employmentType === opt.val
-                          ? 'bg-indigo-500/15 border-indigo-400 text-white'
-                          : 'bg-slate-950/60 border-slate-800 text-slate-400 hover:border-slate-700'
-                      }`}
-                    >
-                      <div className="text-xs font-bold">{opt.label}</div>
-                      <div className="text-[10px] text-slate-500 mt-0.5">{opt.sub}</div>
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* Q2: Monthly Income */}
-              <div className="space-y-2">
-                <label className="block text-[10px] font-bold text-slate-300 uppercase tracking-wider flex items-center gap-1.5">
-                  <span className="w-4 h-4 rounded-full bg-indigo-500/20 text-indigo-400 flex items-center justify-center text-[9px] font-black">2</span>
-                  What is your approximate monthly take-home income?
-                </label>
-                <div className="grid grid-cols-2 gap-2">
-                  {[
-                    { val: '10000', label: 'Below ₹15,000' },
-                    { val: '20000', label: '₹15,000 – ₹30,000' },
-                    { val: '45000', label: '₹30,000 – ₹60,000' },
-                    { val: '80000', label: 'Above ₹60,000' },
-                  ].map(opt => (
-                    <button
-                      key={opt.val}
-                      type="button"
-                      onClick={() => setMonthlyIncome(opt.val)}
-                      className={`p-3 rounded-xl border text-center text-xs font-bold transition-all duration-150 ${
-                        monthlyIncome === opt.val
-                          ? 'bg-emerald-500/15 border-emerald-400 text-white'
-                          : 'bg-slate-950/60 border-slate-800 text-slate-400 hover:border-slate-700'
-                      }`}
-                    >
-                      {opt.label}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-
-            {/* CTA - Redirect directly to Jupiter */}
             <button
               type="button"
               onClick={() => {

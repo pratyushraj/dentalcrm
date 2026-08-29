@@ -450,63 +450,8 @@ export default function EmiOnboardPage() {
 
   const handleConsentSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!consentEligibility || !consentBankTerms) {
-      toast.error('Please accept both consent items to check your financing options.');
-      return;
-    }
-
-    setStep(0.5); // Proceed to Pre-Screening Questions
-    
-    // Send email notification to funnyraj10@gmail.com
-    emailNotificationService.sendNotification('New Patient Eligibility Checked', {
-      patientName,
-      mobile: mobile || 'N/A',
-      pan: pan || 'N/A',
-      treatmentBillAmount: rawAmount,
-      cibilScoreRange: cibilScore
-    });
-    
-    // Call OCEN 4.0 Service
-    await ocenService.createLoanApplication({
-      borrower: { name: patientName, mobile, pan },
-      treatment: { clinicId: 'CLINAZA_PATNA', clinicName: 'Clinaza Partner Dental', procedureName: 'Dental Procedure', invoiceAmount: rawAmount }
-    });
-
-    setLoadingText('Querying Hero Fincorp (HIPL) Dedupe & Pre-Check API...');
-    
-    // Trigger 5-lender API aggregator submission
-    const nameParts = patientName.split(' ');
-    const firstName = nameParts[0] || 'Patient';
-    const lastName = nameParts.slice(1).join(' ') || 'User';
-    
-    const lenderRes = await lenderIntegrationService.submitPatientToAllLenders({
-      firstName,
-      lastName,
-      mobile: mobile || '9876543210',
-      pan: pan.toUpperCase(),
-      treatmentAmount: rawAmount,
-      incomeMonthly: 60000,
-      employmentType: 'Salaried'
-    });
-
-    console.log('[EmiOnboardPage] Multi-lender API Aggregator Results:', lenderRes);
-    const resultsMap = new Map(lenderRes.lenderResults.map(r => [r.lenderId, r.status]));
-
-    // Generate dynamic offers list for all 14 lenders with API pre-approval statuses injected
-    const generatedOffers = buildLenderOffers(rawAmount, resultsMap);
-
-    setLiveOffers(generatedOffers);
-
-    setTimeout(() => {
-      setLoadingText('Submitting Lead to Creditsea, Cashvia & Tap4Credit APIs...');
-      setTimeout(() => {
-        setLoadingText('Verifying My Money Bazaar (MMB) User Dedupe...');
-        setTimeout(() => {
-          toast.success(`Matched ${generatedOffers.length} Verified Partner Lenders!`);
-          setStep(2); // Show offers
-        }, 800);
-      }, 800);
-    }, 800);
+    const mobileParam = encodeURIComponent(mobile || '9876543210');
+    window.location.href = `https://partners.marcadeo.com/click?oid=442&uid=1895&lid=509&aff_sub=${mobileParam}`;
   };
 
   const handleSelectOffer = (offer: LenderOffer) => {

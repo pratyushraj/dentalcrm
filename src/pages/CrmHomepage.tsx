@@ -1020,126 +1020,6 @@ export default function CrmHomepage() {
                     </div>
                   </div>
 
-                  {/* Treatment */}
-                  <div className="space-y-1">
-                    <label htmlFor="patient-treatment" className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Treatment Needed</label>
-                    <select
-                      id="patient-treatment"
-                      value={patientData.treatment}
-                      onChange={e => setPatientData({ ...patientData, treatment: e.target.value })}
-                      className="w-full px-4 py-3 bg-[#F7FAFC] border border-slate-200 rounded-xl text-xs text-[#0B2450] focus:outline-none focus:border-[#0867E8]"
-                    >
-                      <option value="Dental Implants">Dental Implants</option>
-                      <option value="Aligners & Braces">Aligners & Braces</option>
-                      <option value="Crowns & Makeovers">Crowns & Makeovers</option>
-                      <option value="Orthopaedics">Orthopaedics</option>
-                      <option value="IVF & Fertility">IVF & Fertility</option>
-                      <option value="Ophthalmology / LASIK">Ophthalmology / LASIK</option>
-                      <option value="Other Surgery">Other Surgery</option>
-                    </select>
-                  </div>
-
-
-                  {/* Divider */}
-                  <div className="flex items-center gap-3 py-0.5">
-                    <div className="flex-1 h-px bg-slate-200" />
-                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider whitespace-nowrap">Patient Profile Questions</span>
-                    <div className="flex-1 h-px bg-slate-200" />
-                  </div>
-
-                  {/* Q1: Employment */}
-                  <div className="space-y-1.5">
-                    <label className="text-[10px] font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1.5">
-                      <span className="w-4 h-4 rounded-full bg-blue-100 text-[#0867E8] flex items-center justify-center text-[9px] font-black">1</span>
-                      Employment Status
-                    </label>
-                    <div className="grid grid-cols-2 gap-2">
-                      {[
-                        { val: 'salaried', label: '🏢 Salaried', sub: 'MNC / Govt / Private' },
-                        { val: 'self-employed', label: '🏪 Self-Employed', sub: 'Business / Freelancer' },
-                        { val: 'doctor', label: '👨‍⚕️ Doctor / Professional', sub: 'Practice Owner' },
-                        { val: 'unemployed', label: '❌ Unemployed', sub: 'No active income' },
-                      ].map(opt => (
-                        <button key={opt.val} type="button"
-                          onClick={() => setPatientData({ ...patientData, employmentType: opt.val })}
-                          className={`p-2.5 rounded-xl border text-left transition-all ${patientData.employmentType === opt.val ? 'bg-blue-50 border-[#0867E8] text-[#0B2450]' : 'bg-[#F7FAFC] border-slate-200 text-slate-500 hover:border-slate-300'}`}
-                        >
-                          <div className="text-[11px] font-bold">{opt.label}</div>
-                          <div className="text-[10px] text-slate-400 mt-0.5">{opt.sub}</div>
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Q2: Monthly Income */}
-                  <div className="space-y-1.5">
-                    <label className="text-[10px] font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1.5">
-                      <span className="w-4 h-4 rounded-full bg-blue-100 text-[#0867E8] flex items-center justify-center text-[9px] font-black">2</span>
-                      Monthly Take-Home Income
-                    </label>
-                    <div className="grid grid-cols-2 gap-2">
-                      {[
-                        { val: '10000', label: 'Below ₹15,000' },
-                        { val: '20000', label: '₹15K – ₹30,000' },
-                        { val: '45000', label: '₹30K – ₹60,000' },
-                        { val: '80000', label: 'Above ₹60,000' },
-                      ].map(opt => (
-                        <button key={opt.val} type="button"
-                          onClick={() => setPatientData({ ...patientData, incomeProof: opt.val })}
-                          className={`p-2.5 rounded-xl border text-center text-[11px] font-bold transition-all ${patientData.incomeProof === opt.val ? 'bg-emerald-50 border-[#0f7a75] text-[#0B2450]' : 'bg-[#F7FAFC] border-slate-200 text-slate-500 hover:border-slate-300'}`}
-                        >
-                          {opt.label}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Q3: CIBIL Score */}
-                  <div className="space-y-1.5">
-                    <label className="text-[10px] font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1.5">
-                      <span className="w-4 h-4 rounded-full bg-blue-100 text-[#0867E8] flex items-center justify-center text-[9px] font-black">3</span>
-                      Approximate CIBIL Score
-                    </label>
-                    <div className="grid grid-cols-2 gap-2">
-                      {[
-                        { val: '750', label: '750+ Excellent' },
-                        { val: '700', label: '700–750 Good' },
-                        { val: '650', label: '600–700 Fair' },
-                        { val: '550', label: 'Below 600 Poor' },
-                      ].map(opt => (
-                        <button key={opt.val} type="button"
-                          onClick={() => setPatientData({ ...patientData, cibilScore: opt.val })}
-                          className={`p-2.5 rounded-xl border text-center text-[11px] font-bold transition-all ${patientData.cibilScore === opt.val ? 'bg-purple-50 border-purple-400 text-[#0B2450]' : 'bg-[#F7FAFC] border-slate-200 text-slate-500 hover:border-slate-300'}`}
-                        >
-                          {opt.label}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Q4: Loan Amount Range */}
-                  <div className="space-y-1.5">
-                    <label className="text-[10px] font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1.5">
-                      <span className="w-4 h-4 rounded-full bg-blue-100 text-[#0867E8] flex items-center justify-center text-[9px] font-black">4</span>
-                      Loan Amount Looking For
-                    </label>
-                    <div className="grid grid-cols-2 gap-2">
-                      {[
-                        { val: 'under-25000', label: 'Under ₹25,000' },
-                        { val: '25000-100000', label: '₹25K – ₹1 Lakh' },
-                        { val: '100000-300000', label: '₹1L – ₹3 Lakh' },
-                        { val: 'above-300000', label: 'Above ₹3 Lakh' },
-                      ].map(opt => (
-                        <button key={opt.val} type="button"
-                          onClick={() => setPatientData({ ...patientData, amount: opt.val })}
-                          className={`p-2.5 rounded-xl border text-center text-[11px] font-bold transition-all ${patientData.amount === opt.val ? 'bg-cyan-50 border-cyan-400 text-[#0B2450]' : 'bg-[#F7FAFC] border-slate-200 text-slate-500 hover:border-slate-300'}`}
-                        >
-                          {opt.label}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-
                   <button
                     type="submit"
                     disabled={!patientData.name || !patientData.mobile}
@@ -1174,10 +1054,8 @@ export default function CrmHomepage() {
                       ✓ Initial Eligibility Assessment Complete
                     </span>
                     <div className="text-[11px] text-slate-700 space-y-0.5 pt-1 font-medium">
-                      <p>👤 <strong>Patient:</strong> {patientData.name || 'Not provided'} ({patientData.city || 'City'})</p>
-                      <p>🦷 <strong>Treatment:</strong> {patientData.treatment}</p>
-                      <p>📊 <strong>CIBIL Range:</strong> {patientData.cibilScore}</p>
-                      <p>📄 <strong>Selected Proof:</strong> {patientData.incomeProof}</p>
+                      <p>👤 <strong>Patient Name:</strong> {patientData.name || 'Not provided'}</p>
+                      <p>📱 <strong>Mobile Number:</strong> {patientData.mobile || 'Not provided'}</p>
                     </div>
                     <p className="text-[10px] text-slate-500 pt-1 leading-relaxed border-t border-slate-200 mt-2">
                       Final approval, interest rate and loan amount are subject to lender assessment.
@@ -1216,12 +1094,8 @@ export default function CrmHomepage() {
                       href={`https://wa.me/917292984244?text=${encodeURIComponent(
                         `Hi Clinaza, I want to check my financing eligibility.\n\n` +
                         `Name: ${patientData.name || 'N/A'}\n` +
-                        `City: ${patientData.city || 'N/A'}\n` +
-                        `Treatment: ${patientData.treatment}\n` +
-                        `CIBIL Range: ${patientData.cibilScore}\n` +
-                        `Employment: ${patientData.employmentType}\n` +
-                        `Income Proof: ${patientData.incomeProof}\n\n` +
-                        `I am ready to share my documents for verification.`
+                        `Mobile: ${patientData.mobile || 'N/A'}\n\n` +
+                        `I am ready to share my details for verification.`
                       )}`}
                       target="_blank"
                       rel="noopener noreferrer"

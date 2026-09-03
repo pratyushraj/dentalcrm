@@ -52,14 +52,13 @@ export default function CrmHomepage() {
   });
   const [patientSubmitted, setPatientSubmitted] = useState(false);
 
-  // All 13 lenders with filtering metadata
+  // All lenders with filtering metadata
   const ALL_LENDERS = [
     { id: 'salaryontime', name: 'Salary On Time', rate: '7.5%–30% p.a.', minCibil: 600, salaryOnly: true, minIncome: 30000, url: 'https://partners.marcadeo.com/click?oid=448&uid=1895&lid=516', badge: 'Lowest Rate', color: 'bg-indigo-50 border-indigo-200 text-indigo-700' },
     { id: 'cashvia', name: 'Cashvia', rate: '12%–36% p.a.', minCibil: 600, salaryOnly: false, minIncome: 15000, url: 'https://partners.marcadeo.com/click?oid=294&uid=1895&lid=242', badge: 'Best Approval Rate', color: 'bg-emerald-50 border-emerald-200 text-emerald-700' },
-    { id: 'jupiter', name: 'Jupiter', rate: '12%–30% p.a.', minCibil: 650, salaryOnly: false, minIncome: 20000, url: 'https://partners.marcadeo.com/click?oid=442&uid=1895&lid=509', badge: 'Up to ₹5 Lakh', color: 'bg-purple-50 border-purple-200 text-purple-700' },
+    { id: 'dhanlift', name: 'Dhanlift', rate: '12%–30% p.a.', minCibil: 600, salaryOnly: false, minIncome: 15000, url: 'https://dhanlift.com/?utm_source=affiliate&utm_medium=partner&utm_campaign=partner-campaign-aff-4&utm_term=03-09-2026', badge: 'Fast Approval', color: 'bg-emerald-50 border-emerald-200 text-emerald-700' },
     { id: 'atmcred', name: 'ATM Cred', rate: '18%–36% p.a.', minCibil: 500, salaryOnly: false, minIncome: 15000, url: 'https://partners.marcadeo.com/click?oid=447&uid=1895&lid=515', badge: '500+ CIBIL OK', color: 'bg-cyan-50 border-cyan-200 text-cyan-700' },
     { id: 'surya', name: 'Surya', rate: '18%–36% p.a.', minCibil: 600, salaryOnly: false, minIncome: 30000, url: 'https://partners.marcadeo.com/click?oid=449&uid=1895&lid=517', badge: 'High Approval', color: 'bg-amber-50 border-amber-200 text-amber-700' },
-    { id: 'hero', name: 'Hero Fincorp', rate: '18%–30% p.a.', minCibil: 725, salaryOnly: false, minIncome: 15000, url: 'https://partners.marcadeo.com/click?oid=344&uid=1895&lid=335', badge: 'Flexible Medical EMI', color: 'bg-blue-50 border-blue-200 text-blue-700' },
     { id: 'digicredit', name: 'DigiCredit', rate: '18%–36% p.a.', minCibil: 600, salaryOnly: false, minIncome: 15000, url: 'https://partners.marcadeo.com/click?oid=371&uid=1895&lid=385', badge: 'Instant Disbursal', color: 'bg-teal-50 border-teal-200 text-teal-700' },
     { id: 'mmb', name: 'MyMoneyBazaar', rate: '18%–36% p.a.', minCibil: 600, salaryOnly: false, minIncome: 12000, url: 'https://partners.marcadeo.com/click?oid=353&uid=1895&lid=347', badge: 'Multi-Lender', color: 'bg-orange-50 border-orange-200 text-orange-700' },
     { id: 'tap4credit', name: 'Tap4Credit', rate: '18%–36% p.a.', minCibil: 650, salaryOnly: false, minIncome: 15000, url: 'https://partners.marcadeo.com/click?oid=393&uid=1895&lid=420', badge: 'Digital KYC', color: 'bg-pink-50 border-pink-200 text-pink-700' },
@@ -75,7 +74,7 @@ export default function CrmHomepage() {
     const isSalaried = patientData.employmentType === 'salaried';
     const loanRange = patientData.amount;
 
-    return ALL_LENDERS.filter(l => l.id === 'jupiter' || l.id === 'hero').filter(l => {
+    return ALL_LENDERS.filter(l => {
       if (patientData.employmentType === 'unemployed') return false;
       if (l.salaryOnly && !isSalaried && patientData.employmentType !== 'doctor') return false;
       if (cibil > 0 && l.minCibil > 0 && cibil < l.minCibil) return false;

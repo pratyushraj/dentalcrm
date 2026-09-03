@@ -52,37 +52,11 @@ const LenderLogo = ({ id }: { id: string }) => {
           onError={() => setError(true)}
         />
       );
-    case 'offer-jupiter':
-      return (
-        <img 
-          src="https://jupiter.money/assets/images/website-v2/jupiter-logo.svg" 
-          alt="Jupiter" 
-          className="w-8 h-8 object-contain"
-          onError={() => setError(true)}
-        />
-      );
-    case 'offer-atmcred':
+    case 'offer-dhanlift':
       return (
         <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-          <rect x="3" y="5" width="18" height="14" rx="3" />
-          <path strokeLinecap="round" d="M3 10h18M7 15h2M11 15h4" />
+          <path strokeLinecap="round" strokeLinejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
         </svg>
-      );
-    case 'offer-surya':
-      return (
-        <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-          <circle cx="12" cy="12" r="5" />
-          <path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
-        </svg>
-      );
-    case 'offer-hero':
-      return (
-        <img 
-          src="https://www.herofincorp.com/images/logo.webp" 
-          alt="Hero Fincorp" 
-          className="w-8 h-8 object-contain rounded-lg"
-          onError={() => setError(true)}
-        />
       );
     case 'offer-digicredit':
       return (
@@ -233,17 +207,17 @@ export default function EmiOnboardPage() {
         sortRate: 12.0,
       },
       {
-        id: 'offer-jupiter',
-        lenderName: 'Jupiter Personal Loan',
-        logoBg: 'bg-gradient-to-tr from-purple-700 to-indigo-800 text-white',
-        logoChar: 'JU',
-        badge: 'Loan Upto 5 Lakh',
+        id: 'offer-dhanlift',
+        lenderName: 'Dhanlift Personal Loan',
+        logoBg: 'bg-gradient-to-tr from-emerald-600 to-teal-700 text-white',
+        logoChar: 'DL',
+        badge: 'Fast Approval',
         interestRate: '12% – 30% p.a.',
-        tenure: '18 Months',
-        monthlyEmi: Math.round((amount * 1.15) / 18),
+        tenure: '12 Months',
+        monthlyEmi: Math.round((amount * 1.15) / 12),
         totalRepayment: Math.round(amount * 1.15),
         processingFee: Math.round(amount * 0.025),
-        minCibil: '650',
+        minCibil: '600',
         sortRate: 12.0,
       },
       {
@@ -272,20 +246,6 @@ export default function EmiOnboardPage() {
         totalRepayment: Math.round(amount * 1.18),
         processingFee: Math.round(amount * 0.03),
         minCibil: '600',
-        sortRate: 18.0,
-      },
-      {
-        id: 'offer-hero',
-        lenderName: 'Hero Fincorp (HIPL)',
-        logoBg: 'bg-gradient-to-tr from-blue-700 to-violet-800 text-white',
-        logoChar: 'H',
-        badge: resultsMap?.get('herofincorp') === 'APPROVED' ? 'Live API Pre-Approved' : 'Flexible Medical EMI',
-        interestRate: '18% – 30% p.a.',
-        tenure: '12 Months',
-        monthlyEmi: Math.round((amount * 1.18) / 12),
-        totalRepayment: Math.round(amount * 1.18),
-        processingFee: Math.round(amount * 0.02),
-        minCibil: '725',
         sortRate: 18.0,
       },
       {
@@ -394,10 +354,10 @@ export default function EmiOnboardPage() {
       let isRecommended = false;
       if (score >= 750) {
         // Excellent CIBIL: Best matching premium loans
-        isRecommended = ['offer-salaryontime', 'offer-cashvia', 'offer-jupiter'].includes(offer.id);
+        isRecommended = ['offer-salaryontime', 'offer-cashvia', 'offer-dhanlift'].includes(offer.id);
       } else if (score >= 700) {
         // Good CIBIL: Mid-high tier loans
-        isRecommended = ['offer-cashvia', 'offer-jupiter', 'offer-hero'].includes(offer.id);
+        isRecommended = ['offer-cashvia', 'offer-dhanlift'].includes(offer.id);
       } else if (score >= 600) {
         // Fair CIBIL: Reliable subprime options
         isRecommended = ['offer-digicredit', 'offer-tap4credit', 'offer-creditsea'].includes(offer.id);
@@ -431,7 +391,7 @@ export default function EmiOnboardPage() {
       // Q2: Monthly income filter
       const minIncome = Number(monthlyIncome);
       if (minIncome > 0) {
-        if (minIncome < 15000 && ['offer-salaryontime','offer-surya','offer-timepecash','offer-cashvia','offer-atmcred','offer-creditsea','offer-myfloat','offer-dhancash','offer-tap4credit','offer-hero'].includes(offer.id)) return false;
+        if (minIncome < 15000 && ['offer-salaryontime','offer-surya','offer-timepecash','offer-cashvia','offer-atmcred','offer-creditsea','offer-myfloat','offer-dhancash','offer-tap4credit','offer-dhanlift'].includes(offer.id)) return false;
         if (minIncome < 30000 && ['offer-salaryontime','offer-surya','offer-timepecash'].includes(offer.id)) return false;
       }
 
@@ -450,7 +410,7 @@ export default function EmiOnboardPage() {
   const handleConsentSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const mobileParam = encodeURIComponent(mobile || '9876543210');
-    window.location.href = `https://partners.marcadeo.com/click?oid=442&uid=1895&lid=509&aff_sub=${mobileParam}`;
+    window.location.href = `https://dhanlift.com/?utm_source=affiliate&utm_medium=partner&utm_campaign=partner-campaign-aff-4&utm_term=03-09-2026&aff_sub=${mobileParam}`;
   };
 
   const handleSelectOffer = (offer: LenderOffer) => {
@@ -466,10 +426,8 @@ export default function EmiOnboardPage() {
         trackingUrl = 'https://partners.marcadeo.com/click?oid=447&uid=1895&lid=515';
       } else if (offer.id === 'offer-surya') {
         trackingUrl = 'https://partners.marcadeo.com/click?oid=449&uid=1895&lid=517';
-      } else if (offer.id === 'offer-jupiter') {
-        trackingUrl = 'https://partners.marcadeo.com/click?oid=442&uid=1895&lid=509';
-      } else if (offer.id === 'offer-hero') {
-        trackingUrl = 'https://partners.marcadeo.com/click?oid=344&uid=1895&lid=335';
+      } else if (offer.id === 'offer-dhanlift') {
+        trackingUrl = 'https://dhanlift.com/?utm_source=affiliate&utm_medium=partner&utm_campaign=partner-campaign-aff-4&utm_term=03-09-2026';
       } else if (offer.id === 'offer-digicredit') {
         trackingUrl = 'https://partners.marcadeo.com/click?oid=371&uid=1895&lid=385';
       } else if (offer.id === 'offer-mmb') {

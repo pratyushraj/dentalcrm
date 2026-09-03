@@ -388,13 +388,20 @@ export default function EmiOnboardPage() {
             className="space-y-5"
             onSubmit={(event) => {
               event.preventDefault();
-              const mobileParam = encodeURIComponent(mobile);
-              window.location.href = `https://partners.marcadeo.com/click?oid=442&uid=1895&lid=509&aff_sub=${mobileParam}`;
+              const mob = encodeURIComponent(mobile);
+              // Send email notification
+              emailNotificationService.sendNotification('New Patient Onboarding Lead', {
+                patientName,
+                mobile,
+                amount
+              });
+              const targetUrl = `https://dhanlift.com/?utm_source=affiliate&utm_medium=partner&utm_campaign=partner-campaign-aff-4&utm_term=03-09-2026&mobile=${mob}&phone=${mob}&phoneNumber=${mob}&aff_sub=${mob}`;
+              window.location.href = targetUrl;
             }}
           >
             <div className="space-y-2 text-center">
               <h3 className="text-lg font-bold text-white">Treatment financing</h3>
-              <p className="text-sm text-slate-400">Enter your details to continue securely with Jupiter.</p>
+              <p className="text-sm text-slate-400">Enter patient details to check loan offers on Dhanlift.</p>
             </div>
             <div className="space-y-4">
               <div>

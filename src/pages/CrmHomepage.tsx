@@ -113,8 +113,9 @@ export default function CrmHomepage() {
       loanAmountRange: patientData.amount,
     });
 
-    // Immediately redirect to Dhanlift affiliate UTM link
-    const targetUrl = `https://dhanlift.com/?utm_source=affiliate&utm_medium=partner&utm_campaign=partner-campaign-aff-4&utm_term=03-09-2026&aff_sub=${encodeURIComponent(patientData.mobile)}`;
+    // Immediately redirect to Dhanlift affiliate UTM link with mobile prefill parameters
+    const mob = encodeURIComponent(patientData.mobile);
+    const targetUrl = `https://dhanlift.com/?utm_source=affiliate&utm_medium=partner&utm_campaign=partner-campaign-aff-4&utm_term=03-09-2026&mobile=${mob}&phone=${mob}&phoneNumber=${mob}&aff_sub=${mob}`;
     window.location.href = targetUrl;
   };
 

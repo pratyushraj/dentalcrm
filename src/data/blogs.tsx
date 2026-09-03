@@ -589,5 +589,153 @@ export const BLOGS: BlogArticle[] = [
         </p>
       </div>
     )
+  },
+  {
+    slug: "dental-implants-cost-patna-emi",
+    title: "Dental Implants Cost in Patna: Full Breakdown + EMI Options (2026)",
+    category: "Implants",
+    readTime: "5 min read",
+    publishDate: "September 3, 2026",
+    author: "Clinaza Medical Desk",
+    summary: "Dental implants in Patna range from ₹25,000 to ₹80,000 per tooth. Learn what's included, which clinics offer the best rates, and how to get implants on affordable monthly EMI.",
+    featuredImage: "/assets/yourdentist/clinic_in_action.jpg",
+    metaDescription: "Dental implant cost in Patna ranges ₹25,000–₹80,000. Compare top clinics, understand what drives cost, and check monthly EMI options via Clinaza financing partners.",
+    faqs: [
+      {
+        question: "How much do dental implants cost in Patna?",
+        answer: "A single dental implant in Patna typically costs between ₹25,000 and ₹80,000 depending on the implant brand, bone quality, and clinic expertise. Premium zirconia crown + implant packages can reach ₹60,000–₹80,000 per tooth."
+      },
+      {
+        question: "Can I get dental implants on EMI in Patna?",
+        answer: "Yes. Via Clinaza partner clinics in Patna (including YOUR DENTIST Patna, Smile Dental Clinic, Mundeshwari Dental Hub), patients with eligible CIBIL scores can access monthly EMI plans for implant treatments above ₹30,000."
+      },
+      {
+        question: "Which is the best clinic for dental implants in Patna?",
+        answer: "Top-rated implant clinics in Patna include YOUR DENTIST Patna (Dr. Aryan Parmar, Patliputra Colony), Mundeshwari Dental Hub & Implant Centre (5.0★, 153 reviews), and Smile Dental Clinic Patna (5.0★, 104 reviews, Ashok Rajpath)."
+      },
+      {
+        question: "What is included in the dental implant cost in Patna?",
+        answer: "Implant cost typically covers the titanium implant fixture, abutment, and final crown. Some clinics include bone grafting, CT scan, and follow-up visits in the package. Always confirm what is included before committing."
+      },
+      {
+        question: "How many months EMI can I get for a dental implant?",
+        answer: "Via Clinaza partner financing, EMI tenures of 3, 6, 12, or 24 months are available subject to lender eligibility and CIBIL score. A ₹50,000 implant package could cost as low as ₹4,500/month on a 12-month plan."
+      }
+    ],
+    content: (
+      <div className="space-y-6">
+        <p className="text-lg leading-relaxed text-neutral-700">
+          Dental implants are the gold standard for replacing missing teeth — but the upfront cost often stops patients from getting the care they need. In Patna, implant costs vary significantly by clinic, implant brand, and whether bone grafting is needed. This guide breaks down everything so you can plan confidently.
+        </p>
+        <h2 className="text-xl font-bold text-neutral-900">Dental Implant Cost in Patna — 2026 Breakdown</h2>
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm border border-neutral-200 rounded-xl overflow-hidden">
+            <thead className="bg-neutral-100">
+              <tr>
+                <th className="text-left px-4 py-3 font-bold">Implant Component</th>
+                <th className="text-left px-4 py-3 font-bold">Typical Cost Range</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-neutral-100">
+              {[
+                ["Single Implant (imported brand)", "₹35,000 – ₹65,000"],
+                ["Single Implant (domestic brand)", "₹25,000 – ₹40,000"],
+                ["Implant + Zirconia Crown", "₹50,000 – ₹80,000"],
+                ["Bone Grafting (if needed)", "₹10,000 – ₹25,000"],
+                ["Full Mouth Implants (All-on-4)", "₹3,00,000 – ₹6,00,000"],
+              ].map(([item, cost], i) => (
+                <tr key={i} className={i % 2 === 0 ? "bg-white" : "bg-neutral-50"}>
+                  <td className="px-4 py-3">{item}</td>
+                  <td className="px-4 py-3 font-bold text-[#0867E8]">{cost}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <h2 className="text-xl font-bold text-neutral-900">Top Clinics for Dental Implants in Patna</h2>
+        <ul className="space-y-2 text-neutral-700">
+          <li><strong>YOUR DENTIST Patna</strong> (Dr. Aryan Parmar) — Patliputra Colony | Imported &amp; domestic implants | Clinaza EMI partner</li>
+          <li><strong>Mundeshwari Dental Hub &amp; Implant Centre</strong> — Rajeev Nagar | 5.0★ (153 reviews) | Specialises in implant surgery</li>
+          <li><strong>Smile Dental Clinic Patna</strong> — Ashok Rajpath | 5.0★ (104 reviews) | Full implant &amp; crown packages</li>
+          <li><strong>Facio Dental</strong> — Patna | 4.5★ (417 reviews) | Complex cases &amp; bone augmentation</li>
+        </ul>
+        <h2 className="text-xl font-bold text-neutral-900">How to Get Dental Implants on EMI in Patna</h2>
+        <p className="text-neutral-700 leading-relaxed">
+          Via <strong>Clinaza partner clinics</strong>, patients can apply for point-of-care EMI financing for implant treatments. Eligibility is typically based on CIBIL score (600+), monthly income, and employment type. Approved patients can spread implant costs over 3–24 months through regulated NBFC lending partners including Hero FinCorp, Cashvia, and Jupiter.
+        </p>
+      </div>
+    )
+  },
+  {
+    slug: "best-dental-clinic-patna",
+    title: "Best Dental Clinics in Patna 2026: Ratings, Costs & EMI Options",
+    category: "Dental Care",
+    readTime: "6 min read",
+    publishDate: "September 3, 2026",
+    author: "Clinaza Medical Desk",
+    summary: "Comprehensive guide to the best dental clinics in Patna — comparing top-rated clinics by Google reviews, specialties, location, and whether they offer patient EMI financing.",
+    featuredImage: "/assets/yourdentist/dr_with_patient_1.jpg",
+    metaDescription: "Looking for the best dental clinic in Patna? Compare top-rated clinics by reviews, specialty, cost, and EMI options. Includes YOUR DENTIST, PRODENT, Facio Dental, and more.",
+    faqs: [
+      {
+        question: "Which is the best dental clinic in Patna?",
+        answer: "Top-rated dental clinics in Patna in 2026 include YOUR DENTIST Patna (Dr. Aryan Parmar, Patliputra Colony), Smile Point Dental Care (4.9★, 308 reviews), Mundeshwari Dental Hub & Implant Centre (5.0★, 153 reviews), PRODENT (4.9★, 95 reviews), and Facio Dental (4.5★, 417 reviews)."
+      },
+      {
+        question: "Which dental clinics in Patna offer EMI?",
+        answer: "Clinics in Patna offering Clinaza point-of-care EMI financing include YOUR DENTIST Patna, PRODENT, Smile Dental Clinic Patna, YouthONN Multispeciality Dental, Mundeshwari Dental Hub, Pratima Dental Hospital, Facio Dental, and Smile Point Dental Care."
+      },
+      {
+        question: "What is the cost of dental treatment in Patna?",
+        answer: "Dental treatment costs in Patna range from ₹500 for a cleaning to ₹80,000 for a single implant. Braces cost ₹20,000–₹60,000, clear aligners ₹45,000–₹1,50,000, and root canal + crown ₹8,000–₹25,000 per tooth."
+      },
+      {
+        question: "Is Clinaza EMI available at dental clinics in Patna?",
+        answer: "Yes. Clinaza has partnered with multiple dental clinics in Patna to offer point-of-care EMI financing for treatments above ₹30,000. Patients can check eligibility in under 2 minutes at the clinic or via clinaza.in."
+      }
+    ],
+    content: (
+      <div className="space-y-6">
+        <p className="text-lg leading-relaxed text-neutral-700">
+          Patna is home to a growing number of high-quality dental clinics offering everything from routine cleanings to full-mouth rehabilitation. With Clinaza's partner network now active across the city, patients can access flexible EMI financing at the clinic itself — no bank visit needed.
+        </p>
+        <h2 className="text-xl font-bold text-neutral-900">Top-Rated Dental Clinics in Patna (2026)</h2>
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm border border-neutral-200 rounded-xl overflow-hidden">
+            <thead className="bg-neutral-100">
+              <tr>
+                <th className="text-left px-4 py-3 font-bold">Clinic</th>
+                <th className="text-left px-4 py-3 font-bold">Rating</th>
+                <th className="text-left px-4 py-3 font-bold">Speciality</th>
+                <th className="text-left px-4 py-3 font-bold">EMI</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-neutral-100">
+              {[
+                ["YOUR DENTIST Patna", "5.0★ (Primary)", "Implants, Braces & Aligners", "✓ Clinaza Partner"],
+                ["Smile Point Dental Care", "4.9★ (308)", "Painless RCT & Advanced Care", "✓ Clinaza Partner"],
+                ["PRODENT", "4.9★ (95)", "Multispeciality", "✓ Clinaza Partner"],
+                ["Mundeshwari Dental Hub", "5.0★ (153)", "Implants & Surgery", "✓ Clinaza Partner"],
+                ["Facio Dental", "4.5★ (417)", "Orthodontics & Surgery", "✓ Clinaza Partner"],
+                ["Smile Dental Clinic", "5.0★ (104)", "Implants & Scaling", "✓ Clinaza Partner"],
+                ["YouthONN Multispeciality", "5.0★ (133)", "Multispeciality Care", "✓ Clinaza Partner"],
+                ["Pratima Dental Hospital", "4.8★ (113)", "Cosmetic Dentistry", "✓ Clinaza Partner"],
+              ].map(([clinic, rating, spec, emi], i) => (
+                <tr key={i} className={i % 2 === 0 ? "bg-white" : "bg-neutral-50"}>
+                  <td className="px-4 py-3 font-semibold">{clinic}</td>
+                  <td className="px-4 py-3 text-amber-600 font-bold">{rating}</td>
+                  <td className="px-4 py-3 text-neutral-600">{spec}</td>
+                  <td className="px-4 py-3 text-emerald-600 font-bold">{emi}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <h2 className="text-xl font-bold text-neutral-900">How Clinaza EMI Works at Patna Clinics</h2>
+        <p className="text-neutral-700 leading-relaxed">
+          All Clinaza partner clinics in Patna allow patients to check financing eligibility instantly during consultation. If eligible, patients are connected with regulated NBFC lenders (Hero FinCorp, Cashvia, Jupiter, and others) who disburse the loan directly to the clinic. Patients repay in easy monthly instalments.
+        </p>
+      </div>
+    )
   }
 ];

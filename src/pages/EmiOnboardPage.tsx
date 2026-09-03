@@ -179,201 +179,22 @@ export default function EmiOnboardPage() {
   const buildLenderOffers = (amount: number, resultsMap?: Map<string, string>): LenderOffer[] => {
     const list: LenderOffer[] = [
       {
-        id: 'offer-salaryontime',
-        lenderName: 'Salary On Time Loan',
-        logoBg: 'bg-gradient-to-tr from-indigo-600 to-cyan-500 text-white',
-        logoChar: 'ST',
-        badge: 'Low Salaried Approval',
-        interestRate: '7.50%–30% p.a.',
-        tenure: '12 Months',
-        monthlyEmi: Math.round((amount * 1.15) / 12),
-        totalRepayment: Math.round(amount * 1.15),
-        processingFee: Math.round(amount * 0.035),
-        minCibil: '600',
-        sortRate: 7.5,
-      },
-      {
-        id: 'offer-cashvia',
-        lenderName: 'Cashvia Personal Loan',
-        logoBg: 'bg-gradient-to-tr from-emerald-600 to-teal-600 text-white',
-        logoChar: 'CV',
-        badge: resultsMap?.get('cashvia') === 'APPROVED' ? 'Live API Pre-Approved' : 'Best Approval Rate',
-        interestRate: '12% – 36% p.a.',
-        tenure: '12 Months',
-        monthlyEmi: Math.round((amount * 1.12) / 12),
-        totalRepayment: Math.round(amount * 1.12),
-        processingFee: Math.round(amount * 0.03),
-        minCibil: '600',
-        sortRate: 12.0,
-      },
-      {
         id: 'offer-dhanlift',
         lenderName: 'Dhanlift Personal Loan',
         logoBg: 'bg-gradient-to-tr from-emerald-600 to-teal-700 text-white',
         logoChar: 'DL',
-        badge: 'Fast Approval',
+        badge: 'Official EMI Partner',
         interestRate: '12% – 30% p.a.',
         tenure: '12 Months',
         monthlyEmi: Math.round((amount * 1.15) / 12),
         totalRepayment: Math.round(amount * 1.15),
         processingFee: Math.round(amount * 0.025),
-        minCibil: '600',
+        minCibil: '0',
         sortRate: 12.0,
-      },
-      {
-        id: 'offer-atmcred',
-        lenderName: 'ATM Cred Personal Loan',
-        logoBg: 'bg-gradient-to-tr from-cyan-600 to-blue-600 text-white',
-        logoChar: 'AC',
-        badge: 'Low CIBIL Approval',
-        interestRate: '18% – 36% p.a.',
-        tenure: '12 Months',
-        monthlyEmi: Math.round((amount * 1.18) / 12),
-        totalRepayment: Math.round(amount * 1.18),
-        processingFee: Math.round(amount * 0.035),
-        minCibil: '500',
-        sortRate: 18.0,
-      },
-      {
-        id: 'offer-surya',
-        lenderName: 'Surya Personal Loan',
-        logoBg: 'bg-gradient-to-tr from-amber-500 to-yellow-600 text-white',
-        logoChar: 'SU',
-        badge: 'High Approval Rate',
-        interestRate: '18% – 36% p.a.',
-        tenure: '12 Months',
-        monthlyEmi: Math.round((amount * 1.18) / 12),
-        totalRepayment: Math.round(amount * 1.18),
-        processingFee: Math.round(amount * 0.03),
-        minCibil: '600',
-        sortRate: 18.0,
-      },
-      {
-        id: 'offer-digicredit',
-        lenderName: 'DigiCredit Personal Loan',
-        logoBg: 'bg-gradient-to-tr from-teal-700 to-green-600 text-white',
-        logoChar: 'DC',
-        badge: 'Instant Digital Disbursal',
-        interestRate: '18% – 36% p.a.',
-        tenure: '12 Months',
-        monthlyEmi: Math.round((amount * 1.18) / 12),
-        totalRepayment: Math.round(amount * 1.18),
-        processingFee: Math.round(amount * 0.03),
-        minCibil: '650',
-        sortRate: 18.0,
-      },
-      {
-        id: 'offer-mmb',
-        lenderName: 'MyMoneyBazaar (MMB)',
-        logoBg: 'bg-gradient-to-tr from-orange-600 to-amber-600 text-white',
-        logoChar: 'MB',
-        badge: resultsMap?.get('mmb') === 'APPROVED' ? 'Live API Pre-Approved' : 'Multi-Lender Pre-Check',
-        interestRate: '18% – 36% p.a.',
-        tenure: '12 Months',
-        monthlyEmi: Math.round((amount * 1.18) / 12),
-        totalRepayment: Math.round(amount * 1.18),
-        processingFee: Math.round(amount * 0.025),
-        minCibil: '600',
-        sortRate: 18.0,
-      },
-      {
-        id: 'offer-tap4credit',
-        lenderName: 'Tap4Credit',
-        logoBg: 'bg-gradient-to-tr from-pink-600 to-purple-600 text-white',
-        logoChar: 'T4C',
-        badge: resultsMap?.get('tap4credit') === 'APPROVED' || resultsMap?.get('tap4credit') === 'EXISTS' ? 'Live API Pre-Approved' : 'Zero Processing Fee Options',
-        interestRate: '18% – 36% p.a.',
-        tenure: '18 Months',
-        monthlyEmi: Math.round((amount * 1.20) / 18),
-        totalRepayment: Math.round(amount * 1.20),
-        processingFee: Math.round(amount * 0.03),
-        minCibil: '650',
-        sortRate: 18.0,
-      },
-      {
-        id: 'offer-myfloat',
-        lenderName: 'MyFloat Personal Loan',
-        logoBg: 'bg-gradient-to-tr from-emerald-500 to-lime-600 text-white',
-        logoChar: 'MF',
-        badge: 'Best Approval Rate',
-        interestRate: '18% – 36% p.a.',
-        tenure: '12 Months',
-        monthlyEmi: Math.round((amount * 1.18) / 12),
-        totalRepayment: Math.round(amount * 1.18),
-        processingFee: Math.round(amount * 0.03),
-        minCibil: '600',
-        sortRate: 18.0,
-      },
-      {
-        id: 'offer-timepecash',
-        lenderName: 'TimePeCash Personal Loan',
-        logoBg: 'bg-gradient-to-tr from-fuchsia-600 to-rose-600 text-white',
-        logoChar: 'TC',
-        badge: 'Low Income Approval',
-        interestRate: '18% – 36% p.a.',
-        tenure: '9 Months',
-        monthlyEmi: Math.round((amount * 1.15) / 9),
-        totalRepayment: Math.round(amount * 1.15),
-        processingFee: Math.round(amount * 0.03),
-        minCibil: '600',
-        sortRate: 18.0,
-      },
-      {
-        id: 'offer-dhancash',
-        lenderName: 'DhanCash Personal Loan',
-        logoBg: 'bg-gradient-to-tr from-green-700 to-emerald-800 text-white',
-        logoChar: 'DH',
-        badge: 'Flexible EMI Plans',
-        interestRate: '24% – 36% p.a.',
-        tenure: '12 Months',
-        monthlyEmi: Math.round((amount * 1.24) / 12),
-        totalRepayment: Math.round(amount * 1.24),
-        processingFee: Math.round(amount * 0.04),
-        minCibil: '650',
-        sortRate: 24.0,
-      },
-      {
-        id: 'offer-creditsea',
-        lenderName: 'Creditsea',
-        logoBg: 'bg-gradient-to-tr from-sky-600 to-blue-700 text-white',
-        logoChar: 'CS',
-        badge: resultsMap?.get('creditsea') === 'APPROVED' ? 'Live API Pre-Approved' : 'Digital KYC Approval',
-        interestRate: '24% – 36% p.a.',
-        tenure: '12 Months',
-        monthlyEmi: Math.round((amount * 1.24) / 12),
-        totalRepayment: Math.round(amount * 1.24),
-        processingFee: 0,
-        minCibil: '500',
-        sortRate: 24.0,
       }
     ];
 
-    // Dynamic CIBIL recommendations mapping
-    const score = Number(cibilScore);
-    const mappedList = list.map(offer => {
-      let isRecommended = false;
-      if (score >= 750) {
-        // Excellent CIBIL: Best matching premium loans
-        isRecommended = ['offer-salaryontime', 'offer-cashvia', 'offer-dhanlift'].includes(offer.id);
-      } else if (score >= 700) {
-        // Good CIBIL: Mid-high tier loans
-        isRecommended = ['offer-cashvia', 'offer-dhanlift'].includes(offer.id);
-      } else if (score >= 600) {
-        // Fair CIBIL: Reliable subprime options
-        isRecommended = ['offer-digicredit', 'offer-tap4credit', 'offer-creditsea'].includes(offer.id);
-      } else {
-        // Low CIBIL: Specialized bad credit lenders
-        isRecommended = ['offer-atmcred', 'offer-surya', 'offer-dhancash'].includes(offer.id);
-      }
-      return { ...offer, isRecommended };
-    });
-
-    // Sort by recommended status first, then by interest rate (low to high)
-    return mappedList.sort((a, b) => {
-      if (a.isRecommended && !b.isRecommended) return -1;
-      if (!a.isRecommended && b.isRecommended) return 1;
-      return a.sortRate - b.sortRate;
-    });
+    return list.map(offer => ({ ...offer, isRecommended: true }));
   };
 
   const offers = buildLenderOffers(rawAmount);

@@ -1414,17 +1414,17 @@ export default function CrmHomepage() {
       </footer>
 
       {/* Floating Quick Action: WhatsApp Loan Share */}
-      <div className="fixed bottom-6 right-6 z-50">
+      <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50">
         <a
           href="https://wa.me/?text=Apply%20for%20Clinaza%20Patient%20Treatment%20EMI%20Loan%20on%20Dhanlift%3A%20https%3A%2F%2Fclinaza.in%2Fapply"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-2.5 px-4.5 py-3 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-full shadow-2xl shadow-emerald-600/50 border border-emerald-400/40 transition-all transform hover:scale-105"
+          className="inline-flex items-center gap-2 px-3.5 py-2.5 sm:px-5 sm:py-3 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-full shadow-2xl shadow-emerald-600/40 border border-emerald-400/40 transition-all transform hover:scale-105 whitespace-nowrap shrink-0"
           title="Share Clinaza Loan Link on WhatsApp"
         >
-          <MessageSquare size={16} className="text-white" />
+          <MessageSquare size={15} className="text-white shrink-0" />
           <span className="hidden sm:inline">Share Loan Link on WhatsApp</span>
-          <span className="sm:hidden">Share Loan</span>
+          <span className="sm:hidden text-[11px] font-extrabold tracking-tight">Share Loan</span>
         </a>
       </div>
     </div>

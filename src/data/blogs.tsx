@@ -928,4 +928,152 @@ export const BLOGS: BlogArticle[] = [
       </div>
     )
   }
+  ,
+  {
+    slug: "dentist-digital-marketing-india-complete-guide",
+    title: "Dentist Digital Marketing in India: The Complete 2026 Guide",
+    category: "Clinic Growth",
+    readTime: "8 min read",
+    publishDate: "September 4, 2026",
+    author: "Clinaza Growth Team",
+    summary: "From Instagram reels to Google reviews and WhatsApp campaigns — the complete digital marketing playbook for dental clinics in India to get more patients in 2026.",
+    featuredImage: "/og-dentist-workspace.png",
+    metaDescription: "Complete guide to dentist digital marketing in India 2026. Learn Instagram growth, Google reviews, WhatsApp marketing, and SEO strategies to get more dental patients.",
+    faqs: [
+      {
+        question: "How can a dental clinic get more patients through digital marketing?",
+        answer: "The fastest way is combining Google Business Profile optimization (for local searches), consistent Instagram content (before/after reels), and WhatsApp reactivation campaigns. Clinics using all three channels typically see 30–50% more bookings within 90 days."
+      },
+      {
+        question: "What is the best social media platform for dentists in India?",
+        answer: "Instagram is #1 for dental clinics in India due to its visual nature — before/after smile transformations and treatment reels perform extremely well. YouTube Shorts is a strong second for educational content. Facebook works well for ads targeting the 30–55 age group."
+      },
+      {
+        question: "How do I get more Google reviews for my dental clinic?",
+        answer: "Send a WhatsApp message with a direct Google review link within 2 hours of a patient visit. Clinics that ask immediately after treatment get 5x more reviews. Aim for 10+ new reviews per month to improve local search ranking."
+      },
+      {
+        question: "How much does dental clinic digital marketing cost in India?",
+        answer: "Instagram management + Google review automation + WhatsApp campaigns costs Rs 8,000–25,000/month. Google Ads adds Rs 10,000–40,000/month in ad spend. Clinaza offers integrated marketing support as part of its clinic growth platform."
+      },
+      {
+        question: "Does offering EMI help dental clinics get more patients?",
+        answer: "Yes — significantly. Clinics offering EMI financing through Clinaza report 35–60% higher case acceptance for high-value treatments like implants, full-mouth rehabilitation, and clear aligners. Financing removes the #1 barrier to treatment acceptance."
+      }
+    ],
+    content: (
+      <div className="space-y-6">
+        <p className="text-lg leading-relaxed text-neutral-700">
+          In 2026, over <strong>78% of Indians</strong> search online before choosing a dentist — yet most dental clinics still rely only on word-of-mouth. This guide covers every digital marketing channel that works for Indian dental clinics, ranked by ROI.
+        </p>
+
+        <div className="bg-blue-50 border-l-4 border-blue-500 p-5 rounded-r-xl my-4">
+          <p className="text-sm font-semibold text-blue-800">What you will learn:</p>
+          <ul className="text-sm text-blue-700 mt-2 space-y-1 list-disc pl-4">
+            <li>Instagram and Reels strategy for dental clinics</li>
+            <li>How to dominate Google local search</li>
+            <li>WhatsApp marketing for patient reactivation</li>
+            <li>Google Ads vs organic SEO — which to pick</li>
+            <li>How patient financing boosts case acceptance</li>
+          </ul>
+        </div>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">1. Instagram Marketing for Dental Clinics</h2>
+        <p className="text-neutral-700 leading-relaxed">
+          Instagram is the highest-ROI channel for dental clinics in India. Dental results are <em>visual</em> — before/after smile transformations and procedure reels build massive trust with prospective patients.
+        </p>
+
+        <div className="overflow-x-auto my-4">
+          <table className="min-w-full divide-y divide-neutral-200 border border-neutral-100 text-sm">
+            <thead className="bg-neutral-50">
+              <tr>
+                <th className="px-4 py-3 text-left text-xs font-bold text-neutral-500 uppercase">Content Type</th>
+                <th className="px-4 py-3 text-left text-xs font-bold text-neutral-500 uppercase">Patient Conversion</th>
+                <th className="px-4 py-3 text-left text-xs font-bold text-neutral-500 uppercase">Frequency</th>
+              </tr>
+            </thead>
+            <tbody className="bg-white divide-y divide-neutral-100">
+              <tr><td className="px-4 py-3 font-semibold">Before / After Results</td><td className="px-4 py-3 text-green-600 font-bold">Very High</td><td className="px-4 py-3">2–3x / week</td></tr>
+              <tr><td className="px-4 py-3 font-semibold">Patient Testimonial Reels</td><td className="px-4 py-3 text-green-600 font-bold">Very High</td><td className="px-4 py-3">1x / week</td></tr>
+              <tr><td className="px-4 py-3 font-semibold">Treatment Explainer Videos</td><td className="px-4 py-3 text-yellow-600 font-bold">High</td><td className="px-4 py-3">1x / week</td></tr>
+              <tr><td className="px-4 py-3 font-semibold">Dental Tips / Education</td><td className="px-4 py-3 text-yellow-600 font-bold">Medium</td><td className="px-4 py-3">2x / week</td></tr>
+              <tr><td className="px-4 py-3 font-semibold">Discount / Offer Posts</td><td className="px-4 py-3 text-red-500 font-bold">Low</td><td className="px-4 py-3">Max 1x / month</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p className="text-neutral-700">Always use local hashtags like <strong>#DentistPatna</strong>, <strong>#DentalClinicMumbai</strong>, combined with <strong>#IndianDentist</strong> and <strong>#SmileMakeover</strong> on every post.</p>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-10 mb-4">2. Google Business Profile — Your #1 Free Marketing Tool</h2>
+        <p className="text-neutral-700 leading-relaxed">
+          When someone searches "dentist near me" Google shows a map pack of 3 local businesses. Getting into this pack is the single highest-ROI move for any clinic — and it is free.
+        </p>
+        <ul className="space-y-2 text-neutral-700 mt-4">
+          <li className="flex items-start gap-2"><span className="text-green-500 flex-shrink-0">✅</span><span><strong>Complete every field</strong> — services, hours, photos, description with keywords</span></li>
+          <li className="flex items-start gap-2"><span className="text-green-500 flex-shrink-0">✅</span><span><strong>Upload 20+ photos</strong> — clinic, equipment, before/after, doctor</span></li>
+          <li className="flex items-start gap-2"><span className="text-green-500 flex-shrink-0">✅</span><span><strong>Get 50+ Google reviews</strong> with 4.5+ stars — the #1 ranking factor</span></li>
+          <li className="flex items-start gap-2"><span className="text-green-500 flex-shrink-0">✅</span><span><strong>Post weekly updates</strong> on your Google Business profile</span></li>
+          <li className="flex items-start gap-2"><span className="text-green-500 flex-shrink-0">✅</span><span><strong>Reply to every review</strong> — positive and negative</span></li>
+        </ul>
+
+        <h3 className="text-lg font-bold text-neutral-800 mt-6 mb-2">The WhatsApp Review Template That Works</h3>
+        <div className="bg-neutral-900 text-green-400 p-4 rounded-xl text-sm font-mono my-4">
+          "Hi [Name], thank you for visiting [Clinic] today! If you have 30 seconds, a Google review would help other patients find us. [Direct Google Review Link]"
+        </div>
+        <p className="text-neutral-700">Send this within 2 hours of the patient visit. Clinics using this get <strong>5x more reviews within 60 days</strong>.</p>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-10 mb-4">3. WhatsApp Reactivation Campaigns</h2>
+        <p className="text-neutral-700 leading-relaxed">WhatsApp has a 98% open rate in India — the most powerful channel to bring back dormant patients.</p>
+        <div className="space-y-4 my-4">
+          <div className="border border-neutral-200 rounded-xl p-4">
+            <p className="text-xs font-bold text-neutral-500 uppercase mb-2">Recall Campaign (6+ months inactive)</p>
+            <p className="text-sm text-neutral-700 italic">"Hi [Name], it has been a while since your last visit! We recommend a routine checkup every 6 months. Book this week and get a free teeth cleaning. Reply YES to confirm."</p>
+          </div>
+          <div className="border border-neutral-200 rounded-xl p-4">
+            <p className="text-xs font-bold text-neutral-500 uppercase mb-2">EMI Offer Campaign</p>
+            <p className="text-sm text-neutral-700 italic">"Hi [Name], you can now get dental implants or aligners on easy monthly EMI at [Clinic]. No-cost EMI from Rs 2,500/month. Book a free consult — reply CALL ME."</p>
+          </div>
+        </div>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-10 mb-4">4. SEO vs Google Ads for Dental Clinics</h2>
+        <div className="overflow-x-auto my-4">
+          <table className="min-w-full divide-y divide-neutral-200 border border-neutral-100 text-sm">
+            <thead className="bg-neutral-50">
+              <tr>
+                <th className="px-4 py-3 text-left text-xs font-bold text-neutral-500 uppercase">Channel</th>
+                <th className="px-4 py-3 text-left text-xs font-bold text-neutral-500 uppercase">Cost</th>
+                <th className="px-4 py-3 text-left text-xs font-bold text-neutral-500 uppercase">Time to Results</th>
+                <th className="px-4 py-3 text-left text-xs font-bold text-neutral-500 uppercase">Longevity</th>
+              </tr>
+            </thead>
+            <tbody className="bg-white divide-y divide-neutral-100">
+              <tr><td className="px-4 py-3 font-semibold">Google Ads</td><td className="px-4 py-3 text-red-500">High ongoing</td><td className="px-4 py-3 text-green-600">Immediate</td><td className="px-4 py-3 text-red-500">Stops with budget</td></tr>
+              <tr><td className="px-4 py-3 font-semibold">Blog SEO</td><td className="px-4 py-3 text-green-600">Low one-time</td><td className="px-4 py-3 text-yellow-600">3–6 months</td><td className="px-4 py-3 text-green-600">Permanent</td></tr>
+              <tr><td className="px-4 py-3 font-semibold">Google Business</td><td className="px-4 py-3 text-green-600">Free</td><td className="px-4 py-3 text-yellow-600">1–3 months</td><td className="px-4 py-3 text-green-600">Permanent</td></tr>
+              <tr><td className="px-4 py-3 font-semibold">Instagram Organic</td><td className="px-4 py-3 text-yellow-600">Time only</td><td className="px-4 py-3 text-yellow-600">2–4 months</td><td className="px-4 py-3 text-green-600">Grows over time</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-10 mb-4">5. Patient Financing — The Hidden Marketing Weapon</h2>
+        <p className="text-neutral-700 leading-relaxed">
+          When patients cannot afford Rs 60,000 upfront for a dental implant, they delay treatment. When you offer <strong>Rs 2,800/month for 24 months</strong>, the same patient books immediately. Clinics using Clinaza report <strong>35–60% higher case acceptance</strong> for high-value treatments.
+        </p>
+
+        <div className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-6 rounded-2xl my-8">
+          <h3 className="text-lg font-bold mb-2">Want Clinaza to Handle Your Dental Clinic Marketing?</h3>
+          <p className="text-sm text-blue-100 mb-4">We manage Instagram, Google reviews, WhatsApp campaigns, and patient EMI financing for dental clinics across India.</p>
+          <a
+            href="https://wa.me/918826009044?text=Hi%2C+I+want+digital+marketing+for+my+dental+clinic"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block bg-white text-blue-600 font-bold text-sm px-5 py-2.5 rounded-xl hover:bg-blue-50 transition-colors"
+          >
+            Talk to Clinaza Growth Team
+          </a>
+        </div>
+      </div>
+    )
+  }
+
 ];

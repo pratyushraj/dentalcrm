@@ -323,20 +323,6 @@ export default function CrmHomepage() {
             </div>
           </Link>
           <div className="flex items-center gap-3">
-            <Link
-              to="/apply"
-              className="hidden lg:flex items-center gap-1.5 px-3.5 py-2 bg-emerald-50 hover:bg-emerald-100 border border-emerald-300/80 text-xs font-bold text-emerald-800 rounded-xl transition-all shadow-sm"
-            >
-              <Sparkles size={14} className="text-emerald-600 animate-pulse" />
-              Check Dhanlift EMI
-            </Link>
-            <Link
-              to="/emi/onboard"
-              className="hidden sm:flex items-center gap-1.5 px-3 py-2 bg-slate-50 hover:bg-slate-100 border border-slate-200 text-xs font-bold text-[#0B2450] rounded-xl transition-all"
-            >
-              <ShieldCheck size={14} className="text-indigo-600" />
-              Patient Loan API
-            </Link>
             <a
               href="https://wa.me/917292984244?text=Hi%20Clinaza%20team%2C%20I%20want%20to%20offer%20patient%20financing%20at%20my%20clinic"
               target="_blank" rel="noopener noreferrer"

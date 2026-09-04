@@ -236,9 +236,12 @@ export default function CrmHomepage() {
         title="CLINAZA — Embedded Healthcare Patient Financing Infrastructure"
         description="Don't let treatment cost stop your patients. Offer flexible EMI financing for eligible patients (₹30K–₹3L) directly at your clinic checkout."
         keywords={[
-          'clinaza', 'patient financing', 'dental emi', 'healthcare lending', 
+          'clinaza', 'clinaza patient financing', 'clinaza healthpay', 'dhanlift clinaza loan',
+          'patient financing', 'dental emi', 'dental emi patna', 'healthcare lending', 
           'medical loan india', 'point of care financing', 'clinic emi option', 
-          'embedded finance', 'dental implants financing', 'clear aligners emi'
+          'embedded finance', 'dental implants financing', 'clear aligners emi',
+          'root canal on emi', '0 interest medical loan india', 'how to offer emi to dental patients',
+          'dentist social media marketing', 'dental clinic instagram growth', 'google review automation for dentists'
         ]}
         image="https://clinaza.in/og-preview.png"
         canonicalUrl="https://clinaza.in/"

@@ -537,6 +537,51 @@ export default function CrmHomepage() {
           </div>
         </section>
 
+        {/* ── 4.5 DENTIST SOCIAL MEDIA & BRAND GROWTH ── */}
+        <section aria-label="Dentist Growth & Social Media" className="py-12 sm:py-16 px-4 sm:px-6 bg-gradient-to-br from-indigo-950 via-slate-900 to-[#0B2450] text-white">
+          <div className="max-w-5xl mx-auto space-y-8 text-center">
+            <div className="space-y-2">
+              <span className="px-3.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-400 text-[10px] font-bold uppercase tracking-widest inline-block">
+                CLINIC GROWTH & MARKETING
+              </span>
+              <h2 className="text-2xl sm:text-4xl font-black text-white tracking-tight">
+                Dentist Social Media & Brand Growth Management
+              </h2>
+              <p className="text-xs sm:text-sm text-slate-300 max-w-2xl mx-auto leading-relaxed">
+                In addition to EMI financing, Clinaza manages Instagram Reels, Google 5-Star Reviews, Patient Case Studies, and High-Ticket Lead Ads for dental clinics.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 text-left">
+              {[
+                { title: 'Instagram Reels & Content', desc: 'Custom patient transformation reels, educational posts & doctor personal branding tailored for dentists.' },
+                { title: 'Google Maps & 5-Star Reviews', desc: 'Automated review collection tools to boost your clinic rating and rank #1 on Google Local.' },
+                { title: 'High-Ticket Patient Ads', desc: 'Targeted Instagram & Meta ads driving consultation bookings for Dental Implants & Clear Aligners.' },
+                { title: 'Full Brand Management', desc: 'Consistent visual branding, patient story highlights & social media community management.' }
+              ].map((service, idx) => (
+                <div key={idx} className="bg-slate-900/80 border border-slate-800 p-5 rounded-2xl space-y-2 shadow-xl hover:border-emerald-500/40 transition-colors">
+                  <div className="w-8 h-8 rounded-xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 font-black flex items-center justify-center text-xs mb-2">
+                    0{idx + 1}
+                  </div>
+                  <h3 className="text-sm font-bold text-white leading-snug">{service.title}</h3>
+                  <p className="text-xs text-slate-300 leading-relaxed">{service.desc}</p>
+                </div>
+              ))}
+            </div>
+
+            <div className="pt-2">
+              <a
+                href="https://wa.me/917292984244?text=Hi%20Clinaza%2C%20I%20want%20Social%20Media%20Management%20%26%20Growth%20Marketing%20for%20my%20dental%20clinic"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-7 py-3.5 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs uppercase tracking-widest rounded-xl transition-all shadow-xl shadow-emerald-500/20 transform hover:-translate-y-0.5"
+              >
+                <MessageSquare size={16} /> Get Social Media Management for Your Clinic
+              </a>
+            </div>
+          </div>
+        </section>
+
         {/* ── 5. EARLY ELIGIBILITY CHECKER PROMPT ── */}
         <section aria-label="Eligibility Prompt" className="py-12 px-4 sm:px-6 max-w-4xl mx-auto">
           <div className="bg-gradient-to-br from-[#0B2450] to-[#0867E8] text-white p-7 sm:p-9 rounded-3xl text-center space-y-4 shadow-xl">

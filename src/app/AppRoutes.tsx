@@ -16,6 +16,7 @@ const BlogArticlePage = lazy(() => import("@/pages/yourdentist/BlogArticlePage")
 const ReviewAssistant = lazy(() => import("@/pages/yourdentist/ReviewAssistant"));
 const CityLandingPage = lazy(() => import("@/pages/CityLandingPage"));
 const PitchDeckPage = lazy(() => import("@/pages/PitchDeckPage"));
+const DhanliftRedirectPage = lazy(() => import("@/pages/DhanliftRedirectPage"));
 
 export default function AppRoutes() {
   return (
@@ -31,6 +32,12 @@ export default function AppRoutes() {
               </LazyRoute>
             } 
           />
+
+          {/* Direct WhatsApp Share Short Links for Loan Redirect */}
+          <Route path="/loan" element={<LazyRoute><DhanliftRedirectPage /></LazyRoute>} />
+          <Route path="/loans" element={<LazyRoute><DhanliftRedirectPage /></LazyRoute>} />
+          <Route path="/apply" element={<LazyRoute><DhanliftRedirectPage /></LazyRoute>} />
+          <Route path="/dhanlift" element={<LazyRoute><DhanliftRedirectPage /></LazyRoute>} />
 
           {/* Review Assistant Landing Page */}
           <Route path="/review/assist" element={<LazyRoute><ReviewAssistant /></LazyRoute>} />

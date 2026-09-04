@@ -12,6 +12,45 @@ export default function BlogArticlePage() {
     return <Navigate to="/blog" replace />;
   }
 
+  // Helper: convert "June 24, 2026" → "2026-06-24"
+  const toIsoDate = (dateStr: string): string => {
+    try {
+      return new Date(dateStr).toISOString().split('T')[0];
+    } catch {
+      return new Date().toISOString().split('T')[0];
+    }
+  };
+
+  const isoDate = toIsoDate(article.publishDate);
+
+  // Article schema — powers Google rich results & date signals
+  const articleSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    'headline': article.title,
+    'description': article.metaDescription,
+    'image': article.featuredImage || 'https://clinaza.in/og-preview.png',
+    'author': {
+      '@type': 'Person',
+      'name': article.author,
+      'url': 'https://clinaza.in/blog'
+    },
+    'publisher': {
+      '@type': 'Organization',
+      'name': 'Clinaza',
+      'logo': {
+        '@type': 'ImageObject',
+        'url': 'https://clinaza.in/assets/clinaza-logo.jpg'
+      }
+    },
+    'datePublished': isoDate,
+    'dateModified': isoDate,
+    'mainEntityOfPage': {
+      '@type': 'WebPage',
+      '@id': `https://clinaza.in/blog/${article.slug}`
+    }
+  };
+
   // Generate Google-compliant FAQ Schema dynamically
   const faqSchema = {
     '@context': 'https://schema.org',
@@ -34,9 +73,10 @@ export default function BlogArticlePage() {
         keywords={[article.category.toLowerCase(), 'clinaza financing', 'dental care emi india']}
         canonicalUrl={`https://clinaza.in/blog/${article.slug}`}
         type="article"
-        publishedTime={article.publishDate}
+        publishedTime={isoDate}
+        modifiedTime={isoDate}
         author={article.author}
-        jsonLd={faqSchema}
+        jsonLd={[articleSchema, faqSchema]}
         image={article.featuredImage}
       />
 

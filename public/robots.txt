@@ -7,5 +7,31 @@ Allow: /llms-full.txt
 # Block search engines from private dashboard areas
 Disallow: /reactivation/
 Disallow: /api/
+Disallow: /deck
+Disallow: /dentist-proposal
+Disallow: /dental-trends
 
+# Allow all major search engine bots explicitly
+User-agent: Googlebot
+Allow: /
+Disallow: /reactivation/
+Disallow: /api/
+Disallow: /deck
+Disallow: /dentist-proposal
+Disallow: /dental-trends
+
+User-agent: Bingbot
+Allow: /
+Disallow: /reactivation/
+
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: WhatsApp
+Allow: /
+
+# Sitemap
 Sitemap: https://clinaza.in/sitemap.xml

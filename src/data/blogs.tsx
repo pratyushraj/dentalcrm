@@ -852,5 +852,80 @@ export const BLOGS: BlogArticle[] = [
         </div>
       </div>
     )
+  },
+  {
+    slug: "dentist-social-media-marketing-guide-india",
+    title: "Dentist Social Media Marketing 2026: How Dental Clinics Attract High-Ticket Patients",
+    category: "Clinic Growth",
+    readTime: "7 min read",
+    publishDate: "September 4, 2026",
+    author: "Clinaza Growth Team",
+    summary: "Proven social media marketing strategies for dentists in India — Instagram Reels, Google 5-star review automation, patient transformation stories & Meta ads for Implants & Aligners.",
+    featuredImage: "/assets/yourdentist/dr_with_patient_1.jpg",
+    metaDescription: "Learn how dental clinics in India use Instagram Reels, Google Reviews, and Meta Ads to double high-ticket patient inquiries for implants & aligners.",
+    faqs: [
+      {
+        question: "Why do dental clinics need social media marketing?",
+        answer: "Patients research dentists on Instagram and Google Maps before booking high-value procedures like Implants and Clear Aligners. Video testimonials and before/after cases build instant trust."
+      },
+      {
+        question: "How does Clinaza help dentists with social media management?",
+        answer: "Clinaza handles Instagram Reels creation, Google Review collection tools, clinic personal branding, and targeted lead generation ads for dental practices."
+      },
+      {
+        question: "Which social media platforms work best for dentists in India?",
+        answer: "Instagram (Reels & Stories) and Google My Business (Google Maps reviews) generate over 80% of high-intent patient inquiries for dental clinics in India."
+      }
+    ],
+    content: (
+      <div className="space-y-6">
+        <p className="text-lg leading-relaxed text-neutral-700">
+          In 2026, word-of-mouth for dental practices has moved online. Over 75% of patients searching for <strong>Dental Implants, Clear Aligners, and Cosmetic Smile Makeovers</strong> check a dentist's Instagram profile and Google reviews before scheduling an in-person consultation.
+        </p>
+
+        <h2 className="text-xl font-bold text-neutral-900">4 Pillars of Successful Dental Social Media Marketing</h2>
+        
+        <div className="space-y-4">
+          <div className="bg-neutral-50 border border-neutral-200 p-5 rounded-2xl">
+            <h3 className="text-base font-bold text-neutral-900">1. Educational Instagram Reels &amp; Transformation Stories</h3>
+            <p className="text-sm text-neutral-700 mt-1">
+              Short 30-second Reels breaking common dental myths (e.g. "Does scaling loosen teeth?") and showing patient smile transformations generate massive organic reach in your city.
+            </p>
+          </div>
+
+          <div className="bg-neutral-50 border border-neutral-200 p-5 rounded-2xl">
+            <h3 className="text-base font-bold text-neutral-900">2. Google My Business &amp; 5-Star Review Automation</h3>
+            <p className="text-sm text-neutral-700 mt-1">
+              Ranking #1 on Google Local Maps requires consistent 5-star patient reviews. Clinaza provides automated WhatsApp review collection links for clinics right after treatment completion.
+            </p>
+          </div>
+
+          <div className="bg-neutral-50 border border-neutral-200 p-5 rounded-2xl">
+            <h3 className="text-base font-bold text-neutral-900">3. Targeted Meta Ads for High-Ticket Procedures</h3>
+            <p className="text-sm text-neutral-700 mt-1">
+              Run localized Instagram &amp; Facebook ads targeting patients within a 10 km radius interested in Dental Implants and Invisible Aligners with clear monthly EMI options.
+            </p>
+          </div>
+
+          <div className="bg-neutral-50 border border-neutral-200 p-5 rounded-2xl">
+            <h3 className="text-base font-bold text-neutral-900">4. Combining Patient Financing (EMI) with Marketing</h3>
+            <p className="text-sm text-neutral-700 mt-1">
+              Promoting "Dental Implants starting at ₹2,500/month EMI" in your social media posts increases ad click-through rates by over 300%.
+            </p>
+          </div>
+        </div>
+
+        <h2 className="text-xl font-bold text-neutral-900">Get Clinaza Social Media Management for Your Dental Practice</h2>
+        <p className="text-neutral-700 leading-relaxed">
+          Clinaza offers end-to-end growth marketing and social media management specifically tailored for dentists and dental clinics across India.
+        </p>
+
+        <div className="pt-4">
+          <a href="https://wa.me/917292984244?text=Hi%20Clinaza%2C%20I%20want%20Social%20Media%20Management%20for%20my%20dental%20clinic" target="_blank" rel="noopener noreferrer" className="inline-block px-6 py-3 bg-emerald-600 text-white font-bold text-xs uppercase tracking-wider rounded-xl shadow-lg hover:bg-emerald-700 transition-all">
+            Consult Clinaza Growth Team on WhatsApp &rarr;
+          </a>
+        </div>
+      </div>
+    )
   }
 ];

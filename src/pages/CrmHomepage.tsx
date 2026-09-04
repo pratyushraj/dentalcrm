@@ -17,7 +17,9 @@ import {
   Package,
   Truck,
   Award,
-  MapPin
+  MapPin,
+  Sparkles,
+  Share2
 } from 'lucide-react';
 import { emailNotificationService } from '../services/emailNotificationService';
 import { toast } from 'sonner';
@@ -320,12 +322,19 @@ export default function CrmHomepage() {
               <span className="text-[9px] font-bold tracking-wider text-[#0f7a75] block uppercase">EMI FOR BETTER HEALTH</span>
             </div>
           </Link>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3">
+            <Link
+              to="/apply"
+              className="hidden lg:flex items-center gap-1.5 px-3.5 py-2 bg-emerald-50 hover:bg-emerald-100 border border-emerald-300/80 text-xs font-bold text-emerald-800 rounded-xl transition-all shadow-sm"
+            >
+              <Sparkles size={14} className="text-emerald-600 animate-pulse" />
+              Check Dhanlift EMI
+            </Link>
             <Link
               to="/emi/onboard"
-              className="hidden sm:flex items-center gap-1.5 px-3 py-2 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-xs font-bold text-emerald-700 rounded-xl transition-all"
+              className="hidden sm:flex items-center gap-1.5 px-3 py-2 bg-slate-50 hover:bg-slate-100 border border-slate-200 text-xs font-bold text-[#0B2450] rounded-xl transition-all"
             >
-              <ShieldCheck size={14} className="text-emerald-600" />
+              <ShieldCheck size={14} className="text-indigo-600" />
               Patient Loan API
             </Link>
             <a
@@ -1350,6 +1359,21 @@ export default function CrmHomepage() {
           </nav>
         </div>
       </footer>
+
+      {/* Floating Quick Action: WhatsApp Loan Share */}
+      <div className="fixed bottom-6 right-6 z-50">
+        <a
+          href="https://wa.me/?text=Apply%20for%20Clinaza%20Patient%20Treatment%20EMI%20Loan%20on%20Dhanlift%3A%20https%3A%2F%2Fclinaza.in%2Fapply"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-2.5 px-4.5 py-3 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-full shadow-2xl shadow-emerald-600/50 border border-emerald-400/40 transition-all transform hover:scale-105"
+          title="Share Clinaza Loan Link on WhatsApp"
+        >
+          <MessageSquare size={16} className="text-white" />
+          <span className="hidden sm:inline">Share Loan Link on WhatsApp</span>
+          <span className="sm:hidden">Share Loan</span>
+        </a>
+      </div>
     </div>
   );
 }

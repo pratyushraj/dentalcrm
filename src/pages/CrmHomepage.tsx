@@ -61,7 +61,7 @@ export default function CrmHomepage() {
       minCibil: 0, 
       salaryOnly: false, 
       minIncome: 0, 
-      url: 'https://dhanlift.com/?utm_source=affiliate&utm_medium=partner&utm_campaign=partner-campaign-aff-4&utm_term=03-09-2026', 
+      url: 'https://www.dhanlift.com/loans/personal-loan-for-salaried-employees/clinaza-patient-treatment-loan?utm_source=affiliate&utm_medium=partner&utm_campaign=partner-campaign-aff-4&utm_term=03-09-2026', 
       badge: 'Official EMI Partner', 
       color: 'bg-emerald-50 border-emerald-200 text-emerald-700' 
     }
@@ -115,7 +115,7 @@ export default function CrmHomepage() {
 
     // Immediately redirect to Dhanlift affiliate UTM link with mobile prefill parameters
     const mob = encodeURIComponent(patientData.mobile);
-    const targetUrl = `https://dhanlift.com/?utm_source=affiliate&utm_medium=partner&utm_campaign=partner-campaign-aff-4&utm_term=03-09-2026&mobile=${mob}&phone=${mob}&phoneNumber=${mob}&aff_sub=${mob}`;
+    const targetUrl = `https://www.dhanlift.com/loans/personal-loan-for-salaried-employees/clinaza-patient-treatment-loan?utm_source=affiliate&utm_medium=partner&utm_campaign=partner-campaign-aff-4&utm_term=03-09-2026&mobile=${mob}&phone=${mob}&phoneNumber=${mob}&aff_sub=${mob}`;
     window.location.href = targetUrl;
   };
 

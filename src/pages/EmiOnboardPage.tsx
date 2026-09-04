@@ -231,7 +231,7 @@ export default function EmiOnboardPage() {
   const handleConsentSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const mobileParam = encodeURIComponent(mobile || '9876543210');
-    window.location.href = `https://dhanlift.com/?utm_source=affiliate&utm_medium=partner&utm_campaign=partner-campaign-aff-4&utm_term=03-09-2026&aff_sub=${mobileParam}`;
+    window.location.href = `https://www.dhanlift.com/loans/personal-loan-for-salaried-employees/clinaza-patient-treatment-loan?utm_source=affiliate&utm_medium=partner&utm_campaign=partner-campaign-aff-4&utm_term=03-09-2026&aff_sub=${mobileParam}`;
   };
 
   const handleSelectOffer = (offer: LenderOffer) => {
@@ -248,7 +248,7 @@ export default function EmiOnboardPage() {
       } else if (offer.id === 'offer-surya') {
         trackingUrl = 'https://partners.marcadeo.com/click?oid=449&uid=1895&lid=517';
       } else if (offer.id === 'offer-dhanlift') {
-        trackingUrl = 'https://dhanlift.com/?utm_source=affiliate&utm_medium=partner&utm_campaign=partner-campaign-aff-4&utm_term=03-09-2026';
+        trackingUrl = 'https://www.dhanlift.com/loans/personal-loan-for-salaried-employees/clinaza-patient-treatment-loan?utm_source=affiliate&utm_medium=partner&utm_campaign=partner-campaign-aff-4&utm_term=03-09-2026';
       } else if (offer.id === 'offer-digicredit') {
         trackingUrl = 'https://partners.marcadeo.com/click?oid=371&uid=1895&lid=385';
       } else if (offer.id === 'offer-mmb') {
@@ -395,7 +395,7 @@ export default function EmiOnboardPage() {
                 mobile,
                 amount
               });
-              const targetUrl = `https://dhanlift.com/?utm_source=affiliate&utm_medium=partner&utm_campaign=partner-campaign-aff-4&utm_term=03-09-2026&mobile=${mob}&phone=${mob}&phoneNumber=${mob}&aff_sub=${mob}`;
+              const targetUrl = `https://www.dhanlift.com/loans/personal-loan-for-salaried-employees/clinaza-patient-treatment-loan?utm_source=affiliate&utm_medium=partner&utm_campaign=partner-campaign-aff-4&utm_term=03-09-2026&mobile=${mob}&phone=${mob}&phoneNumber=${mob}&aff_sub=${mob}`;
               window.location.href = targetUrl;
             }}
           >

@@ -747,5 +747,110 @@ export const BLOGS: BlogArticle[] = [
         </ul>
       </div>
     )
+  },
+  {
+    slug: "no-cost-emi-dental-treatments-prodent-patna",
+    title: "No-Cost EMI Dental Treatments at PRODENT Patna: Patient Financing Guide",
+    category: "Patient Financing",
+    readTime: "5 min read",
+    publishDate: "September 4, 2026",
+    author: "Clinaza Medical Desk",
+    summary: "Complete guide on how PRODENT Patna offers No-Cost EMI patient financing for dental implants, clear aligners, braces, and root canals powered by Clinaza.",
+    featuredImage: "/assets/yourdentist/dr_with_patient_1.jpg",
+    metaDescription: "PRODENT Patna offers zero-cost and low-interest EMI financing for dental treatments (₹30,000 to ₹3,00,000) powered by Clinaza. Learn eligibility & application steps.",
+    faqs: [
+      {
+        question: "Does PRODENT Patna offer EMI for dental treatment?",
+        answer: "Yes, PRODENT Patna (Anandpuri, West Boring Canal Rd) offers point-of-care EMI patient financing powered by Clinaza for treatments ranging from ₹30,000 to ₹3,00,000."
+      },
+      {
+        question: "What treatments at PRODENT Patna can be done on EMI?",
+        answer: "Dental implants, clear aligners, ceramic braces, full-mouth rehab, crowns & bridges, and cosmetic smile makeovers can be converted into 3–24 month EMIs."
+      },
+      {
+        question: "How do I apply for EMI at PRODENT Patna?",
+        answer: "You can check eligibility in under 2 minutes at PRODENT clinic checkout or apply online at clinaza.in/apply using your Aadhaar/PAN and mobile number."
+      }
+    ],
+    content: (
+      <div className="space-y-6">
+        <p className="text-lg leading-relaxed text-neutral-700">
+          <strong>PRODENT Patna</strong> (located at West Boring Canal Rd, Anandpuri) has partnered with <strong>Clinaza</strong> to make advanced dental treatments affordable for every patient through zero-cost and flexible monthly EMI financing.
+        </p>
+        
+        <h2 className="text-xl font-bold text-neutral-900">Why Patients Choose EMI at PRODENT Patna</h2>
+        <p className="text-neutral-700 leading-relaxed">
+          High-ticket dental procedures like dental implants, invisible aligners, and full-mouth rehabilitation often require upfront payments. With Clinaza's point-of-care financing at PRODENT, patients can break treatment estimates into manageable monthly installments from ₹2,500/month.
+        </p>
+
+        <div className="bg-emerald-50 border border-emerald-200 p-5 rounded-2xl space-y-2">
+          <h3 className="text-base font-bold text-emerald-900">Key Highlights of PRODENT Patna EMI:</h3>
+          <ul className="list-disc pl-5 text-sm text-emerald-800 space-y-1 font-medium">
+            <li>Loan Amounts: ₹30,000 to ₹3,00,000</li>
+            <li>Flexible Tenures: 3, 6, 9, 12, 18 &amp; 24 months</li>
+            <li>100% Digital &amp; Paperless Eligibility Check in 2 Minutes</li>
+            <li>Zero Clinic Processing Fees for Patients</li>
+          </ul>
+        </div>
+
+        <h2 className="text-xl font-bold text-neutral-900">Official Partner Feature</h2>
+        <p className="text-neutral-700 leading-relaxed">
+          Read PRODENT Patna's official feature article on their website: <a href="https://www.prodentpatna.com/blog/no-cost-emi-dental-treatments-patna.html" target="_blank" rel="noopener noreferrer" className="text-emerald-700 font-bold underline">PRODENT Patna — No-Cost EMI Dental Treatments Guide</a>.
+        </p>
+
+        <div className="pt-4">
+          <a href="https://clinaza.in/apply" className="inline-block px-6 py-3 bg-emerald-600 text-white font-bold text-xs uppercase tracking-wider rounded-xl shadow-lg hover:bg-emerald-700 transition-all">
+            Check Eligibility for PRODENT EMI &rarr;
+          </a>
+        </div>
+      </div>
+    )
+  },
+  {
+    slug: "clinaza-patient-financing-your-dentist-patna",
+    title: "Clinaza Patient Financing at YOUR DENTIST Patna: Complete Dental EMI Guide",
+    category: "Patient Financing",
+    readTime: "5 min read",
+    publishDate: "September 4, 2026",
+    author: "Clinaza Medical Desk",
+    summary: "Complete guide on Clinaza point-of-care patient financing at YOUR DENTIST Patna led by Dr. Aryan Parmar in Patliputra Colony.",
+    featuredImage: "/assets/yourdentist/dr_with_patient_1.jpg",
+    metaDescription: "YOUR DENTIST Patna (Dr. Aryan Parmar) provides instant 0% EMI financing for dental implants, aligners & smile makeovers powered by Clinaza. Apply online in 2 minutes.",
+    faqs: [
+      {
+        question: "Is EMI financing available at YOUR DENTIST Patna?",
+        answer: "Yes, YOUR DENTIST Patna (Dr. Aryan Parmar, Patliputra Colony) is an official Clinaza Featured Partner offering 0% and low-interest EMI options for dental care."
+      },
+      {
+        question: "What documents are required for dental EMI at YOUR DENTIST Patna?",
+        answer: "Only PAN card, Aadhaar card, and mobile number registered with bank account are needed for instant digital approval."
+      }
+    ],
+    content: (
+      <div className="space-y-6">
+        <p className="text-lg leading-relaxed text-neutral-700">
+          <strong>YOUR DENTIST Patna</strong> (led by Dr. Aryan Parmar in Patliputra Colony) is Clinaza's premier featured dental partner in Patna. Patients can access instant, zero-cost EMI financing for implants, aligners, and root canals directly at checkout.
+        </p>
+
+        <h2 className="text-xl font-bold text-neutral-900">Treatments Eligible for EMI at YOUR DENTIST Patna</h2>
+        <ul className="list-disc pl-5 text-neutral-700 space-y-1">
+          <li><strong>Single &amp; Full Mouth Dental Implants</strong> — From ₹25,000/implant</li>
+          <li><strong>Clear Aligners &amp; Invisible Braces</strong> — From ₹45,000</li>
+          <li><strong>Zirconia Crowns &amp; Bridges</strong> — From ₹8,000/unit</li>
+          <li><strong>Smile Makeovers &amp; Veneers</strong> — Custom packages on EMI</li>
+        </ul>
+
+        <h2 className="text-xl font-bold text-neutral-900">Official Partner Feature</h2>
+        <p className="text-neutral-700 leading-relaxed">
+          Read YOUR DENTIST Patna's official feature guide: <a href="https://www.yourdentistpatna.in/blog/clinaza-patient-financing-dental-emi-patna" target="_blank" rel="noopener noreferrer" className="text-emerald-700 font-bold underline">YOUR DENTIST Patna — Clinaza Patient Financing Guide</a>.
+        </p>
+
+        <div className="pt-4">
+          <a href="https://clinaza.in/apply" className="inline-block px-6 py-3 bg-emerald-600 text-white font-bold text-xs uppercase tracking-wider rounded-xl shadow-lg hover:bg-emerald-700 transition-all">
+            Check Eligibility for YOUR DENTIST EMI &rarr;
+          </a>
+        </div>
+      </div>
+    )
   }
 ];

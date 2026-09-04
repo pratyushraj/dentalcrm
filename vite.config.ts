@@ -52,18 +52,44 @@ export default defineConfig(() => ({
     rollupOptions: {
       output: {
         manualChunks(id) {
-          if (id.includes('node_modules')) {
-            if (id.includes('framer-motion')) {
-              return 'vendor-framer';
-            }
-            if (id.includes('react') || id.includes('scheduler')) {
-              return 'vendor-react';
-            }
-            if (id.includes('@tanstack')) {
-              return 'vendor-query';
-            }
-            return 'vendor';
-          }
+          if (!id.includes('node_modules')) return;
+
+          // Framer Motion — animations only
+          if (id.includes('framer-motion')) return 'vendor-framer';
+
+          // TanStack Query — data fetching
+          if (id.includes('@tanstack')) return 'vendor-query';
+
+          // Keep ALL react-* together to avoid TDZ circular init errors
+          // (react, react-dom, react-router, react-is, react-countup, etc.)
+          if (id.includes('react') || id.includes('scheduler')) return 'vendor-react';
+
+          // Supabase — auth & DB, only loaded on authenticated pages
+          if (id.includes('@supabase')) return 'vendor-supabase';
+
+          // Charts + Redux ecosystem (recharts pulls in redux/d3)
+          if (
+            id.includes('recharts') ||
+            id.includes('/d3-') ||
+            id.includes('redux') ||
+            id.includes('@reduxjs')
+          ) return 'vendor-charts';
+
+          // PDF / document generation — heavy, only on export actions
+          if (
+            id.includes('jspdf') ||
+            id.includes('jszip') ||
+            id.includes('pizzip') ||
+            id.includes('docxtemplater') ||
+            id.includes('html2canvas') ||
+            id.includes('pdfkit')
+          ) return 'vendor-docs';
+
+          // Sentry monitoring — background, non-critical
+          if (id.includes('@sentry')) return 'vendor-sentry';
+
+          // Everything else (lucide, date-fns, radix, axios, sonner, etc.)
+          return 'vendor';
         }
       }
     }

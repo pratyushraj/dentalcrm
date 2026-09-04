@@ -241,7 +241,8 @@ export default function CrmHomepage() {
           'medical loan india', 'point of care financing', 'clinic emi option', 
           'embedded finance', 'dental implants financing', 'clear aligners emi',
           'root canal on emi', '0 interest medical loan india', 'how to offer emi to dental patients',
-          'dentist social media marketing', 'dental clinic instagram growth', 'google review automation for dentists'
+          'dentist digital marketing india', 'dentist social media marketing', 'dental clinic instagram growth', 
+          'google review automation for dentists', 'dental clinic whatsapp marketing', 'how to get more dental patients india'
         ]}
         image="https://clinaza.in/og-preview.png"
         canonicalUrl="https://clinaza.in/"

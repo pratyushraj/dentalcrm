@@ -733,8 +733,18 @@ export const BLOGS: BlogArticle[] = [
         </div>
         <h2 className="text-xl font-bold text-neutral-900">How Clinaza EMI Works at Patna Clinics</h2>
         <p className="text-neutral-700 leading-relaxed">
-          All Clinaza partner clinics in Patna allow patients to check financing eligibility instantly during consultation. If eligible, patients are connected with regulated NBFC lenders (Hero FinCorp, Cashvia, Jupiter, and others) who disburse the loan directly to the clinic. Patients repay in easy monthly instalments.
+          All Clinaza partner clinics in Patna allow patients to check financing eligibility instantly during consultation. If eligible, patients are connected with regulated lending partners who disburse the loan directly to the clinic. Patients repay in easy monthly instalments.
         </p>
+
+        <h2 className="text-xl font-bold text-neutral-900">Official Partner Clinic Feature Guides</h2>
+        <ul className="space-y-2 text-neutral-700 text-sm">
+          <li>
+            🔗 <a href="https://www.yourdentistpatna.in/blog/clinaza-patient-financing-dental-emi-patna" target="_blank" rel="noopener noreferrer" className="text-emerald-700 font-bold underline hover:text-emerald-900">YOUR DENTIST Patna — Clinaza Patient Financing &amp; Dental EMI Guide</a>
+          </li>
+          <li>
+            🔗 <a href="https://www.prodentpatna.com/blog/no-cost-emi-dental-treatments-patna.html" target="_blank" rel="noopener noreferrer" className="text-emerald-700 font-bold underline hover:text-emerald-900">PRODENT Patna — No-Cost EMI Dental Treatments in Patna</a>
+          </li>
+        </ul>
       </div>
     )
   }

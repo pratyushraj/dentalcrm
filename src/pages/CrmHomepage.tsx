@@ -774,7 +774,8 @@ export default function CrmHomepage() {
                   phone: '062014 78033',
                   rating: '5.0 ★ (Primary Partner)',
                   specialties: 'Implants, Braces & Aligners',
-                  link: '/blog',
+                  link: 'https://www.yourdentistpatna.in/blog/clinaza-patient-financing-dental-emi-patna',
+                  isExternal: true,
                   accent: 'border-emerald-400 bg-emerald-50/70 shadow-sm',
                   badge: 'Featured Partner',
                   badgeColor: 'bg-emerald-600 text-white'
@@ -785,7 +786,8 @@ export default function CrmHomepage() {
                   phone: '084290 57093',
                   rating: '4.9 ★ (95 reviews)',
                   specialties: 'Multispeciality Dental Clinic',
-                  link: '/cities/patna',
+                  link: 'https://www.prodentpatna.com/blog/no-cost-emi-dental-treatments-patna.html',
+                  isExternal: true,
                   accent: 'border-slate-200 bg-white',
                   badge: 'Partner Clinic',
                   badgeColor: 'bg-slate-100 text-slate-700 border border-slate-200'
@@ -891,9 +893,15 @@ export default function CrmHomepage() {
                     <span className="text-[10px] font-bold text-emerald-700 bg-emerald-100/80 px-2.5 py-1 rounded-lg">
                       ✓ Clinaza EMI Accepted
                     </span>
-                    <Link to={clinic.link} className="text-[10px] font-bold text-[#0867E8] hover:underline flex items-center gap-0.5">
-                      Check EMI &rarr;
-                    </Link>
+                    {clinic.isExternal ? (
+                      <a href={clinic.link} target="_blank" rel="noopener noreferrer" className="text-[10px] font-bold text-[#0867E8] hover:underline flex items-center gap-0.5">
+                        Read Article &rarr;
+                      </a>
+                    ) : (
+                      <Link to={clinic.link} className="text-[10px] font-bold text-[#0867E8] hover:underline flex items-center gap-0.5">
+                        Check EMI &rarr;
+                      </Link>
+                    )}
                   </div>
                 </div>
               ))}

@@ -26,10 +26,34 @@ export default function DhanliftRedirectPage() {
     <div className="min-h-screen bg-slate-950 flex flex-col items-center justify-center text-white p-4 font-sans selection:bg-emerald-500 selection:text-white">
       <SEOHead
         title="Clinaza Patient Treatment Loan — Instant Approval"
-        description="Apply for low EMI patient financing for dental & medical procedures up to ₹3,00,000. Powered by Dhanlift."
+        description="Apply for low EMI patient financing for dental & medical procedures up to ₹3,00,000. Instant approval powered by Dhanlift."
         image="https://clinaza.in/og-preview.png"
         canonicalUrl="https://clinaza.in/apply"
-        keywords={['clinaza loan', 'dhanlift clinaza', 'patient treatment loan', 'dental emi loan']}
+        keywords={['clinaza loan', 'dhanlift clinaza', 'patient treatment loan', 'dental emi loan', 'medical financing india']}
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "FinancialProduct",
+          "name": "Clinaza Patient Treatment Loan",
+          "description": "0% interest & flexible monthly EMI financing for medical, dental, and aesthetic treatments in India.",
+          "provider": {
+            "@type": "FinancialService",
+            "name": "Dhanlift",
+            "url": "https://www.dhanlift.com"
+          },
+          "amount": {
+            "@type": "MonetaryAmount",
+            "currency": "INR",
+            "minValue": "10000",
+            "maxValue": "300000"
+          },
+          "offers": {
+            "@type": "Offer",
+            "priceCurrency": "INR",
+            "price": "0",
+            "category": "Healthcare & Dental EMI Loan"
+          },
+          "url": "https://clinaza.in/apply"
+        }}
       />
 
       <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-indigo-500 via-purple-500 to-emerald-500 p-0.5 shadow-lg shadow-emerald-500/20 mb-4 animate-pulse">

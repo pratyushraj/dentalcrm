@@ -104,12 +104,12 @@ export default function CityLandingPage() {
   };
 
   const procedures = [
-    { emoji: '🦷', name: 'Dental Implants', range: '₹35,000 – ₹3,00,000' },
-    { emoji: '😁', name: 'Braces & Aligners', range: '₹30,000 – ₹1,80,000' },
-    { emoji: '👑', name: 'Crowns & Bridges', range: '₹10,000 – ₹80,000' },
-    { emoji: '✨', name: 'Smile Makeovers', range: '₹50,000 – ₹2,00,000' },
-    { emoji: '🦴', name: 'Full Mouth Rehab', range: '₹1,50,000 – ₹3,00,000' },
-    { emoji: '🪥', name: 'Root Canal + Crown', range: '₹15,000 – ₹60,000' },
+    { emoji: '🦷', name: 'Dental Implants', range: '₹35,000 – ₹3,00,000', link: '/blog/dental-implants-cost-on-emi-india' },
+    { emoji: '😁', name: 'Braces & Aligners', range: '₹30,000 – ₹1,80,000', link: '/blog/clear-aligners-cost-on-emi-india' },
+    { emoji: '👑', name: 'Crowns & Bridges', range: '₹10,000 – ₹80,000', link: '/blog/root-canal-and-crown-cost-on-emi-india' },
+    { emoji: '✨', name: 'Smile Makeovers', range: '₹50,000 – ₹2,00,000', link: '/blog/dental-treatment-emi-cost-calculator-india' },
+    { emoji: '🦴', name: 'Full Mouth Rehab', range: '₹1,50,000 – ₹3,00,000', link: '/blog/dental-loans-in-india-medical-financing' },
+    { emoji: '🪥', name: 'Root Canal + Crown', range: '₹15,000 – ₹60,000', link: '/blog/root-canal-and-crown-cost-on-emi-india' },
   ];
 
   return (
@@ -202,11 +202,16 @@ export default function CityLandingPage() {
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
             {procedures.map((p, i) => (
-              <div key={i} className="bg-white border border-slate-200 p-4 rounded-2xl text-center space-y-1.5 shadow-sm">
-                <span className="text-2xl block">{p.emoji}</span>
-                <h3 className="text-xs font-black text-[#0B2450] leading-tight">{p.name}</h3>
+              <Link 
+                key={i} 
+                to={p.link}
+                className="bg-white border border-slate-200 p-4 rounded-2xl text-center space-y-1.5 shadow-sm hover:border-[#0867E8] hover:shadow-md transition-all group block"
+              >
+                <span className="text-2xl block group-hover:scale-110 transition-transform">{p.emoji}</span>
+                <h3 className="text-xs font-black text-[#0B2450] group-hover:text-[#0867E8] transition-colors leading-tight">{p.name}</h3>
                 <p className="text-[10px] text-slate-500 font-medium">{p.range}</p>
-              </div>
+                <span className="text-[9px] font-bold text-[#0867E8] block pt-1">View EMI Guide →</span>
+              </Link>
             ))}
           </div>
           <p className="text-[10px] text-slate-400 text-center">

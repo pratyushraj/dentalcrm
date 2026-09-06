@@ -327,8 +327,15 @@ export default function CrmHomepage() {
             </div>
           </Link>
           <div className="flex items-center gap-3">
+            <Link
+              to="/reactivation/login"
+              className="flex items-center gap-2 px-4 py-2 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-xs font-bold text-emerald-800 rounded-xl transition-all"
+            >
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              Free Dental CRM Login 🔑
+            </Link>
             <a
-              href="https://wa.me/917292984244?text=Hi%20Clinaza%20team%2C%20I%20want%20to%20offer%20patient%20financing%20at%20my%20clinic"
+              href="https://wa.me/917292984244?text=Hi%20Clinaza%20team%2C%20I%20want%20to%20access%20the%20Free%20Dental%20CRM"
               target="_blank" rel="noopener noreferrer"
               className="hidden md:flex items-center gap-2 px-4 py-2 bg-[#F7FAFC] hover:bg-slate-100 border border-slate-200 text-xs font-bold text-[#0B2450] rounded-xl transition-all"
             >
@@ -380,16 +387,12 @@ export default function CrmHomepage() {
                 >
                   <ShieldCheck size={16} /> Check Patient Eligibility
                 </button>
-                <a
-                  href="#partner-form"
-                  onClick={() => {
-                    trackEvent('click_hero_partner_with_clinaza');
-                    setFormType('clinic');
-                  }}
-                  className="w-full sm:w-auto px-5 py-3.5 bg-[#F7FAFC] hover:bg-slate-100 text-[#0B2450] border border-slate-200 text-xs font-black uppercase tracking-wider rounded-xl transition-all flex items-center justify-center gap-2"
+                <Link
+                  to="/reactivation/login"
+                  className="w-full sm:w-auto px-5 py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-black uppercase tracking-wider rounded-xl transition-all flex items-center justify-center gap-2 shadow-md shadow-emerald-600/20"
                 >
-                  Partner With Clinaza <ArrowRight size={14} />
-                </a>
+                  ⚡ Access Free Dental CRM →
+                </Link>
               </div>
 
               <p className="text-[10px] text-slate-400 font-medium pt-1">
@@ -714,11 +717,11 @@ export default function CrmHomepage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-left">
             {[
               { title: '₹0 Upfront Fee', desc: 'Free setup and branding materials for onboarded clinics.' },
+              { title: 'Free Dental CRM Access', desc: '100% free patient reactivation & treatment follow-up portal for life.' },
               { title: 'No EMI Collection Burden', desc: 'No chasing patients for repayments — handled entirely by NBFC.' },
               { title: 'Financing by Partners', desc: 'All loans funded and serviced by RBI-regulated lenders.' },
               { title: 'Higher Ticket Conversions', desc: 'Helps eligible patients manage higher treatment costs easily.' },
-              { title: 'Digital Application', desc: 'Paperless 100% online point-of-care pre-assessment.' },
-              { title: 'Multiple Financing Options', desc: 'Connected network of lenders for better eligibility matching.' }
+              { title: 'Digital Application', desc: 'Paperless 100% online point-of-care pre-assessment.' }
             ].map((item, idx) => (
               <div key={idx} className="bg-[#F7FAFC] border border-slate-200 p-5 rounded-2xl space-y-1.5 shadow-2xs">
                 <div className="flex items-center gap-2">

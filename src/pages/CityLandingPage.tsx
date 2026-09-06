@@ -300,18 +300,22 @@ export default function CityLandingPage() {
             <h3 className="text-sm font-black text-[#0B2450] uppercase tracking-wider">Patient Guides & Dental Marketing Insights</h3>
             <Link to="/blog" className="text-xs font-bold text-[#0867E8] hover:underline">View All Articles →</Link>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+          <div className="grid grid-cols-1 sm:grid-cols-4 gap-3 text-xs">
+            <Link to="/blog/dental-implants-cost-on-emi-india" className="p-4 bg-[#F7FAFC] hover:bg-blue-50 border border-slate-200 rounded-xl block space-y-1">
+              <span className="text-[10px] font-bold text-[#0867E8] uppercase block">Implants Guide</span>
+              <strong className="text-[#0B2450] font-bold block">Dental Implants Cost on 0% EMI</strong>
+            </Link>
+            <Link to="/blog/invisalign-cost-on-emi-india" className="p-4 bg-[#F7FAFC] hover:bg-blue-50 border border-slate-200 rounded-xl block space-y-1">
+              <span className="text-[10px] font-bold text-[#0867E8] uppercase block">Invisalign</span>
+              <strong className="text-[#0B2450] font-bold block">Invisalign Cost & Monthly Plans</strong>
+            </Link>
             <Link to="/blog/dentist-digital-marketing-india-complete-guide" className="p-4 bg-[#F7FAFC] hover:bg-blue-50 border border-slate-200 rounded-xl block space-y-1">
               <span className="text-[10px] font-bold text-[#0867E8] uppercase block">Growth Guide</span>
-              <strong className="text-[#0B2450] font-bold block">Dentist Digital Marketing in India 2026</strong>
+              <strong className="text-[#0B2450] font-bold block">Dentist Digital Marketing in India</strong>
             </Link>
-            <Link to="/blog/aligners-cost-in-patna" className="p-4 bg-[#F7FAFC] hover:bg-blue-50 border border-slate-200 rounded-xl block space-y-1">
-              <span className="text-[10px] font-bold text-[#0867E8] uppercase block">Cost Guide</span>
-              <strong className="text-[#0B2450] font-bold block">Clear Aligners Cost & EMI Breakdown</strong>
-            </Link>
-            <Link to="/blog/best-dentist-in-patna-for-braces" className="p-4 bg-[#F7FAFC] hover:bg-blue-50 border border-slate-200 rounded-xl block space-y-1">
-              <span className="text-[10px] font-bold text-[#0867E8] uppercase block">Orthodontics</span>
-              <strong className="text-[#0B2450] font-bold block">Braces & Aligners Selection Guide</strong>
+            <Link to="/blog/does-health-insurance-cover-dental-implants-india" className="p-4 bg-[#F7FAFC] hover:bg-blue-50 border border-slate-200 rounded-xl block space-y-1">
+              <span className="text-[10px] font-bold text-[#0867E8] uppercase block">Insurance</span>
+              <strong className="text-[#0B2450] font-bold block">Dental Implants & Insurance Truth</strong>
             </Link>
           </div>
         </section>

@@ -64,6 +64,9 @@ export default function AppRoutes() {
           {/* Reactivation Dashboard Portal Routes */}
           {ReactivationRoutes()}
 
+          {/* Direct Login Alias */}
+          <Route path="/login" element={<Navigate to="/reactivation/login" replace />} />
+
           {/* Fallback wildcard route */}
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>

@@ -133,7 +133,7 @@ export default function CityLandingPage() {
       <header className="border-b border-slate-200 bg-white/80 backdrop-blur-md sticky top-0 z-50">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2">
-            <img src="/assets/clinaza-logo.png" alt="Clinaza" className="h-9 w-9 rounded-full" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+            <img src="/assets/clinaza-logo.jpg" alt="Clinaza" className="h-9 w-9 rounded-xl border border-slate-200" />
             <div>
               <span className="text-xs font-black uppercase tracking-widest text-[#0B2450] block">CLINAZA</span>
               <span className="text-[9px] text-slate-500 font-bold uppercase tracking-wider">EMI for Dental Care</span>

@@ -657,16 +657,16 @@ export default function CrmHomepage() {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-transparent flex items-end p-2.5">
                       <p className="text-[10px] font-bold text-white leading-tight">
-                        📱 Real-time patient queue, appointments & 1-click WhatsApp recall on <span className="text-emerald-400 font-mono">http://localhost:3333</span>
+                        📱 Real-time patient queue, appointments & 1-click WhatsApp recall on <span className="text-emerald-400 font-mono">clinaza.in/reactivation</span>
                       </p>
                     </div>
                   </div>
 
                   <div className="flex items-center justify-between text-[10px] text-slate-300 z-10 border-t border-slate-800/80 pt-2">
                     <span className="font-bold text-emerald-400">₹0 Lifetime Access</span>
-                    <a href="http://localhost:3333" target="_blank" rel="noopener noreferrer" className="text-[9.5px] font-black uppercase text-white bg-emerald-600 hover:bg-emerald-500 px-2 py-1 rounded-lg transition-colors flex items-center gap-1">
-                      Open http://localhost:3333 →
-                    </a>
+                    <Link to="/reactivation/login" className="text-[9.5px] font-black uppercase text-white bg-emerald-600 hover:bg-emerald-500 px-2.5 py-1 rounded-lg transition-colors flex items-center gap-1">
+                      Open Free CRM →
+                    </Link>
                   </div>
                 </div>
               </div>

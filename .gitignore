@@ -73,6 +73,11 @@ coverage/
 # Secrets / private exports (never commit)
 rzp.csv
 RENDER_ENV_VARIABLES.txt
+*.key
+*.csr
+*_credentials.*
+*.backup.json
+supabase_consolidated_backup.json
 
 # Nested repos / local clones
 server/nanobot/

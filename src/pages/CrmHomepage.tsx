@@ -330,7 +330,7 @@ export default function CrmHomepage() {
             "name": "Clinaza Partner Dental Clinics",
             "description": "Dental clinics across India offering Clinaza point-of-care EMI patient financing",
             "itemListElement": [
-              { "@type": "ListItem", "position": 1, "name": "YOUR DENTIST Patna", "url": "https://clinaza.in/blog" },
+              { "@type": "ListItem", "position": 1, "name": "YOUR DENTIST Patna", "url": "https://clinaza.in/cities/patna" },
               { "@type": "ListItem", "position": 2, "name": "PRODENT Patna", "url": "https://clinaza.in/cities/patna" },
               { "@type": "ListItem", "position": 3, "name": "GuMzy Dental Gurgaon", "url": "https://clinaza.in/cities/gurgaon" },
               { "@type": "ListItem", "position": 4, "name": "Facio Dental Patna", "url": "https://clinaza.in/cities/patna" },

@@ -512,10 +512,26 @@ export const BLOGS: BlogArticle[] = [
 
         <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">How to Get 0% EMI for Dental Implants at Clinic Checkout</h2>
         <ol className="list-decimal pl-6 space-y-3 text-neutral-700">
-          <li><strong>Consult Partner Clinic:</strong> Visit any Clinaza partner dental clinic in your city (Delhi, Mumbai, Patna, Bangalore, Lucknow, etc.) for a 3D CBCT scan & estimate.</li>
+          <li><strong>Consult Partner Clinic:</strong> Visit any Clinaza partner dental clinic in your city (e.g. <strong>YOUR DENTIST in Patliputra Colony, Patna</strong> led by Dr. Aryan Parmar, or partner centers in Delhi NCR, Mumbai, Bengaluru, and Lucknow) for a 3D CBCT scan & treatment estimate.</li>
           <li><strong>Instant 2-Minute Pre-Check:</strong> Provide basic KYC details on your phone to check loan eligibility with zero impact on your CIBIL score.</li>
           <li><strong>Complete Procedure:</strong> Choose a 3 to 24 month tenure with automated monthly e-NACH auto-debit.</li>
         </ol>
+
+        {/* Featured Partner Clinic Callout */}
+        <div className="bg-emerald-50/80 border border-emerald-200 p-5 rounded-2xl space-y-2 my-6">
+          <div className="flex items-center gap-2">
+            <span className="px-2 py-0.5 bg-emerald-600 text-white text-[9px] font-black uppercase tracking-wider rounded-md">Featured Partner Clinic</span>
+            <h4 className="text-sm font-bold text-[#0B2450]">YOUR DENTIST — Patliputra Colony, Patna</h4>
+          </div>
+          <p className="text-xs text-slate-600 leading-relaxed">
+            Led by <strong>Dr. Aryan Parmar</strong>, YOUR DENTIST is a premier implantology and orthodontic center in Patna equipped with digital 3D CBCT smile scanners and offering Clinaza 0% EMI financing on Osstem, Nobel Biocare, and Straumann implants.
+          </p>
+          <div className="text-[11px] font-semibold text-emerald-800 flex flex-wrap gap-3 pt-1">
+            <span>📍 Patliputra Colony, Patna</span>
+            <span>📞 062014 78033</span>
+            <span>⭐ 5.0 Rated</span>
+          </div>
+        </div>
 
         <div className="bg-gradient-to-r from-[#0867E8] to-blue-700 text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
           <h3 className="text-lg font-bold">Calculate Your Dental Implant EMI</h3>

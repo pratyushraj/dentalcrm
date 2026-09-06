@@ -1082,6 +1082,40 @@ export const BLOGS: BlogArticle[] = [
 
         <p className="text-neutral-700">Always use local hashtags like <strong>#DentistPatna</strong>, <strong>#DentalClinicMumbai</strong>, combined with <strong>#IndianDentist</strong> and <strong>#SmileMakeover</strong> on every post.</p>
 
+        {/* Real Meta Ads Case Study Proof */}
+        <div className="bg-[#F8FAFC] border border-blue-200/80 rounded-2xl p-6 space-y-4 my-8 shadow-xs">
+          <div className="flex items-center gap-2">
+            <span className="px-2.5 py-1 bg-emerald-600 text-white text-[10px] font-black uppercase tracking-wider rounded-md">Live Campaign Benchmark</span>
+            <h3 className="text-base font-bold text-[#0B2450]">Hyper-Local Meta Ads Case Study: 37 Patient Conversations at ₹7.68 / Lead</h3>
+          </div>
+          <p className="text-xs text-slate-600 leading-relaxed">
+            Most digital agencies charge dental clinics ₹150 to ₹350 per lead with minimal patient qualification. Below is an actual verified Meta Ads Manager campaign run by the Clinaza marketing desk in East India:
+          </p>
+
+          <div className="rounded-xl overflow-hidden border border-slate-200 shadow-md">
+            <img 
+              src="/assets/clinaza-meta-ads-case-study.jpg" 
+              alt="Dental Clinic Instagram Ads Case Study - 37 Patients at ₹7.68 per conversation"
+              className="w-full object-cover"
+            />
+          </div>
+
+          <div className="grid grid-cols-3 gap-2 pt-2 text-center text-xs">
+            <div className="p-3 bg-white border border-slate-200 rounded-xl">
+              <div className="text-[10px] text-slate-500 uppercase font-bold">Total Inquiries</div>
+              <div className="text-sm font-black text-[#0B2450]">37 Patients</div>
+            </div>
+            <div className="p-3 bg-white border border-slate-200 rounded-xl">
+              <div className="text-[10px] text-slate-500 uppercase font-bold">Cost Per Result</div>
+              <div className="text-sm font-black text-emerald-600">₹7.68 / Chat</div>
+            </div>
+            <div className="p-3 bg-white border border-slate-200 rounded-xl">
+              <div className="text-[10px] text-slate-500 uppercase font-bold">Total Ad Spend</div>
+              <div className="text-sm font-black text-[#0867E8]">Only ₹284.26</div>
+            </div>
+          </div>
+        </div>
+
         <h2 className="text-2xl font-bold text-neutral-900 mt-10 mb-4">2. Google Business Profile — Your #1 Free Marketing Tool</h2>
         <p className="text-neutral-700 leading-relaxed">
           When someone searches "dentist near me" Google shows a map pack of 3 local businesses. Getting into this pack is the single highest-ROI move for any clinic — and it is free.

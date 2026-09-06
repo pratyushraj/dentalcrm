@@ -240,6 +240,28 @@ export default function CityLandingPage() {
           </div>
         </section>
 
+        {/* Related Blog Guides */}
+        <section className="py-10 px-4 sm:px-6 bg-white border-t border-slate-200/60 max-w-5xl mx-auto space-y-4">
+          <div className="flex justify-between items-center">
+            <h3 className="text-sm font-black text-[#0B2450] uppercase tracking-wider">Patient Guides & Dental Marketing Insights</h3>
+            <Link to="/blog" className="text-xs font-bold text-[#0867E8] hover:underline">View All Articles →</Link>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+            <Link to="/blog/dentist-digital-marketing-india-complete-guide" className="p-4 bg-[#F7FAFC] hover:bg-blue-50 border border-slate-200 rounded-xl block space-y-1">
+              <span className="text-[10px] font-bold text-[#0867E8] uppercase block">Growth Guide</span>
+              <strong className="text-[#0B2450] font-bold block">Dentist Digital Marketing in India 2026</strong>
+            </Link>
+            <Link to="/blog/aligners-cost-in-patna" className="p-4 bg-[#F7FAFC] hover:bg-blue-50 border border-slate-200 rounded-xl block space-y-1">
+              <span className="text-[10px] font-bold text-[#0867E8] uppercase block">Cost Guide</span>
+              <strong className="text-[#0B2450] font-bold block">Clear Aligners Cost & EMI Breakdown</strong>
+            </Link>
+            <Link to="/blog/best-dentist-in-patna-for-braces" className="p-4 bg-[#F7FAFC] hover:bg-blue-50 border border-slate-200 rounded-xl block space-y-1">
+              <span className="text-[10px] font-bold text-[#0867E8] uppercase block">Orthodontics</span>
+              <strong className="text-[#0B2450] font-bold block">Braces & Aligners Selection Guide</strong>
+            </Link>
+          </div>
+        </section>
+
         {/* Final CTA */}
         <section className="py-14 px-4 sm:px-6 text-center space-y-4 max-w-3xl mx-auto">
           <h2 className="text-2xl sm:text-4xl font-black text-[#0B2450] leading-tight">

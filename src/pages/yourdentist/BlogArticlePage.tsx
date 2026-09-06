@@ -38,10 +38,15 @@ export default function BlogArticlePage() {
     'publisher': {
       '@type': 'Organization',
       'name': 'Clinaza',
+      'url': 'https://clinaza.in',
       'logo': {
         '@type': 'ImageObject',
         'url': 'https://clinaza.in/assets/clinaza-logo.jpg'
-      }
+      },
+      'sameAs': [
+        'https://instagram.com/clinaza.in',
+        'https://linkedin.com/company/clinaza'
+      ]
     },
     'datePublished': isoDate,
     'dateModified': isoDate,
@@ -145,6 +150,32 @@ export default function BlogArticlePage() {
                 <p className="text-xs text-neutral-600 leading-relaxed">{faq.answer}</p>
               </div>
             ))}
+          </div>
+        </section>
+
+        {/* Related Articles Interlinking Block */}
+        <section className="bg-white border border-neutral-200/80 rounded-2xl p-6 space-y-4">
+          <h3 className="text-sm font-bold text-neutral-900 uppercase tracking-wider">Related Dental Growth & Patient Guides</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+            {BLOGS.filter(b => b.slug !== article.slug).slice(0, 4).map((b) => (
+              <Link 
+                key={b.slug}
+                to={`/blog/${b.slug}`}
+                className="p-3 bg-neutral-50 hover:bg-[#5b72ff]/5 border border-neutral-100 hover:border-[#5b72ff]/30 rounded-xl transition-all block group"
+              >
+                <span className="text-[10px] font-bold text-[#5b72ff] uppercase block mb-1">{b.category}</span>
+                <span className="font-bold text-neutral-800 group-hover:text-[#5b72ff] transition-colors line-clamp-2">{b.title}</span>
+              </Link>
+            ))}
+          </div>
+
+          <div className="pt-3 border-t border-neutral-100 flex flex-wrap gap-2 text-[11px] text-neutral-500">
+            <span className="font-semibold text-neutral-700">Dental EMI Cities:</span>
+            <Link to="/cities/patna" className="hover:text-[#5b72ff] underline">Patna</Link> •
+            <Link to="/cities/delhi" className="hover:text-[#5b72ff] underline">Delhi NCR</Link> •
+            <Link to="/cities/mumbai" className="hover:text-[#5b72ff] underline">Mumbai</Link> •
+            <Link to="/cities/bengaluru" className="hover:text-[#5b72ff] underline">Bengaluru</Link> •
+            <Link to="/cities/kolkata" className="hover:text-[#5b72ff] underline">Kolkata</Link>
           </div>
         </section>
 

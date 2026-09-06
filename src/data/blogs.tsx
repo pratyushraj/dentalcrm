@@ -1213,4 +1213,68 @@ export const BLOGS: BlogArticle[] = [
       </div>
     )
   }
+  ,
+  {
+    slug: "free-dental-crm-software-india-guide",
+    title: "Best Free Dental CRM Software in India for 2026: Clinaza Patient Portal",
+    category: "Software Guide",
+    readTime: "5 min read",
+    publishDate: "September 6, 2026",
+    author: "Clinaza Product Desk",
+    summary: "Discover how Clinaza's 100% free dental CRM helps clinic owners reactivate old patients, automate WhatsApp appointment reminders, and track treatment follow-ups with zero setup fees.",
+    featuredImage: "/assets/yourdentist/dr_with_patient_1.jpg",
+    metaDescription: "Looking for a free dental CRM in India? Clinaza offers 100% free patient reactivation, WhatsApp reminders, and treatment follow-up software for dental clinic owners.",
+    faqs: [
+      {
+        question: "Is Clinaza Dental CRM really 100% free?",
+        answer: "Yes! Clinaza Dental CRM is completely free for dental clinics across India with zero upfront, monthly, or maintenance fees."
+      },
+      {
+        question: "What features are included in Clinaza Free Dental CRM?",
+        answer: "Automated WhatsApp patient reactivation, appointment scheduling, treatment lead tracking, patient financing pre-checks, and review collection."
+      }
+    ],
+    content: (
+      <div className="space-y-6">
+        <p className="text-lg leading-relaxed text-neutral-700">
+          Managing patient appointments, following up on unaccepted treatment plans, and reactivating dormant patients are the biggest operational challenges for dental clinics in India. Expensive monthly CRM subscriptions often eat into clinic profit margins.
+        </p>
+
+        <p className="text-neutral-700 leading-relaxed">
+          <strong>Clinaza Dental CRM is 100% free</strong> for dentists and clinic owners across India, providing enterprise-grade patient management and automated WhatsApp follow-ups with zero subscription fees.
+        </p>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Key Features of Clinaza Free Dental CRM</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
+          <div className="border border-neutral-200 p-5 rounded-2xl bg-neutral-50 space-y-2">
+            <h3 className="font-bold text-neutral-900 text-base">📲 Automated WhatsApp Reactivation</h3>
+            <p className="text-xs text-neutral-600 leading-relaxed">Send 1-click WhatsApp follow-ups to patients who haven't visited in the last 6 months for routine cleaning and checkups.</p>
+          </div>
+          <div className="border border-neutral-200 p-5 rounded-2xl bg-neutral-50 space-y-2">
+            <h3 className="font-bold text-neutral-900 text-base">💳 Integrated Patient EMI Financing</h3>
+            <p className="text-xs text-neutral-600 leading-relaxed">Instantly check patient eligibility for 0% interest monthly financing directly from your CRM workspace.</p>
+          </div>
+          <div className="border border-neutral-200 p-5 rounded-2xl bg-neutral-50 space-y-2">
+            <h3 className="font-bold text-neutral-900 text-base">⭐ Google Review Collection</h3>
+            <p className="text-xs text-neutral-600 leading-relaxed">Trigger automated 5-star review request links to patients right after successful procedures.</p>
+          </div>
+          <div className="border border-neutral-200 p-5 rounded-2xl bg-neutral-50 space-y-2">
+            <h3 className="font-bold text-neutral-900 text-base">📊 Treatment Pipeline Tracker</h3>
+            <p className="text-xs text-neutral-600 leading-relaxed">Track pending implants, aligners, and crown consultations so no high-value patient lead gets lost.</p>
+          </div>
+        </div>
+
+        <div className="bg-gradient-to-r from-emerald-600 to-teal-600 text-white p-6 rounded-2xl my-8 text-center space-y-3">
+          <h3 className="text-lg font-bold">Start Using Clinaza Free Dental CRM Today</h3>
+          <p className="text-sm text-emerald-100 max-w-lg mx-auto">Instant setup. No credit card or upfront fee required.</p>
+          <a
+            href="https://clinaza.in/reactivation/login"
+            className="inline-block bg-white text-emerald-800 font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-emerald-50 transition-colors shadow-md"
+          >
+            Access Free CRM Portal →
+          </a>
+        </div>
+      </div>
+    )
+  }
 ];

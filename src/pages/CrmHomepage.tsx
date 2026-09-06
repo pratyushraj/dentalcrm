@@ -237,6 +237,7 @@ export default function CrmHomepage() {
         description="Don't let treatment cost stop your patients. Offer flexible EMI financing for eligible patients (₹30K–₹3L) directly at your clinic checkout."
         keywords={[
           'clinaza', 'clinaza patient financing', 'clinaza healthpay', 'dhanlift clinaza loan',
+          'free dental crm', 'free dental crm software india', 'best free dental clinic management software',
           'patient financing', 'dental emi', 'dental emi patna', 'healthcare lending', 
           'medical loan india', 'point of care financing', 'clinic emi option', 
           'embedded finance', 'dental implants financing', 'clear aligners emi',

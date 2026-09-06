@@ -1276,5 +1276,171 @@ export const BLOGS: BlogArticle[] = [
         </div>
       </div>
     )
+  },
+  {
+    slug: "how-to-offer-emi-to-dental-patients-india",
+    title: "How to Offer EMI to Dental Patients in India: Complete Clinic Owner Guide (2026)",
+    category: "Clinic Management",
+    readTime: "7 min read",
+    publishDate: "September 6, 2026",
+    author: "Clinaza Growth Desk",
+    summary: "Step-by-step guide for dental clinic owners in India on how to offer 0% interest and low-cost monthly EMI options to patients without NBFC tie-up hassle or clinic collection risk.",
+    featuredImage: "/assets/clinic-hero-real.png",
+    metaDescription: "Learn how to offer EMI to dental patients in India. Discover how Clinaza embedded patient financing enables 0% EMI checkout at ₹0 clinic fees.",
+    faqs: [
+      {
+        question: "How can my dental clinic offer EMI to patients in India?",
+        answer: "By partnering with an embedded healthcare financing network like Clinaza. Your clinic receives a unique checkout link and POS QR code where patients can complete a 2-minute digital KYC and get instant loan approval from RBI-regulated NBFCs."
+      },
+      {
+        question: "Does the clinic have any liability if the patient defaults on their EMI?",
+        answer: "No. Point-of-care patient financing through Clinaza is non-recourse to the clinic. Monthly auto-debit and repayments are managed directly between the patient and the RBI-regulated lending partner via e-NACH."
+      },
+      {
+        question: "What is the clinic onboarding fee for Clinaza financing?",
+        answer: "Clinaza charges ₹0 onboarding fees and zero monthly subscription fees for dental clinics across India."
+      }
+    ],
+    content: (
+      <div className="space-y-6">
+        <p className="text-lg leading-relaxed text-neutral-700">
+          In India, over <strong>35% of recommended high-value dental treatments</strong> (such as implants, clear aligners, and full-mouth rehabilitations) get postponed or dropped entirely due to upfront cost shock. For a typical clinic, this represents an annual revenue leakage of ₹15 Lakhs to ₹40 Lakhs.
+        </p>
+
+        <p className="text-neutral-700 leading-relaxed">
+          Offering <strong>point-of-care EMI financing</strong> at your clinic reception turns a hesitant ₹80,000 quote into an affordable ₹3,500/month decision that patients approve on the spot.
+        </p>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Why Direct Bank Tie-ups Are Impractical for Solo Clinics</h2>
+        <div className="overflow-x-auto my-4">
+          <table className="min-w-full divide-y divide-neutral-200 border border-neutral-100 text-sm">
+            <thead className="bg-neutral-50">
+              <tr>
+                <th className="px-4 py-3 text-left font-bold text-neutral-500 uppercase">Challenge</th>
+                <th className="px-4 py-3 text-left font-bold text-neutral-500 uppercase">Traditional Bank Tie-Up</th>
+                <th className="px-4 py-3 text-left font-bold text-neutral-500 uppercase">Clinaza Embedded Network</th>
+              </tr>
+            </thead>
+            <tbody className="bg-white divide-y divide-neutral-100">
+              <tr>
+                <td className="px-4 py-3 font-semibold">Setup Cost</td>
+                <td className="px-4 py-3 text-red-500">₹25,000+ Setup / Security Deposit</td>
+                <td className="px-4 py-3 text-green-600 font-bold">₹0 Free Lifetime Setup</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-semibold">Minimum Volume Quota</td>
+                <td className="px-4 py-3 text-red-500">High monthly case quotas required</td>
+                <td className="px-4 py-3 text-green-600 font-bold">Zero minimum monthly quotas</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-semibold">Approval Speed</td>
+                <td className="px-4 py-3 text-red-500">2–4 business days</td>
+                <td className="px-4 py-3 text-green-600 font-bold">Instant (Under 2 Minutes)</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-semibold">Lender Variety</td>
+                <td className="px-4 py-3 text-red-500">Single bank (high rejection)</td>
+                <td className="px-4 py-3 text-green-600 font-bold">Multi-lender waterfall routing</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">3 Steps to Enable Patient EMI in Your Clinic</h2>
+        <ol className="list-decimal pl-6 space-y-3 text-neutral-700">
+          <li><strong>Register Your Clinic:</strong> Sign up for free at <a href="https://clinaza.in/#partner-form" className="text-[#0867E8] font-bold underline">clinaza.in</a> in under 2 minutes.</li>
+          <li><strong>Receive Your Clinic Portal:</strong> Access your digital checkout widget, treatment estimation builder, and clinic QR standee.</li>
+          <li><strong>Offer at Checkout:</strong> When presenting treatment plans above ₹30,000, share your Clinaza link. The patient checks eligibility instantly on their phone.</li>
+        </ol>
+
+        <div className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-6 rounded-2xl my-8 text-center space-y-3">
+          <h3 className="text-lg font-bold">Start Offering EMI at Your Clinic Today</h3>
+          <p className="text-sm text-blue-100 max-w-lg mx-auto">Join 500+ dental clinics across India scaling case acceptance with ₹0 setup fees.</p>
+          <a
+            href="https://clinaza.in/#partner-form"
+            className="inline-block bg-white text-blue-600 font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md"
+          >
+            Partner With Clinaza (Free) →
+          </a>
+        </div>
+      </div>
+    )
+  },
+  {
+    slug: "full-mouth-dental-implants-cost-on-emi-india",
+    title: "Full Mouth Dental Implants Cost on EMI in India: All-on-4 vs All-on-6 Price Guide",
+    category: "Dental Implants",
+    readTime: "6 min read",
+    publishDate: "September 6, 2026",
+    author: "Clinaza Medical Desk",
+    summary: "Complete cost guide for full mouth dental rehabilitation in India. Compare All-on-4 and All-on-6 implant prices (₹1.5L to ₹3.5L) with monthly EMI options from ₹6,500/month.",
+    featuredImage: "/assets/clinic-hero-real.png",
+    metaDescription: "Full mouth dental implants cost on EMI in India: Compare prices for All-on-4 and All-on-6 dental implants and calculate low monthly EMI payment plans.",
+    faqs: [
+      {
+        question: "How much does full mouth dental implant treatment cost in India?",
+        answer: "Full mouth dental implants typically range from ₹1,50,000 to ₹3,50,000 per jaw depending on the technique (All-on-4, All-on-6), implant brand, and prosthesis material (hybrid acrylic vs monolithic zirconia)."
+      },
+      {
+        question: "Can I get full mouth dental implants on monthly EMI?",
+        answer: "Yes! Clinaza enables patients to finance full mouth dental restorations from ₹1,50,000 up to ₹3,00,000 on flexible 12 to 24-month EMI tenures."
+      }
+    ],
+    content: (
+      <div className="space-y-6">
+        <p className="text-lg leading-relaxed text-neutral-700">
+          Full mouth rehabilitation using <strong>All-on-4 or All-on-6 dental implants</strong> is the ultimate life-transforming solution for patients with multiple missing or severely damaged teeth. However, full-arch restorations require substantial financial planning.
+        </p>
+
+        <p className="text-neutral-700 leading-relaxed">
+          With <strong>Clinaza point-of-care patient financing</strong>, patients can restore their full smile and bite function without needing to liquidate personal savings.
+        </p>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Full Mouth Implant Cost & Monthly EMI Breakdown</h2>
+        <div className="overflow-x-auto my-6">
+          <table className="min-w-full divide-y divide-neutral-200 border border-neutral-100 text-sm">
+            <thead className="bg-neutral-50">
+              <tr>
+                <th className="px-4 py-3 text-left font-bold text-neutral-500 uppercase">Procedure / Arch</th>
+                <th className="px-4 py-3 text-left font-bold text-neutral-500 uppercase">Est. Total Cost</th>
+                <th className="px-4 py-3 text-left font-bold text-neutral-500 uppercase">12-Month EMI</th>
+                <th className="px-4 py-3 text-left font-bold text-neutral-500 uppercase">24-Month EMI</th>
+              </tr>
+            </thead>
+            <tbody className="bg-white divide-y divide-neutral-100">
+              <tr>
+                <td className="px-4 py-3 font-semibold text-neutral-800">All-on-4 (Single Arch)</td>
+                <td className="px-4 py-3 text-[#0867E8] font-bold">₹1,50,000 - ₹2,20,000</td>
+                <td className="px-4 py-3 text-neutral-600">₹13,500 / mo</td>
+                <td className="px-4 py-3 text-neutral-600">₹7,290 / mo</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-semibold text-neutral-800">All-on-6 (Single Arch - Zirconia)</td>
+                <td className="px-4 py-3 text-[#0867E8] font-bold">₹2,00,000 - ₹2,80,000</td>
+                <td className="px-4 py-3 text-neutral-600">₹18,000 / mo</td>
+                <td className="px-4 py-3 text-neutral-600">₹9,720 / mo</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-semibold text-neutral-800">Both Arches (Full Mouth Rehab)</td>
+                <td className="px-4 py-3 text-[#0867E8] font-bold">₹3,00,000 - ₹4,50,000</td>
+                <td className="px-4 py-3 text-neutral-600">₹27,000 / mo</td>
+                <td className="px-4 py-3 text-neutral-600">₹14,580 / mo</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div className="bg-neutral-900 text-white p-6 rounded-2xl my-8 text-center space-y-3">
+          <h3 className="text-lg font-bold">Check Full Mouth Implant Financing Eligibility</h3>
+          <p className="text-xs text-neutral-300 max-w-lg mx-auto">Instant 2-minute digital pre-check with zero credit score impact.</p>
+          <a
+            href="https://clinaza.in/#calculator"
+            className="inline-block bg-[#0867E8] text-white font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-[#0756C7] transition-colors shadow-md"
+          >
+            Calculate Monthly EMI Now →
+          </a>
+        </div>
+      </div>
+    )
   }
 ];

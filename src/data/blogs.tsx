@@ -1856,7 +1856,238 @@ export const BLOGS: BlogArticle[] = [
         </div>
       </div>
     )
+  },
+  {
+    slug: "zirconia-crown-cost-on-emi-india",
+    title: "Zirconia Crown Cost on EMI in India (2026): Tooth Cap Prices, Warranty & Monthly Plans",
+    category: "Restorative Dentistry",
+    readTime: "6 min read",
+    publishDate: "September 6, 2026",
+    author: "Clinaza Medical Desk",
+    summary: "Complete 2026 price guide for dental crowns and tooth caps in India. Compare PFM, DMLS, Monolithic Zirconia, and 3M Lava crowns (₹4,000 to ₹18,000 per tooth) with 0% interest monthly EMI options starting at ₹800/month.",
+    featuredImage: "/assets/clinic-hero-real.png",
+    metaDescription: "Zirconia crown cost on EMI in India (2026): Price comparison for PFM, Monolithic Zirconia, and 3M Lava tooth caps with low monthly EMI options from ₹800/mo.",
+    faqs: [
+      {
+        question: "How much does a Zirconia crown cost in India?",
+        answer: "A single Zirconia dental crown in India typically costs between ₹7,000 and ₹18,000 depending on the brand (standard monolithic CAD/CAM zirconia vs premium 3M Lava or BruxZir) and warranty (10 years to lifetime)."
+      },
+      {
+        question: "Can I get multiple dental crowns or bridge on monthly EMI?",
+        answer: "Yes! When undergoing multiple root canals, multi-unit dental bridges, or full smile restorations costing ₹25,000 to ₹1,50,000+, Clinaza enables patients to split costs into 3 to 24 month 0% interest EMIs with zero credit card required."
+      },
+      {
+        question: "Which tooth cap is best: Metal Ceramic (PFM) or Zirconia?",
+        answer: "Monolithic Zirconia is significantly superior to metal ceramic (PFM). Zirconia is 100% biocompatible, unbreakable under biting pressure (1200+ MPa strength), eliminates dark black gum lines, and matches natural translucency."
+      }
+    ],
+    content: (
+      <div className="space-y-6">
+        <p className="text-lg leading-relaxed text-neutral-700">
+          Following a Root Canal Treatment (RCT) or dental implant surgery, placing a high-strength <strong>dental crown (tooth cap)</strong> is mandatory to prevent the tooth from cracking under chewing force. In 2026, <strong>CAD/CAM Monolithic Zirconia</strong> has completely replaced traditional metal-ceramic caps as the gold standard for natural aesthetics and lifelong durability.
+        </p>
+
+        <p className="text-neutral-700 leading-relaxed">
+          However, when a patient requires multiple crowns or full-mouth restorations ranging from <strong>₹25,000 to ₹1,20,000</strong>, upfront payment can be stressful. With <strong>Clinaza point-of-care patient financing</strong>, patients can choose premium 15-year warranty Zirconia crowns on easy monthly installments from <strong>₹800/month</strong>.
+        </p>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Dental Crown Price Comparison by Material & Brand (India 2026)</h2>
+        <div className="overflow-x-auto my-6">
+          <table className="min-w-full divide-y divide-neutral-200 border border-neutral-100 text-sm">
+            <thead className="bg-neutral-50">
+              <tr>
+                <th className="px-4 py-3 text-left font-bold text-neutral-500 uppercase">Crown Type & Material</th>
+                <th className="px-4 py-3 text-left font-bold text-neutral-500 uppercase">Warranty</th>
+                <th className="px-4 py-3 text-left font-bold text-neutral-500 uppercase">Price (Per Tooth)</th>
+                <th className="px-4 py-3 text-left font-bold text-neutral-500 uppercase">12-Month EMI (4 Crowns)</th>
+                <th className="px-4 py-3 text-left font-bold text-neutral-500 uppercase">24-Month EMI (4 Crowns)</th>
+              </tr>
+            </thead>
+            <tbody className="bg-white divide-y divide-neutral-100">
+              <tr>
+                <td className="px-4 py-3 font-semibold text-neutral-800">Basic Metal Ceramic (PFM)</td>
+                <td className="px-4 py-3 text-neutral-600">3–5 Years</td>
+                <td className="px-4 py-3 text-[#0867E8] font-bold">₹3,500 – ₹5,000</td>
+                <td className="px-4 py-3 text-neutral-600">₹1,333 / mo</td>
+                <td className="px-4 py-3 text-green-600 font-bold">₹700 / mo</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-semibold text-neutral-800">DMLS Laser Sintered Ceramic</td>
+                <td className="px-4 py-3 text-neutral-600">7–10 Years</td>
+                <td className="px-4 py-3 text-[#0867E8] font-bold">₹5,500 – ₹7,500</td>
+                <td className="px-4 py-3 text-neutral-600">₹2,000 / mo</td>
+                <td className="px-4 py-3 text-green-600 font-bold">₹1,050 / mo</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-semibold text-neutral-800">Monolithic CAD/CAM Zirconia</td>
+                <td className="px-4 py-3 text-neutral-600">10–15 Years</td>
+                <td className="px-4 py-3 text-[#0867E8] font-bold">₹7,500 – ₹11,000</td>
+                <td className="px-4 py-3 text-neutral-600">₹2,800 / mo</td>
+                <td className="px-4 py-3 text-green-600 font-bold">₹1,450 / mo</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-semibold text-neutral-800">Premium 3M Lava / Multi-Layer Zirconia</td>
+                <td className="px-4 py-3 text-neutral-600">15 Yrs - Lifetime</td>
+                <td className="px-4 py-3 text-[#0867E8] font-bold">₹12,000 – ₹18,000</td>
+                <td className="px-4 py-3 text-neutral-600">₹4,500 / mo</td>
+                <td className="px-4 py-3 text-green-600 font-bold">₹2,350 / mo</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Why Upgrade to Zirconia Crowns with 0% EMI?</h2>
+        <ul className="list-disc pl-6 space-y-3 text-neutral-700">
+          <li><strong>Zero Black Line Margin:</strong> Unlike metal PFM crowns that leave an unsightly dark metal collar along your gumline over time, Zirconia is 100% metal-free and matches your natural tooth shade.</li>
+          <li><strong>Unrivaled Chewing Strength (1200+ MPa):</strong> Perfect for back molars that endure intense chewing pressure. Resistant to chipping or fracturing.</li>
+          <li><strong>Biocompatible & Gum-Friendly:</strong> Highly polished ceramic surfaces reduce plaque accumulation and prevent gum recession.</li>
+          <li><strong>Digital Precision Scanning:</strong> 3D intraoral scans ensure a microscopic fit with zero uncomfortable bite issues.</li>
+        </ul>
+
+        {/* Featured Clinic Recommendation */}
+        <div className="bg-emerald-50/80 border border-emerald-200 p-5 rounded-2xl space-y-2 my-6">
+          <div className="flex items-center gap-2">
+            <span className="px-2 py-0.5 bg-emerald-600 text-white text-[9px] font-black uppercase tracking-wider rounded-md">Recommended Center</span>
+            <h4 className="text-sm font-bold text-[#0B2450]">YOUR DENTIST — Patliputra Colony, Patna</h4>
+          </div>
+          <p className="text-xs text-slate-600 leading-relaxed">
+            Supervised by <strong>Dr. Aryan Parmar</strong>, featuring digital CAD/CAM crown designing, lifetime warranty 3M Lava certifications, and instant Clinaza 0% EMI payment plans.
+          </p>
+          <div className="text-[11px] font-semibold text-emerald-800 flex flex-wrap gap-3 pt-1">
+            <span>📍 Patliputra Colony, Patna</span>
+            <span>📞 062014 78033</span>
+          </div>
+        </div>
+
+        <div className="bg-gradient-to-r from-[#0867E8] to-blue-700 text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
+          <h3 className="text-lg font-bold">Calculate Your Dental Crown EMI Plan</h3>
+          <p className="text-xs text-blue-100 max-w-lg mx-auto">Financing available from ₹25,000 to ₹3,00,000 with 2-minute soft digital KYC approval.</p>
+          <a
+            href="https://clinaza.in/#calculator"
+            className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md"
+          >
+            Check Crown EMI Eligibility →
+          </a>
+        </div>
+      </div>
+    )
+  },
+  {
+    slug: "dental-veneers-and-smile-makeover-cost-on-emi-india",
+    title: "Dental Veneers & Smile Makeover Cost on EMI in India (2026): E-Max, Composite & Monthly Plans",
+    category: "Cosmetic Dentistry",
+    readTime: "7 min read",
+    publishDate: "September 6, 2026",
+    author: "Clinaza Aesthetic Desk",
+    summary: "Complete 2026 cost guide for smile makeovers and dental veneers in India. Compare Composite Bonding vs E-Max Porcelain Veneers (₹10,000 to ₹25,000 per tooth) with 0% interest monthly EMI options starting at ₹2,500/month.",
+    featuredImage: "/assets/clinic-hero-real.png",
+    metaDescription: "Dental veneers and smile makeover cost on EMI in India (2026): Compare E-Max porcelain veneers and composite bonding with 0% interest monthly EMI options from ₹2,500/mo.",
+    faqs: [
+      {
+        question: "How much do dental veneers cost in India?",
+        answer: "Direct composite veneers start from ₹3,000 to ₹5,000 per tooth, while premium porcelain E-Max veneers range from ₹10,000 to ₹22,000 per tooth. A full 8-to-10 tooth upper aesthetic smile makeover typically costs ₹80,000 to ₹1,80,000."
+      },
+      {
+        question: "Can I get a cosmetic smile makeover on EMI in India?",
+        answer: "Yes! Clinaza enables cosmetic dental clinics to offer 0% interest and low-monthly EMI financing from ₹30,000 to ₹3,00,000, allowing patients to complete their smile transformation with flexible 6 to 24 month tenures."
+      },
+      {
+        question: "How long do porcelain E-Max veneers last?",
+        answer: "Porcelain E-Max veneers are stain-resistant and boast a lifespan of 15 to 20+ years when properly maintained with good oral hygiene and routine checkups."
+      }
+    ],
+    content: (
+      <div className="space-y-6">
+        <p className="text-lg leading-relaxed text-neutral-700">
+          A confident, radiant smile can transform your personal and professional life. Whether fixing deep fluorosis stains, closing front gaps, repairing chipped teeth, or correcting asymmetrical enamel, a <strong>digital smile makeover using porcelain veneers</strong> is the gold standard in cosmetic dentistry.
+        </p>
+
+        <p className="text-neutral-700 leading-relaxed">
+          Because cosmetic dentistry is excluded by all health insurance schemes, upfront expenses of <strong>₹80,000 to ₹2,20,000</strong> often hold patients back. Through <strong>Clinaza point-of-care patient financing</strong>, you can achieve your dream smile today and split payments into manageable monthly EMIs from <strong>₹2,500/month</strong>.
+        </p>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Smile Makeover & Veneer Cost Comparison (India 2026)</h2>
+        <div className="overflow-x-auto my-6">
+          <table className="min-w-full divide-y divide-neutral-200 border border-neutral-100 text-sm">
+            <thead className="bg-neutral-50">
+              <tr>
+                <th className="px-4 py-3 text-left font-bold text-neutral-500 uppercase">Aesthetic Procedure</th>
+                <th className="px-4 py-3 text-left font-bold text-neutral-500 uppercase">Durability</th>
+                <th className="px-4 py-3 text-left font-bold text-neutral-500 uppercase">Avg. Price (6–8 Front Teeth)</th>
+                <th className="px-4 py-3 text-left font-bold text-neutral-500 uppercase">12-Month EMI</th>
+                <th className="px-4 py-3 text-left font-bold text-neutral-500 uppercase">24-Month EMI</th>
+              </tr>
+            </thead>
+            <tbody className="bg-white divide-y divide-neutral-100">
+              <tr>
+                <td className="px-4 py-3 font-semibold text-neutral-800">Composite Bonding / Veneers</td>
+                <td className="px-4 py-3 text-neutral-600">4–7 Years</td>
+                <td className="px-4 py-3 text-[#0867E8] font-bold">₹24,000 – ₹40,000</td>
+                <td className="px-4 py-3 text-neutral-600">₹2,500 / mo</td>
+                <td className="px-4 py-3 text-green-600 font-bold">₹1,350 / mo</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-semibold text-neutral-800">Ivoclar E-Max Porcelain Veneers</td>
+                <td className="px-4 py-3 text-neutral-600">15–20+ Years</td>
+                <td className="px-4 py-3 text-[#0867E8] font-bold">₹75,000 – ₹1,40,000</td>
+                <td className="px-4 py-3 text-neutral-600">₹7,500 / mo</td>
+                <td className="px-4 py-3 text-green-600 font-bold">₹3,950 / mo</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-semibold text-neutral-800">Ultra-Thin Lumineers (No-Prep)</td>
+                <td className="px-4 py-3 text-neutral-600">20+ Years</td>
+                <td className="px-4 py-3 text-[#0867E8] font-bold">₹1,20,000 – ₹2,20,000</td>
+                <td className="px-4 py-3 text-neutral-600">₹12,000 / mo</td>
+                <td className="px-4 py-3 text-green-600 font-bold">₹6,250 / mo</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-semibold text-neutral-800">Full Arch Smile Design + Gum Contouring</td>
+                <td className="px-4 py-3 text-neutral-600">Permanent</td>
+                <td className="px-4 py-3 text-[#0867E8] font-bold">₹1,50,000 – ₹2,50,000</td>
+                <td className="px-4 py-3 text-neutral-600">₹15,000 / mo</td>
+                <td className="px-4 py-3 text-green-600 font-bold">₹7,800 / mo</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Why Porcelain E-Max Veneers are Worth the Investment</h2>
+        <ul className="list-disc pl-6 space-y-3 text-neutral-700">
+          <li><strong>100% Stain Resistant:</strong> Porcelain glass ceramics never stain from turmeric, coffee, tea, or red wine.</li>
+          <li><strong>Enamel-Like Light Transmission:</strong> E-Max mimics the optical depth and slight translucency of natural youthful enamel.</li>
+          <li><strong>Minimal Tooth Preparation:</strong> High-precision bonded veneers require removing as little as 0.3mm–0.5mm of outer enamel.</li>
+          <li><strong>Digital Smile Simulation:</strong> View a 3D digital mock-up of your transformed smile on screen before final fabrication.</li>
+        </ul>
+
+        {/* Featured Clinic Recommendation */}
+        <div className="bg-emerald-50/80 border border-emerald-200 p-5 rounded-2xl space-y-2 my-6">
+          <div className="flex items-center gap-2">
+            <span className="px-2 py-0.5 bg-emerald-600 text-white text-[9px] font-black uppercase tracking-wider rounded-md">Featured Aesthetic Center</span>
+            <h4 className="text-sm font-bold text-[#0B2450]">YOUR DENTIST — Patliputra Colony, Patna</h4>
+          </div>
+          <p className="text-xs text-slate-600 leading-relaxed">
+            Led by <strong>Dr. Aryan Parmar</strong>, offering digital smile design, high-end E-Max veneer bonding, laser gum contouring, and instant 0% EMI financing plans.
+          </p>
+          <div className="text-[11px] font-semibold text-emerald-800 flex flex-wrap gap-3 pt-1">
+            <span>📍 Patliputra Colony, Patna</span>
+            <span>📞 062014 78033</span>
+          </div>
+        </div>
+
+        <div className="bg-gradient-to-r from-[#0867E8] to-blue-700 text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
+          <h3 className="text-lg font-bold">Get Instant Pre-Approval for Your Smile Makeover</h3>
+          <p className="text-xs text-blue-100 max-w-lg mx-auto">Check your soft eligibility for ₹30,000 to ₹3,00,000 in under 2 minutes with zero impact on your CIBIL score.</p>
+          <a
+            href="https://clinaza.in/#calculator"
+            className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md"
+          >
+            Check Smile Makeover EMI →
+          </a>
+        </div>
+      </div>
+    )
   }
 ];
+
 
 

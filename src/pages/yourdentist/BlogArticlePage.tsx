@@ -1,16 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { BLOGS } from '@/data/blogs';
 import { SEOHead } from '@/components/seo/SEOHead';
-import { Calendar, Clock, ChevronLeft, Shield, User, Heart } from 'lucide-react';
+import { Calendar, Clock, ChevronLeft, Shield, User, Sparkles, CreditCard } from 'lucide-react';
+import { PatientEligibilityModal } from '@/components/PatientEligibilityModal';
 
 export default function BlogArticlePage() {
   const { slug } = useParams<{ slug: string }>();
   const article = BLOGS.find((b) => b.slug === slug);
+  const [isEligibilityOpen, setIsEligibilityOpen] = useState(false);
 
   if (!article) {
     return <Navigate to="/blog" replace />;
   }
+
+  // Determine default treatment category from article
+  const getDefaultTreatment = (title: string, category: string) => {
+    const t = (title + ' ' + category).toLowerCase();
+    if (t.includes('full mouth') || t.includes('all-on-4') || t.includes('all-on-6')) return 'Full Mouth Dental Implants';
+    if (t.includes('implant')) return 'Dental Implants';
+    if (t.includes('aligner') || t.includes('invisible')) return 'Clear Aligners';
+    if (t.includes('brace') || t.includes('orthodontic')) return 'Orthodontic Braces';
+    if (t.includes('root canal') || t.includes('crown')) return 'Root Canal & Crowns';
+    return 'Dental Implants';
+  };
+
+  const defaultTreatment = getDefaultTreatment(article.title, article.category);
 
   // Helper: convert "June 24, 2026" → "2026-06-24"
   const toIsoDate = (dateStr: string): string => {
@@ -97,7 +112,7 @@ export default function BlogArticlePage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#fafafa] text-neutral-900 font-sora antialiased selection:bg-[#5b72ff] selection:text-white">
+    <div className="min-h-screen bg-[#fafafa] text-neutral-900 font-sora antialiased selection:bg-[#5b72ff] selection:text-white pb-16 sm:pb-0">
       <SEOHead
         title={`${article.title} | Clinaza Patient Guides`}
         description={article.metaDescription}
@@ -112,22 +127,30 @@ export default function BlogArticlePage() {
       />
 
       {/* Clean Light Header */}
-      <header className="border-b border-neutral-200/60 bg-white/80 backdrop-blur-md sticky top-0 z-50">
-        <div className="max-w-4xl mx-auto px-6 h-20 flex justify-between items-center">
-          <Link to="/blog" className="flex items-center gap-2">
+      <header className="border-b border-neutral-200/60 bg-white/90 backdrop-blur-md sticky top-0 z-40">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex justify-between items-center">
+          <Link to="/blog" className="flex items-center gap-1.5 sm:gap-2">
             <ChevronLeft size={16} className="text-neutral-500" />
             <span className="text-xs font-bold uppercase tracking-wider text-neutral-600 hover:text-[#5b72ff] transition-colors">All Articles</span>
           </Link>
 
-          <Link to="/" className="flex items-center gap-2">
-            <img src="/assets/clinaza-logo.jpg" alt="Clinaza" className="h-8 w-8 rounded-lg border border-slate-200" />
-            <span className="text-[10px] font-black uppercase tracking-wider text-neutral-800">CLINAZA</span>
-          </Link>
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => setIsEligibilityOpen(true)}
+              className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 bg-[#0867E8] hover:bg-[#0756C7] text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-all shadow-sm active:scale-95 cursor-pointer"
+            >
+              <CreditCard size={13} /> Check EMI Eligibility
+            </button>
+            <Link to="/" className="flex items-center gap-2">
+              <img src="/assets/clinaza-logo.jpg" alt="Clinaza" className="h-7 w-7 sm:h-8 sm:w-8 rounded-lg border border-slate-200" />
+              <span className="text-[10px] font-black uppercase tracking-wider text-neutral-800">CLINAZA</span>
+            </Link>
+          </div>
         </div>
       </header>
 
       {/* Main Container */}
-      <main className="max-w-3xl mx-auto px-6 py-12 space-y-8">
+      <main className="max-w-3xl mx-auto px-4 sm:px-6 py-8 sm:py-12 space-y-8">
         
         {/* Article Meta */}
         <div className="space-y-4 text-center sm:text-left">
@@ -157,8 +180,29 @@ export default function BlogArticlePage() {
           />
         </div>
 
+        {/* Highlight Quick Action Banner in Article */}
+        <div className="p-4 sm:p-5 bg-gradient-to-r from-blue-50 via-indigo-50 to-emerald-50 border border-blue-200/80 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4 shadow-2xs">
+          <div className="space-y-1 text-center sm:text-left">
+            <div className="inline-flex items-center gap-1 text-[10px] font-black text-[#0867E8] uppercase tracking-wider">
+              <Sparkles size={11} /> 0% Interest EMI Available
+            </div>
+            <h4 className="text-sm sm:text-base font-black text-slate-900">
+              Planning this treatment? Check EMI in 2 mins.
+            </h4>
+            <p className="text-xs text-slate-600">
+              Instant approval from ₹30,000 to ₹3,00,000 with 0 credit score impact.
+            </p>
+          </div>
+          <button
+            onClick={() => setIsEligibilityOpen(true)}
+            className="shrink-0 w-full sm:w-auto px-5 py-2.5 bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-black uppercase tracking-wider rounded-xl transition-all shadow-md active:scale-95 flex items-center justify-center gap-1.5 cursor-pointer"
+          >
+            <Shield size={14} /> Check Eligibility
+          </button>
+        </div>
+
         {/* Article Content Rendered Safely */}
-        <article className="prose prose-neutral max-w-none prose-p:text-neutral-700 prose-p:leading-relaxed prose-headings:text-neutral-950 prose-a:text-[#5b72ff] py-4">
+        <article className="prose prose-neutral max-w-none prose-p:text-neutral-700 prose-p:leading-relaxed prose-headings:text-neutral-950 prose-a:text-[#5b72ff] py-2">
           {article.content}
         </article>
 
@@ -213,12 +257,12 @@ export default function BlogArticlePage() {
             Check your instant pre-eligibility (₹30,000 to ₹3,00,000) in under 2 minutes with zero impact on your credit score.
           </p>
           <div className="flex flex-col sm:flex-row justify-center items-center gap-3 pt-2">
-            <Link 
-              to="/#check-eligibility"
-              className="w-full sm:w-auto px-6 py-3 bg-white hover:bg-slate-50 text-[#0867E8] rounded-xl text-xs font-black uppercase tracking-wider transition-all shadow-md active:scale-95 flex items-center justify-center gap-2"
+            <button 
+              onClick={() => setIsEligibilityOpen(true)}
+              className="w-full sm:w-auto px-6 py-3 bg-white hover:bg-slate-50 text-[#0867E8] rounded-xl text-xs font-black uppercase tracking-wider transition-all shadow-md active:scale-95 flex items-center justify-center gap-2 cursor-pointer"
             >
               <Shield size={14} /> Check EMI Eligibility
-            </Link>
+            </button>
             <a 
               href="https://wa.me/917292984244?text=Hi%20Clinaza%20team%2C%20I%20have%20a%20question%20about%20dental%20treatment%20EMI%20financing." 
               target="_blank" 
@@ -230,6 +274,33 @@ export default function BlogArticlePage() {
           </div>
         </section>
       </main>
+
+      {/* Floating Bottom Sticky Bar on Mobile */}
+      <div className="sm:hidden fixed bottom-0 left-0 right-0 p-3 bg-white/95 backdrop-blur-md border-t border-slate-200 z-40 flex items-center gap-2 shadow-lg">
+        <button
+          onClick={() => setIsEligibilityOpen(true)}
+          className="flex-1 py-3 bg-[#0867E8] text-white rounded-xl text-xs font-black uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-md active:scale-95 cursor-pointer"
+        >
+          <CreditCard size={14} /> Check EMI Eligibility
+        </button>
+        <a
+          href="https://wa.me/917292984244?text=Hi%20Clinaza%20team%2C%20I%20have%20a%20question%20about%20dental%20treatment%20EMI%20financing."
+          target="_blank"
+          rel="noopener noreferrer"
+          className="px-3.5 py-3 bg-[#128C7E] text-white rounded-xl text-xs font-black flex items-center justify-center"
+          aria-label="WhatsApp Us"
+        >
+          💬
+        </a>
+      </div>
+
+      {/* Patient EMI Eligibility Modal Popup */}
+      <PatientEligibilityModal
+        isOpen={isEligibilityOpen}
+        onClose={() => setIsEligibilityOpen(false)}
+        defaultTreatment={defaultTreatment}
+        sourcePage={`Blog: ${article.title}`}
+      />
 
       {/* Footer */}
       <footer className="border-t border-neutral-200 bg-white py-12 text-center text-[10px] text-neutral-400 font-bold uppercase tracking-widest space-y-2">

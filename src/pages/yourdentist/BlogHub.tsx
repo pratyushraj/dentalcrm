@@ -2,41 +2,22 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { BLOGS } from '@/data/blogs';
 import { SEOHead } from '@/components/seo/SEOHead';
-import { Calendar, Clock, ArrowRight, Shield } from 'lucide-react';
+import { Calendar, Clock, ArrowRight, Shield, CreditCard, Sparkles } from 'lucide-react';
 
 export default function BlogHub() {
-  const localBusinessSchema = {
+  const organizationSchema = {
     '@context': 'https://schema.org',
-    '@type': 'Dentist',
-    'name': 'YOUR DENTIST Patna',
-    'image': 'https://clinaza.in/og-preview.png',
-    'telePhone': '+91 6201478033',
-    'email': 'yourdentistpatna@gmail.com',
-    'address': {
-      '@type': 'PostalAddress',
-      'streetAddress': 'Patliputra Colony',
-      'addressLocality': 'Patna',
-      'addressRegion': 'Bihar',
-      'postalCode': '800013',
-      'addressCountry': 'IN'
+    '@type': 'Organization',
+    'name': 'Clinaza',
+    'url': 'https://clinaza.in',
+    'logo': {
+      '@type': 'ImageObject',
+      'url': 'https://clinaza.in/assets/clinaza-logo.jpg'
     },
-    'geo': {
-      '@type': 'GeoCoordinates',
-      'latitude': '25.6200',
-      'longitude': '85.1100'
-    },
-    'url': 'https://clinaza.in/blog',
-    'priceRange': '$$',
-    'openingHoursSpecification': [
-      {
-        '@type': 'OpeningHoursSpecification',
-        'dayOfWeek': ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-        'opens': '10:00',
-        'closes': '20:00'
-      }
-    ],
+    'description': 'Embedded healthcare patient financing infrastructure and dental care guides across India.',
     'sameAs': [
-      'https://www.instagram.com/your.dentist.patna'
+      'https://instagram.com/clinaza.in',
+      'https://linkedin.com/company/clinaza'
     ]
   };
 
@@ -53,7 +34,7 @@ export default function BlogHub() {
       {
         '@type': 'ListItem',
         'position': 2,
-        'name': 'Patient Guides & Dental Articles',
+        'name': 'Patient Guides & Dental Financing',
         'item': 'https://clinaza.in/blog'
       }
     ]
@@ -62,42 +43,51 @@ export default function BlogHub() {
   return (
     <div className="min-h-screen bg-neutral-950 text-white font-sora antialiased selection:bg-white selection:text-neutral-950">
       <SEOHead
-        title="Clinaza Patient Guides | Dental Treatments, Costs & EMI Financing"
-        description="Read comprehensive patient guides on dental implants, braces, aligners cost, and healthcare EMI financing options across India."
-        keywords={['dental patient guides', 'dental treatment costs india', 'dental emi financing', 'implants cost guide', 'braces on emi']}
+        title="Clinaza Patient Guides | Dental Treatments, Costs & 0% EMI Financing"
+        description="Read comprehensive patient guides on dental implants, braces, clear aligners cost in India, and 0% interest EMI healthcare financing options."
+        keywords={['dental patient guides', 'dental treatment costs india', 'dental emi financing', 'implants cost guide', 'braces on emi', 'clinaza financing']}
         canonicalUrl="https://clinaza.in/blog"
-        jsonLd={[localBusinessSchema, breadcrumbSchema]}
+        jsonLd={[organizationSchema, breadcrumbSchema]}
       />
 
       {/* Header */}
-      <header className="border-b border-white/5 bg-neutral-950/80 backdrop-blur-md sticky top-0 z-50">
-        <div className="max-w-5xl mx-auto px-6 h-20 flex justify-between items-center">
+      <header className="border-b border-white/10 bg-neutral-950/80 backdrop-blur-md sticky top-0 z-50">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex justify-between items-center">
           <Link to="/" className="flex items-center gap-2.5">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-[#5b72ff] to-indigo-600 flex items-center justify-center shadow-lg shadow-[#5b72ff]/20">
-              <Shield className="h-5 w-5 text-white" />
-            </div>
+            <img src="/assets/clinaza-logo.jpg" alt="Clinaza" className="h-8 w-8 rounded-lg border border-slate-700" />
             <div>
-              <span className="text-xs font-black uppercase tracking-widest leading-none block">YOUR DENTIST</span>
-              <span className="text-[8px] text-neutral-500 font-bold uppercase tracking-wider mt-0.5 block">Patient Resource Hub</span>
+              <span className="text-xs font-black uppercase tracking-widest leading-none block">CLINAZA</span>
+              <span className="text-[8px] text-neutral-400 font-bold uppercase tracking-wider mt-0.5 block">Patient Resource Hub</span>
             </div>
           </Link>
 
-          <Link
-            to="/reactivation/login"
-            className="px-4 py-2 border border-white/10 hover:border-white/20 text-white hover:bg-white/5 text-xs font-black uppercase tracking-wider rounded-xl transition-all"
-          >
-            CRM Portal
-          </Link>
+          <div className="flex items-center gap-3">
+            <Link
+              to="/#check-eligibility"
+              className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-black uppercase tracking-wider rounded-xl transition-all shadow-sm"
+            >
+              <CreditCard size={13} /> Check EMI
+            </Link>
+            <Link
+              to="/reactivation/login"
+              className="px-3.5 py-1.5 border border-white/10 hover:border-white/20 text-white hover:bg-white/5 text-xs font-black uppercase tracking-wider rounded-xl transition-all"
+            >
+              Clinic Portal
+            </Link>
+          </div>
         </div>
       </header>
 
       {/* Hero Section */}
-      <section className="py-16 px-6 max-w-4xl mx-auto text-center space-y-4">
+      <section className="py-14 sm:py-20 px-6 max-w-4xl mx-auto text-center space-y-4">
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#0867E8]/10 border border-[#0867E8]/30 text-[#0867E8] text-[10px] font-black uppercase tracking-widest">
+          <Sparkles size={12} /> Expert Guides & Cost Calculators
+        </div>
         <h1 className="text-3xl sm:text-5xl font-black uppercase tracking-tight leading-tight">
-          Oral Health <span className="bg-gradient-to-r from-[#5b72ff] to-emerald-400 bg-clip-text text-transparent">Guides & Resources</span>
+          Dental Care <span className="bg-gradient-to-r from-[#5b72ff] via-blue-400 to-emerald-400 bg-clip-text text-transparent">Guides & EMI Costs</span>
         </h1>
         <p className="text-xs sm:text-sm text-neutral-400 max-w-xl mx-auto leading-relaxed">
-          Get transparent, expert-written articles on dental treatments, braces options, clear aligner price charts, and routine care at YOUR DENTIST Patna.
+          Transparent, doctor-verified articles on dental implant costs, clear aligner price charts, full mouth rehabilitation, and 0% EMI financing options across India.
         </p>
       </section>
 
@@ -153,9 +143,9 @@ export default function BlogHub() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-white/5 py-12 text-center text-[10px] text-neutral-600 font-bold uppercase tracking-widest space-y-2">
-        <p>© 2026 YOUR DENTIST Patliputra Patna. All Rights Reserved.</p>
-        <p className="text-[#5b72ff]/60">Orthodontic & Dental Care Specialist</p>
+      <footer className="border-t border-white/5 py-12 text-center text-[10px] text-neutral-500 font-bold uppercase tracking-widest space-y-2">
+        <p>© 2026 CLINAZA Technologies. All Rights Reserved.</p>
+        <p className="text-[#0867E8]">Connecting Clinics & Patients With Regulated Financing Partners</p>
       </footer>
     </div>
   );

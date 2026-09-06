@@ -506,8 +506,17 @@ const ReactivationLayout: React.FC<ReactivationLayoutProps> = ({ children }) => 
             </AnimatePresence>
           </div>
 
-          {/* Right side chips */}
-          <div className="flex items-center gap-2 sm:gap-3 relative">
+            {/* Quick Tutorial / Guide Trigger */}
+            <a
+              href="https://wa.me/917292984244?text=Hi%20Clinaza%20support%2C%20I%20need%20help%20using%20the%20Free%20Dental%20CRM."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-2.5 py-1.5 rounded-xl border border-indigo-200 bg-indigo-50/50 hover:bg-indigo-100/70 text-indigo-700 text-xs font-bold transition-all flex items-center gap-1.5"
+            >
+              <Sparkles size={14} className="text-indigo-600 animate-pulse" />
+              <span className="hidden sm:inline">CRM Guide & Support</span>
+            </a>
+
             {/* Notifications Bell */}
             <div className="relative">
               <button

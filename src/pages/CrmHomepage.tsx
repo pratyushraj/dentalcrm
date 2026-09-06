@@ -697,6 +697,76 @@ export default function CrmHomepage() {
               </div>
             </div>
 
+            {/* Verified Meta Ads Lead Generation Case Study */}
+            <div className="bg-slate-900/95 border border-emerald-500/30 rounded-3xl p-6 sm:p-8 shadow-2xl max-w-4xl mx-auto text-left space-y-5">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800 pb-4">
+                <div className="space-y-1">
+                  <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-[10px] font-black uppercase tracking-wider">
+                    <Sparkles size={11} /> Real Campaign Benchmark
+                  </div>
+                  <h3 className="text-lg sm:text-2xl font-black text-white">
+                    Verified Meta Ads Case Study: 37 Patient Conversations at ₹7.68 / Lead
+                  </h3>
+                  <p className="text-xs text-slate-300 leading-relaxed">
+                    Most digital marketing agencies charge dental clinics ₹150–₹350 per lead. Here is an actual verified Meta Ads Manager campaign run by Clinaza in East India:
+                  </p>
+                </div>
+                <div className="shrink-0 flex items-center gap-2">
+                  <div className="px-3 py-1.5 rounded-xl bg-slate-800 border border-slate-700 text-center">
+                    <span className="text-[9px] text-slate-400 uppercase font-bold block">Cost / Result</span>
+                    <span className="text-sm font-black text-emerald-400">₹7.68</span>
+                  </div>
+                  <div className="px-3 py-1.5 rounded-xl bg-slate-800 border border-slate-700 text-center">
+                    <span className="text-[9px] text-slate-400 uppercase font-bold block">Total Inquiries</span>
+                    <span className="text-sm font-black text-white">37 Chats</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+                <div className="md:col-span-7 rounded-2xl overflow-hidden border border-slate-700 shadow-xl bg-slate-950">
+                  <img
+                    src="/assets/clinaza-meta-ads-case-study.jpg"
+                    alt="Clinaza Dental Clinic Instagram Ads Case Study - 37 Patients at ₹7.68 per conversation"
+                    className="w-full h-auto object-cover"
+                  />
+                </div>
+
+                <div className="md:col-span-5 space-y-4">
+                  <h4 className="text-sm font-bold text-white uppercase tracking-wider">
+                    Why Clinaza Dental Ads Outperform Generic Agencies:
+                  </h4>
+                  <ul className="space-y-2.5 text-xs text-slate-300">
+                    <li className="flex items-start gap-2">
+                      <span className="text-emerald-400 font-bold shrink-0">✓</span>
+                      <span><strong>Hyper-Local Radius:</strong> Targets patients within 3–5km of your clinic pin.</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-emerald-400 font-bold shrink-0">✓</span>
+                      <span><strong>Procedure-Specific Copy:</strong> Tailored for Dental Implants, Braces & Aligners.</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-emerald-400 font-bold shrink-0">✓</span>
+                      <span><strong>0% EMI Hook:</strong> Patients book immediately knowing they can pay in monthly installments.</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-emerald-400 font-bold shrink-0">✓</span>
+                      <span><strong>Direct to WhatsApp:</strong> Zero form drop-off; patient connects to your reception desk directly.</span>
+                    </li>
+                  </ul>
+
+                  <a
+                    href="https://wa.me/917292984244?text=Hi%20Clinaza%2C%20I%20saw%20your%20Meta%20Ads%20case%20study%20(%E2%82%B97.68%20per%20lead).%20I%20want%20high-converting%20ads%20for%20my%20dental%20clinic."
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 w-full py-3 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs uppercase tracking-wider rounded-xl transition-all shadow-lg active:scale-95"
+                  >
+                    <MessageSquare size={15} /> Launch Ads For Your Clinic →
+                  </a>
+                </div>
+              </div>
+            </div>
+
             <div className="pt-2">
               <a
                 href="https://wa.me/917292984244?text=Hi%20Clinaza%2C%20I%20want%20Social%20Media%20Management%20%26%20Growth%20Marketing%20for%20my%20dental%20clinic"

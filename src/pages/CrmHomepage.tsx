@@ -250,6 +250,24 @@ export default function CrmHomepage() {
         jsonLd={[
           {
             "@context": "https://schema.org",
+            "@type": "SoftwareApplication",
+            "name": "Clinaza Dental CRM",
+            "operatingSystem": "Web, iOS, Android (PWA)",
+            "applicationCategory": "BusinessApplication",
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "INR"
+            },
+            "description": "100% Free Dental Clinic Management CRM in India with automated WhatsApp patient recalls, digital prescriptions, and patient financing.",
+            "url": "https://clinaza.in/reactivation/login",
+            "author": {
+              "@type": "Organization",
+              "name": "Clinaza Technologies"
+            }
+          },
+          {
+            "@context": "https://schema.org",
             "@type": "FinancialService",
             "name": "Clinaza",
             "description": "Embedded patient financing infrastructure enabling healthcare clinics & hospitals to offer point-of-care EMI loans.",
@@ -625,16 +643,16 @@ export default function CrmHomepage() {
                     <span className="text-[9px] font-mono font-black uppercase text-emerald-400 bg-emerald-500/20 border border-emerald-500/40 px-2 py-0.5 rounded-md">
                       SLIDE 2/3 • CRM PREVIEW
                     </span>
-                    <a href="http://localhost:3333" target="_blank" rel="noopener noreferrer" className="text-[9px] font-mono font-bold text-emerald-300 bg-emerald-950/80 border border-emerald-500/40 px-2 py-0.5 rounded flex items-center gap-1 hover:text-white transition-colors">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span> http://localhost:3333
-                    </a>
+                    <Link to="/reactivation/login" className="text-[9px] font-mono font-bold text-emerald-300 bg-emerald-950/80 border border-emerald-500/40 px-2 py-0.5 rounded flex items-center gap-1 hover:text-white transition-colors">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span> Live Portal
+                    </Link>
                   </div>
 
                   {/* Real Mobile CRM Screenshot Preview inside Carousel Frame */}
                   <div className="relative flex-1 rounded-xl overflow-hidden border border-slate-700 bg-slate-950 flex items-center justify-center my-1 group">
                     <img 
                       src="/dashboard_mobile_view.png" 
-                      alt="Clinaza Mobile Dental CRM Dashboard Preview (http://localhost:3333)" 
+                      alt="Clinaza Mobile Dental CRM Dashboard Preview" 
                       className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-transparent flex items-end p-2.5">

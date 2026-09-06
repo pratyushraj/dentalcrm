@@ -120,10 +120,8 @@ export default function BlogArticlePage() {
           </Link>
 
           <Link to="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-neutral-900 flex items-center justify-center">
-              <Shield className="h-4.5 w-4.5 text-white" />
-            </div>
-            <span className="text-[10px] font-black uppercase tracking-wider text-neutral-800">YOUR DENTIST</span>
+            <img src="/assets/clinaza-logo.jpg" alt="Clinaza" className="h-8 w-8 rounded-lg border border-slate-200" />
+            <span className="text-[10px] font-black uppercase tracking-wider text-neutral-800">CLINAZA</span>
           </Link>
         </div>
       </header>

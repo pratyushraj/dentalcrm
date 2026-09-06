@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { 
   ShieldCheck, 
   ArrowRight, 
@@ -26,6 +26,7 @@ import { toast } from 'sonner';
 import { SEOHead } from '@/components/seo/SEOHead';
 
 export default function CrmHomepage() {
+  const location = useLocation();
   const [formData, setFormData] = useState({
     doctorName: '',
     clinicName: '',
@@ -40,6 +41,14 @@ export default function CrmHomepage() {
   const [showEligibilityModal, setShowEligibilityModal] = useState(false);
   const [eligibilityStep, setEligibilityStep] = useState<1 | 2>(1);
   const [showLenderResults, setShowLenderResults] = useState(false);
+
+  // Auto-open eligibility modal if navigating with #check-eligibility or ?action=check-eligibility
+  useEffect(() => {
+    if (location.hash === '#check-eligibility' || location.search.includes('action=check-eligibility')) {
+      setShowEligibilityModal(true);
+      setEligibilityStep(1);
+    }
+  }, [location]);
   const [patientData, setPatientData] = useState({
     name: '',
     mobile: '',
@@ -346,6 +355,17 @@ export default function CrmHomepage() {
             </div>
           </Link>
           <div className="flex items-center gap-3">
+            <button
+              type="button"
+              onClick={() => {
+                setShowEligibilityModal(true);
+                setEligibilityStep(1);
+              }}
+              className="hidden sm:flex items-center gap-1.5 px-3.5 py-2 bg-blue-50 hover:bg-blue-100 border border-blue-200 text-xs font-bold text-[#0867E8] rounded-xl transition-all"
+            >
+              <ShieldCheck size={14} className="text-[#0867E8]" />
+              Check Patient EMI
+            </button>
             <Link
               to="/reactivation/login"
               className="flex items-center gap-2 px-4 py-2 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-xs font-bold text-emerald-800 rounded-xl transition-all"

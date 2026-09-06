@@ -204,34 +204,37 @@ export default function BlogArticlePage() {
         </section>
 
         {/* Bottom CTA Block */}
-        <section className="bg-neutral-900 text-white rounded-2xl p-6 sm:p-8 text-center space-y-4 shadow-lg shadow-neutral-900/10">
-          <h3 className="text-lg font-black uppercase tracking-tight">Ready for a Consulting Session?</h3>
-          <p className="text-xs text-neutral-400 max-w-md mx-auto leading-relaxed">
-            Get examined under advanced 3D scanners at our Patliputra Colony clinic. 0% Interest EMI options are active.
+        <section className="bg-gradient-to-br from-[#0B2450] to-[#0867E8] text-white rounded-2xl p-6 sm:p-8 text-center space-y-4 shadow-xl">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-white/10 rounded-full text-[10px] font-bold tracking-wider uppercase text-blue-100">
+            <Shield size={12} /> Point-of-Care Patient Financing
+          </div>
+          <h3 className="text-xl sm:text-2xl font-black tracking-tight">Need Treatment Financing on 0% EMI?</h3>
+          <p className="text-xs text-blue-100/90 max-w-md mx-auto leading-relaxed">
+            Check your instant pre-eligibility (₹30,000 to ₹3,00,000) in under 2 minutes with zero impact on your credit score.
           </p>
           <div className="flex flex-col sm:flex-row justify-center items-center gap-3 pt-2">
+            <Link 
+              to="/#check-eligibility"
+              className="w-full sm:w-auto px-6 py-3 bg-white hover:bg-slate-50 text-[#0867E8] rounded-xl text-xs font-black uppercase tracking-wider transition-all shadow-md active:scale-95 flex items-center justify-center gap-2"
+            >
+              <Shield size={14} /> Check EMI Eligibility
+            </Link>
             <a 
-              href="https://wa.me/916201478033?text=Hi%20Dr.%20Aryan,%20I%20read%20your%20patient%20guide%20and%20want%20to%20book%20a%20consultation." 
+              href="https://wa.me/917292984244?text=Hi%20Clinaza%20team%2C%20I%20have%20a%20question%20about%20dental%20treatment%20EMI%20financing." 
               target="_blank" 
               rel="noopener noreferrer"
-              className="w-full sm:w-auto px-5 py-2.5 bg-[#128C7E] hover:bg-[#075E54] text-white rounded-xl text-xs font-black uppercase tracking-wider transition-all"
+              className="w-full sm:w-auto px-5 py-3 bg-[#128C7E] hover:bg-[#075E54] text-white rounded-xl text-xs font-black uppercase tracking-wider transition-all flex items-center justify-center gap-2"
             >
-              💬 WhatsApp Booking
+              💬 WhatsApp Us
             </a>
-            <Link 
-              to="/reactivation/login"
-              className="w-full sm:w-auto px-5 py-2.5 bg-white hover:bg-neutral-100 text-neutral-950 rounded-xl text-xs font-black uppercase tracking-wider transition-all"
-            >
-              Access CRM Portal
-            </Link>
           </div>
         </section>
       </main>
 
       {/* Footer */}
       <footer className="border-t border-neutral-200 bg-white py-12 text-center text-[10px] text-neutral-400 font-bold uppercase tracking-widest space-y-2">
-        <p>© 2026 YOUR DENTIST Patliputra Patna. All Rights Reserved.</p>
-        <p className="text-[#5b72ff]/80">Orthodontic & Dental Care Specialist</p>
+        <p>© 2026 CLINAZA Technologies. All Rights Reserved.</p>
+        <p className="text-[#0867E8]">Connecting Clinics & Patients With Regulated Financing Partners</p>
       </footer>
     </div>
   );

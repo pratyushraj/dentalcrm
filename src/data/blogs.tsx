@@ -1076,4 +1076,141 @@ export const BLOGS: BlogArticle[] = [
     )
   }
 
+  ,
+  {
+    slug: "dental-treatment-on-emi-india-guide",
+    title: "How to Get Dental Treatment on EMI in India: Complete 2026 Patient Guide",
+    category: "Patient Financing",
+    readTime: "6 min read",
+    publishDate: "September 6, 2026",
+    author: "Clinaza Health Desk",
+    summary: "Need dental implants, clear aligners, or crowns but worried about upfront cost? Learn how to get dental treatment on zero-downpayment monthly EMI across India.",
+    featuredImage: "/assets/yourdentist/dr_with_patient_1.jpg",
+    metaDescription: "Step-by-step guide on how to get dental treatment on EMI in India. Compare zero-interest monthly plans, eligibility criteria, documents required, and eligible procedures.",
+    faqs: [
+      {
+        question: "Can I get dental treatment on EMI in India?",
+        answer: "Yes! Clinaza enables partner dental clinics across India to offer 0% interest point-of-care EMI financing from ₹30,000 to ₹3,00,000 for treatments like implants, aligners, braces, and crowns."
+      },
+      {
+        question: "What documents are required for dental EMI?",
+        answer: "Basic digital KYC: PAN Card, Aadhaar Card (e-KYC), bank account details for automated monthly e-NACH auto-debit, and income proof."
+      },
+      {
+        question: "Does checking EMI eligibility affect my credit score?",
+        answer: "No. Initial pre-check at the clinic is a soft eligibility check that has zero impact on your credit score."
+      }
+    ],
+    content: (
+      <div className="space-y-6">
+        <p className="text-lg leading-relaxed text-neutral-700">
+          Dental care is vital, but advanced treatments like <strong>dental implants, invisible aligners, full-mouth restorations, and root canals with ceramic crowns</strong> can range anywhere from ₹30,000 to ₹3,00,000. For many families in India, paying the full amount upfront can be challenging.
+        </p>
+
+        <p className="text-neutral-700 leading-relaxed">
+          Fortunately, point-of-care <strong>dental treatment on EMI</strong> allows you to split your treatment cost into manageable monthly installments (3 to 24 months) without delaying your dental care.
+        </p>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Eligible Dental Treatments for EMI</h2>
+        <div className="overflow-x-auto my-6">
+          <table className="min-w-full divide-y divide-neutral-200 border border-neutral-100 text-sm">
+            <thead className="bg-neutral-50">
+              <tr>
+                <th className="px-4 py-3 text-left font-bold text-neutral-500 uppercase">Procedure</th>
+                <th className="px-4 py-3 text-left font-bold text-neutral-500 uppercase">Avg. Treatment Cost</th>
+                <th className="px-4 py-3 text-left font-bold text-neutral-500 uppercase">Est. Monthly EMI (12 Mo)</th>
+              </tr>
+            </thead>
+            <tbody className="bg-white divide-y divide-neutral-100">
+              <tr><td className="px-4 py-3 font-semibold text-neutral-800">Single Tooth Dental Implant</td><td className="px-4 py-3 text-neutral-600">₹35,000 – ₹60,000</td><td className="px-4 py-3 text-[#5b72ff] font-bold">₹2,916 – ₹5,000 / mo</td></tr>
+              <tr><td className="px-4 py-3 font-semibold text-neutral-800">Clear Aligners (Invisible Braces)</td><td className="px-4 py-3 text-neutral-600">₹50,000 – ₹1,50,000</td><td className="px-4 py-3 text-[#5b72ff] font-bold">₹4,166 – ₹12,500 / mo</td></tr>
+              <tr><td className="px-4 py-3 font-semibold text-neutral-800">Orthodontic Metal/Ceramic Braces</td><td className="px-4 py-3 text-neutral-600">₹30,000 – ₹75,000</td><td className="px-4 py-3 text-[#5b72ff] font-bold">₹2,500 – ₹6,250 / mo</td></tr>
+              <tr><td className="px-4 py-3 font-semibold text-neutral-800">Full Mouth Rehabilitation / All-on-4</td><td className="px-4 py-3 text-neutral-600">₹1,80,000 – ₹3,00,000</td><td className="px-4 py-3 text-[#5b72ff] font-bold">₹15,000 – ₹25,000 / mo</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">3 Steps to Get Dental EMI at Clinic Checkout</h2>
+        <ol className="list-decimal pl-6 space-y-3 text-neutral-700">
+          <li><strong>Clinical Estimate:</strong> Visit a Clinaza partner dental clinic and receive your clinical treatment plan and estimate from your dentist.</li>
+          <li><strong>Digital Pre-Check (2 Minutes):</strong> Provide basic KYC details at clinic checkout for a instant soft eligibility assessment.</li>
+          <li><strong>e-NACH Auto-Debit Setup:</strong> Choose a 3 to 24 month tenure and authorize monthly e-NACH auto-debit from your salary/savings account.</li>
+        </ol>
+
+        <div className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-6 rounded-2xl my-8 text-center space-y-3">
+          <h3 className="text-lg font-bold">Check Your Dental EMI Eligibility Online</h3>
+          <p className="text-sm text-blue-100 max-w-lg mx-auto">Calculate your monthly EMI and locate a Clinaza partner dental clinic near you.</p>
+          <a
+            href="https://clinaza.in/#calculator"
+            className="inline-block bg-white text-blue-600 font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md"
+          >
+            Calculate Monthly EMI Now →
+          </a>
+        </div>
+      </div>
+    )
+  },
+  {
+    slug: "dental-loans-in-india-medical-financing",
+    title: "Dental Loans in India: Zero-Interest EMI vs Medical Loans Explained",
+    category: "Financial Advice",
+    readTime: "5 min read",
+    publishDate: "September 6, 2026",
+    author: "Clinaza Health Desk",
+    summary: "Comparing personal loans vs healthcare point-of-care financing for dental procedures in India. Understand interest rates, approval speeds, and hidden charges.",
+    featuredImage: "/assets/yourdentist/clinic_in_action.jpg",
+    metaDescription: "Everything you need to know about dental loans in India. Compare zero-interest point-of-care EMI vs bank personal loans for dental surgeries and aligners.",
+    faqs: [
+      {
+        question: "Is a specialized dental loan better than a personal loan?",
+        answer: "Yes! Point-of-care dental financing processed at the clinic offers faster instant approval (under 10 minutes), zero collateral, lower processing fees, and subvention 0% EMI options compared to personal loans."
+      },
+      {
+        question: "Can self-employed individuals get a dental loan in India?",
+        answer: "Yes, both salaried and self-employed individuals with active bank accounts and basic KYC documents can apply for dental financing."
+      }
+    ],
+    content: (
+      <div className="space-y-6">
+        <p className="text-lg leading-relaxed text-neutral-700">
+          When faced with an unexpected root canal or planning a cosmetic dental smile makeover, choosing the right financing option determines how much you end up paying. Should you take a bank personal loan or opt for specialized <strong>point-of-care dental loans</strong> at the clinic?
+        </p>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Comparison: Personal Loan vs Clinaza Point-of-Care EMI</h2>
+        <div className="overflow-x-auto my-6">
+          <table className="min-w-full divide-y divide-neutral-200 border border-neutral-100 text-sm">
+            <thead className="bg-neutral-50">
+              <tr>
+                <th className="px-4 py-3 text-left font-bold text-neutral-500 uppercase">Feature</th>
+                <th className="px-4 py-3 text-left font-bold text-neutral-500 uppercase">Standard Personal Loan</th>
+                <th className="px-4 py-3 text-left font-bold text-neutral-500 uppercase">Clinaza Clinic EMI</th>
+              </tr>
+            </thead>
+            <tbody className="bg-white divide-y divide-neutral-100">
+              <tr><td className="px-4 py-3 font-semibold">Approval Speed</td><td className="px-4 py-3 text-red-500">2–5 Business Days</td><td className="px-4 py-3 text-green-600 font-bold">Instant (Under 10 Mins)</td></tr>
+              <tr><td className="px-4 py-3 font-semibold">Paperwork</td><td className="px-4 py-3 text-red-500">Heavy Documentation</td><td className="px-4 py-3 text-green-600 font-bold">100% Paperless Digital KYC</td></tr>
+              <tr><td className="px-4 py-3 font-semibold">Interest Rate</td><td className="px-4 py-3 text-neutral-600">14% – 24% p.a.</td><td className="px-4 py-3 text-green-600 font-bold">0% Subvention Options Available</td></tr>
+              <tr><td className="px-4 py-3 font-semibold">Prepayment Penalty</td><td className="px-4 py-3 text-red-500">2% – 5% Penalty</td><td className="px-4 py-3 text-green-600 font-bold">Zero Preclosure Charges</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Why Dentists Recommend Point-of-Care Loans</h2>
+        <p className="text-neutral-700 leading-relaxed">
+          Point-of-care dental financing ensures that treatment doesn't get delayed due to cash flow constraints. Patients receive care immediately while paying manageable monthly EMIs managed directly by RBI-regulated lending partners.
+        </p>
+
+        <div className="bg-neutral-900 text-white p-6 rounded-2xl my-8 text-center space-y-3">
+          <h3 className="text-lg font-bold">Are You a Clinic Owner?</h3>
+          <p className="text-xs text-neutral-300 max-w-lg mx-auto">Offer 0% interest EMI options to your patients with ₹0 clinic fees or setup charges.</p>
+          <a
+            href="https://clinaza.in/#partner-form"
+            className="inline-block bg-[#0867E8] text-white font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-[#0756C7] transition-colors shadow-md"
+          >
+            Partner With Clinaza Today →
+          </a>
+        </div>
+      </div>
+    )
+  }
 ];

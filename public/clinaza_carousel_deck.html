@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Clinaza Free Dental CRM - Social Carousel Post</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&family=JetBrains+Mono:wght@700;800&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #040914;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: #FFFFFF;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 24px;
+    }
+    
+    .carousel-header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .carousel-header h1 {
+      font-size: 20px;
+      font-weight: 900;
+      color: #10B981;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .carousel-header p {
+      font-size: 12px;
+      color: #94A3B8;
+      margin-top: 4px;
+    }
+
+    /* Carousel Wrapper Grid */
+    .deck-container {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      max-width: 100%;
+      padding-bottom: 20px;
+      scroll-snap-type: x mandatory;
+    }
+
+    /* Single 1080x1080 Slide Canvas */
+    .slide {
+      width: 440px;
+      height: 440px;
+      shrink: 0;
+      flex-shrink: 0;
+      background: linear-gradient(145deg, #090D16 0%, #061318 60%, #08222C 100%);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      border-radius: 24px;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+      scroll-snap-align: center;
+    }
+
+    .slide::before {
+      content: '';
+      position: absolute;
+      top: -40px;
+      right: -40px;
+      width: 160px;
+      height: 160px;
+      background: rgba(16, 185, 129, 0.12);
+      filter: blur(50px);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    /* Header Strip */
+    .slide-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 2;
+    }
+    .brand-tag {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 800;
+      color: #34D399;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .brand-logo-dot {
+      width: 8px;
+      height: 8px;
+      background: #10B981;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #10B981;
+    }
+    .slide-number {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      font-weight: 800;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 4px 10px;
+      border-radius: 20px;
+      color: #94A3B8;
+    }
+
+    /* Content Body */
+    .slide-body {
+      z-index: 2;
+      margin: auto 0;
+    }
+    .slide-title {
+      font-size: 24px;
+      font-weight: 900;
+      line-height: 1.2;
+      color: #FFFFFF;
+      letter-spacing: -0.5px;
+      margin-bottom: 12px;
+    }
+    .slide-title span {
+      color: #34D399;
+    }
+    .slide-desc {
+      font-size: 12px;
+      color: #CBD5E1;
+      line-height: 1.6;
+    }
+
+    /* Mockup Container for Slide 2 */
+    .mockup-frame {
+      width: 100%;
+      height: 190px;
+      background: #020617;
+      border: 1px solid rgba(52, 211, 153, 0.3);
+      border-radius: 16px;
+      overflow: hidden;
+      position: relative;
+      margin-top: 10px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    /* Recreated Mobile CRM Screen Styles */
+    .crm-mobile-ui {
+      background: #FFFFFF;
+      border-radius: 16px;
+      padding: 12px;
+      color: #0F172A;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.5);
+      border: 1px solid rgba(255,255,255,0.2);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow: hidden;
+      margin-top: 8px;
+    }
+    .crm-header-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 8px;
+      border-b: 1px solid #F1F5F9;
+    }
+    .crm-chip {
+      background: #F1F5F9;
+      font-size: 8px;
+      font-weight: 700;
+      color: #334155;
+      padding: 2px 6px;
+      border-radius: 6px;
+    }
+    .crm-icon-circle {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #F1F5F9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 8px;
+    }
+    .crm-section {
+      padding: 8px;
+      border-radius: 10px;
+      margin-top: 6px;
+    }
+    .crm-btn-primary {
+      width: 100%;
+      background: linear-gradient(135deg, #818CF8 0%, #6366F1 100%);
+      color: #FFFFFF;
+      font-weight: 800;
+      font-size: 10px;
+      padding: 6px;
+      border-radius: 8px;
+      border: none;
+      box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
+    }
+    .crm-stat-badge {
+      flex: 1;
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 6px;
+      padding: 4px 6px;
+      font-size: 8px;
+      color: #64748B;
+      text-align: center;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+    }
+    .crm-card {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 10px;
+      padding: 8px;
+      margin-top: 6px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+
+    /* Feature List Cards */
+    .feature-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .feature-item {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 10px 14px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+      font-weight: 700;
+      color: #E2E8F0;
+    }
+    .feature-icon {
+      width: 20px;
+      height: 20px;
+      border-radius: 6px;
+      background: rgba(16, 185, 129, 0.2);
+      color: #34D399;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      shrink: 0;
+    }
+
+    /* Footer Strip */
+    .slide-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 14px;
+      z-index: 2;
+    }
+    .footer-url {
+      font-size: 10px;
+      font-weight: 700;
+      color: #64748B;
+    }
+    .footer-action {
+      font-size: 10px;
+      font-weight: 800;
+      color: #34D399;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="carousel-header">
+    <h1>Clinaza Dental CRM • Carousel Deck</h1>
+    <p>5-Slide Brand-DNA Social Deck Generated via slideshow-kit</p>
+  </div>
+
+  <div class="deck-container">
+    
+    <!-- SLIDE 1: HOOK -->
+    <div class="slide">
+      <div class="slide-top">
+        <div class="brand-tag">
+          <div class="brand-logo-dot"></div>
+          Clinaza Dental CRM
+        </div>
+        <div class="slide-number">01 / 05</div>
+      </div>
+      <div class="slide-body">
+        <div style="font-size: 32px; margin-bottom: 8px;">🦷⚡</div>
+        <h2 class="slide-title">Stop Paying For Expensive <span>Clinic Software!</span></h2>
+        <p class="slide-desc">
+          Managing patient appointments and follow-ups on paper & Excel? Switch to 100% Free Dental CRM built for clinics in India.
+        </p>
+      </div>
+      <div class="slide-footer">
+        <span class="footer-url">clinaza.in</span>
+        <span class="footer-action">Swipe Next 👉</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 2: LIVE CRM PREVIEW -->
+    <div class="slide" style="border-color: rgba(52, 211, 153, 0.4);">
+      <div class="slide-top">
+        <div class="brand-tag">
+          <div class="brand-logo-dot"></div>
+          Live Dashboard Preview
+        </div>
+        <div class="slide-number">02 / 05</div>
+      </div>
+      <div class="slide-body">
+        <h2 class="slide-title" style="font-size: 16px; margin-bottom: 6px;">
+          Mobile-First <span>Patient Database & Doctor Queue</span>
+        </h2>
+
+        <!-- Exact Mobile CRM Screenshot -->
+        <div class="mockup-frame" style="height: 250px; border-radius: 16px; border: 1px solid rgba(52, 211, 153, 0.4); overflow: hidden; background: #020617; box-shadow: 0 10px 25px rgba(0,0,0,0.5);">
+          <img src="/exact_user_vikram_ss.png" alt="Clinaza Dental CRM Patient Record Screenshot" style="width: 100%; height: 100%; object-fit: contain; object-position: top; background: #F8FAFC;">
+        </div>
+
+      </div>
+      <div class="slide-footer">
+        <span class="footer-url">http://localhost:3333</span>
+        <span class="footer-action">1-Click Recall 👉</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 3: WHATSAPP AUTOMATION -->
+    <div class="slide">
+      <div class="slide-top">
+        <div class="brand-tag">
+          <div class="brand-logo-dot"></div>
+          Automated Recalls
+        </div>
+        <div class="slide-number">03 / 05</div>
+      </div>
+      <div class="slide-body">
+        <h2 class="slide-title">1-Click <span>WhatsApp</span> Patient Reactivation</h2>
+        <p class="slide-desc">Automatically re-engage dormant patients for checkups, scaling, and crowns.</p>
+        <div class="feature-list">
+          <div class="feature-item">
+            <div class="feature-icon">✓</div> Automated 6-month cleaning recall alerts
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">✓</div> Direct 1-tap WhatsApp chat links
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">✓</div> Zero manual chasing by receptionist
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span class="footer-url">clinaza.in</span>
+        <span class="footer-action">Swipe Next 👉</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 4: PATIENT EMI FINANCING -->
+    <div class="slide">
+      <div class="slide-top">
+        <div class="brand-tag">
+          <div class="brand-logo-dot"></div>
+          Patient EMI Financing
+        </div>
+        <div class="slide-number">04 / 05</div>
+      </div>
+      <div class="slide-body">
+        <h2 class="slide-title">Point-of-Care <span>Financing Options</span></h2>
+        <p class="slide-desc">Offer ₹30,000 to ₹3,00,000 EMI options for Dental Implants & Clear Aligners via NBFC partners.</p>
+        <div class="feature-list">
+          <div class="feature-item">
+            <div class="feature-icon">💳</div> 100% Digital instant pre-assessment
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">🛡️</div> ₹0 Clinic fees & zero collection risk
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span class="footer-url">clinaza.in</span>
+        <span class="footer-action">Swipe Next 👉</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 5: CALL TO ACTION -->
+    <div class="slide" style="background: linear-gradient(145deg, #061318 0%, #0B2450 100%);">
+      <div class="slide-top">
+        <div class="brand-tag">
+          <div class="brand-logo-dot"></div>
+          Get Started Today
+        </div>
+        <div class="slide-number">05 / 05</div>
+      </div>
+      <div class="slide-body" style="text-align: center;">
+        <div style="font-size: 36px; margin-bottom: 12px;">🎉</div>
+        <h2 class="slide-title">Claim Your <span>Free Dental CRM</span> Access</h2>
+        <p class="slide-desc" style="max-width: 300px; margin: 0 auto 16px;">
+          Join 500+ dental clinics across India scaling patient appointments effortlessly.
+        </p>
+        <div style="background: #10B981; color: #020617; font-weight: 900; font-size: 13px; padding: 12px 20px; border-radius: 12px; display: inline-block; text-transform: uppercase; letter-spacing: 0.5px;">
+          ⚡ Get Started at clinaza.in
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span class="footer-url">http://localhost:3333</span>
+        <span class="footer-action">clinaza.in</span>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

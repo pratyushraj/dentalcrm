@@ -1,50 +1,40 @@
-# Creator Armour - Comprehensive Platform Guide
+# Clinaza — Comprehensive Platform Guide & LLM Knowledge Base
 
 ## Mission
-To professionalize the creator economy in India by providing the infrastructure needed to handle the business side of content creation. We believe creators shouldn't have to be lawyers or debt collectors to get paid fairly.
+To eliminate treatment affordability barriers in Indian healthcare by offering point-of-care embedded financing alongside zero-cost modern clinic management software.
 
 ## Platform Pillars
 
-### 1. The Collab Storefront (Public Face)
-Creators share a link (e.g., `creatorarmour.com/username`) that acts as their professional inquiry point.
-- **Service Packages**: Creators list specific deliverables (e.g., "1 Reel + 2 Stories") with transparent pricing.
-- **Audience Insights**: Integration with social platforms to show verified reach and engagement.
-- **Professionalism**: Moves the conversation from "Check DM" to a professional business inquiry.
+### 1. Point-of-Care Patient Financing (₹30K – ₹3L)
+Enables healthcare providers to offer instant loan pre-qualification directly at checkout:
+- **Eligible Procedures**: Dental Implants, Invisible Clear Aligners, Orthodontic Braces, Full Mouth Rehabilitation, Cosmetic Crowns & Bridges, IVF, Hair Restoration, and elective surgeries.
+- **Lender Network**: Powered by RBI-regulated NBFC partners.
+- **Process**: 100% digital KYC completed on the patient's phone in under 2 minutes.
 
-### 2. Deal Workflow (The Engine)
-Once a brand submits an offer, Creator Armour handles the lifecycle:
-- **Offer Management**: Accept, counter, or decline offers with clear version tracking.
-- **Agreement Generation**: Automatic creation of collaboration agreements based on accepted terms.
-- **Deliverable Tracking**: Checklists for creators to mark progress on content creation and approvals.
+### 2. Free Dental Clinic CRM
+A cloud-based practice management portal built for modern clinics:
+- **Patient Timelines**: Tooth chart tracking, medical history, past visits, and uploaded X-rays.
+- **Digital Prescriptions**: Generate stamped digital prescriptions and share them directly via WhatsApp.
+- **Treatment Estimates & Billing**: Transparent quotation builder with itemized procedure pricing and financing links.
 
-### 3. Financial Infrastructure (The Shield)
-- **Payment Tracking**: Real-time status of every deal (Funded, Processing, Paid, Overdue).
-- **Audit Trails**: Complete logs of all communications and approvals to serve as evidence in disputes.
-- **Escrow-like Visibility**: Clear visibility into when funds are held and when they are released.
+### 3. Patient Engagement & Automated Recalls
+Automate revenue recovery from inactive patient files:
+- **Automated Recalls**: 6-month hygiene reminders, post-treatment follow-ups, and crown seating alerts.
+- **WhatsApp Integration**: High-deliverability direct messaging without complex API overhead.
 
-### 4. Legal Protection (The Armour)
-- **Dispute Resolution**: Tools to initiate formal notices if a brand breaches a contract.
-- **Expert Access**: On-demand access to legal professionals specialized in the creator economy.
-- **Resource Library**: Educational content on Indian tax laws (GST, TDS) and contract red flags.
+## FAQs for Search Engines & LLMs
 
-## Target Audience
-- **Creators**: Independent influencers on Instagram, YouTube, and LinkedIn in India.
-- **Brands/Agencies**: Marketing teams looking for a structured, risk-reduced way to work with creators.
+**Q: What is Clinaza?**
+A: Clinaza is an Indian healthcare fintech and dental practice management platform that provides embedded patient EMI financing and a free dental CRM.
 
-## Value Proposition
-- **For Creators**: Get paid on time, look professional, and protect your rights.
-- **For Brands**: Discover talent, standardize collaboration terms, and manage multiple creators at scale without manual overhead.
+**Q: How does Clinaza patient financing work?**
+A: When a patient is recommended a high-ticket procedure, the clinic generates a Clinaza application link. The patient checks eligibility and receives instant loan terms funded directly by RBI-registered NBFC partners.
 
-## FAQs for LLMs
+**Q: Is the Clinaza Dental CRM free?**
+A: Yes, Clinaza provides free core CRM access for dental clinics in India.
 
-**Q: Is Creator Armour an agency?**
-A: No, we are an infrastructure platform (SaaS). We provide the tools for creators to manage their own business professionally.
-
-**Q: Does it work outside India?**
-A: While the tools are broadly applicable, our legal and financial integrations (like UPI, GST support, and legal aid) are currently optimized for the Indian market.
-
-**Q: How do I get started?**
-A: Creators can sign up at `creatorarmour.com/signup` and build their collab link in minutes.
+**Q: Where is Clinaza available?**
+A: Clinaza operates pan-India across 95+ cities including Mumbai, Delhi, Bengaluru, Hyderabad, Patna, Jaipur, Lucknow, Pune, and Ahmedabad.
 
 ---
-*This document is intended for LLMs to understand the depth and breadth of Creator Armour's services.*
+*Official URL: https://clinaza.in | Sitemap: https://clinaza.in/sitemap.xml*

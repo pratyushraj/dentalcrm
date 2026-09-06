@@ -40,14 +40,33 @@ export default function BlogHub() {
     ]
   };
 
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    'itemListElement': [
+      {
+        '@type': 'ListItem',
+        'position': 1,
+        'name': 'Home',
+        'item': 'https://clinaza.in/'
+      },
+      {
+        '@type': 'ListItem',
+        'position': 2,
+        'name': 'Patient Guides & Dental Articles',
+        'item': 'https://clinaza.in/blog'
+      }
+    ]
+  };
+
   return (
     <div className="min-h-screen bg-neutral-950 text-white font-sora antialiased selection:bg-white selection:text-neutral-950">
       <SEOHead
-        title="YOUR DENTIST Patna | Oral Health Guides & Patient Resources"
-        description="Read patient guides on braces, clear aligner costs, and dental treatments in Patna by Dr. Aryan Parmar. Flexible EMI financing options available."
-        keywords={['best dentist in patna', 'braces cost patna', 'clear aligners patna', 'dental clinic patna', 'teeth gap treatment']}
+        title="Clinaza Patient Guides | Dental Treatments, Costs & EMI Financing"
+        description="Read comprehensive patient guides on dental implants, braces, aligners cost, and healthcare EMI financing options across India."
+        keywords={['dental patient guides', 'dental treatment costs india', 'dental emi financing', 'implants cost guide', 'braces on emi']}
         canonicalUrl="https://clinaza.in/blog"
-        jsonLd={localBusinessSchema}
+        jsonLd={[localBusinessSchema, breadcrumbSchema]}
       />
 
       {/* Header */}

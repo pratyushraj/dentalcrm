@@ -56,6 +56,32 @@ export default function BlogArticlePage() {
     }
   };
 
+  // Breadcrumb schema for rich breadcrumb trail in Google search results
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    'itemListElement': [
+      {
+        '@type': 'ListItem',
+        'position': 1,
+        'name': 'Home',
+        'item': 'https://clinaza.in/'
+      },
+      {
+        '@type': 'ListItem',
+        'position': 2,
+        'name': 'Patient Guides',
+        'item': 'https://clinaza.in/blog'
+      },
+      {
+        '@type': 'ListItem',
+        'position': 3,
+        'name': article.title,
+        'item': `https://clinaza.in/blog/${article.slug}`
+      }
+    ]
+  };
+
   // Generate Google-compliant FAQ Schema dynamically
   const faqSchema = {
     '@context': 'https://schema.org',
@@ -81,7 +107,7 @@ export default function BlogArticlePage() {
         publishedTime={isoDate}
         modifiedTime={isoDate}
         author={article.author}
-        jsonLd={[articleSchema, faqSchema]}
+        jsonLd={[articleSchema, faqSchema, breadcrumbSchema]}
         image={article.featuredImage}
       />
 

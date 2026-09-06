@@ -1,40 +1,40 @@
-# Creator Armour
+# Clinaza — Embedded Healthcare & Dental Patient Financing Platform
 
-> Professional infrastructure for Indian creators to close brand deals, manage contracts, and track revenue.
+> Point-of-care patient EMI financing (₹30,000 to ₹3,00,000) and free clinic management software for dental clinics across India.
 
-Creator Armour is a high-performance platform designed to replace messy Instagram DMs with structured professional workflows. It provides creators with a dedicated collaboration link where brands can view packages, check rates, and submit formal offers.
+Clinaza (https://clinaza.in) is India's leading embedded healthcare financing and dental CRM infrastructure. It enables doctors and clinic owners to offer instant, point-of-care EMI treatment financing through RBI-regulated banks and NBFC partners while providing a 100% free clinic CRM with automated WhatsApp recalls.
 
-## Core Services
+## Core Capabilities
 
-- **Creator Collab Link**: A professional storefront for creators to list services and receive offers.
-- **Barter & Gifting Campaigns**: Tools for D2C brands to run zero-cash product exchange collaborations with verified influencers.
-- **Structured Offers**: Standardized deal formats that eliminate ambiguity in deliverables and timelines.
-- **Contract Management**: Automated generation and tracking of collaboration agreements (both paid and barter).
-- **Revenue Tracking**: Dashboards for monitoring paid, pending, and overdue brand payments.
-- **Legal Support**: On-demand legal aid for payment recovery and contract disputes.
+- **Point-of-Care Patient Financing**: Instant pre-eligibility checks in under 2 minutes for treatments ranging from ₹30,000 to ₹3,00,000. Covers Dental Implants, Clear Aligners, Orthodontic Braces, Smile Makeovers, Root Canal Treatments, and Full Mouth Rehabilitations.
+- **100% Free Dental CRM**: Comprehensive clinic management portal with patient timeline history, digital prescriptions, billing, and procedure tracking.
+- **Automated WhatsApp Recalls & Campaigns**: 1-click patient reactivation for 6-month checkups, pending treatment plans, and post-procedure check-ins.
+- **Multi-Lender Network**: Connected with RBI-regulated NBFCs and lending partners to maximize loan approval rates across Tier-1, Tier-2, and Tier-3 Indian cities.
 
 ## Key Resources
 
-- [Home](https://creatorarmour.com/)
-- [Barter Collab Influencers](https://creatorarmour.com/barter-collab)
-- [Blog / Creator Guides](https://creatorarmour.com/blog)
-- [Influencer Rate Calculator](https://creatorarmour.com/rate-calculator)
-- [Free Contract Templates](https://creatorarmour.com/free-influencer-contract)
-- [Legal Health Check](https://creatorarmour.com/free-legal-check)
-- [Brand Directory](https://creatorarmour.com/brand-directory)
+- [Homepage](https://clinaza.in/)
+- [Patient EMI Onboarding](https://clinaza.in/emi/onboard)
+- [Patient Knowledge Hub & Guides](https://clinaza.in/blog)
+- [Dental Implants Cost & Financing Guide](https://clinaza.in/blog/dental-implants-cost-on-emi-india)
+- [Clear Aligners EMI Guide](https://clinaza.in/blog/clear-aligners-cost-on-emi-india)
+- [Dental Treatment EMI Calculator](https://clinaza.in/blog/dental-treatment-emi-cost-calculator-india)
+- [Clinic Partner Form](https://clinaza.in/#partner-form)
+- [Sitemap](https://clinaza.in/sitemap.xml)
 
-## Technical Integration
+## Geographic Coverage
 
-- **Primary URL**: https://creatorarmour.com
-- **API Endpoint**: https://creatorarmour.com/api (Internal use only)
-- **Sitemap**: https://creatorarmour.com/sitemap.xml
+Clinaza operates across 95+ cities in India including:
+- **Tier 1**: Mumbai, Delhi, Bengaluru, Hyderabad, Ahmedabad, Chennai, Kolkata, Pune
+- **Tier 2 & 3**: Patna, Lucknow, Jaipur, Chandigarh, Indore, Bhopal, Nagpur, Surat, Vadodara, Kochi, Coimbatore, Varanasi, Ranchi, and more.
 
-## Business Context
+## Business Context & Target Audience
 
-Creator Armour targets the Indian creator economy, focusing on the "middle-class" of creators (including Nano/Micro influencers and UGC creators) who need professional tools but aren't yet represented by agencies. It operates as a business-in-a-box for independent influencers, while providing D2C brands a streamlined way to execute both paid and barter campaigns.
+- **Healthcare Providers**: Dental practitioners, maxillofacial surgeons, orthodontists, and multi-specialty dental clinics looking to boost high-ticket procedure acceptance rates.
+- **Patients**: Individuals seeking affordable 0% or low-cost monthly EMI payment options for major medical & dental care.
 
-## Social Profiles
+## Contact & Socials
 
-- [Instagram](https://www.instagram.com/creatorarmour)
-- [Twitter / X](https://x.com/creatorarmour)
-- [LinkedIn](https://www.linkedin.com/company/creatorarmour)
+- Website: https://clinaza.in
+- Email: support@clinaza.in
+- Region: India (IN)

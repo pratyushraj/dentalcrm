@@ -23,6 +23,55 @@ export default function CityLandingPage() {
   const metaTitle = `Dental Implants, Braces & Crown EMI Plans in ${name}, ${state} | Clinaza`;
   const metaDescription = `Looking for dental treatment on EMI in ${name}? Clinaza connects ${name} patients with financing for implants, aligners, crowns and more. Check eligibility in 2 minutes.`;
 
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: 'https://clinaza.in/',
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Cities',
+        item: 'https://clinaza.in/#cities',
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: `${name} Dental Financing`,
+        item: `https://clinaza.in/cities/${city}`,
+      },
+    ],
+  };
+
+  const medicalFinancingSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FinancialService',
+    name: `Clinaza Dental Financing — ${name}`,
+    description: `Point-of-care dental treatment EMI financing network serving clinics and patients in ${name}, ${state}.`,
+    url: `https://clinaza.in/cities/${city}`,
+    logo: 'https://clinaza.in/assets/clinaza-logo.jpg',
+    areaServed: {
+      '@type': 'City',
+      name: name,
+      containedInPlace: {
+        '@type': 'AdministrativeArea',
+        name: state,
+      },
+    },
+    serviceType: 'Healthcare Patient Financing & Dental EMI Plans',
+    priceRange: '₹30,000 to ₹3,00,000',
+    provider: {
+      '@type': 'Organization',
+      name: 'Clinaza Technologies',
+      url: 'https://clinaza.in',
+    },
+  };
+
   const faqSchema = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
@@ -77,7 +126,7 @@ export default function CityLandingPage() {
           `clear aligners ${name.toLowerCase()} emi`,
         ]}
         canonicalUrl={`https://clinaza.in/cities/${city}`}
-        jsonLd={faqSchema}
+        jsonLd={[breadcrumbSchema, medicalFinancingSchema, faqSchema]}
       />
 
       {/* Header */}

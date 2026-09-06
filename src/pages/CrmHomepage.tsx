@@ -401,13 +401,24 @@ export default function CrmHomepage() {
               </p>
             </div>
 
-            {/* Authentic Clinic Photo */}
+            {/* Authentic Clinic Photo & Mobile CRM Preview */}
             <div className="md:col-span-5 relative mt-2 md:mt-0">
               <img
                 src="/assets/clinic-hero-real.png"
                 alt="Modern authentic dental clinic treatment room in India"
                 className="w-full h-auto rounded-2xl sm:rounded-3xl border border-slate-200 shadow-lg object-cover aspect-[4/3]"
               />
+              {/* Floating Mobile CRM Preview Mockup */}
+              <div className="absolute -bottom-3 -right-2 sm:-bottom-4 sm:-right-4 w-28 sm:w-36 rounded-xl sm:rounded-2xl overflow-hidden border-2 border-white shadow-2xl bg-slate-900 group transition-transform hover:scale-105">
+                <img
+                  src="/dashboard_mobile_view.png"
+                  alt="Clinaza Mobile Dental CRM View"
+                  className="w-full h-auto block"
+                />
+                <div className="bg-slate-950/90 text-white text-[9px] font-bold py-1 px-1.5 text-center truncate">
+                  📱 Mobile CRM
+                </div>
+              </div>
               <div className="absolute -bottom-2.5 -left-2.5 sm:-bottom-3 sm:-left-3 bg-white/95 backdrop-blur-md border border-slate-200 px-3.5 py-2 rounded-xl sm:rounded-2xl shadow-md flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-[#0f7a75] animate-pulse"></span>
                 <span className="text-[11px] font-bold text-[#0B2450]">Point-of-Care EMI Ready</span>
@@ -561,6 +572,91 @@ export default function CrmHomepage() {
                   <p className="text-xs text-slate-300 leading-relaxed">{service.desc}</p>
                 </div>
               ))}
+            </div>
+
+            {/* Interactive Carousel Post Preview Mockup with Clinaza CRM */}
+            <div className="bg-slate-900/90 border border-slate-700/80 rounded-3xl p-5 sm:p-7 shadow-2xl max-w-3xl mx-auto text-left space-y-4">
+              <div className="flex items-center justify-between border-b border-slate-800 pb-3.5">
+                <div className="flex items-center gap-3">
+                  <img src="/assets/clinaza-logo.png" alt="Clinaza" className="w-8 h-8 rounded-full border border-emerald-500/40 p-0.5 bg-slate-950" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+                  <div>
+                    <h4 className="text-xs font-bold text-white flex items-center gap-1.5">
+                      clinaza.official <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                    </h4>
+                    <p className="text-[10px] text-slate-400">Instagram Carousel Post Preset • 1080x1080</p>
+                  </div>
+                </div>
+                <span className="px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[10px] font-mono font-bold">
+                  SWIPE CAROUSEL 👉
+                </span>
+              </div>
+
+              {/* Carousel Slides Container */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {/* Slide 1: Main Hook */}
+                <div className="relative aspect-square rounded-2xl bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950 border border-slate-800 p-5 flex flex-col justify-between overflow-hidden group shadow-lg">
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/10 blur-2xl rounded-full pointer-events-none"></div>
+                  <div className="flex items-center justify-between z-10">
+                    <span className="text-[9px] font-mono font-black uppercase text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded-md">
+                      SLIDE 1/3
+                    </span>
+                    <span className="text-[10px] font-bold text-slate-400">Clinaza CRM</span>
+                  </div>
+
+                  <div className="space-y-2 z-10 my-auto">
+                    <span className="text-3xl">🚀</span>
+                    <h5 className="text-lg font-black text-white leading-snug">
+                      Stop Paying For Expensive Clinic Software!
+                    </h5>
+                    <p className="text-xs text-slate-300">
+                      Introducing 100% Free Dental CRM with automated WhatsApp patient recalls.
+                    </p>
+                  </div>
+
+                  <div className="flex items-center justify-between text-[10px] text-slate-400 z-10 border-t border-slate-800/80 pt-2.5">
+                    <span>Swipe for CRM preview 👉</span>
+                    <span className="font-mono text-emerald-400">#FreeDentalCRM</span>
+                  </div>
+                </div>
+
+                {/* Slide 2: CRM Mobile Dashboard Live Preview Slide */}
+                <div className="relative aspect-square rounded-2xl bg-gradient-to-br from-indigo-950 via-slate-950 to-slate-900 border border-emerald-500/40 p-4 flex flex-col justify-between overflow-hidden shadow-xl">
+                  <div className="flex items-center justify-between z-10 mb-2">
+                    <span className="text-[9px] font-mono font-black uppercase text-emerald-400 bg-emerald-500/20 border border-emerald-500/40 px-2 py-0.5 rounded-md">
+                      SLIDE 2/3 • CRM PREVIEW
+                    </span>
+                    <a href="http://localhost:3333" target="_blank" rel="noopener noreferrer" className="text-[9px] font-mono font-bold text-emerald-300 bg-emerald-950/80 border border-emerald-500/40 px-2 py-0.5 rounded flex items-center gap-1 hover:text-white transition-colors">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span> http://localhost:3333
+                    </a>
+                  </div>
+
+                  {/* Real Mobile CRM Screenshot Preview inside Carousel Frame */}
+                  <div className="relative flex-1 rounded-xl overflow-hidden border border-slate-700 bg-slate-950 flex items-center justify-center my-1 group">
+                    <img 
+                      src="/dashboard_mobile_view.png" 
+                      alt="Clinaza Mobile Dental CRM Dashboard Preview (http://localhost:3333)" 
+                      className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-transparent flex items-end p-2.5">
+                      <p className="text-[10px] font-bold text-white leading-tight">
+                        📱 Real-time patient queue, appointments & 1-click WhatsApp recall on <span className="text-emerald-400 font-mono">http://localhost:3333</span>
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-between text-[10px] text-slate-300 z-10 border-t border-slate-800/80 pt-2">
+                    <span className="font-bold text-emerald-400">₹0 Lifetime Access</span>
+                    <a href="http://localhost:3333" target="_blank" rel="noopener noreferrer" className="text-[9.5px] font-black uppercase text-white bg-emerald-600 hover:bg-emerald-500 px-2 py-1 rounded-lg transition-colors flex items-center gap-1">
+                      Open http://localhost:3333 →
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex items-center justify-between text-[11px] text-slate-400 pt-1">
+                <span>💬 Designed for Instagram & Meta carousel posts</span>
+                <span className="text-emerald-400 font-bold">Included in Clinic Growth Package</span>
+              </div>
             </div>
 
             <div className="pt-2">

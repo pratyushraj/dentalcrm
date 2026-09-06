@@ -507,6 +507,7 @@ const ReactivationLayout: React.FC<ReactivationLayoutProps> = ({ children }) => 
           </div>
 
             {/* Quick Tutorial / Guide Trigger */}
+          <div className="flex items-center gap-2">
             <a
               href="https://wa.me/917292984244?text=Hi%20Clinaza%20support%2C%20I%20need%20help%20using%20the%20Free%20Dental%20CRM."
               target="_blank"

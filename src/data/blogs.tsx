@@ -5197,6 +5197,260 @@ export const BLOGS: BlogArticle[] = [
         </div>
       </div>
     )
+  },
+  {
+    slug: "icl-eye-surgery-cost-on-emi-india",
+    title: "ICL Eye Surgery Cost on EMI in India 2025 — EVO Visian ICL Financing for High Power & Thin Cornea",
+    category: "Medical EMI",
+    readTime: "8 min read",
+    publishDate: "2026-09-08",
+    author: "Clinaza Health Finance Team",
+    summary: "ICL (Implantable Collamer Lens) surgery costs ₹80,000 to ₹1,80,000 in India. Learn why ICL is the best alternative for thin corneas or high refractive power (-8D to -20D) and how to finance it on 0% EMI.",
+    featuredImage: "/assets/clinic-hero-real.png",
+    metaDescription: "ICL eye surgery cost on EMI in India: EVO Visian ICL & IPCL lens pricing (₹80K–₹1.8L per eye) with instant 0% interest EMI options up to ₹5 lakh via Clinaza.",
+    faqs: [
+      { question: "What is ICL surgery and who is it for?", answer: "ICL (Implantable Collamer Lens / Phakic IOL) is a soft, biocompatible lens permanently placed inside the eye between the iris and natural crystalline lens. It is ideal for patients with high power (-3D to -20D), thin corneas, or severe dry eyes who are rejected for LASIK." },
+      { question: "How much does ICL surgery cost in India?", answer: "Spherical ICL costs ₹65,000 to ₹90,000 per eye (₹1.3L to ₹1.8L for both eyes). Toric ICL (for astigmatism/cylinder power) costs ₹90,000 to ₹1,30,000 per eye (₹1.8L to ₹2.6L for both eyes)." },
+      { question: "Can I get ICL surgery on 0% EMI in India?", answer: "Yes! Clinaza offers 0% interest medical loans for ICL and IPCL surgeries with tenures of 3 to 24 months, zero collateral, and instant approval in 2 minutes." },
+      { question: "Is ICL surgery reversible?", answer: "Yes. Unlike LASIK where corneal tissue is permanently removed with a laser, the ICL lens can be safely removed or upgraded if your prescription changes later in life." },
+      { question: "How long is the recovery after ICL surgery?", answer: "Most patients achieve sharp 20/20 HD vision within 24 to 48 hours and can resume light desktop work within 2 to 3 days." }
+    ],
+    content: (
+      <div className="space-y-6 text-neutral-800 leading-relaxed">
+        <p className="text-lg">If an eye specialist told you that you are unsuitable for LASIK or Contoura Vision due to high minus prescription (-8.0D or higher) or thin corneal thickness (&lt;480 microns), <strong>EVO Visian ICL (Implantable Collamer Lens)</strong> is the world's gold standard solution for permanent glass freedom.</p>
+        <p>Made from collagen copolymer, ICL lenses deliver ultra-high-definition vision without altering or shaving your natural cornea. Clinaza now makes this premium technology affordable with zero-cost EMI financing starting from ₹5,500/month.</p>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">ICL vs IPCL Surgery Cost Breakdown in India (2025)</h2>
+        <div className="overflow-x-auto rounded-xl border border-neutral-200 shadow-sm">
+          <table className="w-full text-sm">
+            <thead className="bg-neutral-50 text-neutral-600 uppercase text-xs tracking-wide">
+              <tr>
+                <th className="px-4 py-3 text-left">Lens & Procedure Type</th>
+                <th className="px-4 py-3 text-left">Cost (Both Eyes)</th>
+                <th className="px-4 py-3 text-left">Target Prescription</th>
+                <th className="px-4 py-3 text-left">Clinaza 0% EMI (18 mo)</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-neutral-100">
+              <tr className="hover:bg-blue-50/30">
+                <td className="px-4 py-3 font-medium">Indian IPCL (Care Group) Spherical</td>
+                <td className="px-4 py-3">₹80,000–1,20,000</td>
+                <td className="px-4 py-3">Myopia up to -15D</td>
+                <td className="px-4 py-3 text-green-600 font-bold">₹4,444–6,666 / mo</td>
+              </tr>
+              <tr className="hover:bg-blue-50/30">
+                <td className="px-4 py-3 font-medium">Indian IPCL Toric (with Cylinder)</td>
+                <td className="px-4 py-3">₹1,10,000–1,50,000</td>
+                <td className="px-4 py-3">Myopia + Astigmatism</td>
+                <td className="px-4 py-3 text-green-600 font-bold">₹6,111–8,333 / mo</td>
+              </tr>
+              <tr className="hover:bg-blue-50/30">
+                <td className="px-4 py-3 font-medium">STAAR EVO Visian ICL (USA) Spherical</td>
+                <td className="px-4 py-3">₹1,40,000–1,90,000</td>
+                <td className="px-4 py-3">High Myopia (-0.5D to -18D)</td>
+                <td className="px-4 py-3 text-green-600 font-bold">₹7,777–10,555 / mo</td>
+              </tr>
+              <tr className="hover:bg-blue-50/30">
+                <td className="px-4 py-3 font-medium">STAAR EVO Visian ICL (USA) Toric</td>
+                <td className="px-4 py-3">₹1,90,000–2,60,000</td>
+                <td className="px-4 py-3">High Myopia + High Cylinder</td>
+                <td className="px-4 py-3 text-green-600 font-bold">₹10,555–14,444 / mo</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Why Choose ICL Over Standard Laser Surgery?</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {[
+            { title: "No Corneal Tissue Removal", desc: "Corneal curvature and biomechanical strength remain 100% intact with zero risk of corneal ectasia." },
+            { title: "Completely Reversible", desc: "If your vision needs change in the future, the micro-lens can be easily removed or replaced by a surgeon." },
+            { title: "UV Eye Protection", desc: "Collamer material features an advanced UV filter that blocks harmful UVA/UVB rays from reaching the retina." },
+            { title: "Zero Dry Eye Syndrome", desc: "Does not cut corneal nerves, eliminating post-operative chronic dry eyes associated with flap-based LASIK." },
+          ].map(item => (
+            <div key={item.title} className="bg-blue-50 rounded-xl p-4 border border-blue-100">
+              <p className="font-semibold text-blue-900 text-sm mb-1">{item.title}</p>
+              <p className="text-xs text-blue-800">{item.desc}</p>
+            </div>
+          ))}
+        </div>
+
+        <div className="bg-gradient-to-r from-[#0867E8] to-blue-700 text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
+          <h3 className="text-lg font-bold">Check 0% EMI Pre-Approval for ICL Surgery</h3>
+          <p className="text-xs text-blue-100 max-w-lg mx-auto">Get approved up to ₹3,00,000 with zero downpayment and 0% interest monthly installments across India's top eye hospitals.</p>
+          <a href="https://clinaza.in/#calculator" className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md">Calculate ICL EMI →</a>
+        </div>
+      </div>
+    )
+  },
+  {
+    slug: "cataract-surgery-cost-on-emi-india",
+    title: "Cataract Surgery Cost on EMI in India 2025 — Monofocal, Toric & Multifocal Lens Financing",
+    category: "Medical EMI",
+    readTime: "9 min read",
+    publishDate: "2026-09-08",
+    author: "Clinaza Health Finance Team",
+    summary: "Cataract surgery costs ₹20,000 to ₹1,20,000 per eye in India. Compare robotic femto-laser cataract surgery and premium Trifocal / EDOF lenses on 0% EMI via Clinaza.",
+    featuredImage: "/assets/clinic-hero-real.png",
+    metaDescription: "Cataract surgery cost on EMI in India: Compare Robotic FLACS, Monofocal, Toric, and Trifocal IOL lens prices with 0% interest EMI options on Clinaza.",
+    faqs: [
+      { question: "How much does modern cataract surgery cost in India?", answer: "Standard Phacoemulsification with Indian monofocal lens costs ₹18,000–₹35,000 per eye. Robotic laser cataract surgery with premium imported Trifocal/EDOF lenses costs ₹70,000–₹1,25,000 per eye." },
+      { question: "Can I get premium cataract lenses on 0% EMI?", answer: "Yes! Many insurance policies only reimburse basic monofocal lenses. Clinaza provides 0% EMI financing to bridge the upgrade cost to Trifocal or Toric lenses without financial stress." },
+      { question: "What is the difference between Monofocal, Toric, and Trifocal lenses?", answer: "Monofocal lenses provide clear distant vision (reading glasses still required). Toric lenses correct astigmatism (cylindrical power). Trifocal/EDOF lenses provide complete glasses-free vision for distance, computer screens, and mobile reading." },
+      { question: "Is laser cataract surgery better than manual Phaco?", answer: "Femtosecond Laser-Assisted Cataract Surgery (FLACS) automates corneal incisions and capsulorhexis with computer precision, resulting in faster visual healing and optimal lens centering." }
+    ],
+    content: (
+      <div className="space-y-6 text-neutral-800 leading-relaxed">
+        <p className="text-lg">Cataract is the leading cause of reversible vision loss among Indian seniors. While traditional cataract surgery simply aimed to clear cloudiness, modern <strong>Robotic Femto-Cataract Surgery with Premium Trifocal &amp; EDOF Lenses</strong> now allows patients in their 50s, 60s, and 70s to completely throw away their reading and distance glasses.</p>
+        <p>Because basic health insurance and government schemes often cap payouts to standard monofocal lenses, Clinaza 0% EMI financing empowers families to choose the finest premium imported lenses for their parents without out-of-pocket strain.</p>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Cataract Lens Types & Cost Breakdown (Per Eye, India 2025)</h2>
+        <div className="overflow-x-auto rounded-xl border border-neutral-200 shadow-sm">
+          <table className="w-full text-sm">
+            <thead className="bg-neutral-50 text-neutral-600 uppercase text-xs tracking-wide">
+              <tr>
+                <th className="px-4 py-3 text-left">Intraocular Lens (IOL) Type</th>
+                <th className="px-4 py-3 text-left">Cost Per Eye</th>
+                <th className="px-4 py-3 text-left">Glasses Dependence</th>
+                <th className="px-4 py-3 text-left">Clinaza 0% EMI (12 mo)</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-neutral-100">
+              <tr className="hover:bg-blue-50/30">
+                <td className="px-4 py-3 font-medium">Standard Indian Aspheric Monofocal</td>
+                <td className="px-4 py-3">₹20,000–35,000</td>
+                <td className="px-4 py-3">Reading glasses required</td>
+                <td className="px-4 py-3 text-green-600 font-bold">₹1,666–2,916 / mo</td>
+              </tr>
+              <tr className="hover:bg-blue-50/30">
+                <td className="px-4 py-3 font-medium">Imported Monofocal (Alcon / J&amp;J / Zeiss)</td>
+                <td className="px-4 py-3">₹35,000–55,000</td>
+                <td className="px-4 py-3">Reading glasses required</td>
+                <td className="px-4 py-3 text-green-600 font-bold">₹2,916–4,583 / mo</td>
+              </tr>
+              <tr className="hover:bg-blue-50/30">
+                <td className="px-4 py-3 font-medium">Toric Monofocal (Astigmatism Correction)</td>
+                <td className="px-4 py-3">₹50,000–75,000</td>
+                <td className="px-4 py-3">Sharp distance; reading glasses needed</td>
+                <td className="px-4 py-3 text-green-600 font-bold">₹4,166–6,250 / mo</td>
+              </tr>
+              <tr className="hover:bg-blue-50/30">
+                <td className="px-4 py-3 font-medium">Premium Trifocal / EDOF (PanOptix / AT LISA)</td>
+                <td className="px-4 py-3">₹75,000–1,20,000</td>
+                <td className="px-4 py-3"><strong>95%+ Glasses Free (Near, Mid, Far)</strong></td>
+                <td className="px-4 py-3 text-green-600 font-bold">₹6,250–10,000 / mo</td>
+              </tr>
+              <tr className="hover:bg-blue-50/30">
+                <td className="px-4 py-3 font-medium">Robotic Laser FLACS Add-On</td>
+                <td className="px-4 py-3">+₹20,000–35,000</td>
+                <td className="px-4 py-3">Precision bladeless automation</td>
+                <td className="px-4 py-3 text-green-600 font-bold">+₹1,666 / mo</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div className="bg-slate-900 text-white p-6 rounded-2xl my-8 space-y-4">
+          <h3 className="text-lg font-bold">Partner Eye Hospitals &amp; Cataract Surgeons</h3>
+          <p className="text-sm text-slate-300">Upgrade more patients to premium Trifocal and Toric IOLs with on-spot 0% EMI subvention. Increase surgical revenue and patient satisfaction. Partner with Clinaza today.</p>
+          <a href="https://clinaza.in/#partner-form" className="inline-block bg-[#0867E8] text-white font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-600 transition-colors">Partner With Clinaza →</a>
+        </div>
+
+        <div className="bg-gradient-to-r from-[#0867E8] to-blue-700 text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
+          <h3 className="text-lg font-bold">Check Cataract Surgery 0% EMI Pre-Approval</h3>
+          <p className="text-xs text-blue-100 max-w-lg mx-auto">Instant approval in 2 minutes for yourself or elderly parents. Zero collateral, minimal KYC.</p>
+          <a href="https://clinaza.in/#calculator" className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md">Calculate Cataract EMI →</a>
+        </div>
+      </div>
+    )
+  },
+  {
+    slug: "contoura-vision-vs-smile-vs-lasik-cost-india",
+    title: "Contoura Vision vs SMILE vs Femto-LASIK — Which Eye Surgery is Best in India 2025?",
+    category: "Medical EMI",
+    readTime: "8 min read",
+    publishDate: "2026-09-08",
+    author: "Clinaza Clinical Insights",
+    summary: "Detailed comparison between Contoura Vision, Flapless SMILE Pro, Blade-Free Femto-LASIK, and Standard LASIK. Compare technology, night vision glare, corneal safety, recovery time, and costs on EMI.",
+    featuredImage: "/assets/clinic-hero-real.png",
+    metaDescription: "Contoura Vision vs SMILE vs Femto-LASIK comparison in India: Compare technology, night glare, corneal safety, costs (₹40K–₹1.3L) and 0% monthly EMI on Clinaza.",
+    faqs: [
+      { question: "What is the difference between Contoura Vision and SMILE?", answer: "Contoura Vision is topography-guided LASIK that maps 22,000 elevation points on your cornea to eliminate minute surface irregularities for superior night vision. SMILE is a 100% flapless keyhole laser procedure with maximum corneal biomechanical stability." },
+      { question: "Which is better for dry eyes: Contoura or SMILE?", answer: "SMILE is generally preferred for patients prone to dry eyes because it uses a tiny 2mm incision without cutting a corneal flap, preserving 80% more corneal nerve fibers." },
+      { question: "Which procedure provides the sharpest visual quality?", answer: "Contoura Vision frequently achieves 'Super Vision' (better than 20/20 or 6/5 vision) because it corrects micro-aberrations on the corneal surface." },
+      { question: "Can Contoura Vision or SMILE be done on EMI?", answer: "Yes. Both premium procedures can be financed through Clinaza with 0% interest monthly installments from ₹3,500/month." }
+    ],
+    content: (
+      <div className="space-y-6 text-neutral-800 leading-relaxed">
+        <p className="text-lg">Choosing the right laser vision correction surgery in 2025 can feel overwhelming with options like <strong>Standard LASIK, Blade-Free Femto-LASIK, Topography-Guided Contoura Vision, and Flapless SMILE / SMILE Pro</strong>. Each technology has unique strengths tailored to your corneal thickness, lifestyle, and visual demands.</p>
+        <p>Here is an unbiased clinical comparison to help you choose the ideal laser eye surgery and finance it comfortably with 0% interest EMI through Clinaza.</p>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Feature-by-Feature Comparison Matrix</h2>
+        <div className="overflow-x-auto rounded-xl border border-neutral-200 shadow-sm">
+          <table className="w-full text-sm">
+            <thead className="bg-neutral-50 text-neutral-600 uppercase text-xs tracking-wide">
+              <tr>
+                <th className="px-4 py-3 text-left">Feature</th>
+                <th className="px-4 py-3 text-left">Blade Femto-LASIK</th>
+                <th className="px-4 py-3 text-left">Contoura Vision</th>
+                <th className="px-4 py-3 text-left">SMILE / SMILE Pro</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-neutral-100">
+              <tr className="hover:bg-blue-50/30">
+                <td className="px-4 py-3 font-medium">Corneal Flap?</td>
+                <td className="px-4 py-3">Yes (Laser created)</td>
+                <td className="px-4 py-3">Yes (Laser created)</td>
+                <td className="px-4 py-3 text-green-700 font-bold">No (Flapless 2mm keyhole)</td>
+              </tr>
+              <tr className="hover:bg-blue-50/30">
+                <td className="px-4 py-3 font-medium">Corneal Elevation Mapping</td>
+                <td className="px-4 py-3">Wavefront optimized</td>
+                <td className="px-4 py-3 text-blue-700 font-bold">22,000 Topography points</td>
+                <td className="px-4 py-3">3D Lenticule extraction</td>
+              </tr>
+              <tr className="hover:bg-blue-50/30">
+                <td className="px-4 py-3 font-medium">Dry Eye Risk</td>
+                <td className="px-4 py-3">Mild (1–3 months)</td>
+                <td className="px-4 py-3">Minimal</td>
+                <td className="px-4 py-3 text-green-700 font-bold">Lowest (Nerve sparing)</td>
+              </tr>
+              <tr className="hover:bg-blue-50/30">
+                <td className="px-4 py-3 font-medium">Sports &amp; Armed Forces</td>
+                <td className="px-4 py-3">Allowed with caution</td>
+                <td className="px-4 py-3">Allowed with caution</td>
+                <td className="px-4 py-3 text-green-700 font-bold">Ideal (No flap dislocation)</td>
+              </tr>
+              <tr className="hover:bg-blue-50/30">
+                <td className="px-4 py-3 font-medium">Avg Cost in India (Both Eyes)</td>
+                <td className="px-4 py-3">₹45,000–70,000</td>
+                <td className="px-4 py-3">₹75,000–1,10,000</td>
+                <td className="px-4 py-3">₹90,000–1,35,000</td>
+              </tr>
+              <tr className="hover:bg-blue-50/30">
+                <td className="px-4 py-3 font-medium">Clinaza 0% EMI (12 mo)</td>
+                <td className="px-4 py-3 text-green-600 font-bold">₹3,750 / mo</td>
+                <td className="px-4 py-3 text-green-600 font-bold">₹6,250 / mo</td>
+                <td className="px-4 py-3 text-green-600 font-bold">₹7,500 / mo</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Quick Recommendation Guide</h2>
+        <ul className="list-disc pl-6 space-y-2.5 text-neutral-700">
+          <li><strong>Choose Contoura Vision:</strong> If you frequently drive at night, work in graphic design/photography, or want the absolute sharpest contrast sensitivity and HD visual acuity.</li>
+          <li><strong>Choose SMILE / SMILE Pro:</strong> If you play contact sports (football, martial arts), work in military/police forces, or suffer from pre-existing dry eyes.</li>
+          <li><strong>Choose Femto-LASIK:</strong> If you want a proven, reliable, all-laser blade-free correction at a budget-friendly price point.</li>
+        </ul>
+
+        <div className="bg-gradient-to-r from-[#0867E8] to-blue-700 text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
+          <h3 className="text-lg font-bold">Check Laser Vision Correction 0% EMI Eligibility</h3>
+          <p className="text-xs text-blue-100 max-w-lg mx-auto">Pre-approved limits from ₹30,000 to ₹3,00,000 in under 2 minutes. Transparent, 0% interest, no paperwork hassles.</p>
+          <a href="https://clinaza.in/#calculator" className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md">Calculate Eye Surgery EMI →</a>
+        </div>
+      </div>
+    )
   }
 ];
 

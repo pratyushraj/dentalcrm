@@ -3520,6 +3520,349 @@ export const BLOGS: BlogArticle[] = [
         </div>
       </div>
     )
+  },
+  {
+    slug: "wisdom-tooth-surgery-extraction-cost-on-emi-india",
+    title: "Wisdom Tooth Surgery & Impacted Molar Extraction Cost on EMI in India (2026 Guide)",
+    category: "Oral Surgery",
+    readTime: "8 min read",
+    publishDate: "September 8, 2026",
+    author: "Clinaza Dental Advisory Panel",
+    summary: "Complete 2026 cost guide for wisdom tooth extraction and impacted molar surgery in India. Compare surgical extraction prices (₹4,500–₹18,000 per tooth) and split emergency surgical bills into 0% monthly EMIs from ₹1,000/month.",
+    featuredImage: "/assets/clinic-hero-real.png",
+    metaDescription: "Wisdom tooth surgery cost on EMI in India. Compare simple vs impacted molar extraction prices (₹4.5K to ₹18K) and get instant 0% EMI options starting from ₹1,000/month.",
+    faqs: [
+      {
+        question: "How much does wisdom tooth removal surgery cost in India in 2026?",
+        answer: "A simple erupted wisdom tooth extraction ranges from ₹2,500 to ₹5,000. An impacted, horizontally angulated, or deeply embedded wisdom tooth requiring bone guttering and surgical sectioning costs ₹6,000 to ₹15,000 per tooth depending on complexity and specialist Maxillofacial Surgeon fees."
+      },
+      {
+        question: "Can I convert wisdom tooth extraction costs into monthly EMIs?",
+        answer: "Yes. Through Clinaza partner dental clinics, patients can combine multiple wisdom tooth extractions or paired procedures and convert the entire bill (₹10,000 to ₹50,000) into 0% interest monthly EMIs starting from ₹1,000/month."
+      },
+      {
+        question: "Why should impacted wisdom teeth be removed surgically?",
+        answer: "Impacted wisdom teeth can cause severe pericoronitis (gum infection), damage adjacent second molars, trigger cysts/tumors in the jawbone, and push anterior teeth out of alignment."
+      }
+    ],
+    content: (
+      <div className="space-y-6">
+        <p className="text-lg leading-relaxed text-neutral-700">
+          Persistent jaw ache, difficulty opening your mouth (trismus), cheek biting, or throbbing pain at the back of your lower jaw are classic signs of an <strong>impacted wisdom tooth (third molar)</strong>. When a wisdom tooth lacks sufficient jaw space to erupt normally, oral maxillofacial surgery is required to prevent bone infection and second molar decay.
+        </p>
+
+        <p className="text-neutral-700 leading-relaxed">
+          While routine dental extractions are straightforward, removing multiple deeply impacted third molars with bone guttering can cost ₹15,000 to ₹35,000. Discover how <strong>Clinaza point-of-care EMI financing</strong> enables patients to undergo surgical extractions immediately without upfront financial strain.
+        </p>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Wisdom Tooth Extraction Cost & Monthly EMI Breakdown (2026)</h2>
+        <div className="overflow-x-auto my-6">
+          <table className="min-w-full divide-y divide-neutral-200 border border-neutral-100 text-sm">
+            <thead className="bg-neutral-50">
+              <tr>
+                <th className="px-4 py-3 text-left font-bold text-neutral-600">Type of Third Molar Extraction</th>
+                <th className="px-4 py-3 text-left font-bold text-neutral-600">Cost per Tooth</th>
+                <th className="px-4 py-3 text-left font-bold text-neutral-600">6-Month EMI</th>
+                <th className="px-4 py-3 text-left font-bold text-green-600">12-Month EMI</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-neutral-200 bg-white">
+              <tr>
+                <td className="px-4 py-3 font-semibold text-neutral-800">Simple Erupted Third Molar Extraction</td>
+                <td className="px-4 py-3 text-neutral-600">₹2,500 – ₹4,500</td>
+                <td className="px-4 py-3 text-neutral-600">₹600 / mo</td>
+                <td className="px-4 py-3 text-green-600 font-bold">₹350 / mo</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-semibold text-neutral-800">Soft Tissue Impacted Wisdom Tooth (Operculectomy/Flap)</td>
+                <td className="px-4 py-3 text-neutral-600">₹4,500 – ₹7,500</td>
+                <td className="px-4 py-3 text-neutral-600">₹1,100 / mo</td>
+                <td className="px-4 py-3 text-green-600 font-bold">₹600 / mo</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-semibold text-neutral-800">Complete Bony / Horizontal Impacted Molar Surgery</td>
+                <td className="px-4 py-3 text-neutral-600">₹7,500 – ₹14,000</td>
+                <td className="px-4 py-3 text-neutral-600">₹2,100 / mo</td>
+                <td className="px-4 py-3 text-green-600 font-bold">₹1,150 / mo</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-semibold text-neutral-800">All 4 Wisdom Teeth Extracted in Single Sitting</td>
+                <td className="px-4 py-3 text-neutral-600">₹22,000 – ₹45,000</td>
+                <td className="px-4 py-3 text-neutral-600">₹4,800 / mo</td>
+                <td className="px-4 py-3 text-green-600 font-bold">₹2,600 / mo</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Post-Operative Recovery Timeline</h2>
+        <ul className="list-disc pl-6 space-y-2.5 text-neutral-700">
+          <li><strong>Day 1–2:</strong> Bite firmly on sterile gauze for 45 minutes; apply cold ice pack externally to minimize swelling. Consume cold, soft foods (ice cream, yogurt, curd rice).</li>
+          <li><strong>Day 3–5:</strong> Switch to warm saline rinses 4–5 times daily to flush out food particles gently. Swelling begins subsiding.</li>
+          <li><strong>Day 7:</strong> Suture removal (if non-resorbable stitches were used) and final clinical review with your oral surgeon.</li>
+        </ul>
+
+        {/* Featured Clinic Recommendation */}
+        <div className="bg-emerald-50/80 border border-emerald-200 p-5 rounded-2xl space-y-2 my-6">
+          <div className="flex items-center gap-2">
+            <span className="px-2 py-0.5 bg-emerald-600 text-white text-[9px] font-black uppercase tracking-wider rounded-md">Verified Surgical Center</span>
+            <h4 className="text-sm font-bold text-[#0B2450]">YOUR DENTIST — Patliputra Colony, Patna</h4>
+          </div>
+          <p className="text-xs text-slate-600 leading-relaxed">
+            Advanced Maxillofacial surgical suites, piezosurgical bone cutting for painless wisdom tooth removals, and 0% EMI financing support led by Dr. Aryan Parmar.
+          </p>
+          <div className="text-[11px] font-semibold text-emerald-800 flex flex-wrap gap-3 pt-1">
+            <span>📍 Patliputra Colony, Patna</span>
+            <span>📞 062014 78033</span>
+          </div>
+        </div>
+
+        <div className="bg-gradient-to-r from-[#0867E8] to-blue-700 text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
+          <h3 className="text-lg font-bold">Check Wisdom Tooth Surgery EMI Eligibility</h3>
+          <p className="text-xs text-blue-100 max-w-lg mx-auto">Check instant 0% EMI pre-approval for surgical dental procedures in under 2 minutes.</p>
+          <a
+            href="https://clinaza.in/#calculator"
+            className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md"
+          >
+            Calculate Surgery EMI →
+          </a>
+        </div>
+      </div>
+    )
+  },
+  {
+    slug: "bone-grafting-sinus-lift-cost-on-emi-dental-implants-india",
+    title: "Bone Grafting & Sinus Lift Cost on EMI for Dental Implants in India (2026 Guide)",
+    category: "Implantology",
+    readTime: "9 min read",
+    publishDate: "September 8, 2026",
+    author: "Clinaza Dental Advisory Panel",
+    summary: "Complete guide to bone grafting and maxillary sinus lift surgery costs for dental implants in India. Compare xenograft, synthetic bone, and direct vs indirect sinus lift prices (₹18,000–₹55,000) with 0% EMI options.",
+    featuredImage: "/assets/clinic-hero-real.png",
+    metaDescription: "Bone grafting and sinus lift cost on EMI in India for dental implants. Compare surgical bone augmentation prices (₹18K to ₹55K) with easy monthly 0% EMIs.",
+    faqs: [
+      {
+        question: "How much does a dental bone graft and sinus lift cost in India in 2026?",
+        answer: "A localized dental bone graft (using imported Bio-Oss or synthetic particulate bone) costs ₹10,000 to ₹25,000 per site. A closed (crestal) sinus lift costs ₹15,000 to ₹28,000, while a direct open lateral window sinus lift ranges from ₹25,000 to ₹50,000."
+      },
+      {
+        question: "Can bone grafting and sinus lift costs be paid in monthly EMIs?",
+        answer: "Yes. Clinaza partner clinics allow patients to bundle implant fixtures, bone augmentation materials, collagen barrier membranes, and sinus lifts into a single 0% EMI plan from ₹2,500/month."
+      },
+      {
+        question: "Why is a sinus lift needed before upper jaw dental implants?",
+        answer: "When upper back teeth (molars/premolars) are lost, the maxillary sinus cavity expands downward (pneumatization) and jawbone recedes. A sinus lift gently elevates the sinus membrane and adds bone graft to create solid foundation depth for long-lasting titanium implants."
+      }
+    ],
+    content: (
+      <div className="space-y-6">
+        <p className="text-lg leading-relaxed text-neutral-700">
+          When patients seek permanent dental implants to replace missing teeth, an initial 3D CBCT scan sometimes reveals <strong>insufficient jawbone height or density</strong>. In the upper posterior jaw, the maxillary sinus may have expanded downward, leaving only 2mm–4mm of remaining bone where 10mm is needed.
+        </p>
+
+        <p className="text-neutral-700 leading-relaxed">
+          Through <strong>bone grafting and sinus lift augmentation</strong>, implantologists can rebuild solid cortical and trabecular bone structure. Here is a breakdown of surgical costs, graft material types, and how <strong>Clinaza EMI financing</strong> makes advanced implant surgery affordable.
+        </p>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Bone Augmentation & Sinus Lift Cost Breakdown (2026)</h2>
+        <div className="overflow-x-auto my-6">
+          <table className="min-w-full divide-y divide-neutral-200 border border-neutral-100 text-sm">
+            <thead className="bg-neutral-50">
+              <tr>
+                <th className="px-4 py-3 text-left font-bold text-neutral-600">Procedure / Material</th>
+                <th className="px-4 py-3 text-left font-bold text-neutral-600">Average Procedure Cost</th>
+                <th className="px-4 py-3 text-left font-bold text-neutral-600">6-Month EMI</th>
+                <th className="px-4 py-3 text-left font-bold text-green-600">12-Month EMI</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-neutral-200 bg-white">
+              <tr>
+                <td className="px-4 py-3 font-semibold text-neutral-800">Particulate Bone Graft (0.5g – 1.0g Synthetic / Allograft)</td>
+                <td className="px-4 py-3 text-neutral-600">₹8,000 – ₹16,000</td>
+                <td className="px-4 py-3 text-neutral-600">₹1,500 / mo</td>
+                <td className="px-4 py-3 text-green-600 font-bold">₹800 / mo</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-semibold text-neutral-800">Resorbable Collagen Barrier Membrane (Bio-Gide / OsseoGuard)</td>
+                <td className="px-4 py-3 text-neutral-600">₹7,000 – ₹14,000</td>
+                <td className="px-4 py-3 text-neutral-600">₹1,300 / mo</td>
+                <td className="px-4 py-3 text-green-600 font-bold">₹700 / mo</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-semibold text-neutral-800">Internal Crestal (Indirect) Sinus Lift + Graft</td>
+                <td className="px-4 py-3 text-neutral-600">₹16,000 – ₹26,000</td>
+                <td className="px-4 py-3 text-neutral-600">₹3,100 / mo</td>
+                <td className="px-4 py-3 text-green-600 font-bold">₹1,650 / mo</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-semibold text-neutral-800">Direct Lateral Window Sinus Lift (Open Surgery)</td>
+                <td className="px-4 py-3 text-neutral-600">₹28,000 – ₹55,000</td>
+                <td className="px-4 py-3 text-neutral-600">₹5,800 / mo</td>
+                <td className="px-4 py-3 text-green-600 font-bold">₹3,100 / mo</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Bone Graft Materials Explained</h2>
+        <ul className="list-disc pl-6 space-y-2.5 text-neutral-700">
+          <li><strong>Autografts:</strong> Bone harvested from your own chin or mandibular ramus (gold standard for osteoinduction).</li>
+          <li><strong>Xenografts (Bovine):</strong> Highly purified, sterilized natural mineral matrix (e.g. Geistlich Bio-Oss) providing slow resorption and optimal volume stability.</li>
+          <li><strong>Synthetic Alloplasts:</strong> Beta-tricalcium phosphate and hydroxyapatite biocompatible ceramic granulates.</li>
+        </ul>
+
+        {/* Featured Clinic Recommendation */}
+        <div className="bg-emerald-50/80 border border-emerald-200 p-5 rounded-2xl space-y-2 my-6">
+          <div className="flex items-center gap-2">
+            <span className="px-2 py-0.5 bg-emerald-600 text-white text-[9px] font-black uppercase tracking-wider rounded-md">Advanced Implant Center</span>
+            <h4 className="text-sm font-bold text-[#0B2450]">YOUR DENTIST — Patliputra Colony, Patna</h4>
+          </div>
+          <p className="text-xs text-slate-600 leading-relaxed">
+            3D CBCT guided sinus lift surgeries, PRF (Platelet-Rich Fibrin) enhanced bone regeneration, and imported titanium implants with instant 0% EMI financing support.
+          </p>
+          <div className="text-[11px] font-semibold text-emerald-800 flex flex-wrap gap-3 pt-1">
+            <span>📍 Patliputra Colony, Patna</span>
+            <span>📞 062014 78033</span>
+          </div>
+        </div>
+
+        <div className="bg-gradient-to-r from-[#0867E8] to-blue-700 text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
+          <h3 className="text-lg font-bold">Check Sinus Lift & Implant EMI Eligibility</h3>
+          <p className="text-xs text-blue-100 max-w-lg mx-auto">Get instant pre-approval for ₹30,000 to ₹3,00,000 in 2 minutes with zero impact on your CIBIL score.</p>
+          <a
+            href="https://clinaza.in/#calculator"
+            className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md"
+          >
+            Calculate Implant EMI →
+          </a>
+        </div>
+      </div>
+    )
+  },
+  {
+    slug: "tax-benefits-dental-clinic-equipment-loans-section-32-india",
+    title: "Tax Benefits on Dental Equipment & Clinic Setup Loans in India (Section 32 Guide 2026)",
+    category: "Practice Finance",
+    readTime: "9 min read",
+    publishDate: "September 8, 2026",
+    author: "Clinaza Practice Growth Team",
+    summary: "Complete tax planning guide for Indian dentists. How to claim 15%–40% depreciation on dental chairs, RVG sensors, CBCT machines under Section 32, and write off loan interest as business expenses.",
+    featuredImage: "/assets/clinic-hero-real.png",
+    metaDescription: "Tax benefits on dental equipment and clinic loans in India. Complete guide to Section 32 depreciation, Section 44ADA presumptive taxation, and interest expense write-offs.",
+    faqs: [
+      {
+        question: "What is the depreciation rate for dental equipment under Section 32 in India?",
+        answer: "Standard dental clinic machinery (dental chairs, autoclaves, compressors) qualifies for 15% depreciation. Specialized life-saving or computer-integrated digital imaging machinery (RVG digital X-rays, intraoral scanners, CBCT) can qualify for 40% depreciation under the Income Tax Act."
+      },
+      {
+        question: "Can dentists deduct loan interest on dental equipment as a business expense?",
+        answer: "Yes. 100% of the interest paid on medical equipment loans, clinic renovation loans, or doctor business loans is fully tax-deductible as a business expenditure against gross professional clinic revenue."
+      },
+      {
+        question: "Can dentists opt for Presumptive Taxation under Section 44ADA?",
+        answer: "Yes. Registered BDS/MDS doctors with gross annual clinic receipts up to ₹75 Lakhs can declare 50% of their gross receipts as net taxable income under Section 44ADA, eliminating the need for maintaining detailed expense ledgers."
+      }
+    ],
+    content: (
+      <div className="space-y-6">
+        <p className="text-lg leading-relaxed text-neutral-700">
+          Running a successful dental clinic in India requires smart financial planning alongside clinical excellence. When investing in expensive dental equipment—such as digital RVG sensors, computerized dental chairs, Class B vacuum autoclaves, and CAD/CAM intraoral scanners—understanding <strong>Income Tax deductions and depreciation allowances</strong> can save clinics lakhs of rupees every financial year.
+        </p>
+
+        <p className="text-neutral-700 leading-relaxed">
+          Here is your comprehensive <strong>2026 tax strategy guide</strong> covering Section 32 depreciation rules, Section 44ADA presumptive taxation, and medical equipment loan interest write-offs for dentists.
+        </p>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Tax Depreciation Rates on Dental Machinery (Section 32)</h2>
+        <div className="overflow-x-auto my-6">
+          <table className="min-w-full divide-y divide-neutral-200 border border-neutral-100 text-sm">
+            <thead className="bg-neutral-50">
+              <tr>
+                <th className="px-4 py-3 text-left font-bold text-neutral-600">Equipment Category</th>
+                <th className="px-4 py-3 text-left font-bold text-neutral-600">Depreciation Rate</th>
+                <th className="px-4 py-3 text-left font-bold text-[#0867E8]">Tax Benefit Impact</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-neutral-200 bg-white">
+              <tr>
+                <td className="px-4 py-3 font-semibold text-neutral-800">Motorized Dental Chairs & Compressor Units</td>
+                <td className="px-4 py-3 text-neutral-600">15% WDV</td>
+                <td className="px-4 py-3 text-emerald-600 font-bold">Standard Plant & Machinery deduction</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-semibold text-neutral-800">Computerized Diagnostic Scanners & RVG Digital X-Rays</td>
+                <td className="px-4 py-3 text-neutral-600">40% WDV</td>
+                <td className="px-4 py-3 text-emerald-600 font-bold">Accelerated digital technology write-off</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-semibold text-neutral-800">Class B Autoclaves, Ultrasonic Cleaners & Suction</td>
+                <td className="px-4 py-3 text-neutral-600">15% WDV</td>
+                <td className="px-4 py-3 text-emerald-600 font-bold">Direct asset cost reduction</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-semibold text-neutral-800">Clinic Air Conditioners & Electrical Fitouts</td>
+                <td className="px-4 py-3 text-neutral-600">15% WDV</td>
+                <td className="px-4 py-3 text-emerald-600 font-bold">Infrastructure deduction</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">The "180-Day Rule" for Equipment Purchased Before March 31st</h2>
+        <p className="text-neutral-700 leading-relaxed">
+          Under Indian tax law, if new dental machinery is purchased and put to use for <strong>180 days or more</strong> in a financial year (i.e. before October 3rd), you can claim the full 100% depreciation rate for that year. If put to use for less than 180 days (between October 4th and March 31st), you can claim 50% of the allowable depreciation in year one.
+        </p>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Section 44ADA Presumptive Scheme vs Normal Books of Accounts</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 my-6">
+          <div className="bg-white border border-slate-200 p-5 rounded-2xl space-y-2 shadow-sm">
+            <h4 className="font-bold text-[#0867E8] text-sm">📑 Section 44ADA (Presumptive)</h4>
+            <p className="text-xs text-slate-600">
+              For doctors with gross revenue under ₹75 Lakhs. Declare 50% as taxable income. No audit or detailed receipt bookkeeping required. Ideal for young clinics.
+            </p>
+          </div>
+          <div className="bg-white border border-slate-200 p-5 rounded-2xl space-y-2 shadow-sm">
+            <h4 className="font-bold text-emerald-600 text-sm">📊 Normal Accounting (Audit)</h4>
+            <p className="text-xs text-slate-600">
+              Best for established multi-chair centers with heavy CapEx equipment loans, allowing full depreciation and expense deductions exceeding 50% of revenue.
+            </p>
+          </div>
+        </div>
+
+        {/* Doctor Portal Promo */}
+        <div className="bg-slate-900 text-white p-7 rounded-3xl space-y-4 my-8 shadow-xl">
+          <div className="flex items-center gap-2">
+            <span className="px-3 py-1 bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 text-xs font-bold rounded-full">
+              ⚡ Free Practice Management
+            </span>
+            <span className="text-xs text-slate-400 font-mono">100% Free Forever</span>
+          </div>
+          <h3 className="text-xl font-bold">Simplify Your Dental Practice Operations</h3>
+          <p className="text-xs text-slate-300 leading-relaxed">
+            Eliminate paperwork with Clinaza Doctor Portal. Manage digital patient records, automated WhatsApp checkup recalls, and point-of-care EMI financing (₹30K–₹3L) at ₹0 monthly software cost.
+          </p>
+          <div className="flex flex-wrap gap-3 pt-2">
+            <a
+              href="https://clinaza.in/reactivation/login"
+              className="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs uppercase tracking-wider px-5 py-3 rounded-xl transition-all shadow-md"
+            >
+              Open Free Doctor Portal →
+            </a>
+          </div>
+        </div>
+
+        <div className="bg-gradient-to-r from-[#0867E8] to-blue-700 text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
+          <h3 className="text-lg font-bold">Partner With Clinaza For Patient Treatment EMIs</h3>
+          <p className="text-xs text-blue-100 max-w-lg mx-auto">Enable your clinic to offer ₹30,000 to ₹3,00,000 patient EMI financing at zero merchant onboarding fees.</p>
+          <a
+            href="https://clinaza.in/#partner-form"
+            className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md"
+          >
+            Register Clinic as Partner →
+          </a>
+        </div>
+      </div>
+    )
   }
 ];
 

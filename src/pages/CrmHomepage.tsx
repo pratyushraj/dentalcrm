@@ -405,7 +405,7 @@ export default function CrmHomepage() {
             <div className="md:col-span-7 space-y-4 sm:space-y-5">
               <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#F5F9FC] border border-blue-100 rounded-full text-[11px] font-bold text-[#0756C7] shadow-2xs">
                 <Building2 className="h-3.5 w-3.5 text-[#0f7a75]" />
-                <span>FOR DENTAL CLINICS & HOSPITALS</span>
+                <span>POINT-OF-CARE 0% EMI FINANCING FOR CLINICS &amp; HOSPITALS</span>
               </div>
 
               <h1 className="text-2.5xl sm:text-5xl font-black tracking-tight leading-[1.18] text-[#0B2450]">
@@ -416,7 +416,7 @@ export default function CrmHomepage() {
               </h1>
 
               <p className="text-xs sm:text-base text-slate-600 font-medium leading-relaxed max-w-xl">
-                Help eligible patients access financing for dental treatments from <strong className="text-[#0B2450]">₹30,000 to ₹3 lakh</strong> and pay through EMIs.
+                Help eligible patients access instant 0% EMI financing from <strong className="text-[#0B2450]">₹30,000 to ₹5,00,000</strong> for Dental Implants, Hair Transplants, LASIK, IVF, and Elective Surgeries.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-3 pt-1">
@@ -548,28 +548,62 @@ export default function CrmHomepage() {
           </div>
         </section>
 
-        {/* ── 4. TREATMENT CATEGORIES (CONCISE) ── */}
+        {/* ── 4. TREATMENT CATEGORIES (MULTI-SPECIALTY) ── */}
         <section aria-label="Supported Treatments" className="py-12 sm:py-16 px-4 sm:px-6 bg-[#F7FAFC] border-y border-slate-200/60">
           <div className="max-w-5xl mx-auto space-y-8 text-center">
             <div className="space-y-2">
-              <span className="text-[10px] font-black text-[#0f7a75] uppercase tracking-widest">ELIGIBLE PROCEDURES</span>
-              <h2 className="text-2xl sm:text-4xl font-black text-[#0B2450]">Supported Treatments</h2>
-              <p className="text-xs sm:text-sm text-slate-600">Treatment financing available for procedure estimates from ₹30,000 to ₹3,00,000.</p>
+              <span className="text-[10px] font-black text-[#0f7a75] uppercase tracking-widest">ELIGIBLE HEALTHCARE PROCEDURES</span>
+              <h2 className="text-2xl sm:text-4xl font-black text-[#0B2450]">Supported Treatments &amp; Surgeries</h2>
+              <p className="text-xs sm:text-sm text-slate-600">0% interest treatment financing available from ₹30,000 to ₹5,00,000 across top medical categories.</p>
             </div>
 
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3.5 text-left">
               {[
-                { emoji: '🦷', name: 'Dental Implants' },
-                { emoji: '😁', name: 'Braces & Aligners' },
-                { emoji: '👑', name: 'Crowns & Bridges' },
-                { emoji: '✨', name: 'Smile Makeovers' },
-                { emoji: '🏥', name: 'Full Mouth Rehab' },
-                { emoji: '🦴', name: 'Other Eligible Treatments' }
+                { 
+                  emoji: '🦷', 
+                  category: 'Dental Care', 
+                  treatments: 'Implants, Aligners, Crowns & Full Mouth Rehab',
+                  link: '/blog/dental-implants-cost-on-emi-india'
+                },
+                { 
+                  emoji: '🦱', 
+                  category: 'Hair & Aesthetics', 
+                  treatments: 'Hair Transplant (FUE), Liposuction & Gynecomastia',
+                  link: '/blog/hair-transplant-cost-on-emi-india-guide'
+                },
+                { 
+                  emoji: '👁️', 
+                  category: 'Ophthalmology', 
+                  treatments: 'Contoura Vision, SMILE, ICL & Cataract Lenses',
+                  link: '/blog/lasik-eye-surgery-cost-on-emi-india-guide'
+                },
+                { 
+                  emoji: '👶', 
+                  category: 'IVF & Fertility', 
+                  treatments: 'IVF Cycles, ICSI, IUI & Egg Freezing Packages',
+                  link: '/blog/ivf-cost-on-emi-fertility-treatment-financing-india'
+                },
+                { 
+                  emoji: '🦴', 
+                  category: 'Orthopaedics & Surgeries', 
+                  treatments: 'Knee Replacement, Bariatric, ACL & Daycare Surgeries',
+                  link: '/blog/knee-replacement-surgery-cost-on-emi-india'
+                }
               ].map((cat, idx) => (
-                <div key={idx} className="bg-white border border-slate-200 p-4 rounded-2xl space-y-2 text-center shadow-2xs">
-                  <span className="text-2xl block" role="img" aria-label={cat.name}>{cat.emoji}</span>
-                  <h3 className="text-xs font-black text-[#0B2450] leading-tight">{cat.name}</h3>
-                </div>
+                <Link 
+                  key={idx} 
+                  to={cat.link}
+                  className="bg-white border border-slate-200 hover:border-blue-500/50 p-4 rounded-2xl space-y-2 transition-all shadow-2xs hover:shadow-md group block"
+                >
+                  <span className="text-2xl block group-hover:scale-110 transition-transform" role="img" aria-label={cat.category}>{cat.emoji}</span>
+                  <div>
+                    <h3 className="text-xs font-black text-[#0B2450] group-hover:text-[#0867E8] transition-colors leading-tight">{cat.category}</h3>
+                    <p className="text-[10px] text-slate-500 mt-1 leading-snug">{cat.treatments}</p>
+                  </div>
+                  <span className="text-[9px] font-bold text-[#0867E8] inline-flex items-center gap-0.5 pt-1">
+                    View Pricing &rarr;
+                  </span>
+                </Link>
               ))}
             </div>
           </div>
@@ -1376,6 +1410,40 @@ export default function CrmHomepage() {
                     </div>
                   </div>
 
+                  {/* Treatment Category & Amount */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div className="space-y-1">
+                      <label htmlFor="patient-treatment" className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Treatment Needed *</label>
+                      <select
+                        id="patient-treatment"
+                        value={patientData.treatment}
+                        onChange={e => setPatientData({ ...patientData, treatment: e.target.value })}
+                        className="w-full px-4 py-3 bg-[#F7FAFC] border border-slate-200 rounded-xl text-xs text-[#0B2450] focus:outline-none focus:border-[#0867E8]"
+                      >
+                        <option value="Dental Implants & Aligners">🦷 Dental Implants / Clear Aligners</option>
+                        <option value="Hair Transplant & Aesthetics">🦱 Hair Transplant / Cosmetic Surgery</option>
+                        <option value="LASIK & Eye Surgery">👁️ LASIK / Contoura / Cataract</option>
+                        <option value="IVF & Fertility Treatment">👶 IVF / Fertility Treatment</option>
+                        <option value="Knee & Orthopaedic Surgery">🦴 Knee Replacement / Ortho Surgery</option>
+                        <option value="General / Laparoscopic Surgery">🏥 Laparoscopic & Other Surgeries</option>
+                      </select>
+                    </div>
+                    <div className="space-y-1">
+                      <label htmlFor="patient-amount" className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Estimated Amount *</label>
+                      <select
+                        id="patient-amount"
+                        value={patientData.amount}
+                        onChange={e => setPatientData({ ...patientData, amount: e.target.value })}
+                        className="w-full px-4 py-3 bg-[#F7FAFC] border border-slate-200 rounded-xl text-xs text-[#0B2450] focus:outline-none focus:border-[#0867E8]"
+                      >
+                        <option value="₹30,000 – ₹60,000">₹30,000 – ₹60,000</option>
+                        <option value="₹60,000 – ₹1,20,000">₹60,000 – ₹1,20,000</option>
+                        <option value="₹1,20,000 – ₹2,50,000">₹1,20,000 – ₹2,50,000</option>
+                        <option value="₹2,50,000 – ₹5,00,000">₹2,50,000 – ₹5,00,000</option>
+                      </select>
+                    </div>
+                  </div>
+
                   <button
                     type="submit"
                     disabled={!patientData.name || !patientData.mobile}
@@ -1631,11 +1699,12 @@ export default function CrmHomepage() {
                   >
                     {formType === 'clinic' ? (
                       <>
-                        <option value="Dental Implants & Aligners">Dental Implants & Aligners</option>
-                        <option value="Orthopaedics">Orthopaedics</option>
-                        <option value="Ophthalmology">Ophthalmology</option>
-                        <option value="IVF & Fertility">IVF & Fertility</option>
-                        <option value="Elective Surgeries">Elective Surgeries & Other</option>
+                        <option value="Dental Clinic (Implants & Aligners)">Dental Clinic (Implants &amp; Aligners)</option>
+                        <option value="Hair & Aesthetic Surgery Clinic">Hair &amp; Aesthetic Surgery Clinic</option>
+                        <option value="Eye Hospital & Laser Vision Centre">Eye Hospital &amp; Laser Vision Centre</option>
+                        <option value="IVF & Fertility Centre">IVF &amp; Fertility Centre</option>
+                        <option value="Orthopaedic & Joint Replacement Hospital">Orthopaedic &amp; Joint Replacement Hospital</option>
+                        <option value="Multispeciality & Daycare Hospital">Multispeciality &amp; Daycare Hospital</option>
                       </>
                     ) : (
                       <>

@@ -4830,6 +4830,373 @@ export const BLOGS: BlogArticle[] = [
         </div>
       </div>
     )
+  },
+  {
+    slug: "cancer-treatment-cost-on-emi-india",
+    title: "Cancer Treatment Cost on EMI in India 2025 — Chemotherapy, Radiation & Surgery Financing Guide",
+    category: "Medical EMI",
+    readTime: "10 min read",
+    publishDate: "2026-09-08",
+    author: "Clinaza Health Finance Team",
+    summary: "Cancer treatment costs range from ₹3 lakh to over ₹20 lakh in India. Learn how to manage chemotherapy, radiation, immunotherapy, and surgical oncology bills with 0% medical EMI via Clinaza.",
+    featuredImage: "/assets/clinic-hero-real.png",
+    metaDescription: "Cancer treatment cost on EMI in India: Chemotherapy, radiation, robotic surgery & targeted therapy financing up to ₹5 lakh with 0% interest and instant approval on Clinaza.",
+    faqs: [
+      { question: "How much does cancer treatment cost in India?", answer: "Comprehensive cancer treatment ranges from ₹3,00,000 to over ₹20,00,000 depending on stage, cancer type, hospital, and modality (chemo cycles, radiation fractions, immunotherapy)." },
+      { question: "Can I get cancer treatment on EMI in India?", answer: "Yes. Clinaza offers healthcare treatment financing up to ₹5,00,000 on 0% EMI with tenures from 3 to 24 months, zero collateral, and approval in 2 minutes." },
+      { question: "Does health insurance cover all cancer treatment expenses?", answer: "While insurance covers hospitalisation, many targeted therapies, expensive oral chemo, diagnostic PET scans, and out-of-pocket deductibles exceed policy limits. EMI bridges these gaps immediately." },
+      { question: "What is the cost of chemotherapy per cycle in India?", answer: "Standard chemo cycles cost ₹20,000 to ₹70,000 per cycle, whereas targeted monoclonal antibodies and immunotherapy (like Pembrolizumab) can cost ₹1,50,000 to ₹4,00,000 per dose." },
+      { question: "How does Clinaza pay the cancer hospital?", answer: "Clinaza approves the loan instantly and disburses payments directly to your chosen oncology centre or hospital so treatment starts without delays." }
+    ],
+    content: (
+      <div className="space-y-6 text-neutral-800 leading-relaxed">
+        <p className="text-lg">A cancer diagnosis is emotionally overwhelming — and the sudden financial burden of chemotherapy, radiation therapy, and surgical oncology can deplete lifetime savings in weeks. With modern oncological care requiring multiple cycles, targeted drugs, and advanced radiation techniques, out-of-pocket costs frequently exceed standard insurance caps.</p>
+        <p>Clinaza provides compassionate, instant medical financing up to ₹5,00,000 on 0% EMI. Families can now focus entirely on healing and care without compromising on top oncologists, precision radiation, or critical drug cycles.</p>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Cancer Treatment Modality & Cost Breakdown (India 2025)</h2>
+        <div className="overflow-x-auto rounded-xl border border-neutral-200 shadow-sm">
+          <table className="w-full text-sm">
+            <thead className="bg-neutral-50 text-neutral-600 uppercase text-xs tracking-wide">
+              <tr>
+                <th className="px-4 py-3 text-left">Treatment Modality</th>
+                <th className="px-4 py-3 text-left">Avg Cost (India)</th>
+                <th className="px-4 py-3 text-left">Typical Duration</th>
+                <th className="px-4 py-3 text-left">Clinaza 0% EMI (18 mo)</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-neutral-100">
+              <tr className="hover:bg-blue-50/30">
+                <td className="px-4 py-3 font-medium">Surgical Oncology (Tumor Resection)</td>
+                <td className="px-4 py-3">₹1,80,000–4,50,000</td>
+                <td className="px-4 py-3">1 surgery + hospital stay</td>
+                <td className="px-4 py-3 text-green-600 font-bold">₹10,000–25,000 / mo</td>
+              </tr>
+              <tr className="hover:bg-blue-50/30">
+                <td className="px-4 py-3 font-medium">Chemotherapy (6–8 Cycles Standard)</td>
+                <td className="px-4 py-3">₹1,50,000–3,80,000</td>
+                <td className="px-4 py-3">3 to 6 months</td>
+                <td className="px-4 py-3 text-green-600 font-bold">₹8,333–21,100 / mo</td>
+              </tr>
+              <tr className="hover:bg-blue-50/30">
+                <td className="px-4 py-3 font-medium">Radiation (IMRT / IGRT / CyberKnife)</td>
+                <td className="px-4 py-3">₹2,00,000–4,80,000</td>
+                <td className="px-4 py-3">25 to 35 fractions</td>
+                <td className="px-4 py-3 text-green-600 font-bold">₹11,100–26,600 / mo</td>
+              </tr>
+              <tr className="hover:bg-blue-50/30">
+                <td className="px-4 py-3 font-medium">Immunotherapy & Targeted Drugs</td>
+                <td className="px-4 py-3">₹3,00,000–10,00,000+</td>
+                <td className="px-4 py-3">Ongoing / Maintenance</td>
+                <td className="px-4 py-3 text-green-600 font-bold">Custom Flexible EMI</td>
+              </tr>
+              <tr className="hover:bg-blue-50/30">
+                <td className="px-4 py-3 font-medium">Diagnostic Workup (PET-CT, Biopsy, NGS)</td>
+                <td className="px-4 py-3">₹40,000–90,000</td>
+                <td className="px-4 py-3">Pre-treatment staging</td>
+                <td className="px-4 py-3 text-green-600 font-bold">₹2,500–5,000 / mo</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Why Medical EMI is Crucial for Cancer Care</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {[
+            { title: "Zero Treatment Interruption", desc: "No delays between chemo cycles or radiation sessions waiting for funds or insurance approvals." },
+            { title: "No Asset Distress Sale", desc: "Protect property, gold, and long-term retirement investments by converting large bills into manageable EMIs." },
+            { title: "Access to Precision Oncology", desc: "Afford cutting-edge robotic surgeries, TrueBeam linear accelerators, and genetic genomic profiling." },
+            { title: "Direct Hospital Settlement", desc: "Clinaza directly remits payments to accredited cancer centres and oncology hospitals across India." },
+          ].map(item => (
+            <div key={item.title} className="bg-blue-50 rounded-xl p-4 border border-blue-100">
+              <p className="font-semibold text-blue-900 text-sm mb-1">{item.title}</p>
+              <p className="text-xs text-blue-800">{item.desc}</p>
+            </div>
+          ))}
+        </div>
+
+        <div className="bg-slate-900 text-white p-6 rounded-2xl my-8 space-y-4">
+          <h3 className="text-lg font-bold">Are you an Oncology Day Care or Cancer Hospital?</h3>
+          <p className="text-sm text-slate-300">Empower patients to undergo timely chemotherapy and advanced therapies without financial roadblocks. Clinaza integrates seamless point-of-care 0% EMI financing. Partner with us today.</p>
+          <a href="https://clinaza.in/#partner-form" className="inline-block bg-[#0867E8] text-white font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-600 transition-colors">Onboard Your Hospital →</a>
+        </div>
+
+        <div className="bg-gradient-to-r from-[#0867E8] to-blue-700 text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
+          <h3 className="text-lg font-bold">Check 0% EMI Medical Loan Eligibility</h3>
+          <p className="text-xs text-blue-100 max-w-lg mx-auto">Instant pre-approval up to ₹5,00,000 in under 2 minutes. Paperless, confidential, and 0% interest options available.</p>
+          <a href="https://clinaza.in/#calculator" className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md">Calculate Cancer Treatment EMI →</a>
+        </div>
+      </div>
+    )
+  },
+  {
+    slug: "cochlear-implant-cost-on-emi-india",
+    title: "Cochlear Implant Surgery Cost on EMI in India 2025 — Restore Hearing with 0% Financing",
+    category: "Medical EMI",
+    readTime: "8 min read",
+    publishDate: "2026-09-08",
+    author: "Clinaza Health Finance Team",
+    summary: "Cochlear implants cost between ₹6 lakh and ₹15 lakh per ear in India. Learn about unilateral & bilateral implant costs, sound processors, and 0% EMI medical loans with Clinaza.",
+    featuredImage: "/assets/clinic-hero-real.png",
+    metaDescription: "Cochlear implant cost on EMI in India: Complete pricing guide for Cochlear, Med-El, and Advanced Bionics devices with 0% EMI financing and instant approval via Clinaza.",
+    faqs: [
+      { question: "How much does a cochlear implant cost in India?", answer: "A single-ear cochlear implant surgery costs ₹6,00,000 to ₹14,00,000 depending on the device brand (Cochlear, MED-EL, Advanced Bionics), sound processor technology, and hospital tier." },
+      { question: "Can I get a cochlear implant on 0% EMI?", answer: "Yes! Clinaza provides point-of-care medical EMI loans up to ₹5,00,000 to help parents and adults finance surgical and device costs with zero collateral." },
+      { question: "Is cochlear implant covered by government schemes in India?", answer: "Under the ADIP scheme, eligible children under 5 from low-income families receive free implants. For private patients or those needing upgraded processors, Clinaza EMI bridges the remaining gap." },
+      { question: "What is the best age for a child to get a cochlear implant?", answer: "Implantation before 2–3 years of age yields the best speech and language development outcomes. However, adults with post-lingual hearing loss also achieve excellent speech comprehension." },
+      { question: "What additional costs exist after cochlear implantation?", answer: "Post-op auditory verbal therapy (AVT) for 1–2 years (₹30,000–80,000/yr) and processor battery replacements or upgrades every few years." }
+    ],
+    content: (
+      <div className="space-y-6 text-neutral-800 leading-relaxed">
+        <p className="text-lg">For children born with severe-to-profound hearing loss and adults experiencing sudden neurosensory deafness, cochlear implants are a transformative miracle of modern medical engineering. Unlike hearing aids that merely amplify sound, cochlear implants bypass damaged hair cells to stimulate the auditory nerve directly.</p>
+        <p>However, the significant price tag of ₹6 to ₹15 lakh per ear frequently delays early pediatric intervention — where every month counts for speech development. Clinaza enables immediate access to hearing restoration through transparent 0% interest EMI options.</p>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Cochlear Implant Cost by Brand & Hospital Tier (India 2025)</h2>
+        <div className="overflow-x-auto rounded-xl border border-neutral-200 shadow-sm">
+          <table className="w-full text-sm">
+            <thead className="bg-neutral-50 text-neutral-600 uppercase text-xs tracking-wide">
+              <tr>
+                <th className="px-4 py-3 text-left">Implant Model / Brand</th>
+                <th className="px-4 py-3 text-left">Device + Surgery Cost</th>
+                <th className="px-4 py-3 text-left">Key Features</th>
+                <th className="px-4 py-3 text-left">EMI (24 mo)</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-neutral-100">
+              <tr className="hover:bg-blue-50/30">
+                <td className="px-4 py-3 font-medium">Standard Single-Ear Implant</td>
+                <td className="px-4 py-3">₹5,50,000–7,50,000</td>
+                <td className="px-4 py-3">Robust multi-channel electrode</td>
+                <td className="px-4 py-3 text-green-600 font-bold">₹15,000–22,000 / mo</td>
+              </tr>
+              <tr className="hover:bg-blue-50/30">
+                <td className="px-4 py-3 font-medium">Advanced Bluetooth Smart Processor</td>
+                <td className="px-4 py-3">₹8,50,000–12,00,000</td>
+                <td className="px-4 py-3">Direct streaming & smartphone app</td>
+                <td className="px-4 py-3 text-green-600 font-bold">Flexible Custom Plan</td>
+              </tr>
+              <tr className="hover:bg-blue-50/30">
+                <td className="px-4 py-3 font-medium">Bilateral Implantation (Both Ears)</td>
+                <td className="px-4 py-3">₹12,00,000–22,00,000</td>
+                <td className="px-4 py-3">360-degree spatial sound localization</td>
+                <td className="px-4 py-3 text-green-600 font-bold">Split Financing Options</td>
+              </tr>
+              <tr className="hover:bg-blue-50/30">
+                <td className="px-4 py-3 font-medium">Sound Processor Upgrade Only</td>
+                <td className="px-4 py-3">₹2,00,000–4,00,000</td>
+                <td className="px-4 py-3">Next-gen external processor swap</td>
+                <td className="px-4 py-3 text-green-600 font-bold">₹8,333–16,666 / mo</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Crucial Stages of Cochlear Implantation</h2>
+        <ul className="list-disc pl-6 space-y-2.5 text-neutral-700">
+          <li><strong>Pre-Operative Candidate Evaluation:</strong> BERA, OAE, high-resolution CT temporal bone, MRI inner ear, and psychological readiness assessment.</li>
+          <li><strong>Minimally Invasive Surgery:</strong> 2 to 3 hour surgery under general anesthesia via mastoidectomy and posterior tympanotomy.</li>
+          <li><strong>Switch-On (Activation):</strong> Occurs 3 to 4 weeks post-surgery after incision healing, programing initial MAPs.</li>
+          <li><strong>Auditory-Verbal Therapy (AVT):</strong> Dedicated rehabilitation sessions 2-3 times per week to train the brain to interpret new electrical sounds.</li>
+        </ul>
+
+        <div className="bg-gradient-to-r from-[#0867E8] to-blue-700 text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
+          <h3 className="text-lg font-bold">Check Hearing Surgery EMI Options</h3>
+          <p className="text-xs text-blue-100 max-w-lg mx-auto">Get up to ₹5 lakh pre-approval with 0% interest and affordable monthly tenures. Give your loved one the gift of sound today.</p>
+          <a href="https://clinaza.in/#calculator" className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md">Calculate Cochlear EMI →</a>
+        </div>
+      </div>
+    )
+  },
+  {
+    slug: "dental-clinic-daily-patient-register-format-excel-free",
+    title: "Dental Clinic Daily Patient Register Format Excel — Free Download & Digital Transition Guide",
+    category: "Practice Growth",
+    readTime: "7 min read",
+    publishDate: "2026-09-08",
+    author: "Clinaza Practice Management Team",
+    summary: "Download a free standard Dental Clinic Daily Patient Register Excel template (.xlsx) with columns for OPD, treatment plans, fees, and payments, plus discover why modern clinics are shifting to cloud EMR.",
+    featuredImage: "/assets/clinic-hero-real.png",
+    metaDescription: "Download free Dental Clinic Daily Patient Register Format in Excel (.xlsx). Track OPD visits, chief complaints, treatments, fees, and WhatsApp follow-ups with Clinaza.",
+    faqs: [
+      { question: "What is a dental clinic daily patient register?", answer: "It is an OPD log book or digital spreadsheet used by clinic receptionists and dentists to record patient serial numbers, names, contact numbers, chief complaints, procedures done, fee charged, and balance due." },
+      { question: "What columns must be included in a dental patient register?", answer: "Essential columns include: Date, Patient ID / Reg No, Full Name, Age/Gender, Phone Number, Chief Complaint, Tooth Number / Quad, Treatment Performed, Doctor Name, Amount Charged, Mode of Payment, and Next Recall Date." },
+      { question: "Why is Excel register risky for growing dental clinics?", answer: "Excel sheets are easily corrupted, lack automatic patient WhatsApp appointment reminders, cannot track tooth charting visually, and pose data loss risks when stored locally on reception desktops." },
+      { question: "How does Clinaza replace manual Excel registers?", answer: "Clinaza is a 100% free cloud-based dental CRM with instant patient search, digital prescriptions, WhatsApp recall reminders, and auto-synced ledger books." },
+      { question: "Is Clinaza really free forever for dentists?", answer: "Yes. Clinaza's cloud dental software is free forever with no hidden subscription fees, unlimited patient records, and unlimited staff logins." }
+    ],
+    content: (
+      <div className="space-y-6 text-neutral-800 leading-relaxed">
+        <p className="text-lg">Maintaining an organized, legally compliant daily patient register is the backbone of any well-run dental practice in India. Whether you are running a single-chair dental clinic or a multi-specialty center, accurate records of OPD footfalls, treatment history, and payment ledgers protect against malpractice disputes and ensure healthy cash flows.</p>
+        <p>Below you will find the standard Excel register structure used by top Indian dental clinics, along with how migrating to a modern, zero-cost cloud CRM like Clinaza eliminates hours of manual reception desk paperwork.</p>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Standard Dental OPD Register Columns (Excel Template Format)</h2>
+        <div className="overflow-x-auto rounded-xl border border-neutral-200 shadow-sm">
+          <table className="w-full text-sm">
+            <thead className="bg-neutral-50 text-neutral-600 uppercase text-xs tracking-wide">
+              <tr>
+                <th className="px-4 py-3 text-left">Col Header</th>
+                <th className="px-4 py-3 text-left">Sample Value</th>
+                <th className="px-4 py-3 text-left">Purpose / Clinical Relevance</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-neutral-100">
+              <tr className="hover:bg-blue-50/30">
+                <td className="px-4 py-3 font-mono text-xs">Sl. / Reg No</td>
+                <td className="px-4 py-3">#2025-0842</td>
+                <td className="px-4 py-3">Unique identifier for physical file or digital EMR lookup</td>
+              </tr>
+              <tr className="hover:bg-blue-50/30">
+                <td className="px-4 py-3 font-mono text-xs">Patient Name & Age</td>
+                <td className="px-4 py-3">Rahul Sharma (34M)</td>
+                <td className="px-4 py-3">Demographic details and pediatric/geriatric verification</td>
+              </tr>
+              <tr className="hover:bg-blue-50/30">
+                <td className="px-4 py-3 font-mono text-xs">Mobile Number</td>
+                <td className="px-4 py-3">+91 98765 43210</td>
+                <td className="px-4 py-3">Crucial for SMS/WhatsApp recall & prescription delivery</td>
+              </tr>
+              <tr className="hover:bg-blue-50/30">
+                <td className="px-4 py-3 font-mono text-xs">Tooth # & Procedure</td>
+                <td className="px-4 py-3">Tooth #36 — Biomechanical Prep (RCT)</td>
+                <td className="px-4 py-3">FDI notation & exact clinical procedure completed</td>
+              </tr>
+              <tr className="hover:bg-blue-50/30">
+                <td className="px-4 py-3 font-mono text-xs">Attending Dentist</td>
+                <td className="px-4 py-3">Dr. Aryan Parmar (Endo)</td>
+                <td className="px-4 py-3">Associate dentist attribution for revenue share</td>
+              </tr>
+              <tr className="hover:bg-blue-50/30">
+                <td className="px-4 py-3 font-mono text-xs">Total / Received / Due</td>
+                <td className="px-4 py-3">₹3,500 / ₹2,000 (Due: ₹1,500)</td>
+                <td className="px-4 py-3">Daily cash reconciliation & outstanding accounts tracking</td>
+              </tr>
+              <tr className="hover:bg-blue-50/30">
+                <td className="px-4 py-3 font-mono text-xs">Next Recall Date</td>
+                <td className="px-4 py-3">15-Sep-2025 (Obturation)</td>
+                <td className="px-4 py-3">Automated follow-up trigger date</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Excel Register vs Clinaza Free Cloud Dental Software</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="bg-red-50 rounded-xl p-5 border border-red-100">
+            <h3 className="font-bold text-red-900 mb-2">❌ Problems with Manual Excel Sheets</h3>
+            <ul className="text-xs text-red-800 space-y-1.5 list-disc pl-4">
+              <li>Risk of accidental file deletion or hard drive crash with zero backup.</li>
+              <li>Cannot send automated 1-click WhatsApp appointment reminders.</li>
+              <li>No visual interactive tooth chart or digital prescription generator.</li>
+              <li>Staff can easily copy or leak sensitive patient phone directories.</li>
+            </ul>
+          </div>
+          <div className="bg-green-50 rounded-xl p-5 border border-green-100">
+            <h3 className="font-bold text-green-900 mb-2">✅ Advantages of Clinaza Cloud CRM</h3>
+            <ul className="text-xs text-green-800 space-y-1.5 list-disc pl-4">
+              <li>100% Free Forever with encrypted cloud security.</li>
+              <li>Instant WhatsApp broadcast & automated patient reactivation.</li>
+              <li>Built-in 0% EMI financing directly on the patient invoice.</li>
+              <li>Access anywhere from mobile, tablet, or desktop in real-time.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="bg-slate-900 text-white p-6 rounded-2xl my-8 space-y-4">
+          <h3 className="text-lg font-bold">Upgrade from Excel to Free Cloud Dental EMR Today</h3>
+          <p className="text-sm text-slate-300">Join over 1,200+ clinics using Clinaza to manage appointments, billing, digital Rx, and patient recalls with zero monthly fees.</p>
+          <a href="https://clinaza.in/reactivation/login" className="inline-block bg-[#0867E8] text-white font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-600 transition-colors">Launch Free Doctor Portal →</a>
+        </div>
+      </div>
+    )
+  },
+  {
+    slug: "dental-lab-bill-tracking-software-free-india",
+    title: "Dental Lab Bill Tracking Software Free India — Streamline Crown, Bridge & Aligners Orders",
+    category: "Practice Growth",
+    readTime: "7 min read",
+    publishDate: "2026-09-08",
+    author: "Clinaza Dental Practice Team",
+    summary: "How to manage dental lab slips, track zirconia crowns, ceramic bridges, dentures, and aligner delivery dates without missing patient appointments. Free tool & best practices for Indian clinics.",
+    featuredImage: "/assets/clinic-hero-real.png",
+    metaDescription: "Dental lab bill tracking software free in India: Track custom prosthesis orders, CAD/CAM zirconia crown delivery dates, lab expenses, and invoice reconciliations with Clinaza.",
+    faqs: [
+      { question: "What is dental lab tracking in clinic management?", answer: "It is the clinical process of logging laboratory work orders (impressions, digital intraoral scans) sent to external dental labs, tracking manufacturing status, receiving completed prostheses, and reconciling monthly lab bills." },
+      { question: "Why do dental clinics lose money on lab bills?", answer: "Without digital lab tracking, clinics often pay for remakes that were lab errors, miss promised patient cementation dates causing no-shows, and fail to bill patients for upgraded zirconia or e.max materials." },
+      { question: "How does Clinaza help with dental lab workflow?", answer: "Clinaza allows dentists to attach lab orders directly to the patient's digital treatment chart, set arrival reminder alerts before the scheduled patient appointment, and track lab expenditure per case." },
+      { question: "Is there any software specifically for Indian dental labs and clinics?", answer: "Yes, Clinaza provides an intuitive Indian clinic management platform tailored for local currency (INR), GST dental lab invoices, and regional laboratory workflows." }
+    ],
+    content: (
+      <div className="space-y-6 text-neutral-800 leading-relaxed">
+        <p className="text-lg">Every practicing dentist knows the frustration of a patient sitting in the dental chair for crown cementation — only to discover that the lab delivery hasn't arrived yet. Misplaced physical lab chits, uncoordinated dispatch boys, and untracked remake charges cost Indian dental clinics thousands of rupees in lost chair time and damaged patient trust.</p>
+        <p>Effective dental lab bill tracking is the key to maintaining on-time appointments, predictable clinic cash flow, and seamless coordination between prosthodontists, general practitioners, and commercial dental laboratories.</p>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Essential Data Points Every Dental Lab Slip Must Track</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {[
+            { title: "Patient & Doctor Details", desc: "Patient name, clinic branch, attending doctor, impression date, and targeted delivery date." },
+            { title: "Tooth FDI Charting & Shade Guide", desc: "Exact tooth numbers, VITA shade matching (e.g., A2, 3M Bleach), stump shade, and photos." },
+            { title: "Prosthesis Material Spec", desc: "Monolithic Zirconia, Layered Zirconia, DMLS PFM, e.max Press, Cast Partial Denture, or Clear Aligner." },
+            { title: "Trial Stages (Metal / Bisque / Final)", desc: "Clear marking whether the order is for coping trial, wax rim bite registration, bisque try-in, or final glaze." },
+          ].map(item => (
+            <div key={item.title} className="bg-blue-50 rounded-xl p-4 border border-blue-100">
+              <p className="font-semibold text-blue-900 text-sm mb-1">{item.title}</p>
+              <p className="text-xs text-blue-800">{item.desc}</p>
+            </div>
+          ))}
+        </div>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Average Dental Lab Costs in India (2025 Benchmark)</h2>
+        <div className="overflow-x-auto rounded-xl border border-neutral-200 shadow-sm">
+          <table className="w-full text-sm">
+            <thead className="bg-neutral-50 text-neutral-600 uppercase text-xs tracking-wide">
+              <tr>
+                <th className="px-4 py-3 text-left">Restoration Type</th>
+                <th className="px-4 py-3 text-left">Lab Cost Range (INR)</th>
+                <th className="px-4 py-3 text-left">Typical Clinic Fee to Patient</th>
+                <th className="px-4 py-3 text-left">Turnaround Time</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-neutral-100">
+              <tr className="hover:bg-blue-50/30">
+                <td className="px-4 py-3 font-medium">CAD/CAM Monolithic Zirconia (5-yr warranty)</td>
+                <td className="px-4 py-3">₹1,200–2,200</td>
+                <td className="px-4 py-3">₹6,000–10,000</td>
+                <td className="px-4 py-3">3 to 4 working days</td>
+              </tr>
+              <tr className="hover:bg-blue-50/30">
+                <td className="px-4 py-3 font-medium">Layered Premium Zirconia (15-yr warranty)</td>
+                <td className="px-4 py-3">₹2,500–4,500</td>
+                <td className="px-4 py-3">₹10,000–18,000</td>
+                <td className="px-4 py-3">4 to 6 working days</td>
+              </tr>
+              <tr className="hover:bg-blue-50/30">
+                <td className="px-4 py-3 font-medium">e.max Lithium Disilicate Veneer / Inlay</td>
+                <td className="px-4 py-3">₹2,000–3,800</td>
+                <td className="px-4 py-3">₹9,000–16,000</td>
+                <td className="px-4 py-3">4 to 5 working days</td>
+              </tr>
+              <tr className="hover:bg-blue-50/30">
+                <td className="px-4 py-3 font-medium">DMLS Laser Sintered PFM Crown</td>
+                <td className="px-4 py-3">₹800–1,400</td>
+                <td className="px-4 py-3">₹3,500–6,000</td>
+                <td className="px-4 py-3">3 working days</td>
+              </tr>
+              <tr className="hover:bg-blue-50/30">
+                <td className="px-4 py-3 font-medium">Complete Lucitone Denture (per arch)</td>
+                <td className="px-4 py-3">₹2,200–4,000</td>
+                <td className="px-4 py-3">₹15,000–30,000</td>
+                <td className="px-4 py-3">5 to 7 working days</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div className="bg-gradient-to-r from-[#0867E8] to-blue-700 text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
+          <h3 className="text-lg font-bold">Simplify Your Dental Practice Operations</h3>
+          <p className="text-xs text-blue-100 max-w-lg mx-auto">Free cloud dental management system with digital treatment plans, patient recall automations, and point-of-care 0% patient EMI financing.</p>
+          <a href="https://clinaza.in/reactivation/login" className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md">Start Using Clinaza Free →</a>
+        </div>
+      </div>
+    )
   }
 ];
 

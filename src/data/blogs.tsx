@@ -4297,6 +4297,539 @@ export const BLOGS: BlogArticle[] = [
         </div>
       </div>
     )
+  },
+  {
+    slug: "knee-replacement-surgery-cost-on-emi-india",
+    title: "Knee Replacement Surgery Cost on EMI in India 2025 — Complete Patient Guide",
+    category: "Medical EMI",
+    readTime: "9 min read",
+    publishDate: "2026-09-08",
+    author: "Clinaza Health Finance Team",
+    summary: "Knee replacement costs ₹1.5 to ₹4 lakh in India. Learn how to pay for TKR, PKR, or bilateral knee replacement on affordable 0% EMI with no collateral through Clinaza.",
+    featuredImage: "/assets/clinic-hero-real.png",
+    metaDescription: "Knee replacement surgery costs ₹1.5–4 lakh in India. Get 0% EMI for TKR and PKR surgeries with instant approval. No collateral needed. Check your EMI on Clinaza.",
+    faqs: [
+      { question: "How much does knee replacement cost in India?", answer: "Total knee replacement (TKR) costs ₹1.5–3 lakh per knee in government hospitals and ₹2.5–4 lakh in private hospitals. Bilateral (both knees) can cost ₹4–7 lakh." },
+      { question: "Can I get knee replacement on EMI?", answer: "Yes. Clinaza offers 0% EMI for knee replacement surgeries up to ₹5 lakh with repayment of 3 to 24 months and no collateral or guarantor required." },
+      { question: "Is knee replacement covered under insurance?", answer: "Yes, most health insurance policies cover knee replacement. However, there are waiting periods (usually 2–4 years) and sub-limits. EMI covers your gap or upfront cost before reimbursement." },
+      { question: "What is the age limit for knee replacement?", answer: "There is no strict age limit. Surgeons perform TKR on patients aged 55–85. The decision depends on pain level, X-ray findings, and overall health." },
+      { question: "How long is recovery after knee replacement?", answer: "Most patients walk with support by day 2–3, go home in 3–5 days, and return to normal activities in 6–12 weeks. Full recovery takes 3–6 months." },
+    ],
+    content: (
+      <div className="space-y-6 text-neutral-800 leading-relaxed">
+        <p className="text-lg">Chronic knee pain from osteoarthritis affects over 15 crore Indians, yet many delay surgery due to cost. Total knee replacement (TKR) is one of the most successful elective surgeries in the world — with 95% of patients reporting dramatic pain relief and improved mobility. The problem is the ₹2–4 lakh price tag that stops most middle-class families from proceeding.</p>
+        <p>Clinaza now makes knee replacement accessible through instant 0% EMI — no collateral, no guarantor, and approval in under 2 minutes. Whether you're planning a single knee, both knees, or partial resurfacing, you can spread the cost across 3 to 24 months at zero extra charge.</p>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Knee Replacement Cost in India 2025</h2>
+        <div className="overflow-x-auto rounded-xl border border-neutral-200 shadow-sm">
+          <table className="w-full text-sm">
+            <thead className="bg-neutral-50 text-neutral-600 uppercase text-xs tracking-wide">
+              <tr>
+                <th className="px-4 py-3 text-left">Surgery Type</th>
+                <th className="px-4 py-3 text-left">Govt Hospital</th>
+                <th className="px-4 py-3 text-left">Private Hospital</th>
+                <th className="px-4 py-3 text-left">EMI (24 mo)</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-neutral-100">
+              <tr className="hover:bg-blue-50/30">
+                <td className="px-4 py-3 font-medium">Total Knee Replacement (1 knee)</td>
+                <td className="px-4 py-3">₹1,20,000–1,80,000</td>
+                <td className="px-4 py-3">₹2,50,000–4,00,000</td>
+                <td className="px-4 py-3 text-green-600 font-bold">₹8,333 / mo</td>
+              </tr>
+              <tr className="hover:bg-blue-50/30">
+                <td className="px-4 py-3 font-medium">Partial Knee Replacement</td>
+                <td className="px-4 py-3">₹90,000–1,40,000</td>
+                <td className="px-4 py-3">₹1,80,000–2,80,000</td>
+                <td className="px-4 py-3 text-green-600 font-bold">₹6,250 / mo</td>
+              </tr>
+              <tr className="hover:bg-blue-50/30">
+                <td className="px-4 py-3 font-medium">Bilateral TKR (both knees)</td>
+                <td className="px-4 py-3">₹2,40,000–3,40,000</td>
+                <td className="px-4 py-3">₹4,50,000–7,00,000</td>
+                <td className="px-4 py-3 text-green-600 font-bold">₹17,500 / mo</td>
+              </tr>
+              <tr className="hover:bg-blue-50/30">
+                <td className="px-4 py-3 font-medium">Robotic Knee Replacement</td>
+                <td className="px-4 py-3">—</td>
+                <td className="px-4 py-3">₹4,00,000–6,00,000</td>
+                <td className="px-4 py-3 text-green-600 font-bold">₹16,667 / mo</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">What's Included in the Surgery Cost?</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {[
+            { title: "Implant Cost", desc: "The prosthetic knee implant (Indian vs imported) is the biggest cost driver. Indian implants cost ₹40,000–80,000; imported ₹1–2 lakh." },
+            { title: "Surgeon & OT Fees", desc: "Senior orthopaedic surgeon fees range from ₹30,000–80,000 depending on hospital tier and city." },
+            { title: "Anaesthesia", desc: "Spinal or general anaesthesia adds ₹15,000–30,000 to the total bill." },
+            { title: "Hospital Stay (5–7 days)", desc: "ICU, physiotherapy, meals, nursing — typically ₹15,000–30,000 per day in private hospitals." },
+            { title: "Pre-op Investigations", desc: "Blood tests, X-rays, ECG, cardiac clearance — usually ₹5,000–15,000." },
+            { title: "Post-op Physiotherapy", desc: "Home physio or clinic sessions for 6–12 weeks, typically ₹10,000–25,000 extra." },
+          ].map(item => (
+            <div key={item.title} className="bg-blue-50 rounded-xl p-4 border border-blue-100">
+              <p className="font-semibold text-blue-900 text-sm mb-1">{item.title}</p>
+              <p className="text-xs text-blue-800">{item.desc}</p>
+            </div>
+          ))}
+        </div>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">How Clinaza EMI Works for Knee Replacement</h2>
+        <ol className="list-decimal pl-6 space-y-3 text-neutral-700">
+          <li><strong>Get pre-approved online:</strong> Visit clinaza.in and use the EMI calculator. Enter the surgery cost and select tenure (3–24 months).</li>
+          <li><strong>Instant approval in 2 minutes:</strong> No branch visit, no collateral, no guarantor — just your PAN, Aadhaar, and bank statement.</li>
+          <li><strong>Surgery happens:</strong> Clinaza disburses directly to your hospital or clinic on the day of surgery.</li>
+          <li><strong>Pay monthly:</strong> Fixed EMI auto-debited from your account. Zero extra cost at 0% interest.</li>
+        </ol>
+
+        <div className="bg-slate-900 text-white p-6 rounded-2xl my-8 space-y-4">
+          <h3 className="text-lg font-bold">Are you a hospital or orthopaedic clinic?</h3>
+          <p className="text-sm text-slate-300">Partner with Clinaza to offer zero-cost EMI at the point of care. Increase surgery conversions by 40%. Onboard in 24 hours — no setup fee.</p>
+          <a href="https://clinaza.in/#partner-form" className="inline-block bg-[#0867E8] text-white font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-600 transition-colors">Partner with Clinaza →</a>
+        </div>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Indian vs Imported Knee Implants — Which Should You Choose?</h2>
+        <p>Both Indian (Sushruta, Unison) and imported implants (Zimmer Biomet, DePuy, Smith & Nephew) are FDA/CE approved and offer 15–25 year longevity. The main difference is cost — Indian implants are 50–60% cheaper. For most patients under 70 with standard anatomy, Indian implants perform identically. Discuss with your surgeon based on your weight, activity level, and knee anatomy.</p>
+
+        <div className="bg-gradient-to-r from-[#0867E8] to-blue-700 text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
+          <h3 className="text-lg font-bold">Check Knee Replacement EMI Eligibility — Free in 2 Minutes</h3>
+          <p className="text-xs text-blue-100 max-w-lg mx-auto">Get pre-approved for ₹1 lakh to ₹5 lakh. 0% interest. No collateral. Instant decision.</p>
+          <a href="https://clinaza.in/#calculator" className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md">Calculate My Knee EMI →</a>
+        </div>
+      </div>
+    )
+  },
+  {
+    slug: "bariatric-weight-loss-surgery-cost-on-emi-india",
+    title: "Bariatric & Weight Loss Surgery Cost on EMI in India 2025 — Complete Guide",
+    category: "Medical EMI",
+    readTime: "9 min read",
+    publishDate: "2026-09-08",
+    author: "Clinaza Health Finance Team",
+    summary: "Bariatric surgery costs ₹2.5–5 lakh in India. Learn how to pay for gastric bypass, sleeve gastrectomy, or MGB on affordable 0% EMI with instant approval through Clinaza.",
+    featuredImage: "/assets/clinic-hero-real.png",
+    metaDescription: "Bariatric surgery costs ₹2.5–5 lakh in India. Get 0% EMI for gastric sleeve, bypass, and MGB with instant approval on Clinaza. No collateral needed.",
+    faqs: [
+      { question: "How much does bariatric surgery cost in India?", answer: "Bariatric surgery costs ₹2.5–5 lakh depending on the procedure (sleeve vs bypass) and city. Laparoscopic sleeve gastrectomy is the most popular at ₹2.5–3.5 lakh." },
+      { question: "Can I get bariatric surgery on EMI in India?", answer: "Yes. Clinaza offers 0% EMI for bariatric procedures up to ₹5 lakh with tenure from 3 to 24 months and instant approval — no collateral required." },
+      { question: "Is bariatric surgery covered under health insurance in India?", answer: "Some insurers cover it if BMI > 35 with comorbidities (diabetes, hypertension). Check your policy's 'obesity treatment' clause. EMI bridges the gap or covers the full cost." },
+      { question: "Who is eligible for bariatric surgery in India?", answer: "Adults with BMI ≥ 37.5, or BMI ≥ 32.5 with Type 2 diabetes or other obesity-related conditions, who have failed 6+ months of lifestyle changes." },
+      { question: "How much weight can I lose after bariatric surgery?", answer: "Most patients lose 60–80% of their excess weight within 18–24 months. Gastric bypass shows slightly higher loss than sleeve gastrectomy." },
+    ],
+    content: (
+      <div className="space-y-6 text-neutral-800 leading-relaxed">
+        <p className="text-lg">Obesity affects over 13.5 crore Indians and drives type 2 diabetes, hypertension, sleep apnea, and joint disease. Bariatric surgery is the only proven long-term solution for severe obesity — but at ₹2.5–5 lakh, it's out of reach for most families. Clinaza changes that with 0% EMI financing that makes your surgery affordable today.</p>
+        <p>Whether you're considering a laparoscopic sleeve gastrectomy, Roux-en-Y gastric bypass, or mini gastric bypass (MGB), Clinaza gives instant pre-approval with no collateral, no guarantor, and no branch visit. Just fill the form online and get your approval in under 2 minutes.</p>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Bariatric Surgery Cost Comparison India 2025</h2>
+        <div className="overflow-x-auto rounded-xl border border-neutral-200 shadow-sm">
+          <table className="w-full text-sm">
+            <thead className="bg-neutral-50 text-neutral-600 uppercase text-xs tracking-wide">
+              <tr>
+                <th className="px-4 py-3 text-left">Procedure</th>
+                <th className="px-4 py-3 text-left">Tier-1 City</th>
+                <th className="px-4 py-3 text-left">Tier-2 City</th>
+                <th className="px-4 py-3 text-left">EMI (24 mo)</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-neutral-100">
+              <tr className="hover:bg-blue-50/30">
+                <td className="px-4 py-3 font-medium">Laparoscopic Sleeve Gastrectomy</td>
+                <td className="px-4 py-3">₹3,00,000–4,00,000</td>
+                <td className="px-4 py-3">₹2,50,000–3,20,000</td>
+                <td className="px-4 py-3 text-green-600 font-bold">₹11,458 / mo</td>
+              </tr>
+              <tr className="hover:bg-blue-50/30">
+                <td className="px-4 py-3 font-medium">Roux-en-Y Gastric Bypass</td>
+                <td className="px-4 py-3">₹3,50,000–5,00,000</td>
+                <td className="px-4 py-3">₹3,00,000–4,00,000</td>
+                <td className="px-4 py-3 text-green-600 font-bold">₹14,583 / mo</td>
+              </tr>
+              <tr className="hover:bg-blue-50/30">
+                <td className="px-4 py-3 font-medium">Mini Gastric Bypass (MGB)</td>
+                <td className="px-4 py-3">₹3,00,000–4,50,000</td>
+                <td className="px-4 py-3">₹2,80,000–3,80,000</td>
+                <td className="px-4 py-3 text-green-600 font-bold">₹12,917 / mo</td>
+              </tr>
+              <tr className="hover:bg-blue-50/30">
+                <td className="px-4 py-3 font-medium">Revisional Bariatric Surgery</td>
+                <td className="px-4 py-3">₹4,00,000–6,00,000</td>
+                <td className="px-4 py-3">₹3,50,000–5,00,000</td>
+                <td className="px-4 py-3 text-green-600 font-bold">₹17,917 / mo</td>
+              </tr>
+              <tr className="hover:bg-blue-50/30">
+                <td className="px-4 py-3 font-medium">Intragastric Balloon (non-surgical)</td>
+                <td className="px-4 py-3">₹1,50,000–2,00,000</td>
+                <td className="px-4 py-3">₹1,20,000–1,80,000</td>
+                <td className="px-4 py-3 text-green-600 font-bold">₹5,833 / mo</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Sleeve vs Bypass — Which is Right for You?</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {[
+            { title: "Sleeve Gastrectomy", desc: "Removes ~75% of stomach. Simpler surgery, fewer nutrient deficiencies. Best for BMI 37–50 without severe diabetes." },
+            { title: "Gastric Bypass (RYGB)", desc: "Reroutes the intestine. Stronger diabetes reversal, more weight loss. Best for BMI > 50 or patients with T2D." },
+            { title: "Mini Gastric Bypass", desc: "Single anastomosis, shorter operating time. Comparable results to RYGB. Increasingly popular in India." },
+            { title: "Intragastric Balloon", desc: "Non-surgical, temporary (6 months). Good for BMI 27–40 who need a jumpstart before full surgery." },
+          ].map(item => (
+            <div key={item.title} className="bg-blue-50 rounded-xl p-4 border border-blue-100">
+              <p className="font-semibold text-blue-900 text-sm mb-1">{item.title}</p>
+              <p className="text-xs text-blue-800">{item.desc}</p>
+            </div>
+          ))}
+        </div>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Top Bariatric Surgery Cities in India</h2>
+        <p className="text-neutral-700">India's leading bariatric centres are in Chennai, Hyderabad, Delhi, Mumbai, Bengaluru, and Pune. Tier-2 cities like Jaipur, Lucknow, Patna, and Kochi are rapidly developing experienced bariatric teams — often at 20–30% lower cost than metros while offering the same laparoscopic technique and outcomes.</p>
+
+        <div className="bg-slate-900 text-white p-6 rounded-2xl my-8 space-y-4">
+          <h3 className="text-lg font-bold">Are you a bariatric or metabolic surgery centre?</h3>
+          <p className="text-sm text-slate-300">Partner with Clinaza and offer 0% EMI at the point of consultation. Convert hesitant patients into confirmed surgeries. Free onboarding.</p>
+          <a href="https://clinaza.in/#partner-form" className="inline-block bg-[#0867E8] text-white font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-600 transition-colors">Partner with Clinaza →</a>
+        </div>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">What Does Bariatric Surgery Cure or Improve?</h2>
+        <ul className="list-disc pl-6 space-y-2.5 text-neutral-700">
+          <li><strong>Type 2 Diabetes:</strong> 80–90% remission rate after bypass surgery — often more effective than medication.</li>
+          <li><strong>Hypertension:</strong> 70% of patients reduce or eliminate blood pressure medication within 6 months.</li>
+          <li><strong>Sleep Apnea:</strong> 85% improvement or complete resolution after significant weight loss.</li>
+          <li><strong>Joint Pain:</strong> Every kg of weight loss reduces knee joint load by 4 kg — transformational for mobility.</li>
+          <li><strong>PCOD / Infertility:</strong> Weight loss often restores hormonal balance and improves conception chances.</li>
+        </ul>
+
+        <div className="bg-gradient-to-r from-[#0867E8] to-blue-700 text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
+          <h3 className="text-lg font-bold">Check Bariatric Surgery 0% EMI Eligibility Now</h3>
+          <p className="text-xs text-blue-100 max-w-lg mx-auto">Get pre-approved for ₹1.5 lakh to ₹5 lakh. Instant approval. No collateral. No guarantor.</p>
+          <a href="https://clinaza.in/#calculator" className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md">Calculate My Bariatric EMI →</a>
+        </div>
+      </div>
+    )
+  },
+  {
+    slug: "rhinoplasty-nose-job-cost-on-emi-india",
+    title: "Rhinoplasty (Nose Job) Cost on EMI in India 2025 — Complete Guide",
+    category: "Medical EMI",
+    readTime: "8 min read",
+    publishDate: "2026-09-08",
+    author: "Clinaza Health Finance Team",
+    summary: "Rhinoplasty costs ₹60,000–2.5 lakh in India. Learn how to pay for nose reshaping surgery on affordable 0% EMI through Clinaza with instant approval and no collateral.",
+    featuredImage: "/assets/clinic-hero-real.png",
+    metaDescription: "Rhinoplasty (nose job) costs ₹60,000–2.5 lakh in India. Get 0% EMI for nose reshaping surgery with instant approval on Clinaza. No collateral required.",
+    faqs: [
+      { question: "How much does rhinoplasty cost in India?", answer: "Rhinoplasty in India costs ₹60,000–2.5 lakh depending on the procedure type (open vs closed), surgeon experience, and city. Non-surgical rhinoplasty using fillers costs ₹15,000–40,000." },
+      { question: "Can I get a nose job on EMI in India?", answer: "Yes. Clinaza offers 0% EMI for rhinoplasty up to ₹2.5 lakh with 3–24 month tenures. Instant online approval, no collateral or guarantor required." },
+      { question: "Is rhinoplasty permanent?", answer: "Yes, surgical rhinoplasty results are permanent. Results take 12–18 months to fully settle as post-op swelling gradually resolves. Non-surgical (filler) rhinoplasty lasts 12–18 months." },
+      { question: "How long is recovery after rhinoplasty?", answer: "Splint comes off in 7–10 days. Presentable in 2–3 weeks. 80% of swelling resolves in 3 months. Final result visible at 12–18 months." },
+      { question: "What is the best city for rhinoplasty in India?", answer: "Mumbai, Delhi, and Bengaluru have the highest concentration of experienced rhinoplasty surgeons. Hyderabad, Chennai, and Pune also have excellent plastic surgery centres." },
+    ],
+    content: (
+      <div className="space-y-6 text-neutral-800 leading-relaxed">
+        <p className="text-lg">Rhinoplasty — commonly called a nose job — is the third most popular cosmetic surgery in India. From correcting a nasal hump, reducing tip size, straightening a deviated septum, or refining the nostrils, rhinoplasty delivers life-changing results both aesthetically and functionally. The cost of ₹60,000–2.5 lakh was the only thing stopping most patients — until Clinaza introduced 0% EMI financing.</p>
+        <p>Now you can book your rhinoplasty consultation, confirm your surgery date, and pay in affordable monthly instalments with zero interest. Clinaza approves in under 2 minutes with just your PAN, Aadhaar, and bank details.</p>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Rhinoplasty Cost in India 2025</h2>
+        <div className="overflow-x-auto rounded-xl border border-neutral-200 shadow-sm">
+          <table className="w-full text-sm">
+            <thead className="bg-neutral-50 text-neutral-600 uppercase text-xs tracking-wide">
+              <tr>
+                <th className="px-4 py-3 text-left">Procedure</th>
+                <th className="px-4 py-3 text-left">Metro City</th>
+                <th className="px-4 py-3 text-left">Tier-2 City</th>
+                <th className="px-4 py-3 text-left">EMI (12 mo)</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-neutral-100">
+              <tr className="hover:bg-blue-50/30">
+                <td className="px-4 py-3 font-medium">Open Rhinoplasty (full reshape)</td>
+                <td className="px-4 py-3">₹1,50,000–2,50,000</td>
+                <td className="px-4 py-3">₹80,000–1,50,000</td>
+                <td className="px-4 py-3 text-green-600 font-bold">₹12,500 / mo</td>
+              </tr>
+              <tr className="hover:bg-blue-50/30">
+                <td className="px-4 py-3 font-medium">Closed Rhinoplasty</td>
+                <td className="px-4 py-3">₹1,00,000–1,80,000</td>
+                <td className="px-4 py-3">₹60,000–1,20,000</td>
+                <td className="px-4 py-3 text-green-600 font-bold">₹8,333 / mo</td>
+              </tr>
+              <tr className="hover:bg-blue-50/30">
+                <td className="px-4 py-3 font-medium">Septorhinoplasty (deviated septum)</td>
+                <td className="px-4 py-3">₹1,20,000–2,00,000</td>
+                <td className="px-4 py-3">₹70,000–1,40,000</td>
+                <td className="px-4 py-3 text-green-600 font-bold">₹10,417 / mo</td>
+              </tr>
+              <tr className="hover:bg-blue-50/30">
+                <td className="px-4 py-3 font-medium">Tip Rhinoplasty (tip only)</td>
+                <td className="px-4 py-3">₹80,000–1,40,000</td>
+                <td className="px-4 py-3">₹50,000–90,000</td>
+                <td className="px-4 py-3 text-green-600 font-bold">₹5,833 / mo</td>
+              </tr>
+              <tr className="hover:bg-blue-50/30">
+                <td className="px-4 py-3 font-medium">Non-surgical (fillers)</td>
+                <td className="px-4 py-3">₹20,000–40,000</td>
+                <td className="px-4 py-3">₹15,000–30,000</td>
+                <td className="px-4 py-3 text-green-600 font-bold">₹2,083 / mo</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Open vs Closed Rhinoplasty — What's the Difference?</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {[
+            { title: "Open Rhinoplasty", desc: "Small incision across the columella (skin between nostrils). Gives surgeon maximum visibility. Best for complex reshaping, hump reduction, or ethnic rhinoplasty." },
+            { title: "Closed Rhinoplasty", desc: "All incisions inside the nostrils — no external scar. Less swelling, faster recovery. Best for minor refinements and tip work." },
+            { title: "Septorhinoplasty", desc: "Combines rhinoplasty with correction of a deviated septum. Improves both aesthetics and breathing. Often partially covered by insurance if medically indicated." },
+            { title: "Non-Surgical Rhinoplasty", desc: "Hyaluronic acid fillers camouflage bumps and lift the tip without surgery. Results last 12–18 months. Great for first-timers or those not ready for surgery." },
+          ].map(item => (
+            <div key={item.title} className="bg-blue-50 rounded-xl p-4 border border-blue-100">
+              <p className="font-semibold text-blue-900 text-sm mb-1">{item.title}</p>
+              <p className="text-xs text-blue-800">{item.desc}</p>
+            </div>
+          ))}
+        </div>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">What Affects Rhinoplasty Cost in India?</h2>
+        <ul className="list-disc pl-6 space-y-2.5 text-neutral-700">
+          <li><strong>Surgeon Experience:</strong> A renowned plastic or ENT surgeon with 500+ rhinoplasties charges ₹80,000–1.5 lakh more than a general surgeon.</li>
+          <li><strong>Procedure Complexity:</strong> Hump reduction + tip refinement + nostril narrowing costs more than a single-area correction.</li>
+          <li><strong>Implants:</strong> If a cartilage graft or silicone implant is needed (for augmentation rhinoplasty), cost increases by ₹20,000–60,000.</li>
+          <li><strong>City:</strong> Mumbai, Delhi, and Bengaluru surgeons typically charge 30–50% more than Tier-2 cities for equivalent quality.</li>
+          <li><strong>Anaesthesia:</strong> General anaesthesia adds ₹15,000–25,000 vs local anaesthesia for minor procedures.</li>
+        </ul>
+
+        <div className="bg-slate-900 text-white p-6 rounded-2xl my-8 space-y-4">
+          <h3 className="text-lg font-bold">Are you a plastic surgery or ENT clinic?</h3>
+          <p className="text-sm text-slate-300">Offer 0% EMI for rhinoplasty and all cosmetic procedures. Patients who hesitate at ₹1.5 lakh book immediately when offered ₹6,000/month. Partner with Clinaza — free onboarding.</p>
+          <a href="https://clinaza.in/#partner-form" className="inline-block bg-[#0867E8] text-white font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-600 transition-colors">Partner with Clinaza →</a>
+        </div>
+
+        <div className="bg-gradient-to-r from-[#0867E8] to-blue-700 text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
+          <h3 className="text-lg font-bold">Check Rhinoplasty EMI in 2 Minutes — 0% Interest</h3>
+          <p className="text-xs text-blue-100 max-w-lg mx-auto">Get instant pre-approval for ₹50,000 to ₹2.5 lakh. No collateral, no guarantor. EMI from ₹2,000/month.</p>
+          <a href="https://clinaza.in/#calculator" className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md">Calculate My Rhinoplasty EMI →</a>
+        </div>
+      </div>
+    )
+  },
+  {
+    slug: "gynecomastia-surgery-cost-on-emi-india",
+    title: "Gynecomastia Surgery Cost on EMI in India 2025 — Complete Guide",
+    category: "Medical EMI",
+    readTime: "7 min read",
+    publishDate: "2026-09-08",
+    author: "Clinaza Health Finance Team",
+    summary: "Gynecomastia surgery costs ₹50,000–1.5 lakh in India. Learn how to pay for male breast reduction on affordable 0% EMI through Clinaza with instant approval and no collateral.",
+    featuredImage: "/assets/clinic-hero-real.png",
+    metaDescription: "Gynecomastia surgery costs ₹50,000–1.5 lakh in India. Get 0% EMI for male breast reduction with instant approval on Clinaza. No collateral required.",
+    faqs: [
+      { question: "How much does gynecomastia surgery cost in India?", answer: "Gynecomastia surgery in India costs ₹50,000–1.5 lakh depending on the grade (glandular tissue vs fat), surgical technique (liposuction vs excision), and city." },
+      { question: "Can I get gynecomastia surgery on EMI?", answer: "Yes. Clinaza offers 0% EMI for gynecomastia surgery up to ₹1.5 lakh with 3–24 month tenures and instant online approval." },
+      { question: "Is gynecomastia surgery permanent?", answer: "Yes, surgical results are permanent as long as the underlying hormonal cause is addressed and you avoid substances like steroids and certain medications that cause gynecomastia." },
+      { question: "How long is recovery after gynecomastia surgery?", answer: "You'll wear a compression vest for 4–6 weeks. Return to work in 5–7 days. Strenuous exercise after 4–6 weeks. Final results visible in 3–6 months as swelling settles." },
+      { question: "What causes gynecomastia?", answer: "Hormonal imbalance (high estrogen, low testosterone), steroid use, certain medications (antidepressants, antacids), obesity, or idiopathic (unknown) causes." },
+    ],
+    content: (
+      <div className="space-y-6 text-neutral-800 leading-relaxed">
+        <p className="text-lg">Gynecomastia — enlarged male breast tissue — affects 40–60% of men at some point in their lives and can cause significant embarrassment and psychological distress. Despite being extremely common, most men suffer in silence because they're unaware that surgery exists or assume it's unaffordable. Clinaza makes gynecomastia surgery accessible with 0% EMI starting from just ₹2,500 per month.</p>
+        <p>Whether your condition involves predominantly glandular tissue (requiring excision) or fatty enlargement (treatable with liposuction alone), Clinaza's financing covers the full procedure cost with instant approval — no branch visit, no collateral, no embarrassment.</p>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Gynecomastia Surgery Cost in India 2025</h2>
+        <div className="overflow-x-auto rounded-xl border border-neutral-200 shadow-sm">
+          <table className="w-full text-sm">
+            <thead className="bg-neutral-50 text-neutral-600 uppercase text-xs tracking-wide">
+              <tr>
+                <th className="px-4 py-3 text-left">Procedure</th>
+                <th className="px-4 py-3 text-left">Metro City</th>
+                <th className="px-4 py-3 text-left">Tier-2 City</th>
+                <th className="px-4 py-3 text-left">EMI (12 mo)</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-neutral-100">
+              <tr className="hover:bg-blue-50/30">
+                <td className="px-4 py-3 font-medium">Liposuction only (Grade 1)</td>
+                <td className="px-4 py-3">₹50,000–80,000</td>
+                <td className="px-4 py-3">₹40,000–60,000</td>
+                <td className="px-4 py-3 text-green-600 font-bold">₹4,167 / mo</td>
+              </tr>
+              <tr className="hover:bg-blue-50/30">
+                <td className="px-4 py-3 font-medium">Liposuction + Gland Excision (Grade 2)</td>
+                <td className="px-4 py-3">₹80,000–1,20,000</td>
+                <td className="px-4 py-3">₹60,000–90,000</td>
+                <td className="px-4 py-3 text-green-600 font-bold">₹6,250 / mo</td>
+              </tr>
+              <tr className="hover:bg-blue-50/30">
+                <td className="px-4 py-3 font-medium">Gland Excision + Skin Removal (Grade 3)</td>
+                <td className="px-4 py-3">₹1,20,000–1,80,000</td>
+                <td className="px-4 py-3">₹90,000–1,40,000</td>
+                <td className="px-4 py-3 text-green-600 font-bold">₹9,167 / mo</td>
+              </tr>
+              <tr className="hover:bg-blue-50/30">
+                <td className="px-4 py-3 font-medium">Vaser Hi-Def (athlete chest sculpting)</td>
+                <td className="px-4 py-3">₹1,50,000–2,50,000</td>
+                <td className="px-4 py-3">₹1,20,000–2,00,000</td>
+                <td className="px-4 py-3 text-green-600 font-bold">₹12,500 / mo</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Grades of Gynecomastia and Treatment Options</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {[
+            { title: "Grade 1 — Minor Enlargement", desc: "Small amount of glandular tissue around the nipple. Liposuction alone usually sufficient. Minimal scarring, fastest recovery." },
+            { title: "Grade 2 — Moderate Enlargement", desc: "Breast tissue extends beyond areola but skin is not excess. Liposuction + gland excision via small peri-areolar incision. Most common presentation." },
+            { title: "Grade 3 — Significant Enlargement", desc: "Moderate enlargement with some skin excess. Requires skin excision in addition to tissue removal. More visible scar." },
+            { title: "Grade 4 — Severe (Feminised Chest)", desc: "Large breast with significant skin ptosis. Full mastopexy-type correction needed. Most complex and costly procedure." },
+          ].map(item => (
+            <div key={item.title} className="bg-blue-50 rounded-xl p-4 border border-blue-100">
+              <p className="font-semibold text-blue-900 text-sm mb-1">{item.title}</p>
+              <p className="text-xs text-blue-800">{item.desc}</p>
+            </div>
+          ))}
+        </div>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Why Men Delay Gynecomastia Surgery (and Why They Shouldn't)</h2>
+        <ul className="list-disc pl-6 space-y-2.5 text-neutral-700">
+          <li><strong>Embarrassment:</strong> Most men don't discuss it — but gynecomastia is medically recognised and affects 40–60% of males.</li>
+          <li><strong>Cost perception:</strong> Many assume surgery costs ₹3–5 lakh when the actual cost is ₹50,000–1.2 lakh for most cases.</li>
+          <li><strong>Fear of surgery:</strong> Gynecomastia surgery is a day procedure under local anaesthesia — 2–3 hours and home the same day.</li>
+          <li><strong>No EMI option:</strong> Clinaza solves this — pay ₹4,000–8,000/month instead of ₹80,000–1.2 lakh upfront.</li>
+        </ul>
+
+        <div className="bg-slate-900 text-white p-6 rounded-2xl my-8 space-y-4">
+          <h3 className="text-lg font-bold">Are you a plastic or cosmetic surgery clinic?</h3>
+          <p className="text-sm text-slate-300">Gynecomastia is one of the highest-converting cosmetic procedures with EMI. Partner with Clinaza and start converting hesitant consultations into confirmed surgeries.</p>
+          <a href="https://clinaza.in/#partner-form" className="inline-block bg-[#0867E8] text-white font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-600 transition-colors">Partner with Clinaza →</a>
+        </div>
+
+        <div className="bg-gradient-to-r from-[#0867E8] to-blue-700 text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
+          <h3 className="text-lg font-bold">Check Gynecomastia Surgery EMI — Instant Approval</h3>
+          <p className="text-xs text-blue-100 max-w-lg mx-auto">Get pre-approved for ₹50,000 to ₹2 lakh. 0% interest. No collateral. EMI from ₹2,500/month.</p>
+          <a href="https://clinaza.in/#calculator" className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md">Calculate My Gynecomastia EMI →</a>
+        </div>
+      </div>
+    )
+  },
+  {
+    slug: "liposuction-cost-on-emi-india",
+    title: "Liposuction Cost on EMI in India 2025 — Complete Guide to Body Contouring Finance",
+    category: "Medical EMI",
+    readTime: "8 min read",
+    publishDate: "2026-09-08",
+    author: "Clinaza Health Finance Team",
+    summary: "Liposuction costs ₹60,000–3 lakh in India depending on areas treated. Learn how to pay for lipo, Vaser, or 360° body contouring on affordable 0% EMI through Clinaza.",
+    featuredImage: "/assets/clinic-hero-real.png",
+    metaDescription: "Liposuction costs ₹60,000–3 lakh in India. Get 0% EMI for lipo, Vaser hi-def, and 360° body contouring with instant approval on Clinaza. No collateral needed.",
+    faqs: [
+      { question: "How much does liposuction cost in India?", answer: "Liposuction in India costs ₹60,000–3 lakh depending on the number of areas treated, technique (standard vs Vaser vs laser), and surgeon. Abdomen alone costs ₹60,000–1.2 lakh." },
+      { question: "Can I get liposuction on EMI in India?", answer: "Yes. Clinaza offers 0% EMI for liposuction procedures up to ₹3 lakh with 3–24 month repayment periods and instant online approval." },
+      { question: "Is liposuction permanent?", answer: "Liposuction permanently removes fat cells from the treated area. However, remaining fat cells can expand if you gain weight after surgery — so maintaining weight post-op is important." },
+      { question: "How many areas can be treated in one session?", answer: "Surgeons typically treat 2–4 areas in one session for safety. Common combinations: abdomen + flanks, thighs + hips, arms + upper back." },
+      { question: "What is the difference between Vaser lipo and standard lipo?", answer: "Vaser uses ultrasound energy to liquefy fat before removal — less bruising, faster recovery, and better for fibrous areas. It enables hi-def sculpting for athletic body definition." },
+    ],
+    content: (
+      <div className="space-y-6 text-neutral-800 leading-relaxed">
+        <p className="text-lg">Liposuction remains India's most popular body contouring procedure, with over 1.5 lakh procedures performed annually. Whether targeting stubborn belly fat, love handles, double chin, inner thighs, or arms, liposuction delivers dramatic and permanent fat reduction with 1–3 weeks of downtime. The ₹60,000–3 lakh cost was the only barrier — Clinaza removes it with 0% EMI financing.</p>
+        <p>From a single-area standard liposuction to full 360° body sculpting with Vaser hi-def, Clinaza finances your procedure at zero interest with instant approval. Pay ₹3,000–12,000 per month instead of lakhs upfront.</p>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Liposuction Cost by Area — India 2025</h2>
+        <div className="overflow-x-auto rounded-xl border border-neutral-200 shadow-sm">
+          <table className="w-full text-sm">
+            <thead className="bg-neutral-50 text-neutral-600 uppercase text-xs tracking-wide">
+              <tr>
+                <th className="px-4 py-3 text-left">Area Treated</th>
+                <th className="px-4 py-3 text-left">Standard Lipo</th>
+                <th className="px-4 py-3 text-left">Vaser Lipo</th>
+                <th className="px-4 py-3 text-left">EMI (12 mo)</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-neutral-100">
+              <tr className="hover:bg-blue-50/30">
+                <td className="px-4 py-3 font-medium">Abdomen (upper + lower)</td>
+                <td className="px-4 py-3">₹70,000–1,20,000</td>
+                <td className="px-4 py-3">₹1,20,000–1,80,000</td>
+                <td className="px-4 py-3 text-green-600 font-bold">₹7,500 / mo</td>
+              </tr>
+              <tr className="hover:bg-blue-50/30">
+                <td className="px-4 py-3 font-medium">Flanks / Love Handles</td>
+                <td className="px-4 py-3">₹50,000–80,000</td>
+                <td className="px-4 py-3">₹80,000–1,20,000</td>
+                <td className="px-4 py-3 text-green-600 font-bold">₹5,000 / mo</td>
+              </tr>
+              <tr className="hover:bg-blue-50/30">
+                <td className="px-4 py-3 font-medium">Thighs (inner + outer)</td>
+                <td className="px-4 py-3">₹60,000–1,00,000</td>
+                <td className="px-4 py-3">₹1,00,000–1,60,000</td>
+                <td className="px-4 py-3 text-green-600 font-bold">₹6,667 / mo</td>
+              </tr>
+              <tr className="hover:bg-blue-50/30">
+                <td className="px-4 py-3 font-medium">Arms (both)</td>
+                <td className="px-4 py-3">₹50,000–80,000</td>
+                <td className="px-4 py-3">₹80,000–1,20,000</td>
+                <td className="px-4 py-3 text-green-600 font-bold">₹5,000 / mo</td>
+              </tr>
+              <tr className="hover:bg-blue-50/30">
+                <td className="px-4 py-3 font-medium">Double Chin / Neck</td>
+                <td className="px-4 py-3">₹40,000–70,000</td>
+                <td className="px-4 py-3">₹70,000–1,00,000</td>
+                <td className="px-4 py-3 text-green-600 font-bold">₹3,750 / mo</td>
+              </tr>
+              <tr className="hover:bg-blue-50/30">
+                <td className="px-4 py-3 font-medium">360° Full Body (4–6 areas)</td>
+                <td className="px-4 py-3">₹1,80,000–3,00,000</td>
+                <td className="px-4 py-3">₹2,50,000–4,00,000</td>
+                <td className="px-4 py-3 text-green-600 font-bold">₹14,583 / mo</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Types of Liposuction in India</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {[
+            { title: "Tumescent Liposuction", desc: "The gold standard. Saline + epinephrine + lidocaine injected to firm the fat before suction. Minimal blood loss, safe for large volumes." },
+            { title: "Vaser Liposuction", desc: "Ultrasound energy emulsifies fat first — gentler extraction, less bruising, better skin tightening. Enables hi-def six-pack sculpting." },
+            { title: "Laser Lipo (SmartLipo)", desc: "Laser liquefies fat and simultaneously stimulates collagen for skin tightening. Best for small areas like chin, arms, and inner knees." },
+            { title: "Tickle Lipo (Nutational Infrasonic)", desc: "Vibrating cannula breaks up fat gently with minimal downtime. Often done under local anaesthesia for awake procedures." },
+          ].map(item => (
+            <div key={item.title} className="bg-blue-50 rounded-xl p-4 border border-blue-100">
+              <p className="font-semibold text-blue-900 text-sm mb-1">{item.title}</p>
+              <p className="text-xs text-blue-800">{item.desc}</p>
+            </div>
+          ))}
+        </div>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Is Liposuction a Weight Loss Procedure?</h2>
+        <p className="text-neutral-700">No — liposuction is a <strong>contouring</strong> procedure, not a weight-loss treatment. It removes localised fat deposits that are resistant to diet and exercise. Ideal candidates are within 20–30% of their target weight with good skin elasticity. For obesity with BMI &gt; 35, bariatric surgery is the appropriate intervention. Liposuction removes 2–5 kg of fat per session — the benefit is shape, not scale.</p>
+
+        <div className="bg-slate-900 text-white p-6 rounded-2xl my-8 space-y-4">
+          <h3 className="text-lg font-bold">Are you a cosmetic surgery or aesthetic clinic?</h3>
+          <p className="text-sm text-slate-300">Offer 0% EMI on liposuction and body contouring. Patients who walk out at ₹1.5 lakh stay and book when you show them ₹6,250/month. Partner with Clinaza — free, 24-hour onboarding.</p>
+          <a href="https://clinaza.in/#partner-form" className="inline-block bg-[#0867E8] text-white font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-600 transition-colors">Partner with Clinaza →</a>
+        </div>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Liposuction Recovery Timeline</h2>
+        <ul className="list-disc pl-6 space-y-2.5 text-neutral-700">
+          <li><strong>Day 1–3:</strong> Significant swelling and bruising. Compression garment worn 24/7. Rest at home.</li>
+          <li><strong>Day 4–7:</strong> Return to sedentary work. Drain tubes (if any) removed. Garment continues.</li>
+          <li><strong>Week 2–4:</strong> 60% of swelling resolves. Light walking and activity resumes.</li>
+          <li><strong>Month 2–3:</strong> Exercise and gym resume. 80% of final result visible.</li>
+          <li><strong>Month 4–6:</strong> Final result visible as all swelling resolves and skin contracts.</li>
+        </ul>
+
+        <div className="bg-gradient-to-r from-[#0867E8] to-blue-700 text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
+          <h3 className="text-lg font-bold">Check Liposuction EMI Eligibility — 0% Interest</h3>
+          <p className="text-xs text-blue-100 max-w-lg mx-auto">Get pre-approved for ₹50,000 to ₹3 lakh. Instant approval. No collateral. EMI from ₹3,000/month.</p>
+          <a href="https://clinaza.in/#calculator" className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md">Calculate My Liposuction EMI →</a>
+        </div>
+      </div>
+    )
   }
 ];
 

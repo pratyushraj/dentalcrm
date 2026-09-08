@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Star, Check, Copy, ExternalLink, Sparkles, AlertCircle, Smile, Activity } from 'lucide-react';
 import confetti from 'canvas-confetti';
+import { SEOHead } from '@/components/seo/SEOHead';
 
 interface ClinicConfig {
   id: string;
@@ -180,6 +181,12 @@ export default function ReviewAssistant() {
 
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col items-center justify-center p-4 md:p-8">
+      <SEOHead 
+        title={`${clinic.name} — Review Assistant`}
+        description="Share your treatment feedback and review for the clinic."
+        canonicalUrl="https://clinaza.in/review/assist"
+        robots="noindex, nofollow"
+      />
       <div className="w-full max-w-xl bg-white border border-slate-200 rounded-3xl shadow-xl overflow-hidden flex flex-col">
         {/* Dynamic Header */}
         <div className="p-6 bg-slate-900 border-b border-slate-800 text-white flex items-center justify-between gap-4">
@@ -194,7 +201,7 @@ export default function ReviewAssistant() {
               )}
             </div>
             <div>
-              <h2 className="text-base font-bold tracking-tight">{clinic.name}</h2>
+              <h1 className="text-base font-bold tracking-tight">{clinic.name}</h1>
               <p className="text-xs text-slate-400">Review Helper Portal</p>
             </div>
           </div>

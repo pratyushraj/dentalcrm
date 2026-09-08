@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { CheckCircle2, Zap, Phone, Clock, ArrowRight, ShieldCheck, Sparkles, MessageCircle, CreditCard, ExternalLink } from 'lucide-react';
+import { SEOHead } from '@/components/seo/SEOHead';
 
 interface LenderStep {
   icon: React.ReactNode;
@@ -80,6 +81,12 @@ export default function EmiCallbackPage() {
 
   return (
     <div className="min-h-screen bg-slate-950 flex flex-col justify-between p-4 sm:p-6 font-sans text-slate-100 antialiased relative overflow-hidden">
+      <SEOHead 
+        title="Application Status | Clinaza Patient Financing"
+        description="Patient treatment financing status and lender registration confirmation."
+        canonicalUrl="https://clinaza.in/emi/callback"
+        robots="noindex, nofollow"
+      />
 
       {/* Background Glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-96 bg-gradient-to-b from-emerald-500/10 via-indigo-500/5 to-transparent blur-3xl pointer-events-none -z-10" />
@@ -91,7 +98,7 @@ export default function EmiCallbackPage() {
             <div className="w-full h-full bg-slate-950 rounded-[10px] flex items-center justify-center text-white font-black text-xs">C</div>
           </div>
           <div>
-            <h1 className="text-sm font-black text-white tracking-tight leading-none">Clinaza</h1>
+            <span className="text-sm font-black text-white tracking-tight leading-none block">Clinaza</span>
             <p className="text-[10px] font-semibold text-slate-400 mt-0.5">Healthcare Operating System</p>
           </div>
         </div>

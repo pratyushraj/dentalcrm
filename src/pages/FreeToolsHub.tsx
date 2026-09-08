@@ -109,13 +109,43 @@ export default function FreeToolsHub() {
   const [emiTenure, setEmiTenure] = useState<number>(12);
   const monthlyEmi = Math.round(treatmentAmount / emiTenure);
 
+  const toolsSchema = [
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Clinaza Dental Prescription Maker (Rx Generator)",
+      "applicationCategory": "HealthApplication",
+      "operatingSystem": "All",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "INR"
+      },
+      "description": "Free printable digital prescription generator for dentists in India with standard pre-filled dental dosages."
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Clinaza Dental Clinic Setup Cost Calculator",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "All",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "INR"
+      },
+      "description": "Interactive dental clinic capital expenditure and setup cost estimator for 1 to 3 chairs across Indian cities."
+    }
+  ];
+
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900">
+    <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col justify-between">
       <SEOHead 
-        title="Free Dental Tools & Calculators — Rx Maker, Setup Cost & Medical EMI Calculator | Clinaza"
-        description="Free online utility tools for dentists and patients in India: Digital Dental Prescription Maker (Printable Rx), Clinic Setup Cost Estimator, and Treatment Monthly EMI Calculator."
+        title="Free Dental Tools & Calculators for Clinics & Patients | Clinaza"
+        description="Free online practice utilities: Digital Dental Prescription Maker (Printable Rx), Clinic Setup Cost Estimator, and Treatment Monthly EMI Calculator."
         keywords={["free dental prescription maker", "online rx generator dental india", "dental clinic setup cost calculator", "dental emi calculator", "medical treatment emi calculator", "clinaza free tools"]}
         canonicalUrl="https://clinaza.in/tools"
+        jsonLd={toolsSchema}
       />
 
       {/* Header Bar */}
@@ -665,7 +695,60 @@ export default function FreeToolsHub() {
           </div>
         )}
 
+        {/* Interlinking to Blog Guides */}
+        <section className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-3">
+          <h3 className="text-xs font-black text-slate-800 uppercase tracking-wider">Related Practice Management &amp; Patient Guides</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+            <Link to="/blog/free-digital-dental-prescription-maker-emr-software-india" className="p-3 bg-slate-50 hover:bg-blue-50 border border-slate-200 rounded-xl transition-colors block">
+              <strong className="text-[#0B2450] block">Digital Prescription &amp; EMR Guide</strong>
+              <span className="text-[11px] text-slate-500">How to modernize clinic paperwork</span>
+            </Link>
+            <Link to="/blog/how-to-start-a-dental-clinic-in-india-setup-cost-checklist" className="p-3 bg-slate-50 hover:bg-blue-50 border border-slate-200 rounded-xl transition-colors block">
+              <strong className="text-[#0B2450] block">Clinic Setup Cost &amp; Checklist</strong>
+              <span className="text-[11px] text-slate-500">CapEx budget &amp; equipment guide</span>
+            </Link>
+            <Link to="/blog/how-dental-clinics-increase-treatment-acceptance-with-emi-india" className="p-3 bg-slate-50 hover:bg-blue-50 border border-slate-200 rounded-xl transition-colors block">
+              <strong className="text-[#0B2450] block">Increase Case Acceptance with EMI</strong>
+              <span className="text-[11px] text-slate-500">Overcoming price objections</span>
+            </Link>
+          </div>
+        </section>
+
       </main>
+
+      {/* Footer */}
+      <footer className="border-t border-slate-200 py-8 px-6 bg-white text-center sm:text-left mt-12">
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+          <div className="flex items-center gap-3">
+            <img src="/assets/clinaza-logo.jpg" alt="CLINAZA" className="h-8 w-auto rounded-lg border border-slate-200" />
+            <div>
+              <span className="text-xs font-black uppercase tracking-widest text-[#0B2450] block">CLINAZA</span>
+              <span className="text-[8px] font-bold text-[#0f7a75] block uppercase">PRACTICE UTILITIES &amp; FINANCING</span>
+            </div>
+          </div>
+          <div className="flex flex-col sm:flex-row items-center gap-4 text-xs text-slate-600 font-medium">
+            <a href="tel:+917292984244" className="hover:text-[#0867E8] transition-colors font-bold flex items-center gap-1.5">
+              📞 +91 7292984244
+            </a>
+            <span className="hidden sm:inline text-slate-300" aria-hidden="true">&middot;</span>
+            <a href="https://wa.me/917292984244" target="_blank" rel="noopener noreferrer" className="hover:text-emerald-600 transition-colors font-bold flex items-center gap-1.5">
+              💬 WhatsApp Support
+            </a>
+            <span className="hidden sm:inline text-slate-300" aria-hidden="true">&middot;</span>
+            <a href="mailto:contact@clinaza.in" className="hover:text-[#0867E8] transition-colors">contact@clinaza.in</a>
+          </div>
+          <nav aria-label="Footer navigation" className="flex items-center gap-4 text-[10px] text-slate-500 font-mono uppercase tracking-widest">
+            <Link to="/" className="hover:text-[#0867E8] transition-colors underline">Home</Link>
+            <span aria-hidden="true">&middot;</span>
+            <Link to="/blog" className="hover:text-[#0f7a75] transition-colors underline">Guides</Link>
+            <span aria-hidden="true">&middot;</span>
+            <Link to="/reactivation/login" className="hover:text-[#0B2450] transition-colors font-bold">Doctor Portal</Link>
+          </nav>
+        </div>
+        <div className="max-w-6xl mx-auto mt-4 pt-3 border-t border-slate-100 text-center text-[10px] text-slate-400 font-mono">
+          © 2026 CLINAZA Technologies. All Rights Reserved. &middot; Direct Helpline: +91 7292984244
+        </div>
+      </footer>
     </div>
   );
 }

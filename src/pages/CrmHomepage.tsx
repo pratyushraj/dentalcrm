@@ -1777,22 +1777,35 @@ export default function CrmHomepage() {
 
       {/* ── Footer ── */}
       <footer className="border-t border-slate-200 py-10 px-6 bg-white text-center sm:text-left">
-        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-6">
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="flex items-center gap-3">
             <img src="/assets/clinaza-logo.jpg" alt="CLINAZA" className="h-8 w-auto rounded-lg border border-slate-200" />
             <div>
               <span className="text-xs font-black uppercase tracking-widest text-[#0B2450] block">CLINAZA</span>
-              <span className="text-[8px] font-bold text-[#0f7a75] block uppercase">EMI FOR BETTER HEALTH</span>
+              <span className="text-[8px] font-bold text-[#0f7a75] block uppercase">TREATMENT FINANCING &amp; CLINIC CRM</span>
             </div>
           </div>
-          <nav aria-label="Footer navigation" className="flex flex-col sm:flex-row items-center gap-4 text-[10px] text-slate-500 font-mono uppercase tracking-widest">
-            <span>© 2026 CLINAZA Technologies. All Rights Reserved.</span>
-            <a href="mailto:contact@clinaza.in" className="hover:text-[#0867E8] transition-colors font-bold lowercase">contact@clinaza.in</a>
-            <span className="hidden sm:inline" aria-hidden="true">&middot;</span>
+          <div className="flex flex-col sm:flex-row items-center gap-4 text-xs text-slate-600 font-medium">
+            <a href="tel:+917292984244" className="hover:text-[#0867E8] transition-colors font-bold flex items-center gap-1.5">
+              📞 +91 7292984244
+            </a>
+            <span className="hidden sm:inline text-slate-300" aria-hidden="true">&middot;</span>
+            <a href="https://wa.me/917292984244" target="_blank" rel="noopener noreferrer" className="hover:text-emerald-600 transition-colors font-bold flex items-center gap-1.5">
+              💬 WhatsApp Support
+            </a>
+            <span className="hidden sm:inline text-slate-300" aria-hidden="true">&middot;</span>
+            <a href="mailto:contact@clinaza.in" className="hover:text-[#0867E8] transition-colors">contact@clinaza.in</a>
+          </div>
+          <nav aria-label="Footer navigation" className="flex flex-wrap justify-center sm:justify-end items-center gap-3 text-[10px] text-slate-500 font-mono uppercase tracking-widest">
+            <Link to="/tools" className="hover:text-[#0867E8] transition-colors underline">Free Tools</Link>
+            <span aria-hidden="true">&middot;</span>
             <Link to="/blog" className="hover:text-[#0f7a75] transition-colors underline">Patient Guides</Link>
-            <span className="hidden sm:inline" aria-hidden="true">&middot;</span>
-            <Link to="/reactivation/login" className="hover:text-[#0B2450] transition-colors">Clinic Staff Portal</Link>
+            <span aria-hidden="true">&middot;</span>
+            <Link to="/reactivation/login" className="hover:text-[#0B2450] transition-colors font-bold">Doctor Portal</Link>
           </nav>
+        </div>
+        <div className="max-w-6xl mx-auto mt-6 pt-4 border-t border-slate-100 text-center text-[10px] text-slate-400 font-mono">
+          © 2026 CLINAZA Technologies. All Rights Reserved. &middot; Direct Helpline: +91 7292984244
         </div>
       </footer>
     </div>

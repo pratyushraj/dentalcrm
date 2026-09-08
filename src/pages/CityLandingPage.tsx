@@ -359,9 +359,21 @@ export default function CityLandingPage() {
       </main>
 
       {/* Footer */}
-      <footer className="py-8 px-4 sm:px-6 border-t border-slate-200 text-center">
+      <footer className="py-8 px-4 sm:px-6 border-t border-slate-200 bg-white text-center space-y-3">
+        <div className="flex flex-col sm:flex-row justify-center items-center gap-6 text-xs text-slate-600 font-medium">
+          <a href="tel:+917292984244" className="hover:text-[#0867E8] transition-colors font-bold flex items-center gap-1.5">
+            📞 +91 7292984244
+          </a>
+          <span className="hidden sm:inline text-slate-300" aria-hidden="true">&middot;</span>
+          <a href="https://wa.me/917292984244" target="_blank" rel="noopener noreferrer" className="hover:text-emerald-600 transition-colors font-bold flex items-center gap-1.5">
+            💬 WhatsApp Support
+          </a>
+          <span className="hidden sm:inline text-slate-300" aria-hidden="true">&middot;</span>
+          <a href="mailto:contact@clinaza.in" className="hover:text-[#0867E8] transition-colors">contact@clinaza.in</a>
+        </div>
         <p className="text-[10px] text-slate-400 font-mono uppercase tracking-widest">
           © 2026 CLINAZA Technologies · Connecting Clinics with Financing Partners ·{' '}
+          <Link to="/tools" className="underline hover:text-[#0867E8]">Free Tools</Link> ·{' '}
           <Link to="/blog" className="underline hover:text-[#0f7a75]">Patient Guides</Link>
         </p>
       </footer>

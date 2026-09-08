@@ -327,9 +327,22 @@ export default function BlogArticlePage() {
       />
 
       {/* Footer */}
-      <footer className="border-t border-neutral-200 bg-white py-12 text-center text-[10px] text-neutral-400 font-bold uppercase tracking-widest space-y-2">
-        <p>© 2026 CLINAZA Technologies. All Rights Reserved.</p>
-        <p className="text-[#0867E8]">Connecting Clinics & Patients With Regulated Financing Partners</p>
+      <footer className="border-t border-neutral-200 bg-white py-12 px-6 max-w-5xl mx-auto text-center space-y-3">
+        <div className="flex flex-col sm:flex-row justify-center items-center gap-6 text-xs text-slate-600 font-medium">
+          <a href="tel:+917292984244" className="hover:text-[#0867E8] transition-colors font-bold flex items-center gap-1.5">
+            📞 +91 7292984244
+          </a>
+          <span className="hidden sm:inline text-slate-300" aria-hidden="true">&middot;</span>
+          <a href="https://wa.me/917292984244" target="_blank" rel="noopener noreferrer" className="hover:text-emerald-600 transition-colors font-bold flex items-center gap-1.5">
+            💬 WhatsApp Support
+          </a>
+          <span className="hidden sm:inline text-slate-300" aria-hidden="true">&middot;</span>
+          <a href="mailto:contact@clinaza.in" className="hover:text-[#0867E8] transition-colors">contact@clinaza.in</a>
+        </div>
+        <div className="text-[10px] text-neutral-400 font-mono uppercase tracking-widest space-y-1">
+          <p>© 2026 CLINAZA Technologies. All Rights Reserved.</p>
+          <p className="text-[#0867E8]">Connecting Clinics &amp; Patients With Regulated Financing Partners</p>
+        </div>
       </footer>
     </div>
   );

@@ -2462,7 +2462,7 @@ export const BLOGS: BlogArticle[] = [
     )
   },
   {
-    slug: "full-mouth-dental-implants-cost-on-emi-india",
+    slug: "full-mouth-rehabilitation-all-on-4-guide-india",
     title: "Full Mouth Dental Implants Cost on EMI in India (All-on-4 & All-on-6 Guide 2026)",
     category: "Dental Implants",
     readTime: "8 min read",

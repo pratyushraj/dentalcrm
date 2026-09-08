@@ -99,18 +99,22 @@ export default function BlogHub() {
               key={blog.slug} 
               className="group bg-neutral-900/40 border border-white/5 hover:border-white/10 rounded-2xl overflow-hidden flex flex-col transition-all hover:shadow-xl hover:shadow-[#5b72ff]/5"
             >
-              <div className="relative aspect-[16/9] overflow-hidden bg-neutral-800">
+              <div className="relative aspect-video overflow-hidden bg-neutral-900">
                 <img 
                   src={blog.featuredImage} 
-                  alt={blog.title} 
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  alt={blog.title}
+                  loading="lazy"
+                  decoding="async"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   onError={(e) => {
-                    e.currentTarget.src = "https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=600&auto=format&fit=crop";
+                    e.currentTarget.src = "https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=1200&auto=format&fit=crop";
                   }}
                 />
-                <span className="absolute top-4 left-4 px-2.5 py-1 bg-neutral-950/80 backdrop-blur-md rounded-lg text-[9px] font-bold uppercase tracking-wider text-[#5b72ff]">
-                  {blog.category}
-                </span>
+                <div className="absolute top-3 left-3">
+                  <span className="px-2.5 py-1 bg-black/60 backdrop-blur-md rounded-full text-[9px] font-black uppercase tracking-wider text-white border border-white/10">
+                    {blog.category}
+                  </span>
+                </div>
               </div>
 
               <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
@@ -143,9 +147,22 @@ export default function BlogHub() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-white/5 py-12 text-center text-[10px] text-neutral-500 font-bold uppercase tracking-widest space-y-2">
-        <p>© 2026 CLINAZA Technologies. All Rights Reserved.</p>
-        <p className="text-[#0867E8]">Connecting Clinics & Patients With Regulated Financing Partners</p>
+      <footer className="border-t border-white/10 py-12 px-6 max-w-5xl mx-auto text-center space-y-4">
+        <div className="flex flex-col sm:flex-row justify-center items-center gap-6 text-xs text-neutral-400 font-medium">
+          <a href="tel:+917292984244" className="hover:text-white transition-colors flex items-center gap-1.5">
+            📞 +91 7292984244
+          </a>
+          <span className="hidden sm:inline text-neutral-700" aria-hidden="true">&middot;</span>
+          <a href="https://wa.me/917292984244" target="_blank" rel="noopener noreferrer" className="hover:text-emerald-400 transition-colors flex items-center gap-1.5">
+            💬 WhatsApp Support
+          </a>
+          <span className="hidden sm:inline text-neutral-700" aria-hidden="true">&middot;</span>
+          <a href="mailto:contact@clinaza.in" className="hover:text-white transition-colors">contact@clinaza.in</a>
+        </div>
+        <div className="text-[10px] text-neutral-500 font-mono uppercase tracking-widest space-y-1">
+          <p>© 2026 CLINAZA Technologies. All Rights Reserved.</p>
+          <p className="text-[#5b72ff]">Connecting Clinics &amp; Patients With Regulated Financing Partners</p>
+        </div>
       </footer>
     </div>
   );

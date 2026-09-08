@@ -19,7 +19,9 @@ import {
   Award,
   MapPin,
   Sparkles,
-  Share2
+  Share2,
+  ChevronLeft,
+  ChevronRight
 } from 'lucide-react';
 import { emailNotificationService } from '../services/emailNotificationService';
 import { toast } from 'sonner';
@@ -1108,8 +1110,8 @@ export default function CrmHomepage() {
           </div>
         </section>
 
-        {/* ── 8. ONBOARDED PARTNER CLINICS NETWORK ── */}
-        <section aria-label="Onboarded Partner Clinics" className="py-12 sm:py-16 px-4 sm:px-6 bg-[#F7FAFC] border-y border-slate-200/60">
+        {/* ── 8. ONBOARDED PARTNER CLINICS NETWORK (SLIDESHOW CAROUSEL) ── */}
+        <section aria-label="Onboarded Partner Clinics" className="py-14 sm:py-18 px-4 sm:px-6 bg-gradient-to-b from-[#F7FAFC] to-slate-100 border-y border-slate-200/60 overflow-hidden relative">
           <div className="max-w-5xl mx-auto space-y-8 text-center">
             <div className="space-y-2">
               <span className="text-[10px] font-black text-[#0f7a75] uppercase tracking-widest flex items-center justify-center gap-1.5">
@@ -1117,150 +1119,192 @@ export default function CrmHomepage() {
               </span>
               <h2 className="text-2xl sm:text-4xl font-black text-[#0B2450]">Onboarded Partner Clinics</h2>
               <p className="text-xs sm:text-sm text-slate-600 max-w-xl mx-auto">
-                Leading dental clinics & hospitals using Clinaza to offer point-of-care EMI financing to their patients.
+                Leading healthcare clinics &amp; dental hospitals offering instant point-of-care patient EMI financing powered by Clinaza.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-left">
-              {[
-                {
-                  name: 'YOUR DENTIST Patna',
-                  location: 'Patliputra Colony, Patna',
-                  phone: '062014 78033',
-                  rating: '5.0 ★ (Primary Partner)',
-                  specialties: 'Implants, Braces & Aligners',
-                  link: 'https://www.yourdentistpatna.in/blog/clinaza-patient-financing-dental-emi-patna',
-                  isExternal: true,
-                  accent: 'border-emerald-400 bg-emerald-50/70 shadow-sm',
-                  badge: 'Featured Partner',
-                  badgeColor: 'bg-emerald-600 text-white'
-                },
-                {
-                  name: 'PRODENT',
-                  location: 'West Boring Canal Rd, Anandpuri, Patna',
-                  phone: '084290 57093',
-                  rating: '4.9 ★ (95 reviews)',
-                  specialties: 'Multispeciality Dental Clinic',
-                  link: 'https://www.prodentpatna.com/blog/no-cost-emi-dental-treatments-patna.html',
-                  isExternal: true,
-                  accent: 'border-slate-200 bg-white',
-                  badge: 'Partner Clinic',
-                  badgeColor: 'bg-slate-100 text-slate-700 border border-slate-200'
-                },
-                {
-                  name: 'GuMzy Dental',
-                  location: 'Gurgaon, Haryana',
-                  phone: 'Direct Partner Desk',
-                  rating: '5.0 ★ (30 reviews)',
-                  specialties: 'Painless RCT & Aesthetics',
-                  link: '/cities/gurgaon',
-                  accent: 'border-slate-200 bg-white',
-                  badge: 'Partner Clinic',
-                  badgeColor: 'bg-slate-100 text-slate-700 border border-slate-200'
-                },
-                {
-                  name: 'Facio Dental',
-                  location: 'Patna, Bihar',
-                  phone: 'Direct Partner Desk',
-                  rating: '4.5 ★ (417 reviews)',
-                  specialties: 'Complex Orthodontics & Surgery',
-                  link: '/cities/patna',
-                  accent: 'border-slate-200 bg-white',
-                  badge: 'Partner Clinic',
-                  badgeColor: 'bg-slate-100 text-slate-700 border border-slate-200'
-                },
-                {
-                  name: 'Smile Dental Clinic Patna',
-                  location: 'Pillar 39, Ashok Rajpath, Patna',
-                  phone: '062028 26097',
-                  rating: '5.0 ★ (104 reviews)',
-                  specialties: 'Dental Implants & Scaling',
-                  link: '/cities/patna',
-                  accent: 'border-slate-200 bg-white',
-                  badge: 'Partner Clinic',
-                  badgeColor: 'bg-slate-100 text-slate-700 border border-slate-200'
-                },
-                {
-                  name: 'Smile Point Dental Care',
-                  location: 'Patna, Bihar',
-                  phone: 'Direct Partner Desk',
-                  rating: '4.9 ★ (308 reviews)',
-                  specialties: 'Painless RCT & Advanced Care',
-                  link: '/cities/patna',
-                  accent: 'border-slate-200 bg-white',
-                  badge: 'Partner Clinic',
-                  badgeColor: 'bg-slate-100 text-slate-700 border border-slate-200'
-                },
-                {
-                  name: 'YouthONN Multispeciality Dental',
-                  location: 'Nehru Nagar Rd, Patliputra, Patna',
-                  phone: '077397 46086',
-                  rating: '5.0 ★ (133 reviews)',
-                  specialties: 'Multispeciality Dental Care',
-                  link: '/cities/patna',
-                  accent: 'border-slate-200 bg-white',
-                  badge: 'Partner Clinic',
-                  badgeColor: 'bg-slate-100 text-slate-700 border border-slate-200'
-                },
-                {
-                  name: 'Mundeshwari Dental Hub & Implant',
-                  location: 'Rajeev Nagar Main Rd, Patna',
-                  phone: '085441 65535',
-                  rating: '5.0 ★ (153 reviews)',
-                  specialties: 'Implant Centre & Surgery',
-                  link: '/cities/patna',
-                  accent: 'border-slate-200 bg-white',
-                  badge: 'Partner Clinic',
-                  badgeColor: 'bg-slate-100 text-slate-700 border border-slate-200'
-                },
-                {
-                  name: 'Pratima Dental Hospital & Cosmetic',
-                  location: 'Ashiana - Digha Rd, Patna',
-                  phone: '074628 36028',
-                  rating: '4.8 ★ (113 reviews)',
-                  specialties: 'Hospital & Cosmetic Dentistry',
-                  link: '/cities/patna',
-                  accent: 'border-slate-200 bg-white',
-                  badge: 'Partner Clinic',
-                  badgeColor: 'bg-slate-100 text-slate-700 border border-slate-200'
-                }
-              ].map((clinic, idx) => (
-                <div key={idx} className={`p-5 rounded-2xl border ${clinic.accent} space-y-3 shadow-2xs hover:shadow-md transition-all`}>
-                  <div className="flex items-start justify-between gap-2">
-                    <div>
-                      <h3 className="text-sm font-black text-[#0B2450] leading-snug">{clinic.name}</h3>
-                      <p className="text-[11px] font-medium text-slate-500 flex items-center gap-1 mt-0.5">
-                        <MapPin size={12} className="text-[#0f7a75] shrink-0" /> {clinic.location}
-                      </p>
+            {/* Slideshow Container */}
+            <div className="relative max-w-4xl mx-auto px-2 sm:px-12">
+              {/* Carousel Track with smooth touch-scroll snap */}
+              <div 
+                id="clinic-slideshow-track"
+                className="flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-smooth no-scrollbar py-2 px-1 text-left"
+                style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+              >
+                {[
+                  {
+                    name: 'YOUR DENTIST Patna',
+                    location: 'Patliputra Colony, Patna',
+                    phone: '062014 78033',
+                    rating: '5.0 ★ (Primary Partner)',
+                    specialties: 'Implants, Braces & Aligners',
+                    link: 'https://www.yourdentistpatna.in/blog/clinaza-patient-financing-dental-emi-patna',
+                    isExternal: true,
+                    accent: 'border-emerald-400 bg-white shadow-lg shadow-emerald-500/5',
+                    badge: 'Featured Center',
+                    badgeColor: 'bg-emerald-600 text-white'
+                  },
+                  {
+                    name: 'PRODENT',
+                    location: 'West Boring Canal Rd, Anandpuri, Patna',
+                    phone: '084290 57093',
+                    rating: '4.9 ★ (95 reviews)',
+                    specialties: 'Multispeciality Dental Clinic',
+                    link: 'https://www.prodentpatna.com/blog/no-cost-emi-dental-treatments-patna.html',
+                    isExternal: true,
+                    accent: 'border-slate-200/90 bg-white shadow-md',
+                    badge: 'Partner Clinic',
+                    badgeColor: 'bg-slate-100 text-slate-700 border border-slate-200'
+                  },
+                  {
+                    name: 'GuMzy Dental',
+                    location: 'Sector 56, Gurgaon, Haryana',
+                    phone: 'Direct Partner Desk',
+                    rating: '5.0 ★ (30 reviews)',
+                    specialties: 'Painless RCT & Aesthetics',
+                    link: '/cities/gurgaon',
+                    accent: 'border-slate-200/90 bg-white shadow-md',
+                    badge: 'Partner Clinic',
+                    badgeColor: 'bg-slate-100 text-slate-700 border border-slate-200'
+                  },
+                  {
+                    name: 'Facio Dental',
+                    location: 'Boring Road, Patna, Bihar',
+                    phone: 'Direct Partner Desk',
+                    rating: '4.5 ★ (417 reviews)',
+                    specialties: 'Complex Orthodontics & Surgery',
+                    link: '/cities/patna',
+                    accent: 'border-slate-200/90 bg-white shadow-md',
+                    badge: 'Partner Clinic',
+                    badgeColor: 'bg-slate-100 text-slate-700 border border-slate-200'
+                  },
+                  {
+                    name: 'Smile Dental Clinic',
+                    location: 'Pillar 39, Ashok Rajpath, Patna',
+                    phone: '062028 26097',
+                    rating: '5.0 ★ (104 reviews)',
+                    specialties: 'Dental Implants & Scaling',
+                    link: '/cities/patna',
+                    accent: 'border-slate-200/90 bg-white shadow-md',
+                    badge: 'Partner Clinic',
+                    badgeColor: 'bg-slate-100 text-slate-700 border border-slate-200'
+                  },
+                  {
+                    name: 'Smile Point Dental Care',
+                    location: 'Kankarbagh, Patna, Bihar',
+                    phone: 'Direct Partner Desk',
+                    rating: '4.9 ★ (308 reviews)',
+                    specialties: 'Painless RCT & Advanced Care',
+                    link: '/cities/patna',
+                    accent: 'border-slate-200/90 bg-white shadow-md',
+                    badge: 'Partner Clinic',
+                    badgeColor: 'bg-slate-100 text-slate-700 border border-slate-200'
+                  },
+                  {
+                    name: 'YouthONN Multispeciality',
+                    location: 'Nehru Nagar Rd, Patliputra, Patna',
+                    phone: '077397 46086',
+                    rating: '5.0 ★ (133 reviews)',
+                    specialties: 'Multispeciality Dental Care',
+                    link: '/cities/patna',
+                    accent: 'border-slate-200/90 bg-white shadow-md',
+                    badge: 'Partner Clinic',
+                    badgeColor: 'bg-slate-100 text-slate-700 border border-slate-200'
+                  },
+                  {
+                    name: 'Mundeshwari Dental Hub',
+                    location: 'Rajeev Nagar Main Rd, Patna',
+                    phone: '085441 65535',
+                    rating: '5.0 ★ (153 reviews)',
+                    specialties: 'Implant Centre & Surgery',
+                    link: '/cities/patna',
+                    accent: 'border-slate-200/90 bg-white shadow-md',
+                    badge: 'Partner Clinic',
+                    badgeColor: 'bg-slate-100 text-slate-700 border border-slate-200'
+                  },
+                  {
+                    name: 'Pratima Dental Hospital',
+                    location: 'Ashiana - Digha Rd, Patna',
+                    phone: '074628 36028',
+                    rating: '4.8 ★ (113 reviews)',
+                    specialties: 'Hospital & Cosmetic Dentistry',
+                    link: '/cities/patna',
+                    accent: 'border-slate-200/90 bg-white shadow-md',
+                    badge: 'Partner Clinic',
+                    badgeColor: 'bg-slate-100 text-slate-700 border border-slate-200'
+                  }
+                ].map((clinic, idx) => (
+                  <div 
+                    key={idx} 
+                    className={`min-w-[280px] sm:min-w-[320px] max-w-[320px] snap-center shrink-0 p-5 rounded-2xl border ${clinic.accent} space-y-3.5 flex flex-col justify-between transition-all hover:scale-[1.02] duration-300`}
+                  >
+                    <div className="space-y-2">
+                      <div className="flex items-start justify-between gap-2">
+                        <div>
+                          <h3 className="text-sm font-black text-[#0B2450] leading-snug">{clinic.name}</h3>
+                          <p className="text-[11px] font-medium text-slate-500 flex items-center gap-1 mt-0.5">
+                            <MapPin size={12} className="text-[#0f7a75] shrink-0" /> {clinic.location}
+                          </p>
+                        </div>
+                        <span className={`text-[9px] font-bold px-2 py-0.5 rounded-full shrink-0 ${clinic.badgeColor}`}>
+                          {clinic.badge}
+                        </span>
+                      </div>
+
+                      <div className="pt-2 border-t border-slate-100 text-[11px] space-y-1">
+                        <p className="text-slate-600"><span className="font-bold text-[#0B2450]">Rating:</span> {clinic.rating}</p>
+                        <p className="text-slate-500"><span className="font-bold text-[#0B2450]">Phone / Contact:</span> {clinic.phone}</p>
+                        <p className="text-slate-500"><span className="font-bold text-[#0B2450]">Services:</span> {clinic.specialties}</p>
+                      </div>
                     </div>
-                    <span className={`text-[9px] font-bold px-2 py-0.5 rounded-full shrink-0 ${clinic.badgeColor}`}>
-                      {clinic.badge}
-                    </span>
-                  </div>
 
-                  <div className="pt-1 border-t border-slate-100 text-[11px] space-y-1">
-                    <p className="text-slate-600"><span className="font-bold text-[#0B2450]">Rating:</span> {clinic.rating}</p>
-                    <p className="text-slate-500"><span className="font-bold text-[#0B2450]">Phone / Contact:</span> {clinic.phone}</p>
-                    <p className="text-slate-500"><span className="font-bold text-[#0B2450]">Services:</span> {clinic.specialties}</p>
+                    <div className="pt-2 border-t border-slate-100 flex items-center justify-between">
+                      <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200/80 px-2.5 py-1 rounded-lg">
+                        ✓ EMI Accepted
+                      </span>
+                      {clinic.isExternal ? (
+                        <a href={clinic.link} target="_blank" rel="noopener noreferrer" className="text-[10px] font-bold text-[#0867E8] hover:underline flex items-center gap-0.5">
+                          Read Case &rarr;
+                        </a>
+                      ) : (
+                        <Link to={clinic.link} className="text-[10px] font-bold text-[#0867E8] hover:underline flex items-center gap-0.5">
+                          Check EMI &rarr;
+                        </Link>
+                      )}
+                    </div>
                   </div>
+                ))}
+              </div>
 
-                  <div className="pt-1 flex items-center justify-between">
-                    <span className="text-[10px] font-bold text-emerald-700 bg-emerald-100/80 px-2.5 py-1 rounded-lg">
-                      ✓ Clinaza EMI Accepted
-                    </span>
-                    {clinic.isExternal ? (
-                      <a href={clinic.link} target="_blank" rel="noopener noreferrer" className="text-[10px] font-bold text-[#0867E8] hover:underline flex items-center gap-0.5">
-                        Read Article &rarr;
-                      </a>
-                    ) : (
-                      <Link to={clinic.link} className="text-[10px] font-bold text-[#0867E8] hover:underline flex items-center gap-0.5">
-                        Check EMI &rarr;
-                      </Link>
-                    )}
-                  </div>
-                </div>
-              ))}
+              {/* Left & Right Slideshow Arrows (Desktop & Tablet) */}
+              <button
+                type="button"
+                onClick={() => {
+                  const track = document.getElementById('clinic-slideshow-track');
+                  if (track) track.scrollBy({ left: -340, behavior: 'smooth' });
+                }}
+                className="hidden sm:flex absolute -left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white border border-slate-200 text-slate-700 hover:text-[#0867E8] hover:border-[#0867E8] shadow-md items-center justify-center transition-all z-10 cursor-pointer active:scale-90"
+                aria-label="Previous clinics"
+              >
+                <ChevronLeft size={20} />
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  const track = document.getElementById('clinic-slideshow-track');
+                  if (track) track.scrollBy({ left: 340, behavior: 'smooth' });
+                }}
+                className="hidden sm:flex absolute -right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white border border-slate-200 text-slate-700 hover:text-[#0867E8] hover:border-[#0867E8] shadow-md items-center justify-center transition-all z-10 cursor-pointer active:scale-90"
+                aria-label="Next clinics"
+              >
+                <ChevronRight size={20} />
+              </button>
             </div>
+
+            {/* Micro swipe hint for mobile */}
+            <p className="text-[10px] text-slate-400 font-medium sm:hidden flex items-center justify-center gap-1">
+              <span>← Swipe to explore partner clinics →</span>
+            </p>
 
             <div className="pt-2 flex flex-wrap items-center justify-center gap-2 text-xs font-bold text-slate-500">
               <span>Explore Clinaza partner network in 50+ cities:</span>

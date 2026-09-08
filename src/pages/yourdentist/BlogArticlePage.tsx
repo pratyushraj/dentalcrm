@@ -300,10 +300,13 @@ export default function BlogArticlePage() {
       </main>
 
       {/* Floating Bottom Sticky Bar on Mobile */}
-      <div className="sm:hidden fixed bottom-0 left-0 right-0 p-3 bg-white/95 backdrop-blur-md border-t border-slate-200 z-40 flex items-center gap-2 shadow-lg">
+      <div 
+        className="sm:hidden fixed bottom-0 left-0 right-0 p-3 bg-white/95 backdrop-blur-md border-t border-slate-200 z-40 flex items-center gap-2 shadow-lg"
+        style={{ paddingBottom: 'max(0.75rem, env(safe-area-inset-bottom, 0.75rem))' }}
+      >
         <button
           onClick={() => setIsEligibilityOpen(true)}
-          className="flex-1 py-3 bg-[#0867E8] text-white rounded-xl text-xs font-black uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-md active:scale-95 cursor-pointer"
+          className="flex-1 min-h-[44px] py-3 bg-[#0867E8] text-white rounded-xl text-xs font-black uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-md active:scale-95 cursor-pointer"
         >
           <CreditCard size={14} /> Check EMI Eligibility
         </button>
@@ -311,7 +314,7 @@ export default function BlogArticlePage() {
           href="https://wa.me/917292984244?text=Hi%20Clinaza%20team%2C%20I%20have%20a%20question%20about%20dental%20treatment%20EMI%20financing."
           target="_blank"
           rel="noopener noreferrer"
-          className="px-3.5 py-3 bg-[#128C7E] text-white rounded-xl text-xs font-black flex items-center justify-center"
+          className="min-w-[44px] min-h-[44px] px-3.5 py-3 bg-[#128C7E] text-white rounded-xl text-xs font-black flex items-center justify-center shadow-md active:scale-95"
           aria-label="WhatsApp Us"
         >
           💬

@@ -274,27 +274,38 @@ export default function FreeToolsHub() {
                     />
                   </div>
 
-                  <div className="grid grid-cols-2 gap-2">
+                  <div>
+                    <label className="block text-slate-600 font-bold mb-1">Patient Name</label>
+                    <input
+                      type="text"
+                      value={rxData.patientName}
+                      onChange={(e) => setRxData({ ...rxData, patientName: e.target.value })}
+                      className="w-full p-2 border border-slate-200 rounded-lg text-xs"
+                    />
+                  </div>
+                  {/* Patient Age & Gender */}
+                  <div className="grid grid-cols-2 gap-3">
                     <div>
-                      <label className="block text-slate-600 font-bold mb-1">Patient Name</label>
+                      <label className="block text-slate-600 font-bold mb-1">Age</label>
                       <input
-                        type="text"
-                        value={rxData.patientName}
-                        onChange={(e) => setRxData({ ...rxData, patientName: e.target.value })}
+                        type="number"
+                        placeholder="e.g. 32"
+                        value={rxData.patientAge}
+                        onChange={(e) => setRxData({ ...rxData, patientAge: e.target.value })}
                         className="w-full p-2 border border-slate-200 rounded-lg text-xs"
                       />
                     </div>
                     <div>
-                      <label className="block text-slate-600 font-bold mb-1">Age / Gender</label>
-                      <input
-                        type="text"
-                        value={`${rxData.patientAge} / ${rxData.patientGender}`}
-                        onChange={(e) => {
-                          const [age, gender] = e.target.value.split('/');
-                          setRxData({ ...rxData, patientAge: age?.trim() || '30', patientGender: gender?.trim() || 'M' });
-                        }}
-                        className="w-full p-2 border border-slate-200 rounded-lg text-xs"
-                      />
+                      <label className="block text-slate-600 font-bold mb-1">Gender</label>
+                      <select
+                        value={rxData.patientGender}
+                        onChange={(e) => setRxData({ ...rxData, patientGender: e.target.value })}
+                        className="w-full p-2 border border-slate-200 rounded-lg text-xs bg-white"
+                      >
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                      </select>
                     </div>
                   </div>
 
@@ -314,9 +325,9 @@ export default function FreeToolsHub() {
                       <label className="text-slate-700 font-extrabold text-[11px] uppercase">Medicines (Rx)</label>
                       <button
                         onClick={addMedicine}
-                        className="text-[#0867E8] hover:underline font-bold text-[10px] flex items-center gap-1"
+                        className="text-[#0867E8] hover:underline font-bold text-xs flex items-center gap-1 py-1"
                       >
-                        <Plus size={12} /> Add Drug
+                        <Plus size={14} /> Add Drug
                       </button>
                     </div>
 
@@ -328,13 +339,14 @@ export default function FreeToolsHub() {
                             placeholder="Medicine Name (e.g. Tab Augmentin 625)"
                             value={med.name}
                             onChange={(e) => updateMedicine(idx, 'name', e.target.value)}
-                            className="w-full p-1.5 bg-white border border-slate-200 rounded text-xs font-semibold"
+                            className="w-full p-2 bg-white border border-slate-200 rounded text-xs font-semibold"
                           />
                           <button
                             onClick={() => removeMedicine(idx)}
-                            className="text-red-500 hover:text-red-700 p-1 shrink-0"
+                            className="w-9 h-9 flex items-center justify-center text-red-500 hover:text-red-700 bg-red-50 hover:bg-red-100 rounded-lg shrink-0 transition-colors"
+                            aria-label="Remove medicine"
                           >
-                            <Trash2 size={13} />
+                            <Trash2 size={15} />
                           </button>
                         </div>
                         <div className="grid grid-cols-2 gap-2">

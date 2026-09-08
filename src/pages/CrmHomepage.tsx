@@ -354,7 +354,7 @@ export default function CrmHomepage() {
               <span className="text-[9px] font-bold tracking-wider text-[#0f7a75] block uppercase">EMI FOR BETTER HEALTH</span>
             </div>
           </Link>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
             <Link
               to="/tools"
               className="hidden lg:flex items-center gap-1.5 px-3 py-2 bg-slate-100 hover:bg-slate-200 text-xs font-bold text-slate-800 rounded-xl transition-all"
@@ -380,7 +380,7 @@ export default function CrmHomepage() {
             </button>
             <Link
               to="/reactivation/login"
-              className="flex items-center gap-2 px-4 py-2 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-xs font-bold text-emerald-800 rounded-xl transition-all"
+              className="flex items-center gap-1.5 px-3 sm:px-4 py-2 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-[11px] sm:text-xs font-bold text-emerald-800 rounded-xl transition-all whitespace-nowrap"
             >
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
               Doctor Login 🔐
@@ -396,9 +396,9 @@ export default function CrmHomepage() {
             <a
               href="#partner-form"
               onClick={() => setFormType('clinic')}
-              className="px-6 py-3 bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-black uppercase tracking-widest rounded-xl transition-all shadow-lg shadow-[#0867E8]/30 flex items-center gap-2 transform hover:-translate-y-0.5"
+              className="px-3.5 sm:px-6 py-2.5 sm:py-3 bg-[#0867E8] hover:bg-[#0756C7] text-white text-[11px] sm:text-xs font-black uppercase tracking-wider sm:tracking-widest rounded-xl transition-all shadow-lg shadow-[#0867E8]/30 flex items-center gap-1.5 sm:gap-2 whitespace-nowrap active:scale-95"
             >
-              Partner With Clinaza <ArrowRight size={14} />
+              Partner <span className="hidden sm:inline">With Clinaza</span> <ArrowRight size={13} />
             </a>
           </div>
         </div>
@@ -1322,15 +1322,15 @@ export default function CrmHomepage() {
 
         {/* ── PATIENT ELIGIBILITY 2-STEP MODAL ── */}
         {showEligibilityModal && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-in fade-in">
-            <div className="bg-white border border-slate-200 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative space-y-5 text-left">
+          <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-slate-900/60 backdrop-blur-sm animate-in fade-in">
+            <div className="bg-white border border-slate-200 rounded-t-3xl sm:rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative space-y-5 text-left max-h-[85vh] sm:max-h-[90vh] overflow-hidden flex flex-col">
               <button
                 type="button"
                 onClick={() => { setShowEligibilityModal(false); setShowLenderResults(false); }}
-                className="absolute top-5 right-5 text-slate-400 hover:text-slate-600 p-1.5 rounded-full hover:bg-slate-100 transition-colors"
+                className="absolute top-4 right-4 sm:top-5 sm:right-5 text-slate-400 hover:text-slate-600 w-10 h-10 flex items-center justify-center rounded-full hover:bg-slate-100 transition-colors"
                 aria-label="Close modal"
               >
-                <X size={18} />
+                <X size={20} />
               </button>
 
               {/* Modal Header */}

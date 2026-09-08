@@ -439,24 +439,13 @@ export default function CrmHomepage() {
               </p>
             </div>
 
-            {/* Authentic Clinic Photo & Mobile CRM Preview */}
+            {/* Authentic Clinic Photo */}
             <div className="md:col-span-5 relative mt-2 md:mt-0">
               <img
                 src="/assets/clinic-hero-real.png"
                 alt="Modern authentic dental clinic treatment room in India"
                 className="w-full h-auto rounded-2xl sm:rounded-3xl border border-slate-200 shadow-lg object-cover aspect-[4/3]"
               />
-              {/* Floating Mobile CRM Preview Mockup */}
-              <div className="absolute -bottom-3 -right-2 sm:-bottom-4 sm:-right-4 w-28 sm:w-36 rounded-xl sm:rounded-2xl overflow-hidden border-2 border-white shadow-2xl bg-slate-900 group transition-transform hover:scale-105">
-                <img
-                  src="/dashboard_mobile_view.png"
-                  alt="Clinaza Mobile Dental CRM View"
-                  className="w-full h-auto block"
-                />
-                <div className="bg-slate-950/90 text-white text-[9px] font-bold py-1 px-1.5 text-center truncate">
-                  📱 Mobile CRM
-                </div>
-              </div>
               <div className="absolute -bottom-2.5 -left-2.5 sm:-bottom-3 sm:-left-3 bg-white/95 backdrop-blur-md border border-slate-200 px-3.5 py-2 rounded-xl sm:rounded-2xl shadow-md flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-[#0f7a75] animate-pulse"></span>
                 <span className="text-[11px] font-bold text-[#0B2450]">Point-of-Care EMI Ready</span>

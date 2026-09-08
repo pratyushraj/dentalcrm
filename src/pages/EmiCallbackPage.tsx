@@ -29,7 +29,7 @@ function getLenderSteps(lenderName: string): { steps: LenderStep[]; eta: string;
       steps: [
         { icon: <CheckCircle2 size={15} />, title: 'Pre-Approval Done', desc: 'Cashvia has pre-approved your application via live API check.' },
         { icon: <MessageCircle size={15} />, title: 'SMS / WhatsApp Link', desc: 'You\'ll receive a KYC link on your registered mobile within 1–2 hours.' },
-        { icon: <CreditCard size={15} />, title: 'No-Cost EMI Activated', desc: 'Complete eKYC and 0% EMI plan will be activated for your treatment.' },
+        { icon: <CreditCard size={15} />, title: 'EMI Plan Activated', desc: 'Complete eKYC and flexible monthly EMI plan will be activated for your treatment.' },
       ],
     };
   }

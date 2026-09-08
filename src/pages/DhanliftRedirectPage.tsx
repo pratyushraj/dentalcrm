@@ -34,7 +34,7 @@ export default function DhanliftRedirectPage() {
           "@context": "https://schema.org",
           "@type": "FinancialProduct",
           "name": "Clinaza Patient Treatment Loan",
-          "description": "0% interest & flexible monthly EMI financing for medical, dental, and aesthetic treatments in India.",
+          "description": "Flexible monthly EMI financing for medical, dental, and aesthetic treatments in India.",
           "provider": {
             "@type": "FinancialService",
             "name": "Dhanlift",

@@ -97,7 +97,7 @@ class OcenProtocolService {
         lenderId: 'LENDER-BANK-A',
         lenderName: 'Partner Bank A',
         lenderType: 'BANK',
-        badge: '0% No-Cost EMI',
+        badge: 'Low-Cost Medical EMI',
         sanctionedAmount: amount,
         tenureMonths: 12,
         monthlyEmi: Math.round(amount / 12),

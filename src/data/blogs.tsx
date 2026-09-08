@@ -3919,7 +3919,7 @@ export const BLOGS: BlogArticle[] = [
                 <td className="px-4 py-3 font-semibold text-neutral-800">Interest Rate</td>
                 <td className="px-4 py-3 text-neutral-600">12% – 22% p.a.</td>
                 <td className="px-4 py-3 text-neutral-600">18% – 36% p.a.</td>
-                <td className="px-4 py-3 text-emerald-600 font-black">0% No-Cost EMI Available</td>
+                <td className="px-4 py-3 text-emerald-600 font-black">Low Medical Rates (from 9.9% p.a.)</td>
               </tr>
               <tr>
                 <td className="px-4 py-3 font-semibold text-neutral-800">Approval Speed</td>

@@ -43,9 +43,9 @@ export default function BlogHub() {
   return (
     <div className="min-h-screen bg-neutral-950 text-white font-sora antialiased selection:bg-white selection:text-neutral-950">
       <SEOHead
-        title="Clinaza Patient Guides | Dental Treatments, Costs & 0% EMI Financing"
-        description="Read comprehensive patient guides on dental implants, braces, clear aligners cost in India, and 0% interest EMI healthcare financing options."
-        keywords={['dental patient guides', 'dental treatment costs india', 'dental emi financing', 'implants cost guide', 'braces on emi', 'clinaza financing']}
+        title="Clinaza Patient Guides | Medical & Dental Treatments, Costs & Easy EMI Financing"
+        description="Read comprehensive patient guides on dental implants, braces, clear aligners, LASIK, and surgery costs in India, with flexible monthly EMI financing options."
+        keywords={['patient guides', 'treatment costs india', 'medical emi financing', 'dental emi financing', 'implants cost guide', 'braces on emi', 'clinaza financing']}
         canonicalUrl="https://clinaza.in/blog"
         jsonLd={[organizationSchema, breadcrumbSchema]}
       />
@@ -84,10 +84,10 @@ export default function BlogHub() {
           <Sparkles size={12} /> Expert Guides & Cost Calculators
         </div>
         <h1 className="text-3xl sm:text-5xl font-black uppercase tracking-tight leading-tight">
-          Dental Care <span className="bg-gradient-to-r from-[#5b72ff] via-blue-400 to-emerald-400 bg-clip-text text-transparent">Guides & EMI Costs</span>
+          Medical &amp; Dental <span className="bg-gradient-to-r from-[#5b72ff] via-blue-400 to-emerald-400 bg-clip-text text-transparent">Guides &amp; EMI Costs</span>
         </h1>
         <p className="text-xs sm:text-sm text-neutral-400 max-w-xl mx-auto leading-relaxed">
-          Transparent, doctor-verified articles on dental implant costs, clear aligner price charts, full mouth rehabilitation, and 0% EMI financing options across India.
+          Transparent, doctor-verified articles on dental implant costs, clear aligner price charts, LASIK, hair transplants, and flexible monthly EMI financing options across India.
         </p>
       </section>
 

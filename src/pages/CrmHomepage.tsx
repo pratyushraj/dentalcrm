@@ -411,7 +411,7 @@ export default function CrmHomepage() {
             <div className="md:col-span-7 space-y-4 sm:space-y-5">
               <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#F5F9FC] border border-blue-100 rounded-full text-[11px] font-bold text-[#0756C7] shadow-2xs">
                 <Building2 className="h-3.5 w-3.5 text-[#0f7a75]" />
-                <span>POINT-OF-CARE 0% EMI FINANCING FOR CLINICS &amp; HOSPITALS</span>
+                <span>POINT-OF-CARE TREATMENT FINANCING &amp; EASY MONTHLY EMIs</span>
               </div>
 
               <h1 className="text-2.5xl sm:text-5xl font-black tracking-tight leading-[1.18] text-[#0B2450]">
@@ -422,7 +422,7 @@ export default function CrmHomepage() {
               </h1>
 
               <p className="text-xs sm:text-base text-slate-600 font-medium leading-relaxed max-w-xl">
-                Help eligible patients access instant 0% EMI financing from <strong className="text-[#0B2450]">₹30,000 to ₹5,00,000</strong> for Dental Implants, Hair Transplants, LASIK, IVF, and Elective Surgeries.
+                Help eligible patients access instant treatment financing &amp; flexible monthly EMIs from <strong className="text-[#0B2450]">₹30,000 to ₹5,00,000</strong> for Dental Implants, Hair Transplants, LASIK, IVF, and Elective Surgeries.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-3 pt-1">
@@ -560,7 +560,7 @@ export default function CrmHomepage() {
             <div className="space-y-2">
               <span className="text-[10px] font-black text-[#0f7a75] uppercase tracking-widest">ELIGIBLE HEALTHCARE PROCEDURES</span>
               <h2 className="text-2xl sm:text-4xl font-black text-[#0B2450]">Supported Treatments &amp; Surgeries</h2>
-              <p className="text-xs sm:text-sm text-slate-600">0% interest treatment financing available from ₹30,000 to ₹5,00,000 across top medical categories.</p>
+              <p className="text-xs sm:text-sm text-slate-600">Flexible monthly EMI financing available from ₹30,000 to ₹5,00,000 across top medical categories.</p>
             </div>
 
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3.5 text-left">
@@ -897,7 +897,7 @@ export default function CrmHomepage() {
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="text-emerald-400 font-bold shrink-0">✓</span>
-                      <span><strong>0% EMI Hook:</strong> Patients book immediately knowing they can pay in monthly installments.</span>
+                      <span><strong>Easy EMI Hook:</strong> Patients book immediately knowing they can pay in flexible monthly installments.</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="text-emerald-400 font-bold shrink-0">✓</span>

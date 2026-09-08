@@ -208,13 +208,13 @@ export default function BlogArticlePage() {
         <div className="p-4 sm:p-5 bg-gradient-to-r from-blue-50 via-indigo-50 to-emerald-50 border border-blue-200/80 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4 shadow-2xs">
           <div className="space-y-1 text-center sm:text-left">
             <div className="inline-flex items-center gap-1 text-[10px] font-black text-[#0867E8] uppercase tracking-wider">
-              <Sparkles size={11} /> 0% Interest EMI Available
+              <Sparkles size={11} /> Easy Monthly EMI Available
             </div>
             <h4 className="text-sm sm:text-base font-black text-slate-900">
               Planning this treatment? Check EMI in 2 mins.
             </h4>
             <p className="text-xs text-slate-600">
-              Instant approval from ₹30,000 to ₹3,00,000 with 0 credit score impact.
+              Instant pre-assessment from ₹30,000 to ₹3,00,000 with 0 credit score impact.
             </p>
           </div>
           <button
@@ -247,7 +247,7 @@ export default function BlogArticlePage() {
 
         {/* Related Articles Interlinking Block */}
         <section className="bg-white border border-neutral-200/80 rounded-2xl p-6 space-y-4">
-          <h3 className="text-sm font-bold text-neutral-900 uppercase tracking-wider">Related Dental Growth & Patient Guides</h3>
+          <h3 className="text-sm font-bold text-neutral-900 uppercase tracking-wider">Related Growth &amp; Patient Guides</h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
             {BLOGS.filter(b => b.slug !== article.slug).slice(0, 4).map((b) => (
               <Link 
@@ -262,7 +262,7 @@ export default function BlogArticlePage() {
           </div>
 
           <div className="pt-3 border-t border-neutral-100 flex flex-wrap gap-2 text-[11px] text-neutral-500">
-            <span className="font-semibold text-neutral-700">Dental EMI Cities:</span>
+            <span className="font-semibold text-neutral-700">EMI Cities:</span>
             <Link to="/cities/patna" className="hover:text-[#5b72ff] underline">Patna</Link> •
             <Link to="/cities/delhi" className="hover:text-[#5b72ff] underline">Delhi NCR</Link> •
             <Link to="/cities/mumbai" className="hover:text-[#5b72ff] underline">Mumbai</Link> •
@@ -276,7 +276,7 @@ export default function BlogArticlePage() {
           <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-white/10 rounded-full text-[10px] font-bold tracking-wider uppercase text-blue-100">
             <Shield size={12} /> Point-of-Care Patient Financing
           </div>
-          <h3 className="text-xl sm:text-2xl font-black tracking-tight">Need Treatment Financing on 0% EMI?</h3>
+          <h3 className="text-xl sm:text-2xl font-black tracking-tight">Need Treatment Financing on Monthly EMI?</h3>
           <p className="text-xs text-blue-100/90 max-w-md mx-auto leading-relaxed">
             Check your instant pre-eligibility (₹30,000 to ₹3,00,000) in under 2 minutes with zero impact on your credit score.
           </p>

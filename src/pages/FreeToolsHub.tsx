@@ -112,9 +112,9 @@ export default function FreeToolsHub() {
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900">
       <SEOHead 
-        title="Free Dental Tools & Calculators — Rx Maker, Setup Cost & EMI Calculator | Clinaza"
-        description="Free online utility tools for dentists and patients in India: Digital Dental Prescription Maker (Printable Rx), Clinic Setup Cost Estimator, and Treatment 0% EMI Calculator."
-        keywords={["free dental prescription maker", "online rx generator dental india", "dental clinic setup cost calculator", "dental emi calculator", "clinaza free tools"]}
+        title="Free Dental Tools & Calculators — Rx Maker, Setup Cost & Medical EMI Calculator | Clinaza"
+        description="Free online utility tools for dentists and patients in India: Digital Dental Prescription Maker (Printable Rx), Clinic Setup Cost Estimator, and Treatment Monthly EMI Calculator."
+        keywords={["free dental prescription maker", "online rx generator dental india", "dental clinic setup cost calculator", "dental emi calculator", "medical treatment emi calculator", "clinaza free tools"]}
         canonicalUrl="https://clinaza.in/tools"
       />
 
@@ -590,14 +590,14 @@ export default function FreeToolsHub() {
         )}
 
         {/* ========================================================================= */}
-        {/* TAB 3: TREATMENT 0% EMI CALCULATOR */}
+        {/* TAB 3: TREATMENT EMI CALCULATOR */}
         {/* ========================================================================= */}
         {activeTab === 'emi' && (
           <div className="space-y-6">
             <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
-              <h2 className="text-xl font-black text-slate-900 mb-1">Dental Treatment 0% EMI Calculator</h2>
+              <h2 className="text-xl font-black text-slate-900 mb-1">Medical &amp; Dental Treatment EMI Calculator</h2>
               <p className="text-xs text-slate-600">
-                Calculate monthly installments for Dental Implants, Braces, Aligners, and Full Mouth Rehabilitation.
+                Estimate monthly installments for Dental Implants, Braces, Hair Transplants, LASIK, and Elective Surgeries.
               </p>
             </div>
 
@@ -619,8 +619,8 @@ export default function FreeToolsHub() {
                   />
                   <div className="flex justify-between text-[10px] text-slate-400 mt-1 font-semibold">
                     <span>₹20,000 (RCT/Crown)</span>
-                    <span>₹1,50,000 (Aligners)</span>
-                    <span>₹3,00,000 (Full Mouth)</span>
+                    <span>₹1,50,000 (Aligners/LASIK)</span>
+                    <span>₹3,00,000 (Surgery/Full Mouth)</span>
                   </div>
                 </div>
 
@@ -645,12 +645,12 @@ export default function FreeToolsHub() {
               </div>
 
               <div className="lg:col-span-6 bg-gradient-to-br from-[#0867E8] to-blue-700 text-white rounded-2xl p-6 sm:p-8 space-y-5 shadow-xl text-center">
-                <span className="text-[10px] uppercase font-black tracking-widest text-blue-200 block">ESTIMATED ZERO-INTEREST EMI</span>
+                <span className="text-[10px] uppercase font-black tracking-widest text-blue-200 block">ESTIMATED MONTHLY INSTALLMENT</span>
                 <div className="text-4xl sm:text-5xl font-black">
                   ₹{monthlyEmi.toLocaleString()} <span className="text-sm font-semibold text-blue-100">/ month</span>
                 </div>
                 <p className="text-xs text-blue-100 max-w-sm mx-auto">
-                  ₹{treatmentAmount.toLocaleString()} total financed over {emiTenure} equal monthly installments with zero hidden processing charges.
+                  ₹{treatmentAmount.toLocaleString()} estimated over {emiTenure} monthly installments. Actual interest &amp; EMI terms depend on partner lender approval.
                 </p>
                 <div className="pt-2">
                   <a

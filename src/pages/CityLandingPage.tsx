@@ -303,7 +303,7 @@ export default function CityLandingPage() {
           <div className="grid grid-cols-1 sm:grid-cols-4 gap-3 text-xs">
             <Link to="/blog/dental-implants-cost-on-emi-india" className="p-4 bg-[#F7FAFC] hover:bg-blue-50 border border-slate-200 rounded-xl block space-y-1">
               <span className="text-[10px] font-bold text-[#0867E8] uppercase block">Implants Guide</span>
-              <strong className="text-[#0B2450] font-bold block">Dental Implants Cost on 0% EMI</strong>
+              <strong className="text-[#0B2450] font-bold block">Dental Implants Cost &amp; Monthly EMI</strong>
             </Link>
             <Link to="/blog/invisalign-cost-on-emi-india" className="p-4 bg-[#F7FAFC] hover:bg-blue-50 border border-slate-200 rounded-xl block space-y-1">
               <span className="text-[10px] font-bold text-[#0867E8] uppercase block">Invisalign</span>

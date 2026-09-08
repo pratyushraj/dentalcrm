@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Clinaza CRM — Instagram Post Showcase</title>
+  <title>Clinaza Dental CRM — Mobile App Showcase</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -16,51 +16,51 @@
     }
 
     body {
-      background: #070B14;
+      background: #060911;
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 24px;
+      padding: 20px 16px;
       overflow-x: hidden;
     }
 
-    /* Instagram 4:5 Portrait Container (1080 x 1350 aspect ratio) */
+    /* Instagram 4:5 Portrait Container */
     .insta-canvas {
       width: 100%;
       max-width: 540px;
       aspect-ratio: 4 / 5;
-      background: radial-gradient(130% 100% at 50% 0%, #0F2347 0%, #060D1A 60%, #02060D 100%);
+      background: radial-gradient(130% 100% at 50% 0%, #0F2347 0%, #070E1C 55%, #02060D 100%);
       border-radius: 36px;
       position: relative;
       overflow: hidden;
-      box-shadow: 0 35px 80px -15px rgba(0, 0, 0, 0.85), 0 0 0 1px rgba(255, 255, 255, 0.08);
+      box-shadow: 0 35px 80px -15px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(255, 255, 255, 0.08);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      padding: 34px 30px 24px;
+      padding: 28px 26px 20px;
     }
 
-    /* Ambient Glows */
+    /* Ambient Lighting */
     .glow-top {
       position: absolute;
       top: -120px;
       left: 50%;
       transform: translateX(-50%);
-      width: 380px;
-      height: 380px;
+      width: 400px;
+      height: 400px;
       background: radial-gradient(circle, rgba(8, 103, 232, 0.45) 0%, rgba(8, 103, 232, 0) 70%);
-      filter: blur(60px);
+      filter: blur(65px);
       pointer-events: none;
     }
 
     .glow-cyan {
       position: absolute;
-      bottom: 80px;
-      right: -100px;
+      bottom: 60px;
+      right: -80px;
       width: 320px;
       height: 320px;
-      background: radial-gradient(circle, rgba(6, 182, 212, 0.25) 0%, rgba(6, 182, 212, 0) 70%);
+      background: radial-gradient(circle, rgba(6, 182, 212, 0.22) 0%, rgba(6, 182, 212, 0) 70%);
       filter: blur(70px);
       pointer-events: none;
     }
@@ -75,12 +75,12 @@
     .brand-badge {
       display: inline-flex;
       align-items: center;
-      gap: 7px;
+      gap: 6px;
       background: rgba(8, 103, 232, 0.15);
       border: 1px solid rgba(8, 103, 232, 0.4);
-      padding: 5px 13px;
+      padding: 5px 12px;
       border-radius: 999px;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
       backdrop-filter: blur(12px);
     }
 
@@ -93,7 +93,7 @@
     }
 
     .brand-badge span {
-      font-size: 10.5px;
+      font-size: 10px;
       font-weight: 700;
       color: #93C5FD;
       letter-spacing: 0.08em;
@@ -101,10 +101,10 @@
     }
 
     .main-title {
-      font-size: 25px;
+      font-size: 24px;
       font-weight: 900;
       color: #FFFFFF;
-      line-height: 1.16;
+      line-height: 1.15;
       letter-spacing: -0.02em;
     }
 
@@ -115,50 +115,54 @@
     }
 
     .sub-title {
-      font-size: 12px;
+      font-size: 11.5px;
       color: #94A3B8;
-      margin-top: 5px;
+      margin-top: 4px;
       font-weight: 500;
     }
 
-    /* Phone Mockup Frame */
+    /* Phone Mockup Frame - TALLER HEIGHT */
     .mockup-wrapper {
       position: relative;
       z-index: 10;
       display: flex;
       justify-content: center;
-      margin: 10px 0 6px;
+      margin: 4px 0 2px;
     }
 
     .phone-body {
-      width: 284px;
+      width: 300px;
       background: #0B132B;
-      border-radius: 36px;
+      border-radius: 38px;
       padding: 9px;
       box-shadow: 
-        0 25px 50px -12px rgba(0, 0, 0, 0.9),
-        0 0 0 2px rgba(255, 255, 255, 0.15),
+        0 25px 50px -10px rgba(0, 0, 0, 0.95),
+        0 0 0 2px rgba(255, 255, 255, 0.16),
         0 0 0 7px #1E293B,
-        0 0 35px rgba(8, 103, 232, 0.35);
+        0 0 40px rgba(8, 103, 232, 0.4);
       position: relative;
     }
 
     .phone-screen {
       background: #070D1D;
-      border-radius: 28px;
-      padding: 12px 11px 12px;
+      border-radius: 30px;
+      padding: 11px 11px 12px;
       overflow: hidden;
       border: 1px solid rgba(255, 255, 255, 0.08);
       position: relative;
+      min-height: 410px;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
     }
 
     /* Dynamic Island */
     .notch {
-      width: 78px;
+      width: 80px;
       height: 16px;
       background: #000000;
       border-radius: 20px;
-      margin: 0 auto 9px;
+      margin: 0 auto 4px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -185,7 +189,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 10px;
+      padding-bottom: 2px;
     }
 
     .clinic-info {
@@ -195,8 +199,8 @@
     }
 
     .clinic-avatar {
-      width: 28px;
-      height: 28px;
+      width: 27px;
+      height: 27px;
       border-radius: 8px;
       background: linear-gradient(135deg, #0867E8, #00D4B8);
       display: flex;
@@ -204,8 +208,8 @@
       justify-content: center;
       color: white;
       font-weight: 800;
-      font-size: 12px;
-      box-shadow: 0 4px 10px rgba(8, 103, 232, 0.4);
+      font-size: 11px;
+      box-shadow: 0 3px 8px rgba(8, 103, 232, 0.4);
     }
 
     .clinic-text h4 {
@@ -216,32 +220,39 @@
     }
 
     .clinic-text p {
-      font-size: 8.5px;
+      font-size: 8px;
       color: #38BDF8;
       font-weight: 600;
     }
 
-    .app-bell {
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+    .app-status-dot {
       display: flex;
       align-items: center;
-      justify-content: center;
-      font-size: 10px;
+      gap: 4px;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      padding: 2px 7px;
+      border-radius: 999px;
+      font-size: 7.5px;
+      color: #34D399;
+      font-weight: 700;
+    }
+
+    .app-status-dot span {
+      width: 5px;
+      height: 5px;
+      background: #10B981;
+      border-radius: 50%;
     }
 
     /* Revenue & Stats Card */
     .stat-card {
-      background: linear-gradient(135deg, rgba(8, 103, 232, 0.3) 0%, rgba(15, 23, 42, 0.6) 100%);
+      background: linear-gradient(135deg, rgba(8, 103, 232, 0.28) 0%, rgba(15, 23, 42, 0.7) 100%);
       border: 1px solid rgba(8, 103, 232, 0.4);
-      border-radius: 14px;
+      border-radius: 13px;
       padding: 9px 10px;
-      margin-bottom: 9px;
       backdrop-filter: blur(10px);
-      box-shadow: 0 8px 20px -6px rgba(8, 103, 232, 0.25);
+      box-shadow: 0 6px 18px -4px rgba(8, 103, 232, 0.25);
     }
 
     .stat-header {
@@ -252,7 +263,7 @@
     }
 
     .stat-header span {
-      font-size: 9px;
+      font-size: 8.5px;
       color: #94A3B8;
       font-weight: 600;
       text-transform: uppercase;
@@ -264,35 +275,36 @@
       background: rgba(16, 185, 129, 0.2);
       color: #34D399;
       padding: 2px 5px;
-      border-radius: 5px;
+      border-radius: 4px;
       font-weight: 700;
       border: 1px solid rgba(16, 185, 129, 0.3);
     }
 
     .stat-val {
-      font-size: 18px;
+      font-size: 19px;
       font-weight: 900;
       color: #FFFFFF;
       letter-spacing: -0.02em;
+      line-height: 1.15;
     }
 
     .stat-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 6px;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 5px;
       margin-top: 6px;
       padding-top: 6px;
       border-top: 1px solid rgba(255, 255, 255, 0.08);
     }
 
     .stat-sub-val {
-      font-size: 10.5px;
+      font-size: 10px;
       font-weight: 800;
       color: #F1F5F9;
     }
 
     .stat-sub-label {
-      font-size: 7.5px;
+      font-size: 7px;
       color: #64748B;
       font-weight: 500;
     }
@@ -302,15 +314,14 @@
       background: rgba(15, 23, 42, 0.7);
       border: 1px solid rgba(255, 255, 255, 0.09);
       border-radius: 13px;
-      padding: 9px;
-      margin-bottom: 8px;
+      padding: 8px 9px;
     }
 
     .patient-top {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 7px;
+      margin-bottom: 6px;
     }
 
     .patient-name-box {
@@ -325,7 +336,7 @@
       border-radius: 50%;
       background: #3B82F6;
       color: white;
-      font-size: 8.5px;
+      font-size: 8px;
       font-weight: 800;
       display: flex;
       align-items: center;
@@ -333,7 +344,7 @@
     }
 
     .patient-title {
-      font-size: 10px;
+      font-size: 9.5px;
       font-weight: 700;
       color: #F1F5F9;
     }
@@ -344,30 +355,29 @@
       background: rgba(245, 158, 11, 0.15);
       border: 1px solid rgba(245, 158, 11, 0.3);
       padding: 2px 5px;
-      border-radius: 5px;
+      border-radius: 4px;
       font-weight: 700;
     }
 
-    /* Mini Tooth Chart Row */
+    /* Tooth FDI Matrix */
     .tooth-row {
       display: flex;
       justify-content: space-between;
       background: rgba(0, 0, 0, 0.35);
       border-radius: 7px;
       padding: 4px 5px;
-      margin-bottom: 6px;
     }
 
     .tooth-item {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 2px;
+      gap: 1.5px;
     }
 
     .tooth-box {
-      width: 16px;
-      height: 16px;
+      width: 17px;
+      height: 17px;
       border-radius: 4px;
       background: #1E293B;
       display: flex;
@@ -382,14 +392,14 @@
     .tooth-box.active-root {
       background: linear-gradient(135deg, #EF4444, #DC2626);
       color: white;
-      box-shadow: 0 0 8px rgba(239, 68, 68, 0.6);
+      box-shadow: 0 0 7px rgba(239, 68, 68, 0.6);
       border-color: #F87171;
     }
 
     .tooth-box.active-implant {
       background: linear-gradient(135deg, #0867E8, #2563EB);
       color: white;
-      box-shadow: 0 0 8px rgba(8, 103, 232, 0.6);
+      box-shadow: 0 0 7px rgba(8, 103, 232, 0.6);
       border-color: #60A5FA;
     }
 
@@ -399,42 +409,116 @@
       font-weight: 600;
     }
 
-    /* 0% EMI Banner Inside Screen */
-    .emi-pill-card {
-      background: linear-gradient(90deg, #065F46 0%, #047857 100%);
-      border-radius: 9px;
-      padding: 6px 8px;
+    /* Automated WhatsApp Recall Stream */
+    .whatsapp-card {
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(37, 211, 102, 0.25);
+      border-radius: 12px;
+      padding: 8px 9px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      border: 1px solid #10B981;
-      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
     }
 
-    .emi-left h5 {
+    .wa-left {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .wa-icon {
+      width: 22px;
+      height: 22px;
+      background: rgba(37, 211, 102, 0.15);
+      border: 1px solid rgba(37, 211, 102, 0.35);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+    }
+
+    .wa-text h5 {
       font-size: 9px;
       font-weight: 800;
       color: #FFFFFF;
       line-height: 1.1;
     }
 
-    .emi-left p {
+    .wa-text p {
       font-size: 7px;
-      color: #A7F3D0;
+      color: #86EFAC;
     }
 
-    .emi-btn-mini {
-      background: #FFFFFF;
-      color: #065F46;
+    .wa-badge {
+      background: #25D366;
+      color: #052E16;
       font-size: 7.5px;
-      font-weight: 900;
-      padding: 3px 7px;
+      font-weight: 800;
+      padding: 3px 6px;
       border-radius: 5px;
       text-transform: uppercase;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
     }
 
-    /* Bottom Badges / Selling Points */
+    /* Today's Appointments List */
+    .appts-card {
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 7px 9px;
+    }
+
+    .appts-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 5px;
+    }
+
+    .appts-header span {
+      font-size: 8px;
+      color: #94A3B8;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .appts-header strong {
+      font-size: 8px;
+      color: #38BDF8;
+    }
+
+    .appt-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 3px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .appt-time {
+      font-size: 7.5px;
+      color: #60A5FA;
+      font-weight: 700;
+      width: 44px;
+    }
+
+    .appt-name {
+      font-size: 8px;
+      color: #E2E8F0;
+      font-weight: 600;
+      flex: 1;
+    }
+
+    .appt-proc {
+      font-size: 7px;
+      color: #94A3B8;
+      background: rgba(255, 255, 255, 0.06);
+      padding: 1px 4px;
+      border-radius: 3px;
+    }
+
+    /* Bottom 3 Feature Pills */
     .feature-bar {
       position: relative;
       z-index: 10;
@@ -453,8 +537,8 @@
     }
 
     .feat-icon {
-      font-size: 15px;
-      margin-bottom: 3px;
+      font-size: 14px;
+      margin-bottom: 2px;
       display: block;
     }
 
@@ -466,16 +550,16 @@
     }
 
     .feat-sub {
-      font-size: 8px;
+      font-size: 7.5px;
       color: #94A3B8;
       margin-top: 2px;
       font-weight: 500;
     }
 
-    /* Floating Badges outside phone */
+    /* Floating Badges */
     .float-badge {
       position: absolute;
-      background: rgba(15, 23, 42, 0.85);
+      background: rgba(15, 23, 42, 0.88);
       backdrop-filter: blur(16px);
       border: 1px solid rgba(255, 255, 255, 0.15);
       border-radius: 12px;
@@ -483,25 +567,25 @@
       display: flex;
       align-items: center;
       gap: 7px;
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6);
       z-index: 20;
       animation: float 4s ease-in-out infinite alternate;
     }
 
     .float-badge.left {
-      left: 12px;
-      top: 230px;
+      left: 10px;
+      top: 235px;
     }
 
     .float-badge.right {
-      right: 12px;
-      bottom: 160px;
+      right: 10px;
+      bottom: 145px;
       animation-delay: -2s;
     }
 
     @keyframes float {
       0% { transform: translateY(0px); }
-      100% { transform: translateY(-7px); }
+      100% { transform: translateY(-6px); }
     }
 
     .badge-icon {
@@ -527,7 +611,7 @@
     }
 
     .badge-title {
-      font-size: 9.5px;
+      font-size: 9px;
       font-weight: 800;
       color: #FFFFFF;
       line-height: 1.1;
@@ -538,20 +622,19 @@
       color: #94A3B8;
     }
 
-    /* Footer Call to Action */
+    /* Footer Bar */
     .footer-bar {
       position: relative;
       z-index: 10;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding-top: 10px;
+      padding-top: 8px;
       border-top: 1px solid rgba(255, 255, 255, 0.08);
-      margin-top: 6px;
     }
 
     .footer-left {
-      font-size: 10px;
+      font-size: 9.5px;
       color: #64748B;
       font-weight: 600;
     }
@@ -563,7 +646,7 @@
     .footer-cta {
       background: linear-gradient(135deg, #0867E8 0%, #00B4D8 100%);
       color: white;
-      font-size: 9.5px;
+      font-size: 9px;
       font-weight: 800;
       padding: 5px 13px;
       border-radius: 999px;
@@ -581,7 +664,7 @@
     <div class="glow-top"></div>
     <div class="glow-cyan"></div>
 
-    <!-- Floating Feature Badges -->
+    <!-- Floating Badges -->
     <div class="float-badge left">
       <div class="badge-icon green">⚡</div>
       <div>
@@ -591,10 +674,10 @@
     </div>
 
     <div class="float-badge right">
-      <div class="badge-icon blue">💳</div>
+      <div class="badge-icon blue">💬</div>
       <div>
-        <div class="badge-title">0% Patient EMI</div>
-        <div class="badge-sub">Instant 2-Min Approval</div>
+        <div class="badge-title">1-Click WhatsApp</div>
+        <div class="badge-sub">Auto Recall &amp; Rx</div>
       </div>
     </div>
 
@@ -608,10 +691,10 @@
         Your Dental Practice.<br>
         <span>Running on Autopilot.</span>
       </h1>
-      <p class="sub-title">From WhatsApp Recalls to 0% Patient Treatment Financing</p>
+      <p class="sub-title">From WhatsApp Recalls &amp; Digital Rx to FDI Tooth Charting</p>
     </div>
 
-    <!-- Realistic Mobile UI Mockup -->
+    <!-- Taller Realistic Mobile UI Mockup -->
     <div class="mockup-wrapper">
       <div class="phone-body">
         <div class="phone-screen">
@@ -627,27 +710,33 @@
               <div class="clinic-avatar">YD</div>
               <div class="clinic-text">
                 <h4>YOUR DENTIST</h4>
-                <p>● Live Practice CRM</p>
+                <p>Patliputra Colony, Patna</p>
               </div>
             </div>
-            <div class="app-bell">🔔</div>
+            <div class="app-status-dot">
+              <span></span> Live EMR
+            </div>
           </div>
 
           <!-- Live Revenue / Metrics Widget -->
           <div class="stat-card">
             <div class="stat-header">
-              <span>August Clinical Revenue</span>
+              <span>Clinical Revenue (August)</span>
               <div class="stat-pill">▲ 41.2%</div>
             </div>
             <div class="stat-val">₹6,84,500</div>
             <div class="stat-grid">
               <div>
-                <div class="stat-sub-val">128 Patients</div>
-                <div class="stat-sub-label">This Month</div>
+                <div class="stat-sub-val">128 Total</div>
+                <div class="stat-sub-label">Patients</div>
               </div>
               <div>
-                <div class="stat-sub-val">₹2.4L in 0% EMI</div>
-                <div class="stat-sub-label">Disbursed Instantly</div>
+                <div class="stat-sub-val">42 Reactivated</div>
+                <div class="stat-sub-label">Via WhatsApp</div>
+              </div>
+              <div>
+                <div class="stat-sub-val">₹0 Due</div>
+                <div class="stat-sub-label">Zero Bad Debts</div>
               </div>
             </div>
           </div>
@@ -687,16 +776,38 @@
                 <div class="tooth-num">LR6</div>
               </div>
             </div>
+          </div>
 
-            <!-- 0% EMI Fast Checkout Inside Card -->
-            <div class="emi-pill-card">
-              <div class="emi-left">
-                <h5>₹24,000 on 0% EMI</h5>
-                <p>₹2,000 / month • Instant Approval</p>
+          <!-- Automated WhatsApp Recall Stream -->
+          <div class="whatsapp-card">
+            <div class="wa-left">
+              <div class="wa-icon">💬</div>
+              <div class="wa-text">
+                <h5>Auto WhatsApp Recall Sent</h5>
+                <p>32 Dormant Patients Reached</p>
               </div>
-              <div class="emi-btn-mini">Approved</div>
+            </div>
+            <div class="wa-badge">Active</div>
+          </div>
+
+          <!-- Today's Schedule -->
+          <div class="appts-card">
+            <div class="appts-header">
+              <span>Today's Schedule</span>
+              <strong>4 Appointments</strong>
+            </div>
+            <div class="appt-item">
+              <span class="appt-time">04:30 PM</span>
+              <span class="appt-name">Pooja Verma</span>
+              <span class="appt-proc">Aligner Review</span>
+            </div>
+            <div class="appt-item">
+              <span class="appt-time">05:15 PM</span>
+              <span class="appt-name">Amit Kumar</span>
+              <span class="appt-proc">Crown Trial #16</span>
             </div>
           </div>
+
         </div>
       </div>
     </div>
@@ -706,17 +817,17 @@
       <div class="feat-item">
         <span class="feat-icon">📱</span>
         <div class="feat-title">WhatsApp Recall</div>
-        <div class="feat-sub">Automated 1-Click</div>
+        <div class="feat-sub">Automated Reactivation</div>
       </div>
       <div class="feat-item">
         <span class="feat-icon">🦷</span>
         <div class="feat-title">Visual EMR</div>
-        <div class="feat-sub">FDI Tooth Chart</div>
+        <div class="feat-sub">FDI Tooth Charting</div>
       </div>
       <div class="feat-item">
-        <span class="feat-icon">💳</span>
-        <div class="feat-title">0% Patient EMI</div>
-        <div class="feat-sub">Zero Clinic Risk</div>
+        <span class="feat-icon">⚡</span>
+        <div class="feat-title">100% Free Forever</div>
+        <div class="feat-sub">Unlimited Patients</div>
       </div>
     </div>
 

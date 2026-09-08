@@ -2306,6 +2306,385 @@ export const BLOGS: BlogArticle[] = [
         </div>
       </div>
     )
+  },
+  {
+    slug: "how-to-start-a-dental-clinic-in-india-setup-cost-checklist",
+    title: "How to Start a Dental Clinic in India: Setup Cost & Equipment Checklist (2026 Guide)",
+    category: "Clinic Management",
+    readTime: "11 min read",
+    publishDate: "September 8, 2026",
+    author: "Clinaza Practice Growth Team",
+    summary: "Complete blueprint on starting a dental clinic in India in 2026. Detailed setup cost breakdown (₹12L–₹25L), required dental equipment checklist, legal licensing, clinic software, and patient acquisition strategies.",
+    featuredImage: "/assets/clinic-hero-real.png",
+    metaDescription: "Learn how to start a dental clinic in India in 2026. Complete setup cost breakdown (₹12L to ₹25L), equipment checklist, legal registrations, and free dental software.",
+    faqs: [
+      {
+        question: "How much does it cost to set up a new dental clinic in India?",
+        answer: "Setting up a standard single-chair dental clinic in an Indian tier-1 or tier-2 city typically costs between ₹12,00,000 and ₹18,00,000. A premium two-chair setup with RVG digital X-ray, apex locators, and aesthetic interior design ranges from ₹20,00,000 to ₹30,00,000."
+      },
+      {
+        question: "What licenses and registrations are mandatory for starting a dental clinic in India?",
+        answer: "Essential registrations include State Dental Council Registration, Clinical Establishments Act Registration, Biomedical Waste Management (PCB authorization), Trade License from local municipal corporation, and GST registration."
+      },
+      {
+        question: "How long does it take for a new dental clinic to break even in India?",
+        answer: "With proactive local SEO, automated WhatsApp recalls, and point-of-care patient financing (EMIs for high-ticket procedures), most modern clinics achieve cash-flow break-even within 4 to 8 months."
+      },
+      {
+        question: "What software should a new dental clinic use in 2026?",
+        answer: "Instead of paying ₹15,000–₹30,000 upfront for legacy desktop software, new clinics can use Clinaza's 100% free cloud-based dental CRM for digital prescriptions, appointments, WhatsApp recalls, and patient EMIs."
+      }
+    ],
+    content: (
+      <div className="space-y-6">
+        <p className="text-lg leading-relaxed text-neutral-700">
+          Starting your own private dental practice is one of the most rewarding milestones for any dentist in India. However, transitioning from clinical residency to clinic ownership requires careful financial budgeting, equipment selection, compliance licensing, and patient acquisition planning.
+        </p>
+
+        <p className="text-neutral-700 leading-relaxed">
+          Here is your comprehensive <strong>2026 step-by-step blueprint</strong> covering exact capital expenditure (CapEx), monthly operational expenditure (OpEx), mandatory licenses, and zero-cost clinic technology.
+        </p>
+
+        {/* Investment Breakdown Table */}
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Complete Dental Clinic Setup Cost in India (2026 Estimate)</h2>
+        <div className="overflow-x-auto my-6">
+          <table className="min-w-full divide-y divide-neutral-200 border border-neutral-100 text-sm">
+            <thead className="bg-neutral-50">
+              <tr>
+                <th className="px-4 py-3 text-left font-bold text-neutral-600">Category</th>
+                <th className="px-4 py-3 text-left font-bold text-neutral-600">Essential Standard Setup</th>
+                <th className="px-4 py-3 text-left font-bold text-[#0867E8]">Premium Multi-Chair Setup</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-neutral-200 bg-white">
+              <tr>
+                <td className="px-4 py-3 font-semibold text-neutral-800">Commercial Space Deposit (3–6 mo)</td>
+                <td className="px-4 py-3 text-neutral-600">₹1,00,000 – ₹2,50,000</td>
+                <td className="px-4 py-3 text-neutral-600">₹3,00,000 – ₹6,00,000</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-semibold text-neutral-800">Interior Fitout & Plumbing / Air Lines</td>
+                <td className="px-4 py-3 text-neutral-600">₹3,00,000 – ₹5,00,000</td>
+                <td className="px-4 py-3 text-neutral-600">₹6,00,000 – ₹10,00,000</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-semibold text-neutral-800">Dental Chair & Oil-Free Compressor</td>
+                <td className="px-4 py-3 text-neutral-600">₹1,80,000 – ₹3,50,000</td>
+                <td className="px-4 py-3 text-neutral-600">₹5,00,000 – ₹9,00,000 (2 Chairs)</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-semibold text-neutral-800">Digital X-Ray (RVG + Portable Tube)</td>
+                <td className="px-4 py-3 text-neutral-600">₹2,00,000 – ₹3,00,000</td>
+                <td className="px-4 py-3 text-neutral-600">₹3,50,000 – ₹5,00,000</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-semibold text-neutral-800">Autoclave (Class B), Ultrasonic & Instruments</td>
+                <td className="px-4 py-3 text-neutral-600">₹1,50,000 – ₹2,50,000</td>
+                <td className="px-4 py-3 text-neutral-600">₹3,00,000 – ₹4,50,000</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-semibold text-neutral-800">Initial Consumables & Lab Float</td>
+                <td className="px-4 py-3 text-neutral-600">₹75,000 – ₹1,50,000</td>
+                <td className="px-4 py-3 text-neutral-600">₹2,00,000 – ₹3,50,000</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-semibold text-neutral-800">Clinic CRM, Recalls & Patient EMI Tech</td>
+                <td className="px-4 py-3 text-emerald-600 font-bold">₹0 (Free with Clinaza)</td>
+                <td className="px-4 py-3 text-emerald-600 font-bold">₹0 (Free with Clinaza)</td>
+              </tr>
+              <tr className="bg-slate-50">
+                <td className="px-4 py-3 font-black text-[#0B2450]">Total Estimated Setup Budget</td>
+                <td className="px-4 py-3 font-black text-[#0867E8]">₹10,05,000 – ₹18,00,000</td>
+                <td className="px-4 py-3 font-black text-emerald-600">₹22,50,000 – ₹38,00,000</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Mandatory Legal Compliance Checklist for Indian Dental Clinics</h2>
+        <ul className="list-disc pl-6 space-y-2.5 text-neutral-700">
+          <li><strong>State Dental Council Registration (DCI):</strong> Active registration certificate of the chief dentist.</li>
+          <li><strong>Clinical Establishments Act Registration:</strong> Registration with the Chief Medical Officer (CMO) / District Health Authority.</li>
+          <li><strong>Biomedical Waste Management Authorization (BMW):</strong> Agreement with an authorized local waste disposal vendor + State Pollution Control Board clearance.</li>
+          <li><strong>AERB Approval:</strong> Required for dental X-ray machines and CBCT/OPG imaging setups.</li>
+          <li><strong>Trade License & Fire NOC:</strong> Municipal clearance depending on building square footage.</li>
+        </ul>
+
+        {/* Doctor Portal Promo */}
+        <div className="bg-slate-900 text-white p-7 rounded-3xl space-y-4 my-8 shadow-xl">
+          <span className="px-3 py-1 bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 text-xs font-bold rounded-full">
+            💡 Save ₹35,000 on Clinic Software
+          </span>
+          <h3 className="text-xl font-bold">Launch Your New Clinic With Free Digital Infrastructure</h3>
+          <p className="text-xs text-slate-300 leading-relaxed">
+            Get instant paperless patient records, mobile prescription generation, WhatsApp reminders, and point-of-care EMI financing from day one with Clinaza.
+          </p>
+          <div className="flex flex-wrap gap-3 pt-2">
+            <a
+              href="https://clinaza.in/reactivation/login"
+              className="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs uppercase tracking-wider px-5 py-3 rounded-xl transition-all shadow-md"
+            >
+              Open Free Doctor Portal →
+            </a>
+          </div>
+        </div>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">3 Strategies to Fill Your Dental Chairs in Month 1</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 my-6">
+          <div className="bg-white border border-slate-200 p-5 rounded-2xl space-y-2 shadow-sm">
+            <span className="text-xl font-black text-[#0867E8]">01</span>
+            <h4 className="font-bold text-neutral-900 text-sm">Google Maps Local SEO</h4>
+            <p className="text-xs text-slate-600">Claim your Google Business Profile with exact local keywords like "Dentist near me" and collect 20+ verified patient reviews.</p>
+          </div>
+          <div className="bg-white border border-slate-200 p-5 rounded-2xl space-y-2 shadow-sm">
+            <span className="text-xl font-black text-[#0867E8]">02</span>
+            <h4 className="font-bold text-neutral-900 text-sm">Offer Point-of-Care EMIs</h4>
+            <p className="text-xs text-slate-600">Overcome patient price objections immediately by offering ₹3,000/month 0% EMIs for root canals and implants.</p>
+          </div>
+          <div className="bg-white border border-slate-200 p-5 rounded-2xl space-y-2 shadow-sm">
+            <span className="text-xl font-black text-[#0867E8]">03</span>
+            <h4 className="font-bold text-neutral-900 text-sm">Automated WhatsApp Recalls</h4>
+            <p className="text-xs text-slate-600">Never let a patient fall through the cracks. Schedule automated 6-month checkup reminders automatically.</p>
+          </div>
+        </div>
+
+        <div className="bg-gradient-to-r from-[#0867E8] to-blue-700 text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
+          <h3 className="text-lg font-bold">Partner With Clinaza For Patient Financing</h3>
+          <p className="text-xs text-blue-100 max-w-lg mx-auto">Enable your clinic to offer ₹30,000 to ₹3,00,000 patient EMI financing at zero merchant onboarding fees.</p>
+          <a
+            href="https://clinaza.in/#partner-form"
+            className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md"
+          >
+            Register Your Clinic →
+          </a>
+        </div>
+      </div>
+    )
+  },
+  {
+    slug: "full-mouth-dental-implants-cost-on-emi-india",
+    title: "Full Mouth Dental Implants Cost on EMI in India (All-on-4 & All-on-6 Guide 2026)",
+    category: "Dental Implants",
+    readTime: "8 min read",
+    publishDate: "September 8, 2026",
+    author: "Clinaza Dental Advisory Panel",
+    summary: "Complete 2026 cost guide for full mouth dental implants in India. Compare All-on-4, All-on-6, and basal implant prices, and discover how to convert ₹1.8L–₹5L treatments into easy monthly EMIs from ₹6,500/month.",
+    featuredImage: "/assets/clinic-hero-real.png",
+    metaDescription: "Full mouth dental implants cost on EMI in India. Compare All-on-4 and All-on-6 prices (₹1.8L to ₹5L) and get instant monthly EMI options from ₹6,500/mo.",
+    faqs: [
+      {
+        question: "How much do full mouth dental implants cost in India in 2026?",
+        answer: "Full mouth dental implants typically cost between ₹1,80,000 and ₹3,50,000 per arch for All-on-4 systems. Premium All-on-6 configurations using imported Swiss or German titanium implants range from ₹2,50,000 to ₹5,00,000 per arch."
+      },
+      {
+        question: "Can I pay for full mouth dental implants in monthly EMIs?",
+        answer: "Yes. Through Clinaza partner clinics, patients can access 0% interest and low-cost EMI financing for ₹1,00,000 to ₹3,00,000 with flexible tenures of 6 to 24 months, bringing monthly installments down to ₹6,500–₹12,000."
+      },
+      {
+        question: "What is the difference between All-on-4 and All-on-6 dental implants?",
+        answer: "All-on-4 utilizes four titanium implants (two straight in the anterior and two tilted in the posterior) to support a full arch bridge. All-on-6 uses six implants to provide greater bite force distribution, ideal for patients with adequate bone density."
+      },
+      {
+        question: "Do full mouth implants look and feel like natural teeth?",
+        answer: "Yes. Full arch fixed zirconia or porcelain-fused hybrid bridges are permanently anchored to the jawbone, restoring 95%+ of natural chewing efficiency without the slipping or speech impairment of removable dentures."
+      }
+    ],
+    content: (
+      <div className="space-y-6">
+        <p className="text-lg leading-relaxed text-neutral-700">
+          Losing multiple teeth or suffering from ill-fitting removable dentures severely affects chewing ability, speech, nutrition, and facial aesthetics. Today, <strong>full mouth dental implant rehabilitation</strong> (All-on-4 and All-on-6) represents the gold standard for restoring a permanent, natural-looking smile.
+        </p>
+
+        <p className="text-neutral-700 leading-relaxed">
+          However, because full arch restorations require specialized surgical placement and custom milled zirconia prosthetic bridges, upfront costs range from ₹1.8 Lakh to ₹5 Lakh. Discover how <strong>Clinaza point-of-care EMI financing</strong> makes full mouth transformations accessible.
+        </p>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Full Mouth Implant Treatment Cost & Monthly EMI Breakdown</h2>
+        <div className="overflow-x-auto my-6">
+          <table className="min-w-full divide-y divide-neutral-200 border border-neutral-100 text-sm">
+            <thead className="bg-neutral-50">
+              <tr>
+                <th className="px-4 py-3 text-left font-bold text-neutral-600">Procedure / Implant System</th>
+                <th className="px-4 py-3 text-left font-bold text-neutral-600">Total Treatment Cost</th>
+                <th className="px-4 py-3 text-left font-bold text-neutral-600">12-Month EMI</th>
+                <th className="px-4 py-3 text-left font-bold text-green-600">24-Month EMI</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-neutral-200 bg-white">
+              <tr>
+                <td className="px-4 py-3 font-semibold text-neutral-800">All-on-4 Single Arch (Hybrid Acrylic Bridge)</td>
+                <td className="px-4 py-3 text-neutral-600">₹1,50,000 – ₹2,20,000</td>
+                <td className="px-4 py-3 text-neutral-600">₹14,500 / mo</td>
+                <td className="px-4 py-3 text-green-600 font-bold">₹7,800 / mo</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-semibold text-neutral-800">All-on-4 Single Arch (Monolithic Zirconia Bridge)</td>
+                <td className="px-4 py-3 text-neutral-600">₹2,20,000 – ₹3,00,000</td>
+                <td className="px-4 py-3 text-neutral-600">₹21,000 / mo</td>
+                <td className="px-4 py-3 text-green-600 font-bold">₹11,400 / mo</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-semibold text-neutral-800">All-on-6 Single Arch (Premium Straumann / Nobel Biocare)</td>
+                <td className="px-4 py-3 text-neutral-600">₹2,80,000 – ₹3,80,000</td>
+                <td className="px-4 py-3 text-neutral-600">₹27,000 / mo</td>
+                <td className="px-4 py-3 text-green-600 font-bold">₹14,500 / mo</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-semibold text-neutral-800">Dual Arch Full Mouth Rehabilitation (Both Jaws)</td>
+                <td className="px-4 py-3 text-neutral-600">₹3,50,000 – ₹6,00,000</td>
+                <td className="px-4 py-3 text-neutral-600">₹35,000 / mo</td>
+                <td className="px-4 py-3 text-green-600 font-bold">₹18,900 / mo</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Why Patients Choose Full Mouth Implants Over Traditional Dentures</h2>
+        <ul className="list-disc pl-6 space-y-2.5 text-neutral-700">
+          <li><strong>Permanent & Non-Removable:</strong> No messy adhesives, daily removal, or fear of slipping while speaking.</li>
+          <li><strong>Preserves Facial Bone Structure:</strong> Titanium implants stimulate the jawbone, preventing facial sunkenness and premature aging.</li>
+          <li><strong>Unrestricted Chewing:</strong> Eat nuts, apples, meats, and crunchy foods with 100% bite confidence.</li>
+          <li><strong>Lifetime Durability:</strong> With routine oral hygiene, dental implants last 20+ years to a lifetime.</li>
+        </ul>
+
+        {/* Featured Clinic Card */}
+        <div className="bg-emerald-50/80 border border-emerald-200 p-5 rounded-2xl space-y-2 my-6">
+          <div className="flex items-center gap-2">
+            <span className="px-2 py-0.5 bg-emerald-600 text-white text-[9px] font-black uppercase tracking-wider rounded-md">Verified Implant Center</span>
+            <h4 className="text-sm font-bold text-[#0B2450]">YOUR DENTIST — Patliputra Colony, Patna</h4>
+          </div>
+          <p className="text-xs text-slate-600 leading-relaxed">
+            Specialized surgical implant suites, 3D CBCT guided surgery, All-on-4 & All-on-6 full arch rehabilitations led by senior implantologists with 0% EMI financing support.
+          </p>
+          <div className="text-[11px] font-semibold text-emerald-800 flex flex-wrap gap-3 pt-1">
+            <span>📍 Patliputra Colony, Patna</span>
+            <span>📞 062014 78033</span>
+          </div>
+        </div>
+
+        <div className="bg-gradient-to-r from-[#0867E8] to-blue-700 text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
+          <h3 className="text-lg font-bold">Check Full Mouth Implant EMI Pre-Approval</h3>
+          <p className="text-xs text-blue-100 max-w-lg mx-auto">Check instant EMI eligibility for ₹30,000 to ₹3,00,000 in 2 minutes without affecting your credit score.</p>
+          <a
+            href="https://clinaza.in/#calculator"
+            className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md"
+          >
+            Calculate Implant EMI →
+          </a>
+        </div>
+      </div>
+    )
+  },
+  {
+    slug: "how-to-get-more-dental-patients-india-growth-guide",
+    title: "How to Get More Dental Patients: 7 Proven Growth Strategies for Indian Dentists (2026)",
+    category: "Clinic Marketing",
+    readTime: "9 min read",
+    publishDate: "September 8, 2026",
+    author: "Clinaza Practice Growth Team",
+    summary: "Discover 7 actionable, battle-tested strategies to attract more high-paying dental patients in India. Learn automated WhatsApp recall, Google Maps SEO, Meta ads lead generation, and point-of-care patient EMIs.",
+    featuredImage: "/assets/clinic-hero-real.png",
+    metaDescription: "Learn how to get more dental patients in India. 7 proven growth tactics including Google Maps ranking, WhatsApp patient recalls, Meta Ads, and EMI financing.",
+    faqs: [
+      {
+        question: "What is the fastest way to get new dental patients in India?",
+        answer: "The fastest dual approach is optimizing your Google Business Profile for local dental searches ('Dentist near me') paired with targeted Meta/Instagram ads featuring verified treatment transformations and flexible EMI payment options."
+      },
+      {
+        question: "How do WhatsApp patient recalls increase clinic revenue?",
+        answer: "Automated WhatsApp recalls target past patients due for scaling, crown cementation, or aligner checkups. Clinics using Clinaza recover an average of ₹45,000 to ₹1,20,000 in monthly revenue from existing patient lists without paying for new ads."
+      },
+      {
+        question: "Why does offering patient EMI financing increase dental case acceptance?",
+        answer: "Patients often delay implants, aligners, and root canals due to upfront lump-sum costs. Offering ₹30K–₹3L EMI plans at checkout breaks large treatment amounts into manageable monthly payments, boosting treatment conversions by over 40%."
+      }
+    ],
+    content: (
+      <div className="space-y-6">
+        <p className="text-lg leading-relaxed text-neutral-700">
+          In an increasingly competitive healthcare market across Indian cities, relying solely on word-of-mouth is no longer enough to maintain a consistently booked appointment calendar. Today's top-performing dental practices combine proactive digital presence with automated patient retention and flexible checkout financing.
+        </p>
+
+        <p className="text-neutral-700 leading-relaxed">
+          Here are <strong>7 proven, high-ROI growth strategies</strong> that Indian dental clinics are using to generate steady patient inquiries, improve case acceptance, and scale clinic revenue in 2026.
+        </p>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">7 Proven Strategies to Scale Your Dental Practice</h2>
+
+        <h3 className="text-lg font-bold text-neutral-800 mt-6 mb-2">1. Dominate Google Maps Local 3-Pack</h3>
+        <p className="text-neutral-700 leading-relaxed">
+          When a patient experiences tooth pain or searches for "Best dental clinic in [City]", the top 3 Google Maps listings capture 70%+ of direct phone calls. Keep your profile updated with clinic interior photos, doctor credentials, and weekly Google posts.
+        </p>
+
+        <h3 className="text-lg font-bold text-neutral-800 mt-6 mb-2">2. Automate WhatsApp Recalls for Dormant Patients</h3>
+        <p className="text-neutral-700 leading-relaxed">
+          Your existing patient list is your most valuable asset. Using <strong>Clinaza Doctor Portal</strong>, clinics can send automated 1-click WhatsApp checkup reminders to patients who haven't visited in 6+ months, reactivating dormant consultations at zero ad cost.
+        </p>
+
+        <h3 className="text-lg font-bold text-neutral-800 mt-6 mb-2">3. Remove Price Objections With Point-of-Care EMIs</h3>
+        <p className="text-neutral-700 leading-relaxed">
+          Don't let treatment cost stop your patients from proceeding with implants or smile makeovers. Presenting treatment plans as <em>"₹7,500 per month on 0% EMI"</em> rather than a single ₹1,50,000 invoice increases same-day case acceptance by over 40%.
+        </p>
+
+        <h3 className="text-lg font-bold text-neutral-800 mt-6 mb-2">4. Run Hyper-Local Meta (Instagram & Facebook) Ads</h3>
+        <p className="text-neutral-700 leading-relaxed">
+          Target patients within a 5km radius of your clinic. Focus your ad creatives on clear aligners, dental implants, and smile makeovers with real patient transformation stories and WhatsApp direct-chat buttons.
+        </p>
+
+        <h3 className="text-lg font-bold text-neutral-800 mt-6 mb-2">5. Accelerate Verified 5-Star Google Reviews</h3>
+        <p className="text-neutral-700 leading-relaxed">
+          Patients trust clinics with high review volume. Automate review links immediately after successful procedures so satisfied patients can leave a review in 15 seconds.
+        </p>
+
+        <h3 className="text-lg font-bold text-neutral-800 mt-6 mb-2">6. Offer a Free Dental Website & Digital Booking</h3>
+        <p className="text-neutral-700 leading-relaxed">
+          Ensure your clinic has a fast, mobile-friendly landing page with direct WhatsApp consultation booking, doctor bio, and transparent treatment explanations.
+        </p>
+
+        <h3 className="text-lg font-bold text-neutral-800 mt-6 mb-2">7. Upgrade to a Free Cloud Dental CRM</h3>
+        <p className="text-neutral-700 leading-relaxed">
+          Ditch manual paper registers. Manage appointment schedules, digital prescriptions, patient histories, and follow-ups on any phone, tablet, or desktop with Clinaza.
+        </p>
+
+        {/* Doctor Portal Promotion Box */}
+        <div className="bg-slate-900 text-white p-7 rounded-3xl space-y-4 my-8 shadow-xl">
+          <span className="px-3 py-1 bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 text-xs font-bold rounded-full">
+            🚀 100% Free Practice Growth Platform
+          </span>
+          <h3 className="text-xl font-bold">Grow Your Dental Clinic With Clinaza</h3>
+          <p className="text-xs text-slate-300 leading-relaxed">
+            Join forward-thinking dentists across India using Clinaza for automated WhatsApp patient recalls, digital prescriptions, and point-of-care EMI financing.
+          </p>
+          <div className="flex flex-wrap gap-3 pt-2">
+            <a
+              href="https://clinaza.in/reactivation/login"
+              className="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs uppercase tracking-wider px-5 py-3 rounded-xl transition-all shadow-md"
+            >
+              Access Doctor Portal →
+            </a>
+            <a
+              href="https://wa.me/917292984244?text=Hi%20Clinaza%20team%2C%20I%20want%20to%20grow%20my%20dental%20clinic"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs uppercase tracking-wider px-5 py-3 rounded-xl border border-slate-700 transition-colors"
+            >
+              💬 Talk to Growth Expert
+            </a>
+          </div>
+        </div>
+
+        <div className="bg-gradient-to-r from-[#0867E8] to-blue-700 text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
+          <h3 className="text-lg font-bold">Check Patient EMI Eligibility</h3>
+          <p className="text-xs text-blue-100 max-w-lg mx-auto">Help patients approve treatments faster with flexible point-of-care monthly installments.</p>
+          <a
+            href="https://clinaza.in/#calculator"
+            className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md"
+          >
+            Calculate Patient EMIs →
+          </a>
+        </div>
+      </div>
+    )
   }
 ];
 

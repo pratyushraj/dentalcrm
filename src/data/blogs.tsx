@@ -5445,9 +5445,335 @@ export const BLOGS: BlogArticle[] = [
         </ul>
 
         <div className="bg-gradient-to-r from-[#0867E8] to-blue-700 text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
-          <h3 className="text-lg font-bold">Check Laser Vision Correction 0% EMI Eligibility</h3>
-          <p className="text-xs text-blue-100 max-w-lg mx-auto">Pre-approved limits from ₹30,000 to ₹3,00,000 in under 2 minutes. Transparent, 0% interest, no paperwork hassles.</p>
+          <h3 className="text-lg font-bold">Check Laser Vision Correction EMI Eligibility</h3>
+          <p className="text-xs text-blue-100 max-w-lg mx-auto">Pre-approved limits from ₹30,000 to ₹3,00,000 in under 2 minutes. Transparent, flexible monthly EMI options.</p>
           <a href="https://clinaza.in/#calculator" className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md">Calculate Eye Surgery EMI →</a>
+        </div>
+      </div>
+    )
+  },
+  {
+    slug: "maternity-hospital-delivery-cost-on-emi-india",
+    title: "Maternity & Normal / C-Section Hospital Delivery Cost in India on Easy Monthly EMI (2026)",
+    category: "Hospital & Surgeries",
+    readTime: "7 min read",
+    publishDate: "September 8, 2026",
+    author: "Dr. Ananya Sen, MS (OB-GYN) & Clinaza Medical Desk",
+    summary: "Complete guide on private hospital maternity package costs (Normal vs C-Section, NICU charges) in India and how to finance delivery expenses with flexible monthly EMIs.",
+    featuredImage: "https://images.unsplash.com/photo-1555252333-9f8e92e65df9?q=80&w=1200&auto=format&fit=crop",
+    metaDescription: "Check Normal delivery and Cesarean (C-Section) package costs in private hospitals across India (₹50,000 to ₹2,50,000). Convert hospital birthing bills into easy monthly EMIs.",
+    faqs: [
+      {
+        question: "How much does normal delivery and C-section cost in private hospitals in India?",
+        answer: "Normal delivery in private hospitals costs between ₹45,000 to ₹1,20,000, while C-section (Cesarean) delivery ranges from ₹75,000 to ₹2,50,000 depending on city tier, hospital category, room type (Single Deluxe / Suite), and obstetrician charges."
+      },
+      {
+        question: "Can I pay hospital maternity bills on monthly EMI?",
+        answer: "Yes! Clinaza enables families to convert upfront hospital delivery packages, epidural charges, and newborn nursery care into flexible 3, 6, 12, or 24-month EMIs."
+      },
+      {
+        question: "Does health insurance cover maternity hospital delivery?",
+        answer: "Most basic retail health insurance plans have a 2 to 4 year waiting period for maternity or cap coverage at ₹30,000–₹50,000. Out-of-pocket EMI financing bridges this critical gap without depleting family emergency savings."
+      }
+    ],
+    content: (
+      <div className="space-y-6">
+        <p className="text-lg leading-relaxed text-neutral-700">
+          Welcoming a new baby is one of life's most precious milestones. However, the rapidly rising costs of private maternity hospital packages in India—ranging from <strong>₹50,000 to ₹2,50,000+</strong>—can create unexpected financial strain, especially when unexpected C-sections, epidural analgesia, or neonatal care (NICU) are required.
+        </p>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Average Maternity &amp; Delivery Costs in India (2026)</h2>
+        <div className="overflow-x-auto my-6 border border-neutral-200 rounded-2xl shadow-xs">
+          <table className="w-full text-sm text-left">
+            <thead className="bg-neutral-100 text-neutral-800 font-bold border-b border-neutral-200">
+              <tr>
+                <th className="px-4 py-3">Delivery Type</th>
+                <th className="px-4 py-3">Tier 1 Metros (Delhi, Mumbai, BLR)</th>
+                <th className="px-4 py-3">Tier 2 Cities (Patna, Jaipur, Lucknow)</th>
+                <th className="px-4 py-3">Estimated EMI (12 mo)</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-neutral-100 bg-white">
+              <tr className="hover:bg-blue-50/30">
+                <td className="px-4 py-3 font-semibold text-neutral-900">Normal Delivery (Standard Room)</td>
+                <td className="px-4 py-3">₹65,000 – ₹1,10,000</td>
+                <td className="px-4 py-3">₹40,000 – ₹70,000</td>
+                <td className="px-4 py-3 text-emerald-600 font-bold">₹4,500 / mo</td>
+              </tr>
+              <tr className="hover:bg-blue-50/30">
+                <td className="px-4 py-3 font-semibold text-neutral-900">Normal Delivery (Luxury / Suite)</td>
+                <td className="px-4 py-3">₹1,10,000 – ₹1,80,000</td>
+                <td className="px-4 py-3">₹75,000 – ₹1,20,000</td>
+                <td className="px-4 py-3 text-emerald-600 font-bold">₹8,000 / mo</td>
+              </tr>
+              <tr className="hover:bg-blue-50/30">
+                <td className="px-4 py-3 font-semibold text-neutral-900">C-Section (Cesarean Delivery)</td>
+                <td className="px-4 py-3">₹1,20,000 – ₹2,50,000</td>
+                <td className="px-4 py-3">₹70,000 – ₹1,40,000</td>
+                <td className="px-4 py-3 text-emerald-600 font-bold">₹9,500 / mo</td>
+              </tr>
+              <tr className="hover:bg-blue-50/30">
+                <td className="px-4 py-3 font-semibold text-neutral-900">High-Risk / Twin Delivery</td>
+                <td className="px-4 py-3">₹1,80,000 – ₹3,50,000</td>
+                <td className="px-4 py-3">₹1,10,000 – ₹2,00,000</td>
+                <td className="px-4 py-3 text-emerald-600 font-bold">₹14,000 / mo</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">What Expenses Are Included in Hospital Birthing Packages?</h2>
+        <ul className="list-disc pl-6 space-y-2 text-neutral-700">
+          <li><strong>Labour Delivery Room (LDR) &amp; Operation Theatre Charges:</strong> Standard monitoring equipment and sterile setup.</li>
+          <li><strong>Obstetrician, Paediatrician &amp; Anaesthetist Consultation:</strong> Attending team during and after childbirth.</li>
+          <li><strong>Room Stay (2–4 Days):</strong> Nursing care, daily vital checkups, and nutritional meals for the mother.</li>
+          <li><strong>Initial Newborn Care:</strong> Vitamin K, BCG, and Hepatitis B vaccinations, newborn blood screening, and initial paediatric checkup.</li>
+        </ul>
+
+        <div className="bg-gradient-to-r from-[#0867E8] to-blue-700 text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
+          <h3 className="text-lg font-bold">Plan Your Maternity Hospital Package on Easy EMI</h3>
+          <p className="text-xs text-blue-100 max-w-lg mx-auto">Instant paperless approval up to ₹5,00,000. Give your family the best hospital care without financial stress.</p>
+          <a href="https://clinaza.in/#calculator" className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md">Check Maternity EMI Eligibility →</a>
+        </div>
+      </div>
+    )
+  },
+  {
+    slug: "dental-braces-cost-in-india-metal-ceramic-invisible-aligners",
+    title: "Dental Braces Cost in India (2026): Metal, Ceramic, Self-Ligating & Invisible Aligners Compared",
+    category: "Dental Treatments",
+    readTime: "8 min read",
+    publishDate: "September 8, 2026",
+    author: "Dr. Vikram Sethi, MDS (Orthodontist) & Clinaza Medical Desk",
+    summary: "Comprehensive price comparison of metal braces, ceramic brackets, Damon self-ligating braces, and clear aligners in India with monthly installment plans.",
+    featuredImage: "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?q=80&w=1200&auto=format&fit=crop",
+    metaDescription: "Compare teeth braces cost in India: Traditional metal (₹25k–₹45k), Ceramic (₹40k–₹70k), Self-ligating (₹55k–₹90k), and Invisible Aligners (₹60k–₹2.5L). Pay in monthly EMIs.",
+    faqs: [
+      {
+        question: "Which type of braces is the most affordable in India?",
+        answer: "Traditional stainless steel metal braces are the most cost-effective option in India, typically costing between ₹25,000 and ₹45,000 for both upper and lower arches."
+      },
+      {
+        question: "What is the monthly EMI for dental braces in India?",
+        answer: "With Clinaza financing, dental braces can be split into monthly installments starting from just ₹2,000 to ₹4,500 per month depending on the bracket type and treatment duration."
+      },
+      {
+        question: "Are clear aligners better than traditional braces?",
+        answer: "Clear aligners offer superior aesthetics (nearly invisible), no food restrictions, and easier oral hygiene. However, traditional braces or self-ligating Damon brackets may be preferred for complex skeletal corrections."
+      }
+    ],
+    content: (
+      <div className="space-y-6">
+        <p className="text-lg leading-relaxed text-neutral-700">
+          Straightening misaligned teeth not only enhances your smile and self-confidence but also prevents long-term enamel wear, jaw pain (TMJ disorders), and plaque accumulation. In 2026, patients in India have multiple orthodontic options ranging from traditional metal brackets to high-precision clear aligners.
+        </p>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Complete Orthodontic Cost Comparison Table (India 2026)</h2>
+        <div className="overflow-x-auto my-6 border border-neutral-200 rounded-2xl shadow-xs">
+          <table className="w-full text-sm text-left">
+            <thead className="bg-neutral-100 text-neutral-800 font-bold border-b border-neutral-200">
+              <tr>
+                <th className="px-4 py-3">Braces / Aligner Type</th>
+                <th className="px-4 py-3">Aesthetic Visibility</th>
+                <th className="px-4 py-3">Treatment Duration</th>
+                <th className="px-4 py-3">Total Cost (INR)</th>
+                <th className="px-4 py-3">Monthly EMI (12 mo)</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-neutral-100 bg-white">
+              <tr className="hover:bg-blue-50/30">
+                <td className="px-4 py-3 font-semibold text-neutral-900">Traditional Metal Braces</td>
+                <td className="px-4 py-3 text-slate-600">High Visibility</td>
+                <td className="px-4 py-3">14–24 Months</td>
+                <td className="px-4 py-3">₹25,000 – ₹45,000</td>
+                <td className="px-4 py-3 text-emerald-600 font-bold">₹2,200 / mo</td>
+              </tr>
+              <tr className="hover:bg-blue-50/30">
+                <td className="px-4 py-3 font-semibold text-neutral-900">Tooth-Colored Ceramic Braces</td>
+                <td className="px-4 py-3 text-slate-600">Low Visibility</td>
+                <td className="px-4 py-3">12–20 Months</td>
+                <td className="px-4 py-3">₹40,000 – ₹70,000</td>
+                <td className="px-4 py-3 text-emerald-600 font-bold">₹3,800 / mo</td>
+              </tr>
+              <tr className="hover:bg-blue-50/30">
+                <td className="px-4 py-3 font-semibold text-neutral-900">Self-Ligating (Damon System)</td>
+                <td className="px-4 py-3 text-slate-600">Minimal Friction</td>
+                <td className="px-4 py-3">10–18 Months</td>
+                <td className="px-4 py-3">₹55,000 – ₹90,000</td>
+                <td className="px-4 py-3 text-emerald-600 font-bold">₹5,000 / mo</td>
+              </tr>
+              <tr className="hover:bg-blue-50/30">
+                <td className="px-4 py-3 font-semibold text-neutral-900">Invisible Clear Aligners</td>
+                <td className="px-4 py-3 text-slate-600">100% Invisible</td>
+                <td className="px-4 py-3">6–15 Months</td>
+                <td className="px-4 py-3">₹60,000 – ₹2,20,000</td>
+                <td className="px-4 py-3 text-emerald-600 font-bold">₹5,500 / mo</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Key Factors Influencing Your Braces Treatment Price</h2>
+        <ul className="list-disc pl-6 space-y-2 text-neutral-700">
+          <li><strong>Severity of Malocclusion:</strong> Mild spacing vs severe crowding, deep bite, or open bite corrections.</li>
+          <li><strong>Orthodontist Expertise:</strong> Treatment supervised by a certified MDS Orthodontist ensures optimal root stability and facial harmony.</li>
+          <li><strong>Post-Treatment Retainers:</strong> Transparent Essix retainers or bonded lingual wire retainers (₹4,000–₹10,000).</li>
+        </ul>
+
+        <div className="bg-gradient-to-r from-[#0867E8] to-blue-700 text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
+          <h3 className="text-lg font-bold">Get Your Dream Smile on Easy Monthly EMI</h3>
+          <p className="text-xs text-blue-100 max-w-lg mx-auto">Start teeth alignment today with zero upfront budget delay. Check instant pre-approval in 2 minutes.</p>
+          <a href="https://clinaza.in/#calculator" className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md">Check Braces EMI Eligibility →</a>
+        </div>
+      </div>
+    )
+  },
+  {
+    slug: "gallbladder-kidney-stone-laser-surgery-cost-on-emi-india",
+    title: "Gallbladder & Kidney Stone Laser Surgery Cost in India: Laparoscopy, RIRS & EMI Guide (2026)",
+    category: "Hospital & Surgeries",
+    readTime: "7 min read",
+    publishDate: "September 8, 2026",
+    author: "Dr. Rajesh K. Varma, MS, MCh (Urology) & Clinaza Medical Desk",
+    summary: "Complete cost guide for Laparoscopic Cholecystectomy (Gallbladder stone removal) and Laser RIRS / PCNL Kidney stone surgeries in India with monthly installment payment options.",
+    featuredImage: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=1200&auto=format&fit=crop",
+    metaDescription: "Find laparoscopic gallbladder surgery cost (₹45k–₹1.2L) and laser kidney stone surgery price (RIRS/PCNL ₹50k–₹1.5L) in India. Avail instant treatment financing on EMI.",
+    faqs: [
+      {
+        question: "How much does laparoscopic gallbladder surgery cost in India?",
+        answer: "Laparoscopic Cholecystectomy (gallbladder removal) costs between ₹45,000 and ₹1,20,000 in India depending on the hospital facility, surgeon fees, and post-op room stay."
+      },
+      {
+        question: "What is the cost of laser kidney stone surgery (RIRS)?",
+        answer: "Retrograde Intrarenal Surgery (RIRS) with Holmium laser stone dusting costs between ₹65,000 to ₹1,45,000 for stones up to 20mm."
+      },
+      {
+        question: "Can I get treatment loans for emergency or elective stone surgery?",
+        answer: "Yes, Clinaza enables instant point-of-care hospital financing up to ₹5,00,000 with quick digital approval so patients do not delay urgent surgery."
+      }
+    ],
+    content: (
+      <div className="space-y-6">
+        <p className="text-lg leading-relaxed text-neutral-700">
+          Gallstones and kidney stones are among the most common and acutely painful surgical conditions in India. Advanced minimally invasive techniques like <strong>Laparoscopic Cholecystectomy</strong> and <strong>RIRS Laser Lithotripsy</strong> allow same-day or 24-hour discharge with minimal blood loss, but upfront hospital costs (<strong>₹45,000 to ₹1,60,000</strong>) can be challenging without adequate savings or immediate insurance clearance.
+        </p>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Stone Surgery Cost Breakdown in India (2026)</h2>
+        <div className="overflow-x-auto my-6 border border-neutral-200 rounded-2xl shadow-xs">
+          <table className="w-full text-sm text-left">
+            <thead className="bg-neutral-100 text-neutral-800 font-bold border-b border-neutral-200">
+              <tr>
+                <th className="px-4 py-3">Procedure</th>
+                <th className="px-4 py-3">Technology / Method</th>
+                <th className="px-4 py-3">Hospital Stay</th>
+                <th className="px-4 py-3">Avg Cost (INR)</th>
+                <th className="px-4 py-3">Monthly EMI (12 mo)</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-neutral-100 bg-white">
+              <tr className="hover:bg-blue-50/30">
+                <td className="px-4 py-3 font-semibold text-neutral-900">Laparoscopic Cholecystectomy</td>
+                <td className="px-4 py-3">3–4 Keyhole Laparoscopy</td>
+                <td className="px-4 py-3">24–48 Hours</td>
+                <td className="px-4 py-3">₹45,000 – ₹1,10,000</td>
+                <td className="px-4 py-3 text-emerald-600 font-bold">₹4,200 / mo</td>
+              </tr>
+              <tr className="hover:bg-blue-50/30">
+                <td className="px-4 py-3 font-semibold text-neutral-900">RIRS (Laser Kidney Stone Dusting)</td>
+                <td className="px-4 py-3">Flexible Ureteroscopy + Holmium Laser</td>
+                <td className="px-4 py-3">24 Hours (Daycare)</td>
+                <td className="px-4 py-3">₹65,000 – ₹1,40,000</td>
+                <td className="px-4 py-3 text-emerald-600 font-bold">₹6,000 / mo</td>
+              </tr>
+              <tr className="hover:bg-blue-50/30">
+                <td className="px-4 py-3 font-semibold text-neutral-900">PCNL (Percutaneous Nephrolithotomy)</td>
+                <td className="px-4 py-3">Mini-Incision for Large &gt;20mm Stones</td>
+                <td className="px-4 py-3">48–72 Hours</td>
+                <td className="px-4 py-3">₹55,000 – ₹1,25,000</td>
+                <td className="px-4 py-3 text-emerald-600 font-bold">₹5,200 / mo</td>
+              </tr>
+              <tr className="hover:bg-blue-50/30">
+                <td className="px-4 py-3 font-semibold text-neutral-900">URS (Ureteroscopic Stone Removal)</td>
+                <td className="px-4 py-3">Rigid Scope for Lower Ureter Stones</td>
+                <td className="px-4 py-3">Same Day / 24 Hours</td>
+                <td className="px-4 py-3">₹35,000 – ₹75,000</td>
+                <td className="px-4 py-3 text-emerald-600 font-bold">₹3,200 / mo</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Why Timely Surgery Prevents Critical Complications</h2>
+        <p className="text-neutral-700 leading-relaxed">
+          Delaying gallbladder surgery can lead to acute cholecystitis, pancreatitis, or common bile duct (CBD) blockage. Similarly, untreated kidney stones can obstruct urine flow, leading to hydronephrosis and irreversible renal damage. Point-of-care EMI financing ensures money is never the reason to delay vital treatment.
+        </p>
+
+        <div className="bg-gradient-to-r from-[#0867E8] to-blue-700 text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
+          <h3 className="text-lg font-bold">Avail Instant Point-of-Care Hospital Surgery Financing</h3>
+          <p className="text-xs text-blue-100 max-w-lg mx-auto">Get pre-approved in under 2 minutes. Transparent EMIs with direct hospital settlement.</p>
+          <a href="https://clinaza.in/#calculator" className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md">Check Surgery EMI Eligibility →</a>
+        </div>
+      </div>
+    )
+  },
+  {
+    slug: "how-dental-clinics-increase-treatment-acceptance-with-emi-india",
+    title: "How Dental & Medical Clinics Increase High-Ticket Case Acceptance by 40% with Point-of-Care EMI",
+    category: "Clinic Management & Growth",
+    readTime: "6 min read",
+    publishDate: "September 8, 2026",
+    author: "Clinaza Practice Growth Team",
+    summary: "Proven strategies for dentists and hospital owners in India to overcome patient price objections and double conversion on implants, aligners, and surgical procedures using digital EMI at checkout.",
+    featuredImage: "https://images.unsplash.com/photo-1629909615184-74f495363b67?q=80&w=1200&auto=format&fit=crop",
+    metaDescription: "Learn how modern dental and medical clinics in India increase high-ticket treatment acceptance rates by 40% using digital point-of-care patient EMI financing with Clinaza.",
+    faqs: [
+      {
+        question: "Why do patients postpone high-ticket dental or medical treatments?",
+        answer: "Studies show that over 65% of treatment drop-offs happen due to upfront lump-sum affordability friction, rather than lack of clinical intent or trust in the doctor."
+      },
+      {
+        question: "How does Clinaza help clinics offer EMI without financial risk?",
+        answer: "Clinaza connects clinics directly to verified NBFC and banking partners. The partner settles the treatment fee directly with the clinic, while the patient repays in monthly installments—eliminating bad-debt risk for the doctor."
+      },
+      {
+        question: "Is Clinaza's clinic management CRM really free?",
+        answer: "Yes, Clinaza provides 100% free patient reactivation, digital prescriptions, recall automations, and EMI integration forever."
+      }
+    ],
+    content: (
+      <div className="space-y-6">
+        <p className="text-lg leading-relaxed text-neutral-700">
+          Every clinic owner knows the frustration: you spend 30 minutes diagnosing a patient, explaining a full-mouth implant or clear aligner plan, and presenting a ₹1,20,000 estimate—only to hear: <em>"Doctor, let me discuss at home and get back to you."</em> In 80% of cases, that patient never returns.
+        </p>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">The Psychology of Treatment Acceptance: Lump Sum vs Monthly EMI</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 my-6">
+          <div className="p-5 bg-red-50 border border-red-200 rounded-2xl space-y-2">
+            <h3 className="font-bold text-red-900">❌ Without Point-of-Care Financing</h3>
+            <p className="text-xs text-red-800 leading-relaxed">
+              Patient hears <strong>₹90,000 upfront</strong>. Brain triggers risk aversion. Patient hesitates, delays, and shops around for cheaper, substandard alternatives.
+            </p>
+          </div>
+          <div className="p-5 bg-emerald-50 border border-emerald-200 rounded-2xl space-y-2">
+            <h3 className="font-bold text-emerald-900">✅ With Clinaza Monthly EMI</h3>
+            <p className="text-xs text-emerald-800 leading-relaxed">
+              Patient hears <strong>₹7,500/month over 12 months</strong>. Fits within monthly salary cash flow. Patient approves treatment on the chair itself.
+            </p>
+          </div>
+        </div>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">4 Steps to Integrate EMI at Your Clinic Reception Desk</h2>
+        <ol className="list-decimal pl-6 space-y-3 text-neutral-700">
+          <li><strong>Present Dual Estimates:</strong> Always show both total price and the monthly installment (e.g., <em>"Total ₹80,000 or approx ₹6,600/month"</em>).</li>
+          <li><strong>Instant 2-Minute Eligibility Scan:</strong> Patient enters basic details on the Clinaza widget or mobile desk to see their pre-approved limit.</li>
+          <li><strong>Direct Clinic Disbursal:</strong> Funds are paid directly to your clinic account prior to starting the procedure.</li>
+          <li><strong>Automated Follow-ups:</strong> Use Clinaza's free CRM to automatically re-engage patients who had pending estimates.</li>
+        </ol>
+
+        <div className="bg-gradient-to-r from-emerald-600 to-teal-700 text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
+          <h3 className="text-lg font-bold">Partner Your Clinic with Clinaza Today</h3>
+          <p className="text-xs text-emerald-100 max-w-lg mx-auto">Access 100% Free Practice CRM + Instant Point-of-Care Patient Financing.</p>
+          <a href="https://clinaza.in/reactivation/login" className="inline-block bg-white text-emerald-900 font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-emerald-50 transition-colors shadow-md">Get Free Clinic Portal Access →</a>
         </div>
       </div>
     )

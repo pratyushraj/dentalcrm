@@ -17,6 +17,7 @@ const ReviewAssistant = lazy(() => import("@/pages/yourdentist/ReviewAssistant")
 const CityLandingPage = lazy(() => import("@/pages/CityLandingPage"));
 const PitchDeckPage = lazy(() => import("@/pages/PitchDeckPage"));
 const DhanliftRedirectPage = lazy(() => import("@/pages/DhanliftRedirectPage"));
+const FreeToolsHub = lazy(() => import("@/pages/FreeToolsHub"));
 
 export default function AppRoutes() {
   return (
@@ -41,6 +42,11 @@ export default function AppRoutes() {
 
           {/* Review Assistant Landing Page */}
           <Route path="/review/assist" element={<LazyRoute><ReviewAssistant /></LazyRoute>} />
+
+          {/* Free Practice & Patient Utilities Suite */}
+          <Route path="/tools" element={<LazyRoute><FreeToolsHub /></LazyRoute>} />
+          <Route path="/rx" element={<LazyRoute><FreeToolsHub /></LazyRoute>} />
+          <Route path="/calculator" element={<LazyRoute><FreeToolsHub /></LazyRoute>} />
 
           {/* Clinaza SEO Patient & Clinic Guides */}
           <Route path="/blog" element={<LazyRoute><BlogHub /></LazyRoute>} />

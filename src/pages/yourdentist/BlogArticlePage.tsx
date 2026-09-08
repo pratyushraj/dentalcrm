@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { BLOGS } from '@/data/blogs';
 import { SEOHead } from '@/components/seo/SEOHead';
-import { Calendar, Clock, ChevronLeft, Shield, User, Sparkles, CreditCard } from 'lucide-react';
+import { Calendar, Clock, ChevronLeft, Shield, User, Sparkles, CreditCard, Share2, MessageSquare, Check } from 'lucide-react';
 import { PatientEligibilityModal } from '@/components/PatientEligibilityModal';
 
 export default function BlogArticlePage() {
@@ -161,10 +161,34 @@ export default function BlogArticlePage() {
             {article.title}
           </h1>
 
-          <div className="flex flex-wrap items-center justify-center sm:justify-start gap-4 text-xs text-neutral-500 font-medium">
-            <span className="flex items-center gap-1"><User size={14} /> By {article.author}</span>
-            <span className="flex items-center gap-1"><Calendar size={14} /> {article.publishDate}</span>
-            <span className="flex items-center gap-1"><Clock size={14} /> {article.readTime}</span>
+          <div className="flex flex-wrap items-center justify-between gap-3 text-xs text-neutral-500 font-medium pt-1">
+            <div className="flex flex-wrap items-center gap-3 sm:gap-4">
+              <span className="flex items-center gap-1"><User size={14} /> By {article.author}</span>
+              <span className="flex items-center gap-1"><Calendar size={14} /> {article.publishDate}</span>
+              <span className="flex items-center gap-1"><Clock size={14} /> {article.readTime}</span>
+            </div>
+
+            {/* Social Share Buttons */}
+            <div className="flex items-center gap-2">
+              <a
+                href={`https://api.whatsapp.com/send?text=${encodeURIComponent(`${article.title} — Read on Clinaza: https://clinaza.in/blog/${article.slug}`)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-3 py-1.5 bg-[#25D366] hover:bg-[#20bd5a] text-white rounded-lg font-bold text-[11px] flex items-center gap-1.5 shadow-xs transition-all"
+              >
+                <MessageSquare size={13} /> Share on WhatsApp
+              </a>
+              <button
+                onClick={() => {
+                  navigator.clipboard.writeText(`https://clinaza.in/blog/${article.slug}`);
+                  alert('Link copied to clipboard!');
+                }}
+                className="p-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg border border-slate-200 transition-all text-[11px]"
+                title="Copy Link"
+              >
+                <Share2 size={14} />
+              </button>
+            </div>
           </div>
         </div>
 

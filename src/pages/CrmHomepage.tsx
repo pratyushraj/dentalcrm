@@ -355,6 +355,12 @@ export default function CrmHomepage() {
             </div>
           </Link>
           <div className="flex items-center gap-3">
+            <Link
+              to="/tools"
+              className="hidden lg:flex items-center gap-1.5 px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-xs font-bold text-slate-800 rounded-xl transition-all"
+            >
+              <span>🛠️</span> Free Tools &amp; Rx
+            </Link>
             <button
               type="button"
               onClick={() => {

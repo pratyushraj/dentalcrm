@@ -405,16 +405,19 @@ export default function CrmHomepage() {
       </header>
 
       <main>
-        {/* ── 1. HERO (WHITE) ── */}
-        <section aria-label="Hero" className="relative pt-8 sm:pt-14 pb-12 sm:pb-16 px-4 sm:px-6 max-w-5xl mx-auto space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center text-left">
+        {/* ── 1. HERO (MINIMAL LUXURY) ── */}
+        <section aria-label="Hero" className="relative pt-8 sm:pt-16 pb-12 sm:pb-16 px-4 sm:px-6 max-w-5xl mx-auto space-y-8">
+          {/* Subtle Ambient Radial Glow */}
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-64 bg-gradient-to-b from-[#0867E8]/6 via-[#12A8A0]/4 to-transparent blur-3xl pointer-events-none -z-10" />
+
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center text-left">
             <div className="md:col-span-7 space-y-4 sm:space-y-5">
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#F5F9FC] border border-blue-100 rounded-full text-[11px] font-bold text-[#0756C7] shadow-2xs">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-white/80 backdrop-blur-md border border-slate-200/80 rounded-full text-[11px] font-bold text-[#0867E8] shadow-[0_2px_10px_rgba(8,103,232,0.08)]">
                 <Building2 className="h-3.5 w-3.5 text-[#0f7a75]" />
-                <span>POINT-OF-CARE TREATMENT FINANCING &amp; EASY MONTHLY EMIs</span>
+                <span className="tracking-wide">POINT-OF-CARE TREATMENT FINANCING &amp; EMIs</span>
               </div>
 
-              <h1 className="text-2.5xl sm:text-5xl font-black tracking-tight leading-[1.18] text-[#0B2450]">
+              <h1 className="text-3xl sm:text-5.5xl font-black tracking-[-0.03em] leading-[1.12] text-[#0B2450]">
                 Don't Let Treatment Cost <br />
                 <span className="bg-gradient-to-r from-[#0867E8] via-[#0088FF] to-[#12A8A0] bg-clip-text text-transparent">
                   Stop Your Patients
@@ -422,7 +425,7 @@ export default function CrmHomepage() {
               </h1>
 
               <p className="text-xs sm:text-base text-slate-600 font-medium leading-relaxed max-w-xl">
-                Help eligible patients access instant treatment financing &amp; flexible monthly EMIs from <strong className="text-[#0B2450]">₹30,000 to ₹5,00,000</strong> for Dental Implants, Hair Transplants, LASIK, IVF, and Elective Surgeries.
+                Help eligible patients access instant treatment financing &amp; flexible monthly EMIs from <strong className="text-[#0B2450] font-bold">₹30,000 to ₹5,00,000</strong> for Dental Implants, Hair Transplants, LASIK, IVF, and Elective Surgeries.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-3 pt-1">
@@ -434,50 +437,54 @@ export default function CrmHomepage() {
                     setShowEligibilityModal(true);
                     setEligibilityStep(1);
                   }}
-                  className="w-full sm:w-auto px-6 py-3.5 bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-black uppercase tracking-wider rounded-xl transition-all flex items-center justify-center gap-2 shadow-lg shadow-[#0867E8]/25 transform active:scale-95"
+                  className="w-full sm:w-auto px-7 py-3.5 bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-black uppercase tracking-wider rounded-xl transition-all flex items-center justify-center gap-2 shadow-[0_8px_20px_rgba(8,103,232,0.25)] hover:shadow-[0_12px_28px_rgba(8,103,232,0.35)] transform active:scale-95"
                 >
                   <ShieldCheck size={16} /> Check Patient Eligibility
                 </button>
                 <Link
                   to="/reactivation/login"
-                  className="w-full sm:w-auto px-5 py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-black uppercase tracking-wider rounded-xl transition-all flex items-center justify-center gap-2 shadow-md shadow-emerald-600/20"
+                  className="w-full sm:w-auto px-5 py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-black uppercase tracking-wider rounded-xl transition-all flex items-center justify-center gap-2 shadow-md shadow-emerald-600/15"
                 >
                   Doctor Portal →
                 </Link>
               </div>
 
               <p className="text-[10px] text-slate-400 font-medium pt-1">
-                ⚡ Quick assessment &middot; No obligation &middot; Final approval by lender &middot; <span className="text-[#0f7a75] font-bold">Clinaza connects clinics with financing partners.</span>
+                ⚡ 2-min assessment &middot; Zero CIBIL impact &middot; <span className="text-[#0f7a75] font-bold">Clinaza connects clinics with RBI-regulated financing partners.</span>
               </p>
             </div>
 
-            {/* Authentic Clinic Photo */}
+            {/* Authentic Clinic Photo with subtle glass badge */}
             <div className="md:col-span-5 relative mt-2 md:mt-0">
-              <img
-                src="/assets/clinic-hero-real.png"
-                alt="Modern authentic dental clinic treatment room in India"
-                className="w-full h-auto rounded-2xl sm:rounded-3xl border border-slate-200 shadow-lg object-cover aspect-[4/3]"
-              />
-              <div className="absolute -bottom-2.5 -left-2.5 sm:-bottom-3 sm:-left-3 bg-white/95 backdrop-blur-md border border-slate-200 px-3.5 py-2 rounded-xl sm:rounded-2xl shadow-md flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-[#0f7a75] animate-pulse"></span>
-                <span className="text-[11px] font-bold text-[#0B2450]">Point-of-Care EMI Ready</span>
+              <div className="relative rounded-2xl sm:rounded-3xl p-1 bg-gradient-to-b from-slate-200 to-slate-100 shadow-[0_20px_40px_rgba(0,0,0,0.06)]">
+                <img
+                  src="/assets/clinic-hero-real.png"
+                  alt="Modern authentic dental clinic treatment room in India"
+                  className="w-full h-auto rounded-[14px] sm:rounded-[22px] object-cover aspect-[4/3]"
+                />
+              </div>
+              <div className="absolute -bottom-2.5 -left-2.5 sm:-bottom-3 sm:-left-3 bg-white/90 backdrop-blur-xl border border-slate-200/80 px-4 py-2 rounded-xl sm:rounded-2xl shadow-[0_8px_24px_rgba(0,0,0,0.08)] flex items-center gap-2.5">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span className="text-[11px] font-bold text-[#0B2450] tracking-tight">Point-of-Care EMI Ready</span>
               </div>
             </div>
           </div>
 
-          {/* ── 1. TRUST STRIP (RIGHT BELOW HERO) ── */}
-          <div className="pt-6 border-t border-slate-100 max-w-4xl mx-auto">
-            <p className="text-[10px] font-black uppercase tracking-widest text-[#0f7a75] mb-3 text-center sm:text-left">WHY CLINICS CHOOSE CLINAZA</p>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 text-left">
+          {/* ── 1. MINIMAL TRUST & SECURITY STRIP ── */}
+          <div className="pt-6 border-t border-slate-200/60 max-w-4xl mx-auto">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-left">
               {[
-                '₹30K–₹3L financing options',
-                'Bank/NBFC lending partners',
-                '100% Digital application',
-                'Clinic-focused support'
+                { title: '₹30K – ₹5L Limits', desc: 'Flexible monthly tenures' },
+                { title: 'Regulated Partners', desc: 'RBI registered NBFCs' },
+                { title: '100% Digital eKYC', desc: 'Paperless 2-min checks' },
+                { title: 'Zero Bad Debt Risk', desc: 'Direct clinic disbursal' }
               ].map((item, idx) => (
-                <div key={idx} className="bg-[#F7FAFC] border border-slate-200/80 px-3 py-2.5 rounded-xl flex items-center gap-2">
-                  <CheckCircle2 size={14} className="text-[#0f7a75] shrink-0" aria-hidden="true" />
-                  <span className="text-[11px] font-bold text-[#0B2450] leading-tight">{item}</span>
+                <div key={idx} className="bg-white/70 backdrop-blur-sm border border-slate-200/70 p-3 rounded-2xl transition-all hover:border-blue-400/40 hover:shadow-xs space-y-0.5">
+                  <div className="flex items-center gap-1.5 text-[#0B2450] font-black text-xs">
+                    <CheckCircle2 size={13} className="text-[#0f7a75] shrink-0" aria-hidden="true" />
+                    <span>{item.title}</span>
+                  </div>
+                  <p className="text-[10px] text-slate-500 pl-4">{item.desc}</p>
                 </div>
               ))}
             </div>
@@ -1775,8 +1782,31 @@ export default function CrmHomepage() {
         </section>
       </main>
 
+      {/* ── Mobile Floating Quick Action Pill ── */}
+      <div 
+        className="sm:hidden fixed bottom-4 left-4 right-4 z-40 flex items-center gap-2 p-1.5 bg-[#0B2450]/90 backdrop-blur-xl border border-white/15 rounded-full shadow-[0_12px_36px_rgba(0,0,0,0.35)]"
+        style={{ marginBottom: 'env(safe-area-inset-bottom, 0px)' }}
+      >
+        <button
+          onClick={() => {
+            trackEvent('click_mobile_floating_eligibility');
+            setShowEligibilityModal(true);
+            setEligibilityStep(1);
+          }}
+          className="flex-1 py-2.5 px-4 bg-[#0867E8] text-white rounded-full text-xs font-black uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-md active:scale-95"
+        >
+          <ShieldCheck size={14} /> Check EMI
+        </button>
+        <Link
+          to="/reactivation/login"
+          className="py-2.5 px-4 bg-white/10 hover:bg-white/20 text-white rounded-full text-xs font-bold whitespace-nowrap active:scale-95 transition-colors"
+        >
+          Doctor Login
+        </Link>
+      </div>
+
       {/* ── Footer ── */}
-      <footer className="border-t border-slate-200 py-10 px-6 bg-white text-center sm:text-left">
+      <footer className="border-t border-slate-200 py-10 px-6 bg-white text-center sm:text-left pb-24 sm:pb-10">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="flex items-center gap-3">
             <img src="/assets/clinaza-logo.jpg" alt="CLINAZA" className="h-8 w-auto rounded-lg border border-slate-200" />

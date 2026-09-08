@@ -569,6 +569,204 @@ export default function CrmHomepage() {
           </div>
         </section>
 
+        {/* ── 4.4 MOBILE CRM APP SHOWCASE ── */}
+        <section aria-label="Mobile CRM Experience" className="py-14 sm:py-20 px-4 sm:px-6 bg-gradient-to-b from-[#060D1A] via-[#0A1832] to-[#040914] text-white relative overflow-hidden border-t border-slate-800">
+          {/* Ambient Glows */}
+          <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-96 h-96 bg-blue-600/20 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute bottom-10 right-10 w-80 h-80 bg-teal-500/15 rounded-full blur-3xl pointer-events-none" />
+
+          <div className="max-w-5xl mx-auto space-y-10 relative z-10">
+            <div className="text-center space-y-3">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-500/15 border border-blue-500/30 text-blue-400 text-[10px] font-black uppercase tracking-widest">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                FREE CLOUD DENTAL CRM • RUNNING ON MOBILE &amp; DESKTOP
+              </div>
+              <h2 className="text-2.5xl sm:text-4.5xl font-black tracking-tight text-white leading-tight">
+                Your Entire Practice in Your Pocket.<br />
+                <span className="bg-gradient-to-r from-blue-400 via-sky-300 to-teal-300 bg-clip-text text-transparent">
+                  Running on Complete Autopilot.
+                </span>
+              </h2>
+              <p className="text-xs sm:text-sm text-slate-300 max-w-2xl mx-auto leading-relaxed">
+                From 1-click WhatsApp patient recall automations and visual FDI tooth charting to digital prescriptions and real-time revenue analytics — all free forever with zero per-patient charges.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+              {/* Left Column: Key Features */}
+              <div className="lg:col-span-6 space-y-4 text-left order-2 lg:order-1">
+                {[
+                  {
+                    icon: '💬',
+                    title: 'Automated WhatsApp Patient Recall',
+                    desc: 'Automatically re-engage dormant patients who haven’t visited in 6+ months with personalized WhatsApp recall messages.'
+                  },
+                  {
+                    icon: '🦷',
+                    title: 'Interactive FDI Tooth Charting & EMR',
+                    desc: 'Point-and-click tooth charting for RCT, crowns, implants, and extractions with immediate treatment cost estimation.'
+                  },
+                  {
+                    icon: '📱',
+                    title: 'Instant Digital Prescriptions (Rx)',
+                    desc: 'Generate branded, professional Rx with dental drug dosages and share directly to patient WhatsApp in 2 clicks.'
+                  },
+                  {
+                    icon: '⚡',
+                    title: '100% Free Forever with Zero Hidden Fees',
+                    desc: 'No monthly subscriptions, no staff user limits, and unlimited patient records synced securely in the cloud.'
+                  }
+                ].map((item, idx) => (
+                  <div key={idx} className="bg-slate-900/80 border border-slate-800/80 hover:border-blue-500/40 p-4 sm:p-4.5 rounded-2xl transition-all space-y-1 shadow-lg flex gap-3.5 items-start">
+                    <span className="text-xl sm:text-2xl shrink-0 p-2 bg-slate-800/60 rounded-xl border border-slate-700/60">{item.icon}</span>
+                    <div className="space-y-1">
+                      <h3 className="text-sm font-bold text-white leading-tight">{item.title}</h3>
+                      <p className="text-xs text-slate-300 leading-relaxed">{item.desc}</p>
+                    </div>
+                  </div>
+                ))}
+
+                <div className="pt-2 flex flex-col sm:flex-row gap-3">
+                  <Link
+                    to="/reactivation/login"
+                    className="px-6 py-3.5 bg-gradient-to-r from-[#0867E8] to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white text-xs font-black uppercase tracking-wider rounded-xl transition-all text-center shadow-lg shadow-blue-600/30"
+                  >
+                    Launch Free Doctor Portal →
+                  </Link>
+                  <a
+                    href="https://wa.me/917292984244?text=Hi%20Clinaza%2C%20I%20want%20a%20free%20demo%20of%20the%20dental%20CRM%20software"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-5 py-3.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 text-xs font-bold rounded-xl transition-all text-center flex items-center justify-center gap-2"
+                  >
+                    <MessageSquare size={15} className="text-emerald-400" /> Book 1-on-1 Demo
+                  </a>
+                </div>
+              </div>
+
+              {/* Right Column: Realistic Mobile App UI Frame */}
+              <div className="lg:col-span-6 flex justify-center order-1 lg:order-2">
+                <div className="w-[300px] sm:w-[320px] bg-[#0B132B] rounded-[40px] p-2.5 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.95),0_0_0_2px_rgba(255,255,255,0.15),0_0_0_8px_#1E293B,0_0_45px_rgba(8,103,232,0.45)] relative">
+                  <div className="bg-[#070D1D] rounded-[32px] p-3 text-left border border-white/10 space-y-2.5 relative overflow-hidden">
+                    {/* Dynamic Island Notch */}
+                    <div className="w-20 h-4 bg-black rounded-full mx-auto flex items-center justify-between px-2 mb-1">
+                      <div className="w-1.5 h-1.5 bg-slate-800 rounded-full"></div>
+                      <div className="w-1 h-1 bg-blue-900 rounded-full"></div>
+                    </div>
+
+                    {/* App Header */}
+                    <div className="flex items-center justify-between pb-1 border-b border-white/5">
+                      <div className="flex items-center gap-2">
+                        <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-[#0867E8] to-[#00D4B8] flex items-center justify-center text-white font-extrabold text-[11px] shadow-sm">
+                          YD
+                        </div>
+                        <div>
+                          <h4 className="text-[11px] font-extrabold text-white leading-tight">YOUR DENTIST</h4>
+                          <p className="text-[8px] text-sky-400 font-semibold">Patliputra Colony, Patna</p>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-[7.5px] font-bold text-emerald-400">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Live EMR
+                      </div>
+                    </div>
+
+                    {/* Revenue Card */}
+                    <div className="bg-gradient-to-br from-[#0867E8]/30 via-slate-900/80 to-slate-900 p-2.5 rounded-xl border border-blue-500/40 space-y-1.5">
+                      <div className="flex justify-between items-center">
+                        <span className="text-[8.5px] uppercase font-bold tracking-wider text-slate-400">Clinical Revenue (August)</span>
+                        <span className="text-[7.5px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-bold border border-emerald-500/30">▲ 41.2%</span>
+                      </div>
+                      <div className="text-lg font-black text-white">₹6,84,500</div>
+                      <div className="grid grid-cols-3 gap-1 pt-1.5 border-t border-white/10 text-center">
+                        <div>
+                          <div className="text-[9.5px] font-extrabold text-white">128</div>
+                          <div className="text-[7px] text-slate-400">Total Patients</div>
+                        </div>
+                        <div>
+                          <div className="text-[9.5px] font-extrabold text-sky-300">42</div>
+                          <div className="text-[7px] text-slate-400">Reactivated</div>
+                        </div>
+                        <div>
+                          <div className="text-[9.5px] font-extrabold text-emerald-400">₹0</div>
+                          <div className="text-[7px] text-slate-400">Bad Debts</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Active Patient EMR & FDI Tooth Chart */}
+                    <div className="bg-slate-900/80 border border-white/10 p-2.5 rounded-xl space-y-2">
+                      <div className="flex justify-between items-center">
+                        <div className="flex items-center gap-1.5">
+                          <div className="w-5 h-5 rounded-full bg-blue-600 text-white text-[8px] font-extrabold flex items-center justify-center">RS</div>
+                          <span className="text-[10px] font-bold text-white">Rahul Sharma (34M)</span>
+                        </div>
+                        <span className="text-[7.5px] px-1.5 py-0.5 bg-amber-500/15 border border-amber-500/30 text-amber-300 rounded font-bold">RCT + Crown</span>
+                      </div>
+
+                      {/* Mini Tooth FDI Matrix */}
+                      <div className="flex justify-between bg-black/40 p-1.5 rounded-lg border border-white/5">
+                        {[
+                          { num: '14', tag: 'UR4', active: false },
+                          { num: '16', tag: 'RCT', active: 'red' },
+                          { num: '26', tag: 'IMP', active: 'blue' },
+                          { num: '36', tag: 'LL6', active: false },
+                          { num: '46', tag: 'LR6', active: false }
+                        ].map((tooth, tidx) => (
+                          <div key={tidx} className="flex flex-col items-center gap-0.5">
+                            <div className={`w-4 h-4 rounded text-[7.5px] font-bold flex items-center justify-center ${
+                              tooth.active === 'red' ? 'bg-red-600 text-white shadow-[0_0_8px_rgba(239,68,68,0.7)] border border-red-400' :
+                              tooth.active === 'blue' ? 'bg-blue-600 text-white shadow-[0_0_8px_rgba(8,103,232,0.7)] border border-blue-400' :
+                              'bg-slate-800 text-slate-400 border border-white/5'
+                            }`}>
+                              {tooth.num}
+                            </div>
+                            <span className="text-[6.5px] text-slate-400 font-semibold">{tooth.tag}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* WhatsApp Automation Stream */}
+                    <div className="bg-slate-900/80 border border-emerald-500/30 p-2 rounded-xl flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <div className="w-6 h-6 rounded-md bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 flex items-center justify-center text-xs">
+                          💬
+                        </div>
+                        <div>
+                          <div className="text-[9px] font-bold text-white">Auto WhatsApp Recall</div>
+                          <div className="text-[7.5px] text-emerald-300">32 Dormant Patients Reached</div>
+                        </div>
+                      </div>
+                      <span className="text-[7.5px] px-1.5 py-0.5 bg-emerald-500 text-slate-950 font-black rounded uppercase">Active</span>
+                    </div>
+
+                    {/* Today's Schedule */}
+                    <div className="bg-slate-900/80 border border-white/10 p-2 rounded-xl space-y-1">
+                      <div className="flex justify-between items-center text-[8px] font-bold text-slate-400 uppercase">
+                        <span>Today's Schedule</span>
+                        <span className="text-sky-400">4 Appointments</span>
+                      </div>
+                      <div className="space-y-1 text-[8px]">
+                        <div className="flex justify-between items-center text-slate-300 border-t border-white/5 pt-1">
+                          <span className="text-blue-400 font-bold">04:30 PM</span>
+                          <span className="font-semibold text-white">Pooja Verma</span>
+                          <span className="text-[7px] px-1 bg-slate-800 rounded text-slate-300">Aligner Review</span>
+                        </div>
+                        <div className="flex justify-between items-center text-slate-300 border-t border-white/5 pt-1">
+                          <span className="text-blue-400 font-bold">05:15 PM</span>
+                          <span className="font-semibold text-white">Amit Kumar</span>
+                          <span className="text-[7px] px-1 bg-slate-800 rounded text-slate-300">Crown Trial #16</span>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* ── 4.5 DENTIST SOCIAL MEDIA & BRAND GROWTH ── */}
         <section aria-label="Dentist Growth & Social Media" className="py-12 sm:py-16 px-4 sm:px-6 bg-gradient-to-br from-indigo-950 via-slate-900 to-[#0B2450] text-white">
           <div className="max-w-5xl mx-auto space-y-8 text-center">

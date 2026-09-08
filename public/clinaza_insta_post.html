@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clinaza CRM — Instagram Post Showcase</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    body {
+      background: #070B14;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      overflow-x: hidden;
+    }
+
+    /* Instagram 4:5 Portrait Container (1080 x 1350 aspect ratio) */
+    .insta-canvas {
+      width: 100%;
+      max-width: 540px;
+      aspect-ratio: 4 / 5;
+      background: radial-gradient(130% 100% at 50% 0%, #0F2347 0%, #060D1A 60%, #02060D 100%);
+      border-radius: 36px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 35px 80px -15px rgba(0, 0, 0, 0.85), 0 0 0 1px rgba(255, 255, 255, 0.08);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 34px 30px 24px;
+    }
+
+    /* Ambient Glows */
+    .glow-top {
+      position: absolute;
+      top: -120px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 380px;
+      height: 380px;
+      background: radial-gradient(circle, rgba(8, 103, 232, 0.45) 0%, rgba(8, 103, 232, 0) 70%);
+      filter: blur(60px);
+      pointer-events: none;
+    }
+
+    .glow-cyan {
+      position: absolute;
+      bottom: 80px;
+      right: -100px;
+      width: 320px;
+      height: 320px;
+      background: radial-gradient(circle, rgba(6, 182, 212, 0.25) 0%, rgba(6, 182, 212, 0) 70%);
+      filter: blur(70px);
+      pointer-events: none;
+    }
+
+    /* Header */
+    .header {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+    }
+
+    .brand-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: rgba(8, 103, 232, 0.15);
+      border: 1px solid rgba(8, 103, 232, 0.4);
+      padding: 5px 13px;
+      border-radius: 999px;
+      margin-bottom: 10px;
+      backdrop-filter: blur(12px);
+    }
+
+    .brand-dot {
+      width: 7px;
+      height: 7px;
+      background: #10B981;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #10B981;
+    }
+
+    .brand-badge span {
+      font-size: 10.5px;
+      font-weight: 700;
+      color: #93C5FD;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .main-title {
+      font-size: 25px;
+      font-weight: 900;
+      color: #FFFFFF;
+      line-height: 1.16;
+      letter-spacing: -0.02em;
+    }
+
+    .main-title span {
+      background: linear-gradient(135deg, #60A5FA 0%, #38BDF8 50%, #A78BFA 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .sub-title {
+      font-size: 12px;
+      color: #94A3B8;
+      margin-top: 5px;
+      font-weight: 500;
+    }
+
+    /* Phone Mockup Frame */
+    .mockup-wrapper {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      justify-content: center;
+      margin: 10px 0 6px;
+    }
+
+    .phone-body {
+      width: 284px;
+      background: #0B132B;
+      border-radius: 36px;
+      padding: 9px;
+      box-shadow: 
+        0 25px 50px -12px rgba(0, 0, 0, 0.9),
+        0 0 0 2px rgba(255, 255, 255, 0.15),
+        0 0 0 7px #1E293B,
+        0 0 35px rgba(8, 103, 232, 0.35);
+      position: relative;
+    }
+
+    .phone-screen {
+      background: #070D1D;
+      border-radius: 28px;
+      padding: 12px 11px 12px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      position: relative;
+    }
+
+    /* Dynamic Island */
+    .notch {
+      width: 78px;
+      height: 16px;
+      background: #000000;
+      border-radius: 20px;
+      margin: 0 auto 9px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 6px;
+    }
+
+    .notch-camera {
+      width: 6px;
+      height: 6px;
+      background: #111827;
+      border-radius: 50%;
+      box-shadow: inset 0 0 2px #374151;
+    }
+
+    .notch-sensor {
+      width: 4px;
+      height: 4px;
+      background: #1E3A8A;
+      border-radius: 50%;
+    }
+
+    /* Clinic Header Inside App */
+    .app-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .clinic-info {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .clinic-avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #0867E8, #00D4B8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 800;
+      font-size: 12px;
+      box-shadow: 0 4px 10px rgba(8, 103, 232, 0.4);
+    }
+
+    .clinic-text h4 {
+      font-size: 11px;
+      font-weight: 800;
+      color: #F8FAFC;
+      line-height: 1.1;
+    }
+
+    .clinic-text p {
+      font-size: 8.5px;
+      color: #38BDF8;
+      font-weight: 600;
+    }
+
+    .app-bell {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+    }
+
+    /* Revenue & Stats Card */
+    .stat-card {
+      background: linear-gradient(135deg, rgba(8, 103, 232, 0.3) 0%, rgba(15, 23, 42, 0.6) 100%);
+      border: 1px solid rgba(8, 103, 232, 0.4);
+      border-radius: 14px;
+      padding: 9px 10px;
+      margin-bottom: 9px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 20px -6px rgba(8, 103, 232, 0.25);
+    }
+
+    .stat-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2px;
+    }
+
+    .stat-header span {
+      font-size: 9px;
+      color: #94A3B8;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .stat-pill {
+      font-size: 8px;
+      background: rgba(16, 185, 129, 0.2);
+      color: #34D399;
+      padding: 2px 5px;
+      border-radius: 5px;
+      font-weight: 700;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .stat-val {
+      font-size: 18px;
+      font-weight: 900;
+      color: #FFFFFF;
+      letter-spacing: -0.02em;
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      margin-top: 6px;
+      padding-top: 6px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .stat-sub-val {
+      font-size: 10.5px;
+      font-weight: 800;
+      color: #F1F5F9;
+    }
+
+    .stat-sub-label {
+      font-size: 7.5px;
+      color: #64748B;
+      font-weight: 500;
+    }
+
+    /* Active Patient / Tooth Chart Module */
+    .patient-card {
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      border-radius: 13px;
+      padding: 9px;
+      margin-bottom: 8px;
+    }
+
+    .patient-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 7px;
+    }
+
+    .patient-name-box {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .patient-avatar-sm {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #3B82F6;
+      color: white;
+      font-size: 8.5px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .patient-title {
+      font-size: 10px;
+      font-weight: 700;
+      color: #F1F5F9;
+    }
+
+    .patient-tag {
+      font-size: 7.5px;
+      color: #F59E0B;
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      padding: 2px 5px;
+      border-radius: 5px;
+      font-weight: 700;
+    }
+
+    /* Mini Tooth Chart Row */
+    .tooth-row {
+      display: flex;
+      justify-content: space-between;
+      background: rgba(0, 0, 0, 0.35);
+      border-radius: 7px;
+      padding: 4px 5px;
+      margin-bottom: 6px;
+    }
+
+    .tooth-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+    }
+
+    .tooth-box {
+      width: 16px;
+      height: 16px;
+      border-radius: 4px;
+      background: #1E293B;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 7.5px;
+      font-weight: 700;
+      color: #94A3B8;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .tooth-box.active-root {
+      background: linear-gradient(135deg, #EF4444, #DC2626);
+      color: white;
+      box-shadow: 0 0 8px rgba(239, 68, 68, 0.6);
+      border-color: #F87171;
+    }
+
+    .tooth-box.active-implant {
+      background: linear-gradient(135deg, #0867E8, #2563EB);
+      color: white;
+      box-shadow: 0 0 8px rgba(8, 103, 232, 0.6);
+      border-color: #60A5FA;
+    }
+
+    .tooth-num {
+      font-size: 6.5px;
+      color: #475569;
+      font-weight: 600;
+    }
+
+    /* 0% EMI Banner Inside Screen */
+    .emi-pill-card {
+      background: linear-gradient(90deg, #065F46 0%, #047857 100%);
+      border-radius: 9px;
+      padding: 6px 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border: 1px solid #10B981;
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+    }
+
+    .emi-left h5 {
+      font-size: 9px;
+      font-weight: 800;
+      color: #FFFFFF;
+      line-height: 1.1;
+    }
+
+    .emi-left p {
+      font-size: 7px;
+      color: #A7F3D0;
+    }
+
+    .emi-btn-mini {
+      background: #FFFFFF;
+      color: #065F46;
+      font-size: 7.5px;
+      font-weight: 900;
+      padding: 3px 7px;
+      border-radius: 5px;
+      text-transform: uppercase;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Bottom Badges / Selling Points */
+    .feature-bar {
+      position: relative;
+      z-index: 10;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .feat-item {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 8px 6px;
+      text-align: center;
+      backdrop-filter: blur(10px);
+    }
+
+    .feat-icon {
+      font-size: 15px;
+      margin-bottom: 3px;
+      display: block;
+    }
+
+    .feat-title {
+      font-size: 10px;
+      font-weight: 800;
+      color: #F8FAFC;
+      line-height: 1.1;
+    }
+
+    .feat-sub {
+      font-size: 8px;
+      color: #94A3B8;
+      margin-top: 2px;
+      font-weight: 500;
+    }
+
+    /* Floating Badges outside phone */
+    .float-badge {
+      position: absolute;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      padding: 7px 11px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+      z-index: 20;
+      animation: float 4s ease-in-out infinite alternate;
+    }
+
+    .float-badge.left {
+      left: 12px;
+      top: 230px;
+    }
+
+    .float-badge.right {
+      right: 12px;
+      bottom: 160px;
+      animation-delay: -2s;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      100% { transform: translateY(-7px); }
+    }
+
+    .badge-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 7px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+    }
+
+    .badge-icon.green {
+      background: rgba(16, 185, 129, 0.2);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: #34D399;
+    }
+
+    .badge-icon.blue {
+      background: rgba(8, 103, 232, 0.2);
+      border: 1px solid rgba(8, 103, 232, 0.4);
+      color: #60A5FA;
+    }
+
+    .badge-title {
+      font-size: 9.5px;
+      font-weight: 800;
+      color: #FFFFFF;
+      line-height: 1.1;
+    }
+
+    .badge-sub {
+      font-size: 7.5px;
+      color: #94A3B8;
+    }
+
+    /* Footer Call to Action */
+    .footer-bar {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 10px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      margin-top: 6px;
+    }
+
+    .footer-left {
+      font-size: 10px;
+      color: #64748B;
+      font-weight: 600;
+    }
+
+    .footer-left strong {
+      color: #F8FAFC;
+    }
+
+    .footer-cta {
+      background: linear-gradient(135deg, #0867E8 0%, #00B4D8 100%);
+      color: white;
+      font-size: 9.5px;
+      font-weight: 800;
+      padding: 5px 13px;
+      border-radius: 999px;
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      box-shadow: 0 4px 14px rgba(8, 103, 232, 0.5);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="insta-canvas">
+    <!-- Ambient Lighting -->
+    <div class="glow-top"></div>
+    <div class="glow-cyan"></div>
+
+    <!-- Floating Feature Badges -->
+    <div class="float-badge left">
+      <div class="badge-icon green">⚡</div>
+      <div>
+        <div class="badge-title">₹4,20,000 / mo</div>
+        <div class="badge-sub">+38% Auto Reactivated</div>
+      </div>
+    </div>
+
+    <div class="float-badge right">
+      <div class="badge-icon blue">💳</div>
+      <div>
+        <div class="badge-title">0% Patient EMI</div>
+        <div class="badge-sub">Instant 2-Min Approval</div>
+      </div>
+    </div>
+
+    <!-- Post Header -->
+    <div class="header">
+      <div class="brand-badge">
+        <div class="brand-dot"></div>
+        <span>Clinaza Cloud CRM • 100% Free Forever</span>
+      </div>
+      <h1 class="main-title">
+        Your Dental Practice.<br>
+        <span>Running on Autopilot.</span>
+      </h1>
+      <p class="sub-title">From WhatsApp Recalls to 0% Patient Treatment Financing</p>
+    </div>
+
+    <!-- Realistic Mobile UI Mockup -->
+    <div class="mockup-wrapper">
+      <div class="phone-body">
+        <div class="phone-screen">
+          <!-- Dynamic Island Notch -->
+          <div class="notch">
+            <div class="notch-camera"></div>
+            <div class="notch-sensor"></div>
+          </div>
+
+          <!-- App Topbar -->
+          <div class="app-header">
+            <div class="clinic-info">
+              <div class="clinic-avatar">YD</div>
+              <div class="clinic-text">
+                <h4>YOUR DENTIST</h4>
+                <p>● Live Practice CRM</p>
+              </div>
+            </div>
+            <div class="app-bell">🔔</div>
+          </div>
+
+          <!-- Live Revenue / Metrics Widget -->
+          <div class="stat-card">
+            <div class="stat-header">
+              <span>August Clinical Revenue</span>
+              <div class="stat-pill">▲ 41.2%</div>
+            </div>
+            <div class="stat-val">₹6,84,500</div>
+            <div class="stat-grid">
+              <div>
+                <div class="stat-sub-val">128 Patients</div>
+                <div class="stat-sub-label">This Month</div>
+              </div>
+              <div>
+                <div class="stat-sub-val">₹2.4L in 0% EMI</div>
+                <div class="stat-sub-label">Disbursed Instantly</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Patient EMR & Tooth Chart -->
+          <div class="patient-card">
+            <div class="patient-top">
+              <div class="patient-name-box">
+                <div class="patient-avatar-sm">RS</div>
+                <div>
+                  <div class="patient-title">Rahul Sharma (34M)</div>
+                </div>
+              </div>
+              <div class="patient-tag">RCT + Crown</div>
+            </div>
+
+            <!-- Mini Tooth FDI Matrix -->
+            <div class="tooth-row">
+              <div class="tooth-item">
+                <div class="tooth-box">14</div>
+                <div class="tooth-num">UR4</div>
+              </div>
+              <div class="tooth-item">
+                <div class="tooth-box active-root">16</div>
+                <div class="tooth-num">RCT</div>
+              </div>
+              <div class="tooth-item">
+                <div class="tooth-box active-implant">26</div>
+                <div class="tooth-num">IMP</div>
+              </div>
+              <div class="tooth-item">
+                <div class="tooth-box">36</div>
+                <div class="tooth-num">LL6</div>
+              </div>
+              <div class="tooth-item">
+                <div class="tooth-box">46</div>
+                <div class="tooth-num">LR6</div>
+              </div>
+            </div>
+
+            <!-- 0% EMI Fast Checkout Inside Card -->
+            <div class="emi-pill-card">
+              <div class="emi-left">
+                <h5>₹24,000 on 0% EMI</h5>
+                <p>₹2,000 / month • Instant Approval</p>
+              </div>
+              <div class="emi-btn-mini">Approved</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3 Core Pillars -->
+    <div class="feature-bar">
+      <div class="feat-item">
+        <span class="feat-icon">📱</span>
+        <div class="feat-title">WhatsApp Recall</div>
+        <div class="feat-sub">Automated 1-Click</div>
+      </div>
+      <div class="feat-item">
+        <span class="feat-icon">🦷</span>
+        <div class="feat-title">Visual EMR</div>
+        <div class="feat-sub">FDI Tooth Chart</div>
+      </div>
+      <div class="feat-item">
+        <span class="feat-icon">💳</span>
+        <div class="feat-title">0% Patient EMI</div>
+        <div class="feat-sub">Zero Clinic Risk</div>
+      </div>
+    </div>
+
+    <!-- Footer Bar -->
+    <div class="footer-bar">
+      <div class="footer-left">
+        Join 1,200+ Dentists at <strong>clinaza.in</strong>
+      </div>
+      <a href="https://clinaza.in" class="footer-cta">Get Started Free →</a>
+    </div>
+  </div>
+
+</body>
+</html>

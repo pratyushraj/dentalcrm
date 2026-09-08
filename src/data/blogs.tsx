@@ -2847,6 +2847,345 @@ export const BLOGS: BlogArticle[] = [
         </div>
       </div>
     )
+  },
+  {
+    slug: "how-to-offer-0-percent-emi-in-dental-clinic-india",
+    title: "How to Offer 0% EMI in Your Dental Clinic in India (2026 Guide for Dentists)",
+    category: "Practice Finance",
+    readTime: "8 min read",
+    publishDate: "September 8, 2026",
+    author: "Clinaza Practice Growth Team",
+    summary: "Discover how dental clinics in India can offer zero-cost and low-interest EMIs (₹30K–₹3L) to patients. Eliminate treatment drop-offs for implants, aligners, and crowns with zero merchant onboarding fees.",
+    featuredImage: "/assets/clinic-hero-real.png",
+    metaDescription: "Learn how dental clinics in India can offer 0% EMI patient financing (₹30K to ₹3L) at checkout. Boost high-ticket case acceptance with zero merchant onboarding fees.",
+    faqs: [
+      {
+        question: "How can a dental clinic offer 0% EMI to patients in India?",
+        answer: "Clinics can partner with healthcare financing infrastructure platforms like Clinaza. Clinaza integrates RBI-regulated NBFCs and banks into your clinic checkout, enabling patients to complete a 2-minute digital KYC and split ₹30,000 to ₹3,00,000 bills into flexible EMIs."
+      },
+      {
+        question: "Does the dental clinic bear the credit default risk if a patient fails to pay their EMI?",
+        answer: "No. The lending partner assumes 100% of the credit underwriting and collection risk. The clinic receives the treatment payment directly into its bank account upon procedure confirmation."
+      },
+      {
+        question: "What treatments can be financed under clinic 0% EMI?",
+        answer: "Any elective or comprehensive procedure including dental implants, full-mouth rehabilitations, clear aligners, orthodontic braces, zirconia crowns, veneers, and surgical extractions."
+      },
+      {
+        question: "How much does it cost a clinic to join Clinaza?",
+        answer: "Clinaza offers zero upfront setup fees, zero recurring software subscription fees, and no monthly minimum volume commitments for registered dental practices."
+      }
+    ],
+    content: (
+      <div className="space-y-6">
+        <p className="text-lg leading-relaxed text-neutral-700">
+          In private dental practice, the number one barrier between diagnosis and treatment execution is not clinical fear—it is <strong>price friction</strong>. When presented with a treatment estimate of ₹45,000 for clear aligners or ₹1,20,000 for multiple dental implants, over 55% of patients hesitate, request time to "think about it," and often never return.
+        </p>
+
+        <p className="text-neutral-700 leading-relaxed">
+          Forward-thinking dental practices in India eliminate this bottleneck by offering <strong>Point-of-Care 0% EMI financing</strong>. Here is how you can set up instant patient financing at your clinic front desk in under 24 hours.
+        </p>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Why Lump-Sum Pricing Hurts Dental Case Acceptance</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 my-6">
+          <div className="bg-red-50 border border-red-200 p-5 rounded-2xl space-y-2">
+            <h4 className="font-bold text-red-900 text-sm">❌ The Old Way (Lump Sum)</h4>
+            <p className="text-xs text-red-800">
+              "Doctor, ₹1,50,000 is too high right now. Let me discuss with family and get back to you next month." (80% case drop-off).
+            </p>
+          </div>
+          <div className="bg-emerald-50 border border-emerald-200 p-5 rounded-2xl space-y-2">
+            <h4 className="font-bold text-emerald-900 text-sm">✅ The Clinaza EMI Way</h4>
+            <p className="text-xs text-emerald-800">
+              "You can start your smile transformation today for just ₹6,500 per month on 0% EMI. Approval takes 2 minutes." (40%+ increase in immediate approvals).
+            </p>
+          </div>
+        </div>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">How Clinaza Patient Financing Works for Clinics</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 my-6">
+          <div className="bg-white border border-slate-200 p-5 rounded-2xl space-y-2 shadow-sm">
+            <span className="text-xl font-black text-[#0867E8]">01</span>
+            <h4 className="font-bold text-neutral-900 text-sm">Generate EMI Link</h4>
+            <p className="text-xs text-slate-600">The receptionist enters the treatment amount (₹30K–₹3L) and sends a digital pre-approval link to the patient's phone.</p>
+          </div>
+          <div className="bg-white border border-slate-200 p-5 rounded-2xl space-y-2 shadow-sm">
+            <span className="text-xl font-black text-[#0867E8]">02</span>
+            <h4 className="font-bold text-neutral-900 text-sm">Instant Digital KYC</h4>
+            <p className="text-xs text-slate-600">The patient completes quick Aadhaar/PAN verification and selects their preferred 3 to 24 month tenure.</p>
+          </div>
+          <div className="bg-white border border-slate-200 p-5 rounded-2xl space-y-2 shadow-sm">
+            <span className="text-xl font-black text-[#0867E8]">03</span>
+            <h4 className="font-bold text-neutral-900 text-sm">Direct Clinic Payout</h4>
+            <p className="text-xs text-slate-600">The lending partner settles the procedure amount directly to the clinic bank account with zero credit default risk.</p>
+          </div>
+        </div>
+
+        {/* Doctor Portal Promotion Box */}
+        <div className="bg-slate-900 text-white p-7 rounded-3xl space-y-4 my-8 shadow-xl">
+          <div className="flex items-center gap-2">
+            <span className="px-3 py-1 bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 text-xs font-bold rounded-full">
+              ⚡ 100% Free Clinic Onboarding
+            </span>
+            <span className="text-xs text-slate-400 font-mono">No POS Machine Required</span>
+          </div>
+          <h3 className="text-xl font-bold">Start Offering 0% EMIs at Your Clinic Today</h3>
+          <p className="text-xs text-slate-300 leading-relaxed">
+            Join hundreds of dental clinics in India using Clinaza to boost high-ticket implant and aligner case acceptance. Includes free clinic CRM and automated WhatsApp recalls.
+          </p>
+          <div className="flex flex-wrap gap-3 pt-2">
+            <a
+              href="https://clinaza.in/#partner-form"
+              className="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs uppercase tracking-wider px-5 py-3 rounded-xl transition-all shadow-md"
+            >
+              Partner With Clinaza →
+            </a>
+            <a
+              href="https://wa.me/917292984244?text=Hi%20Clinaza%20team%2C%20I%20want%20to%20offer%20EMIs%20at%20my%20dental%20clinic"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs uppercase tracking-wider px-5 py-3 rounded-xl border border-slate-700 transition-colors"
+            >
+              💬 WhatsApp Growth Team
+            </a>
+          </div>
+        </div>
+
+        <div className="bg-gradient-to-r from-[#0867E8] to-blue-700 text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
+          <h3 className="text-lg font-bold">Check Patient Treatment EMI Calculator</h3>
+          <p className="text-xs text-blue-100 max-w-lg mx-auto">Explore monthly installment breakdowns from ₹30,000 to ₹3,00,000 for your dental patients.</p>
+          <a
+            href="https://clinaza.in/#calculator"
+            className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md"
+          >
+            Open EMI Calculator →
+          </a>
+        </div>
+      </div>
+    )
+  },
+  {
+    slug: "dental-consent-form-format-india-free-guide",
+    title: "Dental Consent Form Formats in India: Free Legal Guidelines & Digital Workflow (2026)",
+    category: "Legal & Compliance",
+    readTime: "9 min read",
+    publishDate: "September 8, 2026",
+    author: "Clinaza Dental Legal Advisory",
+    summary: "Complete guide and legally compliant dental consent form formats in India for dental implants, root canal treatment (RCT), surgical extractions, and orthodontic aligners. Discover paperless digital consent on mobile.",
+    featuredImage: "/assets/clinic-hero-real.png",
+    metaDescription: "Download dental consent form formats in India for implants, root canal, extraction, and braces. Learn informed consent legal requirements under Indian law.",
+    faqs: [
+      {
+        question: "Is informed written consent mandatory for dental procedures in India?",
+        answer: "Yes. Under the Consumer Protection Act and Dental Council of India (DCI) guidelines, obtaining informed written consent before surgical extractions, root canals, dental implants, conscious sedation, and aesthetic procedures is a legal necessity to prevent medical negligence claims."
+      },
+      {
+        question: "What elements must a valid Indian dental consent form contain?",
+        answer: "It must detail the diagnosis, proposed procedure, common risks and potential complications, alternative treatment options, prognosis without treatment, estimated procedure costs, and the patient's signature with date and witness acknowledgment."
+      },
+      {
+        question: "Can dental clinics capture digital consent forms on mobile or tablets?",
+        answer: "Yes. Digital informed consent captured via touchscreen signatures on secure platforms like Clinaza complies with the Indian Information Technology Act (IT Act 2000) and eliminates physical paper storage."
+      }
+    ],
+    content: (
+      <div className="space-y-6">
+        <p className="text-lg leading-relaxed text-neutral-700">
+          In modern Indian dental practice, clinical documentation is just as vital as clinical expertise. With the rise of consumer awareness and stricter Consumer Protection Act mandates, having legally robust <strong>Informed Consent Forms</strong> protects both the treating dentist and the patient.
+        </p>
+
+        <p className="text-neutral-700 leading-relaxed">
+          Here is your complete guide to essential dental consent protocols in India, key legal clauses every dentist must include, and how to transition to <strong>paperless digital consent</strong>.
+        </p>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Mandatory Consent Categories in Dental Practice</h2>
+        <div className="overflow-x-auto my-6">
+          <table className="min-w-full divide-y divide-neutral-200 border border-neutral-100 text-sm">
+            <thead className="bg-neutral-50">
+              <tr>
+                <th className="px-4 py-3 text-left font-bold text-neutral-600">Procedure Type</th>
+                <th className="px-4 py-3 text-left font-bold text-neutral-600">Key Risks to Disclose</th>
+                <th className="px-4 py-3 text-left font-bold text-[#0867E8]">Legal Necessity</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-neutral-200 bg-white">
+              <tr>
+                <td className="px-4 py-3 font-semibold text-neutral-800">Dental Implants & Bone Grafting</td>
+                <td className="px-4 py-3 text-neutral-600">Nerve paresthesia, sinus perforation, implant non-integration, peri-implantitis</td>
+                <td className="px-4 py-3 text-red-600 font-bold">Mandatory Written</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-semibold text-neutral-800">Root Canal Treatment (RCT)</td>
+                <td className="px-4 py-3 text-neutral-600">Instrument separation, post-op flare-up, need for crown coverage, vertical root fracture</td>
+                <td className="px-4 py-3 text-red-600 font-bold">Mandatory Written</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-semibold text-neutral-800">Surgical / Wisdom Tooth Extraction</td>
+                <td className="px-4 py-3 text-neutral-600">Dry socket, alveolar osteitis, transient lip numbness, root fracture in bone</td>
+                <td className="px-4 py-3 text-red-600 font-bold">Mandatory Written</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-semibold text-neutral-800">Orthodontics & Clear Aligners</td>
+                <td className="px-4 py-3 text-neutral-600">Root resorption, relapse if retainers not worn, treatment duration variance</td>
+                <td className="px-4 py-3 text-red-600 font-bold">Mandatory Written</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">6 Essential Clauses Every Dental Consent Form Must Have</h2>
+        <ul className="list-disc pl-6 space-y-2.5 text-neutral-700">
+          <li><strong>Clear Procedure Description in Plain Language:</strong> Avoid overcomplicated medical jargon so the patient fully understands what will take place.</li>
+          <li><strong>Disclosed Alternatives & Consequences of Refusal:</strong> Document what other options exist (e.g., extraction vs RCT) and what happens if left untreated.</li>
+          <li><strong>Anesthesia & Medication Risks:</strong> Specific clauses regarding Local Anesthesia (Lignocaine/Adrenaline allergy, hematoma, temporary facial droop).</li>
+          <li><strong>Financial & Procedure Cost Acknowledgment:</strong> Clearly stated treatment estimates and EMI payment terms.</li>
+          <li><strong>Photographic & Diagnostic Authorization:</strong> Permission to take intraoral photographs and X-rays for documentation and clinical records.</li>
+          <li><strong>Signature, Date & Witness Details:</strong> Signed by the patient (or legal guardian in minors) along with doctor and witness signatures.</li>
+        </ul>
+
+        {/* Doctor Portal Digital Consent Box */}
+        <div className="bg-slate-900 text-white p-7 rounded-3xl space-y-4 my-8 shadow-xl">
+          <div className="flex items-center gap-2">
+            <span className="px-3 py-1 bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 text-xs font-bold rounded-full">
+              📱 Paperless Clinic Automation
+            </span>
+            <span className="text-xs text-slate-400 font-mono">100% Free for Dentists</span>
+          </div>
+          <h3 className="text-xl font-bold">Switch to Digital Patient Charting & Consent</h3>
+          <p className="text-xs text-slate-300 leading-relaxed">
+            Say goodbye to messy paper files. Clinaza's Doctor Portal lets you manage digital treatment estimates, patient records, WhatsApp appointment recalls, and treatment financing on your mobile or tablet.
+          </p>
+          <div className="flex flex-wrap gap-3 pt-2">
+            <a
+              href="https://clinaza.in/reactivation/login"
+              className="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs uppercase tracking-wider px-5 py-3 rounded-xl transition-all shadow-md"
+            >
+              Open Free Doctor Portal →
+            </a>
+          </div>
+        </div>
+
+        <div className="bg-gradient-to-r from-[#0867E8] to-blue-700 text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
+          <h3 className="text-lg font-bold">Offer Treatment EMIs at Your Clinic</h3>
+          <p className="text-xs text-blue-100 max-w-lg mx-auto">Make comprehensive treatments affordable for your patients with instant point-of-care 0% EMIs.</p>
+          <a
+            href="https://clinaza.in/#calculator"
+            className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md"
+          >
+            Calculate Patient EMIs →
+          </a>
+        </div>
+      </div>
+    )
+  },
+  {
+    slug: "can-i-pay-root-canal-and-crown-on-emi-india",
+    title: "Can I Pay for Root Canal Treatment & Crown on EMI in India? (Cost Breakdown 2026)",
+    category: "Patient Financing",
+    readTime: "7 min read",
+    publishDate: "September 8, 2026",
+    author: "Clinaza Editorial Team",
+    summary: "Discover how to convert Root Canal Treatment (RCT) and high-end Zirconia crown costs (₹12,000–₹35,000) into easy 0% monthly EMIs from ₹1,200/month across verified dental clinics in India.",
+    featuredImage: "/assets/clinic-hero-real.png",
+    metaDescription: "Pay for Root Canal Treatment (RCT) and Zirconia Crown on EMI in India. Complete cost guide (₹12K to ₹35K) and instant monthly EMI options from ₹1,200/month.",
+    faqs: [
+      {
+        question: "Can I convert Root Canal and dental crown costs into EMIs in India?",
+        answer: "Yes. Clinaza partner dental clinics offer point-of-care EMI financing, allowing patients to split combined RCT, post & core, and ceramic/zirconia crown costs into flexible 3 to 12 month EMIs starting from ₹1,200/month."
+      },
+      {
+        question: "How much does a Root Canal with a Zirconia Crown cost in India in 2026?",
+        answer: "A standard rotary RCT costs ₹3,500 to ₹7,000 depending on tooth complexity (anterior vs molar). Pairing it with a premium CAD/CAM monolithic Zirconia crown (₹8,000–₹18,000) brings the total investment to ₹12,000–₹25,000 per tooth."
+      },
+      {
+        question: "Does dental insurance cover Root Canal Treatment in India?",
+        answer: "Standard Indian health insurance policies rarely cover OPD dental procedures unless caused by accidental trauma or hospitalization. Point-of-care EMI financing via Clinaza is the most convenient financing option for out-of-pocket dental treatments."
+      }
+    ],
+    content: (
+      <div className="space-y-6">
+        <p className="text-lg leading-relaxed text-neutral-700">
+          Severe tooth decay, nighttime throbbing pain, or a cracked molar often requires immediate <strong>Root Canal Treatment (RCT)</strong> followed by a protective dental crown. While necessary to save your natural tooth from extraction, paying ₹15,000 to ₹35,000 upfront can be an unexpected financial strain.
+        </p>
+
+        <p className="text-neutral-700 leading-relaxed">
+          Through <strong>Clinaza point-of-care patient financing</strong>, dental patients across India can now convert emergency root canals and premium monolithic zirconia crowns into affordable monthly EMIs starting at just <strong>₹1,200/month</strong>.
+        </p>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Complete RCT + Crown Cost & Monthly EMI Breakdown (2026)</h2>
+        <div className="overflow-x-auto my-6">
+          <table className="min-w-full divide-y divide-neutral-200 border border-neutral-100 text-sm">
+            <thead className="bg-neutral-50">
+              <tr>
+                <th className="px-4 py-3 text-left font-bold text-neutral-600">Procedure Package</th>
+                <th className="px-4 py-3 text-left font-bold text-neutral-600">Total Treatment Cost</th>
+                <th className="px-4 py-3 text-left font-bold text-neutral-600">6-Month EMI</th>
+                <th className="px-4 py-3 text-left font-bold text-green-600">12-Month EMI</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-neutral-200 bg-white">
+              <tr>
+                <td className="px-4 py-3 font-semibold text-neutral-800">Rotary RCT + Metal Ceramic Crown (PFM)</td>
+                <td className="px-4 py-3 text-neutral-600">₹8,500 – ₹14,000</td>
+                <td className="px-4 py-3 text-neutral-600">₹1,500 – ₹2,400 / mo</td>
+                <td className="px-4 py-3 text-green-600 font-bold">₹850 – ₹1,250 / mo</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-semibold text-neutral-800">Rotary RCT + CAD/CAM Monolithic Zirconia Crown</td>
+                <td className="px-4 py-3 text-neutral-600">₹14,000 – ₹22,000</td>
+                <td className="px-4 py-3 text-neutral-600">₹2,400 – ₹3,800 / mo</td>
+                <td className="px-4 py-3 text-green-600 font-bold">₹1,300 – ₹1,950 / mo</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-semibold text-neutral-800">Re-RCT + Fiber Post & Core + Layered E-Max Crown</td>
+                <td className="px-4 py-3 text-neutral-600">₹18,000 – ₹30,000</td>
+                <td className="px-4 py-3 text-neutral-600">₹3,100 – ₹5,200 / mo</td>
+                <td className="px-4 py-3 text-green-600 font-bold">₹1,650 – ₹2,700 / mo</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-semibold text-neutral-800">Multiple Quadrant RCTs (2–3 Teeth) + Zirconia</td>
+                <td className="px-4 py-3 text-neutral-600">₹35,000 – ₹65,000</td>
+                <td className="px-4 py-3 text-neutral-600">₹6,000 – ₹11,200 / mo</td>
+                <td className="px-4 py-3 text-green-600 font-bold">₹3,200 – ₹5,900 / mo</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Why You Shouldn't Delay a Recommended Crown After RCT</h2>
+        <ul className="list-disc pl-6 space-y-2.5 text-neutral-700">
+          <li><strong>Prevents Catastrophic Tooth Fracture:</strong> An untreated root canal tooth becomes brittle; without a crown, normal chewing forces can split the tooth in half, forcing an extraction.</li>
+          <li><strong>Guarantees Bacterial Seal:</strong> A precision-milled Zirconia crown prevents saliva and bacteria from reinfecting root canal canals.</li>
+          <li><strong>Restores 100% Chewing Force:</strong> Modern ceramic crowns handle heavy biting forces identically to natural enamel.</li>
+        </ul>
+
+        {/* Featured Clinic Recommendation */}
+        <div className="bg-emerald-50/80 border border-emerald-200 p-5 rounded-2xl space-y-2 my-6">
+          <div className="flex items-center gap-2">
+            <span className="px-2 py-0.5 bg-emerald-600 text-white text-[9px] font-black uppercase tracking-wider rounded-md">Recommended Endodontic Center</span>
+            <h4 className="text-sm font-bold text-[#0B2450]">YOUR DENTIST — Patliputra Colony, Patna</h4>
+          </div>
+          <p className="text-xs text-slate-600 leading-relaxed">
+            Single-sitting microscopic rotary root canals and digital CAD/CAM Zirconia crown bonding led by specialist endodontists with instant 0% EMI financing support.
+          </p>
+          <div className="text-[11px] font-semibold text-emerald-800 flex flex-wrap gap-3 pt-1">
+            <span>📍 Patliputra Colony, Patna</span>
+            <span>📞 062014 78033</span>
+          </div>
+        </div>
+
+        <div className="bg-gradient-to-r from-[#0867E8] to-blue-700 text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
+          <h3 className="text-lg font-bold">Check Root Canal & Crown EMI Pre-Approval</h3>
+          <p className="text-xs text-blue-100 max-w-lg mx-auto">Check instant soft eligibility for ₹30,000 to ₹3,00,000 in under 2 minutes with zero impact on your CIBIL score.</p>
+          <a
+            href="https://clinaza.in/#calculator"
+            className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md"
+          >
+            Calculate Treatment EMI →
+          </a>
+        </div>
+      </div>
+    )
   }
 ];
 

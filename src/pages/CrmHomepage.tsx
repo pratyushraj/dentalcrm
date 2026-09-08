@@ -371,10 +371,10 @@ export default function CrmHomepage() {
               className="flex items-center gap-2 px-4 py-2 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-xs font-bold text-emerald-800 rounded-xl transition-all"
             >
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-              Free Dental CRM Login 🔑
+              Doctor Login 🔐
             </Link>
             <a
-              href="https://wa.me/917292984244?text=Hi%20Clinaza%20team%2C%20I%20want%20to%20access%20the%20Free%20Dental%20CRM"
+              href="https://wa.me/917292984244?text=Hi%20Clinaza%20team%2C%20I%20want%20to%20know%20more%20about%20Clinaza"
               target="_blank" rel="noopener noreferrer"
               className="hidden md:flex items-center gap-2 px-4 py-2 bg-[#F7FAFC] hover:bg-slate-100 border border-slate-200 text-xs font-bold text-[#0B2450] rounded-xl transition-all"
             >
@@ -430,7 +430,7 @@ export default function CrmHomepage() {
                   to="/reactivation/login"
                   className="w-full sm:w-auto px-5 py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-black uppercase tracking-wider rounded-xl transition-all flex items-center justify-center gap-2 shadow-md shadow-emerald-600/20"
                 >
-                  ⚡ Access Free Dental CRM →
+                  Doctor Portal →
                 </Link>
               </div>
 

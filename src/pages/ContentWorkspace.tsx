@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { SEOHead } from '@/components/seo/SEOHead';
+import { RemotionVideoModal } from '@/components/remotion/RemotionVideoModal';
 import { toast } from 'sonner';
 import { generateScriptWithAI, generateChatResponseWithAI, BriefVariant } from '@/utils/briefGenerator';
 import { 
@@ -80,6 +81,8 @@ export default function ContentWorkspace() {
   
   // Request Content Modal State
   const [isRequestModalOpen, setIsRequestModalOpen] = useState(false);
+  const [showSocialReelModal, setShowSocialReelModal] = useState(false);
+  const [selectedSocialReel, setSelectedSocialReel] = useState<{ hookTitle: string; points: string[]; callToAction: string } | null>(null);
   const [requestType, setRequestType] = useState<'Reel' | 'Carousel' | 'Testimonial' | 'Google Review Graphic' | 'Influencer Campaign'>('Reel');
   const [requestPriority, setRequestPriority] = useState<'Low' | 'Medium' | 'High'>('Medium');
   const [requestNotes, setRequestNotes] = useState('');
@@ -526,13 +529,32 @@ export default function ContentWorkspace() {
               </div>
             </div>
 
-            {/* Desktop Request Button */}
-            <button 
-              onClick={() => setIsRequestModalOpen(true)}
-              className="hidden lg:flex px-4 py-2 bg-gradient-to-r from-cyan-500 to-indigo-500 hover:from-cyan-600 hover:to-indigo-600 text-white rounded-xl text-xs font-black uppercase tracking-wider items-center gap-2 shadow-lg shadow-cyan-500/10 transition-all active:scale-[0.98]"
-            >
-              <Plus className="h-4 w-4" /> Request Content
-            </button>
+            {/* Action Buttons */}
+            <div className="flex items-center gap-2">
+              <button 
+                onClick={() => {
+                  setSelectedSocialReel({
+                    hookTitle: '3 Reasons To Choose Invisible Aligners Over Braces 🦷✨',
+                    points: [
+                      'Virtually Invisible & Discreet in Photos',
+                      'Removable for Easy Eating & Brushing',
+                      'Predictable Results with 3D Digital Simulation'
+                    ],
+                    callToAction: 'Book Free 3D Scan & EMI Consultation'
+                  });
+                  setShowSocialReelModal(true);
+                }}
+                className="hidden sm:flex px-4 py-2 bg-emerald-500/10 border border-emerald-500/30 hover:bg-emerald-500/20 text-emerald-400 rounded-xl text-xs font-black uppercase tracking-wider items-center gap-2 transition-all active:scale-[0.98]"
+              >
+                <Video className="h-4 w-4" /> Remotion Reel Studio
+              </button>
+              <button 
+                onClick={() => setIsRequestModalOpen(true)}
+                className="hidden lg:flex px-4 py-2 bg-gradient-to-r from-cyan-500 to-indigo-500 hover:from-cyan-600 hover:to-indigo-600 text-white rounded-xl text-xs font-black uppercase tracking-wider items-center gap-2 shadow-lg shadow-cyan-500/10 transition-all active:scale-[0.98]"
+              >
+                <Plus className="h-4 w-4" /> Request Content
+              </button>
+            </div>
           </header>
 
           {/* MOBILE FLOATING ACTION BUTTON */}
@@ -1751,6 +1773,23 @@ export default function ContentWorkspace() {
           );
         })()}
       </AnimatePresence>
+
+      {/* Remotion Social Reel Studio Modal */}
+      <RemotionVideoModal
+        isOpen={showSocialReelModal}
+        onClose={() => setShowSocialReelModal(false)}
+        mode="social"
+        socialData={{
+          hookTitle: selectedSocialReel?.hookTitle || '3 Reasons To Choose Invisible Aligners Over Braces 🦷✨',
+          points: selectedSocialReel?.points || [
+            'Virtually Invisible & Discreet in Photos',
+            'Removable for Easy Eating & Brushing',
+            'Predictable Results with 3D Digital Simulation'
+          ],
+          callToAction: selectedSocialReel?.callToAction || 'Book Free 3D Scan & EMI Consultation',
+          clinicName: 'YOUR DENTIST, Patna'
+        }}
+      />
 
       {/* FOOTER */}
       <footer className="border-t border-white/[0.06] py-8 text-center text-[10px] text-neutral-600 uppercase tracking-widest bg-[#090d16] relative z-20">

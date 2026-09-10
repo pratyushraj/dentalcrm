@@ -2,6 +2,7 @@ import React, { useState, useMemo, useCallback, useEffect, useRef } from 'react'
 import { useDealAlertNotifications } from '@/hooks/useDealAlertNotifications';
 import { jsPDF } from 'jspdf';
 import { motion, AnimatePresence } from 'framer-motion';
+import { RemotionVideoModal } from '@/components/remotion/RemotionVideoModal';
 import {
   Upload,
   Plus,
@@ -33,7 +34,8 @@ import {
   User,
   Clock,
   ChevronDown,
-  Save
+  Save,
+  Video
 } from 'lucide-react';
 import { toast } from 'sonner';
 import {
@@ -153,6 +155,7 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
   const [searchRxQuery, setSearchRxQuery] = useState<string>('');
   const [isEditingRawPrescription, setIsEditingRawPrescription] = useState<boolean>(false);
   const [rxCollapseDetails, setRxCollapseDetails] = useState<boolean>(false);
+  const [showVideoEstimateModal, setShowVideoEstimateModal] = useState<boolean>(false);
 
   // Clinic branding (loaded from localStorage, used for PDF generation)
   const { organizationId } = useSession();
@@ -4146,13 +4149,48 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                       </div>
                     </div>
 
-                    {/* Billing Summary Box without EMI */}
-                    <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 space-y-2">
-                      <div className="flex justify-between items-center text-xs">
-                        <span className="text-slate-600 font-medium">Subtotal</span>
-                        <span className="font-mono font-bold text-slate-800">₹{calculatedGrandTotal.toLocaleString('en-IN')}</span>
+                    {/* Billing Summary Box with Remotion Video Estimate CTA */}
+                    <div className="bg-gradient-to-r from-emerald-500/10 via-teal-500/10 to-indigo-500/10 border border-emerald-500/30 rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-sm">
+                      <div className="space-y-1">
+                        <div className="flex items-center gap-1.5">
+                          <Sparkles size={14} className="text-emerald-600 animate-pulse" />
+                          <span className="text-xs font-black text-slate-800 uppercase tracking-wider">Remotion Video Estimate</span>
+                          <span className="text-[9px] font-bold px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-700">New</span>
+                        </div>
+                        <p className="text-[11px] text-slate-600">
+                          Generate an animated 15-sec WhatsApp care plan video with monthly EMI breakdown for {form.name || 'this patient'}.
+                        </p>
                       </div>
+                      <button
+                        type="button"
+                        onClick={() => setShowVideoEstimateModal(true)}
+                        className="px-4 py-2.5 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all shadow-md shadow-emerald-600/20 flex items-center gap-2 shrink-0 active:scale-95"
+                      >
+                        <Video size={14} />
+                        <span>Generate Video</span>
+                      </button>
                     </div>
+
+                    <RemotionVideoModal
+                      isOpen={showVideoEstimateModal}
+                      onClose={() => setShowVideoEstimateModal(false)}
+                      mode="estimate"
+                      estimateData={{
+                        patientName: form.name || 'Patient',
+                        clinicName: clinicBranding.clinicName || profile?.business_name || 'Dental Clinic',
+                        doctorName: clinicBranding.doctorName || 'Doctor',
+                        items: estimateItems.map(item => ({
+                          name: item.procedure,
+                          cost: item.cost,
+                          tooth: item.tooth ? String(item.tooth) : undefined
+                        })),
+                        grandTotal: calculatedGrandTotal,
+                        monthlyEmi: Math.round((calculatedGrandTotal * 1.15) / 24),
+                        tenureMonths: 24,
+                        clinicPhone: clinicBranding.phone || '+91 7292984244',
+                        clinicAddress: clinicBranding.address || 'Patliputra Colony, Patna'
+                      }}
+                    />
                   </div>
                 )}
 

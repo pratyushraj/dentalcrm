@@ -341,7 +341,7 @@ const Scene2DoctorSolution: React.FC<{ monthlyEmi: number; tenureMonths: number;
 };
 
 // =========================================================================
-// SCENE 3: 5-STEP 2-MIN DIGITAL APPLICATION FLOW
+// SCENE 3: 5-STEP 2-MIN DIGITAL APPLICATION FLOW (REALISTIC MOBILE MOCKUP)
 // =========================================================================
 const Scene3StepByStepDemo: React.FC<{ fps: number }> = ({ fps }) => {
   const frame = useCurrentFrame();
@@ -354,14 +354,12 @@ const Scene3StepByStepDemo: React.FC<{ fps: number }> = ({ fps }) => {
   else if (frame >= 30) activeStep = 2;
 
   const steps = [
-    { num: 1, title: 'Open Website', sub: 'Visit clinaza.in & click Apply Now', icon: '🌐', badge: 'Step 1/5' },
-    { num: 2, title: 'Enter Mobile Number', sub: 'Input phone to receive OTP', icon: '📱', badge: 'Step 2/5' },
-    { num: 3, title: 'Verify OTP', sub: '6-digit instant verification', icon: '🔒', badge: 'Step 3/5' },
-    { num: 4, title: 'Fill Basic Details', sub: '1-min paperless digital KYC', icon: '📋', badge: 'Step 4/5' },
-    { num: 5, title: 'Select Loan Offer', sub: 'Choose EMI & get treatment approved', icon: '🎉', badge: 'Step 5/5' },
+    { num: 1, title: 'Visit Website', icon: '🌐' },
+    { num: 2, title: 'Enter Phone', icon: '📱' },
+    { num: 3, title: 'Verify OTP', icon: '🔒' },
+    { num: 4, title: 'Instant KYC', icon: '📋' },
+    { num: 5, title: 'Get Approved', icon: '🎉' },
   ];
-
-  const current = steps[activeStep - 1];
 
   return (
     <AbsoluteFill
@@ -410,8 +408,8 @@ const Scene3StepByStepDemo: React.FC<{ fps: number }> = ({ fps }) => {
             <div key={s.num} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
               <div
                 style={{
-                  width: 50,
-                  height: 50,
+                  width: 48,
+                  height: 48,
                   borderRadius: 999,
                   backgroundColor: isCurrent ? '#10B981' : isPassed ? '#059669' : 'rgba(255,255,255,0.1)',
                   color: isCurrent || isPassed ? '#020617' : '#94A3B8',
@@ -421,67 +419,235 @@ const Scene3StepByStepDemo: React.FC<{ fps: number }> = ({ fps }) => {
                   alignItems: 'center',
                   justifyContent: 'center',
                   border: isCurrent ? '3px solid #FFFFFF' : 'none',
-                  boxShadow: isCurrent ? '0 0 30px rgba(16, 185, 129, 0.7)' : 'none',
+                  boxShadow: isCurrent ? '0 0 25px rgba(16, 185, 129, 0.7)' : 'none',
                 }}
               >
                 {isPassed ? '✓' : s.num}
               </div>
               <span style={{ fontSize: 12, fontWeight: isCurrent ? 900 : 700, color: isCurrent ? '#34D399' : '#64748B' }}>
-                Step {s.num}
+                {s.title}
               </span>
             </div>
           );
         })}
       </div>
 
-      {/* Giant Full-Bleed Interactive Phone Simulator (Fits inside y: 240px to 1460px safe area) */}
+      {/* Realistic Smartphone Mockup Frame */}
       <div
         style={{
           width: '100%',
-          height: '620px',
-          borderRadius: '40px',
-          backgroundColor: '#090E17',
-          border: '4px solid #1E293B',
-          boxShadow: '0 30px 80px rgba(0,0,0,0.9), 0 0 45px rgba(8, 103, 232, 0.35)',
-          padding: '18px 22px',
+          height: '630px',
+          borderRadius: '42px',
+          backgroundColor: '#0F172A',
+          border: '5px solid #334155',
+          boxShadow: '0 30px 90px rgba(0,0,0,0.95), 0 0 40px rgba(16, 185, 129, 0.25)',
+          padding: '16px 20px',
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between',
           position: 'relative',
+          overflow: 'hidden',
         }}
       >
-        {/* Dynamic Notch */}
-        <div style={{ width: '140px', height: '22px', backgroundColor: '#000000', borderRadius: '999px', margin: '0 auto' }} />
-
-        {/* Screen Content */}
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 14, textAlign: 'center' }}>
-          <div style={{ fontSize: 48 }}>{current.icon}</div>
-          <div style={{ fontSize: 14, padding: '4px 14px', borderRadius: 999, backgroundColor: 'rgba(56, 189, 248, 0.2)', color: '#38BDF8', fontWeight: 900 }}>
-            {current.badge}
-          </div>
-          <div style={{ fontSize: 34, fontWeight: 900, color: '#FFFFFF', lineHeight: 1.15 }}>
-            {current.title}
-          </div>
-          <p style={{ fontSize: 18, color: '#CBD5E1', margin: 0, fontWeight: 600, maxWidth: '90%' }}>
-            {current.sub}
-          </p>
+        {/* Dynamic Island / Speaker Notch & Status Bar */}
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', marginBottom: 8, padding: '0 8px' }}>
+          <span style={{ fontSize: 13, fontWeight: 800, color: '#94A3B8' }}>9:41</span>
+          <div style={{ width: '110px', height: '20px', backgroundColor: '#000000', borderRadius: '999px' }} />
+          <span style={{ fontSize: 13, fontWeight: 800, color: '#94A3B8' }}>5G 🔋</span>
         </div>
 
-        {/* Action Button inside phone */}
+        {/* Mobile Browser URL Address Bar */}
         <div
           style={{
-            padding: '16px',
-            borderRadius: 16,
-            backgroundColor: '#4F46E5',
-            color: '#FFFFFF',
-            fontSize: 18,
-            fontWeight: 900,
-            textAlign: 'center',
-            boxShadow: '0 12px 35px rgba(79, 70, 229, 0.5)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: 8,
+            padding: '8px 16px',
+            borderRadius: 14,
+            backgroundColor: 'rgba(30, 41, 59, 0.8)',
+            border: '1px solid rgba(255, 255, 255, 0.1)',
+            marginBottom: 12,
           }}
         >
-          {activeStep === 5 ? 'Select EMI & Begin Treatment 🦷' : 'Continue to Next Step →'}
+          <span style={{ fontSize: 12, color: '#10B981' }}>🔒</span>
+          <span style={{ fontSize: 13, fontWeight: 700, color: '#F8FAFC', letterSpacing: '0.02em' }}>
+            clinaza.in<span style={{ color: '#94A3B8' }}>/apply</span>
+          </span>
         </div>
+
+        {/* Dynamic Screen Content Based On Current Active Step */}
+        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 14 }}>
+          {activeStep === 1 && (
+            <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', gap: 12, alignItems: 'center' }}>
+              <div style={{ padding: '6px 16px', borderRadius: 999, backgroundColor: 'rgba(16, 185, 129, 0.2)', color: '#34D399', fontSize: 13, fontWeight: 800 }}>
+                🦷 Clinaza Patient EMI Portal
+              </div>
+              <div style={{ fontSize: 26, fontWeight: 900, color: '#FFFFFF', lineHeight: 1.2 }}>
+                Instant Dental Loan in 2 Mins
+              </div>
+              <div style={{ fontSize: 14, color: '#94A3B8' }}>
+                0% Interest • ₹0 Down Payment • 15+ Banks
+              </div>
+              <div
+                style={{
+                  width: '90%',
+                  padding: '14px',
+                  borderRadius: 16,
+                  backgroundColor: '#10B981',
+                  color: '#020617',
+                  fontSize: 16,
+                  fontWeight: 900,
+                  marginTop: 6,
+                }}
+              >
+                Apply Now &rarr;
+              </div>
+            </div>
+          )}
+
+          {activeStep === 2 && (
+            <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', gap: 12, alignItems: 'center' }}>
+              <div style={{ fontSize: 22, fontWeight: 900, color: '#FFFFFF' }}>
+                Enter Mobile Number
+              </div>
+              <div style={{ fontSize: 13, color: '#94A3B8' }}>
+                We will send an OTP for paperless verification
+              </div>
+              <div
+                style={{
+                  width: '92%',
+                  padding: '14px 18px',
+                  borderRadius: 16,
+                  backgroundColor: '#020617',
+                  border: '2px solid #38BDF8',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 10,
+                }}
+              >
+                <span style={{ fontSize: 16 }}>🇮🇳</span>
+                <span style={{ fontSize: 15, fontWeight: 800, color: '#64748B' }}>+91</span>
+                <span style={{ fontSize: 18, fontWeight: 900, color: '#FFFFFF', letterSpacing: '0.08em' }}>98765 43210</span>
+              </div>
+              <div
+                style={{
+                  width: '92%',
+                  padding: '14px',
+                  borderRadius: 16,
+                  backgroundColor: '#38BDF8',
+                  color: '#020617',
+                  fontSize: 16,
+                  fontWeight: 900,
+                }}
+              >
+                Send OTP &rarr;
+              </div>
+            </div>
+          )}
+
+          {activeStep === 3 && (
+            <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', gap: 12, alignItems: 'center' }}>
+              <div style={{ fontSize: 22, fontWeight: 900, color: '#FFFFFF' }}>
+                Verify 6-Digit OTP
+              </div>
+              <div style={{ fontSize: 13, color: '#94A3B8' }}>
+                Code sent to +91 98765 43210
+              </div>
+              <div style={{ display: 'flex', gap: 8, justifyContent: 'center' }}>
+                {['4', '8', '2', '9', '1', '0'].map((digit, idx) => (
+                  <div
+                    key={idx}
+                    style={{
+                      width: 42,
+                      height: 48,
+                      borderRadius: 12,
+                      backgroundColor: '#020617',
+                      border: '2px solid #10B981',
+                      color: '#10B981',
+                      fontSize: 22,
+                      fontWeight: 900,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      boxShadow: '0 0 15px rgba(16, 185, 129, 0.4)',
+                    }}
+                  >
+                    {digit}
+                  </div>
+                ))}
+              </div>
+              <div style={{ fontSize: 13, color: '#34D399', fontWeight: 800 }}>
+                ✓ OTP Verified Successfully!
+              </div>
+            </div>
+          )}
+
+          {activeStep === 4 && (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 10, width: '92%', margin: '0 auto' }}>
+              <div style={{ fontSize: 20, fontWeight: 900, color: '#FFFFFF', textAlign: 'center' }}>
+                Instant Digital KYC
+              </div>
+              <div style={{ padding: '10px 14px', borderRadius: 12, backgroundColor: '#020617', border: '1px solid #334155' }}>
+                <span style={{ fontSize: 10, color: '#94A3B8', display: 'block' }}>PAN Number</span>
+                <span style={{ fontSize: 14, fontWeight: 800, color: '#FFFFFF' }}>ABCDE1234F</span>
+              </div>
+              <div style={{ padding: '10px 14px', borderRadius: 12, backgroundColor: '#020617', border: '1px solid #334155' }}>
+                <span style={{ fontSize: 10, color: '#94A3B8', display: 'block' }}>Treatment Cost</span>
+                <span style={{ fontSize: 14, fontWeight: 800, color: '#34D399' }}>₹65,000 (Dental Implants)</span>
+              </div>
+              <div style={{ fontSize: 12, color: '#A7F3D0', fontWeight: 700, textAlign: 'center' }}>
+                ⚡ Automated Bureau & Lenders Check (15+ Banks)
+              </div>
+            </div>
+          )}
+
+          {activeStep === 5 && (
+            <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', gap: 10, alignItems: 'center' }}>
+              <div style={{ padding: '4px 14px', borderRadius: 999, backgroundColor: 'rgba(16, 185, 129, 0.25)', color: '#34D399', fontSize: 12, fontWeight: 900 }}>
+                🎉 LOAN APPROVED INSTANTLY
+              </div>
+              <div style={{ fontSize: 22, fontWeight: 900, color: '#FFFFFF', lineHeight: 1.1 }}>
+                ₹65,000 Approved
+              </div>
+              <div
+                style={{
+                  padding: '12px 20px',
+                  borderRadius: 16,
+                  background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.3) 0%, rgba(6, 78, 59, 0.8) 100%)',
+                  border: '2px solid #10B981',
+                  width: '92%',
+                }}
+              >
+                <div style={{ fontSize: 12, color: '#D1FAE5', textTransform: 'uppercase', fontWeight: 800 }}>
+                  Selected 0% EMI Plan
+                </div>
+                <div style={{ fontSize: 26, fontWeight: 900, color: '#FFFFFF', margin: '2px 0' }}>
+                  ₹2,650 <span style={{ fontSize: 14, color: '#A7F3D0' }}>/ mo</span>
+                </div>
+                <div style={{ fontSize: 11, color: '#E2E8F0' }}>
+                  24 Months • ₹0 Down Payment
+                </div>
+              </div>
+              <div
+                style={{
+                  width: '92%',
+                  padding: '12px',
+                  borderRadius: 14,
+                  backgroundColor: '#10B981',
+                  color: '#020617',
+                  fontSize: 15,
+                  fontWeight: 900,
+                }}
+              >
+                Begin Treatment Today 🦷
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Home Indicator Bar */}
+        <div style={{ width: '120px', height: '4px', backgroundColor: '#475569', borderRadius: '999px', margin: '4px auto 0 auto' }} />
       </div>
     </AbsoluteFill>
   );

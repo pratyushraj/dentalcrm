@@ -7,6 +7,7 @@ import {
   useVideoConfig,
   Sequence,
   Img,
+  Audio,
   staticFile,
 } from 'remotion';
 
@@ -131,21 +132,25 @@ export const ClinazaEmiReelComposition: React.FC<ClinazaEmiReelProps> = ({
 
       {/* ─── SCENE 1: THE SHOCKED PATIENT HOOK (0s - 3.5s | Frames 0 - 105) ─── */}
       <Sequence from={0} durationInFrames={105}>
+        <Audio src={staticFile('assets/audio/voice-scene1.mp3')} volume={1} />
         <Scene1ShockedPatient totalCost={totalCost} treatmentName={treatmentName} fps={fps} />
       </Sequence>
 
       {/* ─── SCENE 2: DOCTOR OFFERS CLINAZA SOLUTION (3.5s - 7s | Frames 105 - 210) ─── */}
       <Sequence from={105} durationInFrames={105}>
+        <Audio src={staticFile('assets/audio/voice-scene2.mp3')} volume={1} />
         <Scene2DoctorSolution monthlyEmi={monthlyEmi} tenureMonths={tenureMonths} fps={fps} />
       </Sequence>
 
       {/* ─── SCENE 3: 5-STEP 2-MIN APPLICATION FLOW (7s - 12s | Frames 210 - 360) ─── */}
       <Sequence from={210} durationInFrames={150}>
+        <Audio src={staticFile('assets/audio/voice-scene3.mp3')} volume={1} />
         <Scene3StepByStepDemo fps={fps} />
       </Sequence>
 
       {/* ─── SCENE 4: HAPPY PATIENT & FINAL CONVERSION CTA (12s - 15s | Frames 360 - 450) ─── */}
       <Sequence from={360} durationInFrames={90}>
+        <Audio src={staticFile('assets/audio/voice-scene4.mp3')} volume={1} />
         <Scene4HappyPatientCta websiteUrl={websiteUrl} partnerLendersCount={partnerLendersCount} fps={fps} />
       </Sequence>
     </AbsoluteFill>

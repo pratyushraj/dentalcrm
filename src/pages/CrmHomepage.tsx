@@ -451,21 +451,18 @@ export default function CrmHomepage() {
       <main>
         {/* ── 1. HERO (MINIMAL LUXURY) ── */}
         <section aria-label="Hero" className="relative pt-8 sm:pt-14 pb-12 sm:pb-16 px-4 sm:px-6 max-w-5xl mx-auto space-y-8">
-          {/* Subtle Ambient Radial Glow */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-64 bg-gradient-to-b from-[#0867E8]/6 via-[#12A8A0]/4 to-transparent blur-3xl pointer-events-none -z-10" />
+
 
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center text-left">
             <div className="md:col-span-7 space-y-4 sm:space-y-5">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-white/80 backdrop-blur-md border border-slate-200/80 rounded-full text-[11px] font-bold text-[#0867E8] shadow-[0_2px_10px_rgba(8,103,232,0.08)]">
-                <Building2 className="h-3.5 w-3.5 text-[#0f7a75]" />
-                <span className="tracking-wide">POINT-OF-CARE TREATMENT FINANCING &amp; EMIs</span>
+              <div className="inline-flex items-center gap-2 px-3 py-1 bg-slate-100 border border-slate-200 rounded-full text-[11px] font-medium text-slate-600">
+                <Building2 className="h-3.5 w-3.5 text-[#0867E8]" />
+                <span>Point-of-care treatment financing for clinics</span>
               </div>
 
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-5.5xl font-black tracking-[-0.03em] leading-[1.14] text-[#0B2450]">
-                Don't Let Treatment Cost <br />
-                <span className="bg-gradient-to-r from-[#0867E8] via-[#0088FF] to-[#12A8A0] bg-clip-text text-transparent">
-                  Stop Your Patients
-                </span>
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-[-0.025em] leading-[1.18] text-[#0B2450]">
+                Don't let treatment cost<br />
+                <span className="text-[#0867E8]">stop your patients.</span>
               </h1>
 
               <p className="text-xs sm:text-base text-slate-600 font-medium leading-relaxed max-w-xl">
@@ -493,8 +490,8 @@ export default function CrmHomepage() {
                 </Link>
               </div>
 
-              <p className="text-[10px] text-slate-400 font-medium pt-1">
-                ⚡ 2-min assessment &middot; Zero CIBIL impact &middot; <span className="text-[#0f7a75] font-bold">Clinaza connects clinics with RBI-regulated financing partners.</span>
+              <p className="text-[11px] text-slate-500 pt-1">
+                No CIBIL impact on patients &middot; RBI-regulated lending partners
               </p>
             </div>
 
@@ -623,9 +620,8 @@ export default function CrmHomepage() {
         <section aria-label="The Problem & Value" className="py-12 sm:py-16 px-4 sm:px-6 bg-[#F5F9FC] border-y border-blue-50">
           <div className="max-w-5xl mx-auto space-y-8">
             <div className="text-center space-y-2">
-              <span className="text-[10px] font-black text-[#0f7a75] uppercase tracking-widest">CLINIC CONVERSION IMPACT</span>
-              <h2 className="text-2xl sm:text-4xl font-black text-[#0B2450]">Turn "I'll do it later" into "Let's start."</h2>
-              <p className="text-xs sm:text-sm text-slate-600 max-w-2xl mx-auto">Help more patients say YES to necessary high-ticket treatment plans.</p>
+              <h2 className="text-2xl sm:text-3xl font-bold text-[#0B2450]">Turn "I'll do it later" into "Let's start."</h2>
+              <p className="text-sm text-slate-500 max-w-xl mx-auto">Patients say yes when treatment feels affordable. Clinaza makes that possible at the point of care.</p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -671,8 +667,7 @@ export default function CrmHomepage() {
         {/* ── 3. HOW CLINAZA WORKS (SIMPLE 3-STEP) ── */}
         <section aria-label="How Clinaza Works" className="py-12 sm:py-16 px-4 sm:px-6 max-w-5xl mx-auto space-y-8">
           <div className="text-center space-y-2">
-            <span className="text-[10px] font-black text-[#0756C7] uppercase tracking-widest">SIMPLE WORKFLOW</span>
-            <h2 className="text-2xl sm:text-4xl font-black text-[#0B2450]">How Clinaza Works</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-[#0B2450]">How Clinaza works</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {[
@@ -693,9 +688,8 @@ export default function CrmHomepage() {
         <section aria-label="Supported Treatments" className="py-12 sm:py-16 px-4 sm:px-6 bg-[#F7FAFC] border-y border-slate-200/60">
           <div className="max-w-5xl mx-auto space-y-8 text-center">
             <div className="space-y-2">
-              <span className="text-[10px] font-black text-[#0f7a75] uppercase tracking-widest">ELIGIBLE HEALTHCARE PROCEDURES</span>
-              <h2 className="text-2xl sm:text-4xl font-black text-[#0B2450]">Supported Treatments &amp; Surgeries</h2>
-              <p className="text-xs sm:text-sm text-slate-600">Flexible monthly EMI financing available from ₹30,000 to ₹5,00,000 across top medical categories.</p>
+              <h2 className="text-2xl sm:text-3xl font-bold text-[#0B2450]">Treatments we support</h2>
+              <p className="text-sm text-slate-500">EMI financing from ₹30,000 to ₹5,00,000 across dental, vision, fertility, and surgical care.</p>
             </div>
 
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3.5 text-left">
@@ -751,25 +745,16 @@ export default function CrmHomepage() {
         </section>
 
         {/* ── 4.4 MOBILE CRM APP SHOWCASE ── */}
-        <section aria-label="Mobile CRM Experience" className="py-14 sm:py-20 px-4 sm:px-6 bg-gradient-to-b from-[#060D1A] via-[#0A1832] to-[#040914] text-white relative overflow-hidden border-t border-slate-800">
-          {/* Ambient Glows */}
-          <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-96 h-96 bg-blue-600/20 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute bottom-10 right-10 w-80 h-80 bg-teal-500/15 rounded-full blur-3xl pointer-events-none" />
+        <section aria-label="Mobile CRM Experience" className="py-14 sm:py-20 px-4 sm:px-6 bg-[#0B1120] text-white relative overflow-hidden border-t border-slate-800">
 
           <div className="max-w-5xl mx-auto space-y-10 relative z-10">
             <div className="text-center space-y-3">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-500/15 border border-blue-500/30 text-blue-400 text-[10px] font-black uppercase tracking-widest">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                FREE CLOUD DENTAL CRM • RUNNING ON MOBILE &amp; DESKTOP
-              </div>
-              <h2 className="text-2.5xl sm:text-4.5xl font-black tracking-tight text-white leading-tight">
-                Your Entire Practice in Your Pocket.<br />
-                <span className="bg-gradient-to-r from-blue-400 via-sky-300 to-teal-300 bg-clip-text text-transparent">
-                  Running on Complete Autopilot.
-                </span>
+              <span className="text-xs font-medium text-slate-400">Free cloud-based dental CRM</span>
+              <h2 className="text-2xl sm:text-4xl font-bold text-white leading-tight">
+                Your entire practice,<br />managed from your phone.
               </h2>
-              <p className="text-xs sm:text-sm text-slate-300 max-w-2xl mx-auto leading-relaxed">
-                From 1-click WhatsApp patient recall automations and visual FDI tooth charting to digital prescriptions and real-time revenue analytics — all free forever with zero per-patient charges.
+              <p className="text-sm text-slate-400 max-w-xl mx-auto leading-relaxed">
+                WhatsApp recall, FDI tooth charting, digital prescriptions, and revenue analytics — free forever, no per-patient fees.
               </p>
             </div>
 
@@ -798,12 +783,9 @@ export default function CrmHomepage() {
                     desc: 'No monthly subscriptions, no staff user limits, and unlimited patient records synced securely in the cloud.'
                   }
                 ].map((item, idx) => (
-                  <div key={idx} className="bg-slate-900/80 border border-slate-800/80 hover:border-blue-500/40 p-4 sm:p-4.5 rounded-2xl transition-all space-y-1 shadow-lg flex gap-3.5 items-start">
-                    <span className="text-xl sm:text-2xl shrink-0 p-2 bg-slate-800/60 rounded-xl border border-slate-700/60">{item.icon}</span>
-                    <div className="space-y-1">
-                      <h3 className="text-sm font-bold text-white leading-tight">{item.title}</h3>
-                      <p className="text-xs text-slate-300 leading-relaxed">{item.desc}</p>
-                    </div>
+                  <div key={idx} className="border-l-2 border-slate-700 hover:border-blue-500 pl-4 py-1 transition-colors">
+                    <h3 className="text-sm font-semibold text-white leading-tight mb-1">{item.title}</h3>
+                    <p className="text-xs text-slate-400 leading-relaxed">{item.desc}</p>
                   </div>
                 ))}
 

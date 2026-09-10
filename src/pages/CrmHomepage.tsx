@@ -497,9 +497,17 @@ export default function CrmHomepage() {
                   { name: 'Axis Bank', sub: 'Jarvis APIs', color: 'from-rose-900 to-rose-700', text: 'AXIS', badge: 'Bank' },
                   { name: 'Bajaj Finserv', sub: 'EMI Network', color: 'from-blue-700 to-sky-600', text: 'BAJAJ', badge: 'NBFC' },
                   { name: 'Tata Capital', sub: 'Healthcare Loan', color: 'from-sky-900 to-blue-800', text: 'TATA', badge: 'NBFC' },
+                  { name: 'Piramal Finance', sub: 'Retail Financing', color: 'from-amber-700 to-yellow-600', text: 'PIRAMAL', badge: 'NBFC' },
                   { name: 'Kotak Bank', sub: 'Point-of-Care', color: 'from-red-700 to-rose-600', text: 'KOTAK', badge: 'Bank' },
                   { name: 'L&T Finance', sub: 'Medical EMI', color: 'from-amber-600 to-yellow-600', text: 'L&T', badge: 'NBFC' },
                   { name: 'Aditya Birla', sub: 'Capital Finance', color: 'from-red-800 to-amber-700', text: 'ABCL', badge: 'NBFC' },
+                  { name: 'Poonawalla Fincorp', sub: 'Consumer Finance', color: 'from-indigo-800 to-blue-600', text: 'POONAWALLA', badge: 'NBFC' },
+                  { name: 'Cholamandalam', sub: 'Chola Finance', color: 'from-red-900 to-orange-700', text: 'CHOLA', badge: 'NBFC' },
+                  { name: 'SMFG India Credit', sub: 'Fullerton Credit', color: 'from-emerald-800 to-teal-700', text: 'SMFG', badge: 'NBFC' },
+                  { name: 'Muthoot Finance', sub: 'Personal Lending', color: 'from-red-700 to-rose-800', text: 'MUTHOOT', badge: 'NBFC' },
+                  { name: 'InCred Finance', sub: 'Digital NBFC', color: 'from-blue-600 to-indigo-700', text: 'INCRED', badge: 'NBFC' },
+                  { name: 'DMI Finance', sub: 'Digital Credit', color: 'from-cyan-800 to-blue-700', text: 'DMI', badge: 'NBFC' },
+                  { name: 'LiquiLoans', sub: 'P2P NBFC', color: 'from-teal-700 to-emerald-600', text: 'LIQUI', badge: 'NBFC' },
                   { name: 'Dhanlift', sub: 'EMI Sourcing Partner', color: 'from-emerald-700 to-teal-600', text: 'DHANLIFT', badge: 'LSP' },
                   
                   // 2nd Set for Seamless Infinite Loop
@@ -508,9 +516,17 @@ export default function CrmHomepage() {
                   { name: 'Axis Bank', sub: 'Jarvis APIs', color: 'from-rose-900 to-rose-700', text: 'AXIS', badge: 'Bank' },
                   { name: 'Bajaj Finserv', sub: 'EMI Network', color: 'from-blue-700 to-sky-600', text: 'BAJAJ', badge: 'NBFC' },
                   { name: 'Tata Capital', sub: 'Healthcare Loan', color: 'from-sky-900 to-blue-800', text: 'TATA', badge: 'NBFC' },
+                  { name: 'Piramal Finance', sub: 'Retail Financing', color: 'from-amber-700 to-yellow-600', text: 'PIRAMAL', badge: 'NBFC' },
                   { name: 'Kotak Bank', sub: 'Point-of-Care', color: 'from-red-700 to-rose-600', text: 'KOTAK', badge: 'Bank' },
                   { name: 'L&T Finance', sub: 'Medical EMI', color: 'from-amber-600 to-yellow-600', text: 'L&T', badge: 'NBFC' },
                   { name: 'Aditya Birla', sub: 'Capital Finance', color: 'from-red-800 to-amber-700', text: 'ABCL', badge: 'NBFC' },
+                  { name: 'Poonawalla Fincorp', sub: 'Consumer Finance', color: 'from-indigo-800 to-blue-600', text: 'POONAWALLA', badge: 'NBFC' },
+                  { name: 'Cholamandalam', sub: 'Chola Finance', color: 'from-red-900 to-orange-700', text: 'CHOLA', badge: 'NBFC' },
+                  { name: 'SMFG India Credit', sub: 'Fullerton Credit', color: 'from-emerald-800 to-teal-700', text: 'SMFG', badge: 'NBFC' },
+                  { name: 'Muthoot Finance', sub: 'Personal Lending', color: 'from-red-700 to-rose-800', text: 'MUTHOOT', badge: 'NBFC' },
+                  { name: 'InCred Finance', sub: 'Digital NBFC', color: 'from-blue-600 to-indigo-700', text: 'INCRED', badge: 'NBFC' },
+                  { name: 'DMI Finance', sub: 'Digital Credit', color: 'from-cyan-800 to-blue-700', text: 'DMI', badge: 'NBFC' },
+                  { name: 'LiquiLoans', sub: 'P2P NBFC', color: 'from-teal-700 to-emerald-600', text: 'LIQUI', badge: 'NBFC' },
                   { name: 'Dhanlift', sub: 'EMI Sourcing Partner', color: 'from-emerald-700 to-teal-600', text: 'DHANLIFT', badge: 'LSP' }
                 ].map((item, idx) => (
                   <div 

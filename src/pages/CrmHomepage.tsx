@@ -2011,14 +2011,14 @@ export default function CrmHomepage() {
         </section>
 
         {/* ── 9. LENDER CTA FOOTER STRIP ("FOR LENDERS") ── */}
-        <section aria-label="For Lenders" className="py-12 px-6 bg-gradient-to-r from-[#0B2450] to-[#0867E8] text-white">
-          <div className="max-w-4xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-6 text-center sm:text-left">
+        <section aria-label="For Lenders" className="py-8 sm:py-12 px-5 sm:px-6 bg-gradient-to-r from-[#0B2450] to-[#0867E8] text-white">
+          <div className="max-w-4xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4 sm:gap-6 text-center sm:text-left">
             <div className="space-y-1">
               <div className="flex items-center justify-center sm:justify-start gap-2 text-[#12A8A0]">
                 <Landmark size={18} aria-hidden="true" />
                 <span className="text-[10px] font-black uppercase tracking-widest text-[#12A8A0]">FOR LENDERS & NBFCS</span>
               </div>
-              <h3 className="text-lg sm:text-xl font-black">Are you a Bank, NBFC or Healthcare Lender?</h3>
+              <h3 className="text-base sm:text-xl font-black">Are you a Bank, NBFC or Healthcare Lender?</h3>
               <p className="text-xs text-blue-100/90 max-w-xl">
                 Partner with Clinaza to access high-intent healthcare treatment financing demand through our growing clinic network.
               </p>
@@ -2026,7 +2026,7 @@ export default function CrmHomepage() {
             <a
               href="#partner-form"
               onClick={() => setFormType('lender')}
-              className="px-7 py-3.5 bg-white text-[#0B2450] hover:bg-slate-100 text-xs font-black uppercase tracking-widest rounded-xl transition-all shadow-lg shrink-0 transform hover:-translate-y-0.5"
+              className="px-6 py-3 bg-white text-[#0B2450] hover:bg-slate-100 text-xs font-black uppercase tracking-widest rounded-xl transition-all shadow-lg shrink-0 transform hover:-translate-y-0.5"
             >
               Become a Lending Partner &rarr;
             </a>
@@ -2073,8 +2073,8 @@ export default function CrmHomepage() {
       />
 
       {/* ── Footer ── */}
-      <footer className="border-t border-slate-200 py-10 px-6 bg-white text-center sm:text-left pb-24 sm:pb-10">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+      <footer className="border-t border-slate-200 py-6 sm:py-10 px-5 sm:px-6 bg-white text-center sm:text-left pb-20 sm:pb-10">
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 sm:gap-6">
           <div className="flex items-center gap-3">
             <img src="/assets/clinaza-logo.jpg" alt="CLINAZA" className="h-8 w-auto rounded-lg border border-slate-200" />
             <div>
@@ -2082,7 +2082,7 @@ export default function CrmHomepage() {
               <span className="text-[8px] font-bold text-[#0f7a75] block uppercase">TREATMENT FINANCING &amp; CLINIC CRM</span>
             </div>
           </div>
-          <div className="flex flex-col sm:flex-row items-center gap-4 text-xs text-slate-600 font-medium">
+          <div className="flex flex-col sm:flex-row items-center gap-2.5 sm:gap-4 text-xs text-slate-600 font-medium">
             <a href="tel:+917292984244" className="hover:text-[#0867E8] transition-colors font-bold flex items-center gap-1.5">
               📞 +91 7292984244
             </a>
@@ -2101,7 +2101,7 @@ export default function CrmHomepage() {
             <Link to="/reactivation/login" className="hover:text-[#0B2450] transition-colors font-bold">Doctor Portal</Link>
           </nav>
         </div>
-        <div className="max-w-6xl mx-auto mt-6 pt-4 border-t border-slate-100 text-center text-[10px] text-slate-400 font-mono">
+        <div className="max-w-6xl mx-auto mt-4 pt-3 border-t border-slate-100 text-center text-[10px] text-slate-400 font-mono">
           © 2026 CLINAZA Technologies. All Rights Reserved. &middot; Direct Helpline: +91 7292984244
         </div>
       </footer>

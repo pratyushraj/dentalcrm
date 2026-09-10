@@ -55,6 +55,44 @@ export default function CrmHomepage() {
       setEligibilityStep(1);
     }
   }, [location]);
+
+  // Continuous / Interval Auto-Slideshow for Clinic Network
+  useEffect(() => {
+    const track = document.getElementById('clinic-slideshow-track');
+    if (!track) return;
+
+    let isPaused = false;
+    const onMouseEnter = () => { isPaused = true; };
+    const onMouseLeave = () => { isPaused = false; };
+    const onTouchStart = () => { isPaused = true; };
+    const onTouchEnd = () => { 
+      setTimeout(() => { isPaused = false; }, 3000); 
+    };
+
+    track.addEventListener('mouseenter', onMouseEnter);
+    track.addEventListener('mouseleave', onMouseLeave);
+    track.addEventListener('touchstart', onTouchStart, { passive: true });
+    track.addEventListener('touchend', onTouchEnd, { passive: true });
+
+    const interval = setInterval(() => {
+      if (!isPaused && track) {
+        const maxScroll = track.scrollWidth - track.clientWidth;
+        if (track.scrollLeft >= maxScroll - 10) {
+          track.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+          track.scrollBy({ left: 340, behavior: 'smooth' });
+        }
+      }
+    }, 3500);
+
+    return () => {
+      clearInterval(interval);
+      track.removeEventListener('mouseenter', onMouseEnter);
+      track.removeEventListener('mouseleave', onMouseLeave);
+      track.removeEventListener('touchstart', onTouchStart);
+      track.removeEventListener('touchend', onTouchEnd);
+    };
+  }, []);
   const [patientData, setPatientData] = useState({
     name: '',
     mobile: '',

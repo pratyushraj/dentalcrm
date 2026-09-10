@@ -523,12 +523,12 @@ export default function CrmHomepage() {
             </div>
 
             {/* Continuous Seamless Slideshow Marquee */}
-            <div className="relative overflow-hidden py-4 px-2 bg-white/90 backdrop-blur-md rounded-2xl border border-slate-200/90 shadow-sm">
+            <div className="relative overflow-hidden py-3.5 px-2 bg-white/90 backdrop-blur-md rounded-2xl border border-slate-200/90 shadow-sm group">
               {/* Fade Edges */}
               <div className="absolute left-0 inset-y-0 w-16 sm:w-24 bg-gradient-to-r from-white via-white/80 to-transparent z-10 pointer-events-none" />
               <div className="absolute right-0 inset-y-0 w-16 sm:w-24 bg-gradient-to-l from-white via-white/80 to-transparent z-10 pointer-events-none" />
 
-              <div className="flex w-max gap-5 animate-marquee hover:[animation-play-state:paused]">
+              <div className="flex w-max gap-4 animate-marquee group-hover:[animation-play-state:paused]">
                 {[
                   // 1st Set of Banks & NBFCs
                   { id: 'hdfc', name: 'HDFC Bank', sub: 'Banking Partner', badge: 'Bank' },

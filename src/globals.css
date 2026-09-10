@@ -42,16 +42,23 @@ button, a, [role="button"], [role="tab"], [role="option"], label {
 }
 
 @keyframes marquee {
-  0% { transform: translateX(0); }
+  0%   { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
 
 .animate-marquee {
-  animation: marquee 35s linear infinite;
+  animation: marquee 28s linear infinite;
+  will-change: transform;
 }
 
 .animate-marquee:hover {
   animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none;
+  }
 }
 
 input, textarea, [contenteditable="true"], .selectable {

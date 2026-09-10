@@ -198,11 +198,11 @@ const Scene1ShockedPatient: React.FC<{ totalCost: number; treatmentName: string;
         style={{
           position: 'absolute',
           bottom: 450,
-          left: 65,
-          right: 65,
+          left: 60,
+          right: 60,
           display: 'flex',
           flexDirection: 'column',
-          gap: 16,
+          gap: 18,
           textAlign: 'center',
           alignItems: 'center',
         }}
@@ -210,11 +210,11 @@ const Scene1ShockedPatient: React.FC<{ totalCost: number; treatmentName: string;
         <div
           style={{
             transform: `scale(${scale})`,
-            padding: '12px 28px',
+            padding: '16px 36px',
             borderRadius: 999,
             backgroundColor: 'rgba(239, 68, 68, 0.95)',
             color: '#FFFFFF',
-            fontSize: 20,
+            fontSize: 26,
             fontWeight: 900,
             textTransform: 'uppercase',
             letterSpacing: '0.08em',
@@ -226,19 +226,19 @@ const Scene1ShockedPatient: React.FC<{ totalCost: number; treatmentName: string;
 
         <div
           style={{
-            padding: '24px 26px',
-            borderRadius: 26,
-            backgroundColor: 'rgba(15, 23, 42, 0.94)',
+            padding: '28px 32px',
+            borderRadius: 30,
+            backgroundColor: 'rgba(15, 23, 42, 0.95)',
             backdropFilter: 'blur(20px)',
             border: '2px solid rgba(239, 68, 68, 0.5)',
             boxShadow: '0 20px 50px rgba(0,0,0,0.8)',
             width: '100%',
           }}
         >
-          <div style={{ fontSize: 32, fontWeight: 900, color: '#FFFFFF', lineHeight: 1.25 }}>
+          <div style={{ fontSize: 40, fontWeight: 900, color: '#FFFFFF', lineHeight: 1.2 }}>
             Don't Postpone Your Health Because of Upfront Cost.
           </div>
-          <div style={{ fontSize: 18, color: '#FECACA', marginTop: 10, fontWeight: 700 }}>
+          <div style={{ fontSize: 22, color: '#FECACA', marginTop: 12, fontWeight: 700 }}>
             {treatmentName} • Implants • Aligners • Root Canals
           </div>
         </div>
@@ -287,22 +287,22 @@ const Scene2DoctorSolution: React.FC<{ monthlyEmi: number; tenureMonths: number;
         style={{
           position: 'absolute',
           bottom: 450,
-          left: 65,
-          right: 65,
+          left: 60,
+          right: 60,
           display: 'flex',
           flexDirection: 'column',
-          gap: 16,
+          gap: 18,
           textAlign: 'center',
           alignItems: 'center',
         }}
       >
         <div
           style={{
-            padding: '12px 28px',
+            padding: '16px 36px',
             borderRadius: 999,
             backgroundColor: 'rgba(16, 185, 129, 0.95)',
             color: '#020617',
-            fontSize: 20,
+            fontSize: 26,
             fontWeight: 900,
             textTransform: 'uppercase',
             letterSpacing: '0.08em',
@@ -317,21 +317,21 @@ const Scene2DoctorSolution: React.FC<{ monthlyEmi: number; tenureMonths: number;
           style={{
             transform: `scale(${scale})`,
             width: '100%',
-            padding: '28px 24px',
-            borderRadius: 32,
-            background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.4) 0%, rgba(6, 78, 59, 0.94) 80%)',
+            padding: '34px 30px',
+            borderRadius: 34,
+            background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.4) 0%, rgba(6, 78, 59, 0.95) 80%)',
             border: '3px solid #10B981',
             boxShadow: '0 25px 60px rgba(16, 185, 129, 0.5)',
             textAlign: 'center',
           }}
         >
-          <div style={{ fontSize: 16, color: '#D1FAE5', textTransform: 'uppercase', fontWeight: 900, letterSpacing: '0.1em' }}>
+          <div style={{ fontSize: 20, color: '#D1FAE5', textTransform: 'uppercase', fontWeight: 900, letterSpacing: '0.1em' }}>
             Start Treatment Today For Only
           </div>
-          <div style={{ fontSize: 58, fontWeight: 900, color: '#FFFFFF', margin: '6px 0', lineHeight: 1.1 }}>
-            ₹{monthlyEmi.toLocaleString('en-IN')} <span style={{ fontSize: 20, color: '#A7F3D0' }}>/ month</span>
+          <div style={{ fontSize: 72, fontWeight: 900, color: '#FFFFFF', margin: '8px 0', lineHeight: 1.1 }}>
+            ₹{monthlyEmi.toLocaleString('en-IN')} <span style={{ fontSize: 26, color: '#A7F3D0' }}>/ month</span>
           </div>
-          <div style={{ fontSize: 16, color: '#E2E8F0', fontWeight: 700 }}>
+          <div style={{ fontSize: 20, color: '#E2E8F0', fontWeight: 700 }}>
             ⚡ {tenureMonths} Months Flexible Tenure • ₹0 Down Payment
           </div>
         </div>
@@ -354,11 +354,11 @@ const Scene3StepByStepDemo: React.FC<{ fps: number }> = ({ fps }) => {
   else if (frame >= 30) activeStep = 2;
 
   const steps = [
-    { num: 1, title: 'Visit Website', icon: '🌐' },
-    { num: 2, title: 'Enter Phone', icon: '📱' },
-    { num: 3, title: 'Verify OTP', icon: '🔒' },
+    { num: 1, title: 'Visit Site', icon: '🌐' },
+    { num: 2, title: 'Phone OTP', icon: '📱' },
+    { num: 3, title: 'Verify', icon: '🔒' },
     { num: 4, title: 'Instant KYC', icon: '📋' },
-    { num: 5, title: 'Get Approved', icon: '🎉' },
+    { num: 5, title: 'Approved', icon: '🎉' },
   ];
 
   return (
@@ -369,14 +369,14 @@ const Scene3StepByStepDemo: React.FC<{ fps: number }> = ({ fps }) => {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'space-between',
-        padding: '240px 65px 460px 65px',
+        padding: '230px 50px 450px 50px',
         zIndex: 10,
       }}
     >
       <div style={{ textAlign: 'center', width: '100%' }}>
         <span
           style={{
-            fontSize: 15,
+            fontSize: 18,
             fontWeight: 900,
             color: '#10B981',
             textTransform: 'uppercase',
@@ -387,17 +387,17 @@ const Scene3StepByStepDemo: React.FC<{ fps: number }> = ({ fps }) => {
         >
           ⚡ Takes Less Than 2 Minutes
         </span>
-        <h2 style={{ fontSize: 44, fontWeight: 900, color: '#FFFFFF', margin: 0, letterSpacing: '-0.02em' }}>
+        <h2 style={{ fontSize: 48, fontWeight: 900, color: '#FFFFFF', margin: 0, letterSpacing: '-0.02em' }}>
           How to Apply on <span style={{ color: '#38BDF8' }}>clinaza.in</span>
         </h2>
       </div>
 
-      {/* 5 Step Indicator Nodes */}
+      {/* 5 Step Indicator Nodes (Larger & clearer) */}
       <div
         style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(5, 1fr)',
-          gap: 10,
+          gap: 12,
           width: '100%',
         }}
       >
@@ -408,23 +408,23 @@ const Scene3StepByStepDemo: React.FC<{ fps: number }> = ({ fps }) => {
             <div key={s.num} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
               <div
                 style={{
-                  width: 48,
-                  height: 48,
+                  width: 62,
+                  height: 62,
                   borderRadius: 999,
-                  backgroundColor: isCurrent ? '#10B981' : isPassed ? '#059669' : 'rgba(255,255,255,0.1)',
+                  backgroundColor: isCurrent ? '#10B981' : isPassed ? '#059669' : 'rgba(255,255,255,0.12)',
                   color: isCurrent || isPassed ? '#020617' : '#94A3B8',
-                  fontSize: 20,
+                  fontSize: 26,
                   fontWeight: 900,
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   border: isCurrent ? '3px solid #FFFFFF' : 'none',
-                  boxShadow: isCurrent ? '0 0 25px rgba(16, 185, 129, 0.7)' : 'none',
+                  boxShadow: isCurrent ? '0 0 30px rgba(16, 185, 129, 0.8)' : 'none',
                 }}
               >
                 {isPassed ? '✓' : s.num}
               </div>
-              <span style={{ fontSize: 12, fontWeight: isCurrent ? 900 : 700, color: isCurrent ? '#34D399' : '#64748B' }}>
+              <span style={{ fontSize: 14, fontWeight: isCurrent ? 900 : 700, color: isCurrent ? '#34D399' : '#94A3B8' }}>
                 {s.title}
               </span>
             </div>
@@ -432,16 +432,16 @@ const Scene3StepByStepDemo: React.FC<{ fps: number }> = ({ fps }) => {
         })}
       </div>
 
-      {/* Realistic Smartphone Mockup Frame */}
+      {/* Realistic Full-Sized Smartphone Mockup Frame */}
       <div
         style={{
           width: '100%',
-          height: '630px',
-          borderRadius: '42px',
-          backgroundColor: '#0F172A',
+          height: '780px',
+          borderRadius: '46px',
+          backgroundColor: '#0A0F1D',
           border: '5px solid #334155',
-          boxShadow: '0 30px 90px rgba(0,0,0,0.95), 0 0 40px rgba(16, 185, 129, 0.25)',
-          padding: '16px 20px',
+          boxShadow: '0 30px 90px rgba(0,0,0,0.95), 0 0 50px rgba(16, 185, 129, 0.3)',
+          padding: '20px 24px',
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between',
@@ -450,10 +450,10 @@ const Scene3StepByStepDemo: React.FC<{ fps: number }> = ({ fps }) => {
         }}
       >
         {/* Dynamic Island / Speaker Notch & Status Bar */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', marginBottom: 8, padding: '0 8px' }}>
-          <span style={{ fontSize: 13, fontWeight: 800, color: '#94A3B8' }}>9:41</span>
-          <div style={{ width: '110px', height: '20px', backgroundColor: '#000000', borderRadius: '999px' }} />
-          <span style={{ fontSize: 13, fontWeight: 800, color: '#94A3B8' }}>5G 🔋</span>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', marginBottom: 10, padding: '0 10px' }}>
+          <span style={{ fontSize: 16, fontWeight: 900, color: '#94A3B8' }}>9:41</span>
+          <div style={{ width: '130px', height: '24px', backgroundColor: '#000000', borderRadius: '999px' }} />
+          <span style={{ fontSize: 16, fontWeight: 900, color: '#94A3B8' }}>5G 🔋</span>
         </div>
 
         {/* Mobile Browser URL Address Bar */}
@@ -462,42 +462,43 @@ const Scene3StepByStepDemo: React.FC<{ fps: number }> = ({ fps }) => {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            gap: 8,
-            padding: '8px 16px',
-            borderRadius: 14,
-            backgroundColor: 'rgba(30, 41, 59, 0.8)',
-            border: '1px solid rgba(255, 255, 255, 0.1)',
-            marginBottom: 12,
+            gap: 10,
+            padding: '12px 20px',
+            borderRadius: 16,
+            backgroundColor: 'rgba(30, 41, 59, 0.9)',
+            border: '1.5px solid rgba(255, 255, 255, 0.15)',
+            marginBottom: 14,
           }}
         >
-          <span style={{ fontSize: 12, color: '#10B981' }}>🔒</span>
-          <span style={{ fontSize: 13, fontWeight: 700, color: '#F8FAFC', letterSpacing: '0.02em' }}>
+          <span style={{ fontSize: 16, color: '#10B981' }}>🔒</span>
+          <span style={{ fontSize: 17, fontWeight: 800, color: '#F8FAFC', letterSpacing: '0.02em' }}>
             clinaza.in<span style={{ color: '#94A3B8' }}>/apply</span>
           </span>
         </div>
 
         {/* Dynamic Screen Content Based On Current Active Step */}
-        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 14 }}>
+        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 18 }}>
           {activeStep === 1 && (
-            <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', gap: 12, alignItems: 'center' }}>
-              <div style={{ padding: '6px 16px', borderRadius: 999, backgroundColor: 'rgba(16, 185, 129, 0.2)', color: '#34D399', fontSize: 13, fontWeight: 800 }}>
+            <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', gap: 16, alignItems: 'center' }}>
+              <div style={{ padding: '8px 20px', borderRadius: 999, backgroundColor: 'rgba(16, 185, 129, 0.25)', color: '#34D399', fontSize: 16, fontWeight: 900 }}>
                 🦷 Clinaza Patient EMI Portal
               </div>
-              <div style={{ fontSize: 26, fontWeight: 900, color: '#FFFFFF', lineHeight: 1.2 }}>
+              <div style={{ fontSize: 38, fontWeight: 900, color: '#FFFFFF', lineHeight: 1.2 }}>
                 Instant Dental Loan in 2 Mins
               </div>
-              <div style={{ fontSize: 14, color: '#94A3B8' }}>
+              <div style={{ fontSize: 20, color: '#CBD5E1', fontWeight: 600 }}>
                 0% Interest • ₹0 Down Payment • 15+ Banks
               </div>
               <div
                 style={{
-                  width: '90%',
-                  padding: '14px',
-                  borderRadius: 16,
+                  width: '95%',
+                  padding: '20px',
+                  borderRadius: 20,
                   backgroundColor: '#10B981',
                   color: '#020617',
-                  fontSize: 16,
+                  fontSize: 24,
                   fontWeight: 900,
+                  boxShadow: '0 10px 30px rgba(16, 185, 129, 0.5)',
                   marginTop: 6,
                 }}
               >
@@ -507,38 +508,40 @@ const Scene3StepByStepDemo: React.FC<{ fps: number }> = ({ fps }) => {
           )}
 
           {activeStep === 2 && (
-            <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', gap: 12, alignItems: 'center' }}>
-              <div style={{ fontSize: 22, fontWeight: 900, color: '#FFFFFF' }}>
+            <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', gap: 16, alignItems: 'center' }}>
+              <div style={{ fontSize: 36, fontWeight: 900, color: '#FFFFFF' }}>
                 Enter Mobile Number
               </div>
-              <div style={{ fontSize: 13, color: '#94A3B8' }}>
+              <div style={{ fontSize: 20, color: '#94A3B8', fontWeight: 600 }}>
                 We will send an OTP for paperless verification
               </div>
               <div
                 style={{
-                  width: '92%',
-                  padding: '14px 18px',
-                  borderRadius: 16,
+                  width: '95%',
+                  padding: '20px 24px',
+                  borderRadius: 20,
                   backgroundColor: '#020617',
-                  border: '2px solid #38BDF8',
+                  border: '3px solid #38BDF8',
                   display: 'flex',
                   alignItems: 'center',
-                  gap: 10,
+                  gap: 14,
+                  boxShadow: '0 0 25px rgba(56, 189, 248, 0.3)',
                 }}
               >
-                <span style={{ fontSize: 16 }}>🇮🇳</span>
-                <span style={{ fontSize: 15, fontWeight: 800, color: '#64748B' }}>+91</span>
-                <span style={{ fontSize: 18, fontWeight: 900, color: '#FFFFFF', letterSpacing: '0.08em' }}>98765 43210</span>
+                <span style={{ fontSize: 26 }}>🇮🇳</span>
+                <span style={{ fontSize: 24, fontWeight: 900, color: '#64748B' }}>+91</span>
+                <span style={{ fontSize: 32, fontWeight: 900, color: '#FFFFFF', letterSpacing: '0.08em' }}>98765 43210</span>
               </div>
               <div
                 style={{
-                  width: '92%',
-                  padding: '14px',
-                  borderRadius: 16,
+                  width: '95%',
+                  padding: '20px',
+                  borderRadius: 20,
                   backgroundColor: '#38BDF8',
                   color: '#020617',
-                  fontSize: 16,
+                  fontSize: 24,
                   fontWeight: 900,
+                  boxShadow: '0 10px 30px rgba(56, 189, 248, 0.5)',
                 }}
               >
                 Send OTP &rarr;
@@ -547,97 +550,98 @@ const Scene3StepByStepDemo: React.FC<{ fps: number }> = ({ fps }) => {
           )}
 
           {activeStep === 3 && (
-            <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', gap: 12, alignItems: 'center' }}>
-              <div style={{ fontSize: 22, fontWeight: 900, color: '#FFFFFF' }}>
+            <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', gap: 16, alignItems: 'center' }}>
+              <div style={{ fontSize: 36, fontWeight: 900, color: '#FFFFFF' }}>
                 Verify 6-Digit OTP
               </div>
-              <div style={{ fontSize: 13, color: '#94A3B8' }}>
+              <div style={{ fontSize: 20, color: '#94A3B8', fontWeight: 600 }}>
                 Code sent to +91 98765 43210
               </div>
-              <div style={{ display: 'flex', gap: 8, justifyContent: 'center' }}>
+              <div style={{ display: 'flex', gap: 10, justifyContent: 'center' }}>
                 {['4', '8', '2', '9', '1', '0'].map((digit, idx) => (
                   <div
                     key={idx}
                     style={{
-                      width: 42,
-                      height: 48,
-                      borderRadius: 12,
+                      width: 58,
+                      height: 68,
+                      borderRadius: 16,
                       backgroundColor: '#020617',
-                      border: '2px solid #10B981',
+                      border: '3px solid #10B981',
                       color: '#10B981',
-                      fontSize: 22,
+                      fontSize: 32,
                       fontWeight: 900,
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      boxShadow: '0 0 15px rgba(16, 185, 129, 0.4)',
+                      boxShadow: '0 0 20px rgba(16, 185, 129, 0.4)',
                     }}
                   >
                     {digit}
                   </div>
                 ))}
               </div>
-              <div style={{ fontSize: 13, color: '#34D399', fontWeight: 800 }}>
+              <div style={{ fontSize: 20, color: '#34D399', fontWeight: 900 }}>
                 ✓ OTP Verified Successfully!
               </div>
             </div>
           )}
 
           {activeStep === 4 && (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 10, width: '92%', margin: '0 auto' }}>
-              <div style={{ fontSize: 20, fontWeight: 900, color: '#FFFFFF', textAlign: 'center' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 14, width: '95%', margin: '0 auto' }}>
+              <div style={{ fontSize: 32, fontWeight: 900, color: '#FFFFFF', textAlign: 'center' }}>
                 Instant Digital KYC
               </div>
-              <div style={{ padding: '10px 14px', borderRadius: 12, backgroundColor: '#020617', border: '1px solid #334155' }}>
-                <span style={{ fontSize: 10, color: '#94A3B8', display: 'block' }}>PAN Number</span>
-                <span style={{ fontSize: 14, fontWeight: 800, color: '#FFFFFF' }}>ABCDE1234F</span>
+              <div style={{ padding: '16px 20px', borderRadius: 16, backgroundColor: '#020617', border: '2px solid #334155' }}>
+                <span style={{ fontSize: 14, color: '#94A3B8', display: 'block', fontWeight: 700 }}>PAN Number</span>
+                <span style={{ fontSize: 24, fontWeight: 900, color: '#FFFFFF' }}>ABCDE1234F</span>
               </div>
-              <div style={{ padding: '10px 14px', borderRadius: 12, backgroundColor: '#020617', border: '1px solid #334155' }}>
-                <span style={{ fontSize: 10, color: '#94A3B8', display: 'block' }}>Treatment Cost</span>
-                <span style={{ fontSize: 14, fontWeight: 800, color: '#34D399' }}>₹65,000 (Dental Implants)</span>
+              <div style={{ padding: '16px 20px', borderRadius: 16, backgroundColor: '#020617', border: '2px solid #334155' }}>
+                <span style={{ fontSize: 14, color: '#94A3B8', display: 'block', fontWeight: 700 }}>Treatment Estimate</span>
+                <span style={{ fontSize: 24, fontWeight: 900, color: '#34D399' }}>₹65,000 (Dental Implants)</span>
               </div>
-              <div style={{ fontSize: 12, color: '#A7F3D0', fontWeight: 700, textAlign: 'center' }}>
+              <div style={{ fontSize: 18, color: '#A7F3D0', fontWeight: 800, textAlign: 'center' }}>
                 ⚡ Automated Bureau & Lenders Check (15+ Banks)
               </div>
             </div>
           )}
 
           {activeStep === 5 && (
-            <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', gap: 10, alignItems: 'center' }}>
-              <div style={{ padding: '4px 14px', borderRadius: 999, backgroundColor: 'rgba(16, 185, 129, 0.25)', color: '#34D399', fontSize: 12, fontWeight: 900 }}>
+            <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', gap: 14, alignItems: 'center' }}>
+              <div style={{ padding: '6px 18px', borderRadius: 999, backgroundColor: 'rgba(16, 185, 129, 0.25)', color: '#34D399', fontSize: 16, fontWeight: 900 }}>
                 🎉 LOAN APPROVED INSTANTLY
               </div>
-              <div style={{ fontSize: 22, fontWeight: 900, color: '#FFFFFF', lineHeight: 1.1 }}>
+              <div style={{ fontSize: 34, fontWeight: 900, color: '#FFFFFF', lineHeight: 1.1 }}>
                 ₹65,000 Approved
               </div>
               <div
                 style={{
-                  padding: '12px 20px',
-                  borderRadius: 16,
-                  background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.3) 0%, rgba(6, 78, 59, 0.8) 100%)',
-                  border: '2px solid #10B981',
-                  width: '92%',
+                  padding: '16px 24px',
+                  borderRadius: 20,
+                  background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.3) 0%, rgba(6, 78, 59, 0.85) 100%)',
+                  border: '2.5px solid #10B981',
+                  width: '95%',
                 }}
               >
-                <div style={{ fontSize: 12, color: '#D1FAE5', textTransform: 'uppercase', fontWeight: 800 }}>
+                <div style={{ fontSize: 15, color: '#D1FAE5', textTransform: 'uppercase', fontWeight: 900 }}>
                   Selected 0% EMI Plan
                 </div>
-                <div style={{ fontSize: 26, fontWeight: 900, color: '#FFFFFF', margin: '2px 0' }}>
-                  ₹2,650 <span style={{ fontSize: 14, color: '#A7F3D0' }}>/ mo</span>
+                <div style={{ fontSize: 44, fontWeight: 900, color: '#FFFFFF', margin: '4px 0' }}>
+                  ₹2,650 <span style={{ fontSize: 20, color: '#A7F3D0' }}>/ mo</span>
                 </div>
-                <div style={{ fontSize: 11, color: '#E2E8F0' }}>
+                <div style={{ fontSize: 16, color: '#E2E8F0', fontWeight: 700 }}>
                   24 Months • ₹0 Down Payment
                 </div>
               </div>
               <div
                 style={{
-                  width: '92%',
-                  padding: '12px',
-                  borderRadius: 14,
+                  width: '95%',
+                  padding: '18px',
+                  borderRadius: 18,
                   backgroundColor: '#10B981',
                   color: '#020617',
-                  fontSize: 15,
+                  fontSize: 22,
                   fontWeight: 900,
+                  boxShadow: '0 10px 30px rgba(16, 185, 129, 0.5)',
                 }}
               >
                 Begin Treatment Today 🦷
@@ -647,7 +651,7 @@ const Scene3StepByStepDemo: React.FC<{ fps: number }> = ({ fps }) => {
         </div>
 
         {/* Home Indicator Bar */}
-        <div style={{ width: '120px', height: '4px', backgroundColor: '#475569', borderRadius: '999px', margin: '4px auto 0 auto' }} />
+        <div style={{ width: '140px', height: '5px', backgroundColor: '#64748B', borderRadius: '999px', margin: '6px auto 0 auto' }} />
       </div>
     </AbsoluteFill>
   );
@@ -692,20 +696,20 @@ const Scene4HappyPatientCta: React.FC<{
         style={{
           position: 'absolute',
           bottom: 450,
-          left: 65,
-          right: 65,
+          left: 60,
+          right: 60,
           display: 'flex',
           flexDirection: 'column',
-          gap: 14,
+          gap: 18,
           textAlign: 'center',
           alignItems: 'center',
         }}
       >
         <div>
-          <h2 style={{ fontSize: 44, fontWeight: 900, color: '#FFFFFF', margin: 0, letterSpacing: '-0.02em', lineHeight: 1.15 }}>
+          <h2 style={{ fontSize: 52, fontWeight: 900, color: '#FFFFFF', margin: 0, letterSpacing: '-0.02em', lineHeight: 1.15 }}>
             Say "Yes" to Healthy Smiles 😁
           </h2>
-          <p style={{ fontSize: 18, color: '#CBD5E1', margin: '4px 0 0 0', fontWeight: 600 }}>
+          <p style={{ fontSize: 22, color: '#CBD5E1', margin: '6px 0 0 0', fontWeight: 600 }}>
             Ask your dentist for Clinaza EMI or check online.
           </p>
         </div>
@@ -714,8 +718,8 @@ const Scene4HappyPatientCta: React.FC<{
         <div
           style={{
             width: '100%',
-            padding: '22px 28px',
-            borderRadius: 24,
+            padding: '28px 36px',
+            borderRadius: 28,
             background: 'linear-gradient(135deg, #10B981 0%, #059669 100%)',
             display: 'flex',
             alignItems: 'center',
@@ -723,7 +727,7 @@ const Scene4HappyPatientCta: React.FC<{
             boxShadow: '0 25px 60px rgba(16, 185, 129, 0.5)',
           }}
         >
-          <span style={{ fontSize: 24, fontWeight: 900, color: '#020617', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+          <span style={{ fontSize: 30, fontWeight: 900, color: '#020617', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
             Visit {websiteUrl} &rarr;
           </span>
         </div>
@@ -733,12 +737,12 @@ const Scene4HappyPatientCta: React.FC<{
           style={{
             display: 'flex',
             alignItems: 'center',
-            gap: 8,
-            padding: '10px 20px',
-            borderRadius: 16,
+            gap: 10,
+            padding: '14px 26px',
+            borderRadius: 20,
             backgroundColor: 'rgba(15, 23, 42, 0.95)',
             border: '1.5px solid rgba(255, 255, 255, 0.2)',
-            fontSize: 14,
+            fontSize: 18,
             fontWeight: 800,
             color: '#34D399',
           }}

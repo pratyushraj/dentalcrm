@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { RemotionVideoModal } from '@/components/remotion/RemotionVideoModal';
 import { 
   ShieldCheck, 
   ArrowRight, 
@@ -21,7 +22,8 @@ import {
   Sparkles,
   Share2,
   ChevronLeft,
-  ChevronRight
+  ChevronRight,
+  Video
 } from 'lucide-react';
 import { emailNotificationService } from '../services/emailNotificationService';
 import { toast } from 'sonner';
@@ -41,6 +43,7 @@ export default function CrmHomepage() {
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
   const [formType, setFormType] = useState<'clinic' | 'lender'>('clinic');
   const [showEligibilityModal, setShowEligibilityModal] = useState(false);
+  const [showEmiReelModal, setShowEmiReelModal] = useState(false);
   const [eligibilityStep, setEligibilityStep] = useState<1 | 2>(1);
   const [showLenderResults, setShowLenderResults] = useState(false);
 
@@ -442,6 +445,13 @@ export default function CrmHomepage() {
                   className="w-full sm:w-auto px-7 py-3.5 bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-black uppercase tracking-wider rounded-xl transition-all flex items-center justify-center gap-2 shadow-[0_8px_20px_rgba(8,103,232,0.25)] hover:shadow-[0_12px_28px_rgba(8,103,232,0.35)] transform active:scale-95"
                 >
                   <ShieldCheck size={16} /> Check Patient Eligibility
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setShowEmiReelModal(true)}
+                  className="w-full sm:w-auto px-5 py-3.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-black uppercase tracking-wider rounded-xl transition-all flex items-center justify-center gap-2 shadow-md border border-slate-700 active:scale-95"
+                >
+                  <Video size={16} className="text-emerald-400" /> Watch EMI Reel (9:16)
                 </button>
                 <Link
                   to="/reactivation/login"
@@ -1925,6 +1935,21 @@ export default function CrmHomepage() {
           Doctor Login
         </Link>
       </div>
+
+      {/* Remotion Clinaza EMI Reel Modal */}
+      <RemotionVideoModal
+        isOpen={showEmiReelModal}
+        onClose={() => setShowEmiReelModal(false)}
+        mode="clinaza-emi"
+        emiReelData={{
+          headline: "Don't Delay Your Dental Treatment Because of Cost 🦷💸",
+          treatmentName: "Dental Implants & Aligners",
+          totalCost: 60000,
+          monthlyEmi: 2650,
+          tenureMonths: 24,
+          websiteUrl: "clinaza.in"
+        }}
+      />
 
       {/* ── Footer ── */}
       <footer className="border-t border-slate-200 py-10 px-6 bg-white text-center sm:text-left pb-24 sm:pb-10">

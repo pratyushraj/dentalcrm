@@ -2,15 +2,17 @@ import React, { useState } from 'react';
 import { Player } from '@remotion/player';
 import { EstimateVideoComposition, EstimateVideoProps } from './EstimateVideo';
 import { SocialReelComposition, SocialReelProps } from './SocialReelVideo';
+import { ClinazaEmiReelComposition, ClinazaEmiReelProps } from './ClinazaEmiReelVideo';
 import { Video, X, Download, Share2, Sparkles, RefreshCw, Play } from 'lucide-react';
 import { toast } from 'sonner';
 
 interface RemotionVideoModalProps {
   isOpen: boolean;
   onClose: () => void;
-  mode: 'estimate' | 'social';
+  mode: 'estimate' | 'social' | 'clinaza-emi';
   estimateData?: Partial<EstimateVideoProps>;
   socialData?: Partial<SocialReelProps>;
+  emiReelData?: Partial<ClinazaEmiReelProps>;
 }
 
 export const RemotionVideoModal: React.FC<RemotionVideoModalProps> = ({
@@ -19,6 +21,7 @@ export const RemotionVideoModal: React.FC<RemotionVideoModalProps> = ({
   mode,
   estimateData,
   socialData,
+  emiReelData,
 }) => {
   if (!isOpen) return null;
 
@@ -71,6 +74,22 @@ export const RemotionVideoModal: React.FC<RemotionVideoModalProps> = ({
                 autoPlay
                 loop
               />
+            ) : mode === 'clinaza-emi' ? (
+              <Player
+                component={ClinazaEmiReelComposition}
+                inputProps={emiReelData || {}}
+                durationInFrames={450} // 15 seconds at 30 fps
+                fps={30}
+                compositionWidth={1080}
+                compositionHeight={1920}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                }}
+                controls
+                autoPlay
+                loop
+              />
             ) : (
               <Player
                 component={SocialReelComposition}
@@ -90,7 +109,7 @@ export const RemotionVideoModal: React.FC<RemotionVideoModalProps> = ({
             )}
           </div>
           <span className="text-[11px] text-slate-500 mt-3 flex items-center gap-1">
-            <Play size={12} className="text-emerald-400" /> Interactive Remotion 1080×1920 Video
+            <Play size={12} className="text-emerald-400" /> Interactive Remotion 1080×1920 Video (Instagram 9:16)
           </span>
         </div>
 
@@ -114,12 +133,18 @@ export const RemotionVideoModal: React.FC<RemotionVideoModalProps> = ({
 
             <div>
               <h3 className="text-xl sm:text-2xl font-black text-white">
-                {mode === 'estimate' ? 'Patient Video Estimate' : 'Clinic Social Reel'}
+                {mode === 'estimate'
+                  ? 'Patient Video Estimate'
+                  : mode === 'clinaza-emi'
+                    ? 'Clinaza EMI Breakdown Reel'
+                    : 'Clinic Social Reel'}
               </h3>
               <p className="text-xs text-slate-400 mt-1">
                 {mode === 'estimate'
                   ? 'Personalized 15-second care plan breakdown with animated monthly EMI options.'
-                  : 'Automated kinetic motion typography reel for Instagram, Shorts & WhatsApp Status.'}
+                  : mode === 'clinaza-emi'
+                    ? '15-second high-conversion Instagram Reel breaking down ₹60,000 implants into ₹2,650/month.'
+                    : 'Automated kinetic motion typography reel for Instagram, Shorts & WhatsApp Status.'}
               </p>
             </div>
 
@@ -141,6 +166,24 @@ export const RemotionVideoModal: React.FC<RemotionVideoModalProps> = ({
                   <span>Monthly EMI:</span>
                   <span className="text-sm">₹{defaultEstimate.monthlyEmi.toLocaleString('en-IN')} / mo</span>
                 </div>
+              </div>
+            ) : mode === 'clinaza-emi' ? (
+              <div className="p-4 rounded-2xl bg-slate-950/60 border border-slate-800 space-y-2.5 text-xs">
+                <div className="flex justify-between text-slate-400">
+                  <span>Treatment:</span>
+                  <strong className="text-white">Dental Implants &amp; Aligners</strong>
+                </div>
+                <div className="flex justify-between text-slate-400">
+                  <span>Upfront Cost:</span>
+                  <span className="text-rose-400 line-through font-bold">₹60,000</span>
+                </div>
+                <div className="flex justify-between pt-2 border-t border-slate-800/80 text-emerald-400 font-bold">
+                  <span>Clinaza Monthly EMI:</span>
+                  <span className="text-base">₹2,650 / month</span>
+                </div>
+                <p className="text-[11px] text-slate-400 mt-2">
+                  ⚡ 2-min paperless digital approval &bull; Powered by 15+ Banks &amp; NBFCs
+                </p>
               </div>
             ) : (
               <div className="p-4 rounded-2xl bg-slate-950/60 border border-slate-800 space-y-2 text-xs">

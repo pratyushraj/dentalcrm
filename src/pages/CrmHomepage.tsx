@@ -340,17 +340,15 @@ export default function CrmHomepage() {
   return (
     <div className="min-h-screen bg-white text-[#0B2450] font-sora antialiased overflow-x-hidden selection:bg-[#0867E8] selection:text-white">
       <SEOHead
-        title="CLINAZA — Embedded Healthcare Patient Financing Infrastructure"
-        description="Don't let treatment cost stop your patients. Offer flexible EMI financing for eligible patients (₹30K–₹3L) directly at your clinic checkout."
+        title="Clinaza — Patient Financing, Healthcare EMIs & Free Dental CRM India"
+        description="Offer instant point-of-care patient EMI financing (₹30K–₹5L) with 55+ RBI-regulated Banks & NBFCs. Plus, 100% Free Dental Clinic CRM & WhatsApp recall software."
         keywords={[
           'clinaza', 'clinaza patient financing', 'clinaza healthpay', 'dhanlift clinaza loan',
+          'patient financing india', 'healthcare emi india', 'dental emi', 'dental emi patna', 'dental loan india',
+          'point of care patient financing', 'no cost emi dental clinic', 'dental implants emi', 'clear aligners emi cost',
           'free dental crm', 'free dental crm software india', 'best free dental clinic management software',
-          'patient financing', 'dental emi', 'dental emi patna', 'healthcare lending', 
-          'medical loan india', 'point of care financing', 'clinic emi option', 
-          'embedded finance', 'dental implants financing', 'clear aligners emi',
-          'root canal on emi', '0 interest medical loan india', 'how to offer emi to dental patients',
-          'dentist digital marketing india', 'dentist social media marketing', 'dental clinic instagram growth', 
-          'google review automation for dentists', 'dental clinic whatsapp marketing', 'how to get more dental patients india'
+          'dental prescription software free', 'dental clinic setup cost calculator', 'whatsapp patient recall dental',
+          'lasik on emi', 'ivf treatment emi', 'hair transplant financing india'
         ]}
         image="https://clinaza.in/og-preview.png"
         canonicalUrl="https://clinaza.in/"
@@ -358,7 +356,7 @@ export default function CrmHomepage() {
           {
             "@context": "https://schema.org",
             "@type": "SoftwareApplication",
-            "name": "Clinaza Dental CRM",
+            "name": "Clinaza Dental CRM & Patient Financing",
             "operatingSystem": "Web, iOS, Android (PWA)",
             "applicationCategory": "BusinessApplication",
             "offers": {
@@ -366,11 +364,12 @@ export default function CrmHomepage() {
               "price": "0",
               "priceCurrency": "INR"
             },
-            "description": "100% Free Dental Clinic Management CRM in India with automated WhatsApp patient recalls, digital prescriptions, and patient financing.",
-            "url": "https://clinaza.in/reactivation/login",
+            "description": "100% Free Dental Clinic Management CRM in India with automated WhatsApp patient recalls, digital FDI tooth charting, digital prescriptions, and point-of-care patient EMI financing.",
+            "url": "https://clinaza.in/",
             "author": {
               "@type": "Organization",
-              "name": "Clinaza Technologies"
+              "name": "Clinaza Technologies",
+              "url": "https://clinaza.in"
             }
           },
           {

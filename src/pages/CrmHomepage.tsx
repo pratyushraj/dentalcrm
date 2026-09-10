@@ -28,6 +28,7 @@ import {
 import { emailNotificationService } from '../services/emailNotificationService';
 import { toast } from 'sonner';
 import { SEOHead } from '@/components/seo/SEOHead';
+import { BankSvgLogo } from '@/components/BankSvgLogos';
 
 export default function CrmHomepage() {
   const location = useLocation();
@@ -351,24 +352,24 @@ export default function CrmHomepage() {
 
       {/* ── Header ── */}
       <header className="border-b border-slate-100 backdrop-blur-xl sticky top-0 z-50 bg-white/95 shadow-sm">
-        <div className="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
-          <Link to="/" className="flex items-center gap-3 group">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex justify-between items-center gap-2">
+          <Link to="/" className="flex items-center gap-3 group shrink-0">
             <img src="/assets/clinaza-logo.jpg" alt="CLINAZA" className="h-10 w-auto rounded-xl border border-slate-200 shadow-sm group-hover:scale-105 transition-transform" />
             <div className="hidden sm:block">
               <span className="text-xs font-black tracking-widest text-[#0B2450] block">CLINAZA</span>
               <span className="text-[9px] font-bold tracking-wider text-[#0f7a75] block uppercase">EMI FOR BETTER HEALTH</span>
             </div>
           </Link>
-          <div className="flex items-center gap-2 sm:gap-3">
+          <div className="flex items-center gap-1.5 sm:gap-2.5">
             <Link
               to="/tools"
-              className="hidden lg:flex items-center gap-1.5 px-3 py-2 bg-slate-100 hover:bg-slate-200 text-xs font-bold text-slate-800 rounded-xl transition-all"
+              className="hidden xl:flex items-center gap-1.5 px-3 py-2 bg-slate-100 hover:bg-slate-200 text-xs font-bold text-slate-800 rounded-xl transition-all"
             >
               <span>🛠️</span> Free Tools &amp; Rx
             </Link>
             <Link
               to="/blog"
-              className="hidden md:flex items-center gap-1.5 px-3 py-2 hover:bg-slate-100 text-xs font-bold text-slate-700 rounded-xl transition-all"
+              className="hidden lg:flex items-center gap-1.5 px-3 py-2 hover:bg-slate-100 text-xs font-bold text-slate-700 rounded-xl transition-all"
             >
               <span>📖</span> Guides &amp; EMI
             </Link>
@@ -378,14 +379,14 @@ export default function CrmHomepage() {
                 setShowEligibilityModal(true);
                 setEligibilityStep(1);
               }}
-              className="hidden sm:flex items-center gap-1.5 px-3.5 py-2 bg-blue-50 hover:bg-blue-100 border border-blue-200 text-xs font-bold text-[#0867E8] rounded-xl transition-all"
+              className="hidden md:flex items-center gap-1.5 px-3 py-2 bg-blue-50 hover:bg-blue-100 border border-blue-200 text-xs font-bold text-[#0867E8] rounded-xl transition-all whitespace-nowrap"
             >
               <ShieldCheck size={14} className="text-[#0867E8]" />
-              Check Patient EMI
+              Check EMI
             </button>
             <Link
               to="/reactivation/login"
-              className="flex items-center gap-1.5 px-3 sm:px-4 py-2 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-[11px] sm:text-xs font-bold text-emerald-800 rounded-xl transition-all whitespace-nowrap"
+              className="flex items-center gap-1.5 px-2.5 sm:px-3.5 py-2 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-[11px] sm:text-xs font-bold text-emerald-800 rounded-xl transition-all whitespace-nowrap"
             >
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
               Doctor Login 🔐
@@ -393,17 +394,17 @@ export default function CrmHomepage() {
             <a
               href="https://wa.me/917292984244?text=Hi%20Clinaza%20team%2C%20I%20want%20to%20know%20more%20about%20Clinaza"
               target="_blank" rel="noopener noreferrer"
-              className="hidden md:flex items-center gap-2 px-4 py-2 bg-[#F7FAFC] hover:bg-slate-100 border border-slate-200 text-xs font-bold text-[#0B2450] rounded-xl transition-all"
+              className="hidden md:flex items-center gap-1.5 px-3 py-2 bg-[#F7FAFC] hover:bg-slate-100 border border-slate-200 text-xs font-bold text-[#0B2450] rounded-xl transition-all whitespace-nowrap"
             >
               <MessageSquare size={14} className="text-[#0f7a75]" />
-              WhatsApp Us
+              WhatsApp
             </a>
             <a
               href="#partner-form"
               onClick={() => setFormType('clinic')}
-              className="px-3.5 sm:px-6 py-2.5 sm:py-3 bg-[#0867E8] hover:bg-[#0756C7] text-white text-[11px] sm:text-xs font-black uppercase tracking-wider sm:tracking-widest rounded-xl transition-all shadow-lg shadow-[#0867E8]/30 flex items-center gap-1.5 sm:gap-2 whitespace-nowrap active:scale-95"
+              className="px-3 sm:px-5 py-2.5 sm:py-3 bg-[#0867E8] hover:bg-[#0756C7] text-white text-[11px] sm:text-xs font-black uppercase tracking-wider rounded-xl transition-all shadow-lg shadow-[#0867E8]/30 flex items-center gap-1.5 sm:gap-2 whitespace-nowrap active:scale-95"
             >
-              Partner <span className="hidden sm:inline">With Clinaza</span> <ArrowRight size={13} />
+              Partner <ArrowRight size={13} />
             </a>
           </div>
         </div>
@@ -411,7 +412,7 @@ export default function CrmHomepage() {
 
       <main>
         {/* ── 1. HERO (MINIMAL LUXURY) ── */}
-        <section aria-label="Hero" className="relative pt-8 sm:pt-16 pb-12 sm:pb-16 px-4 sm:px-6 max-w-5xl mx-auto space-y-8">
+        <section aria-label="Hero" className="relative pt-8 sm:pt-14 pb-12 sm:pb-16 px-4 sm:px-6 max-w-5xl mx-auto space-y-8">
           {/* Subtle Ambient Radial Glow */}
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-64 bg-gradient-to-b from-[#0867E8]/6 via-[#12A8A0]/4 to-transparent blur-3xl pointer-events-none -z-10" />
 
@@ -422,7 +423,7 @@ export default function CrmHomepage() {
                 <span className="tracking-wide">POINT-OF-CARE TREATMENT FINANCING &amp; EMIs</span>
               </div>
 
-              <h1 className="text-3xl sm:text-5.5xl font-black tracking-[-0.03em] leading-[1.12] text-[#0B2450]">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-5.5xl font-black tracking-[-0.03em] leading-[1.14] text-[#0B2450]">
                 Don't Let Treatment Cost <br />
                 <span className="bg-gradient-to-r from-[#0867E8] via-[#0088FF] to-[#12A8A0] bg-clip-text text-transparent">
                   Stop Your Patients
@@ -433,7 +434,7 @@ export default function CrmHomepage() {
                 Help eligible patients access instant treatment financing &amp; flexible monthly EMIs from <strong className="text-[#0B2450] font-bold">₹30,000 to ₹5,00,000</strong> for Dental Implants, Hair Transplants, LASIK, IVF, and Elective Surgeries.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-3 pt-1">
+              <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 pt-1">
                 <button
                   type="button"
                   onClick={() => {
@@ -442,20 +443,20 @@ export default function CrmHomepage() {
                     setShowEligibilityModal(true);
                     setEligibilityStep(1);
                   }}
-                  className="w-full sm:w-auto px-7 py-3.5 bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-black uppercase tracking-wider rounded-xl transition-all flex items-center justify-center gap-2 shadow-[0_8px_20px_rgba(8,103,232,0.25)] hover:shadow-[0_12px_28px_rgba(8,103,232,0.35)] transform active:scale-95"
+                  className="px-6 py-3.5 bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-black uppercase tracking-wider rounded-xl transition-all flex items-center justify-center gap-2 shadow-[0_8px_20px_rgba(8,103,232,0.25)] hover:shadow-[0_12px_28px_rgba(8,103,232,0.35)] transform active:scale-95"
                 >
                   <ShieldCheck size={16} /> Check Patient Eligibility
                 </button>
                 <button
                   type="button"
                   onClick={() => setShowEmiReelModal(true)}
-                  className="w-full sm:w-auto px-5 py-3.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-black uppercase tracking-wider rounded-xl transition-all flex items-center justify-center gap-2 shadow-md border border-slate-700 active:scale-95"
+                  className="px-5 py-3.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-black uppercase tracking-wider rounded-xl transition-all flex items-center justify-center gap-2 shadow-md border border-slate-700 active:scale-95"
                 >
                   <Video size={16} className="text-emerald-400" /> Watch EMI Reel (9:16)
                 </button>
                 <Link
                   to="/reactivation/login"
-                  className="w-full sm:w-auto px-5 py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-black uppercase tracking-wider rounded-xl transition-all flex items-center justify-center gap-2 shadow-md shadow-emerald-600/15"
+                  className="px-5 py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-black uppercase tracking-wider rounded-xl transition-all flex items-center justify-center gap-2 shadow-md shadow-emerald-600/15"
                 >
                   Doctor Portal →
                 </Link>
@@ -475,9 +476,9 @@ export default function CrmHomepage() {
                   className="w-full h-auto rounded-[14px] sm:rounded-[22px] object-cover aspect-[4/3]"
                 />
               </div>
-              <div className="absolute -bottom-2.5 -left-2.5 sm:-bottom-3 sm:-left-3 bg-white/90 backdrop-blur-xl border border-slate-200/80 px-4 py-2 rounded-xl sm:rounded-2xl shadow-[0_8px_24px_rgba(0,0,0,0.08)] flex items-center gap-2.5">
+              <div className="absolute -bottom-2 -left-2 sm:-bottom-3 sm:-left-3 bg-white/95 backdrop-blur-xl border border-slate-200/80 px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-xl sm:rounded-2xl shadow-[0_8px_24px_rgba(0,0,0,0.08)] flex items-center gap-2 sm:gap-2.5">
                 <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                <span className="text-[11px] font-bold text-[#0B2450] tracking-tight">Point-of-Care EMI Ready</span>
+                <span className="text-[10px] sm:text-[11px] font-bold text-[#0B2450] tracking-tight">Point-of-Care EMI Ready</span>
               </div>
             </div>
           </div>
@@ -494,57 +495,57 @@ export default function CrmHomepage() {
             </div>
 
             {/* Continuous Seamless Slideshow Marquee */}
-            <div className="relative overflow-hidden py-3 px-2 bg-white/80 backdrop-blur-md rounded-2xl border border-slate-200/80 shadow-2xs">
+            <div className="relative overflow-hidden py-3.5 px-2 bg-white/90 backdrop-blur-md rounded-2xl border border-slate-200/90 shadow-2xs">
               {/* Fade Edges */}
-              <div className="absolute left-0 inset-y-0 w-12 bg-gradient-to-r from-white via-white/80 to-transparent z-10 pointer-events-none" />
-              <div className="absolute right-0 inset-y-0 w-12 bg-gradient-to-l from-white via-white/80 to-transparent z-10 pointer-events-none" />
+              <div className="absolute left-0 inset-y-0 w-12 sm:w-16 bg-gradient-to-r from-white via-white/80 to-transparent z-10 pointer-events-none" />
+              <div className="absolute right-0 inset-y-0 w-12 sm:w-16 bg-gradient-to-l from-white via-white/80 to-transparent z-10 pointer-events-none" />
 
               <div className="flex w-max gap-4 animate-marquee hover:[animation-play-state:paused]">
                 {[
                   // 1st Set of Banks & NBFCs
-                  { name: 'HDFC Bank', sub: 'Banking Partner', color: 'from-blue-900 to-blue-700', text: 'HDFC', badge: 'Bank' },
-                  { name: 'ICICI Bank', sub: 'Digital Lending', color: 'from-orange-600 to-amber-600', text: 'ICICI', badge: 'Bank' },
-                  { name: 'Axis Bank', sub: 'Jarvis APIs', color: 'from-rose-900 to-rose-700', text: 'AXIS', badge: 'Bank' },
-                  { name: 'Bajaj Finserv', sub: 'EMI Network', color: 'from-blue-700 to-sky-600', text: 'BAJAJ', badge: 'NBFC' },
-                  { name: 'Tata Capital', sub: 'Healthcare Loan', color: 'from-sky-900 to-blue-800', text: 'TATA', badge: 'NBFC' },
-                  { name: 'Piramal Finance', sub: 'Retail Financing', color: 'from-amber-700 to-yellow-600', text: 'PIRAMAL', badge: 'NBFC' },
-                  { name: 'Kotak Bank', sub: 'Point-of-Care', color: 'from-red-700 to-rose-600', text: 'KOTAK', badge: 'Bank' },
-                  { name: 'L&T Finance', sub: 'Medical EMI', color: 'from-amber-600 to-yellow-600', text: 'L&T', badge: 'NBFC' },
-                  { name: 'Aditya Birla', sub: 'Capital Finance', color: 'from-red-800 to-amber-700', text: 'ABCL', badge: 'NBFC' },
-                  { name: 'Poonawalla Fincorp', sub: 'Consumer Finance', color: 'from-indigo-800 to-blue-600', text: 'POONAWALLA', badge: 'NBFC' },
-                  { name: 'Cholamandalam', sub: 'Chola Finance', color: 'from-red-900 to-orange-700', text: 'CHOLA', badge: 'NBFC' },
-                  { name: 'SMFG India Credit', sub: 'Fullerton Credit', color: 'from-emerald-800 to-teal-700', text: 'SMFG', badge: 'NBFC' },
-                  { name: 'Muthoot Finance', sub: 'Personal Lending', color: 'from-red-700 to-rose-800', text: 'MUTHOOT', badge: 'NBFC' },
-                  { name: 'InCred Finance', sub: 'Digital NBFC', color: 'from-blue-600 to-indigo-700', text: 'INCRED', badge: 'NBFC' },
-                  { name: 'DMI Finance', sub: 'Digital Credit', color: 'from-cyan-800 to-blue-700', text: 'DMI', badge: 'NBFC' },
-                  { name: 'LiquiLoans', sub: 'P2P NBFC', color: 'from-teal-700 to-emerald-600', text: 'LIQUI', badge: 'NBFC' },
-                  { name: 'Dhanlift', sub: 'EMI Sourcing Partner', color: 'from-emerald-700 to-teal-600', text: 'DHANLIFT', badge: 'LSP' },
+                  { id: 'hdfc', name: 'HDFC Bank', sub: 'Banking Partner', badge: 'Bank' },
+                  { id: 'icici', name: 'ICICI Bank', sub: 'Digital Lending', badge: 'Bank' },
+                  { id: 'axis', name: 'Axis Bank', sub: 'Jarvis APIs', badge: 'Bank' },
+                  { id: 'bajaj', name: 'Bajaj Finserv', sub: 'EMI Network', badge: 'NBFC' },
+                  { id: 'tata', name: 'Tata Capital', sub: 'Healthcare Loan', badge: 'NBFC' },
+                  { id: 'piramal', name: 'Piramal Finance', sub: 'Retail Financing', badge: 'NBFC' },
+                  { id: 'kotak', name: 'Kotak Bank', sub: 'Point-of-Care', badge: 'Bank' },
+                  { id: 'lt', name: 'L&T Finance', sub: 'Medical EMI', badge: 'NBFC' },
+                  { id: 'abcl', name: 'Aditya Birla', sub: 'Capital Finance', badge: 'NBFC' },
+                  { id: 'poonawalla', name: 'Poonawalla Fincorp', sub: 'Consumer Finance', badge: 'NBFC' },
+                  { id: 'chola', name: 'Cholamandalam', sub: 'Chola Finance', badge: 'NBFC' },
+                  { id: 'smfg', name: 'SMFG India Credit', sub: 'Fullerton Credit', badge: 'NBFC' },
+                  { id: 'muthoot', name: 'Muthoot Finance', sub: 'Personal Lending', badge: 'NBFC' },
+                  { id: 'incred', name: 'InCred Finance', sub: 'Digital NBFC', badge: 'NBFC' },
+                  { id: 'dmi', name: 'DMI Finance', sub: 'Digital Credit', badge: 'NBFC' },
+                  { id: 'liquiloans', name: 'LiquiLoans', sub: 'P2P NBFC', badge: 'NBFC' },
+                  { id: 'dhanlift', name: 'Dhanlift', sub: 'EMI Sourcing Partner', badge: 'LSP' },
                   
                   // 2nd Set for Seamless Infinite Loop
-                  { name: 'HDFC Bank', sub: 'Banking Partner', color: 'from-blue-900 to-blue-700', text: 'HDFC', badge: 'Bank' },
-                  { name: 'ICICI Bank', sub: 'Digital Lending', color: 'from-orange-600 to-amber-600', text: 'ICICI', badge: 'Bank' },
-                  { name: 'Axis Bank', sub: 'Jarvis APIs', color: 'from-rose-900 to-rose-700', text: 'AXIS', badge: 'Bank' },
-                  { name: 'Bajaj Finserv', sub: 'EMI Network', color: 'from-blue-700 to-sky-600', text: 'BAJAJ', badge: 'NBFC' },
-                  { name: 'Tata Capital', sub: 'Healthcare Loan', color: 'from-sky-900 to-blue-800', text: 'TATA', badge: 'NBFC' },
-                  { name: 'Piramal Finance', sub: 'Retail Financing', color: 'from-amber-700 to-yellow-600', text: 'PIRAMAL', badge: 'NBFC' },
-                  { name: 'Kotak Bank', sub: 'Point-of-Care', color: 'from-red-700 to-rose-600', text: 'KOTAK', badge: 'Bank' },
-                  { name: 'L&T Finance', sub: 'Medical EMI', color: 'from-amber-600 to-yellow-600', text: 'L&T', badge: 'NBFC' },
-                  { name: 'Aditya Birla', sub: 'Capital Finance', color: 'from-red-800 to-amber-700', text: 'ABCL', badge: 'NBFC' },
-                  { name: 'Poonawalla Fincorp', sub: 'Consumer Finance', color: 'from-indigo-800 to-blue-600', text: 'POONAWALLA', badge: 'NBFC' },
-                  { name: 'Cholamandalam', sub: 'Chola Finance', color: 'from-red-900 to-orange-700', text: 'CHOLA', badge: 'NBFC' },
-                  { name: 'SMFG India Credit', sub: 'Fullerton Credit', color: 'from-emerald-800 to-teal-700', text: 'SMFG', badge: 'NBFC' },
-                  { name: 'Muthoot Finance', sub: 'Personal Lending', color: 'from-red-700 to-rose-800', text: 'MUTHOOT', badge: 'NBFC' },
-                  { name: 'InCred Finance', sub: 'Digital NBFC', color: 'from-blue-600 to-indigo-700', text: 'INCRED', badge: 'NBFC' },
-                  { name: 'DMI Finance', sub: 'Digital Credit', color: 'from-cyan-800 to-blue-700', text: 'DMI', badge: 'NBFC' },
-                  { name: 'LiquiLoans', sub: 'P2P NBFC', color: 'from-teal-700 to-emerald-600', text: 'LIQUI', badge: 'NBFC' },
-                  { name: 'Dhanlift', sub: 'EMI Sourcing Partner', color: 'from-emerald-700 to-teal-600', text: 'DHANLIFT', badge: 'LSP' }
+                  { id: 'hdfc', name: 'HDFC Bank', sub: 'Banking Partner', badge: 'Bank' },
+                  { id: 'icici', name: 'ICICI Bank', sub: 'Digital Lending', badge: 'Bank' },
+                  { id: 'axis', name: 'Axis Bank', sub: 'Jarvis APIs', badge: 'Bank' },
+                  { id: 'bajaj', name: 'Bajaj Finserv', sub: 'EMI Network', badge: 'NBFC' },
+                  { id: 'tata', name: 'Tata Capital', sub: 'Healthcare Loan', badge: 'NBFC' },
+                  { id: 'piramal', name: 'Piramal Finance', sub: 'Retail Financing', badge: 'NBFC' },
+                  { id: 'kotak', name: 'Kotak Bank', sub: 'Point-of-Care', badge: 'Bank' },
+                  { id: 'lt', name: 'L&T Finance', sub: 'Medical EMI', badge: 'NBFC' },
+                  { id: 'abcl', name: 'Aditya Birla', sub: 'Capital Finance', badge: 'NBFC' },
+                  { id: 'poonawalla', name: 'Poonawalla Fincorp', sub: 'Consumer Finance', badge: 'NBFC' },
+                  { id: 'chola', name: 'Cholamandalam', sub: 'Chola Finance', badge: 'NBFC' },
+                  { id: 'smfg', name: 'SMFG India Credit', sub: 'Fullerton Credit', badge: 'NBFC' },
+                  { id: 'muthoot', name: 'Muthoot Finance', sub: 'Personal Lending', badge: 'NBFC' },
+                  { id: 'incred', name: 'InCred Finance', sub: 'Digital NBFC', badge: 'NBFC' },
+                  { id: 'dmi', name: 'DMI Finance', sub: 'Digital Credit', badge: 'NBFC' },
+                  { id: 'liquiloans', name: 'LiquiLoans', sub: 'P2P NBFC', badge: 'NBFC' },
+                  { id: 'dhanlift', name: 'Dhanlift', sub: 'EMI Sourcing Partner', badge: 'LSP' }
                 ].map((item, idx) => (
                   <div 
                     key={idx} 
-                    className="flex items-center gap-3 px-4 py-2 rounded-xl bg-slate-50 border border-slate-200/90 shrink-0 transition-all hover:bg-white hover:border-slate-300 hover:shadow-xs"
+                    className="flex items-center gap-3 px-3.5 py-2 rounded-xl bg-slate-50/90 border border-slate-200/90 shrink-0 transition-all hover:bg-white hover:border-slate-300 hover:shadow-xs"
                   >
-                    <div className={`w-8 h-8 rounded-lg bg-gradient-to-br ${item.color} flex items-center justify-center text-white font-black text-[9px] tracking-tight shadow-xs shrink-0`}>
-                      {item.text}
+                    <div className="w-8 h-8 rounded-lg overflow-hidden flex items-center justify-center shrink-0 shadow-2xs">
+                      <BankSvgLogo id={item.id} size={32} />
                     </div>
                     <div className="text-left">
                       <div className="flex items-center gap-1.5">

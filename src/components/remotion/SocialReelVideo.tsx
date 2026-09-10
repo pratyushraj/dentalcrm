@@ -9,12 +9,24 @@ import {
 } from 'remotion';
 
 export interface SocialReelProps {
-  hookTitle: string;
-  points: string[];
-  callToAction: string;
-  clinicName: string;
+  hookTitle?: string;
+  points?: string[];
+  callToAction?: string;
+  clinicName?: string;
   accentColor?: string;
 }
+
+export const socialReelDefaultProps: SocialReelProps = {
+  hookTitle: '3 Reasons To Choose Invisible Aligners Over Braces 🦷✨',
+  points: [
+    'Virtually Invisible & Discreet in Photos',
+    'Removable for Easy Eating & Brushing',
+    'Predictable Results with 3D Digital Smile Simulation'
+  ],
+  callToAction: 'Book Free 3D Scan & EMI Consultation',
+  clinicName: 'Clinaza Partner Dental Care',
+  accentColor: '#10B981'
+};
 
 export const SocialReelComposition: React.FC<SocialReelProps> = ({
   hookTitle = '3 Reasons To Choose Invisible Aligners Over Braces 🦷✨',

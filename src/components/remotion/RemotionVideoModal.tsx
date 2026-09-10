@@ -156,15 +156,15 @@ export const RemotionVideoModal: React.FC<RemotionVideoModalProps> = ({
                 </div>
                 <div className="flex justify-between text-slate-400">
                   <span>Procedures:</span>
-                  <strong className="text-white">{defaultEstimate.items.length} items</strong>
+                  <strong className="text-white">{(defaultEstimate.items || []).length} items</strong>
                 </div>
                 <div className="flex justify-between text-slate-400">
                   <span>Total Value:</span>
-                  <strong className="text-white">₹{defaultEstimate.grandTotal.toLocaleString('en-IN')}</strong>
+                  <strong className="text-white">₹{(defaultEstimate.grandTotal || 0).toLocaleString('en-IN')}</strong>
                 </div>
                 <div className="flex justify-between pt-2 border-t border-slate-800/80 text-emerald-400 font-bold">
                   <span>Monthly EMI:</span>
-                  <span className="text-sm">₹{defaultEstimate.monthlyEmi.toLocaleString('en-IN')} / mo</span>
+                  <span className="text-sm">₹{(defaultEstimate.monthlyEmi || 0).toLocaleString('en-IN')} / mo</span>
                 </div>
               </div>
             ) : mode === 'clinaza-emi' ? (
@@ -192,7 +192,7 @@ export const RemotionVideoModal: React.FC<RemotionVideoModalProps> = ({
                 <div className="pt-2 border-t border-slate-800/80">
                   <span className="text-slate-400 block mb-1">Key Talking Points:</span>
                   <ul className="space-y-1 text-slate-300">
-                    {defaultSocial.points.map((p, i) => (
+                    {(defaultSocial.points || []).map((p, i) => (
                       <li key={i} className="flex items-center gap-1.5">
                         <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
                         {p}

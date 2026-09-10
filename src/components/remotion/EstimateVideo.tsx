@@ -16,16 +16,31 @@ export interface EstimateItem {
 }
 
 export interface EstimateVideoProps {
-  patientName: string;
-  clinicName: string;
+  patientName?: string;
+  clinicName?: string;
   doctorName?: string;
-  items: EstimateItem[];
-  grandTotal: number;
-  monthlyEmi: number;
+  items?: EstimateItem[];
+  grandTotal?: number;
+  monthlyEmi?: number;
   tenureMonths?: number;
   clinicPhone?: string;
   clinicAddress?: string;
 }
+
+export const estimateDefaultProps: EstimateVideoProps = {
+  patientName: 'Vikram Sharma',
+  clinicName: 'Dr. Aryan Dental & Implant Clinic',
+  doctorName: 'Dr. Aryan Parmar',
+  items: [
+    { name: 'Dental Implant (Titanium)', cost: 35000, qty: 1, tooth: '16' },
+    { name: 'Zirconia Crown', cost: 12000, qty: 1, tooth: '16' }
+  ],
+  grandTotal: 47000,
+  monthlyEmi: 2150,
+  tenureMonths: 24,
+  clinicPhone: '+91 7292984244',
+  clinicAddress: 'Patliputra Colony, Patna'
+};
 
 export const EstimateVideoComposition: React.FC<EstimateVideoProps> = ({
   patientName = 'Patient',

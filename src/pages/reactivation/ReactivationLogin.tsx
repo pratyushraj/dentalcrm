@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
 import { useNavigate, Link } from 'react-router-dom';
 import { useSession } from '@/contexts/SessionContext';
+import { SEOHead } from '@/components/seo/SEOHead';
 import { toast } from 'sonner';
 import { motion } from 'framer-motion';
 import {
@@ -88,6 +89,36 @@ const ReactivationLogin: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-slate-950 flex flex-col justify-center py-12 sm:px-6 lg:px-8 relative overflow-hidden">
+      <SEOHead
+        title="Doctor Portal Login | Clinaza Dental CRM"
+        description="Secure clinic sign-in for dentists and staff. Manage patient records, automated WhatsApp follow-ups, treatment estimates, and zero-debt patient financing."
+        keywords={[
+          'dental crm login',
+          'dentist portal login',
+          'clinic management software',
+          'dental patient recall software',
+          'clinaza doctor login',
+          'dental practice crm india'
+        ]}
+        canonicalUrl="https://clinaza.in/reactivation/login"
+        image="https://clinaza.in/og-doctor-login.png"
+        imageAlt="Clinaza Dental CRM Doctor Portal Login & Clinic Management"
+        robots="index, follow"
+        jsonLd={{
+          '@context': 'https://schema.org',
+          '@type': 'WebApplication',
+          'name': 'Clinaza Dental CRM Doctor Portal',
+          'url': 'https://clinaza.in/reactivation/login',
+          'applicationCategory': 'BusinessApplication',
+          'operatingSystem': 'All',
+          'description': 'Doctor and clinic staff management dashboard for dental patient records, recalls, and treatment financing.',
+          'provider': {
+            '@type': 'Organization',
+            'name': 'Clinaza',
+            'url': 'https://clinaza.in'
+          }
+        }}
+      />
       
       {/* Decorative premium gradients */}
       <div className="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] bg-teal-500/10 rounded-full blur-[100px] pointer-events-none" />

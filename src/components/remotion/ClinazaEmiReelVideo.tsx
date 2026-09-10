@@ -23,23 +23,23 @@ export interface ClinazaEmiReelProps {
 }
 
 export const clinazaEmiDefaultProps: ClinazaEmiReelProps = {
-  headline: "₹65,000 Bill?! Don't Delay Your Dental Treatment 🦷💸",
+  headline: "Dentists: Stop Patients Walking Out on ₹65,000 Estimates! 🦷💼",
   treatmentName: "Dental Implants & Aligners",
   totalCost: 65000,
   monthlyEmi: 2650,
   tenureMonths: 24,
   benefits: [
-    '⚡ 2-Minute Instant Digital Check',
-    '📄 100% Paperless eKYC',
-    '🏦 Funded by 55+ Banks & NBFCs',
-    '💳 ₹0 Down Payment Available'
+    '⚡ Upfront Clinic Payout in 24 Hours',
+    '📄 100% Paperless Digital eKYC',
+    '🏦 Backed by 55+ Banks & NBFCs',
+    '🚀 Increase Case Acceptance by 40%'
   ],
   partnerLendersCount: 55,
   websiteUrl: 'clinaza.in',
 };
 
 export const ClinazaEmiReelComposition: React.FC<ClinazaEmiReelProps> = ({
-  headline = "₹65,000 Bill?! Don't Delay Your Dental Treatment 🦷💸",
+  headline = "Dentists: Stop Patients Walking Out on ₹65,000 Estimates! 🦷💼",
   treatmentName = 'Dental Implants & Aligners',
   totalCost = 65000,
   monthlyEmi = 2650,
@@ -109,7 +109,7 @@ export const ClinazaEmiReelComposition: React.FC<ClinazaEmiReelProps> = ({
               CLINAZA
             </span>
             <span style={{ fontSize: 10, color: '#94A3B8', fontWeight: 800, letterSpacing: '0.05em', textTransform: 'uppercase' }}>
-              Patient Financing
+              Clinic Partner Network
             </span>
           </div>
         </div>
@@ -126,7 +126,7 @@ export const ClinazaEmiReelComposition: React.FC<ClinazaEmiReelProps> = ({
             boxShadow: '0 0 25px rgba(16, 185, 129, 0.4)',
           }}
         >
-          Easy Dental EMI
+          🚀 For Dental Clinics
         </div>
       </div>
 
@@ -158,7 +158,7 @@ export const ClinazaEmiReelComposition: React.FC<ClinazaEmiReelProps> = ({
 };
 
 // =========================================================================
-// SCENE 1: THE SHOCKED PATIENT (VIRAL EMOTIONAL HOOK)
+// SCENE 1: THE DENTIST HOOK - STOP LOSING PATIENTS TO ESTIMATE SHOCK
 // =========================================================================
 const Scene1ShockedPatient: React.FC<{ totalCost: number; treatmentName: string; fps: number }> = ({
   totalCost,
@@ -193,7 +193,7 @@ const Scene1ShockedPatient: React.FC<{ totalCost: number; treatmentName: string;
         />
       </div>
 
-      {/* High-Impact Dialogue Overlay (Positioned at TOP to keep patient face and bill clear) */}
+      {/* High-Impact B2B Dentist Dialogue Overlay */}
       <div
         style={{
           position: 'absolute',
@@ -215,14 +215,14 @@ const Scene1ShockedPatient: React.FC<{ totalCost: number; treatmentName: string;
             borderRadius: 999,
             backgroundColor: 'rgba(239, 68, 68, 0.96)',
             color: '#FFFFFF',
-            fontSize: 26,
+            fontSize: 25,
             fontWeight: 900,
             textTransform: 'uppercase',
             letterSpacing: '0.08em',
             boxShadow: '0 0 35px rgba(239, 68, 68, 0.7)',
           }}
         >
-          😱 ₹{totalCost.toLocaleString('en-IN')} Treatment Bill?!
+          📉 Losing Patients on ₹{totalCost.toLocaleString('en-IN')} Estimates?
         </div>
 
         <div
@@ -237,10 +237,10 @@ const Scene1ShockedPatient: React.FC<{ totalCost: number; treatmentName: string;
           }}
         >
           <div style={{ fontSize: 38, fontWeight: 900, color: '#FFFFFF', lineHeight: 1.2 }}>
-            Don't Cancel Your Treatment — Pay Just <span style={{ color: '#34D399' }}>₹2,650/Mo!</span>
+            Stop Patients Walking Out — Offer <span style={{ color: '#34D399' }}>Instant EMIs!</span>
           </div>
           <div style={{ fontSize: 20, color: '#FECACA', marginTop: 10, fontWeight: 700 }}>
-            Implants • Invisible Aligners • Root Canals • Crowns
+            Boost Case Acceptance for Implants • Aligners • Root Canals
           </div>
         </div>
       </div>
@@ -249,7 +249,7 @@ const Scene1ShockedPatient: React.FC<{ totalCost: number; treatmentName: string;
 };
 
 // =========================================================================
-// SCENE 2: DOCTOR OFFERS CLINAZA SOLUTION
+// SCENE 2: THE CLINIC SOLUTION - UPFRONT PAYOUT & INSTANT EMI
 // =========================================================================
 const Scene2DoctorSolution: React.FC<{ monthlyEmi: number; tenureMonths: number; fps: number }> = ({
   monthlyEmi,
@@ -283,7 +283,7 @@ const Scene2DoctorSolution: React.FC<{ monthlyEmi: number; tenureMonths: number;
         />
       </div>
 
-      {/* Doctor Solution Dialogue & Glowing EMI Card (Positioned at TOP to keep doctor and tablet visible) */}
+      {/* Doctor Solution Dialogue & Glowing EMI Card */}
       <div
         style={{
           position: 'absolute',
@@ -311,7 +311,7 @@ const Scene2DoctorSolution: React.FC<{ monthlyEmi: number; tenureMonths: number;
             boxShadow: '0 0 35px rgba(16, 185, 129, 0.6)',
           }}
         >
-          🩺 Doctor: "Convert Your Bill Into Easy EMIs!"
+          🚀 40% Higher Case Acceptance For Your Clinic!
         </div>
 
         {/* Hero Solution Card */}
@@ -328,13 +328,13 @@ const Scene2DoctorSolution: React.FC<{ monthlyEmi: number; tenureMonths: number;
           }}
         >
           <div style={{ fontSize: 18, color: '#D1FAE5', textTransform: 'uppercase', fontWeight: 900, letterSpacing: '0.1em' }}>
-            Start Treatment Today For Just
+            Patient Pays Easy Monthly EMI
           </div>
           <div style={{ fontSize: 68, fontWeight: 900, color: '#FFFFFF', margin: '6px 0', lineHeight: 1.1 }}>
             ₹{monthlyEmi.toLocaleString('en-IN')} <span style={{ fontSize: 24, color: '#A7F3D0' }}>/ month</span>
           </div>
           <div style={{ fontSize: 18, color: '#E2E8F0', fontWeight: 700 }}>
-            ⚡ {tenureMonths} Months Flexible Tenure • 55+ Banks & NBFCs
+            ⚡ Upfront Clinic Payout • Backed by 55+ Banks & NBFCs
           </div>
         </div>
       </div>
@@ -343,7 +343,7 @@ const Scene2DoctorSolution: React.FC<{ monthlyEmi: number; tenureMonths: number;
 };
 
 // =========================================================================
-// SCENE 3: 5-STEP 2-MIN DIGITAL APPLICATION FLOW (REALISTIC MOBILE MOCKUP)
+// SCENE 3: HOW IT WORKS AT CLINIC RECEPTION (2-MIN DIGITAL PROCESS)
 // =========================================================================
 const Scene3StepByStepDemo: React.FC<{ fps: number }> = ({ fps }) => {
   const frame = useCurrentFrame();
@@ -356,11 +356,11 @@ const Scene3StepByStepDemo: React.FC<{ fps: number }> = ({ fps }) => {
   else if (frame >= 30) activeStep = 2;
 
   const steps = [
-    { num: 1, title: 'Visit Site', icon: '🌐' },
-    { num: 2, title: 'Phone OTP', icon: '📱' },
-    { num: 3, title: 'Verify', icon: '🔒' },
-    { num: 4, title: 'Instant KYC', icon: '📋' },
-    { num: 5, title: 'Approved', icon: '🎉' },
+    { num: 1, title: 'Portal Link', icon: '🌐' },
+    { num: 2, title: 'Patient Phone', icon: '📱' },
+    { num: 3, title: 'Instant OTP', icon: '🔒' },
+    { num: 4, title: '55+ Banks', icon: '📋' },
+    { num: 5, title: 'Clinic Paid', icon: '🎉' },
   ];
 
   return (
@@ -387,14 +387,14 @@ const Scene3StepByStepDemo: React.FC<{ fps: number }> = ({ fps }) => {
             marginBottom: 6,
           }}
         >
-          ⚡ Takes Less Than 2 Minutes
+          ⚡ Seamless 2-Minute Process at Reception
         </span>
         <h2 style={{ fontSize: 48, fontWeight: 900, color: '#FFFFFF', margin: 0, letterSpacing: '-0.02em' }}>
-          How to Apply on <span style={{ color: '#38BDF8' }}>clinaza.in</span>
+          How Clinaza Works at <span style={{ color: '#38BDF8' }}>Your Clinic</span>
         </h2>
       </div>
 
-      {/* 5 Step Indicator Nodes (Larger & clearer) */}
+      {/* 5 Step Indicator Nodes */}
       <div
         style={{
           display: 'grid',
@@ -451,7 +451,7 @@ const Scene3StepByStepDemo: React.FC<{ fps: number }> = ({ fps }) => {
           overflow: 'hidden',
         }}
       >
-        {/* Dynamic Island / Speaker Notch & Status Bar */}
+        {/* Dynamic Island & Status Bar */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', marginBottom: 10, padding: '0 10px' }}>
           <span style={{ fontSize: 16, fontWeight: 900, color: '#94A3B8' }}>9:41</span>
           <div style={{ width: '130px', height: '24px', backgroundColor: '#000000', borderRadius: '999px' }} />
@@ -474,7 +474,7 @@ const Scene3StepByStepDemo: React.FC<{ fps: number }> = ({ fps }) => {
         >
           <span style={{ fontSize: 16, color: '#10B981' }}>🔒</span>
           <span style={{ fontSize: 17, fontWeight: 800, color: '#F8FAFC', letterSpacing: '0.02em' }}>
-            clinaza.in<span style={{ color: '#94A3B8' }}>/apply</span>
+            clinaza.in<span style={{ color: '#94A3B8' }}>/partner-desk</span>
           </span>
         </div>
 
@@ -483,13 +483,13 @@ const Scene3StepByStepDemo: React.FC<{ fps: number }> = ({ fps }) => {
           {activeStep === 1 && (
             <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', gap: 16, alignItems: 'center' }}>
               <div style={{ padding: '8px 20px', borderRadius: 999, backgroundColor: 'rgba(16, 185, 129, 0.25)', color: '#34D399', fontSize: 16, fontWeight: 900 }}>
-                🦷 Clinaza Patient EMI Portal
+                🦷 Clinaza Reception Portal
               </div>
               <div style={{ fontSize: 38, fontWeight: 900, color: '#FFFFFF', lineHeight: 1.2 }}>
-                Instant Dental Loan in 2 Mins
+                Instant Patient Financing
               </div>
               <div style={{ fontSize: 20, color: '#CBD5E1', fontWeight: 600 }}>
-                Easy Monthly EMIs • ₹0 Down • 55+ Banks
+                Upfront Payout • Zero Clinic Risk • 55+ Banks
               </div>
               <div
                 style={{
@@ -504,7 +504,7 @@ const Scene3StepByStepDemo: React.FC<{ fps: number }> = ({ fps }) => {
                   marginTop: 6,
                 }}
               >
-                Apply Now &rarr;
+                Start Patient Application &rarr;
               </div>
             </div>
           )}
@@ -512,10 +512,10 @@ const Scene3StepByStepDemo: React.FC<{ fps: number }> = ({ fps }) => {
           {activeStep === 2 && (
             <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', gap: 16, alignItems: 'center' }}>
               <div style={{ fontSize: 36, fontWeight: 900, color: '#FFFFFF' }}>
-                Enter Mobile Number
+                Enter Patient Phone
               </div>
               <div style={{ fontSize: 20, color: '#94A3B8', fontWeight: 600 }}>
-                We will send an OTP for paperless verification
+                Instant OTP sent to patient mobile
               </div>
               <div
                 style={{
@@ -546,7 +546,7 @@ const Scene3StepByStepDemo: React.FC<{ fps: number }> = ({ fps }) => {
                   boxShadow: '0 10px 30px rgba(56, 189, 248, 0.5)',
                 }}
               >
-                Send OTP &rarr;
+                Send OTP to Patient &rarr;
               </div>
             </div>
           )}
@@ -557,7 +557,7 @@ const Scene3StepByStepDemo: React.FC<{ fps: number }> = ({ fps }) => {
                 Verify 6-Digit OTP
               </div>
               <div style={{ fontSize: 20, color: '#94A3B8', fontWeight: 600 }}>
-                Code sent to +91 98765 43210
+                100% Paperless Digital eKYC
               </div>
               <div style={{ display: 'flex', gap: 10, justifyContent: 'center' }}>
                 {['4', '8', '2', '9', '1', '0'].map((digit, idx) => (
@@ -583,7 +583,7 @@ const Scene3StepByStepDemo: React.FC<{ fps: number }> = ({ fps }) => {
                 ))}
               </div>
               <div style={{ fontSize: 20, color: '#34D399', fontWeight: 900 }}>
-                ✓ OTP Verified Successfully!
+                ✓ Patient Verified in 30 Seconds!
               </div>
             </div>
           )}
@@ -591,18 +591,18 @@ const Scene3StepByStepDemo: React.FC<{ fps: number }> = ({ fps }) => {
           {activeStep === 4 && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: 14, width: '95%', margin: '0 auto' }}>
               <div style={{ fontSize: 32, fontWeight: 900, color: '#FFFFFF', textAlign: 'center' }}>
-                Instant Digital KYC
+                Automated Bank Match
               </div>
               <div style={{ padding: '16px 20px', borderRadius: 16, backgroundColor: '#020617', border: '2px solid #334155' }}>
-                <span style={{ fontSize: 14, color: '#94A3B8', display: 'block', fontWeight: 700 }}>PAN Number</span>
-                <span style={{ fontSize: 24, fontWeight: 900, color: '#FFFFFF' }}>ABCDE1234F</span>
+                <span style={{ fontSize: 14, color: '#94A3B8', display: 'block', fontWeight: 700 }}>Clinic Treatment Bill</span>
+                <span style={{ fontSize: 24, fontWeight: 900, color: '#34D399' }}>₹65,000 (Implants / Aligners)</span>
               </div>
               <div style={{ padding: '16px 20px', borderRadius: 16, backgroundColor: '#020617', border: '2px solid #334155' }}>
-                <span style={{ fontSize: 14, color: '#94A3B8', display: 'block', fontWeight: 700 }}>Treatment Estimate</span>
-                <span style={{ fontSize: 24, fontWeight: 900, color: '#34D399' }}>₹65,000 (Dental Implants)</span>
+                <span style={{ fontSize: 14, color: '#94A3B8', display: 'block', fontWeight: 700 }}>Multi-Lender Bidding</span>
+                <span style={{ fontSize: 24, fontWeight: 900, color: '#FFFFFF' }}>55+ Banks & NBFCs Competing</span>
               </div>
               <div style={{ fontSize: 18, color: '#A7F3D0', fontWeight: 800, textAlign: 'center' }}>
-                ⚡ Instant Approval across 55+ Banks & NBFCs
+                ⚡ 92% High Approval Rate for Your Clinic
               </div>
             </div>
           )}
@@ -610,10 +610,10 @@ const Scene3StepByStepDemo: React.FC<{ fps: number }> = ({ fps }) => {
           {activeStep === 5 && (
             <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', gap: 14, alignItems: 'center' }}>
               <div style={{ padding: '6px 18px', borderRadius: 999, backgroundColor: 'rgba(16, 185, 129, 0.25)', color: '#34D399', fontSize: 16, fontWeight: 900 }}>
-                🎉 LOAN APPROVED INSTANTLY
+                🎉 TREATMENT FUNDED UPFRONT
               </div>
               <div style={{ fontSize: 34, fontWeight: 900, color: '#FFFFFF', lineHeight: 1.1 }}>
-                ₹65,000 Approved
+                ₹65,000 Paid to Clinic
               </div>
               <div
                 style={{
@@ -625,13 +625,13 @@ const Scene3StepByStepDemo: React.FC<{ fps: number }> = ({ fps }) => {
                 }}
               >
                 <div style={{ fontSize: 15, color: '#D1FAE5', textTransform: 'uppercase', fontWeight: 900 }}>
-                  Selected Dental EMI Plan
+                  Patient EMI Confirmed
                 </div>
                 <div style={{ fontSize: 44, fontWeight: 900, color: '#FFFFFF', margin: '4px 0' }}>
                   ₹2,650 <span style={{ fontSize: 20, color: '#A7F3D0' }}>/ mo</span>
                 </div>
                 <div style={{ fontSize: 16, color: '#E2E8F0', fontWeight: 700 }}>
-                  24 Months • ₹0 Down Payment
+                  Zero Follow-Up Required from Doctor
                 </div>
               </div>
               <div
@@ -646,7 +646,7 @@ const Scene3StepByStepDemo: React.FC<{ fps: number }> = ({ fps }) => {
                   boxShadow: '0 10px 30px rgba(16, 185, 129, 0.5)',
                 }}
               >
-                Begin Treatment Today 🦷
+                Start Treatment Immediately 🦷
               </div>
             </div>
           )}
@@ -660,7 +660,7 @@ const Scene3StepByStepDemo: React.FC<{ fps: number }> = ({ fps }) => {
 };
 
 // =========================================================================
-// SCENE 4: HAPPY PATIENT & FINAL CONVERSION CTA
+// SCENE 4: DENTIST PARTNERSHIP CALL TO ACTION
 // =========================================================================
 const Scene4HappyPatientCta: React.FC<{
   websiteUrl: string;
@@ -672,7 +672,7 @@ const Scene4HappyPatientCta: React.FC<{
 
   return (
     <AbsoluteFill style={{ opacity, zIndex: 10 }}>
-      {/* Background Cinematic AI Happy Patient Image */}
+      {/* Background Cinematic AI Happy Doctor & Clinic Image */}
       <div style={{ position: 'absolute', inset: 0, overflow: 'hidden' }}>
         <Img
           src={staticFile('assets/reel/scene4-happy-patient.jpg')}
@@ -708,11 +708,11 @@ const Scene4HappyPatientCta: React.FC<{
         }}
       >
         <div>
-          <h2 style={{ fontSize: 52, fontWeight: 900, color: '#FFFFFF', margin: 0, letterSpacing: '-0.02em', lineHeight: 1.15 }}>
-            Say "Yes" to Healthy Smiles 😁
+          <h2 style={{ fontSize: 50, fontWeight: 900, color: '#FFFFFF', margin: 0, letterSpacing: '-0.02em', lineHeight: 1.15 }}>
+            Grow Your Clinic Revenue 🚀
           </h2>
           <p style={{ fontSize: 22, color: '#CBD5E1', margin: '6px 0 0 0', fontWeight: 600 }}>
-            Ask your dentist for Clinaza EMI or check online.
+            ₹0 Setup Fee • Instant Upfront Payout • 55+ Lenders
           </p>
         </div>
 
@@ -729,8 +729,8 @@ const Scene4HappyPatientCta: React.FC<{
             boxShadow: '0 25px 60px rgba(16, 185, 129, 0.5)',
           }}
         >
-          <span style={{ fontSize: 30, fontWeight: 900, color: '#020617', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-            Visit {websiteUrl} &rarr;
+          <span style={{ fontSize: 28, fontWeight: 900, color: '#020617', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+            PARTNER YOUR CLINIC &rarr; {websiteUrl}
           </span>
         </div>
 
@@ -744,12 +744,12 @@ const Scene4HappyPatientCta: React.FC<{
             borderRadius: 20,
             backgroundColor: 'rgba(15, 23, 42, 0.95)',
             border: '1.5px solid rgba(255, 255, 255, 0.2)',
-            fontSize: 18,
+            fontSize: 17,
             fontWeight: 800,
             color: '#34D399',
           }}
         >
-          <span>📞 Call / WhatsApp: 7292984244 • Backed by {partnerLendersCount}+ Banks</span>
+          <span>📞 Doctor Partnership Helpline: 7292984244 • Backed by {partnerLendersCount}+ Banks</span>
         </div>
       </div>
     </AbsoluteFill>

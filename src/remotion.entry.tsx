@@ -26,7 +26,7 @@ export const RemotionRoot: React.FC = () => {
             "🏦 Funded by RBI-Regulated Banks & NBFCs",
             "💳 0 Down Payment Options Available"
           ],
-          partnerLendersCount: 15,
+          partnerLendersCount: 55,
           websiteUrl: "clinaza.in"
         }}
       />

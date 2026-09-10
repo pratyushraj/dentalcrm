@@ -1983,8 +1983,9 @@ const ReactivationCustomers: React.FC = () => {
           console.error('Error inserting auto-appointment:', apptErr);
         }
       }
-    } catch (err) {
+    } catch (err: any) {
       console.error('Error saving patient to database:', err);
+      toast.error(err.message || 'Failed to save patient record. Please try again.');
     }
   }, [clinicId, editingCustomer]);
 

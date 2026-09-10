@@ -51,12 +51,19 @@ button, a, [role="button"], [role="tab"], [role="option"], label {
   will-change: transform;
 }
 
-.animate-marquee:hover {
+.animate-marquee-slow {
+  animation: marquee 45s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee:hover,
+.animate-marquee-slow:hover {
   animation-play-state: paused;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .animate-marquee {
+  .animate-marquee,
+  .animate-marquee-slow {
     animation: none;
   }
 }

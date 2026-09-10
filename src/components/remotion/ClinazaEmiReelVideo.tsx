@@ -222,7 +222,7 @@ const Scene1ShockedPatient: React.FC<{ totalCost: number; treatmentName: string;
             boxShadow: '0 0 35px rgba(239, 68, 68, 0.7)',
           }}
         >
-          😱 "₹{totalCost.toLocaleString('en-IN')} Treatment Bill?!"
+          😱 ₹{totalCost.toLocaleString('en-IN')} Treatment Bill?!
         </div>
 
         <div
@@ -237,10 +237,10 @@ const Scene1ShockedPatient: React.FC<{ totalCost: number; treatmentName: string;
           }}
         >
           <div style={{ fontSize: 38, fontWeight: 900, color: '#FFFFFF', lineHeight: 1.2 }}>
-            Don't Delay Your Dental Care Because of High Expenses.
+            Don't Cancel Your Treatment — Pay Just <span style={{ color: '#34D399' }}>₹2,650/Mo!</span>
           </div>
           <div style={{ fontSize: 20, color: '#FECACA', marginTop: 10, fontWeight: 700 }}>
-            {treatmentName} • Implants • Aligners • Root Canals
+            Implants • Invisible Aligners • Root Canals • Crowns
           </div>
         </div>
       </div>

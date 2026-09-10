@@ -485,13 +485,6 @@ export default function CrmHomepage() {
                 >
                   <ShieldCheck size={16} /> Check Patient Eligibility
                 </button>
-                <button
-                  type="button"
-                  onClick={() => setShowEmiReelModal(true)}
-                  className="px-5 py-3.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-black uppercase tracking-wider rounded-xl transition-all flex items-center justify-center gap-2 shadow-md border border-slate-700 active:scale-95"
-                >
-                  <Video size={16} className="text-emerald-400" /> Watch EMI Reel (9:16)
-                </button>
                 <Link
                   to="/reactivation/login"
                   className="px-5 py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-black uppercase tracking-wider rounded-xl transition-all flex items-center justify-center gap-2 shadow-md shadow-emerald-600/15"
@@ -1093,97 +1086,138 @@ export default function CrmHomepage() {
           </div>
         </section>
 
-        {/* ── 6. EMI CALCULATOR ── */}
+        {/* ── 6. EMI CALCULATOR & INSTANT EMI VIDEO ── */}
         <section aria-label="EMI Calculator" className="py-12 sm:py-16 px-4 sm:px-6 bg-[#F7FAFC] border-y border-slate-200/60">
-          <div className="max-w-4xl mx-auto space-y-8">
+          <div className="max-w-6xl mx-auto space-y-8">
             <div className="text-center space-y-2">
-              <span className="text-[10px] font-black text-[#0f7a75] uppercase tracking-widest">COST PLANNER</span>
-              <h2 className="text-2xl sm:text-4xl font-black text-[#0B2450]">See What the EMI Could Look Like</h2>
+              <span className="text-[10px] font-black text-[#0f7a75] uppercase tracking-widest">COST PLANNER &amp; CLINIC WALKTHROUGH</span>
+              <h2 className="text-2xl sm:text-4xl font-black text-[#0B2450]">Calculate EMI &amp; See How It Works</h2>
               <p className="text-xs sm:text-sm text-slate-600">Indicative estimate only. Actual rate depends on lender assessment.</p>
             </div>
 
-            <div className="bg-white border border-slate-200 rounded-3xl shadow-sm overflow-hidden">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
-                {/* Left: Controls */}
-                <div className="p-6 sm:p-8 space-y-6 border-b md:border-b-0 md:border-r border-slate-100">
-                  <div className="space-y-3">
-                    <div className="flex justify-between items-center">
-                      <label className="text-xs font-black text-[#0B2450] uppercase tracking-wider">Treatment Amount</label>
-                      <span className="text-sm font-black text-[#0867E8]">₹{emiAmount.toLocaleString('en-IN')}</span>
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+              {/* Left Column: Interactive Calculator (7 cols) */}
+              <div className="lg:col-span-7 bg-white border border-slate-200 rounded-3xl shadow-sm overflow-hidden">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
+                  {/* Left: Controls */}
+                  <div className="p-6 sm:p-7 space-y-6 border-b md:border-b-0 md:border-r border-slate-100">
+                    <div className="space-y-3">
+                      <div className="flex justify-between items-center">
+                        <label className="text-xs font-black text-[#0B2450] uppercase tracking-wider">Treatment Amount</label>
+                        <span className="text-sm font-black text-[#0867E8]">₹{emiAmount.toLocaleString('en-IN')}</span>
+                      </div>
+                      <input
+                        type="range"
+                        min={30000}
+                        max={300000}
+                        step={5000}
+                        value={emiAmount}
+                        onChange={e => {
+                          setEmiAmount(Number(e.target.value));
+                          trackEvent('calculator_used', { amount: Number(e.target.value), tenure: emiTenure });
+                        }}
+                        className="w-full h-2 bg-slate-200 rounded-full appearance-none cursor-pointer accent-[#0867E8]"
+                        aria-label="Treatment amount slider"
+                      />
+                      <div className="flex justify-between text-[10px] text-slate-400 font-bold">
+                        <span>₹30,000</span>
+                        <span>₹3,00,000</span>
+                      </div>
                     </div>
-                    <input
-                      type="range"
-                      min={30000}
-                      max={300000}
-                      step={5000}
-                      value={emiAmount}
-                      onChange={e => {
-                        setEmiAmount(Number(e.target.value));
-                        trackEvent('calculator_used', { amount: Number(e.target.value), tenure: emiTenure });
-                      }}
-                      className="w-full h-2 bg-slate-200 rounded-full appearance-none cursor-pointer accent-[#0867E8]"
-                      aria-label="Treatment amount slider"
-                    />
-                    <div className="flex justify-between text-[10px] text-slate-400 font-bold">
-                      <span>₹30,000</span>
-                      <span>₹3,00,000</span>
+
+                    <div className="space-y-3">
+                      <label className="text-xs font-black text-[#0B2450] uppercase tracking-wider block">Repayment Tenure</label>
+                      <div className="grid grid-cols-4 gap-2">
+                        {[3, 6, 12, 24].map(t => (
+                          <button
+                            key={t}
+                            onClick={() => setEmiTenure(t)}
+                            className={`py-2.5 rounded-xl text-xs font-black border transition-all ${
+                              emiTenure === t
+                                ? 'bg-[#0867E8] text-white border-[#0867E8] shadow-md'
+                                : 'bg-[#F7FAFC] text-[#0B2450] border-slate-200 hover:border-[#0867E8]'
+                            }`}
+                          >
+                            {t}M
+                          </button>
+                        ))}
+                      </div>
                     </div>
                   </div>
 
-                  <div className="space-y-3">
-                    <label className="text-xs font-black text-[#0B2450] uppercase tracking-wider block">Repayment Tenure</label>
-                    <div className="grid grid-cols-4 gap-2">
-                      {[3, 6, 12, 24].map(t => (
-                        <button
-                          key={t}
-                          onClick={() => setEmiTenure(t)}
-                          className={`py-2.5 rounded-xl text-xs font-black border transition-all ${
-                            emiTenure === t
-                              ? 'bg-[#0867E8] text-white border-[#0867E8] shadow-md'
-                              : 'bg-[#F7FAFC] text-[#0B2450] border-slate-200 hover:border-[#0867E8]'
-                          }`}
-                        >
-                          {t}M
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                </div>
+                  {/* Right: Result */}
+                  <div className="p-6 sm:p-7 flex flex-col justify-between space-y-6">
+                    <div className="space-y-4">
+                      <div className="bg-gradient-to-br from-[#0867E8] to-[#0f7a75] rounded-2xl p-4 text-white text-center space-y-1 shadow-md">
+                        <p className="text-[10px] font-bold uppercase tracking-widest text-white/70">Indicative Monthly EMI</p>
+                        <p className="text-3xl font-black">₹{monthlyEMI.toLocaleString('en-IN')}</p>
+                        <p className="text-[10px] text-white/80 font-medium">per month &times; {emiTenure} months</p>
+                      </div>
 
-                {/* Right: Result */}
-                <div className="p-6 sm:p-8 flex flex-col justify-between space-y-6">
-                  <div className="space-y-4">
-                    <div className="bg-gradient-to-br from-[#0867E8] to-[#0f7a75] rounded-2xl p-5 text-white text-center space-y-1">
-                      <p className="text-[10px] font-bold uppercase tracking-widest text-white/70">Indicative Monthly EMI</p>
-                      <p className="text-3xl sm:text-4xl font-black">₹{monthlyEMI.toLocaleString('en-IN')}</p>
-                      <p className="text-[10px] text-white/80 font-medium">per month &times; {emiTenure} months</p>
+                      <div className="space-y-1.5">
+                        {[
+                          { label: 'Principal Amount', value: `₹${emiAmount.toLocaleString('en-IN')}`, accent: false },
+                          { label: 'Est. Interest (15% p.a.)', value: `₹${totalInterest.toLocaleString('en-IN')}`, accent: false },
+                          { label: 'Est. Total Payable', value: `₹${totalPayable.toLocaleString('en-IN')}`, accent: true },
+                        ].map((row, idx) => (
+                          <div key={idx} className={`flex justify-between items-center px-3 py-2 rounded-xl text-xs font-bold ${row.accent ? 'bg-[#0867E8]/8 border border-[#0867E8]/20 text-[#0B2450]' : 'bg-[#F7FAFC] border border-slate-100 text-slate-600'}`}>
+                            <span>{row.label}</span>
+                            <span className={row.accent ? 'text-[#0867E8]' : ''}>{row.value}</span>
+                          </div>
+                        ))}
+                      </div>
                     </div>
 
                     <div className="space-y-2">
-                      {[
-                        { label: 'Principal Amount', value: `₹${emiAmount.toLocaleString('en-IN')}`, accent: false },
-                        { label: 'Est. Interest (15% p.a.)', value: `₹${totalInterest.toLocaleString('en-IN')}`, accent: false },
-                        { label: 'Est. Total Payable', value: `₹${totalPayable.toLocaleString('en-IN')}`, accent: true },
-                      ].map((row, idx) => (
-                        <div key={idx} className={`flex justify-between items-center px-3.5 py-2.5 rounded-xl text-xs font-bold ${row.accent ? 'bg-[#0867E8]/8 border border-[#0867E8]/20 text-[#0B2450]' : 'bg-[#F7FAFC] border border-slate-100 text-slate-600'}`}>
-                          <span>{row.label}</span>
-                          <span className={row.accent ? 'text-[#0867E8]' : ''}>{row.value}</span>
-                        </div>
-                      ))}
+                      <button
+                        onClick={() => {
+                          trackEvent('click_calc_check_eligibility');
+                          setShowEligibilityModal(true);
+                          setEligibilityStep(1);
+                        }}
+                        className="w-full py-3 bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-black uppercase tracking-wider rounded-xl transition-all shadow-md flex items-center justify-center gap-2"
+                      >
+                        <ShieldCheck size={15} /> Check Patient Eligibility →
+                      </button>
                     </div>
                   </div>
+                </div>
+              </div>
 
-                  <div className="space-y-2">
-                    <button
-                      onClick={() => {
-                        trackEvent('click_calc_check_eligibility');
-                        setShowEligibilityModal(true);
-                        setEligibilityStep(1);
-                      }}
-                      className="w-full py-3 bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-black uppercase tracking-wider rounded-xl transition-all shadow-md flex items-center justify-center gap-2"
-                    >
-                      <ShieldCheck size={15} /> Check Patient Eligibility →
-                    </button>
+              {/* Right Column: Embedded Auto-playing 9:16 Video (5 cols) */}
+              <div className="lg:col-span-5 flex flex-col items-center">
+                <div className="w-full max-w-[340px] sm:max-w-[360px] bg-slate-900 border-2 border-slate-800 rounded-3xl p-3 shadow-2xl relative">
+                  <div className="flex items-center justify-between px-2 pb-2.5">
+                    <div className="flex items-center gap-2">
+                      <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping" />
+                      <span className="text-[11px] font-black text-emerald-400 uppercase tracking-wider">
+                        Doctor &amp; Patient Reel
+                      </span>
+                    </div>
+                    <span className="text-[10px] font-bold text-slate-400 bg-slate-800 px-2 py-0.5 rounded-full">
+                      9:16 HD
+                    </span>
+                  </div>
+
+                  <div className="relative aspect-[9/16] rounded-2xl overflow-hidden bg-black shadow-inner border border-slate-800/80">
+                    <video
+                      src="/renders/clinaza-emi-reel.mp4"
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      controls
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+
+                  <div className="pt-3 px-1 text-center">
+                    <p className="text-[11px] font-bold text-slate-300">
+                      ⚡ 2-min paperless digital KYC &bull; 55+ Lending Partners
+                    </p>
+                    <p className="text-[10px] text-slate-500 mt-0.5">
+                      Doctor Helpline: <strong className="text-emerald-400 font-black">+91 7292984244</strong>
+                    </p>
                   </div>
                 </div>
               </div>

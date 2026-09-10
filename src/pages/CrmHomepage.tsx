@@ -472,14 +472,75 @@ export default function CrmHomepage() {
             </div>
           </div>
 
-          {/* ── 1. MINIMAL TRUST & SECURITY STRIP ── */}
-          <div className="pt-6 border-t border-slate-200/60 max-w-4xl mx-auto">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-left">
+          {/* ── 1. POPULAR BANKS & NBFC LENDING ECOSYSTEM SLIDESHOW ── */}
+          <div className="pt-6 border-t border-slate-200/60 max-w-5xl mx-auto space-y-4">
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-2 px-1 text-center sm:text-left">
+              <span className="text-[10px] font-black tracking-widest text-slate-500 uppercase flex items-center gap-1.5">
+                <Landmark size={14} className="text-[#0867E8]" /> FINANCING ECOSYSTEM &bull; BANKS &amp; REGULATED NBFCs
+              </span>
+              <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200/70 px-2.5 py-0.5 rounded-full">
+                ✓ 100% RBI Compliant Digital Lending
+              </span>
+            </div>
+
+            {/* Continuous Seamless Slideshow Marquee */}
+            <div className="relative overflow-hidden py-3 px-2 bg-white/80 backdrop-blur-md rounded-2xl border border-slate-200/80 shadow-2xs">
+              {/* Fade Edges */}
+              <div className="absolute left-0 inset-y-0 w-12 bg-gradient-to-r from-white via-white/80 to-transparent z-10 pointer-events-none" />
+              <div className="absolute right-0 inset-y-0 w-12 bg-gradient-to-l from-white via-white/80 to-transparent z-10 pointer-events-none" />
+
+              <div className="flex w-max gap-4 animate-marquee hover:[animation-play-state:paused]">
+                {[
+                  // 1st Set of Banks & NBFCs
+                  { name: 'HDFC Bank', sub: 'Banking Partner', color: 'from-blue-900 to-blue-700', text: 'HDFC', badge: 'Bank' },
+                  { name: 'ICICI Bank', sub: 'Digital Lending', color: 'from-orange-600 to-amber-600', text: 'ICICI', badge: 'Bank' },
+                  { name: 'Axis Bank', sub: 'Jarvis APIs', color: 'from-rose-900 to-rose-700', text: 'AXIS', badge: 'Bank' },
+                  { name: 'Bajaj Finserv', sub: 'EMI Network', color: 'from-blue-700 to-sky-600', text: 'BAJAJ', badge: 'NBFC' },
+                  { name: 'Tata Capital', sub: 'Healthcare Loan', color: 'from-sky-900 to-blue-800', text: 'TATA', badge: 'NBFC' },
+                  { name: 'Kotak Bank', sub: 'Point-of-Care', color: 'from-red-700 to-rose-600', text: 'KOTAK', badge: 'Bank' },
+                  { name: 'L&T Finance', sub: 'Medical EMI', color: 'from-amber-600 to-yellow-600', text: 'L&T', badge: 'NBFC' },
+                  { name: 'Aditya Birla', sub: 'Capital Finance', color: 'from-red-800 to-amber-700', text: 'ABCL', badge: 'NBFC' },
+                  { name: 'Dhanlift', sub: 'EMI Sourcing Partner', color: 'from-emerald-700 to-teal-600', text: 'DHANLIFT', badge: 'LSP' },
+                  
+                  // 2nd Set for Seamless Infinite Loop
+                  { name: 'HDFC Bank', sub: 'Banking Partner', color: 'from-blue-900 to-blue-700', text: 'HDFC', badge: 'Bank' },
+                  { name: 'ICICI Bank', sub: 'Digital Lending', color: 'from-orange-600 to-amber-600', text: 'ICICI', badge: 'Bank' },
+                  { name: 'Axis Bank', sub: 'Jarvis APIs', color: 'from-rose-900 to-rose-700', text: 'AXIS', badge: 'Bank' },
+                  { name: 'Bajaj Finserv', sub: 'EMI Network', color: 'from-blue-700 to-sky-600', text: 'BAJAJ', badge: 'NBFC' },
+                  { name: 'Tata Capital', sub: 'Healthcare Loan', color: 'from-sky-900 to-blue-800', text: 'TATA', badge: 'NBFC' },
+                  { name: 'Kotak Bank', sub: 'Point-of-Care', color: 'from-red-700 to-rose-600', text: 'KOTAK', badge: 'Bank' },
+                  { name: 'L&T Finance', sub: 'Medical EMI', color: 'from-amber-600 to-yellow-600', text: 'L&T', badge: 'NBFC' },
+                  { name: 'Aditya Birla', sub: 'Capital Finance', color: 'from-red-800 to-amber-700', text: 'ABCL', badge: 'NBFC' },
+                  { name: 'Dhanlift', sub: 'EMI Sourcing Partner', color: 'from-emerald-700 to-teal-600', text: 'DHANLIFT', badge: 'LSP' }
+                ].map((item, idx) => (
+                  <div 
+                    key={idx} 
+                    className="flex items-center gap-3 px-4 py-2 rounded-xl bg-slate-50 border border-slate-200/90 shrink-0 transition-all hover:bg-white hover:border-slate-300 hover:shadow-xs"
+                  >
+                    <div className={`w-8 h-8 rounded-lg bg-gradient-to-br ${item.color} flex items-center justify-center text-white font-black text-[9px] tracking-tight shadow-xs shrink-0`}>
+                      {item.text}
+                    </div>
+                    <div className="text-left">
+                      <div className="flex items-center gap-1.5">
+                        <span className="text-xs font-bold text-[#0B2450] whitespace-nowrap">{item.name}</span>
+                        <span className="text-[8px] font-bold px-1.5 py-0.2 rounded bg-slate-200/80 text-slate-600 uppercase">
+                          {item.badge}
+                        </span>
+                      </div>
+                      <p className="text-[10px] text-slate-500 whitespace-nowrap">{item.sub}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Quick 4-point Trust Grid */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-left pt-2">
               {[
                 { title: '₹30K – ₹5L Limits', desc: 'Flexible monthly tenures' },
-                { title: 'Regulated Partners', desc: 'RBI registered NBFCs' },
+                { title: 'Regulated Partners', desc: 'RBI registered Banks & NBFCs' },
                 { title: '100% Digital eKYC', desc: 'Paperless 2-min checks' },
-                { title: 'Zero Bad Debt Risk', desc: 'Direct clinic disbursal' }
+                { title: 'Direct Disbursal', desc: 'Zero bad debt risk for clinics' }
               ].map((item, idx) => (
                 <div key={idx} className="bg-white/70 backdrop-blur-sm border border-slate-200/70 p-3 rounded-2xl transition-all hover:border-blue-400/40 hover:shadow-xs space-y-0.5">
                   <div className="flex items-center gap-1.5 text-[#0B2450] font-black text-xs">

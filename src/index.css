@@ -1,0 +1,19 @@
+
+/* ── Scroll-triggered section fade-in ── */
+.section-hidden {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+
+.section-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered children — each child gets a delay */
+.section-visible > * { transition-delay: calc(var(--stagger-index, 0) * 60ms); }
+
+@media (prefers-reduced-motion: reduce) {
+  .section-hidden { opacity: 1; transform: none; transition: none; }
+}

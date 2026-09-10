@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useInView, useCountUp } from '../hooks/useScrollAnimation';
 import { Link, useLocation } from 'react-router-dom';
 import { RemotionVideoModal } from '@/components/remotion/RemotionVideoModal';
 import { 
@@ -29,6 +30,59 @@ import { emailNotificationService } from '../services/emailNotificationService';
 import { toast } from 'sonner';
 import { SEOHead } from '@/components/seo/SEOHead';
 import { BankSvgLogo } from '@/components/BankSvgLogos';
+// ── Scroll Fade-In Wrapper ──────────────────────────────
+const FadeIn: React.FC<{ children: React.ReactNode; className?: string }> = ({ children, className = '' }) => {
+  const { ref, visible } = useInView(0.12);
+  return (
+    <div
+      ref={ref as React.RefObject<HTMLDivElement>}
+      className={`section-hidden ${visible ? 'section-visible' : ''} ${className}`}
+    >
+      {children}
+    </div>
+  );
+};
+
+// ── Animated Counter Stats Bar ──────────────────────────
+const StatsBar: React.FC = () => {
+  const { ref, visible } = useInView(0.2);
+
+  const stats = [
+    { value: 55, suffix: '+', label: 'Lending Partners', prefix: '' },
+    { value: 5, suffix: 'L', label: 'Max Loan Amount', prefix: '₹' },
+    { value: 2, suffix: ' min', label: 'Digital KYC', prefix: '' },
+    { value: 0, suffix: '%', label: 'CIBIL Impact', prefix: '' },
+  ];
+
+  return (
+    <div
+      ref={ref as React.RefObject<HTMLDivElement>}
+      className="grid grid-cols-2 sm:grid-cols-4 gap-px bg-slate-200 rounded-2xl overflow-hidden border border-slate-200 mb-3"
+    >
+      {stats.map((stat, idx) => (
+        <StatItem key={idx} {...stat} trigger={visible} delay={idx * 150} />
+      ))}
+    </div>
+  );
+};
+
+const StatItem: React.FC<{
+  value: number; suffix: string; label: string; prefix: string; trigger: boolean; delay: number;
+}> = ({ value, suffix, label, prefix, trigger, delay }) => {
+  const [go, setGo] = React.useState(false);
+  React.useEffect(() => {
+    if (trigger) { const t = setTimeout(() => setGo(true), delay); return () => clearTimeout(t); }
+  }, [trigger, delay]);
+  const count = useCountUp(value, 1200, go);
+  return (
+    <div className="bg-white px-4 py-4 text-center">
+      <div className="text-2xl sm:text-3xl font-bold text-[#0B2450] tabular-nums">
+        {prefix}{count}{suffix}
+      </div>
+      <div className="text-[11px] text-slate-500 mt-0.5 font-medium">{label}</div>
+    </div>
+  );
+};
 
 export default function CrmHomepage() {
   const location = useLocation();
@@ -596,6 +650,9 @@ export default function CrmHomepage() {
               </div>
             </div>
 
+            {/* ── Animated Stats Bar ── */}
+            <StatsBar />
+
             {/* Quick 4-point Trust Grid */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-left pt-2">
               {[
@@ -618,7 +675,7 @@ export default function CrmHomepage() {
 
         {/* ── 2. PROBLEM & CLINIC VALUE ("TURN I'LL DO IT LATER INTO LET'S START") ── */}
         <section aria-label="The Problem & Value" className="py-12 sm:py-16 px-4 sm:px-6 bg-[#F5F9FC] border-y border-blue-50">
-          <div className="max-w-5xl mx-auto space-y-8">
+          <FadeIn className="max-w-5xl mx-auto space-y-8">
             <div className="text-center space-y-2">
               <h2 className="text-2xl sm:text-3xl font-bold text-[#0B2450]">Turn "I'll do it later" into "Let's start."</h2>
               <p className="text-sm text-slate-500 max-w-xl mx-auto">Patients say yes when treatment feels affordable. Clinaza makes that possible at the point of care.</p>
@@ -661,32 +718,34 @@ export default function CrmHomepage() {
                 </ul>
               </div>
             </div>
-          </div>
+          </FadeIn>
         </section>
 
         {/* ── 3. HOW CLINAZA WORKS (SIMPLE 3-STEP) ── */}
-        <section aria-label="How Clinaza Works" className="py-12 sm:py-16 px-4 sm:px-6 max-w-5xl mx-auto space-y-8">
-          <div className="text-center space-y-2">
-            <h2 className="text-2xl sm:text-3xl font-bold text-[#0B2450]">How Clinaza works</h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            {[
-              { num: '01', title: 'Patient Chooses Treatment', desc: 'Patient discusses treatment and total estimate with your clinic.' },
-              { num: '02', title: 'Check Financing Eligibility', desc: 'Clinaza helps the patient apply with a suitable financing partner in minutes.' },
-              { num: '03', title: 'Treatment Goes Ahead', desc: 'Once approved and disbursed, patient receives care and pays lender in EMIs.' }
-            ].map((step, idx) => (
-              <div key={idx} className="bg-[#F7FAFC] border border-slate-200/80 p-6 rounded-2xl space-y-3 text-left shadow-2xs">
-                <span className="text-3xl font-mono font-black text-[#0f7a75] block">{step.num}</span>
-                <h3 className="text-sm font-black text-[#0B2450]">{step.title}</h3>
-                <p className="text-xs text-slate-600 leading-relaxed">{step.desc}</p>
-              </div>
-            ))}
-          </div>
+        <section aria-label="How Clinaza Works" className="py-12 sm:py-16 px-4 sm:px-6">
+          <FadeIn className="max-w-5xl mx-auto space-y-8">
+            <div className="text-center space-y-2">
+              <h2 className="text-2xl sm:text-3xl font-bold text-[#0B2450]">How Clinaza works</h2>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+              {[
+                { num: '01', title: 'Patient Chooses Treatment', desc: 'Patient discusses treatment and total estimate with your clinic.' },
+                { num: '02', title: 'Check Financing Eligibility', desc: 'Clinaza helps the patient apply with a suitable financing partner in minutes.' },
+                { num: '03', title: 'Treatment Goes Ahead', desc: 'Once approved and disbursed, patient receives care and pays lender in EMIs.' }
+              ].map((step, idx) => (
+                <div key={idx} className="bg-[#F7FAFC] border border-slate-200/80 p-6 rounded-2xl space-y-3 text-left shadow-2xs">
+                  <span className="text-3xl font-mono font-black text-[#0f7a75] block">{step.num}</span>
+                  <h3 className="text-sm font-black text-[#0B2450]">{step.title}</h3>
+                  <p className="text-xs text-slate-600 leading-relaxed">{step.desc}</p>
+                </div>
+              ))}
+            </div>
+          </FadeIn>
         </section>
 
         {/* ── 4. TREATMENT CATEGORIES (MULTI-SPECIALTY) ── */}
         <section aria-label="Supported Treatments" className="py-12 sm:py-16 px-4 sm:px-6 bg-[#F7FAFC] border-y border-slate-200/60">
-          <div className="max-w-5xl mx-auto space-y-8 text-center">
+          <FadeIn className="max-w-5xl mx-auto space-y-8 text-center">
             <div className="space-y-2">
               <h2 className="text-2xl sm:text-3xl font-bold text-[#0B2450]">Treatments we support</h2>
               <p className="text-sm text-slate-500">EMI financing from ₹30,000 to ₹5,00,000 across dental, vision, fertility, and surgical care.</p>
@@ -741,7 +800,7 @@ export default function CrmHomepage() {
                 </Link>
               ))}
             </div>
-          </div>
+          </FadeIn>
         </section>
 
         {/* ── 4.4 MOBILE CRM APP SHOWCASE ── */}

@@ -77,13 +77,13 @@ export const ClinazaEmiReelComposition: React.FC<ClinazaEmiReelProps> = ({
         }}
       />
 
-      {/* Persistent Top Header Branding Bar */}
+      {/* Persistent Top Header Branding Bar (Insta Safe Zone: below 180px) */}
       <div
         style={{
           position: 'absolute',
-          top: 60,
-          left: 50,
-          right: 50,
+          top: 180,
+          left: 60,
+          right: 120,
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
@@ -94,21 +94,21 @@ export const ClinazaEmiReelComposition: React.FC<ClinazaEmiReelProps> = ({
           style={{
             display: 'flex',
             alignItems: 'center',
-            gap: 14,
-            padding: '14px 28px',
+            gap: 12,
+            padding: '12px 24px',
             borderRadius: 999,
-            backgroundColor: 'rgba(15, 23, 42, 0.88)',
+            backgroundColor: 'rgba(15, 23, 42, 0.92)',
             backdropFilter: 'blur(20px)',
             border: '2px solid rgba(255, 255, 255, 0.2)',
             boxShadow: '0 12px 35px rgba(0, 0, 0, 0.6)',
           }}
         >
-          <span style={{ fontSize: 28 }}>🦷</span>
+          <span style={{ fontSize: 26 }}>🦷</span>
           <div>
-            <span style={{ fontSize: 22, fontWeight: 900, letterSpacing: '0.06em', color: '#10B981', display: 'block', lineHeight: 1.1 }}>
+            <span style={{ fontSize: 20, fontWeight: 900, letterSpacing: '0.06em', color: '#10B981', display: 'block', lineHeight: 1.1 }}>
               CLINAZA
             </span>
-            <span style={{ fontSize: 11, color: '#94A3B8', fontWeight: 800, letterSpacing: '0.05em', textTransform: 'uppercase' }}>
+            <span style={{ fontSize: 10, color: '#94A3B8', fontWeight: 800, letterSpacing: '0.05em', textTransform: 'uppercase' }}>
               Patient Financing
             </span>
           </div>
@@ -116,11 +116,11 @@ export const ClinazaEmiReelComposition: React.FC<ClinazaEmiReelProps> = ({
 
         <div
           style={{
-            padding: '12px 26px',
+            padding: '10px 22px',
             borderRadius: 999,
             backgroundColor: 'rgba(16, 185, 129, 0.25)',
             border: '2px solid rgba(16, 185, 129, 0.6)',
-            fontSize: 18,
+            fontSize: 16,
             fontWeight: 900,
             color: '#34D399',
             boxShadow: '0 0 25px rgba(16, 185, 129, 0.4)',
@@ -193,16 +193,16 @@ const Scene1ShockedPatient: React.FC<{ totalCost: number; treatmentName: string;
         />
       </div>
 
-      {/* High-Impact Dialogue Overlay */}
+      {/* High-Impact Dialogue Overlay (Instagram Safe Zone: bottom 280px, right 110px) */}
       <div
         style={{
           position: 'absolute',
-          bottom: 120,
-          left: 50,
-          right: 50,
+          bottom: 280,
+          left: 60,
+          right: 110,
           display: 'flex',
           flexDirection: 'column',
-          gap: 20,
+          gap: 18,
           textAlign: 'center',
           alignItems: 'center',
         }}
@@ -210,14 +210,14 @@ const Scene1ShockedPatient: React.FC<{ totalCost: number; treatmentName: string;
         <div
           style={{
             transform: `scale(${scale})`,
-            padding: '14px 32px',
+            padding: '12px 28px',
             borderRadius: 999,
             backgroundColor: 'rgba(239, 68, 68, 0.95)',
             color: '#FFFFFF',
-            fontSize: 22,
+            fontSize: 20,
             fontWeight: 900,
             textTransform: 'uppercase',
-            letterSpacing: '0.1em',
+            letterSpacing: '0.08em',
             boxShadow: '0 0 35px rgba(239, 68, 68, 0.7)',
           }}
         >
@@ -226,19 +226,19 @@ const Scene1ShockedPatient: React.FC<{ totalCost: number; treatmentName: string;
 
         <div
           style={{
-            padding: '24px 30px',
-            borderRadius: 28,
-            backgroundColor: 'rgba(15, 23, 42, 0.92)',
+            padding: '24px 28px',
+            borderRadius: 26,
+            backgroundColor: 'rgba(15, 23, 42, 0.94)',
             backdropFilter: 'blur(20px)',
             border: '2px solid rgba(239, 68, 68, 0.5)',
             boxShadow: '0 20px 50px rgba(0,0,0,0.8)',
             width: '100%',
           }}
         >
-          <div style={{ fontSize: 36, fontWeight: 900, color: '#FFFFFF', lineHeight: 1.25 }}>
+          <div style={{ fontSize: 34, fontWeight: 900, color: '#FFFFFF', lineHeight: 1.25 }}>
             Don't Postpone Your Health Because of Upfront Cost.
           </div>
-          <div style={{ fontSize: 20, color: '#FECACA', marginTop: 10, fontWeight: 700 }}>
+          <div style={{ fontSize: 18, color: '#FECACA', marginTop: 10, fontWeight: 700 }}>
             {treatmentName} • Implants • Aligners • Root Canals
           </div>
         </div>
@@ -282,27 +282,27 @@ const Scene2DoctorSolution: React.FC<{ monthlyEmi: number; tenureMonths: number;
         />
       </div>
 
-      {/* Doctor Solution Dialogue & Glowing EMI Card */}
+      {/* Doctor Solution Dialogue & Glowing EMI Card (Insta Safe: bottom 280px, right 110px) */}
       <div
         style={{
           position: 'absolute',
-          bottom: 100,
-          left: 50,
-          right: 50,
+          bottom: 280,
+          left: 60,
+          right: 110,
           display: 'flex',
           flexDirection: 'column',
-          gap: 20,
+          gap: 18,
           textAlign: 'center',
           alignItems: 'center',
         }}
       >
         <div
           style={{
-            padding: '14px 32px',
+            padding: '12px 28px',
             borderRadius: 999,
             backgroundColor: 'rgba(16, 185, 129, 0.95)',
             color: '#020617',
-            fontSize: 22,
+            fontSize: 20,
             fontWeight: 900,
             textTransform: 'uppercase',
             letterSpacing: '0.08em',
@@ -317,22 +317,22 @@ const Scene2DoctorSolution: React.FC<{ monthlyEmi: number; tenureMonths: number;
           style={{
             transform: `scale(${scale})`,
             width: '100%',
-            padding: '36px 32px',
-            borderRadius: 36,
-            background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.4) 0%, rgba(6, 78, 59, 0.92) 80%)',
+            padding: '30px 28px',
+            borderRadius: 32,
+            background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.4) 0%, rgba(6, 78, 59, 0.94) 80%)',
             border: '3px solid #10B981',
             boxShadow: '0 25px 60px rgba(16, 185, 129, 0.5)',
             textAlign: 'center',
           }}
         >
-          <div style={{ fontSize: 18, color: '#D1FAE5', textTransform: 'uppercase', fontWeight: 900, letterSpacing: '0.1em' }}>
+          <div style={{ fontSize: 17, color: '#D1FAE5', textTransform: 'uppercase', fontWeight: 900, letterSpacing: '0.1em' }}>
             Start Treatment Today For Only
           </div>
-          <div style={{ fontSize: 68, fontWeight: 900, color: '#FFFFFF', margin: '8px 0', lineHeight: 1.1 }}>
-            ₹{monthlyEmi.toLocaleString('en-IN')} <span style={{ fontSize: 24, color: '#A7F3D0' }}>/ month</span>
+          <div style={{ fontSize: 62, fontWeight: 900, color: '#FFFFFF', margin: '6px 0', lineHeight: 1.1 }}>
+            ₹{monthlyEmi.toLocaleString('en-IN')} <span style={{ fontSize: 22, color: '#A7F3D0' }}>/ month</span>
           </div>
-          <div style={{ fontSize: 18, color: '#E2E8F0', fontWeight: 700 }}>
-            ⚡ {tenureMonths} Months Flexible Tenure • ₹0 Down Payment Options
+          <div style={{ fontSize: 17, color: '#E2E8F0', fontWeight: 700 }}>
+            ⚡ {tenureMonths} Months Flexible Tenure • ₹0 Down Payment
           </div>
         </div>
       </div>
@@ -371,14 +371,14 @@ const Scene3StepByStepDemo: React.FC<{ fps: number }> = ({ fps }) => {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'space-between',
-        padding: '190px 60px 100px 60px',
+        padding: '220px 100px 280px 60px',
         zIndex: 10,
       }}
     >
       <div style={{ textAlign: 'center', width: '100%' }}>
         <span
           style={{
-            fontSize: 16,
+            fontSize: 15,
             fontWeight: 900,
             color: '#10B981',
             textTransform: 'uppercase',
@@ -389,7 +389,7 @@ const Scene3StepByStepDemo: React.FC<{ fps: number }> = ({ fps }) => {
         >
           ⚡ Takes Less Than 2 Minutes
         </span>
-        <h2 style={{ fontSize: 50, fontWeight: 900, color: '#FFFFFF', margin: 0, letterSpacing: '-0.02em' }}>
+        <h2 style={{ fontSize: 46, fontWeight: 900, color: '#FFFFFF', margin: 0, letterSpacing: '-0.02em' }}>
           How to Apply on <span style={{ color: '#38BDF8' }}>clinaza.in</span>
         </h2>
       </div>
@@ -399,7 +399,7 @@ const Scene3StepByStepDemo: React.FC<{ fps: number }> = ({ fps }) => {
         style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(5, 1fr)',
-          gap: 14,
+          gap: 12,
           width: '100%',
         }}
       >
@@ -407,15 +407,15 @@ const Scene3StepByStepDemo: React.FC<{ fps: number }> = ({ fps }) => {
           const isCurrent = s.num === activeStep;
           const isPassed = s.num < activeStep;
           return (
-            <div key={s.num} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
+            <div key={s.num} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
               <div
                 style={{
-                  width: 58,
-                  height: 58,
+                  width: 52,
+                  height: 52,
                   borderRadius: 999,
                   backgroundColor: isCurrent ? '#10B981' : isPassed ? '#059669' : 'rgba(255,255,255,0.1)',
                   color: isCurrent || isPassed ? '#020617' : '#94A3B8',
-                  fontSize: 24,
+                  fontSize: 22,
                   fontWeight: 900,
                   display: 'flex',
                   alignItems: 'center',
@@ -426,7 +426,7 @@ const Scene3StepByStepDemo: React.FC<{ fps: number }> = ({ fps }) => {
               >
                 {isPassed ? '✓' : s.num}
               </div>
-              <span style={{ fontSize: 14, fontWeight: isCurrent ? 900 : 700, color: isCurrent ? '#34D399' : '#64748B' }}>
+              <span style={{ fontSize: 13, fontWeight: isCurrent ? 900 : 700, color: isCurrent ? '#34D399' : '#64748B' }}>
                 Step {s.num}
               </span>
             </div>
@@ -438,12 +438,12 @@ const Scene3StepByStepDemo: React.FC<{ fps: number }> = ({ fps }) => {
       <div
         style={{
           width: '100%',
-          height: '800px',
-          borderRadius: '48px',
+          height: '720px',
+          borderRadius: '44px',
           backgroundColor: '#090E17',
-          border: '5px solid #1E293B',
+          border: '4px solid #1E293B',
           boxShadow: '0 30px 80px rgba(0,0,0,0.9), 0 0 45px rgba(8, 103, 232, 0.35)',
-          padding: '24px 28px',
+          padding: '22px 26px',
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between',
@@ -451,18 +451,18 @@ const Scene3StepByStepDemo: React.FC<{ fps: number }> = ({ fps }) => {
         }}
       >
         {/* Dynamic Notch */}
-        <div style={{ width: '180px', height: '30px', backgroundColor: '#000000', borderRadius: '999px', margin: '0 auto' }} />
+        <div style={{ width: '160px', height: '26px', backgroundColor: '#000000', borderRadius: '999px', margin: '0 auto' }} />
 
         {/* Screen Content */}
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 24, textAlign: 'center' }}>
-          <div style={{ fontSize: 64 }}>{current.icon}</div>
-          <div style={{ fontSize: 18, padding: '6px 20px', borderRadius: 999, backgroundColor: 'rgba(56, 189, 248, 0.2)', color: '#38BDF8', fontWeight: 900 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 20, textAlign: 'center' }}>
+          <div style={{ fontSize: 58 }}>{current.icon}</div>
+          <div style={{ fontSize: 16, padding: '6px 18px', borderRadius: 999, backgroundColor: 'rgba(56, 189, 248, 0.2)', color: '#38BDF8', fontWeight: 900 }}>
             {current.badge}
           </div>
-          <div style={{ fontSize: 44, fontWeight: 900, color: '#FFFFFF', lineHeight: 1.15 }}>
+          <div style={{ fontSize: 40, fontWeight: 900, color: '#FFFFFF', lineHeight: 1.15 }}>
             {current.title}
           </div>
-          <p style={{ fontSize: 22, color: '#CBD5E1', margin: 0, fontWeight: 600, maxWidth: '85%' }}>
+          <p style={{ fontSize: 20, color: '#CBD5E1', margin: 0, fontWeight: 600, maxWidth: '85%' }}>
             {current.sub}
           </p>
         </div>
@@ -470,11 +470,11 @@ const Scene3StepByStepDemo: React.FC<{ fps: number }> = ({ fps }) => {
         {/* Action Button inside phone */}
         <div
           style={{
-            padding: '24px',
-            borderRadius: 22,
+            padding: '20px',
+            borderRadius: 20,
             backgroundColor: '#4F46E5',
             color: '#FFFFFF',
-            fontSize: 24,
+            fontSize: 22,
             fontWeight: 900,
             textAlign: 'center',
             boxShadow: '0 12px 35px rgba(79, 70, 229, 0.5)',
@@ -521,25 +521,25 @@ const Scene4HappyPatientCta: React.FC<{
         />
       </div>
 
-      {/* Main Conversion CTA Cards */}
+      {/* Main Conversion CTA Cards (Safe Zone: bottom 280px, right 110px) */}
       <div
         style={{
           position: 'absolute',
-          bottom: 90,
-          left: 50,
-          right: 50,
+          bottom: 280,
+          left: 60,
+          right: 110,
           display: 'flex',
           flexDirection: 'column',
-          gap: 18,
+          gap: 16,
           textAlign: 'center',
           alignItems: 'center',
         }}
       >
         <div>
-          <h2 style={{ fontSize: 56, fontWeight: 900, color: '#FFFFFF', margin: 0, letterSpacing: '-0.02em', lineHeight: 1.15 }}>
+          <h2 style={{ fontSize: 50, fontWeight: 900, color: '#FFFFFF', margin: 0, letterSpacing: '-0.02em', lineHeight: 1.15 }}>
             Say "Yes" to Healthy Smiles 😁
           </h2>
-          <p style={{ fontSize: 22, color: '#CBD5E1', margin: '6px 0 0 0', fontWeight: 600 }}>
+          <p style={{ fontSize: 20, color: '#CBD5E1', margin: '6px 0 0 0', fontWeight: 600 }}>
             Ask your dentist for Clinaza EMI or check eligibility online.
           </p>
         </div>
@@ -548,8 +548,8 @@ const Scene4HappyPatientCta: React.FC<{
         <div
           style={{
             width: '100%',
-            padding: '30px 40px',
-            borderRadius: 30,
+            padding: '26px 36px',
+            borderRadius: 28,
             background: 'linear-gradient(135deg, #10B981 0%, #059669 100%)',
             display: 'flex',
             alignItems: 'center',
@@ -557,7 +557,7 @@ const Scene4HappyPatientCta: React.FC<{
             boxShadow: '0 25px 60px rgba(16, 185, 129, 0.5)',
           }}
         >
-          <span style={{ fontSize: 30, fontWeight: 900, color: '#020617', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+          <span style={{ fontSize: 28, fontWeight: 900, color: '#020617', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
             Visit {websiteUrl} &rarr;
           </span>
         </div>
@@ -567,12 +567,12 @@ const Scene4HappyPatientCta: React.FC<{
           style={{
             display: 'flex',
             alignItems: 'center',
-            gap: 12,
-            padding: '14px 28px',
-            borderRadius: 20,
+            gap: 10,
+            padding: '12px 24px',
+            borderRadius: 18,
             backgroundColor: 'rgba(15, 23, 42, 0.95)',
             border: '1.5px solid rgba(255, 255, 255, 0.2)',
-            fontSize: 18,
+            fontSize: 16,
             fontWeight: 800,
             color: '#34D399',
           }}

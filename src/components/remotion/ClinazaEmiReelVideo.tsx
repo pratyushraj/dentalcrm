@@ -77,58 +77,7 @@ export const ClinazaEmiReelComposition: React.FC<ClinazaEmiReelProps> = ({
         }}
       />
 
-      {/* Persistent Top Header Branding Bar (Insta Safe: y: 230px - clear of top 220px) */}
-      <div
-        style={{
-          position: 'absolute',
-          top: 230,
-          left: 60,
-          right: 60,
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          zIndex: 70,
-        }}
-      >
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: 12,
-            padding: '12px 24px',
-            borderRadius: 999,
-            backgroundColor: 'rgba(15, 23, 42, 0.94)',
-            backdropFilter: 'blur(20px)',
-            border: '2px solid rgba(255, 255, 255, 0.2)',
-            boxShadow: '0 12px 35px rgba(0, 0, 0, 0.6)',
-          }}
-        >
-          <span style={{ fontSize: 24 }}>🦷</span>
-          <div>
-            <span style={{ fontSize: 19, fontWeight: 900, letterSpacing: '0.06em', color: '#10B981', display: 'block', lineHeight: 1.1 }}>
-              CLINAZA
-            </span>
-            <span style={{ fontSize: 10, color: '#94A3B8', fontWeight: 800, letterSpacing: '0.05em', textTransform: 'uppercase' }}>
-              Clinic Partner Network
-            </span>
-          </div>
-        </div>
 
-        <div
-          style={{
-            padding: '10px 22px',
-            borderRadius: 999,
-            backgroundColor: 'rgba(16, 185, 129, 0.25)',
-            border: '2px solid rgba(16, 185, 129, 0.6)',
-            fontSize: 15,
-            fontWeight: 900,
-            color: '#34D399',
-            boxShadow: '0 0 25px rgba(16, 185, 129, 0.4)',
-          }}
-        >
-          🚀 For Dental Clinics
-        </div>
-      </div>
 
       {/* ─── SCENE 1: THE SHOCKED PATIENT HOOK (0s - 3.5s | Frames 0 - 105) ─── */}
       <Sequence from={0} durationInFrames={105}>

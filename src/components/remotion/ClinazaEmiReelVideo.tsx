@@ -31,10 +31,10 @@ export const clinazaEmiDefaultProps: ClinazaEmiReelProps = {
   benefits: [
     '⚡ 2-Minute Instant Digital Check',
     '📄 100% Paperless eKYC',
-    '🏦 Funded by 15+ Banks & NBFCs',
+    '🏦 Funded by 55+ Banks & NBFCs',
     '💳 ₹0 Down Payment Available'
   ],
-  partnerLendersCount: 15,
+  partnerLendersCount: 55,
   websiteUrl: 'clinaza.in',
 };
 
@@ -44,7 +44,7 @@ export const ClinazaEmiReelComposition: React.FC<ClinazaEmiReelProps> = ({
   totalCost = 65000,
   monthlyEmi = 2650,
   tenureMonths = 24,
-  partnerLendersCount = 15,
+  partnerLendersCount = 55,
   websiteUrl = 'clinaza.in',
 }) => {
   const frame = useCurrentFrame();
@@ -126,7 +126,7 @@ export const ClinazaEmiReelComposition: React.FC<ClinazaEmiReelProps> = ({
             boxShadow: '0 0 25px rgba(16, 185, 129, 0.4)',
           }}
         >
-          0% Interest EMI
+          Easy Dental EMI
         </div>
       </div>
 
@@ -193,26 +193,27 @@ const Scene1ShockedPatient: React.FC<{ totalCost: number; treatmentName: string;
         />
       </div>
 
-      {/* High-Impact Dialogue Overlay (Safe Zone: bottom 450px to clear IG UI) */}
+      {/* High-Impact Dialogue Overlay (Positioned at TOP to keep patient face and bill clear) */}
       <div
         style={{
           position: 'absolute',
-          bottom: 450,
+          top: 310,
           left: 60,
           right: 60,
           display: 'flex',
           flexDirection: 'column',
-          gap: 18,
+          gap: 16,
           textAlign: 'center',
           alignItems: 'center',
+          zIndex: 20,
         }}
       >
         <div
           style={{
             transform: `scale(${scale})`,
-            padding: '16px 36px',
+            padding: '14px 34px',
             borderRadius: 999,
-            backgroundColor: 'rgba(239, 68, 68, 0.95)',
+            backgroundColor: 'rgba(239, 68, 68, 0.96)',
             color: '#FFFFFF',
             fontSize: 26,
             fontWeight: 900,
@@ -221,24 +222,24 @@ const Scene1ShockedPatient: React.FC<{ totalCost: number; treatmentName: string;
             boxShadow: '0 0 35px rgba(239, 68, 68, 0.7)',
           }}
         >
-          😱 "₹{totalCost.toLocaleString('en-IN')} for Dental Care?!"
+          😱 "₹{totalCost.toLocaleString('en-IN')} Treatment Bill?!"
         </div>
 
         <div
           style={{
-            padding: '28px 32px',
-            borderRadius: 30,
-            backgroundColor: 'rgba(15, 23, 42, 0.95)',
+            padding: '24px 30px',
+            borderRadius: 28,
+            backgroundColor: 'rgba(15, 23, 42, 0.94)',
             backdropFilter: 'blur(20px)',
             border: '2px solid rgba(239, 68, 68, 0.5)',
-            boxShadow: '0 20px 50px rgba(0,0,0,0.8)',
+            boxShadow: '0 20px 50px rgba(0,0,0,0.85)',
             width: '100%',
           }}
         >
-          <div style={{ fontSize: 40, fontWeight: 900, color: '#FFFFFF', lineHeight: 1.2 }}>
-            Don't Postpone Your Health Because of Upfront Cost.
+          <div style={{ fontSize: 38, fontWeight: 900, color: '#FFFFFF', lineHeight: 1.2 }}>
+            Don't Delay Your Dental Care Because of High Expenses.
           </div>
-          <div style={{ fontSize: 22, color: '#FECACA', marginTop: 12, fontWeight: 700 }}>
+          <div style={{ fontSize: 20, color: '#FECACA', marginTop: 10, fontWeight: 700 }}>
             {treatmentName} • Implants • Aligners • Root Canals
           </div>
         </div>
@@ -282,34 +283,35 @@ const Scene2DoctorSolution: React.FC<{ monthlyEmi: number; tenureMonths: number;
         />
       </div>
 
-      {/* Doctor Solution Dialogue & Glowing EMI Card (Insta Safe: bottom 450px) */}
+      {/* Doctor Solution Dialogue & Glowing EMI Card (Positioned at TOP to keep doctor and tablet visible) */}
       <div
         style={{
           position: 'absolute',
-          bottom: 450,
+          top: 310,
           left: 60,
           right: 60,
           display: 'flex',
           flexDirection: 'column',
-          gap: 18,
+          gap: 16,
           textAlign: 'center',
           alignItems: 'center',
+          zIndex: 20,
         }}
       >
         <div
           style={{
-            padding: '16px 36px',
+            padding: '14px 34px',
             borderRadius: 999,
             backgroundColor: 'rgba(16, 185, 129, 0.95)',
             color: '#020617',
-            fontSize: 26,
+            fontSize: 24,
             fontWeight: 900,
             textTransform: 'uppercase',
             letterSpacing: '0.08em',
             boxShadow: '0 0 35px rgba(16, 185, 129, 0.6)',
           }}
         >
-          🩺 Doctor: "Pay in Easy EMIs With Clinaza!"
+          🩺 Doctor: "Convert Your Bill Into Easy EMIs!"
         </div>
 
         {/* Hero Solution Card */}
@@ -317,22 +319,22 @@ const Scene2DoctorSolution: React.FC<{ monthlyEmi: number; tenureMonths: number;
           style={{
             transform: `scale(${scale})`,
             width: '100%',
-            padding: '34px 30px',
-            borderRadius: 34,
+            padding: '28px 26px',
+            borderRadius: 30,
             background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.4) 0%, rgba(6, 78, 59, 0.95) 80%)',
             border: '3px solid #10B981',
             boxShadow: '0 25px 60px rgba(16, 185, 129, 0.5)',
             textAlign: 'center',
           }}
         >
-          <div style={{ fontSize: 20, color: '#D1FAE5', textTransform: 'uppercase', fontWeight: 900, letterSpacing: '0.1em' }}>
-            Start Treatment Today For Only
+          <div style={{ fontSize: 18, color: '#D1FAE5', textTransform: 'uppercase', fontWeight: 900, letterSpacing: '0.1em' }}>
+            Start Treatment Today For Just
           </div>
-          <div style={{ fontSize: 72, fontWeight: 900, color: '#FFFFFF', margin: '8px 0', lineHeight: 1.1 }}>
-            ₹{monthlyEmi.toLocaleString('en-IN')} <span style={{ fontSize: 26, color: '#A7F3D0' }}>/ month</span>
+          <div style={{ fontSize: 68, fontWeight: 900, color: '#FFFFFF', margin: '6px 0', lineHeight: 1.1 }}>
+            ₹{monthlyEmi.toLocaleString('en-IN')} <span style={{ fontSize: 24, color: '#A7F3D0' }}>/ month</span>
           </div>
-          <div style={{ fontSize: 20, color: '#E2E8F0', fontWeight: 700 }}>
-            ⚡ {tenureMonths} Months Flexible Tenure • ₹0 Down Payment
+          <div style={{ fontSize: 18, color: '#E2E8F0', fontWeight: 700 }}>
+            ⚡ {tenureMonths} Months Flexible Tenure • 55+ Banks & NBFCs
           </div>
         </div>
       </div>
@@ -487,7 +489,7 @@ const Scene3StepByStepDemo: React.FC<{ fps: number }> = ({ fps }) => {
                 Instant Dental Loan in 2 Mins
               </div>
               <div style={{ fontSize: 20, color: '#CBD5E1', fontWeight: 600 }}>
-                0% Interest • ₹0 Down Payment • 15+ Banks
+                Easy Monthly EMIs • ₹0 Down • 55+ Banks
               </div>
               <div
                 style={{
@@ -600,7 +602,7 @@ const Scene3StepByStepDemo: React.FC<{ fps: number }> = ({ fps }) => {
                 <span style={{ fontSize: 24, fontWeight: 900, color: '#34D399' }}>₹65,000 (Dental Implants)</span>
               </div>
               <div style={{ fontSize: 18, color: '#A7F3D0', fontWeight: 800, textAlign: 'center' }}>
-                ⚡ Automated Bureau & Lenders Check (15+ Banks)
+                ⚡ Instant Approval across 55+ Banks & NBFCs
               </div>
             </div>
           )}
@@ -623,7 +625,7 @@ const Scene3StepByStepDemo: React.FC<{ fps: number }> = ({ fps }) => {
                 }}
               >
                 <div style={{ fontSize: 15, color: '#D1FAE5', textTransform: 'uppercase', fontWeight: 900 }}>
-                  Selected 0% EMI Plan
+                  Selected Dental EMI Plan
                 </div>
                 <div style={{ fontSize: 44, fontWeight: 900, color: '#FFFFFF', margin: '4px 0' }}>
                   ₹2,650 <span style={{ fontSize: 20, color: '#A7F3D0' }}>/ mo</span>

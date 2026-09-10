@@ -526,12 +526,12 @@ export default function CrmHomepage() {
             </div>
 
             {/* Continuous Seamless Slideshow Marquee */}
-            <div className="relative overflow-hidden py-3.5 px-2 bg-white/90 backdrop-blur-md rounded-2xl border border-slate-200/90 shadow-2xs">
+            <div className="relative overflow-hidden py-4 px-2 bg-white/90 backdrop-blur-md rounded-2xl border border-slate-200/90 shadow-sm">
               {/* Fade Edges */}
-              <div className="absolute left-0 inset-y-0 w-12 sm:w-16 bg-gradient-to-r from-white via-white/80 to-transparent z-10 pointer-events-none" />
-              <div className="absolute right-0 inset-y-0 w-12 sm:w-16 bg-gradient-to-l from-white via-white/80 to-transparent z-10 pointer-events-none" />
+              <div className="absolute left-0 inset-y-0 w-16 sm:w-24 bg-gradient-to-r from-white via-white/80 to-transparent z-10 pointer-events-none" />
+              <div className="absolute right-0 inset-y-0 w-16 sm:w-24 bg-gradient-to-l from-white via-white/80 to-transparent z-10 pointer-events-none" />
 
-              <div className="flex w-max gap-4 animate-marquee hover:[animation-play-state:paused]">
+              <div className="flex w-max gap-5 animate-marquee hover:[animation-play-state:paused]">
                 {[
                   // 1st Set of Banks & NBFCs
                   { id: 'hdfc', name: 'HDFC Bank', sub: 'Banking Partner', badge: 'Bank' },
@@ -551,7 +551,7 @@ export default function CrmHomepage() {
                   { id: 'dmi', name: 'DMI Finance', sub: 'Digital Credit', badge: 'NBFC' },
                   { id: 'liquiloans', name: 'LiquiLoans', sub: 'P2P NBFC', badge: 'NBFC' },
                   { id: 'dhanlift', name: 'Dhanlift', sub: 'EMI Sourcing Partner', badge: 'LSP' },
-                  
+
                   // 2nd Set for Seamless Infinite Loop
                   { id: 'hdfc', name: 'HDFC Bank', sub: 'Banking Partner', badge: 'Bank' },
                   { id: 'icici', name: 'ICICI Bank', sub: 'Digital Lending', badge: 'Bank' },
@@ -571,21 +571,28 @@ export default function CrmHomepage() {
                   { id: 'liquiloans', name: 'LiquiLoans', sub: 'P2P NBFC', badge: 'NBFC' },
                   { id: 'dhanlift', name: 'Dhanlift', sub: 'EMI Sourcing Partner', badge: 'LSP' }
                 ].map((item, idx) => (
-                  <div 
-                    key={idx} 
-                    className="flex items-center gap-3 px-3.5 py-2 rounded-xl bg-slate-50/90 border border-slate-200/90 shrink-0 transition-all hover:bg-white hover:border-slate-300 hover:shadow-xs"
+                  <div
+                    key={idx}
+                    className="flex items-center gap-4 px-4 py-3 rounded-2xl bg-slate-50 border border-slate-200 shrink-0 transition-all hover:bg-white hover:border-[#0867E8]/30 hover:shadow-md"
                   >
-                    <div className="w-8 h-8 rounded-lg overflow-hidden flex items-center justify-center shrink-0 shadow-2xs">
-                      <BankSvgLogo id={item.id} size={32} />
+                    {/* Large logo container */}
+                    <div className="w-14 h-14 rounded-xl overflow-hidden flex items-center justify-center shrink-0 shadow-sm bg-white border border-slate-100 p-1">
+                      <BankSvgLogo id={item.id} size={52} />
                     </div>
                     <div className="text-left">
-                      <div className="flex items-center gap-1.5">
-                        <span className="text-xs font-bold text-[#0B2450] whitespace-nowrap">{item.name}</span>
-                        <span className="text-[8px] font-bold px-1.5 py-0.2 rounded bg-slate-200/80 text-slate-600 uppercase">
+                      <div className="flex items-center gap-2 mb-0.5">
+                        <span className="text-sm font-black text-[#0B2450] whitespace-nowrap">{item.name}</span>
+                        <span className={`text-[9px] font-black px-2 py-0.5 rounded-full uppercase tracking-wide ${
+                          item.badge === 'Bank'
+                            ? 'bg-blue-50 text-blue-600 border border-blue-200'
+                            : item.badge === 'LSP'
+                            ? 'bg-emerald-50 text-emerald-600 border border-emerald-200'
+                            : 'bg-orange-50 text-orange-600 border border-orange-200'
+                        }`}>
                           {item.badge}
                         </span>
                       </div>
-                      <p className="text-[10px] text-slate-500 whitespace-nowrap">{item.sub}</p>
+                      <p className="text-[11px] text-slate-500 whitespace-nowrap font-medium">{item.sub}</p>
                     </div>
                   </div>
                 ))}

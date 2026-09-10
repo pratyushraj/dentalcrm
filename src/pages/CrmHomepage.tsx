@@ -1954,36 +1954,130 @@ export default function CrmHomepage() {
       />
 
       {/* ── Footer ── */}
-      <footer className="border-t border-slate-200 py-6 sm:py-10 px-5 sm:px-6 bg-white text-center sm:text-left pb-20 sm:pb-10">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 sm:gap-6">
-          <div className="flex items-center gap-3">
-            <img src="/assets/clinaza-logo.jpg" alt="CLINAZA" className="h-8 w-auto rounded-lg border border-slate-200" />
-            <div>
-              <span className="text-xs font-black uppercase tracking-widest text-[#0B2450] block">CLINAZA</span>
-              <span className="text-[8px] font-bold text-[#0f7a75] block uppercase">TREATMENT FINANCING &amp; CLINIC CRM</span>
+      <footer className="border-t border-slate-200 py-10 px-5 sm:px-8 bg-white text-center sm:text-left pb-24 sm:pb-12">
+        <div className="max-w-6xl mx-auto space-y-8">
+          {/* Main Footer Directory Columns */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 text-left">
+            {/* Col 1: Brand & Contact */}
+            <div className="space-y-4">
+              <div className="flex items-center gap-3">
+                <img src="/assets/clinaza-logo.jpg" alt="CLINAZA" className="h-8 w-auto rounded-lg border border-slate-200" />
+                <div>
+                  <span className="text-xs font-black uppercase tracking-widest text-[#0B2450] block">CLINAZA</span>
+                  <span className="text-[8px] font-bold text-[#0f7a75] block uppercase">TREATMENT FINANCING &amp; CLINIC CRM</span>
+                </div>
+              </div>
+              <p className="text-xs text-slate-500 leading-relaxed">
+                Empowering healthcare clinics with point-of-care EMI financing and 100% free cloud practice management software.
+              </p>
+              <div className="space-y-1.5 text-xs text-slate-600 font-medium pt-1">
+                <a href="tel:+917292984244" className="hover:text-[#0867E8] transition-colors font-bold flex items-center gap-2">
+                  📞 +91 7292984244
+                </a>
+                <a href="https://wa.me/917292984244" target="_blank" rel="noopener noreferrer" className="hover:text-emerald-600 transition-colors font-bold flex items-center gap-2">
+                  💬 WhatsApp Support
+                </a>
+                <a href="mailto:contact@clinaza.in" className="hover:text-[#0867E8] transition-colors block">
+                  ✉️ contact@clinaza.in
+                </a>
+              </div>
+            </div>
+
+            {/* Col 2: Popular Patient Guides & Blogs */}
+            <div className="space-y-3">
+              <h4 className="text-xs font-black uppercase tracking-wider text-[#0B2450]">Patient EMI Guides</h4>
+              <ul className="space-y-2 text-xs text-slate-600">
+                <li>
+                  <Link to="/blog/dental-implants-cost-on-emi-india" className="hover:text-[#0867E8] transition-colors">
+                    Dental Implants Cost on EMI
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/blog/hair-transplant-cost-on-emi-india-guide" className="hover:text-[#0867E8] transition-colors">
+                    Hair Transplant EMI Guide
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/blog/lasik-eye-surgery-cost-on-emi-india-guide" className="hover:text-[#0867E8] transition-colors">
+                    LASIK &amp; Eye Surgery Financing
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/blog/ivf-cost-on-emi-fertility-treatment-financing-india" className="hover:text-[#0867E8] transition-colors">
+                    IVF &amp; Fertility EMI Guide
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/blog/knee-replacement-surgery-cost-on-emi-india" className="hover:text-[#0867E8] transition-colors">
+                    Knee Replacement EMI India
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/blog" className="text-[#0867E8] font-bold inline-flex items-center gap-1 mt-1 hover:underline">
+                    View All Guides &rarr;
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            {/* Col 3: Free Tools & Clinic Software */}
+            <div className="space-y-3">
+              <h4 className="text-xs font-black uppercase tracking-wider text-[#0B2450]">Clinic Software &amp; Tools</h4>
+              <ul className="space-y-2 text-xs text-slate-600">
+                <li>
+                  <Link to="/tools" className="hover:text-[#0867E8] transition-colors">
+                    Free Dental Prescription Maker
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/tools" className="hover:text-[#0867E8] transition-colors">
+                    Dental Clinic Setup Calculator
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/tools" className="hover:text-[#0867E8] transition-colors">
+                    Treatment EMI Calculator
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/reactivation/login" className="hover:text-[#0867E8] transition-colors font-bold text-[#0B2450]">
+                    Free Cloud Dental CRM Login 🔐
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/reactivation/login" className="hover:text-[#0867E8] transition-colors">
+                    WhatsApp Patient Recall Portal
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            {/* Col 4: Partner Cities Directory */}
+            <div className="space-y-3">
+              <h4 className="text-xs font-black uppercase tracking-wider text-[#0B2450]">Top Cities</h4>
+              <div className="flex flex-wrap gap-1.5 text-[11px]">
+                {['Patna', 'Delhi', 'Mumbai', 'Bengaluru', 'Hyderabad', 'Pune', 'Kolkata', 'Ahmedabad', 'Chennai', 'Jaipur', 'Lucknow', 'Chandigarh'].map(city => (
+                  <Link 
+                    key={city} 
+                    to={`/cities/${city.toLowerCase()}`}
+                    className="px-2.5 py-1 bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 rounded-lg text-slate-600 hover:text-[#0867E8] transition-colors font-medium"
+                  >
+                    {city}
+                  </Link>
+                ))}
+              </div>
             </div>
           </div>
-          <div className="flex flex-col sm:flex-row items-center gap-2.5 sm:gap-4 text-xs text-slate-600 font-medium">
-            <a href="tel:+917292984244" className="hover:text-[#0867E8] transition-colors font-bold flex items-center gap-1.5">
-              📞 +91 7292984244
-            </a>
-            <span className="hidden sm:inline text-slate-300" aria-hidden="true">&middot;</span>
-            <a href="https://wa.me/917292984244" target="_blank" rel="noopener noreferrer" className="hover:text-emerald-600 transition-colors font-bold flex items-center gap-1.5">
-              💬 WhatsApp Support
-            </a>
-            <span className="hidden sm:inline text-slate-300" aria-hidden="true">&middot;</span>
-            <a href="mailto:contact@clinaza.in" className="hover:text-[#0867E8] transition-colors">contact@clinaza.in</a>
+
+          {/* Bottom Copyright & Disclaimer Strip */}
+          <div className="pt-6 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-slate-400 font-mono">
+            <p>© 2026 CLINAZA Technologies. All Rights Reserved. &middot; Direct Helpline: +91 7292984244</p>
+            <div className="flex items-center gap-4 text-slate-500">
+              <Link to="/tools" className="hover:text-[#0867E8] underline">Free Tools</Link>
+              <Link to="/blog" className="hover:text-[#0867E8] underline">Blog Hub</Link>
+              <Link to="/reactivation/login" className="hover:text-[#0B2450] font-bold">Doctor Login</Link>
+            </div>
           </div>
-          <nav aria-label="Footer navigation" className="flex flex-wrap justify-center sm:justify-end items-center gap-3 text-[10px] text-slate-500 font-mono uppercase tracking-widest">
-            <Link to="/tools" className="hover:text-[#0867E8] transition-colors underline">Free Tools</Link>
-            <span aria-hidden="true">&middot;</span>
-            <Link to="/blog" className="hover:text-[#0f7a75] transition-colors underline">Patient Guides</Link>
-            <span aria-hidden="true">&middot;</span>
-            <Link to="/reactivation/login" className="hover:text-[#0B2450] transition-colors font-bold">Doctor Portal</Link>
-          </nav>
-        </div>
-        <div className="max-w-6xl mx-auto mt-4 pt-3 border-t border-slate-100 text-center text-[10px] text-slate-400 font-mono">
-          © 2026 CLINAZA Technologies. All Rights Reserved. &middot; Direct Helpline: +91 7292984244
         </div>
       </footer>
     </div>

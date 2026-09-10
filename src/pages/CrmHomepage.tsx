@@ -570,26 +570,26 @@ export default function CrmHomepage() {
                 ].map((item, idx) => (
                   <div
                     key={idx}
-                    className="flex items-center gap-4 px-4 py-3 rounded-2xl bg-slate-50 border border-slate-200 shrink-0 transition-all hover:bg-white hover:border-[#0867E8]/30 hover:shadow-md"
+                    className="flex items-center gap-3 px-3.5 py-2 rounded-xl bg-slate-50/90 border border-slate-200/90 shrink-0 transition-all hover:bg-white hover:border-slate-300 hover:shadow-xs"
                   >
-                    {/* Large logo container */}
-                    <div className="w-14 h-14 rounded-xl overflow-hidden flex items-center justify-center shrink-0 shadow-sm bg-white border border-slate-100 p-1">
-                      <BankSvgLogo id={item.id} size={52} />
+                    {/* Logo container */}
+                    <div className="w-8 h-8 rounded-lg overflow-hidden flex items-center justify-center shrink-0 shadow-2xs bg-white border border-slate-100">
+                      <BankSvgLogo id={item.id} size={32} />
                     </div>
                     <div className="text-left">
-                      <div className="flex items-center gap-2 mb-0.5">
-                        <span className="text-sm font-black text-[#0B2450] whitespace-nowrap">{item.name}</span>
-                        <span className={`text-[9px] font-black px-2 py-0.5 rounded-full uppercase tracking-wide ${
+                      <div className="flex items-center gap-1.5 mb-0.5">
+                        <span className="text-xs font-bold text-[#0B2450] whitespace-nowrap">{item.name}</span>
+                        <span className={`text-[8px] font-bold px-1.5 py-0.5 rounded uppercase tracking-wide ${
                           item.badge === 'Bank'
-                            ? 'bg-blue-50 text-blue-600 border border-blue-200'
+                            ? 'bg-blue-50 text-blue-600'
                             : item.badge === 'LSP'
-                            ? 'bg-emerald-50 text-emerald-600 border border-emerald-200'
-                            : 'bg-orange-50 text-orange-600 border border-orange-200'
+                            ? 'bg-emerald-50 text-emerald-600'
+                            : 'bg-orange-50 text-orange-600'
                         }`}>
                           {item.badge}
                         </span>
                       </div>
-                      <p className="text-[11px] text-slate-500 whitespace-nowrap font-medium">{item.sub}</p>
+                      <p className="text-[10px] text-slate-500 whitespace-nowrap">{item.sub}</p>
                     </div>
                   </div>
                 ))}

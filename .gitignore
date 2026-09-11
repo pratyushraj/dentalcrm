@@ -93,6 +93,17 @@ scratch/
 !public/icon-*.png
 !public/og-preview.png
 !public/assets/**/*
-!src/assets/**/*
 !public/videos/**/*.mp4
 !public/videos/*.mp4
+
+# Outreach local data and scripts
+send_*.py
+*dispatch_results*.json
+dental_leads_*.json
+dental_leads_*.csv
+verified_leads_*.json
+verified_leads_*.csv
+*.db
+src/scripts/outreach/__pycache__/
+src/scripts/outreach/logs/
+src/scripts/outreach/dental_leads_master.db

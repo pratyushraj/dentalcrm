@@ -7155,6 +7155,298 @@ export const BLOGS: BlogArticle[] = [
         />
       </div>
     )
+  },
+  {
+    slug: "lasik-contoura-vision-eye-surgery-cost-emi-india-guide",
+    title: "LASIK & Contoura Vision Eye Surgery Cost on EMI in India (2026): Complete Guide",
+    category: "Elective Surgeries",
+    readTime: "6 min read",
+    publishDate: "September 12, 2026",
+    author: "Clinaza Medical Insights",
+    summary: "Complete guide to LASIK, Contoura Vision, SMILE, and FEMTO LASIK eye surgery costs in India on monthly EMI. Understand procedure differences, city-wise pricing, and why health insurance doesn't cover refractive surgery.",
+    featuredImage: "/assets/yourdentist/clinic_in_action.jpg",
+    metaDescription: "LASIK eye surgery cost on EMI in India 2026. Compare LASIK, Contoura Vision & SMILE pricing (₹20,000 to ₹85,000/eye), 0% monthly EMI from ₹1,200/month, and top clinic options.",
+    faqs: [
+      {
+        question: "How much does LASIK eye surgery cost in India per eye?",
+        answer: "Standard Microkeratome LASIK costs ₹20,000 to ₹30,000 per eye. Bladeless FEMTO LASIK ranges from ₹35,000 to ₹55,000 per eye. Premium Contoura Vision (Topography-Guided) costs ₹50,000 to ₹85,000 per eye. Total for both eyes typically ranges from ₹40,000 to ₹1,70,000 depending on the center and technology."
+      },
+      {
+        question: "Can LASIK surgery be done on monthly EMI in India?",
+        answer: "Yes. Leading LASIK and ophthalmology centers partner with healthcare NBFCs and Clinaza point-of-care financing to offer 0% to low-interest EMI (3 to 24 months). You can get both eyes corrected today and repay in small monthly installments of ₹1,200 to ₹4,500/month."
+      },
+      {
+        question: "Does health insurance cover LASIK surgery in India?",
+        answer: "No. LASIK and other refractive surgeries are classified as elective cosmetic eye procedures and are excluded from all standard retail health insurance (Mediclaim) policies in India, as per IRDAI guidelines. Only accident-related corneal reconstruction may be covered."
+      },
+      {
+        question: "What is the difference between LASIK and Contoura Vision?",
+        answer: "Standard LASIK uses a wavefront-optimized laser profile mapped to population averages. Contoura Vision (Topography-Guided LASIK) uses 22,000 individual corneal elevation points to create a completely personalized ablation profile for each patient's unique cornea, often delivering better than 6/6 (20/20) vision and superior night driving outcomes."
+      }
+    ],
+    content: (
+      <div className="space-y-6">
+        <p className="text-lg leading-relaxed text-neutral-700">
+          More than 150 million Indians wear corrective glasses or contact lenses. For working professionals tired of the daily lens care routine, <strong>LASIK and Contoura Vision refractive surgeries</strong> offer permanent freedom from dependence on glasses—often in under 15 minutes per eye. However, premium laser eye surgery costs ₹40,000 to ₹1,70,000 for both eyes, with zero health insurance reimbursement. Monthly EMI financing eliminates this financial barrier entirely.
+        </p>
+
+        {/* Lead Capture Form */}
+        <PatientLeadForm
+          defaultTreatment="LASIK / Contoura Vision Surgery"
+          sourceArticle="LASIK Eye Surgery Cost on EMI Guide (Top Form)"
+        />
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">LASIK Procedure Comparison: Technology vs Cost vs EMI (Both Eyes)</h2>
+        <div className="overflow-x-auto my-6">
+          <table className="min-w-full divide-y divide-neutral-200 border border-neutral-100 text-sm">
+            <thead className="bg-neutral-50">
+              <tr>
+                <th className="px-4 py-3 text-left font-bold text-neutral-700">Procedure Type</th>
+                <th className="px-4 py-3 text-left font-bold text-neutral-700">Technology Used</th>
+                <th className="px-4 py-3 text-left font-bold text-neutral-700">Cost (Both Eyes)</th>
+                <th className="px-4 py-3 text-left font-bold text-neutral-700">EMI from (12–24 Mo)</th>
+                <th className="px-4 py-3 text-left font-bold text-neutral-700">Best For</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-neutral-100 text-neutral-700">
+              <tr className="bg-blue-50/40">
+                <td className="px-4 py-3 font-bold text-blue-950">Standard LASIK (Blade)</td>
+                <td className="px-4 py-3">Microkeratome flap + Excimer laser</td>
+                <td className="px-4 py-3 font-semibold">₹40,000 – ₹60,000</td>
+                <td className="px-4 py-3 font-bold text-blue-600">₹1,800 – ₹2,700/mo</td>
+                <td className="px-4 py-3 text-slate-600">Low/moderate myopia (−1 to −6)</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-bold text-indigo-950">Bladeless FEMTO LASIK</td>
+                <td className="px-4 py-3">Femtosecond laser flap + Excimer</td>
+                <td className="px-4 py-3 font-semibold">₹70,000 – ₹1,10,000</td>
+                <td className="px-4 py-3 font-bold text-indigo-600">₹3,200 – ₹5,000/mo</td>
+                <td className="px-4 py-3 text-slate-600">High myopia, thin corneas</td>
+              </tr>
+              <tr className="bg-emerald-50/40">
+                <td className="px-4 py-3 font-bold text-emerald-950">Contoura Vision (Topography-Guided)</td>
+                <td className="px-4 py-3">22,000-point personalized corneal map</td>
+                <td className="px-4 py-3 font-semibold">₹1,00,000 – ₹1,70,000</td>
+                <td className="px-4 py-3 font-bold text-emerald-600">₹4,500 – ₹7,600/mo</td>
+                <td className="px-4 py-3 text-slate-600">Best possible vision quality, night driving</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-bold text-purple-950">SMILE (Small Incision Lenticule Extraction)</td>
+                <td className="px-4 py-3">Flapless femtosecond-only procedure</td>
+                <td className="px-4 py-3 font-semibold">₹90,000 – ₹1,50,000</td>
+                <td className="px-4 py-3 font-bold text-purple-600">₹4,100 – ₹6,800/mo</td>
+                <td className="px-4 py-3 text-slate-600">Dry eyes, contact sports, athletes</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Am I Eligible for LASIK? 5 Key Criteria</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 my-4">
+          {[
+            { title: "Age ≥ 18 Years", desc: "Vision prescription must be stable for at least 12 consecutive months before surgery." },
+            { title: "Prescription Range", desc: "Myopia (−1 to −12D), Hyperopia (+1 to +5D), Astigmatism (up to −6D) qualify for evaluation." },
+            { title: "Adequate Corneal Thickness", desc: "Minimum 480–500 microns corneal depth required. Measured during pre-operative topography mapping." },
+            { title: "No Active Eye Disease", desc: "Candidates must not have active keratoconus, severe dry eyes, glaucoma, or herpes simplex eye infection." },
+            { title: "Pupil Size in Darkness", desc: "Pupils >7mm in scotopic (dark) conditions may require SMILE or Contoura for optimal night vision." },
+          ].map((item, i) => (
+            <div key={i} className="p-4 border border-slate-200 rounded-xl bg-slate-50 space-y-1.5">
+              <h4 className="font-bold text-sm text-slate-900">{item.title}</h4>
+              <p className="text-xs text-neutral-600 leading-relaxed">{item.desc}</p>
+            </div>
+          ))}
+        </div>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">City-Wise LASIK Cost Range in India</h2>
+        <div className="overflow-x-auto my-4">
+          <table className="min-w-full divide-y divide-neutral-200 border border-neutral-100 text-xs">
+            <thead className="bg-neutral-50">
+              <tr>
+                <th className="px-3 py-3 text-left font-bold text-neutral-700">City</th>
+                <th className="px-3 py-3 text-left font-bold text-neutral-700">Standard LASIK (Both Eyes)</th>
+                <th className="px-3 py-3 text-left font-bold text-neutral-700">FEMTO / Contoura (Both Eyes)</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-neutral-100 text-neutral-700">
+              {[
+                ["Delhi / NCR", "₹45,000 – ₹65,000", "₹90,000 – ₹1,60,000"],
+                ["Mumbai / Pune", "₹50,000 – ₹70,000", "₹1,00,000 – ₹1,70,000"],
+                ["Bangalore", "₹48,000 – ₹68,000", "₹95,000 – ₹1,60,000"],
+                ["Hyderabad", "₹42,000 – ₹60,000", "₹85,000 – ₹1,50,000"],
+                ["Chennai", "₹40,000 – ₹55,000", "₹80,000 – ₹1,40,000"],
+                ["Patna / Lucknow", "₹35,000 – ₹50,000", "₹70,000 – ₹1,20,000"],
+              ].map(([city, std, prem]) => (
+                <tr key={city}>
+                  <td className="px-3 py-2.5 font-semibold text-slate-900">{city}</td>
+                  <td className="px-3 py-2.5">{std}</td>
+                  <td className="px-3 py-2.5 font-semibold text-blue-700">{prem}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Why Health Insurance Won't Cover LASIK — And What to Do</h2>
+        <p className="text-neutral-700 leading-relaxed">
+          The Insurance Regulatory and Development Authority of India (IRDAI) classifies LASIK, SMILE, and Contoura Vision surgeries as elective refractive procedures and excludes them from all standard health insurance policies. This applies to corporate group health policies, individual Mediclaim, and top-up super top-up plans. The only exception is traumatic corneal damage due to accidents.
+        </p>
+        <p className="text-neutral-700 leading-relaxed">
+          The practical alternative is <strong>point-of-care medical EMI</strong> — allowing you to pay for your LASIK in affordable monthly installments, directly at the partner eye care center on the day of surgery, with no credit card required.
+        </p>
+
+        {/* Bottom Lead Capture Block */}
+        <PatientLeadForm
+          defaultTreatment="LASIK / Contoura Vision Surgery"
+          sourceArticle="LASIK Eye Surgery Cost on EMI Guide (Bottom CTA)"
+        />
+      </div>
+    )
+  },
+  {
+    slug: "ivf-fertility-treatment-cost-on-emi-india-guide",
+    title: "IVF Cost on EMI in India: Per Cycle Pricing, Insurance Gaps & Monthly Financing (2026)",
+    category: "Fertility & Elective",
+    readTime: "7 min read",
+    publishDate: "September 12, 2026",
+    author: "Clinaza Medical Insights",
+    summary: "Complete guide to IVF, IUI, and ICSI fertility treatment costs in India on monthly EMI. Understand per-cycle pricing across cities, what health insurance ignores, and how couples can access world-class ART treatment without financial distress.",
+    featuredImage: "/assets/yourdentist/clinic_in_action.jpg",
+    metaDescription: "IVF cost on EMI in India 2026. Compare IVF, IUI & ICSI per-cycle prices (₹80,000 to ₹2,50,000), 0% interest EMI from ₹3,500/month, and how to finance fertility treatment without insurance.",
+    faqs: [
+      {
+        question: "How much does one IVF cycle cost in India?",
+        answer: "A single IVF cycle in India typically costs ₹80,000 to ₹1,80,000 for the procedure. With fertility medication (hormonal injections and progesterone support), total cost rises to ₹1,20,000 to ₹2,50,000 per cycle. Specialized procedures like ICSI (Intracytoplasmic Sperm Injection) or PGT (Preimplantation Genetic Testing) add ₹25,000 to ₹80,000 per cycle."
+      },
+      {
+        question: "Can IVF or IUI fertility treatment be taken on monthly EMI in India?",
+        answer: "Yes. Several fertility hospitals and IVF centers partner with healthcare financing platforms to offer per-cycle EMI plans. Through Clinaza point-of-care financing, a single IVF cycle can be repaid at ₹3,500 to ₹8,500/month over 12 to 24 months."
+      },
+      {
+        question: "Does health insurance in India cover IVF treatment?",
+        answer: "Most retail health insurance plans in India do not cover IVF, IUI, ICSI, or fertility medications. Some progressive corporate group health plans (at large employers like Infosys, TCS, Google India) offer limited fertility benefits of ₹50,000 to ₹1,00,000 per year — but these are rare exceptions. Out-of-pocket EMI remains the primary financing route."
+      },
+      {
+        question: "What is the success rate of IVF in India?",
+        answer: "Average IVF success rates in India range from 35% to 50% per cycle for women under 35, and 20% to 30% for women aged 35 to 40. Success rates depend heavily on the fertility clinic's embryology lab quality, the patient's ovarian reserve (AMH levels), and semen quality parameters."
+      }
+    ],
+    content: (
+      <div className="space-y-6">
+        <p className="text-lg leading-relaxed text-neutral-700">
+          Infertility affects approximately 1 in 6 couples in India, with demand for Assisted Reproductive Technology (ART) growing at 15–20% annually. While India offers <strong>world-class IVF treatment at a fraction of western costs</strong>, even Indian pricing of ₹1.2 to ₹2.5 Lakhs per cycle represents a significant financial strain—especially since most couples require 2 to 3 cycles before a successful pregnancy. Monthly EMI financing allows couples to pursue complete fertility treatment without draining all their savings in one cycle.
+        </p>
+
+        {/* Lead Capture Form */}
+        <PatientLeadForm
+          defaultTreatment="IVF / Fertility Treatment"
+          sourceArticle="IVF Fertility Treatment Cost on EMI Guide (Top Form)"
+        />
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">ART Procedure Cost Breakdown Per Cycle (India 2026)</h2>
+        <div className="overflow-x-auto my-6">
+          <table className="min-w-full divide-y divide-neutral-200 border border-neutral-100 text-sm">
+            <thead className="bg-neutral-50">
+              <tr>
+                <th className="px-4 py-3 text-left font-bold text-neutral-700">Procedure</th>
+                <th className="px-4 py-3 text-left font-bold text-neutral-700">What It Treats</th>
+                <th className="px-4 py-3 text-left font-bold text-neutral-700">Procedure Cost</th>
+                <th className="px-4 py-3 text-left font-bold text-neutral-700">With Medication Total</th>
+                <th className="px-4 py-3 text-left font-bold text-neutral-700">EMI from (12 Mo)</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-neutral-100 text-neutral-700">
+              <tr className="bg-blue-50/40">
+                <td className="px-4 py-3 font-bold text-blue-950">IUI (Intrauterine Insemination)</td>
+                <td className="px-4 py-3">Mild male factor, unexplained infertility</td>
+                <td className="px-4 py-3 font-semibold">₹8,000 – ₹18,000</td>
+                <td className="px-4 py-3 font-semibold">₹15,000 – ₹35,000</td>
+                <td className="px-4 py-3 font-bold text-blue-600">₹1,400/mo</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-bold text-indigo-950">Standard IVF</td>
+                <td className="px-4 py-3">Tubal factors, PCOS, ovulation disorders</td>
+                <td className="px-4 py-3 font-semibold">₹80,000 – ₹1,50,000</td>
+                <td className="px-4 py-3 font-semibold">₹1,20,000 – ₹2,00,000</td>
+                <td className="px-4 py-3 font-bold text-indigo-600">₹5,500 – ₹9,200/mo</td>
+              </tr>
+              <tr className="bg-emerald-50/40">
+                <td className="px-4 py-3 font-bold text-emerald-950">ICSI (Intracytoplasmic Sperm Injection)</td>
+                <td className="px-4 py-3">Severe male factor, azoospermia</td>
+                <td className="px-4 py-3 font-semibold">₹1,00,000 – ₹1,80,000</td>
+                <td className="px-4 py-3 font-semibold">₹1,50,000 – ₹2,50,000</td>
+                <td className="px-4 py-3 font-bold text-emerald-600">₹6,900 – ₹11,500/mo</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-bold text-purple-950">Frozen Embryo Transfer (FET)</td>
+                <td className="px-4 py-3">Using cryopreserved embryos from prior cycle</td>
+                <td className="px-4 py-3 font-semibold">₹25,000 – ₹60,000</td>
+                <td className="px-4 py-3 font-semibold">₹40,000 – ₹90,000</td>
+                <td className="px-4 py-3 font-bold text-purple-600">₹1,800 – ₹4,100/mo</td>
+              </tr>
+              <tr className="bg-amber-50/40">
+                <td className="px-4 py-3 font-bold text-amber-950">IVF + PGT-A (Preimplantation Genetic Testing)</td>
+                <td className="px-4 py-3">Recurrent miscarriage, advanced maternal age</td>
+                <td className="px-4 py-3 font-semibold">₹1,80,000 – ₹3,00,000</td>
+                <td className="px-4 py-3 font-semibold">₹2,20,000 – ₹3,50,000</td>
+                <td className="px-4 py-3 font-bold text-amber-600">₹10,000 – ₹16,000/mo</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">City-Wise IVF Cost Comparison Across India</h2>
+        <div className="overflow-x-auto my-4">
+          <table className="min-w-full divide-y divide-neutral-200 border border-neutral-100 text-xs">
+            <thead className="bg-neutral-50">
+              <tr>
+                <th className="px-3 py-3 text-left font-bold text-neutral-700">City</th>
+                <th className="px-3 py-3 text-left font-bold text-neutral-700">IVF Cost Per Cycle (All-Inclusive)</th>
+                <th className="px-3 py-3 text-left font-bold text-neutral-700">Top Fertility Clinics</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-neutral-100 text-neutral-700">
+              {[
+                ["Delhi / NCR", "₹1,20,000 – ₹2,20,000", "Nova IVF, Fortis, Indira IVF, Oasis"],
+                ["Mumbai", "₹1,30,000 – ₹2,50,000", "Cloudnine, Lilavati, Nova IVF"],
+                ["Bangalore", "₹1,10,000 – ₹2,00,000", "Manipal, Milann, Nova IVF"],
+                ["Hyderabad", "₹1,00,000 – ₹1,90,000", "Oasis, Kiran Infertility, Rainbow"],
+                ["Chennai", "₹95,000 – ₹1,80,000", "SRM, GG, Nova IVF, Apollo"],
+                ["Pune", "₹1,00,000 – ₹1,85,000", "Vaunshdhara, Indira IVF, Ruby Hall"],
+                ["Patna / Lucknow / Tier-2", "₹80,000 – ₹1,50,000", "Local IVF centers, Indira IVF franchises"],
+              ].map(([city, cost, clinics]) => (
+                <tr key={city}>
+                  <td className="px-3 py-2.5 font-semibold text-slate-900">{city}</td>
+                  <td className="px-3 py-2.5 font-semibold text-indigo-700">{cost}</td>
+                  <td className="px-3 py-2.5 text-slate-600">{clinics}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">The Hidden Cost of IVF: What Most Couples Don't Budget For</h2>
+        <ul className="list-disc pl-6 space-y-2 text-neutral-700">
+          <li><strong>Fertility Hormonal Injections:</strong> Follicle stimulating hormone (FSH) and LH injections cost ₹25,000 to ₹60,000 per cycle depending on ovarian response protocol.</li>
+          <li><strong>Embryo Freezing & Cryopreservation:</strong> Initial freezing costs ₹15,000 to ₹30,000 with annual storage fees of ₹8,000 to ₹15,000 per year thereafter.</li>
+          <li><strong>Multiple Cycle Requirements:</strong> Over 60% of couples require more than one IVF cycle. Planning for 2 to 3 cycles upfront allows better financing and psychological preparation.</li>
+          <li><strong>Diagnostic Workups:</strong> AMH, AFC count, semen DNA fragmentation, karyotyping, thrombophilia panels add ₹10,000 to ₹35,000 before the first cycle begins.</li>
+        </ul>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Insurance Coverage for IVF in India: The Hard Truth</h2>
+        <p className="text-neutral-700 leading-relaxed">
+          As of 2026, <strong>fewer than 3% of Indian health insurance policies</strong> offer any fertility-related coverage, and most that do cap benefits at ₹50,000 — barely covering fertility diagnostics alone, let alone a complete IVF cycle with medication. Corporate group health plans at a handful of multinational employers (Google India, Goldman Sachs, some pharma companies) are exceptions, not the rule.
+        </p>
+        <p className="text-neutral-700 leading-relaxed">
+          The practical solution for most Indian couples is <strong>no-collateral medical EMI financing at the fertility clinic itself</strong>—spreading cycle costs into manageable monthly amounts without depleting emergency funds or taking high-interest personal loans.
+        </p>
+
+        {/* Bottom Lead Capture Block */}
+        <PatientLeadForm
+          defaultTreatment="IVF / Fertility Treatment"
+          sourceArticle="IVF Fertility Treatment Cost on EMI Guide (Bottom CTA)"
+        />
+      </div>
+    )
   }
 ];
 

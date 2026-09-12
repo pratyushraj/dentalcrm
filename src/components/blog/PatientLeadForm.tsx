@@ -148,6 +148,9 @@ export const PatientLeadForm: React.FC<PatientLeadFormProps> = ({
               <option value="Single Dental Implant" className="bg-[#0B2450] text-white">Single Tooth Dental Implant</option>
               <option value="Multiple Implants / Full Mouth" className="bg-[#0B2450] text-white">Multiple Implants / Full Mouth</option>
               <option value="Invisible Clear Aligners" className="bg-[#0B2450] text-white">Invisible Clear Aligners</option>
+              <option value="Hair Transplant (FUE/DHI)" className="bg-[#0B2450] text-white">Hair Transplant (FUE / DHI / Grafts)</option>
+              <option value="LASIK / Contoura Vision Surgery" className="bg-[#0B2450] text-white">LASIK / Contoura Vision Eye Surgery</option>
+              <option value="IVF / Fertility Treatment" className="bg-[#0B2450] text-white">IVF / Fertility Treatment</option>
               <option value="Root Canal (RCT) & Crown" className="bg-[#0B2450] text-white">Root Canal (RCT) & Crown</option>
               <option value="Braces / Smile Makeover" className="bg-[#0B2450] text-white">Braces / Smile Makeover</option>
             </select>

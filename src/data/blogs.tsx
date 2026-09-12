@@ -7447,12 +7447,166 @@ export const BLOGS: BlogArticle[] = [
         />
       </div>
     )
+  },
+
+
+  {
+    slug: "knee-hip-replacement-surgery-cost-emi-india-guide",
+    title: "Knee and Hip Replacement Surgery Cost on EMI in India: City-Wise Guide (2026)",
+    category: "Orthopedic Surgery",
+    readTime: "7 min read",
+    publishDate: "September 12, 2026",
+    author: "Clinaza Medical Insights",
+    summary: "Complete guide to total knee replacement and total hip replacement surgery costs in India on monthly EMI. Compare implant types, city-wise pricing, insurance gaps, and how senior citizens can finance joint replacement.",
+    featuredImage: "/assets/yourdentist/clinic_in_action.jpg",
+    metaDescription: "Knee and hip replacement cost on EMI in India 2026. Compare TKR and THR implant pricing, monthly EMI from Rs 4,500/month, insurance gaps, and top ortho hospitals.",
+    faqs: [
+      { question: "How much does a total knee replacement cost in India?", answer: "TKR costs Rs 1,50,000 to Rs 3,50,000 per knee. THR costs Rs 1,80,000 to Rs 4,00,000 per joint depending on implant brand and hospital tier." },
+      { question: "Does health insurance cover knee replacement in India?", answer: "Partially. Most policies cover it after 2-year waiting periods but sub-limits leave Rs 50,000 to Rs 2,00,000 out-of-pocket that can be converted to EMI." },
+      { question: "Can senior citizens get knee replacement on EMI?", answer: "Yes. Adult children can co-apply for senior patient medical financing. Clinaza enables paperless co-borrower onboarding so parents above 60 can receive surgery immediately." },
+      { question: "Which knee implant is best — Indian or imported?", answer: "Indian brands (Meril, Orchid) cost Rs 40,000 to Rs 90,000. Imported (Stryker, Zimmer) cost Rs 1,20,000 to Rs 2,50,000 and are preferred for younger, active patients needing high-flex designs." }
+    ],
+    content: (
+      <div className="space-y-6">
+        <p className="text-lg leading-relaxed text-neutral-700">Over 15 crore Indians suffer from knee or hip osteoarthritis yet fewer than 5 lakh joint replacement surgeries happen annually. <strong>Total knee and hip replacement</strong> restore full mobility and eliminate chronic pain. Monthly EMI removes the financial barrier entirely.</p>
+        <PatientLeadForm defaultTreatment="Multiple Implants / Full Mouth" sourceArticle="Knee Hip Replacement EMI Guide" />
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Joint Replacement Cost and EMI (India 2026)</h2>
+        <div className="overflow-x-auto my-6">
+          <table className="min-w-full divide-y divide-neutral-200 border border-neutral-100 text-sm">
+            <thead className="bg-neutral-50"><tr><th className="px-4 py-3 text-left font-bold text-neutral-700">Procedure</th><th className="px-4 py-3 text-left font-bold text-neutral-700">Implant</th><th className="px-4 py-3 text-left font-bold text-neutral-700">Total Cost</th><th className="px-4 py-3 text-left font-bold text-neutral-700">EMI 24 Mo</th></tr></thead>
+            <tbody className="divide-y divide-neutral-100 text-neutral-700">
+              <tr className="bg-blue-50/40"><td className="px-4 py-3 font-bold text-blue-950">Knee Replacement (TKR)</td><td className="px-4 py-3">Indian Brand</td><td className="px-4 py-3 font-semibold">Rs 1,50,000 - Rs 2,00,000</td><td className="px-4 py-3 font-bold text-blue-600">Rs 7,300/mo</td></tr>
+              <tr><td className="px-4 py-3 font-bold text-indigo-950">Knee Replacement (TKR)</td><td className="px-4 py-3">Imported (Stryker / Zimmer)</td><td className="px-4 py-3 font-semibold">Rs 2,50,000 - Rs 3,50,000</td><td className="px-4 py-3 font-bold text-indigo-600">Rs 12,000 - Rs 17,000/mo</td></tr>
+              <tr className="bg-emerald-50/40"><td className="px-4 py-3 font-bold text-emerald-950">Hip Replacement (THR)</td><td className="px-4 py-3">Indian Brand</td><td className="px-4 py-3 font-semibold">Rs 1,80,000 - Rs 2,50,000</td><td className="px-4 py-3 font-bold text-emerald-600">Rs 8,700 - Rs 12,000/mo</td></tr>
+              <tr><td className="px-4 py-3 font-bold text-purple-950">Hip Replacement (THR)</td><td className="px-4 py-3">Imported Ceramic</td><td className="px-4 py-3 font-semibold">Rs 3,00,000 - Rs 4,50,000</td><td className="px-4 py-3 font-bold text-purple-600">Rs 14,500 - Rs 21,800/mo</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">How Insurance Falls Short</h2>
+        <ul className="list-disc pl-6 space-y-2 text-neutral-700">
+          <li><strong>Implant sub-limits</strong> cap at Rs 50,000-80,000 vs actual cost of Rs 80,000-2,50,000 per implant.</li>
+          <li><strong>Bilateral exclusions</strong> — many insurers will not cover both knees in the same hospitalization.</li>
+          <li><strong>TPA delays</strong> often force families to deposit cash upfront and wait weeks for reimbursement.</li>
+        </ul>
+        <PatientLeadForm defaultTreatment="Multiple Implants / Full Mouth" sourceArticle="Knee Hip Replacement EMI Guide Bottom" />
+      </div>
+    )
+  },
+  {
+    slug: "bariatric-weight-loss-surgery-cost-emi-india-guide",
+    title: "Bariatric and Weight Loss Surgery Cost on EMI in India: Sleeve, Bypass and Band (2026)",
+    category: "Elective Surgeries",
+    readTime: "7 min read",
+    publishDate: "September 12, 2026",
+    author: "Clinaza Medical Insights",
+    summary: "Complete guide to bariatric surgery costs in India on monthly EMI. Compare gastric sleeve, gastric bypass, and mini bypass pricing with insurance exclusions and affordable financing options.",
+    featuredImage: "/assets/yourdentist/clinic_in_action.jpg",
+    metaDescription: "Bariatric surgery cost on EMI in India 2026. Compare gastric sleeve vs bypass pricing (Rs 2L to 5L), monthly EMI from Rs 9,700/month, insurance exclusions, and top bariatric centers.",
+    faqs: [
+      { question: "How much does bariatric surgery cost in India?", answer: "Gastric sleeve: Rs 2L to Rs 3.5L. RYGB bypass: Rs 3L to Rs 5L. Mini bypass: Rs 2.8L to Rs 4L. Intragastric balloon: Rs 1.2L to Rs 2.5L." },
+      { question: "Does health insurance cover bariatric surgery?", answer: "Some policies cover it for BMI over 40 or BMI over 32.5 with comorbidities. Most plans still exclude it and sub-limits leave Rs 1-3L out-of-pocket." },
+      { question: "What BMI is required for bariatric surgery in India?", answer: "BMI 37.5 or above, or BMI 32.5 with comorbidities like Type 2 diabetes, hypertension, PCOS, or sleep apnea." },
+      { question: "Can I get bariatric surgery on EMI without a credit card?", answer: "Yes. Through Clinaza financing, patients repay via bank EMI over 12-36 months with no credit card required." }
+    ],
+    content: (
+      <div className="space-y-6">
+        <p className="text-lg leading-relaxed text-neutral-700">Obesity affects over 13.5 crore adults in India. <strong>Bariatric surgery delivers 60-80% excess weight loss within 18 months</strong> and is the only proven long-term cure for morbid obesity. Monthly EMI financing makes this accessible without depleting savings.</p>
+        <PatientLeadForm defaultTreatment="Multiple Implants / Full Mouth" sourceArticle="Bariatric Surgery EMI Guide" />
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Bariatric Procedure Comparison and EMI (India 2026)</h2>
+        <div className="overflow-x-auto my-6">
+          <table className="min-w-full divide-y divide-neutral-200 border border-neutral-100 text-sm">
+            <thead className="bg-neutral-50"><tr><th className="px-4 py-3 text-left font-bold text-neutral-700">Procedure</th><th className="px-4 py-3 text-left font-bold text-neutral-700">Cost Range</th><th className="px-4 py-3 text-left font-bold text-neutral-700">Excess Weight Loss</th><th className="px-4 py-3 text-left font-bold text-neutral-700">EMI 24 Mo</th></tr></thead>
+            <tbody className="divide-y divide-neutral-100 text-neutral-700">
+              <tr className="bg-blue-50/40"><td className="px-4 py-3 font-bold text-blue-950">Gastric Sleeve (LSG)</td><td className="px-4 py-3 font-semibold">Rs 2,00,000 - Rs 3,50,000</td><td className="px-4 py-3">55-70% EWL</td><td className="px-4 py-3 font-bold text-blue-600">Rs 9,700 - Rs 17,000/mo</td></tr>
+              <tr><td className="px-4 py-3 font-bold text-indigo-950">Gastric Bypass (RYGB)</td><td className="px-4 py-3 font-semibold">Rs 3,00,000 - Rs 5,00,000</td><td className="px-4 py-3">65-80% EWL</td><td className="px-4 py-3 font-bold text-indigo-600">Rs 14,500 - Rs 24,200/mo</td></tr>
+              <tr className="bg-emerald-50/40"><td className="px-4 py-3 font-bold text-emerald-950">Mini Bypass (MGB / OAGB)</td><td className="px-4 py-3 font-semibold">Rs 2,80,000 - Rs 4,00,000</td><td className="px-4 py-3">60-75% EWL</td><td className="px-4 py-3 font-bold text-emerald-600">Rs 13,500 - Rs 19,400/mo</td></tr>
+              <tr><td className="px-4 py-3 font-bold text-amber-950">Intragastric Balloon</td><td className="px-4 py-3 font-semibold">Rs 1,20,000 - Rs 2,50,000</td><td className="px-4 py-3">20-35% EWL (temporary)</td><td className="px-4 py-3 font-bold text-amber-600">Rs 5,800 - Rs 12,100/mo</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Health Conditions Reversed by Bariatric Surgery</h2>
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 my-4">
+          {[{condition:"Type 2 Diabetes",rate:"80% remission"},{condition:"Hypertension",rate:"75% resolution"},{condition:"Sleep Apnea",rate:"85% improvement"},{condition:"PCOS",rate:"70% resolution"},{condition:"Joint Pain",rate:"60% improvement"},{condition:"Fatty Liver",rate:"90% improvement"}].map(item => (
+            <div key={item.condition} className="p-3 bg-slate-50 border border-slate-200 rounded-xl text-center"><p className="text-xs font-bold text-slate-900">{item.condition}</p><p className="text-xs font-semibold text-emerald-600">{item.rate}</p></div>
+          ))}
+        </div>
+        <PatientLeadForm defaultTreatment="Multiple Implants / Full Mouth" sourceArticle="Bariatric Surgery EMI Guide Bottom" />
+      </div>
+    )
+  },
+  {
+    slug: "rhinoplasty-cosmetic-surgery-cost-emi-india-guide",
+    title: "Rhinoplasty and Cosmetic Surgery Cost on EMI in India: Complete Financing Guide (2026)",
+    category: "Cosmetic Surgery",
+    readTime: "6 min read",
+    publishDate: "September 12, 2026",
+    author: "Clinaza Medical Insights",
+    summary: "Complete guide to rhinoplasty, liposuction, gynecomastia, and other cosmetic surgery costs in India on monthly EMI. Why insurance never covers cosmetic surgery and how to finance affordably.",
+    featuredImage: "/assets/yourdentist/clinic_in_action.jpg",
+    metaDescription: "Rhinoplasty and cosmetic surgery cost on EMI in India 2026. Compare nose job, liposuction, and gynecomastia pricing, monthly EMI from Rs 2,500/month.",
+    faqs: [
+      { question: "How much does rhinoplasty cost in India?", answer: "Open or closed rhinoplasty costs Rs 60,000 to Rs 1,80,000. Revision rhinoplasty: Rs 90,000 to Rs 2,50,000. Septorhinoplasty: Rs 80,000 to Rs 2,00,000." },
+      { question: "Can cosmetic surgery be financed on EMI?", answer: "Yes. Leading plastic surgery centers offer no-cost EMI (3 to 24 months) with paperless digital KYC. Procedures can be repaid from Rs 2,500/month." },
+      { question: "Is cosmetic surgery covered by health insurance in India?", answer: "No. All elective aesthetic procedures are excluded from all retail health insurance per IRDAI guidelines. The sole exception is functional rhinoplasty for deviated septum." }
+    ],
+    content: (
+      <div className="space-y-6">
+        <p className="text-lg leading-relaxed text-neutral-700">India is one of the world's top destinations for affordable cosmetic surgery — results comparable to Western centers at 60-80% lower cost. <strong>Monthly EMI financing</strong> makes these procedures accessible without draining savings.</p>
+        <PatientLeadForm defaultTreatment="Braces / Smile Makeover" sourceArticle="Cosmetic Surgery EMI Guide" />
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Popular Cosmetic Surgery Costs and EMI (India 2026)</h2>
+        <div className="overflow-x-auto my-6">
+          <table className="min-w-full divide-y divide-neutral-200 border border-neutral-100 text-sm">
+            <thead className="bg-neutral-50"><tr><th className="px-4 py-3 text-left font-bold text-neutral-700">Procedure</th><th className="px-4 py-3 text-left font-bold text-neutral-700">Cost Range</th><th className="px-4 py-3 text-left font-bold text-neutral-700">EMI 12 Mo</th><th className="px-4 py-3 text-left font-bold text-neutral-700">EMI 24 Mo</th></tr></thead>
+            <tbody className="divide-y divide-neutral-100 text-neutral-700">
+              <tr className="bg-blue-50/40"><td className="px-4 py-3 font-bold text-blue-950">Rhinoplasty (Nose Job)</td><td className="px-4 py-3 font-semibold">Rs 60,000 - Rs 1,80,000</td><td className="px-4 py-3 font-bold text-blue-600">Rs 5,500 - Rs 16,400/mo</td><td className="px-4 py-3">Rs 2,900 - Rs 8,800/mo</td></tr>
+              <tr><td className="px-4 py-3 font-bold text-indigo-950">Liposuction (3-5 Areas)</td><td className="px-4 py-3 font-semibold">Rs 80,000 - Rs 2,50,000</td><td className="px-4 py-3 font-bold text-indigo-600">Rs 7,300 - Rs 22,800/mo</td><td className="px-4 py-3">Rs 3,900 - Rs 12,100/mo</td></tr>
+              <tr className="bg-emerald-50/40"><td className="px-4 py-3 font-bold text-emerald-950">Gynecomastia Surgery</td><td className="px-4 py-3 font-semibold">Rs 60,000 - Rs 1,50,000</td><td className="px-4 py-3 font-bold text-emerald-600">Rs 5,500 - Rs 13,700/mo</td><td className="px-4 py-3">Rs 2,900 - Rs 7,300/mo</td></tr>
+              <tr><td className="px-4 py-3 font-bold text-purple-950">Blepharoplasty (Eyelid)</td><td className="px-4 py-3 font-semibold">Rs 50,000 - Rs 1,20,000</td><td className="px-4 py-3 font-bold text-purple-600">Rs 4,600 - Rs 11,000/mo</td><td className="px-4 py-3">Rs 2,400 - Rs 5,800/mo</td></tr>
+              <tr className="bg-amber-50/40"><td className="px-4 py-3 font-bold text-amber-950">Abdominoplasty (Tummy Tuck)</td><td className="px-4 py-3 font-semibold">Rs 1,20,000 - Rs 2,80,000</td><td className="px-4 py-3 font-bold text-amber-600">Rs 11,000 - Rs 25,500/mo</td><td className="px-4 py-3">Rs 5,800 - Rs 13,600/mo</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p className="text-neutral-700 leading-relaxed">IRDAI guidelines permanently exclude all aesthetic procedures from health insurance. Point-of-care financing democratizes access — a Rs 1,20,000 rhinoplasty repaid at just Rs 5,500/month with only Aadhaar and PAN needed.</p>
+        <PatientLeadForm defaultTreatment="Braces / Smile Makeover" sourceArticle="Cosmetic Surgery EMI Guide Bottom" />
+      </div>
+    )
+  },
+  {
+    slug: "braces-cost-emi-india-adults-teens-complete-guide",
+    title: "Braces Cost on EMI in India for Adults and Teens: Metal, Ceramic and Lingual (2026)",
+    category: "Orthodontics",
+    readTime: "6 min read",
+    publishDate: "September 12, 2026",
+    author: "Clinaza Clinical Insights",
+    summary: "Complete patient guide to braces costs in India on monthly EMI. Compare metal, ceramic, lingual braces and clear aligners with city-wise pricing, treatment duration, and EMI options from Rs 1,200/month.",
+    featuredImage: "/assets/yourdentist/clinic_in_action.jpg",
+    metaDescription: "Braces cost on EMI in India 2026. Compare metal, ceramic and lingual braces pricing (Rs 25,000 to Rs 1,20,000), monthly EMI from Rs 1,200/month, and orthodontist options.",
+    faqs: [
+      { question: "How much do braces cost in India?", answer: "Metal braces: Rs 25,000 to Rs 45,000. Ceramic braces: Rs 40,000 to Rs 75,000. Lingual braces: Rs 80,000 to Rs 1,50,000. Clear aligners: Rs 1,00,000 to Rs 2,50,000." },
+      { question: "Can I get braces on monthly EMI in India?", answer: "Yes. Through Clinaza point-of-care financing, patients get braces bonded on Day 1 and repay from Rs 1,200/month over 12-24 months." },
+      { question: "At what age can adults get braces?", answer: "There is no upper age limit. Working professionals in their 20s, 30s, and 40s routinely get ceramic or lingual treatment." },
+      { question: "Are ceramic braces or clear aligners better for adults?", answer: "Ceramics are fixed, tooth-colored, effective for complex cases at lower cost. Aligners are invisible but cost Rs 1-2.5L and require strict 22-hour compliance." }
+    ],
+    content: (
+      <div className="space-y-6">
+        <p className="text-lg leading-relaxed text-neutral-700">Misaligned teeth affect over 70% of Indian adults. <strong>Adult orthodontics is growing at 25% annually</strong> as ceramic and lingual options offer discreet correction. EMI financing makes treatment accessible from Rs 1,200/month.</p>
+        <PatientLeadForm defaultTreatment="Braces / Smile Makeover" sourceArticle="Braces EMI Guide" />
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Braces Type Comparison and EMI (India 2026)</h2>
+        <div className="overflow-x-auto my-6">
+          <table className="min-w-full divide-y divide-neutral-200 border border-neutral-100 text-sm">
+            <thead className="bg-neutral-50"><tr><th className="px-4 py-3 text-left font-bold text-neutral-700">Type</th><th className="px-4 py-3 text-left font-bold text-neutral-700">Visibility</th><th className="px-4 py-3 text-left font-bold text-neutral-700">Total Cost</th><th className="px-4 py-3 text-left font-bold text-neutral-700">Duration</th><th className="px-4 py-3 text-left font-bold text-neutral-700">Monthly EMI</th></tr></thead>
+            <tbody className="divide-y divide-neutral-100 text-neutral-700">
+              <tr className="bg-blue-50/40"><td className="px-4 py-3 font-bold text-blue-950">Metal Braces</td><td className="px-4 py-3">Fully visible</td><td className="px-4 py-3 font-semibold">Rs 25,000 - Rs 45,000</td><td className="px-4 py-3">12-24 mo</td><td className="px-4 py-3 font-bold text-blue-600">Rs 1,200 - Rs 2,100/mo</td></tr>
+              <tr><td className="px-4 py-3 font-bold text-indigo-950">Ceramic Braces</td><td className="px-4 py-3">Low visibility</td><td className="px-4 py-3 font-semibold">Rs 40,000 - Rs 75,000</td><td className="px-4 py-3">14-26 mo</td><td className="px-4 py-3 font-bold text-indigo-600">Rs 1,900 - Rs 3,600/mo</td></tr>
+              <tr className="bg-emerald-50/40"><td className="px-4 py-3 font-bold text-emerald-950">Self-Ligating (Damon)</td><td className="px-4 py-3">Low-moderate</td><td className="px-4 py-3 font-semibold">Rs 50,000 - Rs 90,000</td><td className="px-4 py-3">12-22 mo</td><td className="px-4 py-3 font-bold text-emerald-600">Rs 2,400 - Rs 4,300/mo</td></tr>
+              <tr><td className="px-4 py-3 font-bold text-purple-950">Lingual Braces</td><td className="px-4 py-3">Completely hidden</td><td className="px-4 py-3 font-semibold">Rs 80,000 - Rs 1,50,000</td><td className="px-4 py-3">16-30 mo</td><td className="px-4 py-3 font-bold text-purple-600">Rs 3,900 - Rs 7,300/mo</td></tr>
+              <tr className="bg-amber-50/40"><td className="px-4 py-3 font-bold text-amber-950">Clear Aligners (Invisalign)</td><td className="px-4 py-3">Invisible removable</td><td className="px-4 py-3 font-semibold">Rs 1,00,000 - Rs 2,50,000</td><td className="px-4 py-3">10-24 mo</td><td className="px-4 py-3 font-bold text-amber-600">Rs 4,800 - Rs 12,100/mo</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p className="text-neutral-700 leading-relaxed">Two reasons adults delay braces: visible metal at work, and a large lump sum upfront. Ceramics or lingual braces solve the first. <strong>Clinaza EMI</strong> solves the second — start treatment today and pay monthly.</p>
+        <PatientLeadForm defaultTreatment="Braces / Smile Makeover" sourceArticle="Braces EMI Guide Bottom" />
+      </div>
+    )
   }
 ];
-
-
-
-
-
-
-

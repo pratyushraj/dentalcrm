@@ -941,5 +941,143 @@ export const BLOGS_PART3 = [
         <PatientLeadForm defaultTreatment="Braces / Smile Makeover" sourceArticle="Braces EMI Guide Bottom" />
       </div>
     )
+  },
+  {
+    slug: "icl-eye-surgery-cost-on-emi-india",
+    title: "ICL Eye Surgery Cost on EMI in India: Phakic IOL vs LASIK Guide (2026)",
+    category: "Elective Surgeries",
+    readTime: "6 min read",
+    publishDate: "September 12, 2026",
+    author: "Clinaza Medical Insights",
+    summary: "Complete guide to Implantable Collamer Lens (ICL) eye surgery costs in India on monthly EMI. Compare ICL pricing (₹80,000 to ₹1,60,000 for both eyes) vs LASIK, suitability for high cylinder/thin corneas, and 0% interest EMI options.",
+    featuredImage: "/assets/yourdentist/clinic_in_action.jpg",
+    metaDescription: "ICL eye surgery cost on EMI in India 2026. Compare Phakic IOL pricing (₹80,000 to ₹1,60,000), monthly EMI from ₹3,500/month, ICL vs LASIK, and top eye hospitals.",
+    faqs: [
+      { question: "How much does ICL eye surgery cost in India for both eyes?", answer: "Standard spherical ICL costs ₹80,000 to ₹1,20,000 for both eyes. Toric ICL (for high astigmatism/cylinder) costs ₹1,20,000 to ₹1,70,000 for both eyes depending on lens power and eye center." },
+      { question: "Can ICL surgery be done on monthly EMI in India?", answer: "Yes. Leading eye centers partner with Clinaza point-of-care financing to offer 0% interest EMI (6 to 24 months). Both eyes can be corrected immediately with repayments starting from ₹3,500/month." },
+      { question: "What is the difference between LASIK and ICL?", answer: "LASIK reshapes corneal tissue using lasers and requires adequate corneal thickness. ICL implants a biocompatible Collamer lens behind the iris without removing corneal tissue, making it ideal for thin corneas or extreme myopia up to −20D." }
+    ],
+    content: (
+      <div className="space-y-6">
+        <p className="text-lg leading-relaxed text-neutral-700">For patients with high myopia (above −8D), thin corneas, or severe dry eyes, standard LASIK or Contoura Vision may not be medically recommended. <strong>Implantable Collamer Lens (ICL / Phakic IOL) surgery</strong> is a permanent, reversible alternative that preserves corneal structure while delivering crisp 6/6 vision. Monthly EMI financing makes this advanced refractive procedure accessible without financial delay.</p>
+        <PatientLeadForm defaultTreatment="LASIK / Contoura Vision Surgery" sourceArticle="ICL Eye Surgery EMI Guide" />
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">ICL Surgery Cost & EMI Breakdown (India 2026)</h2>
+        <div className="overflow-x-auto my-6">
+          <table className="min-w-full divide-y divide-neutral-200 border border-neutral-100 text-sm">
+            <thead className="bg-neutral-50"><tr><th className="px-4 py-3 text-left font-bold text-neutral-700">Lens Type</th><th className="px-4 py-3 text-left font-bold text-neutral-700">Power Range</th><th className="px-4 py-3 text-left font-bold text-neutral-700">Cost (Both Eyes)</th><th className="px-4 py-3 text-left font-bold text-neutral-700">EMI — 12 Mo</th><th className="px-4 py-3 text-left font-bold text-neutral-700">EMI — 24 Mo</th></tr></thead>
+            <tbody className="divide-y divide-neutral-100 text-neutral-700">
+              <tr className="bg-blue-50/40"><td className="px-4 py-3 font-bold text-blue-950">Spherical ICL (V4c EVO)</td><td className="px-4 py-3">Up to −20D Myopia</td><td className="px-4 py-3 font-semibold">₹80,000 – ₹1,20,000</td><td className="px-4 py-3 font-bold text-blue-600">₹7,300/mo</td><td className="px-4 py-3 text-slate-600">₹3,900/mo</td></tr>
+              <tr><td className="px-4 py-3 font-bold text-indigo-950">Toric ICL (EVO+ Toric)</td><td className="px-4 py-3">Myopia + Astigmatism</td><td className="px-4 py-3 font-semibold">₹1,20,000 – ₹1,70,000</td><td className="px-4 py-3 font-bold text-indigo-600">₹11,000/mo</td><td className="px-4 py-3 text-slate-600">₹5,800/mo</td></tr>
+              <tr className="bg-emerald-50/40"><td className="px-4 py-3 font-bold text-emerald-950">IPCL (Indian Phakic Lens)</td><td className="px-4 py-3">Customized Presbyopic / Myopic</td><td className="px-4 py-3 font-semibold">₹60,000 – ₹90,000</td><td className="px-4 py-3 font-bold text-emerald-600">₹5,500/mo</td><td className="px-4 py-3 text-slate-600">₹2,900/mo</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <PatientLeadForm defaultTreatment="LASIK / Contoura Vision Surgery" sourceArticle="ICL Eye Surgery EMI Guide Bottom" />
+      </div>
+    )
+  },
+  {
+    slug: "cataract-surgery-cost-on-emi-india",
+    title: "Cataract Surgery Cost on EMI in India: Monofocal vs Multifocal Lens Guide (2026)",
+    category: "Elective Surgeries",
+    readTime: "7 min read",
+    publishDate: "September 12, 2026",
+    author: "Clinaza Medical Insights",
+    summary: "Complete patient guide to cataract surgery costs in India on monthly EMI. Compare robotic Femto cataract vs Phacoemulsification, Indian vs imported intraocular lenses (IOL), and how to bridge insurance sub-limit gaps.",
+    featuredImage: "/assets/yourdentist/clinic_in_action.jpg",
+    metaDescription: "Cataract surgery cost on EMI in India 2026. Compare monofocal vs multifocal/trifocal IOL pricing (₹20,000 to ₹1,10,000/eye), monthly EMI from ₹1,800/month, and top eye centers.",
+    faqs: [
+      { question: "How much does cataract surgery cost in India per eye?", answer: "Standard Phaco with Monofocal IOL costs ₹20,000 to ₹40,000 per eye. Premium Multifocal or Trifocal IOL costs ₹50,000 to ₹90,000 per eye. Robotic Femto-Cataract with Toric/Trifocal IOL costs ₹80,000 to ₹1,20,000 per eye." },
+      { question: "Does health insurance cover premium multifocal cataract lenses?", answer: "Most Mediclaim policies cap cataract coverage at ₹25,000 to ₹35,000 per eye (covering standard monofocal lenses only). Upgrading to glasses-free multifocal or trifocal lenses requires an out-of-pocket top-up of ₹30,000 to ₹70,000 per eye, which can be financed on zero-cost EMI." },
+      { question: "Can senior citizens get cataract surgery financed on EMI?", answer: "Yes. Adult children or relatives can co-apply as financial co-borrowers with paperless digital KYC via Clinaza." }
+    ],
+    content: (
+      <div className="space-y-6">
+        <p className="text-lg leading-relaxed text-neutral-700">Cataract is the leading cause of reversible blindness in India, affecting over 65% of adults aged 60+. Modern <strong>Phacoemulsification and Robotic Femto-Cataract surgery</strong> replace the clouded lens with a crystal-clear Intraocular Lens (IOL) in 15 minutes. While basic insurance covers entry-level monofocal lenses, monthly EMI financing allows patients to choose premium glasses-free multifocal or trifocal lenses without financial stress.</p>
+        <PatientLeadForm defaultTreatment="LASIK / Contoura Vision Surgery" sourceArticle="Cataract Surgery EMI Guide" />
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Cataract Lens & Surgery Cost Comparison (Per Eye)</h2>
+        <div className="overflow-x-auto my-6">
+          <table className="min-w-full divide-y divide-neutral-200 border border-neutral-100 text-sm">
+            <thead className="bg-neutral-50"><tr><th className="px-4 py-3 text-left font-bold text-neutral-700">Lens / Tech</th><th className="px-4 py-3 text-left font-bold text-neutral-700">Vision Benefit</th><th className="px-4 py-3 text-left font-bold text-neutral-700">Cost (Per Eye)</th><th className="px-4 py-3 text-left font-bold text-neutral-700">Insurance Gap</th><th className="px-4 py-3 text-left font-bold text-neutral-700">EMI — 12 Mo</th></tr></thead>
+            <tbody className="divide-y divide-neutral-100 text-neutral-700">
+              <tr className="bg-blue-50/40"><td className="px-4 py-3 font-bold text-blue-950">Indian Monofocal IOL</td><td className="px-4 py-3">Clear distance (reading glasses needed)</td><td className="px-4 py-3 font-semibold">₹20,000 – ₹30,000</td><td className="px-4 py-3 text-emerald-600 font-bold">100% Covered</td><td className="px-4 py-3 text-slate-600">₹0/mo</td></tr>
+              <tr><td className="px-4 py-3 font-bold text-indigo-950">Imported Monofocal (Alcon / Zeiss)</td><td className="px-4 py-3">High-contrast distance vision</td><td className="px-4 py-3 font-semibold">₹35,000 – ₹50,000</td><td className="px-4 py-3 text-amber-600">₹10,000 – ₹20,000</td><td className="px-4 py-3 font-bold text-indigo-600">₹1,800/mo</td></tr>
+              <tr className="bg-emerald-50/40"><td className="px-4 py-3 font-bold text-emerald-950">Multifocal / EDOF IOL</td><td className="px-4 py-3">Distance + Intermediate (computer)</td><td className="px-4 py-3 font-semibold">₹55,000 – ₹80,000</td><td className="px-4 py-3 text-rose-600 font-semibold">₹25,000 – ₹50,000</td><td className="px-4 py-3 font-bold text-emerald-600">₹3,200/mo</td></tr>
+              <tr><td className="px-4 py-3 font-bold text-purple-950">Trifocal / Toric (Femto Laser)</td><td className="px-4 py-3">100% Glasses-free (Distance + Read)</td><td className="px-4 py-3 font-semibold">₹85,000 – ₹1,20,000</td><td className="px-4 py-3 text-rose-600 font-bold">₹50,000 – ₹85,000</td><td className="px-4 py-3 font-bold text-purple-600">₹5,500/mo</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <PatientLeadForm defaultTreatment="LASIK / Contoura Vision Surgery" sourceArticle="Cataract Surgery EMI Guide Bottom" />
+      </div>
+    )
+  },
+  {
+    slug: "maternity-hospital-delivery-cost-on-emi-india",
+    title: "Maternity Hospital Delivery Cost on EMI in India: Normal vs C-Section Financing (2026)",
+    category: "Elective Surgeries",
+    readTime: "6 min read",
+    publishDate: "September 12, 2026",
+    author: "Clinaza Medical Insights",
+    summary: "Complete guide to maternity, pregnancy care, and delivery hospital costs in India on monthly EMI. Understand normal delivery vs C-section pricing, insurance waiting period gaps, and how to finance hospital bills.",
+    featuredImage: "/assets/yourdentist/clinic_in_action.jpg",
+    metaDescription: "Maternity delivery cost on EMI in India 2026. Compare normal vs C-section delivery pricing (₹50,000 to ₹1,80,000), monthly EMI from ₹3,200/month, maternity insurance gaps, and top maternity hospitals.",
+    faqs: [
+      { question: "How much does hospital delivery cost in India?", answer: "Normal vaginal delivery costs ₹40,000 to ₹1,10,000 in private metro hospitals. Cesarean section (C-section) delivery costs ₹70,000 to ₹1,80,000 depending on room category and hospital tier." },
+      { question: "Does health insurance cover maternity delivery in India?", answer: "Most individual retail Mediclaim policies have a 2 to 4-year waiting period for maternity benefits and cap coverage at ₹30,000 to ₹50,000 — leaving a large out-of-pocket gap in private maternity hospitals." },
+      { question: "Can maternity delivery hospital bills be converted to monthly EMI?", answer: "Yes. Clinaza point-of-care financing allows expecting parents to pay hospital admission deposits and delivery packages in 6 to 24 monthly installments starting from ₹3,200/month." }
+    ],
+    content: (
+      <div className="space-y-6">
+        <p className="text-lg leading-relaxed text-neutral-700">Welcoming a newborn is a joyous milestone, but unexpected hospital delivery costs can cause severe financial stress for young couples. With private hospital delivery packages ranging from ₹50,000 to ₹1,80,000 and standard health insurance capping maternity benefits at ₹30,000–₹50,000, <strong>point-of-care maternity EMI financing</strong> ensures premium mother and child care without exhausting emergency savings.</p>
+        <PatientLeadForm defaultTreatment="IVF / Fertility Treatment" sourceArticle="Maternity Delivery EMI Guide" />
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Maternity Delivery Cost Breakdown (India 2026)</h2>
+        <div className="overflow-x-auto my-6">
+          <table className="min-w-full divide-y divide-neutral-200 border border-neutral-100 text-sm">
+            <thead className="bg-neutral-50"><tr><th className="px-4 py-3 text-left font-bold text-neutral-700">Delivery Type</th><th className="px-4 py-3 text-left font-bold text-neutral-700">Hospital Category</th><th className="px-4 py-3 text-left font-bold text-neutral-700">Package Cost</th><th className="px-4 py-3 text-left font-bold text-neutral-700">EMI — 12 Mo</th><th className="px-4 py-3 text-left font-bold text-neutral-700">EMI — 24 Mo</th></tr></thead>
+            <tbody className="divide-y divide-neutral-100 text-neutral-700">
+              <tr className="bg-blue-50/40"><td className="px-4 py-3 font-bold text-blue-950">Normal Delivery</td><td className="px-4 py-3">Tier-2 / Regional Hospital</td><td className="px-4 py-3 font-semibold">₹40,000 – ₹70,000</td><td className="px-4 py-3 font-bold text-blue-600">₹3,700/mo</td><td className="px-4 py-3 text-slate-600">₹1,900/mo</td></tr>
+              <tr><td className="px-4 py-3 font-bold text-indigo-950">Normal Delivery</td><td className="px-4 py-3">Metro Boutique (Cloudnine, Apollo Cradle)</td><td className="px-4 py-3 font-semibold">₹80,000 – ₹1,30,000</td><td className="px-4 py-3 font-bold text-indigo-600">₹7,300/mo</td><td className="px-4 py-3 text-slate-600">₹3,900/mo</td></tr>
+              <tr className="bg-emerald-50/40"><td className="px-4 py-3 font-bold text-emerald-950">C-Section Delivery</td><td className="px-4 py-3">Private General Hospital</td><td className="px-4 py-3 font-semibold">₹70,000 – ₹1,20,000</td><td className="px-4 py-3 font-bold text-emerald-600">₹6,400/mo</td><td className="px-4 py-3 text-slate-600">₹3,400/mo</td></tr>
+              <tr><td className="px-4 py-3 font-bold text-purple-950">C-Section Delivery</td><td className="px-4 py-3">Metro Super-Specialty Suite</td><td className="px-4 py-3 font-semibold">₹1,20,000 – ₹1,80,000</td><td className="px-4 py-3 font-bold text-purple-600">₹11,000/mo</td><td className="px-4 py-3 text-slate-600">₹5,800/mo</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <PatientLeadForm defaultTreatment="IVF / Fertility Treatment" sourceArticle="Maternity Delivery EMI Guide Bottom" />
+      </div>
+    )
+  },
+  {
+    slug: "gallbladder-kidney-stone-laser-surgery-cost-on-emi-india",
+    title: "Gallbladder & Kidney Stone Laser Surgery Cost on EMI in India (2026)",
+    category: "Elective Surgeries",
+    readTime: "6 min read",
+    publishDate: "September 12, 2026",
+    author: "Clinaza Medical Insights",
+    summary: "Complete guide to gallbladder cholecystectomy and kidney stone RIRS/PCNL laser surgery costs in India on monthly EMI. Compare procedure pricing, insurance co-pay gaps, and quick digital emergency financing.",
+    featuredImage: "/assets/yourdentist/clinic_in_action.jpg",
+    metaDescription: "Kidney and gallbladder stone surgery cost on EMI in India 2026. Compare RIRS, PCNL, and laparoscopic surgery pricing (₹50,000 to ₹1,80,000), monthly EMI from ₹2,900/month.",
+    faqs: [
+      { question: "How much does kidney stone laser surgery cost in India?", answer: "RIRS (Retrograde Intrarenal Surgery) costs ₹70,000 to ₹1,60,000. PCNL (Percutaneous Nephrolithotomy) costs ₹60,000 to ₹1,30,000. ESWL lithotripsy costs ₹30,000 to ₹60,000." },
+      { question: "How much does laparoscopic gallbladder surgery cost in India?", answer: "Laparoscopic cholecystectomy costs ₹50,000 to ₹1,40,000 in private hospitals depending on single-port technique and room selection." },
+      { question: "Can emergency stone surgery bills be financed on EMI?", answer: "Yes. Clinaza point-of-care digital KYC enables instant loan approvals within 10 minutes at partner hospitals, allowing families to settle admission deposits and out-of-pocket insurance shortfalls via monthly bank EMI." }
+    ],
+    content: (
+      <div className="space-y-6">
+        <p className="text-lg leading-relaxed text-neutral-700">Kidney stones and gallbladder inflammation (cholecystitis) strike suddenly, causing severe acute pain that requires urgent surgical intervention. Modern <strong>laser RIRS, PCNL, and laparoscopic cholecystectomy</strong> allow same-day or 24-hour discharge. When health insurance coverage falls short due to co-pay clauses or sub-limits, point-of-care EMI financing ensures zero delay in critical medical care.</p>
+        <PatientLeadForm defaultTreatment="Single Dental Implant" sourceArticle="Stone Surgery EMI Guide" />
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Stone Surgery Procedure & EMI Breakdown (India 2026)</h2>
+        <div className="overflow-x-auto my-6">
+          <table className="min-w-full divide-y divide-neutral-200 border border-neutral-100 text-sm">
+            <thead className="bg-neutral-50"><tr><th className="px-4 py-3 text-left font-bold text-neutral-700">Procedure</th><th className="px-4 py-3 text-left font-bold text-neutral-700">Technique</th><th className="px-4 py-3 text-left font-bold text-neutral-700">Total Cost</th><th className="px-4 py-3 text-left font-bold text-neutral-700">EMI — 12 Mo</th><th className="px-4 py-3 text-left font-bold text-neutral-700">EMI — 24 Mo</th></tr></thead>
+            <tbody className="divide-y divide-neutral-100 text-neutral-700">
+              <tr className="bg-blue-50/40"><td className="px-4 py-3 font-bold text-blue-950">Laparoscopic Gallbladder (Cholecystectomy)</td><td className="px-4 py-3">Keyhole 3-port surgery</td><td className="px-4 py-3 font-semibold">₹50,000 – ₹1,20,000</td><td className="px-4 py-3 font-bold text-blue-600">₹4,600/mo</td><td className="px-4 py-3 text-slate-600">₹2,400/mo</td></tr>
+              <tr><td className="px-4 py-3 font-bold text-indigo-950">RIRS Kidney Stone Laser Surgery</td><td className="px-4 py-3">No incisions (flexible ureteroscopy)</td><td className="px-4 py-3 font-semibold">₹70,000 – ₹1,60,000</td><td className="px-4 py-3 font-bold text-indigo-600">₹6,400/mo</td><td className="px-4 py-3 text-slate-600">₹3,400/mo</td></tr>
+              <tr className="bg-emerald-50/40"><td className="px-4 py-3 font-bold text-emerald-950">PCNL (Large Kidney Stone)</td><td className="px-4 py-3">Keyhole back incision</td><td className="px-4 py-3 font-semibold">₹60,000 – ₹1,30,000</td><td className="px-4 py-3 font-bold text-emerald-600">₹5,500/mo</td><td className="px-4 py-3 text-slate-600">₹2,900/mo</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <PatientLeadForm defaultTreatment="Single Dental Implant" sourceArticle="Stone Surgery EMI Guide Bottom" />
+      </div>
+    )
   }
 ] as BlogArticle[];

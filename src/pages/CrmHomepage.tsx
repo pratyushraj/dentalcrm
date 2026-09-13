@@ -350,7 +350,7 @@ export default function CrmHomepage() {
           'dental prescription software free', 'dental clinic setup cost calculator', 'whatsapp patient recall dental',
           'lasik on emi', 'ivf treatment emi', 'hair transplant financing india'
         ]}
-        image="https://clinaza.in/og-preview.png"
+        image="https://clinaza.in/og-clinaza.png"
         canonicalUrl="https://clinaza.in/"
         jsonLd={[
           {
@@ -379,7 +379,7 @@ export default function CrmHomepage() {
             "description": "Embedded patient financing infrastructure enabling healthcare clinics & hospitals to offer point-of-care EMI loans.",
             "url": "https://clinaza.in/",
             "logo": "https://clinaza.in/assets/clinaza-logo.jpg",
-            "image": "https://clinaza.in/og-preview.png",
+            "image": "https://clinaza.in/og-clinaza.png",
             "areaServed": "IN",
             "serviceType": "Healthcare Patient Financing Infrastructure"
           },

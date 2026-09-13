@@ -11,7 +11,7 @@ export const BLOGS_PART1 = [
     publishDate: "June 24, 2026",
     author: "Dr. Aryan Parmar",
     summary: "Looking for braces in Patna? Discover the top options, dental technology, treatment duration, and why Dr. Aryan Parmar at YOUR DENTIST is highly recommended.",
-    featuredImage: "/assets/yourdentist/clinic_in_action.jpg",
+    featuredImage: "/assets/yourdentist/clear_aligners.png",
     metaDescription: "Looking for the best dentist in Patna for braces? Read our patient guide on orthodontic options, treatment durations, and braces cost at YOUR DENTIST.",
     faqs: [
       {
@@ -94,7 +94,7 @@ export const BLOGS_PART1 = [
     publishDate: "June 24, 2026",
     author: "Dr. Aryan Parmar",
     summary: "Confused about invisible braces pricing? Read our transparent price breakdown of clear aligners in Patna, with monthly EMI details.",
-    featuredImage: "/assets/yourdentist/dr_with_patient_1.jpg",
+    featuredImage: "/assets/yourdentist/clear_aligners.png",
     metaDescription: "Find out how much clear aligners cost in Patna. View price charts, brand differences, and 0% interest EMI options starting at YOUR DENTIST.",
     faqs: [
       {
@@ -175,7 +175,7 @@ export const BLOGS_PART1 = [
     publishDate: "June 24, 2026",
     author: "Dr. Aryan Parmar",
     summary: "Will teeth scaling loosen your gums or wear down enamel? Learn why professional teeth cleaning is safe and highly recommended by dentists.",
-    featuredImage: "/assets/yourdentist/patient_happy_3.png",
+    featuredImage: "/assets/yourdentist/laser_whitening.png",
     metaDescription: "Is professional teeth cleaning safe? Bust common scaling myths (like weakening teeth or creating gaps) with medical facts from YOUR DENTIST Patna.",
     faqs: [
       {
@@ -226,7 +226,7 @@ export const BLOGS_PART1 = [
     publishDate: "June 24, 2026",
     author: "Dr. Aryan Parmar",
     summary: "Want to fix gaps in your front teeth? Compare costs, duration, and durability of composite bonding, porcelain veneers, and invisible aligners in Patna.",
-    featuredImage: "/assets/yourdentist/gap_after.png",
+    featuredImage: "/assets/yourdentist/clinic_in_action.jpg",
     metaDescription: "How much does teeth gap closure cost in Patna? Read a detailed comparison of composite bonding, veneers, and invisible aligners at YOUR DENTIST.",
     faqs: [
       {
@@ -307,7 +307,7 @@ export const BLOGS_PART1 = [
     publishDate: "August 23, 2026",
     author: "Clinaza Research Team",
     summary: "Complete guide on dental treatment EMI in India. Learn how to get 0% interest EMI for Dental Implants, Aligners, Braces, and Full Mouth Rehabilitation (₹30,000 to ₹3,00,000).",
-    featuredImage: "/assets/clinaza-logo.jpg",
+    featuredImage: "/assets/yourdentist/clinic_in_action.jpg",
     metaDescription: "Looking for dental treatment on EMI in India? Compare monthly EMI plans for implants, aligners, braces, and crowns (₹30k to ₹3L) with 0% interest financing.",
     faqs: [
       {
@@ -394,7 +394,7 @@ export const BLOGS_PART1 = [
     publishDate: "September 6, 2026",
     author: "Clinaza Medical Desk",
     summary: "Complete 2026 price guide for dental implants in India. Compare costs for Nobel Biocare, Straumann, Osstem, and Adin implants with low monthly 0% interest EMI options starting at ₹1,458/month.",
-    featuredImage: "/assets/clinic-hero-real.png",
+    featuredImage: "/assets/yourdentist/dental_implant_hero.png",
     metaDescription: "Dental implants cost on EMI in India (2026): Price comparison for single tooth (₹25k-₹55k) and full mouth All-on-4 implants with 0% interest monthly EMI starting at ₹1,458/mo.",
     faqs: [
       {
@@ -542,7 +542,7 @@ export const BLOGS_PART1 = [
     publishDate: "August 24, 2026",
     author: "Clinaza Partner Team",
     summary: "Learn how dental clinics in India partner with Clinaza and RBI-regulated NBFCs to offer point-of-care EMI financing with ₹0 clinic fees.",
-    featuredImage: "/assets/doctor-consult-real.png",
+    featuredImage: "/assets/yourdentist/clinic_in_action.jpg",
     metaDescription: "Want to offer EMI financing at your dental clinic? Learn how Clinaza helps clinics offer point-of-care patient financing with zero credit risk.",
     faqs: [
       {
@@ -578,7 +578,7 @@ export const BLOGS_PART1 = [
     publishDate: "August 24, 2026",
     author: "Clinaza Medical Desk",
     summary: "Compare clear aligner costs in India from ₹45,000 to ₹1,80,000. Learn how to get invisible aligners on low monthly EMIs starting at ₹2,500/month.",
-    featuredImage: "/assets/clinic-hero-real.png",
+    featuredImage: "/assets/yourdentist/clear_aligners.png",
     metaDescription: "Looking for clear aligners cost on EMI in India? Compare prices for invisible aligners and learn how monthly EMI financing works at partner clinics.",
     faqs: [
       {
@@ -640,7 +640,7 @@ export const BLOGS_PART1 = [
     publishDate: "August 24, 2026",
     author: "Clinaza Medical Desk",
     summary: "Learn how much a Root Canal Treatment (RCT) + Zirconia Crown costs in India and how multi-tooth root canals qualify for easy monthly EMIs.",
-    featuredImage: "/assets/doctor-consult-real.png",
+    featuredImage: "/assets/yourdentist/laser_whitening.png",
     metaDescription: "Need a root canal and crown on EMI? Check costs for RCT + Zirconia crowns in India and see how monthly payment plans work at partner clinics.",
     faqs: [
       {
@@ -664,7 +664,7 @@ export const BLOGS_PART1 = [
     publishDate: "September 3, 2026",
     author: "Clinaza Medical Desk",
     summary: "Dental implants in Patna range from ₹25,000 to ₹80,000 per tooth. Learn what's included, which clinics offer the best rates, and how to get implants on affordable monthly EMI.",
-    featuredImage: "/assets/yourdentist/clinic_in_action.jpg",
+    featuredImage: "/assets/yourdentist/dental_implant_hero.png",
     metaDescription: "Dental implant cost in Patna ranges ₹25,000–₹80,000. Compare top clinics, understand what drives cost, and check monthly EMI options via Clinaza financing partners.",
     faqs: [
       {
@@ -740,7 +740,7 @@ export const BLOGS_PART1 = [
     publishDate: "September 3, 2026",
     author: "Clinaza Medical Desk",
     summary: "Comprehensive guide to the best dental clinics in Patna — comparing top-rated clinics by Google reviews, specialties, location, and whether they offer patient EMI financing.",
-    featuredImage: "/assets/yourdentist/dr_with_patient_1.jpg",
+    featuredImage: "/assets/yourdentist/clinic_in_action.jpg",
     metaDescription: "Looking for the best dental clinic in Patna? Compare top-rated clinics by reviews, specialty, cost, and EMI options. Includes YOUR DENTIST, PRODENT, Facio Dental, and more.",
     faqs: [
       {
@@ -822,7 +822,7 @@ export const BLOGS_PART1 = [
     publishDate: "September 4, 2026",
     author: "Clinaza Medical Desk",
     summary: "Complete guide on how PRODENT Patna offers No-Cost EMI patient financing for dental implants, clear aligners, braces, and root canals powered by Clinaza.",
-    featuredImage: "/assets/yourdentist/dr_with_patient_1.jpg",
+    featuredImage: "/assets/yourdentist/clinic_in_action.jpg",
     metaDescription: "PRODENT Patna offers zero-cost and low-interest EMI financing for dental treatments (₹30,000 to ₹3,00,000) powered by Clinaza. Learn eligibility & application steps.",
     faqs: [
       {
@@ -880,7 +880,7 @@ export const BLOGS_PART1 = [
     publishDate: "September 4, 2026",
     author: "Clinaza Medical Desk",
     summary: "Complete guide on Clinaza point-of-care patient financing at YOUR DENTIST Patna led by Dr. Aryan Parmar in Patliputra Colony.",
-    featuredImage: "/assets/yourdentist/dr_with_patient_1.jpg",
+    featuredImage: "/assets/yourdentist/clinic_in_action.jpg",
     metaDescription: "YOUR DENTIST Patna (Dr. Aryan Parmar) provides instant 0% EMI financing for dental implants, aligners & smile makeovers powered by Clinaza. Apply online in 2 minutes.",
     faqs: [
       {
@@ -927,7 +927,7 @@ export const BLOGS_PART1 = [
     publishDate: "September 4, 2026",
     author: "Clinaza Growth Team",
     summary: "Proven social media marketing strategies for dentists in India — Instagram Reels, Google 5-star review automation, patient transformation stories & Meta ads for Implants & Aligners.",
-    featuredImage: "/assets/yourdentist/dr_with_patient_1.jpg",
+    featuredImage: "/assets/yourdentist/clinic_in_action.jpg",
     metaDescription: "Learn how dental clinics in India use Instagram Reels, Google Reviews, and Meta Ads to double high-ticket patient inquiries for implants & aligners.",
     faqs: [
       {
@@ -1002,7 +1002,7 @@ export const BLOGS_PART1 = [
     publishDate: "September 4, 2026",
     author: "Clinaza Growth Team",
     summary: "From Instagram reels to Google reviews and WhatsApp campaigns — the complete digital marketing playbook for dental clinics in India to get more patients in 2026.",
-    featuredImage: "/og-dentist-workspace.png",
+    featuredImage: "/assets/yourdentist/clinic_in_action.jpg",
     metaDescription: "Complete guide to dentist digital marketing in India 2026. Learn Instagram growth, Google reviews, WhatsApp marketing, and SEO strategies to get more dental patients.",
     faqs: [
       {
@@ -1182,7 +1182,7 @@ export const BLOGS_PART1 = [
     publishDate: "September 6, 2026",
     author: "Clinaza Health Desk",
     summary: "Need dental implants, clear aligners, or crowns but worried about upfront cost? Learn how to get dental treatment on zero-downpayment monthly EMI across India.",
-    featuredImage: "/assets/yourdentist/dr_with_patient_1.jpg",
+    featuredImage: "/assets/yourdentist/clinic_in_action.jpg",
     metaDescription: "Step-by-step guide on how to get dental treatment on EMI in India. Compare zero-interest monthly plans, eligibility criteria, documents required, and eligible procedures.",
     faqs: [
       {
@@ -1318,7 +1318,7 @@ export const BLOGS_PART1 = [
     publishDate: "September 6, 2026",
     author: "Clinaza Product Desk",
     summary: "Discover how Clinaza's 100% free dental CRM helps clinic owners reactivate old patients, automate WhatsApp appointment reminders, and track treatment follow-ups with zero setup fees.",
-    featuredImage: "/assets/yourdentist/dr_with_patient_1.jpg",
+    featuredImage: "/assets/yourdentist/clinic_in_action.jpg",
     metaDescription: "Looking for a free dental CRM in India? Clinaza offers 100% free patient reactivation, WhatsApp reminders, and treatment follow-up software for dental clinic owners.",
     faqs: [
       {
@@ -1381,7 +1381,7 @@ export const BLOGS_PART1 = [
     publishDate: "September 6, 2026",
     author: "Clinaza Growth Desk",
     summary: "Step-by-step guide for dental clinic owners in India on how to offer 0% interest and low-cost monthly EMI options to patients without NBFC tie-up hassle or clinic collection risk.",
-    featuredImage: "/assets/clinic-hero-real.png",
+    featuredImage: "/assets/yourdentist/clinic_in_action.jpg",
     metaDescription: "Learn how to offer EMI to dental patients in India. Discover how Clinaza embedded patient financing enables 0% EMI checkout at ₹0 clinic fees.",
     faqs: [
       {
@@ -1470,7 +1470,7 @@ export const BLOGS_PART1 = [
     publishDate: "September 6, 2026",
     author: "Clinaza Medical Desk",
     summary: "Complete cost guide for full mouth dental rehabilitation in India. Compare All-on-4 and All-on-6 implant prices (₹1.5L to ₹3.5L) with monthly EMI options from ₹6,500/month.",
-    featuredImage: "/assets/clinic-hero-real.png",
+    featuredImage: "/assets/yourdentist/dental_implant_hero.png",
     metaDescription: "Full mouth dental implants cost on EMI in India: Compare prices for All-on-4 and All-on-6 dental implants and calculate low monthly EMI payment plans.",
     faqs: [
       {
@@ -1547,7 +1547,7 @@ export const BLOGS_PART1 = [
     publishDate: "September 6, 2026",
     author: "Clinaza Orthodontic Desk",
     summary: "Complete 2026 price guide for Invisalign in India. Compare Invisalign Express, Lite, and Comprehensive costs (₹80,000 to ₹2,50,000) with monthly 0% interest EMI options starting at ₹3,333/month.",
-    featuredImage: "/assets/clinic-hero-real.png",
+    featuredImage: "/assets/yourdentist/clinic_in_action.jpg",
     metaDescription: "Invisalign cost on EMI in India (2026): Price comparison for Invisalign Lite & Comprehensive with 0% interest monthly EMI starting at ₹3,333/month across partner clinics.",
     faqs: [
       {
@@ -1662,7 +1662,7 @@ export const BLOGS_PART1 = [
     publishDate: "September 6, 2026",
     author: "Clinaza Medical Desk",
     summary: "Discover why 90%+ health insurance policies in India exclude dental implants and cosmetic crowns, and learn how Clinaza 0% EMI financing fills the gap for patients.",
-    featuredImage: "/assets/clinic-hero-real.png",
+    featuredImage: "/assets/yourdentist/dental_implant_hero.png",
     metaDescription: "Does health insurance cover dental implants in India? Learn why dental implants are excluded from standard mediclaim and how to get 0% EMI financing at clinic checkout.",
     faqs: [
       {
@@ -1756,7 +1756,7 @@ export const BLOGS_PART1 = [
     publishDate: "September 6, 2026",
     author: "Clinaza Practice Growth Desk",
     summary: "Discover the best free website builders and digital landing page solutions for dental clinics in India. Learn how to launch a Google-optimized clinic page with WhatsApp booking and point-of-care EMI calculators for ₹0.",
-    featuredImage: "/assets/doctor-consult-real.png",
+    featuredImage: "/assets/yourdentist/clinic_in_action.jpg",
     metaDescription: "Looking for a free website for dentists in India? Compare top free website builders, Google Business Profile sites, and Clinaza digital patient landing pages with WhatsApp booking & 0% EMI.",
     faqs: [
       {
@@ -1883,7 +1883,7 @@ export const BLOGS_PART1 = [
     publishDate: "September 6, 2026",
     author: "Clinaza Medical Desk",
     summary: "Complete 2026 price guide for dental crowns and tooth caps in India. Compare PFM, DMLS, Monolithic Zirconia, and 3M Lava crowns (₹4,000 to ₹18,000 per tooth) with 0% interest monthly EMI options starting at ₹800/month.",
-    featuredImage: "/assets/clinic-hero-real.png",
+    featuredImage: "/assets/yourdentist/laser_whitening.png",
     metaDescription: "Zirconia crown cost on EMI in India (2026): Price comparison for PFM, Monolithic Zirconia, and 3M Lava tooth caps with low monthly EMI options from ₹800/mo.",
     faqs: [
       {
@@ -1998,7 +1998,7 @@ export const BLOGS_PART1 = [
     publishDate: "September 6, 2026",
     author: "Clinaza Aesthetic Desk",
     summary: "Complete 2026 cost guide for smile makeovers and dental veneers in India. Compare Composite Bonding vs E-Max Porcelain Veneers (₹10,000 to ₹25,000 per tooth) with 0% interest monthly EMI options starting at ₹2,500/month.",
-    featuredImage: "/assets/clinic-hero-real.png",
+    featuredImage: "/assets/yourdentist/laser_whitening.png",
     metaDescription: "Dental veneers and smile makeover cost on EMI in India (2026): Compare E-Max porcelain veneers and composite bonding with 0% interest monthly EMI options from ₹2,500/mo.",
     faqs: [
       {
@@ -2113,7 +2113,7 @@ export const BLOGS_PART1 = [
     publishDate: "September 8, 2026",
     author: "Clinaza Editorial Team",
     summary: "Discover the best dental clinic management software in India for 2026. Compare cloud CRM features, automated WhatsApp patient recalls, digital billing, and point-of-care EMI financing for dental practices.",
-    featuredImage: "/assets/clinic-hero-real.png",
+    featuredImage: "/assets/yourdentist/clinic_in_action.jpg",
     metaDescription: "Compare the best dental clinic management software in India for 2026. Discover free cloud CRM features, automated WhatsApp appointment recalls, digital prescriptions, and EMI patient financing.",
     faqs: [
       {
@@ -2299,7 +2299,7 @@ export const BLOGS_PART1 = [
     publishDate: "September 8, 2026",
     author: "Clinaza Practice Growth Team",
     summary: "Complete blueprint on starting a dental clinic in India in 2026. Detailed setup cost breakdown (₹12L–₹25L), required dental equipment checklist, legal licensing, clinic software, and patient acquisition strategies.",
-    featuredImage: "/assets/clinic-hero-real.png",
+    featuredImage: "/assets/yourdentist/clinic_in_action.jpg",
     metaDescription: "Learn how to start a dental clinic in India in 2026. Complete setup cost breakdown (₹12L to ₹25L), equipment checklist, legal registrations, and free dental software.",
     faqs: [
       {
@@ -2453,7 +2453,7 @@ export const BLOGS_PART1 = [
     publishDate: "September 8, 2026",
     author: "Clinaza Dental Advisory Panel",
     summary: "Complete 2026 cost guide for full mouth dental implants in India. Compare All-on-4, All-on-6, and basal implant prices, and discover how to convert ₹1.8L–₹5L treatments into easy monthly EMIs from ₹6,500/month.",
-    featuredImage: "/assets/clinic-hero-real.png",
+    featuredImage: "/assets/yourdentist/dental_implant_hero.png",
     metaDescription: "Full mouth dental implants cost on EMI in India. Compare All-on-4 and All-on-6 prices (₹1.8L to ₹5L) and get instant monthly EMI options from ₹6,500/mo.",
     faqs: [
       {
@@ -2567,7 +2567,7 @@ export const BLOGS_PART1 = [
     publishDate: "September 8, 2026",
     author: "Clinaza Practice Growth Team",
     summary: "Discover 7 actionable, battle-tested strategies to attract more high-paying dental patients in India. Learn automated WhatsApp recall, Google Maps SEO, Meta ads lead generation, and point-of-care patient EMIs.",
-    featuredImage: "/assets/clinic-hero-real.png",
+    featuredImage: "/assets/yourdentist/clinic_in_action.jpg",
     metaDescription: "Learn how to get more dental patients in India. 7 proven growth tactics including Google Maps ranking, WhatsApp patient recalls, Meta Ads, and EMI financing.",
     faqs: [
       {
@@ -2678,7 +2678,7 @@ export const BLOGS_PART1 = [
     publishDate: "September 8, 2026",
     author: "Clinaza Practice Growth Team",
     summary: "Complete guide to buying dental equipment on EMI in India. Compare medical equipment loans, interest rates (8.5%–14%), collateral-free financing for dental chairs, RVG X-rays, autoclaves, CBCT scanners, and dental lasers.",
-    featuredImage: "/assets/clinic-hero-real.png",
+    featuredImage: "/assets/yourdentist/clinic_in_action.jpg",
     metaDescription: "Buy dental equipment on EMI in India. Complete 2026 guide to medical equipment loans for dental chairs, RVG, CBCT, and autoclaves with low interest rates and zero collateral.",
     faqs: [
       {
@@ -2840,7 +2840,7 @@ export const BLOGS_PART1 = [
     publishDate: "September 8, 2026",
     author: "Clinaza Practice Growth Team",
     summary: "Discover how dental clinics in India can offer zero-cost and low-interest EMIs (₹30K–₹3L) to patients. Eliminate treatment drop-offs for implants, aligners, and crowns with zero merchant onboarding fees.",
-    featuredImage: "/assets/clinic-hero-real.png",
+    featuredImage: "/assets/yourdentist/clinic_in_action.jpg",
     metaDescription: "Learn how dental clinics in India can offer 0% EMI patient financing (₹30K to ₹3L) at checkout. Boost high-ticket case acceptance with zero merchant onboarding fees.",
     faqs: [
       {
@@ -2956,7 +2956,7 @@ export const BLOGS_PART1 = [
     publishDate: "September 8, 2026",
     author: "Clinaza Dental Legal Advisory",
     summary: "Complete guide and legally compliant dental consent form formats in India for dental implants, root canal treatment (RCT), surgical extractions, and orthodontic aligners. Discover paperless digital consent on mobile.",
-    featuredImage: "/assets/clinic-hero-real.png",
+    featuredImage: "/assets/yourdentist/clinic_in_action.jpg",
     metaDescription: "Download dental consent form formats in India for implants, root canal, extraction, and braces. Learn informed consent legal requirements under Indian law.",
     faqs: [
       {
@@ -3070,7 +3070,7 @@ export const BLOGS_PART1 = [
     publishDate: "September 8, 2026",
     author: "Clinaza Editorial Team",
     summary: "Discover how to convert Root Canal Treatment (RCT) and high-end Zirconia crown costs (₹12,000–₹35,000) into easy 0% monthly EMIs from ₹1,200/month across verified dental clinics in India.",
-    featuredImage: "/assets/clinic-hero-real.png",
+    featuredImage: "/assets/yourdentist/laser_whitening.png",
     metaDescription: "Pay for Root Canal Treatment (RCT) and Zirconia Crown on EMI in India. Complete cost guide (₹12K to ₹35K) and instant monthly EMI options from ₹1,200/month.",
     faqs: [
       {
@@ -3179,7 +3179,7 @@ export const BLOGS_PART1 = [
     publishDate: "September 8, 2026",
     author: "Clinaza Practice Growth Team",
     summary: "Discover how dental clinics in India use automated WhatsApp reminders to recover 30%+ of dormant patients, eliminate appointment no-shows, and automate 5-star Google review collection for ₹0.",
-    featuredImage: "/assets/clinic-hero-real.png",
+    featuredImage: "/assets/yourdentist/clinic_in_action.jpg",
     metaDescription: "Free WhatsApp marketing and automated patient recall software for dental clinics in India. Boost appointment bookings, recover dormant patients, and collect 5-star Google reviews.",
     faqs: [
       {
@@ -3295,7 +3295,7 @@ export const BLOGS_PART1 = [
     publishDate: "September 8, 2026",
     author: "Clinaza Practice Growth Team",
     summary: "Discover the best free online digital dental prescription generator and cloud EMR software in India. Create branded PDF prescriptions with pre-loaded dental medications and share instantly via WhatsApp in 5 seconds.",
-    featuredImage: "/assets/clinic-hero-real.png",
+    featuredImage: "/assets/yourdentist/clinic_in_action.jpg",
     metaDescription: "Free digital dental prescription maker and EMR software in India. Generate branded PDF dental prescriptions on mobile or tablet and share via WhatsApp.",
     faqs: [
       {
@@ -3384,7 +3384,7 @@ export const BLOGS_PART1 = [
     publishDate: "September 8, 2026",
     author: "Clinaza Dental Advisory Panel",
     summary: "Complete 2026 cost comparison between metal braces, ceramic braces, and invisible clear aligners in India. Discover how to convert ₹35,000–₹1,80,000 orthodontic treatments into easy 0% monthly EMIs from ₹2,500/month.",
-    featuredImage: "/assets/clinic-hero-real.png",
+    featuredImage: "/assets/yourdentist/clear_aligners.png",
     metaDescription: "Compare teeth alignment cost in India: Metal braces vs Ceramic braces vs Clear Aligners (₹35K to ₹1.8L). Get instant 0% EMI options starting from ₹2,500/month.",
     faqs: [
       {
@@ -3513,7 +3513,7 @@ export const BLOGS_PART1 = [
     publishDate: "September 8, 2026",
     author: "Clinaza Dental Advisory Panel",
     summary: "Complete 2026 cost guide for wisdom tooth extraction and impacted molar surgery in India. Compare surgical extraction prices (₹4,500–₹18,000 per tooth) and split emergency surgical bills into 0% monthly EMIs from ₹1,000/month.",
-    featuredImage: "/assets/clinic-hero-real.png",
+    featuredImage: "/assets/yourdentist/clinic_in_action.jpg",
     metaDescription: "Wisdom tooth surgery cost on EMI in India. Compare simple vs impacted molar extraction prices (₹4.5K to ₹18K) and get instant 0% EMI options starting from ₹1,000/month.",
     faqs: [
       {
@@ -3622,7 +3622,7 @@ export const BLOGS_PART1 = [
     publishDate: "September 8, 2026",
     author: "Clinaza Dental Advisory Panel",
     summary: "Complete guide to bone grafting and maxillary sinus lift surgery costs for dental implants in India. Compare xenograft, synthetic bone, and direct vs indirect sinus lift prices (₹18,000–₹55,000) with 0% EMI options.",
-    featuredImage: "/assets/clinic-hero-real.png",
+    featuredImage: "/assets/yourdentist/dental_implant_hero.png",
     metaDescription: "Bone grafting and sinus lift cost on EMI in India for dental implants. Compare surgical bone augmentation prices (₹18K to ₹55K) with easy monthly 0% EMIs.",
     faqs: [
       {
@@ -3731,7 +3731,7 @@ export const BLOGS_PART1 = [
     publishDate: "September 8, 2026",
     author: "Clinaza Practice Growth Team",
     summary: "Complete tax planning guide for Indian dentists. How to claim 15%–40% depreciation on dental chairs, RVG sensors, CBCT machines under Section 32, and write off loan interest as business expenses.",
-    featuredImage: "/assets/clinic-hero-real.png",
+    featuredImage: "/assets/yourdentist/clinic_in_action.jpg",
     metaDescription: "Tax benefits on dental equipment and clinic loans in India. Complete guide to Section 32 depreciation, Section 44ADA presumptive taxation, and interest expense write-offs.",
     faqs: [
       {
@@ -3856,7 +3856,7 @@ export const BLOGS_PART1 = [
     publishDate: "September 8, 2026",
     author: "Clinaza Editorial Team",
     summary: "Complete 2026 guide to instant medical loans and healthcare financing in India. How to get ₹30,000 to ₹5,00,000 loans for dental, IVF, LASIK, orthopaedics, and elective surgeries with low-cost flexible monthly EMIs and zero collateral.",
-    featuredImage: "/assets/clinic-hero-real.png",
+    featuredImage: "/assets/yourdentist/clinic_in_action.jpg",
     metaDescription: "Instant medical loans in India: Compare patient healthcare financing, medical emergency loans, and point-of-care hospital EMIs (₹30K to ₹5L) with zero collateral and fast approval.",
     faqs: [
       {

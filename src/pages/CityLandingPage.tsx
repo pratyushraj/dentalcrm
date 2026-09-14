@@ -294,31 +294,78 @@ export default function CityLandingPage() {
           </div>
         </section>
 
-        {/* Related Blog Guides */}
-        <section className="py-10 px-4 sm:px-6 bg-white border-t border-slate-200/60 max-w-5xl mx-auto space-y-4">
-          <div className="flex justify-between items-center">
-            <h3 className="text-sm font-black text-[#0B2450] uppercase tracking-wider">Patient Guides & Dental Marketing Insights</h3>
-            <Link to="/blog" className="text-xs font-bold text-[#0867E8] hover:underline">View All Articles →</Link>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-4 gap-3 text-xs">
-            <Link to="/blog/dental-implants-cost-on-emi-india" className="p-4 bg-[#F7FAFC] hover:bg-blue-50 border border-slate-200 rounded-xl block space-y-1">
-              <span className="text-[10px] font-bold text-[#0867E8] uppercase block">Implants Guide</span>
-              <strong className="text-[#0B2450] font-bold block">Dental Implants Cost &amp; Monthly EMI</strong>
-            </Link>
-            <Link to="/blog/invisalign-cost-on-emi-india" className="p-4 bg-[#F7FAFC] hover:bg-blue-50 border border-slate-200 rounded-xl block space-y-1">
-              <span className="text-[10px] font-bold text-[#0867E8] uppercase block">Invisalign</span>
-              <strong className="text-[#0B2450] font-bold block">Invisalign Cost & Monthly Plans</strong>
-            </Link>
-            <Link to="/blog/dentist-digital-marketing-india-complete-guide" className="p-4 bg-[#F7FAFC] hover:bg-blue-50 border border-slate-200 rounded-xl block space-y-1">
-              <span className="text-[10px] font-bold text-[#0867E8] uppercase block">Growth Guide</span>
-              <strong className="text-[#0B2450] font-bold block">Dentist Digital Marketing in India</strong>
-            </Link>
-            <Link to="/blog/does-health-insurance-cover-dental-implants-india" className="p-4 bg-[#F7FAFC] hover:bg-blue-50 border border-slate-200 rounded-xl block space-y-1">
-              <span className="text-[10px] font-bold text-[#0867E8] uppercase block">Insurance</span>
-              <strong className="text-[#0B2450] font-bold block">Dental Implants & Insurance Truth</strong>
-            </Link>
-          </div>
-        </section>
+        {/* Related Blog Guides — City-Aware Internal Links */}
+        {(() => {
+          // City-specific guide mapping for SEO internal linking
+          const cityGuides: Record<string, { label: string; slug: string; title: string }[]> = {
+            kochi: [
+              { label: 'Braces in Kochi', slug: 'braces-cost-emi-india-adults-teens-complete-guide', title: 'Braces Cost on EMI in India: Metal, Ceramic & Lingual (2026)' },
+              { label: 'Aligners Guide', slug: 'clear-aligners-cost-on-emi-india', title: 'Clear Aligners Cost on EMI: Price Comparison & Monthly Plans' },
+              { label: 'Implants EMI', slug: 'dental-implants-cost-on-emi-india', title: 'Dental Implants Cost & Monthly EMI Guide' },
+              { label: 'Dental Loans', slug: 'dental-treatment-on-emi-india-guide', title: 'How to Get Dental Treatment on EMI in India (2026)' },
+            ],
+            patna: [
+              { label: 'Implants in Patna', slug: 'dental-implants-cost-patna-emi', title: 'Dental Implants Cost in Patna: Full Breakdown + EMI Options' },
+              { label: 'Braces in Patna', slug: 'best-dentist-in-patna-for-braces', title: 'Best Dentist in Patna for Braces: Ultimate Patient Guide' },
+              { label: 'Best Clinics', slug: 'best-dental-clinics-in-patna', title: 'Best Dental Clinics in Patna 2026: Ratings & EMI Options' },
+              { label: 'Teeth Gap', slug: 'gap-closure-cost-in-patna', title: 'Teeth Gap Closure Cost in Patna: Treatments Compared' },
+            ],
+            chennai: [
+              { label: 'Implants EMI', slug: 'dental-implants-cost-on-emi-india', title: 'Dental Implants Cost on EMI in India (2026)' },
+              { label: 'Full Mouth', slug: 'full-mouth-dental-implants-cost-on-emi-india-guide', title: 'Full Mouth Implants Cost on EMI: All-on-4 vs All-on-6' },
+              { label: 'Braces & Aligners', slug: 'braces-cost-emi-india-adults-teens-complete-guide', title: 'Braces Cost on EMI: Metal, Ceramic & Lingual Guide' },
+              { label: 'Dental Loans', slug: 'dental-loans-in-india-medical-financing', title: 'Dental Loans in India: EMI vs Medical Loans Explained' },
+            ],
+            hyderabad: [
+              { label: 'Implants EMI', slug: 'dental-implants-cost-on-emi-india', title: 'Dental Implants Cost on EMI in India (2026)' },
+              { label: 'Clear Aligners', slug: 'clear-aligners-cost-on-emi-india', title: 'Clear Aligners Cost on EMI: Brands & Monthly Plans' },
+              { label: 'Full Mouth', slug: 'full-mouth-dental-implants-cost-on-emi-india-guide', title: 'Full Mouth Implants: All-on-4 vs All-on-6 on EMI' },
+              { label: 'Patient EMI Guide', slug: 'dental-treatment-on-emi-india-guide', title: 'How to Get Dental Treatment on EMI in India' },
+            ],
+            pune: [
+              { label: 'Implants EMI', slug: 'dental-implants-cost-on-emi-india', title: 'Dental Implants Cost on EMI in India (2026)' },
+              { label: 'Aligners EMI', slug: 'cheapest-invisible-aligners-india-under-40000-guide', title: 'Cheapest Invisible Aligners in India (Under ₹40,000)' },
+              { label: 'Braces Guide', slug: 'braces-cost-emi-india-adults-teens-complete-guide', title: 'Braces Cost on EMI: Metal, Ceramic & Lingual (2026)' },
+              { label: 'Dental Loans', slug: 'dental-treatment-on-emi-india-guide', title: 'How to Get Dental Treatment on EMI in India' },
+            ],
+            jaipur: [
+              { label: 'Implants EMI', slug: 'dental-implants-cost-on-emi-india', title: 'Dental Implants Cost on EMI in India (2026)' },
+              { label: 'Braces Guide', slug: 'braces-cost-emi-india-adults-teens-complete-guide', title: 'Braces Cost on EMI: Metal, Ceramic & Lingual Guide' },
+              { label: 'Crown & RCT', slug: 'root-canal-and-crown-cost-on-emi-india', title: 'Root Canal & Crown Cost on EMI: Complete Breakdown' },
+              { label: 'Dental Loans', slug: 'dental-loans-in-india-medical-financing', title: 'Dental Loans in India Explained' },
+            ],
+            bhopal: [
+              { label: 'Implants EMI', slug: 'dental-implants-cost-on-emi-india', title: 'Dental Implants Cost on EMI in India (2026)' },
+              { label: 'Patient EMI Guide', slug: 'dental-treatment-on-emi-india-guide', title: 'How to Get Dental Treatment on EMI in India' },
+              { label: 'Crown & RCT', slug: 'root-canal-and-crown-cost-on-emi-india', title: 'Root Canal & Crown Cost on EMI: Complete Breakdown' },
+              { label: 'Dental Loans', slug: 'dental-loans-in-india-medical-financing', title: 'Dental Loans in India Explained' },
+            ],
+          };
+
+          const guides = cityGuides[city || ''] ?? [
+            { label: 'Implants Guide', slug: 'dental-implants-cost-on-emi-india', title: 'Dental Implants Cost & Monthly EMI' },
+            { label: 'Aligners', slug: 'clear-aligners-cost-on-emi-india', title: 'Clear Aligners Cost on EMI: Price Comparison & Monthly Plans' },
+            { label: 'Braces Guide', slug: 'braces-cost-emi-india-adults-teens-complete-guide', title: 'Braces Cost on EMI: Metal, Ceramic & Lingual (2026)' },
+            { label: 'Dental Loans', slug: 'dental-treatment-on-emi-india-guide', title: 'How to Get Dental Treatment on EMI in India (2026)' },
+          ];
+
+          return (
+            <section className="py-10 px-4 sm:px-6 bg-white border-t border-slate-200/60 max-w-5xl mx-auto space-y-4">
+              <div className="flex justify-between items-center">
+                <h3 className="text-sm font-black text-[#0B2450] uppercase tracking-wider">Helpful Patient Guides for {name}</h3>
+                <Link to="/blog" className="text-xs font-bold text-[#0867E8] hover:underline">View All Articles →</Link>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-4 gap-3 text-xs">
+                {guides.map((g, i) => (
+                  <Link key={i} to={`/blog/${g.slug}`} className="p-4 bg-[#F7FAFC] hover:bg-blue-50 border border-slate-200 rounded-xl block space-y-1">
+                    <span className="text-[10px] font-bold text-[#0867E8] uppercase block">{g.label}</span>
+                    <strong className="text-[#0B2450] font-bold block leading-snug">{g.title}</strong>
+                  </Link>
+                ))}
+              </div>
+            </section>
+          );
+        })()}
 
         {/* Final CTA */}
         <section className="py-14 px-4 sm:px-6 text-center space-y-4 max-w-3xl mx-auto">

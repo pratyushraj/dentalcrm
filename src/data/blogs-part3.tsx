@@ -377,7 +377,7 @@ export const BLOGS_PART3 = [
     author: "Clinaza Medical Insights",
     summary: "Complete patient guide to hair transplant costs in India on monthly EMI. Compare FUE, DHI, and Sapphire graft pricing (1,500 to 5,000 grafts), zero-cost financing options, and why health insurance excludes aesthetic hair restoration.",
     featuredImage: "https://images.unsplash.com/photo-1628178148526-b338a3428879?q=80&w=1200&auto=format&fit=crop",
-    metaDescription: "Hair transplant cost on EMI in India (2026). Compare FUE vs DHI per-graft prices (₹20 to ₹65/graft), 0% interest monthly EMI plans from ₹2,500/month, and top clinics.",
+    metaDescription: "Hair transplant cost on EMI in India (2026). Compare FUE vs DHI per-graft prices (₹20 to ₹65/graft), flexible monthly EMI plans from ₹2,500/month, and top clinics.",
     faqs: [
       {
         question: "Can I get a hair transplant on monthly EMI in India?",
@@ -646,7 +646,7 @@ export const BLOGS_PART3 = [
     author: "Clinaza Medical Insights",
     summary: "Complete guide to IVF, IUI, and ICSI fertility treatment costs in India on monthly EMI. Understand per-cycle pricing across cities, what health insurance ignores, and how couples can access world-class ART treatment without financial distress.",
     featuredImage: "https://images.unsplash.com/photo-1555252333-9f8e92e65df9?q=80&w=1200&auto=format&fit=crop",
-    metaDescription: "IVF cost on EMI in India 2026. Compare IVF, IUI & ICSI per-cycle prices (₹80,000 to ₹2,50,000), 0% interest EMI from ₹3,500/month, and how to finance fertility treatment without insurance.",
+    metaDescription: "IVF cost on EMI in India 2026. Compare IVF, IUI & ICSI per-cycle prices (₹80,000 to ₹2,50,000), flexible monthly EMI from ₹3,500/month, and how to finance fertility treatment without insurance.",
     faqs: [
       {
         question: "How much does one IVF cycle cost in India?",
@@ -949,7 +949,7 @@ export const BLOGS_PART3 = [
     readTime: "6 min read",
     publishDate: "September 12, 2026",
     author: "Clinaza Medical Insights",
-    summary: "Complete guide to Implantable Collamer Lens (ICL) eye surgery costs in India on monthly EMI. Compare ICL pricing (₹80,000 to ₹1,60,000 for both eyes) vs LASIK, suitability for high cylinder/thin corneas, and 0% interest EMI options.",
+    summary: "Complete guide to Implantable Collamer Lens (ICL) eye surgery costs in India on monthly EMI. Compare ICL pricing (₹80,000 to ₹1,60,000 for both eyes) vs LASIK, suitability for high cylinder/thin corneas, and flexible monthly EMI options.",
     featuredImage: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=1200&auto=format&fit=crop",
     metaDescription: "ICL eye surgery cost on EMI in India 2026. Compare Phakic IOL pricing (₹80,000 to ₹1,60,000), monthly EMI from ₹3,500/month, ICL vs LASIK, and top eye hospitals.",
     faqs: [

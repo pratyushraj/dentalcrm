@@ -12,7 +12,7 @@ export const BLOGS_PART2 = [
     author: "Clinaza Healthcare Advisory",
     summary: "Complete 2026 guide to hair transplant costs on EMI in India. Compare FUE, FUT, and DHI graft prices (₹35,000–₹1,80,000) and convert your hair restoration procedure into easy 0% monthly EMIs from ₹2,800/month.",
     featuredImage: "https://images.unsplash.com/photo-1628178148526-b338a3428879?q=80&w=1200&auto=format&fit=crop",
-    metaDescription: "Hair transplant cost on EMI in India: Compare FUE & DHI graft prices (₹35K to ₹1.8L). Get instant 0% interest monthly EMI options starting from ₹2,800/month.",
+    metaDescription: "Hair transplant cost on EMI in India: Compare FUE & DHI graft prices (₹35K to ₹1.8L). Get instant flexible monthly EMI options starting from ₹2,800/month.",
     faqs: [
       {
         question: "Can I pay for a hair transplant on monthly EMI in India?",
@@ -99,7 +99,7 @@ export const BLOGS_PART2 = [
   },,
     {
     slug: "ivf-cost-on-emi-fertility-treatment-financing-india",
-    title: "IVF Treatment Cost on EMI in India: Fertility Financing & 0% Loan Guide (2026)",
+    title: "IVF Treatment Cost on EMI in India: Fertility Financing & Monthly Payment Guide (2026)",
     category: "Fertility Financing",
     readTime: "9 min read",
     publishDate: "September 8, 2026",
@@ -198,9 +198,9 @@ export const BLOGS_PART2 = [
     readTime: "8 min read",
     publishDate: "September 8, 2026",
     author: "Clinaza Healthcare Advisory",
-    summary: "Complete 2026 guide to LASIK laser eye surgery costs on EMI in India. Compare Blade-Free Femto LASIK, Contoura Vision, and SMILE prices (₹35,000–₹1,20,000) with 0% interest monthly EMIs from ₹2,900/month.",
+    summary: "Complete 2026 guide to LASIK laser eye surgery costs on EMI in India. Compare Blade-Free Femto LASIK, Contoura Vision, and SMILE prices (₹35,000–₹1,20,000) with flexible monthly EMIs from ₹2,900/month.",
     featuredImage: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=1200&auto=format&fit=crop",
-    metaDescription: "LASIK eye surgery cost on EMI in India. Compare Femto-LASIK, Contoura Vision, and SMILE prices (₹35K to ₹1.2L) with instant 0% interest monthly EMIs from ₹2,900/mo.",
+    metaDescription: "LASIK eye surgery cost on EMI in India. Compare Femto-LASIK, Contoura Vision, and SMILE prices (₹35K to ₹1.2L) with instant flexible monthly EMIs from ₹2,900/mo.",
     faqs: [
       {
         question: "Can I get LASIK eye surgery on 0% EMI in India?",
@@ -292,9 +292,9 @@ export const BLOGS_PART2 = [
     readTime: "9 min read",
     publishDate: "2026-09-08",
     author: "Clinaza Health Finance Team",
-    summary: "Knee replacement costs ₹1.5 to ₹4 lakh in India. Learn how to pay for TKR, PKR, or bilateral knee replacement on affordable 0% EMI with no collateral through Clinaza.",
+    summary: "Knee replacement costs ₹1.5 to ₹4 lakh in India. Learn how to pay for TKR, PKR, or bilateral knee replacement on affordable flexible EMI with no collateral through Clinaza.",
     featuredImage: "https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?q=80&w=1200&auto=format&fit=crop",
-    metaDescription: "Knee replacement surgery costs ₹1.5–4 lakh in India. Get 0% EMI for TKR and PKR surgeries with instant approval. No collateral needed. Check your EMI on Clinaza.",
+    metaDescription: "Knee replacement surgery costs ₹1.5–4 lakh in India. Get flexible EMI for TKR and PKR surgeries with instant approval. No collateral needed. Check your EMI on Clinaza.",
     faqs: [
       { question: "How much does knee replacement cost in India?", answer: "Total knee replacement (TKR) costs ₹1.5–3 lakh per knee in government hospitals and ₹2.5–4 lakh in private hospitals. Bilateral (both knees) can cost ₹4–7 lakh." },
       { question: "Can I get knee replacement on EMI?", answer: "Yes. Clinaza offers 0% EMI for knee replacement surgeries up to ₹5 lakh with repayment of 3 to 24 months and no collateral or guarantor required." },
@@ -396,9 +396,9 @@ export const BLOGS_PART2 = [
     readTime: "9 min read",
     publishDate: "2026-09-08",
     author: "Clinaza Health Finance Team",
-    summary: "Bariatric surgery costs ₹2.5–5 lakh in India. Learn how to pay for gastric bypass, sleeve gastrectomy, or MGB on affordable 0% EMI with instant approval through Clinaza.",
+    summary: "Bariatric surgery costs ₹2.5–5 lakh in India. Learn how to pay for gastric bypass, sleeve gastrectomy, or MGB on affordable flexible EMI with instant approval through Clinaza.",
     featuredImage: "https://images.unsplash.com/photo-1516549655169-df83a0774514?q=80&w=1200&auto=format&fit=crop",
-    metaDescription: "Bariatric surgery costs ₹2.5–5 lakh in India. Get 0% EMI for gastric sleeve, bypass, and MGB with instant approval on Clinaza. No collateral needed.",
+    metaDescription: "Bariatric surgery costs ₹2.5–5 lakh in India. Get flexible EMI for gastric sleeve, bypass, and MGB with instant approval on Clinaza. No collateral needed.",
     faqs: [
       { question: "How much does bariatric surgery cost in India?", answer: "Bariatric surgery costs ₹2.5–5 lakh depending on the procedure (sleeve vs bypass) and city. Laparoscopic sleeve gastrectomy is the most popular at ₹2.5–3.5 lakh." },
       { question: "Can I get bariatric surgery on EMI in India?", answer: "Yes. Clinaza offers 0% EMI for bariatric procedures up to ₹5 lakh with tenure from 3 to 24 months and instant approval — no collateral required." },
@@ -505,9 +505,9 @@ export const BLOGS_PART2 = [
     readTime: "8 min read",
     publishDate: "2026-09-08",
     author: "Clinaza Health Finance Team",
-    summary: "Rhinoplasty costs ₹60,000–2.5 lakh in India. Learn how to pay for nose reshaping surgery on affordable 0% EMI through Clinaza with instant approval and no collateral.",
+    summary: "Rhinoplasty costs ₹60,000–2.5 lakh in India. Learn how to pay for nose reshaping surgery on affordable flexible EMI through Clinaza with instant approval and no collateral.",
     featuredImage: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=1200&auto=format&fit=crop",
-    metaDescription: "Rhinoplasty (nose job) costs ₹60,000–2.5 lakh in India. Get 0% EMI for nose reshaping surgery with instant approval on Clinaza. No collateral required.",
+    metaDescription: "Rhinoplasty (nose job) costs ₹60,000–2.5 lakh in India. Get flexible EMI for nose reshaping surgery with instant approval on Clinaza. No collateral required.",
     faqs: [
       { question: "How much does rhinoplasty cost in India?", answer: "Rhinoplasty in India costs ₹60,000–2.5 lakh depending on the procedure type (open vs closed), surgeon experience, and city. Non-surgical rhinoplasty using fillers costs ₹15,000–40,000." },
       { question: "Can I get a nose job on EMI in India?", answer: "Yes. Clinaza offers 0% EMI for rhinoplasty up to ₹2.5 lakh with 3–24 month tenures. Instant online approval, no collateral or guarantor required." },
@@ -611,9 +611,9 @@ export const BLOGS_PART2 = [
     readTime: "7 min read",
     publishDate: "2026-09-08",
     author: "Clinaza Health Finance Team",
-    summary: "Gynecomastia surgery costs ₹50,000–1.5 lakh in India. Learn how to pay for male breast reduction on affordable 0% EMI through Clinaza with instant approval and no collateral.",
+    summary: "Gynecomastia surgery costs ₹50,000–1.5 lakh in India. Learn how to pay for male breast reduction on affordable flexible EMI through Clinaza with instant approval and no collateral.",
     featuredImage: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=1200&auto=format&fit=crop",
-    metaDescription: "Gynecomastia surgery costs ₹50,000–1.5 lakh in India. Get 0% EMI for male breast reduction with instant approval on Clinaza. No collateral required.",
+    metaDescription: "Gynecomastia surgery costs ₹50,000–1.5 lakh in India. Get flexible EMI for male breast reduction with instant approval on Clinaza. No collateral required.",
     faqs: [
       { question: "How much does gynecomastia surgery cost in India?", answer: "Gynecomastia surgery in India costs ₹50,000–1.5 lakh depending on the grade (glandular tissue vs fat), surgical technique (liposuction vs excision), and city." },
       { question: "Can I get gynecomastia surgery on EMI?", answer: "Yes. Clinaza offers 0% EMI for gynecomastia surgery up to ₹1.5 lakh with 3–24 month tenures and instant online approval." },
@@ -710,9 +710,9 @@ export const BLOGS_PART2 = [
     readTime: "8 min read",
     publishDate: "2026-09-08",
     author: "Clinaza Health Finance Team",
-    summary: "Liposuction costs ₹60,000–3 lakh in India depending on areas treated. Learn how to pay for lipo, Vaser, or 360° body contouring on affordable 0% EMI through Clinaza.",
+    summary: "Liposuction costs ₹60,000–3 lakh in India depending on areas treated. Learn how to pay for lipo, Vaser, or 360° body contouring on affordable flexible EMI through Clinaza.",
     featuredImage: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=1200&auto=format&fit=crop",
-    metaDescription: "Liposuction costs ₹60,000–3 lakh in India. Get 0% EMI for lipo, Vaser hi-def, and 360° body contouring with instant approval on Clinaza. No collateral needed.",
+    metaDescription: "Liposuction costs ₹60,000–3 lakh in India. Get flexible EMI for lipo, Vaser hi-def, and 360° body contouring with instant approval on Clinaza. No collateral needed.",
     faqs: [
       { question: "How much does liposuction cost in India?", answer: "Liposuction in India costs ₹60,000–3 lakh depending on the number of areas treated, technique (standard vs Vaser vs laser), and surgeon. Abdomen alone costs ₹60,000–1.2 lakh." },
       { question: "Can I get liposuction on EMI in India?", answer: "Yes. Clinaza offers 0% EMI for liposuction procedures up to ₹3 lakh with 3–24 month repayment periods and instant online approval." },
@@ -827,7 +827,7 @@ export const BLOGS_PART2 = [
     author: "Clinaza Health Finance Team",
     summary: "Cancer treatment costs range from ₹3 lakh to over ₹20 lakh in India. Learn how to manage chemotherapy, radiation, immunotherapy, and surgical oncology bills with 0% medical EMI via Clinaza.",
     featuredImage: "/assets/yourdentist/clinic_in_action.jpg",
-    metaDescription: "Cancer treatment cost on EMI in India: Chemotherapy, radiation, robotic surgery & targeted therapy financing up to ₹5 lakh with 0% interest and instant approval on Clinaza.",
+    metaDescription: "Cancer treatment cost on EMI in India: Chemotherapy, radiation, robotic surgery & targeted therapy financing up to ₹5 lakh with flexible and instant approval on Clinaza.",
     faqs: [
       { question: "How much does cancer treatment cost in India?", answer: "Comprehensive cancer treatment ranges from ₹3,00,000 to over ₹20,00,000 depending on stage, cancer type, hospital, and modality (chemo cycles, radiation fractions, immunotherapy)." },
       { question: "Can I get cancer treatment on EMI in India?", answer: "Yes. Clinaza offers healthcare treatment financing up to ₹5,00,000 on 0% EMI with tenures from 3 to 24 months, zero collateral, and approval in 2 minutes." },
@@ -922,9 +922,9 @@ export const BLOGS_PART2 = [
     readTime: "8 min read",
     publishDate: "2026-09-08",
     author: "Clinaza Health Finance Team",
-    summary: "Cochlear implants cost between ₹6 lakh and ₹15 lakh per ear in India. Learn about unilateral & bilateral implant costs, sound processors, and 0% EMI medical loans with Clinaza.",
+    summary: "Cochlear implants cost between ₹6 lakh and ₹15 lakh per ear in India. Learn about unilateral & bilateral implant costs, sound processors, and flexible EMI medical loans with Clinaza.",
     featuredImage: "/assets/yourdentist/dental_implant_hero.png",
-    metaDescription: "Cochlear implant cost on EMI in India: Complete pricing guide for Cochlear, Med-El, and Advanced Bionics devices with 0% EMI financing and instant approval via Clinaza.",
+    metaDescription: "Cochlear implant cost on EMI in India: Complete pricing guide for Cochlear, Med-El, and Advanced Bionics devices with flexible EMI financing and instant approval via Clinaza.",
     faqs: [
       { question: "How much does a cochlear implant cost in India?", answer: "A single-ear cochlear implant surgery costs ₹6,00,000 to ₹14,00,000 depending on the device brand (Cochlear, MED-EL, Advanced Bionics), sound processor technology, and hospital tier." },
       { question: "Can I get a cochlear implant on 0% EMI?", answer: "Yes! Clinaza provides point-of-care medical EMI loans up to ₹5,00,000 to help parents and adults finance surgical and device costs with zero collateral." },
@@ -1192,9 +1192,9 @@ export const BLOGS_PART2 = [
     readTime: "8 min read",
     publishDate: "2026-09-08",
     author: "Clinaza Health Finance Team",
-    summary: "ICL (Implantable Collamer Lens) surgery costs ₹80,000 to ₹1,80,000 in India. Learn why ICL is the best alternative for thin corneas or high refractive power (-8D to -20D) and how to finance it on 0% EMI.",
+    summary: "ICL (Implantable Collamer Lens) surgery costs ₹80,000 to ₹1,80,000 in India. Learn why ICL is the best alternative for thin corneas or high refractive power (-8D to -20D) and how to finance it on flexible EMI.",
     featuredImage: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=1200&auto=format&fit=crop",
-    metaDescription: "ICL eye surgery cost on EMI in India: EVO Visian ICL & IPCL lens pricing (₹80K–₹1.8L per eye) with instant 0% interest EMI options up to ₹5 lakh via Clinaza.",
+    metaDescription: "ICL eye surgery cost on EMI in India: EVO Visian ICL & IPCL lens pricing (₹80K–₹1.8L per eye) with instant flexible monthly EMI options up to ₹5 lakh via Clinaza.",
     faqs: [
       { question: "What is ICL surgery and who is it for?", answer: "ICL (Implantable Collamer Lens / Phakic IOL) is a soft, biocompatible lens permanently placed inside the eye between the iris and natural crystalline lens. It is ideal for patients with high power (-3D to -20D), thin corneas, or severe dry eyes who are rejected for LASIK." },
       { question: "How much does ICL surgery cost in India?", answer: "Spherical ICL costs ₹65,000 to ₹90,000 per eye (₹1.3L to ₹1.8L for both eyes). Toric ICL (for astigmatism/cylinder power) costs ₹90,000 to ₹1,30,000 per eye (₹1.8L to ₹2.6L for both eyes)." },
@@ -1277,9 +1277,9 @@ export const BLOGS_PART2 = [
     readTime: "9 min read",
     publishDate: "2026-09-08",
     author: "Clinaza Health Finance Team",
-    summary: "Cataract surgery costs ₹20,000 to ₹1,20,000 per eye in India. Compare robotic femto-laser cataract surgery and premium Trifocal / EDOF lenses on 0% EMI via Clinaza.",
+    summary: "Cataract surgery costs ₹20,000 to ₹1,20,000 per eye in India. Compare robotic femto-laser cataract surgery and premium Trifocal / EDOF lenses on flexible EMI via Clinaza.",
     featuredImage: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=1200&auto=format&fit=crop",
-    metaDescription: "Cataract surgery cost on EMI in India: Compare Robotic FLACS, Monofocal, Toric, and Trifocal IOL lens prices with 0% interest EMI options on Clinaza.",
+    metaDescription: "Cataract surgery cost on EMI in India: Compare Robotic FLACS, Monofocal, Toric, and Trifocal IOL lens prices with flexible monthly EMI options on Clinaza.",
     faqs: [
       { question: "How much does modern cataract surgery cost in India?", answer: "Standard Phacoemulsification with Indian monofocal lens costs ₹18,000–₹35,000 per eye. Robotic laser cataract surgery with premium imported Trifocal/EDOF lenses costs ₹70,000–₹1,25,000 per eye." },
       { question: "Can I get premium cataract lenses on 0% EMI?", answer: "Yes! Many insurance policies only reimburse basic monofocal lenses. Clinaza provides 0% EMI financing to bridge the upgrade cost to Trifocal or Toric lenses without financial stress." },
@@ -1830,14 +1830,14 @@ export const BLOGS_PART2 = [
   },,
     {
     slug: "zero-percent-interest-medical-loans-dental-implants-braces-india",
-    title: "Can You Get 0% Interest Medical Loans for Dental Implants & Braces in India? The Complete Guide",
+    title: "Can You Get flexible Medical Loans for Dental Implants & Braces in India? The Complete Guide",
     category: "Patient Financing & Costs",
     readTime: "6 min read",
     publishDate: "September 11, 2026",
     author: "Clinaza Financial Research Desk",
-    summary: "Everything Indian patients and doctors need to know about No-Cost EMI and 0% interest medical loans for high-ticket dental procedures like implants, braces, and full-mouth rehabilitation.",
+    summary: "Everything Indian patients and doctors need to know about Flexible-EMI and flexible medical loans for high-ticket dental procedures like implants, braces, and full-mouth rehabilitation.",
     featuredImage: "/assets/yourdentist/clear_aligners.png",
-    metaDescription: "Learn how 0% interest medical loans and No-Cost EMI work in Indian healthcare. Understand processing fees, subvention models, and how to get instant approval at Clinaza partner clinics.",
+    metaDescription: "Learn how flexible medical loans and Flexible-EMI work in Indian healthcare. Understand processing fees, subvention models, and how to get instant approval at Clinaza partner clinics.",
     faqs: [
       {
         question: "How do 0% interest or No-Cost EMIs work for dental treatments?",
@@ -2120,7 +2120,7 @@ export const BLOGS_PART2 = [
     author: "Clinaza Medical Insights Desk",
     summary: "A detailed breakdown of IRDAI rules, refractive power thresholds (-7.5D+), waiting periods, and how to pay for Contoura Vision or SMILE on easy monthly EMIs if your insurance claim is rejected.",
     featuredImage: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=1200&auto=format&fit=crop",
-    metaDescription: "Check if your health insurance covers LASIK or Contoura eye surgery in India. Learn the 7.5 diopter rule, Star Health / HDFC Ergo terms, and 0% EMI alternatives.",
+    metaDescription: "Check if your health insurance covers LASIK or Contoura eye surgery in India. Learn the 7.5 diopter rule, Star Health / HDFC Ergo terms, and flexible EMI alternatives.",
     faqs: [
       {
         question: "When does health insurance in India approve LASIK surgery?",
@@ -2173,7 +2173,7 @@ export const BLOGS_PART2 = [
     author: "Clinaza Practice Growth Team",
     summary: "A practical emergency roadmap for patients and families facing unexpected TPA cashless rejections for IVF, dental implants, bariatric, and daycare surgeries in India.",
     featuredImage: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=1200&auto=format&fit=crop",
-    metaDescription: "Faced with an insurance rejection at hospital checkout? Learn how to finance elective surgeries in India using point-of-care medical loans and instant 0% EMIs with Clinaza.",
+    metaDescription: "Faced with an insurance rejection at hospital checkout? Learn how to finance elective surgeries in India using point-of-care medical loans and instant flexible EMIs with Clinaza.",
     faqs: [
       {
         question: "What are the most common reasons for health insurance claim rejections in India?",
@@ -2234,7 +2234,7 @@ export const BLOGS_PART2 = [
     readTime: "6 min read",
     publishDate: "September 11, 2026",
     author: "Clinaza Healthcare Economics Desk",
-    summary: "An economic comparison between standalone OPD dental insurance plans in India and point-of-care 0% EMIs for dental implants, root canals, and cosmetic smile makeovers.",
+    summary: "An economic comparison between standalone OPD dental insurance plans in India and point-of-care flexible EMIs for dental implants, root canals, and cosmetic smile makeovers.",
     featuredImage: "/assets/yourdentist/clinic_in_action.jpg",
     metaDescription: "Compare OPD dental insurance plans in India with point-of-care dental EMIs. Understand annual sub-limits, premium costs, waiting periods, and true patient savings.",
     faqs: [

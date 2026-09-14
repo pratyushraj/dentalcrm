@@ -44,7 +44,7 @@ export default function BlogArticlePage() {
     '@type': 'Article',
     'headline': article.title,
     'description': article.metaDescription,
-    'image': article.featuredImage || 'https://clinaza.in/og-preview.png',
+    'image': article.featuredImage || 'https://clinaza.in/og-clinaza.png',
     'author': {
       '@type': 'Person',
       'name': article.author,

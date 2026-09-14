@@ -285,7 +285,7 @@ export default function EmiOnboardPage() {
       <SEOHead
         title="Clinaza Patient Onboarding — Point-of-Care Financing"
         description="Check treatment loan eligibility and choose custom monthly EMIs directly at checkout."
-        image="https://clinaza.in/og-preview.png"
+        image="https://clinaza.in/og-clinaza.png"
         canonicalUrl="https://clinaza.in/emi/onboard"
         keywords={['clinaza emi onboard', 'patient loan check', 'medical emi checkout', 'dental loan approval']}
         jsonLd={{

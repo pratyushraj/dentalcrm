@@ -27,7 +27,7 @@ export default function DhanliftRedirectPage() {
       <SEOHead
         title="Clinaza Patient Treatment Loan — Instant Approval"
         description="Apply for low EMI patient financing for dental & medical procedures up to ₹3,00,000. Instant approval powered by Dhanlift."
-        image="https://clinaza.in/og-preview.png"
+        image="https://clinaza.in/og-clinaza.png"
         canonicalUrl="https://clinaza.in/apply"
         keywords={['clinaza loan', 'dhanlift clinaza', 'patient treatment loan', 'dental emi loan', 'medical financing india']}
         jsonLd={{

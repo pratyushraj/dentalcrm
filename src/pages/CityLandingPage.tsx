@@ -117,7 +117,7 @@ export default function CityLandingPage() {
       <SEOHead
         title={metaTitle}
         description={metaDescription}
-        image="https://clinaza.in/og-preview.png"
+        image="https://clinaza.in/og-clinaza.png"
         keywords={[
           `dental emi ${name.toLowerCase()}`,
           `dental implants on emi ${name.toLowerCase()}`,

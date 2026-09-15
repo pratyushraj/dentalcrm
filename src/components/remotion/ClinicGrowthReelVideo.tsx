@@ -26,7 +26,7 @@ export const ClinicGrowthReelComposition: React.FC<ClinicGrowthReelProps> = ({
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
-  // Slide duration: 120 frames (4 seconds per slide, 5 slides total = 600 frames / 20s)
+  // Slide duration: 120 frames (4 seconds per slide, 6 slides total = 720 frames / 24s)
   const SLIDE_DURATION = 120;
 
   return (
@@ -43,24 +43,29 @@ export const ClinicGrowthReelComposition: React.FC<ClinicGrowthReelProps> = ({
         <Slide1 frame={frame} fps={fps} />
       </Sequence>
 
-      {/* SLIDE 2: SECRET #1 - STOP LOSING ₹50K CASES (4 - 8s) */}
+      {/* SLIDE 2: SECRET #1 - PATIENT EMI (4 - 8s) */}
       <Sequence from={SLIDE_DURATION} durationInFrames={SLIDE_DURATION}>
         <Slide2 frame={frame - SLIDE_DURATION} fps={fps} />
       </Sequence>
 
-      {/* SLIDE 3: SECRET #2 - UNLOCK HIDDEN FILE REVENUE (8 - 12s) */}
+      {/* SLIDE 3: SECRET #2 - WHATSAPP PATIENT RECOVERY (8 - 12s) */}
       <Sequence from={SLIDE_DURATION * 2} durationInFrames={SLIDE_DURATION}>
         <Slide3 frame={frame - SLIDE_DURATION * 2} fps={fps} />
       </Sequence>
 
-      {/* SLIDE 4: SECRET #3 - DOMINATE LOCAL GOOGLE SEARCH (12 - 16s) */}
+      {/* SLIDE 4: SECRET #3 - GOOGLE AI OVERVIEWS & SEO (12 - 16s) */}
       <Sequence from={SLIDE_DURATION * 3} durationInFrames={SLIDE_DURATION}>
         <Slide4 frame={frame - SLIDE_DURATION * 3} fps={fps} />
       </Sequence>
 
-      {/* SLIDE 5: HIGH-CONVERTING CTA (16 - 20s) */}
+      {/* SLIDE 5: SECRET #4 - CHATGPT & PERPLEXITY AI SEARCH GEO (16 - 20s) */}
       <Sequence from={SLIDE_DURATION * 4} durationInFrames={SLIDE_DURATION}>
-        <Slide5 frame={frame - SLIDE_DURATION * 4} fps={fps} websiteUrl={websiteUrl} />
+        <Slide5 frame={frame - SLIDE_DURATION * 4} fps={fps} />
+      </Sequence>
+
+      {/* SLIDE 6: SECRET #5 & HIGH-CONVERTING CTA (20 - 24s) */}
+      <Sequence from={SLIDE_DURATION * 5} durationInFrames={SLIDE_DURATION}>
+        <Slide6 frame={frame - SLIDE_DURATION * 5} fps={fps} websiteUrl={websiteUrl} />
       </Sequence>
     </AbsoluteFill>
   );
@@ -96,7 +101,7 @@ const Slide1: React.FC<{ frame: number; fps: number }> = ({ frame, fps }) => {
         style={{
           position: 'absolute',
           inset: 0,
-          background: 'linear-gradient(to top, rgba(2, 6, 23, 0.98) 0%, rgba(2, 6, 23, 0.7) 50%, rgba(2, 6, 23, 0.5) 100%)',
+          background: 'linear-gradient(to top, rgba(2, 6, 23, 0.98) 0%, rgba(2, 6, 23, 0.65) 50%, rgba(2, 6, 23, 0.45) 100%)',
         }}
       />
 
@@ -148,10 +153,10 @@ const Slide1: React.FC<{ frame: number; fps: number }> = ({ frame, fps }) => {
 
           <h1
             style={{
-              fontSize: 46,
+              fontSize: 44,
               fontWeight: 900,
               lineHeight: 1.15,
-              margin: '0 0 20px 0',
+              margin: '0 0 18px 0',
               color: '#FFFFFF',
               textShadow: '0 4px 20px rgba(0,0,0,0.9)',
             }}
@@ -159,8 +164,8 @@ const Slide1: React.FC<{ frame: number; fps: number }> = ({ frame, fps }) => {
             Why Are <span style={{ color: '#F87171' }}>70% of Patients Leaving</span> Your Clinic Without Treatment? ❌🦷
           </h1>
 
-          <p style={{ fontSize: 20, color: '#CBD5E1', fontWeight: 600, lineHeight: 1.4, margin: 0 }}>
-            Hint: It’s NOT your clinical skills. Here is the 3-step growth framework top clinics use to fix it!
+          <p style={{ fontSize: 19, color: '#CBD5E1', fontWeight: 600, lineHeight: 1.4, margin: 0 }}>
+            Hint: It’s NOT your clinical skills. Here is the 5-step AI &amp; growth framework top clinics use to 3X revenue!
           </p>
         </div>
       </div>
@@ -224,7 +229,7 @@ const Slide2: React.FC<{ frame: number; fps: number }> = ({ frame, fps }) => {
         <div style={{ opacity: textOpacity }}>
           <h2
             style={{
-              fontSize: 44,
+              fontSize: 42,
               fontWeight: 900,
               color: '#FFFFFF',
               margin: '0 0 14px 0',
@@ -234,8 +239,8 @@ const Slide2: React.FC<{ frame: number; fps: number }> = ({ frame, fps }) => {
             Stop Losing <span style={{ color: '#10B981' }}>₹50,000+ Cases</span> at Checkout 💳
           </h2>
 
-          <p style={{ fontSize: 21, color: '#CBD5E1', fontWeight: 700, margin: '0 0 24px 0', lineHeight: 1.35 }}>
-            Patients say NO to Implants &amp; Aligners because they can't pay ₹50k upfront. Offer Point-of-Care Monthly EMIs!
+          <p style={{ fontSize: 20, color: '#CBD5E1', fontWeight: 700, margin: '0 0 22px 0', lineHeight: 1.35 }}>
+            Patients say NO to Implants &amp; Aligners because of upfront cost. Offer Point-of-Care Monthly EMIs!
           </p>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
@@ -305,17 +310,17 @@ const Slide3: React.FC<{ frame: number; fps: number }> = ({ frame, fps }) => {
         <div style={{ opacity: textOpacity }}>
           <h2
             style={{
-              fontSize: 44,
+              fontSize: 42,
               fontWeight: 900,
               color: '#FFFFFF',
               margin: '0 0 14px 0',
               lineHeight: 1.15,
             }}
           >
-            Unlock <span style={{ color: '#25D366' }}>₹2-5 Lakhs Hidden</span> in Old Patient Files 💬
+            Unlock <span style={{ color: '#25D366' }}>₹2-5 Lakhs Hidden</span> in Old Files 💬
           </h2>
 
-          <p style={{ fontSize: 21, color: '#CBD5E1', fontWeight: 700, margin: '0 0 24px 0', lineHeight: 1.35 }}>
+          <p style={{ fontSize: 20, color: '#CBD5E1', fontWeight: 700, margin: '0 0 22px 0', lineHeight: 1.35 }}>
             Automate WhatsApp 6-Month Recall &amp; Cleaning Reminders — Recover 30%+ Dormant Patients on Autopilot!
           </p>
 
@@ -330,7 +335,7 @@ const Slide3: React.FC<{ frame: number; fps: number }> = ({ frame, fps }) => {
   );
 };
 
-// --- SLIDE 4: SECRET #3 ---
+// --- SLIDE 4: SECRET #3 - GOOGLE AI OVERVIEWS & SEO ---
 const Slide4: React.FC<{ frame: number; fps: number }> = ({ frame, fps }) => {
   const badgeSpring = spring({ frame, fps, config: { damping: 12 } });
   const textOpacity = interpolate(frame, [10, 25], [0, 1], { extrapolateRight: 'clamp' });
@@ -343,7 +348,7 @@ const Slide4: React.FC<{ frame: number; fps: number }> = ({ frame, fps }) => {
           width: '100%',
           height: '100%',
           objectFit: 'cover',
-          filter: 'brightness(0.35) blur(4px)',
+          filter: 'brightness(0.3) blur(6px)',
         }}
       />
       <div
@@ -371,7 +376,7 @@ const Slide4: React.FC<{ frame: number; fps: number }> = ({ frame, fps }) => {
             display: 'inline-block',
             padding: '10px 20px',
             borderRadius: 999,
-            backgroundColor: '#F59E0B',
+            backgroundColor: '#4285F4',
             color: '#FFFFFF',
             fontSize: 16,
             fontWeight: 900,
@@ -385,24 +390,24 @@ const Slide4: React.FC<{ frame: number; fps: number }> = ({ frame, fps }) => {
         <div style={{ opacity: textOpacity }}>
           <h2
             style={{
-              fontSize: 44,
+              fontSize: 42,
               fontWeight: 900,
               color: '#FFFFFF',
               margin: '0 0 14px 0',
               lineHeight: 1.15,
             }}
           >
-            Dominate <span style={{ color: '#F59E0B' }}>Google Search in Your City</span> ⭐⭐⭐⭐⭐
+            Rank #1 on <span style={{ color: '#60A5FA' }}>Google AI Overviews</span> 🔍🤖
           </h2>
 
-          <p style={{ fontSize: 21, color: '#CBD5E1', fontWeight: 700, margin: '0 0 24px 0', lineHeight: 1.35 }}>
-            92% of new patients check Google reviews before booking. Automate post-checkout review requests!
+          <p style={{ fontSize: 20, color: '#CBD5E1', fontWeight: 700, margin: '0 0 22px 0', lineHeight: 1.35 }}>
+            Structure procedure cost guides (Implants, Braces) to trigger instant Google AI Search answers in your city!
           </p>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
-            <FeatureBadge icon="⭐" text="Auto-Trigger 5-Star Google Review Requests" color="#F59E0B" />
-            <FeatureBadge icon="🏆" text="Outrank Nearby Competitor Dental Clinics" color="#38BDF8" />
-            <FeatureBadge icon="🎯" text="Attract High-Paying Organic Patient Consults" color="#10B981" />
+            <FeatureBadge icon="🔍" text="Capture High-Intent Patients Searching Treatment Cost" color="#60A5FA" />
+            <FeatureBadge icon="⚡" text="Rank Above Paid Competitor Ad Listings" color="#F59E0B" />
+            <FeatureBadge icon="📈" text="10X Organic Patient Inquiries Every Month" color="#10B981" />
           </div>
         </div>
       </div>
@@ -410,8 +415,88 @@ const Slide4: React.FC<{ frame: number; fps: number }> = ({ frame, fps }) => {
   );
 };
 
-// --- SLIDE 5: HIGH-CONVERTING CTA ---
-const Slide5: React.FC<{ frame: number; fps: number; websiteUrl: string }> = ({
+// --- SLIDE 5: SECRET #4 - CHATGPT & PERPLEXITY GEO (AI SEARCH) ---
+const Slide5: React.FC<{ frame: number; fps: number }> = ({ frame, fps }) => {
+  const badgeSpring = spring({ frame, fps, config: { damping: 12 } });
+  const textOpacity = interpolate(frame, [10, 25], [0, 1], { extrapolateRight: 'clamp' });
+
+  return (
+    <AbsoluteFill>
+      <Img
+        src={staticFile('assets/reels/whatsapp_reactivation.jpg')}
+        style={{
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          filter: 'brightness(0.25) blur(6px)',
+        }}
+      />
+      <div
+        style={{
+          position: 'absolute',
+          inset: 0,
+          background: 'linear-gradient(to top, rgba(2, 6, 23, 0.98) 0%, rgba(2, 6, 23, 0.85) 100%)',
+        }}
+      />
+
+      <div
+        style={{
+          position: 'absolute',
+          inset: 0,
+          padding: INSTA_SAFE_PADDING,
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+          zIndex: 10,
+        }}
+      >
+        <div
+          style={{
+            transform: `scale(${badgeSpring})`,
+            display: 'inline-block',
+            padding: '10px 20px',
+            borderRadius: 999,
+            backgroundColor: '#A855F7',
+            color: '#FFFFFF',
+            fontSize: 16,
+            fontWeight: 900,
+            letterSpacing: 1.5,
+            width: 'fit-content',
+          }}
+        >
+          SECRET #4
+        </div>
+
+        <div style={{ opacity: textOpacity }}>
+          <h2
+            style={{
+              fontSize: 42,
+              fontWeight: 900,
+              color: '#FFFFFF',
+              margin: '0 0 14px 0',
+              lineHeight: 1.15,
+            }}
+          >
+            Get Recommended by <span style={{ color: '#C084FC' }}>ChatGPT &amp; Perplexity AI</span> 🤖✨
+          </h2>
+
+          <p style={{ fontSize: 20, color: '#CBD5E1', fontWeight: 700, margin: '0 0 22px 0', lineHeight: 1.35 }}>
+            Optimize Clinic Schema.org data so AI Search engines recommend YOUR clinic when patients ask "Best dentist near me"!
+          </p>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+            <FeatureBadge icon="🤖" text="Generative Engine Optimization (GEO) for Clinics" color="#C084FC" />
+            <FeatureBadge icon="📍" text="Top Recommendation for Local High-Ticket Dental Leads" color="#38BDF8" />
+            <FeatureBadge icon="🛡️" text="Build Unmatched Authority Over Competitor Practices" color="#10B981" />
+          </div>
+        </div>
+      </div>
+    </AbsoluteFill>
+  );
+};
+
+// --- SLIDE 6: SECRET #5 & HIGH-CONVERTING CTA ---
+const Slide6: React.FC<{ frame: number; fps: number; websiteUrl: string }> = ({
   frame,
   fps,
   websiteUrl,
@@ -453,7 +538,7 @@ const Slide5: React.FC<{ frame: number; fps: number; websiteUrl: string }> = ({
             borderRadius: 20,
             backgroundColor: 'rgba(255, 255, 255, 0.05)',
             border: '1px solid rgba(255, 255, 255, 0.15)',
-            marginBottom: 24,
+            marginBottom: 20,
           }}
         >
           <span style={{ fontSize: 24, fontWeight: 900, color: '#FFFFFF', letterSpacing: 2 }}>
@@ -463,39 +548,40 @@ const Slide5: React.FC<{ frame: number; fps: number; websiteUrl: string }> = ({
 
         <h2
           style={{
-            fontSize: 44,
+            fontSize: 42,
             fontWeight: 900,
             color: '#FFFFFF',
             lineHeight: 1.15,
-            margin: '0 0 16px 0',
+            margin: '0 0 14px 0',
           }}
         >
           Turn Patient Hesitation Into <span style={{ color: '#38BDF8' }}>Instant Appointments</span> 🚀
         </h2>
 
-        <p style={{ fontSize: 20, color: '#94A3B8', fontWeight: 600, margin: '0 0 32px 0', maxWidth: 540 }}>
-          Clinaza — Embedded Patient Financing &amp; Automated Practice Growth for Dentists.
+        <p style={{ fontSize: 19, color: '#94A3B8', fontWeight: 600, margin: '0 0 28px 0', maxWidth: 540 }}>
+          Clinaza — Embedded Patient Financing &amp; AI Practice Growth for Dentists.
         </p>
 
         <div
           style={{
             transform: `scale(${buttonPulse})`,
             display: 'inline-block',
-            padding: '20px 48px',
+            padding: '18px 44px',
             borderRadius: 22,
-            background: 'linear-gradient(135deg, #0867E8 0%, #0756C7 100%)',
+            background: 'gradient(135deg, #0867E8 0%, #0756C7 100%)',
+            backgroundColor: '#0867E8',
             color: '#FFFFFF',
             fontSize: 22,
             fontWeight: 900,
             boxShadow: '0 12px 40px rgba(8, 103, 232, 0.4)',
             letterSpacing: 1,
-            marginBottom: 24,
+            marginBottom: 20,
           }}
         >
           Partner With Clinaza Today →
         </div>
 
-        <div style={{ fontSize: 18, color: '#10B981', fontWeight: 800, letterSpacing: 1 }}>
+        <div style={{ fontSize: 17, color: '#10B981', fontWeight: 800, letterSpacing: 1 }}>
           ⚡ ₹0 SETUP FEE · 100% FREE FOR CLINICS · {websiteUrl}
         </div>
       </div>
@@ -513,15 +599,15 @@ const FeatureBadge: React.FC<{ icon: string; text: string; color: string }> = ({
       display: 'flex',
       alignItems: 'center',
       gap: 14,
-      padding: '14px 18px',
+      padding: '12px 16px',
       borderRadius: 16,
       backgroundColor: 'rgba(255, 255, 255, 0.06)',
       border: '1px solid rgba(255, 255, 255, 0.1)',
       backdropFilter: 'blur(10px)',
     }}
   >
-    <span style={{ fontSize: 24 }}>{icon}</span>
-    <span style={{ fontSize: 18, fontWeight: 800, color: '#F8FAFC', textAlign: 'left' }}>
+    <span style={{ fontSize: 22 }}>{icon}</span>
+    <span style={{ fontSize: 17, fontWeight: 800, color: '#F8FAFC', textAlign: 'left' }}>
       {text}
     </span>
   </div>

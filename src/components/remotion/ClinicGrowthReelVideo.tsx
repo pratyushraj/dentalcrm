@@ -20,8 +20,12 @@ export const clinicGrowthReelDefaultProps: ClinicGrowthReelProps = {
   websiteUrl: 'clinaza.in',
 };
 
-// ── INSTAGRAM SAFE ZONE (1080 x 1920) ──
-const INSTA_SAFE_PADDING = '220px 100px 320px 80px';
+// ── INSTAGRAM REEL SAFE ZONE (1080 x 1920) ──
+// Top 140px: clears status bar & search icon
+// Right 60px: clears heart/comment icons edge
+// Bottom 240px: clears account caption & audio track
+// Left 60px: symmetrical margin
+const INSTA_SAFE_PADDING = '140px 60px 240px 60px';
 
 // ── HIGH-END MOTION GRAPHICS UTILITIES ──
 
@@ -31,7 +35,7 @@ const FilmGrainOverlay: React.FC = () => (
     style={{
       position: 'absolute',
       inset: 0,
-      opacity: 0.045,
+      opacity: 0.04,
       pointerEvents: 'none',
       zIndex: 50,
       backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
@@ -57,19 +61,19 @@ const AmbientMotionBackground: React.FC<{ primaryColor: string; secondaryColor: 
         style={{
           position: 'absolute',
           inset: 0,
-          opacity: 0.12,
+          opacity: 0.1,
           backgroundImage:
             'linear-gradient(to right, rgba(255,255,255,0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.08) 1px, transparent 1px)',
-          backgroundSize: '60px 60px',
+          backgroundSize: '50px 50px',
         }}
       />
       <div
         style={{
           position: 'absolute',
-          top: '15%',
+          top: '20%',
           left: '10%',
-          width: 700,
-          height: 700,
+          width: 750,
+          height: 750,
           borderRadius: '50%',
           background: `radial-gradient(circle, ${primaryColor} 0%, transparent 65%)`,
           opacity: 0.35,
@@ -80,10 +84,10 @@ const AmbientMotionBackground: React.FC<{ primaryColor: string; secondaryColor: 
       <div
         style={{
           position: 'absolute',
-          bottom: '15%',
+          bottom: '20%',
           right: '5%',
-          width: 650,
-          height: 650,
+          width: 700,
+          height: 700,
           borderRadius: '50%',
           background: `radial-gradient(circle, ${secondaryColor} 0%, transparent 65%)`,
           opacity: 0.28,
@@ -105,19 +109,19 @@ const KineticTitle: React.FC<{
   return (
     <h1
       style={{
-        fontSize: 48,
+        fontSize: 46,
         fontWeight: 900,
-        lineHeight: 1.15,
-        margin: '0 0 20px 0',
+        lineHeight: 1.18,
+        margin: '0 0 16px 0',
         color: '#FFFFFF',
         display: 'flex',
         flexWrap: 'wrap',
-        gap: '12px 14px',
-        textShadow: '0 8px 30px rgba(0,0,0,0.9)',
+        gap: '10px 14px',
+        textShadow: '0 6px 25px rgba(0,0,0,0.9)',
       }}
     >
       {words.map((w, idx) => {
-        const wordDelay = delay + idx * 4;
+        const wordDelay = delay + idx * 3;
         const wordSpring = spring({
           frame: frame - wordDelay,
           fps,
@@ -133,7 +137,7 @@ const KineticTitle: React.FC<{
             key={idx}
             style={{
               display: 'inline-block',
-              transform: `scale(${wordSpring}) translateY(${interpolate(wordSpring, [0, 1], [20, 0])}px)`,
+              transform: `scale(${wordSpring}) translateY(${interpolate(wordSpring, [0, 1], [15, 0])}px)`,
               opacity: wordOpacity,
               color: w.highlight ? (w.color || '#FACC15') : '#FFFFFF',
               background: w.highlight ? 'rgba(250, 204, 21, 0.15)' : 'transparent',
@@ -205,7 +209,7 @@ export const ClinicGrowthReelComposition: React.FC<ClinicGrowthReelProps> = ({
 };
 
 // ══════════════════════════════════════════════════════════════════
-// SCENE 1: VIRAL HOOK (ANIMATED DROP-OFF WARNING + DENTIST CONSULTATION)
+// SCENE 1: VIRAL HOOK (DENTIST + TIGHT VERTICAL COMPOSITION)
 // ══════════════════════════════════════════════════════════════════
 const Slide1Hook: React.FC<{ frame: number; fps: number }> = ({ frame, fps }) => {
   const badgeSpring = spring({ frame, fps, config: { damping: 10 } });
@@ -237,12 +241,13 @@ const Slide1Hook: React.FC<{ frame: number; fps: number }> = ({ frame, fps }) =>
           height: '100%',
           objectFit: 'cover',
           transform: `scale(${doctorScale})`,
-          filter: 'brightness(0.38) contrast(1.1)',
+          filter: 'brightness(0.35) contrast(1.1)',
         }}
       />
 
       <AmbientMotionBackground primaryColor="#DC2626" secondaryColor="#4F46E5" frame={frame} />
 
+      {/* Main Content: Centered, balanced, zero empty dead space */}
       <div
         style={{
           position: 'absolute',
@@ -250,27 +255,25 @@ const Slide1Hook: React.FC<{ frame: number; fps: number }> = ({ frame, fps }) =>
           padding: INSTA_SAFE_PADDING,
           display: 'flex',
           flexDirection: 'column',
-          justifyContent: 'space-between',
+          justifyContent: 'center',
+          gap: 24,
           zIndex: 10,
         }}
       >
         {/* Top Doctor Profile Tag & Revenue Crisis Badge */}
-        <div style={{ transform: `scale(${badgeSpring})`, transformOrigin: 'top left', display: 'flex', flexDirection: 'column', gap: 10 }}>
+        <div style={{ transform: `scale(${badgeSpring})`, display: 'flex', flexWrap: 'wrap', gap: 12 }}>
           <div
             style={{
               display: 'inline-flex',
               alignItems: 'center',
-              gap: 10,
+              gap: 8,
               padding: '8px 18px',
               borderRadius: 999,
-              backgroundColor: 'rgba(15, 23, 42, 0.85)',
-              border: '1.5px solid rgba(255, 255, 255, 0.2)',
-              width: 'fit-content',
+              backgroundColor: 'rgba(15, 23, 42, 0.9)',
+              border: '1.5px solid rgba(255, 255, 255, 0.25)',
             }}
           >
-            <div style={{ width: 26, height: 26, borderRadius: '50%', backgroundColor: '#0284C7', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 14 }}>
-              👨‍⚕️
-            </div>
+            <span style={{ fontSize: 16 }}>👨‍⚕️</span>
             <span style={{ fontSize: 14, fontWeight: 800, color: '#F8FAFC' }}>
               DR. ARYAN PARMAR · DENTAL SURGEON
             </span>
@@ -280,44 +283,42 @@ const Slide1Hook: React.FC<{ frame: number; fps: number }> = ({ frame, fps }) =>
             style={{
               display: 'inline-flex',
               alignItems: 'center',
-              gap: 10,
-              padding: '10px 22px',
+              gap: 8,
+              padding: '8px 18px',
               borderRadius: 999,
               backgroundColor: 'rgba(239, 68, 68, 0.25)',
               border: '2px solid #EF4444',
               color: '#FECACA',
-              fontSize: 16,
+              fontSize: 14,
               fontWeight: 900,
-              letterSpacing: 1.5,
-              width: 'fit-content',
-              boxShadow: '0 0 30px rgba(239, 68, 68, 0.5)',
+              letterSpacing: 1.2,
+              boxShadow: '0 0 25px rgba(239, 68, 68, 0.4)',
             }}
           >
-            <span style={{ fontSize: 20 }}>🚨</span> CLINIC REVENUE CRISIS
+            <span>🚨</span> CLINIC REVENUE CRISIS
           </div>
         </div>
 
         {/* Dynamic Animated Meter UI Card */}
         <div
           style={{
-            backgroundColor: 'rgba(15, 23, 42, 0.88)',
-            border: '1.5px solid rgba(239, 68, 68, 0.4)',
+            backgroundColor: 'rgba(15, 23, 42, 0.92)',
+            border: '2px solid rgba(239, 68, 68, 0.4)',
             borderRadius: 28,
-            padding: 24,
+            padding: 28,
             backdropFilter: 'blur(20px)',
-            boxShadow: '0 20px 50px rgba(0,0,0,0.8)',
-            marginBottom: 20,
+            boxShadow: '0 25px 60px rgba(0,0,0,0.85)',
           }}
         >
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
-            <span style={{ fontSize: 16, fontWeight: 800, color: '#94A3B8' }}>CASE ACCEPTANCE RATE</span>
-            <span style={{ fontSize: 28, fontWeight: 900, color: '#EF4444', transform: `scale(${pulseScale})` }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 14 }}>
+            <span style={{ fontSize: 17, fontWeight: 800, color: '#94A3B8' }}>CASE ACCEPTANCE RATE</span>
+            <span style={{ fontSize: 32, fontWeight: 900, color: '#EF4444', transform: `scale(${pulseScale})` }}>
               {Math.round(meterDrop)}%
             </span>
           </div>
 
           {/* Progress Bar with plummeting animation */}
-          <div style={{ height: 16, width: '100%', backgroundColor: 'rgba(255,255,255,0.1)', borderRadius: 999, overflow: 'hidden' }}>
+          <div style={{ height: 18, width: '100%', backgroundColor: 'rgba(255,255,255,0.12)', borderRadius: 999, overflow: 'hidden' }}>
             <div
               style={{
                 height: '100%',
@@ -329,16 +330,24 @@ const Slide1Hook: React.FC<{ frame: number; fps: number }> = ({ frame, fps }) =>
             />
           </div>
 
-          <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 10, fontSize: 13, color: '#EF4444', fontWeight: 800 }}>
-            <span>📉 Normal: 30%</span>
+          <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 12, fontSize: 14, color: '#EF4444', fontWeight: 800 }}>
+            <span>📉 Average: 30%</span>
             <span>🏆 Top Clinics: 85%+</span>
           </div>
         </div>
 
         {/* Kinetic Title & Subtitle */}
-        <div>
+        <div
+          style={{
+            backgroundColor: 'rgba(15, 23, 42, 0.85)',
+            border: '1px solid rgba(255,255,255,0.12)',
+            borderRadius: 28,
+            padding: 26,
+            backdropFilter: 'blur(16px)',
+          }}
+        >
           <KineticTitle words={hookWords} frame={frame} fps={fps} delay={5} />
-          <p style={{ fontSize: 22, color: '#CBD5E1', fontWeight: 600, lineHeight: 1.4, margin: 0 }}>
+          <p style={{ fontSize: 21, color: '#E2E8F0', fontWeight: 600, lineHeight: 1.45, margin: 0 }}>
             It’s NOT your clinical skills. Here is the 5-step secret playbook top clinics use to 3X case acceptance!
           </p>
         </div>
@@ -348,7 +357,7 @@ const Slide1Hook: React.FC<{ frame: number; fps: number }> = ({ frame, fps }) =>
 };
 
 // ══════════════════════════════════════════════════════════════════
-// SCENE 2: SECRET #1 - EMI COST SLASHER (DENTIST + PATIENT TABLET)
+// SCENE 2: SECRET #1 - EMI COST SLASHER
 // ══════════════════════════════════════════════════════════════════
 const Slide2EmiCost: React.FC<{ frame: number; fps: number }> = ({ frame, fps }) => {
   const cardSpring = spring({ frame, fps, config: { damping: 11 } });
@@ -368,7 +377,7 @@ const Slide2EmiCost: React.FC<{ frame: number; fps: number }> = ({ frame, fps })
           height: '100%',
           objectFit: 'cover',
           transform: `scale(${bgScale})`,
-          filter: 'brightness(0.28) contrast(1.15)',
+          filter: 'brightness(0.3) contrast(1.15)',
         }}
       />
 
@@ -381,19 +390,20 @@ const Slide2EmiCost: React.FC<{ frame: number; fps: number }> = ({ frame, fps })
           padding: INSTA_SAFE_PADDING,
           display: 'flex',
           flexDirection: 'column',
-          justifyContent: 'space-between',
+          justifyContent: 'center',
+          gap: 24,
           zIndex: 10,
         }}
       >
         {/* Secret Badge */}
-        <div style={{ transform: `scale(${cardSpring})`, transformOrigin: 'top left' }}>
+        <div>
           <span
             style={{
               padding: '10px 22px',
               borderRadius: 999,
               backgroundColor: '#059669',
               color: '#FFFFFF',
-              fontSize: 16,
+              fontSize: 15,
               fontWeight: 900,
               letterSpacing: 1.5,
               boxShadow: '0 6px 25px rgba(5, 150, 105, 0.4)',
@@ -406,26 +416,26 @@ const Slide2EmiCost: React.FC<{ frame: number; fps: number }> = ({ frame, fps })
         {/* Interactive Payment Transformation Card */}
         <div
           style={{
-            backgroundColor: 'rgba(15, 23, 42, 0.92)',
+            backgroundColor: 'rgba(15, 23, 42, 0.94)',
             border: '2px solid rgba(16, 185, 129, 0.4)',
             borderRadius: 32,
-            padding: 30,
+            padding: 32,
             boxShadow: '0 25px 60px rgba(0,0,0,0.9)',
             transform: `scale(${cardSpring})`,
             backdropFilter: 'blur(20px)',
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 12 }}>
-            <span style={{ fontSize: 20 }}>🦷</span>
-            <span style={{ fontSize: 16, fontWeight: 800, color: '#94A3B8' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 14 }}>
+            <span style={{ fontSize: 24 }}>🦷</span>
+            <span style={{ fontSize: 17, fontWeight: 800, color: '#94A3B8' }}>
               IMPLANTS &amp; INVISIBLE ALIGNERS
             </span>
           </div>
 
           {/* Slashed Upfront Price */}
-          <div style={{ position: 'relative', display: 'inline-block', marginBottom: 18 }}>
-            <div style={{ fontSize: 38, fontWeight: 900, color: '#64748B' }}>
-              ₹65,000 <span style={{ fontSize: 20 }}>Upfront</span>
+          <div style={{ position: 'relative', display: 'inline-block', marginBottom: 20 }}>
+            <div style={{ fontSize: 42, fontWeight: 900, color: '#64748B' }}>
+              ₹65,000 <span style={{ fontSize: 22 }}>Upfront</span>
             </div>
             {/* Red Strike-Through Bar */}
             <div
@@ -433,12 +443,12 @@ const Slide2EmiCost: React.FC<{ frame: number; fps: number }> = ({ frame, fps })
                 position: 'absolute',
                 top: '50%',
                 left: -6,
-                height: 5,
+                height: 6,
                 width: `${slashProgress}%`,
                 backgroundColor: '#EF4444',
                 transform: 'rotate(-6deg)',
                 borderRadius: 999,
-                boxShadow: '0 0 12px rgba(239,68,68,0.8)',
+                boxShadow: '0 0 15px rgba(239,68,68,0.9)',
               }}
             />
           </div>
@@ -446,38 +456,46 @@ const Slide2EmiCost: React.FC<{ frame: number; fps: number }> = ({ frame, fps })
           {/* Glowing Green EMI Transformation Box */}
           <div
             style={{
-              backgroundColor: 'rgba(16, 185, 129, 0.18)',
+              backgroundColor: 'rgba(16, 185, 129, 0.2)',
               border: '2px solid #10B981',
               borderRadius: 24,
-              padding: '18px 22px',
+              padding: '22px 24px',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
               transform: `scale(${emiReveal})`,
               opacity: interpolate(frame, [35, 45], [0, 1], { extrapolateRight: 'clamp' }),
-              boxShadow: '0 10px 40px rgba(16, 185, 129, 0.4)',
+              boxShadow: '0 10px 40px rgba(16, 185, 129, 0.45)',
             }}
           >
             <div>
-              <div style={{ fontSize: 13, fontWeight: 900, color: '#6EE7B7', letterSpacing: 1 }}>
+              <div style={{ fontSize: 14, fontWeight: 900, color: '#6EE7B7', letterSpacing: 1 }}>
                 PATIENT PAYS JUST
               </div>
-              <div style={{ fontSize: 38, fontWeight: 900, color: '#FFFFFF' }}>
-                ₹2,650<span style={{ fontSize: 18, color: '#A7F3D0' }}>/mo</span>
+              <div style={{ fontSize: 44, fontWeight: 900, color: '#FFFFFF' }}>
+                ₹2,650<span style={{ fontSize: 20, color: '#A7F3D0' }}>/mo</span>
               </div>
             </div>
-            <div style={{ backgroundColor: '#10B981', color: '#042F2E', padding: '10px 18px', borderRadius: 999, fontWeight: 900, fontSize: 15 }}>
+            <div style={{ backgroundColor: '#10B981', color: '#042F2E', padding: '12px 22px', borderRadius: 999, fontWeight: 900, fontSize: 16 }}>
               0% EMI ✅
             </div>
           </div>
         </div>
 
-        {/* Bottom Headline */}
-        <div>
-          <h2 style={{ fontSize: 40, fontWeight: 900, color: '#FFFFFF', margin: '0 0 14px 0', lineHeight: 1.15 }}>
+        {/* Content Box */}
+        <div
+          style={{
+            backgroundColor: 'rgba(15, 23, 42, 0.85)',
+            border: '1px solid rgba(255,255,255,0.12)',
+            borderRadius: 28,
+            padding: 26,
+            backdropFilter: 'blur(16px)',
+          }}
+        >
+          <h2 style={{ fontSize: 42, fontWeight: 900, color: '#FFFFFF', margin: '0 0 12px 0', lineHeight: 1.15 }}>
             Turn 80% Cost Hesitations into <span style={{ color: '#34D399' }}>Instant "YES"</span> 💳
           </h2>
-          <p style={{ fontSize: 20, color: '#CBD5E1', fontWeight: 600, margin: 0, lineHeight: 1.35 }}>
+          <p style={{ fontSize: 20, color: '#CBD5E1', fontWeight: 600, margin: 0, lineHeight: 1.4 }}>
             Clinaza lets patients split payments into easy monthly EMIs while your clinic gets paid upfront!
           </p>
         </div>
@@ -504,7 +522,8 @@ const Slide3WhatsAppSim: React.FC<{ frame: number; fps: number }> = ({ frame, fp
           padding: INSTA_SAFE_PADDING,
           display: 'flex',
           flexDirection: 'column',
-          justifyContent: 'space-between',
+          justifyContent: 'center',
+          gap: 24,
           zIndex: 10,
         }}
       >
@@ -516,7 +535,7 @@ const Slide3WhatsAppSim: React.FC<{ frame: number; fps: number }> = ({ frame, fp
               borderRadius: 999,
               backgroundColor: '#22C55E',
               color: '#FFFFFF',
-              fontSize: 16,
+              fontSize: 15,
               fontWeight: 900,
               letterSpacing: 1.5,
               boxShadow: '0 6px 25px rgba(34, 197, 94, 0.4)',
@@ -530,10 +549,10 @@ const Slide3WhatsAppSim: React.FC<{ frame: number; fps: number }> = ({ frame, fp
         <div
           style={{
             backgroundColor: '#0B141A',
-            border: '1.5px solid rgba(255,255,255,0.15)',
+            border: '2px solid rgba(34, 197, 94, 0.3)',
             borderRadius: 32,
-            padding: '24px 20px',
-            boxShadow: '0 25px 60px rgba(0,0,0,0.8)',
+            padding: '26px 24px',
+            boxShadow: '0 25px 60px rgba(0,0,0,0.85)',
             display: 'flex',
             flexDirection: 'column',
             gap: 16,
@@ -541,11 +560,11 @@ const Slide3WhatsAppSim: React.FC<{ frame: number; fps: number }> = ({ frame, fp
         >
           {/* WhatsApp Header */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 14, borderBottom: '1px solid #1F2C34', paddingBottom: 14 }}>
-            <div style={{ width: 44, height: 44, borderRadius: '50%', backgroundColor: '#22C55E', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 22 }}>
+            <div style={{ width: 46, height: 46, borderRadius: '50%', backgroundColor: '#22C55E', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 24 }}>
               🦷
             </div>
             <div>
-              <div style={{ fontSize: 18, fontWeight: 800, color: '#E9EDEF' }}>Smile Craft Dental Clinic</div>
+              <div style={{ fontSize: 19, fontWeight: 800, color: '#E9EDEF' }}>Smile Craft Dental Clinic</div>
               <div style={{ fontSize: 13, color: '#25D366', fontWeight: 600 }}>● Online (Automated Bot)</div>
             </div>
           </div>
@@ -556,18 +575,18 @@ const Slide3WhatsAppSim: React.FC<{ frame: number; fps: number }> = ({ frame, fp
               alignSelf: 'flex-start',
               backgroundColor: '#202C33',
               color: '#E9EDEF',
-              padding: '14px 18px',
+              padding: '16px 20px',
               borderRadius: '20px 20px 20px 4px',
-              maxWidth: '85%',
+              maxWidth: '88%',
               transform: `scale(${chatSpring1}) translateY(${interpolate(chatSpring1, [0, 1], [30, 0])}px)`,
               opacity: interpolate(frame, [8, 18], [0, 1], { extrapolateRight: 'clamp' }),
               boxShadow: '0 4px 15px rgba(0,0,0,0.3)',
             }}
           >
-            <div style={{ fontSize: 16, fontWeight: 600, lineHeight: 1.4 }}>
+            <div style={{ fontSize: 17, fontWeight: 600, lineHeight: 1.4 }}>
               Hi Rahul! 👋 It's been 6 months since your cleaning. We reserved a slot for your free dental checkup this Saturday at 4 PM!
             </div>
-            <div style={{ fontSize: 11, color: '#8696A0', textAlign: 'right', marginTop: 4 }}>10:14 AM</div>
+            <div style={{ fontSize: 12, color: '#8696A0', textAlign: 'right', marginTop: 6 }}>10:14 AM</div>
           </div>
 
           {/* Incoming Message: Patient Booking Confirmation */}
@@ -576,29 +595,37 @@ const Slide3WhatsAppSim: React.FC<{ frame: number; fps: number }> = ({ frame, fp
               alignSelf: 'flex-end',
               backgroundColor: '#005C4B',
               color: '#E9EDEF',
-              padding: '14px 18px',
+              padding: '16px 20px',
               borderRadius: '20px 20px 4px 20px',
-              maxWidth: '80%',
+              maxWidth: '84%',
               transform: `scale(${chatSpring2}) translateY(${interpolate(chatSpring2, [0, 1], [30, 0])}px)`,
               opacity: interpolate(frame, [40, 52], [0, 1], { extrapolateRight: 'clamp' }),
               boxShadow: '0 4px 15px rgba(0,0,0,0.3)',
             }}
           >
-            <div style={{ fontSize: 16, fontWeight: 700, lineHeight: 1.4 }}>
+            <div style={{ fontSize: 17, fontWeight: 700, lineHeight: 1.4 }}>
               Yes please! Confirm Saturday 4 PM. Thanks for reminding! 🙏
             </div>
-            <div style={{ fontSize: 11, color: '#8696A0', textAlign: 'right', marginTop: 4 }}>
+            <div style={{ fontSize: 12, color: '#8696A0', textAlign: 'right', marginTop: 6 }}>
               10:16 AM <span style={{ color: '#53BDEB' }}>✓✓</span>
             </div>
           </div>
         </div>
 
-        {/* Bottom Headline */}
-        <div>
-          <h2 style={{ fontSize: 40, fontWeight: 900, color: '#FFFFFF', margin: '0 0 14px 0', lineHeight: 1.15 }}>
+        {/* Content Box */}
+        <div
+          style={{
+            backgroundColor: 'rgba(15, 23, 42, 0.85)',
+            border: '1px solid rgba(255,255,255,0.12)',
+            borderRadius: 28,
+            padding: 26,
+            backdropFilter: 'blur(16px)',
+          }}
+        >
+          <h2 style={{ fontSize: 42, fontWeight: 900, color: '#FFFFFF', margin: '0 0 12px 0', lineHeight: 1.15 }}>
             Recover <span style={{ color: '#4ADE80' }}>₹2-5 Lakhs</span> in Dormant Patients 💬
           </h2>
-          <p style={{ fontSize: 20, color: '#CBD5E1', fontWeight: 600, margin: 0, lineHeight: 1.35 }}>
+          <p style={{ fontSize: 20, color: '#CBD5E1', fontWeight: 600, margin: 0, lineHeight: 1.4 }}>
             Automate 6-month hygiene recall sequences on WhatsApp and fill your empty chair slots on autopilot!
           </p>
         </div>
@@ -612,7 +639,6 @@ const Slide3WhatsAppSim: React.FC<{ frame: number; fps: number }> = ({ frame, fp
 // ══════════════════════════════════════════════════════════════════
 const Slide4GoogleAiMockup: React.FC<{ frame: number; fps: number }> = ({ frame, fps }) => {
   const cardSpring = spring({ frame, fps, config: { damping: 12 } });
-  const shimmer = interpolate(frame, [0, 60], [-100, 200]);
 
   return (
     <AbsoluteFill>
@@ -625,7 +651,8 @@ const Slide4GoogleAiMockup: React.FC<{ frame: number; fps: number }> = ({ frame,
           padding: INSTA_SAFE_PADDING,
           display: 'flex',
           flexDirection: 'column',
-          justifyContent: 'space-between',
+          justifyContent: 'center',
+          gap: 24,
           zIndex: 10,
         }}
       >
@@ -637,7 +664,7 @@ const Slide4GoogleAiMockup: React.FC<{ frame: number; fps: number }> = ({ frame,
               borderRadius: 999,
               backgroundColor: '#2563EB',
               color: '#FFFFFF',
-              fontSize: 16,
+              fontSize: 15,
               fontWeight: 900,
               letterSpacing: 1.5,
               boxShadow: '0 6px 25px rgba(37, 99, 235, 0.4)',
@@ -652,9 +679,9 @@ const Slide4GoogleAiMockup: React.FC<{ frame: number; fps: number }> = ({ frame,
           style={{
             backgroundColor: 'rgba(15, 23, 42, 0.95)',
             border: '2px solid rgba(59, 130, 246, 0.5)',
-            borderRadius: 30,
-            padding: 26,
-            boxShadow: '0 25px 60px rgba(0,0,0,0.8)',
+            borderRadius: 32,
+            padding: 30,
+            boxShadow: '0 25px 60px rgba(0,0,0,0.85)',
             transform: `scale(${cardSpring})`,
           }}
         >
@@ -662,24 +689,24 @@ const Slide4GoogleAiMockup: React.FC<{ frame: number; fps: number }> = ({ frame,
           <div
             style={{
               backgroundColor: 'rgba(255,255,255,0.08)',
-              borderRadius: 16,
-              padding: '12px 18px',
+              borderRadius: 18,
+              padding: '14px 20px',
               display: 'flex',
               alignItems: 'center',
               gap: 12,
-              marginBottom: 18,
+              marginBottom: 20,
             }}
           >
-            <span style={{ fontSize: 18 }}>🔍</span>
-            <span style={{ fontSize: 15, fontWeight: 700, color: '#93C5FD' }}>
+            <span style={{ fontSize: 20 }}>🔍</span>
+            <span style={{ fontSize: 16, fontWeight: 700, color: '#93C5FD' }}>
               "Cost of dental implants with EMI in Delhi"
             </span>
           </div>
 
           {/* AI Overview Header */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 12 }}>
-            <span style={{ fontSize: 20 }}>✨</span>
-            <span style={{ fontSize: 15, fontWeight: 900, color: '#60A5FA', letterSpacing: 1 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 14 }}>
+            <span style={{ fontSize: 22 }}>✨</span>
+            <span style={{ fontSize: 16, fontWeight: 900, color: '#60A5FA', letterSpacing: 1 }}>
               AI OVERVIEW (GOOGLE SEARCH)
             </span>
           </div>
@@ -687,28 +714,36 @@ const Slide4GoogleAiMockup: React.FC<{ frame: number; fps: number }> = ({ frame,
           {/* AI Top Result Listing */}
           <div
             style={{
-              backgroundColor: 'rgba(37, 99, 235, 0.15)',
+              backgroundColor: 'rgba(37, 99, 235, 0.18)',
               border: '1.5px solid #3B82F6',
-              borderRadius: 20,
-              padding: '16px 20px',
+              borderRadius: 22,
+              padding: '18px 22px',
             }}
           >
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6 }}>
-              <strong style={{ fontSize: 18, color: '#FFFFFF' }}>#1 Clinaza Partner Clinic</strong>
-              <span style={{ fontSize: 14, color: '#FACC15', fontWeight: 900 }}>⭐ 4.9 (420+ Reviews)</span>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
+              <strong style={{ fontSize: 19, color: '#FFFFFF' }}>#1 Clinaza Partner Clinic</strong>
+              <span style={{ fontSize: 15, color: '#FACC15', fontWeight: 900 }}>⭐ 4.9 (420+ Reviews)</span>
             </div>
-            <p style={{ fontSize: 14, color: '#BFDBFE', margin: 0, lineHeight: 1.4 }}>
+            <p style={{ fontSize: 15, color: '#BFDBFE', margin: 0, lineHeight: 1.45 }}>
               Top recommended practice. Transparent pricing, zero-cost EMI from ₹2,500/mo &amp; same-day digital consults.
             </p>
           </div>
         </div>
 
-        {/* Bottom Headline */}
-        <div>
-          <h2 style={{ fontSize: 40, fontWeight: 900, color: '#FFFFFF', margin: '0 0 14px 0', lineHeight: 1.15 }}>
+        {/* Content Box */}
+        <div
+          style={{
+            backgroundColor: 'rgba(15, 23, 42, 0.85)',
+            border: '1px solid rgba(255,255,255,0.12)',
+            borderRadius: 28,
+            padding: 26,
+            backdropFilter: 'blur(16px)',
+          }}
+        >
+          <h2 style={{ fontSize: 42, fontWeight: 900, color: '#FFFFFF', margin: '0 0 12px 0', lineHeight: 1.15 }}>
             Dominate <span style={{ color: '#60A5FA' }}>Google AI Overviews</span> 🤖
           </h2>
-          <p style={{ fontSize: 20, color: '#CBD5E1', fontWeight: 600, margin: 0, lineHeight: 1.35 }}>
+          <p style={{ fontSize: 20, color: '#CBD5E1', fontWeight: 600, margin: 0, lineHeight: 1.4 }}>
             Publish procedure pricing guides with medical schema to rank above paid competitor Google ads for free!
           </p>
         </div>
@@ -734,7 +769,8 @@ const Slide5ChatGptGeo: React.FC<{ frame: number; fps: number }> = ({ frame, fps
           padding: INSTA_SAFE_PADDING,
           display: 'flex',
           flexDirection: 'column',
-          justifyContent: 'space-between',
+          justifyContent: 'center',
+          gap: 24,
           zIndex: 10,
         }}
       >
@@ -746,7 +782,7 @@ const Slide5ChatGptGeo: React.FC<{ frame: number; fps: number }> = ({ frame, fps
               borderRadius: 999,
               backgroundColor: '#9333EA',
               color: '#FFFFFF',
-              fontSize: 16,
+              fontSize: 15,
               fontWeight: 900,
               letterSpacing: 1.5,
               boxShadow: '0 6px 25px rgba(147, 51, 234, 0.4)',
@@ -761,28 +797,28 @@ const Slide5ChatGptGeo: React.FC<{ frame: number; fps: number }> = ({ frame, fps
           style={{
             backgroundColor: 'rgba(15, 23, 42, 0.95)',
             border: '2px solid rgba(168, 85, 247, 0.5)',
-            borderRadius: 30,
-            padding: 26,
-            boxShadow: '0 25px 60px rgba(0,0,0,0.8)',
+            borderRadius: 32,
+            padding: 30,
+            boxShadow: '0 25px 60px rgba(0,0,0,0.85)',
             transform: `scale(${cardSpring})`,
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16 }}>
-            <div style={{ width: 38, height: 38, borderRadius: 10, backgroundColor: '#10A37F', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 20 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 18 }}>
+            <div style={{ width: 42, height: 42, borderRadius: 12, backgroundColor: '#10A37F', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 22 }}>
               🤖
             </div>
             <div>
-              <div style={{ fontSize: 16, fontWeight: 800, color: '#FFFFFF' }}>ChatGPT &amp; Perplexity AI</div>
-              <div style={{ fontSize: 12, color: '#A855F7', fontWeight: 700 }}>Prompt: "Find best dental surgeon near me"</div>
+              <div style={{ fontSize: 18, fontWeight: 800, color: '#FFFFFF' }}>ChatGPT &amp; Perplexity AI</div>
+              <div style={{ fontSize: 13, color: '#C084FC', fontWeight: 700 }}>Prompt: "Find best dental surgeon near me"</div>
             </div>
           </div>
 
           <div
             style={{
               backgroundColor: 'rgba(255,255,255,0.06)',
-              borderRadius: 20,
-              padding: '16px 18px',
-              fontSize: 15,
+              borderRadius: 22,
+              padding: '18px 20px',
+              fontSize: 16,
               color: '#F3E8FF',
               lineHeight: 1.5,
               borderLeft: '4px solid #A855F7',
@@ -792,12 +828,20 @@ const Slide5ChatGptGeo: React.FC<{ frame: number; fps: number }> = ({ frame, fps
           </div>
         </div>
 
-        {/* Bottom Headline */}
-        <div>
-          <h2 style={{ fontSize: 40, fontWeight: 900, color: '#FFFFFF', margin: '0 0 14px 0', lineHeight: 1.15 }}>
+        {/* Content Box */}
+        <div
+          style={{
+            backgroundColor: 'rgba(15, 23, 42, 0.85)',
+            border: '1px solid rgba(255,255,255,0.12)',
+            borderRadius: 28,
+            padding: 26,
+            backdropFilter: 'blur(16px)',
+          }}
+        >
+          <h2 style={{ fontSize: 42, fontWeight: 900, color: '#FFFFFF', margin: '0 0 12px 0', lineHeight: 1.15 }}>
             Get Recommended by <span style={{ color: '#C084FC' }}>AI Search Engines</span> 🧠
           </h2>
-          <p style={{ fontSize: 20, color: '#CBD5E1', fontWeight: 600, margin: 0, lineHeight: 1.35 }}>
+          <p style={{ fontSize: 20, color: '#CBD5E1', fontWeight: 600, margin: 0, lineHeight: 1.4 }}>
             Generative Engine Optimization (GEO) ensures your clinic is the first name patients hear from AI!
           </p>
         </div>
@@ -831,7 +875,7 @@ const Slide6FinalCTA: React.FC<{ frame: number; fps: number; websiteUrl: string 
     >
       <AmbientMotionBackground primaryColor="#0867E8" secondaryColor="#38BDF8" frame={frame} />
 
-      <div style={{ transform: `scale(${logoScale})`, zIndex: 10 }}>
+      <div style={{ transform: `scale(${logoScale})`, zIndex: 10, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 20 }}>
         {/* Clinaza Pill */}
         <div
           style={{
@@ -842,7 +886,6 @@ const Slide6FinalCTA: React.FC<{ frame: number; fps: number; websiteUrl: string 
             borderRadius: 999,
             backgroundColor: 'rgba(255, 255, 255, 0.08)',
             border: '1.5px solid rgba(255, 255, 255, 0.2)',
-            marginBottom: 24,
             boxShadow: '0 10px 30px rgba(8, 103, 232, 0.4)',
           }}
         >
@@ -851,44 +894,57 @@ const Slide6FinalCTA: React.FC<{ frame: number; fps: number; websiteUrl: string 
           </span>
         </div>
 
-        <h2
-          style={{
-            fontSize: 44,
-            fontWeight: 900,
-            color: '#FFFFFF',
-            lineHeight: 1.15,
-            margin: '0 0 16px 0',
-          }}
-        >
-          Stop Losing Patients. <br />
-          <span style={{ color: '#38BDF8' }}>3X Your Dental Revenue.</span> 🚀
-        </h2>
-
-        <p style={{ fontSize: 20, color: '#94A3B8', fontWeight: 600, margin: '0 0 32px 0', maxWidth: 580 }}>
-          Patient EMI Financing + Automated WhatsApp Recalls + AI Search Optimization in One Platform.
-        </p>
-
-        {/* Pulsing CTA Action Button */}
         <div
           style={{
-            transform: `scale(${pulseButton})`,
-            display: 'inline-block',
-            padding: '20px 48px',
-            borderRadius: 24,
-            backgroundColor: '#0867E8',
-            color: '#FFFFFF',
-            fontSize: 22,
-            fontWeight: 900,
-            boxShadow: '0 14px 45px rgba(8, 103, 232, 0.6)',
-            letterSpacing: 1,
-            marginBottom: 22,
+            backgroundColor: 'rgba(15, 23, 42, 0.9)',
+            border: '1.5px solid rgba(8, 103, 232, 0.4)',
+            borderRadius: 32,
+            padding: '36px 30px',
+            boxShadow: '0 25px 60px rgba(0,0,0,0.85)',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
           }}
         >
-          Partner With Clinaza Free →
-        </div>
+          <h2
+            style={{
+              fontSize: 44,
+              fontWeight: 900,
+              color: '#FFFFFF',
+              lineHeight: 1.18,
+              margin: '0 0 16px 0',
+            }}
+          >
+            Stop Losing Patients. <br />
+            <span style={{ color: '#38BDF8' }}>3X Your Dental Revenue.</span> 🚀
+          </h2>
 
-        <div style={{ fontSize: 18, color: '#10B981', fontWeight: 900, letterSpacing: 1.5 }}>
-          ⚡ ZERO SETUP COST · 100% FREE FOR CLINICS · {websiteUrl}
+          <p style={{ fontSize: 20, color: '#94A3B8', fontWeight: 600, margin: '0 0 28px 0', maxWidth: 580, lineHeight: 1.4 }}>
+            Patient EMI Financing + Automated WhatsApp Recalls + AI Search Optimization in One Platform.
+          </p>
+
+          {/* Pulsing CTA Action Button */}
+          <div
+            style={{
+              transform: `scale(${pulseButton})`,
+              display: 'inline-block',
+              padding: '20px 48px',
+              borderRadius: 24,
+              backgroundColor: '#0867E8',
+              color: '#FFFFFF',
+              fontSize: 22,
+              fontWeight: 900,
+              boxShadow: '0 14px 45px rgba(8, 103, 232, 0.6)',
+              letterSpacing: 1,
+              marginBottom: 20,
+            }}
+          >
+            Partner With Clinaza Free →
+          </div>
+
+          <div style={{ fontSize: 18, color: '#10B981', fontWeight: 900, letterSpacing: 1.5 }}>
+            ⚡ ZERO SETUP COST · 100% FREE FOR CLINICS · {websiteUrl}
+          </div>
         </div>
       </div>
     </AbsoluteFill>

@@ -205,12 +205,13 @@ export const ClinicGrowthReelComposition: React.FC<ClinicGrowthReelProps> = ({
 };
 
 // ══════════════════════════════════════════════════════════════════
-// SCENE 1: VIRAL HOOK (ANIMATED DROP-OFF WARNING)
+// SCENE 1: VIRAL HOOK (ANIMATED DROP-OFF WARNING + DENTIST CONSULTATION)
 // ══════════════════════════════════════════════════════════════════
 const Slide1Hook: React.FC<{ frame: number; fps: number }> = ({ frame, fps }) => {
   const badgeSpring = spring({ frame, fps, config: { damping: 10 } });
   const meterDrop = interpolate(frame, [15, 60], [100, 30], { extrapolateRight: 'clamp' });
   const pulseScale = Math.sin(frame / 6) * 0.05 + 1;
+  const doctorScale = interpolate(frame, [0, 120], [1.0, 1.08]);
 
   const hookWords = [
     { text: 'Why' },
@@ -226,6 +227,20 @@ const Slide1Hook: React.FC<{ frame: number; fps: number }> = ({ frame, fps }) =>
 
   return (
     <AbsoluteFill>
+      {/* Background Dentist Consulting Patient in Clinic */}
+      <Img
+        src={staticFile('assets/doctor-consult-real.png')}
+        style={{
+          position: 'absolute',
+          inset: 0,
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          transform: `scale(${doctorScale})`,
+          filter: 'brightness(0.38) contrast(1.1)',
+        }}
+      />
+
       <AmbientMotionBackground primaryColor="#DC2626" secondaryColor="#4F46E5" frame={frame} />
 
       <div
@@ -239,8 +254,28 @@ const Slide1Hook: React.FC<{ frame: number; fps: number }> = ({ frame, fps }) =>
           zIndex: 10,
         }}
       >
-        {/* Top Floating Badge */}
-        <div style={{ transform: `scale(${badgeSpring})`, transformOrigin: 'top left' }}>
+        {/* Top Doctor Profile Tag & Revenue Crisis Badge */}
+        <div style={{ transform: `scale(${badgeSpring})`, transformOrigin: 'top left', display: 'flex', flexDirection: 'column', gap: 10 }}>
+          <div
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 10,
+              padding: '8px 18px',
+              borderRadius: 999,
+              backgroundColor: 'rgba(15, 23, 42, 0.85)',
+              border: '1.5px solid rgba(255, 255, 255, 0.2)',
+              width: 'fit-content',
+            }}
+          >
+            <div style={{ width: 26, height: 26, borderRadius: '50%', backgroundColor: '#0284C7', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 14 }}>
+              👨‍⚕️
+            </div>
+            <span style={{ fontSize: 14, fontWeight: 800, color: '#F8FAFC' }}>
+              DR. ARYAN PARMAR · DENTAL SURGEON
+            </span>
+          </div>
+
           <div
             style={{
               display: 'inline-flex',
@@ -248,13 +283,14 @@ const Slide1Hook: React.FC<{ frame: number; fps: number }> = ({ frame, fps }) =>
               gap: 10,
               padding: '10px 22px',
               borderRadius: 999,
-              backgroundColor: 'rgba(239, 68, 68, 0.2)',
+              backgroundColor: 'rgba(239, 68, 68, 0.25)',
               border: '2px solid #EF4444',
               color: '#FECACA',
               fontSize: 16,
               fontWeight: 900,
               letterSpacing: 1.5,
-              boxShadow: '0 0 30px rgba(239, 68, 68, 0.4)',
+              width: 'fit-content',
+              boxShadow: '0 0 30px rgba(239, 68, 68, 0.5)',
             }}
           >
             <span style={{ fontSize: 20 }}>🚨</span> CLINIC REVENUE CRISIS
@@ -264,13 +300,13 @@ const Slide1Hook: React.FC<{ frame: number; fps: number }> = ({ frame, fps }) =>
         {/* Dynamic Animated Meter UI Card */}
         <div
           style={{
-            backgroundColor: 'rgba(15, 23, 42, 0.85)',
+            backgroundColor: 'rgba(15, 23, 42, 0.88)',
             border: '1.5px solid rgba(239, 68, 68, 0.4)',
             borderRadius: 28,
-            padding: 26,
+            padding: 24,
             backdropFilter: 'blur(20px)',
-            boxShadow: '0 20px 50px rgba(0,0,0,0.6)',
-            marginBottom: 24,
+            boxShadow: '0 20px 50px rgba(0,0,0,0.8)',
+            marginBottom: 20,
           }}
         >
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
@@ -312,15 +348,30 @@ const Slide1Hook: React.FC<{ frame: number; fps: number }> = ({ frame, fps }) =>
 };
 
 // ══════════════════════════════════════════════════════════════════
-// SCENE 2: SECRET #1 - EMI COST SLASHER (INTERACTIVE UI MOCKUP)
+// SCENE 2: SECRET #1 - EMI COST SLASHER (DENTIST + PATIENT TABLET)
 // ══════════════════════════════════════════════════════════════════
 const Slide2EmiCost: React.FC<{ frame: number; fps: number }> = ({ frame, fps }) => {
   const cardSpring = spring({ frame, fps, config: { damping: 11 } });
   const slashProgress = interpolate(frame, [25, 45], [0, 100], { extrapolateRight: 'clamp' });
   const emiReveal = spring({ frame: frame - 40, fps, config: { damping: 10 } });
+  const bgScale = interpolate(frame, [0, 120], [1.0, 1.06]);
 
   return (
     <AbsoluteFill>
+      {/* Background Dentist Showing EMI on Tablet */}
+      <Img
+        src={staticFile('assets/reels/patient_emi_tablet.jpg')}
+        style={{
+          position: 'absolute',
+          inset: 0,
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          transform: `scale(${bgScale})`,
+          filter: 'brightness(0.28) contrast(1.15)',
+        }}
+      />
+
       <AmbientMotionBackground primaryColor="#059669" secondaryColor="#0284C7" frame={frame} />
 
       <div
@@ -355,20 +406,24 @@ const Slide2EmiCost: React.FC<{ frame: number; fps: number }> = ({ frame, fps })
         {/* Interactive Payment Transformation Card */}
         <div
           style={{
-            backgroundColor: 'rgba(15, 23, 42, 0.9)',
+            backgroundColor: 'rgba(15, 23, 42, 0.92)',
             border: '2px solid rgba(16, 185, 129, 0.4)',
             borderRadius: 32,
-            padding: 32,
-            boxShadow: '0 25px 60px rgba(0,0,0,0.8)',
+            padding: 30,
+            boxShadow: '0 25px 60px rgba(0,0,0,0.9)',
             transform: `scale(${cardSpring})`,
+            backdropFilter: 'blur(20px)',
           }}
         >
-          <div style={{ fontSize: 16, fontWeight: 800, color: '#94A3B8', marginBottom: 12 }}>
-            TREATMENT: FULL MOUTH IMPLANTS & ALIGNERS
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 12 }}>
+            <span style={{ fontSize: 20 }}>🦷</span>
+            <span style={{ fontSize: 16, fontWeight: 800, color: '#94A3B8' }}>
+              IMPLANTS &amp; INVISIBLE ALIGNERS
+            </span>
           </div>
 
           {/* Slashed Upfront Price */}
-          <div style={{ position: 'relative', display: 'inline-block', marginBottom: 20 }}>
+          <div style={{ position: 'relative', display: 'inline-block', marginBottom: 18 }}>
             <div style={{ fontSize: 38, fontWeight: 900, color: '#64748B' }}>
               ₹65,000 <span style={{ fontSize: 20 }}>Upfront</span>
             </div>
@@ -391,23 +446,23 @@ const Slide2EmiCost: React.FC<{ frame: number; fps: number }> = ({ frame, fps })
           {/* Glowing Green EMI Transformation Box */}
           <div
             style={{
-              backgroundColor: 'rgba(16, 185, 129, 0.15)',
+              backgroundColor: 'rgba(16, 185, 129, 0.18)',
               border: '2px solid #10B981',
               borderRadius: 24,
-              padding: '20px 24px',
+              padding: '18px 22px',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
               transform: `scale(${emiReveal})`,
               opacity: interpolate(frame, [35, 45], [0, 1], { extrapolateRight: 'clamp' }),
-              boxShadow: '0 10px 40px rgba(16, 185, 129, 0.3)',
+              boxShadow: '0 10px 40px rgba(16, 185, 129, 0.4)',
             }}
           >
             <div>
               <div style={{ fontSize: 13, fontWeight: 900, color: '#6EE7B7', letterSpacing: 1 }}>
                 PATIENT PAYS JUST
               </div>
-              <div style={{ fontSize: 40, fontWeight: 900, color: '#FFFFFF' }}>
+              <div style={{ fontSize: 38, fontWeight: 900, color: '#FFFFFF' }}>
                 ₹2,650<span style={{ fontSize: 18, color: '#A7F3D0' }}>/mo</span>
               </div>
             </div>

@@ -16,7 +16,7 @@ export interface ClinicGrowthReelProps {
 }
 
 export const clinicGrowthReelDefaultProps: ClinicGrowthReelProps = {
-  title: '3 Secrets to 3X Your Dental Clinic Revenue in 2026 🦷🚀',
+  title: 'Why Are 70% of Dental Patients Leaving Without Treatment? ❌🦷',
   websiteUrl: 'clinaza.in',
 };
 
@@ -38,27 +38,27 @@ export const ClinicGrowthReelComposition: React.FC<ClinicGrowthReelProps> = ({
         overflow: 'hidden',
       }}
     >
-      {/* SLIDE 1: HOOK (0 - 4s) */}
+      {/* SLIDE 1: VIRAL HOOK (0 - 4s) */}
       <Sequence from={0} durationInFrames={SLIDE_DURATION}>
         <Slide1 frame={frame} fps={fps} />
       </Sequence>
 
-      {/* SLIDE 2: SECRET #1 - PATIENT EMI (4 - 8s) */}
+      {/* SLIDE 2: SECRET #1 - STOP LOSING ₹50K CASES (4 - 8s) */}
       <Sequence from={SLIDE_DURATION} durationInFrames={SLIDE_DURATION}>
         <Slide2 frame={frame - SLIDE_DURATION} fps={fps} />
       </Sequence>
 
-      {/* SLIDE 3: SECRET #2 - WHATSAPP REACTIVATION (8 - 12s) */}
+      {/* SLIDE 3: SECRET #2 - UNLOCK HIDDEN FILE REVENUE (8 - 12s) */}
       <Sequence from={SLIDE_DURATION * 2} durationInFrames={SLIDE_DURATION}>
         <Slide3 frame={frame - SLIDE_DURATION * 2} fps={fps} />
       </Sequence>
 
-      {/* SLIDE 4: SECRET #3 - GOOGLE REVIEWS (12 - 16s) */}
+      {/* SLIDE 4: SECRET #3 - DOMINATE LOCAL GOOGLE SEARCH (12 - 16s) */}
       <Sequence from={SLIDE_DURATION * 3} durationInFrames={SLIDE_DURATION}>
         <Slide4 frame={frame - SLIDE_DURATION * 3} fps={fps} />
       </Sequence>
 
-      {/* SLIDE 5: CTA (16 - 20s) */}
+      {/* SLIDE 5: HIGH-CONVERTING CTA (16 - 20s) */}
       <Sequence from={SLIDE_DURATION * 4} durationInFrames={SLIDE_DURATION}>
         <Slide5 frame={frame - SLIDE_DURATION * 4} fps={fps} websiteUrl={websiteUrl} />
       </Sequence>
@@ -66,7 +66,7 @@ export const ClinicGrowthReelComposition: React.FC<ClinicGrowthReelProps> = ({
   );
 };
 
-// --- SLIDE 1: HOOK ---
+// --- SLIDE 1: VIRAL HOOK ---
 const Slide1: React.FC<{ frame: number; fps: number }> = ({ frame, fps }) => {
   const scale = spring({ frame, fps, config: { damping: 14 } });
   const opacity = interpolate(frame, [0, 15], [0, 1], { extrapolateRight: 'clamp' });
@@ -87,7 +87,7 @@ const Slide1: React.FC<{ frame: number; fps: number }> = ({ frame, fps }) => {
         style={{
           position: 'absolute',
           inset: 0,
-          background: 'linear-gradient(to top, rgba(2, 6, 23, 0.95) 0%, rgba(2, 6, 23, 0.6) 50%, rgba(2, 6, 23, 0.4) 100%)',
+          background: 'linear-gradient(to top, rgba(2, 6, 23, 0.96) 0%, rgba(2, 6, 23, 0.65) 50%, rgba(2, 6, 23, 0.45) 100%)',
         }}
       />
 
@@ -107,15 +107,15 @@ const Slide1: React.FC<{ frame: number; fps: number }> = ({ frame, fps }) => {
             style={{
               padding: '10px 22px',
               borderRadius: 999,
-              backgroundColor: 'rgba(8, 103, 232, 0.25)',
-              border: '1.5px solid #0867E8',
+              backgroundColor: 'rgba(239, 68, 68, 0.25)',
+              border: '1.5px solid #EF4444',
               fontSize: 16,
               fontWeight: 800,
-              color: '#38BDF8',
+              color: '#FCA5A5',
               letterSpacing: 1,
             }}
           >
-            CLINAZA PRACTICE INSIGHTS
+            ⚠️ DENTAL PRACTICE WARNING
           </span>
         </div>
 
@@ -125,7 +125,7 @@ const Slide1: React.FC<{ frame: number; fps: number }> = ({ frame, fps }) => {
               display: 'inline-block',
               padding: '8px 18px',
               borderRadius: 12,
-              backgroundColor: '#FF6B1A',
+              backgroundColor: '#EF4444',
               color: '#FFFFFF',
               fontSize: 18,
               fontWeight: 900,
@@ -134,12 +134,12 @@ const Slide1: React.FC<{ frame: number; fps: number }> = ({ frame, fps }) => {
               letterSpacing: 1,
             }}
           >
-            🔥 CLINIC GROWTH GUIDE
+            ❌ 70% PATIENT DROP-OFF PROBLEM
           </div>
 
           <h1
             style={{
-              fontSize: 54,
+              fontSize: 52,
               fontWeight: 900,
               lineHeight: 1.15,
               margin: '0 0 24px 0',
@@ -147,11 +147,11 @@ const Slide1: React.FC<{ frame: number; fps: number }> = ({ frame, fps }) => {
               textShadow: '0 4px 20px rgba(0,0,0,0.8)',
             }}
           >
-            3 Secrets to <span style={{ color: '#38BDF8' }}>3X Your Dental Clinic</span> Revenue in 2026 🦷🚀
+            Why Are <span style={{ color: '#F87171' }}>70% of Patients Leaving</span> Your Clinic Without Treatment? ❌🦷
           </h1>
 
-          <p style={{ fontSize: 22, color: '#94A3B8', fontWeight: 600, lineHeight: 1.4, margin: 0 }}>
-            How top dental surgeons in India convert 80%+ of high-ticket treatment plans effortlessly.
+          <p style={{ fontSize: 22, color: '#CBD5E1', fontWeight: 600, lineHeight: 1.4, margin: 0 }}>
+            Hint: It’s NOT your clinical skills. Here is the 3-step growth framework top clinics use to fix it!
           </p>
         </div>
       </div>
@@ -222,17 +222,17 @@ const Slide2: React.FC<{ frame: number; fps: number }> = ({ frame, fps }) => {
               lineHeight: 1.15,
             }}
           >
-            Offer Point-of-Care <span style={{ color: '#10B981' }}>Patient EMI Financing</span> 💳
+            Stop Losing <span style={{ color: '#10B981' }}>₹50,000+ Cases</span> at Checkout 💳
           </h2>
 
           <p style={{ fontSize: 24, color: '#CBD5E1', fontWeight: 700, margin: '0 0 32px 0', lineHeight: 1.35 }}>
-            Convert ₹50,000+ treatment hesitations (implants, aligners, crowns) into instant monthly EMIs!
+            Patients say NO to Implants &amp; Aligners because they can't pay ₹50k upfront. Offer Point-of-Care Monthly EMIs!
           </p>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
             <FeatureBadge icon="✅" text="₹0 Upfront Setup Fee for Dental Clinics" color="#10B981" />
             <FeatureBadge icon="🏦" text="Funded by RBI-Regulated Banks & NBFCs" color="#38BDF8" />
-            <FeatureBadge icon="📲" text="2-Minute Soft Digital KYC at Checkout" color="#F59E0B" />
+            <FeatureBadge icon="📲" text="2-Minute Soft Digital Pre-Check at Front Desk" color="#F59E0B" />
           </div>
         </div>
       </div>
@@ -303,17 +303,17 @@ const Slide3: React.FC<{ frame: number; fps: number }> = ({ frame, fps }) => {
               lineHeight: 1.15,
             }}
           >
-            Automate <span style={{ color: '#25D366' }}>WhatsApp Patient Reactivation</span> 💬
+            Unlock <span style={{ color: '#25D366' }}>₹2-5 Lakhs Hidden</span> in Old Patient Files 💬
           </h2>
 
           <p style={{ fontSize: 24, color: '#CBD5E1', fontWeight: 700, margin: '0 0 32px 0', lineHeight: 1.35 }}>
-            Recover <span style={{ color: '#25D366' }}>30%+ of dormant patient records</span> on 100% autopilot!
+            Automate WhatsApp 6-Month Recall &amp; Cleaning Reminders — Recover 30%+ Dormant Patients on Autopilot!
           </p>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-            <FeatureBadge icon="🔔" text="Automated 6-Month Recall & Cleaning Reminders" color="#25D366" />
-            <FeatureBadge icon="🗓️" text="Zero No-Shows with Instant WhatsApp Confirmations" color="#38BDF8" />
-            <FeatureBadge icon="📈" text="Fill Empty Slot Gaps Every Single Week" color="#F59E0B" />
+            <FeatureBadge icon="🔔" text="Automated WhatsApp Recall & Cleaning Reminders" color="#25D366" />
+            <FeatureBadge icon="🗓️" text="Zero No-Shows with Instant 1-Click Confirmations" color="#38BDF8" />
+            <FeatureBadge icon="📈" text="Fill Empty Chair Slots Every Single Week" color="#F59E0B" />
           </div>
         </div>
       </div>
@@ -383,17 +383,17 @@ const Slide4: React.FC<{ frame: number; fps: number }> = ({ frame, fps }) => {
               lineHeight: 1.15,
             }}
           >
-            Automated <span style={{ color: '#F59E0B' }}>5-Star Google Reviews</span> ⭐⭐⭐⭐⭐
+            Dominate <span style={{ color: '#F59E0B' }}>Google Search in Your City</span> ⭐⭐⭐⭐⭐
           </h2>
 
           <p style={{ fontSize: 24, color: '#CBD5E1', fontWeight: 700, margin: '0 0 32px 0', lineHeight: 1.35 }}>
-            Dominate Google Search in your city and build unmatched local clinical trust.
+            92% of new patients check Google reviews before booking. Automate post-checkout review requests!
           </p>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-            <FeatureBadge icon="⭐" text="Auto-Send Google Review Request After Checkout" color="#F59E0B" />
+            <FeatureBadge icon="⭐" text="Auto-Trigger 5-Star Google Review Requests" color="#F59E0B" />
             <FeatureBadge icon="🏆" text="Outrank Nearby Competitor Dental Clinics" color="#38BDF8" />
-            <FeatureBadge icon="🎯" text="Attract High-Paying Organic Patients Monthly" color="#10B981" />
+            <FeatureBadge icon="🎯" text="Attract High-Paying Organic Patient Consults" color="#10B981" />
           </div>
         </div>
       </div>
@@ -401,7 +401,7 @@ const Slide4: React.FC<{ frame: number; fps: number }> = ({ frame, fps }) => {
   );
 };
 
-// --- SLIDE 5: CTA ---
+// --- SLIDE 5: HIGH-CONVERTING CTA ---
 const Slide5: React.FC<{ frame: number; fps: number; websiteUrl: string }> = ({
   frame,
   fps,
@@ -429,7 +429,7 @@ const Slide5: React.FC<{ frame: number; fps: number; websiteUrl: string }> = ({
           width: 500,
           height: 500,
           borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(8, 103, 232, 0.3) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(8, 103, 232, 0.35) 0%, transparent 70%)',
           filter: 'blur(80px)',
         }}
       />
@@ -461,11 +461,11 @@ const Slide5: React.FC<{ frame: number; fps: number; websiteUrl: string }> = ({
             margin: '0 0 20px 0',
           }}
         >
-          Ready to <span style={{ color: '#38BDF8' }}>3X Your Dental Practice</span>?
+          Turn Patient Hesitation Into <span style={{ color: '#38BDF8' }}>Instant Appointments</span> 🚀
         </h2>
 
         <p style={{ fontSize: 22, color: '#94A3B8', fontWeight: 600, margin: '0 0 40px 0', maxWidth: 600 }}>
-          Join 300+ leading dental clinics offering instant patient EMI financing &amp; automated growth.
+          Clinaza — Embedded Patient Financing &amp; Automated Practice Growth for Dentists.
         </p>
 
         <div

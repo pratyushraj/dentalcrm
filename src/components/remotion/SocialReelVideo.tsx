@@ -28,6 +28,8 @@ export const socialReelDefaultProps: SocialReelProps = {
   accentColor: '#10B981'
 };
 
+const INSTA_SAFE_PADDING = '240px 140px 340px 60px';
+
 export const SocialReelComposition: React.FC<SocialReelProps> = ({
   hookTitle = '3 Reasons To Choose Invisible Aligners Over Braces 🦷✨',
   points = [
@@ -49,7 +51,7 @@ export const SocialReelComposition: React.FC<SocialReelProps> = ({
         fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
         color: '#ffffff',
         overflow: 'hidden',
-        padding: '60px 40px',
+        padding: INSTA_SAFE_PADDING,
       }}
     >
       {/* Dynamic Animated Gradient Background */}

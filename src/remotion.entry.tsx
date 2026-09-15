@@ -4,10 +4,23 @@ import { ClinazaEmiReelComposition } from './components/remotion/ClinazaEmiReelV
 import { EstimateVideoComposition } from './components/remotion/EstimateVideo';
 import { SocialReelComposition } from './components/remotion/SocialReelVideo';
 import { ClinicGrowthReelComposition } from './components/remotion/ClinicGrowthReelVideo';
+import { AiGeoReelComposition } from './components/remotion/AiGeoReelVideo';
 
 export const RemotionRoot: React.FC = () => {
   return (
     <>
+      <Composition
+        id="AiGeoReel"
+        component={AiGeoReelComposition}
+        durationInFrames={360}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          title: 'How Dentists Rank #1 on Google AI & ChatGPT Search 🤖🦷',
+          websiteUrl: 'clinaza.in',
+        }}
+      />
       <Composition
         id="ClinicGrowthReel"
         component={ClinicGrowthReelComposition}

@@ -3,13 +3,14 @@ import { Player } from '@remotion/player';
 import { EstimateVideoComposition, EstimateVideoProps } from './EstimateVideo';
 import { SocialReelComposition, SocialReelProps } from './SocialReelVideo';
 import { ClinazaEmiReelComposition, ClinazaEmiReelProps } from './ClinazaEmiReelVideo';
+import { ClinicGrowthReelComposition } from './ClinicGrowthReelVideo';
 import { Video, X, Download, Share2, Sparkles, RefreshCw, Play } from 'lucide-react';
 import { toast } from 'sonner';
 
 interface RemotionVideoModalProps {
   isOpen: boolean;
   onClose: () => void;
-  mode: 'estimate' | 'social' | 'clinaza-emi';
+  mode: 'estimate' | 'social' | 'clinaza-emi' | 'clinic-growth';
   estimateData?: Partial<EstimateVideoProps>;
   socialData?: Partial<SocialReelProps>;
   emiReelData?: Partial<ClinazaEmiReelProps>;
@@ -79,6 +80,22 @@ export const RemotionVideoModal: React.FC<RemotionVideoModalProps> = ({
                 component={ClinazaEmiReelComposition}
                 inputProps={emiReelData || {}}
                 durationInFrames={450} // 15 seconds at 30 fps
+                fps={30}
+                compositionWidth={1080}
+                compositionHeight={1920}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                }}
+                controls
+                autoPlay
+                loop
+              />
+            ) : mode === 'clinic-growth' ? (
+              <Player
+                component={ClinicGrowthReelComposition}
+                inputProps={{}}
+                durationInFrames={600} // 20 seconds at 30 fps
                 fps={30}
                 compositionWidth={1080}
                 compositionHeight={1920}

@@ -3,10 +3,23 @@ import { Composition, registerRoot } from 'remotion';
 import { ClinazaEmiReelComposition } from './components/remotion/ClinazaEmiReelVideo';
 import { EstimateVideoComposition } from './components/remotion/EstimateVideo';
 import { SocialReelComposition } from './components/remotion/SocialReelVideo';
+import { ClinicGrowthReelComposition } from './components/remotion/ClinicGrowthReelVideo';
 
 export const RemotionRoot: React.FC = () => {
   return (
     <>
+      <Composition
+        id="ClinicGrowthReel"
+        component={ClinicGrowthReelComposition}
+        durationInFrames={600}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          title: '3 Secrets to 3X Your Dental Clinic Revenue in 2026 🦷🚀',
+          websiteUrl: 'clinaza.in',
+        }}
+      />
       <Composition
         id="ClinazaEmiReel"
         component={ClinazaEmiReelComposition}

@@ -20,192 +20,213 @@ export const clinicGrowthReelDefaultProps: ClinicGrowthReelProps = {
   websiteUrl: 'clinaza.in',
 };
 
-// ── REUSABLE MOTION GRAPHICS COMPONENTS (INPIRED BY CLAUDE-REMOTION-SKILL) ──
+// ── INSTAGRAM SAFE ZONE (1080 x 1920) ──
+const INSTA_SAFE_PADDING = '220px 100px 320px 80px';
 
-/**
- * Ken Burns Dynamic Image Zoom & Pan Component
- * Adds continuous organic camera motion to static images
- */
-const KenBurnsImage: React.FC<{
-  src: string;
-  frame: number;
-  startScale?: number;
-  endScale?: number;
-  filter?: string;
-}> = ({ src, frame, startScale = 1.0, endScale = 1.08, filter }) => {
-  const scale = interpolate(frame, [0, 120], [startScale, endScale], {
-    extrapolateRight: 'clamp',
-  });
-  const translateY = interpolate(frame, [0, 120], [0, -12], {
-    extrapolateRight: 'clamp',
-  });
+// ── HIGH-END MOTION GRAPHICS UTILITIES ──
 
-  return (
-    <Img
-      src={src}
-      style={{
-        width: '100%',
-        height: '100%',
-        objectFit: 'cover',
-        transform: `scale(${scale}) translateY(${translateY}px)`,
-        filter: filter || 'none',
-      }}
-    />
-  );
-};
-
-/**
- * Film Grain & Noise Overlay
- * Adds subtle texture for agency-grade cinematic polish
- */
+/** Film Grain Noise Overlay */
 const FilmGrainOverlay: React.FC = () => (
   <div
     style={{
       position: 'absolute',
       inset: 0,
-      opacity: 0.04,
+      opacity: 0.045,
       pointerEvents: 'none',
-      zIndex: 5,
-      backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+      zIndex: 50,
+      backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
     }}
   />
 );
 
-/**
- * Organic Mesh Gradient Backdrop
- * Creates subtle glowing ambient lighting that moves slowly
- */
-const AmbientMeshGradient: React.FC<{ color1?: string; color2?: string; frame: number }> = ({
-  color1 = '#0867E8',
-  color2 = '#8B5CF6',
+/** Dynamic Pulsing Ambient Glow Background */
+const AmbientMotionBackground: React.FC<{ primaryColor: string; secondaryColor: string; frame: number }> = ({
+  primaryColor,
+  secondaryColor,
   frame,
 }) => {
-  const x = Math.sin(frame / 20) * 40;
-  const y = Math.cos(frame / 25) * 30;
+  const x1 = Math.sin(frame / 20) * 80;
+  const y1 = Math.cos(frame / 24) * 60;
+  const x2 = Math.cos(frame / 18) * 70;
+  const y2 = Math.sin(frame / 22) * 50;
 
   return (
-    <div
-      style={{
-        position: 'absolute',
-        inset: 0,
-        pointerEvents: 'none',
-        overflow: 'hidden',
-      }}
-    >
+    <div style={{ position: 'absolute', inset: 0, overflow: 'hidden', pointerEvents: 'none', zIndex: 1 }}>
+      {/* Subtle grid pattern */}
       <div
         style={{
           position: 'absolute',
-          top: '20%',
-          left: '10%',
-          width: 600,
-          height: 600,
-          borderRadius: '50%',
-          background: `radial-gradient(circle, ${color1} 0%, transparent 70%)`,
-          opacity: 0.25,
-          filter: 'blur(90px)',
-          transform: `translate(${x}px, ${y}px)`,
+          inset: 0,
+          opacity: 0.12,
+          backgroundImage:
+            'linear-gradient(to right, rgba(255,255,255,0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.08) 1px, transparent 1px)',
+          backgroundSize: '60px 60px',
         }}
       />
       <div
         style={{
           position: 'absolute',
-          bottom: '20%',
-          right: '5%',
-          width: 500,
-          height: 500,
+          top: '15%',
+          left: '10%',
+          width: 700,
+          height: 700,
           borderRadius: '50%',
-          background: `radial-gradient(circle, ${color2} 0%, transparent 70%)`,
-          opacity: 0.2,
+          background: `radial-gradient(circle, ${primaryColor} 0%, transparent 65%)`,
+          opacity: 0.35,
           filter: 'blur(100px)',
-          transform: `translate(${-x}px, ${-y}px)`,
+          transform: `translate(${x1}px, ${y1}px)`,
+        }}
+      />
+      <div
+        style={{
+          position: 'absolute',
+          bottom: '15%',
+          right: '5%',
+          width: 650,
+          height: 650,
+          borderRadius: '50%',
+          background: `radial-gradient(circle, ${secondaryColor} 0%, transparent 65%)`,
+          opacity: 0.28,
+          filter: 'blur(110px)',
+          transform: `translate(${x2}px, ${y2}px)`,
         }}
       />
     </div>
   );
 };
 
+/** Kinetic Word-by-Word Highlighting Headline */
+const KineticTitle: React.FC<{
+  words: { text: string; highlight?: boolean; color?: string }[];
+  frame: number;
+  fps: number;
+  delay?: number;
+}> = ({ words, frame, fps, delay = 0 }) => {
+  return (
+    <h1
+      style={{
+        fontSize: 48,
+        fontWeight: 900,
+        lineHeight: 1.15,
+        margin: '0 0 20px 0',
+        color: '#FFFFFF',
+        display: 'flex',
+        flexWrap: 'wrap',
+        gap: '12px 14px',
+        textShadow: '0 8px 30px rgba(0,0,0,0.9)',
+      }}
+    >
+      {words.map((w, idx) => {
+        const wordDelay = delay + idx * 4;
+        const wordSpring = spring({
+          frame: frame - wordDelay,
+          fps,
+          config: { damping: 12, mass: 0.4 },
+        });
+        const wordOpacity = interpolate(frame - wordDelay, [0, 6], [0, 1], {
+          extrapolateLeft: 'clamp',
+          extrapolateRight: 'clamp',
+        });
+
+        return (
+          <span
+            key={idx}
+            style={{
+              display: 'inline-block',
+              transform: `scale(${wordSpring}) translateY(${interpolate(wordSpring, [0, 1], [20, 0])}px)`,
+              opacity: wordOpacity,
+              color: w.highlight ? (w.color || '#FACC15') : '#FFFFFF',
+              background: w.highlight ? 'rgba(250, 204, 21, 0.15)' : 'transparent',
+              padding: w.highlight ? '2px 10px' : '0',
+              borderRadius: w.highlight ? 8 : 0,
+              border: w.highlight ? '1px solid rgba(250, 204, 21, 0.4)' : 'none',
+            }}
+          >
+            {w.text}
+          </span>
+        );
+      })}
+    </h1>
+  );
+};
+
+// ── COMPOSITION ROOT ──
 export const ClinicGrowthReelComposition: React.FC<ClinicGrowthReelProps> = ({
   websiteUrl = 'clinaza.in',
 }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
-  // Slide duration: 120 frames (4 seconds per slide, 6 slides total = 720 frames / 24s)
+  // 120 frames per slide (4s each, 6 slides = 720 frames / 24s)
   const SLIDE_DURATION = 120;
 
   return (
     <AbsoluteFill
       style={{
-        backgroundColor: '#020617',
+        backgroundColor: '#030712',
         fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
         color: '#ffffff',
         overflow: 'hidden',
       }}
     >
-      {/* Film Grain Across All Slides */}
       <FilmGrainOverlay />
 
-      {/* SLIDE 1: VIRAL HOOK (0 - 4s) */}
+      {/* SLIDE 1: VIRAL HOOK WITH DROP-OFF RADAR (0 - 4s) */}
       <Sequence from={0} durationInFrames={SLIDE_DURATION}>
-        <Slide1 frame={frame} fps={fps} />
+        <Slide1Hook frame={frame} fps={fps} />
       </Sequence>
 
-      {/* SLIDE 2: SECRET #1 - PATIENT EMI (4 - 8s) */}
+      {/* SLIDE 2: SECRET #1 - INTERACTIVE EMI COST SLASHER (4 - 8s) */}
       <Sequence from={SLIDE_DURATION} durationInFrames={SLIDE_DURATION}>
-        <Slide2 frame={frame - SLIDE_DURATION} fps={fps} />
+        <Slide2EmiCost frame={frame - SLIDE_DURATION} fps={fps} />
       </Sequence>
 
-      {/* SLIDE 3: SECRET #2 - WHATSAPP PATIENT RECOVERY (8 - 12s) */}
+      {/* SLIDE 3: SECRET #2 - ANIMATED WHATSAPP CHAT SIMULATOR (8 - 12s) */}
       <Sequence from={SLIDE_DURATION * 2} durationInFrames={SLIDE_DURATION}>
-        <Slide3 frame={frame - SLIDE_DURATION * 2} fps={fps} />
+        <Slide3WhatsAppSim frame={frame - SLIDE_DURATION * 2} fps={fps} />
       </Sequence>
 
-      {/* SLIDE 4: SECRET #3 - GOOGLE AI OVERVIEWS & SEO (12 - 16s) */}
+      {/* SLIDE 4: SECRET #3 - GOOGLE AI OVERVIEW MOCKUP (12 - 16s) */}
       <Sequence from={SLIDE_DURATION * 3} durationInFrames={SLIDE_DURATION}>
-        <Slide4 frame={frame - SLIDE_DURATION * 3} fps={fps} />
+        <Slide4GoogleAiMockup frame={frame - SLIDE_DURATION * 3} fps={fps} />
       </Sequence>
 
-      {/* SLIDE 5: SECRET #4 - CHATGPT & PERPLEXITY AI SEARCH GEO (16 - 20s) */}
+      {/* SLIDE 5: SECRET #4 - CHATGPT GEO SEARCH CARD (16 - 20s) */}
       <Sequence from={SLIDE_DURATION * 4} durationInFrames={SLIDE_DURATION}>
-        <Slide5 frame={frame - SLIDE_DURATION * 4} fps={fps} />
+        <Slide5ChatGptGeo frame={frame - SLIDE_DURATION * 4} fps={fps} />
       </Sequence>
 
-      {/* SLIDE 6: SECRET #5 & HIGH-CONVERTING CTA (20 - 24s) */}
+      {/* SLIDE 6: HIGH CONVERTING 3D CTA (20 - 24s) */}
       <Sequence from={SLIDE_DURATION * 5} durationInFrames={SLIDE_DURATION}>
-        <Slide6 frame={frame - SLIDE_DURATION * 5} fps={fps} websiteUrl={websiteUrl} />
+        <Slide6FinalCTA frame={frame - SLIDE_DURATION * 5} fps={fps} websiteUrl={websiteUrl} />
       </Sequence>
     </AbsoluteFill>
   );
 };
 
-/**
- * INSTAGRAM REEL SAFE ZONE CONTAINER
- * Top: 240px (avoids IG top header & back button)
- * Right: 140px (avoids Like, Comment, Share, Bookmark side buttons)
- * Bottom: 340px (avoids IG caption text, username, and audio bar)
- * Left: 60px
- */
-const INSTA_SAFE_PADDING = '240px 140px 340px 60px';
+// ══════════════════════════════════════════════════════════════════
+// SCENE 1: VIRAL HOOK (ANIMATED DROP-OFF WARNING)
+// ══════════════════════════════════════════════════════════════════
+const Slide1Hook: React.FC<{ frame: number; fps: number }> = ({ frame, fps }) => {
+  const badgeSpring = spring({ frame, fps, config: { damping: 10 } });
+  const meterDrop = interpolate(frame, [15, 60], [100, 30], { extrapolateRight: 'clamp' });
+  const pulseScale = Math.sin(frame / 6) * 0.05 + 1;
 
-// --- SLIDE 1: VIRAL HOOK ---
-const Slide1: React.FC<{ frame: number; fps: number }> = ({ frame, fps }) => {
-  const scale = spring({ frame, fps, config: { damping: 14 } });
-  const opacity = interpolate(frame, [0, 15], [0, 1], { extrapolateRight: 'clamp' });
-  const breatheY = Math.sin(frame / 12) * 5;
+  const hookWords = [
+    { text: 'Why' },
+    { text: 'Are' },
+    { text: '70%', highlight: true, color: '#EF4444' },
+    { text: 'Of' },
+    { text: 'Dental' },
+    { text: 'Patients' },
+    { text: 'Leaving', highlight: true, color: '#F87171' },
+    { text: 'Without' },
+    { text: 'Treatment? ❌' },
+  ];
 
   return (
-    <AbsoluteFill style={{ opacity }}>
-      <KenBurnsImage src={staticFile('assets/reels/clinic_growth_hero.jpg')} frame={frame} startScale={1.0} endScale={1.12} />
-      
-      <AmbientMeshGradient color1="#EF4444" color2="#3B82F6" frame={frame} />
-
-      <div
-        style={{
-          position: 'absolute',
-          inset: 0,
-          background: 'linear-gradient(to top, rgba(2, 6, 23, 0.98) 0%, rgba(2, 6, 23, 0.65) 50%, rgba(2, 6, 23, 0.45) 100%)',
-        }}
-      />
+    <AbsoluteFill>
+      <AmbientMotionBackground primaryColor="#DC2626" secondaryColor="#4F46E5" frame={frame} />
 
       <div
         style={{
@@ -218,58 +239,191 @@ const Slide1: React.FC<{ frame: number; fps: number }> = ({ frame, fps }) => {
           zIndex: 10,
         }}
       >
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <span
-            style={{
-              padding: '8px 18px',
-              borderRadius: 999,
-              backgroundColor: 'rgba(239, 68, 68, 0.25)',
-              border: '1.5px solid #EF4444',
-              fontSize: 15,
-              fontWeight: 800,
-              color: '#FCA5A5',
-              letterSpacing: 1,
-              boxShadow: '0 0 20px rgba(239, 68, 68, 0.3)',
-            }}
-          >
-            ⚠️ DENTAL PRACTICE WARNING
-          </span>
-        </div>
-
-        <div style={{ transform: `scale(${scale}) translateY(${breatheY}px)`, transformOrigin: 'bottom left' }}>
+        {/* Top Floating Badge */}
+        <div style={{ transform: `scale(${badgeSpring})`, transformOrigin: 'top left' }}>
           <div
             style={{
-              display: 'inline-block',
-              padding: '8px 16px',
-              borderRadius: 12,
-              backgroundColor: '#EF4444',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 10,
+              padding: '10px 22px',
+              borderRadius: 999,
+              backgroundColor: 'rgba(239, 68, 68, 0.2)',
+              border: '2px solid #EF4444',
+              color: '#FECACA',
+              fontSize: 16,
+              fontWeight: 900,
+              letterSpacing: 1.5,
+              boxShadow: '0 0 30px rgba(239, 68, 68, 0.4)',
+            }}
+          >
+            <span style={{ fontSize: 20 }}>🚨</span> CLINIC REVENUE CRISIS
+          </div>
+        </div>
+
+        {/* Dynamic Animated Meter UI Card */}
+        <div
+          style={{
+            backgroundColor: 'rgba(15, 23, 42, 0.85)',
+            border: '1.5px solid rgba(239, 68, 68, 0.4)',
+            borderRadius: 28,
+            padding: 26,
+            backdropFilter: 'blur(20px)',
+            boxShadow: '0 20px 50px rgba(0,0,0,0.6)',
+            marginBottom: 24,
+          }}
+        >
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
+            <span style={{ fontSize: 16, fontWeight: 800, color: '#94A3B8' }}>CASE ACCEPTANCE RATE</span>
+            <span style={{ fontSize: 28, fontWeight: 900, color: '#EF4444', transform: `scale(${pulseScale})` }}>
+              {Math.round(meterDrop)}%
+            </span>
+          </div>
+
+          {/* Progress Bar with plummeting animation */}
+          <div style={{ height: 16, width: '100%', backgroundColor: 'rgba(255,255,255,0.1)', borderRadius: 999, overflow: 'hidden' }}>
+            <div
+              style={{
+                height: '100%',
+                width: `${meterDrop}%`,
+                background: 'linear-gradient(90deg, #EF4444, #F87171)',
+                borderRadius: 999,
+                boxShadow: '0 0 20px rgba(239, 68, 68, 0.8)',
+              }}
+            />
+          </div>
+
+          <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 10, fontSize: 13, color: '#EF4444', fontWeight: 800 }}>
+            <span>📉 Normal: 30%</span>
+            <span>🏆 Top Clinics: 85%+</span>
+          </div>
+        </div>
+
+        {/* Kinetic Title & Subtitle */}
+        <div>
+          <KineticTitle words={hookWords} frame={frame} fps={fps} delay={5} />
+          <p style={{ fontSize: 22, color: '#CBD5E1', fontWeight: 600, lineHeight: 1.4, margin: 0 }}>
+            It’s NOT your clinical skills. Here is the 5-step secret playbook top clinics use to 3X case acceptance!
+          </p>
+        </div>
+      </div>
+    </AbsoluteFill>
+  );
+};
+
+// ══════════════════════════════════════════════════════════════════
+// SCENE 2: SECRET #1 - EMI COST SLASHER (INTERACTIVE UI MOCKUP)
+// ══════════════════════════════════════════════════════════════════
+const Slide2EmiCost: React.FC<{ frame: number; fps: number }> = ({ frame, fps }) => {
+  const cardSpring = spring({ frame, fps, config: { damping: 11 } });
+  const slashProgress = interpolate(frame, [25, 45], [0, 100], { extrapolateRight: 'clamp' });
+  const emiReveal = spring({ frame: frame - 40, fps, config: { damping: 10 } });
+
+  return (
+    <AbsoluteFill>
+      <AmbientMotionBackground primaryColor="#059669" secondaryColor="#0284C7" frame={frame} />
+
+      <div
+        style={{
+          position: 'absolute',
+          inset: 0,
+          padding: INSTA_SAFE_PADDING,
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+          zIndex: 10,
+        }}
+      >
+        {/* Secret Badge */}
+        <div style={{ transform: `scale(${cardSpring})`, transformOrigin: 'top left' }}>
+          <span
+            style={{
+              padding: '10px 22px',
+              borderRadius: 999,
+              backgroundColor: '#059669',
               color: '#FFFFFF',
               fontSize: 16,
               fontWeight: 900,
-              marginBottom: 16,
-              textTransform: 'uppercase',
-              letterSpacing: 1,
-              boxShadow: '0 4px 15px rgba(239, 68, 68, 0.4)',
+              letterSpacing: 1.5,
+              boxShadow: '0 6px 25px rgba(5, 150, 105, 0.4)',
             }}
           >
-            ❌ 70% PATIENT DROP-OFF
+            SECRET #1: FINANCING
+          </span>
+        </div>
+
+        {/* Interactive Payment Transformation Card */}
+        <div
+          style={{
+            backgroundColor: 'rgba(15, 23, 42, 0.9)',
+            border: '2px solid rgba(16, 185, 129, 0.4)',
+            borderRadius: 32,
+            padding: 32,
+            boxShadow: '0 25px 60px rgba(0,0,0,0.8)',
+            transform: `scale(${cardSpring})`,
+          }}
+        >
+          <div style={{ fontSize: 16, fontWeight: 800, color: '#94A3B8', marginBottom: 12 }}>
+            TREATMENT: FULL MOUTH IMPLANTS & ALIGNERS
           </div>
 
-          <h1
+          {/* Slashed Upfront Price */}
+          <div style={{ position: 'relative', display: 'inline-block', marginBottom: 20 }}>
+            <div style={{ fontSize: 38, fontWeight: 900, color: '#64748B' }}>
+              ₹65,000 <span style={{ fontSize: 20 }}>Upfront</span>
+            </div>
+            {/* Red Strike-Through Bar */}
+            <div
+              style={{
+                position: 'absolute',
+                top: '50%',
+                left: -6,
+                height: 5,
+                width: `${slashProgress}%`,
+                backgroundColor: '#EF4444',
+                transform: 'rotate(-6deg)',
+                borderRadius: 999,
+                boxShadow: '0 0 12px rgba(239,68,68,0.8)',
+              }}
+            />
+          </div>
+
+          {/* Glowing Green EMI Transformation Box */}
+          <div
             style={{
-              fontSize: 44,
-              fontWeight: 900,
-              lineHeight: 1.15,
-              margin: '0 0 18px 0',
-              color: '#FFFFFF',
-              textShadow: '0 4px 20px rgba(0,0,0,0.9)',
+              backgroundColor: 'rgba(16, 185, 129, 0.15)',
+              border: '2px solid #10B981',
+              borderRadius: 24,
+              padding: '20px 24px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              transform: `scale(${emiReveal})`,
+              opacity: interpolate(frame, [35, 45], [0, 1], { extrapolateRight: 'clamp' }),
+              boxShadow: '0 10px 40px rgba(16, 185, 129, 0.3)',
             }}
           >
-            Why Are <span style={{ color: '#F87171' }}>70% of Patients Leaving</span> Your Clinic Without Treatment? ❌🦷
-          </h1>
+            <div>
+              <div style={{ fontSize: 13, fontWeight: 900, color: '#6EE7B7', letterSpacing: 1 }}>
+                PATIENT PAYS JUST
+              </div>
+              <div style={{ fontSize: 40, fontWeight: 900, color: '#FFFFFF' }}>
+                ₹2,650<span style={{ fontSize: 18, color: '#A7F3D0' }}>/mo</span>
+              </div>
+            </div>
+            <div style={{ backgroundColor: '#10B981', color: '#042F2E', padding: '10px 18px', borderRadius: 999, fontWeight: 900, fontSize: 15 }}>
+              0% EMI ✅
+            </div>
+          </div>
+        </div>
 
-          <p style={{ fontSize: 19, color: '#CBD5E1', fontWeight: 600, lineHeight: 1.4, margin: 0 }}>
-            Hint: It’s NOT your clinical skills. Here is the 5-step AI &amp; growth framework top clinics use to 3X revenue!
+        {/* Bottom Headline */}
+        <div>
+          <h2 style={{ fontSize: 40, fontWeight: 900, color: '#FFFFFF', margin: '0 0 14px 0', lineHeight: 1.15 }}>
+            Turn 80% Cost Hesitations into <span style={{ color: '#34D399' }}>Instant "YES"</span> 💳
+          </h2>
+          <p style={{ fontSize: 20, color: '#CBD5E1', fontWeight: 600, margin: 0, lineHeight: 1.35 }}>
+            Clinaza lets patients split payments into easy monthly EMIs while your clinic gets paid upfront!
           </p>
         </div>
       </div>
@@ -277,25 +431,16 @@ const Slide1: React.FC<{ frame: number; fps: number }> = ({ frame, fps }) => {
   );
 };
 
-// --- SLIDE 2: SECRET #1 ---
-const Slide2: React.FC<{ frame: number; fps: number }> = ({ frame, fps }) => {
-  const badgeSpring = spring({ frame, fps, config: { damping: 12 } });
-  const textOpacity = interpolate(frame, [10, 25], [0, 1], { extrapolateRight: 'clamp' });
-  const floatY = Math.sin(frame / 10) * 4;
+// ══════════════════════════════════════════════════════════════════
+// SCENE 3: SECRET #2 - ANIMATED WHATSAPP CHAT SIMULATOR
+// ══════════════════════════════════════════════════════════════════
+const Slide3WhatsAppSim: React.FC<{ frame: number; fps: number }> = ({ frame, fps }) => {
+  const chatSpring1 = spring({ frame: frame - 10, fps, config: { damping: 12 } });
+  const chatSpring2 = spring({ frame: frame - 45, fps, config: { damping: 12 } });
 
   return (
     <AbsoluteFill>
-      <KenBurnsImage src={staticFile('assets/reels/patient_emi_tablet.jpg')} frame={frame} startScale={1.0} endScale={1.09} />
-
-      <AmbientMeshGradient color1="#0867E8" color2="#10B981" frame={frame} />
-
-      <div
-        style={{
-          position: 'absolute',
-          inset: 0,
-          background: 'linear-gradient(to top, rgba(2, 6, 23, 0.98) 0%, rgba(2, 6, 23, 0.75) 50%, rgba(2, 6, 23, 0.5) 100%)',
-        }}
-      />
+      <AmbientMotionBackground primaryColor="#22C55E" secondaryColor="#0D9488" frame={frame} />
 
       <div
         style={{
@@ -308,71 +453,115 @@ const Slide2: React.FC<{ frame: number; fps: number }> = ({ frame, fps }) => {
           zIndex: 10,
         }}
       >
-        <div
-          style={{
-            transform: `scale(${badgeSpring})`,
-            display: 'inline-block',
-            padding: '10px 20px',
-            borderRadius: 999,
-            backgroundColor: '#0867E8',
-            color: '#FFFFFF',
-            fontSize: 16,
-            fontWeight: 900,
-            letterSpacing: 1.5,
-            width: 'fit-content',
-            boxShadow: '0 4px 20px rgba(8, 103, 232, 0.4)',
-          }}
-        >
-          SECRET #1
-        </div>
-
-        <div style={{ opacity: textOpacity, transform: `translateY(${floatY}px)` }}>
-          <h2
+        {/* Secret Badge */}
+        <div>
+          <span
             style={{
-              fontSize: 42,
-              fontWeight: 900,
+              padding: '10px 22px',
+              borderRadius: 999,
+              backgroundColor: '#22C55E',
               color: '#FFFFFF',
-              margin: '0 0 14px 0',
-              lineHeight: 1.15,
+              fontSize: 16,
+              fontWeight: 900,
+              letterSpacing: 1.5,
+              boxShadow: '0 6px 25px rgba(34, 197, 94, 0.4)',
             }}
           >
-            Stop Losing <span style={{ color: '#10B981' }}>₹50,000+ Cases</span> at Checkout 💳
-          </h2>
+            SECRET #2: WHATSAPP AUTO-RECALL
+          </span>
+        </div>
 
-          <p style={{ fontSize: 20, color: '#CBD5E1', fontWeight: 700, margin: '0 0 22px 0', lineHeight: 1.35 }}>
-            Patients say NO to Implants &amp; Aligners because of upfront cost. Offer Point-of-Care Monthly EMIs!
-          </p>
-
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
-            <FeatureBadge icon="✅" text="₹0 Upfront Setup Fee for Dental Clinics" color="#10B981" frame={frame} delay={0} />
-            <FeatureBadge icon="🏦" text="Funded by RBI-Regulated Banks & NBFCs" color="#38BDF8" frame={frame} delay={5} />
-            <FeatureBadge icon="📲" text="2-Minute Soft Digital Pre-Check at Front Desk" color="#F59E0B" frame={frame} delay={10} />
+        {/* Real Animated WhatsApp Chat Mockup */}
+        <div
+          style={{
+            backgroundColor: '#0B141A',
+            border: '1.5px solid rgba(255,255,255,0.15)',
+            borderRadius: 32,
+            padding: '24px 20px',
+            boxShadow: '0 25px 60px rgba(0,0,0,0.8)',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 16,
+          }}
+        >
+          {/* WhatsApp Header */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 14, borderBottom: '1px solid #1F2C34', paddingBottom: 14 }}>
+            <div style={{ width: 44, height: 44, borderRadius: '50%', backgroundColor: '#22C55E', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 22 }}>
+              🦷
+            </div>
+            <div>
+              <div style={{ fontSize: 18, fontWeight: 800, color: '#E9EDEF' }}>Smile Craft Dental Clinic</div>
+              <div style={{ fontSize: 13, color: '#25D366', fontWeight: 600 }}>● Online (Automated Bot)</div>
+            </div>
           </div>
+
+          {/* Outgoing Message: Clinic Automated Recall */}
+          <div
+            style={{
+              alignSelf: 'flex-start',
+              backgroundColor: '#202C33',
+              color: '#E9EDEF',
+              padding: '14px 18px',
+              borderRadius: '20px 20px 20px 4px',
+              maxWidth: '85%',
+              transform: `scale(${chatSpring1}) translateY(${interpolate(chatSpring1, [0, 1], [30, 0])}px)`,
+              opacity: interpolate(frame, [8, 18], [0, 1], { extrapolateRight: 'clamp' }),
+              boxShadow: '0 4px 15px rgba(0,0,0,0.3)',
+            }}
+          >
+            <div style={{ fontSize: 16, fontWeight: 600, lineHeight: 1.4 }}>
+              Hi Rahul! 👋 It's been 6 months since your cleaning. We reserved a slot for your free dental checkup this Saturday at 4 PM!
+            </div>
+            <div style={{ fontSize: 11, color: '#8696A0', textAlign: 'right', marginTop: 4 }}>10:14 AM</div>
+          </div>
+
+          {/* Incoming Message: Patient Booking Confirmation */}
+          <div
+            style={{
+              alignSelf: 'flex-end',
+              backgroundColor: '#005C4B',
+              color: '#E9EDEF',
+              padding: '14px 18px',
+              borderRadius: '20px 20px 4px 20px',
+              maxWidth: '80%',
+              transform: `scale(${chatSpring2}) translateY(${interpolate(chatSpring2, [0, 1], [30, 0])}px)`,
+              opacity: interpolate(frame, [40, 52], [0, 1], { extrapolateRight: 'clamp' }),
+              boxShadow: '0 4px 15px rgba(0,0,0,0.3)',
+            }}
+          >
+            <div style={{ fontSize: 16, fontWeight: 700, lineHeight: 1.4 }}>
+              Yes please! Confirm Saturday 4 PM. Thanks for reminding! 🙏
+            </div>
+            <div style={{ fontSize: 11, color: '#8696A0', textAlign: 'right', marginTop: 4 }}>
+              10:16 AM <span style={{ color: '#53BDEB' }}>✓✓</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom Headline */}
+        <div>
+          <h2 style={{ fontSize: 40, fontWeight: 900, color: '#FFFFFF', margin: '0 0 14px 0', lineHeight: 1.15 }}>
+            Recover <span style={{ color: '#4ADE80' }}>₹2-5 Lakhs</span> in Dormant Patients 💬
+          </h2>
+          <p style={{ fontSize: 20, color: '#CBD5E1', fontWeight: 600, margin: 0, lineHeight: 1.35 }}>
+            Automate 6-month hygiene recall sequences on WhatsApp and fill your empty chair slots on autopilot!
+          </p>
         </div>
       </div>
     </AbsoluteFill>
   );
 };
 
-// --- SLIDE 3: SECRET #2 ---
-const Slide3: React.FC<{ frame: number; fps: number }> = ({ frame, fps }) => {
-  const badgeSpring = spring({ frame, fps, config: { damping: 12 } });
-  const textOpacity = interpolate(frame, [10, 25], [0, 1], { extrapolateRight: 'clamp' });
-  const floatY = Math.sin(frame / 10) * 4;
+// ══════════════════════════════════════════════════════════════════
+// SCENE 4: SECRET #3 - GOOGLE AI OVERVIEW MOCKUP
+// ══════════════════════════════════════════════════════════════════
+const Slide4GoogleAiMockup: React.FC<{ frame: number; fps: number }> = ({ frame, fps }) => {
+  const cardSpring = spring({ frame, fps, config: { damping: 12 } });
+  const shimmer = interpolate(frame, [0, 60], [-100, 200]);
 
   return (
     <AbsoluteFill>
-      <KenBurnsImage src={staticFile('assets/reels/whatsapp_reactivation.jpg')} frame={frame} startScale={1.0} endScale={1.09} />
-
-      <AmbientMeshGradient color1="#25D366" color2="#0867E8" frame={frame} />
-
-      <div
-        style={{
-          position: 'absolute',
-          inset: 0,
-          background: 'linear-gradient(to top, rgba(2, 6, 23, 0.98) 0%, rgba(2, 6, 23, 0.75) 50%, rgba(2, 6, 23, 0.5) 100%)',
-        }}
-      />
+      <AmbientMotionBackground primaryColor="#2563EB" secondaryColor="#9333EA" frame={frame} />
 
       <div
         style={{
@@ -385,71 +574,103 @@ const Slide3: React.FC<{ frame: number; fps: number }> = ({ frame, fps }) => {
           zIndex: 10,
         }}
       >
-        <div
-          style={{
-            transform: `scale(${badgeSpring})`,
-            display: 'inline-block',
-            padding: '10px 20px',
-            borderRadius: 999,
-            backgroundColor: '#25D366',
-            color: '#FFFFFF',
-            fontSize: 16,
-            fontWeight: 900,
-            letterSpacing: 1.5,
-            width: 'fit-content',
-            boxShadow: '0 4px 20px rgba(37, 211, 102, 0.4)',
-          }}
-        >
-          SECRET #2
-        </div>
-
-        <div style={{ opacity: textOpacity, transform: `translateY(${floatY}px)` }}>
-          <h2
+        {/* Secret Badge */}
+        <div>
+          <span
             style={{
-              fontSize: 42,
-              fontWeight: 900,
+              padding: '10px 22px',
+              borderRadius: 999,
+              backgroundColor: '#2563EB',
               color: '#FFFFFF',
-              margin: '0 0 14px 0',
-              lineHeight: 1.15,
+              fontSize: 16,
+              fontWeight: 900,
+              letterSpacing: 1.5,
+              boxShadow: '0 6px 25px rgba(37, 99, 235, 0.4)',
             }}
           >
-            Unlock <span style={{ color: '#25D366' }}>₹2-5 Lakhs Hidden</span> in Old Files 💬
-          </h2>
+            SECRET #3: GOOGLE AI SEARCH
+          </span>
+        </div>
 
-          <p style={{ fontSize: 20, color: '#CBD5E1', fontWeight: 700, margin: '0 0 22px 0', lineHeight: 1.35 }}>
-            Automate WhatsApp 6-Month Recall &amp; Cleaning Reminders — Recover 30%+ Dormant Patients on Autopilot!
-          </p>
-
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
-            <FeatureBadge icon="🔔" text="Automated WhatsApp Recall & Cleaning Reminders" color="#25D366" frame={frame} delay={0} />
-            <FeatureBadge icon="🗓️" text="Zero No-Shows with Instant 1-Click Confirmations" color="#38BDF8" frame={frame} delay={5} />
-            <FeatureBadge icon="📈" text="Fill Empty Chair Slots Every Single Week" color="#F59E0B" frame={frame} delay={10} />
+        {/* Simulated Google AI Overview Result Box */}
+        <div
+          style={{
+            backgroundColor: 'rgba(15, 23, 42, 0.95)',
+            border: '2px solid rgba(59, 130, 246, 0.5)',
+            borderRadius: 30,
+            padding: 26,
+            boxShadow: '0 25px 60px rgba(0,0,0,0.8)',
+            transform: `scale(${cardSpring})`,
+          }}
+        >
+          {/* Search Query Bar */}
+          <div
+            style={{
+              backgroundColor: 'rgba(255,255,255,0.08)',
+              borderRadius: 16,
+              padding: '12px 18px',
+              display: 'flex',
+              alignItems: 'center',
+              gap: 12,
+              marginBottom: 18,
+            }}
+          >
+            <span style={{ fontSize: 18 }}>🔍</span>
+            <span style={{ fontSize: 15, fontWeight: 700, color: '#93C5FD' }}>
+              "Cost of dental implants with EMI in Delhi"
+            </span>
           </div>
+
+          {/* AI Overview Header */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 12 }}>
+            <span style={{ fontSize: 20 }}>✨</span>
+            <span style={{ fontSize: 15, fontWeight: 900, color: '#60A5FA', letterSpacing: 1 }}>
+              AI OVERVIEW (GOOGLE SEARCH)
+            </span>
+          </div>
+
+          {/* AI Top Result Listing */}
+          <div
+            style={{
+              backgroundColor: 'rgba(37, 99, 235, 0.15)',
+              border: '1.5px solid #3B82F6',
+              borderRadius: 20,
+              padding: '16px 20px',
+            }}
+          >
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6 }}>
+              <strong style={{ fontSize: 18, color: '#FFFFFF' }}>#1 Clinaza Partner Clinic</strong>
+              <span style={{ fontSize: 14, color: '#FACC15', fontWeight: 900 }}>⭐ 4.9 (420+ Reviews)</span>
+            </div>
+            <p style={{ fontSize: 14, color: '#BFDBFE', margin: 0, lineHeight: 1.4 }}>
+              Top recommended practice. Transparent pricing, zero-cost EMI from ₹2,500/mo &amp; same-day digital consults.
+            </p>
+          </div>
+        </div>
+
+        {/* Bottom Headline */}
+        <div>
+          <h2 style={{ fontSize: 40, fontWeight: 900, color: '#FFFFFF', margin: '0 0 14px 0', lineHeight: 1.15 }}>
+            Dominate <span style={{ color: '#60A5FA' }}>Google AI Overviews</span> 🤖
+          </h2>
+          <p style={{ fontSize: 20, color: '#CBD5E1', fontWeight: 600, margin: 0, lineHeight: 1.35 }}>
+            Publish procedure pricing guides with medical schema to rank above paid competitor Google ads for free!
+          </p>
         </div>
       </div>
     </AbsoluteFill>
   );
 };
 
-// --- SLIDE 4: SECRET #3 - GOOGLE AI OVERVIEWS & SEO ---
-const Slide4: React.FC<{ frame: number; fps: number }> = ({ frame, fps }) => {
-  const badgeSpring = spring({ frame, fps, config: { damping: 12 } });
-  const textOpacity = interpolate(frame, [10, 25], [0, 1], { extrapolateRight: 'clamp' });
-  const floatY = Math.sin(frame / 10) * 4;
+// ══════════════════════════════════════════════════════════════════
+// SCENE 5: SECRET #4 - CHATGPT & PERPLEXITY GEO CARD
+// ══════════════════════════════════════════════════════════════════
+const Slide5ChatGptGeo: React.FC<{ frame: number; fps: number }> = ({ frame, fps }) => {
+  const cardSpring = spring({ frame, fps, config: { damping: 12 } });
 
   return (
     <AbsoluteFill>
-      <KenBurnsImage src={staticFile('assets/reels/clinic_growth_hero.jpg')} frame={frame} filter="brightness(0.3) blur(6px)" startScale={1.0} endScale={1.08} />
-
-      <AmbientMeshGradient color1="#4285F4" color2="#34A853" frame={frame} />
-
-      <div
-        style={{
-          position: 'absolute',
-          inset: 0,
-          background: 'linear-gradient(to top, rgba(2, 6, 23, 0.98) 0%, rgba(2, 6, 23, 0.8) 100%)',
-        }}
-      />
+      <AmbientMotionBackground primaryColor="#9333EA" secondaryColor="#EC4899" frame={frame} />
 
       <div
         style={{
@@ -462,137 +683,84 @@ const Slide4: React.FC<{ frame: number; fps: number }> = ({ frame, fps }) => {
           zIndex: 10,
         }}
       >
-        <div
-          style={{
-            transform: `scale(${badgeSpring})`,
-            display: 'inline-block',
-            padding: '10px 20px',
-            borderRadius: 999,
-            backgroundColor: '#4285F4',
-            color: '#FFFFFF',
-            fontSize: 16,
-            fontWeight: 900,
-            letterSpacing: 1.5,
-            width: 'fit-content',
-            boxShadow: '0 4px 20px rgba(66, 133, 244, 0.4)',
-          }}
-        >
-          SECRET #3
-        </div>
-
-        <div style={{ opacity: textOpacity, transform: `translateY(${floatY}px)` }}>
-          <h2
+        {/* Secret Badge */}
+        <div>
+          <span
             style={{
-              fontSize: 42,
-              fontWeight: 900,
+              padding: '10px 22px',
+              borderRadius: 999,
+              backgroundColor: '#9333EA',
               color: '#FFFFFF',
-              margin: '0 0 14px 0',
-              lineHeight: 1.15,
+              fontSize: 16,
+              fontWeight: 900,
+              letterSpacing: 1.5,
+              boxShadow: '0 6px 25px rgba(147, 51, 234, 0.4)',
             }}
           >
-            Rank #1 on <span style={{ color: '#60A5FA' }}>Google AI Overviews</span> 🔍🤖
-          </h2>
+            SECRET #4: GEO (AI SEARCH SEO)
+          </span>
+        </div>
 
-          <p style={{ fontSize: 20, color: '#CBD5E1', fontWeight: 700, margin: '0 0 22px 0', lineHeight: 1.35 }}>
-            Structure procedure cost guides (Implants, Braces) to trigger instant Google AI Search answers in your city!
-          </p>
-
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
-            <FeatureBadge icon="🔍" text="Capture High-Intent Patients Searching Treatment Cost" color="#60A5FA" frame={frame} delay={0} />
-            <FeatureBadge icon="⚡" text="Rank Above Paid Competitor Ad Listings" color="#F59E0B" frame={frame} delay={5} />
-            <FeatureBadge icon="📈" text="10X Organic Patient Inquiries Every Month" color="#10B981" frame={frame} delay={10} />
+        {/* Simulated ChatGPT / Perplexity Recommendation Mockup */}
+        <div
+          style={{
+            backgroundColor: 'rgba(15, 23, 42, 0.95)',
+            border: '2px solid rgba(168, 85, 247, 0.5)',
+            borderRadius: 30,
+            padding: 26,
+            boxShadow: '0 25px 60px rgba(0,0,0,0.8)',
+            transform: `scale(${cardSpring})`,
+          }}
+        >
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16 }}>
+            <div style={{ width: 38, height: 38, borderRadius: 10, backgroundColor: '#10A37F', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 20 }}>
+              🤖
+            </div>
+            <div>
+              <div style={{ fontSize: 16, fontWeight: 800, color: '#FFFFFF' }}>ChatGPT &amp; Perplexity AI</div>
+              <div style={{ fontSize: 12, color: '#A855F7', fontWeight: 700 }}>Prompt: "Find best dental surgeon near me"</div>
+            </div>
           </div>
+
+          <div
+            style={{
+              backgroundColor: 'rgba(255,255,255,0.06)',
+              borderRadius: 20,
+              padding: '16px 18px',
+              fontSize: 15,
+              color: '#F3E8FF',
+              lineHeight: 1.5,
+              borderLeft: '4px solid #A855F7',
+            }}
+          >
+            "Based on verified patient outcomes, digital equipment, and point-of-care EMI options, <strong>Dr. Sharma’s Clinic</strong> is ranked #1 in your district."
+          </div>
+        </div>
+
+        {/* Bottom Headline */}
+        <div>
+          <h2 style={{ fontSize: 40, fontWeight: 900, color: '#FFFFFF', margin: '0 0 14px 0', lineHeight: 1.15 }}>
+            Get Recommended by <span style={{ color: '#C084FC' }}>AI Search Engines</span> 🧠
+          </h2>
+          <p style={{ fontSize: 20, color: '#CBD5E1', fontWeight: 600, margin: 0, lineHeight: 1.35 }}>
+            Generative Engine Optimization (GEO) ensures your clinic is the first name patients hear from AI!
+          </p>
         </div>
       </div>
     </AbsoluteFill>
   );
 };
 
-// --- SLIDE 5: SECRET #4 - CHATGPT & PERPLEXITY GEO (AI SEARCH) ---
-const Slide5: React.FC<{ frame: number; fps: number }> = ({ frame, fps }) => {
-  const badgeSpring = spring({ frame, fps, config: { damping: 12 } });
-  const textOpacity = interpolate(frame, [10, 25], [0, 1], { extrapolateRight: 'clamp' });
-  const floatY = Math.sin(frame / 10) * 4;
-
-  return (
-    <AbsoluteFill>
-      <KenBurnsImage src={staticFile('assets/reels/whatsapp_reactivation.jpg')} frame={frame} filter="brightness(0.25) blur(6px)" startScale={1.0} endScale={1.08} />
-
-      <AmbientMeshGradient color1="#A855F7" color2="#EC4899" frame={frame} />
-
-      <div
-        style={{
-          position: 'absolute',
-          inset: 0,
-          background: 'linear-gradient(to top, rgba(2, 6, 23, 0.98) 0%, rgba(2, 6, 23, 0.85) 100%)',
-        }}
-      />
-
-      <div
-        style={{
-          position: 'absolute',
-          inset: 0,
-          padding: INSTA_SAFE_PADDING,
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'space-between',
-          zIndex: 10,
-        }}
-      >
-        <div
-          style={{
-            transform: `scale(${badgeSpring})`,
-            display: 'inline-block',
-            padding: '10px 20px',
-            borderRadius: 999,
-            backgroundColor: '#A855F7',
-            color: '#FFFFFF',
-            fontSize: 16,
-            fontWeight: 900,
-            letterSpacing: 1.5,
-            width: 'fit-content',
-            boxShadow: '0 4px 20px rgba(168, 85, 247, 0.4)',
-          }}
-        >
-          SECRET #4
-        </div>
-
-        <div style={{ opacity: textOpacity, transform: `translateY(${floatY}px)` }}>
-          <h2
-            style={{
-              fontSize: 42,
-              fontWeight: 900,
-              color: '#FFFFFF',
-              margin: '0 0 14px 0',
-              lineHeight: 1.15,
-            }}
-          >
-            Get Recommended by <span style={{ color: '#C084FC' }}>ChatGPT &amp; Perplexity AI</span> 🤖✨
-          </h2>
-
-          <p style={{ fontSize: 20, color: '#CBD5E1', fontWeight: 700, margin: '0 0 22px 0', lineHeight: 1.35 }}>
-            Optimize Clinic Schema.org data so AI Search engines recommend YOUR clinic when patients ask "Best dentist near me"!
-          </p>
-
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
-            <FeatureBadge icon="🤖" text="Generative Engine Optimization (GEO) for Clinics" color="#C084FC" frame={frame} delay={0} />
-            <FeatureBadge icon="📍" text="Top Recommendation for Local High-Ticket Dental Leads" color="#38BDF8" frame={frame} delay={5} />
-            <FeatureBadge icon="🛡️" text="Build Unmatched Authority Over Competitor Practices" color="#10B981" frame={frame} delay={10} />
-          </div>
-        </div>
-      </div>
-    </AbsoluteFill>
-  );
-};
-
-// --- SLIDE 6: SECRET #5 & HIGH-CONVERTING CTA ---
-const Slide6: React.FC<{ frame: number; fps: number; websiteUrl: string }> = ({
+// ══════════════════════════════════════════════════════════════════
+// SCENE 6: HIGH CONVERTING 3D PERSPECTIVE CTA
+// ══════════════════════════════════════════════════════════════════
+const Slide6FinalCTA: React.FC<{ frame: number; fps: number; websiteUrl: string }> = ({
   frame,
   fps,
   websiteUrl,
 }) => {
   const logoScale = spring({ frame, fps, config: { damping: 10 } });
-  const buttonPulse = Math.sin(frame / 8) * 0.04 + 1;
+  const pulseButton = Math.sin(frame / 7) * 0.04 + 1;
 
   return (
     <AbsoluteFill
@@ -606,105 +774,68 @@ const Slide6: React.FC<{ frame: number; fps: number; websiteUrl: string }> = ({
         textAlign: 'center',
       }}
     >
-      <AmbientMeshGradient color1="#0867E8" color2="#38BDF8" frame={frame} />
+      <AmbientMotionBackground primaryColor="#0867E8" secondaryColor="#38BDF8" frame={frame} />
 
       <div style={{ transform: `scale(${logoScale})`, zIndex: 10 }}>
+        {/* Clinaza Pill */}
         <div
           style={{
             display: 'inline-flex',
             alignItems: 'center',
-            gap: 10,
-            padding: '10px 24px',
-            borderRadius: 20,
-            backgroundColor: 'rgba(255, 255, 255, 0.05)',
-            border: '1px solid rgba(255, 255, 255, 0.15)',
-            marginBottom: 20,
-            boxShadow: '0 8px 30px rgba(8, 103, 232, 0.25)',
+            gap: 12,
+            padding: '12px 30px',
+            borderRadius: 999,
+            backgroundColor: 'rgba(255, 255, 255, 0.08)',
+            border: '1.5px solid rgba(255, 255, 255, 0.2)',
+            marginBottom: 24,
+            boxShadow: '0 10px 30px rgba(8, 103, 232, 0.4)',
           }}
         >
-          <span style={{ fontSize: 24, fontWeight: 900, color: '#FFFFFF', letterSpacing: 2 }}>
+          <span style={{ fontSize: 28, fontWeight: 900, color: '#FFFFFF', letterSpacing: 2 }}>
             CLIN<span style={{ color: '#0867E8' }}>AZA</span>
           </span>
         </div>
 
         <h2
           style={{
-            fontSize: 42,
+            fontSize: 44,
             fontWeight: 900,
             color: '#FFFFFF',
             lineHeight: 1.15,
-            margin: '0 0 14px 0',
+            margin: '0 0 16px 0',
           }}
         >
-          Turn Patient Hesitation Into <span style={{ color: '#38BDF8' }}>Instant Appointments</span> 🚀
+          Stop Losing Patients. <br />
+          <span style={{ color: '#38BDF8' }}>3X Your Dental Revenue.</span> 🚀
         </h2>
 
-        <p style={{ fontSize: 19, color: '#94A3B8', fontWeight: 600, margin: '0 0 28px 0', maxWidth: 540 }}>
-          Clinaza — Embedded Patient Financing &amp; AI Practice Growth for Dentists.
+        <p style={{ fontSize: 20, color: '#94A3B8', fontWeight: 600, margin: '0 0 32px 0', maxWidth: 580 }}>
+          Patient EMI Financing + Automated WhatsApp Recalls + AI Search Optimization in One Platform.
         </p>
 
+        {/* Pulsing CTA Action Button */}
         <div
           style={{
-            transform: `scale(${buttonPulse})`,
+            transform: `scale(${pulseButton})`,
             display: 'inline-block',
-            padding: '18px 44px',
-            borderRadius: 22,
+            padding: '20px 48px',
+            borderRadius: 24,
             backgroundColor: '#0867E8',
             color: '#FFFFFF',
             fontSize: 22,
             fontWeight: 900,
-            boxShadow: '0 12px 40px rgba(8, 103, 232, 0.5)',
+            boxShadow: '0 14px 45px rgba(8, 103, 232, 0.6)',
             letterSpacing: 1,
-            marginBottom: 20,
+            marginBottom: 22,
           }}
         >
-          Partner With Clinaza Today →
+          Partner With Clinaza Free →
         </div>
 
-        <div style={{ fontSize: 17, color: '#10B981', fontWeight: 800, letterSpacing: 1 }}>
-          ⚡ ₹0 SETUP FEE · 100% FREE FOR CLINICS · {websiteUrl}
+        <div style={{ fontSize: 18, color: '#10B981', fontWeight: 900, letterSpacing: 1.5 }}>
+          ⚡ ZERO SETUP COST · 100% FREE FOR CLINICS · {websiteUrl}
         </div>
       </div>
     </AbsoluteFill>
-  );
-};
-
-const FeatureBadge: React.FC<{
-  icon: string;
-  text: string;
-  color: string;
-  frame?: number;
-  delay?: number;
-}> = ({ icon, text, color, frame = 0, delay = 0 }) => {
-  const slideIn = interpolate(frame - delay, [0, 15], [30, 0], {
-    extrapolateLeft: 'clamp',
-    extrapolateRight: 'clamp',
-  });
-  const opacity = interpolate(frame - delay, [0, 15], [0, 1], {
-    extrapolateLeft: 'clamp',
-    extrapolateRight: 'clamp',
-  });
-
-  return (
-    <div
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        gap: 14,
-        padding: '12px 16px',
-        borderRadius: 16,
-        backgroundColor: 'rgba(255, 255, 255, 0.07)',
-        border: '1px solid rgba(255, 255, 255, 0.12)',
-        backdropFilter: 'blur(12px)',
-        transform: `translateX(${slideIn}px)`,
-        opacity,
-        boxShadow: '0 4px 15px rgba(0, 0, 0, 0.2)',
-      }}
-    >
-      <span style={{ fontSize: 22 }}>{icon}</span>
-      <span style={{ fontSize: 17, fontWeight: 800, color: '#F8FAFC', textAlign: 'left' }}>
-        {text}
-      </span>
-    </div>
   );
 };

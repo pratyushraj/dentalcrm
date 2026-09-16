@@ -299,10 +299,10 @@ export default function CityLandingPage() {
           // City-specific guide mapping for SEO internal linking
           const cityGuides: Record<string, { label: string; slug: string; title: string }[]> = {
             kochi: [
+              { label: 'Kochi Cost Guide', slug: 'cost-of-dental-implants-and-braces-in-kochi-price-guide', title: 'Cost of Dental Implants & Braces in Kochi (2026 Price Guide)' },
               { label: 'Braces in Kochi', slug: 'braces-cost-emi-india-adults-teens-complete-guide', title: 'Braces Cost on EMI in India: Metal, Ceramic & Lingual (2026)' },
               { label: 'Aligners Guide', slug: 'clear-aligners-cost-on-emi-india', title: 'Clear Aligners Cost on EMI: Price Comparison & Monthly Plans' },
               { label: 'Implants EMI', slug: 'dental-implants-cost-on-emi-india', title: 'Dental Implants Cost & Monthly EMI Guide' },
-              { label: 'Dental Loans', slug: 'dental-treatment-on-emi-india-guide', title: 'How to Get Dental Treatment on EMI in India (2026)' },
             ],
             patna: [
               { label: 'Implants in Patna', slug: 'dental-implants-cost-patna-emi', title: 'Dental Implants Cost in Patna: Full Breakdown + EMI Options' },

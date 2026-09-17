@@ -1,18 +1,6 @@
 {
   "framework": "vite",
-  "redirects": [
-    {
-      "source": "/:path*",
-      "has": [
-        {
-          "type": "host",
-          "value": "www.clinaza.in"
-        }
-      ],
-      "destination": "https://clinaza.in/:path*",
-      "permanent": true
-    }
-  ],
+
   "rewrites": [
     {
       "source": "/api/push/:path*",

@@ -262,7 +262,7 @@ export default function PitchDeckPage() {
 
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 my-auto">
                 <div className="p-6 bg-gradient-to-br from-blue-50 to-white border border-blue-200 rounded-2xl text-center space-y-1">
-                  <span className="text-4xl sm:text-5xl font-black text-[#0867E8] block">20+</span>
+                  <span className="text-4xl sm:text-5xl font-black text-[#0867E8] block">50+</span>
                   <span className="text-xs font-bold text-[#0B2450] block uppercase tracking-wider">Clinics Onboarded</span>
                   <span className="text-[10px] text-slate-500 block">Dental centers in network</span>
                 </div>
@@ -448,7 +448,7 @@ export default function PitchDeckPage() {
                     <Building2 size={16} /> CLINAZA ROLE
                   </div>
                   <ul className="space-y-2 text-xs text-slate-600">
-                    <li className="flex items-start gap-1.5"><CheckCircle2 size={14} className="text-[#0867E8] shrink-0 mt-0.5" /> 20+ clinic network growth</li>
+                    <li className="flex items-start gap-1.5"><CheckCircle2 size={14} className="text-[#0867E8] shrink-0 mt-0.5" /> 50+ clinic network growth</li>
                     <li className="flex items-start gap-1.5"><CheckCircle2 size={14} className="text-[#0867E8] shrink-0 mt-0.5" /> Clinic onboarding & support</li>
                     <li className="flex items-start gap-1.5"><CheckCircle2 size={14} className="text-[#0867E8] shrink-0 mt-0.5" /> Patient application journey</li>
                     <li className="flex items-start gap-1.5"><CheckCircle2 size={14} className="text-[#0867E8] shrink-0 mt-0.5" /> Technical API integration</li>
@@ -555,7 +555,7 @@ export default function PitchDeckPage() {
 
                     <div className="flex items-start gap-3 p-3 bg-white border border-slate-200 rounded-xl shadow-2xs">
                       <span className="font-bold text-[#0867E8]">02</span>
-                      <span>Evaluate Clinaza's 20+ clinic network pipeline & demand</span>
+                      <span>Evaluate Clinaza's 50+ clinic network pipeline & demand</span>
                     </div>
 
                     <div className="flex items-start gap-3 p-3 bg-white border border-slate-200 rounded-xl shadow-2xs">

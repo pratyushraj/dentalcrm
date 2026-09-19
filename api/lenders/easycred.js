@@ -2,10 +2,49 @@ import axios from 'axios';
 
 // Easycred Partner DSA Credentials
 const EASYCRED_PARTNER_API = 'https://partner.easycred.co.in/api/partner/journey/initiate';
+const EASYCRED_LOGIN_API = 'https://partner.easycred.co.in/api/partner/login-password';
 
-// Fallback / active partner token (refreshed from partner session)
-const PARTNER_TOKEN = process.env.EASYCRED_PARTNER_TOKEN || 
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2YTg1NTZlYmQwNmQxNjFkNTFhNzIxNzQiLCJyb2xlIjoiUEFSVE5FUiIsInBhcnRuZXJJZCI6IjZhODU1NmU5ZDA2ZDE2MWQ1MWE3MjE3MiIsInBlcm1pc3Npb25zIjpbXSwiaWF0IjoxNzg5ODA1NjkwLCJleHAiOjE3ODk4MTI4OTB9.BlJ8lk0EqZy-74kyjiACXewWfi1TtoalWXMCp1_Jl7w';
+const PARTNER_MOBILE = process.env.EASYCRED_MOBILE || '7292984244';
+const PARTNER_PASSWORD = process.env.EASYCRED_PASSWORD || 'jaqjy7-femzeh-xukfAn';
+
+let cachedToken = process.env.EASYCRED_PARTNER_TOKEN || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2YTg1NTZlYmQwNmQxNjFkNTFhNzIxNzQiLCJyb2xlIjoiUEFSVE5FUiIsInBhcnRuZXJJZCI6IjZhODU1NmU5ZDA2ZDE2MWQ1MWE3MjE3MiIsInBlcm1pc3Npb25zIjpbXSwiaWF0IjoxNzg5ODE4MTQyLCJleHAiOjE3ODk4MjUzNDJ9.3US5eotqpkedlpaQycfqxifEdySTO6AB-mOPR-SEcek';
+let tokenExpiry = 0;
+
+async function getPartnerToken() {
+  const now = Math.floor(Date.now() / 1000);
+  if (cachedToken && tokenExpiry > now + 60) {
+    return cachedToken;
+  }
+
+  try {
+    const loginRes = await axios.post(
+      EASYCRED_LOGIN_API,
+      { mobile: PARTNER_MOBILE, password: PARTNER_PASSWORD },
+      { headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, timeout: 7000 }
+    );
+
+    const cookies = loginRes.headers['set-cookie'] || [];
+    let token = null;
+    for (const c of cookies) {
+      const match = c.match(/access_token=([^;]+)/);
+      if (match) {
+        token = match[1];
+        break;
+      }
+    }
+
+    if (token) {
+      cachedToken = token;
+      // Tokens are valid for 30 mins (1800s)
+      tokenExpiry = now + 1700;
+      return cachedToken;
+    }
+  } catch (err) {
+    console.error('Failed to auto-refresh Easycred partner token:', err.message);
+  }
+
+  return cachedToken;
+}
 
 export default async function handler(req, res) {
   // CORS configuration
@@ -16,6 +55,8 @@ export default async function handler(req, res) {
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
   }
+
+  const activeToken = await getPartnerToken();
 
   // Support GET for CRM lead status checking
   if (req.method === 'GET') {
@@ -28,8 +69,8 @@ export default async function handler(req, res) {
         `https://partner.easycred.co.in/api/partner/leads/${encodeURIComponent(applicationId)}/status`,
         {
           headers: {
-            'Authorization': `Bearer ${PARTNER_TOKEN}`,
-            'Cookie': `access_token=${PARTNER_TOKEN}`,
+            'Authorization': `Bearer ${activeToken}`,
+            'Cookie': `access_token=${activeToken}`,
             'Accept': 'application/json'
           },
           timeout: 7000
@@ -66,8 +107,8 @@ export default async function handler(req, res) {
       },
       {
         headers: {
-          'Authorization': `Bearer ${PARTNER_TOKEN}`,
-          'Cookie': `access_token=${PARTNER_TOKEN}`,
+          'Authorization': `Bearer ${activeToken}`,
+          'Cookie': `access_token=${activeToken}`,
           'Content-Type': 'application/json',
           'Accept': 'application/json',
           'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'

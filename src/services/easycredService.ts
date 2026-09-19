@@ -53,5 +53,15 @@ export const easycredService = {
         fallbackLink
       };
     }
+  },
+
+  async checkLeadStatus(applicationId: string) {
+    try {
+      const res = await fetch(`/api/lenders/easycred?applicationId=${encodeURIComponent(applicationId)}`);
+      if (!res.ok) throw new Error('Status query failed');
+      return await res.json();
+    } catch (err: any) {
+      return { success: false, error: err.message };
+    }
   }
 };

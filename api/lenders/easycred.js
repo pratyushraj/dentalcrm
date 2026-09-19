@@ -10,11 +10,35 @@ const PARTNER_TOKEN = process.env.EASYCRED_PARTNER_TOKEN ||
 export default async function handler(req, res) {
   // CORS configuration
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'POST,OPTIONS');
+  res.setHeader('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type,Authorization');
 
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
+  }
+
+  // Support GET for CRM lead status checking
+  if (req.method === 'GET') {
+    const { applicationId } = req.query || {};
+    if (!applicationId) {
+      return res.status(400).json({ success: false, error: 'applicationId required' });
+    }
+    try {
+      const response = await axios.get(
+        `https://partner.easycred.co.in/api/partner/leads/${encodeURIComponent(applicationId)}/status`,
+        {
+          headers: {
+            'Authorization': `Bearer ${PARTNER_TOKEN}`,
+            'Cookie': `access_token=${PARTNER_TOKEN}`,
+            'Accept': 'application/json'
+          },
+          timeout: 7000
+        }
+      );
+      return res.status(200).json({ success: true, data: response.data });
+    } catch (err) {
+      return res.status(200).json({ success: false, error: err.response?.data?.error || err.message });
+    }
   }
 
   if (req.method !== 'POST') {

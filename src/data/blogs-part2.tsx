@@ -96,7 +96,7 @@ export const BLOGS_PART2 = [
         </div>
       </div>
     )
-  },,
+  },
     {
     slug: "ivf-cost-on-emi-fertility-treatment-financing-india",
     title: "IVF Treatment Cost on EMI in India: Fertility Financing & Monthly Payment Guide (2026)",
@@ -190,7 +190,7 @@ export const BLOGS_PART2 = [
         </div>
       </div>
     )
-  },,
+  },
     {
     slug: "lasik-eye-surgery-cost-on-emi-india-guide",
     title: "LASIK Eye Surgery Cost on EMI in India: Contoura Vision & SMILE Financing (2026 Guide)",
@@ -284,7 +284,7 @@ export const BLOGS_PART2 = [
         </div>
       </div>
     )
-  },,
+  },
     {
     slug: "knee-replacement-surgery-cost-on-emi-india",
     title: "Knee Replacement Surgery Cost on EMI in India 2025 — Complete Patient Guide",
@@ -388,7 +388,7 @@ export const BLOGS_PART2 = [
         </div>
       </div>
     )
-  },,
+  },
     {
     slug: "bariatric-weight-loss-surgery-cost-on-emi-india",
     title: "Bariatric & Weight Loss Surgery Cost on EMI in India 2025 — Complete Guide",
@@ -497,7 +497,7 @@ export const BLOGS_PART2 = [
         </div>
       </div>
     )
-  },,
+  },
     {
     slug: "rhinoplasty-nose-job-cost-on-emi-india",
     title: "Rhinoplasty (Nose Job) Cost on EMI in India 2025 — Complete Guide",
@@ -603,7 +603,7 @@ export const BLOGS_PART2 = [
         </div>
       </div>
     )
-  },,
+  },
     {
     slug: "gynecomastia-surgery-cost-on-emi-india",
     title: "Gynecomastia Surgery Cost on EMI in India 2025 — Complete Guide",
@@ -702,7 +702,7 @@ export const BLOGS_PART2 = [
         </div>
       </div>
     )
-  },,
+  },
     {
     slug: "liposuction-cost-on-emi-india",
     title: "Liposuction Cost on EMI in India 2025 — Complete Guide to Body Contouring Finance",
@@ -817,7 +817,7 @@ export const BLOGS_PART2 = [
         </div>
       </div>
     )
-  },,
+  },
     {
     slug: "cancer-treatment-cost-on-emi-india",
     title: "Cancer Treatment Cost on EMI in India 2025 — Chemotherapy, Radiation & Surgery Financing Guide",
@@ -914,7 +914,7 @@ export const BLOGS_PART2 = [
         </div>
       </div>
     )
-  },,
+  },
     {
     slug: "cochlear-implant-cost-on-emi-india",
     title: "Cochlear Implant Surgery Cost on EMI in India 2025 — Restore Hearing with 0% Financing",
@@ -992,7 +992,7 @@ export const BLOGS_PART2 = [
         </div>
       </div>
     )
-  },,
+  },
     {
     slug: "dental-clinic-daily-patient-register-format-excel-free",
     title: "Dental Clinic Daily Patient Register Format Excel — Free Download & Digital Transition Guide",
@@ -1094,7 +1094,7 @@ export const BLOGS_PART2 = [
         </div>
       </div>
     )
-  },,
+  },
     {
     slug: "dental-lab-bill-tracking-software-free-india",
     title: "Dental Lab Bill Tracking Software Free India — Streamline Crown, Bridge & Aligners Orders",
@@ -1184,7 +1184,7 @@ export const BLOGS_PART2 = [
         </div>
       </div>
     )
-  },,
+  },
     {
     slug: "icl-eye-surgery-cost-on-emi-india",
     title: "ICL Eye Surgery Cost on EMI in India 2025 — EVO Visian ICL Financing for High Power & Thin Cornea",
@@ -1269,7 +1269,7 @@ export const BLOGS_PART2 = [
         </div>
       </div>
     )
-  },,
+  },
     {
     slug: "cataract-surgery-cost-on-emi-india",
     title: "Cataract Surgery Cost on EMI in India 2025 — Monofocal, Toric & Multifocal Lens Financing",
@@ -1350,7 +1350,7 @@ export const BLOGS_PART2 = [
         </div>
       </div>
     )
-  },,
+  },
     {
     slug: "contoura-vision-vs-smile-vs-lasik-cost-india",
     title: "Contoura Vision vs SMILE vs Femto-LASIK — Which Eye Surgery is Best in India 2025?",
@@ -1438,7 +1438,7 @@ export const BLOGS_PART2 = [
         </div>
       </div>
     )
-  },,
+  },
     {
     slug: "maternity-hospital-delivery-cost-on-emi-india",
     title: "Maternity & Normal / C-Section Hospital Delivery Cost in India on Easy Monthly EMI (2026)",
@@ -1524,7 +1524,7 @@ export const BLOGS_PART2 = [
         </div>
       </div>
     )
-  },,
+  },
     {
     slug: "dental-braces-cost-in-india-metal-ceramic-invisible-aligners",
     title: "Dental Braces Cost in India (2026): Metal, Ceramic, Self-Ligating & Invisible Aligners Compared",
@@ -1614,7 +1614,7 @@ export const BLOGS_PART2 = [
         </div>
       </div>
     )
-  },,
+  },
     {
     slug: "gallbladder-kidney-stone-laser-surgery-cost-on-emi-india",
     title: "Gallbladder & Kidney Stone Laser Surgery Cost in India: Laparoscopy, RIRS & EMI Guide (2026)",
@@ -1702,7 +1702,7 @@ export const BLOGS_PART2 = [
         </div>
       </div>
     )
-  },,
+  },
     {
     slug: "how-dental-clinics-increase-treatment-acceptance-with-emi-india",
     title: "How Dental & Medical Clinics Increase High-Ticket Case Acceptance by 40% with Point-of-Care EMI",
@@ -1764,7 +1764,7 @@ export const BLOGS_PART2 = [
         </div>
       </div>
     )
-  },,
+  },
     {
     slug: "nabh-digital-consent-guidelines-dental-clinics-india",
     title: "NABH Digital Consent Guidelines: Legal Framework & Compliance for Dental Clinics in India",
@@ -1827,7 +1827,7 @@ export const BLOGS_PART2 = [
         </div>
       </div>
     )
-  },,
+  },
     {
     slug: "zero-percent-interest-medical-loans-dental-implants-braces-india",
     title: "Can You Get flexible Medical Loans for Dental Implants & Braces in India? The Complete Guide",
@@ -1908,7 +1908,7 @@ export const BLOGS_PART2 = [
         </div>
       </div>
     )
-  },,
+  },
     {
     slug: "how-to-increase-dental-clinic-patient-recall-whatsapp-emr-india",
     title: "How to Increase Dental Clinic Recall by 60% Using Automated WhatsApp EMR (Without Being Spammy)",
@@ -1970,7 +1970,7 @@ export const BLOGS_PART2 = [
         </div>
       </div>
     )
-  },,
+  },
     {
     slug: "top-10-dental-financing-medical-loan-companies-india-comparison",
     title: "Top 10 Dental Financing & Medical Loan Companies in India (2026 Comparison)",
@@ -2033,7 +2033,7 @@ export const BLOGS_PART2 = [
         </div>
       </div>
     )
-  },,
+  },
     {
     slug: "healthcare-lending-service-provider-lsp-partnership-nbfc-banks-india",
     title: "Healthcare Lending Service Provider (LSP) Partnerships in India: How NBFCs & Banks Scale Point-of-Care Medical Credit with Clinaza",
@@ -2110,7 +2110,7 @@ export const BLOGS_PART2 = [
         </div>
       </div>
     )
-  },,
+  },
     {
     slug: "does-health-insurance-cover-lasik-eye-surgery-india-cost-emi",
     title: "Does Health Insurance Cover LASIK Eye Surgery in India? (Star Health, HDFC ERGO, Care Guide + EMI Options)",
@@ -2163,7 +2163,7 @@ export const BLOGS_PART2 = [
         </div>
       </div>
     )
-  },,
+  },
     {
     slug: "how-to-finance-elective-surgeries-when-health-insurance-mediclaim-rejects-india",
     title: "How to Finance Elective Surgeries When Health Insurance Rejects Your Claim in India",
@@ -2226,7 +2226,7 @@ export const BLOGS_PART2 = [
         </div>
       </div>
     )
-  },,
+  },
     {
     slug: "opd-dental-insurance-vs-point-of-care-emi-india-comparison",
     title: "OPD Dental Insurance in India vs Point-of-Care EMI: Which Saves More Money for Patients?",
@@ -2304,7 +2304,7 @@ export const BLOGS_PART2 = [
         </div>
       </div>
     )
-  },,
+  },
     {
     slug: "dental-implants-cost-in-india-single-vs-full-mouth-guide",
     title: "Dental Implants Cost in India: Single Tooth vs Full Mouth (2026 Price Guide)",
@@ -2390,7 +2390,7 @@ export const BLOGS_PART2 = [
         </div>
       </div>
     )
-  },,
+  },
     {
     slug: "invisible-aligners-vs-metal-braces-cost-india-comparison",
     title: "Invisible Aligners vs Metal Braces: Cost Comparison in India (2026)",
@@ -2470,7 +2470,7 @@ export const BLOGS_PART2 = [
         </div>
       </div>
     )
-  },,
+  },
     {
     slug: "root-canal-treatment-rct-cost-breakdown-cities-india",
     title: "Root Canal Treatment (RCT) Cost Breakdown in India (City-by-City Guide)",
@@ -2550,7 +2550,7 @@ export const BLOGS_PART2 = [
         </div>
       </div>
     )
-  },,
+  },
     {
     slug: "cheapest-dental-implants-in-india-affordable-guide",
     title: "Cheapest Dental Implants in India: Safe, Low-Cost Options & EMI Plans (2026)",

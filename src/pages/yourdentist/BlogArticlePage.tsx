@@ -249,7 +249,7 @@ export default function BlogArticlePage() {
         <section className="bg-white border border-neutral-200/80 rounded-2xl p-6 space-y-4">
           <h3 className="text-sm font-bold text-neutral-900 uppercase tracking-wider">Related Growth &amp; Patient Guides</h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-            {BLOGS.filter(b => b.slug !== article.slug).slice(0, 4).map((b) => (
+            {BLOGS.filter(b => b && b.slug && b.slug !== article.slug).slice(0, 4).map((b) => (
               <Link 
                 key={b.slug}
                 to={`/blog/${b.slug}`}

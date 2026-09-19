@@ -90,7 +90,7 @@ export const BLOGS_PART3 = [
         />
       </div>
     )
-  },,
+  },
     {
     slug: "full-mouth-dental-implants-cost-on-emi-india-guide",
     title: "Full Mouth Dental Implants Cost on EMI in India: All-on-4 vs All-on-6 (2026)",
@@ -178,7 +178,7 @@ export const BLOGS_PART3 = [
         />
       </div>
     )
-  },,
+  },
     {
     slug: "dental-equipment-on-emi-india-doctor-loan-guide",
     title: "Dental Equipment on EMI in India: How to Finance Chairs, RVG, CBCT & Lasers (2026)",
@@ -367,7 +367,7 @@ export const BLOGS_PART3 = [
         </div>
       </div>
     )
-  },,
+  },
     {
     slug: "hair-transplant-cost-on-emi-india-fue-dhi-guide",
     title: "Hair Transplant Cost on EMI in India: FUE vs DHI Per Graft Pricing (2026)",
@@ -490,7 +490,7 @@ export const BLOGS_PART3 = [
         />
       </div>
     )
-  },,
+  },
     {
     slug: "lasik-contoura-vision-eye-surgery-cost-emi-india-guide",
     title: "LASIK & Contoura Vision Eye Surgery Cost on EMI in India (2026): Complete Guide",
@@ -636,7 +636,7 @@ export const BLOGS_PART3 = [
         />
       </div>
     )
-  },,
+  },
     {
     slug: "ivf-fertility-treatment-cost-on-emi-india-guide",
     title: "IVF Cost on EMI in India: Per Cycle Pricing, Insurance Gaps & Monthly Financing (2026)",
@@ -782,7 +782,7 @@ export const BLOGS_PART3 = [
         />
       </div>
     )
-  },,
+  },
     {
     slug: "knee-hip-replacement-surgery-cost-emi-india-guide",
     title: "Knee and Hip Replacement Surgery Cost on EMI in India: City-Wise Guide (2026)",
@@ -824,7 +824,7 @@ export const BLOGS_PART3 = [
         <PatientLeadForm defaultTreatment="Multiple Implants / Full Mouth" sourceArticle="Knee Hip Replacement EMI Guide Bottom" />
       </div>
     )
-  },,
+  },
     {
     slug: "bariatric-weight-loss-surgery-cost-emi-india-guide",
     title: "Bariatric and Weight Loss Surgery Cost on EMI in India: Sleeve, Bypass and Band (2026)",
@@ -866,7 +866,7 @@ export const BLOGS_PART3 = [
         <PatientLeadForm defaultTreatment="Multiple Implants / Full Mouth" sourceArticle="Bariatric Surgery EMI Guide Bottom" />
       </div>
     )
-  },,
+  },
     {
     slug: "rhinoplasty-cosmetic-surgery-cost-emi-india-guide",
     title: "Rhinoplasty and Cosmetic Surgery Cost on EMI in India: Complete Financing Guide (2026)",
@@ -903,7 +903,7 @@ export const BLOGS_PART3 = [
         <PatientLeadForm defaultTreatment="Braces / Smile Makeover" sourceArticle="Cosmetic Surgery EMI Guide Bottom" />
       </div>
     )
-  },,
+  },
     {
     slug: "braces-cost-emi-india-adults-teens-complete-guide",
     title: "Braces Cost on EMI in India for Adults and Teens: Metal, Ceramic and Lingual (2026)",

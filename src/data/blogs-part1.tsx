@@ -85,7 +85,7 @@ export const BLOGS_PART1 = [
         </div>
       </div>
     )
-  },,
+  },
     {
     slug: "aligners-cost-in-patna",
     title: "How Much Do Clear Aligners Cost in Patna? (2026 Price List)",
@@ -166,7 +166,7 @@ export const BLOGS_PART1 = [
         </p>
       </div>
     )
-  },,
+  },
     {
     slug: "is-teeth-cleaning-safe",
     title: "Is Professional Teeth Cleaning Safe? Myths vs. Facts Revealed",
@@ -217,7 +217,7 @@ export const BLOGS_PART1 = [
         </div>
       </div>
     )
-  },,
+  },
     {
     slug: "gap-closure-cost-in-patna",
     title: "Teeth Gap Filling Cost & Treatment in Patna: Diastema Closure Price Guide",
@@ -298,7 +298,7 @@ export const BLOGS_PART1 = [
         </ol>
       </div>
     )
-  },,
+  },
     {
     slug: "dental-treatment-emi-cost-calculator-india",
     title: "Dental Treatment on EMI in India: Cost Calculator & Monthly Plans [2026 Guide]",
@@ -385,7 +385,7 @@ export const BLOGS_PART1 = [
         </div>
       </div>
     )
-  },,
+  },
     {
     slug: "dental-implants-cost-on-emi-india",
     title: "Dental Implants Cost on EMI in India (2026): Single Tooth to Full Mouth Monthly Plans",
@@ -533,7 +533,7 @@ export const BLOGS_PART1 = [
         </div>
       </div>
     )
-  },,
+  },
     {
     slug: "how-clinics-offer-patient-emi-financing-india",
     title: "How Dental Clinics Offer EMI Financing to Patients Without Taking Credit Risk",
@@ -569,7 +569,7 @@ export const BLOGS_PART1 = [
         </ul>
       </div>
     )
-  },,
+  },
     {
     slug: "clear-aligners-cost-on-emi-india",
     title: "Invisible Clear Aligners Cost on EMI in India: Price Comparison & Monthly Plans",
@@ -631,7 +631,7 @@ export const BLOGS_PART1 = [
         </div>
       </div>
     )
-  },,
+  },
     {
     slug: "root-canal-and-crown-cost-on-emi-india",
     title: "Root Canal & Zirconia Crown Cost on EMI: Complete Payment Breakdown",
@@ -655,7 +655,7 @@ export const BLOGS_PART1 = [
         </p>
       </div>
     )
-  },,
+  },
     {
     slug: "dental-implants-cost-patna-emi",
     title: "Dental Implants Cost in Patna: Full Breakdown + EMI Options (2026)",
@@ -731,7 +731,7 @@ export const BLOGS_PART1 = [
         </p>
       </div>
     )
-  },,
+  },
     {
     slug: "best-dental-clinic-patna",
     title: "Best Dental Clinics in Patna 2026: Ratings, Costs & EMI Options",
@@ -813,7 +813,7 @@ export const BLOGS_PART1 = [
         </ul>
       </div>
     )
-  },,
+  },
     {
     slug: "no-cost-emi-dental-treatments-prodent-patna",
     title: "Flexible-EMI Dental Treatments at PRODENT Patna: Patient Financing Guide",
@@ -871,7 +871,7 @@ export const BLOGS_PART1 = [
         </div>
       </div>
     )
-  },,
+  },
     {
     slug: "clinaza-patient-financing-your-dentist-patna",
     title: "Clinaza Patient Financing at YOUR DENTIST Patna: Complete Dental EMI Guide",
@@ -918,7 +918,7 @@ export const BLOGS_PART1 = [
         </div>
       </div>
     )
-  },,
+  },
     {
     slug: "dentist-social-media-marketing-guide-india",
     title: "Dentist Social Media Marketing 2026: How Dental Clinics Attract High-Ticket Patients",
@@ -1246,7 +1246,7 @@ export const BLOGS_PART1 = [
         </div>
       </div>
     )
-  },,
+  },
     {
     slug: "dental-loans-in-india-medical-financing",
     title: "Dental Loans in India: Patient Financing vs Medical Loans — Complete 2026 Guide",
@@ -1372,7 +1372,7 @@ export const BLOGS_PART1 = [
         </div>
       </div>
     )
-  },,
+  },
     {
     slug: "how-to-offer-emi-to-dental-patients-india",
     title: "How to Offer EMI to Dental Patients in India: Complete Clinic Owner Guide (2026)",
@@ -1461,7 +1461,7 @@ export const BLOGS_PART1 = [
         </div>
       </div>
     )
-  },,
+  },
     {
     slug: "full-mouth-dental-implants-cost-on-emi-india",
     title: "Full Mouth Dental Implants Cost on EMI in India: All-on-4 vs All-on-6 Price Guide",
@@ -1538,7 +1538,7 @@ export const BLOGS_PART1 = [
         </div>
       </div>
     )
-  },,
+  },
     {
     slug: "invisalign-cost-on-emi-india",
     title: "Invisalign Cost on EMI in India (2026): Monthly Plans, Comparison & flexible Options",
@@ -1653,7 +1653,7 @@ export const BLOGS_PART1 = [
         </div>
       </div>
     )
-  },,
+  },
     {
     slug: "does-health-insurance-cover-dental-implants-india",
     title: "Does Health Insurance Cover Dental Implants in India? (2026 Truth & EMI Solutions)",
@@ -1747,7 +1747,7 @@ export const BLOGS_PART1 = [
         </div>
       </div>
     )
-  },,
+  },
     {
     slug: "free-website-for-dentists-india-guide",
     title: "Free Website for Dentists in India (2026): How to Build a High-Converting Dental Clinic Page in 10 Mins",
@@ -1874,7 +1874,7 @@ export const BLOGS_PART1 = [
         </div>
       </div>
     )
-  },,
+  },
     {
     slug: "zirconia-crown-cost-on-emi-india",
     title: "Zirconia Crown Cost on EMI in India (2026): Tooth Cap Prices, Warranty & Monthly Plans",
@@ -1989,7 +1989,7 @@ export const BLOGS_PART1 = [
         </div>
       </div>
     )
-  },,
+  },
     {
     slug: "dental-veneers-and-smile-makeover-cost-on-emi-india",
     title: "Dental Veneers & Smile Makeover Cost on EMI in India (2026): E-Max, Composite & Monthly Plans",
@@ -2104,7 +2104,7 @@ export const BLOGS_PART1 = [
         </div>
       </div>
     )
-  },,
+  },
     {
     slug: "best-dental-clinic-management-software-india",
     title: "Best Dental Clinic Management Software in India (2026 Comparison & Free Guide)",
@@ -2290,7 +2290,7 @@ export const BLOGS_PART1 = [
         </div>
       </div>
     )
-  },,
+  },
     {
     slug: "how-to-start-a-dental-clinic-in-india-setup-cost-checklist",
     title: "How to Start a Dental Clinic in India: Setup Cost & Equipment Checklist (2026 Guide)",
@@ -2444,7 +2444,7 @@ export const BLOGS_PART1 = [
         </div>
       </div>
     )
-  },,
+  },
     {
     slug: "full-mouth-rehabilitation-all-on-4-guide-india",
     title: "Full Mouth Dental Implants Cost on EMI in India (All-on-4 & All-on-6 Guide 2026)",
@@ -2558,7 +2558,7 @@ export const BLOGS_PART1 = [
         </div>
       </div>
     )
-  },,
+  },
     {
     slug: "how-to-get-more-dental-patients-india-growth-guide",
     title: "How to Get More Dental Patients: 7 Proven Growth Strategies for Indian Dentists (2026)",
@@ -2669,7 +2669,7 @@ export const BLOGS_PART1 = [
         </div>
       </div>
     )
-  },,
+  },
     {
     slug: "dental-equipment-loan-emi-india-guide",
     title: "Dental Equipment on EMI in India: Complete Loan & Financing Guide (2026)",
@@ -2831,7 +2831,7 @@ export const BLOGS_PART1 = [
         </div>
       </div>
     )
-  },,
+  },
     {
     slug: "how-to-offer-0-percent-emi-in-dental-clinic-india",
     title: "How to Offer flexible EMI in Your Dental Clinic in India (2026 Guide for Dentists)",
@@ -2947,7 +2947,7 @@ export const BLOGS_PART1 = [
         </div>
       </div>
     )
-  },,
+  },
     {
     slug: "dental-consent-form-format-india-free-guide",
     title: "Dental Consent Form Formats in India: Free Legal Guidelines & Digital Workflow (2026)",
@@ -3061,7 +3061,7 @@ export const BLOGS_PART1 = [
         </div>
       </div>
     )
-  },,
+  },
     {
     slug: "can-i-pay-root-canal-and-crown-on-emi-india",
     title: "Can I Pay for Root Canal Treatment & Crown on EMI in India? (Cost Breakdown 2026)",
@@ -3170,7 +3170,7 @@ export const BLOGS_PART1 = [
         </div>
       </div>
     )
-  },,
+  },
     {
     slug: "dental-clinic-whatsapp-marketing-software-india",
     title: "WhatsApp Marketing & Patient Recall Software for Dental Clinics in India (Free 2026 Guide)",
@@ -3286,7 +3286,7 @@ export const BLOGS_PART1 = [
         </div>
       </div>
     )
-  },,
+  },
     {
     slug: "free-digital-dental-prescription-maker-emr-software-india",
     title: "Free Digital Dental Prescription Maker & EMR Software for Indian Dentists (2026)",
@@ -3375,7 +3375,7 @@ export const BLOGS_PART1 = [
         </div>
       </div>
     )
-  },,
+  },
     {
     slug: "teeth-alignment-cost-braces-vs-aligners-emi-india",
     title: "Teeth Alignment Cost in India: Braces vs Clear Aligners on EMI (2026 Price Guide)",
@@ -3504,7 +3504,7 @@ export const BLOGS_PART1 = [
         </div>
       </div>
     )
-  },,
+  },
     {
     slug: "wisdom-tooth-surgery-extraction-cost-on-emi-india",
     title: "Wisdom Tooth Surgery & Impacted Molar Extraction Cost on EMI in India (2026 Guide)",
@@ -3613,7 +3613,7 @@ export const BLOGS_PART1 = [
         </div>
       </div>
     )
-  },,
+  },
     {
     slug: "bone-grafting-sinus-lift-cost-on-emi-dental-implants-india",
     title: "Bone Grafting & Sinus Lift Cost on EMI for Dental Implants in India (2026 Guide)",
@@ -3722,7 +3722,7 @@ export const BLOGS_PART1 = [
         </div>
       </div>
     )
-  },,
+  },
     {
     slug: "tax-benefits-dental-clinic-equipment-loans-section-32-india",
     title: "Tax Benefits on Dental Equipment & Clinic Setup Loans in India (Section 32 Guide 2026)",
@@ -3847,7 +3847,7 @@ export const BLOGS_PART1 = [
         </div>
       </div>
     )
-  },,
+  },
     {
     slug: "medical-loans-in-india-treatment-financing-guide",
     title: "Instant Medical Loans in India: Treatment Financing & Emergency Health EMIs (2026 Guide)",

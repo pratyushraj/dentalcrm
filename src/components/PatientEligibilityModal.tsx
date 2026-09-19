@@ -9,7 +9,8 @@ import {
   Loader2, 
   Lock, 
   Copy,
-  Check
+  Check,
+  Eye
 } from 'lucide-react';
 import { toast } from 'sonner';
 import { emailNotificationService } from '@/services/emailNotificationService';
@@ -120,6 +121,20 @@ export const PatientEligibilityModal: React.FC<PatientEligibilityModalProps> = (
     setCopied(true);
     toast.success('Secure link copied to clipboard!');
     setTimeout(() => setCopied(false), 2500);
+  };
+
+  const handlePreviewMode = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setName('Rahul Sharma');
+    setMobile('9876543210');
+    setTreatment('Dental Implants');
+    setAmount('₹1,20,000');
+    setCustomerLink('https://easycred.co.in/loan/invite?t=4f5c35f59772ee1325c2907ed1d09947e83ecb4f3399e1e4');
+    setMaskedMobile('••••••3210');
+    setIsSuccess(true);
+    setIsPaused(true); // Default paused so user can freely inspect UI without redirecting
+    setCountdown(5);
+    toast.info('Viewing loan confirmation in Demo Preview mode (no OTP sent)');
   };
 
   const handleReset = () => {
@@ -370,6 +385,17 @@ export const PatientEligibilityModal: React.FC<PatientEligibilityModalProps> = (
                   </>
                 )}
               </button>
+
+              <div className="flex items-center justify-center pt-1">
+                <button
+                  type="button"
+                  onClick={handlePreviewMode}
+                  className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-slate-400 hover:text-[#0867E8] transition-colors py-1 px-2.5 rounded-lg hover:bg-blue-50/50 cursor-pointer"
+                >
+                  <Eye size={13} className="text-slate-400" />
+                  <span>Preview Confirmation UI (Demo Mode — No OTP)</span>
+                </button>
+              </div>
 
               <p className="text-[10px] text-slate-400 text-center leading-relaxed">
                 🔒 By submitting, you agree to receive digital financing verification via Clinaza and partnered RBI-regulated lending infrastructure.

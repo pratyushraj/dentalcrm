@@ -18,6 +18,7 @@ const CityLandingPage = lazy(() => import("@/pages/CityLandingPage"));
 const PitchDeckPage = lazy(() => import("@/pages/PitchDeckPage"));
 const DhanliftRedirectPage = lazy(() => import("@/pages/DhanliftRedirectPage"));
 const FreeToolsHub = lazy(() => import("@/pages/FreeToolsHub"));
+const LoanDemoPage = lazy(() => import("@/pages/LoanDemoPage"));
 
 export default function AppRoutes() {
   return (
@@ -39,6 +40,8 @@ export default function AppRoutes() {
           <Route path="/loans" element={<LazyRoute><DhanliftRedirectPage /></LazyRoute>} />
           <Route path="/apply" element={<LazyRoute><DhanliftRedirectPage /></LazyRoute>} />
           <Route path="/dhanlift" element={<LazyRoute><DhanliftRedirectPage /></LazyRoute>} />
+          <Route path="/demo/loan" element={<LazyRoute><LoanDemoPage /></LazyRoute>} />
+          <Route path="/loan/demo" element={<LazyRoute><LoanDemoPage /></LazyRoute>} />
 
           {/* Review Assistant Landing Page */}
           <Route path="/review/assist" element={<LazyRoute><ReviewAssistant /></LazyRoute>} />

@@ -27,6 +27,7 @@ import {
   Video
 } from 'lucide-react';
 import { emailNotificationService } from '../services/emailNotificationService';
+import { easycredService } from '../services/easycredService';
 import { toast } from 'sonner';
 import { SEOHead } from '@/components/seo/SEOHead';
 import { BankSvgLogo } from '@/components/BankSvgLogos';
@@ -198,10 +199,16 @@ export default function CrmHomepage() {
     }
     console.log(`[Analytics Event]: ${eventName}`, payload || {});
   };
-  const handlePatientEligibilitySubmit = (e: React.FormEvent) => {
+  const handlePatientEligibilitySubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!patientData.name || !patientData.mobile) {
       toast.error('Please fill in required fields');
+      return;
+    }
+
+    const cleanMobile = patientData.mobile.replace(/\D/g, '').slice(-10);
+    if (cleanMobile.length < 10) {
+      toast.error('Please enter a valid 10-digit mobile number');
       return;
     }
 
@@ -214,7 +221,7 @@ export default function CrmHomepage() {
     // Send email notification
     emailNotificationService.sendNotification('New Patient Eligibility Form Checked', {
       patientName: patientData.name,
-      mobile: patientData.mobile,
+      mobile: cleanMobile,
       cibilScoreRange: patientData.cibilScore,
       employmentType: patientData.employmentType,
       treatmentNeeded: patientData.treatment,
@@ -222,10 +229,24 @@ export default function CrmHomepage() {
       loanAmountRange: patientData.amount,
     });
 
-    // Immediately redirect to Dhanlift affiliate UTM link with mobile prefill parameters
-    const mob = encodeURIComponent(patientData.mobile);
-    const targetUrl = `https://www.dhanlift.com/loans/personal-loan-for-salaried-employees/clinaza-patient-treatment-loan?utm_source=affiliate&utm_medium=partner&utm_campaign=partner-campaign-aff-4&utm_term=03-09-2026&mobile=${mob}&phone=${mob}&phoneNumber=${mob}&aff_sub=${mob}`;
-    window.location.href = targetUrl;
+    toast.success('Initiating financing application...');
+
+    try {
+      const result = await easycredService.initiateApplication({
+        customerName: patientData.name.trim(),
+        mobile: cleanMobile,
+        productCode: 'ONLINE_PERSONAL'
+      });
+
+      const redirectUrl = (result.success && result.data?.customerLink)
+        ? result.data.customerLink
+        : (result.fallbackLink || `https://easycred.co.in/loan/apply?product=PERSONAL_LOAN&mobile=${cleanMobile}&name=${encodeURIComponent(patientData.name)}`);
+
+      window.location.href = redirectUrl;
+    } catch (err) {
+      const fallbackUrl = `https://easycred.co.in/loan/apply?product=PERSONAL_LOAN&mobile=${cleanMobile}&name=${encodeURIComponent(patientData.name)}`;
+      window.location.href = fallbackUrl;
+    }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -514,12 +535,12 @@ export default function CrmHomepage() {
               </div>
 
               <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-[-0.025em] leading-[1.18] text-[#0B2450]">
-                Don't let treatment cost<br />
-                <span className="text-[#0867E8]">stop your patients.</span>
+                Dental Treatment on EMI.<br />
+                <span className="text-[#0867E8]">Zero patient drop-offs.</span>
               </h1>
 
               <p className="text-xs sm:text-base text-slate-600 font-medium leading-relaxed max-w-xl">
-                Help eligible patients access instant treatment financing &amp; flexible monthly EMIs from <strong className="text-[#0B2450] font-bold">₹30,000 to ₹5,00,000</strong> for Dental Implants, Hair Transplants, LASIK, IVF, and Elective Surgeries.
+                Offer instant point-of-care patient financing &amp; medical dental loans from <strong className="text-[#0B2450] font-bold">₹30,000 to ₹5,00,000</strong> for Dental Implants, Braces, Aligners, Hair Transplants, and Elective Surgeries.
               </p>
 
               <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 pt-1">
@@ -1987,28 +2008,33 @@ export default function CrmHomepage() {
               <h4 className="text-xs font-black uppercase tracking-wider text-[#0B2450]">Patient EMI Guides</h4>
               <ul className="space-y-2 text-xs text-slate-600">
                 <li>
+                  <Link to="/blog/dental-treatment-on-emi-india-guide" className="hover:text-[#0867E8] font-semibold text-slate-700 transition-colors">
+                    Dental Treatment on EMI Guide
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/blog/dental-loans-in-india-medical-financing" className="hover:text-[#0867E8] font-semibold text-slate-700 transition-colors">
+                    Dental Loans &amp; Medical Financing
+                  </Link>
+                </li>
+                <li>
                   <Link to="/blog/dental-implants-cost-on-emi-india" className="hover:text-[#0867E8] transition-colors">
                     Dental Implants Cost on EMI
                   </Link>
                 </li>
                 <li>
+                  <Link to="/blog/full-mouth-dental-implants-cost-on-emi-india" className="hover:text-[#0867E8] transition-colors">
+                    Full Mouth Implants Cost on EMI
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/blog/gap-closure-cost-in-patna" className="hover:text-[#0867E8] transition-colors">
+                    Teeth Gap Filling &amp; Treatment Cost
+                  </Link>
+                </li>
+                <li>
                   <Link to="/blog/hair-transplant-cost-on-emi-india-guide" className="hover:text-[#0867E8] transition-colors">
                     Hair Transplant EMI Guide
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/blog/lasik-eye-surgery-cost-on-emi-india-guide" className="hover:text-[#0867E8] transition-colors">
-                    LASIK &amp; Eye Surgery Financing
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/blog/ivf-cost-on-emi-fertility-treatment-financing-india" className="hover:text-[#0867E8] transition-colors">
-                    IVF &amp; Fertility EMI Guide
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/blog/knee-replacement-surgery-cost-on-emi-india" className="hover:text-[#0867E8] transition-colors">
-                    Knee Replacement EMI India
                   </Link>
                 </li>
                 <li>

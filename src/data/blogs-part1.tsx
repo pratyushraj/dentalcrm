@@ -220,17 +220,17 @@ export const BLOGS_PART1 = [
   },,
     {
     slug: "gap-closure-cost-in-patna",
-    title: "Teeth Gap Closure Cost in Patna: Treatments Compared",
+    title: "Teeth Gap Filling Cost & Treatment in Patna: Diastema Closure Price Guide",
     category: "Aesthetics",
     readTime: "4 min read",
     publishDate: "June 24, 2026",
     author: "Dr. Aryan Parmar",
-    summary: "Want to fix gaps in your front teeth? Compare costs, duration, and durability of composite bonding, porcelain veneers, and invisible aligners in Patna.",
+    summary: "Want to fix gaps in your front teeth? Compare costs, duration, and durability of teeth gap filling with composite bonding, porcelain veneers, and invisible aligners in Patna.",
     featuredImage: "/assets/yourdentist/clinic_in_action.jpg",
-    metaDescription: "How much does teeth gap closure cost in Patna? Read a detailed comparison of composite bonding, veneers, and invisible aligners at YOUR DENTIST.",
+    metaDescription: "How much does teeth gap filling and treatment cost in Patna? Compare teeth gaping treatment prices for composite bonding, veneers, and aligners at YOUR DENTIST.",
     faqs: [
       {
-        question: "What is the teeth gap closure cost in Patna?",
+        question: "What is the teeth gap filling and closure cost in Patna?",
         answer: "Gap closure in Patna starts from ₹999 for cosmetic composite bonding (single session) and ₹12,000 per tooth for high-durability porcelain veneers. Aligner costs start at ₹45,000."
       },
       {

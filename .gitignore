@@ -107,3 +107,12 @@ verified_leads_*.csv
 src/scripts/outreach/__pycache__/
 src/scripts/outreach/logs/
 src/scripts/outreach/dental_leads_master.db
+
+# Temp scrapers & lead batches
+batch*.json
+fresh_*.json
+new_dentists_*.*
+master_nbfc_directory.json
+target_*.json
+src/all_sent_emails.json
+*.DS_Store

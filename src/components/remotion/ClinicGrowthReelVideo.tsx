@@ -174,7 +174,7 @@ export const ClinicGrowthReelComposition: React.FC<ClinicGrowthReelProps> = ({
   const { fps } = useVideoConfig();
 
   // 120 frames per slide (4s each, 6 slides = 720 frames / 24s)
-  const SLIDE_DURATION = 120;
+  const SLIDE_DURATION = 145;
 
   return (
     <AbsoluteFill
@@ -221,29 +221,42 @@ export const ClinicGrowthReelComposition: React.FC<ClinicGrowthReelProps> = ({
 };
 
 // ══════════════════════════════════════════════════════════════════
-// SCENE 1: VIRAL HOOK (DENTIST + ENLARGED TEXT & VISUALS)
+// SCENE 1: VIRAL HOOK (FULL-WIDTH 2-LINE COMPOSITION)
 // ══════════════════════════════════════════════════════════════════
 const Slide1Hook: React.FC<{ frame: number; fps: number }> = ({ frame, fps }) => {
-  const badgeSpring = spring({ frame, fps, config: { damping: 10 } });
-  const meterDrop = interpolate(frame, [15, 60], [100, 30], { extrapolateRight: 'clamp' });
-  const pulseScale = Math.sin(frame / 6) * 0.05 + 1;
+  // Sequential motion timing:
+  // 0.0s (frame 0)  -> Top Badge
+  // 0.2s (frame 6)  -> Headline Kinetic Title
+  // 0.5s (frame 15) -> Main Card
+  // 0.9s (frame 27) -> Key Value & Barrier
+  // 1.3s (frame 39) -> Supporting Line & Playbook Bottom
+  const badgeSpring = spring({ frame, fps, config: { damping: 12 } });
+  const cardSpring = spring({ frame: frame - 15, fps, config: { damping: 12 } });
+  const keyItemsSpring = spring({ frame: frame - 27, fps, config: { damping: 12 } });
+  const bottomSpring = spring({ frame: frame - 39, fps, config: { damping: 12 } });
   const doctorScale = interpolate(frame, [0, 120], [1.0, 1.08]);
 
-  const hookWords = [
-    { text: 'Why' },
-    { text: 'Are' },
-    { text: '70%', highlight: true, color: '#EF4444' },
-    { text: 'Of' },
-    { text: 'Dental' },
-    { text: 'Patients' },
-    { text: 'Leaving', highlight: true, color: '#F87171' },
-    { text: 'Without' },
-    { text: 'Treatment? ❌' },
+  // Case acceptance drops dynamically from 78% down to 31% with a dramatic pulse
+  const meterDrop = interpolate(frame, [15, 60], [78, 31], { extrapolateRight: 'clamp' });
+  const pulseScale = interpolate(frame, [58, 66, 74], [1, 1.15, 1], { extrapolateRight: 'clamp' });
+
+  const line1Words = [
+    { text: 'WHY' },
+    { text: 'DO' },
+    { text: 'PATIENTS', highlight: true, color: '#EF4444' },
+    { text: 'SAY' },
+  ];
+
+  const line2Words = [
+    { text: '“I’LL' },
+    { text: 'THINK' },
+    { text: 'ABOUT' },
+    { text: 'IT”?' },
   ];
 
   return (
     <AbsoluteFill>
-      {/* Cinematic Background: Real Dentist in Clinic */}
+      {/* Cinematic Background: Real Dentist and Patient in Clinic */}
       <Img
         src={staticFile('assets/doctor-consult-real.png')}
         style={{
@@ -252,8 +265,9 @@ const Slide1Hook: React.FC<{ frame: number; fps: number }> = ({ frame, fps }) =>
           width: '100%',
           height: '100%',
           objectFit: 'cover',
+          objectPosition: 'center 22%',
           transform: `scale(${doctorScale})`,
-          filter: 'brightness(0.35) contrast(1.15)',
+          filter: 'brightness(0.38) contrast(1.15)',
         }}
       />
 
@@ -261,32 +275,15 @@ const Slide1Hook: React.FC<{ frame: number; fps: number }> = ({ frame, fps }) =>
 
       {/* Full Safe Zone Container (Top 220px to Bottom 1560px) */}
       <div style={INSTA_SAFE_CONTAINER}>
-        {/* TOP SECTION: Badges + Big Kinetic Headline */}
+        {/* TOP SECTION: Clinical Dilemma Badge + Full-Width 2-Line Kinetic Headline */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
-          <div style={{ transform: `scale(${badgeSpring})`, display: 'flex', flexWrap: 'wrap', gap: 12 }}>
+          <div style={{ transform: `scale(${badgeSpring})`, display: 'flex' }}>
             <div
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: 8,
-                padding: '10px 22px',
-                borderRadius: 999,
-                backgroundColor: 'rgba(15, 23, 42, 0.94)',
-                border: '1.5px solid rgba(255, 255, 255, 0.3)',
-              }}
-            >
-              <span style={{ fontSize: 18 }}>👨‍⚕️</span>
-              <span style={{ fontSize: 16, fontWeight: 800, color: '#F8FAFC', letterSpacing: 0.5 }}>
-                DR. ARYAN PARMAR · DENTAL SURGEON
-              </span>
-            </div>
-
-            <div
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: 8,
-                padding: '10px 22px',
+                padding: '10px 24px',
                 borderRadius: 999,
                 backgroundColor: 'rgba(239, 68, 68, 0.28)',
                 border: '2px solid #EF4444',
@@ -297,141 +294,182 @@ const Slide1Hook: React.FC<{ frame: number; fps: number }> = ({ frame, fps }) =>
                 boxShadow: '0 0 25px rgba(239, 68, 68, 0.5)',
               }}
             >
-              <span>🚨</span> CLINIC REVENUE CRISIS
+              <span>🩺</span> THE PRACTICE CHALLENGE
             </div>
           </div>
 
-          <KineticTitle words={hookWords} frame={frame} fps={fps} delay={5} fontSize={52} />
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+            <KineticTitle words={line1Words} frame={frame} fps={fps} delay={6} fontSize={54} />
+            <KineticTitle words={line2Words} frame={frame} fps={fps} delay={18} fontSize={54} />
+          </div>
         </div>
 
-        {/* CENTER SECTION: Large Conversion & Revenue Diagnostic Dashboard */}
+        {/* LOWER SECTION: Grounded Patient Hesitation & Acceptance Card */}
         <div
           style={{
-            backgroundColor: 'rgba(15, 23, 42, 0.95)',
-            border: '2.5px solid rgba(239, 68, 68, 0.5)',
-            borderRadius: 32,
-            padding: '32px 30px',
-            backdropFilter: 'blur(22px)',
-            boxShadow: '0 25px 60px rgba(0,0,0,0.9)',
+            marginTop: 48,
+            backgroundColor: 'rgba(15, 23, 42, 0.96)',
+            border: '2px solid rgba(239, 68, 68, 0.5)',
+            borderRadius: 30,
+            padding: '26px 28px',
+            backdropFilter: 'blur(24px)',
+            boxShadow: '0 25px 60px rgba(0,0,0,0.95)',
+            transform: `scale(${cardSpring}) translateY(${interpolate(cardSpring, [0, 1], [35, 0])}px)`,
+            opacity: interpolate(frame, [14, 24], [0, 1], { extrapolateRight: 'clamp' }),
             display: 'flex',
             flexDirection: 'column',
-            gap: 22,
+            gap: 18,
           }}
         >
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <div>
-              <div style={{ fontSize: 16, fontWeight: 900, color: '#94A3B8', letterSpacing: 1.5 }}>
-                DIAGNOSTIC AUDIT
-              </div>
-              <div style={{ fontSize: 26, fontWeight: 900, color: '#FFFFFF', marginTop: 2 }}>Case Acceptance Rate</div>
+          {/* Patient Dialogue Box */}
+          <div
+            style={{
+              backgroundColor: 'rgba(255, 255, 255, 0.08)',
+              borderRadius: 20,
+              padding: '18px 24px',
+              borderLeft: '5px solid #EF4444',
+            }}
+          >
+            <div style={{ fontSize: 16, fontWeight: 900, color: '#94A3B8', letterSpacing: 1.2, marginBottom: 6 }}>
+              PATIENT HESITATION
             </div>
-            <span
-              style={{
-                fontSize: 50,
-                fontWeight: 900,
-                color: '#EF4444',
-                transform: `scale(${pulseScale})`,
-                textShadow: '0 0 25px rgba(239, 68, 68, 0.7)',
-              }}
-            >
-              {Math.round(meterDrop)}%
-            </span>
+            <div style={{ fontSize: 26, fontWeight: 800, color: '#FFFFFF', fontStyle: 'italic', lineHeight: 1.3 }}>
+              “Doctor, let me think about it and get back to you.”
+            </div>
           </div>
 
-          {/* Animated Plummeting Progress Bar */}
-          <div>
+          {/* Dynamic Animated Loading Progress Bar */}
+          <div
+            style={{
+              backgroundColor: 'rgba(255, 255, 255, 0.06)',
+              borderRadius: 20,
+              padding: '18px 22px',
+              border: '1px solid rgba(255, 255, 255, 0.1)',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: 12,
+              transform: `scale(${keyItemsSpring})`,
+              opacity: interpolate(frame, [20, 30], [0, 1], { extrapolateRight: 'clamp' }),
+            }}
+          >
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                <span style={{ fontSize: 20 }}>📊</span>
+                <span style={{ fontSize: 16, fontWeight: 900, color: '#CBD5E1', letterSpacing: 1.2 }}>
+                  DIAGNOSTIC AUDIT: CASE ACCEPTANCE
+                </span>
+              </div>
+              <span
+                style={{
+                  fontSize: 28,
+                  fontWeight: 900,
+                  color: '#EF4444',
+                  transform: `scale(${pulseScale})`,
+                  textShadow: '0 0 22px rgba(239, 68, 68, 0.8)',
+                }}
+              >
+                {Math.round(meterDrop)}%
+              </span>
+            </div>
+
+            {/* Glowing animated loading bar with shimmer */}
             <div
               style={{
-                height: 24,
+                height: 20,
                 width: '100%',
-                backgroundColor: 'rgba(255,255,255,0.12)',
+                backgroundColor: 'rgba(255, 255, 255, 0.12)',
                 borderRadius: 999,
                 overflow: 'hidden',
-                boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.5)',
+                position: 'relative',
+                boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.6)',
               }}
             >
               <div
                 style={{
                   height: '100%',
                   width: `${meterDrop}%`,
-                  background: 'linear-gradient(90deg, #EF4444, #F87171)',
+                  background: 'linear-gradient(90deg, #DC2626 0%, #EF4444 70%, #F87171 100%)',
                   borderRadius: 999,
-                  boxShadow: '0 0 22px rgba(239, 68, 68, 0.95)',
+                  boxShadow: '0 0 20px rgba(239, 68, 68, 0.9)',
                 }}
               />
             </div>
+
             <div
               style={{
                 display: 'flex',
                 justifyContent: 'space-between',
-                marginTop: 12,
                 fontSize: 16,
                 fontWeight: 800,
               }}
             >
-              <span style={{ color: '#EF4444' }}>📉 Average Clinic: 30%</span>
-              <span style={{ color: '#10B981' }}>🏆 Top Practice: 85%+</span>
+              <span style={{ color: '#EF4444' }}>📉 Average Clinic: ~30%</span>
+              <span style={{ color: '#10B981' }}>🏆 Target Benchmark: 75%+</span>
             </div>
           </div>
 
-          {/* Revenue Breakdown Stat Grid */}
+          {/* Root Cause & Treatment Acceptance Reality */}
           <div
             style={{
               display: 'grid',
               gridTemplateColumns: '1fr 1fr',
               gap: 16,
               backgroundColor: 'rgba(255, 255, 255, 0.06)',
-              borderRadius: 22,
-              padding: '20px 22px',
+              borderRadius: 20,
+              padding: '18px 22px',
               border: '1px solid rgba(255, 255, 255, 0.1)',
+              transform: `scale(${keyItemsSpring})`,
+              opacity: interpolate(frame, [26, 36], [0, 1], { extrapolateRight: 'clamp' }),
             }}
           >
             <div>
-              <div style={{ fontSize: 15, color: '#94A3B8', fontWeight: 800 }}>UNACCEPTED CASES</div>
-              <div style={{ fontSize: 32, fontWeight: 900, color: '#F87171', marginTop: 4 }}>
-                ₹4,80,000<span style={{ fontSize: 16, color: '#94A3B8' }}>/mo</span>
+              <div style={{ fontSize: 16, color: '#94A3B8', fontWeight: 800 }}>THE #1 BARRIER</div>
+              <div style={{ fontSize: 26, fontWeight: 900, color: '#FCD34D', marginTop: 4 }}>
+                💳 Upfront Cost
               </div>
             </div>
             <div>
-              <div style={{ fontSize: 15, color: '#94A3B8', fontWeight: 800 }}>#1 PATIENT REASON</div>
-              <div style={{ fontSize: 26, fontWeight: 900, color: '#FCD34D', marginTop: 4 }}>
-                Upfront Cost (74%)
+              <div style={{ fontSize: 16, color: '#94A3B8', fontWeight: 800 }}>CLINIC REALITY</div>
+              <div style={{ fontSize: 26, fontWeight: 900, color: '#F87171', marginTop: 4 }}>
+                Delayed Treatment
               </div>
             </div>
           </div>
 
-          {/* Crisis Callout Box */}
+          {/* Subtitle tag - Enlarged text */}
           <div
             style={{
-              backgroundColor: 'rgba(239, 68, 68, 0.15)',
-              border: '1.5px solid rgba(239, 68, 68, 0.35)',
-              borderRadius: 18,
+              backgroundColor: 'rgba(239, 68, 68, 0.16)',
+              borderRadius: 16,
               padding: '14px 18px',
-              fontSize: 16,
+              fontSize: 18,
               color: '#FECACA',
-              fontWeight: 700,
+              fontWeight: 800,
               lineHeight: 1.4,
+              opacity: interpolate(frame, [38, 48], [0, 1], { extrapolateRight: 'clamp' }),
             }}
           >
-            ⚠️ 7 out of 10 walk-in patients leave without starting treatment due to upfront payment shock.
+            ⚠️ High-value treatment plans (Implants, Aligners, Crowns) often pause at the payment counter.
           </div>
         </div>
 
-        {/* BOTTOM SECTION: Key Insight Card (Sits safely above IG caption zone) */}
+        {/* BOTTOM SECTION: The Playbook Focus */}
         <div
           style={{
-            backgroundColor: 'rgba(15, 23, 42, 0.9)',
+            backgroundColor: 'rgba(15, 23, 42, 0.92)',
             border: '1.5px solid rgba(255,255,255,0.18)',
-            borderRadius: 26,
+            borderRadius: 24,
             padding: '22px 26px',
             backdropFilter: 'blur(18px)',
+            transform: `scale(${bottomSpring}) translateY(${interpolate(bottomSpring, [0, 1], [25, 0])}px)`,
+            opacity: interpolate(frame, [38, 48], [0, 1], { extrapolateRight: 'clamp' }),
           }}
         >
-          <div style={{ fontSize: 15, fontWeight: 900, color: '#FACC15', letterSpacing: 1.2, marginBottom: 8 }}>
-            💡 THE BREAKTHROUGH PLAYBOOK
+          <div style={{ fontSize: 16, fontWeight: 900, color: '#FACC15', letterSpacing: 1.2, marginBottom: 8 }}>
+            💡 THE PLAYBOOK
           </div>
-          <p style={{ fontSize: 22, color: '#F1F5F9', fontWeight: 600, lineHeight: 1.4, margin: 0 }}>
-            It’s NOT your clinical skills. Here are the 4 secrets top clinics use to 3X patient acceptance! ⬇️
+          <p style={{ fontSize: 25, color: '#F8FAFC', fontWeight: 800, lineHeight: 1.34, margin: 0 }}>
+            Remove the biggest barriers between diagnosis and treatment acceptance. ⬇️
           </p>
         </div>
       </div>
@@ -440,27 +478,32 @@ const Slide1Hook: React.FC<{ frame: number; fps: number }> = ({ frame, fps }) =>
 };
 
 // ══════════════════════════════════════════════════════════════════
-// SCENE 2: SECRET #1 - EMI COST SLASHER
+// SCENE 2: SECRET #1 - EMI COST SLASHER (FULL-WIDTH 2-LINE)
 // ══════════════════════════════════════════════════════════════════
 const Slide2EmiCost: React.FC<{ frame: number; fps: number }> = ({ frame, fps }) => {
-  const cardSpring = spring({ frame, fps, config: { damping: 11 } });
-  const slashProgress = interpolate(frame, [20, 42], [0, 100], { extrapolateRight: 'clamp' });
-  const emiReveal = spring({ frame: frame - 35, fps, config: { damping: 10 } });
+  const badgeSpring = spring({ frame, fps, config: { damping: 12 } });
+  const titleSpring = spring({ frame: frame - 6, fps, config: { damping: 12 } });
+  const cardSpring = spring({ frame: frame - 15, fps, config: { damping: 12 } });
+  const slashProgress = interpolate(frame, [25, 45], [0, 100], { extrapolateRight: 'clamp' });
+  const emiReveal = spring({ frame: frame - 28, fps, config: { damping: 10 } });
+  const benefitsSpring = spring({ frame: frame - 39, fps, config: { damping: 12 } });
+  const bottomSpring = spring({ frame: frame - 45, fps, config: { damping: 12 } });
   const bgScale = interpolate(frame, [0, 120], [1.0, 1.06]);
 
   return (
     <AbsoluteFill>
-      {/* Background Dentist Showing EMI on Tablet */}
+      {/* Background: AI Generated Indian Dentist presenting digital EMI options on tablet */}
       <Img
-        src={staticFile('assets/reels/patient_emi_tablet.jpg')}
+        src={staticFile('assets/reel/scene2-doctor-solution.jpg')}
         style={{
           position: 'absolute',
           inset: 0,
           width: '100%',
           height: '100%',
           objectFit: 'cover',
+          objectPosition: 'center 12%',
           transform: `scale(${bgScale})`,
-          filter: 'brightness(0.32) contrast(1.15)',
+          filter: 'brightness(0.38) contrast(1.15)',
         }}
       />
 
@@ -468,9 +511,9 @@ const Slide2EmiCost: React.FC<{ frame: number; fps: number }> = ({ frame, fps })
 
       {/* Full Safe Zone Container */}
       <div style={INSTA_SAFE_CONTAINER}>
-        {/* TOP SECTION: Secret Badge + Big Kinetic Headline */}
+        {/* TOP SECTION: Secret Badge + Full-Width 2-Line Balanced Headline */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
-          <div>
+          <div style={{ transform: `scale(${badgeSpring})`, display: 'flex' }}>
             <span
               style={{
                 padding: '10px 24px',
@@ -484,7 +527,7 @@ const Slide2EmiCost: React.FC<{ frame: number; fps: number }> = ({ frame, fps })
                 display: 'inline-block',
               }}
             >
-              SECRET #1: PATIENT FINANCING
+              SECRET #1: REMOVE THE PRICE BARRIER
             </span>
           </div>
 
@@ -494,11 +537,14 @@ const Slide2EmiCost: React.FC<{ frame: number; fps: number }> = ({ frame, fps })
               fontWeight: 900,
               color: '#FFFFFF',
               margin: 0,
-              lineHeight: 1.14,
+              lineHeight: 1.15,
               textShadow: '0 4px 22px rgba(0,0,0,0.95)',
+              transform: `scale(${titleSpring}) translateY(${interpolate(titleSpring, [0, 1], [25, 0])}px)`,
+              opacity: interpolate(frame, [5, 15], [0, 1], { extrapolateRight: 'clamp' }),
             }}
           >
-            Turn 80% Cost Hesitations Into <span style={{ color: '#34D399' }}>Instant "YES"</span> 💳
+            <div>TURN A ₹65,000 TREATMENT</div>
+            <div>INTO AN <span style={{ color: '#34D399' }}>EMI OPTION</span> 💳</div>
           </h2>
         </div>
 
@@ -506,33 +552,34 @@ const Slide2EmiCost: React.FC<{ frame: number; fps: number }> = ({ frame, fps })
         <div
           style={{
             backgroundColor: 'rgba(15, 23, 42, 0.95)',
-            border: '2.5px solid rgba(16, 185, 129, 0.5)',
-            borderRadius: 32,
-            padding: '32px 30px',
+            border: '2px solid rgba(16, 185, 129, 0.5)',
+            borderRadius: 30,
+            padding: '28px 28px',
             boxShadow: '0 25px 60px rgba(0,0,0,0.9)',
-            transform: `scale(${cardSpring})`,
+            transform: `scale(${cardSpring}) translateY(${interpolate(cardSpring, [0, 1], [35, 0])}px)`,
+            opacity: interpolate(frame, [14, 24], [0, 1], { extrapolateRight: 'clamp' }),
             backdropFilter: 'blur(22px)',
             display: 'flex',
             flexDirection: 'column',
-            gap: 22,
+            gap: 18,
           }}
         >
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-              <span style={{ fontSize: 28 }}>🦷</span>
+              <span style={{ fontSize: 26 }}>🦷</span>
               <span style={{ fontSize: 20, fontWeight: 900, color: '#E2E8F0' }}>
                 IMPLANTS &amp; INVISIBLE ALIGNERS
               </span>
             </div>
-            <span style={{ fontSize: 15, fontWeight: 900, color: '#10B981', backgroundColor: 'rgba(16, 185, 129, 0.18)', padding: '6px 14px', borderRadius: 999 }}>
-              HIGH TICKET
+            <span style={{ fontSize: 14, fontWeight: 900, color: '#10B981', backgroundColor: 'rgba(16, 185, 129, 0.18)', padding: '6px 14px', borderRadius: 999 }}>
+              HIGH-TICKET
             </span>
           </div>
 
           {/* Slashed Upfront Price */}
-          <div style={{ position: 'relative', display: 'inline-block', margin: '6px 0' }}>
-            <div style={{ fontSize: 48, fontWeight: 900, color: '#64748B' }}>
-              ₹65,000 <span style={{ fontSize: 24 }}>Upfront Barrier</span>
+          <div style={{ position: 'relative', display: 'inline-block', margin: '4px 0' }}>
+            <div style={{ fontSize: 44, fontWeight: 900, color: '#64748B' }}>
+              ₹65,000 <span style={{ fontSize: 22 }}>Upfront Barrier</span>
             </div>
             {/* Red Strike-Through Bar */}
             <div
@@ -540,7 +587,7 @@ const Slide2EmiCost: React.FC<{ frame: number; fps: number }> = ({ frame, fps })
                 position: 'absolute',
                 top: '50%',
                 left: -6,
-                height: 7,
+                height: 6,
                 width: `${slashProgress}%`,
                 backgroundColor: '#EF4444',
                 transform: 'rotate(-5deg)',
@@ -553,68 +600,70 @@ const Slide2EmiCost: React.FC<{ frame: number; fps: number }> = ({ frame, fps })
           {/* Glowing Green EMI Transformation Box */}
           <div
             style={{
-              backgroundColor: 'rgba(16, 185, 129, 0.22)',
-              border: '2.5px solid #10B981',
-              borderRadius: 24,
-              padding: '24px 26px',
+              backgroundColor: 'rgba(16, 185, 129, 0.2)',
+              border: '2px solid #10B981',
+              borderRadius: 22,
+              padding: '20px 24px',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
               transform: `scale(${emiReveal})`,
-              boxShadow: '0 12px 45px rgba(16, 185, 129, 0.5)',
+              boxShadow: '0 12px 45px rgba(16, 185, 129, 0.45)',
+              opacity: interpolate(frame, [26, 36], [0, 1], { extrapolateRight: 'clamp' }),
             }}
           >
             <div>
               <div style={{ fontSize: 15, fontWeight: 900, color: '#6EE7B7', letterSpacing: 1.2 }}>
                 PATIENT PAYS JUST
               </div>
-              <div style={{ fontSize: 52, fontWeight: 900, color: '#FFFFFF', marginTop: 2 }}>
-                ₹2,650<span style={{ fontSize: 22, color: '#A7F3D0' }}>/mo</span>
+              <div style={{ fontSize: 46, fontWeight: 900, color: '#FFFFFF', marginTop: 2 }}>
+                From ₹2,650<span style={{ fontSize: 22, color: '#A7F3D0' }}>/mo*</span>
               </div>
             </div>
-            <div style={{ backgroundColor: '#10B981', color: '#042F2E', padding: '14px 26px', borderRadius: 999, fontWeight: 900, fontSize: 18 }}>
-              0% EMI ✅
+            <div style={{ backgroundColor: '#10B981', color: '#042F2E', padding: '12px 22px', borderRadius: 999, fontWeight: 900, fontSize: 16 }}>
+              Flexible Tenures ✅
             </div>
           </div>
 
-          {/* Doctor Payout & Acceptance Ribbon */}
+          {/* Clean 3 Credible Benefits List */}
           <div
             style={{
               display: 'flex',
-              justifyContent: 'space-between',
-              backgroundColor: 'rgba(255, 255, 255, 0.06)',
+              flexDirection: 'column',
+              gap: 12,
+              backgroundColor: 'rgba(255, 255, 255, 0.05)',
               borderRadius: 18,
-              padding: '16px 20px',
-              fontSize: 16,
+              padding: '18px 22px',
+              fontSize: 18,
               fontWeight: 800,
+              color: '#F1F5F9',
+              transform: `scale(${benefitsSpring})`,
+              opacity: interpolate(frame, [38, 48], [0, 1], { extrapolateRight: 'clamp' }),
             }}
           >
-            <span style={{ color: '#38BDF8' }}>🏦 Clinic Paid Full in 24 Hrs</span>
-            <span style={{ color: '#34D399' }}>📈 Acceptance: 32% ➔ 88%</span>
-          </div>
-
-          {/* Key Benefits */}
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, fontSize: 15, color: '#CBD5E1', fontWeight: 700 }}>
-            <div>⚡ 2-Min Digital eKYC</div>
-            <div>📄 100% Paperless Process</div>
+            <div>✓ Seamless digital application right at the front desk</div>
+            <div>✓ Multiple financing options for patient choice</div>
+            <div>✓ No EMI collection burden for the clinic</div>
           </div>
         </div>
 
-        {/* BOTTOM SECTION: Key Takeaway Box */}
+        {/* BOTTOM SECTION: Disclaimer & Terms */}
         <div
           style={{
             backgroundColor: 'rgba(15, 23, 42, 0.9)',
             border: '1.5px solid rgba(255,255,255,0.18)',
-            borderRadius: 26,
-            padding: '22px 26px',
+            borderRadius: 24,
+            padding: '18px 24px',
             backdropFilter: 'blur(18px)',
+            transform: `scale(${bottomSpring})`,
+            opacity: interpolate(frame, [44, 54], [0, 1], { extrapolateRight: 'clamp' }),
           }}
         >
-          <div style={{ fontSize: 15, fontWeight: 900, color: '#34D399', letterSpacing: 1.2, marginBottom: 8 }}>
-            ⚡ 55+ RBI-REGULATED LENDERS
+          <div style={{ fontSize: 15, fontWeight: 900, color: '#34D399', letterSpacing: 1.2, marginBottom: 6 }}>
+            💳 PATIENT PAYS LENDER IN MONTHLY EMIs
           </div>
-          <p style={{ fontSize: 22, color: '#F1F5F9', fontWeight: 600, margin: 0, lineHeight: 1.4 }}>
-            Zero paperwork, instant 2-minute digital approval right in your dental operatory.
+          <p style={{ fontSize: 17, color: '#CBD5E1', fontWeight: 600, margin: 0, lineHeight: 1.4 }}>
+            *Subject to lender eligibility, credit approval, chosen tenure and applicable charges.
           </p>
         </div>
       </div>
@@ -623,12 +672,17 @@ const Slide2EmiCost: React.FC<{ frame: number; fps: number }> = ({ frame, fps })
 };
 
 // ══════════════════════════════════════════════════════════════════
-// SCENE 3: SECRET #2 - ANIMATED WHATSAPP CHAT SIMULATOR
+// SCENE 3: SECRET #2 - ANIMATED WHATSAPP CHAT SIMULATOR (EXPANDED CARD)
 // ══════════════════════════════════════════════════════════════════
 const Slide3WhatsAppSim: React.FC<{ frame: number; fps: number }> = ({ frame, fps }) => {
-  const chatSpring1 = spring({ frame: frame - 8, fps, config: { damping: 12 } });
-  const chatSpring2 = spring({ frame: frame - 38, fps, config: { damping: 12 } });
-  const chatSpring3 = spring({ frame: frame - 65, fps, config: { damping: 12 } });
+  const badgeSpring = spring({ frame, fps, config: { damping: 12 } });
+  const titleSpring = spring({ frame: frame - 6, fps, config: { damping: 12 } });
+  const cardSpring = spring({ frame: frame - 14, fps, config: { damping: 12 } });
+  const chatSpring1 = spring({ frame: frame - 16, fps, config: { damping: 12 } });
+  const chatSpring2 = spring({ frame: frame - 32, fps, config: { damping: 12 } });
+  const chatSpring3 = spring({ frame: frame - 46, fps, config: { damping: 12 } });
+  const pipelineSpring = spring({ frame: frame - 50, fps, config: { damping: 12 } });
+  const bottomSpring = spring({ frame: frame - 56, fps, config: { damping: 12 } });
   const bgScale = interpolate(frame, [0, 120], [1.0, 1.06]);
 
   return (
@@ -651,9 +705,9 @@ const Slide3WhatsAppSim: React.FC<{ frame: number; fps: number }> = ({ frame, fp
 
       {/* Full Safe Zone Container */}
       <div style={INSTA_SAFE_CONTAINER}>
-        {/* TOP SECTION: Secret Badge + Big Kinetic Headline */}
+        {/* TOP SECTION: Secret Badge + Full-Width 2-Line Headline */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
-          <div>
+          <div style={{ transform: `scale(${badgeSpring})`, display: 'flex' }}>
             <span
               style={{
                 padding: '10px 24px',
@@ -667,21 +721,24 @@ const Slide3WhatsAppSim: React.FC<{ frame: number; fps: number }> = ({ frame, fp
                 display: 'inline-block',
               }}
             >
-              SECRET #2: SMART AUTO-RECALL
+              SECRET #2: REACTIVATE OLD PATIENTS
             </span>
           </div>
 
           <h2
             style={{
-              fontSize: 50,
+              fontSize: 52,
               fontWeight: 900,
               color: '#FFFFFF',
               margin: 0,
-              lineHeight: 1.14,
+              lineHeight: 1.15,
               textShadow: '0 4px 22px rgba(0,0,0,0.95)',
+              transform: `scale(${titleSpring}) translateY(${interpolate(titleSpring, [0, 1], [25, 0])}px)`,
+              opacity: interpolate(frame, [5, 15], [0, 1], { extrapolateRight: 'clamp' }),
             }}
           >
-            Recover <span style={{ color: '#4ADE80' }}>₹2-5 Lakhs</span> in Dormant Patients 💬
+            <div>TURN DORMANT PATIENTS</div>
+            <div>INTO <span style={{ color: '#4ADE80', fontSize: 56 }}>APPOINTMENTS</span> 🔄</div>
           </h2>
         </div>
 
@@ -689,26 +746,28 @@ const Slide3WhatsAppSim: React.FC<{ frame: number; fps: number }> = ({ frame, fp
         <div
           style={{
             backgroundColor: '#0B141A',
-            border: '2.5px solid rgba(34, 197, 94, 0.45)',
-            borderRadius: 32,
-            padding: '28px 26px',
+            border: '2px solid rgba(34, 197, 94, 0.45)',
+            borderRadius: 30,
+            padding: '24px 24px',
             boxShadow: '0 25px 60px rgba(0,0,0,0.9)',
+            transform: `scale(${cardSpring})`,
+            opacity: interpolate(frame, [12, 22], [0, 1], { extrapolateRight: 'clamp' }),
             display: 'flex',
             flexDirection: 'column',
-            gap: 18,
+            gap: 16,
           }}
         >
           {/* WhatsApp Clinic Header */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: 14, borderBottom: '1px solid #1F2C34', paddingBottom: 16 }}>
-            <div style={{ width: 48, height: 48, borderRadius: '50%', backgroundColor: '#22C55E', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 24 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 14, borderBottom: '1px solid #1F2C34', paddingBottom: 14 }}>
+            <div style={{ width: 44, height: 44, borderRadius: '50%', backgroundColor: '#22C55E', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 22 }}>
               🦷
             </div>
             <div style={{ flex: 1 }}>
-              <div style={{ fontSize: 20, fontWeight: 900, color: '#E9EDEF' }}>Smile Craft Dental Clinic</div>
-              <div style={{ fontSize: 15, color: '#25D366', fontWeight: 700 }}>● 24/7 Smart Recall AI</div>
+              <div style={{ fontSize: 20, fontWeight: 900, color: '#E9EDEF' }}>City Dental Clinic</div>
+              <div style={{ fontSize: 15, color: '#25D366', fontWeight: 700 }}>● Automated Patient Recall</div>
             </div>
             <span style={{ fontSize: 14, backgroundColor: '#1F2C34', color: '#94A3B8', padding: '6px 14px', borderRadius: 999, fontWeight: 700 }}>
-              Automated
+              WhatsApp Verified
             </span>
           </div>
 
@@ -719,17 +778,17 @@ const Slide3WhatsAppSim: React.FC<{ frame: number; fps: number }> = ({ frame, fp
               backgroundColor: '#202C33',
               color: '#E9EDEF',
               padding: '16px 20px',
-              borderRadius: '20px 20px 20px 4px',
+              borderRadius: '18px 18px 18px 4px',
               maxWidth: '92%',
               transform: `scale(${chatSpring1}) translateY(${interpolate(chatSpring1, [0, 1], [25, 0])}px)`,
-              opacity: interpolate(frame, [6, 16], [0, 1], { extrapolateRight: 'clamp' }),
+              opacity: interpolate(frame, [14, 24], [0, 1], { extrapolateRight: 'clamp' }),
               boxShadow: '0 4px 15px rgba(0,0,0,0.3)',
             }}
           >
             <div style={{ fontSize: 18, fontWeight: 600, lineHeight: 1.4 }}>
-              Hi Priya! 👋 It's been 6 months since your cleaning. We reserved a priority slot for your checkup this Saturday at 11:30 AM!
+              Hi Priya! 👋 It's been 6 months since your last dental cleaning. Would you like us to reserve a check-up slot this Saturday?
             </div>
-            <div style={{ fontSize: 13, color: '#8696A0', textAlign: 'right', marginTop: 6 }}>10:14 AM</div>
+            <div style={{ fontSize: 13, color: '#8696A0', textAlign: 'right', marginTop: 4 }}>10:14 AM</div>
           </div>
 
           {/* Incoming Message: Patient Booking Confirmation */}
@@ -739,17 +798,17 @@ const Slide3WhatsAppSim: React.FC<{ frame: number; fps: number }> = ({ frame, fp
               backgroundColor: '#005C4B',
               color: '#E9EDEF',
               padding: '16px 20px',
-              borderRadius: '20px 20px 4px 20px',
+              borderRadius: '18px 18px 4px 18px',
               maxWidth: '88%',
               transform: `scale(${chatSpring2}) translateY(${interpolate(chatSpring2, [0, 1], [25, 0])}px)`,
-              opacity: interpolate(frame, [36, 46], [0, 1], { extrapolateRight: 'clamp' }),
+              opacity: interpolate(frame, [30, 40], [0, 1], { extrapolateRight: 'clamp' }),
               boxShadow: '0 4px 15px rgba(0,0,0,0.3)',
             }}
           >
             <div style={{ fontSize: 18, fontWeight: 700, lineHeight: 1.4 }}>
-              Yes please! Confirm Saturday 11:30 AM. Thanks for reminding me! 🙏
+              Yes please! Confirm Saturday 11:30 AM. 🙏
             </div>
-            <div style={{ fontSize: 13, color: '#8696A0', textAlign: 'right', marginTop: 6 }}>
+            <div style={{ fontSize: 13, color: '#8696A0', textAlign: 'right', marginTop: 4 }}>
               10:16 AM <span style={{ color: '#53BDEB' }}>✓✓</span>
             </div>
           </div>
@@ -761,54 +820,70 @@ const Slide3WhatsAppSim: React.FC<{ frame: number; fps: number }> = ({ frame, fp
               backgroundColor: '#202C33',
               color: '#E9EDEF',
               padding: '14px 18px',
-              borderRadius: '20px 20px 20px 4px',
+              borderRadius: '18px 18px 18px 4px',
               maxWidth: '90%',
               transform: `scale(${chatSpring3}) translateY(${interpolate(chatSpring3, [0, 1], [25, 0])}px)`,
-              opacity: interpolate(frame, [62, 72], [0, 1], { extrapolateRight: 'clamp' }),
+              opacity: interpolate(frame, [44, 54], [0, 1], { extrapolateRight: 'clamp' }),
               boxShadow: '0 4px 15px rgba(0,0,0,0.3)',
             }}
           >
             <div style={{ fontSize: 16, fontWeight: 700, color: '#A7F3D0' }}>
-              ✅ Confirmed! Dr. Aryan is notified. See you Saturday at 11:30 AM.
+              ✅ Confirmed! Slot reserved for Saturday at 11:30 AM.
             </div>
           </div>
 
-          {/* Bottom Chat Stat Ribbon */}
+          {/* Realistic Funnel Mechanism Pipeline */}
           <div
             style={{
               backgroundColor: 'rgba(34, 197, 94, 0.14)',
-              border: '1px solid rgba(34, 197, 94, 0.3)',
+              border: '1px solid rgba(34, 197, 94, 0.35)',
               borderRadius: 16,
               padding: '14px 18px',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
               fontSize: 16,
-              fontWeight: 900,
+              fontWeight: 800,
               color: '#4ADE80',
+              transform: `scale(${pipelineSpring})`,
+              opacity: interpolate(frame, [48, 58], [0, 1], { extrapolateRight: 'clamp' }),
             }}
           >
-            <span>⚡ 38 Patients Reactivated This Month</span>
-            <span>+₹3.4L Added</span>
+            <span>📁 1,000+ Dormant Records</span>
+            <span>➔</span>
+            <span>📲 Smart Follow-Up</span>
+            <span>➔</span>
+            <span>📅 Confirmed Slot</span>
           </div>
         </div>
 
-        {/* BOTTOM SECTION: Key Takeaway Box */}
+        {/* BOTTOM SECTION: High-Impact Hierarchical Recall Box */}
         <div
           style={{
-            backgroundColor: 'rgba(15, 23, 42, 0.9)',
+            backgroundColor: 'rgba(15, 23, 42, 0.94)',
             border: '1.5px solid rgba(255,255,255,0.18)',
-            borderRadius: 26,
-            padding: '22px 26px',
+            borderRadius: 24,
+            padding: '20px 24px',
             backdropFilter: 'blur(18px)',
+            transform: `scale(${bottomSpring})`,
+            opacity: interpolate(frame, [54, 64], [0, 1], { extrapolateRight: 'clamp' }),
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 8,
           }}
         >
-          <div style={{ fontSize: 15, fontWeight: 900, color: '#4ADE80', letterSpacing: 1.2, marginBottom: 8 }}>
-            🤖 100% HANDS-FREE AUTOMATION
+          <div style={{ fontSize: 15, fontWeight: 900, color: '#4ADE80', letterSpacing: 1.2 }}>
+            ⚡ AUTOMATED PATIENT RECALL
           </div>
-          <p style={{ fontSize: 22, color: '#F1F5F9', fontWeight: 600, margin: 0, lineHeight: 1.4 }}>
-            Stop letting dormant records gather dust. Fill empty chair slots automatically every week!
-          </p>
+          <div style={{ fontSize: 26, fontWeight: 900, color: '#FFFFFF', lineHeight: 1.2 }}>
+            REACTIVATE OLD PATIENTS
+          </div>
+          <div style={{ fontSize: 22, fontWeight: 900, color: '#FCD34D', lineHeight: 1.2 }}>
+            WITHOUT MANUAL CALLING
+          </div>
+          <div style={{ fontSize: 16, color: '#94A3B8', fontWeight: 600, marginTop: 2 }}>
+            Smart WhatsApp follow-ups → Confirmed appointment slots
+          </div>
         </div>
       </div>
     </AbsoluteFill>
@@ -816,10 +891,14 @@ const Slide3WhatsAppSim: React.FC<{ frame: number; fps: number }> = ({ frame, fp
 };
 
 // ══════════════════════════════════════════════════════════════════
-// SCENE 4: SECRET #3 - GOOGLE AI OVERVIEW MOCKUP
+// SCENE 4: SECRET #3 - SHOW UP WHEN PATIENTS ASK AI (BALANCED)
 // ══════════════════════════════════════════════════════════════════
 const Slide4GoogleAiMockup: React.FC<{ frame: number; fps: number }> = ({ frame, fps }) => {
-  const cardSpring = spring({ frame, fps, config: { damping: 12 } });
+  const badgeSpring = spring({ frame, fps, config: { damping: 12 } });
+  const titleSpring = spring({ frame: frame - 6, fps, config: { damping: 12 } });
+  const cardSpring = spring({ frame: frame - 15, fps, config: { damping: 12 } });
+  const clinicResultSpring = spring({ frame: frame - 27, fps, config: { damping: 12 } });
+  const bottomSpring = spring({ frame: frame - 42, fps, config: { damping: 12 } });
   const bgScale = interpolate(frame, [0, 120], [1.0, 1.06]);
 
   return (
@@ -842,9 +921,9 @@ const Slide4GoogleAiMockup: React.FC<{ frame: number; fps: number }> = ({ frame,
 
       {/* Full Safe Zone Container */}
       <div style={INSTA_SAFE_CONTAINER}>
-        {/* TOP SECTION: Secret Badge + Big Kinetic Headline */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
-          <div>
+        {/* TOP SECTION: Secret Badge + Full-Width 2-Line Headline */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+          <div style={{ transform: `scale(${badgeSpring})`, display: 'flex' }}>
             <span
               style={{
                 padding: '10px 24px',
@@ -858,119 +937,238 @@ const Slide4GoogleAiMockup: React.FC<{ frame: number; fps: number }> = ({ frame,
                 display: 'inline-block',
               }}
             >
-              SECRET #3: GOOGLE AI DOMINATION
+              SECRET #3: GET FOUND IN AI SEARCH
             </span>
           </div>
 
           <h2
             style={{
-              fontSize: 50,
+              fontSize: 52,
               fontWeight: 900,
               color: '#FFFFFF',
               margin: 0,
-              lineHeight: 1.14,
+              lineHeight: 1.15,
               textShadow: '0 4px 22px rgba(0,0,0,0.95)',
+              transform: `scale(${titleSpring}) translateY(${interpolate(titleSpring, [0, 1], [25, 0])}px)`,
+              opacity: interpolate(frame, [5, 15], [0, 1], { extrapolateRight: 'clamp' }),
             }}
           >
-            Dominate <span style={{ color: '#60A5FA' }}>Google AI Overviews</span> 🤖
+            <div>SHOW UP WHEN PATIENTS</div>
+            <div><span style={{ color: '#60A5FA', fontSize: 56 }}>ASK AI</span> 🤖</div>
           </h2>
+          <div style={{ fontSize: 19, color: '#93C5FD', fontWeight: 700 }}>
+            When patients search: “Dentist offering EMI for implants near me”
+          </div>
         </div>
 
-        {/* CENTER SECTION: Simulated Google AI Overview Result Box */}
+        {/* CENTER SECTION: Realistic Google AI Overview Result Box */}
         <div
           style={{
             backgroundColor: 'rgba(15, 23, 42, 0.95)',
-            border: '2.5px solid rgba(59, 130, 246, 0.55)',
-            borderRadius: 32,
-            padding: '28px 26px',
+            border: '2px solid rgba(59, 130, 246, 0.55)',
+            borderRadius: 30,
+            padding: '28px 28px',
             boxShadow: '0 25px 60px rgba(0,0,0,0.9)',
             transform: `scale(${cardSpring})`,
+            opacity: interpolate(frame, [14, 24], [0, 1], { extrapolateRight: 'clamp' }),
             display: 'flex',
             flexDirection: 'column',
-            gap: 18,
+            gap: 20,
+            marginTop: 10,
           }}
         >
-          {/* Google Search Query Bar */}
+          {/* Search Query Input Bar */}
+          <div
+            style={{
+              backgroundColor: 'rgba(255,255,255,0.08)',
+              borderRadius: 20,
+              padding: '22px 26px',
+              display: 'flex',
+              alignItems: 'center',
+              gap: 16,
+              border: '1.5px solid rgba(255,255,255,0.16)',
+            }}
+          >
+            <span style={{ fontSize: 28 }}>🔍</span>
+            <span style={{ fontSize: 24, fontWeight: 800, color: '#F1F5F9' }}>
+              Best dentist for dental implants with EMI near me
+            </span>
+          </div>
+
+          {/* AI Overview Header with subtle illustrative label */}
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+              <span style={{ fontSize: 28 }}>✨</span>
+              <span style={{ fontSize: 24, fontWeight: 900, color: '#60A5FA', letterSpacing: 1.2 }}>
+                AI OVERVIEW
+              </span>
+            </div>
+            <span
+              style={{
+                fontSize: 15,
+                fontWeight: 900,
+                color: '#CBD5E1',
+                backgroundColor: 'rgba(255,255,255,0.14)',
+                padding: '8px 16px',
+                borderRadius: 10,
+                letterSpacing: 0.8,
+              }}
+            >
+              ILLUSTRATIVE AI SEARCH RESULT
+            </span>
+          </div>
+
+          <div style={{ fontSize: 22, color: '#E2E8F0', fontWeight: 600, lineHeight: 1.4 }}>
+            Here are top-rated dental practices offering implant procedures with flexible financing:
+          </div>
+
+          {/* Realistic Recommended Dental Clinic Result */}
+          <div
+            style={{
+              backgroundColor: 'rgba(37, 99, 235, 0.22)',
+              border: '2px solid rgba(96, 165, 250, 0.75)',
+              borderRadius: 24,
+              padding: '26px 28px',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: 16,
+              transform: `scale(${clinicResultSpring})`,
+              opacity: interpolate(frame, [25, 35], [0, 1], { extrapolateRight: 'clamp' }),
+            }}
+          >
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <div>
+                <div style={{ fontSize: 30, fontWeight: 900, color: '#FFFFFF' }}>ABC Dental Care</div>
+                <div style={{ fontSize: 20, color: '#93C5FD', fontWeight: 700, marginTop: 4 }}>
+                  Implantology · EMI Available · 📍 4.2 km
+                </div>
+              </div>
+              <span
+                style={{
+                  fontSize: 20,
+                  color: '#FACC15',
+                  fontWeight: 900,
+                  backgroundColor: 'rgba(250, 204, 21, 0.22)',
+                  padding: '10px 18px',
+                  borderRadius: 999,
+                  border: '1.5px solid rgba(250, 204, 21, 0.55)',
+                }}
+              >
+                ⭐ 4.9 · 120+ reviews
+              </span>
+            </div>
+
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: 14, borderTop: '1.5px solid rgba(255,255,255,0.15)' }}>
+              <span style={{ fontSize: 21, color: '#34D399', fontWeight: 900 }}>
+                💳 EMI options available
+              </span>
+              <span style={{ fontSize: 21, color: '#60A5FA', fontWeight: 900 }}>
+                View clinic profile →
+              </span>
+            </div>
+          </div>
+
+          {/* Organic Discovery Mechanism */}
           <div
             style={{
               backgroundColor: 'rgba(255,255,255,0.08)',
               borderRadius: 18,
-              padding: '16px 22px',
+              padding: '18px 22px',
+              fontSize: 20,
+              fontWeight: 800,
+              color: '#38BDF8',
               display: 'flex',
               alignItems: 'center',
               gap: 14,
             }}
           >
-            <span style={{ fontSize: 22 }}>🔍</span>
-            <span style={{ fontSize: 18, fontWeight: 700, color: '#93C5FD' }}>
-              "Cost of dental implants with EMI near me"
-            </span>
+            <span style={{ fontSize: 24 }}>💡</span>
+            <span>Clinaza helps structure your clinic’s online information for AI search</span>
           </div>
 
-          {/* AI Overview Header */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-            <span style={{ fontSize: 24 }}>✨</span>
-            <span style={{ fontSize: 18, fontWeight: 900, color: '#60A5FA', letterSpacing: 1.2 }}>
-              AI OVERVIEW (GOOGLE SEARCH)
-            </span>
-          </div>
-
-          {/* AI Top Result Listing */}
-          <div
-            style={{
-              backgroundColor: 'rgba(37, 99, 235, 0.2)',
-              border: '1.5px solid #3B82F6',
-              borderRadius: 22,
-              padding: '20px 22px',
-            }}
-          >
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
-              <strong style={{ fontSize: 20, color: '#FFFFFF' }}>#1 Clinaza Partner Clinic</strong>
-              <span style={{ fontSize: 16, color: '#FACC15', fontWeight: 900 }}>⭐ 4.9 (420+ Reviews)</span>
-            </div>
-            <p style={{ fontSize: 17, color: '#BFDBFE', margin: 0, lineHeight: 1.45 }}>
-              Top recommended practice. Transparent pricing, zero-cost EMI from ₹2,500/mo &amp; same-day digital consults.
-            </p>
-          </div>
-
-          {/* Advantage Badge */}
-          <div
-            style={{
-              backgroundColor: 'rgba(255,255,255,0.06)',
-              borderRadius: 16,
-              padding: '14px 18px',
-              fontSize: 16,
-              fontWeight: 900,
-              color: '#38BDF8',
-              display: 'flex',
-              justifyContent: 'space-between',
-            }}
-          >
-            <span>🚀 Ranks Above Paid Competitor Ads</span>
-            <span>Zero Ad Spend</span>
-          </div>
-
-          <div style={{ fontSize: 15, color: '#94A3B8', fontWeight: 600 }}>
-            📌 84% of high-intent patients click the AI Overview box before scrolling to map results.
+          <div style={{ fontSize: 18, color: '#CBD5E1', fontWeight: 700 }}>
+            📌 AI search relies on structured information it can understand about your practice.
           </div>
         </div>
 
-        {/* BOTTOM SECTION: Key Takeaway Box */}
+        {/* BOTTOM SECTION: AI Search Visibility with glowing schema chips */}
         <div
           style={{
-            backgroundColor: 'rgba(15, 23, 42, 0.9)',
-            border: '1.5px solid rgba(255,255,255,0.18)',
+            backgroundColor: 'rgba(15, 23, 42, 0.94)',
+            border: '1.5px solid rgba(255,255,255,0.22)',
             borderRadius: 26,
-            padding: '22px 26px',
-            backdropFilter: 'blur(18px)',
+            padding: '24px 28px',
+            backdropFilter: 'blur(20px)',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 14,
+            transform: `scale(${bottomSpring})`,
+            opacity: interpolate(frame, [40, 50], [0, 1], { extrapolateRight: 'clamp' }),
+            marginBottom: 8,
           }}
         >
-          <div style={{ fontSize: 15, fontWeight: 900, color: '#60A5FA', letterSpacing: 1.2, marginBottom: 8 }}>
-            📈 ORGANIC PATIENT ACQUISITION
+          <div style={{ fontSize: 18, fontWeight: 900, color: '#60A5FA', letterSpacing: 1.4 }}>
+            🤖 AI SEARCH OPTIMIZATION
           </div>
-          <p style={{ fontSize: 22, color: '#F1F5F9', fontWeight: 600, margin: 0, lineHeight: 1.4 }}>
-            Structured medical schema positions your practice as the trusted authority on Google AI!
+          <p style={{ fontSize: 24, color: '#F1F5F9', fontWeight: 800, lineHeight: 1.34, margin: 0 }}>
+            Structured clinic data helps search engines and AI systems understand and recommend your practice.
           </p>
+
+          {/* Glowing GEO Mechanism Pipeline */}
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              paddingTop: 10,
+              borderTop: '1.5px solid rgba(255,255,255,0.14)',
+            }}
+          >
+            <div
+              style={{
+                backgroundColor: 'rgba(59, 130, 246, 0.28)',
+                border: '1.5px solid rgba(59, 130, 246, 0.7)',
+                color: '#BFDBFE',
+                fontSize: 16,
+                fontWeight: 800,
+                padding: '10px 20px',
+                borderRadius: 999,
+              }}
+            >
+              Clinic Website
+            </div>
+            <span style={{ color: '#60A5FA', fontWeight: 900, fontSize: 18 }}>➔</span>
+            <div
+              style={{
+                backgroundColor: 'rgba(168, 85, 247, 0.28)',
+                border: '1.5px solid rgba(168, 85, 247, 0.7)',
+                color: '#E9D5FF',
+                fontSize: 16,
+                fontWeight: 800,
+                padding: '10px 20px',
+                borderRadius: 999,
+              }}
+            >
+              Structured Data
+            </div>
+            <span style={{ color: '#A855F7', fontWeight: 900, fontSize: 18 }}>➔</span>
+            <div
+              style={{
+                backgroundColor: 'rgba(16, 185, 129, 0.28)',
+                border: '1.5px solid rgba(16, 185, 129, 0.7)',
+                color: '#A7F3D0',
+                fontSize: 16,
+                fontWeight: 800,
+                padding: '10px 20px',
+                borderRadius: 999,
+              }}
+            >
+              AI Search
+            </div>
+          </div>
+          <div style={{ fontSize: 17, color: '#CBD5E1', fontWeight: 700, textAlign: 'center' }}>
+            Services • Expertise • Location • FAQs • Reviews
+          </div>
         </div>
       </div>
     </AbsoluteFill>
@@ -978,10 +1176,14 @@ const Slide4GoogleAiMockup: React.FC<{ frame: number; fps: number }> = ({ frame,
 };
 
 // ══════════════════════════════════════════════════════════════════
-// SCENE 5: SECRET #4 - CHATGPT & PERPLEXITY GEO CARD
+// SCENE 5: SECRET #4 - MAKE YOUR CLINIC AI-READY (ENLARGED)
 // ══════════════════════════════════════════════════════════════════
 const Slide5ChatGptGeo: React.FC<{ frame: number; fps: number }> = ({ frame, fps }) => {
-  const cardSpring = spring({ frame, fps, config: { damping: 12 } });
+  const badgeSpring = spring({ frame, fps, config: { damping: 12 } });
+  const titleSpring = spring({ frame: frame - 6, fps, config: { damping: 12 } });
+  const cardSpring = spring({ frame: frame - 15, fps, config: { damping: 12 } });
+  const answerSpring = spring({ frame: frame - 27, fps, config: { damping: 12 } });
+  const bottomSpring = spring({ frame: frame - 40, fps, config: { damping: 12 } });
   const bgScale = interpolate(frame, [0, 120], [1.0, 1.06]);
 
   return (
@@ -1004,9 +1206,9 @@ const Slide5ChatGptGeo: React.FC<{ frame: number; fps: number }> = ({ frame, fps
 
       {/* Full Safe Zone Container */}
       <div style={INSTA_SAFE_CONTAINER}>
-        {/* TOP SECTION: Secret Badge + Big Kinetic Headline */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
-          <div>
+        {/* TOP SECTION: Secret Badge + Full-Width 2-Line Headline */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+          <div style={{ transform: `scale(${badgeSpring})`, display: 'flex' }}>
             <span
               style={{
                 padding: '10px 24px',
@@ -1020,7 +1222,276 @@ const Slide5ChatGptGeo: React.FC<{ frame: number; fps: number }> = ({ frame, fps
                 display: 'inline-block',
               }}
             >
-              SECRET #4: GEO (AI SEARCH SEO)
+              SECRET #4: MAKE YOUR CLINIC AI-READY
+            </span>
+          </div>
+
+          <h2
+            style={{
+              fontSize: 52,
+              fontWeight: 900,
+              color: '#FFFFFF',
+              margin: 0,
+              lineHeight: 1.15,
+              textShadow: '0 4px 22px rgba(0,0,0,0.95)',
+              transform: `scale(${titleSpring}) translateY(${interpolate(titleSpring, [0, 1], [25, 0])}px)`,
+              opacity: interpolate(frame, [5, 15], [0, 1], { extrapolateRight: 'clamp' }),
+            }}
+          >
+            <div>MAKE YOUR CLINIC</div>
+            <div><span style={{ color: '#C084FC', fontSize: 58 }}>AI-READY</span> 🧠</div>
+          </h2>
+          <div style={{ fontSize: 19, color: '#E9D5FF', fontWeight: 700 }}>
+            Help search engines and AI assistants understand your clinic
+          </div>
+        </div>
+
+        {/* CENTER SECTION: Simulated Assistant Card */}
+        <div
+          style={{
+            backgroundColor: 'rgba(15, 23, 42, 0.95)',
+            border: '2px solid rgba(168, 85, 247, 0.55)',
+            borderRadius: 30,
+            padding: '28px 28px',
+            boxShadow: '0 25px 60px rgba(0,0,0,0.9)',
+            transform: `scale(${cardSpring})`,
+            opacity: interpolate(frame, [14, 24], [0, 1], { extrapolateRight: 'clamp' }),
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 20,
+            marginTop: 10,
+          }}
+        >
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+              <div style={{ width: 50, height: 50, borderRadius: 14, backgroundColor: '#10A37F', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 28 }}>
+                🤖
+              </div>
+              <div>
+                <div style={{ fontSize: 25, fontWeight: 900, color: '#FFFFFF' }}>Patient Asks AI</div>
+                <div style={{ fontSize: 18, color: '#C084FC', fontWeight: 700 }}>Search &amp; Assistant Query</div>
+              </div>
+            </div>
+            <span
+              style={{
+                fontSize: 15,
+                fontWeight: 900,
+                color: '#CBD5E1',
+                backgroundColor: 'rgba(255,255,255,0.14)',
+                padding: '8px 16px',
+                borderRadius: 10,
+                letterSpacing: 0.8,
+              }}
+            >
+              SIMULATED AI SEARCH EXAMPLE
+            </span>
+          </div>
+
+          <div
+            style={{
+              backgroundColor: 'rgba(255,255,255,0.08)',
+              borderRadius: 20,
+              padding: '22px 26px',
+              fontSize: 24,
+              color: '#F8FAFC',
+              fontStyle: 'italic',
+              fontWeight: 700,
+              borderLeft: '5px solid #A855F7',
+            }}
+          >
+            "Find a trusted dentist for implants with EMI near me."
+          </div>
+
+          <div
+            style={{
+              backgroundColor: 'rgba(147, 51, 234, 0.22)',
+              border: '2px solid rgba(168, 85, 247, 0.7)',
+              borderRadius: 24,
+              padding: '24px 26px',
+              fontSize: 22,
+              color: '#F3E8FF',
+              lineHeight: 1.45,
+              transform: `scale(${answerSpring})`,
+              opacity: interpolate(frame, [25, 35], [0, 1], { extrapolateRight: 'clamp' }),
+            }}
+          >
+            <span style={{ fontWeight: 600 }}>Example of how structured clinic information can appear in an AI answer:</span>
+            <div
+              style={{
+                marginTop: 16,
+                padding: '18px 22px',
+                backgroundColor: 'rgba(255,255,255,0.12)',
+                borderRadius: 16,
+                fontSize: 25,
+                fontWeight: 900,
+                color: '#6EE7B7',
+                border: '1px solid rgba(110, 231, 183, 0.35)',
+              }}
+            >
+              📍 Dr. Sharma's Dental Care · Implants · EMI Options · ⭐ 4.9
+            </div>
+          </div>
+
+          {/* Credible GEO Mechanism Benefit */}
+          <div
+            style={{
+              backgroundColor: 'rgba(255, 255, 255, 0.08)',
+              borderRadius: 18,
+              padding: '18px 22px',
+              fontSize: 20,
+              fontWeight: 800,
+              color: '#C084FC',
+              display: 'flex',
+              alignItems: 'center',
+              gap: 14,
+            }}
+          >
+            <span style={{ fontSize: 24 }}>✨</span>
+            <span>Organic visibility without paying for every click</span>
+          </div>
+
+          <div style={{ fontSize: 18, color: '#CBD5E1', fontWeight: 700 }}>
+            📌 Patients are increasingly using AI to discover local healthcare providers.
+          </div>
+        </div>
+
+        {/* BOTTOM SECTION: Implementation Pipeline */}
+        <div
+          style={{
+            backgroundColor: 'rgba(15, 23, 42, 0.94)',
+            border: '1.5px solid rgba(255,255,255,0.22)',
+            borderRadius: 26,
+            padding: '24px 28px',
+            backdropFilter: 'blur(20px)',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 14,
+            transform: `scale(${bottomSpring})`,
+            opacity: interpolate(frame, [38, 48], [0, 1], { extrapolateRight: 'clamp' }),
+            marginBottom: 8,
+          }}
+        >
+          <div style={{ fontSize: 18, fontWeight: 900, color: '#C084FC', letterSpacing: 1.4 }}>
+            🤖 AI SEARCH VISIBILITY
+          </div>
+          <p style={{ fontSize: 24, color: '#F1F5F9', fontWeight: 800, lineHeight: 1.34, margin: 0 }}>
+            Make your clinic easier for Google and AI search engines to understand, discover, and recommend.
+          </p>
+
+          {/* Clean GEO Pipeline */}
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              paddingTop: 10,
+              borderTop: '1.5px solid rgba(255,255,255,0.14)',
+            }}
+          >
+            <div
+              style={{
+                backgroundColor: 'rgba(168, 85, 247, 0.28)',
+                border: '1.5px solid rgba(168, 85, 247, 0.7)',
+                color: '#E9D5FF',
+                fontSize: 16,
+                fontWeight: 800,
+                padding: '10px 20px',
+                borderRadius: 999,
+              }}
+            >
+              Clinic Website
+            </div>
+            <span style={{ color: '#C084FC', fontWeight: 900, fontSize: 18 }}>➔</span>
+            <div
+              style={{
+                backgroundColor: 'rgba(168, 85, 247, 0.32)',
+                border: '1.5px solid rgba(168, 85, 247, 0.8)',
+                color: '#E9D5FF',
+                fontSize: 16,
+                fontWeight: 800,
+                padding: '10px 20px',
+                borderRadius: 999,
+              }}
+            >
+              Structured Info
+            </div>
+            <span style={{ color: '#C084FC', fontWeight: 900, fontSize: 18 }}>➔</span>
+            <div
+              style={{
+                backgroundColor: 'rgba(16, 185, 129, 0.28)',
+                border: '1.5px solid rgba(16, 185, 129, 0.7)',
+                color: '#A7F3D0',
+                fontSize: 16,
+                fontWeight: 800,
+                padding: '10px 20px',
+                borderRadius: 999,
+              }}
+            >
+              Search &amp; AI Discovery
+            </div>
+          </div>
+          <div style={{ fontSize: 17, color: '#CBD5E1', fontWeight: 700, textAlign: 'center' }}>
+            Clinic profile · Services · FAQs · Location · Doctor expertise
+          </div>
+        </div>
+      </div>
+    </AbsoluteFill>
+  );
+};
+
+// ══════════════════════════════════════════════════════════════════
+// SCENE 6: HIGH CONVERTING CTA (FULL-WIDTH 2-LINE)
+// ══════════════════════════════════════════════════════════════════
+const Slide6FinalCTA: React.FC<{ frame: number; fps: number; websiteUrl: string }> = ({
+  frame,
+  fps,
+  websiteUrl,
+}) => {
+  const badgeSpring = spring({ frame, fps, config: { damping: 12 } });
+  const titleSpring = spring({ frame: frame - 6, fps, config: { damping: 12 } });
+  const cardSpring = spring({ frame: frame - 15, fps, config: { damping: 12 } });
+  const ctaBtnSpring = spring({ frame: frame - 27, fps, config: { damping: 12 } });
+  const bottomBoxSpring = spring({ frame: frame - 38, fps, config: { damping: 12 } });
+  const pulseButton = Math.sin(frame / 5) * 0.04 + 1;
+  const bgScale = interpolate(frame, [0, 120], [1.0, 1.05]);
+
+  return (
+    <AbsoluteFill>
+      <Img
+        src={staticFile('assets/reels/clinic_growth_hero.jpg')}
+        style={{
+          position: 'absolute',
+          inset: 0,
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          objectPosition: 'center',
+          transform: `scale(${bgScale})`,
+          filter: 'brightness(0.32) contrast(1.15)',
+        }}
+      />
+
+      <AmbientMotionBackground primaryColor="#0867E8" secondaryColor="#10B981" frame={frame} />
+
+      {/* Full Safe Zone Container */}
+      <div style={INSTA_SAFE_CONTAINER}>
+        {/* TOP SECTION: Final Call Badge + Full-Width 2-Line Headline */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+          <div style={{ transform: `scale(${badgeSpring})`, display: 'flex' }}>
+            <span
+              style={{
+                padding: '10px 24px',
+                borderRadius: 999,
+                backgroundColor: '#0867E8',
+                color: '#FFFFFF',
+                fontSize: 16,
+                fontWeight: 900,
+                letterSpacing: 1.5,
+                boxShadow: '0 6px 25px rgba(8, 103, 232, 0.5)',
+                display: 'inline-block',
+              }}
+            >
+              THIS IS CLINAZA
             </span>
           </div>
 
@@ -1030,238 +1501,150 @@ const Slide5ChatGptGeo: React.FC<{ frame: number; fps: number }> = ({ frame, fps
               fontWeight: 900,
               color: '#FFFFFF',
               margin: 0,
-              lineHeight: 1.14,
+              lineHeight: 1.15,
               textShadow: '0 4px 22px rgba(0,0,0,0.95)',
+              transform: `scale(${titleSpring}) translateY(${interpolate(titleSpring, [0, 1], [25, 0])}px)`,
+              opacity: interpolate(frame, [5, 15], [0, 1], { extrapolateRight: 'clamp' }),
             }}
           >
-            Get Recommended by <span style={{ color: '#C084FC' }}>AI Search Engines</span> 🧠
+            <div>TURN MORE TREATMENT PLANS</div>
+            <div>INTO <span style={{ color: '#60A5FA', fontSize: 56 }}>PATIENTS</span> 🚀</div>
           </h2>
         </div>
 
-        {/* CENTER SECTION: Simulated ChatGPT / Perplexity Recommendation Mockup */}
+        {/* CENTER SECTION: Interactive Transformation Summary Card */}
         <div
           style={{
             backgroundColor: 'rgba(15, 23, 42, 0.95)',
-            border: '2.5px solid rgba(168, 85, 247, 0.55)',
-            borderRadius: 32,
+            border: '2px solid rgba(8, 103, 232, 0.5)',
+            borderRadius: 30,
             padding: '28px 26px',
             boxShadow: '0 25px 60px rgba(0,0,0,0.9)',
             transform: `scale(${cardSpring})`,
-            display: 'flex',
-            flexDirection: 'column',
-            gap: 18,
-          }}
-        >
-          <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
-            <div style={{ width: 46, height: 46, borderRadius: 14, backgroundColor: '#10A37F', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 24 }}>
-              🤖
-            </div>
-            <div>
-              <div style={{ fontSize: 20, fontWeight: 900, color: '#FFFFFF' }}>ChatGPT &amp; Perplexity AI</div>
-              <div style={{ fontSize: 15, color: '#C084FC', fontWeight: 700 }}>Prompt: "Find best dental surgeon near me"</div>
-            </div>
-          </div>
-
-          <div
-            style={{
-              backgroundColor: 'rgba(255,255,255,0.08)',
-              borderRadius: 20,
-              padding: '20px 22px',
-              fontSize: 18,
-              color: '#F3E8FF',
-              lineHeight: 1.45,
-              borderLeft: '5px solid #A855F7',
-            }}
-          >
-            "Based on verified patient outcomes, digital equipment, and point-of-care EMI options, <strong>Dr. Sharma’s Clinic</strong> is ranked #1 in your district."
-          </div>
-
-          {/* Metric Badge */}
-          <div
-            style={{
-              backgroundColor: 'rgba(147, 51, 234, 0.18)',
-              borderRadius: 16,
-              padding: '14px 18px',
-              fontSize: 16,
-              fontWeight: 900,
-              color: '#E9D5FF',
-              display: 'flex',
-              justifyContent: 'space-between',
-            }}
-          >
-            <span>🏆 #1 AI Cited Practice</span>
-            <span>3.8X More High-Ticket Inquiries</span>
-          </div>
-
-          <div style={{ fontSize: 15, color: '#94A3B8', fontWeight: 600 }}>
-            ⚡ Patients searching via voice assistants and AI bots receive direct links to your booking calendar.
-          </div>
-        </div>
-
-        {/* BOTTOM SECTION: Key Takeaway Box */}
-        <div
-          style={{
-            backgroundColor: 'rgba(15, 23, 42, 0.9)',
-            border: '1.5px solid rgba(255,255,255,0.18)',
-            borderRadius: 26,
-            padding: '22px 26px',
-            backdropFilter: 'blur(18px)',
-          }}
-        >
-          <div style={{ fontSize: 15, fontWeight: 900, color: '#C084FC', letterSpacing: 1.2, marginBottom: 8 }}>
-            🌐 THE FUTURE OF DENTAL DISCOVERY
-          </div>
-          <p style={{ fontSize: 22, color: '#F1F5F9', fontWeight: 600, margin: 0, lineHeight: 1.4 }}>
-            Generative Engine Optimization (GEO) ensures your clinic is the first name patients hear from AI!
-          </p>
-        </div>
-      </div>
-    </AbsoluteFill>
-  );
-};
-
-// ══════════════════════════════════════════════════════════════════
-// SCENE 6: HIGH CONVERTING CTA CARD (PERFECTLY FRAMED IN SAFE GRID)
-// ══════════════════════════════════════════════════════════════════
-const Slide6FinalCTA: React.FC<{ frame: number; fps: number; websiteUrl: string }> = ({
-  frame,
-  fps,
-  websiteUrl,
-}) => {
-  const logoScale = spring({ frame, fps, config: { damping: 10 } });
-  const pulseButton = Math.sin(frame / 7) * 0.04 + 1;
-  const bgScale = interpolate(frame, [0, 120], [1.0, 1.06]);
-
-  return (
-    <AbsoluteFill>
-      {/* Background Modern Dental Clinic */}
-      <Img
-        src={staticFile('assets/reels/clinic_growth_hero.jpg')}
-        style={{
-          position: 'absolute',
-          inset: 0,
-          width: '100%',
-          height: '100%',
-          objectFit: 'cover',
-          transform: `scale(${bgScale})`,
-          filter: 'brightness(0.3) contrast(1.15)',
-        }}
-      />
-
-      <AmbientMotionBackground primaryColor="#0867E8" secondaryColor="#38BDF8" frame={frame} />
-
-      {/* Full Safe Zone Container */}
-      <div style={INSTA_SAFE_CONTAINER}>
-        {/* TOP SECTION: Clinaza Brand Badge */}
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <div
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: 14,
-              padding: '14px 34px',
-              borderRadius: 999,
-              backgroundColor: 'rgba(255, 255, 255, 0.1)',
-              border: '1.5px solid rgba(255, 255, 255, 0.3)',
-              boxShadow: '0 10px 30px rgba(8, 103, 232, 0.45)',
-            }}
-          >
-            <span style={{ fontSize: 30, fontWeight: 900, color: '#FFFFFF', letterSpacing: 2 }}>
-              CLIN<span style={{ color: '#0867E8' }}>AZA</span>
-            </span>
-          </div>
-        </div>
-
-        {/* CENTER SECTION: Master CTA Card */}
-        <div
-          style={{
-            backgroundColor: 'rgba(15, 23, 42, 0.95)',
-            border: '2.5px solid rgba(8, 103, 232, 0.5)',
-            borderRadius: 34,
-            padding: '38px 32px',
-            boxShadow: '0 25px 60px rgba(0,0,0,0.9)',
-            transform: `scale(${logoScale})`,
+            opacity: interpolate(frame, [14, 24], [0, 1], { extrapolateRight: 'clamp' }),
+            backdropFilter: 'blur(22px)',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            textAlign: 'center',
-            gap: 22,
+            gap: 18,
           }}
         >
-          <h2
-            style={{
-              fontSize: 48,
-              fontWeight: 900,
-              color: '#FFFFFF',
-              lineHeight: 1.15,
-              margin: 0,
-            }}
-          >
-            Stop Losing Patients. <br />
-            <span style={{ color: '#38BDF8' }}>3X Your Dental Revenue.</span> 🚀
-          </h2>
+          <div style={{ fontSize: 18, fontWeight: 800, color: '#CBD5E1', alignSelf: 'flex-start' }}>
+            Clinaza helps dental clinics with:
+          </div>
 
+          {/* 4 Clean Pillars Summary Grid */}
           <div
             style={{
               display: 'flex',
               flexDirection: 'column',
               gap: 14,
               width: '100%',
-              backgroundColor: 'rgba(255, 255, 255, 0.06)',
-              borderRadius: 22,
+              backgroundColor: 'rgba(255, 255, 255, 0.05)',
+              borderRadius: 20,
               padding: '20px 22px',
               textAlign: 'left',
             }}
           >
-            <div style={{ fontSize: 18, color: '#F1F5F9', fontWeight: 800 }}>
-              ✅ 0% Patient EMI Financing (55+ Lenders)
+            <div style={{ fontSize: 20, color: '#F1F5F9', fontWeight: 800 }}>
+              ✓ Patient Financing
             </div>
-            <div style={{ fontSize: 18, color: '#F1F5F9', fontWeight: 800 }}>
-              ✅ Automated WhatsApp Recall Campaigns
+            <div style={{ fontSize: 20, color: '#F1F5F9', fontWeight: 800 }}>
+              ✓ Automated Patient Recall
             </div>
-            <div style={{ fontSize: 18, color: '#F1F5F9', fontWeight: 800 }}>
-              ✅ #1 Google AI &amp; ChatGPT GEO Visibility
+            <div style={{ fontSize: 20, color: '#F1F5F9', fontWeight: 800 }}>
+              ✓ AI &amp; Google Search Visibility
+            </div>
+            <div style={{ fontSize: 20, color: '#F1F5F9', fontWeight: 800 }}>
+              ✓ Digital Clinic Growth
             </div>
           </div>
 
           {/* Pulsing CTA Action Button */}
           <div
             style={{
-              transform: `scale(${pulseButton})`,
+              transform: `scale(${ctaBtnSpring * pulseButton})`,
+              opacity: interpolate(frame, [25, 35], [0, 1], { extrapolateRight: 'clamp' }),
               display: 'inline-block',
-              padding: '22px 52px',
-              borderRadius: 24,
+              padding: '20px 48px',
+              borderRadius: 22,
               backgroundColor: '#0867E8',
               color: '#FFFFFF',
-              fontSize: 24,
+              fontSize: 22,
               fontWeight: 900,
               boxShadow: '0 14px 45px rgba(8, 103, 232, 0.7)',
               letterSpacing: 0.5,
-              marginTop: 6,
+              marginTop: 4,
             }}
           >
-            Partner With Clinaza Free →
+            PARTNER WITH CLINAZA FREE →
           </div>
         </div>
 
-        {/* BOTTOM SECTION: Zero Risk Guarantee Ribbon */}
+        {/* BOTTOM SECTION: Staggered Large Two-Line Destination Callout */}
         <div
           style={{
-            backgroundColor: 'rgba(15, 23, 42, 0.9)',
-            border: '1.5px solid rgba(255,255,255,0.18)',
-            borderRadius: 22,
-            padding: '18px 22px',
+            backgroundColor: 'rgba(15, 23, 42, 0.94)',
+            border: '2px solid rgba(16, 185, 129, 0.5)',
+            borderRadius: 24,
+            padding: '18px 24px',
             textAlign: 'center',
-            fontSize: 18,
-            color: '#10B981',
-            fontWeight: 900,
-            letterSpacing: 1,
             backdropFilter: 'blur(18px)',
+            transform: `scale(${bottomBoxSpring})`,
+            opacity: interpolate(frame, [36, 46], [0, 1], { extrapolateRight: 'clamp' }),
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: 6,
           }}
         >
-          ⚡ ZERO SETUP COST · 100% FREE FOR CLINICS · {websiteUrl}
+          <div
+            style={{
+              fontSize: 16,
+              color: '#34D399',
+              fontWeight: 900,
+              letterSpacing: 1.5,
+            }}
+          >
+            ⚡ FREE FOR DENTAL CLINICS
+          </div>
+          <div
+            style={{
+              fontSize: 32,
+              color: '#FFFFFF',
+              fontWeight: 900,
+              letterSpacing: 1.2,
+              textShadow: '0 0 20px rgba(52, 211, 153, 0.6)',
+            }}
+          >
+            {websiteUrl}
+          </div>
+        </div>
+
+        {/* Clinaza Logo Endcard */}
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            opacity: interpolate(frame, [55, 75], [0, 1], { extrapolateRight: 'clamp' }),
+            transform: `scale(${interpolate(frame, [55, 75], [0.8, 1], { extrapolateRight: 'clamp' })})`,
+          }}
+        >
+          <Img
+            src={staticFile('assets/reels/clinaza-logo.jpg')}
+            style={{
+              width: 220,
+              height: 'auto',
+              borderRadius: 20,
+              boxShadow: '0 8px 32px rgba(8, 103, 232, 0.5)',
+              backgroundColor: '#FFFFFF',
+              padding: 10,
+            }}
+          />
         </div>
       </div>
     </AbsoluteFill>
   );
 };
+
+

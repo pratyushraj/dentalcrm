@@ -709,19 +709,23 @@ export default function FreeToolsHub() {
 
         {/* Interlinking to Blog Guides */}
         <section className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-3">
-          <h3 className="text-xs font-black text-slate-800 uppercase tracking-wider">Related Practice Management &amp; Patient Guides</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+          <h3 className="text-xs font-black text-slate-800 uppercase tracking-wider">Related Practice Management &amp; Patient EMI Guides</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 text-xs">
+            <Link to="/blog/dental-treatment-on-emi-india-guide" className="p-3 bg-slate-50 hover:bg-blue-50 border border-slate-200 rounded-xl transition-colors block">
+              <strong className="text-[#0B2450] block">Dental Treatment on EMI Guide</strong>
+              <span className="text-[11px] text-slate-500">0% interest plans &amp; eligibility criteria</span>
+            </Link>
+            <Link to="/blog/dental-loans-in-india-medical-financing" className="p-3 bg-slate-50 hover:bg-blue-50 border border-slate-200 rounded-xl transition-colors block">
+              <strong className="text-[#0B2450] block">Dental Loans &amp; Medical Financing</strong>
+              <span className="text-[11px] text-slate-500">Compare NBFC rates, approvals &amp; tenure</span>
+            </Link>
             <Link to="/blog/free-digital-dental-prescription-maker-emr-software-india" className="p-3 bg-slate-50 hover:bg-blue-50 border border-slate-200 rounded-xl transition-colors block">
               <strong className="text-[#0B2450] block">Digital Prescription &amp; EMR Guide</strong>
               <span className="text-[11px] text-slate-500">How to modernize clinic paperwork</span>
             </Link>
-            <Link to="/blog/how-to-start-a-dental-clinic-in-india-setup-cost-checklist" className="p-3 bg-slate-50 hover:bg-blue-50 border border-slate-200 rounded-xl transition-colors block">
-              <strong className="text-[#0B2450] block">Clinic Setup Cost &amp; Checklist</strong>
-              <span className="text-[11px] text-slate-500">CapEx budget &amp; equipment guide</span>
-            </Link>
             <Link to="/blog/how-dental-clinics-increase-treatment-acceptance-with-emi-india" className="p-3 bg-slate-50 hover:bg-blue-50 border border-slate-200 rounded-xl transition-colors block">
               <strong className="text-[#0B2450] block">Increase Case Acceptance with EMI</strong>
-              <span className="text-[11px] text-slate-500">Overcoming price objections</span>
+              <span className="text-[11px] text-slate-500">Overcoming patient price objections</span>
             </Link>
           </div>
         </section>

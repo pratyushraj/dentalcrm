@@ -160,7 +160,33 @@ When `eventType` is received, Clinaza automatically:
 
 ---
 
-## 4. Frontend Client Implementation
+## 4. Official Easycred Headless API Reference (`API_HEADLESS`)
+
+According to the official Easycred Developer Documentation (`https://docs.easycred.co.in/`):
+
+Easycred provides **two distinct integration modes** on their enterprise gateway `https://api.easycred.in`:
+1. `API_HOSTED` (Hosted Journey / Redirect)
+2. `API_HEADLESS` (Pure Headless Integration / API-Only)
+
+### 4.1 Headless Credentials Required
+Enterprise Headless mode uses dedicated API Keys and HMAC-SHA256 signatures rather than web session tokens:
+- **API Key Format**: `ec_live_...` (Production) or `ec_test_...` (Sandbox) in `x-api-key` header
+- **Signing Secret**: 48-character hex string used to generate `X-Signature` over `method + path + timestamp + nonce + body`
+- **Security Headers**: `X-Signature`, `X-Timestamp`, `X-Nonce`
+
+### 4.2 Headless Journey Endpoints
+
+| Method | Endpoint | Purpose |
+|---|---|---|
+| `POST` | `/api/v1/partner/journey/initiate` | Initiate headless journey with `channel: "API_HEADLESS"` & customer details (PAN, DOB, Gender, Income, PinCode). Returns `journeyId` and `journeySession`. |
+| `GET` | `/api/v1/partner/journey/{journeyId}` | Read state machine. Header: `X-Journey-Session`. Returns `nextAction` (`POLL`, `COLLECT`, `REDIRECT`, `TERMINAL`) and lender offers. |
+| `POST` | `/api/v1/partner/journey/{journeyId}/action` | Submit customer choice: `SELECT_OFFER` (`offerId`, `loanAmount`) or `SUBMIT_BANK_ACCOUNT` (`accHolderName`, `acctype`, `accNo`, `ifscCode`). |
+| `POST` | `/api/v1/partner/journey/{journeyId}/redirect-returned` | Signal completion when customer returns from KYC, e-NACH mandate, or eSign redirect steps. |
+| `GET` | `/api/v1/partner/leads/{applicationId}/status` | Direct status polling. |
+
+---
+
+## 5. Frontend Client Implementation
 
 Service file located at `src/services/easycredService.ts`:
 
@@ -184,8 +210,9 @@ const status = await easycredService.checkLeadStatus("EC-APP-894210");
 
 ---
 
-## 5. Summary of Integration Features
-- **Zero Redirect Friction**: Uses the **Clinaza Care-Pass Overlay** with auto-redirect timer controls.
-- **Direct SMS Dispatch**: Automatic invite link dispatched to patient phone.
+## 6. Summary of Integration Modes
+- **Mode 1: Headless (`API_HEADLESS`)**: Requires dedicated API key (`ec_live_...`) and signing secret from Easycred sales/onboarding (`https://www.easycred.co.in/partnership-api`). Drives all screens inside Clinaza.
+- **Mode 2: Hosted Partner Handoff (`API_HOSTED`)**: Works immediately via our active partner token. Uses the **Clinaza Care-Pass Overlay** with auto-redirect timer controls and instant SMS dispatch.
 - **Fail-Safe Fallbacks**: Zero dropped leads due to client-side fallback generation.
 - **Full Database Sync**: Real-time Supabase patient status updates via HMAC verified webhooks.
+

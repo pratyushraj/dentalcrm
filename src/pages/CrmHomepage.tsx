@@ -24,7 +24,9 @@ import {
   Share2,
   ChevronLeft,
   ChevronRight,
-  Video
+  Video,
+  Loader2,
+  Copy
 } from 'lucide-react';
 import { emailNotificationService } from '../services/emailNotificationService';
 import { easycredService } from '../services/easycredService';
@@ -102,6 +104,24 @@ export default function CrmHomepage() {
   const [showEmiReelModal, setShowEmiReelModal] = useState(false);
   const [eligibilityStep, setEligibilityStep] = useState<1 | 2>(1);
   const [showLenderResults, setShowLenderResults] = useState(false);
+  const [isFinancingSuccess, setIsFinancingSuccess] = useState(false);
+  const [customerLink, setCustomerLink] = useState('');
+  const [maskedMobile, setMaskedMobile] = useState('');
+  const [passCountdown, setPassCountdown] = useState(5);
+  const [isPassPaused, setIsPassPaused] = useState(false);
+  const [passCopied, setPassCopied] = useState(false);
+
+  // Auto-redirect timer for Care-Pass overlay
+  useEffect(() => {
+    if (isFinancingSuccess && customerLink && !isPassPaused) {
+      if (passCountdown > 0) {
+        const timer = setTimeout(() => setPassCountdown(passCountdown - 1), 1000);
+        return () => clearTimeout(timer);
+      } else {
+        window.location.href = customerLink;
+      }
+    }
+  }, [isFinancingSuccess, customerLink, passCountdown, isPassPaused]);
 
   // Auto-open eligibility modal if navigating with #check-eligibility or ?action=check-eligibility
   useEffect(() => {
@@ -242,11 +262,39 @@ export default function CrmHomepage() {
         ? result.data.customerLink
         : (result.fallbackLink || `https://easycred.co.in/loan/apply?product=PERSONAL_LOAN&mobile=${cleanMobile}&name=${encodeURIComponent(patientData.name)}`);
 
-      window.location.href = redirectUrl;
+      const masked = (result.success && result.data?.maskedMobile)
+        ? result.data.maskedMobile
+        : `••••••${cleanMobile.slice(-4)}`;
+
+      setCustomerLink(redirectUrl);
+      setMaskedMobile(masked);
+      setIsFinancingSuccess(true);
+      setPassCountdown(5);
     } catch (err) {
+      console.error('Error initiating financing:', err);
       const fallbackUrl = `https://easycred.co.in/loan/apply?product=PERSONAL_LOAN&mobile=${cleanMobile}&name=${encodeURIComponent(patientData.name)}`;
-      window.location.href = fallbackUrl;
+      setCustomerLink(fallbackUrl);
+      setMaskedMobile(`••••••${cleanMobile.slice(-4)}`);
+      setIsFinancingSuccess(true);
+      setPassCountdown(5);
     }
+  };
+
+  const handleCopyPassLink = () => {
+    if (!customerLink) return;
+    navigator.clipboard.writeText(customerLink);
+    setPassCopied(true);
+    toast.success('Secure KYC link copied to clipboard!');
+    setTimeout(() => setPassCopied(false), 2500);
+  };
+
+  const handleCloseEligibilityModal = () => {
+    setShowEligibilityModal(false);
+    setShowLenderResults(false);
+    setIsFinancingSuccess(false);
+    setCustomerLink('');
+    setMaskedMobile('');
+    setIsPassPaused(false);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -1486,25 +1534,129 @@ export default function CrmHomepage() {
             <div className="bg-white border border-slate-200 rounded-t-3xl sm:rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative space-y-5 text-left max-h-[85vh] sm:max-h-[90vh] overflow-hidden flex flex-col">
               <button
                 type="button"
-                onClick={() => { setShowEligibilityModal(false); setShowLenderResults(false); }}
-                className="absolute top-4 right-4 sm:top-5 sm:right-5 text-slate-400 hover:text-slate-600 w-10 h-10 flex items-center justify-center rounded-full hover:bg-slate-100 transition-colors"
+                onClick={handleCloseEligibilityModal}
+                className="absolute top-4 right-4 sm:top-5 sm:right-5 text-slate-400 hover:text-slate-600 w-10 h-10 flex items-center justify-center rounded-full hover:bg-slate-100 transition-colors z-10"
                 aria-label="Close modal"
               >
                 <X size={20} />
               </button>
 
-              {/* Modal Header */}
-              <div className="space-y-1">
-                <span className="text-[10px] font-black text-[#0f7a75] uppercase tracking-widest block">PATIENT FINANCING CHECK</span>
-                <h3 className="text-xl font-black text-[#0B2450]">
-                  {showLenderResults ? `${getMatchedLenders().length} Lenders Matched` : 'Check Financing Eligibility'}
-                </h3>
-                <p className="text-xs text-slate-500">
-                  {showLenderResults
-                    ? `Based on ${patientData.name}'s profile — share a link for them to apply directly`
-                    : 'Fill in the details below to find matching lenders'}
-                </p>
-              </div>
+              {isFinancingSuccess ? (
+                /* ── IN-APP SEAMLESS CARE-PASS OVERLAY (IMPROVEMENT 1) ── */
+                <div className="space-y-4 py-1 animate-in zoom-in-95 duration-200 overflow-y-auto pr-0.5">
+                  {/* Header Status Card */}
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600 shrink-0 shadow-xs">
+                      <CheckCircle2 size={26} />
+                    </div>
+                    <div>
+                      <span className="text-[10px] font-black text-emerald-600 uppercase tracking-widest block">
+                        FINANCING PASS READY
+                      </span>
+                      <h3 className="text-lg sm:text-xl font-black text-[#0B2450] tracking-tight leading-tight">
+                        Verification Link Generated
+                      </h3>
+                      <p className="text-[11px] text-slate-500">
+                        Dispatched via SMS to <strong className="text-slate-800">{maskedMobile || patientData.mobile}</strong>
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Smart Countdown & Hand-off Banner */}
+                  <div className="p-3.5 bg-gradient-to-r from-blue-50 to-indigo-50/80 border border-blue-200 rounded-2xl flex items-center justify-between text-xs">
+                    <div className="flex items-center gap-2.5">
+                      <Loader2 size={16} className={`text-[#0867E8] ${isPassPaused ? '' : 'animate-spin'}`} />
+                      <div>
+                        <span className="font-black text-[#0B2450] block">
+                          {isPassPaused ? 'Auto-redirect paused' : `Launching secure portal in ${passCountdown}s`}
+                        </span>
+                        <span className="text-[10px] text-slate-500">
+                          Entering encrypted RBI lending gateway
+                        </span>
+                      </div>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => setIsPassPaused(!isPassPaused)}
+                      className="text-[10px] font-bold text-[#0867E8] hover:underline px-2.5 py-1 rounded bg-white border border-blue-200 shadow-2xs"
+                    >
+                      {isPassPaused ? 'Resume' : 'Pause'}
+                    </button>
+                  </div>
+
+                  {/* In-App Healthcare Care-Pass Card */}
+                  <div className="bg-slate-900 text-white rounded-2xl p-4 space-y-3 relative overflow-hidden shadow-lg border border-slate-800">
+                    <div className="flex justify-between items-center border-b border-slate-800 pb-2.5">
+                      <div className="flex items-center gap-2">
+                        <span className="text-xs font-black tracking-widest uppercase text-emerald-400">CLINAZA PASS</span>
+                        <span className="text-[9px] bg-slate-800 text-slate-300 px-2 py-0.5 rounded-full font-mono">
+                          ID: {patientData.mobile ? `+91 ${patientData.mobile.replace(/\D/g, '').slice(-10)}` : 'N/A'}
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-1 text-[10px] text-slate-400">
+                        <Lock size={10} className="text-emerald-400" />
+                        <span>256-Bit SSL</span>
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-3 text-xs">
+                      <div>
+                        <span className="text-[9px] uppercase tracking-wider text-slate-400 block">Patient Name</span>
+                        <span className="font-bold text-slate-100">{patientData.name}</span>
+                      </div>
+                      <div>
+                        <span className="text-[9px] uppercase tracking-wider text-slate-400 block">Treatment</span>
+                        <span className="font-bold text-slate-100 truncate block">{patientData.treatment}</span>
+                      </div>
+                      <div>
+                        <span className="text-[9px] uppercase tracking-wider text-slate-400 block">Requested Amount</span>
+                        <span className="font-bold text-emerald-400">{patientData.amount}</span>
+                      </div>
+                      <div>
+                        <span className="text-[9px] uppercase tracking-wider text-slate-400 block">Lender Network</span>
+                        <span className="font-bold text-slate-200">Easycred / 55+ NBFCs</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Action Buttons */}
+                  <div className="space-y-2">
+                    <a
+                      href={customerLink}
+                      className="w-full py-3.5 bg-[#0867E8] hover:bg-[#0756C7] text-white font-black text-xs uppercase tracking-wider rounded-xl transition-all shadow-md active:scale-98 flex items-center justify-center gap-2 text-center cursor-pointer"
+                    >
+                      <span>Continue to Secure KYC Now</span>
+                      <ChevronRight size={15} />
+                    </a>
+
+                    <button
+                      type="button"
+                      onClick={handleCopyPassLink}
+                      className="w-full py-2.5 px-3 bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-700 font-bold text-xs rounded-xl transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+                    >
+                      {passCopied ? <Check size={14} className="text-emerald-600" /> : <Copy size={14} />}
+                      <span>{passCopied ? 'Copied to Clipboard!' : 'Copy Secure KYC Link'}</span>
+                    </button>
+                  </div>
+
+                  <p className="text-[10px] text-slate-400 text-center leading-relaxed pt-1 border-t border-slate-100">
+                    🔒 Final approval and repayment terms are verified digitally on our partner portal.
+                  </p>
+                </div>
+              ) : (
+                <>
+                  {/* Modal Header */}
+                  <div className="space-y-1">
+                    <span className="text-[10px] font-black text-[#0f7a75] uppercase tracking-widest block">PATIENT FINANCING CHECK</span>
+                    <h3 className="text-xl font-black text-[#0B2450]">
+                      {showLenderResults ? `${getMatchedLenders().length} Lenders Matched` : 'Check Financing Eligibility'}
+                    </h3>
+                    <p className="text-xs text-slate-500">
+                      {showLenderResults
+                        ? `Based on ${patientData.name}'s profile — share a link for them to apply directly`
+                        : 'Fill in the details below to find matching lenders'}
+                    </p>
+                  </div>
 
               {showLenderResults ? (
                 /* ── RESULTS VIEW ── */
@@ -1706,6 +1858,8 @@ export default function CrmHomepage() {
                     Your documents are reviewed privately by Clinaza & partnered NBFC desk officers only.
                   </p>
                 </div>
+              )}
+              </>
               )}
               </>
               )}

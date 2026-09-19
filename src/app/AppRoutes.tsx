@@ -10,13 +10,11 @@ const DentalTrendFinder = lazy(() => import("@/pages/DentalTrendFinder"));
 const ContentWorkspace = lazy(() => import("@/pages/ContentWorkspace"));
 const CrmHomepage = lazy(() => import("@/pages/CrmHomepage"));
 const EmiCallbackPage = lazy(() => import("@/pages/EmiCallbackPage"));
-const EmiOnboardPage = lazy(() => import("@/pages/EmiOnboardPage"));
 const BlogHub = lazy(() => import("@/pages/yourdentist/BlogHub"));
 const BlogArticlePage = lazy(() => import("@/pages/yourdentist/BlogArticlePage"));
 const ReviewAssistant = lazy(() => import("@/pages/yourdentist/ReviewAssistant"));
 const CityLandingPage = lazy(() => import("@/pages/CityLandingPage"));
 const PitchDeckPage = lazy(() => import("@/pages/PitchDeckPage"));
-const DhanliftRedirectPage = lazy(() => import("@/pages/DhanliftRedirectPage"));
 const FreeToolsHub = lazy(() => import("@/pages/FreeToolsHub"));
 const LoanDemoPage = lazy(() => import("@/pages/LoanDemoPage"));
 
@@ -35,11 +33,10 @@ export default function AppRoutes() {
             } 
           />
 
-          {/* Direct WhatsApp Share Short Links for Loan Redirect */}
-          <Route path="/loan" element={<LazyRoute><DhanliftRedirectPage /></LazyRoute>} />
-          <Route path="/loans" element={<LazyRoute><DhanliftRedirectPage /></LazyRoute>} />
-          <Route path="/apply" element={<LazyRoute><DhanliftRedirectPage /></LazyRoute>} />
-          <Route path="/dhanlift" element={<LazyRoute><DhanliftRedirectPage /></LazyRoute>} />
+          {/* Direct WhatsApp Share & Demo Links for Loan */}
+          <Route path="/loan" element={<Navigate to="/#check-eligibility" replace />} />
+          <Route path="/loans" element={<Navigate to="/#check-eligibility" replace />} />
+          <Route path="/apply" element={<Navigate to="/#check-eligibility" replace />} />
           <Route path="/demo/loan" element={<LazyRoute><LoanDemoPage /></LazyRoute>} />
           <Route path="/loan/demo" element={<LazyRoute><LoanDemoPage /></LazyRoute>} />
 
@@ -68,7 +65,6 @@ export default function AppRoutes() {
           <Route path="/dental-trends" element={<LazyRoute><DentalTrendFinder /></LazyRoute>} />
           <Route path="/dentist-proposal" element={<LazyRoute><ContentWorkspace /></LazyRoute>} />
           <Route path="/emi/callback" element={<LazyRoute><EmiCallbackPage /></LazyRoute>} />
-          <Route path="/emi/onboard" element={<LazyRoute><EmiOnboardPage /></LazyRoute>} />
 
           {/* Reactivation Dashboard Portal Routes */}
           {ReactivationRoutes()}

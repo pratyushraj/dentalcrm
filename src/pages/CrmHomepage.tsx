@@ -182,18 +182,18 @@ export default function CrmHomepage() {
   });
   const [patientSubmitted, setPatientSubmitted] = useState(false);
 
-  // Single partner lender: Dhanlift
+  // Primary partner lending network: Easycred
   const ALL_LENDERS = [
     { 
-      id: 'dhanlift', 
-      name: 'Dhanlift', 
-      rate: '12%–30% p.a.', 
+      id: 'easycred', 
+      name: 'Easycred NBFC Network', 
+      rate: 'From 11.5% p.a.', 
       minCibil: 0, 
       salaryOnly: false, 
       minIncome: 0, 
-      url: 'https://www.dhanlift.com/loans/personal-loan-for-salaried-employees/clinaza-patient-treatment-loan?utm_source=affiliate&utm_medium=partner&utm_campaign=partner-campaign-aff-4&utm_term=03-09-2026', 
-      badge: 'Official EMI Partner', 
-      color: 'bg-emerald-50 border-emerald-200 text-emerald-700' 
+      url: 'https://easycred.co.in/loan/apply?product=PERSONAL_LOAN', 
+      badge: 'Official Multi-NBFC Partner', 
+      color: 'bg-blue-50 border-blue-200 text-[#0867E8]' 
     }
   ];
 
@@ -412,7 +412,7 @@ export default function CrmHomepage() {
         title="Clinaza — Patient Financing, Healthcare EMIs & Free Dental CRM India"
         description="Offer instant point-of-care patient EMI financing (₹30K–₹5L) with 55+ RBI-regulated Banks & NBFCs. Plus, 100% Free Dental Clinic CRM & WhatsApp recall software."
         keywords={[
-          'clinaza', 'clinaza patient financing', 'clinaza healthpay', 'dhanlift clinaza loan',
+          'clinaza', 'clinaza patient financing', 'clinaza healthpay', 'clinaza healthcare emi',
           'patient financing india', 'healthcare emi india', 'dental emi', 'dental emi patna', 'dental loan india',
           'point of care patient financing', 'no cost emi dental clinic', 'dental implants emi', 'clear aligners emi cost',
           'free dental crm', 'free dental crm software india', 'best free dental clinic management software',
@@ -669,7 +669,6 @@ export default function CrmHomepage() {
                   { id: 'incred', name: 'InCred Finance', sub: 'Digital NBFC', badge: 'NBFC' },
                   { id: 'dmi', name: 'DMI Finance', sub: 'Digital Credit', badge: 'NBFC' },
                   { id: 'liquiloans', name: 'LiquiLoans', sub: 'P2P NBFC', badge: 'NBFC' },
-                  { id: 'dhanlift', name: 'Dhanlift', sub: 'EMI Sourcing Partner', badge: 'LSP' },
 
                   // 2nd Set for Seamless Infinite Loop
                   { id: 'hdfc', name: 'HDFC Bank', sub: 'Banking Partner', badge: 'Bank' },
@@ -687,8 +686,7 @@ export default function CrmHomepage() {
                   { id: 'muthoot', name: 'Muthoot Finance', sub: 'Personal Lending', badge: 'NBFC' },
                   { id: 'incred', name: 'InCred Finance', sub: 'Digital NBFC', badge: 'NBFC' },
                   { id: 'dmi', name: 'DMI Finance', sub: 'Digital Credit', badge: 'NBFC' },
-                  { id: 'liquiloans', name: 'LiquiLoans', sub: 'P2P NBFC', badge: 'NBFC' },
-                  { id: 'dhanlift', name: 'Dhanlift', sub: 'EMI Sourcing Partner', badge: 'LSP' }
+                  { id: 'liquiloans', name: 'LiquiLoans', sub: 'P2P NBFC', badge: 'NBFC' }
                 ].map((item, idx) => (
                   <div
                     key={idx}

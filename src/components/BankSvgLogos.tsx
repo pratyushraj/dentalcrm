@@ -72,10 +72,6 @@ const BANK_LOGOS: Record<string, { src: string; name: string }> = {
     src: 'https://www.google.com/s2/favicons?sz=128&domain=liquiloans.io',
     name: 'LiquiLoans',
   },
-  dhanlift: {
-    src: 'https://www.google.com/s2/favicons?sz=128&domain=dhanlift.com',
-    name: 'Dhanlift',
-  },
 };
 
 // Fallback: colored initials badge when image fails to load

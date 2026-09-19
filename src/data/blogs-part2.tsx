@@ -11,7 +11,7 @@ export const BLOGS_PART2 = [
     publishDate: "September 8, 2026",
     author: "Clinaza Healthcare Advisory",
     summary: "Complete 2026 guide to hair transplant costs on EMI in India. Compare FUE, FUT, and DHI graft prices (₹35,000–₹1,80,000) and convert your hair restoration procedure into easy 0% monthly EMIs from ₹2,800/month.",
-    featuredImage: "https://images.unsplash.com/photo-1628178148526-b338a3428879?q=80&w=1200&auto=format&fit=crop",
+    featuredImage: "https://images.unsplash.com/photo-1585747860715-2ba37e788b70?q=80&w=1200&auto=format&fit=crop",
     metaDescription: "Hair transplant cost on EMI in India: Compare FUE & DHI graft prices (₹35K to ₹1.8L). Get instant flexible monthly EMI options starting from ₹2,800/month.",
     faqs: [
       {

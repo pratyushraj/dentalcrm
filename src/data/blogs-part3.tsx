@@ -376,7 +376,7 @@ export const BLOGS_PART3 = [
     publishDate: "September 12, 2026",
     author: "Clinaza Medical Insights",
     summary: "Complete patient guide to hair transplant costs in India on monthly EMI. Compare FUE, DHI, and Sapphire graft pricing (1,500 to 5,000 grafts), zero-cost financing options, and why health insurance excludes aesthetic hair restoration.",
-    featuredImage: "https://images.unsplash.com/photo-1628178148526-b338a3428879?q=80&w=1200&auto=format&fit=crop",
+    featuredImage: "https://images.unsplash.com/photo-1585747860715-2ba37e788b70?q=80&w=1200&auto=format&fit=crop",
     metaDescription: "Hair transplant cost on EMI in India (2026). Compare FUE vs DHI per-graft prices (₹20 to ₹65/graft), flexible monthly EMI plans from ₹2,500/month, and top clinics.",
     faqs: [
       {

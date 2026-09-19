@@ -5,16 +5,11 @@ import {
   Sparkles, 
   ArrowRight, 
   CheckCircle2, 
-  MessageSquare, 
-  ExternalLink, 
+  ChevronRight, 
   Loader2, 
-  Share2, 
-  Send, 
-  Check, 
-  Clock, 
   Lock, 
   Copy,
-  ChevronRight
+  Check
 } from 'lucide-react';
 import { toast } from 'sonner';
 import { emailNotificationService } from '@/services/emailNotificationService';
@@ -46,14 +41,13 @@ export const PatientEligibilityModal: React.FC<PatientEligibilityModalProps> = (
   const [copied, setCopied] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
 
-  // Auto-redirect timer with option to pause or click immediately
+  // Auto-redirect timer with pause/resume control
   useEffect(() => {
     if (isSuccess && customerLink && !isPaused) {
       if (countdown > 0) {
         const timer = setTimeout(() => setCountdown(countdown - 1), 1000);
         return () => clearTimeout(timer);
       } else {
-        // Automatically open the secure KYC session
         window.location.href = customerLink;
       }
     }
@@ -88,16 +82,11 @@ export const PatientEligibilityModal: React.FC<PatientEligibilityModalProps> = (
         checkedAt: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })
       });
 
-      // 2. Determine productCode (Smart Ticket Routing)
-      // If estimated amount is <= 30k, use ONLINE_SHORT_TERM pocket loan for faster approval
-      const isPocketLoan = amount.includes('25,000') || amount.includes('30,000');
-      const productCode = isPocketLoan ? 'ONLINE_SHORT_TERM' : 'ONLINE_PERSONAL';
-
-      // 3. Initiate application with Easycred Partner API
+      // 2. Initiate application with Easycred Partner API (standard ONLINE_PERSONAL)
       const result = await easycredService.initiateApplication({
         customerName: name.trim(),
         mobile: cleanMobile,
-        productCode: productCode as any
+        productCode: 'ONLINE_PERSONAL'
       });
 
       const link = (result.success && result.data?.customerLink)
@@ -143,13 +132,6 @@ export const PatientEligibilityModal: React.FC<PatientEligibilityModalProps> = (
     onClose();
   };
 
-  const whatsappMessage = encodeURIComponent(
-    `🏥 *CLINAZA HEALTHCARE FINANCING PASS*\n\n` +
-    `Hello ${name},\nYour treatment financing application for *${treatment}* has been initiated!\n\n` +
-    `🔑 *Your Secure Digital KYC Link:*\n${customerLink}\n\n` +
-    `Please enter the 6-digit verification code texted to your phone to activate your approval.`
-  );
-
   return (
     <div className="fixed inset-0 z-[999] flex items-center justify-center p-3 sm:p-4 bg-slate-950/75 backdrop-blur-md animate-in fade-in duration-200">
       <div 
@@ -170,7 +152,7 @@ export const PatientEligibilityModal: React.FC<PatientEligibilityModalProps> = (
         </button>
 
         {isSuccess ? (
-          /* ── 1. IN-APP SEAMLESS CARE-PASS OVERLAY & 3. WHATSAPP PASS ── */
+          /* ── IN-APP SEAMLESS CARE-PASS OVERLAY ── */
           <div className="space-y-4 py-1 animate-in zoom-in-95 duration-200 overflow-y-auto pr-0.5">
             {/* Header Status Card */}
             <div className="flex items-center gap-3">
@@ -190,7 +172,7 @@ export const PatientEligibilityModal: React.FC<PatientEligibilityModalProps> = (
               </div>
             </div>
 
-            {/* Smart Countdown & In-App Hand-off Banner */}
+            {/* Smart Countdown & Hand-off Banner */}
             <div className="p-3.5 bg-gradient-to-r from-blue-50 to-indigo-50/80 border border-blue-200 rounded-2xl flex items-center justify-between text-xs">
               <div className="flex items-center gap-2.5">
                 <Loader2 size={16} className={`text-[#0867E8] ${isPaused ? '' : 'animate-spin'}`} />
@@ -245,7 +227,7 @@ export const PatientEligibilityModal: React.FC<PatientEligibilityModalProps> = (
               </div>
             </div>
 
-            {/* Action 1: Open Secure KYC Window Immediately */}
+            {/* Action Buttons */}
             <div className="space-y-2">
               <a
                 href={customerLink}
@@ -255,32 +237,18 @@ export const PatientEligibilityModal: React.FC<PatientEligibilityModalProps> = (
                 <ChevronRight size={15} />
               </a>
 
-              {/* Action 2: Send Care-Pass via WhatsApp (Item 3) */}
-              <div className="grid grid-cols-2 gap-2">
-                <a
-                  href={`https://wa.me/91${mobile.replace(/\D/g, '').slice(-10)}?text=${whatsappMessage}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="py-2.5 px-3 bg-emerald-50 hover:bg-emerald-100 border border-emerald-300 text-emerald-800 font-bold text-[11px] rounded-xl transition-all flex items-center justify-center gap-1.5 text-center"
-                >
-                  <Send size={13} className="text-emerald-600" />
-                  <span>Send on WhatsApp</span>
-                </a>
-
-                <button
-                  type="button"
-                  onClick={handleCopyLink}
-                  className="py-2.5 px-3 bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-700 font-bold text-[11px] rounded-xl transition-all flex items-center justify-center gap-1.5"
-                >
-                  {copied ? <Check size={13} className="text-emerald-600" /> : <Copy size={13} />}
-                  <span>{copied ? 'Copied!' : 'Copy KYC Link'}</span>
-                </button>
-              </div>
+              <button
+                type="button"
+                onClick={handleCopyLink}
+                className="w-full py-2.5 px-3 bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-700 font-bold text-xs rounded-xl transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+              >
+                {copied ? <Check size={14} className="text-emerald-600" /> : <Copy size={14} />}
+                <span>{copied ? 'Copied to Clipboard!' : 'Copy Secure KYC Link'}</span>
+              </button>
             </div>
 
-            {/* Clinic Support Footnote */}
             <p className="text-[10px] text-slate-400 text-center leading-relaxed pt-1 border-t border-slate-100">
-              Need assistance? WhatsApp Clinaza Care Desk at <a href="https://wa.me/917292984244" className="text-[#0867E8] font-bold underline">+91 7292984244</a>
+              🔒 Final approval and repayment terms are verified digitally on our partner portal.
             </p>
           </div>
         ) : (

@@ -1620,7 +1620,7 @@ export default function CrmHomepage() {
                   </div>
 
                   {/* Action Buttons */}
-                  <div className="space-y-2">
+                  <div className="pt-1">
                     <a
                       href={customerLink}
                       className="w-full py-3.5 bg-[#0867E8] hover:bg-[#0756C7] text-white font-black text-xs uppercase tracking-wider rounded-xl transition-all shadow-md active:scale-98 flex items-center justify-center gap-2 text-center cursor-pointer"
@@ -1628,15 +1628,6 @@ export default function CrmHomepage() {
                       <span>Continue to Secure KYC Now</span>
                       <ChevronRight size={15} />
                     </a>
-
-                    <button
-                      type="button"
-                      onClick={handleCopyPassLink}
-                      className="w-full py-2.5 px-3 bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-700 font-bold text-xs rounded-xl transition-all flex items-center justify-center gap-1.5 cursor-pointer"
-                    >
-                      {passCopied ? <Check size={14} className="text-emerald-600" /> : <Copy size={14} />}
-                      <span>{passCopied ? 'Copied to Clipboard!' : 'Copy Secure KYC Link'}</span>
-                    </button>
                   </div>
 
                   <p className="text-[10px] text-slate-400 text-center leading-relaxed pt-1 border-t border-slate-100">

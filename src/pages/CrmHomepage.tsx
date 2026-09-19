@@ -410,7 +410,7 @@ export default function CrmHomepage() {
     <div className="min-h-screen bg-white text-[#0B2450] font-sora antialiased overflow-x-hidden selection:bg-[#0867E8] selection:text-white">
       <SEOHead
         title="Clinaza — Patient Financing, Healthcare EMIs & Free Dental CRM India"
-        description="Offer instant point-of-care patient EMI financing (₹30K–₹5L) with 55+ RBI-regulated Banks & NBFCs. Plus, 100% Free Dental Clinic CRM & WhatsApp recall software."
+        description="Offer instant point-of-care patient EMI financing (₹30K–₹5L) with 13 Live RBI-regulated NBFCs. Plus, 100% Free Dental Clinic CRM & WhatsApp recall software."
         keywords={[
           'clinaza', 'clinaza patient financing', 'clinaza healthpay', 'clinaza healthcare emi',
           'patient financing india', 'healthcare emi india', 'dental emi', 'dental emi patna', 'dental loan india',
@@ -652,41 +652,35 @@ export default function CrmHomepage() {
 
               <div className="flex w-max gap-4 animate-marquee group-hover:[animation-play-state:paused]">
                 {[
-                  // 1st Set of Banks & NBFCs
-                  { id: 'hdfc', name: 'HDFC Bank', sub: 'Banking Partner', badge: 'Bank' },
-                  { id: 'icici', name: 'ICICI Bank', sub: 'Digital Lending', badge: 'Bank' },
-                  { id: 'axis', name: 'Axis Bank', sub: 'Jarvis APIs', badge: 'Bank' },
+                  // 1st Set of Easycred 13 Live Lenders
                   { id: 'bajaj', name: 'Bajaj Finserv', sub: 'EMI Network', badge: 'NBFC' },
                   { id: 'tata', name: 'Tata Capital', sub: 'Healthcare Loan', badge: 'NBFC' },
-                  { id: 'piramal', name: 'Piramal Finance', sub: 'Retail Financing', badge: 'NBFC' },
-                  { id: 'kotak', name: 'Kotak Bank', sub: 'Point-of-Care', badge: 'Bank' },
-                  { id: 'lt', name: 'L&T Finance', sub: 'Medical EMI', badge: 'NBFC' },
-                  { id: 'abcl', name: 'Aditya Birla', sub: 'Capital Finance', badge: 'NBFC' },
                   { id: 'poonawalla', name: 'Poonawalla Fincorp', sub: 'Consumer Finance', badge: 'NBFC' },
-                  { id: 'chola', name: 'Cholamandalam', sub: 'Chola Finance', badge: 'NBFC' },
-                  { id: 'smfg', name: 'SMFG India Credit', sub: 'Fullerton Credit', badge: 'NBFC' },
-                  { id: 'muthoot', name: 'Muthoot Finance', sub: 'Personal Lending', badge: 'NBFC' },
+                  { id: 'godrej', name: 'Godrej Capital', sub: 'Medical Credit', badge: 'NBFC' },
                   { id: 'incred', name: 'InCred Finance', sub: 'Digital NBFC', badge: 'NBFC' },
-                  { id: 'dmi', name: 'DMI Finance', sub: 'Digital Credit', badge: 'NBFC' },
-                  { id: 'liquiloans', name: 'LiquiLoans', sub: 'P2P NBFC', badge: 'NBFC' },
+                  { id: 'chola', name: 'Cholamandalam', sub: 'Chola Finance', badge: 'NBFC' },
+                  { id: 'chinmay', name: 'Chinmay Finlease', sub: 'Pocket Loans', badge: 'NBFC' },
+                  { id: 'fibe', name: 'FIBE', sub: 'Instant Credit', badge: 'Fintech' },
+                  { id: 'faircent', name: 'Faircent', sub: 'P2P NBFC', badge: 'NBFC' },
+                  { id: 'zype', name: 'ZYPE', sub: 'Credit Line', badge: 'Digital' },
+                  { id: 'olyv', name: 'OLYV', sub: 'Smart Lending', badge: 'Digital' },
+                  { id: 'truefund', name: 'TrueFund', sub: 'Credit Partner', badge: 'Lender' },
+                  { id: 'mymudra', name: 'MyMudra', sub: 'Financial Partner', badge: 'Marketplace' },
 
                   // 2nd Set for Seamless Infinite Loop
-                  { id: 'hdfc', name: 'HDFC Bank', sub: 'Banking Partner', badge: 'Bank' },
-                  { id: 'icici', name: 'ICICI Bank', sub: 'Digital Lending', badge: 'Bank' },
-                  { id: 'axis', name: 'Axis Bank', sub: 'Jarvis APIs', badge: 'Bank' },
                   { id: 'bajaj', name: 'Bajaj Finserv', sub: 'EMI Network', badge: 'NBFC' },
                   { id: 'tata', name: 'Tata Capital', sub: 'Healthcare Loan', badge: 'NBFC' },
-                  { id: 'piramal', name: 'Piramal Finance', sub: 'Retail Financing', badge: 'NBFC' },
-                  { id: 'kotak', name: 'Kotak Bank', sub: 'Point-of-Care', badge: 'Bank' },
-                  { id: 'lt', name: 'L&T Finance', sub: 'Medical EMI', badge: 'NBFC' },
-                  { id: 'abcl', name: 'Aditya Birla', sub: 'Capital Finance', badge: 'NBFC' },
                   { id: 'poonawalla', name: 'Poonawalla Fincorp', sub: 'Consumer Finance', badge: 'NBFC' },
-                  { id: 'chola', name: 'Cholamandalam', sub: 'Chola Finance', badge: 'NBFC' },
-                  { id: 'smfg', name: 'SMFG India Credit', sub: 'Fullerton Credit', badge: 'NBFC' },
-                  { id: 'muthoot', name: 'Muthoot Finance', sub: 'Personal Lending', badge: 'NBFC' },
+                  { id: 'godrej', name: 'Godrej Capital', sub: 'Medical Credit', badge: 'NBFC' },
                   { id: 'incred', name: 'InCred Finance', sub: 'Digital NBFC', badge: 'NBFC' },
-                  { id: 'dmi', name: 'DMI Finance', sub: 'Digital Credit', badge: 'NBFC' },
-                  { id: 'liquiloans', name: 'LiquiLoans', sub: 'P2P NBFC', badge: 'NBFC' }
+                  { id: 'chola', name: 'Cholamandalam', sub: 'Chola Finance', badge: 'NBFC' },
+                  { id: 'chinmay', name: 'Chinmay Finlease', sub: 'Pocket Loans', badge: 'NBFC' },
+                  { id: 'fibe', name: 'FIBE', sub: 'Instant Credit', badge: 'Fintech' },
+                  { id: 'faircent', name: 'Faircent', sub: 'P2P NBFC', badge: 'NBFC' },
+                  { id: 'zype', name: 'ZYPE', sub: 'Credit Line', badge: 'Digital' },
+                  { id: 'olyv', name: 'OLYV', sub: 'Smart Lending', badge: 'Digital' },
+                  { id: 'truefund', name: 'TrueFund', sub: 'Credit Partner', badge: 'Lender' },
+                  { id: 'mymudra', name: 'MyMudra', sub: 'Financial Partner', badge: 'Marketplace' }
                 ].map((item, idx) => (
                   <div
                     key={idx}
@@ -1612,7 +1606,7 @@ export default function CrmHomepage() {
                       </div>
                       <div>
                         <span className="text-[9px] uppercase tracking-wider text-slate-400 block">Lender Network</span>
-                        <span className="font-bold text-slate-200">Easycred / 55+ NBFCs</span>
+                        <span className="font-bold text-slate-200">Easycred / 13 Live NBFCs</span>
                       </div>
                     </div>
                   </div>

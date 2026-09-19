@@ -8,6 +8,60 @@ interface BankLogoProps {
 
 // Official brand logos via Google's S2 favicon service — no hotlink restrictions
 const BANK_LOGOS: Record<string, { src: string; name: string }> = {
+  // Easycred 13 Multi-Lender Network
+  bajaj: {
+    src: 'https://www.google.com/s2/favicons?sz=128&domain=bajajfinserv.in',
+    name: 'Bajaj Finserv',
+  },
+  tata: {
+    src: 'https://www.google.com/s2/favicons?sz=128&domain=tatacapital.com',
+    name: 'Tata Capital',
+  },
+  poonawalla: {
+    src: 'https://www.google.com/s2/favicons?sz=128&domain=poonawallafincorp.com',
+    name: 'Poonawalla Fincorp',
+  },
+  godrej: {
+    src: 'https://www.google.com/s2/favicons?sz=128&domain=godrejcapital.com',
+    name: 'Godrej Capital',
+  },
+  incred: {
+    src: 'https://www.google.com/s2/favicons?sz=128&domain=incred.com',
+    name: 'InCred Finance',
+  },
+  chola: {
+    src: 'https://www.google.com/s2/favicons?sz=128&domain=cholamandalam.com',
+    name: 'Cholamandalam',
+  },
+  chinmay: {
+    src: 'https://www.google.com/s2/favicons?sz=128&domain=chinmayfinlease.com',
+    name: 'Chinmay Finlease',
+  },
+  fibe: {
+    src: 'https://www.google.com/s2/favicons?sz=128&domain=fibe.in',
+    name: 'FIBE',
+  },
+  faircent: {
+    src: 'https://www.google.com/s2/favicons?sz=128&domain=faircent.in',
+    name: 'Faircent',
+  },
+  zype: {
+    src: 'https://www.google.com/s2/favicons?sz=128&domain=getzype.com',
+    name: 'ZYPE',
+  },
+  olyv: {
+    src: 'https://www.google.com/s2/favicons?sz=128&domain=olyv.in',
+    name: 'OLYV',
+  },
+  truefund: {
+    src: 'https://www.google.com/s2/favicons?sz=128&domain=truefund.in',
+    name: 'TrueFund',
+  },
+  mymudra: {
+    src: 'https://www.google.com/s2/favicons?sz=128&domain=mymudra.com',
+    name: 'MyMudra',
+  },
+  // Major Bank Co-Lending Partners
   hdfc: {
     src: 'https://www.google.com/s2/favicons?sz=128&domain=hdfcbank.com',
     name: 'HDFC Bank',
@@ -20,57 +74,9 @@ const BANK_LOGOS: Record<string, { src: string; name: string }> = {
     src: 'https://www.google.com/s2/favicons?sz=128&domain=axisbank.com',
     name: 'Axis Bank',
   },
-  bajaj: {
-    src: 'https://www.google.com/s2/favicons?sz=128&domain=bajajfinserv.in',
-    name: 'Bajaj Finserv',
-  },
-  tata: {
-    src: 'https://www.google.com/s2/favicons?sz=128&domain=tatacapital.com',
-    name: 'Tata Capital',
-  },
   kotak: {
     src: 'https://www.google.com/s2/favicons?sz=128&domain=kotak.com',
     name: 'Kotak Bank',
-  },
-  piramal: {
-    src: 'https://www.google.com/s2/favicons?sz=128&domain=piramalfinance.com',
-    name: 'Piramal Finance',
-  },
-  lt: {
-    src: 'https://www.google.com/s2/favicons?sz=128&domain=ltfs.com',
-    name: 'L&T Finance',
-  },
-  abcl: {
-    src: 'https://www.google.com/s2/favicons?sz=128&domain=adityabirlacapital.com',
-    name: 'Aditya Birla',
-  },
-  poonawalla: {
-    src: 'https://www.google.com/s2/favicons?sz=128&domain=poonawallafincorp.com',
-    name: 'Poonawalla',
-  },
-  chola: {
-    src: 'https://www.google.com/s2/favicons?sz=128&domain=cholafin.com',
-    name: 'Cholamandalam',
-  },
-  smfg: {
-    src: 'https://www.google.com/s2/favicons?sz=128&domain=smfgindiacredit.com',
-    name: 'SMFG Credit',
-  },
-  muthoot: {
-    src: 'https://www.google.com/s2/favicons?sz=128&domain=muthootfinance.com',
-    name: 'Muthoot Finance',
-  },
-  incred: {
-    src: 'https://www.google.com/s2/favicons?sz=128&domain=incred.com',
-    name: 'InCred',
-  },
-  dmi: {
-    src: 'https://www.google.com/s2/favicons?sz=128&domain=dmifinance.in',
-    name: 'DMI Finance',
-  },
-  liquiloans: {
-    src: 'https://www.google.com/s2/favicons?sz=128&domain=liquiloans.io',
-    name: 'LiquiLoans',
   },
 };
 

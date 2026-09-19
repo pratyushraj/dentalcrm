@@ -92,6 +92,7 @@ scratch/
 !public/apple-touch-icon.png
 !public/icon-*.png
 !public/og-preview.png
+!public/og-clinaza.png
 !public/assets/**/*
 !public/videos/**/*.mp4
 !public/videos/*.mp4

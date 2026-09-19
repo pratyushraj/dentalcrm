@@ -222,7 +222,7 @@ export const PatientEligibilityModal: React.FC<PatientEligibilityModalProps> = (
                 </div>
                 <div>
                   <span className="text-[9px] uppercase tracking-wider text-slate-400 block">Lender Network</span>
-                  <span className="font-bold text-slate-200">Easycred / 55+ NBFCs</span>
+                  <span className="font-bold text-slate-200">Easycred / 13 Live NBFCs</span>
                 </div>
               </div>
             </div>

@@ -1,5 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { X, Shield, Sparkles, ArrowRight, CheckCircle2, MessageSquare, ExternalLink, Loader2 } from 'lucide-react';
+import { 
+  X, 
+  Shield, 
+  Sparkles, 
+  ArrowRight, 
+  CheckCircle2, 
+  MessageSquare, 
+  ExternalLink, 
+  Loader2, 
+  Share2, 
+  Send, 
+  Check, 
+  Clock, 
+  Lock, 
+  Copy,
+  ChevronRight
+} from 'lucide-react';
 import { toast } from 'sonner';
 import { emailNotificationService } from '@/services/emailNotificationService';
 import { easycredService } from '@/services/easycredService';
@@ -26,19 +42,22 @@ export const PatientEligibilityModal: React.FC<PatientEligibilityModalProps> = (
   const [isSuccess, setIsSuccess] = useState(false);
   const [customerLink, setCustomerLink] = useState('');
   const [maskedMobile, setMaskedMobile] = useState('');
-  const [countdown, setCountdown] = useState(2);
+  const [countdown, setCountdown] = useState(5);
+  const [copied, setCopied] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
 
-  // Auto-redirect timer once customerLink is set
+  // Auto-redirect timer with option to pause or click immediately
   useEffect(() => {
-    if (isSuccess && customerLink) {
+    if (isSuccess && customerLink && !isPaused) {
       if (countdown > 0) {
         const timer = setTimeout(() => setCountdown(countdown - 1), 1000);
         return () => clearTimeout(timer);
       } else {
+        // Automatically open the secure KYC session
         window.location.href = customerLink;
       }
     }
-  }, [isSuccess, customerLink, countdown]);
+  }, [isSuccess, customerLink, countdown, isPaused]);
 
   if (!isOpen) return null;
 
@@ -69,11 +88,16 @@ export const PatientEligibilityModal: React.FC<PatientEligibilityModalProps> = (
         checkedAt: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })
       });
 
-      // 2. Initiate application with Easycred Partner API
+      // 2. Determine productCode (Smart Ticket Routing)
+      // If estimated amount is <= 30k, use ONLINE_SHORT_TERM pocket loan for faster approval
+      const isPocketLoan = amount.includes('25,000') || amount.includes('30,000');
+      const productCode = isPocketLoan ? 'ONLINE_SHORT_TERM' : 'ONLINE_PERSONAL';
+
+      // 3. Initiate application with Easycred Partner API
       const result = await easycredService.initiateApplication({
         customerName: name.trim(),
         mobile: cleanMobile,
-        productCode: 'ONLINE_PERSONAL'
+        productCode: productCode as any
       });
 
       const link = (result.success && result.data?.customerLink)
@@ -87,18 +111,26 @@ export const PatientEligibilityModal: React.FC<PatientEligibilityModalProps> = (
       setCustomerLink(link);
       setMaskedMobile(masked);
       setIsSuccess(true);
-      setCountdown(2);
-      toast.success('Verification link & OTP dispatched!');
+      setCountdown(5);
+      toast.success('Financing verification sent to your mobile!');
     } catch (err) {
       console.error('Error submitting eligibility form:', err);
       const fallback = `https://easycred.co.in/loan/apply?product=PERSONAL_LOAN&mobile=${cleanMobile}&name=${encodeURIComponent(name)}`;
       setCustomerLink(fallback);
       setMaskedMobile(`••••••${cleanMobile.slice(-4)}`);
       setIsSuccess(true);
-      setCountdown(2);
+      setCountdown(5);
     } finally {
       setIsSubmitting(false);
     }
+  };
+
+  const handleCopyLink = () => {
+    if (!customerLink) return;
+    navigator.clipboard.writeText(customerLink);
+    setCopied(true);
+    toast.success('Secure link copied to clipboard!');
+    setTimeout(() => setCopied(false), 2500);
   };
 
   const handleReset = () => {
@@ -107,13 +139,21 @@ export const PatientEligibilityModal: React.FC<PatientEligibilityModalProps> = (
     setMaskedMobile('');
     setName('');
     setMobile('');
+    setIsPaused(false);
     onClose();
   };
 
+  const whatsappMessage = encodeURIComponent(
+    `🏥 *CLINAZA HEALTHCARE FINANCING PASS*\n\n` +
+    `Hello ${name},\nYour treatment financing application for *${treatment}* has been initiated!\n\n` +
+    `🔑 *Your Secure Digital KYC Link:*\n${customerLink}\n\n` +
+    `Please enter the 6-digit verification code texted to your phone to activate your approval.`
+  );
+
   return (
-    <div className="fixed inset-0 z-[999] flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-sm animate-in fade-in duration-200">
+    <div className="fixed inset-0 z-[999] flex items-center justify-center p-3 sm:p-4 bg-slate-950/75 backdrop-blur-md animate-in fade-in duration-200">
       <div 
-        className="bg-white border border-slate-200 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative space-y-5 text-left overflow-hidden"
+        className="bg-white border border-slate-200 rounded-3xl max-w-lg w-full p-5 sm:p-7 shadow-2xl relative text-left overflow-hidden max-h-[92vh] flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Decorative Top Accent */}
@@ -123,79 +163,124 @@ export const PatientEligibilityModal: React.FC<PatientEligibilityModalProps> = (
         <button
           type="button"
           onClick={handleReset}
-          className="absolute top-5 right-5 text-slate-400 hover:text-slate-600 p-2 rounded-full hover:bg-slate-100 transition-colors"
+          className="absolute top-4 right-4 text-slate-400 hover:text-slate-600 p-2 rounded-full hover:bg-slate-100 transition-colors z-10"
           aria-label="Close modal"
         >
           <X size={18} />
         </button>
 
         {isSuccess ? (
-          /* ── SUCCESS CONFIRMATION SCREEN WITH AUTO-REDIRECT (NO "0%" MENTIONS) ── */
-          <div className="space-y-5 py-2 animate-in zoom-in-95 duration-200">
-            <div className="w-14 h-14 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600 shadow-sm mx-auto sm:mx-0">
-              <CheckCircle2 size={32} />
-            </div>
-
-            <div className="space-y-1 text-center sm:text-left">
-              <span className="text-[10px] font-black text-emerald-600 uppercase tracking-widest block">
-                APPLICATION INITIATED
-              </span>
-              <h3 className="text-xl sm:text-2xl font-black text-[#0B2450] tracking-tight">
-                Financing Verification Sent
-              </h3>
-              <p className="text-xs text-slate-500 leading-relaxed">
-                We have texted your 6-digit code to <strong className="text-slate-800">{maskedMobile || mobile}</strong>.
-              </p>
-            </div>
-
-            <div className="bg-[#F8FAFC] border border-slate-200 rounded-2xl p-4 space-y-2.5 text-xs text-slate-700">
-              <div className="flex justify-between items-center py-1 border-b border-slate-100">
-                <span className="text-slate-500 font-medium">Applicant Name</span>
-                <span className="font-bold text-[#0B2450]">{name}</span>
+          /* ── 1. IN-APP SEAMLESS CARE-PASS OVERLAY & 3. WHATSAPP PASS ── */
+          <div className="space-y-4 py-1 animate-in zoom-in-95 duration-200 overflow-y-auto pr-0.5">
+            {/* Header Status Card */}
+            <div className="flex items-center gap-3">
+              <div className="w-12 h-12 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600 shrink-0 shadow-xs">
+                <CheckCircle2 size={26} />
               </div>
-              <div className="flex justify-between items-center py-1 border-b border-slate-100">
-                <span className="text-slate-500 font-medium">Selected Treatment</span>
-                <span className="font-bold text-[#0B2450]">{treatment}</span>
-              </div>
-              <div className="flex justify-between items-center py-1">
-                <span className="text-slate-500 font-medium">Financing Limit</span>
-                <span className="font-bold text-emerald-600">{amount}</span>
+              <div>
+                <span className="text-[10px] font-black text-emerald-600 uppercase tracking-widest block">
+                  FINANCING PASS READY
+                </span>
+                <h3 className="text-lg sm:text-xl font-black text-[#0B2450] tracking-tight leading-tight">
+                  Verification Code Dispatched
+                </h3>
+                <p className="text-[11px] text-slate-500">
+                  Texted via SMS to <strong className="text-slate-800">{maskedMobile || mobile}</strong>
+                </p>
               </div>
             </div>
 
-            {/* Auto-redirect Banner */}
-            <div className="p-3 bg-blue-50 border border-blue-200 rounded-xl flex items-center justify-between text-xs text-[#0867E8] font-bold">
-              <span className="flex items-center gap-2">
-                <Loader2 size={15} className="animate-spin" />
-                Auto-redirecting in {countdown}s...
-              </span>
-              <span className="text-[10px] uppercase font-black tracking-wider text-blue-500">Secure Portal</span>
+            {/* Smart Countdown & In-App Hand-off Banner */}
+            <div className="p-3.5 bg-gradient-to-r from-blue-50 to-indigo-50/80 border border-blue-200 rounded-2xl flex items-center justify-between text-xs">
+              <div className="flex items-center gap-2.5">
+                <Loader2 size={16} className={`text-[#0867E8] ${isPaused ? '' : 'animate-spin'}`} />
+                <div>
+                  <span className="font-black text-[#0B2450] block">
+                    {isPaused ? 'Auto-redirect paused' : `Launching secure portal in ${countdown}s`}
+                  </span>
+                  <span className="text-[10px] text-slate-500">
+                    Entering encrypted RBI lending gateway
+                  </span>
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={() => setIsPaused(!isPaused)}
+                className="text-[10px] font-bold text-[#0867E8] hover:underline px-2 py-1 rounded bg-white border border-blue-200 shadow-2xs"
+              >
+                {isPaused ? 'Resume' : 'Pause'}
+              </button>
             </div>
 
-            <div className="space-y-2.5 pt-1">
+            {/* In-App Healthcare Care-Pass Card */}
+            <div className="bg-slate-900 text-white rounded-2xl p-4 space-y-3 relative overflow-hidden shadow-lg border border-slate-800">
+              <div className="flex justify-between items-center border-b border-slate-800 pb-2.5">
+                <div className="flex items-center gap-2">
+                  <span className="text-xs font-black tracking-widest uppercase text-emerald-400">CLINAZA PASS</span>
+                  <span className="text-[9px] bg-slate-800 text-slate-300 px-2 py-0.5 rounded-full font-mono">ID: {cleanMobile(mobile)}</span>
+                </div>
+                <div className="flex items-center gap-1 text-[10px] text-slate-400">
+                  <Lock size={10} className="text-emerald-400" />
+                  <span>256-Bit SSL</span>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-3 text-xs">
+                <div>
+                  <span className="text-[9px] uppercase tracking-wider text-slate-400 block">Patient Name</span>
+                  <span className="font-bold text-slate-100">{name}</span>
+                </div>
+                <div>
+                  <span className="text-[9px] uppercase tracking-wider text-slate-400 block">Treatment</span>
+                  <span className="font-bold text-slate-100 truncate block">{treatment}</span>
+                </div>
+                <div>
+                  <span className="text-[9px] uppercase tracking-wider text-slate-400 block">Requested Amount</span>
+                  <span className="font-bold text-emerald-400">{amount}</span>
+                </div>
+                <div>
+                  <span className="text-[9px] uppercase tracking-wider text-slate-400 block">Lender Network</span>
+                  <span className="font-bold text-slate-200">Easycred / 55+ NBFCs</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Action 1: Open Secure KYC Window Immediately */}
+            <div className="space-y-2">
               <a
                 href={customerLink}
                 className="w-full py-3.5 bg-[#0867E8] hover:bg-[#0756C7] text-white font-black text-xs uppercase tracking-wider rounded-xl transition-all shadow-md active:scale-98 flex items-center justify-center gap-2 text-center cursor-pointer"
               >
-                <span>Continue Immediately to Secure KYC</span>
-                <ExternalLink size={14} />
+                <span>Continue to Secure KYC Now</span>
+                <ChevronRight size={15} />
               </a>
 
-              <a
-                href={`https://wa.me/917292984244?text=${encodeURIComponent(
-                  `Hi Clinaza Desk, I initiated treatment financing for ${treatment} (Mobile: ${mobile}, Name: ${name}). Please guide me through approval.`
-                )}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full py-3 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-emerald-800 font-bold text-xs rounded-xl transition-all flex items-center justify-center gap-2 text-center"
-              >
-                <MessageSquare size={14} className="text-emerald-600" />
-                <span>Need assistance? Chat with Clinaza Desk</span>
-              </a>
+              {/* Action 2: Send Care-Pass via WhatsApp (Item 3) */}
+              <div className="grid grid-cols-2 gap-2">
+                <a
+                  href={`https://wa.me/91${mobile.replace(/\D/g, '').slice(-10)}?text=${whatsappMessage}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="py-2.5 px-3 bg-emerald-50 hover:bg-emerald-100 border border-emerald-300 text-emerald-800 font-bold text-[11px] rounded-xl transition-all flex items-center justify-center gap-1.5 text-center"
+                >
+                  <Send size={13} className="text-emerald-600" />
+                  <span>Send on WhatsApp</span>
+                </a>
+
+                <button
+                  type="button"
+                  onClick={handleCopyLink}
+                  className="py-2.5 px-3 bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-700 font-bold text-[11px] rounded-xl transition-all flex items-center justify-center gap-1.5"
+                >
+                  {copied ? <Check size={13} className="text-emerald-600" /> : <Copy size={13} />}
+                  <span>{copied ? 'Copied!' : 'Copy KYC Link'}</span>
+                </button>
+              </div>
             </div>
 
-            <p className="text-[10px] text-slate-400 text-center leading-relaxed">
-              🔒 Final approval and repayment schedules are verified digitally by our RBI-registered lending partner.
+            {/* Clinic Support Footnote */}
+            <p className="text-[10px] text-slate-400 text-center leading-relaxed pt-1 border-t border-slate-100">
+              Need assistance? WhatsApp Clinaza Care Desk at <a href="https://wa.me/917292984244" className="text-[#0867E8] font-bold underline">+91 7292984244</a>
             </p>
           </div>
         ) : (
@@ -215,7 +300,7 @@ export const PatientEligibilityModal: React.FC<PatientEligibilityModalProps> = (
             </div>
 
             {/* Form */}
-            <form onSubmit={handleSubmit} className="space-y-3.5">
+            <form onSubmit={handleSubmit} className="space-y-3.5 mt-2">
               {/* Name & Mobile */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div className="space-y-1">
@@ -328,3 +413,9 @@ export const PatientEligibilityModal: React.FC<PatientEligibilityModalProps> = (
     </div>
   );
 };
+
+// Helper to mask mobile
+function cleanMobile(m: string) {
+  const digits = m.replace(/\D/g, '').slice(-10);
+  return digits ? `+91 ${digits.slice(0, 5)} ${digits.slice(5)}` : 'N/A';
+}

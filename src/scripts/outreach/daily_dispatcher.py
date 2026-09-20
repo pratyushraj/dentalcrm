@@ -59,7 +59,7 @@ def create_email_payload(lead):
       <ul>
         <li><strong>Instant Point-of-Care Patient Financing</strong>: Patients get instant, paperless medical financing approvals (₹10,000 – ₹5,00,000) in under 2 minutes directly at your front desk.</li>
         <li><strong>100% Upfront Settlement</strong>: Your clinic receives the full treatment payment directly in your bank account within 24 hours.</li>
-        <li><strong>Zero Credit Risk</strong>: All credit assessment & collections are handled by 55+ RBI-regulated lending partners — zero financial liability on your clinic.</li>
+        <li><strong>Zero Credit Risk</strong>: Handled by 13+ RBI-regulated NBFC lending partners — zero financial liability on your clinic.</li>
         <li><strong>Free Digital Clinic Tools</strong>: Free access to our digital NABH consent form generator, prescription maker, and patient recall dashboard.</li>
       </ul>
     </div>
@@ -88,7 +88,7 @@ We work with leading dental surgeons and practices across India to eliminate pat
 How Clinaza empowers {clinic_name}:
 - Instant Point-of-Care Patient Financing: Paperless approvals (₹10,000 - ₹5,00,000) in under 2 mins at your front desk.
 - 100% Upfront Settlement: Your clinic receives full treatment payment in 24 hours.
-- Zero Credit Risk: Handled by 55+ RBI-regulated lenders with zero liability on your clinic.
+- Zero Credit Risk: Handled by 13+ RBI-regulated NBFC lenders with zero liability on your clinic.
 - Free Clinic Tools: Digital NABH consent generator, prescription maker, and patient recall dashboard.
 
 Would you be open for a brief 5-minute chat or demo this week?
@@ -140,7 +140,7 @@ def send_daily_batch(limit=DEFAULT_DAILY_LIMIT, dry_run=False):
             headers={
                 "Authorization": f"Bearer {API_KEY}",
                 "Content-Type": "application/json",
-                "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
+                "User-Agent": "resend-python/2.0.0"
             },
             method="POST"
         )

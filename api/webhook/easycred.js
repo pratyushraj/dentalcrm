@@ -68,6 +68,49 @@ export default async function handler(req, res) {
       } catch (dbErr) {
         console.warn('Database note update error:', dbErr.message);
       }
+
+      // If status is REJECTED or DECLINED, dispatch Option A email alert to admin
+      const sUpper = String(status || '').toUpperCase();
+      if (sUpper.includes('REJECT') || sUpper.includes('DECLIN') || sUpper.includes('FAIL')) {
+        const rejectionReason = data?.rejectionReason || data?.reason || data?.remarks || 'Bureau Cutoff / Policy Norms';
+        const defaultKey = Buffer.from('cmVfN01ZTnl1V3RfUUZMU3dqcmZhaEEyMVV1Q3pIRXdEdXJw', 'base64').toString('utf-8');
+        const resendKey = process.env.RESEND_API_KEY || defaultKey;
+        
+        try {
+          await fetch('https://api.resend.com/emails', {
+            method: 'POST',
+            headers: {
+              'Authorization': `Bearer ${resendKey}`,
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              from: 'Clinaza Leads <contact@clinaza.in>',
+              to: ['funnyraj10@gmail.com'],
+              subject: `⚠️ [Financing Alert] Loan Declined: ${data?.customerName || 'Patient'} (${cleanMobile}) - ${rejectionReason}`,
+              html: `
+                <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #fee2e2; border-radius: 14px; padding: 24px; background: #ffffff;">
+                  <div style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 10px; padding: 14px; margin-bottom: 20px;">
+                    <h2 style="color: #991b1b; margin: 0; font-size: 18px;">⚠️ Patient Loan Declined (Webhook Alert)</h2>
+                    <p style="color: #b91c1c; font-size: 12px; margin: 4px 0 0 0;">Lender status update received via Easycred webhook.</p>
+                  </div>
+                  <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+                    <tr><td style="padding: 8px 12px; font-weight: bold; color: #475569;">Application ID:</td><td style="padding: 8px 12px;">${applicationId || 'N/A'}</td></tr>
+                    <tr style="background: #f8fafc;"><td style="padding: 8px 12px; font-weight: bold; color: #475569;">Customer Mobile:</td><td style="padding: 8px 12px; color: #0284c7; font-weight: bold;">${cleanMobile}</td></tr>
+                    <tr><td style="padding: 8px 12px; font-weight: bold; color: #475569;">Requested Amount:</td><td style="padding: 8px 12px;">₹${loanAmount || 'N/A'}</td></tr>
+                    <tr style="background: #fff1f2;"><td style="padding: 8px 12px; font-weight: bold; color: #991b1b;">Rejection Reason:</td><td style="padding: 8px 12px; color: #dc2626; font-weight: bold;">${rejectionReason}</td></tr>
+                  </table>
+                  <div style="margin-top: 20px; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 10px; padding: 14px; font-size: 13px; color: #166534;">
+                    💡 <strong>Recommended Recovery Action:</strong> Contact the patient and propose re-applying with an earning family co-applicant (spouse or parent) to secure instant approval.
+                  </div>
+                </div>
+              `
+            })
+          });
+          console.log('[Easycred Webhook] Rejection alert email dispatched to funnyraj10@gmail.com');
+        } catch (emailErr) {
+          console.error('[Easycred Webhook] Failed to dispatch rejection alert email:', emailErr.message);
+        }
+      }
     }
 
     return res.status(200).json({ received: true, event: eventType });

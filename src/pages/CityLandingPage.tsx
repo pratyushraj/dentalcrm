@@ -20,8 +20,13 @@ export default function CityLandingPage() {
       ? `Dental Treatment EMI Financing in ${name}`
       : `Affordable Dental EMI Plans for Patients in ${name}`;
 
-  const metaTitle = `Best Dental Clinics & Treatment EMI in ${name} (From ₹1,200/mo) | Clinaza`;
-  const metaDescription = `Compare dental treatment costs in ${name}. Explore easy monthly EMI options (₹30K–₹3L) for dental implants, braces, aligners & root canal at top ${name} clinics. 2-min digital approval.`;
+  const metaTitle = city === 'kochi'
+    ? `Braces & Dental Treatment Cost in Kochi (From ₹1,200/mo EMI) | Clinaza`
+    : `Best Dental Clinics & Treatment EMI in ${name} (From ₹1,200/mo) | Clinaza`;
+
+  const metaDescription = city === 'kochi'
+    ? `Compare braces treatment cost in Kochi (₹18K–₹50K) & dental implants on EMI. Explore 0% interest monthly financing (₹30K–₹3L) at top Ernakulam clinics.`
+    : `Compare dental treatment costs in ${name}. Explore easy monthly EMI options (₹30K–₹3L) for dental implants, braces, aligners & root canal at top ${name} clinics. 2-min digital approval.`;
 
   const breadcrumbSchema = {
     '@context': 'https://schema.org',

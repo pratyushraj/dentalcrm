@@ -34,4 +34,4 @@ User-agent: WhatsApp
 Allow: /
 
 # Sitemap
-Sitemap: https://clinaza.in/sitemap.xml
+Sitemap: https://www.clinaza.in/sitemap.xml

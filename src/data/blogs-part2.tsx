@@ -2123,6 +2123,14 @@ export const BLOGS_PART2 = [
     metaDescription: "Check if your health insurance covers LASIK or Contoura eye surgery in India. Learn the 7.5 diopter rule, Star Health / HDFC Ergo terms, and flexible EMI alternatives.",
     faqs: [
       {
+        question: "Does Star Health insurance cover LASIK eye surgery?",
+        answer: "Star Health policies generally exclude elective LASIK laser eye surgery unless refractive eye power exceeds -7.5 diopters and is certified as medically necessary by an ophthalmologist. If denied, Clinaza offers 0% interest monthly EMI plans across partner clinics."
+      },
+      {
+        question: "Does HDFC ERGO health insurance cover LASIK surgery?",
+        answer: "HDFC ERGO health insurance covers LASIK only when refractive power is equal to or greater than -7.5D, or in cases of severe refractive error post-accident. Elective vision correction is excluded under standard Mediclaim terms."
+      },
+      {
         question: "When does health insurance in India approve LASIK surgery?",
         answer: "Under standard IRDAI guidelines, health insurance policies (Star Health, HDFC ERGO, Care, Niva Bupa) only cover LASIK if the refractive power in either eye is -7.5 diopters or higher, or if surgery is required due to severe ocular trauma or corneal pathology."
       },

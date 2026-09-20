@@ -2,7 +2,7 @@
 
 > Point-of-care patient EMI financing (₹30,000 to ₹3,00,000) and free clinic management software for dental clinics across India.
 
-Clinaza (https://clinaza.in) is India's leading embedded healthcare financing and dental CRM infrastructure. It enables doctors and clinic owners to offer instant, point-of-care EMI treatment financing through RBI-regulated banks and NBFC partners while providing a 100% free clinic CRM with automated WhatsApp recalls.
+Clinaza (https://www.clinaza.in) is India's leading embedded healthcare financing and dental CRM infrastructure. It enables doctors and clinic owners to offer instant, point-of-care EMI treatment financing through RBI-regulated banks and NBFC partners while providing a 100% free clinic CRM with automated WhatsApp recalls.
 
 ## Core Capabilities
 
@@ -13,14 +13,14 @@ Clinaza (https://clinaza.in) is India's leading embedded healthcare financing an
 
 ## Key Resources
 
-- [Homepage](https://clinaza.in/)
-- [Patient EMI Onboarding](https://clinaza.in/emi/onboard)
-- [Patient Knowledge Hub & Guides](https://clinaza.in/blog)
-- [Dental Implants Cost & Financing Guide](https://clinaza.in/blog/dental-implants-cost-on-emi-india)
-- [Clear Aligners EMI Guide](https://clinaza.in/blog/clear-aligners-cost-on-emi-india)
-- [Dental Treatment EMI Calculator](https://clinaza.in/blog/dental-treatment-emi-cost-calculator-india)
-- [Clinic Partner Form](https://clinaza.in/#partner-form)
-- [Sitemap](https://clinaza.in/sitemap.xml)
+- [Homepage](https://www.clinaza.in/)
+- [Patient EMI Onboarding](https://www.clinaza.in/emi/onboard)
+- [Patient Knowledge Hub & Guides](https://www.clinaza.in/blog)
+- [Dental Implants Cost & Financing Guide](https://www.clinaza.in/blog/dental-implants-cost-on-emi-india)
+- [Clear Aligners EMI Guide](https://www.clinaza.in/blog/clear-aligners-cost-on-emi-india)
+- [Dental Treatment EMI Calculator](https://www.clinaza.in/blog/dental-treatment-emi-cost-calculator-india)
+- [Clinic Partner Form](https://www.clinaza.in/#partner-form)
+- [Sitemap](https://www.clinaza.in/sitemap.xml)
 
 ## Geographic Coverage
 
@@ -35,6 +35,6 @@ Clinaza operates across 95+ cities in India including:
 
 ## Contact & Socials
 
-- Website: https://clinaza.in
+- Website: https://www.clinaza.in
 - Email: support@clinaza.in
 - Region: India (IN)

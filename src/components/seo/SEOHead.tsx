@@ -47,8 +47,10 @@ export const SEOHead: React.FC<SEOHeadProps> = ({
   videoThumbnail,
 }) => {
   const location = useLocation();
-  const baseUrl = 'https://clinaza.in';
-  const currentUrl = canonicalUrl || `${baseUrl}${location.pathname}`;
+  const baseUrl = 'https://www.clinaza.in';
+  // Ensure canonical URL is always normalized to www.clinaza.in to prevent canonical domain split in search engines
+  const rawUrl = canonicalUrl || `${baseUrl}${location.pathname}`;
+  const currentUrl = rawUrl.replace(/^https?:\/\/clinaza\.in/, 'https://www.clinaza.in');
 
   useEffect(() => {
     // Update document title

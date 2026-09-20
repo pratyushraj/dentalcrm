@@ -243,10 +243,19 @@ const ReactivationLayout: React.FC<ReactivationLayoutProps> = ({ children }) => 
 
   const { session, profile, loading, organizationId } = useSession();
   const navigate = useNavigate();
+  const [sessionTimedOut, setSessionTimedOut] = useState(false);
+
+  // Safety timer: Never block the doctor on "Securing clinic session..." for more than 4 seconds
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setSessionTimedOut(true);
+    }, 4000);
+    return () => clearTimeout(timer);
+  }, []);
 
   // Role Protection: Ensure only dentist/receptionist can access these pages
   useEffect(() => {
-    if (!loading) {
+    if (!loading || sessionTimedOut) {
       if (!session) {
         navigate('/reactivation/login', { replace: true });
       } else if (profile && profile.role !== 'dentist' && profile.role !== 'receptionist') {
@@ -254,7 +263,7 @@ const ReactivationLayout: React.FC<ReactivationLayoutProps> = ({ children }) => 
         navigate(target, { replace: true });
       }
     }
-  }, [session, profile, loading, navigate]);
+  }, [session, profile, loading, navigate, sessionTimedOut]);
 
   const { canInstall, promptInstall } = usePwaInstall();
   const [isStandalone, setIsStandalone] = useState(false);
@@ -373,11 +382,42 @@ const ReactivationLayout: React.FC<ReactivationLayoutProps> = ({ children }) => 
     return () => clearInterval(interval);
   }, [session, orgId]);
 
-  if (loading || (session && !profile)) {
+  if (!sessionTimedOut && (loading || (session && !profile))) {
     return (
-      <div className="min-h-screen bg-slate-950 flex flex-col items-center justify-center">
+      <div className="min-h-screen bg-slate-950 flex flex-col items-center justify-center p-6 text-center">
         <div className="w-10 h-10 border-4 border-indigo-500/30 border-t-indigo-500 rounded-full animate-spin" />
-        <p className="mt-4 text-xs font-semibold text-slate-400 uppercase tracking-widest animate-pulse">Securing clinic session...</p>
+        <p className="mt-4 text-xs font-semibold text-slate-400 uppercase tracking-widest animate-pulse">
+          Securing clinic session...
+        </p>
+      </div>
+    );
+  }
+
+  // If loading timed out and there is still no valid session, show re-login option
+  if (sessionTimedOut && !session) {
+    return (
+      <div className="min-h-screen bg-slate-950 flex flex-col items-center justify-center p-6 text-center">
+        <div className="w-12 h-12 rounded-full bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 mb-4">
+          <ZapIcon size={20} />
+        </div>
+        <h2 className="text-base font-semibold text-white mb-1">Session Verification Delayed</h2>
+        <p className="text-xs text-slate-400 max-w-xs mb-6">
+          Taking longer than usual to connect. Please re-authenticate or refresh your session.
+        </p>
+        <div className="flex flex-col sm:flex-row gap-3">
+          <button
+            onClick={() => window.location.reload()}
+            className="px-4 py-2 text-xs font-semibold rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white transition-colors"
+          >
+            Retry Connection
+          </button>
+          <button
+            onClick={() => navigate('/reactivation/login', { replace: true })}
+            className="px-4 py-2 text-xs font-semibold rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition-colors"
+          >
+            Sign In Again
+          </button>
+        </div>
       </div>
     );
   }

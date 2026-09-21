@@ -6,76 +6,93 @@ interface BankLogoProps {
   size?: number;
 }
 
-// Official brand logos via Google's S2 favicon service — no hotlink restrictions
-const BANK_LOGOS: Record<string, { src: string; name: string }> = {
+// Map of lenders with local static assets (highest reliability, no CORS/404 risk) and remote fallbacks
+const BANK_LOGOS: Record<string, { src: string; fallback: string; name: string }> = {
   // Easycred 13 Multi-Lender Network
   bajaj: {
-    src: 'https://www.google.com/s2/favicons?sz=128&domain=bajajfinserv.in',
+    src: '/assets/lenders/bajaj.png',
+    fallback: 'https://icon.horse/icon/bajajfinserv.in',
     name: 'Bajaj Finserv',
   },
   tata: {
-    src: 'https://www.google.com/s2/favicons?sz=128&domain=tatacapital.com',
+    src: '/assets/lenders/tata.png',
+    fallback: 'https://icon.horse/icon/tatacapital.com',
     name: 'Tata Capital',
   },
   poonawalla: {
-    src: 'https://www.google.com/s2/favicons?sz=128&domain=poonawallafincorp.com',
+    src: '/assets/lenders/poonawalla.png',
+    fallback: 'https://icon.horse/icon/poonawallafincorp.com',
     name: 'Poonawalla Fincorp',
   },
   godrej: {
-    src: 'https://www.google.com/s2/favicons?sz=128&domain=godrejcapital.com',
+    src: '/assets/lenders/godrej.png',
+    fallback: 'https://icon.horse/icon/godrejcapital.com',
     name: 'Godrej Capital',
   },
   incred: {
-    src: 'https://www.google.com/s2/favicons?sz=128&domain=incred.com',
+    src: '/assets/lenders/incred.png',
+    fallback: 'https://icon.horse/icon/incred.com',
     name: 'InCred Finance',
   },
   chola: {
-    src: 'https://www.google.com/s2/favicons?sz=128&domain=cholamandalam.com',
+    src: '/assets/lenders/chola.png',
+    fallback: 'https://icon.horse/icon/cholamandalam.com',
     name: 'Cholamandalam',
   },
   chinmay: {
-    src: 'https://www.google.com/s2/favicons?sz=128&domain=chinmayfinlease.com',
+    src: '/assets/lenders/chinmay.png',
+    fallback: 'https://icon.horse/icon/chinmayfinlease.com',
     name: 'Chinmay Finlease',
   },
   fibe: {
-    src: 'https://www.google.com/s2/favicons?sz=128&domain=fibe.in',
+    src: '/assets/lenders/fibe.png',
+    fallback: 'https://icon.horse/icon/fibe.in',
     name: 'FIBE',
   },
   faircent: {
-    src: 'https://www.google.com/s2/favicons?sz=128&domain=faircent.in',
+    src: '/assets/lenders/faircent.png',
+    fallback: 'https://icon.horse/icon/faircent.in',
     name: 'Faircent',
   },
   zype: {
-    src: 'https://www.google.com/s2/favicons?sz=128&domain=getzype.com',
+    src: '/assets/lenders/zype.png',
+    fallback: 'https://icon.horse/icon/getzype.com',
     name: 'ZYPE',
   },
   olyv: {
-    src: 'https://www.google.com/s2/favicons?sz=128&domain=olyv.in',
+    src: '/assets/lenders/olyv.png',
+    fallback: 'https://icon.horse/icon/olyv.in',
     name: 'OLYV',
   },
   truefund: {
-    src: 'https://www.google.com/s2/favicons?sz=128&domain=truefund.in',
+    src: '/assets/lenders/truefund.png',
+    fallback: 'https://icon.horse/icon/truefund.in',
     name: 'TrueFund',
   },
   mymudra: {
-    src: 'https://www.google.com/s2/favicons?sz=128&domain=mymudra.com',
+    src: '/assets/lenders/mymudra.png',
+    fallback: 'https://icon.horse/icon/mymudra.com',
     name: 'MyMudra',
   },
   // Major Bank Co-Lending Partners
   hdfc: {
-    src: 'https://www.google.com/s2/favicons?sz=128&domain=hdfcbank.com',
+    src: '/assets/lenders/hdfc.png',
+    fallback: 'https://icon.horse/icon/hdfcbank.com',
     name: 'HDFC Bank',
   },
   icici: {
-    src: 'https://www.google.com/s2/favicons?sz=128&domain=icicibank.com',
+    src: '/assets/lenders/icici.png',
+    fallback: 'https://icon.horse/icon/icicibank.com',
     name: 'ICICI Bank',
   },
   axis: {
-    src: 'https://www.google.com/s2/favicons?sz=128&domain=axisbank.com',
+    src: '/assets/lenders/axis.png',
+    fallback: 'https://icon.horse/icon/axisbank.com',
     name: 'Axis Bank',
   },
   kotak: {
-    src: 'https://www.google.com/s2/favicons?sz=128&domain=kotak.com',
+    src: '/assets/lenders/kotak.png',
+    fallback: 'https://icon.horse/icon/kotak.com',
     name: 'Kotak Bank',
   },
 };
@@ -111,7 +128,15 @@ const InitialsBadge: React.FC<{ name: string; size: number; className?: string }
 
 export const BankSvgLogo: React.FC<BankLogoProps> = ({ id, className = '', size = 32 }) => {
   const logo = BANK_LOGOS[id.toLowerCase()];
+  const [imgSrc, setImgSrc] = React.useState<string>(logo?.src || '');
   const [failed, setFailed] = React.useState(false);
+
+  React.useEffect(() => {
+    if (logo) {
+      setImgSrc(logo.src);
+      setFailed(false);
+    }
+  }, [id]);
 
   if (!logo || failed) {
     return <InitialsBadge name={logo?.name ?? id} size={size} className={className} />;
@@ -119,7 +144,7 @@ export const BankSvgLogo: React.FC<BankLogoProps> = ({ id, className = '', size 
 
   return (
     <img
-      src={logo.src}
+      src={imgSrc}
       alt={`${logo.name} logo`}
       className={className}
       style={{
@@ -131,7 +156,14 @@ export const BankSvgLogo: React.FC<BankLogoProps> = ({ id, className = '', size 
         flexShrink: 0,
         display: 'block',
       }}
-      onError={() => setFailed(true)}
+      onError={() => {
+        // If local asset fails or hasn't loaded, try remote fallback once before falling back to InitialsBadge
+        if (imgSrc === logo.src && logo.fallback && logo.fallback !== logo.src) {
+          setImgSrc(logo.fallback);
+        } else {
+          setFailed(true);
+        }
+      }}
     />
   );
 };

@@ -20,7 +20,7 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "tsc && vite build && react-snap",
     "postbuild": "node -e \"console.log('Build complete')\"",
     "prerender": "react-snap",
     "lint": "eslint .",
@@ -140,16 +140,17 @@
     },
     "skipThirdPartyRequests": true,
     "cacheAjaxRequests": false,
-    "puppeteerExecutablePath": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
     "puppeteerArgs": [
       "--no-sandbox",
       "--disable-setuid-sandbox",
-      "--disable-dev-shm-usage"
+      "--disable-dev-shm-usage",
+      "--disable-gpu",
+      "--single-process"
     ],
     "fixWebpackChunksIssue": false,
     "removeStyleTags": false,
     "removeScriptTags": false,
-    "waitFor": 4000,
+    "waitFor": 5000,
     "crawl": false,
     "removeDataAttributes": false,
     "inlineCss": false,

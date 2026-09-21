@@ -134,7 +134,7 @@ export default function FreeToolsHub() {
     {
       "@context": "https://schema.org",
       "@type": "WebApplication",
-      "name": "Clinaza Dental Clinic Setup Cost Calculator",
+      "name": "Clinaza Dental Clinic Setup Cost & Equipment Loan Calculator",
       "applicationCategory": "BusinessApplication",
       "operatingSystem": "All",
       "offers": {
@@ -142,16 +142,46 @@ export default function FreeToolsHub() {
         "price": "0",
         "priceCurrency": "INR"
       },
-      "description": "Interactive dental clinic capital expenditure and setup cost estimator for 1 to 3 chairs across Indian cities."
+      "description": "Interactive dental clinic capital expenditure, equipment EMI, and setup loan estimator for 1 to 3 chairs across Indian cities (डेंटल क्लिनिक सेटअप और उपकरण लोन कैलकुलेटर)."
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "डेंटल क्लिनिक के लिए लोन कैसे मिलता है? (How to get dental clinic loan in India?)",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "डेंटिस्ट्स को क्लिनिक सेटअप और नए डेंटल चेयर, RVG सेंसर, ऑटोकलेव खरीदने के लिए बिना किसी कोलेटरल (Collateral-free Doctor Loan) ₹15 लाख से ₹50 लाख तक का बिजनेस लोन HDFC, ICICI, SBI, Bajaj Finserv और Tata Capital से मिल जाता है। बीडीएस/एमडीएस डिग्री, पैन, आधार और 6 महीने के बैंक स्टेटमेंट पर लोन 24 से 60 महीनों के आसान ईएमआई पर स्वीकृत होता है।"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "नए डेंटल क्लिनिक के सेटअप में कितना खर्च आता है?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "भारत में 1-चेयर क्लिनिक सेटअप का खर्च ₹6 लाख से ₹10 लाख और 2-चेयर क्लिनिक का कुल खर्च ₹12 लाख से ₹18 लाख (चेयर, इंटीरियर, आरवीजी, कंप्रेसर एवं डिपॉजिट सहित) आता है। इस कुल लागत को ₹18,000 से ₹45,000 प्रति माह की ईएमआई पर फाइनेंस किया जा सकता है।"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "क्या डेंटल क्लिनिक उपकरण लोन पर इनकम टैक्स में छूट मिलती है?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "हाँ, इनकम टैक्स एक्ट की धारा 32 के तहत डेंटल उपकरणों पर 15% से 40% तक डेप्रिसिएशन और उपकरण लोन पर चुकाए गए ब्याज पर 100% टैक्स कटौती (Tax Deductible Business Expense) का लाभ मिलता है।"
+          }
+        }
+      ]
     }
   ];
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col justify-between">
       <SEOHead 
-        title="Free Dental Tools & Calculators for Clinics & Patients | Clinaza"
-        description="Free online practice utilities: Digital Dental Prescription Maker (Printable Rx), Clinic Setup Cost Estimator, and Treatment Monthly EMI Calculator."
-        keywords={["free dental prescription maker", "online rx generator dental india", "dental clinic setup cost calculator", "dental emi calculator", "medical treatment emi calculator", "clinaza free tools"]}
+        title="Free Dental Tools & Clinic Setup Loan Calculator | Clinaza"
+        description="Free online practice utilities: Digital Dental Prescription Maker (Printable Rx), Clinic Setup Cost & Equipment Loan Calculator (डेंटल क्लिनिक लोन), and Treatment EMI Estimator."
+        keywords={["free dental prescription maker", "online rx generator dental india", "dental clinic setup cost calculator", "डेंटल क्लिनिक के लिए लोन", "dental clinic loan in india", "dental equipment loan emi", "medical treatment emi calculator", "clinaza free tools"]}
         canonicalUrl="https://clinaza.in/tools"
         jsonLd={toolsSchema}
       />
@@ -644,6 +674,75 @@ export default function FreeToolsHub() {
                   >
                     Start Free on Clinaza →
                   </Link>
+                </div>
+              </div>
+            </div>
+
+            {/* B2B Dental Clinic Equipment & Doctor Loan Guide Section (डेंटल क्लिनिक के लिए लोन) */}
+            <div className="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 space-y-6 shadow-sm">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-5">
+                <div>
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-[11px] font-bold mb-2">
+                    <ShieldCheck size={14} /> Doctor Business Loan &amp; Equipment Financing Guide
+                  </div>
+                  <h3 className="text-xl sm:text-2xl font-black text-slate-900">
+                    डेंटल क्लिनिक के लिए लोन और उपकरण EMI गाइड (Doctor Loans in India)
+                  </h3>
+                  <p className="text-xs text-slate-600 mt-1">
+                    Complete financing assistance for BDS/MDS doctors looking to set up new clinics or upgrade dental chairs, RVG sensors, CBCT, and autoclaves.
+                  </p>
+                </div>
+                <Link
+                  to="/blog/dental-equipment-on-emi-india-doctor-loan-guide"
+                  className="px-5 py-2.5 bg-[#0867E8] hover:bg-[#0756C7] text-white font-bold text-xs rounded-xl shadow-sm transition-all whitespace-nowrap text-center"
+                >
+                  Full Equipment Loan Guide →
+                </Link>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+                <div className="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-1.5">
+                  <h4 className="font-bold text-slate-900 text-sm">₹15L – ₹50L Collateral Free</h4>
+                  <p className="text-slate-600 leading-relaxed">
+                    Unsecured doctor business loans approved solely on your BDS/MDS degree and clinic banking track record. Zero property mortgage required.
+                  </p>
+                </div>
+                <div className="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-1.5">
+                  <h4 className="font-bold text-slate-900 text-sm">Flexible 12 to 60 Months EMI</h4>
+                  <p className="text-slate-600 leading-relaxed">
+                    Split chair, RVG, and interior expenses into manageable monthly installments starting from 10.5% p.a. from regulated partner banks and NBFCs.
+                  </p>
+                </div>
+                <div className="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-1.5">
+                  <h4 className="font-bold text-slate-900 text-sm">100% Tax Deductible Interest</h4>
+                  <p className="text-slate-600 leading-relaxed">
+                    Under Section 32 of Income Tax Act, claim 15%–40% equipment depreciation, while interest paid is fully deductible against clinic receipts.
+                  </p>
+                </div>
+              </div>
+
+              {/* Hindi & English FAQs Accordion / List */}
+              <div className="space-y-3 pt-2">
+                <h4 className="font-extrabold text-slate-900 text-sm uppercase tracking-wide">
+                  अक्सर पूछे जाने वाले सवाल (Frequently Asked Questions)
+                </h4>
+                <div className="space-y-2 text-xs">
+                  <div className="p-3.5 bg-slate-50 rounded-xl border border-slate-100">
+                    <p className="font-bold text-slate-900 mb-1">
+                      प्रश्न: क्या नए डेंटिस्ट (Fresh BDS Graduates) को बिना 3 साल के ITR के क्लिनिक लोन मिल सकता है?
+                    </p>
+                    <p className="text-slate-600 leading-relaxed">
+                      उत्तर: हाँ! कई प्रमुख बैंक (HDFC, ICICI, SBI) और NBFCs नए डॉक्टर्स के लिए स्पेशल "New Doctor Setup Loan" स्कीम प्रदान करते हैं। इसमें राज्य डेंटल काउंसिल रजिस्ट्रेशन और को-बोरोअर (Co-borrower) के आधार पर ₹15 लाख से ₹25 लाख तक का लोन अप्रूव हो जाता है।
+                    </p>
+                  </div>
+                  <div className="p-3.5 bg-slate-50 rounded-xl border border-slate-100">
+                    <p className="font-bold text-slate-900 mb-1">
+                      प्रश्न: डेंटल उपकरण (Chairs, RVG, OPG) खरीदने के लिए कौन-से दस्तावेज चाहिए?
+                    </p>
+                    <p className="text-slate-600 leading-relaxed">
+                      उत्तर: प्राथमिक दस्तावेज: (1) BDS/MDS डिग्री एवं डेंटल काउंसिल रजिस्ट्रेशन, (2) आधार कार्ड एवं पैन कार्ड, (3) 6 महीने का बैंक स्टेटमेंट, (4) उपकरण डीलर/कंपनी से प्रोफोर्मा इनवॉइस (Quotation), और (5) क्लिनिक का रेंट एग्रीमेंट या बिजली बिल।
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>

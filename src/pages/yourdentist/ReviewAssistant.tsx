@@ -155,6 +155,12 @@ export default function ReviewAssistant() {
   if (loading) {
     return (
       <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4">
+        <SEOHead 
+          title="Review Assistant | Clinaza"
+          description="Google review generation assistant for partnered clinics."
+          canonicalUrl="https://clinaza.in/review/assist"
+          robots="noindex, nofollow"
+        />
         <div className="flex flex-col items-center gap-3">
           <div className="w-12 h-12 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin" />
           <p className="text-sm font-semibold text-slate-500">Preparing your assistant...</p>
@@ -166,6 +172,12 @@ export default function ReviewAssistant() {
   if (!clinic) {
     return (
       <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4">
+        <SEOHead 
+          title="Review Assistant | Clinaza"
+          description="Google review generation assistant for partnered clinics."
+          canonicalUrl="https://clinaza.in/review/assist"
+          robots="noindex, nofollow"
+        />
         <div className="w-full max-w-md bg-white border border-slate-200 rounded-3xl p-6 text-center shadow-lg space-y-4">
           <div className="w-14 h-14 bg-rose-50 border border-rose-200 rounded-2xl flex items-center justify-center mx-auto text-rose-500">
             <AlertCircle size={28} />

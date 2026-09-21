@@ -41,7 +41,7 @@ const STATIC_ROUTES = {
   },
   '/dental-implant-loan': {
     title: 'Dental Implant Loan & EMI in India (From ₹2,400/mo) | Clinaza',
-    desc: 'Looking for a dental implant loan in India? Finance single tooth, multiple implants & All-on-4 full mouth surgery with 2-minute digital approval from ~11.5% p.a.',
+    desc: 'Finance single tooth, multiple implants & All-on-4 dental implant surgery in India with flexible monthly EMI from ~11.5% p.a. 2-min digital approval.',
     h1: 'Dental Implant Loans & Flexible Monthly EMIs in India'
   },
   '/clear-aligners-on-emi': {
@@ -58,6 +58,12 @@ const STATIC_ROUTES = {
     title: 'Clinaza Patient Healthcare Financing & Instant EMI Demo',
     desc: 'Experience Clinaza’s seamless point-of-care patient financing journey with 2-minute digital KYC, zero CIBIL impact, and flexible monthly tenures.',
     h1: 'Interactive Patient EMI & Healthcare Financing Demo Sandbox'
+  },
+  '/review/assist': {
+    title: 'Review Assistant | Clinaza',
+    desc: 'Automated Google review helper and patient feedback generator for Clinaza partner clinics.',
+    h1: 'Clinic Review & Patient Feedback Assistant',
+    robots: 'noindex, nofollow'
   }
 };
 
@@ -92,6 +98,9 @@ export default async function handler(req, res) {
     html = html.replace(/<meta\s+property=["']twitter:title["']\s+content=["'][\s\S]*?["']\s*\/?>/i, `<meta property="twitter:title" content="${meta.title.replace(/"/g, '&quot;')}" />`);
     html = html.replace(/<meta\s+property=["']og:description["']\s+content=["'][\s\S]*?["']\s*\/?>/i, `<meta property="og:description" content="${meta.desc.replace(/"/g, '&quot;')}" />`);
     html = html.replace(/<meta\s+property=["']twitter:description["']\s+content=["'][\s\S]*?["']\s*\/?>/i, `<meta property="twitter:description" content="${meta.desc.replace(/"/g, '&quot;')}" />`);
+    if (meta.robots) {
+      html = html.replace(/<meta\s+name=["']robots["']\s+content=["'][\s\S]*?["']\s*\/?>/i, `<meta name="robots" content="${meta.robots}" />`);
+    }
     const canonical = `https://www.clinaza.in${pathname === '/' ? '' : pathname}`;
     if (html.includes('rel="canonical"')) {
       html = html.replace(/<link\s+rel=["']canonical["']\s+href=["'][^"']*["']/i, `<link rel="canonical" href="${canonical}"`);

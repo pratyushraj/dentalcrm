@@ -42,6 +42,10 @@
       "destination": "/api/meta"
     },
     {
+      "source": "/review/assist",
+      "destination": "/api/meta"
+    },
+    {
       "source": "/((?!api/|assets/|favicon|sw\\.js|site\\.webmanifest|manifest\\.json).*)",
       "destination": "/index.html"
     }

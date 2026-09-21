@@ -20,8 +20,8 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build && react-snap",
-    "postbuild": "node -e \"console.log('Prerender complete')\"",
+    "build": "tsc && vite build",
+    "postbuild": "node -e \"console.log('Build complete')\"",
     "prerender": "react-snap",
     "lint": "eslint .",
     "preview": "vite preview"

@@ -98,18 +98,57 @@ export default async function handler(req, res) {
     }
 
     const h1Text = meta.h1 || meta.title.split('|')[0].trim();
+    const isBlog = pathname.startsWith('/blog/');
+    const isCity = pathname.startsWith('/cities/');
+
     const ssrContent = `
-    <div style="max-width:1200px;margin:0 auto;padding:24px 16px;font-family:system-ui,-apple-system,sans-serif;">
-      <header>
-        <h1 style="font-size:2rem;font-weight:800;color:#0B2450;margin-bottom:12px;">${h1Text}</h1>
+    <div style="max-width:1200px;margin:0 auto;padding:24px 16px;font-family:system-ui,-apple-system,sans-serif;color:#1e293b;">
+      <header style="margin-bottom:20px;">
+        <nav aria-label="Breadcrumb" style="font-size:0.875rem;color:#64748b;margin-bottom:12px;">
+          <a href="/" style="color:#0867E8;text-decoration:none;">Home</a> &gt; 
+          <a href="${isBlog ? '/blog' : isCity ? '/#cities' : '/'}" style="color:#0867E8;text-decoration:none;">${isBlog ? 'Guides' : isCity ? 'Cities' : 'Services'}</a> &gt; 
+          <span>${h1Text}</span>
+        </nav>
+        <h1 style="font-size:2.25rem;font-weight:800;color:#0B2450;line-height:1.2;margin-bottom:14px;">${h1Text}</h1>
       </header>
-      <p style="font-size:1.1rem;line-height:1.6;color:#334155;margin-bottom:24px;">${meta.desc}</p>
-      <nav aria-label="Essential Links" style="margin-top:20px;padding-top:16px;border-top:1px solid #e2e8f0;display:flex;gap:16px;flex-wrap:wrap;">
+
+      <section style="font-size:1.05rem;line-height:1.7;color:#334155;margin-bottom:28px;">
+        <p style="margin-bottom:16px;font-weight:500;">${meta.desc}</p>
+        <p style="margin-bottom:16px;">
+          Clinaza is India's leading healthcare patient financing and embedded medical loan network. We empower patients to access essential and elective dental, orthodontic, implant, and aesthetic treatments through convenient monthly payment options starting from ~11.5% p.a. via RBI-regulated NBFC partners with transparent tenures from 3 to 24 months.
+        </p>
+        <div style="background-color:#f8fafc;border-left:4px solid #0867E8;padding:16px;border-radius:6px;margin:20px 0;">
+          <h2 style="font-size:1.15rem;font-weight:700;color:#0B2450;margin-top:0;margin-bottom:8px;">Transparent Patient Financing Highlights</h2>
+          <ul style="margin:0;padding-left:20px;line-height:1.6;">
+            <li>Pre-approved credit limits ranging from ₹30,000 to ₹5,00,000 based on digital KYC.</li>
+            <li>Instant 2-minute paperless verification with zero CIBIL impact during eligibility checks.</li>
+            <li>Point-of-care clinic disbursals directly to healthcare providers, eliminating financial stress.</li>
+            <li>Wide coverage across major metros and Tier-2/Tier-3 cities throughout India.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section style="margin-top:32px;padding-top:20px;border-top:1px solid #e2e8f0;">
+        <h2 style="font-size:1.35rem;font-weight:700;color:#0B2450;margin-bottom:14px;">Frequently Asked Questions</h2>
+        <div style="margin-bottom:16px;">
+          <h3 style="font-size:1rem;font-weight:600;color:#0f172a;margin-bottom:4px;">How does dental and medical treatment financing work?</h3>
+          <p style="font-size:0.95rem;color:#475569;margin:0;">Eligible patients can apply online or directly at partnered clinics. Once approved by RBI-regulated lending institutions, treatment costs are disbursed directly to the clinic, and patients repay in comfortable monthly EMIs.</p>
+        </div>
+        <div style="margin-bottom:16px;">
+          <h3 style="font-size:1rem;font-weight:600;color:#0f172a;margin-bottom:4px;">What treatments qualify for monthly EMI plans?</h3>
+          <p style="font-size:0.95rem;color:#475569;margin:0;">High-ticket dental and healthcare procedures including single and full-mouth dental implants (All-on-4 / All-on-6), invisible clear aligners, orthodontic braces, root canal treatments with zirconia crowns, cosmetic smile makeovers, LASIK eye surgeries, and hair transplants.</p>
+        </div>
+      </section>
+
+      <nav aria-label="Explore Clinaza Network" style="margin-top:32px;padding-top:20px;border-top:1px solid #cbd5e1;display:flex;gap:16px;flex-wrap:wrap;font-size:0.95rem;">
         <a href="/" style="color:#0867E8;text-decoration:none;font-weight:600;">Home</a>
         <a href="/dental-implant-loan" style="color:#0867E8;text-decoration:none;font-weight:600;">Dental Implant Loan</a>
         <a href="/clear-aligners-on-emi" style="color:#0867E8;text-decoration:none;font-weight:600;">Clear Aligners on EMI</a>
         <a href="/tools" style="color:#0867E8;text-decoration:none;font-weight:600;">Free Clinic Tools</a>
-        <a href="/blog" style="color:#0867E8;text-decoration:none;font-weight:600;">Guides &amp; Articles</a>
+        <a href="/blog" style="color:#0867E8;text-decoration:none;font-weight:600;">Dental &amp; Health Guides</a>
+        <a href="/cities/delhi" style="color:#0867E8;text-decoration:none;font-weight:600;">Delhi Clinics</a>
+        <a href="/cities/mumbai" style="color:#0867E8;text-decoration:none;font-weight:600;">Mumbai Clinics</a>
+        <a href="/cities/bengaluru" style="color:#0867E8;text-decoration:none;font-weight:600;">Bengaluru Clinics</a>
       </nav>
     </div>`;
 

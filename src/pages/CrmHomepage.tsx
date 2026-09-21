@@ -33,6 +33,7 @@ import { easycredService } from '../services/easycredService';
 import { toast } from 'sonner';
 import { SEOHead } from '@/components/seo/SEOHead';
 import { BankSvgLogo } from '@/components/BankSvgLogos';
+import { CITIES } from '@/data/cities';
 // ── Scroll Fade-In Wrapper ──────────────────────────────
 const FadeIn: React.FC<{ children: React.ReactNode; className?: string }> = ({ children, className = '' }) => {
   const { ref, visible } = useInView(0.12);
@@ -2241,15 +2242,15 @@ export default function CrmHomepage() {
 
             {/* Col 4: Partner Cities Directory */}
             <div className="space-y-3">
-              <h4 className="text-xs font-black uppercase tracking-wider text-[#0B2450]">Top Cities</h4>
-              <div className="flex flex-wrap gap-1.5 text-[11px]">
-                {['Patna', 'Delhi', 'Mumbai', 'Bengaluru', 'Hyderabad', 'Pune', 'Kolkata', 'Ahmedabad', 'Chennai', 'Jaipur', 'Lucknow', 'Chandigarh'].map(city => (
+              <h4 className="text-xs font-black uppercase tracking-wider text-[#0B2450]">Clinaza Network Cities</h4>
+              <div className="flex flex-wrap gap-1 text-[10px] max-h-48 overflow-y-auto pr-1">
+                {CITIES.map(city => (
                   <Link 
-                    key={city} 
-                    to={`/cities/${city.toLowerCase()}`}
-                    className="px-2.5 py-1 bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 rounded-lg text-slate-600 hover:text-[#0867E8] transition-colors font-medium"
+                    key={city.slug} 
+                    to={`/cities/${city.slug}`}
+                    className="px-2 py-0.5 bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 rounded text-slate-600 hover:text-[#0867E8] transition-colors font-medium whitespace-nowrap"
                   >
-                    {city}
+                    {city.name}
                   </Link>
                 ))}
               </div>

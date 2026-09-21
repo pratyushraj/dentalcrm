@@ -220,82 +220,126 @@ export const BLOGS_PART1 = [
   },
     {
     slug: "gap-closure-cost-in-patna",
-    title: "Teeth Gap Filling Cost & Treatment: Diastema Closure Price Guide (From ₹999)",
+    title: "Teeth Gap Filling Cost & Treatment Price in India: Diastema Closure Guide (From ₹999)",
     category: "Aesthetics",
-    readTime: "4 min read",
+    readTime: "5 min read",
     publishDate: "June 24, 2026",
     author: "Dr. Aryan Parmar",
     summary: "Want to fix gaps in your front teeth? Compare costs, duration, and durability of teeth gap filling with composite bonding, porcelain veneers, and invisible aligners.",
     featuredImage: "/assets/yourdentist/clinic_in_action.jpg",
-    metaDescription: "Teeth gap filling cost starts from ₹999 for composite bonding & ₹12,000 for veneers. Compare teeth gap closure options, treatment duration & EMI plans.",
+    metaDescription: "What is the teeth gap filling cost in India? Teeth gaping treatment price starts from ₹999 for composite bonding to ₹12,000 for veneers & ₹45,000 for aligners. 2026 price guide.",
     faqs: [
       {
-        question: "What is the teeth gap filling and closure cost in Patna?",
-        answer: "Gap closure in Patna starts from ₹999 for cosmetic composite bonding (single session) and ₹12,000 per tooth for high-durability porcelain veneers. Aligner costs start at ₹45,000."
+        question: "What is the average teeth gap filling cost in India?",
+        answer: "Teeth gap filling cost ranges from ₹999 to ₹2,500 per gap for composite dental bonding (completed in 45 minutes), ₹12,000 to ₹18,000 per tooth for porcelain veneers, and ₹45,000 to ₹1,20,000 for clear invisible aligners."
       },
       {
-        question: "Can front teeth gaps be closed in one day?",
-        answer: "Yes. Composite bonding allows dentists to fill front teeth gaps in just 45 minutes. It is a painless, immediate cosmetic solution."
+        question: "What is the teeth gaping treatment price for front teeth in one day?",
+        answer: "For same-day teeth gap closure, composite resin bonding is the most popular and affordable procedure, costing ₹999 to ₹2,500 per gap. It requires only 1 clinic visit and takes 30 to 45 minutes."
+      },
+      {
+        question: "Is EMI available for teeth gap treatment and aligners?",
+        answer: "Yes! High-value cosmetic treatments like porcelain veneers and invisible aligners can be divided into flexible monthly installments starting from ₹2,500 to ₹4,200 per month through Clinaza partner financing."
       }
     ],
     content: (
       <div className="space-y-6">
         <p className="text-lg leading-relaxed text-neutral-700">
-          Gaps in the front teeth (known medically as a diastema) can prevent you from smiling freely. Fortunately, modern aesthetic dentistry provides multiple treatments to close these spaces. If you are comparing options, here is a complete guide to <strong>teeth gap closure costs in Patna</strong>.
+          Gaps in the front teeth (medically termed a <strong>midline diastema</strong>) are one of the most common cosmetic dental concerns in India. If you are researching <strong>teeth gap filling cost</strong> and <strong>teeth gaping treatment prices</strong>, modern aesthetic dentistry provides multiple quick, painless options ranging from budget-friendly same-day bonding to permanent orthodontic alignment.
         </p>
 
-        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Treatment Comparison Chart</h2>
+        {/* Featured Price Snapshot */}
+        <div className="bg-emerald-50/80 border border-emerald-200 rounded-2xl p-5 my-6 space-y-2">
+          <h3 className="text-sm font-bold text-emerald-900 uppercase tracking-wide">💰 Quick Price Snapshot: Teeth Gaping Treatment Price</h3>
+          <ul className="text-xs text-emerald-950 space-y-1.5 list-disc pl-5">
+            <li><strong>Composite Bonding:</strong> ₹999 – ₹2,500 per gap (Instant 45-min treatment)</li>
+            <li><strong>Porcelain Ceramic Veneers:</strong> ₹12,000 – ₹18,000 per tooth (Ultra-durable, 10–15 years)</li>
+            <li><strong>Clear Invisible Aligners:</strong> ₹45,000 – ₹1,20,000 complete set (EMI from ~₹3,750/mo)</li>
+            <li><strong>Orthodontic Ceramic Braces:</strong> ₹35,000 – ₹65,000 (EMI from ~₹2,900/mo)</li>
+          </ul>
+        </div>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Treatment Comparison Chart: Teeth Gap Closure Options</h2>
         <div className="overflow-x-auto my-6">
           <table className="min-w-full divide-y divide-neutral-200 border border-neutral-100">
             <thead className="bg-neutral-50">
               <tr>
                 <th className="px-6 py-3 text-left text-xs font-bold text-neutral-500 uppercase">Treatment Option</th>
-                <th className="px-6 py-3 text-left text-xs font-bold text-neutral-500 uppercase">Cost (Patna)</th>
-                <th className="px-6 py-3 text-left text-xs font-bold text-neutral-500 uppercase">Sessions Required</th>
-                <th className="px-6 py-3 text-left text-xs font-bold text-neutral-500 uppercase">Durability</th>
+                <th className="px-6 py-3 text-left text-xs font-bold text-neutral-500 uppercase">Average Cost</th>
+                <th className="px-6 py-3 text-left text-xs font-bold text-neutral-500 uppercase">Time / Sessions</th>
+                <th className="px-6 py-3 text-left text-xs font-bold text-neutral-500 uppercase">Expected Durability</th>
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-neutral-100 text-sm">
               <tr>
-                <td className="px-6 py-4 font-bold text-neutral-800">Composite Bonding</td>
-                <td className="px-6 py-4 text-[#5b72ff] font-bold">₹999 - ₹2,500 / gap</td>
+                <td className="px-6 py-4 font-bold text-neutral-800">Composite Bonding (Filling)</td>
+                <td className="px-6 py-4 text-[#0867E8] font-bold">₹999 – ₹2,500 / gap</td>
                 <td className="px-6 py-4 text-neutral-600">1 session (45 mins)</td>
-                <td className="px-6 py-4 text-neutral-600">3 - 5 years</td>
+                <td className="px-6 py-4 text-neutral-600">3 – 5 years</td>
               </tr>
               <tr>
                 <td className="px-6 py-4 font-bold text-neutral-800">Porcelain Veneers</td>
-                <td className="px-6 py-4 text-[#5b72ff] font-bold">₹12,000 - ₹18,000 / tooth</td>
-                <td className="px-6 py-4 text-neutral-600">2 sessions (10 days)</td>
-                <td className="px-6 py-4 text-neutral-600">10 - 15 years</td>
+                <td className="px-6 py-4 text-[#0867E8] font-bold">₹12,000 – ₹18,000 / tooth</td>
+                <td className="px-6 py-4 text-neutral-600">2 sessions (7–10 days)</td>
+                <td className="px-6 py-4 text-neutral-600">10 – 15 years</td>
               </tr>
               <tr>
-                <td className="px-6 py-4 font-bold text-neutral-800">Clear Aligners</td>
-                <td className="px-6 py-4 text-[#5b72ff] font-bold">₹45,000 - ₹1,50,000</td>
-                <td className="px-6 py-4 text-neutral-600">Continuous trays</td>
+                <td className="px-6 py-4 font-bold text-neutral-800">Clear Invisible Aligners</td>
+                <td className="px-6 py-4 text-[#0867E8] font-bold">₹45,000 – ₹1,20,000</td>
+                <td className="px-6 py-4 text-neutral-600">4 – 9 months wear</td>
+                <td className="px-6 py-4 text-neutral-600">Permanent (with retainers)</td>
+              </tr>
+              <tr>
+                <td className="px-6 py-4 font-bold text-neutral-800">Traditional Ceramic Braces</td>
+                <td className="px-6 py-4 text-[#0867E8] font-bold">₹35,000 – ₹65,000</td>
+                <td className="px-6 py-4 text-neutral-600">6 – 12 months</td>
                 <td className="px-6 py-4 text-neutral-600">Permanent (with retainers)</td>
               </tr>
             </tbody>
           </table>
         </div>
 
-        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Detailed Guide on Options</h2>
-        <ol className="list-decimal pl-6 space-y-4 text-neutral-700">
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Which Teeth Gap Treatment Should You Choose?</h2>
+        <ol className="list-decimal pl-6 space-y-4 text-neutral-700 text-sm">
           <li>
-            <strong>Composite Bonding (Immediate & Affordable):</strong>
+            <strong>Composite Bonding (Fastest &amp; Most Cost-Effective):</strong>
             <br />
-            Our dentists use resin matches that adhere to your natural teeth, filling in the gap instantly. It is non-invasive and requires zero grinding of your teeth.
+            Our dentists use tooth-colored biocompatible composite resin that matches your enamel shade perfectly. It is sculpted directly onto the adjacent tooth edges to close the gap in under an hour without needles or tooth shaving.
           </li>
           <li>
-            <strong>Porcelain Veneers (Highly Aesthetic & Permanent):</strong>
+            <strong>Porcelain Veneers (Premium Aesthetic Smile Design):</strong>
             <br />
-            Custom ceramic shells are bonded to the front teeth. Porcelain is stain-resistant and mimics the natural light reflection of tooth enamel, offering a premium smile makeover.
+            Ultra-thin custom ceramic shells fabricated in advanced digital dental labs. Veneers are completely stain-resistant to coffee, tea, and turmeric, giving a high-definition celebrity smile.
           </li>
           <li>
-            <strong>Clear Aligners (Natural Tooth Movement):</strong>
+            <strong>Clear Aligners (Natural Teeth Repositioning):</strong>
             <br />
-            If you want to move your teeth naturally to close gaps instead of filling them with materials, aligners are the ideal long-term treatment.
+            If your diastema is accompanied by mild crowding or bite misalignment, invisible aligners gradually move your natural teeth closer without any metal wires or brackets.
           </li>
         </ol>
+
+        {/* Action card */}
+        <div className="p-6 bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-200 rounded-2xl my-8 text-center space-y-3">
+          <span className="text-[10px] font-black text-[#0867E8] uppercase tracking-widest block">FIX YOUR FRONT TEETH GAP</span>
+          <h3 className="text-lg font-black text-slate-900">Want an Exact Estimate for Your Teeth Gap Filling?</h3>
+          <p className="text-xs text-slate-600 max-w-lg mx-auto">
+            Book a consultation at a verified partner dental clinic or check monthly EMI financing options starting from ₹2,500/month.
+          </p>
+          <div className="pt-2 flex flex-col sm:flex-row justify-center gap-3">
+            <a
+              href="https://clinaza.in/#patient-form"
+              className="inline-block bg-[#0867E8] text-white font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-[#0756C7] transition-colors shadow-md"
+            >
+              Book Clinic Consultation →
+            </a>
+            <a
+              href="https://clinaza.in/#calculator"
+              className="inline-block bg-white text-slate-800 border border-slate-300 font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-slate-50 transition-colors shadow-xs"
+            >
+              Calculate EMI Installments
+            </a>
+          </div>
+        </div>
       </div>
     )
   },
@@ -1249,62 +1293,126 @@ export const BLOGS_PART1 = [
   },
     {
     slug: "dental-loans-in-india-medical-financing",
-    title: "Dental Loans in India: Patient Financing vs Medical Loans — Complete 2026 Guide",
+    title: "Dental Loans in India (2026): Instant Approval, Interest Rates & Top Lending Options",
     category: "Financial Advice",
-    readTime: "5 min read",
+    readTime: "6 min read",
     publishDate: "September 6, 2026",
     author: "Clinaza Health Desk",
-    summary: "Comparing personal loans vs healthcare point-of-care financing for dental procedures in India. Understand interest rates, approval speeds, and hidden charges.",
+    summary: "Complete 2026 guide to dental loans and point-of-care patient financing in India. Compare interest rates (~11.5% p.a.), instant approval criteria, CIBIL requirements, and top lenders.",
     featuredImage: "/assets/yourdentist/clinic_in_action.jpg",
-    metaDescription: "Everything you need to know about dental loans in India. Compare point-of-care patient EMI financing vs bank personal loans for dental surgeries and aligners. 2026 guide.",
+    metaDescription: "Looking for dental loans in India? Explore instant patient EMI financing for root canals, braces, aligners & dental implants from ₹30,000 to ₹3,00,000 with quick digital KYC. 2026 guide.",
     faqs: [
       {
-        question: "Is a specialized dental loan better than a personal loan?",
-        answer: "Yes! Point-of-care dental financing processed at the clinic offers faster instant approval (under 10 minutes), zero collateral, lower processing fees, and subvention 0% EMI options compared to personal loans."
+        question: "Can I get a dental loan in India for implants and braces?",
+        answer: "Yes! High-value elective dental treatments like dental implants, orthodontic braces, invisible aligners, and full mouth rehabilitation can be financed through monthly personal loan EMIs ranging from ₹30,000 up to ₹5,00,000."
       },
       {
-        question: "Can self-employed individuals get a dental loan in India?",
-        answer: "Yes, both salaried and self-employed individuals with active bank accounts and basic KYC documents can apply for dental financing."
+        question: "What is the interest rate for dental loans in India?",
+        answer: "Dental financing personal loans from regulated NBFCs and digital lending partners typically start from 11.5% to 16% per annum depending on applicant credit score and chosen tenure (3 to 24 months)."
+      },
+      {
+        question: "Is collateral required for a dental loan?",
+        answer: "No. Dental treatment financing is 100% unsecured. No collateral or security deposit is needed. Approval is determined via digital Aadhaar/PAN KYC and bank account pre-assessment."
+      },
+      {
+        question: "Can self-employed or non-salaried patients apply for dental financing?",
+        answer: "Yes. Both salaried and self-employed individuals with active bank accounts and basic KYC documents can apply for dental financing directly at partner clinics."
       }
     ],
     content: (
       <div className="space-y-6">
         <p className="text-lg leading-relaxed text-neutral-700">
-          When faced with an unexpected root canal or planning a cosmetic dental smile makeover, choosing the right financing option determines how much you end up paying. Should you take a bank personal loan or opt for specialized <strong>point-of-care dental loans</strong> at the clinic?
+          When faced with an unexpected root canal, multi-unit dental implants, or planning a smile makeover with invisible aligners, paying ₹50,000 to ₹2,50,000 upfront can strain any family budget. <strong>Dental loans</strong> and point-of-care healthcare financing in India allow patients to divide treatment expenses into predictable, affordable monthly EMIs without delaying necessary dental surgery.
         </p>
 
-        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Comparison: Personal Loan vs Clinaza Point-of-Care EMI</h2>
+        {/* Quick Summary Snapshot for Google Snippets */}
+        <div className="bg-blue-50/80 border border-blue-200 rounded-2xl p-5 my-6 space-y-2">
+          <h3 className="text-sm font-bold text-[#0B2450] uppercase tracking-wide">💡 Key Highlights: Dental Loans at a Glance</h3>
+          <ul className="text-xs text-slate-700 space-y-1.5 list-disc pl-5">
+            <li><strong>Loan Amount Range:</strong> ₹30,000 to ₹5,00,000</li>
+            <li><strong>Repayment Tenure:</strong> 3, 6, 9, 12, 18, or 24 months</li>
+            <li><strong>Approval Time:</strong> Digital pre-approval in 5–10 minutes via paperless Aadhaar/PAN verification</li>
+            <li><strong>Collateral:</strong> Zero collateral or security deposit required (Unsecured personal credit)</li>
+            <li><strong>Covered Procedures:</strong> Implants, Invisible Aligners, Braces, Full Mouth Rehab, Root Canals, Porcelain Crowns &amp; Cosmetic Veneers</li>
+          </ul>
+        </div>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Comparison: Standard Bank Loan vs Clinaza Point-of-Care EMI</h2>
         <div className="overflow-x-auto my-6">
           <table className="min-w-full divide-y divide-neutral-200 border border-neutral-100 text-sm">
             <thead className="bg-neutral-50">
               <tr>
-                <th className="px-4 py-3 text-left font-bold text-neutral-500 uppercase">Feature</th>
-                <th className="px-4 py-3 text-left font-bold text-neutral-500 uppercase">Standard Personal Loan</th>
-                <th className="px-4 py-3 text-left font-bold text-neutral-500 uppercase">Clinaza Clinic EMI</th>
+                <th className="px-4 py-3 text-left font-bold text-neutral-500 uppercase">Financing Feature</th>
+                <th className="px-4 py-3 text-left font-bold text-neutral-500 uppercase">Traditional Bank Personal Loan</th>
+                <th className="px-4 py-3 text-left font-bold text-neutral-500 uppercase">Clinaza Partner Healthcare EMI</th>
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-neutral-100">
-              <tr><td className="px-4 py-3 font-semibold">Approval Speed</td><td className="px-4 py-3 text-red-500">2–5 Business Days</td><td className="px-4 py-3 text-green-600 font-bold">Instant (Under 10 Mins)</td></tr>
-              <tr><td className="px-4 py-3 font-semibold">Paperwork</td><td className="px-4 py-3 text-red-500">Heavy Documentation</td><td className="px-4 py-3 text-green-600 font-bold">100% Paperless Digital KYC</td></tr>
-              <tr><td className="px-4 py-3 font-semibold">Interest Rate</td><td className="px-4 py-3 text-neutral-600">14% – 24% p.a.</td><td className="px-4 py-3 text-green-600 font-bold">0% Subvention Options Available</td></tr>
-              <tr><td className="px-4 py-3 font-semibold">Prepayment Penalty</td><td className="px-4 py-3 text-red-500">2% – 5% Penalty</td><td className="px-4 py-3 text-green-600 font-bold">Zero Preclosure Charges</td></tr>
+              <tr><td className="px-4 py-3 font-semibold">Approval Speed</td><td className="px-4 py-3 text-red-500">3–7 Business Days</td><td className="px-4 py-3 text-green-600 font-bold">Instant (Under 10 Mins)</td></tr>
+              <tr><td className="px-4 py-3 font-semibold">Paperwork &amp; KYC</td><td className="px-4 py-3 text-red-500">Physical forms, salary slips, branch visit</td><td className="px-4 py-3 text-green-600 font-bold">100% Digital OTP Paperless KYC</td></tr>
+              <tr><td className="px-4 py-3 font-semibold">Interest Rate</td><td className="px-4 py-3 text-neutral-600">14% – 24% p.a.</td><td className="px-4 py-3 text-green-600 font-bold">From ~11.5% p.a. via Regulated NBFCs</td></tr>
+              <tr><td className="px-4 py-3 font-semibold">Clinic Integration</td><td className="px-4 py-3 text-neutral-500">None (Patient must disburse to self)</td><td className="px-4 py-3 text-green-600 font-bold">Direct checkout connection at dental clinic</td></tr>
+              <tr><td className="px-4 py-3 font-semibold">Prepayment / Foreclosure</td><td className="px-4 py-3 text-red-500">2% – 5% penalty charges</td><td className="px-4 py-3 text-green-600 font-bold">Transparent foreclosure per RBI norms</td></tr>
             </tbody>
           </table>
         </div>
 
-        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Why Dentists Recommend Point-of-Care Loans</h2>
-        <p className="text-neutral-700 leading-relaxed">
-          Point-of-care dental financing ensures that treatment doesn't get delayed due to cash flow constraints. Patients receive care immediately while paying manageable monthly EMIs managed directly by RBI-regulated lending partners.
-        </p>
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Typical Dental Procedures Financed via Monthly EMI</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
+          <div className="p-4 bg-white border border-slate-200 rounded-xl space-y-1 shadow-2xs">
+            <h4 className="font-bold text-slate-900 text-sm">🦷 Single &amp; Multiple Dental Implants</h4>
+            <p className="text-xs text-slate-600">Cost: ₹25,000 – ₹60,000 per tooth &bull; Typical EMI: ₹2,300/mo (12 mo)</p>
+          </div>
+          <div className="p-4 bg-white border border-slate-200 rounded-xl space-y-1 shadow-2xs">
+            <h4 className="font-bold text-slate-900 text-sm">✨ Invisible Clear Aligners</h4>
+            <p className="text-xs text-slate-600">Cost: ₹45,000 – ₹1,50,000 full set &bull; Typical EMI: ₹4,100/mo (12 mo)</p>
+          </div>
+          <div className="p-4 bg-white border border-slate-200 rounded-xl space-y-1 shadow-2xs">
+            <h4 className="font-bold text-slate-900 text-sm">🦴 Full Mouth Rehabilitation (All-on-4 / All-on-6)</h4>
+            <p className="text-xs text-slate-600">Cost: ₹1,80,000 – ₹4,00,000 per jaw &bull; Typical EMI: ₹9,800/mo (24 mo)</p>
+          </div>
+          <div className="p-4 bg-white border border-slate-200 rounded-xl space-y-1 shadow-2xs">
+            <h4 className="font-bold text-slate-900 text-sm">🦷 Ceramic Crowns &amp; Multiple Root Canals</h4>
+            <p className="text-xs text-slate-600">Cost: ₹30,000 – ₹70,000 comprehensive &bull; Typical EMI: ₹2,750/mo (12 mo)</p>
+          </div>
+        </div>
 
-        <div className="bg-neutral-900 text-white p-6 rounded-2xl my-8 text-center space-y-3">
-          <h3 className="text-lg font-bold">Are You a Clinic Owner?</h3>
-          <p className="text-xs text-neutral-300 max-w-lg mx-auto">Offer 0% interest EMI options to your patients with ₹0 clinic fees or setup charges.</p>
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">How to Apply for a Dental Loan at Clinaza Partner Clinics</h2>
+        <ol className="list-decimal pl-6 space-y-3 text-neutral-700 text-sm">
+          <li><strong>Consult Doctor &amp; Get Treatment Estimate:</strong> Your dentist examines your oral condition and creates an accurate treatment plan.</li>
+          <li><strong>Select Tenure &amp; Calculate EMI:</strong> Choose a monthly repayment plan between 3 and 24 months that fits your income.</li>
+          <li><strong>Digital KYC in 3 Minutes:</strong> Enter Aadhaar-linked mobile and PAN card details for an instant eligibility sanction from regulated lenders.</li>
+          <li><strong>Commence Treatment Immediately:</strong> Treatment begins without waiting days for manual bank approvals.</li>
+        </ol>
+
+        {/* Embedded Interactive CTA Card */}
+        <div className="p-6 bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-200 rounded-2xl my-8 text-center space-y-3">
+          <span className="text-[10px] font-black text-[#0867E8] uppercase tracking-widest block">CHECK ELIGIBILITY IN 2 MINUTES</span>
+          <h3 className="text-lg font-black text-slate-900">Need Patient Financing for Your Dental Treatment?</h3>
+          <p className="text-xs text-slate-600 max-w-lg mx-auto">
+            Evaluate your financing eligibility across India's top lending partners (Bajaj, Tata Capital, Poonawalla, InCred) with zero credit score impact.
+          </p>
+          <div className="pt-2">
+            <a
+              href="https://clinaza.in/#calculator"
+              className="inline-block bg-[#0867E8] text-white font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-[#0756C7] transition-colors shadow-md"
+            >
+              Check My Dental Loan Eligibility →
+            </a>
+          </div>
+        </div>
+
+        {/* Clinic Partner Card */}
+        <div className="bg-neutral-900 text-white p-6 rounded-2xl my-6 text-center space-y-3">
+          <h3 className="text-lg font-bold">Are You a Dental Clinic Owner?</h3>
+          <p className="text-xs text-neutral-300 max-w-lg mx-auto">
+            Enable point-of-care patient EMI financing at your front desk with zero clinic setup fees or software charges.
+          </p>
           <a
             href="https://clinaza.in/#partner-form"
-            className="inline-block bg-[#0867E8] text-white font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-[#0756C7] transition-colors shadow-md"
+            className="inline-block bg-white text-slate-900 font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-slate-100 transition-colors shadow-md"
           >
-            Partner With Clinaza Today →
+            Onboard Your Clinic Free →
           </a>
         </div>
       </div>

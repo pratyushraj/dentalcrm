@@ -713,7 +713,7 @@ export default function FreeToolsHub() {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 text-xs">
             <Link to="/blog/dental-treatment-on-emi-india-guide" className="p-3 bg-slate-50 hover:bg-blue-50 border border-slate-200 rounded-xl transition-colors block">
               <strong className="text-[#0B2450] block">Dental Treatment on EMI Guide</strong>
-              <span className="text-[11px] text-slate-500">0% interest plans &amp; eligibility criteria</span>
+              <span className="text-[11px] text-slate-500">Flexible monthly EMI plans &amp; eligibility criteria</span>
             </Link>
             <Link to="/blog/dental-loans-in-india-medical-financing" className="p-3 bg-slate-50 hover:bg-blue-50 border border-slate-200 rounded-xl transition-colors block">
               <strong className="text-[#0B2450] block">Dental Loans &amp; Medical Financing</strong>

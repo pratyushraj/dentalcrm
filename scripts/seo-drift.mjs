@@ -11,37 +11,44 @@ const CHECKS = [
   {
     path: '/',
     expectedTitleSnippet: 'Clinaza',
-    expectedDescSnippet: 'treatment cost'
+    expectedDescSnippet: 'treatment cost',
+    expectedH1Snippet: 'Dental Treatment on EMI'
   },
   {
     path: '/tools',
     expectedTitleSnippet: 'Free Dental Tools',
-    expectedDescSnippet: 'utilities'
+    expectedDescSnippet: 'utilities',
+    expectedH1Snippet: 'Free Dental Practice Utilities'
   },
   {
     path: '/cities/delhi',
     expectedTitleSnippet: 'Delhi',
-    expectedDescSnippet: 'Delhi'
+    expectedDescSnippet: 'Delhi',
+    expectedH1Snippet: 'Dental Treatment EMI'
   },
   {
     path: '/blog/dental-loans-in-india-medical-financing',
     expectedTitleSnippet: 'Dental Loans in India',
-    expectedDescSnippet: 'dental implant loan'
+    expectedDescSnippet: 'dental implant loan',
+    expectedH1Snippet: 'Dental Loans in India'
   },
   {
     path: '/blog/gap-closure-cost-in-patna',
     expectedTitleSnippet: 'Teeth Gap Filling Cost',
-    expectedDescSnippet: 'Teeth gaping treatment price'
+    expectedDescSnippet: 'Teeth gaping treatment price',
+    expectedH1Snippet: 'Teeth Gap Filling Cost'
   },
   {
     path: '/dental-implant-loan',
     expectedTitleSnippet: 'Dental Implant Loan',
-    expectedDescSnippet: 'dental implant loan'
+    expectedDescSnippet: 'dental implant loan',
+    expectedH1Snippet: 'Dental Implant Loans'
   },
   {
     path: '/clear-aligners-on-emi',
     expectedTitleSnippet: 'Clear Aligners Cost on EMI',
-    expectedDescSnippet: 'clear aligners on EMI'
+    expectedDescSnippet: 'clear aligners on EMI',
+    expectedH1Snippet: 'Clear Invisible Aligners'
   }
 ];
 
@@ -78,6 +85,16 @@ async function runDriftCheck() {
         console.error(`❌ [FAIL] ${check.path} -> Description mismatch:\n  Got: "${desc}"\n  Expected snippet: "${check.expectedDescSnippet}"`);
         failed++;
         continue;
+      }
+
+      if (check.expectedH1Snippet) {
+        const h1Match = html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i);
+        const h1 = h1Match ? h1Match[1].replace(/<[^>]*>/g, '').trim() : '';
+        if (!h1 || !h1.toLowerCase().includes(check.expectedH1Snippet.toLowerCase())) {
+          console.error(`❌ [FAIL] ${check.path} -> H1 mismatch or missing:\n  Got: "${h1}"\n  Expected snippet: "${check.expectedH1Snippet}"`);
+          failed++;
+          continue;
+        }
       }
 
       console.log(`✅ [PASS] ${check.path}`);

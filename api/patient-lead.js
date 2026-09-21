@@ -26,6 +26,11 @@ module.exports = async function handler(req, res) {
       return res.status(400).json({ error: 'Name and phone number are required' });
     }
 
+    // Capture caller IP address from standard reverse-proxy headers
+    const rawIp = req.headers['x-forwarded-for'] || req.headers['x-real-ip'] || req.connection?.remoteAddress || req.socket?.remoteAddress || '';
+    const clientIp = rawIp.split(',')[0].trim();
+    const userAgent = req.headers['user-agent'] || 'Unknown Device';
+
     const cleanPhone = String(phone).replace(/\D/g, '').slice(-10);
     const whatsappLink = `https://wa.me/91${cleanPhone}?text=${encodeURIComponent(`Hi ${name}, I am following up on your inquiry for ${treatment || 'dental treatment'} through Clinaza.`)}`;
 
@@ -79,6 +84,11 @@ module.exports = async function handler(req, res) {
     <div class="lead-row">
       <span class="lead-label">Timestamp:</span>
       <span class="lead-value">${new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })} IST</span>
+    </div>
+    ${clientIp ? `<div class="lead-row"><span class="lead-label">Applicant IP:</span><span class="lead-value" style="font-family: monospace; color: #0284c7;">${clientIp}</span></div>` : ''}
+    <div class="lead-row">
+      <span class="lead-label">Device / Browser:</span>
+      <span class="lead-value" style="font-size: 12px; color: #64748b;">${userAgent.slice(0, 70)}</span>
     </div>
 
     <div style="margin-top: 24px; text-align: center;">

@@ -97,6 +97,11 @@ export default async function handler(req, res) {
     return res.status(400).json({ success: false, error: 'Invalid 10-digit mobile number' });
   }
 
+  // Capture client IP for compliance and audit trail
+  const rawIp = req.headers['x-forwarded-for'] || req.headers['x-real-ip'] || req.connection?.remoteAddress || '';
+  const clientIp = String(rawIp).split(',')[0].trim();
+  console.log(`[Easycred Loan Apply] Initiating for ${customerName} (${cleanMobile}) from IP: ${clientIp || 'unknown'}`);
+
   try {
     const response = await axios.post(
       EASYCRED_PARTNER_API,

@@ -3,7 +3,7 @@ export const emailNotificationService = {
     const defaultKey = atob('cmVfN01ZTnl1V3RfUUZMU3dqcmZhaEEyMVV1Q3pIRXdEdXJw');
     const resendApiKey = import.meta.env.VITE_RESEND_API_KEY || defaultKey;
 
-    // Collect rich visitor context automatically (UTMs, Referrer, Current URL, Device)
+    // Collect rich visitor context automatically (IP, Geo-location, UTMs, Referrer, Current URL, Device)
     let visitorContext: Record<string, string> = {};
     if (typeof window !== 'undefined') {
       try {
@@ -20,8 +20,46 @@ export const emailNotificationService = {
         const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
         const deviceType = isMobile ? 'Mobile Device' : 'Desktop / Laptop';
 
+        // Attempt fast IP & Geolocation resolution with 2.5s timeout
+        let ipInfo: { ip?: string; city?: string; region?: string; country?: string; isp?: string } = {};
+        try {
+          const controller = new AbortController();
+          const timeoutId = setTimeout(() => controller.abort(), 2500);
+          const ipRes = await fetch('https://ipwho.is/', {
+            signal: controller.signal,
+            headers: { 'Accept': 'application/json' }
+          });
+          clearTimeout(timeoutId);
+          if (ipRes.ok) {
+            const data = await ipRes.json();
+            if (data.success) {
+              ipInfo = {
+                ip: data.ip,
+                city: data.city,
+                region: data.region,
+                country: data.country,
+                isp: data.connection?.isp || data.connection?.org
+              };
+            }
+          }
+        } catch {
+          // Fallback if ipwho is blocked or slow
+          try {
+            const ipifyRes = await fetch('https://api.ipify.org?format=json', { signal: AbortSignal.timeout(1500) });
+            if (ipifyRes.ok) {
+              const d = await ipifyRes.json();
+              if (d.ip) ipInfo.ip = d.ip;
+            }
+          } catch {
+            // Silently continue
+          }
+        }
+
         visitorContext = {
           'Submitted At': new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }) + ' (IST)',
+          ...(ipInfo.ip ? { 'Applicant IP': ipInfo.ip } : {}),
+          ...(ipInfo.city ? { 'Detected Location': `${ipInfo.city}, ${ipInfo.region || ''}, ${ipInfo.country || 'India'}` } : {}),
+          ...(ipInfo.isp ? { 'ISP / Network': ipInfo.isp } : {}),
           'Page URL': landingPage,
           'Referring Source': referrer,
           'Device': `${deviceType} (${screenRes})`,

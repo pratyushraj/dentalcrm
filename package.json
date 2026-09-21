@@ -150,7 +150,7 @@
     "fixWebpackChunksIssue": false,
     "removeStyleTags": false,
     "removeScriptTags": false,
-    "waitFor": 5000,
+    "waitFor": 2000,
     "crawl": false,
     "removeDataAttributes": false,
     "inlineCss": false,

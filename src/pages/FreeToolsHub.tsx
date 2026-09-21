@@ -700,6 +700,13 @@ export default function FreeToolsHub() {
                 </Link>
               </div>
 
+              {/* GEO Citability Block: Doctor & Dental Clinic Setup Loans */}
+              <div className="bg-slate-50 border-l-4 border-blue-600 p-4 rounded-r-xl text-xs text-slate-800 space-y-2 leading-relaxed">
+                <p>
+                  <strong>How can a dentist get a loan to set up a dental clinic in India? (डेंटल क्लिनिक सेटअप लोन):</strong> Registered BDS and MDS practitioners can secure collateral-free professional doctor loans between ₹15,00,000 and ₹50,00,000 for new clinic setups, chair installations, and digital equipment (RVG, OPG, autoclaves). Regulated commercial banks and NBFCs provide doctor business loans starting from ~10.5% to 14% p.a. with tenures up to 60 months based on professional degree credentials and banking track record. In addition, government schemes like the <strong>Pradhan Mantri MUDRA Yojana (Tarun Scheme up to ₹10 Lakhs)</strong> and <strong>CGTMSE MSME Loans</strong> allow first-generation dental clinic entrepreneurs to finance clinic infrastructure with zero third-party collateral or property mortgage.
+                </p>
+              </div>
+
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
                 <div className="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-1.5">
                   <h4 className="font-bold text-slate-900 text-sm">₹15L – ₹50L Collateral Free</h4>

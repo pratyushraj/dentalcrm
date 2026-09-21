@@ -244,6 +244,13 @@ export const BLOGS_PART1 = [
           Gaps in the front teeth (medically termed a <strong>midline diastema</strong>) are one of the most common cosmetic dental concerns in India. If you are researching <strong>teeth gap filling cost</strong> and <strong>teeth gaping treatment prices</strong>, modern aesthetic dentistry provides multiple quick, painless options ranging from budget-friendly same-day bonding to permanent orthodontic alignment.
         </p>
 
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-3">How Much Does Teeth Gap Filling Cost in India?</h2>
+        <div className="bg-slate-50 border-l-4 border-emerald-600 p-4 my-4 text-sm text-slate-800 leading-relaxed rounded-r-xl">
+          <p>
+            <strong>The cost of teeth gap filling in India ranges from ₹999 to ₹2,500 per gap for composite dental bonding, ₹12,000 to ₹18,000 per tooth for porcelain ceramic veneers, and ₹45,000 to ₹1,20,000 for full-mouth clear invisible aligners.</strong> Same-day composite bonding is the fastest and most affordable procedure for closing a front tooth midline diastema, taking only 30 to 45 minutes in a single clinic visit with a lifespan of 3 to 5 years. For permanent gap closure or wider spacing, orthodontic invisible aligners and ceramic braces can be financed via point-of-care patient EMIs starting from ~₹2,500 per month through Clinaza partner clinics with zero upfront payment barrier.
+          </p>
+        </div>
+
         {/* Featured Price Snapshot */}
         <div className="bg-emerald-50/80 border border-emerald-200 rounded-2xl p-5 my-6 space-y-2">
           <h3 className="text-sm font-bold text-emerald-900 uppercase tracking-wide">💰 Quick Price Snapshot: Teeth Gaping Treatment Price</h3>
@@ -1459,7 +1466,7 @@ export const BLOGS_PART1 = [
           </div>
           <div className="border border-neutral-200 p-5 rounded-2xl bg-neutral-50 space-y-2">
             <h3 className="font-bold text-neutral-900 text-base">💳 Integrated Patient EMI Financing</h3>
-            <p className="text-xs text-neutral-600 leading-relaxed">Instantly check patient eligibility for 0% interest monthly financing directly from your CRM workspace.</p>
+            <p className="text-xs text-neutral-600 leading-relaxed">Instantly check patient eligibility for flexible monthly EMI financing (from ~11.5% p.a. via RBI-regulated NBFC partners) directly from your CRM workspace.</p>
           </div>
           <div className="border border-neutral-200 p-5 rounded-2xl bg-neutral-50 space-y-2">
             <h3 className="font-bold text-neutral-900 text-base">⭐ Google Review Collection</h3>

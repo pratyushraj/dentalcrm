@@ -197,7 +197,7 @@ export default function EmiCallbackPage() {
                 </div>
                 <div className="flex items-center gap-2 text-emerald-400 font-semibold">
                   <CheckCircle2 size={12} />
-                  <span>Preserves 0% interest promo rate</span>
+                  <span>Unlocks flexible monthly EMI plans</span>
                 </div>
                 <div className="flex items-center gap-2 text-emerald-400 font-semibold">
                   <CheckCircle2 size={12} />

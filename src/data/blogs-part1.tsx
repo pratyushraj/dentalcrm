@@ -1321,6 +1321,13 @@ export const BLOGS_PART1 = [
           When faced with an unexpected root canal, multi-unit dental implants, or planning a smile makeover with invisible aligners, paying ₹50,000 to ₹2,50,000 upfront can strain any family budget. <strong>Dental loans</strong> and point-of-care healthcare financing in India allow patients to divide treatment expenses into predictable, affordable monthly EMIs without delaying necessary dental surgery.
         </p>
 
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-3">Can You Get a Loan for Dental Treatment &amp; Implants in India?</h2>
+        <div className="bg-slate-50 border-l-4 border-[#0867E8] p-4 my-4 text-sm text-slate-800 leading-relaxed rounded-r-xl">
+          <p>
+            <strong>Yes, patients in India can finance elective and emergency dental procedures through point-of-care medical personal loans.</strong> Healthcare financing networks like Clinaza facilitate unsecured dental loans between ₹30,000 and ₹5,00,000 through RBI-regulated banks and NBFC partners. Interest rates start from ~11.5% per annum with repayment tenures spanning 3 to 24 months. Eligibility is assessed digitally via paperless Aadhaar and PAN verification in under 2 minutes, enabling immediate commencement for single-tooth dental implants, full-mouth rehabilitations (All-on-4), clear aligners, ceramic crowns, and root canal surgeries without requiring physical collateral.
+          </p>
+        </div>
+
         {/* Quick Summary Snapshot for Google Snippets */}
         <div className="bg-blue-50/80 border border-blue-200 rounded-2xl p-5 my-6 space-y-2">
           <h3 className="text-sm font-bold text-[#0B2450] uppercase tracking-wide">💡 Key Highlights: Dental Loans at a Glance</h3>

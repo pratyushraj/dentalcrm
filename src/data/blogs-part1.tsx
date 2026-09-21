@@ -468,7 +468,7 @@ export const BLOGS_PART1 = [
         </p>
 
         <p className="text-neutral-700 leading-relaxed">
-          Through <strong>Clinaza point-of-care patient financing</strong>, patients can start their implant procedure immediately with zero upfront stress and split payments into manageable monthly EMIs (3 to 24 months).
+          Through <strong>Clinaza point-of-care patient financing</strong>, patients can start their implant procedure immediately with zero upfront stress and split payments into manageable monthly EMIs (3 to 24 months). You can also evaluate your exact repayment schedule with our dedicated <a href="/dental-implant-loan" className="text-[#0867E8] font-bold underline hover:text-[#0756C7]">Dental Implant Loan &amp; EMI Calculator</a>.
         </p>
 
         <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Dental Implant Price Comparison by Brand (India 2026)</h2>

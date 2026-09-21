@@ -30,6 +30,10 @@
       "destination": "/api/meta"
     },
     {
+      "source": "/clear-aligners-on-emi",
+      "destination": "/api/meta"
+    },
+    {
       "source": "/((?!api/|assets/|favicon|sw\\.js|site\\.webmanifest|manifest\\.json).*)",
       "destination": "/index.html"
     }

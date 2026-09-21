@@ -138,8 +138,8 @@ export default function CityLandingPage() {
   };
 
   const procedures = [
-    { emoji: '🦷', name: 'Dental Implants', range: '₹35,000 – ₹3,00,000', link: '/blog/dental-implants-cost-on-emi-india' },
-    { emoji: '😁', name: 'Braces & Aligners', range: '₹30,000 – ₹1,80,000', link: '/blog/clear-aligners-cost-on-emi-india' },
+    { emoji: '🦷', name: 'Dental Implants', range: '₹35,000 – ₹3,00,000', link: '/dental-implant-loan' },
+    { emoji: '😁', name: 'Braces & Aligners', range: '₹30,000 – ₹1,80,000', link: '/clear-aligners-on-emi' },
     { emoji: '👑', name: 'Crowns & Bridges', range: '₹10,000 – ₹80,000', link: '/blog/root-canal-and-crown-cost-on-emi-india' },
     { emoji: '✨', name: 'Smile Makeovers', range: '₹50,000 – ₹2,00,000', link: '/blog/dental-treatment-emi-cost-calculator-india' },
     { emoji: '🦴', name: 'Full Mouth Rehab', range: '₹1,50,000 – ₹3,00,000', link: '/blog/dental-loans-in-india-medical-financing' },

@@ -18,6 +18,7 @@ const PitchDeckPage = lazy(() => import("@/pages/PitchDeckPage"));
 const FreeToolsHub = lazy(() => import("@/pages/FreeToolsHub"));
 const LoanDemoPage = lazy(() => import("@/pages/LoanDemoPage"));
 const DentalImplantLoanPage = lazy(() => import("@/pages/DentalImplantLoanPage"));
+const ClearAlignersEmiPage = lazy(() => import("@/pages/ClearAlignersEmiPage"));
 
 export default function AppRoutes() {
   return (
@@ -34,9 +35,11 @@ export default function AppRoutes() {
             } 
           />
 
-          {/* Dental Implant Loan Dedicated Page */}
+          {/* Dental Implant & Clear Aligner Loan Dedicated Pages */}
           <Route path="/dental-implant-loan" element={<LazyRoute><DentalImplantLoanPage /></LazyRoute>} />
           <Route path="/dental-implants-loan" element={<Navigate to="/dental-implant-loan" replace />} />
+          <Route path="/clear-aligners-on-emi" element={<LazyRoute><ClearAlignersEmiPage /></LazyRoute>} />
+          <Route path="/clear-aligners-cost-on-emi" element={<Navigate to="/clear-aligners-on-emi" replace />} />
 
           {/* Direct WhatsApp Share & Demo Links for Loan */}
           <Route path="/loan" element={<Navigate to="/#check-eligibility" replace />} />

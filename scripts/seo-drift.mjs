@@ -32,6 +32,16 @@ const CHECKS = [
     path: '/blog/gap-closure-cost-in-patna',
     expectedTitleSnippet: 'Teeth Gap Filling Cost',
     expectedDescSnippet: 'Teeth gaping treatment price'
+  },
+  {
+    path: '/dental-implant-loan',
+    expectedTitleSnippet: 'Dental Implant Loan',
+    expectedDescSnippet: 'dental implant loan'
+  },
+  {
+    path: '/clear-aligners-on-emi',
+    expectedTitleSnippet: 'Clear Aligners Cost on EMI',
+    expectedDescSnippet: 'clear aligners on EMI'
   }
 ];
 

@@ -1289,14 +1289,14 @@ export const BLOGS_PART1 = [
   },
     {
     slug: "dental-loans-in-india-medical-financing",
-    title: "Dental Loans in India (2026): Instant Approval, Interest Rates & Top Lending Options",
+    title: "Dental Loans in India (2026): Dental Implant Loan, Rates & Top Lending Options",
     category: "Financial Advice",
     readTime: "6 min read",
     publishDate: "September 6, 2026",
     author: "Clinaza Health Desk",
-    summary: "Complete 2026 guide to dental loans and point-of-care patient financing in India. Compare interest rates (~11.5% p.a.), instant approval criteria, CIBIL requirements, and top lenders.",
+    summary: "Complete 2026 guide to dental loans and dental implant loan financing in India. Compare interest rates (~11.5% p.a.), instant approval criteria, CIBIL requirements, and top lenders.",
     featuredImage: "/assets/yourdentist/clinic_in_action.jpg",
-    metaDescription: "Looking for dental loans in India? Explore instant patient EMI financing for root canals, braces, aligners & dental implants from ₹30,000 to ₹3,00,000 with quick digital KYC. 2026 guide.",
+    metaDescription: "Looking for a dental implant loan or treatment financing in India? Explore instant patient EMI options for implants, braces & aligners with 5-minute KYC.",
     faqs: [
       {
         question: "Can I get a dental loan in India for implants and braces?",

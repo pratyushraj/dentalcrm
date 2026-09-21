@@ -179,9 +179,9 @@ export default function FreeToolsHub() {
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col justify-between">
       <SEOHead 
-        title="Free Dental Tools & Clinic Setup Loan Calculator | Clinaza"
-        description="Free online practice utilities: Digital Dental Prescription Maker (Printable Rx), Clinic Setup Cost & Equipment Loan Calculator (डेंटल क्लिनिक लोन), and Treatment EMI Estimator."
-        keywords={["free dental prescription maker", "online rx generator dental india", "dental clinic setup cost calculator", "डेंटल क्लिनिक के लिए लोन", "dental clinic loan in india", "dental equipment loan emi", "medical treatment emi calculator", "clinaza free tools"]}
+        title="Free Dental Tools, Rx Generator & Clinic Setup Loan Calculator | Clinaza"
+        description="Free dental utilities: Digital Dental Prescription Maker (Printable Rx), Clinic Setup Cost & Equipment Loan Calculator (डेंटल क्लिनिक लोन), and Treatment EMI Estimator."
+        keywords={["free dental prescription maker", "online rx generator dental india", "dental clinic setup cost calculator", "loan for dental clinic setup", "डेंटल क्लिनिक के लिए लोन", "dental clinic loan in india", "msme loan for dental clinic", "mudra loan for dental clinic", "dental equipment loan emi", "clinaza free tools"]}
         canonicalUrl="https://clinaza.in/tools"
         jsonLd={toolsSchema}
       />

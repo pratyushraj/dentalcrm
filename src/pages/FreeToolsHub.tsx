@@ -146,6 +146,31 @@ export default function FreeToolsHub() {
     },
     {
       "@context": "https://schema.org",
+      "@type": "FinancialProduct",
+      "name": "Clinaza Doctor Loan & Dental Clinic Setup Financing",
+      "description": "Collateral-free professional business loans for BDS/MDS dentists to finance new clinic setup, dental chairs, and imaging equipment across India.",
+      "provider": {
+        "@type": "Organization",
+        "name": "Clinaza Technologies",
+        "url": "https://clinaza.in"
+      },
+      "areaServed": "IN",
+      "amount": {
+        "@type": "MonetaryAmount",
+        "currency": "INR",
+        "minValue": 1500000,
+        "maxValue": 5000000
+      },
+      "annualPercentageRate": {
+        "@type": "QuantitativeValue",
+        "minValue": 10.5,
+        "maxValue": 14.0,
+        "unitText": "PERCENT"
+      },
+      "feesAndCommissionsSpecification": "Zero upfront evaluation charges. Transparent NBFC/bank processing fees per RBI guidelines."
+    },
+    {
+      "@context": "https://schema.org",
       "@type": "FAQPage",
       "mainEntity": [
         {

@@ -33,6 +33,10 @@ const STATIC_ROUTES = {
   '/blog': {
     title: 'Dental Practice Growth & Patient Financing Blog | Clinaza',
     desc: 'Expert guides on dental clinic financing, treatment costs, digital marketing, and patient acquisition in India.'
+  },
+  '/dental-implant-loan': {
+    title: 'Dental Implant Loan & EMI in India (From ₹2,400/mo) | Clinaza',
+    desc: 'Looking for a dental implant loan in India? Finance single tooth, multiple implants & All-on-4 full mouth surgery with 2-minute digital approval from ~11.5% p.a.'
   }
 };
 

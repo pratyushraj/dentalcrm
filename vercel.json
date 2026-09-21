@@ -26,6 +26,10 @@
       "destination": "/api/meta"
     },
     {
+      "source": "/dental-implant-loan",
+      "destination": "/api/meta"
+    },
+    {
       "source": "/((?!api/|assets/|favicon|sw\\.js|site\\.webmanifest|manifest\\.json).*)",
       "destination": "/index.html"
     }

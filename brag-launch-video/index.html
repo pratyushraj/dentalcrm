@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>Clinaza Launch Video — Healthcare Financing</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        background: #070B14;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        color: #ffffff;
+      }
+      #root {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+      }
+      .scene {
+        position: absolute;
+        inset: 0;
+        width: 1080px;
+        height: 1920px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 80px 60px;
+        text-align: center;
+      }
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        padding: 14px 28px;
+        border-radius: 9999px;
+        background: rgba(8, 103, 232, 0.15);
+        border: 2px solid rgba(8, 103, 232, 0.4);
+        color: #38bdf8;
+        font-size: 24px;
+        font-weight: 800;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-bottom: 32px;
+      }
+      .glow {
+        position: absolute;
+        width: 600px;
+        height: 600px;
+        border-radius: 50%;
+        filter: blur(140px);
+        pointer-events: none;
+        opacity: 0.5;
+      }
+      .glow-blue {
+        background: #0867E8;
+        top: 20%;
+        left: 20%;
+      }
+      .glow-emerald {
+        background: #10B981;
+        bottom: 25%;
+        right: 15%;
+      }
+      .card {
+        background: rgba(15, 23, 42, 0.75);
+        border: 2px solid rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(24px);
+        border-radius: 36px;
+        padding: 48px;
+        width: 100%;
+        max-width: 920px;
+        box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+        text-align: left;
+      }
+      .title-hero {
+        font-size: 82px;
+        font-weight: 900;
+        line-height: 1.05;
+        letter-spacing: -0.03em;
+        margin-bottom: 28px;
+      }
+      .gradient-text {
+        background: linear-gradient(135deg, #ffffff 0%, #38bdf8 50%, #0867E8 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .gradient-emerald {
+        background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .stat-pill {
+        background: rgba(255, 255, 255, 0.04);
+        border: 1.5px solid rgba(255, 255, 255, 0.08);
+        border-radius: 24px;
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="16"
+      data-width="1080"
+      data-height="1920"
+    >
+      <!-- Background Ambient Glows -->
+      <div class="glow glow-blue"></div>
+      <div class="glow glow-emerald"></div>
+
+      <!-- ── SCENE 1: THE HOOK (0s - 4s) ── -->
+      <section id="scene-1" class="clip scene" data-start="0" data-duration="4" data-track-index="0">
+        <div id="s1-badge" class="badge">
+          ⚡ Clinaza FinTech OS
+        </div>
+        <h1 id="s1-title" class="title-hero">
+          Stop Losing Patients to <br />
+          <span class="gradient-text">Upfront Treatment Costs.</span>
+        </h1>
+        <p id="s1-sub" style="font-size: 32px; color: #94a3b8; max-width: 800px; line-height: 1.4; margin-top: 10px;">
+          73% of high-ticket dental treatments get dropped at the billing desk.
+        </p>
+      </section>
+
+      <!-- ── SCENE 2: THE SOLUTION (4s - 8s) ── -->
+      <section id="scene-2" class="clip scene" data-start="4" data-duration="4" data-track-index="0">
+        <div id="s2-badge" class="badge" style="color: #34d399; border-color: rgba(16, 185, 129, 0.4); background: rgba(16, 185, 129, 0.15);">
+          ✓ Instant RBI-Regulated EMI
+        </div>
+        <h2 id="s2-title" class="title-hero">
+          Instant Approvals in <br />
+          <span class="gradient-emerald">Under 2 Minutes.</span>
+        </h2>
+        <div id="s2-card" class="card" style="margin-top: 20px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid rgba(255,255,255,0.08); padding-bottom: 24px; margin-bottom: 28px;">
+            <div style="display: flex; align-items: center; gap: 16px;">
+              <div style="width: 56px; height: 56px; border-radius: 16px; background: #0867E8; display: grid; place-items: center; font-size: 28px; font-weight: 900;">C</div>
+              <div>
+                <div style="font-size: 28px; font-weight: 900; color: #f8fafc;">CLINAZA CARE-PASS</div>
+                <div style="font-size: 18px; color: #34d399; font-weight: 700;">APPROVED &bull; 256-BIT ENCRYPTED</div>
+              </div>
+            </div>
+            <div style="font-size: 22px; color: #94a3b8; font-weight: 600;">₹1,20,000</div>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            <div class="stat-pill">
+              <span style="font-size: 16px; color: #64748b; font-weight: 700; text-transform: uppercase;">Treatment</span>
+              <span style="font-size: 24px; font-weight: 800; color: #f1f5f9;">Dental Implants</span>
+            </div>
+            <div class="stat-pill">
+              <span style="font-size: 16px; color: #64748b; font-weight: 700; text-transform: uppercase;">CIBIL Impact</span>
+              <span style="font-size: 24px; font-weight: 800; color: #34d399;">Zero Score Hit</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── SCENE 3: THE SCALE & MULTI-LENDER (8s - 12s) ── -->
+      <section id="scene-3" class="clip scene" data-start="8" data-duration="4" data-track-index="0">
+        <div id="s3-badge" class="badge">
+          🏦 Institutional Lending Grid
+        </div>
+        <h2 id="s3-title" class="title-hero">
+          Backed by <br />
+          <span class="gradient-text">55+ Leading NBFCs & Banks</span>
+        </h2>
+        <div id="s3-stats" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; width: 100%; max-width: 940px; margin-top: 30px;">
+          <div class="stat-pill" style="text-align: center; align-items: center;">
+            <span style="font-size: 54px; font-weight: 900; color: #38bdf8;">100%</span>
+            <span style="font-size: 18px; color: #94a3b8; font-weight: 600;">Paperless KYC</span>
+          </div>
+          <div class="stat-pill" style="text-align: center; align-items: center;">
+            <span style="font-size: 54px; font-weight: 900; color: #34d399;">24 hrs</span>
+            <span style="font-size: 18px; color: #94a3b8; font-weight: 600;">Direct Clinic Payout</span>
+          </div>
+          <div class="stat-pill" style="text-align: center; align-items: center;">
+            <span style="font-size: 54px; font-weight: 900; color: #818cf8;">3–24m</span>
+            <span style="font-size: 18px; color: #94a3b8; font-weight: 600;">Flexible Tenure</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── SCENE 4: CALL TO ACTION (12s - 16s) ── -->
+      <section id="scene-4" class="clip scene" data-start="12" data-duration="4" data-track-index="0">
+        <div id="s4-logo" style="width: 140px; height: 140px; border-radius: 36px; background: linear-gradient(135deg, #0867E8, #0B2450); display: grid; place-items: center; margin-bottom: 36px; box-shadow: 0 20px 60px rgba(8, 103, 232, 0.4); border: 2px solid rgba(255,255,255,0.2);">
+          <span style="font-size: 72px; font-weight: 900; color: #fff;">C</span>
+        </div>
+        <h2 id="s4-title" class="title-hero" style="font-size: 74px; margin-bottom: 20px;">
+          Empower Your Clinic with <br />
+          <span class="gradient-text">Clinaza Today.</span>
+        </h2>
+        <p id="s4-sub" style="font-size: 32px; color: #cbd5e1; font-weight: 700; margin-bottom: 40px;">
+          clinaza.in &bull; Patient Financing &amp; Growth OS
+        </p>
+        <div id="s4-cta" style="padding: 24px 56px; border-radius: 9999px; background: #0867E8; color: #ffffff; font-size: 28px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.08em; box-shadow: 0 15px 45px rgba(8, 103, 232, 0.6);">
+          Get Started Free &rarr;
+        </div>
+      </section>
+    </div>
+
+    <!-- GSAP Master Animation Timeline -->
+    <script>
+      const tl = gsap.timeline({ paused: true });
+
+      // Scene 1 In (0.0s - 3.8s)
+      tl.fromTo("#s1-badge", { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: "back.out(1.7)" }, 0.2);
+      tl.fromTo("#s1-title", { y: 60, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" }, 0.4);
+      tl.fromTo("#s1-sub", { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" }, 0.7);
+      tl.to(["#s1-badge", "#s1-title", "#s1-sub"], { y: -50, opacity: 0, duration: 0.4, ease: "power2.in" }, 3.6);
+
+      // Scene 2 In (4.0s - 7.8s)
+      tl.fromTo("#s2-badge", { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: "back.out(1.7)" }, 4.2);
+      tl.fromTo("#s2-title", { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, ease: "power3.out" }, 4.4);
+      tl.fromTo("#s2-card", { scale: 0.88, y: 70, opacity: 0 }, { scale: 1, y: 0, opacity: 1, duration: 0.9, ease: "elastic.out(1, 0.75)" }, 4.7);
+      tl.to(["#s2-badge", "#s2-title", "#s2-card"], { y: -60, opacity: 0, duration: 0.4, ease: "power2.in" }, 7.6);
+
+      // Scene 3 In (8.0s - 11.8s)
+      tl.fromTo("#s3-badge", { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: "back.out(1.7)" }, 8.2);
+      tl.fromTo("#s3-title", { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, ease: "power3.out" }, 8.4);
+      tl.fromTo("#s3-stats .stat-pill", { y: 60, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, stagger: 0.15, ease: "power3.out" }, 8.7);
+      tl.to(["#s3-badge", "#s3-title", "#s3-stats"], { y: -50, opacity: 0, duration: 0.4, ease: "power2.in" }, 11.6);
+
+      // Scene 4 In (12.0s - 16.0s)
+      tl.fromTo("#s4-logo", { scale: 0, rotation: -20, opacity: 0 }, { scale: 1, rotation: 0, opacity: 1, duration: 0.8, ease: "back.out(2)" }, 12.2);
+      tl.fromTo("#s4-title", { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, ease: "power3.out" }, 12.5);
+      tl.fromTo("#s4-sub", { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: "power3.out" }, 12.8);
+      tl.fromTo("#s4-cta", { scale: 0.85, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.6, ease: "back.out(1.8)" }, 13.1);
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

@@ -77,6 +77,35 @@ export default function CityLandingPage() {
     },
   };
 
+  const financialProductSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FinancialProduct',
+    name: `Clinaza Dental Treatment EMI Financing — ${name}`,
+    description: `Point-of-care patient medical loan and treatment financing for dental implants, braces, aligners, and crowns in ${name}, ${state}.`,
+    provider: {
+      '@type': 'Organization',
+      name: 'Clinaza Technologies',
+      url: 'https://clinaza.in',
+    },
+    areaServed: {
+      '@type': 'City',
+      name: name,
+    },
+    amount: {
+      '@type': 'MonetaryAmount',
+      currency: 'INR',
+      minValue: 30000,
+      maxValue: 300000,
+    },
+    annualPercentageRate: {
+      '@type': 'QuantitativeValue',
+      minValue: 11.5,
+      maxValue: 16.0,
+      unitText: 'PERCENT',
+    },
+    feesAndCommissionsSpecification: 'Zero paper documentation fees. Transparent processing fees through RBI-regulated NBFC partners.',
+  };
+
   const faqSchema = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
@@ -131,7 +160,7 @@ export default function CityLandingPage() {
           `clear aligners ${name.toLowerCase()} emi`,
         ]}
         canonicalUrl={`https://clinaza.in/cities/${city}`}
-        jsonLd={[breadcrumbSchema, medicalFinancingSchema, faqSchema]}
+        jsonLd={[breadcrumbSchema, medicalFinancingSchema, financialProductSchema, faqSchema]}
       />
 
       {/* Header */}

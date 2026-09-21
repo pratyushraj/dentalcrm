@@ -23,6 +23,7 @@
     "build": "tsc && vite build && node scripts/prerender.mjs",
     "postbuild": "node -e \"console.log('Build complete')\"",
     "prerender": "node scripts/prerender.mjs",
+    "seo:drift": "node scripts/seo-drift.mjs",
     "lint": "eslint .",
     "preview": "vite preview"
   },

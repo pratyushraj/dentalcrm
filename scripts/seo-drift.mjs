@@ -12,7 +12,7 @@ const CHECKS = [
     path: '/',
     expectedTitleSnippet: 'Clinaza',
     expectedDescSnippet: 'treatment cost',
-    expectedH1Snippet: 'Dental Treatment on EMI'
+    expectedH1Snippet: 'Clinaza — Patient Financing'
   },
   {
     path: '/tools',
@@ -24,7 +24,7 @@ const CHECKS = [
     path: '/cities/delhi',
     expectedTitleSnippet: 'Delhi',
     expectedDescSnippet: 'Delhi',
-    expectedH1Snippet: 'Dental Treatment EMI'
+    expectedH1Snippet: 'Treatment EMI in Delhi'
   },
   {
     path: '/blog/dental-loans-in-india-medical-financing',

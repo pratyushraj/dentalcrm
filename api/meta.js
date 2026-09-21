@@ -62,11 +62,11 @@ export default async function handler(req, res) {
 
   if (meta) {
     html = html.replace(/<title>[^<]*<\/title>/i, `<title>${meta.title}</title>`);
-    html = html.replace(/<meta\s+name=["']description["']\s+content=["'][^"']*["']/i, `<meta name="description" content="${meta.desc.replace(/"/g, '&quot;')}"`);
-    html = html.replace(/<meta\s+property=["']og:title["']\s+content=["'][^"']*["']/i, `<meta property="og:title" content="${meta.title.replace(/"/g, '&quot;')}"`);
-    html = html.replace(/<meta\s+property=["']twitter:title["']\s+content=["'][^"']*["']/i, `<meta property="twitter:title" content="${meta.title.replace(/"/g, '&quot;')}"`);
-    html = html.replace(/<meta\s+property=["']og:description["']\s+content=["'][^"']*["']/i, `<meta property="og:description" content="${meta.desc.replace(/"/g, '&quot;')}"`);
-    html = html.replace(/<meta\s+property=["']twitter:description["']\s+content=["'][^"']*["']/i, `<meta property="twitter:description" content="${meta.desc.replace(/"/g, '&quot;')}"`);
+    html = html.replace(/<meta\s+name=["']description["']\s+content=["'][\s\S]*?["']\s*\/?>/i, `<meta name="description" content="${meta.desc.replace(/"/g, '&quot;')}" />`);
+    html = html.replace(/<meta\s+property=["']og:title["']\s+content=["'][\s\S]*?["']\s*\/?>/i, `<meta property="og:title" content="${meta.title.replace(/"/g, '&quot;')}" />`);
+    html = html.replace(/<meta\s+property=["']twitter:title["']\s+content=["'][\s\S]*?["']\s*\/?>/i, `<meta property="twitter:title" content="${meta.title.replace(/"/g, '&quot;')}" />`);
+    html = html.replace(/<meta\s+property=["']og:description["']\s+content=["'][\s\S]*?["']\s*\/?>/i, `<meta property="og:description" content="${meta.desc.replace(/"/g, '&quot;')}" />`);
+    html = html.replace(/<meta\s+property=["']twitter:description["']\s+content=["'][\s\S]*?["']\s*\/?>/i, `<meta property="twitter:description" content="${meta.desc.replace(/"/g, '&quot;')}" />`);
     const canonical = `https://www.clinaza.in${pathname === '/' ? '' : pathname}`;
     if (html.includes('rel="canonical"')) {
       html = html.replace(/<link\s+rel=["']canonical["']\s+href=["'][^"']*["']/i, `<link rel="canonical" href="${canonical}"`);

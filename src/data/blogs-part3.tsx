@@ -1093,7 +1093,7 @@ export const BLOGS_PART3 = [
     author: "Clinaza Dental Research",
     summary: "Complete guide to dental treatment costs in Kochi & Ernakulam. Compare prices for metal & ceramic braces, invisible aligners, and titanium implants with monthly EMI options.",
     featuredImage: "/assets/yourdentist/dr_with_patient_1.jpg",
-    metaDescription: "Braces treatment cost in Kochi from ₹18,000; dental implants from ₹22,000. Compare top dental clinics in Ernakulam, price breakdown & 0% interest monthly EMI plans.",
+    metaDescription: "Braces treatment cost in Kochi from ₹18,000; dental implants from ₹22,000. Compare top dental clinics in Ernakulam, price breakdown & flexible monthly EMI plans.",
     faqs: [
       {
         question: "How much do dental implants cost in Kochi?",
@@ -1337,7 +1337,7 @@ export const BLOGS_PART3 = [
   },
   {
     slug: "dental-treatment-on-emi-near-me-zero-cost-financing-guide",
-    title: "Dental Treatment on EMI Near Me: How to Get 0% Interest Dental Financing in India (2026)",
+    title: "Dental Treatment on EMI Near Me: How to Get Affordable Dental Financing in India (2026)",
     category: "Patient Guides",
     readTime: "6 min read",
     publishDate: "September 21, 2026",

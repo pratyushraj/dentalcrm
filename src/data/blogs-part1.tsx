@@ -103,7 +103,7 @@ export const BLOGS_PART1 = [
       },
       {
         question: "Are EMI payment plans available for aligners?",
-        answer: "Yes, YOUR DENTIST Patna offers 0% interest monthly financing (EMI) through Bajaj Finance and other banking partners, making payments highly affordable."
+        answer: "Yes, YOUR DENTIST Patna offers flexible monthly financing (EMI) starting from ~11.5% p.a. through Bajaj Finance and other banking partners, making payments highly affordable."
       }
     ],
     content: (
@@ -113,38 +113,34 @@ export const BLOGS_PART1 = [
         </p>
 
         <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Transparent Pricing Breakdown at YOUR DENTIST</h2>
-        <p className="text-neutral-700 leading-relaxed">
-          The price of aligner treatment depends on the brand, case complexity (mild, moderate, or severe alignment issues), and treatment duration. Here is a baseline guide to clear aligner costs in Patna:
-        </p>
-
         <div className="overflow-x-auto my-6">
           <table className="min-w-full divide-y divide-neutral-200 border border-neutral-100">
             <thead className="bg-neutral-50">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-bold text-neutral-500 uppercase">Aligner Brand Category</th>
-                <th className="px-6 py-3 text-left text-xs font-bold text-neutral-500 uppercase">Estimated Cost (Patna)</th>
-                <th className="px-6 py-3 text-left text-xs font-bold text-neutral-500 uppercase">Ideal Case Complexity</th>
-                <th className="px-6 py-3 text-left text-xs font-bold text-neutral-500 uppercase">Features</th>
+                <th className="px-6 py-3 text-left text-xs font-bold text-neutral-500 uppercase">Package</th>
+                <th className="px-6 py-3 text-left text-xs font-bold text-neutral-500 uppercase">Brand / Type</th>
+                <th className="px-6 py-3 text-left text-xs font-bold text-neutral-500 uppercase">Average Cost</th>
+                <th className="px-6 py-3 text-left text-xs font-bold text-neutral-500 uppercase">EMI (12 Months)</th>
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-neutral-100 text-sm">
               <tr>
-                <td className="px-6 py-4 font-bold text-neutral-800">Essential Class (Local Brands)</td>
-                <td className="px-6 py-4 text-[#5b72ff] font-bold">₹45,000 - ₹65,000</td>
-                <td className="px-6 py-4 text-neutral-600">Mild crowding, small gaps</td>
-                <td className="px-6 py-4 text-neutral-600">High efficiency, basic plastic material</td>
+                <td className="px-6 py-4 font-bold text-neutral-800">Essential (Mild Alignment)</td>
+                <td className="px-6 py-4 text-neutral-600">Indian Clear Aligners</td>
+                <td className="px-6 py-4 text-neutral-600">₹45,000 – ₹65,000</td>
+                <td className="px-6 py-4 text-neutral-600">₹3,999/month</td>
               </tr>
               <tr>
-                <td className="px-6 py-4 font-bold text-neutral-800">Premium Domestic Brands</td>
-                <td className="px-6 py-4 text-[#5b72ff] font-bold">₹70,000 - ₹95,000</td>
-                <td className="px-6 py-4 text-neutral-600">Moderate spacing or crowding</td>
-                <td className="px-6 py-4 text-neutral-600">US-FDA approved plastics, high comfort</td>
+                <td className="px-6 py-4 font-bold text-neutral-800">Comprehensive (Moderate)</td>
+                <td className="px-6 py-4 text-neutral-600">Premium Domestic Brands</td>
+                <td className="px-6 py-4 text-neutral-600">₹70,000 – ₹95,000</td>
+                <td className="px-6 py-4 text-neutral-600">₹5,999/month</td>
               </tr>
               <tr>
-                <td className="px-6 py-4 font-bold text-neutral-800">International Brands (Invisalign)</td>
-                <td className="px-6 py-4 text-[#5b72ff] font-bold">₹1,20,000 - ₹2,50,000</td>
-                <td className="px-6 py-4 text-neutral-600">Complex bites, severe overcrowding</td>
-                <td className="px-6 py-4 text-neutral-600">SmartTrack material, global tracking app</td>
+                <td className="px-6 py-4 font-bold text-neutral-800">International (Severe/Complex)</td>
+                <td className="px-6 py-4 text-neutral-600">Invisalign (USA)</td>
+                <td className="px-6 py-4 text-neutral-600">₹1,20,000 – ₹1,80,000</td>
+                <td className="px-6 py-4 text-neutral-600">₹9,999/month</td>
               </tr>
             </tbody>
           </table>
@@ -160,9 +156,9 @@ export const BLOGS_PART1 = [
           <li><strong>Refinement Trays:</strong> Some high-end packages include secondary "refinement" trays free of charge if teeth need minor adjustments at the end.</li>
         </ul>
 
-        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">0% Interest Financing Options</h2>
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Flexible Monthly Financing Options</h2>
         <p className="text-neutral-700 leading-relaxed">
-          At YOUR DENTIST Patna, we believe everyone deserves a premium smile. We offer customized 0% interest EMI options starting at just ₹3,999/month. You can select your package and split the costs over 6, 9, or 12 months with no hidden costs.
+          At YOUR DENTIST Patna, we believe everyone deserves a premium smile. We offer customized EMI options starting at just ₹3,999/month through regulated lending partners. You can select your package and split the costs over 6, 9, or 12 months with no hidden costs.
         </p>
       </div>
     )
@@ -446,8 +442,8 @@ export const BLOGS_PART1 = [
         answer: "A single dental implant with crown costs between ₹25,000 and ₹55,000 in India. On a 24-month EMI plan with Clinaza partner clinics, monthly payments start as low as ₹1,458/month."
       },
       {
-        question: "Can I get dental implants on 0% interest EMI in India?",
-        answer: "Yes! Clinaza enables partner dental clinics to offer 0% interest and subvention EMI plans for procedures ranging from ₹30,000 to ₹3,00,000 via RBI-regulated NBFC partners."
+        question: "Can I get dental implants on monthly EMI in India?",
+        answer: "Yes! Clinaza enables partner dental clinics to offer flexible monthly EMI financing plans for procedures ranging from ₹30,000 to ₹3,00,000 via RBI-regulated NBFC partners starting from ~11.5% p.a."
       },
       {
         question: "What implant brands are eligible for EMI financing?",

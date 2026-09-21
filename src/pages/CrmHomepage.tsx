@@ -504,7 +504,8 @@ export default function CrmHomepage() {
               { "@type": "ListItem", "position": 6, "name": "Smile Point Dental Care Patna", "url": "https://clinaza.in/cities/patna" },
               { "@type": "ListItem", "position": 7, "name": "YouthONN Multispeciality Dental Patna", "url": "https://clinaza.in/cities/patna" },
               { "@type": "ListItem", "position": 8, "name": "Mundeshwari Dental Hub & Implant Patna", "url": "https://clinaza.in/cities/patna" },
-              { "@type": "ListItem", "position": 9, "name": "Pratima Dental Hospital Patna", "url": "https://clinaza.in/cities/patna" }
+              { "@type": "ListItem", "position": 9, "name": "Pratima Dental Hospital Patna", "url": "https://clinaza.in/cities/patna" },
+              { "@type": "ListItem", "position": 10, "name": "Dantsri Dental Hospital Jhanjharpur", "url": "https://www.instagram.com/dantsri_dental/" }
             ]
           }
         ]}
@@ -1358,6 +1359,18 @@ export default function CrmHomepage() {
                     badge: 'Partner Clinic',
                     badgeColor: 'bg-slate-100 text-slate-700 border border-slate-200'
                   },
+                  {
+                    name: 'Dantsri Dental Hospital',
+                    location: 'Janta College Rd, Jhanjharpur, Bihar',
+                    phone: '083402 20139',
+                    rating: '5.0 ★ (@dantsri_dental)',
+                    specialties: 'Implants, Smile Design & RCT',
+                    link: 'https://www.instagram.com/dantsri_dental/',
+                    isExternal: true,
+                    accent: 'border-pink-200 bg-white shadow-sm',
+                    badge: 'Instagram Partner',
+                    badgeColor: 'bg-gradient-to-r from-pink-500 to-rose-500 text-white'
+                  },
 
                   // Set 2 for Infinite Seamless Loop
                   {
@@ -1460,6 +1473,18 @@ export default function CrmHomepage() {
                     accent: 'border-slate-200 bg-white shadow-sm',
                     badge: 'Partner Clinic',
                     badgeColor: 'bg-slate-100 text-slate-700 border border-slate-200'
+                  },
+                  {
+                    name: 'Dantsri Dental Hospital',
+                    location: 'Janta College Rd, Jhanjharpur, Bihar',
+                    phone: '083402 20139',
+                    rating: '5.0 ★ (@dantsri_dental)',
+                    specialties: 'Implants, Smile Design & RCT',
+                    link: 'https://www.instagram.com/dantsri_dental/',
+                    isExternal: true,
+                    accent: 'border-pink-200 bg-white shadow-sm',
+                    badge: 'Instagram Partner',
+                    badgeColor: 'bg-gradient-to-r from-pink-500 to-rose-500 text-white'
                   }
                 ].map((clinic, idx) => (
                   <div 

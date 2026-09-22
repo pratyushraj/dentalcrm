@@ -46,7 +46,7 @@ export default function ClearAlignersEmiPage() {
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col justify-between">
       <SEOHead
-        title="Clear Aligners Cost on EMI in India (From ₹2,600/mo) | Clinaza"
+        title="Clear Aligners Cost on EMI in India (From ₹2,600/mo)"
         description="Looking for clear aligners on EMI in India? Compare Invisalign, Flash & Toothsi alternatives with flexible monthly financing from ~11.5% p.a. 2-min approval."
         keywords={["clear aligners cost on emi india", "invisible aligners emi", "invisalign emi india", "teeth aligners monthly payment", "braces on emi india"]}
         canonicalUrl="https://clinaza.in/clear-aligners-on-emi"

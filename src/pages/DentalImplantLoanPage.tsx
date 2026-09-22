@@ -46,8 +46,8 @@ export default function DentalImplantLoanPage() {
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col justify-between">
       <SEOHead
-        title="Dental Implant Loan & EMI in India (From ₹2,400/mo) | Clinaza"
-        description="Get a dental implant loan in India. Finance single tooth, multiple implants & All-on-4 surgery with flexible monthly EMI from ~11.5% p.a. 2-min digital approval."
+        title="Dental Implant Loan & EMI in India (From ₹2,400/mo)"
+        description="Get a dental implant loan in India. Finance single tooth, multiple implants & All-on-4 with flexible monthly EMI from ~11.5% p.a. 2-min digital approval."
         keywords={["dental implant loan", "dental implants loan", "dental implant on emi india", "dental surgery loan", "medical loan for dental implants", "dental financing india"]}
         canonicalUrl="https://clinaza.in/dental-implant-loan"
         jsonLd={implantLoanSchema}

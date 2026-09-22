@@ -41,7 +41,7 @@ const STATIC_ROUTES = {
   },
   '/dental-implant-loan': {
     title: 'Dental Implant Loan & EMI in India (From ₹2,400/mo) | Clinaza',
-    desc: 'Finance single tooth, multiple implants & All-on-4 dental implant surgery in India with flexible monthly EMI from ~11.5% p.a. 2-min digital approval.',
+    desc: 'Get a dental implant loan in India. Finance single tooth, multiple implants & All-on-4 surgery with flexible monthly EMI from ~11.5% p.a. 2-min digital approval.',
     h1: 'Dental Implant Loans & Flexible Monthly EMIs in India'
   },
   '/clear-aligners-on-emi': {

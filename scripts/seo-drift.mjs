@@ -59,50 +59,64 @@ async function runDriftCheck() {
 
   for (const check of CHECKS) {
     const url = `${BASE_URL}${check.path}`;
-    try {
-      const res = await fetch(url);
-      if (res.status !== 200) {
-        console.error(`❌ [FAIL] ${check.path} -> Status: ${res.status} (Expected 200)`);
-        failed++;
-        continue;
-      }
-
-      const html = await res.text();
-      const titleMatch = html.match(/<title>([^<]*)<\/title>/i);
-      const title = titleMatch ? titleMatch[1] : '';
-
-      const descMatch = html.match(/<meta\s+name=["']description["']\s+content="([^"]*)"/i) ||
-                        html.match(/<meta\s+name=["']description["']\s+content='([^']*)'/i);
-      const desc = descMatch ? descMatch[1] : '';
-
-      if (!title.toLowerCase().includes(check.expectedTitleSnippet.toLowerCase())) {
-        console.error(`❌ [FAIL] ${check.path} -> Title mismatch:\n  Got: "${title}"\n  Expected snippet: "${check.expectedTitleSnippet}"`);
-        failed++;
-        continue;
-      }
-
-      if (!desc.toLowerCase().includes(check.expectedDescSnippet.toLowerCase())) {
-        console.error(`❌ [FAIL] ${check.path} -> Description mismatch:\n  Got: "${desc}"\n  Expected snippet: "${check.expectedDescSnippet}"`);
-        failed++;
-        continue;
-      }
-
-      if (check.expectedH1Snippet) {
-        const h1Match = html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i);
-        const h1 = h1Match ? h1Match[1].replace(/<[^>]*>/g, '').trim() : '';
-        if (!h1 || !h1.toLowerCase().includes(check.expectedH1Snippet.toLowerCase())) {
-          console.error(`❌ [FAIL] ${check.path} -> H1 mismatch or missing:\n  Got: "${h1}"\n  Expected snippet: "${check.expectedH1Snippet}"`);
+    let success = false;
+    for (let attempt = 1; attempt <= 3; attempt++) {
+      try {
+        const res = await fetch(url, { headers: { 'Cache-Control': 'no-cache' } });
+        if (res.status !== 200) {
+          if (attempt < 3) { await new Promise(r => setTimeout(r, 5000)); continue; }
+          console.error(`❌ [FAIL] ${check.path} -> Status: ${res.status} (Expected 200)`);
           failed++;
+          break;
+        }
+
+        const html = await res.text();
+        const titleMatch = html.match(/<title>([^<]*)<\/title>/i);
+        const title = titleMatch ? titleMatch[1] : '';
+
+        const descMatch = html.match(/<meta\s+name=["']description["']\s+content="([^"]*)"/i) ||
+                          html.match(/<meta\s+name=["']description["']\s+content='([^']*)'/i);
+        const desc = descMatch ? descMatch[1] : '';
+
+        if (!title.toLowerCase().includes(check.expectedTitleSnippet.toLowerCase())) {
+          if (attempt < 3) { await new Promise(r => setTimeout(r, 5000)); continue; }
+          console.error(`❌ [FAIL] ${check.path} -> Title mismatch:\n  Got: "${title}"\n  Expected snippet: "${check.expectedTitleSnippet}"`);
+          failed++;
+          break;
+        }
+
+        if (!desc.toLowerCase().includes(check.expectedDescSnippet.toLowerCase())) {
+          if (attempt < 3) { await new Promise(r => setTimeout(r, 5000)); continue; }
+          console.error(`❌ [FAIL] ${check.path} -> Description mismatch:\n  Got: "${desc}"\n  Expected snippet: "${check.expectedDescSnippet}"`);
+          failed++;
+          break;
+        }
+
+        if (check.expectedH1Snippet) {
+          const h1Match = html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i);
+          const h1 = h1Match ? h1Match[1].replace(/<[^>]*>/g, '').trim() : '';
+          if (!h1 || !h1.toLowerCase().includes(check.expectedH1Snippet.toLowerCase())) {
+            if (attempt < 3) { await new Promise(r => setTimeout(r, 5000)); continue; }
+            console.error(`❌ [FAIL] ${check.path} -> H1 mismatch or missing:\n  Got: "${h1}"\n  Expected snippet: "${check.expectedH1Snippet}"`);
+            failed++;
+            break;
+          }
+        }
+
+        console.log(`✅ [PASS] ${check.path}`);
+        console.log(`   Title: "${title.slice(0, 70)}..."`);
+        passed++;
+        success = true;
+        break;
+      } catch (err) {
+        if (attempt < 3) {
+          await new Promise(r => setTimeout(r, 5000));
           continue;
         }
+        console.error(`❌ [ERROR] ${check.path} -> ${err.message}`);
+        failed++;
+        break;
       }
-
-      console.log(`✅ [PASS] ${check.path}`);
-      console.log(`   Title: "${title.slice(0, 70)}..."`);
-      passed++;
-    } catch (err) {
-      console.error(`❌ [ERROR] ${check.path} -> ${err.message}`);
-      failed++;
     }
   }
 

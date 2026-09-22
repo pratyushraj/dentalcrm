@@ -20,8 +20,10 @@ jobs:
         with:
           node-version: 20
 
-      - name: Run SEO Drift Check
+      - name: Wait for Vercel Deployment & Run SEO Drift Check
         run: |
+          echo "Waiting 30s for Vercel deployment to propagate to edge..."
+          sleep 30
           node scripts/seo-drift.mjs
         env:
           BASE_URL: 'https://www.clinaza.in'

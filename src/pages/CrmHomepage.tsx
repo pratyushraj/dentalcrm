@@ -459,26 +459,50 @@ export default function CrmHomepage() {
             "mainEntity": [
               {
                 "@type": "Question",
+                "name": "What is Clinaza?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Clinaza is an embedded healthcare patient financing platform that connects clinics with RBI-regulated Banks and NBFCs, allowing patients to pay for high-ticket treatments in flexible monthly EMIs."
+                }
+              },
+              {
+                "@type": "Question",
                 "name": "How does Clinaza patient financing work?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Clinaza connects clinic patients directly with regulated lending partners to offer flexible monthly EMI options for treatments ranging from ₹30,000 to ₹3,00,000."
+                  "text": "Clinaza connects clinic patients directly with regulated lending partners to offer flexible monthly EMI options for treatments ranging from ₹30,000 to ₹5,00,000 with 2-minute paperless digital KYC."
                 }
               },
               {
                 "@type": "Question",
-                "name": "What treatments are covered under Clinaza EMI?",
+                "name": "Which treatments are eligible for EMI?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Clinaza supports dental implants, clear aligners, crowns & makeovers, orthopaedics, IVF, ophthalmology/LASIK, and other elective surgeries."
+                  "text": "High-value planned procedures ranging from ₹30,000 to ₹5,00,000 including Dental Implants, Clear Aligners, Braces, Crowns, Orthopaedic surgeries, IVF/Fertility, and LASIK/Ophthalmology."
                 }
               },
               {
                 "@type": "Question",
-                "name": "Does Clinaza require clinic integration?",
+                "name": "Does the clinic bear any credit risk?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "No complex IT setup is required. Clinics can start offering financing instantly using the Clinaza partner link or checkout widget."
+                  "text": "Zero credit risk on the clinic. The loan is funded, serviced, and collected directly by 13+ RBI-regulated lending partners via automated monthly e-NACH auto-debit."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Does the clinic pay any upfront fee?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "No upfront fees for clinics. Partner clinics receive physical branding kits, QR standees, and onboarding support free of charge."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What documents does the patient need?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Basic digital KYC: PAN card, Aadhaar card (eKYC), proof of income (salary slip, bank statement, or ITR), and bank account details for e-NACH auto-debit setup."
                 }
               },
               {
@@ -622,11 +646,19 @@ export default function CrmHomepage() {
             {/* Authentic Clinic Photo with subtle glass badge */}
             <div className="md:col-span-5 relative mt-2 md:mt-0">
               <div className="relative rounded-2xl sm:rounded-3xl p-1 bg-gradient-to-b from-slate-200 to-slate-100 shadow-[0_20px_40px_rgba(0,0,0,0.06)]">
-                <img
-                  src="/assets/clinic-hero-real.png"
-                  alt="Modern authentic dental clinic treatment room in India"
-                  className="w-full h-auto rounded-[14px] sm:rounded-[22px] object-cover aspect-[4/3]"
-                />
+                <picture>
+                  <source srcSet="/assets/clinic-hero-real.webp" type="image/webp" />
+                  <img
+                    src="/assets/clinic-hero-real.png"
+                    alt="Modern authentic dental clinic treatment room in India"
+                    fetchPriority="high"
+                    loading="eager"
+                    decoding="async"
+                    width={800}
+                    height={600}
+                    className="w-full h-auto rounded-[14px] sm:rounded-[22px] object-cover aspect-[4/3]"
+                  />
+                </picture>
               </div>
               <div className="absolute -bottom-2 -left-2 sm:-bottom-3 sm:-left-3 bg-white/95 backdrop-blur-xl border border-slate-200/80 px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-xl sm:rounded-2xl shadow-[0_8px_24px_rgba(0,0,0,0.08)] flex items-center gap-2 sm:gap-2.5">
                 <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>

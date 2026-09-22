@@ -691,14 +691,26 @@ export default function FreeToolsHub() {
                   </div>
                 </div>
 
-                <div className="pt-4 border-t border-slate-800 flex flex-col sm:flex-row gap-3 items-center justify-between">
-                  <span className="text-[11px] text-slate-400">Want to run your new clinic with 0 software fees?</span>
-                  <Link
-                    to="/reactivation/login"
-                    className="w-full sm:w-auto px-5 py-2.5 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs uppercase tracking-wider rounded-xl transition-all text-center"
-                  >
-                    Start Free on Clinaza →
-                  </Link>
+                <div className="pt-4 border-t border-slate-800 space-y-3">
+                  <div className="flex flex-col sm:flex-row gap-2.5 items-stretch sm:items-center">
+                    <a
+                      href="https://wa.me/917292984244?text=Hi%20Pratyush,%20I%20am%20a%20dentist%20calculating%20clinic%20setup%20costs%20on%20Clinaza.%20I%20would%20like%20guidance%20on%20Dental%20Equipment%20%26%20Doctor%20Loans."
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 px-4 py-2.5 bg-[#25D366] hover:bg-[#20bd5a] text-slate-950 font-black text-xs uppercase tracking-wider rounded-xl transition-all text-center flex items-center justify-center gap-1.5 shadow-md shadow-emerald-500/20 active:scale-95"
+                    >
+                      <MessageSquare size={14} className="text-slate-950" /> Get Equipment Loan Help (WhatsApp) →
+                    </a>
+                    <Link
+                      to="/reactivation/login"
+                      className="px-4 py-2.5 bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all text-center whitespace-nowrap"
+                    >
+                      Free Dental CRM →
+                    </Link>
+                  </div>
+                  <p className="text-[10px] text-slate-400 text-center">
+                    Doctor Loan Advisor: <strong className="text-white">+91 7292984244</strong> &bull; Unsecured Doctor Loans up to ₹50L
+                  </p>
                 </div>
               </div>
             </div>

@@ -38,6 +38,43 @@ export default function BlogArticlePage() {
 
   const isoDate = toIsoDate(article.publishDate);
 
+  // Smart SEO Title: clamps titles to <= 60 characters with branding to prevent SERP truncation
+  const formatBlogSeoTitle = (rawTitle: string): string => {
+    const brand = ' | Clinaza';
+    const maxLen = 60;
+    if (rawTitle.length + brand.length <= maxLen) {
+      return `${rawTitle}${brand}`;
+    }
+
+    // Try splitting at natural delimiters (colons, dashes, parenthesis)
+    for (const sep of [': ', ' — ', ' - ', ' [', ' (']) {
+      if (rawTitle.includes(sep)) {
+        const prefix = rawTitle.split(sep)[0].trim();
+        if (prefix.length + brand.length <= maxLen && prefix.length >= 28) {
+          return `${prefix}${brand}`;
+        }
+      }
+    }
+
+    // Word boundary clamp
+    const avail = maxLen - brand.length;
+    let truncated = rawTitle.slice(0, avail);
+    if (truncated.includes(' ')) {
+      truncated = truncated.slice(0, truncated.lastIndexOf(' '));
+    }
+
+    // Strip trailing punctuation & trailing prepositions/conjunctions
+    const stopWords = new Set(['to', 'in', 'and', 'for', 'vs.', 'vs', 'on', 'with', 'by', 'at', 'of', 'or', '&']);
+    const words = truncated.replace(/[:,\-–—]+$/, '').trim().split(/\s+/);
+    while (words.length > 0 && stopWords.has(words[words.length - 1].toLowerCase())) {
+      words.pop();
+    }
+    const cleaned = words.join(' ');
+    return `${cleaned}${brand}`;
+  };
+
+  const seoTitle = formatBlogSeoTitle(article.title);
+
   // Article schema — powers Google rich results & date signals
   const articleSchema = {
     '@context': 'https://schema.org',
@@ -114,7 +151,7 @@ export default function BlogArticlePage() {
   return (
     <div className="min-h-screen bg-[#fafafa] text-neutral-900 font-sora antialiased selection:bg-[#5b72ff] selection:text-white pb-16 sm:pb-0">
       <SEOHead
-        title={`${article.title} | Clinaza Patient Guides`}
+        title={seoTitle}
         description={article.metaDescription}
         keywords={[article.category.toLowerCase(), 'clinaza financing', 'dental care emi india']}
         canonicalUrl={`https://clinaza.in/blog/${article.slug}`}

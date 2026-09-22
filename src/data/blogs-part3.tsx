@@ -12,7 +12,7 @@ export const BLOGS_PART3 = [
     author: "Clinaza Clinical Insights",
     summary: "Complete guide to finding affordable clear aligners in India under ₹40,000. Compare top Indian certified aligners vs Invisalign, at-home vs clinic-monitored aligners, and 0-downpayment monthly EMI plans.",
     featuredImage: "/assets/yourdentist/clear_aligners.png",
-    metaDescription: "Looking for the cheapest invisible aligners in India? Compare verified clear aligner brands starting under ₹40,000, doctor-supervised vs D2C kits, and monthly EMI options.",
+    metaDescription: "Cheapest invisible aligners in India: Compare verified clear aligner brands starting under ₹40,000, doctor-supervised kits, and monthly EMI options.",
     faqs: [
       {
         question: "Can I get clear invisible aligners in India for under ₹40,000?",
@@ -100,7 +100,7 @@ export const BLOGS_PART3 = [
     author: "Clinaza Clinical Insights",
     summary: "Comprehensive guide to full mouth dental implant pricing in India on monthly EMI. Compare All-on-4, All-on-6, permanent fixed Zirconia bridges, and low-interest point-of-care medical financing across Indian metro and Tier-2 cities.",
     featuredImage: "/assets/yourdentist/dental_implant_hero.png",
-    metaDescription: "Full mouth dental implants cost on EMI in India. Compare All-on-4 vs All-on-6 pricing, permanent fixed teeth packages, and instant monthly EMI plans starting from ₹4,500/mo.",
+    metaDescription: "Full mouth dental implants cost on EMI in India: Compare All-on-4 vs All-on-6 pricing, fixed teeth packages, and monthly EMI plans from ₹4,500/month.",
     faqs: [
       {
         question: "How much do full mouth dental implants cost on EMI in India?",
@@ -188,7 +188,7 @@ export const BLOGS_PART3 = [
     author: "Clinaza Practice Finance Desk",
     summary: "Complete guide for Indian dentists on collateral-free dental clinic setup loans (डेंटल क्लिनिक के लिए लोन) and purchasing dental chairs, digital RVG, CBCT, and intraoral scanners on flexible EMI starting from 10.5% p.a.",
     featuredImage: "/assets/yourdentist/clinic_in_action.jpg",
-    metaDescription: "डेंटल क्लिनिक के लिए लोन और इक्विपमेंट EMI: Compare dental clinic setup loans & equipment financing in India. Zero collateral doctor loans up to ₹50L, tax benefits & EMI tables.",
+    metaDescription: "Dental clinic setup loans & equipment financing in India: Zero collateral doctor loans up to ₹50L, Section 32 tax benefits, and monthly EMI tables.",
     faqs: [
       {
         question: "डेंटल क्लिनिक के लिए लोन कैसे लें? (How to get a dental clinic loan in India?)",
@@ -381,7 +381,7 @@ export const BLOGS_PART3 = [
     author: "Clinaza Medical Insights",
     summary: "Complete patient guide to hair transplant costs in India on monthly EMI. Compare FUE, DHI, and Sapphire graft pricing (1,500 to 5,000 grafts), zero-cost financing options, and why health insurance excludes aesthetic hair restoration.",
     featuredImage: "https://images.unsplash.com/photo-1585747860715-2ba37e788b70?q=80&w=1200&auto=format&fit=crop",
-    metaDescription: "Hair transplant cost on EMI in India (2026). Compare FUE vs DHI per-graft prices (₹20 to ₹65/graft), flexible monthly EMI plans from ₹2,500/month, and top clinics.",
+    metaDescription: "Hair transplant cost on EMI in India 2026: Compare FUE vs DHI per-graft prices (₹20–₹65/graft), flexible monthly EMI from ₹2,500/month, and top clinics.",
     faqs: [
       {
         question: "Can I get a hair transplant on monthly EMI in India?",
@@ -504,7 +504,7 @@ export const BLOGS_PART3 = [
     author: "Clinaza Medical Insights",
     summary: "Complete guide to LASIK, Contoura Vision, SMILE, and FEMTO LASIK eye surgery costs in India on monthly EMI. Understand procedure differences, city-wise pricing, and why health insurance doesn't cover refractive surgery.",
     featuredImage: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=1200&auto=format&fit=crop",
-    metaDescription: "LASIK eye surgery cost on EMI in India 2026. Compare LASIK, Contoura Vision & SMILE pricing (₹20,000 to ₹85,000/eye), 0% monthly EMI from ₹1,200/month, and top clinic options.",
+    metaDescription: "LASIK eye surgery cost on EMI in India 2026: Compare LASIK, Contoura Vision & SMILE pricing (₹20k–₹85k/eye), 0% monthly EMI from ₹1,200/mo, and top clinics.",
     faqs: [
       {
         question: "How much does LASIK eye surgery cost in India per eye?",
@@ -650,7 +650,7 @@ export const BLOGS_PART3 = [
     author: "Clinaza Medical Insights",
     summary: "Complete guide to IVF, IUI, and ICSI fertility treatment costs in India on monthly EMI. Understand per-cycle pricing across cities, what health insurance ignores, and how couples can access world-class ART treatment without financial distress.",
     featuredImage: "https://images.unsplash.com/photo-1555252333-9f8e92e65df9?q=80&w=1200&auto=format&fit=crop",
-    metaDescription: "IVF cost on EMI in India 2026. Compare IVF, IUI & ICSI per-cycle prices (₹80,000 to ₹2,50,000), flexible monthly EMI from ₹3,500/month, and how to finance fertility treatment without insurance.",
+    metaDescription: "IVF cost on EMI in India 2026: Compare IVF, IUI & ICSI pricing (₹80k–₹2.5L), flexible monthly EMI from ₹3,500/month, and financing without insurance.",
     faqs: [
       {
         question: "How much does one IVF cycle cost in India?",
@@ -796,7 +796,7 @@ export const BLOGS_PART3 = [
     author: "Clinaza Medical Insights",
     summary: "Complete guide to total knee replacement and total hip replacement surgery costs in India on monthly EMI. Compare implant types, city-wise pricing, insurance gaps, and how senior citizens can finance joint replacement.",
     featuredImage: "https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?q=80&w=1200&auto=format&fit=crop",
-    metaDescription: "Knee and hip replacement cost on EMI in India 2026. Compare TKR and THR implant pricing, monthly EMI from Rs 4,500/month, insurance gaps, and top ortho hospitals.",
+    metaDescription: "Knee and hip replacement cost on EMI in India 2026: Compare TKR & THR implant pricing, monthly EMI from ₹4,500/month, insurance gaps, and top hospitals.",
     faqs: [
       { question: "How much does a total knee replacement cost in India?", answer: "TKR costs Rs 1,50,000 to Rs 3,50,000 per knee. THR costs Rs 1,80,000 to Rs 4,00,000 per joint depending on implant brand and hospital tier." },
       { question: "Does health insurance cover knee replacement in India?", answer: "Partially. Most policies cover it after 2-year waiting periods but sub-limits leave Rs 50,000 to Rs 2,00,000 out-of-pocket that can be converted to EMI." },
@@ -838,7 +838,7 @@ export const BLOGS_PART3 = [
     author: "Clinaza Medical Insights",
     summary: "Complete guide to bariatric surgery costs in India on monthly EMI. Compare gastric sleeve, gastric bypass, and mini bypass pricing with insurance exclusions and affordable financing options.",
     featuredImage: "https://images.unsplash.com/photo-1516549655169-df83a0774514?q=80&w=1200&auto=format&fit=crop",
-    metaDescription: "Bariatric surgery cost on EMI in India 2026. Compare gastric sleeve vs bypass pricing (Rs 2L to 5L), monthly EMI from Rs 9,700/month, insurance exclusions, and top bariatric centers.",
+    metaDescription: "Bariatric surgery cost on EMI in India 2026: Compare gastric sleeve vs bypass pricing (₹2L–₹5L), monthly EMI from ₹9,700/mo, and top bariatric centers.",
     faqs: [
       { question: "How much does bariatric surgery cost in India?", answer: "Gastric sleeve: Rs 2L to Rs 3.5L. RYGB bypass: Rs 3L to Rs 5L. Mini bypass: Rs 2.8L to Rs 4L. Intragastric balloon: Rs 1.2L to Rs 2.5L." },
       { question: "Does health insurance cover bariatric surgery?", answer: "Some policies cover it for BMI over 40 or BMI over 32.5 with comorbidities. Most plans still exclude it and sub-limits leave Rs 1-3L out-of-pocket." },
@@ -917,7 +917,7 @@ export const BLOGS_PART3 = [
     author: "Clinaza Clinical Insights",
     summary: "Complete patient guide to braces costs in India on monthly EMI. Compare metal, ceramic, lingual braces and clear aligners with city-wise pricing, treatment duration, and EMI options from Rs 1,200/month.",
     featuredImage: "/assets/yourdentist/clear_aligners.png",
-    metaDescription: "Braces cost on EMI in India 2026. Compare metal, ceramic and lingual braces pricing (Rs 25,000 to Rs 1,20,000), monthly EMI from Rs 1,200/month, and orthodontist options.",
+    metaDescription: "Braces cost on EMI in India 2026: Compare metal, ceramic and lingual braces pricing (₹25k–₹1.2L), monthly EMI from ₹1,200/month, and top orthodontists.",
     faqs: [
       { question: "How much do braces cost in India?", answer: "Metal braces: Rs 25,000 to Rs 45,000. Ceramic braces: Rs 40,000 to Rs 75,000. Lingual braces: Rs 80,000 to Rs 1,50,000. Clear aligners: Rs 1,00,000 to Rs 2,50,000." },
       { question: "Can I get braces on monthly EMI in India?", answer: "Yes. Through Clinaza point-of-care financing, patients get braces bonded on Day 1 and repay from Rs 1,200/month over 12-24 months." },
@@ -955,7 +955,7 @@ export const BLOGS_PART3 = [
     author: "Clinaza Medical Insights",
     summary: "Complete guide to Implantable Collamer Lens (ICL) eye surgery costs in India on monthly EMI. Compare ICL pricing (₹80,000 to ₹1,60,000 for both eyes) vs LASIK, suitability for high cylinder/thin corneas, and flexible monthly EMI options.",
     featuredImage: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=1200&auto=format&fit=crop",
-    metaDescription: "ICL eye surgery cost on EMI in India 2026. Compare Phakic IOL pricing (₹80,000 to ₹1,60,000), monthly EMI from ₹3,500/month, ICL vs LASIK, and top eye hospitals.",
+    metaDescription: "ICL eye surgery cost on EMI in India: EVO Visian ICL & IPCL lens pricing (₹80K–₹1.8L per eye) with instant flexible monthly EMI options via Clinaza.",
     faqs: [
       { question: "How much does ICL eye surgery cost in India for both eyes?", answer: "Standard spherical ICL costs ₹80,000 to ₹1,20,000 for both eyes. Toric ICL (for high astigmatism/cylinder) costs ₹1,20,000 to ₹1,70,000 for both eyes depending on lens power and eye center." },
       { question: "Can ICL surgery be done on monthly EMI in India?", answer: "Yes. Leading eye centers partner with Clinaza point-of-care financing to offer 0% interest EMI (6 to 24 months). Both eyes can be corrected immediately with repayments starting from ₹3,500/month." },
@@ -989,7 +989,7 @@ export const BLOGS_PART3 = [
     author: "Clinaza Medical Insights",
     summary: "Complete patient guide to cataract surgery costs in India on monthly EMI. Compare robotic Femto cataract vs Phacoemulsification, Indian vs imported intraocular lenses (IOL), and how to bridge insurance sub-limit gaps.",
     featuredImage: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=1200&auto=format&fit=crop",
-    metaDescription: "Cataract surgery cost on EMI in India 2026. Compare monofocal vs multifocal/trifocal IOL pricing (₹20,000 to ₹1,10,000/eye), monthly EMI from ₹1,800/month, and top eye centers.",
+    metaDescription: "Cataract surgery cost on EMI in India 2026: Compare monofocal vs multifocal IOL pricing (₹20k–₹1.1L/eye), monthly EMI from ₹1,800/mo, and top eye centers.",
     faqs: [
       { question: "How much does cataract surgery cost in India per eye?", answer: "Standard Phaco with Monofocal IOL costs ₹20,000 to ₹40,000 per eye. Premium Multifocal or Trifocal IOL costs ₹50,000 to ₹90,000 per eye. Robotic Femto-Cataract with Toric/Trifocal IOL costs ₹80,000 to ₹1,20,000 per eye." },
       { question: "Does health insurance cover premium multifocal cataract lenses?", answer: "Most Mediclaim policies cap cataract coverage at ₹25,000 to ₹35,000 per eye (covering standard monofocal lenses only). Upgrading to glasses-free multifocal or trifocal lenses requires an out-of-pocket top-up of ₹30,000 to ₹70,000 per eye, which can be financed on zero-cost EMI." },
@@ -1024,7 +1024,7 @@ export const BLOGS_PART3 = [
     author: "Clinaza Medical Insights",
     summary: "Complete guide to maternity, pregnancy care, and delivery hospital costs in India on monthly EMI. Understand normal delivery vs C-section pricing, insurance waiting period gaps, and how to finance hospital bills.",
     featuredImage: "https://images.unsplash.com/photo-1555252333-9f8e92e65df9?q=80&w=1200&auto=format&fit=crop",
-    metaDescription: "Maternity delivery cost on EMI in India 2026. Compare normal vs C-section delivery pricing (₹50,000 to ₹1,80,000), monthly EMI from ₹3,200/month, maternity insurance gaps, and top maternity hospitals.",
+    metaDescription: "Maternity delivery cost on EMI in India 2026: Compare normal vs C-section pricing (₹50k–₹1.8L), monthly EMI from ₹3,200/month, and top maternity hospitals.",
     faqs: [
       { question: "How much does hospital delivery cost in India?", answer: "Normal vaginal delivery costs ₹40,000 to ₹1,10,000 in private metro hospitals. Cesarean section (C-section) delivery costs ₹70,000 to ₹1,80,000 depending on room category and hospital tier." },
       { question: "Does health insurance cover maternity delivery in India?", answer: "Most individual retail Mediclaim policies have a 2 to 4-year waiting period for maternity benefits and cap coverage at ₹30,000 to ₹50,000 — leaving a large out-of-pocket gap in private maternity hospitals." },
@@ -1059,7 +1059,7 @@ export const BLOGS_PART3 = [
     author: "Clinaza Medical Insights",
     summary: "Complete guide to gallbladder cholecystectomy and kidney stone RIRS/PCNL laser surgery costs in India on monthly EMI. Compare procedure pricing, insurance co-pay gaps, and quick digital emergency financing.",
     featuredImage: "https://images.unsplash.com/photo-1516549655169-df83a0774514?q=80&w=1200&auto=format&fit=crop",
-    metaDescription: "Kidney and gallbladder stone surgery cost on EMI in India 2026. Compare RIRS, PCNL, and laparoscopic surgery pricing (₹50,000 to ₹1,80,000), monthly EMI from ₹2,900/month.",
+    metaDescription: "Kidney and gallbladder stone surgery cost on EMI in India 2026: Compare RIRS, PCNL & laparoscopic surgery pricing, with monthly EMI from ₹2,900/month.",
     faqs: [
       { question: "How much does kidney stone laser surgery cost in India?", answer: "RIRS (Retrograde Intrarenal Surgery) costs ₹70,000 to ₹1,60,000. PCNL (Percutaneous Nephrolithotomy) costs ₹60,000 to ₹1,30,000. ESWL lithotripsy costs ₹30,000 to ₹60,000." },
       { question: "How much does laparoscopic gallbladder surgery cost in India?", answer: "Laparoscopic cholecystectomy costs ₹50,000 to ₹1,40,000 in private hospitals depending on single-port technique and room selection." },
@@ -1093,7 +1093,7 @@ export const BLOGS_PART3 = [
     author: "Clinaza Dental Research",
     summary: "Complete guide to dental treatment costs in Kochi & Ernakulam. Compare prices for metal & ceramic braces, invisible aligners, and titanium implants with monthly EMI options.",
     featuredImage: "/assets/yourdentist/dr_with_patient_1.jpg",
-    metaDescription: "Braces treatment cost in Kochi from ₹18,000; dental implants from ₹22,000. Compare top dental clinics in Ernakulam, price breakdown & flexible monthly EMI plans.",
+    metaDescription: "Braces treatment cost in Kochi from ₹18,000; dental implants from ₹22,000. Compare top dental clinics in Ernakulam, price breakdown & monthly EMI plans.",
     faqs: [
       {
         question: "How much do dental implants cost in Kochi?",

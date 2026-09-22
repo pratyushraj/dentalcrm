@@ -67,11 +67,13 @@ def create_email_payload(lead):
     <p>Would you or your clinic manager be open for a quick 5-minute conversation or demo this week to see how this works for {clinic_name}?</p>
     
     <p>
-      <a href="https://clinaza.in" class="btn">Explore Clinaza Platform →</a>
+      <a href="https://wa.me/917292984244?text=Hi%20Pratyush,%20interested%20in%20learning%20more%20about%20Clinaza%20for%20our%20clinic" class="btn" style="background-color: #25D366; color: #ffffff; text-decoration: none; padding: 10px 18px; border-radius: 6px; font-weight: bold; display: inline-block; margin-right: 8px;">Chat on WhatsApp →</a>
+      <a href="https://clinaza.in" class="btn" style="background-color: #0867E8; color: #ffffff; text-decoration: none; padding: 10px 18px; border-radius: 6px; font-weight: bold; display: inline-block;">Explore Website →</a>
     </p>
     
     <div class="footer">
       <p style="margin-bottom: 4px;"><strong>Pratyush Raj</strong><br>Founder, Clinaza Healthcare Technologies</p>
+      <p style="margin-bottom: 4px;">📱 WhatsApp / Direct: <a href="https://wa.me/917292984244" style="color: #0867E8; text-decoration: none; font-weight: bold;">+91 7292984244</a></p>
       <p style="margin-bottom: 4px;">🌐 Website: <a href="https://clinaza.in">clinaza.in</a> | 📸 Instagram: <a href="https://instagram.com/clinaza.in">@clinaza.in</a></p>
       <p style="font-size: 11px; color: #94a3b8; margin-top: 12px;">If you prefer not to receive updates, reply "Unsubscribe" and we will remove your email immediately.</p>
     </div>
@@ -91,13 +93,15 @@ How Clinaza empowers {clinic_name}:
 - Zero Credit Risk: Handled by 13+ RBI-regulated NBFC lenders with zero liability on your clinic.
 - Free Clinic Tools: Digital NABH consent generator, prescription maker, and patient recall dashboard.
 
-Would you be open for a brief 5-minute chat or demo this week?
+Would you be open for a brief 5-minute chat or demo this week? You can reply to this email or reach me directly on WhatsApp at +91 7292984244.
 
-Explore more at https://clinaza.in | Instagram @clinaza.in
+Explore more at https://clinaza.in | WhatsApp: https://wa.me/917292984244
 
 Warm regards,
 Pratyush Raj
-Founder, Clinaza (contact@clinaza.in)
+Founder, Clinaza
+Phone / WhatsApp: +91 7292984244
+Email: contact@clinaza.in
 """
 
     return {

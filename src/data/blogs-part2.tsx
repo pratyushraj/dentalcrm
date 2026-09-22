@@ -200,7 +200,7 @@ export const BLOGS_PART2 = [
     author: "Clinaza Healthcare Advisory",
     summary: "Complete 2026 guide to LASIK laser eye surgery costs on EMI in India. Compare Blade-Free Femto LASIK, Contoura Vision, and SMILE prices (₹35,000–₹1,20,000) with flexible monthly EMIs from ₹2,900/month.",
     featuredImage: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=1200&auto=format&fit=crop",
-    metaDescription: "LASIK eye surgery cost on EMI in India. Compare Femto-LASIK, Contoura Vision, and SMILE prices (₹35K to ₹1.2L) with instant flexible monthly EMIs from ₹2,900/mo.",
+    metaDescription: "LASIK eye surgery cost on EMI in India: Compare Femto-LASIK, Contoura Vision & SMILE pricing (₹35K–₹1.2L) with instant flexible monthly EMIs from ₹2,900/mo.",
     faqs: [
       {
         question: "Can I get LASIK eye surgery on 0% EMI in India?",
@@ -294,7 +294,7 @@ export const BLOGS_PART2 = [
     author: "Clinaza Health Finance Team",
     summary: "Knee replacement costs ₹1.5 to ₹4 lakh in India. Learn how to pay for TKR, PKR, or bilateral knee replacement on affordable flexible EMI with no collateral through Clinaza.",
     featuredImage: "https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?q=80&w=1200&auto=format&fit=crop",
-    metaDescription: "Knee replacement surgery costs ₹1.5–4 lakh in India. Get flexible EMI for TKR and PKR surgeries with instant approval. No collateral needed. Check your EMI on Clinaza.",
+    metaDescription: "Knee replacement surgery cost in India (₹1.5L–₹4L): Get flexible monthly EMI for TKR & PKR surgeries with instant approval and no collateral on Clinaza.",
     faqs: [
       { question: "How much does knee replacement cost in India?", answer: "Total knee replacement (TKR) costs ₹1.5–3 lakh per knee in government hospitals and ₹2.5–4 lakh in private hospitals. Bilateral (both knees) can cost ₹4–7 lakh." },
       { question: "Can I get knee replacement on EMI?", answer: "Yes. Clinaza offers 0% EMI for knee replacement surgeries up to ₹5 lakh with repayment of 3 to 24 months and no collateral or guarantor required." },
@@ -507,7 +507,7 @@ export const BLOGS_PART2 = [
     author: "Clinaza Health Finance Team",
     summary: "Rhinoplasty costs ₹60,000–2.5 lakh in India. Learn how to pay for nose reshaping surgery on affordable flexible EMI through Clinaza with instant approval and no collateral.",
     featuredImage: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=1200&auto=format&fit=crop",
-    metaDescription: "Rhinoplasty (nose job) costs ₹60,000–2.5 lakh in India. Get flexible EMI for nose reshaping surgery with instant approval on Clinaza. No collateral required.",
+    metaDescription: "Rhinoplasty cost on EMI in India: Cosmetic and functional nose job surgery pricing (₹60,000 to ₹2,00,000) with flexible monthly financing via Clinaza.",
     faqs: [
       { question: "How much does rhinoplasty cost in India?", answer: "Rhinoplasty in India costs ₹60,000–2.5 lakh depending on the procedure type (open vs closed), surgeon experience, and city. Non-surgical rhinoplasty using fillers costs ₹15,000–40,000." },
       { question: "Can I get a nose job on EMI in India?", answer: "Yes. Clinaza offers 0% EMI for rhinoplasty up to ₹2.5 lakh with 3–24 month tenures. Instant online approval, no collateral or guarantor required." },
@@ -613,7 +613,7 @@ export const BLOGS_PART2 = [
     author: "Clinaza Health Finance Team",
     summary: "Gynecomastia surgery costs ₹50,000–1.5 lakh in India. Learn how to pay for male breast reduction on affordable flexible EMI through Clinaza with instant approval and no collateral.",
     featuredImage: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=1200&auto=format&fit=crop",
-    metaDescription: "Gynecomastia surgery costs ₹50,000–1.5 lakh in India. Get flexible EMI for male breast reduction with instant approval on Clinaza. No collateral required.",
+    metaDescription: "Gynecomastia male chest reduction surgery cost on EMI in India: Compare liposuction & gland excision pricing (₹45k–₹1.2L) with monthly financing.",
     faqs: [
       { question: "How much does gynecomastia surgery cost in India?", answer: "Gynecomastia surgery in India costs ₹50,000–1.5 lakh depending on the grade (glandular tissue vs fat), surgical technique (liposuction vs excision), and city." },
       { question: "Can I get gynecomastia surgery on EMI?", answer: "Yes. Clinaza offers 0% EMI for gynecomastia surgery up to ₹1.5 lakh with 3–24 month tenures and instant online approval." },
@@ -712,7 +712,7 @@ export const BLOGS_PART2 = [
     author: "Clinaza Health Finance Team",
     summary: "Liposuction costs ₹60,000–3 lakh in India depending on areas treated. Learn how to pay for lipo, Vaser, or 360° body contouring on affordable flexible EMI through Clinaza.",
     featuredImage: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=1200&auto=format&fit=crop",
-    metaDescription: "Liposuction costs ₹60,000–3 lakh in India. Get flexible EMI for lipo, Vaser hi-def, and 360° body contouring with instant approval on Clinaza. No collateral needed.",
+    metaDescription: "Liposuction surgery cost on EMI in India: Compare VASER, laser & body contouring pricing (₹50k to ₹2.5L) with flexible monthly EMI plans via Clinaza.",
     faqs: [
       { question: "How much does liposuction cost in India?", answer: "Liposuction in India costs ₹60,000–3 lakh depending on the number of areas treated, technique (standard vs Vaser vs laser), and surgeon. Abdomen alone costs ₹60,000–1.2 lakh." },
       { question: "Can I get liposuction on EMI in India?", answer: "Yes. Clinaza offers 0% EMI for liposuction procedures up to ₹3 lakh with 3–24 month repayment periods and instant online approval." },
@@ -827,7 +827,7 @@ export const BLOGS_PART2 = [
     author: "Clinaza Health Finance Team",
     summary: "Cancer treatment costs range from ₹3 lakh to over ₹20 lakh in India. Learn how to manage chemotherapy, radiation, immunotherapy, and surgical oncology bills with 0% medical EMI via Clinaza.",
     featuredImage: "/assets/yourdentist/clinic_in_action.jpg",
-    metaDescription: "Cancer treatment cost on EMI in India: Chemotherapy, radiation, robotic surgery & targeted therapy financing up to ₹5 lakh with flexible and instant approval on Clinaza.",
+    metaDescription: "Cancer treatment financing in India: Chemotherapy, radiation & surgical oncology costs with flexible healthcare medical loans up to ₹5 lakh via Clinaza.",
     faqs: [
       { question: "How much does cancer treatment cost in India?", answer: "Comprehensive cancer treatment ranges from ₹3,00,000 to over ₹20,00,000 depending on stage, cancer type, hospital, and modality (chemo cycles, radiation fractions, immunotherapy)." },
       { question: "Can I get cancer treatment on EMI in India?", answer: "Yes. Clinaza offers healthcare treatment financing up to ₹5,00,000 on 0% EMI with tenures from 3 to 24 months, zero collateral, and approval in 2 minutes." },
@@ -924,7 +924,7 @@ export const BLOGS_PART2 = [
     author: "Clinaza Health Finance Team",
     summary: "Cochlear implants cost between ₹6 lakh and ₹15 lakh per ear in India. Learn about unilateral & bilateral implant costs, sound processors, and flexible EMI medical loans with Clinaza.",
     featuredImage: "/assets/yourdentist/dental_implant_hero.png",
-    metaDescription: "Cochlear implant cost on EMI in India: Complete pricing guide for Cochlear, Med-El, and Advanced Bionics devices with flexible EMI financing and instant approval via Clinaza.",
+    metaDescription: "Cochlear implant cost on EMI in India: Pricing guide for Cochlear, Med-El & Advanced Bionics devices with flexible EMI financing and instant approval.",
     faqs: [
       { question: "How much does a cochlear implant cost in India?", answer: "A single-ear cochlear implant surgery costs ₹6,00,000 to ₹14,00,000 depending on the device brand (Cochlear, MED-EL, Advanced Bionics), sound processor technology, and hospital tier." },
       { question: "Can I get a cochlear implant on 0% EMI?", answer: "Yes! Clinaza provides point-of-care medical EMI loans up to ₹5,00,000 to help parents and adults finance surgical and device costs with zero collateral." },
@@ -1002,7 +1002,7 @@ export const BLOGS_PART2 = [
     author: "Clinaza Practice Management Team",
     summary: "Download a free standard Dental Clinic Daily Patient Register Excel template (.xlsx) with columns for OPD, treatment plans, fees, and payments, plus discover why modern clinics are shifting to cloud EMR.",
     featuredImage: "/assets/yourdentist/clinic_in_action.jpg",
-    metaDescription: "Download free Dental Clinic Daily Patient Register Format in Excel (.xlsx). Track OPD visits, chief complaints, treatments, fees, and WhatsApp follow-ups with Clinaza.",
+    metaDescription: "Download free Dental Clinic Daily Patient Register Format in Excel (.xlsx). Track OPD visits, chief complaints, treatments, fees, and patient recalls.",
     faqs: [
       { question: "What is a dental clinic daily patient register?", answer: "It is an OPD log book or digital spreadsheet used by clinic receptionists and dentists to record patient serial numbers, names, contact numbers, chief complaints, procedures done, fee charged, and balance due." },
       { question: "What columns must be included in a dental patient register?", answer: "Essential columns include: Date, Patient ID / Reg No, Full Name, Age/Gender, Phone Number, Chief Complaint, Tooth Number / Quad, Treatment Performed, Doctor Name, Amount Charged, Mode of Payment, and Next Recall Date." },
@@ -1104,7 +1104,7 @@ export const BLOGS_PART2 = [
     author: "Clinaza Dental Practice Team",
     summary: "How to manage dental lab slips, track zirconia crowns, ceramic bridges, dentures, and aligner delivery dates without missing patient appointments. Free tool & best practices for Indian clinics.",
     featuredImage: "/assets/yourdentist/clinic_in_action.jpg",
-    metaDescription: "Dental lab bill tracking software free in India: Track custom prosthesis orders, CAD/CAM zirconia crown delivery dates, lab expenses, and invoice reconciliations with Clinaza.",
+    metaDescription: "Free dental lab bill tracking software in India: Track custom prosthesis orders, CAD/CAM zirconia crown delivery dates, and expenses with Clinaza.",
     faqs: [
       { question: "What is dental lab tracking in clinic management?", answer: "It is the clinical process of logging laboratory work orders (impressions, digital intraoral scans) sent to external dental labs, tracking manufacturing status, receiving completed prostheses, and reconciling monthly lab bills." },
       { question: "Why do dental clinics lose money on lab bills?", answer: "Without digital lab tracking, clinics often pay for remakes that were lab errors, miss promised patient cementation dates causing no-shows, and fail to bill patients for upgraded zirconia or e.max materials." },
@@ -1194,7 +1194,7 @@ export const BLOGS_PART2 = [
     author: "Clinaza Health Finance Team",
     summary: "ICL (Implantable Collamer Lens) surgery costs ₹80,000 to ₹1,80,000 in India. Learn why ICL is the best alternative for thin corneas or high refractive power (-8D to -20D) and how to finance it on flexible EMI.",
     featuredImage: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=1200&auto=format&fit=crop",
-    metaDescription: "ICL eye surgery cost on EMI in India: EVO Visian ICL & IPCL lens pricing (₹80K–₹1.8L per eye) with instant flexible monthly EMI options up to ₹5 lakh via Clinaza.",
+    metaDescription: "ICL eye surgery cost on EMI in India: EVO Visian ICL & IPCL lens pricing (₹80K–₹1.8L per eye) with instant flexible monthly EMI options via Clinaza.",
     faqs: [
       { question: "What is ICL surgery and who is it for?", answer: "ICL (Implantable Collamer Lens / Phakic IOL) is a soft, biocompatible lens permanently placed inside the eye between the iris and natural crystalline lens. It is ideal for patients with high power (-3D to -20D), thin corneas, or severe dry eyes who are rejected for LASIK." },
       { question: "How much does ICL surgery cost in India?", answer: "Spherical ICL costs ₹65,000 to ₹90,000 per eye (₹1.3L to ₹1.8L for both eyes). Toric ICL (for astigmatism/cylinder power) costs ₹90,000 to ₹1,30,000 per eye (₹1.8L to ₹2.6L for both eyes)." },
@@ -1279,7 +1279,7 @@ export const BLOGS_PART2 = [
     author: "Clinaza Health Finance Team",
     summary: "Cataract surgery costs ₹20,000 to ₹1,20,000 per eye in India. Compare robotic femto-laser cataract surgery and premium Trifocal / EDOF lenses on flexible EMI via Clinaza.",
     featuredImage: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=1200&auto=format&fit=crop",
-    metaDescription: "Cataract surgery cost on EMI in India: Compare Robotic FLACS, Monofocal, Toric, and Trifocal IOL lens prices with flexible monthly EMI options on Clinaza.",
+    metaDescription: "Cataract surgery cost on EMI in India 2026: Compare monofocal vs multifocal IOL pricing (₹20k–₹1.1L/eye), monthly EMI from ₹1,800/mo, and top eye centers.",
     faqs: [
       { question: "How much does modern cataract surgery cost in India?", answer: "Standard Phacoemulsification with Indian monofocal lens costs ₹18,000–₹35,000 per eye. Robotic laser cataract surgery with premium imported Trifocal/EDOF lenses costs ₹70,000–₹1,25,000 per eye." },
       { question: "Can I get premium cataract lenses on 0% EMI?", answer: "Yes! Many insurance policies only reimburse basic monofocal lenses. Clinaza provides 0% EMI financing to bridge the upgrade cost to Trifocal or Toric lenses without financial stress." },
@@ -1360,7 +1360,7 @@ export const BLOGS_PART2 = [
     author: "Clinaza Clinical Insights",
     summary: "Detailed comparison between Contoura Vision, Flapless SMILE Pro, Blade-Free Femto-LASIK, and Standard LASIK. Compare technology, night vision glare, corneal safety, recovery time, and costs on EMI.",
     featuredImage: "/assets/yourdentist/laser_whitening.png",
-    metaDescription: "Contoura Vision vs SMILE vs Femto-LASIK comparison in India: Compare technology, night glare, corneal safety, costs (₹40K–₹1.3L) and 0% monthly EMI on Clinaza.",
+    metaDescription: "Contoura Vision vs SMILE vs Femto-LASIK in India: Compare night glare, corneal safety, costs (₹40K–₹1.3L) and flexible monthly EMI options on Clinaza.",
     faqs: [
       { question: "What is the difference between Contoura Vision and SMILE?", answer: "Contoura Vision is topography-guided LASIK that maps 22,000 elevation points on your cornea to eliminate minute surface irregularities for superior night vision. SMILE is a 100% flapless keyhole laser procedure with maximum corneal biomechanical stability." },
       { question: "Which is better for dry eyes: Contoura or SMILE?", answer: "SMILE is generally preferred for patients prone to dry eyes because it uses a tiny 2mm incision without cutting a corneal flap, preserving 80% more corneal nerve fibers." },
@@ -1448,7 +1448,7 @@ export const BLOGS_PART2 = [
     author: "Dr. Ananya Sen, MS (OB-GYN) & Clinaza Medical Desk",
     summary: "Complete guide on private hospital maternity package costs (Normal vs C-Section, NICU charges) in India and how to finance delivery expenses with flexible monthly EMIs.",
     featuredImage: "https://images.unsplash.com/photo-1555252333-9f8e92e65df9?q=80&w=1200&auto=format&fit=crop",
-    metaDescription: "Check Normal delivery and Cesarean (C-Section) package costs in private hospitals across India (₹50,000 to ₹2,50,000). Convert hospital birthing bills into easy monthly EMIs.",
+    metaDescription: "Maternity delivery cost on EMI in India 2026: Compare normal vs C-section pricing (₹50k–₹1.8L), monthly EMI from ₹3,200/month, and top maternity hospitals.",
     faqs: [
       {
         question: "How much does normal delivery and C-section cost in private hospitals in India?",
@@ -1534,7 +1534,7 @@ export const BLOGS_PART2 = [
     author: "Dr. Vikram Sethi, MDS (Orthodontist) & Clinaza Medical Desk",
     summary: "Comprehensive price comparison of metal braces, ceramic brackets, Damon self-ligating braces, and clear aligners in India with monthly installment plans.",
     featuredImage: "/assets/yourdentist/clear_aligners.png",
-    metaDescription: "Compare teeth braces cost in India: Traditional metal (₹25k–₹45k), Ceramic (₹40k–₹70k), Self-ligating (₹55k–₹90k), and Invisible Aligners (₹60k–₹2.5L). Pay in monthly EMIs.",
+    metaDescription: "Compare teeth braces cost in India: Metal (₹25k–₹45k), Ceramic (₹40k–₹70k), Self-ligating (₹55k–₹90k) & Aligners (₹60k–₹2.5L). Pay in monthly EMIs.",
     faqs: [
       {
         question: "Which type of braces is the most affordable in India?",
@@ -1624,7 +1624,7 @@ export const BLOGS_PART2 = [
     author: "Dr. Rajesh K. Varma, MS, MCh (Urology) & Clinaza Medical Desk",
     summary: "Complete cost guide for Laparoscopic Cholecystectomy (Gallbladder stone removal) and Laser RIRS / PCNL Kidney stone surgeries in India with monthly installment payment options.",
     featuredImage: "https://images.unsplash.com/photo-1516549655169-df83a0774514?q=80&w=1200&auto=format&fit=crop",
-    metaDescription: "Find laparoscopic gallbladder surgery cost (₹45k–₹1.2L) and laser kidney stone surgery price (RIRS/PCNL ₹50k–₹1.5L) in India. Avail instant treatment financing on EMI.",
+    metaDescription: "Kidney and gallbladder stone surgery cost on EMI in India 2026: Compare RIRS, PCNL & laparoscopic surgery pricing, with monthly EMI from ₹2,900/month.",
     faqs: [
       {
         question: "How much does laparoscopic gallbladder surgery cost in India?",
@@ -1712,7 +1712,7 @@ export const BLOGS_PART2 = [
     author: "Clinaza Practice Growth Team",
     summary: "Proven strategies for dentists and hospital owners in India to overcome patient price objections and double conversion on implants, aligners, and surgical procedures using digital EMI at checkout.",
     featuredImage: "/assets/yourdentist/clinic_in_action.jpg",
-    metaDescription: "Learn how modern dental and medical clinics in India increase high-ticket treatment acceptance rates by 40% using digital point-of-care patient EMI financing with Clinaza.",
+    metaDescription: "Learn how dental and medical clinics in India increase high-ticket treatment acceptance by 40% using digital point-of-care patient EMI financing.",
     faqs: [
       {
         question: "Why do patients postpone high-ticket dental or medical treatments?",
@@ -1774,7 +1774,7 @@ export const BLOGS_PART2 = [
     author: "Dr. Aryan Parmar",
     summary: "A comprehensive legal and operational guide for Indian dental practitioners on implementing paperless digital informed consent compliant with IT Act Section 65B, Consumer Protection Act 2019, and NABH standards.",
     featuredImage: "/assets/yourdentist/clinic_in_action.jpg",
-    metaDescription: "Understand NABH digital informed consent guidelines for dental clinics in India. Learn legal requirements under IT Act 2000, Section 65B electronic evidence, and free digital consent tools.",
+    metaDescription: "NABH digital informed consent guidelines for dental clinics in India: Legal requirements under IT Act 2000, Section 65B evidence & free consent tools.",
     faqs: [
       {
         question: "Is digital consent legally valid in Indian courts for dental procedures?",
@@ -1837,7 +1837,7 @@ export const BLOGS_PART2 = [
     author: "Clinaza Financial Research Desk",
     summary: "Everything Indian patients and doctors need to know about Flexible-EMI and flexible medical loans for high-ticket dental procedures like implants, braces, and full-mouth rehabilitation.",
     featuredImage: "/assets/yourdentist/clear_aligners.png",
-    metaDescription: "Learn how flexible medical loans and Flexible-EMI work in Indian healthcare. Understand processing fees, subvention models, and how to get instant approval at Clinaza partner clinics.",
+    metaDescription: "Understand flexible medical loans in Indian healthcare. Learn how processing fees, subvention models & instant approval work at Clinaza partner clinics.",
     faqs: [
       {
         question: "How do 0% interest or No-Cost EMIs work for dental treatments?",
@@ -1918,7 +1918,7 @@ export const BLOGS_PART2 = [
     author: "Clinaza Practice Growth Team",
     summary: "Actionable retention frameworks for Indian dental clinics to reactivate dormant patients, automate 6-month checkup reminders, and increase treatment follow-ups via WhatsApp EMR.",
     featuredImage: "/assets/yourdentist/clinic_in_action.jpg",
-    metaDescription: "Learn how to build an automated WhatsApp patient recall system for your dental clinic in India. Re-engage 6+ month inactive patients and increase recurring clinic revenue by 60%.",
+    metaDescription: "Build an automated WhatsApp patient recall system for your dental clinic in India. Re-engage inactive patients and grow recurring clinic revenue by 60%.",
     faqs: [
       {
         question: "Why do standard SMS and email patient recalls fail in India?",
@@ -1980,7 +1980,7 @@ export const BLOGS_PART2 = [
     author: "Clinaza Research Desk",
     summary: "An in-depth 2026 industry comparison of the leading healthcare NBFCs, point-of-care EMI providers, and digital medical loan platforms in India for dental and elective surgeries.",
     featuredImage: "/assets/yourdentist/clinic_in_action.jpg",
-    metaDescription: "Compare the top 10 dental and healthcare loan providers in India for 2026. Review interest rates, approval speeds, EMI tenures, and point-of-care checkout financing infrastructure.",
+    metaDescription: "Compare top 10 dental and healthcare loan providers in India for 2026: Interest rates, approval speeds, EMI tenures, and point-of-care financing.",
     faqs: [
       {
         question: "What are the major medical financing companies operating in India?",
@@ -2043,7 +2043,7 @@ export const BLOGS_PART2 = [
     author: "Clinaza Institutional Partnerships Desk",
     summary: "An institutional blueprint for Banks, Regulated NBFCs, and Digital Lenders on partnering with Clinaza as an RBI-compliant Lending Service Provider (LSP) to originate high-quality healthcare and dental credit.",
     featuredImage: "https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?q=80&w=1200&auto=format&fit=crop",
-    metaDescription: "Partner with Clinaza as an RBI-compliant Lending Service Provider (LSP). Access verified healthcare point-of-care loan origination across dental, aesthetics, and surgical clinics in India.",
+    metaDescription: "Partner with Clinaza as an RBI-compliant Lending Service Provider (LSP). Access verified healthcare loan origination across dental and surgical clinics.",
     faqs: [
       {
         question: "What is the role of an LSP in digital healthcare lending under RBI guidelines?",
@@ -2120,7 +2120,7 @@ export const BLOGS_PART2 = [
     author: "Clinaza Medical Insights Desk",
     summary: "A detailed breakdown of IRDAI rules, refractive power thresholds (-7.5D+), waiting periods, and how to pay for Contoura Vision or SMILE on easy monthly EMIs if your insurance claim is rejected.",
     featuredImage: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=1200&auto=format&fit=crop",
-    metaDescription: "Check if your health insurance covers LASIK or Contoura eye surgery in India. Learn the 7.5 diopter rule, Star Health / HDFC Ergo terms, and flexible EMI alternatives.",
+    metaDescription: "Check if health insurance covers LASIK or Contoura surgery in India. Learn the 7.5 diopter rule, Star Health terms, and flexible EMI alternatives.",
     faqs: [
       {
         question: "Does Star Health insurance cover LASIK eye surgery?",
@@ -2181,7 +2181,7 @@ export const BLOGS_PART2 = [
     author: "Clinaza Practice Growth Team",
     summary: "A practical emergency roadmap for patients and families facing unexpected TPA cashless rejections for IVF, dental implants, bariatric, and daycare surgeries in India.",
     featuredImage: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=1200&auto=format&fit=crop",
-    metaDescription: "Faced with an insurance rejection at hospital checkout? Learn how to finance elective surgeries in India using point-of-care medical loans and instant flexible EMIs with Clinaza.",
+    metaDescription: "Insurance rejected at hospital checkout? Learn how to finance elective surgeries in India using point-of-care medical loans and instant flexible EMIs.",
     faqs: [
       {
         question: "What are the most common reasons for health insurance claim rejections in India?",
@@ -2244,7 +2244,7 @@ export const BLOGS_PART2 = [
     author: "Clinaza Healthcare Economics Desk",
     summary: "An economic comparison between standalone OPD dental insurance plans in India and point-of-care flexible EMIs for dental implants, root canals, and cosmetic smile makeovers.",
     featuredImage: "/assets/yourdentist/clinic_in_action.jpg",
-    metaDescription: "Compare OPD dental insurance plans in India with point-of-care dental EMIs. Understand annual sub-limits, premium costs, waiting periods, and true patient savings.",
+    metaDescription: "Compare OPD dental insurance plans in India with point-of-care dental EMIs. Understand annual sub-limits, premium costs, waiting periods & real savings.",
     faqs: [
       {
         question: "Is standalone OPD dental insurance worth buying in India?",
@@ -2322,7 +2322,7 @@ export const BLOGS_PART2 = [
     author: "Clinaza Clinical Insights",
     summary: "Comprehensive guide to dental implant costs in India in 2026. Compare single tooth implants, All-on-4, All-on-6 full mouth rehabilitation, imported brands (Nobel Biocare, Straumann, Osstem), and flexible point-of-care EMI financing.",
     featuredImage: "/assets/yourdentist/dental_implant_hero.png",
-    metaDescription: "How much do dental implants cost in India? Explore single tooth vs full mouth (All-on-4 / All-on-6) costs, brand comparisons, and instant point-of-care EMI financing.",
+    metaDescription: "How much do dental implants cost in India? Single tooth vs full mouth All-on-4 pricing, brand comparisons, and instant point-of-care EMI financing.",
     faqs: [
       {
         question: "What is the average cost of a single dental implant in India?",
@@ -2488,7 +2488,7 @@ export const BLOGS_PART2 = [
     author: "Clinaza Clinical Insights",
     summary: "Complete city-by-city price guide for Root Canal Treatment (RCT) in India. Compare single-sitting RCT, rotary endodontics, re-RCT, and dental crown costs across Delhi, Mumbai, Bengaluru, Hyderabad, Pune, and Ahmedabad.",
     featuredImage: "/assets/yourdentist/laser_whitening.png",
-    metaDescription: "What is the cost of Root Canal Treatment (RCT) in India? Compare city-by-city pricing for anterior vs molar RCT, Zirconia vs ceramic crowns, and payment options.",
+    metaDescription: "Root Canal Treatment (RCT) cost breakdown in India: City pricing for anterior vs molar RCT, Zirconia crowns, and flexible monthly payment options.",
     faqs: [
       {
         question: "How much does a Root Canal Treatment (RCT) cost in India?",
@@ -2568,7 +2568,7 @@ export const BLOGS_PART2 = [
     author: "Clinaza Healthcare Research",
     summary: "How to get the most affordable, high-quality dental implants in India. Compare low-cost packages, verified discount clinics, trusted Korean and European brands, and instant monthly EMI options without credit card requirements.",
     featuredImage: "/assets/yourdentist/dental_implant_hero.png",
-    metaDescription: "Looking for the cheapest dental implants in India? Discover safe low-cost implant options starting from ₹18,000, brand comparisons, and 0-downpayment monthly EMI plans.",
+    metaDescription: "Looking for affordable dental implants in India? Discover safe low-cost implant options starting from ₹18,000, brand comparisons & monthly EMI plans.",
     faqs: [
       {
         question: "What is the absolute cheapest cost of a dental implant in India?",

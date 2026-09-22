@@ -1,4 +1,5 @@
 import React from 'react';
+import { LENDER_BASE64_LOGOS } from './lenderLogosData';
 
 interface BankLogoProps {
   id: string;
@@ -127,16 +128,22 @@ const InitialsBadge: React.FC<{ name: string; size: number; className?: string }
 };
 
 export const BankSvgLogo: React.FC<BankLogoProps> = ({ id, className = '', size = 32 }) => {
-  const logo = BANK_LOGOS[id.toLowerCase()];
-  const [imgSrc, setImgSrc] = React.useState<string>(logo?.src || '');
+  const normalizedId = id.toLowerCase();
+  const logo = BANK_LOGOS[normalizedId];
+  const base64Src = LENDER_BASE64_LOGOS[normalizedId];
+  const [imgSrc, setImgSrc] = React.useState<string>(base64Src || logo?.src || '');
   const [failed, setFailed] = React.useState(false);
 
   React.useEffect(() => {
-    if (logo) {
+    const currentBase64 = LENDER_BASE64_LOGOS[normalizedId];
+    if (currentBase64) {
+      setImgSrc(currentBase64);
+      setFailed(false);
+    } else if (logo) {
       setImgSrc(logo.src);
       setFailed(false);
     }
-  }, [id]);
+  }, [normalizedId]);
 
   if (!logo || failed) {
     return <InitialsBadge name={logo?.name ?? id} size={size} className={className} />;
@@ -147,6 +154,8 @@ export const BankSvgLogo: React.FC<BankLogoProps> = ({ id, className = '', size 
       src={imgSrc}
       alt={`${logo.name} logo`}
       className={className}
+      loading="eager"
+      decoding="async"
       style={{
         width: size,
         height: size,
@@ -157,8 +166,10 @@ export const BankSvgLogo: React.FC<BankLogoProps> = ({ id, className = '', size 
         display: 'block',
       }}
       onError={() => {
-        // If local asset fails or hasn't loaded, try remote fallback once before falling back to InitialsBadge
-        if (imgSrc === logo.src && logo.fallback && logo.fallback !== logo.src) {
+        // Fall back to local file or remote fallback before initials badge
+        if (imgSrc.startsWith('data:') && logo.src) {
+          setImgSrc(logo.src);
+        } else if (logo.fallback && imgSrc !== logo.fallback) {
           setImgSrc(logo.fallback);
         } else {
           setFailed(true);

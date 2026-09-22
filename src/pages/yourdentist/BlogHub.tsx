@@ -43,7 +43,7 @@ export default function BlogHub() {
   return (
     <div className="min-h-screen bg-neutral-950 text-white font-sora antialiased selection:bg-white selection:text-neutral-950">
       <SEOHead
-        title="Clinaza Patient Guides | Medical & Dental Treatments, Costs & Easy EMI Financing"
+        title="Patient Guides: Dental & Medical Treatment Costs | Clinaza"
         description="Read comprehensive patient guides on dental implants, braces, clear aligners, LASIK, and surgery costs in India, with flexible monthly EMI financing options."
         keywords={['patient guides', 'treatment costs india', 'medical emi financing', 'dental emi financing', 'implants cost guide', 'braces on emi', 'clinaza financing']}
         canonicalUrl="https://clinaza.in/blog"

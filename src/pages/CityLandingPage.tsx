@@ -26,7 +26,7 @@ export default function CityLandingPage() {
 
   const metaDescription = city === 'kochi'
     ? `Compare braces cost in Kochi (₹18K–₹50K) & dental implants on EMI. Explore easy monthly financing (₹30K–₹3L) at top clinics with 2-min instant approval.`
-    : `Compare dental costs in ${name}. Explore easy monthly EMI plans (₹30K–₹3L) for dental implants, braces, aligners & RCT at top clinics. Fast 2-min approval.`;
+    : `Compare dental costs in ${name}. Explore easy EMI options (₹30K–₹3L) for dental implants, braces, aligners & RCT at top clinics. Fast 2-min approval.`;
 
   const breadcrumbSchema = {
     '@context': 'https://schema.org',

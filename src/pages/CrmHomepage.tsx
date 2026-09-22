@@ -410,7 +410,7 @@ export default function CrmHomepage() {
   return (
     <div className="min-h-screen bg-white text-[#0B2450] font-sora antialiased overflow-x-hidden selection:bg-[#0867E8] selection:text-white">
       <SEOHead
-        title="Clinaza — Patient Financing, Healthcare EMIs & Free Dental CRM India"
+        title="Clinaza — Healthcare EMIs & Free Dental CRM India"
         description="Offer instant point-of-care patient EMI financing (₹30K–₹5L) with 13 Live RBI-regulated NBFCs. Plus, 100% Free Dental Clinic CRM & WhatsApp recall software."
         keywords={[
           'clinaza', 'clinaza patient financing', 'clinaza healthpay', 'clinaza healthcare emi',

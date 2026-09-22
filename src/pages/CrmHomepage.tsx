@@ -52,7 +52,7 @@ const StatsBar: React.FC = () => {
   const { ref, visible } = useInView(0.2);
 
   const stats = [
-    { value: 55, suffix: '+', label: 'Lending Partners', prefix: '' },
+    { value: 13, suffix: '+', label: 'Lending Partners', prefix: '' },
     { value: 5, suffix: 'L', label: 'Max Loan Amount', prefix: '₹' },
     { value: 2, suffix: ' min', label: 'Digital KYC', prefix: '' },
     { value: 0, suffix: '%', label: 'CIBIL Impact', prefix: '' },
@@ -1180,7 +1180,7 @@ export default function CrmHomepage() {
 
                   <div className="pt-3 px-1 text-center">
                     <p className="text-[11px] font-bold text-slate-300">
-                      ⚡ 2-min paperless digital KYC &bull; 55+ Lending Partners
+                      ⚡ 2-min paperless digital KYC &bull; 13+ Lending Partners
                     </p>
                     <p className="text-[10px] text-slate-500 mt-0.5">
                       Doctor Helpline: <strong className="text-emerald-400 font-black">+91 7292984244</strong>

@@ -20,8 +20,8 @@ const STATIC_ROUTES = {
     h1: 'Dental Treatment on EMI. Zero Patient Drop-Offs.'
   },
   '/tools': {
-    title: 'Free Dental Tools, Rx Generator & Clinic Setup Loan Calculator | Clinaza',
-    desc: 'Free dental clinic management utilities: digital prescription maker, loan EMI calculator, consent forms, and clinic setup financing guides.',
+    title: 'Free Dental Tools & Loan Calculator | Clinaza',
+    desc: 'Free dental clinic utilities: digital prescription maker, treatment EMI calculator, consent forms, and clinic setup financing guides with instant approval.',
     h1: 'Free Dental Practice Utilities & Cost Calculators'
   },
   '/rx': {
@@ -35,18 +35,18 @@ const STATIC_ROUTES = {
     h1: 'Dental Treatment EMI & Clinic Setup Loan Calculator'
   },
   '/blog': {
-    title: 'Dental Practice Growth & Patient Financing Blog | Clinaza',
+    title: 'Patient Guides: Dental & Medical Treatment Costs | Clinaza',
     desc: 'Expert guides on dental clinic financing, treatment costs, digital marketing, and patient acquisition in India.',
     h1: 'Medical & Dental Guides, Treatment Costs & EMI Plans'
   },
   '/dental-implant-loan': {
-    title: 'Dental Implant Loan & EMI in India (From ₹2,400/mo) | Clinaza',
-    desc: 'Get a dental implant loan in India. Finance single tooth, multiple implants & All-on-4 surgery with flexible monthly EMI from ~11.5% p.a. 2-min digital approval.',
+    title: 'Dental Implant Loan & EMI in India (From ₹2,400/mo)',
+    desc: 'Get a dental implant loan in India. Finance single tooth, multiple implants & All-on-4 with flexible monthly EMI from ~11.5% p.a. 2-min digital approval.',
     h1: 'Dental Implant Loans & Flexible Monthly EMIs in India'
   },
   '/clear-aligners-on-emi': {
-    title: 'Clear Aligners Cost on EMI in India (From ₹2,600/mo) | Clinaza',
-    desc: 'Looking for clear aligners on EMI in India? Compare Invisalign, Flash & Toothsi alternatives with flexible monthly financing from ~11.5% p.a. 2-min approval.',
+    title: 'Clear Aligners Cost on EMI India (From ₹2,600/mo)',
+    desc: 'Compare Invisalign, Flash & Toothsi alternatives with flexible monthly financing from ~11.5% p.a. 2-min digital approval across partner clinics.',
     h1: 'Clear Invisible Aligners on Flexible Monthly EMI in India'
   },
   '/deck': {

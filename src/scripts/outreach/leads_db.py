@@ -6,10 +6,56 @@ from datetime import datetime
 
 DB_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "dental_leads_master.db")
 
+JSON_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "leads_data.json")
+
 def get_db_connection():
     conn = sqlite3.connect(DB_PATH)
     conn.row_factory = sqlite3.Row
     return conn
+
+def sync_from_json_if_needed():
+    """Seed SQLite database from leads_data.json if DB does not exist or has 0 rows."""
+    if not os.path.exists(JSON_PATH):
+        return
+    conn = get_db_connection()
+    c = conn.cursor()
+    c.execute("SELECT count(*) FROM leads")
+    count = c.fetchone()[0]
+    if count == 0:
+        import json
+        with open(JSON_PATH, "r", encoding="utf-8") as f:
+            leads = json.load(f)
+        for lead in leads:
+            c.execute("""
+            INSERT OR IGNORE INTO leads (id, clinic_name, doctor_name, email, city, state, specialty, source, status, resend_id, created_at, sent_at)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """, (
+                lead.get("id"),
+                lead.get("clinic_name"),
+                lead.get("doctor_name"),
+                lead.get("email"),
+                lead.get("city"),
+                lead.get("state"),
+                lead.get("specialty"),
+                lead.get("source"),
+                lead.get("status", "pending"),
+                lead.get("resend_id"),
+                lead.get("created_at"),
+                lead.get("sent_at")
+            ))
+        conn.commit()
+    conn.close()
+
+def export_db_to_json():
+    """Export current SQLite state to leads_data.json so git tracks it."""
+    import json
+    conn = get_db_connection()
+    c = conn.cursor()
+    c.execute("SELECT * FROM leads ORDER BY id ASC")
+    rows = [dict(r) for r in c.fetchall()]
+    conn.close()
+    with open(JSON_PATH, "w", encoding="utf-8") as f:
+        json.dump(rows, f, indent=2, ensure_ascii=False)
 
 def init_db():
     conn = get_db_connection()
@@ -24,7 +70,7 @@ def init_db():
         state TEXT,
         specialty TEXT,
         source TEXT,
-        status TEXT DEFAULT 'pending', -- pending, sent, bounced, opt_out
+        status TEXT DEFAULT 'pending', -- pending, sent, bounced, opt_out, invalid_mailbox
         resend_id TEXT,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         sent_at TIMESTAMP
@@ -34,6 +80,7 @@ def init_db():
     cursor.execute("CREATE INDEX IF NOT EXISTS idx_leads_status ON leads(status)")
     conn.commit()
     conn.close()
+    sync_from_json_if_needed()
 
 def is_valid_email(email):
     if not email:

@@ -114,6 +114,8 @@ Email: contact@clinaza.in
     }
 
 def send_daily_batch(limit=DEFAULT_DAILY_LIMIT, dry_run=False):
+    from leads_db import init_db
+    init_db()  # Ensures SQLite is seeded from leads_data.json on fresh GitHub runner
     leads = get_pending_leads(limit=limit)
     print(f"[{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] Daily Dispatch Started.")
     print(f"Pending leads selected: {len(leads)} (Target limit: {limit}, Dry run: {dry_run})")
@@ -186,8 +188,13 @@ def send_daily_batch(limit=DEFAULT_DAILY_LIMIT, dry_run=False):
     with open(log_file, "w", encoding="utf-8") as f:
         json.dump(run_results, f, indent=2)
         
+    # Persist updated lead statuses back to JSON so GitHub Actions can commit them
+    from leads_db import export_db_to_json
+    export_db_to_json()
+    print("📦 Lead state exported to leads_data.json for git persistence.")
+        
     print(f"[{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] Daily Dispatch Completed!")
-    print(f"Total: {len(leads)} | Sent: {success_count} | Failed: {failed_count}")
+    print(f"Total: {len(leads)} | Sent: {success_count} | Failed/Skipped: {failed_count}")
     print(f"Log saved: {log_file}")
     
     return {"sent": success_count, "failed": failed_count, "total": len(leads)}

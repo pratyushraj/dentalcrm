@@ -108,6 +108,8 @@ verified_leads_*.csv
 src/scripts/outreach/__pycache__/
 src/scripts/outreach/logs/
 src/scripts/outreach/dental_leads_master.db
+# leads_data.json IS tracked — it's the persistent lead state for GitHub Actions autopilot
+!src/scripts/outreach/leads_data.json
 
 # Temp scrapers & lead batches
 batch*.json

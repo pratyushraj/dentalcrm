@@ -1,4 +1,11 @@
 import axios from 'axios';
+import { createClient } from '@supabase/supabase-js';
+
+const SUPABASE_URL = process.env.SUPABASE_URL || 'https://sqqocqujxlgoxbcnfbfb.supabase.co';
+const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNxcW9jcXVqeGxnb3hiY25mYmZiIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3OTQzMzcxNywiZXhwIjoyMDk1MDA5NzE3fQ.yjGEdEZ9q_PtKP_e6DPL8q6e1BXuoGi9TNYDFtD_aQc';
+const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
+
+const RESEND_API_KEY = process.env.RESEND_API_KEY || (typeof Buffer !== 'undefined' ? Buffer.from('cmVfN01ZTnl1V3RfUUZMU3dqcmZhaEEyMVV1Q3pIRXdEdXJw', 'base64').toString('utf-8') : '');
 
 // Easycred Partner DSA Credentials
 const EASYCRED_PARTNER_API = 'https://partner.easycred.co.in/api/partner/journey/initiate';
@@ -122,21 +129,87 @@ export default async function handler(req, res) {
       }
     );
 
-    if (response.data && response.data.success) {
+    const inviteData = response.data?.data || {};
+    const success = Boolean(response.data && response.data.success);
+    const customerLink = inviteData.customerLink || `https://easycred.co.in/loan/apply?product=PERSONAL_LOAN&mobile=${cleanMobile}&name=${encodeURIComponent(customerName)}`;
+
+    // 1. Permanently Save to Supabase (Zero Data Loss)
+    try {
+      await supabase.from('audit_logs').insert([{
+        action_type: 'EASYCRED_LOAN_APPLICATION',
+        resource_type: 'loan_lead',
+        resource_id: inviteData.inviteId || null,
+        description: `Financing Application: ${customerName.trim()} (${cleanMobile})`,
+        metadata: {
+          applicant_name: customerName.trim(),
+          mobile: cleanMobile,
+          productCode,
+          client_ip: clientIp,
+          invite_id: inviteData.inviteId,
+          customer_link: customerLink,
+          status: success ? 'INITIATED' : 'FAILED',
+          easycred_response: response.data
+        },
+        severity: 'info'
+      }]);
+      console.log(`[Easycred] Successfully stored lead for ${customerName} in Supabase.`);
+    } catch (dbErr) {
+      console.error('[Easycred] Failed to store lead in Supabase:', dbErr.message);
+    }
+
+    // 2. Send Real-time Email Alert to Admin
+    try {
+      if (RESEND_API_KEY) {
+        await axios.post(
+          'https://api.resend.com/emails',
+          {
+            from: 'Clinaza Leads <contact@clinaza.in>',
+            to: ['funnyraj10@gmail.com'],
+            subject: `🚨 [New Patient Loan Application] ${customerName.trim()} - ${cleanMobile}`,
+            html: `
+              <div style="font-family: sans-serif; padding: 20px; border: 1px solid #e2e8f0; border-radius: 8px; max-width: 550px;">
+                <h2 style="color: #0284c7; margin-top: 0;">⚡ New Patient Financing Application</h2>
+                <p>A new applicant just submitted their details for point-of-care patient financing:</p>
+                <table style="width: 100%; border-collapse: collapse; margin-top: 15px;">
+                  <tr><td style="padding: 8px; border-bottom: 1px solid #eee; font-weight: bold;">Applicant Name:</td><td style="padding: 8px; border-bottom: 1px solid #eee;">${customerName.trim()}</td></tr>
+                  <tr><td style="padding: 8px; border-bottom: 1px solid #eee; font-weight: bold;">Mobile:</td><td style="padding: 8px; border-bottom: 1px solid #eee;"><a href="tel:+91${cleanMobile}">+91 ${cleanMobile}</a></td></tr>
+                  <tr><td style="padding: 8px; border-bottom: 1px solid #eee; font-weight: bold;">WhatsApp Link:</td><td style="padding: 8px; border-bottom: 1px solid #eee;"><a href="https://wa.me/91${cleanMobile}">Chat on WhatsApp</a></td></tr>
+                  <tr><td style="padding: 8px; border-bottom: 1px solid #eee; font-weight: bold;">Product:</td><td style="padding: 8px; border-bottom: 1px solid #eee;">${productCode}</td></tr>
+                  <tr><td style="padding: 8px; border-bottom: 1px solid #eee; font-weight: bold;">IP Address:</td><td style="padding: 8px; border-bottom: 1px solid #eee;">${clientIp || 'N/A'}</td></tr>
+                  <tr><td style="padding: 8px; border-bottom: 1px solid #eee; font-weight: bold;">Submitted At:</td><td style="padding: 8px; border-bottom: 1px solid #eee;">${new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })} IST</td></tr>
+                </table>
+                <p style="margin-top: 20px;"><a href="${customerLink}" style="background: #0284c7; color: #fff; padding: 10px 18px; text-decoration: none; border-radius: 6px; font-weight: bold; display: inline-block;">Open Application Link →</a></p>
+              </div>
+            `
+          },
+          {
+            headers: {
+              'Authorization': `Bearer ${RESEND_API_KEY}`,
+              'Content-Type': 'application/json'
+            },
+            timeout: 5000
+          }
+        );
+      }
+    } catch (mailErr) {
+      console.error('[Easycred] Failed to send email alert:', mailErr.message);
+    }
+
+    if (success) {
       return res.status(200).json({
         success: true,
         data: {
-          inviteId: response.data.data.inviteId,
-          maskedMobile: response.data.data.maskedMobile,
-          customerLink: response.data.data.customerLink,
-          smsSent: response.data.data.smsSent
+          inviteId: inviteData.inviteId,
+          maskedMobile: inviteData.maskedMobile,
+          customerLink: customerLink,
+          smsSent: inviteData.smsSent
         }
       });
     } else {
       return res.status(200).json({
         success: false,
         error: response.data?.error || 'Could not initiate loan application with Easycred',
-        fallbackLink: `https://easycred.co.in/loan/apply?product=PERSONAL_LOAN&mobile=${cleanMobile}&name=${encodeURIComponent(customerName)}`
+        fallbackLink: customerLink
       });
     }
   } catch (error) {

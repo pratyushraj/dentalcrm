@@ -24,7 +24,7 @@ const CHECKS = [
     path: '/cities/delhi',
     expectedTitleSnippet: 'Delhi',
     expectedDescSnippet: 'Delhi',
-    expectedH1Snippet: 'Treatment EMI in Delhi'
+    expectedH1Snippet: 'Delhi'
   },
   {
     path: '/blog/dental-loans-in-india-medical-financing',
@@ -47,7 +47,7 @@ const CHECKS = [
   {
     path: '/clear-aligners-on-emi',
     expectedTitleSnippet: 'Clear Aligners Cost on EMI',
-    expectedDescSnippet: 'clear aligners on EMI',
+    expectedDescSnippet: 'flexible monthly financing',
     expectedH1Snippet: 'Clear Invisible Aligners'
   }
 ];

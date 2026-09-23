@@ -11,6 +11,7 @@ SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, SCRIPT_DIR)
 
 from leads_db import get_pending_leads, mark_lead_sent, mark_lead_failed, get_db_stats
+from email_verifier import verify_email_mailbox
 
 import base64
 API_KEY = os.environ.get("RESEND_API_KEY") or base64.b64decode("cmVfN01ZTnl1V3RfUUZMU3dqcmZhaEEyMVV1Q3pIRXdEdXJw").decode("utf-8")
@@ -133,8 +134,18 @@ def send_daily_batch(limit=DEFAULT_DAILY_LIMIT, dry_run=False):
         recipient = lead["email"]
         doctor = lead.get("doctor_name") or "Doctor"
         
+        # 1. Pre-flight Mailbox Verification (Guardrail against quota waste & bounces)
+        print(f"[{idx}/{len(leads)}] 🔍 Verifying mailbox deliverability for {recipient}...")
+        is_deliverable, verify_reason = verify_email_mailbox(recipient)
+        if not is_deliverable:
+            print(f"[{idx}/{len(leads)}] ⛔ SKIPPING {recipient} (Mailbox invalid: {verify_reason}) - ZERO QUOTA WASTED")
+            mark_lead_failed(lead["id"], "invalid_mailbox")
+            failed_count += 1
+            run_results.append({"id": lead["id"], "email": recipient, "status": "skipped_invalid", "reason": verify_reason})
+            continue
+
         if dry_run:
-            print(f"[{idx}/{len(leads)}] [DRY-RUN] Would send to {doctor} <{recipient}> - Subject: {payload['subject']}")
+            print(f"[{idx}/{len(leads)}] [DRY-RUN] Verified deliverable! Would send to {doctor} <{recipient}> - Subject: {payload['subject']}")
             success_count += 1
             continue
             

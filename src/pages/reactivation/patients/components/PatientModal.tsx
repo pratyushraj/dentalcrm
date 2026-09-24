@@ -73,8 +73,8 @@ import { logWhatsAppMessage } from '@/utils/whatsappLogger';
 import { Customer, CustomerStatus } from '../types';
 import { getInitialForm, getToothName, getShortToothLabel, getNextVisitDate } from '../helpers';
 import { generateSmileGalleryImage, getProxyUrl, addSmileGalleryToPDF } from '../smileGalleryHelper';
-import { CARE_PROGRAMS } from '../carePrograms';
 import { AVATAR_COLORS, STATUS_OPTIONS } from '../constants';
+import { RazorpayAffordabilityWidget } from '@/components/financing/RazorpayAffordabilityWidget';
 
 // Specialty constants
 const ORTHO_JOINTS: Record<number, string> = {
@@ -4146,6 +4146,13 @@ const CustomerModal: React.FC<CustomerModalProps> = ({ open, onClose, customer, 
                             <span className="block text-[8.5px] text-slate-400 font-medium mt-0.5">All Taxes Included</span>
                           </div>
                         </div>
+
+                        {/* Razorpay In-Clinic Patient EMI Widget */}
+                        {calculatedGrandTotal >= 10000 && (
+                          <div className="pt-2 border-t border-slate-200">
+                            <RazorpayAffordabilityWidget amount={calculatedGrandTotal} />
+                          </div>
+                        )}
                       </div>
                     </div>
 

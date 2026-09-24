@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { SEOHead } from '@/components/seo/SEOHead';
+import { RazorpayAffordabilityWidget } from '@/components/financing/RazorpayAffordabilityWidget';
 import { 
   FileText, 
   Calculator, 
@@ -865,6 +866,22 @@ export default function FreeToolsHub() {
                   </a>
                 </div>
               </div>
+            </div>
+
+            {/* Live Razorpay Affordability Suite Widget Integration */}
+            <div className="bg-white border border-slate-200 rounded-2xl p-5 sm:p-6 shadow-sm space-y-3">
+              <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+                <div className="flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                  <h3 className="text-xs sm:text-sm font-black text-slate-800 uppercase tracking-wide">
+                    Live Bank &amp; NBFC EMI Options (Powered by Razorpay)
+                  </h3>
+                </div>
+                <span className="text-[10px] font-bold text-slate-400 bg-slate-50 border border-slate-200 px-2 py-0.5 rounded-full">
+                  16+ Banks Supported
+                </span>
+              </div>
+              <RazorpayAffordabilityWidget amount={treatmentAmount} />
             </div>
           </div>
         )}

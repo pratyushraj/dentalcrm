@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useInView, useCountUp } from '../hooks/useScrollAnimation';
 import { Link, useLocation } from 'react-router-dom';
 import { RemotionVideoModal } from '@/components/remotion/RemotionVideoModal';
+import { RazorpayAffordabilityWidget } from '@/components/financing/RazorpayAffordabilityWidget';
 import { 
   ShieldCheck, 
   ArrowRight, 
@@ -1178,6 +1179,11 @@ export default function CrmHomepage() {
                       >
                         <ShieldCheck size={15} /> Check Patient Eligibility →
                       </button>
+                    </div>
+
+                    {/* Razorpay Affordability Suite */}
+                    <div className="pt-2 border-t border-slate-100">
+                      <RazorpayAffordabilityWidget amount={emiAmount} />
                     </div>
                   </div>
                 </div>

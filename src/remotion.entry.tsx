@@ -5,10 +5,67 @@ import { EstimateVideoComposition } from './components/remotion/EstimateVideo';
 import { SocialReelComposition } from './components/remotion/SocialReelVideo';
 import { ClinicGrowthReelComposition } from './components/remotion/ClinicGrowthReelVideo';
 import { AiGeoReelComposition } from './components/remotion/AiGeoReelVideo';
+import {
+  ClinazaCarouselComposition,
+  Slide1Hook,
+  Slide2Mistakes,
+  Slide3Psychology,
+  Slide4Script,
+  Slide5Cta,
+} from './components/remotion/ClinazaCarouselPost';
 
 export const RemotionRoot: React.FC = () => {
   return (
     <>
+      {/* ── Instagram 4:5 Carousel Slides (1080 x 1350) ── */}
+      <Composition
+        id="ClinazaCarouselFull"
+        component={ClinazaCarouselComposition}
+        durationInFrames={150}
+        fps={30}
+        width={1080}
+        height={1350}
+      />
+      <Composition
+        id="Slide1"
+        component={Slide1Hook}
+        durationInFrames={30}
+        fps={30}
+        width={1080}
+        height={1350}
+      />
+      <Composition
+        id="Slide2"
+        component={Slide2Mistakes}
+        durationInFrames={30}
+        fps={30}
+        width={1080}
+        height={1350}
+      />
+      <Composition
+        id="Slide3"
+        component={Slide3Psychology}
+        durationInFrames={30}
+        fps={30}
+        width={1080}
+        height={1350}
+      />
+      <Composition
+        id="Slide4"
+        component={Slide4Script}
+        durationInFrames={30}
+        fps={30}
+        width={1080}
+        height={1350}
+      />
+      <Composition
+        id="Slide5"
+        component={Slide5Cta}
+        durationInFrames={30}
+        fps={30}
+        width={1080}
+        height={1350}
+      />
       <Composition
         id="AiGeoReel"
         component={AiGeoReelComposition}

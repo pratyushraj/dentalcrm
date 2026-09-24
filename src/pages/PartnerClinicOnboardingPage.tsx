@@ -9,7 +9,9 @@ import {
   Check,
   Sparkles,
   Landmark,
-  Mail
+  Mail,
+  Star,
+  Home
 } from 'lucide-react';
 import { emailNotificationService } from '@/services/emailNotificationService';
 import { supabase } from '@/lib/supabase';
@@ -23,6 +25,9 @@ export default function PartnerClinicOnboardingPage() {
     phone: '',
     email: '',
     chairs: '',
+    premisesType: '',
+    googleRating: '',
+    reviewCount: '',
     specialties: [] as string[],
     avgMonthlyCases: '',
     expectedEmiLoans: '',
@@ -92,6 +97,9 @@ export default function PartnerClinicOnboardingPage() {
         phone: form.phone,
         email: form.email || null,
         chairs: form.chairs || null,
+        premises_type: form.premisesType || null,
+        google_rating: form.googleRating || null,
+        review_count: form.reviewCount || null,
         specialties: form.specialties,
         avg_monthly_cases: form.avgMonthlyCases || null,
         expected_emi_loans: form.expectedEmiLoans || null,
@@ -131,6 +139,8 @@ export default function PartnerClinicOnboardingPage() {
         'City / Location': form.city,
         'Contact Phone': form.phone,
         'Email': form.email || 'Not provided',
+        'Clinic Space': form.premisesType || 'Not specified',
+        'Google Maps Rating': form.googleRating ? `${form.googleRating} ★ (${form.reviewCount || '0'} reviews)` : 'Not provided',
         'Dental Chairs': form.chairs || 'Not specified',
         'Most Common Treatments': form.specialties.length > 0 ? form.specialties.join(', ') : 'Not specified',
         'Monthly High-Ticket Cases (>₹25k)': form.avgMonthlyCases || 'Not specified',
@@ -166,7 +176,7 @@ export default function PartnerClinicOnboardingPage() {
       <SEOHead 
         title="Partner Clinic Onboarding — Clinaza Point-of-Care EMI"
         description="Official onboarding portal for partner dental clinics to activate instant point-of-care patient EMI financing."
-        image="https://www.clinaza.in/og-clinic-onboarding.jpg"
+        image="https://www.clinaza.in/og-clinic-onboarding.png"
       />
 
       {/* Top Header */}
@@ -236,6 +246,9 @@ export default function PartnerClinicOnboardingPage() {
                     phone: '',
                     email: '',
                     chairs: '',
+                    premisesType: '',
+                    googleRating: '',
+                    reviewCount: '',
                     specialties: [],
                     avgMonthlyCases: '',
                     expectedEmiLoans: '',
@@ -374,6 +387,52 @@ export default function PartnerClinicOnboardingPage() {
                       {opt}
                     </button>
                   ))}
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
+                <div>
+                  <label className="block text-xs font-bold text-slate-700 mb-1.5 flex items-center gap-1.5">
+                    <Home size={13} className="text-[#0867E8]" /> Clinic Space / Premises
+                  </label>
+                  <div className="grid grid-cols-2 gap-2">
+                    {['Owned', 'Rented / Leased'].map((opt) => (
+                      <button
+                        type="button"
+                        key={opt}
+                        onClick={() => setForm({ ...form, premisesType: opt })}
+                        className={`py-2 text-xs font-bold rounded-xl border text-center transition-all ${
+                          form.premisesType === opt
+                            ? 'bg-[#0867E8] text-white border-[#0867E8] shadow-xs'
+                            : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-50'
+                        }`}
+                      >
+                        {opt}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-slate-700 mb-1.5 flex items-center gap-1.5">
+                    <Star size={13} className="text-amber-500 fill-amber-500" /> Google Maps Rating & Reviews
+                  </label>
+                  <div className="grid grid-cols-2 gap-2">
+                    <input
+                      type="text"
+                      placeholder="e.g. 4.8 ★"
+                      value={form.googleRating}
+                      onChange={e => setForm({ ...form, googleRating: e.target.value })}
+                      className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:bg-white focus:border-[#0867E8]"
+                    />
+                    <input
+                      type="text"
+                      placeholder="e.g. 150+ reviews"
+                      value={form.reviewCount}
+                      onChange={e => setForm({ ...form, reviewCount: e.target.value })}
+                      className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:bg-white focus:border-[#0867E8]"
+                    />
+                  </div>
                 </div>
               </div>
             </div>

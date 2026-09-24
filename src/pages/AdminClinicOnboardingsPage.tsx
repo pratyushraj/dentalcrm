@@ -25,6 +25,9 @@ interface ClinicRow {
   phone: string;
   email: string | null;
   chairs: string | null;
+  premises_type: string | null;
+  google_rating: string | null;
+  review_count: string | null;
   specialties: string[] | null;
   avg_monthly_cases: string | null;
   expected_emi_loans: string | null;
@@ -62,6 +65,7 @@ function utmBadge(src: string | null) {
 function exportCsv(rows: ClinicRow[]) {
   const headers = [
     'Clinic Name', 'Doctor', 'City', 'Phone', 'Email', 'Chairs',
+    'Premises (Owned/Rented)', 'Google Rating', 'Google Reviews',
     'Specialties', 'Monthly Cases', 'Expected Loans', 'Avg Ticket',
     'Current Account', 'Business Proof', 'Cancelled Cheque',
     'UTM Source', 'UTM Medium', 'UTM Campaign', 'Submitted At'
@@ -69,6 +73,7 @@ function exportCsv(rows: ClinicRow[]) {
   const escape = (v: string | null | undefined) => `"${(v ?? '').replace(/"/g, '""')}"`;
   const lines = rows.map(r => [
     r.clinic_name, r.doctor_name, r.city, r.phone, r.email, r.chairs,
+    r.premises_type, r.google_rating, r.review_count,
     (r.specialties ?? []).join('; '), r.avg_monthly_cases, r.expected_emi_loans, r.avg_ticket_size,
     r.has_current_account, r.business_proof_type, r.has_cancelled_cheque,
     r.utm_source, r.utm_medium, r.utm_campaign,
@@ -279,8 +284,20 @@ export default function AdminClinicOnboardingsPage() {
                   >
                     <td className="px-4 py-3">
                       <p className="font-bold text-slate-900 leading-tight">{row.clinic_name}</p>
-                      {row.doctor_name && <p className="text-[10px] text-slate-400">{row.doctor_name}</p>}
-                      {row.chairs && <p className="text-[10px] text-slate-400">{row.chairs}</p>}
+                      <div className="flex items-center gap-1.5 flex-wrap mt-0.5">
+                        {row.doctor_name && <span className="text-[10px] text-slate-400">{row.doctor_name}</span>}
+                        {row.chairs && <span className="text-[10px] text-slate-400">• {row.chairs}</span>}
+                        {row.premises_type && (
+                          <span className="text-[10px] font-semibold text-slate-500 bg-slate-100 px-1.5 py-0.2 rounded">
+                            {row.premises_type}
+                          </span>
+                        )}
+                        {row.google_rating && (
+                          <span className="text-[10px] font-bold text-amber-600 bg-amber-50 border border-amber-200 px-1.5 py-0.2 rounded">
+                            {row.google_rating} {row.review_count ? `(${row.review_count})` : ''}
+                          </span>
+                        )}
+                      </div>
                     </td>
                     <td className="px-4 py-3">
                       <span className="flex items-center gap-1 text-slate-600">
@@ -350,6 +367,9 @@ export default function AdminClinicOnboardingsPage() {
                 ['Phone', selectedRow.phone],
                 ['Email', selectedRow.email],
                 ['Chairs', selectedRow.chairs],
+                ['Premises', selectedRow.premises_type],
+                ['Google Rating', selectedRow.google_rating ? `${selectedRow.google_rating} ★` : null],
+                ['Google Reviews', selectedRow.review_count],
                 ['Monthly Cases', selectedRow.avg_monthly_cases],
                 ['Expected Loans/mo', selectedRow.expected_emi_loans],
                 ['Avg Ticket Size', selectedRow.avg_ticket_size],

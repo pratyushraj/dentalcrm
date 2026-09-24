@@ -58,9 +58,9 @@ def create_email_payload(lead):
     <div class="highlight-box">
       <strong>How Clinaza empowers {clinic_name}:</strong>
       <ul>
-        <li><strong>Instant Point-of-Care Patient Financing</strong>: Patients get instant, paperless medical financing approvals (₹10,000 – ₹5,00,000) in under 2 minutes directly at your front desk.</li>
-        <li><strong>100% Upfront Settlement</strong>: Your clinic receives the full treatment payment directly in your bank account within 24 hours.</li>
-        <li><strong>Zero Credit Risk</strong>: Handled by 13+ RBI-regulated NBFC lending partners — zero financial liability on your clinic.</li>
+        <li><strong>Instant Patient Financing</strong>: Eligible patients get instant, paperless medical EMI approvals (₹10,000 – ₹5,00,000) in minutes directly at your front desk.</li>
+        <li><strong>Convert High-Ticket Cases</strong>: Eliminate drop-offs on expensive treatments (implants, aligners, crowns, full-mouth rehab) by letting patients split costs into affordable EMIs.</li>
+        <li><strong>Zero Financial Liability</strong>: Handled directly by 13+ RBI-regulated NBFC lending partners — zero credit risk or collection burden on your clinic.</li>
         <li><strong>Free Digital Clinic Tools</strong>: Free access to our digital NABH consent form generator, prescription maker, and patient recall dashboard.</li>
       </ul>
     </div>
@@ -89,9 +89,9 @@ I hope you're having a productive week at {clinic_name}.
 We work with leading dental surgeons and practices across India to eliminate patient drop-offs on high-ticket treatments (implants, aligners, crowns, and full-mouth rehabilitation).
 
 How Clinaza empowers {clinic_name}:
-- Instant Point-of-Care Patient Financing: Paperless approvals (₹10,000 - ₹5,00,000) in under 2 mins at your front desk.
-- 100% Upfront Settlement: Your clinic receives full treatment payment in 24 hours.
-- Zero Credit Risk: Handled by 13+ RBI-regulated NBFC lenders with zero liability on your clinic.
+- Instant Patient Financing: Paperless medical EMI approvals (₹10,000 - ₹5,00,000) in minutes at your front desk.
+- Convert High-Ticket Cases: Eliminate patient drop-offs on expensive treatments (implants, aligners, crowns) with flexible EMIs.
+- Zero Financial Liability: Handled directly by 13+ RBI-regulated NBFC lenders with zero credit risk or collection burden on your clinic.
 - Free Clinic Tools: Digital NABH consent generator, prescription maker, and patient recall dashboard.
 
 Would you be open for a brief 5-minute chat or demo this week? You can reply to this email or reach me directly on WhatsApp at +91 7292984244.

@@ -13,7 +13,7 @@
 /* Disable selection globally for a native app feel, except in inputs/textareas */
 html {
   /* Inherit theme background to prevent visual mismatch during overscroll/PWA launch */
-  background-color: #020D0A;
+  background-color: #F8FAFC;
 }
 
 body {
@@ -24,7 +24,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   /* overscroll-behavior-y: contain is handled in the main scroller block (#root) */
   /* iOS PWA: prevent hardcoded background mismatch */
-  background-color: #020D0A;
+  background-color: #F8FAFC;
 }
 
 /* Remove 300ms tap delay on all interactive elements */

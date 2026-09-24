@@ -116,7 +116,7 @@ const App = () => {
       <GlobalLoadingBar />
       <AppToaster />
 
-      <div className="min-h-dvh bg-[#020D0A]">
+      <div className="min-h-dvh bg-slate-50">
           <RouterInstrumentation />
           <ScrollToTop />
           <NetworkStatusWrapper>

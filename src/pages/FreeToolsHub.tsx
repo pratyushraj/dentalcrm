@@ -299,7 +299,7 @@ export default function FreeToolsHub() {
       </section>
 
       {/* Tool Container */}
-      <main className="max-w-5xl mx-auto px-4 py-8">
+      <main className="flex-1 w-full max-w-5xl mx-auto px-4 py-8">
         
         {/* ========================================================================= */}
         {/* TAB 1: DIGITAL PRESCRIPTION MAKER */}
@@ -1159,7 +1159,7 @@ export default function FreeToolsHub() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-slate-200 py-8 px-6 bg-white text-center sm:text-left mt-12">
+      <footer className="border-t border-slate-200 py-8 px-6 bg-white text-center sm:text-left w-full mt-auto">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="flex items-center gap-3">
             <img src="/assets/clinaza-logo.jpg" alt="CLINAZA" className="h-8 w-auto rounded-lg border border-slate-200" />

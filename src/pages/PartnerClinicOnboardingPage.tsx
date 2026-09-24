@@ -7,7 +7,9 @@ import {
   TrendingUp, 
   Share2, 
   Check,
-  Sparkles
+  Sparkles,
+  Landmark,
+  FileCheck
 } from 'lucide-react';
 import { emailNotificationService } from '@/services/emailNotificationService';
 import { toast } from 'sonner';
@@ -22,7 +24,10 @@ export default function PartnerClinicOnboardingPage() {
     specialties: ['Dental Implants', 'Clear Aligners'],
     avgMonthlyCases: '10',
     expectedEmiLoans: '5',
-    avgTicketSize: '₹40,000'
+    avgTicketSize: '₹40,000',
+    hasCurrentAccount: 'Yes',
+    businessProofType: 'GST Registration',
+    hasCancelledCheque: 'Yes'
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -61,6 +66,9 @@ export default function PartnerClinicOnboardingPage() {
         'Monthly High-Ticket Cases (>₹25k)': form.avgMonthlyCases,
         'Expected Monthly Loan / EMI Applications': form.expectedEmiLoans,
         'Avg Treatment Ticket': form.avgTicketSize,
+        'Active Business Current Account': form.hasCurrentAccount,
+        'Clinic Business Proof Available': form.businessProofType,
+        'Cancelled Cheque Ready': form.hasCancelledCheque,
         'Estimated Monthly Loan Volume Potential': `₹${(parseInt(form.expectedEmiLoans || '5') * 40000).toLocaleString('en-IN')}/month`
       });
     } catch (err) {
@@ -156,7 +164,10 @@ export default function PartnerClinicOnboardingPage() {
                     specialties: ['Dental Implants', 'Clear Aligners'],
                     avgMonthlyCases: '10',
                     expectedEmiLoans: '5',
-                    avgTicketSize: '₹40,000'
+                    avgTicketSize: '₹40,000',
+                    hasCurrentAccount: 'Yes',
+                    businessProofType: 'GST Registration',
+                    hasCancelledCheque: 'Yes'
                   });
                 }}
                 className="px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold rounded-xl transition-all"
@@ -328,6 +339,103 @@ export default function PartnerClinicOnboardingPage() {
                     onChange={e => setForm({...form, avgTicketSize: e.target.value})}
                     className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-xs text-slate-900 font-bold focus:outline-none focus:border-[#0867E8]"
                   />
+                </div>
+              </div>
+            </div>
+
+            {/* Section 3: Settlement Account & KYC Readiness */}
+            <div className="bg-white border border-slate-200/90 rounded-2xl p-5 shadow-xs space-y-4">
+              <div className="flex items-center gap-2 border-b border-slate-100 pb-3">
+                <div className="w-7 h-7 rounded-lg bg-blue-50 text-[#0867E8] flex items-center justify-center font-bold text-xs">
+                  <Landmark size={15} />
+                </div>
+                <div>
+                  <h3 className="text-sm font-bold text-slate-900">Direct Payout Account &amp; Clinic Proof</h3>
+                  <p className="text-[11px] text-slate-500">Required by banking &amp; lending rails to route patient loan disbursals directly to the clinic</p>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {/* 1. Active Current Account */}
+                <div className="space-y-2">
+                  <label className="block text-xs font-bold text-slate-800">
+                    Active Current / Business Bank Account? <span className="text-rose-500">*</span>
+                  </label>
+                  <p className="text-[11px] text-slate-500">For daily/weekly loan disbursals directly into clinic account</p>
+                  <div className="grid grid-cols-2 gap-2">
+                    {['Yes', 'No'].map((opt) => (
+                      <button
+                        key={opt}
+                        type="button"
+                        onClick={() => setForm({ ...form, hasCurrentAccount: opt })}
+                        className={`py-2 px-3 rounded-lg text-xs font-bold border transition-all text-center ${
+                          form.hasCurrentAccount === opt
+                            ? 'bg-[#0867E8] text-white border-[#0867E8] shadow-xs'
+                            : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
+                        }`}
+                      >
+                        {opt === 'Yes' ? '✅ Yes' : '❌ No'}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* 2. Cancelled Cheque */}
+                <div className="space-y-2">
+                  <label className="block text-xs font-bold text-slate-800">
+                    Cancelled Cheque / Bank Statement Ready? <span className="text-rose-500">*</span>
+                  </label>
+                  <p className="text-[11px] text-slate-500">Required for bank IFSC &amp; account name verification</p>
+                  <div className="grid grid-cols-2 gap-2">
+                    {['Yes', 'No'].map((opt) => (
+                      <button
+                        key={opt}
+                        type="button"
+                        onClick={() => setForm({ ...form, hasCancelledCheque: opt })}
+                        className={`py-2 px-3 rounded-lg text-xs font-bold border transition-all text-center ${
+                          form.hasCancelledCheque === opt
+                            ? 'bg-[#0867E8] text-white border-[#0867E8] shadow-xs'
+                            : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
+                        }`}
+                      >
+                        {opt === 'Yes' ? '✅ Yes' : '❌ No'}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* 3. Business Proof Type */}
+              <div className="pt-2 border-t border-slate-100 space-y-2">
+                <label className="block text-xs font-bold text-slate-800">
+                  Business Proof Available (Any valid clinic registration / license) <span className="text-rose-500">*</span>
+                </label>
+                <p className="text-[11px] text-slate-500">Select which clinic proof you have ready for the lending partnership:</p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  {[
+                    { label: 'GST Registration Certificate', desc: 'Active GSTIN in clinic/proprietor name' },
+                    { label: 'Shop & Establishment Act License', desc: 'Municipal trade / Gumasta certificate' },
+                    { label: 'Clinical Establishment / Municipal Registration', desc: 'State health / CEA license' },
+                    { label: 'Drug License / Professional Degree Registration', desc: 'State Dental Council / Pharmacy license' },
+                    { label: 'Will arrange during onboarding', desc: 'Need guidance from Clinaza team' }
+                  ].map((item) => (
+                    <button
+                      key={item.label}
+                      type="button"
+                      onClick={() => setForm({ ...form, businessProofType: item.label })}
+                      className={`text-left p-2.5 rounded-xl border text-xs transition-all ${
+                        form.businessProofType === item.label
+                          ? 'border-[#0867E8] bg-blue-50/70 text-[#0867E8] font-bold shadow-xs'
+                          : 'border-slate-200 bg-slate-50/60 hover:bg-slate-100 text-slate-700 font-medium'
+                      }`}
+                    >
+                      <div className="flex items-center justify-between">
+                        <span className="font-semibold text-slate-900">{item.label}</span>
+                        {form.businessProofType === item.label && <Check size={14} className="text-[#0867E8] shrink-0" />}
+                      </div>
+                      <p className="text-[10px] text-slate-500 mt-0.5">{item.desc}</p>
+                    </button>
+                  ))}
                 </div>
               </div>
             </div>

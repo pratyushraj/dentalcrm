@@ -89,8 +89,21 @@ def is_valid_email(email):
     pattern = r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
     return bool(re.match(pattern, email))
 
+# Regions excluded by NBFC lending criteria (no medical financing coverage)
+EXCLUDED_REGIONS = {
+    "assam", "meghalaya", "manipur", "mizoram", "nagaland", "tripura", "arunachal pradesh", "sikkim",
+    "himachal pradesh", "himachal", "north east"
+}
+
+def is_excluded_location(city="", state=""):
+    loc = f"{city} {state}".strip().lower()
+    return any(ex in loc for ex in EXCLUDED_REGIONS)
+
 def insert_lead(clinic_name, doctor_name, email, city="", state="", specialty="", source="web_scraper", status="pending"):
     if not is_valid_email(email):
+        return False
+    
+    if is_excluded_location(city, state):
         return False
     
     email = email.strip().lower()
@@ -121,6 +134,8 @@ def get_pending_leads(limit=100):
     cursor.execute("""
     SELECT * FROM leads 
     WHERE status = 'pending' 
+      AND LOWER(COALESCE(state, '')) NOT IN ('assam', 'meghalaya', 'manipur', 'mizoram', 'nagaland', 'tripura', 'arunachal pradesh', 'sikkim', 'himachal pradesh')
+      AND LOWER(COALESCE(city, '')) NOT IN ('guwahati', 'shillong', 'imphal', 'aizawl', 'kohima', 'agartala', 'itanagar', 'gangtok', 'shimla', 'dharamshala', 'mandi', 'solan', 'kullu', 'manali')
     ORDER BY id ASC 
     LIMIT ?
     """, (limit,))

@@ -26,7 +26,7 @@ INDIAN_CITIES = [
     ("Rajkot", "Gujarat"), ("Ludhiana", "Punjab"), ("Amritsar", "Punjab"),
     ("Agra", "Uttar Pradesh"), ("Varanasi", "Uttar Pradesh"), ("Meerut", "Uttar Pradesh"),
     ("Nashik", "Maharashtra"), ("Aurangabad", "Maharashtra"), ("Bhubaneswar", "Odisha"),
-    ("Ranchi", "Jharkhand"), ("Raipur", "Chhattisgarh"), ("Guwahati", "Assam"),
+    ("Ranchi", "Jharkhand"), ("Raipur", "Chhattisgarh"),
     ("Mysore", "Karnataka"), ("Mangalore", "Karnataka"), ("Vijayawada", "Andhra Pradesh"),
     ("Guntur", "Andhra Pradesh"), ("Dehradun", "Uttarakhand"), ("Jodhpur", "Rajasthan"),
     ("Udaipur", "Rajasthan"), ("Jalandhar", "Punjab"), ("Gwalior", "Madhya Pradesh")

@@ -68,18 +68,15 @@ EXPANDED_NATIONAL_CLINICS = [
     {"clinic": "Rohtak Dental Hospital", "doctor": "Dr. Dahiya", "email": "rohtakdentalcare@gmail.com", "city": "Rohtak", "state": "Haryana", "specialty": "Oral Surgery"},
     {"clinic": "Hisar Smiles Dental Clinic", "doctor": "Dr. Goyal", "email": "hisarsmilesdental@gmail.com", "city": "Hisar", "state": "Haryana", "specialty": "Aligners & Implants"},
 
-    # Bihar & North-East (Gaya, Muzaffarpur, Bhagalpur, Guwahati, Shillong)
+    # Bihar (Gaya, Muzaffarpur, Bhagalpur)
     {"clinic": "Gaya Dental Specialities", "doctor": "Dr. Sharan", "email": "gayadentalcare@gmail.com", "city": "Gaya", "state": "Bihar", "specialty": "Implant Center"},
     {"clinic": "Muzaffarpur Dental Studio", "doctor": "Dr. K. N. Jha", "email": "muzaffarpurdental@gmail.com", "city": "Muzaffarpur", "state": "Bihar", "specialty": "Cosmetic & Crowns"},
     {"clinic": "Bhagalpur Smiles Dental", "doctor": "Dr. Prakash", "email": "bhagalpuresmiles@gmail.com", "city": "Bhagalpur", "state": "Bihar", "specialty": "Root Canal & Bridges"},
-    {"clinic": "Brahmaputra Dental Care", "doctor": "Dr. Barooah", "email": "guwahatidentalcare@gmail.com", "city": "Guwahati", "state": "Assam", "specialty": "Advanced Surgery"},
-    {"clinic": "Shillong Dental Clinic", "doctor": "Dr. Lyngdoh", "email": "shillongdentalcare@gmail.com", "city": "Shillong", "state": "Meghalaya", "specialty": "General & Cosmetic"},
 
-    # Uttarakhand & Himachal (Dehradun, Haridwar, Rishikesh, Shimla)
+    # Uttarakhand (Dehradun, Haridwar, Rishikesh)
     {"clinic": "Dehradun Dental Care", "doctor": "Dr. Rawat", "email": "dehradundentalclinic@gmail.com", "city": "Dehradun", "state": "Uttarakhand", "specialty": "General & Cosmetic"},
     {"clinic": "Ganga Dental Clinic Haridwar", "doctor": "Dr. Pandey", "email": "haridwardentalcare@gmail.com", "city": "Haridwar", "state": "Uttarakhand", "specialty": "Laser Implants"},
-    {"clinic": "Rishikesh Smiles Dental", "doctor": "Dr. Sharma", "email": "rishikeshsmiles@gmail.com", "city": "Rishikesh", "state": "Uttarakhand", "specialty": "Aesthetic Dentistry"},
-    {"clinic": "Shimla Hills Dental Centre", "doctor": "Dr. Thakur", "email": "shimladentalcare@gmail.com", "city": "Shimla", "state": "Himachal Pradesh", "specialty": "Orthodontics & Crowns"}
+    {"clinic": "Rishikesh Smiles Dental", "doctor": "Dr. Sharma", "email": "rishikeshsmiles@gmail.com", "city": "Rishikesh", "state": "Uttarakhand", "specialty": "Aesthetic Dentistry"}
 ]
 
 def export_csv():

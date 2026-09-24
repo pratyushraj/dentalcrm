@@ -46,6 +46,14 @@
       "destination": "/api/meta"
     },
     {
+      "source": "/pilot-onboarding",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/clinic-pilot",
+      "destination": "/index.html"
+    },
+    {
       "source": "/((?!api/|assets/|favicon|sw\\.js|site\\.webmanifest|manifest\\.json).*)",
       "destination": "/index.html"
     }

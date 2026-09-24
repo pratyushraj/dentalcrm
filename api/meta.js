@@ -173,10 +173,15 @@ export default async function handler(req, res) {
       </nav>
     </div>`;
 
-    if (html.includes('<div id="root"></div>')) {
-      html = html.replace('<div id="root"></div>', `<div id="root">${ssrContent}</div>`);
-    } else if (html.includes('<div id="root">')) {
-      html = html.replace(/<div id="root">[\s\S]*?<\/div>/, `<div id="root">${ssrContent}</div>`);
+    const userAgent = req.headers['user-agent'] || '';
+    const isBot = /bot|googlebot|crawler|spider|robot|crawling|whatsapp|facebookexternalhit|meta-externalagent|twitterbot|linkedinbot|slackbot|telegrambot|applebot|bingbot|yandex|duckduckbot|baiduspider/i.test(userAgent);
+
+    if (isBot) {
+      if (html.includes('<div id="root"></div>')) {
+        html = html.replace('<div id="root"></div>', `<div id="root">${ssrContent}</div>`);
+      } else if (html.includes('<div id="root">')) {
+        html = html.replace(/<div id="root">[\s\S]*?<\/div>/, `<div id="root">${ssrContent}</div>`);
+      }
     }
   }
 

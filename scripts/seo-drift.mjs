@@ -61,7 +61,12 @@ async function runDriftCheck() {
     let success = false;
     for (let attempt = 1; attempt <= 3; attempt++) {
       try {
-        const res = await fetch(url, { headers: { 'Cache-Control': 'no-cache' } });
+        const res = await fetch(url, {
+          headers: {
+            'Cache-Control': 'no-cache',
+            'User-Agent': 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html) Clinaza-SEO-Monitor'
+          }
+        });
         if (res.status !== 200) {
           if (attempt < 3) { await new Promise(r => setTimeout(r, 5000)); continue; }
           console.error(`❌ [FAIL] ${check.path} -> Status: ${res.status} (Expected 200)`);

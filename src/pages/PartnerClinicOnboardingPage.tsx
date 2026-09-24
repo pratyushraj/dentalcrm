@@ -20,14 +20,14 @@ export default function PartnerClinicOnboardingPage() {
     doctorName: '',
     city: '',
     phone: '',
-    chairs: '2 Chairs',
-    specialties: ['Dental Implants', 'Clear Aligners'],
-    avgMonthlyCases: '10',
-    expectedEmiLoans: '5',
-    avgTicketSize: '₹40,000',
-    hasCurrentAccount: 'Yes',
-    businessProofType: 'GST Registration',
-    hasCancelledCheque: 'Yes'
+    chairs: '',
+    specialties: [] as string[],
+    avgMonthlyCases: '',
+    expectedEmiLoans: '',
+    avgTicketSize: '',
+    hasCurrentAccount: '',
+    businessProofType: '',
+    hasCancelledCheque: ''
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -53,6 +53,21 @@ export default function PartnerClinicOnboardingPage() {
       return;
     }
 
+    if (!form.hasCurrentAccount) {
+      toast.error('Please specify if you have an active Current / Business Account.');
+      return;
+    }
+
+    if (!form.hasCancelledCheque) {
+      toast.error('Please specify if you have a Cancelled Cheque ready.');
+      return;
+    }
+
+    if (!form.businessProofType) {
+      toast.error('Please select your available Business Proof.');
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
@@ -61,15 +76,15 @@ export default function PartnerClinicOnboardingPage() {
         'Doctor Name': form.doctorName || 'Doctor',
         'City / Location': form.city,
         'Contact Phone': form.phone,
-        'Dental Chairs': form.chairs,
-        'Most Common Treatments': form.specialties.join(', '),
-        'Monthly High-Ticket Cases (>₹25k)': form.avgMonthlyCases,
-        'Expected Monthly Loan / EMI Applications': form.expectedEmiLoans,
-        'Avg Treatment Ticket': form.avgTicketSize,
+        'Dental Chairs': form.chairs || 'Not specified',
+        'Most Common Treatments': form.specialties.length > 0 ? form.specialties.join(', ') : 'Not specified',
+        'Monthly High-Ticket Cases (>₹25k)': form.avgMonthlyCases || 'Not specified',
+        'Expected Monthly Loan / EMI Applications': form.expectedEmiLoans || 'Not specified',
+        'Avg Treatment Ticket': form.avgTicketSize || 'Not specified',
         'Active Business Current Account': form.hasCurrentAccount,
         'Clinic Business Proof Available': form.businessProofType,
         'Cancelled Cheque Ready': form.hasCancelledCheque,
-        'Estimated Monthly Loan Volume Potential': `₹${(parseInt(form.expectedEmiLoans || '5') * 40000).toLocaleString('en-IN')}/month`
+        'Estimated Monthly Loan Volume Potential': form.expectedEmiLoans ? `₹${(parseInt(form.expectedEmiLoans.replace(/\D/g, '') || '0') * 40000).toLocaleString('en-IN')}/month` : 'Pending discussion'
       });
     } catch (err) {
       console.error(err);
@@ -160,14 +175,14 @@ export default function PartnerClinicOnboardingPage() {
                     doctorName: '',
                     city: '',
                     phone: '',
-                    chairs: '2 Chairs',
-                    specialties: ['Dental Implants', 'Clear Aligners'],
-                    avgMonthlyCases: '10',
-                    expectedEmiLoans: '5',
-                    avgTicketSize: '₹40,000',
-                    hasCurrentAccount: 'Yes',
-                    businessProofType: 'GST Registration',
-                    hasCancelledCheque: 'Yes'
+                    chairs: '',
+                    specialties: [],
+                    avgMonthlyCases: '',
+                    expectedEmiLoans: '',
+                    avgTicketSize: '',
+                    hasCurrentAccount: '',
+                    businessProofType: '',
+                    hasCancelledCheque: ''
                   });
                 }}
                 className="px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold rounded-xl transition-all"

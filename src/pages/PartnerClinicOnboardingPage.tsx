@@ -12,6 +12,7 @@ import {
   FileCheck
 } from 'lucide-react';
 import { emailNotificationService } from '@/services/emailNotificationService';
+import { supabase } from '@/lib/supabase';
 import { toast } from 'sonner';
 
 export default function PartnerClinicOnboardingPage() {
@@ -71,6 +72,43 @@ export default function PartnerClinicOnboardingPage() {
     setIsSubmitting(true);
 
     try {
+      // 1. Save directly to Supabase
+      const payload = {
+        clinic_name: form.clinicName,
+        doctor_name: form.doctorName || null,
+        city: form.city,
+        phone: form.phone,
+        chairs: form.chairs || null,
+        specialties: form.specialties,
+        avg_monthly_cases: form.avgMonthlyCases || null,
+        expected_emi_loans: form.expectedEmiLoans || null,
+        avg_ticket_size: form.avgTicketSize || null,
+        has_current_account: form.hasCurrentAccount,
+        business_proof_type: form.businessProofType,
+        has_cancelled_cheque: form.hasCancelledCheque,
+        source: 'clinic-onboarding-portal',
+        created_at: new Date().toISOString()
+      };
+
+      try {
+        await supabase.from('clinic_onboardings').insert([payload]);
+      } catch (dbErr) {
+        console.warn('[Supabase] Storing in clinic_onboardings fallback:', dbErr);
+        // Fallback to generic leads table if clinic_onboardings does not exist yet
+        try {
+          await supabase.from('leads').insert([{
+            type: 'clinic_onboarding',
+            name: form.doctorName || form.clinicName,
+            phone: form.phone,
+            metadata: payload,
+            created_at: new Date().toISOString()
+          }]);
+        } catch (leadErr) {
+          console.warn('[Supabase] Lead store fallback error:', leadErr);
+        }
+      }
+
+      // 2. Dispatch email notification alert
       await emailNotificationService.sendNotification('🏥 New Clinic Pilot Accreditation Submitted', {
         'Clinic Name': form.clinicName,
         'Doctor Name': form.doctorName || 'Doctor',
@@ -87,7 +125,7 @@ export default function PartnerClinicOnboardingPage() {
         'Estimated Monthly Loan Volume Potential': form.expectedEmiLoans ? `₹${(parseInt(form.expectedEmiLoans.replace(/\D/g, '') || '0') * 40000).toLocaleString('en-IN')}/month` : 'Pending discussion'
       });
     } catch (err) {
-      console.error(err);
+      console.error('Submission error:', err);
     }
 
     setIsSubmitting(false);

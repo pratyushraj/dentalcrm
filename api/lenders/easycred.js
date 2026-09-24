@@ -2,19 +2,19 @@ import axios from 'axios';
 import { createClient } from '@supabase/supabase-js';
 
 const SUPABASE_URL = process.env.SUPABASE_URL || 'https://sqqocqujxlgoxbcnfbfb.supabase.co';
-const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNxcW9jcXVqeGxnb3hiY25mYmZiIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3OTQzMzcxNywiZXhwIjoyMDk1MDA5NzE3fQ.yjGEdEZ9q_PtKP_e6DPL8q6e1BXuoGi9TNYDFtD_aQc';
-const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
+const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
+const supabase = SUPABASE_SERVICE_ROLE_KEY ? createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY) : null;
 
-const RESEND_API_KEY = process.env.RESEND_API_KEY || (typeof Buffer !== 'undefined' ? Buffer.from('cmVfN01ZTnl1V3RfUUZMU3dqcmZhaEEyMVV1Q3pIRXdEdXJw', 'base64').toString('utf-8') : '');
+const RESEND_API_KEY = process.env.RESEND_API_KEY || '';
 
 // Easycred Partner DSA Credentials
 const EASYCRED_PARTNER_API = 'https://partner.easycred.co.in/api/partner/journey/initiate';
 const EASYCRED_LOGIN_API = 'https://partner.easycred.co.in/api/partner/login-password';
 
-const PARTNER_MOBILE = process.env.EASYCRED_MOBILE || '7292984244';
-const PARTNER_PASSWORD = process.env.EASYCRED_PASSWORD || 'jaqjy7-femzeh-xukfAn';
+const PARTNER_MOBILE = process.env.EASYCRED_MOBILE || '';
+const PARTNER_PASSWORD = process.env.EASYCRED_PASSWORD || '';
 
-let cachedToken = process.env.EASYCRED_PARTNER_TOKEN || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2YTg1NTZlYmQwNmQxNjFkNTFhNzIxNzQiLCJyb2xlIjoiUEFSVE5FUiIsInBhcnRuZXJJZCI6IjZhODU1NmU5ZDA2ZDE2MWQ1MWE3MjE3MiIsInBlcm1pc3Npb25zIjpbXSwiaWF0IjoxNzg5ODE4MTQyLCJleHAiOjE3ODk4MjUzNDJ9.3US5eotqpkedlpaQycfqxifEdySTO6AB-mOPR-SEcek';
+let cachedToken = process.env.EASYCRED_PARTNER_TOKEN || '';
 let tokenExpiry = 0;
 
 async function getPartnerToken() {
@@ -135,11 +135,12 @@ export default async function handler(req, res) {
 
     // 1. Permanently Save to Supabase (Zero Data Loss)
     try {
-      await supabase.from('audit_logs').insert([{
-        action_type: 'EASYCRED_LOAN_APPLICATION',
-        resource_type: 'loan_lead',
-        resource_id: inviteData.inviteId || null,
-        description: `Financing Application: ${customerName.trim()} (${cleanMobile})`,
+      if (supabase) {
+        await supabase.from('audit_logs').insert([{
+          action_type: 'EASYCRED_LOAN_APPLICATION',
+          resource_type: 'loan_lead',
+          resource_id: inviteData.inviteId || null,
+          description: `Financing Application: ${customerName.trim()} (${cleanMobile})`,
         metadata: {
           applicant_name: customerName.trim(),
           mobile: cleanMobile,

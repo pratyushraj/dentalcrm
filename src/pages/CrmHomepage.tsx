@@ -586,13 +586,12 @@ export default function CrmHomepage() {
               <MessageSquare size={14} className="text-[#0f7a75]" />
               WhatsApp
             </a>
-            <a
-              href="#partner-form"
-              onClick={() => setFormType('clinic')}
+            <Link
+              to="/clinic-onboarding"
               className="px-3 sm:px-5 py-2.5 sm:py-3 bg-[#0867E8] hover:bg-[#0756C7] text-white text-[11px] sm:text-xs font-black uppercase tracking-wider rounded-xl transition-all shadow-lg shadow-[#0867E8]/30 flex items-center gap-1.5 sm:gap-2 whitespace-nowrap active:scale-95"
             >
-              Partner <ArrowRight size={13} />
-            </a>
+              Clinic Onboarding <ArrowRight size={13} />
+            </Link>
           </div>
         </div>
       </header>
@@ -631,6 +630,12 @@ export default function CrmHomepage() {
                 >
                   <ShieldCheck size={16} /> Check Patient Eligibility
                 </button>
+                <Link
+                  to="/clinic-onboarding"
+                  className="px-5 py-3.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-black uppercase tracking-wider rounded-xl transition-all flex items-center justify-center gap-2 shadow-md"
+                >
+                  Clinic Onboarding →
+                </Link>
                 <Link
                   to="/reactivation/login"
                   className="px-5 py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-black uppercase tracking-wider rounded-xl transition-all flex items-center justify-center gap-2 shadow-md shadow-emerald-600/15"

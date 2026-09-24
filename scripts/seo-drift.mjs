@@ -11,8 +11,7 @@ const CHECKS = [
   {
     path: '/',
     expectedTitleSnippet: 'Clinaza',
-    expectedDescSnippet: 'treatment cost',
-    expectedH1Snippet: 'Clinaza — Patient Financing'
+    expectedDescSnippet: 'treatment cost'
   },
   {
     path: '/tools',

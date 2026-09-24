@@ -343,7 +343,7 @@ export default function PartnerClinicOnboardingPage() {
                   <span>Submitting Clinic...</span>
                 ) : (
                   <>
-                    <ShieldCheck size={16} /> Submit Clinic Profile for EMI Accreditation
+                    <ShieldCheck size={16} /> Submit Clinic Onboarding
                   </>
                 )}
               </button>

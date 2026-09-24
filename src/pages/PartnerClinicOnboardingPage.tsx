@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { SEOHead } from '@/components/seo/SEOHead';
 import { 
   Building2, 
@@ -9,7 +9,7 @@ import {
   Check,
   Sparkles,
   Landmark,
-  FileCheck
+  Mail
 } from 'lucide-react';
 import { emailNotificationService } from '@/services/emailNotificationService';
 import { supabase } from '@/lib/supabase';
@@ -21,6 +21,7 @@ export default function PartnerClinicOnboardingPage() {
     doctorName: '',
     city: '',
     phone: '',
+    email: '',
     chairs: '',
     specialties: [] as string[],
     avgMonthlyCases: '',
@@ -30,6 +31,17 @@ export default function PartnerClinicOnboardingPage() {
     businessProofType: '',
     hasCancelledCheque: ''
   });
+
+  const [utmParams, setUtmParams] = useState({ source: '', medium: '', campaign: '' });
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    setUtmParams({
+      source: params.get('utm_source') || '',
+      medium: params.get('utm_medium') || '',
+      campaign: params.get('utm_campaign') || '',
+    });
+  }, []);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -72,12 +84,13 @@ export default function PartnerClinicOnboardingPage() {
     setIsSubmitting(true);
 
     try {
-      // 1. Save directly to Supabase
+    // 1. Save directly to Supabase
       const payload = {
         clinic_name: form.clinicName,
         doctor_name: form.doctorName || null,
         city: form.city,
         phone: form.phone,
+        email: form.email || null,
         chairs: form.chairs || null,
         specialties: form.specialties,
         avg_monthly_cases: form.avgMonthlyCases || null,
@@ -86,6 +99,9 @@ export default function PartnerClinicOnboardingPage() {
         has_current_account: form.hasCurrentAccount,
         business_proof_type: form.businessProofType,
         has_cancelled_cheque: form.hasCancelledCheque,
+        utm_source: utmParams.source || null,
+        utm_medium: utmParams.medium || null,
+        utm_campaign: utmParams.campaign || null,
         source: 'clinic-onboarding-portal',
         created_at: new Date().toISOString()
       };
@@ -109,11 +125,12 @@ export default function PartnerClinicOnboardingPage() {
       }
 
       // 2. Dispatch email notification alert
-      await emailNotificationService.sendNotification('🏥 New Clinic Pilot Accreditation Submitted', {
+      await emailNotificationService.sendNotification('🏥 New Clinic Onboarding Submitted', {
         'Clinic Name': form.clinicName,
-        'Doctor Name': form.doctorName || 'Doctor',
+        'Doctor Name': form.doctorName || 'Not provided',
         'City / Location': form.city,
         'Contact Phone': form.phone,
+        'Email': form.email || 'Not provided',
         'Dental Chairs': form.chairs || 'Not specified',
         'Most Common Treatments': form.specialties.length > 0 ? form.specialties.join(', ') : 'Not specified',
         'Monthly High-Ticket Cases (>₹25k)': form.avgMonthlyCases || 'Not specified',
@@ -122,8 +139,12 @@ export default function PartnerClinicOnboardingPage() {
         'Active Business Current Account': form.hasCurrentAccount,
         'Clinic Business Proof Available': form.businessProofType,
         'Cancelled Cheque Ready': form.hasCancelledCheque,
+        'UTM Source': utmParams.source || '(direct)',
+        'UTM Medium': utmParams.medium || '(none)',
+        'UTM Campaign': utmParams.campaign || '(none)',
         'Estimated Monthly Loan Volume Potential': form.expectedEmiLoans ? `₹${(parseInt(form.expectedEmiLoans.replace(/\D/g, '') || '0') * 40000).toLocaleString('en-IN')}/month` : 'Pending discussion'
       });
+
     } catch (err) {
       console.error('Submission error:', err);
     }
@@ -145,7 +166,7 @@ export default function PartnerClinicOnboardingPage() {
       <SEOHead 
         title="Partner Clinic Onboarding — Clinaza Point-of-Care EMI"
         description="Official onboarding portal for partner dental clinics to activate instant point-of-care patient EMI financing."
-        image="https://www.clinaza.in/og-clinaza.png"
+        image="https://www.clinaza.in/og-clinic-onboarding.jpg"
       />
 
       {/* Top Header */}
@@ -213,6 +234,7 @@ export default function PartnerClinicOnboardingPage() {
                     doctorName: '',
                     city: '',
                     phone: '',
+                    email: '',
                     chairs: '',
                     specialties: [],
                     avgMonthlyCases: '',
@@ -280,6 +302,18 @@ export default function PartnerClinicOnboardingPage() {
                     placeholder="e.g. 9876543210"
                     value={form.phone}
                     onChange={e => setForm({...form, phone: e.target.value})}
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:bg-white focus:border-[#0867E8] focus:ring-1 focus:ring-[#0867E8]"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-bold text-slate-700 mb-1.5 flex items-center gap-1">
+                    <Mail size={12} className="text-slate-400" /> Clinic Email
+                  </label>
+                  <input 
+                    type="email"
+                    placeholder="e.g. drparmar@apexdental.in"
+                    value={form.email}
+                    onChange={e => setForm({...form, email: e.target.value})}
                     className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:bg-white focus:border-[#0867E8] focus:ring-1 focus:ring-[#0867E8]"
                   />
                 </div>

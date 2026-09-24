@@ -68,12 +68,14 @@ const STATIC_ROUTES = {
   '/clinic-onboarding': {
     title: 'Partner Clinic Onboarding — Clinaza Point-of-Care EMI',
     desc: 'Official partner clinic onboarding portal to activate instant point-of-care patient EMI financing.',
-    h1: 'Partner Clinic Onboarding & Point-of-Care EMI Activation'
+    h1: 'Partner Clinic Onboarding & Point-of-Care EMI Activation',
+    image: 'https://www.clinaza.in/og-clinic-onboarding.jpg'
   },
   '/pilot-onboarding': {
     title: 'Partner Clinic Onboarding — Clinaza Point-of-Care EMI',
     desc: 'Official partner clinic onboarding portal to activate instant point-of-care patient EMI financing.',
-    h1: 'Partner Clinic Onboarding & Point-of-Care EMI Activation'
+    h1: 'Partner Clinic Onboarding & Point-of-Care EMI Activation',
+    image: 'https://www.clinaza.in/og-clinic-onboarding.jpg'
   }
 };
 

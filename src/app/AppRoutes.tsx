@@ -19,6 +19,7 @@ const FreeToolsHub = lazy(() => import("@/pages/FreeToolsHub"));
 const LoanDemoPage = lazy(() => import("@/pages/LoanDemoPage"));
 const DentalImplantLoanPage = lazy(() => import("@/pages/DentalImplantLoanPage"));
 const ClearAlignersEmiPage = lazy(() => import("@/pages/ClearAlignersEmiPage"));
+const PartnerClinicOnboardingPage = lazy(() => import("@/pages/PartnerClinicOnboardingPage"));
 
 export default function AppRoutes() {
   return (
@@ -47,6 +48,8 @@ export default function AppRoutes() {
           <Route path="/apply" element={<Navigate to="/#check-eligibility" replace />} />
           <Route path="/demo/loan" element={<LazyRoute><LoanDemoPage /></LazyRoute>} />
           <Route path="/loan/demo" element={<LazyRoute><LoanDemoPage /></LazyRoute>} />
+          <Route path="/pilot-onboarding" element={<LazyRoute><PartnerClinicOnboardingPage /></LazyRoute>} />
+          <Route path="/clinic-pilot" element={<Navigate to="/pilot-onboarding" replace />} />
 
           {/* Review Assistant Landing Page */}
           <Route path="/review/assist" element={<LazyRoute><ReviewAssistant /></LazyRoute>} />

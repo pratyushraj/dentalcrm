@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Clinaza Healthcare - Investor Pitch Deck</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    @page {
+      size: 1920px 1080px;
+      margin: 0;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: #030712;
+      color: #F3F4F6;
+      -webkit-font-smoothing: antialiased;
+    }
+    .slide {
+      width: 1920px;
+      height: 1080px;
+      position: relative;
+      overflow: hidden;
+      page-break-after: always;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 80px 110px;
+      background: radial-gradient(circle at 80% 20%, rgba(14, 165, 233, 0.12) 0%, rgba(3, 7, 18, 0.98) 70%),
+                  radial-gradient(circle at 10% 90%, rgba(99, 102, 241, 0.08) 0%, rgba(3, 7, 18, 1) 80%);
+    }
+
+    /* Ambient Glow & Grid lines */
+    .slide::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-image: linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+    }
+
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      z-index: 10;
+    }
+    .brand-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(14, 165, 233, 0.12);
+      border: 1px solid rgba(14, 165, 233, 0.35);
+      padding: 10px 22px;
+      border-radius: 9999px;
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #38BDF8;
+    }
+    .brand-pill::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      background: #38BDF8;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #38BDF8;
+    }
+    .slide-num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 18px;
+      font-weight: 800;
+      color: #94A3B8;
+      letter-spacing: 0.05em;
+    }
+
+    .header-block {
+      margin-top: 15px;
+      position: relative;
+      z-index: 10;
+    }
+    .header-block h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 54px;
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: #FFFFFF;
+      margin-bottom: 14px;
+    }
+    .header-block h1 .highlight,
+    .hero-title .highlight {
+      color: #38BDF8 !important;
+      -webkit-text-fill-color: initial !important;
+      background: none !important;
+    }
+    .header-block p {
+      font-size: 23px;
+      color: #CBD5E1;
+      max-width: 1500px;
+      line-height: 1.5;
+    }
+
+    .content-area {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin: 25px 0;
+      position: relative;
+      z-index: 10;
+    }
+
+    /* Grid cards */
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 36px;
+    }
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 22px;
+    }
+
+    .card {
+      background: rgba(17, 24, 39, 0.75);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 20px;
+      padding: 34px 30px;
+      position: relative;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .card.accent {
+      background: linear-gradient(145deg, rgba(14, 165, 233, 0.15) 0%, rgba(15, 23, 42, 0.85) 100%);
+      border: 1.5px solid rgba(56, 189, 248, 0.5);
+      box-shadow: 0 12px 45px -10px rgba(14, 165, 233, 0.25);
+    }
+    .card-badge {
+      display: inline-block;
+      align-self: flex-start;
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 6px 14px;
+      border-radius: 8px;
+      margin-bottom: 16px;
+    }
+    .badge-red { background: rgba(239, 68, 68, 0.2); color: #FCA5A5; border: 1px solid rgba(239, 68, 68, 0.4); }
+    .badge-blue { background: rgba(14, 165, 233, 0.2); color: #7DD3FC; border: 1px solid rgba(14, 165, 233, 0.4); }
+    .badge-green { background: rgba(34, 197, 94, 0.2); color: #86EFAC; border: 1px solid rgba(34, 197, 94, 0.4); }
+    .badge-purple { background: rgba(168, 85, 247, 0.2); color: #D8B4FE; border: 1px solid rgba(168, 85, 247, 0.4); }
+
+    .card h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 26px;
+      font-weight: 700;
+      color: #F8FAFC;
+      margin-bottom: 14px;
+      line-height: 1.25;
+    }
+    .card p {
+      font-size: 18px;
+      line-height: 1.6;
+      color: #CBD5E1;
+    }
+    .card .stat-callout {
+      margin-top: 24px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 32px;
+      font-weight: 800;
+      color: #38BDF8;
+    }
+
+    /* Comparison Table */
+    .comp-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      background: rgba(17, 24, 39, 0.65);
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+    .comp-table th, .comp-table td {
+      padding: 22px 28px;
+      text-align: left;
+      font-size: 18px;
+      line-height: 1.45;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .comp-table th {
+      background: rgba(15, 23, 42, 0.95);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 18px;
+      font-weight: 800;
+      color: #94A3B8;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .comp-table th.highlight-col {
+      background: rgba(14, 165, 233, 0.25);
+      color: #38BDF8;
+      border-bottom: 3px solid #38BDF8;
+    }
+    .comp-table td.highlight-col {
+      background: rgba(14, 165, 233, 0.12);
+      color: #FFFFFF;
+      font-weight: 700;
+    }
+    .comp-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* Bottom footer */
+    .bottom-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      position: relative;
+      z-index: 10;
+    }
+    .footer-meta {
+      font-size: 16px;
+      color: #94A3B8;
+    }
+    .footer-meta strong {
+      color: #F1F5F9;
+    }
+
+    /* Hero cover specific */
+    .hero-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 100%;
+    }
+    .hero-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 66px;
+      font-weight: 800;
+      line-height: 1.12;
+      letter-spacing: -0.03em;
+      color: #FFFFFF;
+      margin-bottom: 22px;
+    }
+    .hero-sub {
+      font-size: 26px;
+      line-height: 1.5;
+      color: #E2E8F0;
+      max-width: 1400px;
+      margin-bottom: 42px;
+    }
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      margin-top: 15px;
+    }
+    .hero-stat-card {
+      background: rgba(15, 23, 42, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 20px;
+      padding: 30px 32px;
+    }
+    .hero-stat-num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 46px;
+      font-weight: 800;
+      color: #38BDF8;
+      margin-bottom: 10px;
+    }
+    .hero-stat-desc {
+      font-size: 21px;
+      font-weight: 500;
+      color: #CBD5E1;
+      line-height: 1.45;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- SLIDE 1: HERO COVER -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <div class="slide">
+    <div class="top-bar">
+      <div class="brand-pill">HEALTHCARE FINTECH • POINT-OF-CARE CREDIT</div>
+      <div class="slide-num">01 / 08</div>
+    </div>
+    <div class="content-area hero-container">
+      <h1 class="hero-title">
+        The Point-of-Care Financing Gateway for India's <span class="highlight">95% Standalone Dental Clinics</span>
+      </h1>
+      <p class="hero-sub">
+        Democratizing direct-to-clinic disbursement and subvented 0% EMIs for 2,00,000+ independent clinics completely locked out of Bajaj Finserv, GMoney, and SaveIN.
+      </p>
+      <div class="hero-stats">
+        <div class="hero-stat-card">
+          <div class="hero-stat-num">2,00,000+</div>
+          <div class="hero-stat-desc">Standalone dental clinics across India with zero point-of-care credit rails</div>
+        </div>
+        <div class="hero-stat-card">
+          <div class="hero-stat-num">70% Drop-Off</div>
+          <div class="hero-stat-desc">High-ticket treatment abandonment due to lack of front-desk financing</div>
+        </div>
+        <div class="hero-stat-card">
+          <div class="hero-stat-num">INR 18,500 Cr</div>
+          <div class="hero-stat-desc">Annual out-of-pocket elective healthcare spend ready for financing</div>
+        </div>
+      </div>
+    </div>
+    <div class="bottom-bar">
+      <div class="footer-meta">
+        <strong>Founder:</strong> Pratyush Raj &nbsp;•&nbsp; <strong>Contact:</strong> contact@clinaza.in | +91 7292984244 &nbsp;•&nbsp; <strong>Live Platform:</strong> https://clinaza.in
+      </div>
+      <div class="footer-meta">
+        Investor Pitch Deck • 2026
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- SLIDE 2: THE REAL BOTTLENECK -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <div class="slide">
+    <div class="top-bar">
+      <div class="brand-pill">THE PROBLEM & MARKET BOTTLENECK</div>
+      <div class="slide-num">02 / 08</div>
+    </div>
+    <div class="header-block">
+      <h1>The Unserved 95%: <span class="highlight">Why Standalone Clinics Drop 70% of High-Ticket Cases</span></h1>
+      <p>Bajaj Finserv, GMoney, SaveIN, and CarePay fight for the top 5% corporate hospital chains and high-turnover tier-1 clinics. The remaining 95% standalone practices are completely abandoned.</p>
+    </div>
+    <div class="content-area">
+      <div class="grid-3">
+        <div class="card">
+          <div>
+            <span class="card-badge badge-red">Problem 01</span>
+            <h3>Standalone Clinics Locked Out</h3>
+            <p>2,00,000+ independent dental practices in Tier-1 and Tier-2 cities do INR 2L–INR 8L in monthly billing. They cannot meet Bajaj's rigid volume thresholds or POS terminal audits, leaving them with zero credit infrastructure.</p>
+          </div>
+          <div class="stat-callout">0% Options</div>
+        </div>
+        <div class="card">
+          <div>
+            <span class="card-badge badge-red">Problem 02</span>
+            <h3>Punitive 20% – 36% Interest Rates</h3>
+            <p>Current third-party loan apps treat dental care as high-risk unsecured personal loans with 20% to 36% APR and strict CIBIL filters. Patients immediately abandon implant and aligner recommendations at the reception counter.</p>
+          </div>
+          <div class="stat-callout">70% Drop Rate</div>
+        </div>
+        <div class="card">
+          <div>
+            <span class="card-badge badge-red">Problem 03</span>
+            <h3>The NBFC Catch-22</h3>
+            <p>No tier-1 NBFC will build custom integration, offer direct-to-clinic disbursement, or grant 8% subvention rates for individual standalone clinics due to fragmented volume. Standalone doctors have zero bargaining power.</p>
+          </div>
+          <div class="stat-callout">No Direct Disbursal</div>
+        </div>
+      </div>
+    </div>
+    <div class="bottom-bar">
+      <div class="footer-meta">Clinaza Healthcare Technologies • Confidential Pitch</div>
+      <div class="footer-meta">Slide 2 of 8</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- SLIDE 3: THE SOLUTION -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <div class="slide">
+    <div class="top-bar">
+      <div class="brand-pill">THE CLINAZA SOLUTION & ROADMAP</div>
+      <div class="slide-num">03 / 08</div>
+    </div>
+    <div class="header-block">
+      <h1>The Strategic Gateway: <span class="highlight">Aggregating Volume to Unlock Subvented Credit</span></h1>
+      <p>Clinaza bundles fragmented standalone clinics into an institutional-grade volume pool to transition from high-interest personal loans to direct-to-clinic subvented financing.</p>
+    </div>
+    <div class="content-area">
+      <div class="grid-3">
+        <div class="card accent">
+          <div>
+            <span class="card-badge badge-blue">Layer 01 • Live Platform</span>
+            <h3>Digital Aggregation Gateway</h3>
+            <p>Direct patient financing portal live at <code>clinaza.in</code>. Aggregates regional dental demand and gives independent clinics institutional bargaining leverage with lenders.</p>
+          </div>
+          <div class="stat-callout">Aggregated Demand</div>
+        </div>
+        <div class="card accent">
+          <div>
+            <span class="card-badge badge-green">Layer 02 • Channel Partner Pipeline</span>
+            <h3>ShopSe Referral & Disbursal Rail</h3>
+            <p>In active partnership discussions with ShopSe (referral & commission model) to unlock multi-bank EMI coverage and direct settlement across our top 5 pilot clinics with zero balance-sheet risk.</p>
+          </div>
+          <div class="stat-callout">In Discussion</div>
+        </div>
+        <div class="card accent">
+          <div>
+            <span class="card-badge badge-purple">Layer 03 • Scale Milestone</span>
+            <h3>Direct NBFC Co-Lending Rails</h3>
+            <p>Leveraging verified clinic loan volume and zero-default repayment data to negotiate direct, white-labeled NBFC credit lines and 0% merchant subvention (MDR), capturing the full 2.5%–3.5% take rate.</p>
+          </div>
+          <div class="stat-callout">Direct Co-Lending</div>
+        </div>
+      </div>
+    </div>
+    <div class="bottom-bar">
+      <div class="footer-meta">Clinaza Healthcare Technologies • Confidential Pitch</div>
+      <div class="footer-meta">Slide 3 of 8</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- SLIDE 4: COMPETITIVE WEDGE -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <div class="slide">
+    <div class="top-bar">
+      <div class="brand-pill">COMPETITIVE POSITIONING</div>
+      <div class="slide-num">04 / 08</div>
+    </div>
+    <div class="header-block">
+      <h1>Why Clinaza Wins the Long Tail <span class="highlight">While Incumbents Ignore It</span></h1>
+      <p>Incumbents have high-cost field sales teams that make onboarding independent clinics unprofitable. Clinaza's pure-digital acquisition model unlocks the underserved 95%.</p>
+    </div>
+    <div class="content-area">
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th style="width: 20%;">Dimension</th>
+            <th style="width: 25%;">Bajaj Finserv / Health EMI</th>
+            <th style="width: 27%;">GMoney / SaveIN / CarePay</th>
+            <th style="width: 28%;" class="highlight-col">Clinaza Healthcare Gateway</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Target Market</strong></td>
+            <td>Large corporate chains & multi-specialty hospitals</td>
+            <td>High-volume urban clinics & partner hospitals</td>
+            <td class="highlight-col">The 95% standalone independent dental practices</td>
+          </tr>
+          <tr>
+            <td><strong>Onboarding Friction</strong></td>
+            <td>Heavy physical documentation, POS machine, strict audits</td>
+            <td>Selective offline onboarding, physical paperwork verification</td>
+            <td class="highlight-col">Instant 100% digital onboarding via web & clinic QR</td>
+          </tr>
+          <tr>
+            <td><strong>Disbursement Flow</strong></td>
+            <td>Direct to clinic (closed ecosystem)</td>
+            <td>Direct to clinic (high volume clinic requirement)</td>
+            <td class="highlight-col">Aggregated pool direct-to-clinic settlement</td>
+          </tr>
+          <tr>
+            <td><strong>Patient Interest Rate</strong></td>
+            <td>0% via heavy merchant subvention</td>
+            <td>0% / 8% - 12% APR (requires high clinic volumes)</td>
+            <td class="highlight-col">Transitioning long tail from 20%–36% personal loans to affordable subvented EMIs</td>
+          </tr>
+          <tr>
+            <td><strong>Clinic Acquisition Cost</strong></td>
+            <td>High (Feet-on-street sales reps)</td>
+            <td>High (Regional relationship managers)</td>
+            <td class="highlight-col">Low (Digital self-serve, direct clinician network)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="bottom-bar">
+      <div class="footer-meta">Clinaza Healthcare Technologies • Confidential Pitch</div>
+      <div class="footer-meta">Slide 4 of 8</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- SLIDE 5: UNIT ECONOMICS -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <div class="slide">
+    <div class="top-bar">
+      <div class="brand-pill">BUSINESS MODEL & UNIT ECONOMICS</div>
+      <div class="slide-num">05 / 08</div>
+    </div>
+    <div class="header-block">
+      <h1>Transparent Revenue Architecture: <span class="highlight">Subvention & Distribution Economics</span></h1>
+      <p>Zero balance-sheet exposure. Clinaza monetizes via subvention split and distribution fees without double-charging clinics or patients.</p>
+    </div>
+    <div class="content-area">
+      <div class="grid-3">
+        <div class="card">
+          <div>
+            <span class="card-badge badge-green">Option A: 0% EMI</span>
+            <h3>True 0% Merchant Subvention</h3>
+            <p><strong>Patient pays:</strong> 0% Interest.<br/><strong>Clinic pays:</strong> 4.0% – 5.0% all-inclusive subvention to close high-margin (65%+) treatments.<br/>• 3.5% buys down NBFC cost of capital.<br/>• <strong>1.5% retained by Clinaza</strong> as tech fee.</p>
+          </div>
+          <div class="stat-callout">1.5% Net Margin</div>
+        </div>
+        <div class="card">
+          <div>
+            <span class="card-badge badge-green">Option B: Low ROI</span>
+            <h3>Subsidized 8–10% Split Model</h3>
+            <p><strong>Patient pays:</strong> Affordable 8%–10% healthcare APR (vs 18–24% personal loans).<br/><strong>Clinic pays:</strong> Standard 1.5% payment gateway fee for instant 24h disbursal.<br/><strong>NBFC pays:</strong> 1.0% sourcing commission.</p>
+          </div>
+          <div class="stat-callout">2.0% Blended Take</div>
+        </div>
+        <div class="card accent">
+          <div>
+            <span class="card-badge badge-purple">Unit Economics</span>
+            <h3>Blended Realization per Case</h3>
+            <p>Across both models, Clinaza secures a sustainable <strong>1.8% to 2.5% net take rate</strong> (INR 1,800 – INR 2,500 on an INR 1,00,000 treatment) at 90%+ software gross margin.</p>
+          </div>
+          <div class="stat-callout">INR 2,200 / Disbursal</div>
+        </div>
+      </div>
+      <div style="margin-top: 30px; background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 16px; padding: 22px 32px; display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <div style="font-size: 13px; font-weight: 700; color: #38BDF8; letter-spacing: 0.08em; text-transform: uppercase;">Scale Projection</div>
+          <div style="font-size: 18px; color: #F1F5F9; font-weight: 600; margin-top: 4px;">150 Active Clinics &nbsp;•&nbsp; INR 3 Lakh Monthly Financing per Clinic &nbsp;=&nbsp; <strong>INR 4.5 Cr Monthly Disbursed GMV</strong></div>
+        </div>
+        <div style="font-family: 'Space Grotesk', sans-serif; font-size: 32px; font-weight: 700; color: #4ADE80;">
+          INR 8.5L - 11.2L Monthly Net Revenue
+        </div>
+      </div>
+    </div>
+    <div class="bottom-bar">
+      <div class="footer-meta">Clinaza Healthcare Technologies • Confidential Pitch</div>
+      <div class="footer-meta">Slide 5 of 8</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- SLIDE 6: RISK ARCHITECTURE & ANTI-FRAUD DEFENSE -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <div class="slide">
+    <div class="top-bar">
+      <div class="brand-pill">RISK & UNDERWRITING SAFEGUARDS</div>
+      <div class="slide-num">06 / 08</div>
+    </div>
+    <div class="header-block">
+      <h1>Robust Anti-Fraud Architecture: <span class="highlight">Preventing Merchant Cash-Out & Loan Round-Tripping</span></h1>
+      <p>Direct clinic disbursement carries risks of collusion between doctors and fake patients. Clinaza builds 4 institutional defense layers to safeguard lending capital.</p>
+    </div>
+    <div class="content-area">
+      <div class="grid-4">
+        <div class="card">
+          <div>
+            <span class="card-badge badge-green">Pillar 01</span>
+            <h3 style="font-size: 20px;">Geofenced Dual-Presence</h3>
+            <p style="font-size: 14.5px;">Financing can only trigger when both the patient’s mobile device and the clinic’s verified GPS terminal are within 50 meters of each other at checkout.</p>
+          </div>
+          <div class="stat-callout" style="font-size: 22px;">GPS + Device IP</div>
+        </div>
+        <div class="card">
+          <div>
+            <span class="card-badge badge-green">Pillar 02</span>
+            <h3 style="font-size: 20px;">Clinical Digital Evidence</h3>
+            <p style="font-size: 14.5px;">High-ticket cases (INR 50,000+) require mandatory digital OPG X-ray or intraoral scan submission before disbursement approval. Fake patients don't have broken teeth.</p>
+          </div>
+          <div class="stat-callout" style="font-size: 22px;">Digital OPG / Scan</div>
+        </div>
+        <div class="card">
+          <div>
+            <span class="card-badge badge-green">Pillar 03</span>
+            <h3 style="font-size: 20px;">Milestone Tranche Disbursal</h3>
+            <p style="font-size: 14.5px;">Disbursements above INR 1 Lakh are staged: 40% initial prep tranche, with remaining 60% released only upon verified lab crown/implant placement receipt.</p>
+          </div>
+          <div class="stat-callout" style="font-size: 22px;">Staged Tranches</div>
+        </div>
+        <div class="card accent">
+          <div>
+            <span class="card-badge badge-purple">Pillar 04</span>
+            <h3 style="font-size: 20px;">DCI Vetting & Reserve Fund</h3>
+            <p style="font-size: 14.5px;">Doctors verified against Dental Council of India (DCI) register, clinic GST, and 6-mo bank statements, backed by a 5% rolling reserve hold on new clinic partners.</p>
+          </div>
+          <div class="stat-callout" style="font-size: 22px;">DCI State Registry</div>
+        </div>
+      </div>
+    </div>
+    <div class="bottom-bar">
+      <div class="footer-meta">Clinaza Healthcare Technologies • Confidential Pitch</div>
+      <div class="footer-meta">Slide 6 of 8</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- SLIDE 7: TRACTION & DISCOVERY -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <div class="slide">
+    <div class="top-bar">
+      <div class="brand-pill">EXECUTION & TRACTION</div>
+      <div class="slide-num">07 / 08</div>
+    </div>
+    <div class="header-block">
+      <h1>Early Traction & <span class="highlight">Validation of the Core Bottleneck</span></h1>
+      <p>We built the product, tested the consumer flow live, generated real applicants, and identified the exact missing piece required to unlock scale.</p>
+    </div>
+    <div class="content-area">
+      <div class="grid-3">
+        <div class="card accent">
+          <div>
+            <span class="card-badge badge-green">Partnership Pipeline</span>
+            <h3>ShopSe Partnership Discussions</h3>
+            <p>In active discussions with ShopSe on a commission & referral framework to activate multi-bank point-of-care EMIs across our pilot clinic cohort with zero balance-sheet risk.</p>
+          </div>
+          <div class="stat-callout">In Discussion</div>
+        </div>
+        <div class="card">
+          <div>
+            <span class="card-badge badge-blue">Cohort Pipeline</span>
+            <h3>Top 5 Pilot Clinics Pipeline</h3>
+            <p>Active onboarding of initial cohort across Delhi NCR, Mumbai, Bengaluru, Mohali & Patna with an estimated <strong>INR 20L – 25L/month</strong> in patient financing volume.</p>
+          </div>
+          <div class="stat-callout">INR 20L–25L/mo</div>
+        </div>
+        <div class="card">
+          <div>
+            <span class="card-badge badge-purple">Traction & Demand</span>
+            <h3>Live Digital Gateway</h3>
+            <p>End-to-end digital financing application live at <code>https://clinaza.in</code>. Organic testing validated consistent borrower intent and rapid treatment conversion.</p>
+          </div>
+          <div class="stat-callout">Production Live</div>
+        </div>
+      </div>
+      <div style="margin-top: 24px; background: rgba(30, 41, 59, 0.4); border: 1px solid rgba(255, 255, 255, 0.06); border-radius: 14px; padding: 18px 26px; display: flex; align-items: center; gap: 20px;">
+        <div style="font-size: 24px;">🎯</div>
+        <div style="font-size: 15px; color: #CBD5E1; line-height: 1.5;">
+          <strong>Strategic Two-Stage Execution:</strong> ShopSe referral rails establish clinic transaction history and zero-default repayment track records across the pilot cohort, providing the verified data required to secure direct, white-labeled NBFC co-lending lines.
+        </div>
+      </div>
+    </div>
+    <div class="bottom-bar">
+      <div class="footer-meta">Clinaza Healthcare Technologies • Confidential Pitch</div>
+      <div class="footer-meta">Slide 7 of 8</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- SLIDE 8: THE ASK & STRATEGIC ACCELERATOR ALIGNMENT -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <div class="slide">
+    <div class="top-bar">
+      <div class="brand-pill">STRATEGIC ACCELERATOR ASK</div>
+      <div class="slide-num">08 / 08</div>
+    </div>
+    <div class="header-block">
+      <h1>The Strategic Ask: <span class="highlight">Capital & Institutional NBFC Alliances</span></h1>
+      <p>We have validated organic borrower intent and clinician distribution. We need institutional co-lending alignment and pilot capital to unlock direct clinic disbursement.</p>
+    </div>
+    <div class="content-area">
+      <div class="grid-2">
+        <div class="card accent">
+          <div>
+            <span class="card-badge badge-blue">Ask 01 • Institutional Partnerships</span>
+            <h3 style="font-size: 28px;">NBFC Institutional Co-Lending</h3>
+            <p style="font-size: 19px; line-height: 1.6;">Direct introductions to forward-thinking NBFCs, digital debt funds, and credit partners willing to pilot direct-to-clinic disbursement with 8-10% interest rates backed by our aggregated standalone clinic pipeline.</p>
+          </div>
+          <div class="stat-callout" style="font-size: 26px;">Direct Clinic Disbursement</div>
+        </div>
+        <div class="card accent">
+          <div>
+            <span class="card-badge badge-blue">Ask 02 • Seed Capital</span>
+            <h3 style="font-size: 28px;">Volume Escrow & Runway Capital</h3>
+            <p style="font-size: 19px; line-height: 1.6;">Initial seed investment (INR 50L – 1 Cr) to fund minimum guarantee escrow thresholds required by institutional lenders to unlock true 0% subvented merchant credit and support regional clinic onboarding.</p>
+          </div>
+          <div class="stat-callout" style="font-size: 26px;">INR 50L - 1 Cr Seed</div>
+        </div>
+      </div>
+      <div style="margin-top: 34px; background: linear-gradient(135deg, rgba(14, 165, 233, 0.15) 0%, rgba(99, 102, 241, 0.15) 100%); border: 1px solid rgba(56, 189, 248, 0.4); border-radius: 18px; padding: 26px 36px; display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <div style="font-family: 'Space Grotesk', sans-serif; font-size: 26px; font-weight: 700; color: #FFFFFF;">Pratyush Raj • Founder, Clinaza Healthcare</div>
+          <div style="font-size: 16px; color: #CBD5E1; margin-top: 6px;">Phone / WhatsApp: <strong>+91 7292984244</strong> &nbsp;|&nbsp; Email: <strong>contact@clinaza.in</strong> &nbsp;|&nbsp; Web: <strong>https://clinaza.in</strong></div>
+        </div>
+        <div>
+          <span style="background: #0284C7; color: #FFF; font-weight: 700; font-size: 15px; padding: 14px 28px; border-radius: 12px; display: inline-block;">Ready to Scale & Partner</span>
+        </div>
+      </div>
+    </div>
+    <div class="bottom-bar">
+      <div class="footer-meta">Clinaza Healthcare Technologies • Confidential Pitch</div>
+      <div class="footer-meta">Slide 8 of 8</div>
+    </div>
+  </div>
+
+</body>
+</html>

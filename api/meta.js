@@ -64,6 +64,16 @@ const STATIC_ROUTES = {
     desc: 'Automated Google review helper and patient feedback generator for Clinaza partner clinics.',
     h1: 'Clinic Review & Patient Feedback Assistant',
     robots: 'noindex, nofollow'
+  },
+  '/clinic-onboarding': {
+    title: 'Partner Clinic Onboarding — Clinaza Point-of-Care EMI',
+    desc: 'Official partner clinic onboarding portal to activate instant point-of-care patient EMI financing.',
+    h1: 'Partner Clinic Onboarding & Point-of-Care EMI Activation'
+  },
+  '/pilot-onboarding': {
+    title: 'Partner Clinic Onboarding — Clinaza Point-of-Care EMI',
+    desc: 'Official partner clinic onboarding portal to activate instant point-of-care patient EMI financing.',
+    h1: 'Partner Clinic Onboarding & Point-of-Care EMI Activation'
   }
 };
 
@@ -97,7 +107,9 @@ export default async function handler(req, res) {
     html = html.replace(/<meta\s+property=["']og:title["']\s+content=["'][\s\S]*?["']\s*\/?>/i, `<meta property="og:title" content="${meta.title.replace(/"/g, '&quot;')}" />`);
     html = html.replace(/<meta\s+property=["']twitter:title["']\s+content=["'][\s\S]*?["']\s*\/?>/i, `<meta property="twitter:title" content="${meta.title.replace(/"/g, '&quot;')}" />`);
     html = html.replace(/<meta\s+property=["']og:description["']\s+content=["'][\s\S]*?["']\s*\/?>/i, `<meta property="og:description" content="${meta.desc.replace(/"/g, '&quot;')}" />`);
-    html = html.replace(/<meta\s+property=["']twitter:description["']\s+content=["'][\s\S]*?["']\s*\/?>/i, `<meta property="twitter:description" content="${meta.desc.replace(/"/g, '&quot;')}" />`);
+    const ogImage = meta.image || 'https://www.clinaza.in/og-clinaza.png';
+    html = html.replace(/<meta\s+property=["']og:image["']\s+content=["'][\s\S]*?["']\s*\/?>/i, `<meta property="og:image" content="${ogImage}" />`);
+    html = html.replace(/<meta\s+property=["']twitter:image["']\s+content=["'][\s\S]*?["']\s*\/?>/i, `<meta property="twitter:image" content="${ogImage}" />`);
     if (meta.robots) {
       html = html.replace(/<meta\s+name=["']robots["']\s+content=["'][\s\S]*?["']\s*\/?>/i, `<meta name="robots" content="${meta.robots}" />`);
     }

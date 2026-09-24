@@ -73,7 +73,7 @@ export default function PartnerClinicOnboardingPage() {
   };
 
   const copyShareLink = () => {
-    navigator.clipboard.writeText(window.location.origin + '/pilot-onboarding');
+    navigator.clipboard.writeText(window.location.origin + '/clinic-onboarding');
     setCopiedLink(true);
     toast.success('Share link copied to clipboard!');
     setTimeout(() => setCopiedLink(false), 2500);
@@ -82,8 +82,9 @@ export default function PartnerClinicOnboardingPage() {
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 font-sans selection:bg-[#0867E8] selection:text-white pb-20">
       <SEOHead 
-        title="Partner Clinic Accreditation — Clinaza Point-of-Care EMI"
-        description="Accreditation portal for partner dental clinics to activate instant point-of-care patient EMI financing."
+        title="Partner Clinic Onboarding — Clinaza Point-of-Care EMI"
+        description="Official onboarding portal for partner dental clinics to activate instant point-of-care patient EMI financing."
+        image="https://www.clinaza.in/og-clinaza.png"
       />
 
       {/* Top Header */}
@@ -98,7 +99,7 @@ export default function PartnerClinicOnboardingPage() {
             <div className="flex items-center gap-2">
               <span className="text-xs font-black tracking-widest text-[#0B2450] uppercase">CLINAZA</span>
               <span className="px-2 py-0.5 rounded-full bg-blue-50 border border-blue-200 text-[10px] font-bold text-[#0867E8]">
-                PARTNER ACCREDITATION
+                CLINIC ONBOARDING
               </span>
             </div>
             <p className="text-[10px] text-slate-500 font-mono">Point-of-Care Patient EMI Network</p>
@@ -126,10 +127,10 @@ export default function PartnerClinicOnboardingPage() {
             <span>Healthcare Patient EMI Integration</span>
           </div>
           <h1 className="text-2xl sm:text-4xl font-black text-[#0B2450] tracking-tight">
-            Clinic Partner <span className="text-[#0867E8]">Accreditation</span>
+            Clinic Partner <span className="text-[#0867E8]">Onboarding</span>
           </h1>
           <p className="text-xs sm:text-sm text-slate-600 max-w-lg mx-auto leading-relaxed">
-            Please confirm your clinic's high-ticket procedure volume to allocate pre-approved patient financing lines with our lending partner (ShopSe).
+            Please confirm your clinic's high-ticket procedure volume to activate pre-approved patient financing lines with our lending partner (ShopSe).
           </p>
         </div>
 

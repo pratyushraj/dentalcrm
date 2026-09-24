@@ -47,9 +47,9 @@ export default function AppRoutes() {
           <Route path="/loans" element={<Navigate to="/#check-eligibility" replace />} />
           <Route path="/apply" element={<Navigate to="/#check-eligibility" replace />} />
           <Route path="/demo/loan" element={<LazyRoute><LoanDemoPage /></LazyRoute>} />
-          <Route path="/loan/demo" element={<LazyRoute><LoanDemoPage /></LazyRoute>} />
-          <Route path="/pilot-onboarding" element={<LazyRoute><PartnerClinicOnboardingPage /></LazyRoute>} />
-          <Route path="/clinic-pilot" element={<Navigate to="/pilot-onboarding" replace />} />
+          <Route path="/clinic-onboarding" element={<LazyRoute><PartnerClinicOnboardingPage /></LazyRoute>} />
+          <Route path="/pilot-onboarding" element={<Navigate to="/clinic-onboarding" replace />} />
+          <Route path="/clinic-pilot" element={<Navigate to="/clinic-onboarding" replace />} />
 
           {/* Review Assistant Landing Page */}
           <Route path="/review/assist" element={<LazyRoute><ReviewAssistant /></LazyRoute>} />

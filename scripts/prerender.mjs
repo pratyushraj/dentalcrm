@@ -14,7 +14,14 @@ const ROOT = join(__dirname, '..');
 const DIST = join(ROOT, 'dist');
 const pkg = JSON.parse(readFileSync(join(ROOT, 'package.json'), 'utf-8'));
 const routes = pkg.reactSnap?.include || ['/'];
-const waitFor = pkg.reactSnap?.waitFor || 3000;
+// Allow skipping prerender via SKIP_PRERENDER=1 or PRERENDER=0
+if (process.env.SKIP_PRERENDER === '1' || process.env.PRERENDER === '0') {
+  console.log('[prerender] ⏩ Skipping prerender via environment flag.');
+  process.exit(0);
+}
+
+const CONCURRENCY = parseInt(process.env.PRERENDER_CONCURRENCY || '6', 10);
+const waitFor = Math.min(pkg.reactSnap?.waitFor || 1000, 1200);
 const PORT = pkg.reactSnap?.port || 45789;
 
 const chromePaths = [
@@ -33,6 +40,7 @@ if (!executablePath) {
 }
 
 console.log(`[prerender] Chrome: ${executablePath}`);
+console.log(`[prerender] Concurrency: ${CONCURRENCY} workers | waitFor: ${waitFor}ms`);
 
 // Dynamic import of puppeteer (may be puppeteer or puppeteer-core)
 let puppeteer;
@@ -72,35 +80,68 @@ console.log(`[prerender] Server ready at http://localhost:${PORT}`);
 const browser = await puppeteer.launch({
   executablePath,
   headless: true,
-  args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage', '--disable-gpu'],
+  args: [
+    '--no-sandbox',
+    '--disable-setuid-sandbox',
+    '--disable-dev-shm-usage',
+    '--disable-gpu',
+    '--disable-extensions',
+    '--blink-settings=imagesEnabled=false' // Skip image downloads during static HTML snapshotting for maximum speed
+  ],
 });
 
 let success = 0, failed = 0;
+let queueIndex = 0;
 
-for (const route of routes) {
-  try {
-    const page = await browser.newPage();
-    await page.goto(`http://localhost:${PORT}${route}`, { waitUntil: 'networkidle0', timeout: 30000 });
-    // Wait for react-helmet-async to apply tags
-    await new Promise(r => setTimeout(r, waitFor));
-    const html = await page.content();
-    await page.close();
-
-    const filePath = route === '/'
-      ? join(DIST, 'index.html')
-      : join(DIST, route.replace(/^\//, ''), 'index.html');
-    mkdirSync(dirname(filePath), { recursive: true });
-    writeFileSync(filePath, html, 'utf-8');
-    success++;
-    if (success % 20 === 0 || success === routes.length) {
-      console.log(`[prerender] ${success}/${routes.length} done...`);
+async function worker() {
+  const page = await browser.newPage();
+  // Block heavy assets (images, fonts, media) to make DOM snapshotting blazing fast
+  await page.setRequestInterception(true);
+  page.on('request', (req) => {
+    const resourceType = req.resourceType();
+    if (['image', 'media', 'font'].includes(resourceType)) {
+      req.abort();
+    } else {
+      req.continue();
     }
-  } catch (e) {
-    console.warn(`[prerender] ⚠️  Error at ${route}: ${e.message}`);
-    failed++;
+  });
+
+  while (queueIndex < routes.length) {
+    const route = routes[queueIndex++];
+    if (!route) break;
+
+    try {
+      await page.goto(`http://localhost:${PORT}${route}`, { waitUntil: 'domcontentloaded', timeout: 15000 });
+      if (waitFor > 0) {
+        await new Promise(r => setTimeout(r, waitFor));
+      }
+      const html = await page.content();
+
+      const filePath = route === '/'
+        ? join(DIST, 'index.html')
+        : join(DIST, route.replace(/^\//, ''), 'index.html');
+      mkdirSync(dirname(filePath), { recursive: true });
+      writeFileSync(filePath, html, 'utf-8');
+      success++;
+
+      if (success % 25 === 0 || success === routes.length) {
+        console.log(`[prerender] ${success}/${routes.length} routes snapshotted...`);
+      }
+    } catch (e) {
+      console.warn(`[prerender] ⚠️  Error at ${route}: ${e.message}`);
+      failed++;
+    }
   }
+
+  await page.close();
 }
+
+console.log(`[prerender] Running ${CONCURRENCY} parallel workers across ${routes.length} routes...`);
+const startTime = Date.now();
+const workers = Array.from({ length: CONCURRENCY }, () => worker());
+await Promise.all(workers);
 
 await browser.close();
 preview.kill();
-console.log(`[prerender] ✅ Complete: ${success} succeeded, ${failed} failed out of ${routes.length} routes`);
+const elapsedSec = ((Date.now() - startTime) / 1000).toFixed(1);
+console.log(`[prerender] ⚡ Finished in ${elapsedSec}s: ${success} succeeded, ${failed} failed out of ${routes.length} routes`);

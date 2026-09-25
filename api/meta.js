@@ -182,15 +182,14 @@ export default async function handler(req, res) {
       </nav>
     </div>`;
 
-    const userAgent = req.headers['user-agent'] || '';
-    const isBot = /bot|googlebot|crawler|spider|robot|crawling|whatsapp|facebookexternalhit|meta-externalagent|twitterbot|linkedinbot|slackbot|telegrambot|applebot|bingbot|yandex|duckduckbot|baiduspider/i.test(userAgent);
-
-    if (isBot) {
-      if (html.includes('<div id="root"></div>')) {
-        html = html.replace('<div id="root"></div>', `<div id="root">${ssrContent}</div>`);
-      } else if (html.includes('<div id="root">')) {
-        html = html.replace(/<div id="root">[\s\S]*?<\/div>/, `<div id="root">${ssrContent}</div>`);
-      }
+    // Always inject SSR content for every request (not just known bots).
+    // React will hydrate and replace this on client-side rendering.
+    // This ensures any crawler — including non-standard ones like OpenSEO — sees
+    // the H1, description text, and outgoing links immediately.
+    if (html.includes('<div id="root"></div>')) {
+      html = html.replace('<div id="root"></div>', `<div id="root">${ssrContent}</div>`);
+    } else if (html.includes('<div id="root">')) {
+      html = html.replace(/<div id="root">[\s\S]*?<\/div>/, `<div id="root">${ssrContent}</div>`);
     }
   }
 

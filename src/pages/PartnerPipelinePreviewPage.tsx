@@ -17,9 +17,9 @@ import {
 import { SEOHead } from '@/components/seo/SEOHead';
 
 interface ClinicRow {
+  // NOTE: clinic_name, doctor_name, phone, email are intentionally EXCLUDED.
+  // These are sensitive fields protected by Supabase RLS — never fetched on the client.
   id: string;
-  clinic_name: string;
-  doctor_name: string | null;
   city: string;
   chairs: string | null;
   premises_type: string | null;
@@ -35,15 +35,9 @@ interface ClinicRow {
   created_at: string;
 }
 
-// Generate consistent masked identifier: e.g. "CLN-01"
-function maskDoctor(name: string | null): string {
-  if (!name) return 'Dr. Verified Practitioner';
-  const clean = name.replace(/^dr\.?\s*/i, '').trim();
-  const parts = clean.split(' ').filter(Boolean);
-  if (parts.length === 1) {
-    return `Dr. ${parts[0][0].toUpperCase()}••••`;
-  }
-  return `Dr. ${parts.map(p => `${p[0].toUpperCase()}••••`).join(' ')}`;
+// Generate sequential masked doctor ID — real names are never fetched from DB
+function maskDoctorById(idx: number): string {
+  return `Dr. ••••• (Lead-${String(idx + 1).padStart(2, '0')})`;
 }
 
 function cleanCityName(raw: string): string {
@@ -62,13 +56,15 @@ function cleanCityName(raw: string): string {
   return clean;
 }
 
-function getClinicDescriptor(name: string): string {
-  const isImplant = /implant/i.test(name);
-  const isOrtho = /ortho|braces|align/i.test(name);
-  const isLab = /lab/i.test(name);
-  const isHospital = /hospital|multispeciality/i.test(name);
+function getClinicDescriptor(specialties: string[] | null): string {
+  const s = specialties ?? [];
+  const isImplant = s.some(x => /implant/i.test(x));
+  const isOrtho = s.some(x => /ortho|braces|align/i.test(x));
+  const isLab = s.some(x => /lab/i.test(x));
+  const isHospital = s.some(x => /hospital|multispeciality/i.test(x));
   
   if (isLab) return 'Dental Laboratory & Prosthetics Network';
+  if (isImplant && isOrtho) return 'Advanced Implant & Orthodontic Practice';
   if (isImplant) return 'Advanced Implant & Surgical Centre';
   if (isOrtho) return 'Orthodontic & Clear Aligner Practice';
   if (isHospital) return 'Multispeciality Dental Hospital';
@@ -85,9 +81,11 @@ export default function PartnerPipelinePreviewPage() {
     async function loadData() {
       setLoading(true);
       try {
+        // SECURITY: Never request clinic_name, doctor_name, phone, or email.
+        // Those are protected by Supabase RLS — only service_role / authenticated admins can read them.
         const { data, error } = await supabase
           .from('clinic_onboardings')
-          .select('id, clinic_name, doctor_name, city, chairs, premises_type, google_rating, review_count, specialties, avg_monthly_cases, expected_emi_loans, avg_ticket_size, has_current_account, business_proof_type, has_cancelled_cheque, created_at')
+          .select('id, city, chairs, premises_type, google_rating, review_count, specialties, avg_monthly_cases, expected_emi_loans, avg_ticket_size, has_current_account, business_proof_type, has_cancelled_cheque, created_at')
           .order('created_at', { ascending: false });
 
         if (!error && data) {
@@ -122,7 +120,7 @@ export default function PartnerPipelinePreviewPage() {
 
   const exportMaskedCsv = () => {
     const headers = [
-      'Partner ID', 'Clinic Category', 'Doctor Title (Masked)', 'City', 'Dental Chairs',
+      'Partner ID', 'Clinic Category', 'Doctor Lead (Masked)', 'City', 'Dental Chairs',
       'Premises', 'Google Rating', 'Google Reviews', 'Common Treatments',
       'Monthly Cases (>25k)', 'Expected Monthly Loans', 'Avg Ticket Size',
       'Business Current A/C', 'KYC Business Proof', 'Cancelled Cheque Ready', 'Accredited Date'
@@ -133,8 +131,8 @@ export default function PartnerPipelinePreviewPage() {
       const cityCode = city.slice(0, 3).toUpperCase().replace(/[^A-Z]/g, 'IND');
       return [
         `CLN-${cityCode}-${String(i + 1).padStart(2, '0')}`,
-        getClinicDescriptor(r.clinic_name),
-        maskDoctor(r.doctor_name),
+        getClinicDescriptor(r.specialties),
+        maskDoctorById(i),
         city,
         r.chairs || 'Not specified',
         r.premises_type || '—',
@@ -302,7 +300,7 @@ export default function PartnerPipelinePreviewPage() {
                   const cityLabel = cleanCityName(row.city);
                   const cityCode = cityLabel.slice(0, 3).toUpperCase().replace(/[^A-Z]/g, 'IND');
                   const merchantId = `CLN-${cityCode}-${String(idx + 1).padStart(2, '0')}`;
-                  const descriptor = getClinicDescriptor(row.clinic_name);
+                  const descriptor = getClinicDescriptor(row.specialties);
 
                   return (
                     <tr key={row.id} className="hover:bg-blue-50/40 transition-colors">
@@ -337,7 +335,7 @@ export default function PartnerPipelinePreviewPage() {
                       <td className="px-4 py-4 font-semibold text-slate-800 whitespace-nowrap">
                         <span className="inline-flex items-center gap-1.5 bg-slate-100/70 border border-slate-200 px-2.5 py-1 rounded-lg text-xs font-mono">
                           <Lock size={11} className="text-slate-400" />
-                          {maskDoctor(row.doctor_name)}
+                          {maskDoctorById(idx)}
                         </span>
                       </td>
 

@@ -62,6 +62,10 @@
       "destination": "/api/meta"
     },
     {
+      "source": "/",
+      "destination": "/api/meta"
+    },
+    {
       "source": "/((?!api/|assets/|favicon|.*\\.(?:jpg|jpeg|png|webp|svg|ico|json|txt|xml)|sw\\.js|site\\.webmanifest|manifest\\.json).*)",
       "destination": "/index.html"
     }

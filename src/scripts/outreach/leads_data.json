@@ -15478,10 +15478,10 @@
     "state": "Maharashtra",
     "specialty": "Cosmetic Care",
     "source": "verified_live_smtp_crawl_2026",
-    "status": "pending",
-    "resend_id": null,
+    "status": "sent",
+    "resend_id": "01a0d774-cc37-7859-8f54-021ee6117c37",
     "created_at": "2026-09-25 07:18:44",
-    "sent_at": null
+    "sent_at": "2026-09-25 07:25:51"
   },
   {
     "id": 1315,
@@ -15492,10 +15492,10 @@
     "state": "Maharashtra",
     "specialty": "Restorative",
     "source": "verified_live_smtp_crawl_2026",
-    "status": "pending",
-    "resend_id": null,
+    "status": "sent",
+    "resend_id": "01a0d774-d956-71cd-91ba-67d208971f45",
     "created_at": "2026-09-25 07:18:44",
-    "sent_at": null
+    "sent_at": "2026-09-25 07:25:54"
   },
   {
     "id": 1316,
@@ -15506,10 +15506,10 @@
     "state": "Maharashtra",
     "specialty": "General Dental",
     "source": "verified_live_smtp_crawl_2026",
-    "status": "pending",
-    "resend_id": null,
+    "status": "sent",
+    "resend_id": "01a0d774-e593-7479-8f44-4170fa715d13",
     "created_at": "2026-09-25 07:18:44",
-    "sent_at": null
+    "sent_at": "2026-09-25 07:25:57"
   },
   {
     "id": 1317,
@@ -15520,10 +15520,10 @@
     "state": "Karnataka",
     "specialty": "Implant Center",
     "source": "verified_live_smtp_crawl_2026",
-    "status": "pending",
-    "resend_id": null,
+    "status": "sent",
+    "resend_id": "01a0d774-f162-76ff-ba63-2a1b33ce498b",
     "created_at": "2026-09-25 07:18:44",
-    "sent_at": null
+    "sent_at": "2026-09-25 07:26:00"
   },
   {
     "id": 1318,
@@ -15534,10 +15534,10 @@
     "state": "Maharashtra",
     "specialty": "Smile Design",
     "source": "verified_live_smtp_crawl_2026",
-    "status": "pending",
-    "resend_id": null,
+    "status": "sent",
+    "resend_id": "01a0d774-fbf5-767f-bd61-2e8af015d076",
     "created_at": "2026-09-25 07:18:44",
-    "sent_at": null
+    "sent_at": "2026-09-25 07:26:03"
   },
   {
     "id": 1319,
@@ -15548,10 +15548,10 @@
     "state": "Maharashtra",
     "specialty": "Root Canal",
     "source": "verified_live_smtp_crawl_2026",
-    "status": "pending",
-    "resend_id": null,
+    "status": "sent",
+    "resend_id": "01a0d775-07ec-769f-89e4-517d057dccb8",
     "created_at": "2026-09-25 07:18:44",
-    "sent_at": null
+    "sent_at": "2026-09-25 07:26:06"
   },
   {
     "id": 1320,
@@ -15562,10 +15562,10 @@
     "state": "Telangana",
     "specialty": "Laser Implants",
     "source": "verified_live_smtp_crawl_2026",
-    "status": "pending",
-    "resend_id": null,
+    "status": "sent",
+    "resend_id": "01a0d775-1420-75f8-9b5f-1cdf86744a80",
     "created_at": "2026-09-25 07:18:44",
-    "sent_at": null
+    "sent_at": "2026-09-25 07:26:09"
   },
   {
     "id": 1321,
@@ -15576,10 +15576,10 @@
     "state": "Gujarat",
     "specialty": "Clear Aligners",
     "source": "verified_live_smtp_crawl_2026",
-    "status": "pending",
-    "resend_id": null,
+    "status": "sent",
+    "resend_id": "01a0d775-21c0-78b0-aef5-4e9c1fb13c86",
     "created_at": "2026-09-25 07:18:44",
-    "sent_at": null
+    "sent_at": "2026-09-25 07:26:13"
   },
   {
     "id": 1322,
@@ -15590,10 +15590,10 @@
     "state": "Delhi NCR",
     "specialty": "Implantology & Surgery",
     "source": "verified_live_smtp_crawl_2026",
-    "status": "pending",
-    "resend_id": null,
+    "status": "sent",
+    "resend_id": "01a0d775-2cdd-7100-b932-fd2a5882f280",
     "created_at": "2026-09-25 07:18:44",
-    "sent_at": null
+    "sent_at": "2026-09-25 07:26:16"
   },
   {
     "id": 1323,
@@ -15604,10 +15604,10 @@
     "state": "Haryana",
     "specialty": "Clear Aligners",
     "source": "verified_live_smtp_crawl_2026",
-    "status": "pending",
-    "resend_id": null,
+    "status": "sent",
+    "resend_id": "01a0d775-3912-745b-825b-1ce2c424a458",
     "created_at": "2026-09-25 07:18:44",
-    "sent_at": null
+    "sent_at": "2026-09-25 07:26:19"
   },
   {
     "id": 1324,
@@ -15618,10 +15618,10 @@
     "state": "Delhi NCR",
     "specialty": "Orthodontics",
     "source": "verified_live_smtp_crawl_2026",
-    "status": "pending",
-    "resend_id": null,
+    "status": "sent",
+    "resend_id": "01a0d775-4629-754d-a555-ab50f6c86535",
     "created_at": "2026-09-25 07:18:44",
-    "sent_at": null
+    "sent_at": "2026-09-25 07:26:22"
   },
   {
     "id": 1325,
@@ -15632,10 +15632,10 @@
     "state": "Rajasthan",
     "specialty": "Oral Surgery",
     "source": "verified_live_smtp_crawl_2026",
-    "status": "pending",
-    "resend_id": null,
+    "status": "sent",
+    "resend_id": "01a0d775-50a9-760f-88c8-20eedbc216f6",
     "created_at": "2026-09-25 07:18:44",
-    "sent_at": null
+    "sent_at": "2026-09-25 07:26:25"
   },
   {
     "id": 1326,
@@ -15646,10 +15646,10 @@
     "state": "West Bengal",
     "specialty": "Aesthetic Dentistry",
     "source": "verified_live_smtp_crawl_2026",
-    "status": "pending",
-    "resend_id": null,
+    "status": "sent",
+    "resend_id": "01a0d775-5ac7-749b-bc50-a6286cb560fe",
     "created_at": "2026-09-25 07:18:44",
-    "sent_at": null
+    "sent_at": "2026-09-25 07:26:27"
   },
   {
     "id": 1327,
@@ -15660,10 +15660,10 @@
     "state": "Gujarat",
     "specialty": "Implant Center",
     "source": "verified_live_smtp_crawl_2026",
-    "status": "pending",
-    "resend_id": null,
+    "status": "sent",
+    "resend_id": "01a0d775-6623-70bd-b2c2-5a26239b1152",
     "created_at": "2026-09-25 07:18:44",
-    "sent_at": null
+    "sent_at": "2026-09-25 07:26:30"
   },
   {
     "id": 1328,
@@ -15674,10 +15674,10 @@
     "state": "Gujarat",
     "specialty": "Orthodontics & Implants",
     "source": "verified_live_smtp_crawl_2026",
-    "status": "pending",
-    "resend_id": null,
+    "status": "sent",
+    "resend_id": "01a0d775-72e4-77e2-9087-5e1e98519bed",
     "created_at": "2026-09-25 07:18:44",
-    "sent_at": null
+    "sent_at": "2026-09-25 07:26:33"
   },
   {
     "id": 1329,
@@ -15688,10 +15688,10 @@
     "state": "Gujarat",
     "specialty": "Restorative Dentistry",
     "source": "verified_live_smtp_crawl_2026",
-    "status": "pending",
-    "resend_id": null,
+    "status": "sent",
+    "resend_id": "01a0d775-7eb3-7264-9306-c929147c3ebb",
     "created_at": "2026-09-25 07:18:44",
-    "sent_at": null
+    "sent_at": "2026-09-25 07:26:36"
   },
   {
     "id": 1330,
@@ -15702,10 +15702,10 @@
     "state": "Gujarat",
     "specialty": "Implantology",
     "source": "verified_live_smtp_crawl_2026",
-    "status": "pending",
-    "resend_id": null,
+    "status": "sent",
+    "resend_id": "01a0d775-8aee-74df-a738-19c66b60aa80",
     "created_at": "2026-09-25 07:18:44",
-    "sent_at": null
+    "sent_at": "2026-09-25 07:26:39"
   },
   {
     "id": 1331,
@@ -15716,9 +15716,9 @@
     "state": "Telangana",
     "specialty": "Full Mouth Rehabilitation",
     "source": "verified_live_smtp_crawl_2026",
-    "status": "pending",
-    "resend_id": null,
+    "status": "sent",
+    "resend_id": "01a0d775-973f-7498-aa14-c6d0759fc69b",
     "created_at": "2026-09-25 07:18:44",
-    "sent_at": null
+    "sent_at": "2026-09-25 07:26:43"
   }
 ]

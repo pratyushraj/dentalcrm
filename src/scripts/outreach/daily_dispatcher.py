@@ -58,6 +58,7 @@ def create_email_payload(lead):
     <div class="highlight-box">
       <strong>How Clinaza empowers {clinic_name}:</strong>
       <ul>
+        <li><strong>Direct Clinic Disbursement</strong>: Loan proceeds are settled directly into your clinic's business current account — not to the patient.</li>
         <li><strong>Instant Patient Financing</strong>: Eligible patients get instant, paperless medical EMI approvals (₹10,000 – ₹5,00,000) in minutes directly at your front desk.</li>
         <li><strong>Convert High-Ticket Cases</strong>: Eliminate drop-offs on expensive treatments (implants, aligners, crowns, full-mouth rehab) by letting patients split costs into affordable EMIs.</li>
         <li><strong>Zero Financial Liability</strong>: Handled directly by 13+ RBI-regulated NBFC lending partners — zero credit risk or collection burden on your clinic.</li>
@@ -68,6 +69,7 @@ def create_email_payload(lead):
     <p>Would you or your clinic manager be open for a quick 5-minute conversation or demo this week to see how this works for {clinic_name}?</p>
     
     <p>
+      <a href="https://clinaza.in/clinic-onboarding?utm_source=cold_email&utm_medium=email&utm_campaign=doctor_outreach" class="btn" style="background-color: #0B2450; color: #ffffff; text-decoration: none; padding: 10px 18px; border-radius: 6px; font-weight: bold; display: inline-block; margin-right: 8px;">Clinic Onboarding (60s) →</a>
       <a href="https://wa.me/917292984244?text=Hi%20Pratyush,%20interested%20in%20learning%20more%20about%20Clinaza%20for%20our%20clinic" class="btn" style="background-color: #25D366; color: #ffffff; text-decoration: none; padding: 10px 18px; border-radius: 6px; font-weight: bold; display: inline-block; margin-right: 8px;">Chat on WhatsApp →</a>
       <a href="https://clinaza.in" class="btn" style="background-color: #0867E8; color: #ffffff; text-decoration: none; padding: 10px 18px; border-radius: 6px; font-weight: bold; display: inline-block;">Explore Website →</a>
     </p>
@@ -75,7 +77,7 @@ def create_email_payload(lead):
     <div class="footer">
       <p style="margin-bottom: 4px;"><strong>Pratyush Raj</strong><br>Founder, Clinaza Healthcare Technologies</p>
       <p style="margin-bottom: 4px;">📱 WhatsApp / Direct: <a href="https://wa.me/917292984244" style="color: #0867E8; text-decoration: none; font-weight: bold;">+91 7292984244</a></p>
-      <p style="margin-bottom: 4px;">🌐 Website: <a href="https://clinaza.in">clinaza.in</a> | 📸 Instagram: <a href="https://instagram.com/clinaza.in">@clinaza.in</a></p>
+      <p style="margin-bottom: 4px;">🌐 Website: <a href="https://clinaza.in">clinaza.in</a> | 📋 Onboarding: <a href="https://clinaza.in/clinic-onboarding">clinaza.in/clinic-onboarding</a></p>
       <p style="font-size: 11px; color: #94a3b8; margin-top: 12px;">If you prefer not to receive updates, reply "Unsubscribe" and we will remove your email immediately.</p>
     </div>
   </div>
@@ -89,10 +91,14 @@ I hope you're having a productive week at {clinic_name}.
 We work with leading dental surgeons and practices across India to eliminate patient drop-offs on high-ticket treatments (implants, aligners, crowns, and full-mouth rehabilitation).
 
 How Clinaza empowers {clinic_name}:
+- Direct Clinic Disbursement: Loan proceeds are settled directly into your clinic current account (not to the patient).
 - Instant Patient Financing: Paperless medical EMI approvals (₹10,000 - ₹5,00,000) in minutes at your front desk.
 - Convert High-Ticket Cases: Eliminate patient drop-offs on expensive treatments (implants, aligners, crowns) with flexible EMIs.
 - Zero Financial Liability: Handled directly by 13+ RBI-regulated NBFC lenders with zero credit risk or collection burden on your clinic.
 - Free Clinic Tools: Digital NABH consent generator, prescription maker, and patient recall dashboard.
+
+Onboard your clinic in 60 seconds:
+https://clinaza.in/clinic-onboarding?utm_source=cold_email&utm_medium=email&utm_campaign=doctor_outreach
 
 Would you be open for a brief 5-minute chat or demo this week? You can reply to this email or reach me directly on WhatsApp at +91 7292984244.
 

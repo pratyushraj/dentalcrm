@@ -35,32 +35,44 @@ interface ClinicRow {
   created_at: string;
 }
 
-// Generate consistent masked identifier: e.g. "CLN-VISAKH-01" or "Dr. S**** C****"
+// Generate consistent masked identifier: e.g. "CLN-01"
 function maskDoctor(name: string | null): string {
   if (!name) return 'Dr. Verified Practitioner';
   const clean = name.replace(/^dr\.?\s*/i, '').trim();
   const parts = clean.split(' ').filter(Boolean);
   if (parts.length === 1) {
-    return `Dr. ${parts[0][0]}****`;
+    return `Dr. ${parts[0][0].toUpperCase()}••••`;
   }
-  return `Dr. ${parts.map(p => `${p[0]}****`).join(' ')}`;
+  return `Dr. ${parts.map(p => `${p[0].toUpperCase()}••••`).join(' ')}`;
 }
 
-function maskClinic(name: string, city: string, index: number): string {
-  // Extract category hints from name (e.g. Implant, Ortho, Care)
+function cleanCityName(raw: string): string {
+  if (!raw) return 'India';
+  // Clean values like "patna and bihar" -> "Patna, Bihar" or "Visakhapatnam Andhrapradesh" -> "Visakhapatnam, AP"
+  let clean = raw.trim();
+  if (/patna/i.test(clean)) return 'Patna, Bihar';
+  if (/visakhapatnam/i.test(clean)) return 'Visakhapatnam, AP';
+  if (/hanumangarh/i.test(clean)) return 'Hanumangarh, RJ';
+  if (/dholpur/i.test(clean)) return 'Dholpur, RJ';
+  if (/buldhana/i.test(clean)) return 'Buldhana, MH';
+  if (/ludhiana/i.test(clean)) return 'Ludhiana, Punjab';
+  if (/chandigarh/i.test(clean)) return 'Chandigarh (UT)';
+  if (/hyderabad/i.test(clean)) return 'Hyderabad, TS';
+  if (/mumbai/i.test(clean)) return 'Mumbai, MH';
+  return clean;
+}
+
+function getClinicDescriptor(name: string): string {
   const isImplant = /implant/i.test(name);
   const isOrtho = /ortho|braces|align/i.test(name);
+  const isLab = /lab/i.test(name);
   const isHospital = /hospital|multispeciality/i.test(name);
   
-  let descriptor = 'Dental Clinic & Healthcare';
-  if (isImplant) descriptor = 'Advanced Implant & Dental Centre';
-  else if (isOrtho) descriptor = 'Orthodontics & Clear Aligner Practice';
-  else if (isHospital) descriptor = 'Multispeciality Dental Hospital';
-
-  const cityCode = city.slice(0, 3).toUpperCase().replace(/[^A-Z]/g, 'IND');
-  const code = `CLN-${cityCode}-${String(index + 1).padStart(2, '0')}`;
-
-  return `${code} • ${descriptor}`;
+  if (isLab) return 'Dental Laboratory & Prosthetics Network';
+  if (isImplant) return 'Advanced Implant & Surgical Centre';
+  if (isOrtho) return 'Orthodontic & Clear Aligner Practice';
+  if (isHospital) return 'Multispeciality Dental Hospital';
+  return 'Cosmetic & Family Dental Practice';
 }
 
 export default function PartnerPipelinePreviewPage() {
@@ -116,24 +128,28 @@ export default function PartnerPipelinePreviewPage() {
       'Business Current A/C', 'KYC Business Proof', 'Cancelled Cheque Ready', 'Accredited Date'
     ];
     const escape = (v: string | null | undefined) => `"${(v ?? '').replace(/"/g, '""')}"`;
-    const lines = filtered.map((r, i) => [
-      `CLN-${r.city.slice(0, 3).toUpperCase()}-${String(i + 1).padStart(2, '0')}`,
-      maskClinic(r.clinic_name, r.city, i).split(' • ')[1],
-      maskDoctor(r.doctor_name),
-      r.city,
-      r.chairs || 'Not specified',
-      r.premises_type || '—',
-      r.google_rating ? `${r.google_rating} ★` : '—',
-      r.review_count || '—',
-      (r.specialties ?? []).join('; '),
-      r.avg_monthly_cases || '—',
-      r.expected_emi_loans || '—',
-      r.avg_ticket_size || '—',
-      r.has_current_account || '—',
-      r.business_proof_type || '—',
-      r.has_cancelled_cheque || '—',
-      new Date(r.created_at).toLocaleDateString('en-IN')
-    ].map(escape).join(','));
+    const lines = filtered.map((r, i) => {
+      const city = cleanCityName(r.city);
+      const cityCode = city.slice(0, 3).toUpperCase().replace(/[^A-Z]/g, 'IND');
+      return [
+        `CLN-${cityCode}-${String(i + 1).padStart(2, '0')}`,
+        getClinicDescriptor(r.clinic_name),
+        maskDoctor(r.doctor_name),
+        city,
+        r.chairs || 'Not specified',
+        r.premises_type || '—',
+        r.google_rating ? `${r.google_rating} ★` : '—',
+        r.review_count || '—',
+        (r.specialties ?? []).join('; '),
+        r.avg_monthly_cases || '—',
+        r.expected_emi_loans || '—',
+        r.avg_ticket_size || '—',
+        r.has_current_account || '—',
+        r.business_proof_type || '—',
+        r.has_cancelled_cheque || '—',
+        new Date(r.created_at).toLocaleDateString('en-IN')
+      ].map(escape).join(',');
+    });
 
     const csv = [headers.map(escape).join(','), ...lines].join('\n');
     const blob = new Blob([csv], { type: 'text/csv' });
@@ -264,102 +280,116 @@ export default function PartnerPipelinePreviewPage() {
           <div className="overflow-x-auto">
             <table className="w-full text-xs">
               <thead>
-                <tr className="border-b border-slate-100 bg-slate-50 text-left text-[11px] font-bold uppercase tracking-wider text-slate-500">
-                  <th className="px-4 py-3.5">Merchant ID & Profile</th>
-                  <th className="px-4 py-3.5">Doctor (Masked)</th>
-                  <th className="px-4 py-3.5">City</th>
-                  <th className="px-4 py-3.5 text-center">Current A/C</th>
-                  <th className="px-4 py-3.5 text-center">Cancelled Cheque</th>
-                  <th className="px-4 py-3.5">KYC Proof Type</th>
-                  <th className="px-4 py-3.5">Expected Monthly Loans</th>
-                  <th className="px-4 py-3.5">Avg Ticket Size</th>
+                <tr className="border-b border-slate-200 bg-slate-100/80 text-left text-[11px] font-black uppercase tracking-wider text-slate-600">
+                  <th className="px-5 py-4 min-w-[240px]">Accredited Partner Profile</th>
+                  <th className="px-4 py-4 min-w-[140px]">Doctor Lead</th>
+                  <th className="px-4 py-4 min-w-[150px]">Location</th>
+                  <th className="px-3 py-4 text-center">Current A/C</th>
+                  <th className="px-3 py-4 text-center">Cheque Ready</th>
+                  <th className="px-4 py-4 min-w-[160px]">KYC Proof</th>
+                  <th className="px-4 py-4 min-w-[140px]">Monthly Loan Demand</th>
+                  <th className="px-4 py-4 min-w-[130px]">Avg Ticket</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-50">
+              <tbody className="divide-y divide-slate-100">
                 {loading && (
-                  <tr><td colSpan={8} className="px-4 py-12 text-center text-slate-400">Loading merchant network…</td></tr>
+                  <tr><td colSpan={8} className="px-4 py-16 text-center text-slate-400">Loading verified merchant network…</td></tr>
                 )}
                 {!loading && filtered.length === 0 && (
-                  <tr><td colSpan={8} className="px-4 py-12 text-center text-slate-400">No clinics match your filter.</td></tr>
+                  <tr><td colSpan={8} className="px-4 py-16 text-center text-slate-400">No clinics match your filter.</td></tr>
                 )}
-                {filtered.map((row, idx) => (
-                  <tr key={row.id} className="hover:bg-slate-50/80 transition-colors">
-                    <td className="px-4 py-3.5">
-                      <p className="font-bold text-slate-900 leading-snug">
-                        {maskClinic(row.clinic_name, row.city, idx)}
-                      </p>
-                      <div className="flex items-center gap-1.5 flex-wrap mt-1">
-                        {row.chairs && (
-                          <span className="text-[10px] font-semibold text-slate-500 bg-slate-100 px-1.5 py-0.5 rounded">
-                            {row.chairs}
-                          </span>
-                        )}
-                        {row.premises_type && (
-                          <span className="text-[10px] font-semibold text-slate-500 bg-slate-100 px-1.5 py-0.5 rounded">
-                            {row.premises_type} Space
-                          </span>
-                        )}
-                        {row.google_rating && (
-                          <span className="text-[10px] font-bold text-amber-600 bg-amber-50 border border-amber-200 px-1.5 py-0.5 rounded">
-                            {row.google_rating} ★ {row.review_count ? `(${row.review_count})` : ''}
-                          </span>
-                        )}
-                      </div>
-                    </td>
+                {filtered.map((row, idx) => {
+                  const cityLabel = cleanCityName(row.city);
+                  const cityCode = cityLabel.slice(0, 3).toUpperCase().replace(/[^A-Z]/g, 'IND');
+                  const merchantId = `CLN-${cityCode}-${String(idx + 1).padStart(2, '0')}`;
+                  const descriptor = getClinicDescriptor(row.clinic_name);
 
-                    <td className="px-4 py-3.5 font-medium text-slate-700 whitespace-nowrap">
-                      <span className="flex items-center gap-1">
-                        <Lock size={11} className="text-slate-400" />
-                        {maskDoctor(row.doctor_name)}
-                      </span>
-                    </td>
+                  return (
+                    <tr key={row.id} className="hover:bg-blue-50/40 transition-colors">
+                      <td className="px-5 py-4">
+                        <div className="flex items-center gap-2">
+                          <span className="font-mono text-[11px] font-bold bg-slate-900 text-white px-2 py-0.5 rounded-md shrink-0">
+                            {merchantId}
+                          </span>
+                          <p className="font-bold text-slate-900 text-[13px] leading-snug">
+                            {descriptor}
+                          </p>
+                        </div>
+                        <div className="flex items-center gap-1.5 flex-wrap mt-2">
+                          {row.chairs && (
+                            <span className="text-[10px] font-bold text-slate-600 bg-slate-100 border border-slate-200 px-2 py-0.5 rounded-md">
+                              {row.chairs}
+                            </span>
+                          )}
+                          {row.premises_type && (
+                            <span className="text-[10px] font-bold text-slate-600 bg-slate-100 border border-slate-200 px-2 py-0.5 rounded-md">
+                              {row.premises_type} Space
+                            </span>
+                          )}
+                          {row.google_rating && (
+                            <span className="text-[10px] font-bold text-amber-700 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded-md flex items-center gap-1">
+                              ★ {row.google_rating} {row.review_count ? `(${row.review_count} reviews)` : ''}
+                            </span>
+                          )}
+                        </div>
+                      </td>
 
-                    <td className="px-4 py-3.5 whitespace-nowrap">
-                      <span className="flex items-center gap-1 font-semibold text-slate-800">
-                        <MapPin size={12} className="text-[#0867E8]" /> {row.city}
-                      </span>
-                    </td>
-
-                    <td className="px-4 py-3.5 text-center">
-                      {row.has_current_account === 'Yes' ? (
-                        <span className="inline-flex items-center gap-1 text-emerald-600 font-bold bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full text-[10px]">
-                          <CheckCircle2 size={11} /> Ready
+                      <td className="px-4 py-4 font-semibold text-slate-800 whitespace-nowrap">
+                        <span className="inline-flex items-center gap-1.5 bg-slate-100/70 border border-slate-200 px-2.5 py-1 rounded-lg text-xs font-mono">
+                          <Lock size={11} className="text-slate-400" />
+                          {maskDoctor(row.doctor_name)}
                         </span>
-                      ) : (
-                        <span className="text-slate-400">—</span>
-                      )}
-                    </td>
+                      </td>
 
-                    <td className="px-4 py-3.5 text-center">
-                      {row.has_cancelled_cheque === 'Yes' ? (
-                        <span className="inline-flex items-center gap-1 text-emerald-600 font-bold bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full text-[10px]">
-                          <CheckCircle2 size={11} /> Ready
+                      <td className="px-4 py-4 whitespace-nowrap">
+                        <span className="inline-flex items-center gap-1 font-bold text-slate-800 text-xs">
+                          <MapPin size={13} className="text-[#0867E8]" /> {cityLabel}
                         </span>
-                      ) : (
-                        <span className="text-slate-400">—</span>
-                      )}
-                    </td>
+                      </td>
 
-                    <td className="px-4 py-3.5">
-                      <span className="text-slate-700 font-medium text-[11px] line-clamp-1">
-                        {row.business_proof_type || 'GST / Registration'}
-                      </span>
-                    </td>
+                      <td className="px-3 py-4 text-center whitespace-nowrap">
+                        {row.has_current_account === 'Yes' ? (
+                          <span className="inline-flex items-center gap-1 text-emerald-700 font-black bg-emerald-100/70 border border-emerald-300 px-2.5 py-1 rounded-full text-[10px]">
+                            <CheckCircle2 size={12} /> Ready
+                          </span>
+                        ) : (
+                          <span className="text-slate-400 font-bold">—</span>
+                        )}
+                      </td>
 
-                    <td className="px-4 py-3.5">
-                      <span className="font-bold text-emerald-600">
-                        {row.expected_emi_loans ? `${row.expected_emi_loans} loans/mo` : '10–15 loans/mo'}
-                      </span>
-                      {row.avg_monthly_cases && (
-                        <p className="text-[10px] text-slate-400">{row.avg_monthly_cases} cases/mo</p>
-                      )}
-                    </td>
+                      <td className="px-3 py-4 text-center whitespace-nowrap">
+                        {row.has_cancelled_cheque === 'Yes' ? (
+                          <span className="inline-flex items-center gap-1 text-emerald-700 font-black bg-emerald-100/70 border border-emerald-300 px-2.5 py-1 rounded-full text-[10px]">
+                            <CheckCircle2 size={12} /> Ready
+                          </span>
+                        ) : (
+                          <span className="text-slate-400 font-bold">—</span>
+                        )}
+                      </td>
 
-                    <td className="px-4 py-3.5 font-bold text-slate-800 whitespace-nowrap">
-                      {row.avg_ticket_size ? `${row.avg_ticket_size}/case` : '₹40,000 – ₹60,000'}
-                    </td>
-                  </tr>
-                ))}
+                      <td className="px-4 py-4">
+                        <span className="inline-block bg-slate-50 border border-slate-200 text-slate-700 font-semibold px-2 py-1 rounded-lg text-[11px]">
+                          {row.business_proof_type || 'GST / Clinical Est. Certificate'}
+                        </span>
+                      </td>
+
+                      <td className="px-4 py-4">
+                        <span className="font-black text-emerald-600 text-xs block">
+                          {row.expected_emi_loans ? `${row.expected_emi_loans} loans/mo` : '10–12 loans/mo'}
+                        </span>
+                        {row.avg_monthly_cases && (
+                          <span className="text-[10px] text-slate-500 font-medium">
+                            {row.avg_monthly_cases} cases &gt; ₹25k
+                          </span>
+                        )}
+                      </td>
+
+                      <td className="px-4 py-4 font-black text-slate-900 whitespace-nowrap text-xs">
+                        {row.avg_ticket_size ? `${row.avg_ticket_size}/case` : '₹40,000 – ₹60,000'}
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>

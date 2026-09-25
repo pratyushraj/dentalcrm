@@ -76,6 +76,13 @@ const STATIC_ROUTES = {
     desc: 'Official partner clinic onboarding portal to activate instant point-of-care patient EMI financing.',
     h1: 'Partner Clinic Onboarding & Point-of-Care EMI Activation',
     image: 'https://www.clinaza.in/og-clinic-onboarding.png'
+  },
+  '/partner-pipeline': {
+    title: 'Clinaza Verified Merchant Clinic Network — Partner Pipeline',
+    desc: 'Verified partner clinic network accredited for point-of-care patient financing and instant treatment EMI disbursals.',
+    h1: 'Pre-Qualified Dental Merchant Network',
+    image: 'https://www.clinaza.in/og-clinic-onboarding.png',
+    robots: 'noindex, nofollow'
   }
 };
 

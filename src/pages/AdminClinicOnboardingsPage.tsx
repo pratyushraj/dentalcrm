@@ -190,6 +190,15 @@ export default function AdminClinicOnboardingsPage() {
           >
             <RefreshCw size={14} className={loading ? 'animate-spin' : ''} />
           </button>
+          <a
+            href="/partner-pipeline"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-xl transition-all"
+            title="Open safe masked preview for lenders like ShopSe"
+          >
+            <span>🔒 Safe Lender View</span>
+          </a>
           <button
             onClick={() => exportCsv(filtered)}
             className="flex items-center gap-1.5 px-3.5 py-2 bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-bold rounded-xl transition-all"

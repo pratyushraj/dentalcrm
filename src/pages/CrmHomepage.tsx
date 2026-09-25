@@ -1979,140 +1979,161 @@ export default function CrmHomepage() {
               </button>
             </div>
 
-            <div className="text-center space-y-2">
-              <span className="text-[10px] font-black text-[#0f7a75] uppercase tracking-widest">
-                {formType === 'clinic' ? 'CLINIC PARTNER APPLICATION' : 'NBFC & LENDER PARTNERSHIP'}
+            {/* Modern Partner CTA card */}
+            <div className="text-center space-y-3">
+              <span className="text-[11px] font-black text-[#0867E8] uppercase tracking-widest bg-blue-50 border border-blue-200 px-3 py-1 rounded-full inline-block">
+                {formType === 'clinic' ? 'DIRECT CLINIC DISBURSEMENT LIVE' : 'NBFC & LENDER PARTNERSHIP'}
               </span>
-              <h2 className="text-2xl sm:text-3xl font-black text-[#0B2450]">
-                {formType === 'clinic' ? 'Ready to help more patients say YES to treatment?' : 'Partner with Clinaza as a Capital Provider'}
+              <h2 className="text-2xl sm:text-3xl font-black text-[#0B2450] tracking-tight">
+                {formType === 'clinic' ? 'Activate Point-of-Care Patient Financing For Your Clinic' : 'Partner with Clinaza as a Capital Provider'}
               </h2>
-              <p className="text-xs font-medium text-slate-600">
+              <p className="text-xs sm:text-sm font-medium text-slate-600 max-w-lg mx-auto">
                 {formType === 'clinic'
-                  ? 'Offer financing through Clinaza. Tell us about your clinic and we will get in touch.'
-                  : 'Access high-intent healthcare treatment financing demand through our clinic network.'}
+                  ? 'Zero clinic discount, zero credit risk, and loan amount disbursed directly to your clinic current account on sanction.'
+                  : 'Access high-ticket healthcare treatment financing demand through our pre-qualified clinic network.'}
               </p>
             </div>
 
-            {submitted ? (
-              <div className="bg-white border border-[#0f7a75]/40 p-8 rounded-2xl text-center space-y-3 shadow-sm">
-                <CheckCircle2 size={40} className="text-[#0f7a75] mx-auto" aria-hidden="true" />
-                <h3 className="text-lg font-black text-[#0B2450]">Inquiry Received!</h3>
-                <p className="text-xs text-slate-600">Our partnership team will reach out within 24 hours.</p>
+            {formType === 'clinic' ? (
+              <div className="space-y-5 pt-2">
+                {/* Feature Chips */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                  <div className="flex items-center gap-2.5 p-3 rounded-xl bg-white border border-slate-200 shadow-2xs">
+                    <span className="w-5 h-5 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold text-[11px]">✓</span>
+                    <span className="font-semibold text-slate-800">Direct Clinic Bank Payout</span>
+                  </div>
+                  <div className="flex items-center gap-2.5 p-3 rounded-xl bg-white border border-slate-200 shadow-2xs">
+                    <span className="w-5 h-5 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold text-[11px]">✓</span>
+                    <span className="font-semibold text-slate-800">Paperless Front-Desk Approval</span>
+                  </div>
+                  <div className="flex items-center gap-2.5 p-3 rounded-xl bg-white border border-slate-200 shadow-2xs">
+                    <span className="w-5 h-5 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold text-[11px]">✓</span>
+                    <span className="font-semibold text-slate-800">Zero Liability on Non-Payment</span>
+                  </div>
+                  <div className="flex items-center gap-2.5 p-3 rounded-xl bg-white border border-slate-200 shadow-2xs">
+                    <span className="w-5 h-5 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold text-[11px]">✓</span>
+                    <span className="font-semibold text-slate-800">60-Second Instant Onboarding</span>
+                  </div>
+                </div>
+
+                <div className="pt-2">
+                  <Link
+                    to="/clinic-onboarding?utm_source=homepage&utm_medium=website&utm_campaign=partner_form_cta"
+                    className="w-full py-4 bg-[#0867E8] hover:bg-[#0756C7] text-white font-black text-sm uppercase tracking-wider rounded-xl transition-all shadow-xl shadow-[#0867E8]/25 flex items-center justify-center gap-2 transform hover:-translate-y-0.5 text-center"
+                  >
+                    <span>Complete Clinic Onboarding (60s)</span>
+                    <ArrowRight size={16} />
+                  </Link>
+                </div>
+
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-4 text-xs text-slate-500 pt-1">
+                  <span className="flex items-center gap-1.5">
+                    <ShieldCheck size={14} className="text-emerald-600" /> 13+ RBI Regulated NBFC Partners
+                  </span>
+                  <span>&middot;</span>
+                  <a href="https://wa.me/917292984244?text=Hi%20Pratyush,%20interested%20in%20Clinaza%20onboarding" target="_blank" rel="noopener noreferrer" className="text-emerald-600 font-bold hover:underline">
+                    Quick Question on WhatsApp →
+                  </a>
+                </div>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-4" noValidate onFocus={() => trackEvent('clinic_form_started', { formType })}>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="space-y-1">
-                    <label htmlFor="doctor-name" className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">
-                      {formType === 'clinic' ? 'Your Name *' : 'Contact Person / Designation *'}
-                    </label>
-                    <input
-                      id="doctor-name"
-                      type="text"
-                      required
-                      placeholder={formType === 'clinic' ? 'e.g. Dr. Rajesh Sharma' : 'e.g. Head of Co-Lending / LSP Partnerships'}
-                      value={formData.doctorName}
-                      onChange={e => setFormData({ ...formData, doctorName: e.target.value })}
-                      className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl text-xs text-[#0B2450] placeholder-slate-400 focus:outline-none focus:border-[#0867E8]"
-                    />
-                  </div>
-                  <div className="space-y-1">
-                    <label htmlFor="clinic-name" className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">
-                      {formType === 'clinic' ? 'Clinic / Hospital Name *' : 'Bank / NBFC Name *'}
-                    </label>
-                    <input
-                      id="clinic-name"
-                      type="text"
-                      required
-                      placeholder={formType === 'clinic' ? 'e.g. Apollo Dental Care' : 'e.g. Chinmay Finlease / Capital NBFC'}
-                      value={formData.clinicName}
-                      onChange={e => setFormData({ ...formData, clinicName: e.target.value })}
-                      className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl text-xs text-[#0B2450] placeholder-slate-400 focus:outline-none focus:border-[#0867E8]"
-                    />
-                  </div>
+              /* Lender Form */
+              submitted ? (
+                <div className="bg-white border border-[#0f7a75]/40 p-8 rounded-2xl text-center space-y-3 shadow-sm">
+                  <CheckCircle2 size={40} className="text-[#0f7a75] mx-auto" aria-hidden="true" />
+                  <h3 className="text-lg font-black text-[#0B2450]">Inquiry Received!</h3>
+                  <p className="text-xs text-slate-600">Our capital markets team will reach out within 24 hours.</p>
                 </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="space-y-1">
-                    <label htmlFor="phone-number" className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Phone / WhatsApp *</label>
-                    <input
-                      id="phone-number"
-                      type="tel"
-                      required
-                      placeholder="e.g. 7292984244"
-                      value={formData.phone}
-                      onChange={e => setFormData({ ...formData, phone: e.target.value })}
-                      className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl text-xs text-[#0B2450] placeholder-slate-400 focus:outline-none focus:border-[#0867E8]"
-                    />
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-4" noValidate>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="space-y-1">
+                      <label htmlFor="lender-person" className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">
+                        Contact Person / Designation *
+                      </label>
+                      <input
+                        id="lender-person"
+                        type="text"
+                        required
+                        placeholder="e.g. Head of Co-Lending / LSP Partnerships"
+                        value={formData.doctorName}
+                        onChange={e => setFormData({ ...formData, doctorName: e.target.value })}
+                        className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl text-xs text-[#0B2450] placeholder-slate-400 focus:outline-none focus:border-[#0867E8]"
+                      />
+                    </div>
+                    <div className="space-y-1">
+                      <label htmlFor="lender-name" className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">
+                        Bank / NBFC Name *
+                      </label>
+                      <input
+                        id="lender-name"
+                        type="text"
+                        required
+                        placeholder="e.g. Chinmay Finlease / Capital NBFC"
+                        value={formData.clinicName}
+                        onChange={e => setFormData({ ...formData, clinicName: e.target.value })}
+                        className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl text-xs text-[#0B2450] placeholder-slate-400 focus:outline-none focus:border-[#0867E8]"
+                      />
+                    </div>
                   </div>
-                  <div className="space-y-1">
-                    <label htmlFor="clinic-city" className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">City *</label>
-                    <input
-                      id="clinic-city"
-                      type="text"
-                      required
-                      placeholder="e.g. Mumbai, Delhi, Bengaluru"
-                      value={formData.city}
-                      onChange={e => setFormData({ ...formData, city: e.target.value })}
-                      className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl text-xs text-[#0B2450] placeholder-slate-400 focus:outline-none focus:border-[#0867E8]"
-                    />
-                  </div>
-                </div>
 
-                <div className="space-y-1">
-                  <label htmlFor="treatment-speciality" className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">
-                    {formType === 'clinic' ? 'Treatment Speciality' : 'Partnership Focus'}
-                  </label>
-                  <select
-                    id="treatment-speciality"
-                    value={formData.category}
-                    onChange={e => setFormData({ ...formData, category: e.target.value })}
-                    className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl text-xs text-[#0B2450] focus:outline-none focus:border-[#0867E8]"
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="space-y-1">
+                      <label htmlFor="lender-phone" className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Phone / WhatsApp *</label>
+                      <input
+                        id="lender-phone"
+                        type="tel"
+                        required
+                        placeholder="e.g. 7292984244"
+                        value={formData.phone}
+                        onChange={e => setFormData({ ...formData, phone: e.target.value })}
+                        className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl text-xs text-[#0B2450] placeholder-slate-400 focus:outline-none focus:border-[#0867E8]"
+                      />
+                    </div>
+                    <div className="space-y-1">
+                      <label htmlFor="lender-city" className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Headquarters City *</label>
+                      <input
+                        id="lender-city"
+                        type="text"
+                        required
+                        placeholder="e.g. Mumbai, Delhi, Bengaluru"
+                        value={formData.city}
+                        onChange={e => setFormData({ ...formData, city: e.target.value })}
+                        className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl text-xs text-[#0B2450] placeholder-slate-400 focus:outline-none focus:border-[#0867E8]"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="space-y-1">
+                    <label htmlFor="partnership-focus" className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Partnership Focus</label>
+                    <select
+                      id="partnership-focus"
+                      value={formData.category}
+                      onChange={e => setFormData({ ...formData, category: e.target.value })}
+                      className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl text-xs text-[#0B2450] focus:outline-none focus:border-[#0867E8]"
+                    >
+                      <option value="FLDG-Backed LSP Partnership">FLDG-Backed LSP Partnership</option>
+                      <option value="Co-Lending API Integration">Co-Lending API Integration</option>
+                      <option value="Direct Loan Origination">Direct Loan Origination</option>
+                      <option value="Pilot Launch Discussion">Pilot Launch Discussion</option>
+                    </select>
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full py-4 bg-[#0867E8] hover:bg-[#0756C7] disabled:opacity-60 text-white font-black text-xs uppercase tracking-widest rounded-xl transition-all shadow-xl shadow-[#0867E8]/25 flex items-center justify-center gap-2 transform hover:-translate-y-0.5"
                   >
-                    {formType === 'clinic' ? (
-                      <>
-                        <option value="Dental Clinic (Implants & Aligners)">Dental Clinic (Implants &amp; Aligners)</option>
-                        <option value="Hair & Aesthetic Surgery Clinic">Hair &amp; Aesthetic Surgery Clinic</option>
-                        <option value="Eye Hospital & Laser Vision Centre">Eye Hospital &amp; Laser Vision Centre</option>
-                        <option value="IVF & Fertility Centre">IVF &amp; Fertility Centre</option>
-                        <option value="Orthopaedic & Joint Replacement Hospital">Orthopaedic &amp; Joint Replacement Hospital</option>
-                        <option value="Multispeciality & Daycare Hospital">Multispeciality &amp; Daycare Hospital</option>
-                      </>
-                    ) : (
-                      <>
-                        <option value="FLDG-Backed LSP Partnership">FLDG-Backed LSP Partnership</option>
-                        <option value="Co-Lending API Integration">Co-Lending API Integration</option>
-                        <option value="Direct Loan Origination">Direct Loan Origination</option>
-                        <option value="Pilot Launch Discussion">Pilot Launch Discussion</option>
-                      </>
-                    )}
-                  </select>
-                </div>
+                    {isSubmitting ? 'Submitting…' : 'Become a Lending Partner'}
+                    <Send size={14} aria-hidden="true" />
+                  </button>
 
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full py-4 bg-[#0867E8] hover:bg-[#0756C7] disabled:opacity-60 text-white font-black text-xs uppercase tracking-widest rounded-xl transition-all shadow-xl shadow-[#0867E8]/25 flex items-center justify-center gap-2 transform hover:-translate-y-0.5"
-                >
-                  {isSubmitting
-                    ? 'Submitting…'
-                    : formType === 'clinic'
-                    ? 'Become a Clinaza Partner'
-                    : 'Become a Lending Partner'}
-                  <Send size={14} aria-hidden="true" />
-                </button>
-
-                <p className="text-center text-xs text-slate-500 font-mono pt-1">
-                  Or email:{' '}
-                  <a href="mailto:contact@clinaza.in" className="text-[#0867E8] font-bold underline">
-                    contact@clinaza.in
-                  </a>
-                  {' '}&middot; WhatsApp:{' '}
-                  <a href="https://wa.me/917292984244" target="_blank" rel="noopener noreferrer" className="text-[#0f7a75] font-bold underline">
-                    +91 7292984244
-                  </a>
-                </p>
-              </form>
+                  <p className="text-center text-xs text-slate-500 font-mono pt-1">
+                    Email:{' '}
+                    <a href="mailto:contact@clinaza.in" className="text-[#0867E8] font-bold underline">contact@clinaza.in</a>
+                  </p>
+                </form>
+              )
             )}
           </div>
         </section>

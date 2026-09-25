@@ -21,6 +21,7 @@ const DentalImplantLoanPage = lazy(() => import("@/pages/DentalImplantLoanPage")
 const ClearAlignersEmiPage = lazy(() => import("@/pages/ClearAlignersEmiPage"));
 const PartnerClinicOnboardingPage = lazy(() => import("@/pages/PartnerClinicOnboardingPage"));
 const AdminClinicOnboardingsPage = lazy(() => import("@/pages/AdminClinicOnboardingsPage"));
+const PartnerPipelinePreviewPage = lazy(() => import("@/pages/PartnerPipelinePreviewPage"));
 
 export default function AppRoutes() {
   return (
@@ -52,6 +53,8 @@ export default function AppRoutes() {
           <Route path="/pilot-onboarding" element={<Navigate to="/clinic-onboarding" replace />} />
           <Route path="/clinic-pilot" element={<Navigate to="/clinic-onboarding" replace />} />
           <Route path="/admin/clinics" element={<LazyRoute><AdminClinicOnboardingsPage /></LazyRoute>} />
+          <Route path="/partner-pipeline" element={<LazyRoute><PartnerPipelinePreviewPage /></LazyRoute>} />
+          <Route path="/pipeline" element={<Navigate to="/partner-pipeline" replace />} />
 
           {/* Review Assistant Landing Page */}
           <Route path="/review/assist" element={<LazyRoute><ReviewAssistant /></LazyRoute>} />

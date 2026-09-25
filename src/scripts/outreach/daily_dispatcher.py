@@ -66,7 +66,7 @@ def create_email_payload(lead):
       </ul>
     </div>
     
-    <p>Would you or your clinic manager be open for a quick 5-minute conversation or demo this week to see how this works for {clinic_name}?</p>
+    <p>You can activate instant patient financing for {clinic_name} in under 60 seconds below, or reach out directly on WhatsApp if you have questions:</p>
     
     <p>
       <a href="https://clinaza.in/clinic-onboarding?utm_source=cold_email&utm_medium=email&utm_campaign=doctor_outreach" class="btn" style="background-color: #0B2450; color: #ffffff; text-decoration: none; padding: 10px 18px; border-radius: 6px; font-weight: bold; display: inline-block; margin-right: 8px;">Clinic Onboarding (60s) →</a>
@@ -100,7 +100,7 @@ How Clinaza empowers {clinic_name}:
 Onboard your clinic in 60 seconds:
 https://clinaza.in/clinic-onboarding?utm_source=cold_email&utm_medium=email&utm_campaign=doctor_outreach
 
-Would you be open for a brief 5-minute chat or demo this week? You can reply to this email or reach me directly on WhatsApp at +91 7292984244.
+Have questions? Reply to this email or reach me directly on WhatsApp at +91 7292984244.
 
 Explore more at https://clinaza.in | WhatsApp: https://wa.me/917292984244
 

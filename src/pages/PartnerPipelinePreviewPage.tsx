@@ -273,8 +273,110 @@ export default function PartnerPipelinePreviewPage() {
           </div>
         </div>
 
-        {/* Clean Masked Data Table */}
-        <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-xs">
+        {/* Mobile View: Clean Responsive Cards (Visible on screens < md) */}
+        <div className="block md:hidden space-y-3">
+          {loading && (
+            <div className="bg-white border border-slate-200 rounded-2xl p-8 text-center text-xs text-slate-400">
+              Loading verified merchant network…
+            </div>
+          )}
+          {!loading && filtered.length === 0 && (
+            <div className="bg-white border border-slate-200 rounded-2xl p-8 text-center text-xs text-slate-400">
+              No clinics match your filter.
+            </div>
+          )}
+          {filtered.map((row, idx) => {
+            const cityLabel = cleanCityName(row.city);
+            const cityCode = cityLabel.slice(0, 3).toUpperCase().replace(/[^A-Z]/g, 'IND');
+            const merchantId = `CLN-${cityCode}-${String(idx + 1).padStart(2, '0')}`;
+            const descriptor = getClinicDescriptor(row.specialties);
+
+            return (
+              <div key={row.id} className="bg-white border border-slate-200 rounded-2xl p-4 shadow-xs space-y-3">
+                <div className="flex items-start justify-between gap-2">
+                  <div>
+                    <span className="font-mono text-[10px] font-bold bg-slate-900 text-white px-2 py-0.5 rounded-md inline-block mb-1.5">
+                      {merchantId}
+                    </span>
+                    <h3 className="font-bold text-slate-900 text-sm leading-snug">
+                      {descriptor}
+                    </h3>
+                  </div>
+                  <span className="inline-flex items-center gap-1 font-bold text-slate-800 text-xs shrink-0 bg-blue-50 border border-blue-100 text-blue-800 px-2 py-1 rounded-lg">
+                    <MapPin size={11} className="text-[#0867E8]" /> {cityLabel}
+                  </span>
+                </div>
+
+                <div className="flex items-center gap-1.5 flex-wrap">
+                  {row.chairs && (
+                    <span className="text-[10px] font-bold text-slate-600 bg-slate-100 border border-slate-200 px-2 py-0.5 rounded-md">
+                      {row.chairs}
+                    </span>
+                  )}
+                  {row.premises_type && (
+                    <span className="text-[10px] font-bold text-slate-600 bg-slate-100 border border-slate-200 px-2 py-0.5 rounded-md">
+                      {row.premises_type} Space
+                    </span>
+                  )}
+                  {row.google_rating && (
+                    <span className="text-[10px] font-bold text-amber-700 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded-md flex items-center gap-1">
+                      ★ {row.google_rating} {row.review_count ? `(${row.review_count})` : ''}
+                    </span>
+                  )}
+                </div>
+
+                <div className="grid grid-cols-2 gap-2 pt-1 border-t border-slate-100 text-xs">
+                  <div className="bg-slate-50 rounded-xl p-2.5">
+                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Doctor Lead</span>
+                    <span className="font-mono text-xs font-semibold text-slate-800 flex items-center gap-1 mt-0.5">
+                      <Lock size={10} className="text-slate-400" /> {maskDoctorById(idx)}
+                    </span>
+                  </div>
+
+                  <div className="bg-slate-50 rounded-xl p-2.5">
+                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Monthly Loan Demand</span>
+                    <span className="font-black text-emerald-600 text-xs mt-0.5 block">
+                      {row.expected_emi_loans ? `${row.expected_emi_loans} loans/mo` : '10–12 loans/mo'}
+                    </span>
+                  </div>
+
+                  <div className="bg-slate-50 rounded-xl p-2.5">
+                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Avg Ticket</span>
+                    <span className="font-bold text-slate-900 text-xs mt-0.5 block">
+                      {row.avg_ticket_size ? `₹${row.avg_ticket_size.replace(/[^0-9,]/g, '')}` : '₹40k–₹60k'}
+                    </span>
+                  </div>
+
+                  <div className="bg-slate-50 rounded-xl p-2.5">
+                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Banking Readiness</span>
+                    <div className="flex items-center gap-1.5 mt-0.5">
+                      {row.has_current_account === 'Yes' && (
+                        <span className="text-[10px] font-bold text-emerald-700 bg-emerald-100 px-1.5 py-0.5 rounded-md flex items-center gap-0.5">
+                          <CheckCircle2 size={10} /> A/C
+                        </span>
+                      )}
+                      {row.has_cancelled_cheque === 'Yes' && (
+                        <span className="text-[10px] font-bold text-indigo-700 bg-indigo-100 px-1.5 py-0.5 rounded-md flex items-center gap-0.5">
+                          <CheckCircle2 size={10} /> Cheque
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="text-[11px] text-slate-500 bg-slate-50/60 border border-slate-100 rounded-lg px-2.5 py-1.5 flex items-center justify-between">
+                  <span className="text-slate-400 font-medium">KYC Proof:</span>
+                  <span className="font-semibold text-slate-700 truncate max-w-[200px]">
+                    {row.business_proof_type || 'GST / Clinical Est.'}
+                  </span>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Desktop View: Full Masked Data Table (Visible on screens md+) */}
+        <div className="hidden md:block bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-xs">
           <div className="overflow-x-auto">
             <table className="w-full text-xs">
               <thead>

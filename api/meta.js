@@ -81,7 +81,7 @@ const STATIC_ROUTES = {
     title: 'Clinaza Verified Merchant Clinic Network — Partner Pipeline',
     desc: 'Verified partner clinic network accredited for point-of-care patient financing and instant treatment EMI disbursals.',
     h1: 'Pre-Qualified Dental Merchant Network',
-    image: 'https://www.clinaza.in/og-clinic-onboarding.png',
+    image: 'https://www.clinaza.in/og-partner-pipeline.png',
     robots: 'noindex, nofollow'
   }
 };

@@ -164,6 +164,7 @@ export default function PartnerPipelinePreviewPage() {
       <SEOHead 
         title="Clinaza Verified Merchant Clinic Network — Partner Pipeline"
         description="Verified partner clinic network accredited for point-of-care patient financing and instant treatment EMI disbursals."
+        image="https://www.clinaza.in/og-partner-pipeline.png"
       />
 
       {/* Header Bar */}

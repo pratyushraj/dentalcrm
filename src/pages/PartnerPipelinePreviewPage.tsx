@@ -100,16 +100,17 @@ export default function PartnerPipelinePreviewPage() {
     loadData();
   }, []);
 
-  const cities = Array.from(new Set(rows.map(r => r.city.trim()))).filter(Boolean);
+  const cities = Array.from(new Set(rows.map(r => cleanCityName(r.city)))).filter(Boolean).sort();
 
   const filtered = rows.filter(r => {
     const q = search.toLowerCase();
+    const cleanedCity = cleanCityName(r.city);
     const matchesSearch = !q || 
-      r.city.toLowerCase().includes(q) || 
+      cleanedCity.toLowerCase().includes(q) || 
       (r.specialties && r.specialties.some(s => s.toLowerCase().includes(q))) ||
       (r.avg_ticket_size && r.avg_ticket_size.toLowerCase().includes(q));
     
-    const matchesCity = !selectedCity || r.city.toLowerCase() === selectedCity.toLowerCase();
+    const matchesCity = !selectedCity || cleanedCity.toLowerCase() === selectedCity.toLowerCase();
     return matchesSearch && matchesCity;
   });
 
@@ -169,7 +170,7 @@ export default function PartnerPipelinePreviewPage() {
 
       {/* Header Bar */}
       <header className="sticky top-0 z-30 bg-white/90 backdrop-blur-md border-b border-slate-200">
-        <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-9 h-9 rounded-xl bg-[#0867E8] flex items-center justify-center text-white font-black text-sm shadow-md shadow-blue-500/20">
               C
@@ -195,9 +196,9 @@ export default function PartnerPipelinePreviewPage() {
       </header>
 
       {/* Hero / Lender Confidentiality Notice */}
-      <main className="max-w-6xl mx-auto px-4 py-8 space-y-6">
-        <div className="bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900 text-white rounded-3xl p-6 sm:p-8 shadow-xl relative overflow-hidden">
-          <div className="relative z-10 max-w-2xl space-y-3">
+      <main className="max-w-7xl mx-auto px-4 py-6 space-y-5">
+        <div className="bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900 text-white rounded-3xl p-6 sm:p-7 shadow-xl relative overflow-hidden">
+          <div className="relative z-10 max-w-2xl space-y-2.5">
             <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-blue-500/20 border border-blue-400/30 text-blue-300 text-[11px] font-bold uppercase tracking-wider">
               <ShieldCheck size={13} /> Accredited Partner Distribution
             </div>
@@ -233,28 +234,28 @@ export default function PartnerPipelinePreviewPage() {
           </div>
           <div className="bg-white border border-slate-200 rounded-2xl p-4 shadow-xs">
             <p className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Est. Monthly Disbursal</p>
-            <p className="text-2xl font-black text-emerald-600 mt-1">₹45L – ₹65L</p>
+            <p className="text-2xl font-black text-emerald-600 mt-1">₹55L – ₹80L</p>
             <p className="text-[11px] text-slate-500 font-medium mt-0.5">Across high-ticket cases</p>
           </div>
         </div>
 
         {/* Filters Bar */}
-        <div className="bg-white border border-slate-200 rounded-2xl p-3 shadow-xs flex flex-col sm:flex-row gap-3 items-center justify-between">
-          <div className="relative w-full sm:w-72">
+        <div className="bg-white border border-slate-200 rounded-2xl p-3 shadow-xs flex flex-col md:flex-row gap-3 items-stretch md:items-center justify-between">
+          <div className="relative w-full md:w-64 shrink-0">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={14} />
             <input
               type="text"
-              placeholder="Search by city, treatment, ticket size…"
+              placeholder="Search by city, treatment…"
               value={search}
               onChange={e => setSearch(e.target.value)}
               className="w-full pl-9 pr-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:bg-white focus:border-[#0867E8]"
             />
           </div>
 
-          <div className="flex items-center gap-2 w-full sm:w-auto overflow-x-auto">
+          <div className="flex items-center gap-1.5 flex-wrap">
             <button
               onClick={() => setSelectedCity('')}
-              className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all ${
+              className={`px-2.5 py-1 rounded-lg text-xs font-semibold whitespace-nowrap transition-all ${
                 !selectedCity ? 'bg-[#0867E8] text-white shadow-xs' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
               }`}
             >
@@ -264,7 +265,7 @@ export default function PartnerPipelinePreviewPage() {
               <button
                 key={c}
                 onClick={() => setSelectedCity(c)}
-                className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all ${
+                className={`px-2.5 py-1 rounded-lg text-xs font-semibold whitespace-nowrap transition-all ${
                   selectedCity === c ? 'bg-[#0867E8] text-white shadow-xs' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
                 }`}
               >
@@ -376,124 +377,117 @@ export default function PartnerPipelinePreviewPage() {
           })}
         </div>
 
-        {/* Desktop View: Full Masked Data Table (Visible on screens md+) */}
+        {/* Desktop View: Full Masked Data Table (Fit to screen without horizontal scrolling) */}
         <div className="hidden md:block bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-xs">
-          <div className="overflow-x-auto">
-            <table className="w-full text-xs">
-              <thead>
-                <tr className="border-b border-slate-200 bg-slate-100/80 text-left text-[11px] font-black uppercase tracking-wider text-slate-600">
-                  <th className="px-5 py-4 min-w-[240px]">Accredited Partner Profile</th>
-                  <th className="px-4 py-4 min-w-[140px]">Doctor Lead</th>
-                  <th className="px-4 py-4 min-w-[150px]">Location</th>
-                  <th className="px-3 py-4 text-center">Current A/C</th>
-                  <th className="px-3 py-4 text-center">Cheque Ready</th>
-                  <th className="px-4 py-4 min-w-[160px]">KYC Proof</th>
-                  <th className="px-4 py-4 min-w-[140px]">Monthly Loan Demand</th>
-                  <th className="px-4 py-4 min-w-[130px]">Avg Ticket</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-slate-100">
-                {loading && (
-                  <tr><td colSpan={8} className="px-4 py-16 text-center text-slate-400">Loading verified merchant network…</td></tr>
-                )}
-                {!loading && filtered.length === 0 && (
-                  <tr><td colSpan={8} className="px-4 py-16 text-center text-slate-400">No clinics match your filter.</td></tr>
-                )}
-                {filtered.map((row, idx) => {
-                  const cityLabel = cleanCityName(row.city);
-                  const cityCode = cityLabel.slice(0, 3).toUpperCase().replace(/[^A-Z]/g, 'IND');
-                  const merchantId = `CLN-${cityCode}-${String(idx + 1).padStart(2, '0')}`;
-                  const descriptor = getClinicDescriptor(row.specialties);
+          <table className="w-full text-xs table-auto">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-100/80 text-left text-[11px] font-black uppercase tracking-wider text-slate-600">
+                <th className="px-5 py-3.5">Accredited Partner Profile</th>
+                <th className="px-4 py-3.5">Doctor & City</th>
+                <th className="px-3 py-3.5 text-center">Banking KYC</th>
+                <th className="px-4 py-3.5">Business Proof</th>
+                <th className="px-4 py-3.5 text-right">Monthly Demand</th>
+                <th className="px-5 py-3.5 text-right">Avg Ticket</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-100">
+              {loading && (
+                <tr><td colSpan={6} className="px-4 py-16 text-center text-slate-400">Loading verified merchant network…</td></tr>
+              )}
+              {!loading && filtered.length === 0 && (
+                <tr><td colSpan={6} className="px-4 py-16 text-center text-slate-400">No clinics match your filter.</td></tr>
+              )}
+              {filtered.map((row, idx) => {
+                const cityLabel = cleanCityName(row.city);
+                const cityCode = cityLabel.slice(0, 3).toUpperCase().replace(/[^A-Z]/g, 'IND');
+                const merchantId = `CLN-${cityCode}-${String(idx + 1).padStart(2, '0')}`;
+                const descriptor = getClinicDescriptor(row.specialties);
 
-                  return (
-                    <tr key={row.id} className="hover:bg-blue-50/40 transition-colors">
-                      <td className="px-5 py-4">
-                        <div className="flex items-center gap-2">
-                          <span className="font-mono text-[11px] font-bold bg-slate-900 text-white px-2 py-0.5 rounded-md shrink-0">
-                            {merchantId}
+                return (
+                  <tr key={row.id} className="hover:bg-blue-50/40 transition-colors">
+                    <td className="px-5 py-3.5">
+                      <div className="flex items-center gap-2">
+                        <span className="font-mono text-[10px] font-bold bg-slate-900 text-white px-2 py-0.5 rounded-md shrink-0">
+                          {merchantId}
+                        </span>
+                        <p className="font-bold text-slate-900 text-[13px] leading-snug">
+                          {descriptor}
+                        </p>
+                      </div>
+                      <div className="flex items-center gap-1.5 flex-wrap mt-1.5">
+                        {row.chairs && (
+                          <span className="text-[10px] font-bold text-slate-600 bg-slate-100 border border-slate-200 px-2 py-0.5 rounded-md">
+                            {row.chairs}
                           </span>
-                          <p className="font-bold text-slate-900 text-[13px] leading-snug">
-                            {descriptor}
-                          </p>
+                        )}
+                        {row.premises_type && (
+                          <span className="text-[10px] font-bold text-slate-600 bg-slate-100 border border-slate-200 px-2 py-0.5 rounded-md">
+                            {row.premises_type} Space
+                          </span>
+                        )}
+                        {row.google_rating && (
+                          <span className="text-[10px] font-bold text-amber-700 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded-md flex items-center gap-1">
+                            ★ {row.google_rating} {row.review_count ? `(${row.review_count})` : ''}
+                          </span>
+                        )}
+                      </div>
+                    </td>
+
+                    <td className="px-4 py-3.5">
+                      <span className="inline-flex items-center gap-1 bg-slate-100/70 border border-slate-200 px-2 py-0.5 rounded-md text-[11px] font-mono text-slate-800">
+                        <Lock size={10} className="text-slate-400" />
+                        {maskDoctorById(idx)}
+                      </span>
+                      <div className="flex items-center gap-1 font-semibold text-slate-700 text-xs mt-1">
+                        <MapPin size={11} className="text-[#0867E8] shrink-0" />
+                        <span>{cityLabel}</span>
+                      </div>
+                    </td>
+
+                    <td className="px-3 py-3.5 text-center">
+                      <div className="inline-flex flex-col items-center gap-1">
+                        <div className="flex items-center gap-1">
+                          {row.has_current_account === 'Yes' ? (
+                            <span className="inline-flex items-center gap-0.5 text-emerald-700 font-bold bg-emerald-100/80 border border-emerald-300 px-2 py-0.5 rounded-full text-[10px]">
+                              <CheckCircle2 size={10} /> Current A/C
+                            </span>
+                          ) : (
+                            <span className="text-slate-400 font-medium text-[10px]">No A/C</span>
+                          )}
                         </div>
-                        <div className="flex items-center gap-1.5 flex-wrap mt-2">
-                          {row.chairs && (
-                            <span className="text-[10px] font-bold text-slate-600 bg-slate-100 border border-slate-200 px-2 py-0.5 rounded-md">
-                              {row.chairs}
-                            </span>
-                          )}
-                          {row.premises_type && (
-                            <span className="text-[10px] font-bold text-slate-600 bg-slate-100 border border-slate-200 px-2 py-0.5 rounded-md">
-                              {row.premises_type} Space
-                            </span>
-                          )}
-                          {row.google_rating && (
-                            <span className="text-[10px] font-bold text-amber-700 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded-md flex items-center gap-1">
-                              ★ {row.google_rating} {row.review_count ? `(${row.review_count} reviews)` : ''}
-                            </span>
-                          )}
-                        </div>
-                      </td>
-
-                      <td className="px-4 py-4 font-semibold text-slate-800 whitespace-nowrap">
-                        <span className="inline-flex items-center gap-1.5 bg-slate-100/70 border border-slate-200 px-2.5 py-1 rounded-lg text-xs font-mono">
-                          <Lock size={11} className="text-slate-400" />
-                          {maskDoctorById(idx)}
-                        </span>
-                      </td>
-
-                      <td className="px-4 py-4 whitespace-nowrap">
-                        <span className="inline-flex items-center gap-1 font-bold text-slate-800 text-xs">
-                          <MapPin size={13} className="text-[#0867E8]" /> {cityLabel}
-                        </span>
-                      </td>
-
-                      <td className="px-3 py-4 text-center whitespace-nowrap">
-                        {row.has_current_account === 'Yes' ? (
-                          <span className="inline-flex items-center gap-1 text-emerald-700 font-black bg-emerald-100/70 border border-emerald-300 px-2.5 py-1 rounded-full text-[10px]">
-                            <CheckCircle2 size={12} /> Ready
-                          </span>
-                        ) : (
-                          <span className="text-slate-400 font-bold">—</span>
-                        )}
-                      </td>
-
-                      <td className="px-3 py-4 text-center whitespace-nowrap">
-                        {row.has_cancelled_cheque === 'Yes' ? (
-                          <span className="inline-flex items-center gap-1 text-emerald-700 font-black bg-emerald-100/70 border border-emerald-300 px-2.5 py-1 rounded-full text-[10px]">
-                            <CheckCircle2 size={12} /> Ready
-                          </span>
-                        ) : (
-                          <span className="text-slate-400 font-bold">—</span>
-                        )}
-                      </td>
-
-                      <td className="px-4 py-4">
-                        <span className="inline-block bg-slate-50 border border-slate-200 text-slate-700 font-semibold px-2 py-1 rounded-lg text-[11px]">
-                          {row.business_proof_type || 'GST / Clinical Est. Certificate'}
-                        </span>
-                      </td>
-
-                      <td className="px-4 py-4">
-                        <span className="font-black text-emerald-600 text-xs block">
-                          {row.expected_emi_loans ? `${row.expected_emi_loans} loans/mo` : '10–12 loans/mo'}
-                        </span>
-                        {row.avg_monthly_cases && (
-                          <span className="text-[10px] text-slate-500 font-medium">
-                            {row.avg_monthly_cases} cases &gt; ₹25k
+                        {row.has_cancelled_cheque === 'Yes' && (
+                          <span className="inline-flex items-center gap-0.5 text-indigo-700 font-bold bg-indigo-100/80 border border-indigo-200 px-2 py-0.5 rounded-full text-[10px]">
+                            <CheckCircle2 size={10} /> Cheque Ready
                           </span>
                         )}
-                      </td>
+                      </div>
+                    </td>
 
-                      <td className="px-4 py-4 font-black text-slate-900 whitespace-nowrap text-xs">
-                        {row.avg_ticket_size ? `${row.avg_ticket_size}/case` : '₹40,000 – ₹60,000'}
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
+                    <td className="px-4 py-3.5">
+                      <span className="inline-block bg-slate-50 border border-slate-200 text-slate-700 font-medium px-2 py-1 rounded-lg text-[11px] max-w-[180px] truncate" title={row.business_proof_type || ''}>
+                        {row.business_proof_type || 'Clinical Registration'}
+                      </span>
+                    </td>
+
+                    <td className="px-4 py-3.5 text-right">
+                      <span className="font-black text-emerald-600 text-xs block">
+                        {row.expected_emi_loans ? `${row.expected_emi_loans} loans/mo` : '10–12 loans/mo'}
+                      </span>
+                      {row.avg_monthly_cases && (
+                        <span className="text-[10px] text-slate-400 font-medium block">
+                          {row.avg_monthly_cases} cases &gt; ₹25k
+                        </span>
+                      )}
+                    </td>
+
+                    <td className="px-5 py-3.5 text-right font-black text-slate-900 whitespace-nowrap text-xs">
+                      {row.avg_ticket_size ? `₹${row.avg_ticket_size.replace(/[^0-9,]/g, '')}` : '₹40k–₹60k'}
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
         </div>
 
         {/* Footer Commercial Note */}

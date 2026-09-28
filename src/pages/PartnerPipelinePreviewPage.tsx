@@ -92,6 +92,22 @@ function getSpecialtyColor(descriptor: string): string {
   return 'bg-slate-50 text-slate-700 border-slate-200';
 }
 
+function formatTicketSize(raw: string | null): string {
+  if (!raw || raw === 'None' || raw === 'null') return '₹35,000';
+  // Strip out currency words/symbols
+  let clean = raw.replace(/[Rs\.₹\s]/gi, '').trim();
+  if (clean.includes('-')) {
+    // If range like 40000-60000, take clean average or standard range
+    const parts = clean.split('-').map(p => parseInt(p.replace(/[^0-9]/g, ''))).filter(Boolean);
+    if (parts.length === 2) {
+      return `₹${parts[0].toLocaleString('en-IN')} – ₹${parts[1].toLocaleString('en-IN')}`;
+    }
+  }
+  const num = parseInt(clean.replace(/[^0-9]/g, ''));
+  if (isNaN(num) || num <= 0) return '₹35,000';
+  return `₹${num.toLocaleString('en-IN')}`;
+}
+
 export default function PartnerPipelinePreviewPage() {
   const [rows, setRows] = useState<ClinicRow[]>([]);
   const [loading, setLoading] = useState(true);
@@ -164,7 +180,7 @@ export default function PartnerPipelinePreviewPage() {
         (r.specialties ?? []).join('; '),
         r.avg_monthly_cases || '—',
         r.expected_emi_loans || '—',
-        r.avg_ticket_size || '—',
+        formatTicketSize(r.avg_ticket_size),
         r.has_current_account || '—',
         r.business_proof_type || '—',
         r.has_cancelled_cheque || '—',
@@ -457,7 +473,7 @@ export default function PartnerPipelinePreviewPage() {
                   <div className="bg-slate-50 rounded-xl p-2.5">
                     <span className="text-[9px] font-black text-slate-400 uppercase tracking-wider block mb-0.5">Avg Ticket Size</span>
                     <span className="font-black text-slate-900 text-sm block">
-                      {row.avg_ticket_size ? `₹${row.avg_ticket_size.replace(/[^0-9,]/g, '')}` : '₹40k–₹60k'}
+                      {formatTicketSize(row.avg_ticket_size)}
                     </span>
                   </div>
 
@@ -623,7 +639,7 @@ export default function PartnerPipelinePreviewPage() {
                       {/* Avg Ticket */}
                       <td className="px-5 py-4 text-right">
                         <span className="font-black text-slate-900 text-sm whitespace-nowrap">
-                          {row.avg_ticket_size ? `₹${row.avg_ticket_size.replace(/[^0-9,]/g, '')}` : '₹40k–₹60k'}
+                          {formatTicketSize(row.avg_ticket_size)}
                         </span>
                       </td>
                     </tr>

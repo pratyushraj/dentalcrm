@@ -195,7 +195,7 @@ export default function AdminClinicOnboardingsPage() {
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-1.5 px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-xl transition-all"
-            title="Open safe masked preview for lenders like ShopSe"
+            title="Open safe masked preview for lending partners"
           >
             <span>🔒 Safe Lender View</span>
           </a>

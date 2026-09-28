@@ -222,7 +222,7 @@ export default function PartnerClinicOnboardingPage() {
             Clinic Partner <span className="text-[#0867E8]">Onboarding</span>
           </h1>
           <p className="text-xs sm:text-sm text-slate-600 max-w-lg mx-auto leading-relaxed">
-            Please confirm your clinic's high-ticket procedure volume to activate pre-approved patient financing lines with our lending partner (ShopSe).
+            Please confirm your clinic's high-ticket procedure volume to activate pre-approved patient financing lines with our accredited RBI-regulated lending network.
           </p>
         </div>
 

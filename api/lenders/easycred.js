@@ -141,19 +141,20 @@ export default async function handler(req, res) {
           resource_type: 'loan_lead',
           resource_id: inviteData.inviteId || null,
           description: `Financing Application: ${customerName.trim()} (${cleanMobile})`,
-        metadata: {
-          applicant_name: customerName.trim(),
-          mobile: cleanMobile,
-          productCode,
-          client_ip: clientIp,
-          invite_id: inviteData.inviteId,
-          customer_link: customerLink,
-          status: success ? 'INITIATED' : 'FAILED',
-          easycred_response: response.data
-        },
-        severity: 'info'
-      }]);
-      console.log(`[Easycred] Successfully stored lead for ${customerName} in Supabase.`);
+          metadata: {
+            applicant_name: customerName.trim(),
+            mobile: cleanMobile,
+            productCode,
+            client_ip: clientIp,
+            invite_id: inviteData.inviteId,
+            customer_link: customerLink,
+            status: success ? 'INITIATED' : 'FAILED',
+            easycred_response: response.data
+          },
+          severity: 'info'
+        }]);
+        console.log(`[Easycred] Successfully stored lead for ${customerName} in Supabase.`);
+      }
     } catch (dbErr) {
       console.error('[Easycred] Failed to store lead in Supabase:', dbErr.message);
     }

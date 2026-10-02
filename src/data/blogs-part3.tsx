@@ -2013,6 +2013,155 @@ export const BLOGS_PART3 = [
         </div>
       </div>
     )
+  },
+  {
+    slug: "clinaza-vs-savein-vs-carepay-dental-financing-comparison",
+    title: "Clinaza vs SaveIN vs CarePay: Best Dental Financing in India (2026)",
+    category: "Practice Growth",
+    readTime: "7 min read",
+    publishDate: "October 02, 2026",
+    author: "Clinaza Healthcare Strategy",
+    summary: "Comprehensive 2026 comparison of India's leading point-of-care patient financing platforms: Clinaza vs SaveIN vs CarePay. Compare clinic MDR, doctor credit risk, patient EMI tenures, approval turnaround, and integrated practice software.",
+    featuredImage: "/assets/yourdentist/dental_implants.png",
+    metaDescription: "Clinaza vs SaveIN vs CarePay: Compare dental patient financing platforms in India. Compare clinic MDR fees, approval TAT, EMI options, and clinic tools.",
+    faqs: [
+      {
+        question: "How do Clinaza, SaveIN, and CarePay differ for dental clinics?",
+        answer: "While SaveIN and CarePay primarily act as standalone QR-code consumer lending intermediaries, Clinaza provides an end-to-end dental operating system. Clinaza pairs point-of-care financing with 100% free practice management tools (digital NABH consent forms, digital Rx generator, automated WhatsApp recall) and guarantees zero clinic liability for patient defaults."
+      },
+      {
+        question: "Does the clinic bear any financial risk if a patient defaults on EMIs?",
+        answer: "No. Under Clinaza, all credit underwriting, KYC, and monthly collections are handled directly by RBI-regulated banking and NBFC partners. The dental clinic receives full treatment disbursal within 24 hours with zero clawback liability."
+      },
+      {
+        question: "What treatments can patients finance through Clinaza?",
+        answer: "Patients can finance high-ticket dental procedures including dental implants, clear invisible aligners, full-mouth rehabilitation, zirconia crowns, root canals, and cosmetic smile makeovers ranging from ₹10,000 to ₹5,00,000."
+      }
+    ],
+    content: (
+      <div className="space-y-6">
+        <p className="text-lg leading-relaxed text-neutral-700">
+          In Indian dentistry, over <strong>40% of patients drop out</strong> after receiving a high-ticket treatment estimate for dental implants, clear aligners, or full-mouth crowns. Point-of-care healthcare financing platforms like <strong>Clinaza</strong>, <strong>SaveIN</strong>, and <strong>CarePay</strong> have emerged to solve this affordability crisis.
+        </p>
+        <p className="text-neutral-700 leading-relaxed">
+          However, each platform operates under distinct commercial structures, clinic MDR fees, lender integration models, and doctor software suites. Here is an honest, data-backed 2026 comparison for dental surgeons and clinic owners.
+        </p>
+
+        {/* Lead Capture Form */}
+        <PatientLeadForm
+          defaultTreatment="Dental Implants & Aligners"
+          sourceArticle="Clinaza vs SaveIN vs CarePay Comparison"
+        />
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Feature & Architecture Comparison: Clinaza vs SaveIN vs CarePay</h2>
+        
+        <div className="overflow-x-auto my-6">
+          <table className="min-w-full divide-y divide-neutral-200 border border-neutral-100 text-sm">
+            <thead className="bg-[#0B2450] text-white">
+              <tr>
+                <th className="px-4 py-3 text-left font-bold">Evaluation Metric</th>
+                <th className="px-4 py-3 text-left font-bold text-blue-300">Clinaza</th>
+                <th className="px-4 py-3 text-left font-bold">SaveIN</th>
+                <th className="px-4 py-3 text-left font-bold">CarePay</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-neutral-100 text-neutral-700">
+              <tr className="bg-blue-50/40">
+                <td className="px-4 py-3 font-bold text-neutral-900">Core Platform Focus</td>
+                <td className="px-4 py-3 font-bold text-blue-700">Dental CRM + Point-of-Care EMI</td>
+                <td className="px-4 py-3">General Healthcare / Wellness QR</td>
+                <td className="px-4 py-3">OPD & Surgical Loan Intermediary</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-bold text-neutral-900">Clinic Practice Software</td>
+                <td className="px-4 py-3 font-semibold text-emerald-600">100% Free (NABH Consent, Rx, WhatsApp)</td>
+                <td className="px-4 py-3 text-neutral-500">None (Financing QR only)</td>
+                <td className="px-4 py-3 text-neutral-500">None (Financing QR / AI bot only)</td>
+              </tr>
+              <tr className="bg-blue-50/40">
+                <td className="px-4 py-3 font-bold text-neutral-900">Doctor Default Liability</td>
+                <td className="px-4 py-3 font-bold text-emerald-700">Zero (100% RBI Lender Risk)</td>
+                <td className="px-4 py-3">Zero (Lender Risk)</td>
+                <td className="px-4 py-3">Zero (Lender Risk)</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-bold text-neutral-900">Treatment Ticket Range</td>
+                <td className="px-4 py-3 font-semibold">₹10,000 – ₹5,00,000</td>
+                <td className="px-4 py-3">₹5,000 – ₹2,00,000</td>
+                <td className="px-4 py-3">₹15,000 – ₹3,00,000</td>
+              </tr>
+              <tr className="bg-blue-50/40">
+                <td className="px-4 py-3 font-bold text-neutral-900">Approval Turnaround Time (TAT)</td>
+                <td className="px-4 py-3 font-bold text-blue-700">Under 2 Minutes (Paperless KYC)</td>
+                <td className="px-4 py-3">3 – 5 Minutes</td>
+                <td className="px-4 py-3">~2 – 4 Minutes (via Careena AI)</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-bold text-neutral-900">Clinic Settlement Speed</td>
+                <td className="px-4 py-3 font-semibold text-emerald-600">Same-Day / T+1 Direct Bank Credit</td>
+                <td className="px-4 py-3">T+1 to T+2 Business Days</td>
+                <td className="px-4 py-3">T+1 to T+2 Business Days</td>
+              </tr>
+              <tr className="bg-blue-50/40">
+                <td className="px-4 py-3 font-bold text-neutral-900">Lending Network Diversity</td>
+                <td className="px-4 py-3 font-semibold">15+ Credit Card Issuers + NBFC Rails</td>
+                <td className="px-4 py-3">Multi-lender NBFC network</td>
+                <td className="px-4 py-3">Curated NBFC Partners</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">1. Clinaza: Embedded Clinic OS + Instant Patient Financing</h2>
+        <p className="text-neutral-700 leading-relaxed">
+          Clinaza is engineered specifically for dental surgeons, implantologists, and orthodontists. Instead of just mailing a standalone QR code standee to your reception desk, Clinaza integrates into the dentist's daily workflow:
+        </p>
+        <ul className="list-disc pl-6 space-y-2 text-neutral-700">
+          <li><strong>Digital NABH Legal Consent:</strong> Auto-generate multilingual legal consent forms before surgery that patients can sign digitally on a tablet or mobile.</li>
+          <li><strong>Digital Rx Prescription Maker:</strong> Quick dental drug selector and printable digital clinic prescriptions.</li>
+          <li><strong>Zero Clinic Discounting:</strong> Under the standard patient-paid financing model, the clinic receives 100% of the treatment cost directly into its current account without bearing aggressive merchant deductions.</li>
+        </ul>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">2. SaveIN: Consumer Pay Later at Reception</h2>
+        <p className="text-neutral-700 leading-relaxed">
+          SaveIN is a prominent healthcare fintech aggregator based in Gurgaon that connects patients with NBFC credit lines at physical clinics. It operates via a countertop QR standee where patients apply on their smartphones. While SaveIN has established partnerships across dental chains like OrthoSquare, it functions strictly as a checkout financing layer with no clinical software or practice CRM tools for doctors.
+        </p>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">3. CarePay: AI-Driven Healthcare Loans</h2>
+        <p className="text-neutral-700 leading-relaxed">
+          CarePay operates an AI conversational intake bot named "Careena" that guides hospital and surgical patients through loan applications via chat. CarePay has broader healthcare coverage across IVF, hair transplants, bariatric, and dental surgeries. Its primary strength lies in chat-based lead collection, though clinics do not receive integrated practice management or appointment recall capabilities.
+        </p>
+
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">The Verdict: Which Platform Should Your Clinic Choose?</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
+          <div className="p-5 bg-blue-50 border border-blue-200 rounded-xl space-y-2">
+            <h4 className="font-bold text-blue-900 text-base">Choose Clinaza if:</h4>
+            <p className="text-xs text-blue-800 leading-relaxed">
+              You want an all-in-one dental practice platform that eliminates patient drop-offs on high-ticket implants and aligners while providing free digital consent, digital prescriptions, and direct settlement with zero clawback liability.
+            </p>
+          </div>
+          <div className="p-5 bg-neutral-50 border border-neutral-200 rounded-xl space-y-2">
+            <h4 className="font-bold text-neutral-900 text-base">Choose SaveIN / CarePay if:</h4>
+            <p className="text-xs text-neutral-700 leading-relaxed">
+              You already pay for expensive third-party CRM software and only desire a secondary checkout QR standee at the reception desk for multi-specialty medical treatments.
+            </p>
+          </div>
+        </div>
+
+        <div className="p-6 bg-slate-900 text-white rounded-2xl my-8 text-center space-y-3">
+          <h3 className="text-xl font-bold text-white">Activate Point-of-Care Patient Financing at Your Clinic</h3>
+          <p className="text-xs text-slate-300 max-w-md mx-auto">
+            Join 50+ accredited dental clinics across India. Zero clinic signup fees, zero software charges, and same-day settlement.
+          </p>
+          <a
+            href="https://clinaza.in/clinic-onboarding"
+            className="inline-block bg-[#0867E8] text-white font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-700 transition-colors shadow-md"
+          >
+            Onboard Your Clinic in 2 Minutes →
+          </a>
+        </div>
+      </div>
+    )
   }
 ] as BlogArticle[];
 

@@ -3,15 +3,16 @@ Allow: /
 Allow: /sitemap.xml
 Allow: /llms.txt
 Allow: /llms-full.txt
+Allow: /.well-known/ai-catalog.json
 
-# Block search engines from private dashboard areas
+# Block crawlers from private dashboard & testing areas
 Disallow: /reactivation/
 Disallow: /api/
 Disallow: /deck
 Disallow: /dentist-proposal
 Disallow: /dental-trends
 
-# Allow all major search engine bots explicitly
+# Search Engine Crawlers
 User-agent: Googlebot
 Allow: /
 Disallow: /reactivation/
@@ -24,6 +25,33 @@ User-agent: Bingbot
 Allow: /
 Disallow: /reactivation/
 
+# AI Search & LLM Web Crawlers (OpenAI, Anthropic, Perplexity, Google)
+User-agent: GPTBot
+Allow: /
+Disallow: /reactivation/
+Disallow: /api/
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /reactivation/
+Disallow: /api/
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /reactivation/
+Disallow: /api/
+
+User-agent: Google-Extended
+Allow: /
+Disallow: /reactivation/
+Disallow: /api/
+
+User-agent: Applebot-Extended
+Allow: /
+Disallow: /reactivation/
+Disallow: /api/
+
+# Social Media Previews
 User-agent: facebookexternalhit
 Allow: /
 

@@ -22,6 +22,7 @@ const ClearAlignersEmiPage = lazy(() => import("@/pages/ClearAlignersEmiPage"));
 const PartnerClinicOnboardingPage = lazy(() => import("@/pages/PartnerClinicOnboardingPage"));
 const AdminClinicOnboardingsPage = lazy(() => import("@/pages/AdminClinicOnboardingsPage"));
 const PartnerPipelinePreviewPage = lazy(() => import("@/pages/PartnerPipelinePreviewPage"));
+const NotFoundPage = lazy(() => import("@/pages/NotFoundPage"));
 
 export default function AppRoutes() {
   return (
@@ -68,7 +69,7 @@ export default function AppRoutes() {
           <Route path="/blog" element={<LazyRoute><BlogHub /></LazyRoute>} />
           <Route path="/blog/:slug" element={<LazyRoute><BlogArticlePage /></LazyRoute>} />
 
-          {/* City-specific Landing Pages – all Indian cities */}
+          {/* City-specific Landing Pages â all Indian cities */}
           <Route path="/cities/:city" element={<LazyRoute><CityLandingPage /></LazyRoute>} />
 
           {/* Vrozart Partnership Pitch Deck */}
@@ -89,7 +90,7 @@ export default function AppRoutes() {
           <Route path="/login" element={<Navigate to="/reactivation/login" replace />} />
 
           {/* Fallback wildcard route */}
-          <Route path="*" element={<Navigate to="/" replace />} />
+          <Route path="*" element={<LazyRoute><NotFoundPage /></LazyRoute>} />
         </Routes>
         <AddToHomeScreen />
       </SidebarProvider>

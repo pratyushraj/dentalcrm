@@ -15,8 +15,8 @@ try {
 
 const STATIC_ROUTES = {
   '/': {
-    title: 'Clinaza — Healthcare EMIs & Free Dental CRM India',
-    desc: 'Offer instant point-of-care patient EMI financing (₹30K–₹5L) with 13 Live RBI-regulated NBFCs. Plus, 100% Free Dental Clinic CRM & WhatsApp recall software.',
+    title: 'Clinaza â Healthcare EMIs & Free Dental CRM India',
+    desc: 'Offer instant point-of-care patient EMI financing (â¹30Kââ¹5L) with 13 Live RBI-regulated NBFCs. Plus, 100% Free Dental Clinic CRM & WhatsApp recall software.',
     h1: 'Dental Treatment on EMI. Zero Patient Drop-Offs.'
   },
   '/tools': {
@@ -40,23 +40,23 @@ const STATIC_ROUTES = {
     h1: 'Medical & Dental Guides, Treatment Costs & EMI Plans'
   },
   '/dental-implant-loan': {
-    title: 'Dental Implant Loan & EMI in India (From ₹2,400/mo)',
+    title: 'Dental Implant Loan & EMI in India (From â¹2,400/mo)',
     desc: 'Get a dental implant loan in India. Finance single tooth, multiple implants & All-on-4 with flexible monthly EMI from ~11.5% p.a. 2-min digital approval.',
     h1: 'Dental Implant Loans & Flexible Monthly EMIs in India'
   },
   '/clear-aligners-on-emi': {
-    title: 'Clear Aligners Cost on EMI India (From ₹2,600/mo)',
+    title: 'Clear Aligners Cost on EMI India (From â¹2,600/mo)',
     desc: 'Compare Invisalign, Flash & Toothsi alternatives with flexible monthly financing from ~11.5% p.a. 2-min digital approval across partner clinics.',
     h1: 'Clear Invisible Aligners on Flexible Monthly EMI in India'
   },
   '/deck': {
     title: 'Clinaza Strategic Healthcare Financing & Partnership Deck',
-    desc: 'Explore Clinaza’s healthcare point-of-care patient financing network, NBFC underwriting architecture, and partner clinic distribution model.',
+    desc: 'Explore Clinazaâs healthcare point-of-care patient financing network, NBFC underwriting architecture, and partner clinic distribution model.',
     h1: 'Clinaza Healthcare Financing & Strategic Partnership Overview'
   },
   '/demo/loan': {
     title: 'Clinaza Patient Healthcare Financing & Instant EMI Demo',
-    desc: 'Experience Clinaza’s seamless point-of-care patient financing journey with 2-minute digital KYC, zero CIBIL impact, and flexible monthly tenures.',
+    desc: 'Experience Clinazaâs seamless point-of-care patient financing journey with 2-minute digital KYC, zero CIBIL impact, and flexible monthly tenures.',
     h1: 'Interactive Patient EMI & Healthcare Financing Demo Sandbox'
   },
   '/review/assist': {
@@ -66,19 +66,19 @@ const STATIC_ROUTES = {
     robots: 'noindex, nofollow'
   },
   '/clinic-onboarding': {
-    title: 'Partner Clinic Onboarding — Clinaza Point-of-Care EMI',
+    title: 'Partner Clinic Onboarding â Clinaza Point-of-Care EMI',
     desc: 'Official partner clinic onboarding portal to activate instant point-of-care patient EMI financing.',
     h1: 'Partner Clinic Onboarding & Point-of-Care EMI Activation',
     image: 'https://www.clinaza.in/og-clinic-onboarding.png'
   },
   '/pilot-onboarding': {
-    title: 'Partner Clinic Onboarding — Clinaza Point-of-Care EMI',
+    title: 'Partner Clinic Onboarding â Clinaza Point-of-Care EMI',
     desc: 'Official partner clinic onboarding portal to activate instant point-of-care patient EMI financing.',
     h1: 'Partner Clinic Onboarding & Point-of-Care EMI Activation',
     image: 'https://www.clinaza.in/og-clinic-onboarding.png'
   },
   '/partner-pipeline': {
-    title: 'Clinaza Verified Merchant Clinic Network — Partner Pipeline',
+    title: 'Clinaza Verified Merchant Clinic Network â Partner Pipeline',
     desc: 'Verified partner clinic network accredited for point-of-care patient financing and instant treatment EMI disbursals.',
     h1: 'Pre-Qualified Dental Merchant Network',
     image: 'https://www.clinaza.in/og-partner-pipeline.png',
@@ -150,7 +150,7 @@ export default async function handler(req, res) {
         <div style="background-color:#f8fafc;border-left:4px solid #0867E8;padding:16px;border-radius:6px;margin:20px 0;">
           <h2 style="font-size:1.15rem;font-weight:700;color:#0B2450;margin-top:0;margin-bottom:8px;">Transparent Patient Financing Highlights</h2>
           <ul style="margin:0;padding-left:20px;line-height:1.6;">
-            <li>Pre-approved credit limits ranging from ₹30,000 to ₹5,00,000 based on digital KYC.</li>
+            <li>Pre-approved credit limits ranging from â¹30,000 to â¹5,00,000 based on digital KYC.</li>
             <li>Instant 2-minute paperless verification with zero CIBIL impact during eligibility checks.</li>
             <li>Point-of-care clinic disbursals directly to healthcare providers, eliminating financial stress.</li>
             <li>Wide coverage across major metros and Tier-2/Tier-3 cities throughout India.</li>
@@ -184,16 +184,32 @@ export default async function handler(req, res) {
 
     // Always inject SSR content for every request (not just known bots).
     // React will hydrate and replace this on client-side rendering.
-    // This ensures any crawler — including non-standard ones like OpenSEO — sees
+    // This ensures any crawler â including non-standard ones like OpenSEO â sees
     // the H1, description text, and outgoing links immediately.
     if (html.includes('<!--ssr-start-->') && html.includes('<!--ssr-end-->')) {
       html = html.replace(/<!--ssr-start-->[\s\S]*?<!--ssr-end-->/, `<!--ssr-start-->${ssrContent}<!--ssr-end-->`);
     } else if (html.includes('<div id="root"></div>')) {
       html = html.replace('<div id="root"></div>', `<div id="root">${ssrContent}</div>`);
     }
+
+    res.setHeader('Content-Type', 'text/html; charset=utf-8');
+    res.setHeader('Cache-Control', 'public, s-maxage=3600, stale-while-revalidate=86400');
+    return res.status(200).send(html);
   }
 
+  // Route not found in STATIC_ROUTES or metaMap -> Return 404
+  html = html.replace(/<title>[^<]*<\/title>/i, `<title>404 Page Not Found | Clinaza</title>`);
+  html = html.replace(/<meta\s+name=["']robots["']\s+content=["'][\s\S]*?["']\s*\/?>/i, `<meta name="robots" content="noindex, nofollow" />`);
+  const notFoundContent = `
+    <div style="max-width:600px;margin:80px auto;padding:24px 16px;text-align:center;font-family:system-ui,-apple-system,sans-serif;color:#1e293b;">
+      <h1 style="font-size:2.5rem;font-weight:800;color:#0B2450;margin-bottom:12px;">404 - Page Not Found</h1>
+      <p style="font-size:1.05rem;color:#64748b;margin-bottom:24px;">The page you are looking for doesn't exist or has moved.</p>
+      <a href="/" style="display:inline-block;padding:12px 24px;background-color:#0867E8;color:#ffffff;text-decoration:none;border-radius:8px;font-weight:600;">Return Home</a>
+    </div>`;
+  if (html.includes('<!--ssr-start-->') && html.includes('<!--ssr-end-->')) {
+    html = html.replace(/<!--ssr-start-->[\s\S]*?<!--ssr-end-->/, `<!--ssr-start-->${notFoundContent}<!--ssr-end-->`);
+  }
   res.setHeader('Content-Type', 'text/html; charset=utf-8');
-  res.setHeader('Cache-Control', 'public, s-maxage=3600, stale-while-revalidate=86400');
-  return res.status(200).send(html);
+  res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+  return res.status(404).send(html);
 }

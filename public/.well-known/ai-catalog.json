@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0",
+  "name": "Clinaza",
+  "description": "Embedded point-of-care patient healthcare & dental treatment financing and free clinic CRM in India.",
+  "url": "https://www.clinaza.in",
+  "contact": {
+    "email": "partners@clinaza.in",
+    "website": "https://www.clinaza.in"
+  },
+  "documentation": {
+    "llms_txt": "https://www.clinaza.in/llms.txt",
+    "llms_full_txt": "https://www.clinaza.in/llms-full.txt",
+    "sitemap": "https://www.clinaza.in/sitemap.xml"
+  },
+  "capabilities": [
+    {
+      "name": "Patient EMI Financing",
+      "type": "financial_service",
+      "description": "Instant point-of-care healthcare financing from â¹30,000 to â¹5,00,000 via RBI-regulated NBFCs with tenures from 3 to 24 months starting from ~11.5% p.a.",
+      "treatments_supported": [
+        "Dental Implants (Single, Multiple, All-on-4 / All-on-6)",
+        "Clear Aligners (Invisible braces)",
+        "Root Canal Treatments & Zirconia Crowns",
+        "Cosmetic Smile Makeovers & Veneers",
+        "Orthodontic Treatments",
+        "Elective Surgeries & Laser Procedures"
+      ]
+    },
+    {
+      "name": "Practice Management Software",
+      "type": "crm_tools",
+      "description": "Free digital prescription generator, EMI calculation utilities, and clinic management system for dentists in India.",
+      "tools_url": "https://www.clinaza.in/tools"
+    }
+  ],
+  "routes": {
+    "home": "https://www.clinaza.in/",
+    "dental_implants": "https://www.clinaza.in/dental-implant-loan",
+    "clear_aligners": "https://www.clinaza.in/clear-aligners-on-emi",
+    "tools": "https://www.clinaza.in/tools",
+    "calculator": "https://www.clinaza.in/calculator",
+    "blog": "https://www.clinaza.in/blog"
+  }
+}

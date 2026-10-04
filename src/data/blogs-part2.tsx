@@ -16,7 +16,7 @@ export const BLOGS_PART2 = [
     faqs: [
       {
         question: "Can I pay for a hair transplant on monthly EMI in India?",
-        answer: "Yes. Through Clinaza partner aesthetic and trichology clinics, patients can split hair transplant procedures (1,500 to 4,500+ grafts) into 0% interest and low-cost monthly EMIs ranging from ₹2,800 to ₹8,500/month."
+        answer: "Yes. Through Clinaza partner aesthetic and trichology clinics, patients can split hair transplant procedures (1,500 to 4,500+ grafts) into low-cost monthly EMIs ranging from ₹2,800 to ₹8,500/month."
       },
       {
         question: "How much does a hair transplant cost in India in 2026?",
@@ -34,7 +34,7 @@ export const BLOGS_PART2 = [
         </p>
 
         <p className="text-neutral-700 leading-relaxed">
-          However, high-density hair restoration involving 2,500 to 4,000+ grafts can cost ₹60,000 to ₹1,80,000. Through <strong>Clinaza point-of-care patient financing</strong>, you can undergo your hair restoration surgery immediately and pay through flexible 0% interest monthly EMIs starting at just <strong>₹2,800/month</strong>.
+          However, high-density hair restoration involving 2,500 to 4,000+ grafts can cost ₹60,000 to ₹1,80,000. Through <strong>Clinaza point-of-care patient financing</strong>, you can undergo your hair restoration surgery immediately and pay through flexible flexible monthly EMIs starting at just <strong>₹2,800/month</strong>.
         </p>
 
         <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Hair Transplant Graft Cost & Monthly EMI Breakdown (2026)</h2>
@@ -85,7 +85,7 @@ export const BLOGS_PART2 = [
         </ul>
 
         <div className="bg-gradient-to-r from-[#0867E8] to-blue-700 text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
-          <h3 className="text-lg font-bold">Check Hair Transplant 0% EMI Pre-Approval</h3>
+          <h3 className="text-lg font-bold">Check Hair Transplant easy EMI Pre-Approval</h3>
           <p className="text-xs text-blue-100 max-w-lg mx-auto">Get instant pre-approval for ₹30,000 to ₹3,00,000 in 2 minutes without affecting your credit score.</p>
           <a
             href="https://clinaza.in/#calculator"
@@ -118,7 +118,7 @@ export const BLOGS_PART2 = [
       },
       {
         question: "Does health insurance cover IVF and infertility treatments in India?",
-        answer: "Most basic retail health insurance plans exclude infertility treatments. Dedicated medical financing and zero-cost EMIs via Clinaza help couples proceed with treatment cycles without financial disruption."
+        answer: "Most basic retail health insurance plans exclude infertility treatments. Dedicated medical financing and easy EMIs via Clinaza help couples proceed with treatment cycles without financial disruption."
       }
     ],
     content: (
@@ -203,8 +203,8 @@ export const BLOGS_PART2 = [
     metaDescription: "LASIK eye surgery cost on EMI in India: Compare Femto-LASIK, Contoura Vision & SMILE pricing (₹35K–₹1.2L) with instant flexible monthly EMIs from ₹2,900/mo.",
     faqs: [
       {
-        question: "Can I get LASIK eye surgery on 0% EMI in India?",
-        answer: "Yes. Through Clinaza partner eye hospitals and laser vision centers, patients can split LASIK, Contoura Vision, and SMILE procedures into 0% interest monthly installments from ₹2,900/month."
+        question: "Can I get LASIK eye surgery on easy EMI in India?",
+        answer: "Yes. Through Clinaza partner eye hospitals and laser vision centers, patients can split LASIK, Contoura Vision, and SMILE procedures into flexible monthly installments from ₹2,900/month."
       },
       {
         question: "How much does LASIK eye surgery cost in India in 2026?",
@@ -212,7 +212,7 @@ export const BLOGS_PART2 = [
       },
       {
         question: "Is LASIK surgery covered by health insurance in India?",
-        answer: "Insurance only covers refractive surgery if refractive power is -7.5 diopters or higher. For general specs removal (-1.0D to -6.0D), it is considered elective, making 0% EMI financing via Clinaza the preferred payment option."
+        answer: "Insurance only covers refractive surgery if refractive power is -7.5 diopters or higher. For general specs removal (-1.0D to -6.0D), it is considered elective, making easy EMI financing via Clinaza the preferred payment option."
       }
     ],
     content: (
@@ -222,7 +222,7 @@ export const BLOGS_PART2 = [
         </p>
 
         <p className="text-neutral-700 leading-relaxed">
-          While premium customized laser procedures cost ₹45,000 to ₹1,20,000 for both eyes, <strong>Clinaza point-of-care patient financing</strong> enables you to say goodbye to spectacles for just <strong>₹2,900 per month on 0% EMI</strong>.
+          While premium customized laser procedures cost ₹45,000 to ₹1,20,000 for both eyes, <strong>Clinaza point-of-care patient financing</strong> enables you to say goodbye to spectacles for just <strong>₹2,900 per month on easy EMI</strong>.
         </p>
 
         <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">LASIK Surgery Cost & Monthly EMI Breakdown for Both Eyes (2026)</h2>
@@ -273,7 +273,7 @@ export const BLOGS_PART2 = [
         </ul>
 
         <div className="bg-gradient-to-r from-[#0867E8] to-blue-700 text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
-          <h3 className="text-lg font-bold">Check LASIK Surgery 0% EMI Pre-Approval</h3>
+          <h3 className="text-lg font-bold">Check LASIK Surgery easy EMI Pre-Approval</h3>
           <p className="text-xs text-blue-100 max-w-lg mx-auto">Get instant pre-approval for ₹30,000 to ₹3,00,000 in under 2 minutes with zero collateral.</p>
           <a
             href="https://clinaza.in/#calculator"
@@ -297,7 +297,7 @@ export const BLOGS_PART2 = [
     metaDescription: "Knee replacement surgery cost in India (₹1.5L–₹4L): Get flexible monthly EMI for TKR & PKR surgeries with instant approval and no collateral on Clinaza.",
     faqs: [
       { question: "How much does knee replacement cost in India?", answer: "Total knee replacement (TKR) costs ₹1.5–3 lakh per knee in government hospitals and ₹2.5–4 lakh in private hospitals. Bilateral (both knees) can cost ₹4–7 lakh." },
-      { question: "Can I get knee replacement on EMI?", answer: "Yes. Clinaza offers 0% EMI for knee replacement surgeries up to ₹5 lakh with repayment of 3 to 24 months and no collateral or guarantor required." },
+      { question: "Can I get knee replacement on EMI?", answer: "Yes. Clinaza offers easy EMI for knee replacement surgeries up to ₹5 lakh with repayment of 3 to 24 months and no collateral or guarantor required." },
       { question: "Is knee replacement covered under insurance?", answer: "Yes, most health insurance policies cover knee replacement. However, there are waiting periods (usually 2–4 years) and sub-limits. EMI covers your gap or upfront cost before reimbursement." },
       { question: "What is the age limit for knee replacement?", answer: "There is no strict age limit. Surgeons perform TKR on patients aged 55–85. The decision depends on pain level, X-ray findings, and overall health." },
       { question: "How long is recovery after knee replacement?", answer: "Most patients walk with support by day 2–3, go home in 3–5 days, and return to normal activities in 6–12 weeks. Full recovery takes 3–6 months." },
@@ -305,7 +305,7 @@ export const BLOGS_PART2 = [
     content: (
       <div className="space-y-6 text-neutral-800 leading-relaxed">
         <p className="text-lg">Chronic knee pain from osteoarthritis affects over 15 crore Indians, yet many delay surgery due to cost. Total knee replacement (TKR) is one of the most successful elective surgeries in the world — with 95% of patients reporting dramatic pain relief and improved mobility. The problem is the ₹2–4 lakh price tag that stops most middle-class families from proceeding.</p>
-        <p>Clinaza now makes knee replacement accessible through instant 0% EMI — no collateral, no guarantor, and approval in under 2 minutes. Whether you're planning a single knee, both knees, or partial resurfacing, you can spread the cost across 3 to 24 months at zero extra charge.</p>
+        <p>Clinaza now makes knee replacement accessible through instant easy EMI — no collateral, no guarantor, and approval in under 2 minutes. Whether you're planning a single knee, both knees, or partial resurfacing, you can spread the cost across 3 to 24 months at zero extra charge.</p>
 
         <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Knee Replacement Cost in India 2025</h2>
         <div className="overflow-x-auto rounded-xl border border-neutral-200 shadow-sm">
@@ -369,12 +369,12 @@ export const BLOGS_PART2 = [
           <li><strong>Get pre-approved online:</strong> Visit clinaza.in and use the EMI calculator. Enter the surgery cost and select tenure (3–24 months).</li>
           <li><strong>Instant approval in 2 minutes:</strong> No branch visit, no collateral, no guarantor — just your PAN, Aadhaar, and bank statement.</li>
           <li><strong>Surgery happens:</strong> Clinaza disburses directly to your hospital or clinic on the day of surgery.</li>
-          <li><strong>Pay monthly:</strong> Fixed EMI auto-debited from your account. Zero extra cost at 0% interest.</li>
+          <li><strong>Pay monthly:</strong> Fixed EMI auto-debited from your account. Zero extra cost at flexible.</li>
         </ol>
 
         <div className="bg-slate-900 text-white p-6 rounded-2xl my-8 space-y-4">
           <h3 className="text-lg font-bold">Are you a hospital or orthopaedic clinic?</h3>
-          <p className="text-sm text-slate-300">Partner with Clinaza to offer zero-cost EMI at the point of care. Increase surgery conversions by 40%. Onboard in 24 hours — no setup fee.</p>
+          <p className="text-sm text-slate-300">Partner with Clinaza to offer easy EMI at the point of care. Increase surgery conversions by 40%. Onboard in 24 hours — no setup fee.</p>
           <a href="https://clinaza.in/#partner-form" className="inline-block bg-[#0867E8] text-white font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-600 transition-colors">Partner with Clinaza →</a>
         </div>
 
@@ -383,7 +383,7 @@ export const BLOGS_PART2 = [
 
         <div className="bg-gradient-to-r from-[#0867E8] to-blue-700 text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
           <h3 className="text-lg font-bold">Check Knee Replacement EMI Eligibility — Free in 2 Minutes</h3>
-          <p className="text-xs text-blue-100 max-w-lg mx-auto">Get pre-approved for ₹1 lakh to ₹5 lakh. 0% interest. No collateral. Instant decision.</p>
+          <p className="text-xs text-blue-100 max-w-lg mx-auto">Get pre-approved for ₹1 lakh to ₹5 lakh. flexible. No collateral. Instant decision.</p>
           <a href="https://clinaza.in/#calculator" className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md">Calculate My Knee EMI →</a>
         </div>
       </div>
@@ -401,14 +401,14 @@ export const BLOGS_PART2 = [
     metaDescription: "Bariatric surgery costs ₹2.5–5 lakh in India. Get flexible EMI for gastric sleeve, bypass, and MGB with instant approval on Clinaza. No collateral needed.",
     faqs: [
       { question: "How much does bariatric surgery cost in India?", answer: "Bariatric surgery costs ₹2.5–5 lakh depending on the procedure (sleeve vs bypass) and city. Laparoscopic sleeve gastrectomy is the most popular at ₹2.5–3.5 lakh." },
-      { question: "Can I get bariatric surgery on EMI in India?", answer: "Yes. Clinaza offers 0% EMI for bariatric procedures up to ₹5 lakh with tenure from 3 to 24 months and instant approval — no collateral required." },
+      { question: "Can I get bariatric surgery on EMI in India?", answer: "Yes. Clinaza offers easy EMI for bariatric procedures up to ₹5 lakh with tenure from 3 to 24 months and instant approval — no collateral required." },
       { question: "Is bariatric surgery covered under health insurance in India?", answer: "Some insurers cover it if BMI > 35 with comorbidities (diabetes, hypertension). Check your policy's 'obesity treatment' clause. EMI bridges the gap or covers the full cost." },
       { question: "Who is eligible for bariatric surgery in India?", answer: "Adults with BMI ≥ 37.5, or BMI ≥ 32.5 with Type 2 diabetes or other obesity-related conditions, who have failed 6+ months of lifestyle changes." },
       { question: "How much weight can I lose after bariatric surgery?", answer: "Most patients lose 60–80% of their excess weight within 18–24 months. Gastric bypass shows slightly higher loss than sleeve gastrectomy." },
     ],
     content: (
       <div className="space-y-6 text-neutral-800 leading-relaxed">
-        <p className="text-lg">Obesity affects over 13.5 crore Indians and drives type 2 diabetes, hypertension, sleep apnea, and joint disease. Bariatric surgery is the only proven long-term solution for severe obesity — but at ₹2.5–5 lakh, it's out of reach for most families. Clinaza changes that with 0% EMI financing that makes your surgery affordable today.</p>
+        <p className="text-lg">Obesity affects over 13.5 crore Indians and drives type 2 diabetes, hypertension, sleep apnea, and joint disease. Bariatric surgery is the only proven long-term solution for severe obesity — but at ₹2.5–5 lakh, it's out of reach for most families. Clinaza changes that with easy EMI financing that makes your surgery affordable today.</p>
         <p>Whether you're considering a laparoscopic sleeve gastrectomy, Roux-en-Y gastric bypass, or mini gastric bypass (MGB), Clinaza gives instant pre-approval with no collateral, no guarantor, and no branch visit. Just fill the form online and get your approval in under 2 minutes.</p>
 
         <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Bariatric Surgery Cost Comparison India 2025</h2>
@@ -477,7 +477,7 @@ export const BLOGS_PART2 = [
 
         <div className="bg-slate-900 text-white p-6 rounded-2xl my-8 space-y-4">
           <h3 className="text-lg font-bold">Are you a bariatric or metabolic surgery centre?</h3>
-          <p className="text-sm text-slate-300">Partner with Clinaza and offer 0% EMI at the point of consultation. Convert hesitant patients into confirmed surgeries. Free onboarding.</p>
+          <p className="text-sm text-slate-300">Partner with Clinaza and offer easy EMI at the point of consultation. Convert hesitant patients into confirmed surgeries. Free onboarding.</p>
           <a href="https://clinaza.in/#partner-form" className="inline-block bg-[#0867E8] text-white font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-600 transition-colors">Partner with Clinaza →</a>
         </div>
 
@@ -491,7 +491,7 @@ export const BLOGS_PART2 = [
         </ul>
 
         <div className="bg-gradient-to-r from-[#0867E8] to-blue-700 text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
-          <h3 className="text-lg font-bold">Check Bariatric Surgery 0% EMI Eligibility Now</h3>
+          <h3 className="text-lg font-bold">Check Bariatric Surgery easy EMI Eligibility Now</h3>
           <p className="text-xs text-blue-100 max-w-lg mx-auto">Get pre-approved for ₹1.5 lakh to ₹5 lakh. Instant approval. No collateral. No guarantor.</p>
           <a href="https://clinaza.in/#calculator" className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md">Calculate My Bariatric EMI →</a>
         </div>
@@ -510,15 +510,15 @@ export const BLOGS_PART2 = [
     metaDescription: "Rhinoplasty cost on EMI in India: Cosmetic and functional nose job surgery pricing (₹60,000 to ₹2,00,000) with flexible monthly financing via Clinaza.",
     faqs: [
       { question: "How much does rhinoplasty cost in India?", answer: "Rhinoplasty in India costs ₹60,000–2.5 lakh depending on the procedure type (open vs closed), surgeon experience, and city. Non-surgical rhinoplasty using fillers costs ₹15,000–40,000." },
-      { question: "Can I get a nose job on EMI in India?", answer: "Yes. Clinaza offers 0% EMI for rhinoplasty up to ₹2.5 lakh with 3–24 month tenures. Instant online approval, no collateral or guarantor required." },
+      { question: "Can I get a nose job on EMI in India?", answer: "Yes. Clinaza offers easy EMI for rhinoplasty up to ₹2.5 lakh with 3–24 month tenures. Instant online approval, no collateral or guarantor required." },
       { question: "Is rhinoplasty permanent?", answer: "Yes, surgical rhinoplasty results are permanent. Results take 12–18 months to fully settle as post-op swelling gradually resolves. Non-surgical (filler) rhinoplasty lasts 12–18 months." },
       { question: "How long is recovery after rhinoplasty?", answer: "Splint comes off in 7–10 days. Presentable in 2–3 weeks. 80% of swelling resolves in 3 months. Final result visible at 12–18 months." },
       { question: "What is the best city for rhinoplasty in India?", answer: "Mumbai, Delhi, and Bengaluru have the highest concentration of experienced rhinoplasty surgeons. Hyderabad, Chennai, and Pune also have excellent plastic surgery centres." },
     ],
     content: (
       <div className="space-y-6 text-neutral-800 leading-relaxed">
-        <p className="text-lg">Rhinoplasty — commonly called a nose job — is the third most popular cosmetic surgery in India. From correcting a nasal hump, reducing tip size, straightening a deviated septum, or refining the nostrils, rhinoplasty delivers life-changing results both aesthetically and functionally. The cost of ₹60,000–2.5 lakh was the only thing stopping most patients — until Clinaza introduced 0% EMI financing.</p>
-        <p>Now you can book your rhinoplasty consultation, confirm your surgery date, and pay in affordable monthly instalments with zero interest. Clinaza approves in under 2 minutes with just your PAN, Aadhaar, and bank details.</p>
+        <p className="text-lg">Rhinoplasty — commonly called a nose job — is the third most popular cosmetic surgery in India. From correcting a nasal hump, reducing tip size, straightening a deviated septum, or refining the nostrils, rhinoplasty delivers life-changing results both aesthetically and functionally. The cost of ₹60,000–2.5 lakh was the only thing stopping most patients — until Clinaza introduced easy EMI financing.</p>
+        <p>Now you can book your rhinoplasty consultation, confirm your surgery date, and pay in affordable monthly instalments with flexible interest. Clinaza approves in under 2 minutes with just your PAN, Aadhaar, and bank details.</p>
 
         <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Rhinoplasty Cost in India 2025</h2>
         <div className="overflow-x-auto rounded-xl border border-neutral-200 shadow-sm">
@@ -592,12 +592,12 @@ export const BLOGS_PART2 = [
 
         <div className="bg-slate-900 text-white p-6 rounded-2xl my-8 space-y-4">
           <h3 className="text-lg font-bold">Are you a plastic surgery or ENT clinic?</h3>
-          <p className="text-sm text-slate-300">Offer 0% EMI for rhinoplasty and all cosmetic procedures. Patients who hesitate at ₹1.5 lakh book immediately when offered ₹6,000/month. Partner with Clinaza — free onboarding.</p>
+          <p className="text-sm text-slate-300">Offer easy EMI for rhinoplasty and all cosmetic procedures. Patients who hesitate at ₹1.5 lakh book immediately when offered ₹6,000/month. Partner with Clinaza — free onboarding.</p>
           <a href="https://clinaza.in/#partner-form" className="inline-block bg-[#0867E8] text-white font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-600 transition-colors">Partner with Clinaza →</a>
         </div>
 
         <div className="bg-gradient-to-r from-[#0867E8] to-blue-700 text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
-          <h3 className="text-lg font-bold">Check Rhinoplasty EMI in 2 Minutes — 0% Interest</h3>
+          <h3 className="text-lg font-bold">Check Rhinoplasty EMI in 2 Minutes — flexible</h3>
           <p className="text-xs text-blue-100 max-w-lg mx-auto">Get instant pre-approval for ₹50,000 to ₹2.5 lakh. No collateral, no guarantor. EMI from ₹2,000/month.</p>
           <a href="https://clinaza.in/#calculator" className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md">Calculate My Rhinoplasty EMI →</a>
         </div>
@@ -616,14 +616,14 @@ export const BLOGS_PART2 = [
     metaDescription: "Gynecomastia male chest reduction surgery cost on EMI in India: Compare liposuction & gland excision pricing (₹45k–₹1.2L) with monthly financing.",
     faqs: [
       { question: "How much does gynecomastia surgery cost in India?", answer: "Gynecomastia surgery in India costs ₹50,000–1.5 lakh depending on the grade (glandular tissue vs fat), surgical technique (liposuction vs excision), and city." },
-      { question: "Can I get gynecomastia surgery on EMI?", answer: "Yes. Clinaza offers 0% EMI for gynecomastia surgery up to ₹1.5 lakh with 3–24 month tenures and instant online approval." },
+      { question: "Can I get gynecomastia surgery on EMI?", answer: "Yes. Clinaza offers easy EMI for gynecomastia surgery up to ₹1.5 lakh with 3–24 month tenures and instant online approval." },
       { question: "Is gynecomastia surgery permanent?", answer: "Yes, surgical results are permanent as long as the underlying hormonal cause is addressed and you avoid substances like steroids and certain medications that cause gynecomastia." },
       { question: "How long is recovery after gynecomastia surgery?", answer: "You'll wear a compression vest for 4–6 weeks. Return to work in 5–7 days. Strenuous exercise after 4–6 weeks. Final results visible in 3–6 months as swelling settles." },
       { question: "What causes gynecomastia?", answer: "Hormonal imbalance (high estrogen, low testosterone), steroid use, certain medications (antidepressants, antacids), obesity, or idiopathic (unknown) causes." },
     ],
     content: (
       <div className="space-y-6 text-neutral-800 leading-relaxed">
-        <p className="text-lg">Gynecomastia — enlarged male breast tissue — affects 40–60% of men at some point in their lives and can cause significant embarrassment and psychological distress. Despite being extremely common, most men suffer in silence because they're unaware that surgery exists or assume it's unaffordable. Clinaza makes gynecomastia surgery accessible with 0% EMI starting from just ₹2,500 per month.</p>
+        <p className="text-lg">Gynecomastia — enlarged male breast tissue — affects 40–60% of men at some point in their lives and can cause significant embarrassment and psychological distress. Despite being extremely common, most men suffer in silence because they're unaware that surgery exists or assume it's unaffordable. Clinaza makes gynecomastia surgery accessible with easy EMI starting from just ₹2,500 per month.</p>
         <p>Whether your condition involves predominantly glandular tissue (requiring excision) or fatty enlargement (treatable with liposuction alone), Clinaza's financing covers the full procedure cost with instant approval — no branch visit, no collateral, no embarrassment.</p>
 
         <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Gynecomastia Surgery Cost in India 2025</h2>
@@ -697,7 +697,7 @@ export const BLOGS_PART2 = [
 
         <div className="bg-gradient-to-r from-[#0867E8] to-blue-700 text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
           <h3 className="text-lg font-bold">Check Gynecomastia Surgery EMI — Instant Approval</h3>
-          <p className="text-xs text-blue-100 max-w-lg mx-auto">Get pre-approved for ₹50,000 to ₹2 lakh. 0% interest. No collateral. EMI from ₹2,500/month.</p>
+          <p className="text-xs text-blue-100 max-w-lg mx-auto">Get pre-approved for ₹50,000 to ₹2 lakh. flexible. No collateral. EMI from ₹2,500/month.</p>
           <a href="https://clinaza.in/#calculator" className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md">Calculate My Gynecomastia EMI →</a>
         </div>
       </div>
@@ -715,15 +715,15 @@ export const BLOGS_PART2 = [
     metaDescription: "Liposuction surgery cost on EMI in India: Compare VASER, laser & body contouring pricing (₹50k to ₹2.5L) with flexible monthly EMI plans via Clinaza.",
     faqs: [
       { question: "How much does liposuction cost in India?", answer: "Liposuction in India costs ₹60,000–3 lakh depending on the number of areas treated, technique (standard vs Vaser vs laser), and surgeon. Abdomen alone costs ₹60,000–1.2 lakh." },
-      { question: "Can I get liposuction on EMI in India?", answer: "Yes. Clinaza offers 0% EMI for liposuction procedures up to ₹3 lakh with 3–24 month repayment periods and instant online approval." },
+      { question: "Can I get liposuction on EMI in India?", answer: "Yes. Clinaza offers easy EMI for liposuction procedures up to ₹3 lakh with 3–24 month repayment periods and instant online approval." },
       { question: "Is liposuction permanent?", answer: "Liposuction permanently removes fat cells from the treated area. However, remaining fat cells can expand if you gain weight after surgery — so maintaining weight post-op is important." },
       { question: "How many areas can be treated in one session?", answer: "Surgeons typically treat 2–4 areas in one session for safety. Common combinations: abdomen + flanks, thighs + hips, arms + upper back." },
       { question: "What is the difference between Vaser lipo and standard lipo?", answer: "Vaser uses ultrasound energy to liquefy fat before removal — less bruising, faster recovery, and better for fibrous areas. It enables hi-def sculpting for athletic body definition." },
     ],
     content: (
       <div className="space-y-6 text-neutral-800 leading-relaxed">
-        <p className="text-lg">Liposuction remains India's most popular body contouring procedure, with over 1.5 lakh procedures performed annually. Whether targeting stubborn belly fat, love handles, double chin, inner thighs, or arms, liposuction delivers dramatic and permanent fat reduction with 1–3 weeks of downtime. The ₹60,000–3 lakh cost was the only barrier — Clinaza removes it with 0% EMI financing.</p>
-        <p>From a single-area standard liposuction to full 360° body sculpting with Vaser hi-def, Clinaza finances your procedure at zero interest with instant approval. Pay ₹3,000–12,000 per month instead of lakhs upfront.</p>
+        <p className="text-lg">Liposuction remains India's most popular body contouring procedure, with over 1.5 lakh procedures performed annually. Whether targeting stubborn belly fat, love handles, double chin, inner thighs, or arms, liposuction delivers dramatic and permanent fat reduction with 1–3 weeks of downtime. The ₹60,000–3 lakh cost was the only barrier — Clinaza removes it with easy EMI financing.</p>
+        <p>From a single-area standard liposuction to full 360° body sculpting with Vaser hi-def, Clinaza finances your procedure at flexible interest with instant approval. Pay ₹3,000–12,000 per month instead of lakhs upfront.</p>
 
         <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Liposuction Cost by Area — India 2025</h2>
         <div className="overflow-x-auto rounded-xl border border-neutral-200 shadow-sm">
@@ -797,7 +797,7 @@ export const BLOGS_PART2 = [
 
         <div className="bg-slate-900 text-white p-6 rounded-2xl my-8 space-y-4">
           <h3 className="text-lg font-bold">Are you a cosmetic surgery or aesthetic clinic?</h3>
-          <p className="text-sm text-slate-300">Offer 0% EMI on liposuction and body contouring. Patients who walk out at ₹1.5 lakh stay and book when you show them ₹6,250/month. Partner with Clinaza — free, 24-hour onboarding.</p>
+          <p className="text-sm text-slate-300">Offer easy EMI on liposuction and body contouring. Patients who walk out at ₹1.5 lakh stay and book when you show them ₹6,250/month. Partner with Clinaza — free, 24-hour onboarding.</p>
           <a href="https://clinaza.in/#partner-form" className="inline-block bg-[#0867E8] text-white font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-600 transition-colors">Partner with Clinaza →</a>
         </div>
 
@@ -811,7 +811,7 @@ export const BLOGS_PART2 = [
         </ul>
 
         <div className="bg-gradient-to-r from-[#0867E8] to-blue-700 text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
-          <h3 className="text-lg font-bold">Check Liposuction EMI Eligibility — 0% Interest</h3>
+          <h3 className="text-lg font-bold">Check Liposuction EMI Eligibility — flexible</h3>
           <p className="text-xs text-blue-100 max-w-lg mx-auto">Get pre-approved for ₹50,000 to ₹3 lakh. Instant approval. No collateral. EMI from ₹3,000/month.</p>
           <a href="https://clinaza.in/#calculator" className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md">Calculate My Liposuction EMI →</a>
         </div>
@@ -830,7 +830,7 @@ export const BLOGS_PART2 = [
     metaDescription: "Cancer treatment financing in India: Chemotherapy, radiation & surgical oncology costs with flexible healthcare medical loans up to ₹5 lakh via Clinaza.",
     faqs: [
       { question: "How much does cancer treatment cost in India?", answer: "Comprehensive cancer treatment ranges from ₹3,00,000 to over ₹20,00,000 depending on stage, cancer type, hospital, and modality (chemo cycles, radiation fractions, immunotherapy)." },
-      { question: "Can I get cancer treatment on EMI in India?", answer: "Yes. Clinaza offers healthcare treatment financing up to ₹5,00,000 on 0% EMI with tenures from 3 to 24 months, zero collateral, and approval in 2 minutes." },
+      { question: "Can I get cancer treatment on EMI in India?", answer: "Yes. Clinaza offers healthcare treatment financing up to ₹5,00,000 on easy EMI with tenures from 3 to 24 months, zero collateral, and approval in 2 minutes." },
       { question: "Does health insurance cover all cancer treatment expenses?", answer: "While insurance covers hospitalisation, many targeted therapies, expensive oral chemo, diagnostic PET scans, and out-of-pocket deductibles exceed policy limits. EMI bridges these gaps immediately." },
       { question: "What is the cost of chemotherapy per cycle in India?", answer: "Standard chemo cycles cost ₹20,000 to ₹70,000 per cycle, whereas targeted monoclonal antibodies and immunotherapy (like Pembrolizumab) can cost ₹1,50,000 to ₹4,00,000 per dose." },
       { question: "How does Clinaza pay the cancer hospital?", answer: "Clinaza approves the loan instantly and disburses payments directly to your chosen oncology centre or hospital so treatment starts without delays." }
@@ -838,7 +838,7 @@ export const BLOGS_PART2 = [
     content: (
       <div className="space-y-6 text-neutral-800 leading-relaxed">
         <p className="text-lg">A cancer diagnosis is emotionally overwhelming — and the sudden financial burden of chemotherapy, radiation therapy, and surgical oncology can deplete lifetime savings in weeks. With modern oncological care requiring multiple cycles, targeted drugs, and advanced radiation techniques, out-of-pocket costs frequently exceed standard insurance caps.</p>
-        <p>Clinaza provides compassionate, instant medical financing up to ₹5,00,000 on 0% EMI. Families can now focus entirely on healing and care without compromising on top oncologists, precision radiation, or critical drug cycles.</p>
+        <p>Clinaza provides compassionate, instant medical financing up to ₹5,00,000 on easy EMI. Families can now focus entirely on healing and care without compromising on top oncologists, precision radiation, or critical drug cycles.</p>
 
         <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Cancer Treatment Modality & Cost Breakdown (India 2025)</h2>
         <div className="overflow-x-auto rounded-xl border border-neutral-200 shadow-sm">
@@ -848,7 +848,7 @@ export const BLOGS_PART2 = [
                 <th className="px-4 py-3 text-left">Treatment Modality</th>
                 <th className="px-4 py-3 text-left">Avg Cost (India)</th>
                 <th className="px-4 py-3 text-left">Typical Duration</th>
-                <th className="px-4 py-3 text-left">Clinaza 0% EMI (18 mo)</th>
+                <th className="px-4 py-3 text-left">Clinaza easy EMI (18 mo)</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-neutral-100">
@@ -903,13 +903,13 @@ export const BLOGS_PART2 = [
 
         <div className="bg-slate-900 text-white p-6 rounded-2xl my-8 space-y-4">
           <h3 className="text-lg font-bold">Are you an Oncology Day Care or Cancer Hospital?</h3>
-          <p className="text-sm text-slate-300">Empower patients to undergo timely chemotherapy and advanced therapies without financial roadblocks. Clinaza integrates seamless point-of-care 0% EMI financing. Partner with us today.</p>
+          <p className="text-sm text-slate-300">Empower patients to undergo timely chemotherapy and advanced therapies without financial roadblocks. Clinaza integrates seamless point-of-care easy EMI financing. Partner with us today.</p>
           <a href="https://clinaza.in/#partner-form" className="inline-block bg-[#0867E8] text-white font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-600 transition-colors">Onboard Your Hospital →</a>
         </div>
 
         <div className="bg-gradient-to-r from-[#0867E8] to-blue-700 text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
-          <h3 className="text-lg font-bold">Check 0% EMI Medical Loan Eligibility</h3>
-          <p className="text-xs text-blue-100 max-w-lg mx-auto">Instant pre-approval up to ₹5,00,000 in under 2 minutes. Paperless, confidential, and 0% interest options available.</p>
+          <h3 className="text-lg font-bold">Check easy EMI Medical Loan Eligibility</h3>
+          <p className="text-xs text-blue-100 max-w-lg mx-auto">Instant pre-approval up to ₹5,00,000 in under 2 minutes. Paperless, confidential, and flexible options available.</p>
           <a href="https://clinaza.in/#calculator" className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md">Calculate Cancer Treatment EMI →</a>
         </div>
       </div>
@@ -917,7 +917,7 @@ export const BLOGS_PART2 = [
   },
     {
     slug: "cochlear-implant-cost-on-emi-india",
-    title: "Cochlear Implant Surgery Cost on EMI in India 2025 — Restore Hearing with 0% Financing",
+    title: "Cochlear Implant Surgery Cost on EMI in India 2025 — Restore Hearing with Flexible Financing",
     category: "Medical EMI",
     readTime: "8 min read",
     publishDate: "2026-09-08",
@@ -927,7 +927,7 @@ export const BLOGS_PART2 = [
     metaDescription: "Cochlear implant cost on EMI in India: Pricing guide for Cochlear, Med-El & Advanced Bionics devices with flexible EMI financing and instant approval.",
     faqs: [
       { question: "How much does a cochlear implant cost in India?", answer: "A single-ear cochlear implant surgery costs ₹6,00,000 to ₹14,00,000 depending on the device brand (Cochlear, MED-EL, Advanced Bionics), sound processor technology, and hospital tier." },
-      { question: "Can I get a cochlear implant on 0% EMI?", answer: "Yes! Clinaza provides point-of-care medical EMI loans up to ₹5,00,000 to help parents and adults finance surgical and device costs with zero collateral." },
+      { question: "Can I get a cochlear implant on easy EMI?", answer: "Yes! Clinaza provides point-of-care medical EMI loans up to ₹5,00,000 to help parents and adults finance surgical and device costs with zero collateral." },
       { question: "Is cochlear implant covered by government schemes in India?", answer: "Under the ADIP scheme, eligible children under 5 from low-income families receive free implants. For private patients or those needing upgraded processors, Clinaza EMI bridges the remaining gap." },
       { question: "What is the best age for a child to get a cochlear implant?", answer: "Implantation before 2–3 years of age yields the best speech and language development outcomes. However, adults with post-lingual hearing loss also achieve excellent speech comprehension." },
       { question: "What additional costs exist after cochlear implantation?", answer: "Post-op auditory verbal therapy (AVT) for 1–2 years (₹30,000–80,000/yr) and processor battery replacements or upgrades every few years." }
@@ -935,7 +935,7 @@ export const BLOGS_PART2 = [
     content: (
       <div className="space-y-6 text-neutral-800 leading-relaxed">
         <p className="text-lg">For children born with severe-to-profound hearing loss and adults experiencing sudden neurosensory deafness, cochlear implants are a transformative miracle of modern medical engineering. Unlike hearing aids that merely amplify sound, cochlear implants bypass damaged hair cells to stimulate the auditory nerve directly.</p>
-        <p>However, the significant price tag of ₹6 to ₹15 lakh per ear frequently delays early pediatric intervention — where every month counts for speech development. Clinaza enables immediate access to hearing restoration through transparent 0% interest EMI options.</p>
+        <p>However, the significant price tag of ₹6 to ₹15 lakh per ear frequently delays early pediatric intervention — where every month counts for speech development. Clinaza enables immediate access to hearing restoration through transparent flexible EMI options.</p>
 
         <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Cochlear Implant Cost by Brand & Hospital Tier (India 2025)</h2>
         <div className="overflow-x-auto rounded-xl border border-neutral-200 shadow-sm">
@@ -987,7 +987,7 @@ export const BLOGS_PART2 = [
 
         <div className="bg-gradient-to-r from-[#0867E8] to-blue-700 text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
           <h3 className="text-lg font-bold">Check Hearing Surgery EMI Options</h3>
-          <p className="text-xs text-blue-100 max-w-lg mx-auto">Get up to ₹5 lakh pre-approval with 0% interest and affordable monthly tenures. Give your loved one the gift of sound today.</p>
+          <p className="text-xs text-blue-100 max-w-lg mx-auto">Get up to ₹5 lakh pre-approval with flexible affordable monthly tenures. Give your loved one the gift of sound today.</p>
           <a href="https://clinaza.in/#calculator" className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md">Calculate Cochlear EMI →</a>
         </div>
       </div>
@@ -1081,7 +1081,7 @@ export const BLOGS_PART2 = [
             <ul className="text-xs text-green-800 space-y-1.5 list-disc pl-4">
               <li>100% Free Forever with encrypted cloud security.</li>
               <li>Instant WhatsApp broadcast & automated patient reactivation.</li>
-              <li>Built-in 0% EMI financing directly on the patient invoice.</li>
+              <li>Built-in easy EMI financing directly on the patient invoice.</li>
               <li>Access anywhere from mobile, tablet, or desktop in real-time.</li>
             </ul>
           </div>
@@ -1198,14 +1198,14 @@ export const BLOGS_PART2 = [
     faqs: [
       { question: "What is ICL surgery and who is it for?", answer: "ICL (Implantable Collamer Lens / Phakic IOL) is a soft, biocompatible lens permanently placed inside the eye between the iris and natural crystalline lens. It is ideal for patients with high power (-3D to -20D), thin corneas, or severe dry eyes who are rejected for LASIK." },
       { question: "How much does ICL surgery cost in India?", answer: "Spherical ICL costs ₹65,000 to ₹90,000 per eye (₹1.3L to ₹1.8L for both eyes). Toric ICL (for astigmatism/cylinder power) costs ₹90,000 to ₹1,30,000 per eye (₹1.8L to ₹2.6L for both eyes)." },
-      { question: "Can I get ICL surgery on 0% EMI in India?", answer: "Yes! Clinaza offers 0% interest medical loans for ICL and IPCL surgeries with tenures of 3 to 24 months, zero collateral, and instant approval in 2 minutes." },
+      { question: "Can I get ICL surgery on easy EMI in India?", answer: "Yes! Clinaza offers flexible medical loans for ICL and IPCL surgeries with tenures of 3 to 24 months, zero collateral, and instant approval in 2 minutes." },
       { question: "Is ICL surgery reversible?", answer: "Yes. Unlike LASIK where corneal tissue is permanently removed with a laser, the ICL lens can be safely removed or upgraded if your prescription changes later in life." },
       { question: "How long is the recovery after ICL surgery?", answer: "Most patients achieve sharp 20/20 HD vision within 24 to 48 hours and can resume light desktop work within 2 to 3 days." }
     ],
     content: (
       <div className="space-y-6 text-neutral-800 leading-relaxed">
         <p className="text-lg">If an eye specialist told you that you are unsuitable for LASIK or Contoura Vision due to high minus prescription (-8.0D or higher) or thin corneal thickness (&lt;480 microns), <strong>EVO Visian ICL (Implantable Collamer Lens)</strong> is the world's gold standard solution for permanent glass freedom.</p>
-        <p>Made from collagen copolymer, ICL lenses deliver ultra-high-definition vision without altering or shaving your natural cornea. Clinaza now makes this premium technology affordable with zero-cost EMI financing starting from ₹5,500/month.</p>
+        <p>Made from collagen copolymer, ICL lenses deliver ultra-high-definition vision without altering or shaving your natural cornea. Clinaza now makes this premium technology affordable with easy EMI financing starting from ₹5,500/month.</p>
 
         <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">ICL vs IPCL Surgery Cost Breakdown in India (2025)</h2>
         <div className="overflow-x-auto rounded-xl border border-neutral-200 shadow-sm">
@@ -1215,7 +1215,7 @@ export const BLOGS_PART2 = [
                 <th className="px-4 py-3 text-left">Lens & Procedure Type</th>
                 <th className="px-4 py-3 text-left">Cost (Both Eyes)</th>
                 <th className="px-4 py-3 text-left">Target Prescription</th>
-                <th className="px-4 py-3 text-left">Clinaza 0% EMI (18 mo)</th>
+                <th className="px-4 py-3 text-left">Clinaza easy EMI (18 mo)</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-neutral-100">
@@ -1263,8 +1263,8 @@ export const BLOGS_PART2 = [
         </div>
 
         <div className="bg-gradient-to-r from-[#0867E8] to-blue-700 text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
-          <h3 className="text-lg font-bold">Check 0% EMI Pre-Approval for ICL Surgery</h3>
-          <p className="text-xs text-blue-100 max-w-lg mx-auto">Get approved up to ₹3,00,000 with zero downpayment and 0% interest monthly installments across India's top eye hospitals.</p>
+          <h3 className="text-lg font-bold">Check easy EMI Pre-Approval for ICL Surgery</h3>
+          <p className="text-xs text-blue-100 max-w-lg mx-auto">Get approved up to ₹3,00,000 with zero downpayment and flexible monthly installments across India's top eye hospitals.</p>
           <a href="https://clinaza.in/#calculator" className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md">Calculate ICL EMI →</a>
         </div>
       </div>
@@ -1282,14 +1282,14 @@ export const BLOGS_PART2 = [
     metaDescription: "Cataract surgery cost on EMI in India 2026: Compare monofocal vs multifocal IOL pricing (₹20k–₹1.1L/eye), monthly EMI from ₹1,800/mo, and top eye centers.",
     faqs: [
       { question: "How much does modern cataract surgery cost in India?", answer: "Standard Phacoemulsification with Indian monofocal lens costs ₹18,000–₹35,000 per eye. Robotic laser cataract surgery with premium imported Trifocal/EDOF lenses costs ₹70,000–₹1,25,000 per eye." },
-      { question: "Can I get premium cataract lenses on 0% EMI?", answer: "Yes! Many insurance policies only reimburse basic monofocal lenses. Clinaza provides 0% EMI financing to bridge the upgrade cost to Trifocal or Toric lenses without financial stress." },
+      { question: "Can I get premium cataract lenses on easy EMI?", answer: "Yes! Many insurance policies only reimburse basic monofocal lenses. Clinaza provides easy EMI financing to bridge the upgrade cost to Trifocal or Toric lenses without financial stress." },
       { question: "What is the difference between Monofocal, Toric, and Trifocal lenses?", answer: "Monofocal lenses provide clear distant vision (reading glasses still required). Toric lenses correct astigmatism (cylindrical power). Trifocal/EDOF lenses provide complete glasses-free vision for distance, computer screens, and mobile reading." },
       { question: "Is laser cataract surgery better than manual Phaco?", answer: "Femtosecond Laser-Assisted Cataract Surgery (FLACS) automates corneal incisions and capsulorhexis with computer precision, resulting in faster visual healing and optimal lens centering." }
     ],
     content: (
       <div className="space-y-6 text-neutral-800 leading-relaxed">
         <p className="text-lg">Cataract is the leading cause of reversible vision loss among Indian seniors. While traditional cataract surgery simply aimed to clear cloudiness, modern <strong>Robotic Femto-Cataract Surgery with Premium Trifocal &amp; EDOF Lenses</strong> now allows patients in their 50s, 60s, and 70s to completely throw away their reading and distance glasses.</p>
-        <p>Because basic health insurance and government schemes often cap payouts to standard monofocal lenses, Clinaza 0% EMI financing empowers families to choose the finest premium imported lenses for their parents without out-of-pocket strain.</p>
+        <p>Because basic health insurance and government schemes often cap payouts to standard monofocal lenses, Clinaza easy EMI financing empowers families to choose the finest premium imported lenses for their parents without out-of-pocket strain.</p>
 
         <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Cataract Lens Types & Cost Breakdown (Per Eye, India 2025)</h2>
         <div className="overflow-x-auto rounded-xl border border-neutral-200 shadow-sm">
@@ -1299,7 +1299,7 @@ export const BLOGS_PART2 = [
                 <th className="px-4 py-3 text-left">Intraocular Lens (IOL) Type</th>
                 <th className="px-4 py-3 text-left">Cost Per Eye</th>
                 <th className="px-4 py-3 text-left">Glasses Dependence</th>
-                <th className="px-4 py-3 text-left">Clinaza 0% EMI (12 mo)</th>
+                <th className="px-4 py-3 text-left">Clinaza easy EMI (12 mo)</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-neutral-100">
@@ -1339,12 +1339,12 @@ export const BLOGS_PART2 = [
 
         <div className="bg-slate-900 text-white p-6 rounded-2xl my-8 space-y-4">
           <h3 className="text-lg font-bold">Partner Eye Hospitals &amp; Cataract Surgeons</h3>
-          <p className="text-sm text-slate-300">Upgrade more patients to premium Trifocal and Toric IOLs with on-spot 0% EMI subvention. Increase surgical revenue and patient satisfaction. Partner with Clinaza today.</p>
+          <p className="text-sm text-slate-300">Upgrade more patients to premium Trifocal and Toric IOLs with on-spot easy EMI subvention. Increase surgical revenue and patient satisfaction. Partner with Clinaza today.</p>
           <a href="https://clinaza.in/#partner-form" className="inline-block bg-[#0867E8] text-white font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-600 transition-colors">Partner With Clinaza →</a>
         </div>
 
         <div className="bg-gradient-to-r from-[#0867E8] to-blue-700 text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
-          <h3 className="text-lg font-bold">Check Cataract Surgery 0% EMI Pre-Approval</h3>
+          <h3 className="text-lg font-bold">Check Cataract Surgery easy EMI Pre-Approval</h3>
           <p className="text-xs text-blue-100 max-w-lg mx-auto">Instant approval in 2 minutes for yourself or elderly parents. Zero collateral, minimal KYC.</p>
           <a href="https://clinaza.in/#calculator" className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md">Calculate Cataract EMI →</a>
         </div>
@@ -1365,12 +1365,12 @@ export const BLOGS_PART2 = [
       { question: "What is the difference between Contoura Vision and SMILE?", answer: "Contoura Vision is topography-guided LASIK that maps 22,000 elevation points on your cornea to eliminate minute surface irregularities for superior night vision. SMILE is a 100% flapless keyhole laser procedure with maximum corneal biomechanical stability." },
       { question: "Which is better for dry eyes: Contoura or SMILE?", answer: "SMILE is generally preferred for patients prone to dry eyes because it uses a tiny 2mm incision without cutting a corneal flap, preserving 80% more corneal nerve fibers." },
       { question: "Which procedure provides the sharpest visual quality?", answer: "Contoura Vision frequently achieves 'Super Vision' (better than 20/20 or 6/5 vision) because it corrects micro-aberrations on the corneal surface." },
-      { question: "Can Contoura Vision or SMILE be done on EMI?", answer: "Yes. Both premium procedures can be financed through Clinaza with 0% interest monthly installments from ₹3,500/month." }
+      { question: "Can Contoura Vision or SMILE be done on EMI?", answer: "Yes. Both premium procedures can be financed through Clinaza with flexible monthly installments from ₹3,500/month." }
     ],
     content: (
       <div className="space-y-6 text-neutral-800 leading-relaxed">
         <p className="text-lg">Choosing the right laser vision correction surgery in 2025 can feel overwhelming with options like <strong>Standard LASIK, Blade-Free Femto-LASIK, Topography-Guided Contoura Vision, and Flapless SMILE / SMILE Pro</strong>. Each technology has unique strengths tailored to your corneal thickness, lifestyle, and visual demands.</p>
-        <p>Here is an unbiased clinical comparison to help you choose the ideal laser eye surgery and finance it comfortably with 0% interest EMI through Clinaza.</p>
+        <p>Here is an unbiased clinical comparison to help you choose the ideal laser eye surgery and finance it comfortably with flexible EMI through Clinaza.</p>
 
         <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Feature-by-Feature Comparison Matrix</h2>
         <div className="overflow-x-auto rounded-xl border border-neutral-200 shadow-sm">
@@ -1415,7 +1415,7 @@ export const BLOGS_PART2 = [
                 <td className="px-4 py-3">₹90,000–1,35,000</td>
               </tr>
               <tr className="hover:bg-blue-50/30">
-                <td className="px-4 py-3 font-medium">Clinaza 0% EMI (12 mo)</td>
+                <td className="px-4 py-3 font-medium">Clinaza easy EMI (12 mo)</td>
                 <td className="px-4 py-3 text-green-600 font-bold">₹3,750 / mo</td>
                 <td className="px-4 py-3 text-green-600 font-bold">₹6,250 / mo</td>
                 <td className="px-4 py-3 text-green-600 font-bold">₹7,500 / mo</td>
@@ -1840,8 +1840,8 @@ export const BLOGS_PART2 = [
     metaDescription: "Understand flexible medical loans in Indian healthcare. Learn how processing fees, subvention models & instant approval work at Clinaza partner clinics.",
     faqs: [
       {
-        question: "How do 0% interest or No-Cost EMIs work for dental treatments?",
-        answer: "In a No-Cost EMI model, the financing partner offers a subvention scheme where either the lender discount or clinic processing subsidy absorbs the interest cost, allowing the patient to pay only the principal treatment cost split over 3 to 12 equal monthly installments."
+        question: "How do flexible or Easy EMIs work for dental treatments?",
+        answer: "In a Easy EMI model, the financing partner offers a subvention scheme where either the lender discount or clinic processing subsidy absorbs the interest cost, allowing the patient to pay only the principal treatment cost split over 3 to 12 equal monthly installments."
       },
       {
         question: "What is the minimum CIBIL score required for dental financing in India?",
@@ -1855,10 +1855,10 @@ export const BLOGS_PART2 = [
     content: (
       <div className="space-y-6">
         <p className="text-lg leading-relaxed text-neutral-700">
-          When faced with an estimate of ₹60,000 for a dental implant or ₹1,20,000 for clear aligners, most patients cannot afford a single lump-sum debit from their savings account. The term <strong>"0% Interest EMI"</strong> or <strong>"No-Cost Medical Loan"</strong> has emerged as the most popular financing avenue in Indian healthcare. Here is how it actually works.
+          When faced with an estimate of ₹60,000 for a dental implant or ₹1,20,000 for clear aligners, most patients cannot afford a single lump-sum debit from their savings account. The term <strong>"flexible EMI"</strong> or <strong>"No-Cost Medical Loan"</strong> has emerged as the most popular financing avenue in Indian healthcare. Here is how it actually works.
         </p>
 
-        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">How No-Cost EMI Differs from Standard Personal Loans</h2>
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">How Easy EMI Differs from Standard Personal Loans</h2>
         <div className="overflow-x-auto my-6">
           <table className="min-w-full divide-y divide-neutral-200 border border-neutral-100 text-xs">
             <thead className="bg-neutral-50 font-bold text-neutral-600 uppercase">
@@ -2124,7 +2124,7 @@ export const BLOGS_PART2 = [
     faqs: [
       {
         question: "Does Star Health insurance cover LASIK eye surgery?",
-        answer: "Star Health policies generally exclude elective LASIK laser eye surgery unless refractive eye power exceeds -7.5 diopters and is certified as medically necessary by an ophthalmologist. If denied, Clinaza offers 0% interest monthly EMI plans across partner clinics."
+        answer: "Star Health policies generally exclude elective LASIK laser eye surgery unless refractive eye power exceeds -7.5 diopters and is certified as medically necessary by an ophthalmologist. If denied, Clinaza offers flexible monthly EMI plans across partner clinics."
       },
       {
         question: "Does HDFC ERGO health insurance cover LASIK surgery?",

@@ -545,7 +545,7 @@ export const BLOGS_PART1 = [
           <li><strong>Crown Material:</strong> PFM (Porcelain-fused-to-metal) is economical; Monolithic Zirconia offers unbreakable strength and superior aesthetics.</li>
         </ul>
 
-        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">How to Get 0% EMI for Dental Implants at Clinic Checkout</h2>
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">How to Get easy EMI for Dental Implants at Clinic Checkout</h2>
         <ol className="list-decimal pl-6 space-y-3 text-neutral-700">
           <li><strong>Consult Partner Clinic:</strong> Visit any Clinaza partner dental clinic in your city (e.g. <strong>YOUR DENTIST in Patliputra Colony, Patna</strong> led by Dr. Aryan Parmar, or partner centers in Delhi NCR, Mumbai, Bengaluru, and Lucknow) for a 3D CBCT scan & treatment estimate.</li>
           <li><strong>Instant 2-Minute Pre-Check:</strong> Provide basic KYC details on your phone to check loan eligibility with zero impact on your CIBIL score.</li>
@@ -559,7 +559,7 @@ export const BLOGS_PART1 = [
             <h4 className="text-sm font-bold text-[#0B2450]">YOUR DENTIST — Patliputra Colony, Patna</h4>
           </div>
           <p className="text-xs text-slate-600 leading-relaxed">
-            Led by <strong>Dr. Aryan Parmar</strong>, YOUR DENTIST is a premier implantology and orthodontic center in Patna equipped with digital 3D CBCT smile scanners and offering Clinaza 0% EMI financing on Osstem, Nobel Biocare, and Straumann implants.
+            Led by <strong>Dr. Aryan Parmar</strong>, YOUR DENTIST is a premier implantology and orthodontic center in Patna equipped with digital 3D CBCT smile scanners and offering Clinaza easy EMI financing on Osstem, Nobel Biocare, and Straumann implants.
           </p>
           <div className="text-[11px] font-semibold text-emerald-800 flex flex-wrap gap-3 pt-1">
             <span>📍 Patliputra Colony, Patna</span>
@@ -855,7 +855,7 @@ export const BLOGS_PART1 = [
             🔗 <a href="https://www.yourdentistpatna.in/blog/clinaza-patient-financing-dental-emi-patna" target="_blank" rel="noopener noreferrer" className="text-emerald-700 font-bold underline hover:text-emerald-900">YOUR DENTIST Patna — Clinaza Patient Financing &amp; Dental EMI Guide</a>
           </li>
           <li>
-            🔗 <a href="https://www.prodentpatna.com/blog/no-cost-emi-dental-treatments-patna.html" target="_blank" rel="noopener noreferrer" className="text-emerald-700 font-bold underline hover:text-emerald-900">PRODENT Patna — No-Cost EMI Dental Treatments in Patna</a>
+            🔗 <a href="https://www.prodentpatna.com/blog/no-cost-emi-dental-treatments-patna.html" target="_blank" rel="noopener noreferrer" className="text-emerald-700 font-bold underline hover:text-emerald-900">PRODENT Patna — Easy EMI Dental Treatments in Patna</a>
           </li>
         </ul>
       </div>
@@ -908,7 +908,7 @@ export const BLOGS_PART1 = [
 
         <h2 className="text-xl font-bold text-neutral-900">Official Partner Feature</h2>
         <p className="text-neutral-700 leading-relaxed">
-          Read PRODENT Patna's official feature article on their website: <a href="https://www.prodentpatna.com/blog/no-cost-emi-dental-treatments-patna.html" target="_blank" rel="noopener noreferrer" className="text-emerald-700 font-bold underline">PRODENT Patna — No-Cost EMI Dental Treatments Guide</a>.
+          Read PRODENT Patna's official feature article on their website: <a href="https://www.prodentpatna.com/blog/no-cost-emi-dental-treatments-patna.html" target="_blank" rel="noopener noreferrer" className="text-emerald-700 font-bold underline">PRODENT Patna — Easy EMI Dental Treatments Guide</a>.
         </p>
 
         <div className="pt-4">
@@ -942,7 +942,7 @@ export const BLOGS_PART1 = [
     content: (
       <div className="space-y-6">
         <p className="text-lg leading-relaxed text-neutral-700">
-          <strong>YOUR DENTIST Patna</strong> (led by Dr. Aryan Parmar in Patliputra Colony) is Clinaza's premier featured dental partner in Patna. Patients can access instant, zero-cost EMI financing for implants, aligners, and root canals directly at checkout.
+          <strong>YOUR DENTIST Patna</strong> (led by Dr. Aryan Parmar in Patliputra Colony) is Clinaza's premier featured dental partner in Patna. Patients can access instant, easy EMI financing for implants, aligners, and root canals directly at checkout.
         </p>
 
         <h2 className="text-xl font-bold text-neutral-900">Treatments Eligible for EMI at YOUR DENTIST Patna</h2>
@@ -1177,7 +1177,7 @@ export const BLOGS_PART1 = [
           </div>
           <div className="border border-neutral-200 rounded-xl p-4">
             <p className="text-xs font-bold text-neutral-500 uppercase mb-2">EMI Offer Campaign</p>
-            <p className="text-sm text-neutral-700 italic">"Hi [Name], you can now get dental implants or aligners on easy monthly EMI at [Clinic]. No-cost EMI from Rs 2,500/month. Book a free consult — reply CALL ME."</p>
+            <p className="text-sm text-neutral-700 italic">"Hi [Name], you can now get dental implants or aligners on easy monthly EMI at [Clinic]. Easy EMI from Rs 2,500/month. Book a free consult — reply CALL ME."</p>
           </div>
         </div>
 
@@ -1673,7 +1673,7 @@ export const BLOGS_PART1 = [
         answer: "Invisalign in India typically ranges from ₹80,000 for mild cases (Invisalign Express/Lite) up to ₹2,50,000 for complex full-mouth realignment (Invisalign Comprehensive). On a 24-month EMI plan with Clinaza partner clinics, monthly payments start as low as ₹3,333 to ₹6,250/month."
       },
       {
-        question: "Can I get Invisalign on 0% interest EMI without a credit card?",
+        question: "Can I get Invisalign on flexible EMI without a credit card?",
         answer: "Yes. Clinaza allows patients to finance Invisalign treatment directly at partner clinic checkouts via RBI-regulated NBFC partners with digital KYC and e-NACH bank auto-debit, with zero credit card dependency."
       },
       {
@@ -1736,7 +1736,7 @@ export const BLOGS_PART1 = [
           </table>
         </div>
 
-        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Why Choose Invisalign on Clinaza 0% EMI?</h2>
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Why Choose Invisalign on Clinaza easy EMI?</h2>
         <ul className="list-disc pl-6 space-y-3 text-neutral-700">
           <li><strong>Patented SmartTrack Material:</strong> More comfortable, predictable tooth movement with faster alignment compared to generic PETG plastics.</li>
           <li><strong>Zero Credit Score Impact:</strong> 2-minute instant digital pre-check on your smartphone before booking.</li>
@@ -1793,7 +1793,7 @@ export const BLOGS_PART1 = [
       },
       {
         question: "How do patients finance dental implants without insurance?",
-        answer: "Over 80% of patients in India manage dental implant costs through point-of-care EMI financing. Clinaza allows dental clinics to offer 0% interest monthly installment plans (₹30,000 to ₹3,00,000) funded by RBI-regulated NBFC partners."
+        answer: "Over 80% of patients in India manage dental implant costs through point-of-care EMI financing. Clinaza allows dental clinics to offer flexible monthly installment plans (₹30,000 to ₹3,00,000) funded by RBI-regulated NBFC partners."
       }
     ],
     content: (
@@ -1820,7 +1820,7 @@ export const BLOGS_PART1 = [
               <tr>
                 <th className="px-4 py-3 text-left font-bold text-neutral-500 uppercase">Coverage Parameter</th>
                 <th className="px-4 py-3 text-left font-bold text-neutral-500 uppercase">Standard Health Insurance</th>
-                <th className="px-4 py-3 text-left font-bold text-neutral-500 uppercase">Clinaza 0% EMI Financing</th>
+                <th className="px-4 py-3 text-left font-bold text-neutral-500 uppercase">Clinaza easy EMI Financing</th>
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-neutral-100">
@@ -1854,7 +1854,7 @@ export const BLOGS_PART1 = [
         </p>
 
         <div className="bg-gradient-to-r from-[#0867E8] to-blue-700 text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
-          <h3 className="text-lg font-bold">Get 100% Treatment Financing on 0% EMI</h3>
+          <h3 className="text-lg font-bold">Get 100% Treatment Financing on easy EMI</h3>
           <p className="text-xs text-blue-100 max-w-lg mx-auto">No insurance? No problem. Check your soft pre-eligibility in 2 minutes with zero impact on your CIBIL score.</p>
           <a
             href="https://clinaza.in/#calculator"
@@ -1879,11 +1879,11 @@ export const BLOGS_PART1 = [
     faqs: [
       {
         question: "Can a dentist build a website for free in India?",
-        answer: "Yes. Dentists can launch professional web profiles using free platforms like Google Business Profile sites, Wix, Canva Websites, or partner with Clinaza to receive a free dedicated high-converting clinic page with WhatsApp booking and point-of-care 0% EMI calculators."
+        answer: "Yes. Dentists can launch professional web profiles using free platforms like Google Business Profile sites, Wix, Canva Websites, or partner with Clinaza to receive a free dedicated high-converting clinic page with WhatsApp booking and point-of-care easy EMI calculators."
       },
       {
         question: "What features must a dental clinic website have to get patients?",
-        answer: "Essential features include: 1) One-click WhatsApp & direct call button, 2) Doctor credentials & specialization details, 3) 3D smile makeover before/after gallery, 4) Google Maps location & patient reviews, and 5) Transparent treatment price guide with 0% EMI payment options."
+        answer: "Essential features include: 1) One-click WhatsApp & direct call button, 2) Doctor credentials & specialization details, 3) 3D smile makeover before/after gallery, 4) Google Maps location & patient reviews, and 5) Transparent treatment price guide with easy EMI payment options."
       },
       {
         question: "Do dentists need coding skills to create a clinic website?",
@@ -1917,7 +1917,7 @@ export const BLOGS_PART1 = [
                 <td className="px-4 py-3 font-semibold text-neutral-800">Clinaza Partner Landing Page</td>
                 <td className="px-4 py-3 text-green-700 font-bold">₹0 Free Forever</td>
                 <td className="px-4 py-3 text-neutral-600">5 Mins (Instant)</td>
-                <td className="px-4 py-3 text-neutral-600">Built-in 0% EMI financing calculator, WhatsApp CRM, Google SEO ranking</td>
+                <td className="px-4 py-3 text-neutral-600">Built-in easy EMI financing calculator, WhatsApp CRM, Google SEO ranking</td>
                 <td className="px-4 py-3 text-neutral-500">Only for dental & healthcare</td>
               </tr>
               <tr>
@@ -1949,7 +1949,7 @@ export const BLOGS_PART1 = [
         <ol className="list-decimal pl-6 space-y-3 text-neutral-700">
           <li><strong>Direct WhatsApp Quick-Action:</strong> Over 70% of dental patients in India prefer booking appointments directly via WhatsApp rather than filling long static web forms.</li>
           <li><strong>Doctor Credentials & Clinic Tour:</strong> Prominently display BDS/MDS specialization, years of clinical experience, sterilization protocols, and real operatory photos.</li>
-          <li><strong>High-Ticket Procedure Calculators:</strong> Patients searching for Implants and Aligners are price-sensitive. Offering an on-page <strong>0% EMI calculator (e.g. ₹1,458/mo)</strong> increases conversion by over 35%.</li>
+          <li><strong>High-Ticket Procedure Calculators:</strong> Patients searching for Implants and Aligners are price-sensitive. Offering an on-page <strong>easy EMI calculator (e.g. ₹1,458/mo)</strong> increases conversion by over 35%.</li>
           <li><strong>Real Patient Reviews & Video Testimonials:</strong> Embed Google reviews and before/after smile transformations to build instant medical trust.</li>
           <li><strong>Clear Location & Landmark Directions:</strong> Embed Google Maps with parking and transit landmarks for effortless navigation.</li>
         </ol>
@@ -1961,7 +1961,7 @@ export const BLOGS_PART1 = [
             <h4 className="text-sm font-bold text-[#0B2450]">YOUR DENTIST — Patliputra Colony, Patna</h4>
           </div>
           <p className="text-xs text-slate-600 leading-relaxed">
-            By combining high-ranking SEO patient guides, 3D CBCT procedure highlights, and Clinaza 0% EMI checkout options, <strong>Dr. Aryan Parmar</strong> converted previously hesitant high-ticket implant and braces inquiries into confirmed treatments.
+            By combining high-ranking SEO patient guides, 3D CBCT procedure highlights, and Clinaza easy EMI checkout options, <strong>Dr. Aryan Parmar</strong> converted previously hesitant high-ticket implant and braces inquiries into confirmed treatments.
           </p>
           <div className="text-[11px] font-semibold text-emerald-800 flex flex-wrap gap-3 pt-1">
             <span>📍 Patliputra Colony, Patna</span>
@@ -1975,7 +1975,7 @@ export const BLOGS_PART1 = [
         </p>
         <ul className="list-disc pl-6 space-y-2 text-neutral-700">
           <li><strong>Free Verified Clinic Landing Profile</strong> with doctor bio, treatments offered, and contact details.</li>
-          <li><strong>Embedded 0% EMI Patient Financing Engine</strong> to offer instant treatment loans (₹30,000–₹3,00,000) with zero credit risk to your practice.</li>
+          <li><strong>Embedded easy EMI Patient Financing Engine</strong> to offer instant treatment loans (₹30,000–₹3,00,000) with zero credit risk to your practice.</li>
           <li><strong>Free Smart WhatsApp Patient Reactivation CRM</strong> to re-engage past checkups and overdue cleaning visits.</li>
           <li><strong>Physical Clinic QR Standees & Branding Kit</strong> shipped directly to your clinic desk.</li>
         </ul>
@@ -2002,7 +2002,7 @@ export const BLOGS_PART1 = [
     author: "Clinaza Medical Desk",
     summary: "Complete 2026 price guide for dental crowns and tooth caps in India. Compare PFM, DMLS, Monolithic Zirconia, and 3M Lava crowns (₹4,000 to ₹18,000 per tooth) with flexible monthly EMI options starting at ₹800/month.",
     featuredImage: "/assets/yourdentist/laser_whitening.png",
-    metaDescription: "Zirconia crown cost on EMI in India: Compare CAD/CAM monolithic & layered zirconia prices (₹8k–₹25k per tooth) with 0% interest monthly financing options.",
+    metaDescription: "Zirconia crown cost on EMI in India: Compare CAD/CAM monolithic & layered zirconia prices (₹8k–₹25k per tooth) with flexible monthly financing options.",
     faqs: [
       {
         question: "How much does a Zirconia crown cost in India?",
@@ -2010,7 +2010,7 @@ export const BLOGS_PART1 = [
       },
       {
         question: "Can I get multiple dental crowns or bridge on monthly EMI?",
-        answer: "Yes! When undergoing multiple root canals, multi-unit dental bridges, or full smile restorations costing ₹25,000 to ₹1,50,000+, Clinaza enables patients to split costs into 3 to 24 month 0% interest EMIs with zero credit card required."
+        answer: "Yes! When undergoing multiple root canals, multi-unit dental bridges, or full smile restorations costing ₹25,000 to ₹1,50,000+, Clinaza enables patients to split costs into 3 to 24 month flexible EMIs with zero credit card required."
       },
       {
         question: "Which tooth cap is best: Metal Ceramic (PFM) or Zirconia?",
@@ -2072,7 +2072,7 @@ export const BLOGS_PART1 = [
           </table>
         </div>
 
-        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Why Upgrade to Zirconia Crowns with 0% EMI?</h2>
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Why Upgrade to Zirconia Crowns with easy EMI?</h2>
         <ul className="list-disc pl-6 space-y-3 text-neutral-700">
           <li><strong>Zero Black Line Margin:</strong> Unlike metal PFM crowns that leave an unsightly dark metal collar along your gumline over time, Zirconia is 100% metal-free and matches your natural tooth shade.</li>
           <li><strong>Unrivaled Chewing Strength (1200+ MPa):</strong> Perfect for back molars that endure intense chewing pressure. Resistant to chipping or fracturing.</li>
@@ -2087,7 +2087,7 @@ export const BLOGS_PART1 = [
             <h4 className="text-sm font-bold text-[#0B2450]">YOUR DENTIST — Patliputra Colony, Patna</h4>
           </div>
           <p className="text-xs text-slate-600 leading-relaxed">
-            Supervised by <strong>Dr. Aryan Parmar</strong>, featuring digital CAD/CAM crown designing, lifetime warranty 3M Lava certifications, and instant Clinaza 0% EMI payment plans.
+            Supervised by <strong>Dr. Aryan Parmar</strong>, featuring digital CAD/CAM crown designing, lifetime warranty 3M Lava certifications, and instant Clinaza easy EMI payment plans.
           </p>
           <div className="text-[11px] font-semibold text-emerald-800 flex flex-wrap gap-3 pt-1">
             <span>📍 Patliputra Colony, Patna</span>
@@ -2125,7 +2125,7 @@ export const BLOGS_PART1 = [
       },
       {
         question: "Can I get a cosmetic smile makeover on EMI in India?",
-        answer: "Yes! Clinaza enables cosmetic dental clinics to offer 0% interest and low-monthly EMI financing from ₹30,000 to ₹3,00,000, allowing patients to complete their smile transformation with flexible 6 to 24 month tenures."
+        answer: "Yes! Clinaza enables cosmetic dental clinics to offer low-monthly EMI financing from ₹30,000 to ₹3,00,000, allowing patients to complete their smile transformation with flexible 6 to 24 month tenures."
       },
       {
         question: "How long do porcelain E-Max veneers last?",
@@ -2202,7 +2202,7 @@ export const BLOGS_PART1 = [
             <h4 className="text-sm font-bold text-[#0B2450]">YOUR DENTIST — Patliputra Colony, Patna</h4>
           </div>
           <p className="text-xs text-slate-600 leading-relaxed">
-            Led by <strong>Dr. Aryan Parmar</strong>, offering digital smile design, high-end E-Max veneer bonding, laser gum contouring, and instant 0% EMI financing plans.
+            Led by <strong>Dr. Aryan Parmar</strong>, offering digital smile design, high-end E-Max veneer bonding, laser gum contouring, and instant easy EMI financing plans.
           </p>
           <div className="text-[11px] font-semibold text-emerald-800 flex flex-wrap gap-3 pt-1">
             <span>📍 Patliputra Colony, Patna</span>
@@ -2283,7 +2283,7 @@ export const BLOGS_PART1 = [
 
         <h3 className="text-lg font-bold text-neutral-800 mt-6 mb-2">2. Point-of-Care Patient EMI Financing</h3>
         <p className="text-neutral-700 leading-relaxed">
-          High-ticket dental treatments like dental implants, full-mouth rehabilitations, and clear aligners frequently experience case abandonment due to upfront lump-sum costs. Software integrated with <strong>Clinaza patient financing</strong> enables doctors to offer instant ₹30,000 to ₹3,00,000 0% EMIs directly from the clinic counter.
+          High-ticket dental treatments like dental implants, full-mouth rehabilitations, and clear aligners frequently experience case abandonment due to upfront lump-sum costs. Software integrated with <strong>Clinaza patient financing</strong> enables doctors to offer instant ₹30,000 to ₹3,00,000 easy EMIs directly from the clinic counter.
         </p>
 
         <h3 className="text-lg font-bold text-neutral-800 mt-6 mb-2">3. Mobile-First Doctor Portal</h3>
@@ -2541,7 +2541,7 @@ export const BLOGS_PART1 = [
           <div className="bg-white border border-slate-200 p-5 rounded-2xl space-y-2 shadow-sm">
             <span className="text-xl font-black text-[#0867E8]">02</span>
             <h4 className="font-bold text-neutral-900 text-sm">Offer Point-of-Care EMIs</h4>
-            <p className="text-xs text-slate-600">Overcome patient price objections immediately by offering ₹3,000/month 0% EMIs for root canals and implants.</p>
+            <p className="text-xs text-slate-600">Overcome patient price objections immediately by offering ₹3,000/month easy EMIs for root canals and implants.</p>
           </div>
           <div className="bg-white border border-slate-200 p-5 rounded-2xl space-y-2 shadow-sm">
             <span className="text-xl font-black text-[#0867E8]">03</span>
@@ -2580,7 +2580,7 @@ export const BLOGS_PART1 = [
       },
       {
         question: "Can I pay for full mouth dental implants in monthly EMIs?",
-        answer: "Yes. Through Clinaza partner clinics, patients can access 0% interest and low-cost EMI financing for ₹1,00,000 to ₹3,00,000 with flexible tenures of 6 to 24 months, bringing monthly installments down to ₹6,500–₹12,000."
+        answer: "Yes. Through Clinaza partner clinics, patients can access low-cost EMI financing for ₹1,00,000 to ₹3,00,000 with flexible tenures of 6 to 24 months, bringing monthly installments down to ₹6,500–₹12,000."
       },
       {
         question: "What is the difference between All-on-4 and All-on-6 dental implants?",
@@ -2656,7 +2656,7 @@ export const BLOGS_PART1 = [
             <h4 className="text-sm font-bold text-[#0B2450]">YOUR DENTIST — Patliputra Colony, Patna</h4>
           </div>
           <p className="text-xs text-slate-600 leading-relaxed">
-            Specialized surgical implant suites, 3D CBCT guided surgery, All-on-4 & All-on-6 full arch rehabilitations led by senior implantologists with 0% EMI financing support.
+            Specialized surgical implant suites, 3D CBCT guided surgery, All-on-4 & All-on-6 full arch rehabilitations led by senior implantologists with easy EMI financing support.
           </p>
           <div className="text-[11px] font-semibold text-emerald-800 flex flex-wrap gap-3 pt-1">
             <span>📍 Patliputra Colony, Patna</span>
@@ -2725,7 +2725,7 @@ export const BLOGS_PART1 = [
 
         <h3 className="text-lg font-bold text-neutral-800 mt-6 mb-2">3. Remove Price Objections With Point-of-Care EMIs</h3>
         <p className="text-neutral-700 leading-relaxed">
-          Don't let treatment cost stop your patients from proceeding with implants or smile makeovers. Presenting treatment plans as <em>"₹7,500 per month on 0% EMI"</em> rather than a single ₹1,50,000 invoice increases same-day case acceptance by over 40%.
+          Don't let treatment cost stop your patients from proceeding with implants or smile makeovers. Presenting treatment plans as <em>"₹7,500 per month on easy EMI"</em> rather than a single ₹1,50,000 invoice increases same-day case acceptance by over 40%.
         </p>
 
         <h3 className="text-lg font-bold text-neutral-800 mt-6 mb-2">4. Run Hyper-Local Meta (Instagram & Facebook) Ads</h3>
@@ -2939,7 +2939,7 @@ export const BLOGS_PART1 = [
 
         <div className="bg-gradient-to-r from-[#0867E8] to-blue-700 text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
           <h3 className="text-lg font-bold">Partner With Clinaza For Patient Treatment EMIs</h3>
-          <p className="text-xs text-blue-100 max-w-lg mx-auto">Enable your dental practice to offer instant ₹30,000 to ₹3,00,000 0% EMIs to patients with zero merchant onboarding fees.</p>
+          <p className="text-xs text-blue-100 max-w-lg mx-auto">Enable your dental practice to offer instant ₹30,000 to ₹3,00,000 easy EMIs to patients with zero merchant onboarding fees.</p>
           <a
             href="https://clinaza.in/#partner-form"
             className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md"
@@ -2962,7 +2962,7 @@ export const BLOGS_PART1 = [
     metaDescription: "Learn how dental clinics in India offer flexible EMI financing (₹30K–₹3L) at checkout. Boost high-ticket case acceptance with zero merchant onboarding fees.",
     faqs: [
       {
-        question: "How can a dental clinic offer 0% EMI to patients in India?",
+        question: "How can a dental clinic offer easy EMI to patients in India?",
         answer: "Clinics can partner with healthcare financing infrastructure platforms like Clinaza. Clinaza integrates RBI-regulated NBFCs and banks into your clinic checkout, enabling patients to complete a 2-minute digital KYC and split ₹30,000 to ₹3,00,000 bills into flexible EMIs."
       },
       {
@@ -2970,7 +2970,7 @@ export const BLOGS_PART1 = [
         answer: "No. The lending partner assumes 100% of the credit underwriting and collection risk. The clinic receives the treatment payment directly into its bank account upon procedure confirmation."
       },
       {
-        question: "What treatments can be financed under clinic 0% EMI?",
+        question: "What treatments can be financed under clinic easy EMI?",
         answer: "Any elective or comprehensive procedure including dental implants, full-mouth rehabilitations, clear aligners, orthodontic braces, zirconia crowns, veneers, and surgical extractions."
       },
       {
@@ -2985,7 +2985,7 @@ export const BLOGS_PART1 = [
         </p>
 
         <p className="text-neutral-700 leading-relaxed">
-          Forward-thinking dental practices in India eliminate this bottleneck by offering <strong>Point-of-Care 0% EMI financing</strong>. Here is how you can set up instant patient financing at your clinic front desk in under 24 hours.
+          Forward-thinking dental practices in India eliminate this bottleneck by offering <strong>Point-of-Care easy EMI financing</strong>. Here is how you can set up instant patient financing at your clinic front desk in under 24 hours.
         </p>
 
         <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Why Lump-Sum Pricing Hurts Dental Case Acceptance</h2>
@@ -2999,7 +2999,7 @@ export const BLOGS_PART1 = [
           <div className="bg-emerald-50 border border-emerald-200 p-5 rounded-2xl space-y-2">
             <h4 className="font-bold text-emerald-900 text-sm">✅ The Clinaza EMI Way</h4>
             <p className="text-xs text-emerald-800">
-              "You can start your smile transformation today for just ₹6,500 per month on 0% EMI. Approval takes 2 minutes." (40%+ increase in immediate approvals).
+              "You can start your smile transformation today for just ₹6,500 per month on easy EMI. Approval takes 2 minutes." (40%+ increase in immediate approvals).
             </p>
           </div>
         </div>
@@ -3031,7 +3031,7 @@ export const BLOGS_PART1 = [
             </span>
             <span className="text-xs text-slate-400 font-mono">No POS Machine Required</span>
           </div>
-          <h3 className="text-xl font-bold">Start Offering 0% EMIs at Your Clinic Today</h3>
+          <h3 className="text-xl font-bold">Start Offering easy EMIs at Your Clinic Today</h3>
           <p className="text-xs text-slate-300 leading-relaxed">
             Join hundreds of dental clinics in India using Clinaza to boost high-ticket implant and aligner case acceptance. Includes free clinic CRM and automated WhatsApp recalls.
           </p>
@@ -3169,7 +3169,7 @@ export const BLOGS_PART1 = [
 
         <div className="bg-gradient-to-r from-[#0867E8] to-blue-700 text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
           <h3 className="text-lg font-bold">Offer Treatment EMIs at Your Clinic</h3>
-          <p className="text-xs text-blue-100 max-w-lg mx-auto">Make comprehensive treatments affordable for your patients with instant point-of-care 0% EMIs.</p>
+          <p className="text-xs text-blue-100 max-w-lg mx-auto">Make comprehensive treatments affordable for your patients with instant point-of-care easy EMIs.</p>
           <a
             href="https://clinaza.in/#calculator"
             className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md"
@@ -3268,7 +3268,7 @@ export const BLOGS_PART1 = [
             <h4 className="text-sm font-bold text-[#0B2450]">YOUR DENTIST — Patliputra Colony, Patna</h4>
           </div>
           <p className="text-xs text-slate-600 leading-relaxed">
-            Single-sitting microscopic rotary root canals and digital CAD/CAM Zirconia crown bonding led by specialist endodontists with instant 0% EMI financing support.
+            Single-sitting microscopic rotary root canals and digital CAD/CAM Zirconia crown bonding led by specialist endodontists with instant easy EMI financing support.
           </p>
           <div className="text-[11px] font-semibold text-emerald-800 flex flex-wrap gap-3 pt-1">
             <span>📍 Patliputra Colony, Patna</span>
@@ -3363,9 +3363,9 @@ export const BLOGS_PART1 = [
             </p>
           </div>
           <div className="bg-white border border-slate-200 p-4 rounded-xl shadow-xs">
-            <h4 className="font-bold text-xs uppercase text-[#0867E8] tracking-wider mb-1">4. High-Ticket Treatment 0% EMI Approval Link</h4>
+            <h4 className="font-bold text-xs uppercase text-[#0867E8] tracking-wider mb-1">4. High-Ticket Treatment easy EMI Approval Link</h4>
             <p className="text-xs text-slate-700 font-mono bg-slate-50 p-3 rounded-lg">
-              "Hi [Patient Name], ready for your smile transformation? You can split your treatment cost of ₹[Amount] into easy monthly EMIs of just ₹[EMI]/mo with 0% interest via Clinaza. Check your 2-minute pre-approval here: [Clinaza EMI Link]"
+              "Hi [Patient Name], ready for your smile transformation? You can split your treatment cost of ₹[Amount] into easy monthly EMIs of just ₹[EMI]/mo with flexible via Clinaza. Check your 2-minute pre-approval here: [Clinaza EMI Link]"
             </p>
           </div>
         </div>
@@ -3394,7 +3394,7 @@ export const BLOGS_PART1 = [
 
         <div className="bg-gradient-to-r from-[#0867E8] to-blue-700 text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
           <h3 className="text-lg font-bold">Partner With Clinaza For Patient Financing</h3>
-          <p className="text-xs text-blue-100 max-w-lg mx-auto">Enable your clinic to offer ₹30,000 to ₹3,00,000 0% EMIs directly through WhatsApp links.</p>
+          <p className="text-xs text-blue-100 max-w-lg mx-auto">Enable your clinic to offer ₹30,000 to ₹3,00,000 easy EMIs directly through WhatsApp links.</p>
           <a
             href="https://clinaza.in/#partner-form"
             className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md"
@@ -3483,7 +3483,7 @@ export const BLOGS_PART1 = [
 
         <div className="bg-gradient-to-r from-[#0867E8] to-blue-700 text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
           <h3 className="text-lg font-bold">Enable Patient EMI Financing at Your Clinic</h3>
-          <p className="text-xs text-blue-100 max-w-lg mx-auto">Help patients afford root canals, crowns, and implants with 0% interest monthly installments from ₹30,000 to ₹3,00,000.</p>
+          <p className="text-xs text-blue-100 max-w-lg mx-auto">Help patients afford root canals, crowns, and implants with flexible monthly installments from ₹30,000 to ₹3,00,000.</p>
           <a
             href="https://clinaza.in/#calculator"
             className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md"
@@ -3511,7 +3511,7 @@ export const BLOGS_PART1 = [
       },
       {
         question: "Can I pay for braces or clear aligners on monthly EMI in India?",
-        answer: "Yes. Through Clinaza partner clinics, orthodontic patients can split treatments into 0% interest monthly EMIs ranging from ₹2,500 to ₹7,500/month with zero collateral and instant digital approval."
+        answer: "Yes. Through Clinaza partner clinics, orthodontic patients can split treatments into flexible monthly EMIs ranging from ₹2,500 to ₹7,500/month with zero collateral and instant digital approval."
       },
       {
         question: "Are clear aligners as effective as traditional metal braces?",
@@ -3525,7 +3525,7 @@ export const BLOGS_PART1 = [
         </p>
 
         <p className="text-neutral-700 leading-relaxed">
-          Here is your comprehensive <strong>2026 comparison guide</strong> covering total costs, treatment duration, lifestyle pros & cons, and how <strong>Clinaza 0% EMI financing</strong> makes teeth alignment affordable for students and working professionals.
+          Here is your comprehensive <strong>2026 comparison guide</strong> covering total costs, treatment duration, lifestyle pros & cons, and how <strong>Clinaza easy EMI financing</strong> makes teeth alignment affordable for students and working professionals.
         </p>
 
         {/* Comparison Table */}
@@ -3602,7 +3602,7 @@ export const BLOGS_PART1 = [
             <h4 className="text-sm font-bold text-[#0B2450]">YOUR DENTIST — Patliputra Colony, Patna</h4>
           </div>
           <p className="text-xs text-slate-600 leading-relaxed">
-            3D digital smile simulation scanning, ceramic aesthetic brackets, and certified clear aligner treatments led by Dr. Aryan Parmar with instant 0% EMI financing plans.
+            3D digital smile simulation scanning, ceramic aesthetic brackets, and certified clear aligner treatments led by Dr. Aryan Parmar with instant easy EMI financing plans.
           </p>
           <div className="text-[11px] font-semibold text-emerald-800 flex flex-wrap gap-3 pt-1">
             <span>📍 Patliputra Colony, Patna</span>
@@ -3611,7 +3611,7 @@ export const BLOGS_PART1 = [
         </div>
 
         <div className="bg-gradient-to-r from-[#0867E8] to-blue-700 text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
-          <h3 className="text-lg font-bold">Check Teeth Alignment 0% EMI Pre-Approval</h3>
+          <h3 className="text-lg font-bold">Check Teeth Alignment easy EMI Pre-Approval</h3>
           <p className="text-xs text-blue-100 max-w-lg mx-auto">Get instant pre-approval for ₹30,000 to ₹3,00,000 in under 2 minutes without affecting your credit score.</p>
           <a
             href="https://clinaza.in/#calculator"
@@ -3640,7 +3640,7 @@ export const BLOGS_PART1 = [
       },
       {
         question: "Can I convert wisdom tooth extraction costs into monthly EMIs?",
-        answer: "Yes. Through Clinaza partner dental clinics, patients can combine multiple wisdom tooth extractions or paired procedures and convert the entire bill (₹10,000 to ₹50,000) into 0% interest monthly EMIs starting from ₹1,000/month."
+        answer: "Yes. Through Clinaza partner dental clinics, patients can combine multiple wisdom tooth extractions or paired procedures and convert the entire bill (₹10,000 to ₹50,000) into flexible monthly EMIs starting from ₹1,000/month."
       },
       {
         question: "Why should impacted wisdom teeth be removed surgically?",
@@ -3711,7 +3711,7 @@ export const BLOGS_PART1 = [
             <h4 className="text-sm font-bold text-[#0B2450]">YOUR DENTIST — Patliputra Colony, Patna</h4>
           </div>
           <p className="text-xs text-slate-600 leading-relaxed">
-            Advanced Maxillofacial surgical suites, piezosurgical bone cutting for painless wisdom tooth removals, and 0% EMI financing support led by Dr. Aryan Parmar.
+            Advanced Maxillofacial surgical suites, piezosurgical bone cutting for painless wisdom tooth removals, and easy EMI financing support led by Dr. Aryan Parmar.
           </p>
           <div className="text-[11px] font-semibold text-emerald-800 flex flex-wrap gap-3 pt-1">
             <span>📍 Patliputra Colony, Patna</span>
@@ -3721,7 +3721,7 @@ export const BLOGS_PART1 = [
 
         <div className="bg-gradient-to-r from-[#0867E8] to-blue-700 text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
           <h3 className="text-lg font-bold">Check Wisdom Tooth Surgery EMI Eligibility</h3>
-          <p className="text-xs text-blue-100 max-w-lg mx-auto">Check instant 0% EMI pre-approval for surgical dental procedures in under 2 minutes.</p>
+          <p className="text-xs text-blue-100 max-w-lg mx-auto">Check instant easy EMI pre-approval for surgical dental procedures in under 2 minutes.</p>
           <a
             href="https://clinaza.in/#calculator"
             className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md"
@@ -3749,7 +3749,7 @@ export const BLOGS_PART1 = [
       },
       {
         question: "Can bone grafting and sinus lift costs be paid in monthly EMIs?",
-        answer: "Yes. Clinaza partner clinics allow patients to bundle implant fixtures, bone augmentation materials, collagen barrier membranes, and sinus lifts into a single 0% EMI plan from ₹2,500/month."
+        answer: "Yes. Clinaza partner clinics allow patients to bundle implant fixtures, bone augmentation materials, collagen barrier membranes, and sinus lifts into a single easy EMI plan from ₹2,500/month."
       },
       {
         question: "Why is a sinus lift needed before upper jaw dental implants?",
@@ -3820,7 +3820,7 @@ export const BLOGS_PART1 = [
             <h4 className="text-sm font-bold text-[#0B2450]">YOUR DENTIST — Patliputra Colony, Patna</h4>
           </div>
           <p className="text-xs text-slate-600 leading-relaxed">
-            3D CBCT guided sinus lift surgeries, PRF (Platelet-Rich Fibrin) enhanced bone regeneration, and imported titanium implants with instant 0% EMI financing support.
+            3D CBCT guided sinus lift surgeries, PRF (Platelet-Rich Fibrin) enhanced bone regeneration, and imported titanium implants with instant easy EMI financing support.
           </p>
           <div className="text-[11px] font-semibold text-emerald-800 flex flex-wrap gap-3 pt-1">
             <span>📍 Patliputra Colony, Patna</span>

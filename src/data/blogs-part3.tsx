@@ -312,9 +312,9 @@ export const BLOGS_PART3 = [
           </div>
 
           <div className="p-5 border border-slate-200 rounded-xl bg-slate-50 space-y-2">
-            <h4 className="font-bold text-base text-indigo-900">3. OEM & Distributor Subvention / No-Cost EMI</h4>
+            <h4 className="font-bold text-base text-indigo-900">3. OEM & Distributor Subvention / Easy EMI</h4>
             <p className="text-xs text-neutral-600 leading-relaxed">
-              During major dental conferences (FDI, Expodent, Famdent), dental distributors tie up with fintech NBFCs to offer 6 to 12-month zero-interest or subvention EMI schemes on select chairs and RVG sensors.
+              During major dental conferences (FDI, Expodent, Famdent), dental distributors tie up with fintech NBFCs to offer 6 to 12-month low-interest or subvention EMI schemes on select chairs and RVG sensors.
             </p>
             <span className="inline-block text-[11px] font-bold text-indigo-600 bg-indigo-100 px-2.5 py-0.5 rounded-full">Exhibition & Dealer Deals</span>
           </div>
@@ -334,7 +334,7 @@ export const BLOGS_PART3 = [
         </p>
         <ul className="list-disc pl-6 space-y-2 text-neutral-700">
           <li><strong>High Depreciation Rate:</strong> Dental operatory equipment, X-ray machinery, and computers qualify for 15% to 40% annual written-down value (WDV) depreciation under Section 32.</li>
-          <li><strong>100% Interest Deductibility:</strong> Every rupee of interest paid on your equipment loan is deductible as a revenue business expense against your clinic's gross professional receipts.</li>
+          <li><strong>10flexible Deductibility:</strong> Every rupee of interest paid on your equipment loan is deductible as a revenue business expense against your clinic's gross professional receipts.</li>
           <li><strong>GST Input Tax Credit (ITC):</strong> Registered dental clinics with eligible business setups can offset input GST on capital goods invoices against applicable clinical tax liabilities.</li>
         </ul>
 
@@ -385,7 +385,7 @@ export const BLOGS_PART3 = [
     faqs: [
       {
         question: "Can I get a hair transplant on monthly EMI in India?",
-        answer: "Yes. Leading trichology centers and hair transplant clinics partner with Clinaza point-of-care medical financing to offer 0% interest monthly EMIs (3 to 24 months) with zero upfront deposit and paperless 2-minute digital KYC."
+        answer: "Yes. Leading trichology centers and hair transplant clinics partner with Clinaza point-of-care medical financing to offer flexible monthly EMIs (3 to 24 months) with zero upfront deposit and paperless 2-minute digital KYC."
       },
       {
         question: "How much does a 2,500 to 3,500 graft hair transplant cost in India?",
@@ -403,7 +403,7 @@ export const BLOGS_PART3 = [
     content: (
       <div className="space-y-6">
         <p className="text-lg leading-relaxed text-neutral-700">
-          Male pattern baldness (androgenetic alopecia) affects millions of young professionals across India. While advanced surgical restoration techniques like <strong>FUE (Follicular Unit Extraction) and DHI (Direct Hair Implantation)</strong> deliver permanent, natural hairline density, paying ₹50,000 to ₹1,80,000 in a single lump sum is a major barrier. Converting your procedure into <strong>0% interest monthly EMI</strong> makes premium hairline restoration accessible without depleting your emergency savings.
+          Male pattern baldness (androgenetic alopecia) affects millions of young professionals across India. While advanced surgical restoration techniques like <strong>FUE (Follicular Unit Extraction) and DHI (Direct Hair Implantation)</strong> deliver permanent, natural hairline density, paying ₹50,000 to ₹1,80,000 in a single lump sum is a major barrier. Converting your procedure into <strong>flexible monthly EMI</strong> makes premium hairline restoration accessible without depleting your emergency savings.
         </p>
 
         {/* Lead Capture Form */}
@@ -883,7 +883,7 @@ export const BLOGS_PART3 = [
     metaDescription: "Rhinoplasty and cosmetic surgery cost on EMI in India 2026. Compare nose job, liposuction, and gynecomastia pricing, monthly EMI from Rs 2,500/month.",
     faqs: [
       { question: "How much does rhinoplasty cost in India?", answer: "Open or closed rhinoplasty costs Rs 60,000 to Rs 1,80,000. Revision rhinoplasty: Rs 90,000 to Rs 2,50,000. Septorhinoplasty: Rs 80,000 to Rs 2,00,000." },
-      { question: "Can cosmetic surgery be financed on EMI?", answer: "Yes. Leading plastic surgery centers offer no-cost EMI (3 to 24 months) with paperless digital KYC. Procedures can be repaid from Rs 2,500/month." },
+      { question: "Can cosmetic surgery be financed on EMI?", answer: "Yes. Leading plastic surgery centers offer easy EMI (3 to 24 months) with paperless digital KYC. Procedures can be repaid from Rs 2,500/month." },
       { question: "Is cosmetic surgery covered by health insurance in India?", answer: "No. All elective aesthetic procedures are excluded from all retail health insurance per IRDAI guidelines. The sole exception is functional rhinoplasty for deviated septum." }
     ],
     content: (
@@ -958,7 +958,7 @@ export const BLOGS_PART3 = [
     metaDescription: "ICL eye surgery cost on EMI in India: EVO Visian ICL & IPCL lens pricing (₹80K–₹1.8L per eye) with instant flexible monthly EMI options via Clinaza.",
     faqs: [
       { question: "How much does ICL eye surgery cost in India for both eyes?", answer: "Standard spherical ICL costs ₹80,000 to ₹1,20,000 for both eyes. Toric ICL (for high astigmatism/cylinder) costs ₹1,20,000 to ₹1,70,000 for both eyes depending on lens power and eye center." },
-      { question: "Can ICL surgery be done on monthly EMI in India?", answer: "Yes. Leading eye centers partner with Clinaza point-of-care financing to offer 0% interest EMI (6 to 24 months). Both eyes can be corrected immediately with repayments starting from ₹3,500/month." },
+      { question: "Can ICL surgery be done on monthly EMI in India?", answer: "Yes. Leading eye centers partner with Clinaza point-of-care financing to offer flexible EMI (6 to 24 months). Both eyes can be corrected immediately with repayments starting from ₹3,500/month." },
       { question: "What is the difference between LASIK and ICL?", answer: "LASIK reshapes corneal tissue using lasers and requires adequate corneal thickness. ICL implants a biocompatible Collamer lens behind the iris without removing corneal tissue, making it ideal for thin corneas or extreme myopia up to −20D." }
     ],
     content: (
@@ -992,7 +992,7 @@ export const BLOGS_PART3 = [
     metaDescription: "Cataract surgery cost on EMI in India 2026: Compare monofocal vs multifocal IOL pricing (₹20k–₹1.1L/eye), monthly EMI from ₹1,800/mo, and top eye centers.",
     faqs: [
       { question: "How much does cataract surgery cost in India per eye?", answer: "Standard Phaco with Monofocal IOL costs ₹20,000 to ₹40,000 per eye. Premium Multifocal or Trifocal IOL costs ₹50,000 to ₹90,000 per eye. Robotic Femto-Cataract with Toric/Trifocal IOL costs ₹80,000 to ₹1,20,000 per eye." },
-      { question: "Does health insurance cover premium multifocal cataract lenses?", answer: "Most Mediclaim policies cap cataract coverage at ₹25,000 to ₹35,000 per eye (covering standard monofocal lenses only). Upgrading to glasses-free multifocal or trifocal lenses requires an out-of-pocket top-up of ₹30,000 to ₹70,000 per eye, which can be financed on zero-cost EMI." },
+      { question: "Does health insurance cover premium multifocal cataract lenses?", answer: "Most Mediclaim policies cap cataract coverage at ₹25,000 to ₹35,000 per eye (covering standard monofocal lenses only). Upgrading to glasses-free multifocal or trifocal lenses requires an out-of-pocket top-up of ₹30,000 to ₹70,000 per eye, which can be financed on easy EMI." },
       { question: "Can senior citizens get cataract surgery financed on EMI?", answer: "Yes. Adult children or relatives can co-apply as financial co-borrowers with paperless digital KYC via Clinaza." }
     ],
     content: (
@@ -1323,7 +1323,7 @@ export const BLOGS_PART3 = [
         <div className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white p-6 sm:p-8 rounded-2xl my-8 text-center space-y-3 shadow-lg">
           <h3 className="text-xl font-bold">Boost Clinic Cash Flow Without Taking Bank Debt</h3>
           <p className="text-xs sm:text-sm text-blue-100 max-w-xl mx-auto">
-            Instead of borrowing high-interest capital, enable your patients to finance high-ticket dental implants, braces, and full-mouth rehabilitations on 0% EMI with Clinaza.
+            Instead of borrowing high-interest capital, enable your patients to finance high-ticket dental implants, braces, and full-mouth rehabilitations on easy EMI with Clinaza.
           </p>
           <a
             href="https://www.clinaza.in/#partner-form"
@@ -1770,7 +1770,7 @@ export const BLOGS_PART3 = [
     author: "Clinaza Healthcare Payments Desk",
     summary: "How to use Bajaj Finserv Health EMI Card for dental implants, braces, aligners, and root canals: partner clinics, limits up to ₹4 Lakhs, and step-by-step swipe guide.",
     featuredImage: "/assets/clinic-hero-real.webp",
-    metaDescription: "Can you use Bajaj Finserv Health EMI Card for dental treatment? Check eligible dental clinics, swipe procedures, interest-free tenures & approval limits.",
+    metaDescription: "Can you use Bajaj Finserv Health EMI Card for dental treatment? Check eligible dental clinics, swipe procedures, flexible tenures & approval limits.",
     faqs: [
       {
         question: "Can I use my Bajaj Finserv EMI Card for dental treatments?",

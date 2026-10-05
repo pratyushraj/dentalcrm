@@ -1995,14 +1995,14 @@ export const BLOGS_PART1 = [
   },
     {
     slug: "zirconia-crown-cost-on-emi-india",
-    title: "Zirconia Crown Cost on EMI in India (2026): Tooth Cap Prices, Warranty & Monthly Plans",
+    title: "Zirconia Crown Cost in India (2026): ₹7,500–₹18,000 Tooth Cap Prices & 15-Yr Warranty",
     category: "Restorative Dentistry",
     readTime: "6 min read",
     publishDate: "September 6, 2026",
     author: "Clinaza Medical Desk",
-    summary: "Complete 2026 price guide for dental crowns and tooth caps in India. Compare PFM, DMLS, Monolithic Zirconia, and 3M Lava crowns (₹4,000 to ₹18,000 per tooth) with flexible monthly EMI options starting at ₹800/month.",
+    summary: "2026 price guide for dental crowns and tooth caps in India: Compare Monolithic CAD/CAM Zirconia, 3M Lava (₹7,500 to ₹18,000), and PFM caps with 10–15 year warranties and EMI options from ₹800/mo.",
     featuredImage: "/assets/yourdentist/laser_whitening.png",
-    metaDescription: "Zirconia crown cost on EMI in India: Compare CAD/CAM monolithic & layered zirconia prices (₹8k–₹25k per tooth) with flexible monthly financing options.",
+    metaDescription: "Zirconia crown cost in India (2026): CAD/CAM monolithic & 3M Lava tooth caps (₹7,500–₹18,000 per tooth) with 15-year warranty and low monthly EMI from ₹800/mo.",
     faqs: [
       {
         question: "How much does a Zirconia crown cost in India?",

@@ -1527,14 +1527,14 @@ export const BLOGS_PART2 = [
   },
     {
     slug: "dental-braces-cost-in-india-metal-ceramic-invisible-aligners",
-    title: "Dental Braces Cost in India (2026): Metal, Ceramic, Self-Ligating & Invisible Aligners Compared",
+    title: "Metal & Ceramic Braces Cost in India (2026): ₹25,000–₹70,000 Price & EMI",
     category: "Dental Treatments",
     readTime: "8 min read",
     publishDate: "September 8, 2026",
     author: "Dr. Vikram Sethi, MDS (Orthodontist) & Clinaza Medical Desk",
-    summary: "Comprehensive price comparison of metal braces, ceramic brackets, Damon self-ligating braces, and clear aligners in India with monthly installment plans.",
+    summary: "2026 price guide for dental braces in India: Compare traditional metal braces (₹25k–₹45k), ceramic braces (₹40k–₹70k), self-ligating brackets, and aligners with easy monthly EMI options.",
     featuredImage: "/assets/yourdentist/clear_aligners.png",
-    metaDescription: "Compare teeth braces cost in India: Metal (₹25k–₹45k), Ceramic (₹40k–₹70k), Self-ligating (₹55k–₹90k) & Aligners (₹60k–₹2.5L). Pay in monthly EMIs.",
+    metaDescription: "Metal braces cost in India (2026): Traditional metal (₹25k–₹45k), ceramic (₹40k–₹70k), self-ligating & aligners with monthly EMI from ₹2,200/mo. Compare prices now.",
     faqs: [
       {
         question: "Which type of braces is the most affordable in India?",

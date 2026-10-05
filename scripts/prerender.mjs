@@ -115,7 +115,11 @@ async function worker() {
       if (waitFor > 0) {
         await new Promise(r => setTimeout(r, waitFor));
       }
-      const html = await page.content();
+      let html = await page.content();
+      if (!/rel=["']canonical["']/i.test(html)) {
+        const canonicalUrl = `https://www.clinaza.in${route === '/' ? '/' : route.replace(/\/$/, '')}`;
+        html = html.replace(/<\/head>/i, `<link rel="canonical" href="${canonicalUrl}" />\n</head>`);
+      }
 
       const filePath = route === '/'
         ? join(DIST, 'index.html')

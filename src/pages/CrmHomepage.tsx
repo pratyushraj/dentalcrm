@@ -169,6 +169,17 @@ export default function CrmHomepage() {
       track.removeEventListener('touchend', onTouchEnd);
     };
   }, []);
+
+  // Show mobile sticky bar only after scrolling past hero
+  const [showMobileFloating, setShowMobileFloating] = useState(false);
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowMobileFloating(window.scrollY > 400);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   const [patientData, setPatientData] = useState({
     name: '',
     mobile: '',
@@ -602,18 +613,18 @@ export default function CrmHomepage() {
 
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center text-left">
             <div className="md:col-span-7 space-y-4 sm:space-y-5">
-              <div className="inline-flex items-center gap-2 px-3 py-1 bg-slate-100 border border-slate-200 rounded-full text-[11px] font-medium text-slate-600">
+              <div className="inline-flex items-center gap-2 px-3 py-1 bg-slate-100 border border-slate-200 rounded-full text-xs font-semibold text-slate-700">
                 <Building2 className="h-3.5 w-3.5 text-[#0867E8]" />
                 <span>Point-of-care treatment financing for clinics</span>
               </div>
 
               <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-[-0.025em] leading-[1.18] text-[#0B2450]">
                 Dental Treatment on EMI.<br />
-                <span className="text-[#0867E8]">Zero patient drop-offs.</span>
+                <span className="text-[#0867E8]">Stop patient drop-offs.</span>
               </h1>
 
-              <p className="text-xs sm:text-base text-slate-600 font-medium leading-relaxed max-w-xl">
-                Offer instant point-of-care patient financing &amp; medical dental loans from <strong className="text-[#0B2450] font-bold">₹30,000 to ₹5,00,000</strong> for Dental Implants, Braces, Aligners, Hair Transplants, and Elective Surgeries.
+              <p className="text-sm sm:text-base text-slate-600 font-medium leading-relaxed max-w-xl">
+                Offer instant point-of-care patient financing &amp; medical dental loans from <strong className="text-[#0B2450] font-bold">₹30,000 to ₹5,00,000</strong> for Dental Implants, Braces, Aligners, and Elective Surgeries.
               </p>
 
               <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 pt-1">
@@ -631,20 +642,14 @@ export default function CrmHomepage() {
                 </button>
                 <Link
                   to="/clinic-onboarding"
-                  className="px-5 py-3.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-black uppercase tracking-wider rounded-xl transition-all flex items-center justify-center gap-2 shadow-md"
+                  className="px-5 py-3.5 bg-white hover:bg-slate-50 text-slate-800 border-2 border-slate-200 hover:border-slate-300 text-xs font-black uppercase tracking-wider rounded-xl transition-all flex items-center justify-center gap-2 active:scale-95 shadow-sm"
                 >
                   Clinic Onboarding →
                 </Link>
-                <Link
-                  to="/reactivation/login"
-                  className="px-5 py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-black uppercase tracking-wider rounded-xl transition-all flex items-center justify-center gap-2 shadow-md shadow-emerald-600/15"
-                >
-                  Doctor Portal →
-                </Link>
               </div>
 
-              <p className="text-[11px] text-slate-500 pt-1">
-                No CIBIL impact on patients &middot; RBI-regulated lending partners
+              <p className="text-xs text-slate-600 font-medium pt-1">
+                Instant soft credit eligibility &middot; 13+ RBI-regulated lending partners
               </p>
             </div>
 
@@ -2157,9 +2162,11 @@ export default function CrmHomepage() {
         </section>
       </main>
 
-      {/* ── Mobile Floating Quick Action Pill ── */}
+      {/* ── Mobile Floating Quick Action Pill (Appears only after scrolling past hero) ── */}
       <div 
-        className="sm:hidden fixed bottom-4 left-4 right-4 z-40 flex items-center gap-2 p-1.5 bg-[#0B2450]/90 backdrop-blur-xl border border-white/15 rounded-full shadow-[0_12px_36px_rgba(0,0,0,0.35)]"
+        className={`sm:hidden fixed bottom-4 left-4 right-4 z-40 transition-all duration-300 transform ${
+          showMobileFloating ? 'translate-y-0 opacity-100 pointer-events-auto' : 'translate-y-12 opacity-0 pointer-events-none'
+        } flex items-center gap-2 p-1.5 bg-[#0B2450]/95 backdrop-blur-xl border border-white/15 rounded-full shadow-[0_12px_36px_rgba(0,0,0,0.35)]`}
         style={{ marginBottom: 'env(safe-area-inset-bottom, 0px)' }}
       >
         <button
@@ -2168,16 +2175,10 @@ export default function CrmHomepage() {
             setShowEligibilityModal(true);
             setEligibilityStep(1);
           }}
-          className="flex-1 py-2.5 px-4 bg-[#0867E8] text-white rounded-full text-xs font-black uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-md active:scale-95"
+          className="flex-1 py-3 px-4 bg-[#0867E8] text-white rounded-full text-xs font-black uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-md active:scale-95"
         >
-          <ShieldCheck size={14} /> Check EMI
+          <ShieldCheck size={15} /> Check Patient Eligibility
         </button>
-        <Link
-          to="/reactivation/login"
-          className="py-2.5 px-4 bg-white/10 hover:bg-white/20 text-white rounded-full text-xs font-bold whitespace-nowrap active:scale-95 transition-colors"
-        >
-          Doctor Login
-        </Link>
       </div>
 
       {/* Remotion Clinaza EMI Reel Modal */}

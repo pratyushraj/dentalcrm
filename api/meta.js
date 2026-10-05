@@ -123,8 +123,10 @@ export default async function handler(req, res) {
       html = html.replace(/<meta\s+name=["']robots["']\s+content=["'][\s\S]*?["']\s*\/?>/i, `<meta name="robots" content="${meta.robots}" />`);
     }
     const canonical = `https://www.clinaza.in${pathname === '/' ? '' : pathname}`;
-    if (html.includes('rel="canonical"')) {
+    if (/rel=["']canonical["']/i.test(html)) {
       html = html.replace(/<link\s+rel=["']canonical["']\s+href=["'][^"']*["']/i, `<link rel="canonical" href="${canonical}"`);
+    } else {
+      html = html.replace(/<\/head>/i, `<link rel="canonical" href="${canonical}" />\n</head>`);
     }
 
     const h1Text = meta.h1 || meta.title.split('|')[0].trim();

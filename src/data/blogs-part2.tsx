@@ -2113,14 +2113,14 @@ export const BLOGS_PART2 = [
   },
     {
     slug: "does-health-insurance-cover-lasik-eye-surgery-india-cost-emi",
-    title: "Does Health Insurance Cover LASIK Eye Surgery in India? (Star Health, HDFC ERGO, Care Guide + EMI Options)",
+    title: "Does Health Insurance Cover LASIK in India? (Star Health, HDFC ERGO & Niva Bupa Rules)",
     category: "Insurance & Ophthalmology Financing",
     readTime: "6 min read",
     publishDate: "September 11, 2026",
     author: "Clinaza Medical Insights Desk",
-    summary: "A detailed breakdown of IRDAI rules, refractive power thresholds (-7.5D+), waiting periods, and how to pay for Contoura Vision or SMILE on easy monthly EMIs if your insurance claim is rejected.",
+    summary: "A detailed breakdown of IRDAI rules, refractive power thresholds (-7.5D+), Star Health, HDFC ERGO, and Niva Bupa policies, plus monthly EMI options from ₹2,500/mo if your claim is rejected.",
     featuredImage: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=1200&auto=format&fit=crop",
-    metaDescription: "Check if health insurance covers LASIK or Contoura surgery in India. Learn the 7.5 diopter rule, Star Health terms, and flexible EMI alternatives.",
+    metaDescription: "Does insurance cover LASIK in India? Check Star Health, HDFC ERGO & Niva Bupa terms, the -7.5D IRDAI rule, and flexible monthly EMI options if claims get rejected.",
     faqs: [
       {
         question: "Does Star Health insurance cover LASIK eye surgery?",

@@ -422,13 +422,15 @@ export default function CrmHomepage() {
     <div className="min-h-screen bg-white text-[#0B2450] font-sora antialiased overflow-x-hidden selection:bg-[#0867E8] selection:text-white">
       <SEOHead
         title="Clinaza — Healthcare EMIs & Free Dental CRM India"
-        description="Offer instant point-of-care patient EMI financing (₹30K–₹5L) with 13 Live RBI-regulated NBFCs. Plus, 100% Free Dental Clinic CRM & WhatsApp recall software."
+        description="Offer instant point-of-care patient EMI financing (₹30K–₹5L) & clinic equipment loans with 13+ RBI-regulated NBFCs. Plus, 100% Free Dental Clinic CRM software."
         keywords={[
           'clinaza', 'clinaza patient financing', 'clinaza healthpay', 'clinaza healthcare emi',
-          'patient financing india', 'healthcare emi india', 'dental emi', 'dental emi patna', 'dental loan india',
-          'point of care patient financing', 'no cost emi dental clinic', 'dental implants emi', 'clear aligners emi cost',
+          'medical equipment loan for dentist', 'loan for dental clinic', 'loan for dentist', 'dental equipment loan emi',
+          'dental clinic setup cost calculator', 'डेंटल क्लिनिक के लिए लोन',
+          'patient financing india', 'healthcare emi india', 'dental emi', 'dental loan india',
+          'point of care patient financing', 'dental implants emi', 'clear aligners emi cost',
           'free dental crm', 'free dental crm software india', 'best free dental clinic management software',
-          'dental prescription software free', 'dental clinic setup cost calculator', 'whatsapp patient recall dental',
+          'dental prescription software free', 'whatsapp patient recall dental',
           'lasik on emi', 'ivf treatment emi', 'hair transplant financing india'
         ]}
         image="https://clinaza.in/og-clinaza.png"

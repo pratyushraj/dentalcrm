@@ -557,17 +557,19 @@ export default function CrmHomepage() {
               </div>
 
               {/* ── Official PayU & Flexmoney Partnership Institutional Card ── */}
-              <div className="p-3 sm:p-4 rounded-2xl bg-gradient-to-br from-white via-slate-50 to-blue-50/50 border border-blue-200/90 shadow-sm space-y-2">
+              <div className="p-3 sm:p-4 rounded-2xl bg-gradient-to-br from-white via-slate-50 to-blue-50/50 border border-blue-200/90 shadow-sm space-y-2.5">
                 <div className="flex items-center justify-between gap-2 border-b border-slate-200/80 pb-2">
                   <div className="flex items-center gap-1.5 sm:gap-2">
-                    <span className="text-[10px] font-black uppercase tracking-wider bg-emerald-50 text-emerald-800 border border-emerald-300/80 px-2 py-0.5 rounded-full flex items-center gap-1.5">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                      Verified Lending Partnership
+                    <span className="text-[10px] sm:text-xs font-black uppercase tracking-wide bg-emerald-50 text-emerald-800 border border-emerald-300/80 px-2 sm:px-2.5 py-0.5 rounded-full inline-flex items-center gap-1.5 whitespace-nowrap">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse shrink-0"></span>
+                      <span className="sm:hidden">Verified Lending</span>
+                      <span className="hidden sm:inline">Verified Lending Partnership</span>
                     </span>
                     <span className="text-[10px] font-bold text-slate-500 hidden sm:inline">&bull; RBI-Regulated Rails</span>
                   </div>
-                  <span className="text-[10px] font-extrabold text-[#0867E8] bg-blue-50 border border-blue-200 px-2 py-0.5 rounded-md">
-                    35+ EMI Modes Live
+                  <span className="text-[10px] sm:text-xs font-black text-[#0867E8] bg-blue-50 border border-blue-200 px-2 sm:px-2.5 py-0.5 rounded-md whitespace-nowrap shrink-0">
+                    <span className="sm:hidden">35+ EMI Modes</span>
+                    <span className="hidden sm:inline">35+ EMI Modes Live</span>
                   </span>
                 </div>
 
@@ -582,21 +584,24 @@ export default function CrmHomepage() {
                     </p>
                   </div>
                   <div className="flex items-center gap-3.5 bg-white px-4 py-2 rounded-xl border border-slate-200 shadow-2xs shrink-0">
-                    <img src="/assets/payu_logo.svg" alt="PayU Official Affordability Partner" style={{ height: '15px', width: 'auto' }} className="object-contain shrink-0" />
+                    <img src="/assets/payu_logo.svg" alt="PayU Official Affordability Partner" style={{ height: '16px', width: 'auto' }} className="object-contain shrink-0" />
                     <span className="h-5 w-px bg-slate-200" />
                     <img src="/assets/flexmoney_logo.png" alt="Flexmoney Official InstaCred Partner" style={{ height: '20px', width: 'auto' }} className="object-contain shrink-0" />
                   </div>
                 </div>
 
                 {/* Mobile streamlined row */}
-                <div className="sm:hidden flex items-center justify-between gap-2 pt-1">
-                  <p className="text-[11px] text-slate-600 font-medium">
-                    Cardless &amp; Card EMIs powered by
-                  </p>
-                  <div className="flex items-center gap-2 bg-white px-2.5 py-1.5 rounded-xl border border-slate-200 shadow-2xs shrink-0">
-                    <img src="/assets/payu_logo.svg" alt="PayU" style={{ height: '12px', width: 'auto' }} className="object-contain shrink-0" />
-                    <span className="text-slate-300">|</span>
-                    <img src="/assets/flexmoney_logo.png" alt="Flexmoney" style={{ height: '15px', width: 'auto' }} className="object-contain shrink-0" />
+                <div className="sm:hidden pt-0.5">
+                  <div className="flex items-center justify-between gap-2.5 bg-white px-3 py-2 rounded-xl border border-slate-200 shadow-2xs">
+                    <div className="flex flex-col min-w-0">
+                      <span className="text-[11px] font-extrabold text-[#0B2450] leading-tight truncate">Cardless &amp; Card EMIs</span>
+                      <span className="text-[9.5px] font-semibold text-slate-500 tracking-wide">Official Partners</span>
+                    </div>
+                    <div className="flex items-center gap-2.5 shrink-0 bg-slate-50/80 px-2.5 py-1 rounded-lg border border-slate-100">
+                      <img src="/assets/payu_logo.svg" alt="PayU" style={{ height: '14px', width: 'auto' }} className="object-contain shrink-0" />
+                      <span className="h-3.5 w-px bg-slate-300" />
+                      <img src="/assets/flexmoney_logo.png" alt="Flexmoney" style={{ height: '17px', width: 'auto' }} className="object-contain shrink-0" />
+                    </div>
                   </div>
                 </div>
               </div>

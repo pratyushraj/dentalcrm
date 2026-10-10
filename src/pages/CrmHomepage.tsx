@@ -1958,8 +1958,8 @@ export default function CrmHomepage() {
         </section>
 
         {/* ── 8. CLINIC CTA & REGISTRATION FORM ── */}
-        <section id="partner-form" aria-label="Clinic Partner Registration" className="py-16 px-6 max-w-2xl mx-auto">
-          <div className="bg-[#F7FAFC] border border-slate-200 rounded-3xl p-6 sm:p-10 shadow-xl space-y-6 text-left">
+        <section id="partner-form" aria-label="Clinic Partner Registration" className="py-10 sm:py-16 px-3.5 sm:px-6 max-w-2xl mx-auto">
+          <div className="bg-gradient-to-b from-[#F7FAFC] to-white border border-slate-200/90 rounded-2xl sm:rounded-3xl p-5 sm:p-8 shadow-xl space-y-5 text-left">
             {/* Form Toggle Header */}
             <div className="flex bg-slate-200/70 p-1 rounded-xl mb-2">
               <button
@@ -1987,10 +1987,10 @@ export default function CrmHomepage() {
               <span className="text-[11px] font-black text-[#0867E8] uppercase tracking-widest bg-blue-50 border border-blue-200 px-3 py-1 rounded-full inline-block">
                 {formType === 'clinic' ? 'DIRECT CLINIC DISBURSEMENT LIVE' : 'NBFC & LENDER PARTNERSHIP'}
               </span>
-              <h2 className="text-2xl sm:text-3xl font-black text-[#0B2450] tracking-tight">
+              <h2 className="text-xl sm:text-3xl font-black text-[#0B2450] tracking-tight leading-snug">
                 {formType === 'clinic' ? 'Activate Point-of-Care Patient Financing For Your Clinic' : 'Partner with Clinaza as a Capital Provider'}
               </h2>
-              <p className="text-xs sm:text-sm font-medium text-slate-600 max-w-lg mx-auto">
+              <p className="text-xs sm:text-sm font-medium text-slate-600 max-w-lg mx-auto leading-relaxed">
                 {formType === 'clinic'
                   ? 'Zero clinic discount, zero credit risk, and loan amount disbursed directly to your clinic current account on sanction.'
                   : 'Access high-ticket healthcare treatment financing demand through our pre-qualified clinic network.'}
@@ -1998,67 +1998,72 @@ export default function CrmHomepage() {
             </div>
 
             {formType === 'clinic' ? (
-              <div className="space-y-5 pt-2">
-                {/* Feature Chips */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-                  <div className="flex items-center gap-2.5 p-3 rounded-xl bg-white border border-slate-200 shadow-2xs">
-                    <span className="w-5 h-5 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold text-[11px]">✓</span>
-                    <span className="font-semibold text-slate-800">Direct Clinic Bank Payout</span>
+              <div className="space-y-4 pt-1">
+                {/* Feature Chips - 2x2 grid on mobile & desktop */}
+                <div className="grid grid-cols-2 gap-2 sm:gap-2.5 text-[11px] sm:text-xs">
+                  <div className="flex items-center gap-2 p-2.5 sm:p-3 rounded-xl bg-white border border-slate-200/90 shadow-2xs">
+                    <span className="w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold text-[10px] sm:text-[11px] shrink-0">✓</span>
+                    <span className="font-semibold text-slate-800 leading-tight">Direct Bank Payout</span>
                   </div>
-                  <div className="flex items-center gap-2.5 p-3 rounded-xl bg-white border border-slate-200 shadow-2xs">
-                    <span className="w-5 h-5 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold text-[11px]">✓</span>
-                    <span className="font-semibold text-slate-800">Paperless Front-Desk Approval</span>
+                  <div className="flex items-center gap-2 p-2.5 sm:p-3 rounded-xl bg-white border border-slate-200/90 shadow-2xs">
+                    <span className="w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold text-[10px] sm:text-[11px] shrink-0">✓</span>
+                    <span className="font-semibold text-slate-800 leading-tight">Paperless Approval</span>
                   </div>
-                  <div className="flex items-center gap-2.5 p-3 rounded-xl bg-white border border-slate-200 shadow-2xs">
-                    <span className="w-5 h-5 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold text-[11px]">✓</span>
-                    <span className="font-semibold text-slate-800">Zero Liability on Non-Payment</span>
+                  <div className="flex items-center gap-2 p-2.5 sm:p-3 rounded-xl bg-white border border-slate-200/90 shadow-2xs">
+                    <span className="w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold text-[10px] sm:text-[11px] shrink-0">✓</span>
+                    <span className="font-semibold text-slate-800 leading-tight">Zero Credit Liability</span>
                   </div>
-                  <div className="flex items-center gap-2.5 p-3 rounded-xl bg-white border border-slate-200 shadow-2xs">
-                    <span className="w-5 h-5 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold text-[11px]">✓</span>
-                    <span className="font-semibold text-slate-800">60-Second Instant Onboarding</span>
+                  <div className="flex items-center gap-2 p-2.5 sm:p-3 rounded-xl bg-white border border-slate-200/90 shadow-2xs">
+                    <span className="w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold text-[10px] sm:text-[11px] shrink-0">✓</span>
+                    <span className="font-semibold text-slate-800 leading-tight">60-Sec Onboarding</span>
                   </div>
                 </div>
 
-                <div className="space-y-2 pt-2">
+                <div className="space-y-2.5 pt-1">
                   <Link
                     to="/clinic-onboarding?utm_source=homepage&utm_medium=website&utm_campaign=partner_form_cta"
-                    className="w-full py-4 bg-[#0867E8] hover:bg-[#0756C7] text-white font-black text-sm uppercase tracking-wider rounded-xl transition-all shadow-xl shadow-[#0867E8]/25 flex items-center justify-center gap-2 transform hover:-translate-y-0.5 text-center"
+                    className="w-full py-3.5 sm:py-4 px-3 sm:px-6 bg-[#0867E8] hover:bg-[#0756C7] text-white font-black text-xs sm:text-sm uppercase tracking-wide rounded-xl transition-all shadow-xl shadow-[#0867E8]/25 flex items-center justify-center gap-2 transform hover:-translate-y-0.5 text-center"
                   >
                     <span>Complete Clinic Onboarding (60s)</span>
-                    <ArrowRight size={16} />
+                    <ArrowRight size={16} className="shrink-0" />
                   </Link>
 
                   {/* Quick Specialty Deep-Links */}
-                  <div className="flex flex-wrap items-center justify-center gap-2 pt-1">
-                    <span className="text-[11px] text-slate-500 font-medium">Quick link:</span>
+                  <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 pt-0.5">
+                    <span className="text-[10px] sm:text-[11px] text-slate-400 font-semibold uppercase tracking-wider">Fast-track:</span>
                     <Link
                       to="/clinic-onboarding?category=dental"
-                      className="px-2.5 py-1 bg-white hover:bg-slate-100 border border-slate-200 rounded-lg text-[11px] font-bold text-slate-700 transition-colors"
+                      className="px-2.5 py-1 bg-white hover:bg-slate-50 border border-slate-200 rounded-lg text-[11px] font-bold text-slate-700 transition-colors shadow-2xs"
                     >
-                      🦷 Dental Clinic
+                      🦷 Dental
                     </Link>
                     <Link
                       to="/clinic-onboarding?category=ivf"
-                      className="px-2.5 py-1 bg-white hover:bg-slate-100 border border-slate-200 rounded-lg text-[11px] font-bold text-slate-700 transition-colors"
+                      className="px-2.5 py-1 bg-white hover:bg-slate-50 border border-slate-200 rounded-lg text-[11px] font-bold text-slate-700 transition-colors shadow-2xs"
                     >
-                      👶 IVF &amp; Fertility Centre
+                      👶 IVF
                     </Link>
                     <Link
                       to="/clinic-onboarding?category=aesthetics"
-                      className="px-2.5 py-1 bg-white hover:bg-slate-100 border border-slate-200 rounded-lg text-[11px] font-bold text-slate-700 transition-colors"
+                      className="px-2.5 py-1 bg-white hover:bg-slate-50 border border-slate-200 rounded-lg text-[11px] font-bold text-slate-700 transition-colors shadow-2xs"
                     >
-                      ✨ Skin &amp; Hair Clinic
+                      ✨ Derma &amp; Hair
                     </Link>
                   </div>
                 </div>
 
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-4 text-xs text-slate-500 pt-1">
-                  <span className="flex items-center gap-1.5">
-                    <ShieldCheck size={14} className="text-emerald-600" /> PayU &amp; Flexmoney Regulated Partner Network
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-4 text-xs text-slate-500 pt-2 border-t border-slate-200/60">
+                  <span className="flex items-center gap-1.5 text-[11px] sm:text-xs font-medium text-slate-600">
+                    <ShieldCheck size={14} className="text-emerald-600 shrink-0" /> PayU &amp; Flexmoney Regulated Partner Network
                   </span>
-                  <span>&middot;</span>
-                  <a href="https://wa.me/917292984244?text=Hi%20Pratyush,%20interested%20in%20Clinaza%20onboarding" target="_blank" rel="noopener noreferrer" className="text-emerald-600 font-bold hover:underline">
-                    Quick Question on WhatsApp →
+                  <span className="hidden sm:inline text-slate-300">&bull;</span>
+                  <a
+                    href="https://wa.me/917292984244?text=Hi%20Pratyush,%20interested%20in%20Clinaza%20onboarding"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-50 hover:bg-emerald-100 border border-emerald-200/80 text-emerald-800 text-[11px] sm:text-xs font-bold transition-colors"
+                  >
+                    <span>💬 Question on WhatsApp →</span>
                   </a>
                 </div>
               </div>

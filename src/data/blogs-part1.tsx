@@ -598,7 +598,7 @@ export const BLOGS_PART1 = [
       },
       {
         question: "Is there any setup fee for dental clinics?",
-        answer: "Clinaza charges a nominal one-time onboarding fee of ₹999 which includes physical clinic counter standees, customized QR payment kits, and zero monthly subscriptions."
+        answer: "Clinaza charges a nominal one-time onboarding fee of ₹999 for clinic onboarding and lending gateway setup, with zero monthly subscriptions."
       }
     ],
     content: (
@@ -1512,7 +1512,7 @@ export const BLOGS_PART1 = [
       },
       {
         question: "What is the clinic onboarding fee for Clinaza financing?",
-        answer: "Clinaza charges a nominal one-time onboarding fee of ₹999 for physical counter standees and custom POS QR kits, with zero monthly subscription fees for clinics across India."
+        answer: "Clinaza charges a nominal one-time onboarding fee of ₹999 for clinic onboarding and lending gateway integration, with zero monthly subscription fees for clinics across India."
       }
     ],
     content: (

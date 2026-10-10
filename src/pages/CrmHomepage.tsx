@@ -277,7 +277,7 @@ export default function CrmHomepage() {
     },
     {
       q: 'What is the onboarding fee for clinics?',
-      a: 'Clinaza charges a nominal one-time onboarding fee of ₹999 for physical counter QR standees, clinic marketing kits, and lending gateway integration. There are zero recurring monthly subscriptions.'
+      a: 'Clinaza charges a nominal one-time onboarding fee of ₹999 for clinic onboarding and lending gateway integration. There are zero recurring monthly subscriptions.'
     },
     {
       q: 'What documents does the patient need?',
@@ -382,7 +382,7 @@ export default function CrmHomepage() {
                 "name": "What is the onboarding fee for clinics?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Clinaza charges a nominal one-time onboarding fee of ₹999 for physical counter QR standees, clinic marketing kits, and lending gateway integration. There are zero recurring monthly subscriptions."
+                  "text": "Clinaza charges a nominal one-time onboarding fee of ₹999 for clinic onboarding and lending gateway integration. There are zero recurring monthly subscriptions."
                 }
               },
               {
@@ -874,194 +874,6 @@ export default function CrmHomepage() {
           </FadeIn>
         </section>
 
-        {/* ── 4.4 MOBILE CRM APP SHOWCASE ── */}
-        <section aria-label="Mobile CRM Experience" className="py-14 sm:py-20 px-4 sm:px-6 bg-[#0B1120] text-white relative overflow-hidden border-t border-slate-800">
-
-          <div className="max-w-5xl mx-auto space-y-10 relative z-10">
-            <div className="text-center space-y-3">
-              <span className="text-xs font-semibold text-sky-400 uppercase tracking-wider">Free Cloud-Based Clinic Management Software</span>
-              <h2 className="text-2xl sm:text-4xl font-bold text-white leading-tight">
-                Your entire practice,<br />managed from your phone.
-              </h2>
-              <p className="text-sm text-slate-400 max-w-xl mx-auto leading-relaxed">
-                Automated WhatsApp recall, specialty clinical EMR, digital prescriptions, and revenue analytics — 100% free forever for outpatient clinics.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-              {/* Left Column: Key Features */}
-              <div className="lg:col-span-6 space-y-4 text-left order-2 lg:order-1">
-                {[
-                  {
-                    icon: '💬',
-                    title: 'Automated WhatsApp Patient Recall',
-                    desc: 'Automatically re-engage dormant patients who haven’t visited in 3–6 months with personalized WhatsApp recall messages.'
-                  },
-                  {
-                    icon: '📋',
-                    title: 'Specialty EMR & Clinical Charting',
-                    desc: 'Tooth charting for dental, procedural logs for aesthetics, IVF, & daycare with immediate treatment cost estimation.'
-                  },
-                  {
-                    icon: '📱',
-                    title: 'Instant Digital Prescriptions (Rx)',
-                    desc: 'Generate branded, professional Rx with pre-filled drug dosages and share directly to patient WhatsApp in 2 clicks.'
-                  },
-                  {
-                    icon: '⚡',
-                    title: '100% Free Forever with Zero Hidden Fees',
-                    desc: 'No monthly subscriptions, no staff user limits, and unlimited patient records synced securely in the cloud.'
-                  }
-                ].map((item, idx) => (
-                  <div key={idx} className="border-l-2 border-slate-700 hover:border-blue-500 pl-4 py-1 transition-colors">
-                    <h3 className="text-sm font-semibold text-white leading-tight mb-1">{item.title}</h3>
-                    <p className="text-xs text-slate-400 leading-relaxed">{item.desc}</p>
-                  </div>
-                ))}
-
-                <div className="pt-2 flex flex-col sm:flex-row gap-3">
-                  <Link
-                    to="/reactivation/login"
-                    className="px-6 py-3.5 bg-gradient-to-r from-[#0867E8] to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white text-xs font-black uppercase tracking-wider rounded-xl transition-all text-center shadow-lg shadow-blue-600/30"
-                  >
-                    Launch Free Doctor Portal →
-                  </Link>
-                  <a
-                    href="https://wa.me/917292984244?text=Hi%20Clinaza%2C%20I%20want%20a%20free%20demo%20of%20the%20clinic%20CRM%20software"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-5 py-3.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 text-xs font-bold rounded-xl transition-all text-center flex items-center justify-center gap-2"
-                  >
-                    <MessageSquare size={15} className="text-emerald-400" /> Book 1-on-1 Demo
-                  </a>
-                </div>
-              </div>
-
-              {/* Right Column: Realistic Mobile App UI Frame */}
-              <div className="lg:col-span-6 flex justify-center order-1 lg:order-2">
-                <div className="w-[300px] sm:w-[320px] bg-[#0B132B] rounded-[40px] p-2.5 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.95),0_0_0_2px_rgba(255,255,255,0.15),0_0_0_8px_#1E293B,0_0_45px_rgba(8,103,232,0.45)] relative">
-                  <div className="bg-[#070D1D] rounded-[32px] p-3 text-left border border-white/10 space-y-2.5 relative overflow-hidden">
-                    {/* Dynamic Island Notch */}
-                    <div className="w-20 h-4 bg-black rounded-full mx-auto flex items-center justify-between px-2 mb-1">
-                      <div className="w-1.5 h-1.5 bg-slate-800 rounded-full"></div>
-                      <div className="w-1 h-1 bg-blue-900 rounded-full"></div>
-                    </div>
-
-                    {/* App Header */}
-                    <div className="flex items-center justify-between pb-1 border-b border-white/5">
-                      <div className="flex items-center gap-2">
-                        <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-[#0867E8] to-[#00D4B8] flex items-center justify-center text-white font-extrabold text-[11px] shadow-sm">
-                          CC
-                        </div>
-                        <div>
-                          <h4 className="text-[11px] font-extrabold text-white leading-tight">CLINAZA EMR</h4>
-                          <p className="text-[8px] text-sky-400 font-semibold">Specialty &amp; Dental Practice</p>
-                        </div>
-                      </div>
-                      <div className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-[7.5px] font-bold text-emerald-400">
-                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Live EMR
-                      </div>
-                    </div>
-
-                    {/* Revenue Card */}
-                    <div className="bg-gradient-to-br from-[#0867E8]/30 via-slate-900/80 to-slate-900 p-2.5 rounded-xl border border-blue-500/40 space-y-1.5">
-                      <div className="flex justify-between items-center">
-                        <span className="text-[8.5px] uppercase font-bold tracking-wider text-slate-400">Clinical Revenue (August)</span>
-                        <span className="text-[7.5px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-bold border border-emerald-500/30">▲ 41.2%</span>
-                      </div>
-                      <div className="text-lg font-black text-white">₹6,84,500</div>
-                      <div className="grid grid-cols-3 gap-1 pt-1.5 border-t border-white/10 text-center">
-                        <div>
-                          <div className="text-[9.5px] font-extrabold text-white">128</div>
-                          <div className="text-[7px] text-slate-400">Total Patients</div>
-                        </div>
-                        <div>
-                          <div className="text-[9.5px] font-extrabold text-sky-300">42</div>
-                          <div className="text-[7px] text-slate-400">Reactivated</div>
-                        </div>
-                        <div>
-                          <div className="text-[9.5px] font-extrabold text-emerald-400">₹0</div>
-                          <div className="text-[7px] text-slate-400">Bad Debts</div>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Active Patient EMR & FDI Tooth Chart */}
-                    <div className="bg-slate-900/80 border border-white/10 p-2.5 rounded-xl space-y-2">
-                      <div className="flex justify-between items-center">
-                        <div className="flex items-center gap-1.5">
-                          <div className="w-5 h-5 rounded-full bg-blue-600 text-white text-[8px] font-extrabold flex items-center justify-center">RS</div>
-                          <span className="text-[10px] font-bold text-white">Rahul Sharma (34M)</span>
-                        </div>
-                        <span className="text-[7.5px] px-1.5 py-0.5 bg-amber-500/15 border border-amber-500/30 text-amber-300 rounded font-bold">RCT + Crown</span>
-                      </div>
-
-                      {/* Mini Tooth FDI Matrix */}
-                      <div className="flex justify-between bg-black/40 p-1.5 rounded-lg border border-white/5">
-                        {[
-                          { num: '14', tag: 'UR4', active: false },
-                          { num: '16', tag: 'RCT', active: 'red' },
-                          { num: '26', tag: 'IMP', active: 'blue' },
-                          { num: '36', tag: 'LL6', active: false },
-                          { num: '46', tag: 'LR6', active: false }
-                        ].map((tooth, tidx) => (
-                          <div key={tidx} className="flex flex-col items-center gap-0.5">
-                            <div className={`w-4 h-4 rounded text-[7.5px] font-bold flex items-center justify-center ${
-                              tooth.active === 'red' ? 'bg-red-600 text-white shadow-[0_0_8px_rgba(239,68,68,0.7)] border border-red-400' :
-                              tooth.active === 'blue' ? 'bg-blue-600 text-white shadow-[0_0_8px_rgba(8,103,232,0.7)] border border-blue-400' :
-                              'bg-slate-800 text-slate-400 border border-white/5'
-                            }`}>
-                              {tooth.num}
-                            </div>
-                            <span className="text-[6.5px] text-slate-400 font-semibold">{tooth.tag}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* WhatsApp Automation Stream */}
-                    <div className="bg-slate-900/80 border border-emerald-500/30 p-2 rounded-xl flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <div className="w-6 h-6 rounded-md bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 flex items-center justify-center text-xs">
-                          💬
-                        </div>
-                        <div>
-                          <div className="text-[9px] font-bold text-white">Auto WhatsApp Recall</div>
-                          <div className="text-[7.5px] text-emerald-300">32 Dormant Patients Reached</div>
-                        </div>
-                      </div>
-                      <span className="text-[7.5px] px-1.5 py-0.5 bg-emerald-500 text-slate-950 font-black rounded uppercase">Active</span>
-                    </div>
-
-                    {/* Today's Schedule */}
-                    <div className="bg-slate-900/80 border border-white/10 p-2 rounded-xl space-y-1">
-                      <div className="flex justify-between items-center text-[8px] font-bold text-slate-400 uppercase">
-                        <span>Today's Schedule</span>
-                        <span className="text-sky-400">4 Appointments</span>
-                      </div>
-                      <div className="space-y-1 text-[8px]">
-                        <div className="flex justify-between items-center text-slate-300 border-t border-white/5 pt-1">
-                          <span className="text-blue-400 font-bold">04:30 PM</span>
-                          <span className="font-semibold text-white">Pooja Verma</span>
-                          <span className="text-[7px] px-1 bg-slate-800 rounded text-slate-300">Aligner / Skin Review</span>
-                        </div>
-                        <div className="flex justify-between items-center text-slate-300 border-t border-white/5 pt-1">
-                          <span className="text-blue-400 font-bold">05:15 PM</span>
-                          <span className="font-semibold text-white">Amit Kumar</span>
-                          <span className="text-[7px] px-1 bg-slate-800 rounded text-slate-300">Procedure Session #2</span>
-                        </div>
-                      </div>
-                    </div>
-
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-
-
         {/* ── 6. EMI CALCULATOR & FRONT-DESK WORKFLOW ── */}
         <section aria-label="EMI Calculator" className="py-12 sm:py-16 px-4 sm:px-6 bg-[#F7FAFC] border-y border-slate-200/60">
           <div className="max-w-6xl mx-auto space-y-8">
@@ -1223,8 +1035,8 @@ export default function CrmHomepage() {
                       {
                         step: '1',
                         icon: <QrCode size={16} className="text-sky-400" />,
-                        title: 'Scan Clinic Counter Standee',
-                        desc: 'Patient scans your custom Clinaza QR standee with their phone camera. No app download needed.',
+                        title: 'Scan Clinic Counter QR',
+                        desc: 'Patient scans your custom Clinaza QR code with their phone camera. No app download needed.',
                         badge: 'Zero hardware cost'
                       },
                       {
@@ -1368,12 +1180,12 @@ export default function CrmHomepage() {
           {/* Prominent ₹999 One-Time Onboarding Fee Highlight Badge */}
           <div className="bg-gradient-to-r from-blue-50/80 via-emerald-50/50 to-blue-50/80 border border-blue-200/90 p-5 rounded-2xl text-center max-w-2xl mx-auto shadow-2xs">
             <span className="text-2xl font-black text-[#0867E8] block">₹999 One-Time Onboarding Fee</span>
-            <p className="text-xs font-bold text-[#0B2450] mt-1">One-time setup for custom counter QR standee &amp; lending integration. Zero recurring monthly subscriptions.</p>
+            <p className="text-xs font-bold text-[#0B2450] mt-1">One-time clinic onboarding &amp; lending gateway integration. Zero recurring monthly subscriptions.</p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-left">
             {[
-              { title: '₹999 One-Time Setup', desc: 'One-time onboarding includes custom QR standee kit. Zero recurring monthly fees.' },
+              { title: '₹999 One-Time Setup', desc: 'One-time clinic onboarding & lending gateway integration. Zero recurring monthly fees.' },
               { title: 'Free Clinic CRM & EMR Portal', desc: '100% free patient reactivation & treatment follow-up portal for life.' },
               { title: 'No EMI Collection Burden', desc: 'No chasing patients for repayments — handled entirely by NBFC.' },
               { title: 'Financing by Partners', desc: 'All loans funded and serviced by RBI-regulated lenders.' },
@@ -1974,7 +1786,7 @@ export default function CrmHomepage() {
                   formType === 'clinic' ? 'bg-white text-[#0B2450] shadow-xs' : 'text-slate-600 hover:text-[#0B2450]'
                 }`}
               >
-                🏥 For Clinics &amp; Specialty Centres
+                🏥 For Clinics<span className="hidden sm:inline"> &amp; Specialty Centres</span>
               </button>
               <button
                 type="button"
@@ -2033,26 +1845,26 @@ export default function CrmHomepage() {
                     <ArrowRight size={16} className="shrink-0" />
                   </Link>
 
-                  {/* Quick Specialty Deep-Links */}
-                  <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 pt-0.5">
-                    <span className="text-[10px] sm:text-[11px] text-slate-400 font-semibold uppercase tracking-wider">Fast-track:</span>
+                  {/* Quick Specialty Deep-Links in a single line */}
+                  <div className="flex items-center justify-center gap-1 sm:gap-2 pt-0.5 whitespace-nowrap text-[10px] sm:text-[11px]">
+                    <span className="text-slate-400 font-bold uppercase tracking-wider shrink-0">Fast-track:</span>
                     <Link
                       to="/clinic-onboarding?category=dental"
-                      className="px-2.5 py-1 bg-white hover:bg-slate-50 border border-slate-200 rounded-lg text-[11px] font-bold text-slate-700 transition-colors shadow-2xs"
+                      className="px-2 py-0.5 sm:px-2.5 sm:py-1 bg-white hover:bg-slate-50 border border-slate-200 rounded-lg font-bold text-slate-700 transition-colors shadow-2xs shrink-0"
                     >
                       🦷 Dental
                     </Link>
                     <Link
                       to="/clinic-onboarding?category=ivf"
-                      className="px-2.5 py-1 bg-white hover:bg-slate-50 border border-slate-200 rounded-lg text-[11px] font-bold text-slate-700 transition-colors shadow-2xs"
+                      className="px-2 py-0.5 sm:px-2.5 sm:py-1 bg-white hover:bg-slate-50 border border-slate-200 rounded-lg font-bold text-slate-700 transition-colors shadow-2xs shrink-0"
                     >
                       👶 IVF
                     </Link>
                     <Link
                       to="/clinic-onboarding?category=aesthetics"
-                      className="px-2.5 py-1 bg-white hover:bg-slate-50 border border-slate-200 rounded-lg text-[11px] font-bold text-slate-700 transition-colors shadow-2xs"
+                      className="px-2 py-0.5 sm:px-2.5 sm:py-1 bg-white hover:bg-slate-50 border border-slate-200 rounded-lg font-bold text-slate-700 transition-colors shadow-2xs shrink-0"
                     >
-                      ✨ Derma &amp; Hair
+                      ✨ Derma<span className="hidden sm:inline"> &amp; Hair</span>
                     </Link>
                   </div>
                 </div>
@@ -2350,24 +2162,30 @@ export default function CrmHomepage() {
           </div>
 
           {/* Bottom Copyright & Disclaimer Strip */}
-          <div className="pt-6 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-slate-400 font-mono">
-            <p>© 2026 CLINAZA Technologies. All Rights Reserved. &middot; Direct Helpline: +91 7292984244</p>
-            <div className="flex items-center gap-4 text-slate-500">
+          <div className="pt-6 pb-6 sm:pb-2 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500 font-sans">
+            <div className="text-center sm:text-left space-y-0.5">
+              <p className="font-medium text-slate-600">© 2026 CLINAZA Technologies. All Rights Reserved.</p>
+              <p className="text-[11px] text-slate-400">
+                Direct Helpline: <a href="tel:+917292984244" className="font-semibold text-slate-600 hover:text-[#0867E8] transition-colors">+91 7292984244</a>
+              </p>
+            </div>
+            <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-xs font-medium text-slate-600 pt-1 sm:pt-0">
               <a 
                 href="https://instagram.com/clinaza.in" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="hover:text-pink-600 font-sans font-semibold inline-flex items-center gap-1 text-slate-600 transition-colors"
+                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-pink-50 hover:bg-pink-100 text-pink-700 text-[11px] font-bold border border-pink-200/80 transition-colors whitespace-nowrap"
               >
-                <svg className="w-4 h-4 text-pink-600" fill="currentColor" viewBox="0 0 24 24">
+                <svg className="w-3.5 h-3.5 text-pink-600 shrink-0" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
                 </svg>
-                Follow on Instagram
+                <span>Instagram</span>
               </a>
-              <span className="text-slate-300">&middot;</span>
-              <Link to="/tools" className="hover:text-[#0867E8] underline">Free Tools</Link>
-              <Link to="/blog" className="hover:text-[#0867E8] underline">Blog Hub</Link>
-              <Link to="/reactivation/login" className="hover:text-[#0B2450] font-bold">Doctor Login</Link>
+              <Link to="/tools" className="hover:text-[#0867E8] transition-colors whitespace-nowrap">Free Tools</Link>
+              <span className="text-slate-300">&bull;</span>
+              <Link to="/blog" className="hover:text-[#0867E8] transition-colors whitespace-nowrap">Blog Hub</Link>
+              <span className="text-slate-300">&bull;</span>
+              <Link to="/reactivation/login" className="hover:text-[#0B2450] font-bold text-slate-800 transition-colors whitespace-nowrap">Doctor Login &rarr;</Link>
             </div>
           </div>
         </div>

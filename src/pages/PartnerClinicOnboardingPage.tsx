@@ -306,7 +306,7 @@ export default function PartnerClinicOnboardingPage() {
             </div>
             <h2 className="text-xl sm:text-2xl font-bold text-slate-900">Clinic Details Submitted!</h2>
             <p className="text-xs sm:text-sm text-slate-600 max-w-md mx-auto leading-relaxed">
-              Thank you! Your clinic has been logged for merchant accreditation. Our team will share your digital merchant QR standee and front-desk portal.
+              Thank you! Your clinic has been logged for merchant accreditation. Our team will share your digital merchant QR and front-desk portal.
             </p>
             <div className="pt-4 flex justify-center">
               <button

@@ -898,9 +898,9 @@ export default function FreeToolsHub() {
                 </p>
                 <div className="flex items-center justify-center gap-2.5 bg-white px-3.5 py-1.5 rounded-xl w-fit mx-auto shadow-xs">
                   <span className="text-[10px] text-slate-600 font-bold uppercase tracking-wider">Partners:</span>
-                  <img src="/assets/payu_logo.svg" alt="PayU" className="h-4 w-auto object-contain" />
+                  <img src="/assets/payu_logo.svg" alt="PayU" style={{ height: '14px', width: 'auto' }} className="object-contain shrink-0" />
                   <span className="text-slate-300">|</span>
-                  <img src="/assets/flexmoney_logo.png" alt="Flexmoney" className="h-3.5 w-auto object-contain" />
+                  <img src="/assets/flexmoney_logo.png" alt="Flexmoney" style={{ height: '18px', width: 'auto' }} className="object-contain shrink-0" />
                 </div>
                 <div className="pt-2">
                   <a

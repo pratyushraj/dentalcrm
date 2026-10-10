@@ -288,9 +288,9 @@ export default function PartnerClinicOnboardingPage() {
           <div className="pt-2 flex items-center justify-center">
             <div className="inline-flex flex-wrap items-center justify-center gap-3 bg-white border border-slate-200/90 px-4 py-2 rounded-2xl shadow-xs text-xs text-slate-700">
               <span className="font-extrabold text-[#0B2450] text-[11px] uppercase tracking-wider">Official Partners:</span>
-              <img src="/assets/payu_logo.svg" alt="PayU Affordability Partner" className="h-5 w-auto object-contain" />
+              <img src="/assets/payu_logo.svg" alt="PayU Affordability Partner" style={{ height: '15px', width: 'auto' }} className="object-contain shrink-0" />
               <span className="text-slate-300">|</span>
-              <img src="/assets/flexmoney_logo.png" alt="Flexmoney InstaCred Partner" className="h-4.5 w-auto object-contain" />
+              <img src="/assets/flexmoney_logo.png" alt="Flexmoney InstaCred Partner" style={{ height: '21px', width: 'auto' }} className="object-contain shrink-0" />
               <span className="text-slate-300 hidden sm:inline">&bull;</span>
               <span className="text-emerald-700 font-bold text-[11px] bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-full">
                 ✓ 35+ EMI Modes &bull; Instant Point-of-Care Sanction

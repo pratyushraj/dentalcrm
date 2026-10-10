@@ -442,10 +442,10 @@ export default function CrmHomepage() {
 
       {/* ── Header ── */}
       <header className="border-b border-slate-100 backdrop-blur-xl sticky top-0 z-50 bg-white/95 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex justify-between items-center gap-2">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 h-16 sm:h-20 flex justify-between items-center gap-2">
           <div className="flex items-center gap-3">
             <Link to="/" className="flex items-center gap-3 group shrink-0">
-              <img src="/assets/clinaza-logo.jpg" alt="CLINAZA" className="h-10 w-auto rounded-xl border border-slate-200 shadow-sm group-hover:scale-105 transition-transform" />
+              <img src="/assets/clinaza-logo.jpg" alt="CLINAZA" className="h-9 sm:h-10 w-auto rounded-xl border border-slate-200 shadow-sm group-hover:scale-105 transition-transform" />
               <div className="hidden sm:block">
                 <span className="text-xs font-black tracking-widest text-[#0B2450] block">CLINAZA</span>
                 <span className="text-[9px] font-bold tracking-wider text-[#0f7a75] block uppercase">EMI FOR BETTER HEALTH</span>
@@ -455,9 +455,9 @@ export default function CrmHomepage() {
             {/* Header Co-brand Trust Pill */}
             <div className="hidden xl:flex items-center gap-2.5 px-3 py-1.5 bg-slate-50/90 border border-slate-200/90 rounded-xl shadow-2xs">
               <span className="text-[10px] font-black uppercase text-slate-500 tracking-wider">Affordability Partners:</span>
-              <img src="/assets/payu_logo.svg" alt="PayU" className="h-4 w-auto object-contain" />
+              <img src="/assets/payu_logo.svg" alt="PayU" style={{ height: '13px', width: 'auto' }} className="object-contain shrink-0" />
               <span className="text-slate-300">|</span>
-              <img src="/assets/flexmoney_logo.png" alt="Flexmoney" className="h-3.5 w-auto object-contain" />
+              <img src="/assets/flexmoney_logo.png" alt="Flexmoney" style={{ height: '18px', width: 'auto' }} className="object-contain shrink-0" />
             </div>
           </div>
           <div className="flex items-center gap-1.5 sm:gap-2.5">
@@ -485,10 +485,10 @@ export default function CrmHomepage() {
             </button>
             <Link
               to="/reactivation/login"
-              className="flex items-center gap-1.5 px-2.5 sm:px-3.5 py-2 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-[11px] sm:text-xs font-bold text-emerald-800 rounded-xl transition-all whitespace-nowrap"
+              className="flex items-center gap-1.5 px-2.5 sm:px-3.5 py-1.5 sm:py-2 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-[11px] sm:text-xs font-bold text-emerald-800 rounded-xl transition-all whitespace-nowrap"
             >
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-              Doctor Login 🔐
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span className="hidden sm:inline">Doctor </span>Login 🔐
             </Link>
             <a
               href="https://wa.me/917292984244?text=Hi%20Clinaza%20team%2C%20I%20want%20to%20know%20more%20about%20Clinaza"
@@ -500,9 +500,11 @@ export default function CrmHomepage() {
             </a>
             <Link
               to="/clinic-onboarding"
-              className="px-3 sm:px-5 py-2.5 sm:py-3 bg-[#0867E8] hover:bg-[#0756C7] text-white text-[11px] sm:text-xs font-black uppercase tracking-wider rounded-xl transition-all shadow-lg shadow-[#0867E8]/30 flex items-center gap-1.5 sm:gap-2 whitespace-nowrap active:scale-95"
+              className="px-3 sm:px-5 py-2 sm:py-3 bg-[#0867E8] hover:bg-[#0756C7] text-white text-[11px] sm:text-xs font-black uppercase tracking-wider rounded-xl transition-all shadow-md sm:shadow-lg shadow-[#0867E8]/25 flex items-center gap-1.5 sm:gap-2 whitespace-nowrap active:scale-95"
             >
-              Clinic Onboarding <ArrowRight size={13} />
+              <span className="sm:hidden">Onboarding</span>
+              <span className="hidden sm:inline">Clinic Onboarding</span>
+              <ArrowRight size={13} />
             </Link>
           </div>
         </div>
@@ -510,22 +512,22 @@ export default function CrmHomepage() {
 
       <main>
         {/* ── 1. HERO (MINIMAL LUXURY) ── */}
-        <section aria-label="Hero" className="relative pt-8 sm:pt-14 pb-12 sm:pb-16 px-4 sm:px-6 max-w-5xl mx-auto space-y-8">
+        <section aria-label="Hero" className="relative pt-6 sm:pt-14 pb-10 sm:pb-16 px-4 sm:px-6 max-w-5xl mx-auto space-y-6 sm:space-y-8">
 
 
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center text-left">
-            <div className="md:col-span-7 space-y-4 sm:space-y-5">
-              <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 bg-gradient-to-r from-blue-50/90 to-slate-100 border border-blue-200/80 rounded-full text-xs font-semibold text-slate-800 shadow-2xs flex-wrap">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-6 sm:gap-8 items-center text-left">
+            <div className="md:col-span-7 space-y-3.5 sm:space-y-5">
+              <div className="inline-flex items-center gap-2 sm:gap-2.5 px-3 sm:px-3.5 py-1 sm:py-1.5 bg-gradient-to-r from-blue-50/90 to-slate-100 border border-blue-200/80 rounded-full text-xs font-semibold text-slate-800 shadow-2xs flex-wrap">
                 <span className="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
                 <span className="text-[10px] font-black text-slate-600 uppercase tracking-widest">Official Partnership:</span>
-                <img src="/assets/payu_logo.svg" alt="PayU" className="h-4 w-auto object-contain" />
+                <img src="/assets/payu_logo.svg" alt="PayU" style={{ height: '13px', width: 'auto' }} className="object-contain shrink-0" />
                 <span className="text-slate-400 font-normal">&amp;</span>
-                <img src="/assets/flexmoney_logo.png" alt="Flexmoney InstaCred" className="h-3.5 w-auto object-contain" />
+                <img src="/assets/flexmoney_logo.png" alt="Flexmoney InstaCred" style={{ height: '17px', width: 'auto' }} className="object-contain shrink-0" />
                 <span className="text-slate-300 hidden sm:inline">&bull;</span>
                 <span className="text-[10px] font-bold text-slate-600 hidden sm:inline">35+ EMI Modes</span>
               </div>
 
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-[-0.025em] leading-[1.18] text-[#0B2450]">
+              <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold tracking-[-0.025em] leading-[1.2] text-[#0B2450]">
                 Healthcare Treatments on EMI.<br />
                 <span className="text-[#0867E8]">Stop patient drop-offs.</span>
               </h1>
@@ -534,7 +536,7 @@ export default function CrmHomepage() {
                 Offer instant point-of-care patient financing &amp; medical loans from <strong className="text-[#0B2450] font-bold">₹30,000 to ₹5,00,000</strong> across Dental, IVF &amp; Fertility, Dermatology, Ophthalmology, and Outpatient Specialty Clinics.
               </p>
 
-              <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 pt-1">
+              <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-2.5 sm:gap-3 pt-1">
                 <button
                   type="button"
                   onClick={() => {
@@ -542,46 +544,59 @@ export default function CrmHomepage() {
                     trackEvent('eligibility_started', { source: 'hero_cta' });
                     setShowEligibilityModal(true);
                   }}
-                  className="px-6 py-3.5 bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-black uppercase tracking-wider rounded-xl transition-all flex items-center justify-center gap-2 shadow-[0_8px_20px_rgba(8,103,232,0.25)] hover:shadow-[0_12px_28px_rgba(8,103,232,0.35)] transform active:scale-95"
+                  className="px-5 sm:px-6 py-3 sm:py-3.5 bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-black uppercase tracking-wider rounded-xl transition-all flex items-center justify-center gap-2 shadow-[0_8px_20px_rgba(8,103,232,0.25)] hover:shadow-[0_12px_28px_rgba(8,103,232,0.35)] transform active:scale-95"
                 >
                   <ShieldCheck size={16} /> Check Patient Eligibility
                 </button>
                 <Link
                   to="/clinic-onboarding"
-                  className="px-5 py-3.5 bg-white hover:bg-slate-50 text-slate-800 border-2 border-slate-200 hover:border-slate-300 text-xs font-black uppercase tracking-wider rounded-xl transition-all flex items-center justify-center gap-2 active:scale-95 shadow-sm"
+                  className="px-5 py-3 sm:py-3.5 bg-white hover:bg-slate-50 text-slate-800 border-2 border-slate-200 hover:border-slate-300 text-xs font-black uppercase tracking-wider rounded-xl transition-all flex items-center justify-center gap-2 active:scale-95 shadow-sm"
                 >
                   Clinic Onboarding →
                 </Link>
               </div>
 
               {/* ── Official PayU & Flexmoney Partnership Institutional Card ── */}
-              <div className="p-4 rounded-2xl bg-gradient-to-br from-white via-slate-50 to-blue-50/50 border border-blue-200/90 shadow-sm space-y-2.5">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200/80 pb-2">
-                  <div className="flex items-center gap-2">
-                    <span className="text-[10px] font-black uppercase tracking-wider bg-emerald-50 text-emerald-800 border border-emerald-300/80 px-2.5 py-0.5 rounded-full flex items-center gap-1.5">
+              <div className="p-3 sm:p-4 rounded-2xl bg-gradient-to-br from-white via-slate-50 to-blue-50/50 border border-blue-200/90 shadow-sm space-y-2">
+                <div className="flex items-center justify-between gap-2 border-b border-slate-200/80 pb-2">
+                  <div className="flex items-center gap-1.5 sm:gap-2">
+                    <span className="text-[10px] font-black uppercase tracking-wider bg-emerald-50 text-emerald-800 border border-emerald-300/80 px-2 py-0.5 rounded-full flex items-center gap-1.5">
                       <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
                       Verified Lending Partnership
                     </span>
                     <span className="text-[10px] font-bold text-slate-500 hidden sm:inline">&bull; RBI-Regulated Rails</span>
                   </div>
-                  <span className="text-[10px] font-extrabold text-[#0867E8] bg-blue-50 border border-blue-200 px-2 py-0.5 rounded-md self-start sm:self-auto">
+                  <span className="text-[10px] font-extrabold text-[#0867E8] bg-blue-50 border border-blue-200 px-2 py-0.5 rounded-md">
                     35+ EMI Modes Live
                   </span>
                 </div>
 
-                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3.5">
+                {/* Desktop detailed text + logo block */}
+                <div className="hidden sm:flex flex-row items-center justify-between gap-3.5 pt-0.5">
                   <div className="space-y-1">
-                    <p className="text-xs sm:text-sm font-black text-[#0B2450] tracking-tight">
+                    <p className="text-sm font-black text-[#0B2450] tracking-tight">
                       Healthcare Affordability In Partnership with PayU &amp; Flexmoney
                     </p>
                     <p className="text-[11px] text-slate-600 leading-relaxed">
                       Clinaza has partnered with <strong>PayU</strong> and <strong>Flexmoney (InstaCred)</strong> to provide point-of-care patient financing directly at dental and outpatient clinic counters. Patients get paperless Cardless EMIs, pre-approved Debit Card EMIs, and 21+ major banks' Credit Card EMIs in 2 minutes.
                     </p>
                   </div>
-                  <div className="flex items-center gap-3 bg-white px-4 py-2.5 rounded-xl border border-slate-200 shadow-2xs shrink-0 self-center sm:self-auto">
-                    <img src="/assets/payu_logo.svg" alt="PayU Official Affordability Partner" className="h-6 sm:h-7 w-auto object-contain" />
-                    <span className="h-6 w-px bg-slate-200" />
-                    <img src="/assets/flexmoney_logo.png" alt="Flexmoney Official InstaCred Partner" className="h-5 sm:h-6 w-auto object-contain" />
+                  <div className="flex items-center gap-3.5 bg-white px-4 py-2 rounded-xl border border-slate-200 shadow-2xs shrink-0">
+                    <img src="/assets/payu_logo.svg" alt="PayU Official Affordability Partner" style={{ height: '15px', width: 'auto' }} className="object-contain shrink-0" />
+                    <span className="h-5 w-px bg-slate-200" />
+                    <img src="/assets/flexmoney_logo.png" alt="Flexmoney Official InstaCred Partner" style={{ height: '20px', width: 'auto' }} className="object-contain shrink-0" />
+                  </div>
+                </div>
+
+                {/* Mobile streamlined row */}
+                <div className="sm:hidden flex items-center justify-between gap-2 pt-1">
+                  <p className="text-[11px] text-slate-600 font-medium">
+                    Cardless &amp; Card EMIs powered by
+                  </p>
+                  <div className="flex items-center gap-2 bg-white px-2.5 py-1.5 rounded-xl border border-slate-200 shadow-2xs shrink-0">
+                    <img src="/assets/payu_logo.svg" alt="PayU" style={{ height: '12px', width: 'auto' }} className="object-contain shrink-0" />
+                    <span className="text-slate-300">|</span>
+                    <img src="/assets/flexmoney_logo.png" alt="Flexmoney" style={{ height: '15px', width: 'auto' }} className="object-contain shrink-0" />
                   </div>
                 </div>
               </div>
@@ -621,9 +636,9 @@ export default function CrmHomepage() {
                 <span className="text-slate-300 hidden sm:inline">&bull;</span>
                 <div className="flex items-center gap-2.5 bg-white px-3 py-1.5 rounded-xl border border-slate-200 shadow-2xs">
                   <span className="text-[10px] font-black text-slate-700 uppercase tracking-wider">Powered by</span>
-                  <img src="/assets/payu_logo.svg" alt="PayU" className="h-4.5 w-auto object-contain" />
+                  <img src="/assets/payu_logo.svg" alt="PayU" style={{ height: '13px', width: 'auto' }} className="object-contain shrink-0" />
                   <span className="text-slate-300">|</span>
-                  <img src="/assets/flexmoney_logo.png" alt="Flexmoney" className="h-4 w-auto object-contain" />
+                  <img src="/assets/flexmoney_logo.png" alt="Flexmoney" style={{ height: '18px', width: 'auto' }} className="object-contain shrink-0" />
                 </div>
               </div>
               <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200/70 px-2.5 py-0.5 rounded-full shrink-0">
@@ -1182,9 +1197,9 @@ export default function CrmHomepage() {
                     </div>
                     <div className="flex items-center gap-1.5 bg-white/10 border border-white/15 px-2 py-1 rounded-lg">
                       <span className="text-[8px] uppercase tracking-wider text-slate-300 font-bold">Partnered with</span>
-                      <img src="/assets/payu_logo.svg" alt="PayU" className="h-3.5 w-auto" />
+                      <img src="/assets/payu_logo.svg" alt="PayU" style={{ height: '11px', width: 'auto' }} className="object-contain" />
                       <span className="text-[9px] text-slate-400">&amp;</span>
-                      <img src="/assets/flexmoney_logo.png" alt="Flexmoney" className="h-2.5 w-auto" />
+                      <img src="/assets/flexmoney_logo.png" alt="Flexmoney" style={{ height: '14px', width: 'auto' }} className="object-contain" />
                     </div>
                   </div>
 
@@ -1284,9 +1299,9 @@ export default function CrmHomepage() {
                 </div>
                 <div className="flex items-center gap-3 bg-white border border-slate-200 px-4 py-2 rounded-xl shadow-xs">
                   <span className="text-[10px] text-slate-500 font-black uppercase tracking-wider">Official Partners:</span>
-                  <img src="/assets/payu_logo.svg" alt="PayU Affordability Partner" className="h-5 w-auto object-contain" />
+                  <img src="/assets/payu_logo.svg" alt="PayU Affordability Partner" style={{ height: '15px', width: 'auto' }} className="object-contain shrink-0" />
                   <span className="text-slate-300">|</span>
-                  <img src="/assets/flexmoney_logo.png" alt="Flexmoney InstaCred Partner" className="h-4.5 w-auto object-contain" />
+                  <img src="/assets/flexmoney_logo.png" alt="Flexmoney InstaCred Partner" style={{ height: '21px', width: 'auto' }} className="object-contain shrink-0" />
                 </div>
               </div>
 
@@ -1809,9 +1824,9 @@ export default function CrmHomepage() {
                       <span className="text-[10px] font-black text-[#0f7a75] uppercase tracking-widest block">PATIENT FINANCING CHECK</span>
                       <div className="flex items-center gap-1.5 bg-slate-100 border border-slate-200/80 px-2 py-0.5 rounded-md">
                         <span className="text-[8px] uppercase tracking-wider text-slate-500 font-bold">Powered by</span>
-                        <img src="/assets/payu_logo.svg" alt="PayU" className="h-3 w-auto" />
+                        <img src="/assets/payu_logo.svg" alt="PayU" style={{ height: '11px', width: 'auto' }} className="object-contain" />
                         <span className="text-[8px] text-slate-400">&amp;</span>
-                        <img src="/assets/flexmoney_logo.png" alt="Flexmoney" className="h-2.5 w-auto" />
+                        <img src="/assets/flexmoney_logo.png" alt="Flexmoney" style={{ height: '14px', width: 'auto' }} className="object-contain" />
                       </div>
                     </div>
                     <h3 className="text-xl font-black text-[#0B2450]">
@@ -2225,9 +2240,9 @@ export default function CrmHomepage() {
                   Official Affordability Partners
                 </span>
                 <div className="flex items-center gap-2.5 bg-slate-50 border border-slate-200/80 px-3 py-1.5 rounded-xl w-fit">
-                  <img src="/assets/payu_logo.svg" alt="PayU" className="h-4 w-auto object-contain" />
+                  <img src="/assets/payu_logo.svg" alt="PayU" style={{ height: '14px', width: 'auto' }} className="object-contain shrink-0" />
                   <span className="text-slate-300">|</span>
-                  <img src="/assets/flexmoney_logo.png" alt="Flexmoney" className="h-3.5 w-auto object-contain" />
+                  <img src="/assets/flexmoney_logo.png" alt="Flexmoney" style={{ height: '18px', width: 'auto' }} className="object-contain shrink-0" />
                 </div>
               </div>
             </div>

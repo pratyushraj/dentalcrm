@@ -284,15 +284,17 @@ export default function PartnerClinicOnboardingPage() {
               : "Please confirm your facility's high-ticket procedure volume to activate pre-approved patient financing lines with our accredited RBI-regulated lending network."}
           </p>
 
-          {/* PayU & Flexmoney Credibility Trust Badge */}
+          {/* PayU & Flexmoney Credibility Trust Banner */}
           <div className="pt-2 flex items-center justify-center">
-            <div className="inline-flex items-center gap-2 bg-slate-100/90 border border-slate-200 px-3 py-1.5 rounded-xl text-[11px] text-slate-700 font-medium">
-              <span className="font-bold text-[#0B2450]">Powered in partnership with</span>
-              <img src="/assets/payu_logo.svg" alt="PayU" className="h-3.5 w-auto" />
-              <span className="text-slate-400">&amp;</span>
-              <img src="/assets/flexmoney_logo.png" alt="Flexmoney" className="h-3 w-auto" />
+            <div className="inline-flex flex-wrap items-center justify-center gap-3 bg-white border border-slate-200/90 px-4 py-2 rounded-2xl shadow-xs text-xs text-slate-700">
+              <span className="font-extrabold text-[#0B2450] text-[11px] uppercase tracking-wider">Official Partners:</span>
+              <img src="/assets/payu_logo.svg" alt="PayU Affordability Partner" className="h-5 w-auto object-contain" />
+              <span className="text-slate-300">|</span>
+              <img src="/assets/flexmoney_logo.png" alt="Flexmoney InstaCred Partner" className="h-4.5 w-auto object-contain" />
               <span className="text-slate-300 hidden sm:inline">&bull;</span>
-              <span className="text-emerald-700 font-bold hidden sm:inline">35+ EMI Modes</span>
+              <span className="text-emerald-700 font-bold text-[11px] bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-full">
+                ✓ 35+ EMI Modes &bull; Instant Point-of-Care Sanction
+              </span>
             </div>
           </div>
         </div>

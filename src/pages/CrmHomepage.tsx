@@ -443,13 +443,23 @@ export default function CrmHomepage() {
       {/* ── Header ── */}
       <header className="border-b border-slate-100 backdrop-blur-xl sticky top-0 z-50 bg-white/95 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex justify-between items-center gap-2">
-          <Link to="/" className="flex items-center gap-3 group shrink-0">
-            <img src="/assets/clinaza-logo.jpg" alt="CLINAZA" className="h-10 w-auto rounded-xl border border-slate-200 shadow-sm group-hover:scale-105 transition-transform" />
-            <div className="hidden sm:block">
-              <span className="text-xs font-black tracking-widest text-[#0B2450] block">CLINAZA</span>
-              <span className="text-[9px] font-bold tracking-wider text-[#0f7a75] block uppercase">EMI FOR BETTER HEALTH</span>
+          <div className="flex items-center gap-3">
+            <Link to="/" className="flex items-center gap-3 group shrink-0">
+              <img src="/assets/clinaza-logo.jpg" alt="CLINAZA" className="h-10 w-auto rounded-xl border border-slate-200 shadow-sm group-hover:scale-105 transition-transform" />
+              <div className="hidden sm:block">
+                <span className="text-xs font-black tracking-widest text-[#0B2450] block">CLINAZA</span>
+                <span className="text-[9px] font-bold tracking-wider text-[#0f7a75] block uppercase">EMI FOR BETTER HEALTH</span>
+              </div>
+            </Link>
+
+            {/* Header Co-brand Trust Pill */}
+            <div className="hidden xl:flex items-center gap-2.5 px-3 py-1.5 bg-slate-50/90 border border-slate-200/90 rounded-xl shadow-2xs">
+              <span className="text-[10px] font-black uppercase text-slate-500 tracking-wider">Affordability Partners:</span>
+              <img src="/assets/payu_logo.svg" alt="PayU" className="h-4 w-auto object-contain" />
+              <span className="text-slate-300">|</span>
+              <img src="/assets/flexmoney_logo.png" alt="Flexmoney" className="h-3.5 w-auto object-contain" />
             </div>
-          </Link>
+          </div>
           <div className="flex items-center gap-1.5 sm:gap-2.5">
             <Link
               to="/tools"
@@ -505,9 +515,14 @@ export default function CrmHomepage() {
 
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center text-left">
             <div className="md:col-span-7 space-y-4 sm:space-y-5">
-              <div className="inline-flex items-center gap-2 px-3 py-1 bg-slate-100 border border-slate-200 rounded-full text-xs font-semibold text-slate-700">
-                <Building2 className="h-3.5 w-3.5 text-[#0867E8]" />
-                <span>Point-of-care treatment financing for clinics &amp; specialized centres</span>
+              <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 bg-gradient-to-r from-blue-50/90 to-slate-100 border border-blue-200/80 rounded-full text-xs font-semibold text-slate-800 shadow-2xs flex-wrap">
+                <span className="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+                <span className="text-[10px] font-black text-slate-600 uppercase tracking-widest">Official Partnership:</span>
+                <img src="/assets/payu_logo.svg" alt="PayU" className="h-4 w-auto object-contain" />
+                <span className="text-slate-400 font-normal">&amp;</span>
+                <img src="/assets/flexmoney_logo.png" alt="Flexmoney InstaCred" className="h-3.5 w-auto object-contain" />
+                <span className="text-slate-300 hidden sm:inline">&bull;</span>
+                <span className="text-[10px] font-bold text-slate-600 hidden sm:inline">35+ EMI Modes</span>
               </div>
 
               <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-[-0.025em] leading-[1.18] text-[#0B2450]">
@@ -539,14 +554,36 @@ export default function CrmHomepage() {
                 </Link>
               </div>
 
-              <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-slate-600 font-medium pt-1">
-                <span className="flex items-center gap-1.5 text-emerald-700 font-bold">
-                  <CheckCircle2 size={13} className="text-emerald-600" /> Cardless, Credit &amp; Debit Card EMI
-                </span>
-                <span>&bull;</span>
-                <span className="font-semibold text-slate-700">Powered by PayU &amp; Flexmoney</span>
-                <span>&bull;</span>
-                <span>35+ Payment Modes</span>
+              {/* ── Official PayU & Flexmoney Partnership Institutional Card ── */}
+              <div className="p-4 rounded-2xl bg-gradient-to-br from-white via-slate-50 to-blue-50/50 border border-blue-200/90 shadow-sm space-y-2.5">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200/80 pb-2">
+                  <div className="flex items-center gap-2">
+                    <span className="text-[10px] font-black uppercase tracking-wider bg-emerald-50 text-emerald-800 border border-emerald-300/80 px-2.5 py-0.5 rounded-full flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                      Verified Lending Partnership
+                    </span>
+                    <span className="text-[10px] font-bold text-slate-500 hidden sm:inline">&bull; RBI-Regulated Rails</span>
+                  </div>
+                  <span className="text-[10px] font-extrabold text-[#0867E8] bg-blue-50 border border-blue-200 px-2 py-0.5 rounded-md self-start sm:self-auto">
+                    35+ EMI Modes Live
+                  </span>
+                </div>
+
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3.5">
+                  <div className="space-y-1">
+                    <p className="text-xs sm:text-sm font-black text-[#0B2450] tracking-tight">
+                      Healthcare Affordability In Partnership with PayU &amp; Flexmoney
+                    </p>
+                    <p className="text-[11px] text-slate-600 leading-relaxed">
+                      Clinaza has partnered with <strong>PayU</strong> and <strong>Flexmoney (InstaCred)</strong> to provide point-of-care patient financing directly at dental and outpatient clinic counters. Patients get paperless Cardless EMIs, pre-approved Debit Card EMIs, and 21+ major banks' Credit Card EMIs in 2 minutes.
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-3 bg-white px-4 py-2.5 rounded-xl border border-slate-200 shadow-2xs shrink-0 self-center sm:self-auto">
+                    <img src="/assets/payu_logo.svg" alt="PayU Official Affordability Partner" className="h-6 sm:h-7 w-auto object-contain" />
+                    <span className="h-6 w-px bg-slate-200" />
+                    <img src="/assets/flexmoney_logo.png" alt="Flexmoney Official InstaCred Partner" className="h-5 sm:h-6 w-auto object-contain" />
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -577,17 +614,17 @@ export default function CrmHomepage() {
           {/* ── 1. POPULAR BANKS & NBFC LENDING ECOSYSTEM SLIDESHOW ── */}
           <div className="pt-6 border-t border-slate-200/60 max-w-5xl mx-auto space-y-4">
             <div className="flex flex-col sm:flex-row items-center justify-between gap-3 px-1 text-center sm:text-left">
-              <div className="flex items-center gap-2 flex-wrap justify-center sm:justify-start">
+              <div className="flex items-center gap-2.5 flex-wrap justify-center sm:justify-start">
                 <span className="text-[10px] font-black tracking-widest text-slate-500 uppercase flex items-center gap-1.5">
                   <Landmark size={14} className="text-[#0867E8]" /> AFFORDABILITY &amp; LENDING PARTNERS
                 </span>
                 <span className="text-slate-300 hidden sm:inline">&bull;</span>
-                <span className="text-[10px] font-bold text-slate-700 bg-slate-100/90 border border-slate-200 px-2.5 py-1 rounded-lg flex items-center gap-2">
-                  <span>Cardless EMI powered by</span>
-                  <img src="/assets/payu_logo.svg" alt="PayU" className="h-3.5 w-auto" />
-                  <span className="text-slate-400 font-normal">&amp;</span>
-                  <img src="/assets/flexmoney_logo.png" alt="Flexmoney" className="h-3 w-auto" />
-                </span>
+                <div className="flex items-center gap-2.5 bg-white px-3 py-1.5 rounded-xl border border-slate-200 shadow-2xs">
+                  <span className="text-[10px] font-black text-slate-700 uppercase tracking-wider">Powered by</span>
+                  <img src="/assets/payu_logo.svg" alt="PayU" className="h-4.5 w-auto object-contain" />
+                  <span className="text-slate-300">|</span>
+                  <img src="/assets/flexmoney_logo.png" alt="Flexmoney" className="h-4 w-auto object-contain" />
+                </div>
               </div>
               <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200/70 px-2.5 py-0.5 rounded-full shrink-0">
                 ✓ 35+ EMI Options &bull; Credit, Debit &amp; Cardless
@@ -1245,11 +1282,11 @@ export default function CrmHomepage() {
                     Integrated directly at the clinic counter in partnership with PayU &amp; Flexmoney.
                   </p>
                 </div>
-                <div className="flex items-center gap-2 bg-white border border-slate-200 px-3 py-1.5 rounded-xl shadow-2xs">
-                  <span className="text-[10px] text-slate-500 font-bold uppercase">Affordability Partners:</span>
-                  <img src="/assets/payu_logo.svg" alt="PayU" className="h-3.5 w-auto" />
+                <div className="flex items-center gap-3 bg-white border border-slate-200 px-4 py-2 rounded-xl shadow-xs">
+                  <span className="text-[10px] text-slate-500 font-black uppercase tracking-wider">Official Partners:</span>
+                  <img src="/assets/payu_logo.svg" alt="PayU Affordability Partner" className="h-5 w-auto object-contain" />
                   <span className="text-slate-300">|</span>
-                  <img src="/assets/flexmoney_logo.png" alt="Flexmoney" className="h-3 w-auto" />
+                  <img src="/assets/flexmoney_logo.png" alt="Flexmoney InstaCred Partner" className="h-4.5 w-auto object-contain" />
                 </div>
               </div>
 
@@ -2180,6 +2217,18 @@ export default function CrmHomepage() {
                 <a href="mailto:contact@clinaza.in" className="hover:text-[#0867E8] transition-colors block">
                   ✉️ contact@clinaza.in
                 </a>
+              </div>
+
+              {/* Footer Partnership Trust Badge */}
+              <div className="pt-2 border-t border-slate-100 space-y-1.5">
+                <span className="text-[10px] font-black uppercase tracking-wider text-slate-400 block">
+                  Official Affordability Partners
+                </span>
+                <div className="flex items-center gap-2.5 bg-slate-50 border border-slate-200/80 px-3 py-1.5 rounded-xl w-fit">
+                  <img src="/assets/payu_logo.svg" alt="PayU" className="h-4 w-auto object-contain" />
+                  <span className="text-slate-300">|</span>
+                  <img src="/assets/flexmoney_logo.png" alt="Flexmoney" className="h-3.5 w-auto object-contain" />
+                </div>
               </div>
             </div>
 

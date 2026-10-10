@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useInView, useCountUp } from '../hooks/useScrollAnimation';
 import { Link, useLocation } from 'react-router-dom';
-import { RemotionVideoModal } from '@/components/remotion/RemotionVideoModal';
 import { 
   ShieldCheck, 
   ArrowRight, 
@@ -13,20 +12,15 @@ import {
   Send,
   HelpCircle,
   ChevronDown,
-  UserCheck,
   Landmark,
   Lock,
-  Package,
-  Truck,
-  Award,
   MapPin,
-  Sparkles,
-  Share2,
-  ChevronLeft,
   ChevronRight,
-  Video,
   Loader2,
-  Copy
+  Copy,
+  QrCode,
+  Zap,
+  Clock
 } from 'lucide-react';
 import { emailNotificationService } from '../services/emailNotificationService';
 import { easycredService } from '../services/easycredService';
@@ -52,10 +46,10 @@ const StatsBar: React.FC = () => {
   const { ref, visible } = useInView(0.2);
 
   const stats = [
-    { value: 13, suffix: '+', label: 'Lending Partners', prefix: '' },
-    { value: 5, suffix: 'L', label: 'Max Loan Amount', prefix: '₹' },
-    { value: 2, suffix: ' min', label: 'Digital KYC', prefix: '' },
-    { value: 0, suffix: '%', label: 'CIBIL Impact', prefix: '' },
+    { value: 35, suffix: '+', label: 'Payment & EMI Modes', prefix: '' },
+    { value: 21, suffix: '+', label: 'Credit Card Banks', prefix: '' },
+    { value: 2, suffix: ' min', label: 'Cardless Digital eKYC', prefix: '' },
+    { value: 0, suffix: '%', label: 'Clinic Collection Risk', prefix: '' },
   ];
 
   return (
@@ -102,73 +96,17 @@ export default function CrmHomepage() {
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
   const [formType, setFormType] = useState<'clinic' | 'lender'>('clinic');
   const [showEligibilityModal, setShowEligibilityModal] = useState(false);
-  const [showEmiReelModal, setShowEmiReelModal] = useState(false);
-  const [eligibilityStep, setEligibilityStep] = useState<1 | 2>(1);
-  const [showLenderResults, setShowLenderResults] = useState(false);
   const [isFinancingSuccess, setIsFinancingSuccess] = useState(false);
   const [customerLink, setCustomerLink] = useState('');
   const [maskedMobile, setMaskedMobile] = useState('');
-  const [passCountdown, setPassCountdown] = useState(5);
-  const [isPassPaused, setIsPassPaused] = useState(false);
   const [passCopied, setPassCopied] = useState(false);
-
-  // Auto-redirect timer for Care-Pass overlay
-  useEffect(() => {
-    if (isFinancingSuccess && customerLink && !isPassPaused) {
-      if (passCountdown > 0) {
-        const timer = setTimeout(() => setPassCountdown(passCountdown - 1), 1000);
-        return () => clearTimeout(timer);
-      } else {
-        window.location.href = customerLink;
-      }
-    }
-  }, [isFinancingSuccess, customerLink, passCountdown, isPassPaused]);
 
   // Auto-open eligibility modal if navigating with #check-eligibility or ?action=check-eligibility
   useEffect(() => {
     if (location.hash === '#check-eligibility' || location.search.includes('action=check-eligibility')) {
       setShowEligibilityModal(true);
-      setEligibilityStep(1);
     }
   }, [location]);
-
-  // Continuous / Interval Auto-Slideshow for Clinic Network
-  useEffect(() => {
-    const track = document.getElementById('clinic-slideshow-track');
-    if (!track) return;
-
-    let isPaused = false;
-    const onMouseEnter = () => { isPaused = true; };
-    const onMouseLeave = () => { isPaused = false; };
-    const onTouchStart = () => { isPaused = true; };
-    const onTouchEnd = () => { 
-      setTimeout(() => { isPaused = false; }, 3000); 
-    };
-
-    track.addEventListener('mouseenter', onMouseEnter);
-    track.addEventListener('mouseleave', onMouseLeave);
-    track.addEventListener('touchstart', onTouchStart, { passive: true });
-    track.addEventListener('touchend', onTouchEnd, { passive: true });
-
-    const interval = setInterval(() => {
-      if (!isPaused && track) {
-        const maxScroll = track.scrollWidth - track.clientWidth;
-        if (track.scrollLeft >= maxScroll - 10) {
-          track.scrollTo({ left: 0, behavior: 'smooth' });
-        } else {
-          track.scrollBy({ left: 340, behavior: 'smooth' });
-        }
-      }
-    }, 3500);
-
-    return () => {
-      clearInterval(interval);
-      track.removeEventListener('mouseenter', onMouseEnter);
-      track.removeEventListener('mouseleave', onMouseLeave);
-      track.removeEventListener('touchstart', onTouchStart);
-      track.removeEventListener('touchend', onTouchEnd);
-    };
-  }, []);
 
   // Show mobile sticky bar only after scrolling past hero
   const [showMobileFloating, setShowMobileFloating] = useState(false);
@@ -183,34 +121,9 @@ export default function CrmHomepage() {
   const [patientData, setPatientData] = useState({
     name: '',
     mobile: '',
-    city: '',
-    treatment: 'Dental Implants',
-    amount: '',
-    treatmentAmount: 0,
-    preferredClinic: '',
-    cibilScore: '',
-    employmentType: '',
-    incomeProof: ''
+    treatment: 'Dental Implants & Aligners',
+    amount: '₹60,000 – ₹1,20,000',
   });
-  const [patientSubmitted, setPatientSubmitted] = useState(false);
-
-  // Primary partner lending network: Easycred
-  const ALL_LENDERS = [
-    { 
-      id: 'easycred', 
-      name: 'Easycred NBFC Network', 
-      rate: 'From 11.5% p.a.', 
-      minCibil: 0, 
-      salaryOnly: false, 
-      minIncome: 0, 
-      url: 'https://easycred.co.in/loan/apply?product=PERSONAL_LOAN', 
-      badge: 'Official Multi-NBFC Partner', 
-      color: 'bg-blue-50 border-blue-200 text-[#0867E8]' 
-    }
-  ];
-
-  const getMatchedLenders = () => ALL_LENDERS;
-
   // EMI Calculator state
   const [emiAmount, setEmiAmount] = useState(100000);
   const [emiTenure, setEmiTenure] = useState(12);
@@ -245,8 +158,6 @@ export default function CrmHomepage() {
     }
 
     trackEvent('eligibility_completed', {
-      cibil: patientData.cibilScore,
-      employment: patientData.employmentType,
       treatment: patientData.treatment,
     });
 
@@ -254,10 +165,7 @@ export default function CrmHomepage() {
     emailNotificationService.sendNotification('New Patient Eligibility Form Checked', {
       patientName: patientData.name,
       mobile: cleanMobile,
-      cibilScoreRange: patientData.cibilScore,
-      employmentType: patientData.employmentType,
       treatmentNeeded: patientData.treatment,
-      monthlyIncome: patientData.incomeProof,
       loanAmountRange: patientData.amount,
     });
 
@@ -272,7 +180,7 @@ export default function CrmHomepage() {
 
       const redirectUrl = (result.success && result.data?.customerLink)
         ? result.data.customerLink
-        : (result.fallbackLink || `https://easycred.co.in/loan/apply?product=PERSONAL_LOAN&mobile=${cleanMobile}&name=${encodeURIComponent(patientData.name)}`);
+        : (result.fallbackLink || `https://clinaza.in/partner?ref=cardless_emi&mobile=${cleanMobile}&name=${encodeURIComponent(patientData.name)}`);
 
       const masked = (result.success && result.data?.maskedMobile)
         ? result.data.maskedMobile
@@ -281,14 +189,12 @@ export default function CrmHomepage() {
       setCustomerLink(redirectUrl);
       setMaskedMobile(masked);
       setIsFinancingSuccess(true);
-      setPassCountdown(5);
     } catch (err) {
       console.error('Error initiating financing:', err);
-      const fallbackUrl = `https://easycred.co.in/loan/apply?product=PERSONAL_LOAN&mobile=${cleanMobile}&name=${encodeURIComponent(patientData.name)}`;
+      const fallbackUrl = `https://clinaza.in/partner?ref=cardless_emi&mobile=${cleanMobile}&name=${encodeURIComponent(patientData.name)}`;
       setCustomerLink(fallbackUrl);
       setMaskedMobile(`••••••${cleanMobile.slice(-4)}`);
       setIsFinancingSuccess(true);
-      setPassCountdown(5);
     }
   };
 
@@ -302,11 +208,9 @@ export default function CrmHomepage() {
 
   const handleCloseEligibilityModal = () => {
     setShowEligibilityModal(false);
-    setShowLenderResults(false);
     setIsFinancingSuccess(false);
     setCustomerLink('');
     setMaskedMobile('');
-    setIsPassPaused(false);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -323,14 +227,17 @@ export default function CrmHomepage() {
     });
 
     // Send email notification to funnyraj10@gmail.com
-    emailNotificationService.sendNotification('New Clinic Onboarding Partner Request', {
-      formType,
-      doctorName: formData.doctorName,
-      clinicName: formData.clinicName,
-      phone: formData.phone,
-      city: formData.city,
-      selectedSpecialty: formData.category || 'N/A'
-    });
+    emailNotificationService.sendNotification(
+      formType === 'clinic' ? 'New Clinic Partner Request' : 'New Lender Partnership Inquiry',
+      {
+        formType,
+        doctorName: formData.doctorName,
+        clinicName: formData.clinicName,
+        phone: formData.phone,
+        city: formData.city,
+        selectedSpecialty: formData.category || 'N/A'
+      }
+    );
 
     setTimeout(() => {
       setIsSubmitting(false);
@@ -343,74 +250,42 @@ export default function CrmHomepage() {
     }, 1000);
   };
 
-  const steps = [
-    { num: '01', title: 'Patient Chooses Treatment', desc: 'Implants, braces, aligners, crowns, surgeries, and elective healthcare procedures.' },
-    { num: '02', title: 'Patient Applies for Financing', desc: 'Clinaza connects the patient with appropriate lending partners directly at checkout.' },
-    { num: '03', title: 'Lender Evaluates', desc: 'Independent Bank/NBFC handles eligibility, approval, and loan terms.' },
-    { num: '04', title: 'Treatment Proceeds', desc: 'Patient receives treatment while repaying the lender through monthly EMIs.' }
-  ];
-
-  const clinicBenefits = [
-    'Give patients a way to manage large treatment costs',
-    'Reduce treatment postponement & patient drop-off',
-    'No need for the clinic to collect monthly EMIs',
-    'Financing handled entirely by lending partners',
-    '100% digital, paperless application process',
-    'Dedicated support from the Clinaza team'
-  ];
-
-  const categories = [
-    { emoji: '🦷', name: 'Dental Implants', tag: 'Restorative & Full Mouth' },
-    { emoji: '😁', name: 'Aligners & Braces', tag: 'Orthodontics' },
-    { emoji: '👑', name: 'Crowns & Makeovers', tag: 'Cosmetic Dentistry' },
-    { emoji: '🦴', name: 'Orthopaedics', tag: 'Joints & Surgeries' },
-    { emoji: '👶', name: 'IVF & Fertility', tag: 'Reproductive Care' },
-    { emoji: '👁️', name: 'Ophthalmology', tag: 'LASIK & Cataract' },
-    { emoji: '🏥', name: 'Elective Surgeries', tag: 'Specialty Procedures' }
-  ];
-
-  const whatClinicDoesntDo = [
-    'No monthly EMI collection from patients',
-    'No chasing patients for missed repayments',
-    'No loan servicing or credit risk taken by clinic',
-    'No complicated paper financing documentation'
-  ];
-
-  const patientSteps = [
-    { num: '1', emoji: '🦷', title: 'Choose your treatment', desc: 'Discuss your treatment plan and total cost with your clinic.' },
-    { num: '2', emoji: '📋', title: 'Apply for financing', desc: 'Complete the simple digital application with required KYC documents.' },
-    { num: '3', emoji: '✅', title: 'Get an eligibility decision', desc: 'The lending partner reviews your application instantly.' },
-    { num: '4', emoji: '💳', title: 'Pay through EMIs', desc: 'If approved, repay the lender according to the agreed repayment schedule.' }
-  ];
-
   const comprehensiveFaqs = [
     {
       q: 'What is Clinaza?',
       a: 'Clinaza is an embedded healthcare patient financing platform that connects clinics with RBI-regulated Banks and NBFCs, allowing patients to pay for high-ticket treatments in flexible monthly EMIs.'
     },
     {
+      q: 'How does Clinaza patient financing work?',
+      a: 'Clinaza connects clinic patients directly with regulated lending partners to offer flexible monthly EMI options for treatments ranging from ₹30,000 to ₹5,00,000 with 2-minute paperless digital KYC.'
+    },
+    {
       q: 'Which treatments are eligible for EMI?',
-      a: 'High-value planned procedures ranging from ₹30,000 to ₹3,00,000 including Dental Implants, Clear Aligners, Braces, Crowns, Orthopaedic surgeries, IVF/Fertility, and LASIK/Ophthalmology.'
+      a: 'High-value planned procedures ranging from ₹30,000 to ₹5,00,000 including Dental Implants, Clear Aligners, Braces, Crowns, Orthopaedic surgeries, IVF/Fertility, and LASIK/Ophthalmology.'
     },
     {
-      q: 'What is the financing amount limit?',
-      a: 'Financing options typically range from ₹30,000 up to ₹3,00,000, tailored to patient eligibility and treatment estimate.'
+      q: 'Can patients get treatment on EMI without a credit card (Cardless EMI)?',
+      a: 'Yes. Clinaza powers Cardless EMIs exclusively in partnership with PayU and Flexmoney (InstaCred) cardless lenders (including Fibe, Axio, LazyPay, CASHe, KreditBee, TVS Credit, and Home Credit). Patients without a credit card only need a valid PAN and Aadhaar OTP to split treatments into monthly EMIs. Additionally, Credit Card EMI across 21+ banks, Debit Card EMI, and Down Payment + EMI options are fully supported.'
     },
     {
-      q: 'What documents does the patient need?',
-      a: 'Basic digital KYC: PAN card, Aadhaar card (eKYC), proof of income (salary slip, bank statement, or ITR), and bank account details for e-NACH auto-debit setup.'
+      q: 'Are IVF and fertility treatments eligible for monthly EMI financing?',
+      a: 'Yes. Clinaza covers high-ticket IVF cycles, ICSI, IUI, and reproductive healthcare packages from ₹50,000 to ₹5,00,000 with upfront clinic disbursement and flexible 3 to 24 month repayment tenures.'
+    },
+    {
+      q: 'Does the clinic bear any credit risk?',
+      a: 'Zero credit risk on the clinic. The loan is funded, serviced, and collected directly by PayU & Flexmoney regulated lending partners via automated monthly e-NACH auto-debit.'
     },
     {
       q: 'Does the clinic pay any upfront fee?',
       a: 'No upfront fees for clinics. Partner clinics receive physical branding kits, QR standees, and onboarding support free of charge.'
     },
     {
-      q: 'Who manages the loan and repayments?',
-      a: 'Zero clinic involvement. The loan is funded, serviced, and collected directly by the RBI-regulated lending partner via automated monthly e-NACH auto-debit.'
+      q: 'What documents does the patient need?',
+      a: 'Basic digital KYC: PAN card, Aadhaar card (eKYC), proof of income (salary slip, bank statement, or ITR), and bank account details for e-NACH auto-debit setup.'
     },
     {
       q: 'What determines the interest rate & terms?',
-      a: 'Interest rates (typically ~15% p.a. standard or subvention options) and tenures (3–24 months) are set directly by the lending partner based on credit assessment.'
+      a: 'Interest rates (starting from ~11.5% to 15% p.a.) and tenures (3–24 months) are set directly by the lending partner based on credit assessment.'
     },
     {
       q: 'Is loan approval guaranteed?',
@@ -422,7 +297,7 @@ export default function CrmHomepage() {
     <div className="min-h-screen bg-white text-[#0B2450] font-sora antialiased overflow-x-hidden selection:bg-[#0867E8] selection:text-white">
       <SEOHead
         title="Clinaza — Healthcare EMIs & Free Dental CRM India"
-        description="Offer instant point-of-care patient EMI financing (₹30K–₹5L) & clinic equipment loans with 13+ RBI-regulated NBFCs. Plus, 100% Free Dental Clinic CRM software."
+        description="Offer instant point-of-care patient EMI financing (₹30K–₹5L) with PayU & Flexmoney cardless EMI lenders. Plus, 100% Free Dental Clinic CRM software."
         keywords={[
           'clinaza', 'clinaza patient financing', 'clinaza healthpay', 'clinaza healthcare emi',
           'medical equipment loan for dentist', 'loan for dental clinic', 'loan for dentist', 'dental equipment loan emi',
@@ -499,7 +374,7 @@ export default function CrmHomepage() {
                 "name": "Does the clinic bear any credit risk?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Zero credit risk on the clinic. The loan is funded, serviced, and collected directly by 13+ RBI-regulated lending partners via automated monthly e-NACH auto-debit."
+                  "text": "Zero credit risk on the clinic. The loan is funded, serviced, and collected directly by PayU & Flexmoney regulated lending partners via automated monthly e-NACH auto-debit."
                 }
               },
               {
@@ -516,6 +391,22 @@ export default function CrmHomepage() {
                 "acceptedAnswer": {
                   "@type": "Answer",
                   "text": "Basic digital KYC: PAN card, Aadhaar card (eKYC), proof of income (salary slip, bank statement, or ITR), and bank account details for e-NACH auto-debit setup."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can patients get treatment on EMI without a credit card (Cardless EMI)?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes. Clinaza powers Cardless EMIs exclusively in partnership with PayU and Flexmoney (InstaCred) cardless lenders (including Fibe, Axio, LazyPay, CASHe, KreditBee, TVS Credit, and Home Credit). Patients without a credit card only need a valid PAN and Aadhaar OTP to split treatments into monthly EMIs. Additionally, Credit Card EMI across 21+ banks, Debit Card EMI, and Down Payment + EMI options are fully supported."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Are IVF and fertility treatments eligible for monthly EMI financing?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes. Clinaza covers high-ticket IVF cycles, ICSI, IUI, and reproductive healthcare packages from ₹50,000 to ₹5,00,000 with upfront clinic disbursement and flexible 3 to 24 month repayment tenures."
                 }
               },
               {
@@ -576,7 +467,6 @@ export default function CrmHomepage() {
               type="button"
               onClick={() => {
                 setShowEligibilityModal(true);
-                setEligibilityStep(1);
               }}
               className="hidden md:flex items-center gap-1.5 px-3 py-2 bg-blue-50 hover:bg-blue-100 border border-blue-200 text-xs font-bold text-[#0867E8] rounded-xl transition-all whitespace-nowrap"
             >
@@ -617,16 +507,16 @@ export default function CrmHomepage() {
             <div className="md:col-span-7 space-y-4 sm:space-y-5">
               <div className="inline-flex items-center gap-2 px-3 py-1 bg-slate-100 border border-slate-200 rounded-full text-xs font-semibold text-slate-700">
                 <Building2 className="h-3.5 w-3.5 text-[#0867E8]" />
-                <span>Point-of-care treatment financing for clinics</span>
+                <span>Point-of-care treatment financing for clinics &amp; specialized centres</span>
               </div>
 
               <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-[-0.025em] leading-[1.18] text-[#0B2450]">
-                Dental Treatment on EMI.<br />
+                Healthcare Treatments on EMI.<br />
                 <span className="text-[#0867E8]">Stop patient drop-offs.</span>
               </h1>
 
               <p className="text-sm sm:text-base text-slate-600 font-medium leading-relaxed max-w-xl">
-                Offer instant point-of-care patient financing &amp; medical dental loans from <strong className="text-[#0B2450] font-bold">₹30,000 to ₹5,00,000</strong> for Dental Implants, Braces, Aligners, and Elective Surgeries.
+                Offer instant point-of-care patient financing &amp; medical loans from <strong className="text-[#0B2450] font-bold">₹30,000 to ₹5,00,000</strong> across Dental, IVF &amp; Fertility, Dermatology, Ophthalmology, and Outpatient Specialty Clinics.
               </p>
 
               <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 pt-1">
@@ -636,7 +526,6 @@ export default function CrmHomepage() {
                     trackEvent('click_hero_check_eligibility');
                     trackEvent('eligibility_started', { source: 'hero_cta' });
                     setShowEligibilityModal(true);
-                    setEligibilityStep(1);
                   }}
                   className="px-6 py-3.5 bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-black uppercase tracking-wider rounded-xl transition-all flex items-center justify-center gap-2 shadow-[0_8px_20px_rgba(8,103,232,0.25)] hover:shadow-[0_12px_28px_rgba(8,103,232,0.35)] transform active:scale-95"
                 >
@@ -650,9 +539,15 @@ export default function CrmHomepage() {
                 </Link>
               </div>
 
-              <p className="text-xs text-slate-600 font-medium pt-1">
-                Instant soft credit eligibility &middot; 13+ RBI-regulated lending partners
-              </p>
+              <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-slate-600 font-medium pt-1">
+                <span className="flex items-center gap-1.5 text-emerald-700 font-bold">
+                  <CheckCircle2 size={13} className="text-emerald-600" /> Cardless, Credit &amp; Debit Card EMI
+                </span>
+                <span>&bull;</span>
+                <span className="font-semibold text-slate-700">Powered by PayU &amp; Flexmoney</span>
+                <span>&bull;</span>
+                <span>35+ Payment Modes</span>
+              </div>
             </div>
 
             {/* Authentic Clinic Photo with subtle glass badge */}
@@ -681,12 +576,21 @@ export default function CrmHomepage() {
 
           {/* ── 1. POPULAR BANKS & NBFC LENDING ECOSYSTEM SLIDESHOW ── */}
           <div className="pt-6 border-t border-slate-200/60 max-w-5xl mx-auto space-y-4">
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-2 px-1 text-center sm:text-left">
-              <span className="text-[10px] font-black tracking-widest text-slate-500 uppercase flex items-center gap-1.5">
-                <Landmark size={14} className="text-[#0867E8]" /> FINANCING ECOSYSTEM &bull; BANKS &amp; REGULATED NBFCs
-              </span>
-              <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200/70 px-2.5 py-0.5 rounded-full">
-                ✓ 100% RBI Compliant Digital Lending
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-3 px-1 text-center sm:text-left">
+              <div className="flex items-center gap-2 flex-wrap justify-center sm:justify-start">
+                <span className="text-[10px] font-black tracking-widest text-slate-500 uppercase flex items-center gap-1.5">
+                  <Landmark size={14} className="text-[#0867E8]" /> AFFORDABILITY &amp; LENDING PARTNERS
+                </span>
+                <span className="text-slate-300 hidden sm:inline">&bull;</span>
+                <span className="text-[10px] font-bold text-slate-700 bg-slate-100/90 border border-slate-200 px-2.5 py-1 rounded-lg flex items-center gap-2">
+                  <span>Cardless EMI powered by</span>
+                  <img src="/assets/payu_logo.svg" alt="PayU" className="h-3.5 w-auto" />
+                  <span className="text-slate-400 font-normal">&amp;</span>
+                  <img src="/assets/flexmoney_logo.png" alt="Flexmoney" className="h-3 w-auto" />
+                </span>
+              </div>
+              <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200/70 px-2.5 py-0.5 rounded-full shrink-0">
+                ✓ 35+ EMI Options &bull; Credit, Debit &amp; Cardless
               </span>
             </div>
 
@@ -698,43 +602,45 @@ export default function CrmHomepage() {
 
               <div className="flex w-max gap-4 animate-marquee group-hover:[animation-play-state:paused]">
                 {[
-                  // 1st Set of Easycred 13 Live Lenders
-                  { id: 'bajaj', name: 'Bajaj Finserv', sub: 'EMI Network', badge: 'NBFC' },
-                  { id: 'tata', name: 'Tata Capital', sub: 'Healthcare Loan', badge: 'NBFC' },
-                  { id: 'poonawalla', name: 'Poonawalla Fincorp', sub: 'Consumer Finance', badge: 'NBFC' },
-                  { id: 'godrej', name: 'Godrej Capital', sub: 'Medical Credit', badge: 'NBFC' },
-                  { id: 'incred', name: 'InCred Finance', sub: 'Digital NBFC', badge: 'NBFC' },
-                  { id: 'chola', name: 'Cholamandalam', sub: 'Chola Finance', badge: 'NBFC' },
-                  { id: 'chinmay', name: 'Chinmay Finlease', sub: 'Pocket Loans', badge: 'NBFC' },
-                  { id: 'fibe', name: 'FIBE', sub: 'Instant Credit', badge: 'Fintech' },
-                  { id: 'faircent', name: 'Faircent', sub: 'P2P NBFC', badge: 'NBFC' },
-                  { id: 'zype', name: 'ZYPE', sub: 'Credit Line', badge: 'Digital' },
-                  { id: 'olyv', name: 'OLYV', sub: 'Smart Lending', badge: 'Digital' },
-                  { id: 'truefund', name: 'TrueFund', sub: 'Credit Partner', badge: 'Lender' },
-                  { id: 'mymudra', name: 'MyMudra', sub: 'Financial Partner', badge: 'Marketplace' },
-
-                  // 2nd Set for Seamless Infinite Loop
-                  { id: 'bajaj', name: 'Bajaj Finserv', sub: 'EMI Network', badge: 'NBFC' },
-                  { id: 'tata', name: 'Tata Capital', sub: 'Healthcare Loan', badge: 'NBFC' },
-                  { id: 'poonawalla', name: 'Poonawalla Fincorp', sub: 'Consumer Finance', badge: 'NBFC' },
-                  { id: 'godrej', name: 'Godrej Capital', sub: 'Medical Credit', badge: 'NBFC' },
-                  { id: 'incred', name: 'InCred Finance', sub: 'Digital NBFC', badge: 'NBFC' },
-                  { id: 'chola', name: 'Cholamandalam', sub: 'Chola Finance', badge: 'NBFC' },
-                  { id: 'chinmay', name: 'Chinmay Finlease', sub: 'Pocket Loans', badge: 'NBFC' },
-                  { id: 'fibe', name: 'FIBE', sub: 'Instant Credit', badge: 'Fintech' },
-                  { id: 'faircent', name: 'Faircent', sub: 'P2P NBFC', badge: 'NBFC' },
-                  { id: 'zype', name: 'ZYPE', sub: 'Credit Line', badge: 'Digital' },
-                  { id: 'olyv', name: 'OLYV', sub: 'Smart Lending', badge: 'Digital' },
-                  { id: 'truefund', name: 'TrueFund', sub: 'Credit Partner', badge: 'Lender' },
-                  { id: 'mymudra', name: 'MyMudra', sub: 'Financial Partner', badge: 'Marketplace' }
-                ].map((item, idx) => (
+                  { id: 'payu', name: 'PayU', sub: 'Affordability Gateway', badge: 'Gateway' },
+                  { id: 'flexmoney', name: 'Flexmoney', sub: 'InstaCred Network', badge: 'Cardless' },
+                  { id: 'fibe', name: 'FIBE', sub: 'Instant Cardless Credit', badge: 'Cardless' },
+                  { id: 'axio', name: 'Axio', sub: 'Zest Digital Credit', badge: 'Cardless' },
+                  { id: 'lazypay', name: 'LazyPay', sub: 'PayU 1-Click Credit', badge: 'Cardless' },
+                  { id: 'cashe', name: 'CASHe', sub: 'Cardless Healthcare Credit', badge: 'Cardless' },
+                  { id: 'kreditbee', name: 'KreditBee', sub: 'Cardless Checkout EMI', badge: 'Cardless' },
+                  { id: 'tvs', name: 'TVS Credit', sub: 'Point-of-Sale Finance', badge: 'Cardless' },
+                  { id: 'homecredit', name: 'Home Credit', sub: 'Instant Retail EMI', badge: 'Cardless' },
+                  { id: 'idfc', name: 'IDFC FIRST Bank', sub: 'Cardless Digital EMI', badge: 'Bank' },
+                  { id: 'icici', name: 'ICICI Bank', sub: 'Cardless & Debit EMI', badge: 'Bank' },
+                  { id: 'hdfc', name: 'HDFC Bank', sub: 'Credit & Debit Card EMI', badge: 'Bank' },
+                  { id: 'kotak', name: 'Kotak Bank', sub: 'Smart EMI & Debit Card', badge: 'Bank' },
+                  { id: 'axis', name: 'Axis Bank', sub: 'Credit & Debit Card EMI', badge: 'Bank' },
+                  { id: 'federal', name: 'Federal Bank', sub: 'Pre-Approved Debit EMI', badge: 'Bank' }
+                ].concat([
+                  { id: 'payu', name: 'PayU', sub: 'Affordability Gateway', badge: 'Gateway' },
+                  { id: 'flexmoney', name: 'Flexmoney', sub: 'InstaCred Network', badge: 'Cardless' },
+                  { id: 'fibe', name: 'FIBE', sub: 'Instant Cardless Credit', badge: 'Cardless' },
+                  { id: 'axio', name: 'Axio', sub: 'Zest Digital Credit', badge: 'Cardless' },
+                  { id: 'lazypay', name: 'LazyPay', sub: 'PayU 1-Click Credit', badge: 'Cardless' },
+                  { id: 'cashe', name: 'CASHe', sub: 'Cardless Healthcare Credit', badge: 'Cardless' },
+                  { id: 'kreditbee', name: 'KreditBee', sub: 'Cardless Checkout EMI', badge: 'Cardless' },
+                  { id: 'tvs', name: 'TVS Credit', sub: 'Point-of-Sale Finance', badge: 'Cardless' },
+                  { id: 'homecredit', name: 'Home Credit', sub: 'Instant Retail EMI', badge: 'Cardless' },
+                  { id: 'idfc', name: 'IDFC FIRST Bank', sub: 'Cardless Digital EMI', badge: 'Bank' },
+                  { id: 'icici', name: 'ICICI Bank', sub: 'Cardless & Debit EMI', badge: 'Bank' },
+                  { id: 'hdfc', name: 'HDFC Bank', sub: 'Credit & Debit Card EMI', badge: 'Bank' },
+                  { id: 'kotak', name: 'Kotak Bank', sub: 'Smart EMI & Debit Card', badge: 'Bank' },
+                  { id: 'axis', name: 'Axis Bank', sub: 'Credit & Debit Card EMI', badge: 'Bank' },
+                  { id: 'federal', name: 'Federal Bank', sub: 'Pre-Approved Debit EMI', badge: 'Bank' }
+                ]).map((item, idx) => (
                   <div
                     key={idx}
                     className="flex items-center gap-3 px-3.5 py-2 rounded-xl bg-slate-50/90 border border-slate-200/90 shrink-0 transition-all hover:bg-white hover:border-slate-300 hover:shadow-xs"
                   >
                     {/* Logo container */}
-                    <div className="w-8 h-8 rounded-lg overflow-hidden flex items-center justify-center shrink-0 shadow-2xs bg-white border border-slate-100">
-                      <BankSvgLogo id={item.id} size={32} />
+                    <div className="w-8 h-8 rounded-lg overflow-hidden flex items-center justify-center shrink-0 shadow-2xs bg-white border border-slate-100 p-0.5">
+                      <BankSvgLogo id={item.id} size={28} />
                     </div>
                     <div className="text-left">
                       <div className="flex items-center gap-1.5 mb-0.5">
@@ -742,8 +648,10 @@ export default function CrmHomepage() {
                         <span className={`text-[8px] font-bold px-1.5 py-0.5 rounded uppercase tracking-wide ${
                           item.badge === 'Bank'
                             ? 'bg-blue-50 text-blue-600'
-                            : item.badge === 'LSP'
-                            ? 'bg-emerald-50 text-emerald-600'
+                            : item.badge === 'Gateway'
+                            ? 'bg-purple-50 text-purple-700'
+                            : item.badge === 'Cardless'
+                            ? 'bg-emerald-50 text-emerald-700'
                             : 'bg-orange-50 text-orange-600'
                         }`}>
                           {item.badge}
@@ -914,12 +822,12 @@ export default function CrmHomepage() {
 
           <div className="max-w-5xl mx-auto space-y-10 relative z-10">
             <div className="text-center space-y-3">
-              <span className="text-xs font-medium text-slate-400">Free cloud-based dental CRM</span>
+              <span className="text-xs font-semibold text-sky-400 uppercase tracking-wider">Free Cloud-Based Clinic Management Software</span>
               <h2 className="text-2xl sm:text-4xl font-bold text-white leading-tight">
                 Your entire practice,<br />managed from your phone.
               </h2>
               <p className="text-sm text-slate-400 max-w-xl mx-auto leading-relaxed">
-                WhatsApp recall, FDI tooth charting, digital prescriptions, and revenue analytics — free forever, no per-patient fees.
+                Automated WhatsApp recall, specialty clinical EMR, digital prescriptions, and revenue analytics — 100% free forever for outpatient clinics.
               </p>
             </div>
 
@@ -930,17 +838,17 @@ export default function CrmHomepage() {
                   {
                     icon: '💬',
                     title: 'Automated WhatsApp Patient Recall',
-                    desc: 'Automatically re-engage dormant patients who haven’t visited in 6+ months with personalized WhatsApp recall messages.'
+                    desc: 'Automatically re-engage dormant patients who haven’t visited in 3–6 months with personalized WhatsApp recall messages.'
                   },
                   {
-                    icon: '🦷',
-                    title: 'Interactive FDI Tooth Charting & EMR',
-                    desc: 'Point-and-click tooth charting for RCT, crowns, implants, and extractions with immediate treatment cost estimation.'
+                    icon: '📋',
+                    title: 'Specialty EMR & Clinical Charting',
+                    desc: 'Tooth charting for dental, procedural logs for aesthetics, IVF, & daycare with immediate treatment cost estimation.'
                   },
                   {
                     icon: '📱',
                     title: 'Instant Digital Prescriptions (Rx)',
-                    desc: 'Generate branded, professional Rx with dental drug dosages and share directly to patient WhatsApp in 2 clicks.'
+                    desc: 'Generate branded, professional Rx with pre-filled drug dosages and share directly to patient WhatsApp in 2 clicks.'
                   },
                   {
                     icon: '⚡',
@@ -962,7 +870,7 @@ export default function CrmHomepage() {
                     Launch Free Doctor Portal →
                   </Link>
                   <a
-                    href="https://wa.me/917292984244?text=Hi%20Clinaza%2C%20I%20want%20a%20free%20demo%20of%20the%20dental%20CRM%20software"
+                    href="https://wa.me/917292984244?text=Hi%20Clinaza%2C%20I%20want%20a%20free%20demo%20of%20the%20clinic%20CRM%20software"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="px-5 py-3.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 text-xs font-bold rounded-xl transition-all text-center flex items-center justify-center gap-2"
@@ -986,11 +894,11 @@ export default function CrmHomepage() {
                     <div className="flex items-center justify-between pb-1 border-b border-white/5">
                       <div className="flex items-center gap-2">
                         <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-[#0867E8] to-[#00D4B8] flex items-center justify-center text-white font-extrabold text-[11px] shadow-sm">
-                          YD
+                          CC
                         </div>
                         <div>
-                          <h4 className="text-[11px] font-extrabold text-white leading-tight">YOUR DENTIST</h4>
-                          <p className="text-[8px] text-sky-400 font-semibold">Patliputra Colony, Patna</p>
+                          <h4 className="text-[11px] font-extrabold text-white leading-tight">CLINAZA EMR</h4>
+                          <p className="text-[8px] text-sky-400 font-semibold">Specialty &amp; Dental Practice</p>
                         </div>
                       </div>
                       <div className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-[7.5px] font-bold text-emerald-400">
@@ -1078,12 +986,12 @@ export default function CrmHomepage() {
                         <div className="flex justify-between items-center text-slate-300 border-t border-white/5 pt-1">
                           <span className="text-blue-400 font-bold">04:30 PM</span>
                           <span className="font-semibold text-white">Pooja Verma</span>
-                          <span className="text-[7px] px-1 bg-slate-800 rounded text-slate-300">Aligner Review</span>
+                          <span className="text-[7px] px-1 bg-slate-800 rounded text-slate-300">Aligner / Skin Review</span>
                         </div>
                         <div className="flex justify-between items-center text-slate-300 border-t border-white/5 pt-1">
                           <span className="text-blue-400 font-bold">05:15 PM</span>
                           <span className="font-semibold text-white">Amit Kumar</span>
-                          <span className="text-[7px] px-1 bg-slate-800 rounded text-slate-300">Crown Trial #16</span>
+                          <span className="text-[7px] px-1 bg-slate-800 rounded text-slate-300">Procedure Session #2</span>
                         </div>
                       </div>
                     </div>
@@ -1097,13 +1005,13 @@ export default function CrmHomepage() {
 
 
 
-        {/* ── 6. EMI CALCULATOR & INSTANT EMI VIDEO ── */}
+        {/* ── 6. EMI CALCULATOR & FRONT-DESK WORKFLOW ── */}
         <section aria-label="EMI Calculator" className="py-12 sm:py-16 px-4 sm:px-6 bg-[#F7FAFC] border-y border-slate-200/60">
           <div className="max-w-6xl mx-auto space-y-8">
             <div className="text-center space-y-2">
-              <span className="text-[10px] font-black text-[#0f7a75] uppercase tracking-widest">COST PLANNER &amp; CLINIC WALKTHROUGH</span>
-              <h2 className="text-2xl sm:text-4xl font-black text-[#0B2450]">Calculate EMI &amp; See How It Works</h2>
-              <p className="text-xs sm:text-sm text-slate-600">Indicative estimate only. Actual rate depends on lender assessment.</p>
+              <span className="text-[10px] font-black text-[#0f7a75] uppercase tracking-widest">AFFORDABILITY SUITE &amp; RECEPTION WORKFLOW</span>
+              <h2 className="text-2xl sm:text-4xl font-black text-[#0B2450]">Calculate Patient EMI &amp; Reception Workflow</h2>
+              <p className="text-xs sm:text-sm text-slate-600">35+ EMI payment modes powered in partnership with PayU &amp; Flexmoney.</p>
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
@@ -1117,10 +1025,37 @@ export default function CrmHomepage() {
                         <label className="text-xs font-black text-[#0B2450] uppercase tracking-wider">Treatment Amount</label>
                         <span className="text-sm font-black text-[#0867E8]">₹{emiAmount.toLocaleString('en-IN')}</span>
                       </div>
+
+                      {/* Quick Treatment Presets */}
+                      <div className="flex flex-wrap gap-1.5 pt-0.5">
+                        {[
+                          { label: '🦷 Implant', amount: 45000 },
+                          { label: '😁 Aligners', amount: 75000 },
+                          { label: '👶 IVF Cycle', amount: 150000 },
+                          { label: '✨ Full Mouth', amount: 250000 },
+                        ].map((preset) => (
+                          <button
+                            key={preset.label}
+                            type="button"
+                            onClick={() => {
+                              setEmiAmount(preset.amount);
+                              trackEvent('calculator_preset_clicked', { preset: preset.label, amount: preset.amount });
+                            }}
+                            className={`px-2.5 py-1 rounded-lg text-[10px] font-bold border transition-all ${
+                              emiAmount === preset.amount
+                                ? 'bg-[#0867E8] text-white border-[#0867E8]'
+                                : 'bg-[#F7FAFC] text-slate-700 border-slate-200 hover:border-[#0867E8]'
+                            }`}
+                          >
+                            {preset.label}
+                          </button>
+                        ))}
+                      </div>
+
                       <input
                         type="range"
                         min={30000}
-                        max={300000}
+                        max={500000}
                         step={5000}
                         value={emiAmount}
                         onChange={e => {
@@ -1132,7 +1067,7 @@ export default function CrmHomepage() {
                       />
                       <div className="flex justify-between text-[10px] text-slate-400 font-bold">
                         <span>₹30,000</span>
-                        <span>₹3,00,000</span>
+                        <span>₹5,00,000</span>
                       </div>
                     </div>
 
@@ -1184,7 +1119,6 @@ export default function CrmHomepage() {
                         onClick={() => {
                           trackEvent('click_calc_check_eligibility');
                           setShowEligibilityModal(true);
-                          setEligibilityStep(1);
                         }}
                         className="w-full py-3 bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-black uppercase tracking-wider rounded-xl transition-all shadow-md flex items-center justify-center gap-2"
                       >
@@ -1196,42 +1130,171 @@ export default function CrmHomepage() {
                 </div>
               </div>
 
-              {/* Right Column: Embedded Auto-playing 9:16 Video (5 cols) */}
-              <div className="lg:col-span-5 flex flex-col items-center">
-                <div className="w-full max-w-[340px] sm:max-w-[360px] bg-slate-900 border-2 border-slate-800 rounded-3xl p-3 shadow-2xl relative">
-                  <div className="flex items-center justify-between px-2 pb-2.5">
+              {/* Right Column: 4-Step Front-Desk Approval Workflow (5 cols) */}
+              <div className="lg:col-span-5 flex flex-col justify-between h-full bg-[#0B132B] border-2 border-slate-800 rounded-3xl p-6 sm:p-7 shadow-2xl text-left text-white relative overflow-hidden">
+                {/* Glow accent */}
+                <div className="absolute top-0 right-0 w-64 h-64 bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
+
+                <div className="relative z-10 space-y-5">
+                  <div className="flex items-center justify-between pb-3 border-b border-white/10 flex-wrap gap-2">
                     <div className="flex items-center gap-2">
-                      <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping" />
+                      <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
                       <span className="text-[11px] font-black text-emerald-400 uppercase tracking-wider">
-                        Doctor &amp; Patient Reel
+                        Reception Desk Flow
                       </span>
                     </div>
-                    <span className="text-[10px] font-bold text-slate-400 bg-slate-800 px-2 py-0.5 rounded-full">
-                      9:16 HD
-                    </span>
+                    <div className="flex items-center gap-1.5 bg-white/10 border border-white/15 px-2 py-1 rounded-lg">
+                      <span className="text-[8px] uppercase tracking-wider text-slate-300 font-bold">Partnered with</span>
+                      <img src="/assets/payu_logo.svg" alt="PayU" className="h-3.5 w-auto" />
+                      <span className="text-[9px] text-slate-400">&amp;</span>
+                      <img src="/assets/flexmoney_logo.png" alt="Flexmoney" className="h-2.5 w-auto" />
+                    </div>
                   </div>
 
-                  <div className="relative aspect-[9/16] rounded-2xl overflow-hidden bg-black shadow-inner border border-slate-800/80">
-                    <video
-                      src="/renders/clinaza-emi-reel.mp4"
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                      controls
-                      className="w-full h-full object-cover"
-                    />
+                  <div>
+                    <h3 className="text-lg sm:text-xl font-black text-white leading-snug">
+                      How Patient Financing Works At Your Counter
+                    </h3>
+                    <p className="text-xs text-slate-400 mt-1">
+                      Zero paperwork for clinic staff. Instant digital approval in 4 simple steps.
+                    </p>
                   </div>
 
-                  <div className="pt-3 px-1 text-center">
-                    <p className="text-[11px] font-bold text-slate-300">
-                      ⚡ 2-min paperless digital KYC &bull; 13+ Lending Partners
-                    </p>
-                    <p className="text-[10px] text-slate-500 mt-0.5">
-                      Doctor Helpline: <strong className="text-emerald-400 font-black">+91 7292984244</strong>
-                    </p>
+                  {/* 4 Steps */}
+                  <div className="space-y-3">
+                    {[
+                      {
+                        step: '1',
+                        icon: <QrCode size={16} className="text-sky-400" />,
+                        title: 'Scan Clinic Counter Standee',
+                        desc: 'Patient scans your custom Clinaza QR standee with their phone camera. No app download needed.',
+                        badge: 'Zero hardware cost'
+                      },
+                      {
+                        step: '2',
+                        icon: <ShieldCheck size={16} className="text-emerald-400" />,
+                        title: 'Cardless, Credit or Debit Card EMI',
+                        desc: 'Choose from 35+ modes: Cardless EMI (2-min Aadhaar OTP via PayU & Flexmoney), 21+ Credit Card EMIs, or Debit Card EMI.',
+                        badge: 'Cardless + Card'
+                      },
+                      {
+                        step: '3',
+                        icon: <Clock size={16} className="text-amber-400" />,
+                        title: 'Real-Time Sanction (PayU & Flexmoney Network)',
+                        desc: 'Algorithm matches patient with best lender offer. Patient selects flexible 3 to 24-month EMI plan.',
+                        badge: 'High approval rate'
+                      },
+                      {
+                        step: '4',
+                        icon: <Building2 size={16} className="text-blue-400" />,
+                        title: '100% Upfront Clinic Disbursal',
+                        desc: 'Treatment amount is disbursed directly into your clinic account. Start treatment immediately.',
+                        badge: '₹0 clinic credit risk'
+                      }
+                    ].map((item, idx) => (
+                      <div
+                        key={idx}
+                        className="flex items-start gap-3 p-3 rounded-2xl bg-white/[0.04] border border-white/5 hover:border-blue-500/30 transition-colors"
+                      >
+                        <div className="w-8 h-8 rounded-xl bg-slate-800/90 border border-white/10 flex items-center justify-center shrink-0 mt-0.5">
+                          {item.icon}
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center justify-between gap-1 flex-wrap">
+                            <span className="text-xs font-black text-white">
+                              {item.step}. {item.title}
+                            </span>
+                            <span className="text-[9px] font-bold text-slate-400 bg-slate-800/60 px-1.5 py-0.5 rounded">
+                              {item.badge}
+                            </span>
+                          </div>
+                          <p className="text-[11px] text-slate-400 mt-0.5 leading-relaxed">
+                            {item.desc}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 </div>
+
+                {/* Footer bar */}
+                <div className="relative z-10 pt-4 mt-4 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-2 text-[10.5px]">
+                  <span className="text-slate-400">
+                    Counter setup: <strong className="text-white">Under 5 minutes</strong>
+                  </span>
+                  <a
+                    href="https://wa.me/917292984244?text=Hi%20Clinaza%2C%20I%20want%20to%20set%20up%20patient%20EMI%20QR%20at%20my%20clinic"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-emerald-400 font-bold hover:underline flex items-center gap-1"
+                  >
+                    <span>Doctor Line: +91 7292984244</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            {/* ── Supported Payment Modes from Affordability Suite ── */}
+            <div className="pt-6 border-t border-slate-200/80 space-y-4">
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-2 text-center sm:text-left">
+                <div>
+                  <h3 className="text-base sm:text-lg font-black text-[#0B2450]">
+                    35+ Ways For Patients To Pay Over Time
+                  </h3>
+                  <p className="text-xs text-slate-500">
+                    Integrated directly at the clinic counter in partnership with PayU &amp; Flexmoney.
+                  </p>
+                </div>
+                <div className="flex items-center gap-2 bg-white border border-slate-200 px-3 py-1.5 rounded-xl shadow-2xs">
+                  <span className="text-[10px] text-slate-500 font-bold uppercase">Affordability Partners:</span>
+                  <img src="/assets/payu_logo.svg" alt="PayU" className="h-3.5 w-auto" />
+                  <span className="text-slate-300">|</span>
+                  <img src="/assets/flexmoney_logo.png" alt="Flexmoney" className="h-3 w-auto" />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 text-left">
+                {[
+                  {
+                    title: 'Cardless EMI',
+                    partner: 'PayU & Flexmoney InstaCred',
+                    desc: 'No credit or debit card required. 2-min paperless digital KYC via Aadhaar & PAN OTP with instant loan sanction.',
+                    badge: 'Most Popular',
+                    tagColor: 'bg-emerald-50 text-emerald-700 border-emerald-200'
+                  },
+                  {
+                    title: 'Credit Card EMI',
+                    partner: '21+ Major Scheduled Banks',
+                    desc: 'Split high-ticket treatment fees on credit cards from HDFC, ICICI, SBI, Axis, Kotak, IndusInd, RBL & more with 3–24M tenures.',
+                    badge: '21+ Banks',
+                    tagColor: 'bg-blue-50 text-blue-700 border-blue-200'
+                  },
+                  {
+                    title: 'Debit Card EMI',
+                    partner: 'HDFC, ICICI, Axis, Kotak, Federal',
+                    desc: 'Pre-approved EMIs directly on patient’s existing savings bank debit card with zero additional paperwork.',
+                    badge: 'No New Credit Card',
+                    tagColor: 'bg-purple-50 text-purple-700 border-purple-200'
+                  },
+                  {
+                    title: 'Down Payment + EMI',
+                    partner: 'Flexible Co-Payment Mode',
+                    desc: 'Patient pays a small down payment (10%–30%) via UPI or Card, and converts the remaining treatment balance into low-interest EMI.',
+                    badge: 'Lower Monthly Cost',
+                    tagColor: 'bg-amber-50 text-amber-800 border-amber-200'
+                  }
+                ].map((mode, idx) => (
+                  <div key={idx} className="bg-white border border-slate-200/90 rounded-2xl p-4 space-y-2 shadow-2xs hover:shadow-xs transition-shadow">
+                    <div className="flex items-center justify-between gap-1">
+                      <span className="text-xs font-black text-[#0B2450]">{mode.title}</span>
+                      <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded border ${mode.tagColor}`}>
+                        {mode.badge}
+                      </span>
+                    </div>
+                    <div className="text-[10px] font-bold text-[#0867E8]">{mode.partner}</div>
+                    <p className="text-[11px] text-slate-600 leading-relaxed">{mode.desc}</p>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
@@ -1253,7 +1316,7 @@ export default function CrmHomepage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-left">
             {[
               { title: '₹0 Upfront Fee', desc: 'Free setup and branding materials for onboarded clinics.' },
-              { title: 'Free Dental CRM Access', desc: '100% free patient reactivation & treatment follow-up portal for life.' },
+              { title: 'Free Clinic CRM & EMR Portal', desc: '100% free patient reactivation & treatment follow-up portal for life.' },
               { title: 'No EMI Collection Burden', desc: 'No chasing patients for repayments — handled entirely by NBFC.' },
               { title: 'Financing by Partners', desc: 'All loans funded and serviced by RBI-regulated lenders.' },
               { title: 'Higher Ticket Conversions', desc: 'Helps eligible patients manage higher treatment costs easily.' },
@@ -1268,18 +1331,6 @@ export default function CrmHomepage() {
               </div>
             ))}
           </div>
-
-          {/* Sticky Clinic CTA Banner */}
-          <div className="bg-[#F5F9FC] border border-blue-100 p-6 rounded-3xl text-center space-y-3 shadow-2xs max-w-xl mx-auto">
-            <h3 className="text-base font-black text-[#0B2450]">Want to offer EMI to your patients?</h3>
-            <a
-              href="#partner-form"
-              onClick={() => setFormType('clinic')}
-              className="inline-flex items-center gap-2 px-7 py-3 bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-black uppercase tracking-wider rounded-xl transition-all shadow-md"
-            >
-              Partner With Clinaza &rarr;
-            </a>
-          </div>
         </section>
 
         {/* ── 8. ONBOARDED PARTNER CLINICS NETWORK (SLIDESHOW CAROUSEL) ── */}
@@ -1291,7 +1342,7 @@ export default function CrmHomepage() {
               </span>
               <h2 className="text-2xl sm:text-4xl font-black text-[#0B2450]">Onboarded Partner Clinics</h2>
               <p className="text-xs sm:text-sm text-slate-600 max-w-xl mx-auto">
-                Leading healthcare clinics &amp; dental hospitals offering instant point-of-care patient EMI financing powered by Clinaza.
+                Leading healthcare clinics &amp; specialized centres offering instant point-of-care patient EMI financing powered by Clinaza.
               </p>
             </div>
 
@@ -1625,26 +1676,19 @@ export default function CrmHomepage() {
                     </div>
                   </div>
 
-                  {/* Smart Countdown & Hand-off Banner */}
+                  {/* Secure Verification Ready Banner */}
                   <div className="p-3.5 bg-gradient-to-r from-blue-50 to-indigo-50/80 border border-blue-200 rounded-2xl flex items-center justify-between text-xs">
                     <div className="flex items-center gap-2.5">
-                      <Loader2 size={16} className={`text-[#0867E8] ${isPassPaused ? '' : 'animate-spin'}`} />
+                      <ShieldCheck size={18} className="text-emerald-600 shrink-0" />
                       <div>
                         <span className="font-black text-[#0B2450] block">
-                          {isPassPaused ? 'Auto-redirect paused' : `Launching secure portal in ${passCountdown}s`}
+                          Secure Application Generated
                         </span>
                         <span className="text-[10px] text-slate-500">
-                          Entering encrypted RBI lending gateway
+                          Complete Aadhaar OTP verification via RBI-regulated partner portal
                         </span>
                       </div>
                     </div>
-                    <button
-                      type="button"
-                      onClick={() => setIsPassPaused(!isPassPaused)}
-                      className="text-[10px] font-bold text-[#0867E8] hover:underline px-2.5 py-1 rounded bg-white border border-blue-200 shadow-2xs"
-                    >
-                      {isPassPaused ? 'Resume' : 'Pause'}
-                    </button>
                   </div>
 
                   {/* In-App Healthcare Care-Pass Card */}
@@ -1677,20 +1721,43 @@ export default function CrmHomepage() {
                       </div>
                       <div>
                         <span className="text-[9px] uppercase tracking-wider text-slate-400 block">Lender Network</span>
-                        <span className="font-bold text-slate-200">Easycred / 13 Live NBFCs</span>
+                        <span className="font-bold text-slate-200">PayU &amp; Flexmoney (35+ Options)</span>
                       </div>
                     </div>
                   </div>
 
                   {/* Action Buttons */}
-                  <div className="pt-1">
+                  <div className="pt-1 space-y-2">
                     <a
                       href={customerLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="w-full py-3.5 bg-[#0867E8] hover:bg-[#0756C7] text-white font-black text-xs uppercase tracking-wider rounded-xl transition-all shadow-md active:scale-98 flex items-center justify-center gap-2 text-center cursor-pointer"
                     >
                       <span>Continue to Secure KYC Now</span>
                       <ChevronRight size={15} />
                     </a>
+
+                    <div className="grid grid-cols-2 gap-2">
+                      <button
+                        type="button"
+                        onClick={handleCopyPassLink}
+                        className="py-2.5 px-3 bg-white hover:bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold text-slate-700 flex items-center justify-center gap-1.5 transition-all shadow-2xs"
+                      >
+                        <Copy size={13} className="text-[#0867E8]" />
+                        <span>{passCopied ? 'Link Copied!' : 'Copy Link'}</span>
+                      </button>
+
+                      <a
+                        href={`https://wa.me/?text=${encodeURIComponent(`Hi! Here is my Clinaza instant treatment financing link to complete digital KYC: ${customerLink}`)}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="py-2.5 px-3 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-emerald-800 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-all shadow-2xs"
+                      >
+                        <MessageSquare size={13} className="text-emerald-600" />
+                        <span>Share WhatsApp</span>
+                      </a>
+                    </div>
                   </div>
 
                   <p className="text-[10px] text-slate-400 text-center leading-relaxed pt-1 border-t border-slate-100">
@@ -1700,222 +1767,103 @@ export default function CrmHomepage() {
               ) : (
                 <>
                   {/* Modal Header */}
-                  <div className="space-y-1">
-                    <span className="text-[10px] font-black text-[#0f7a75] uppercase tracking-widest block">PATIENT FINANCING CHECK</span>
+                  <div className="space-y-1.5">
+                    <div className="flex items-center justify-between gap-2 flex-wrap">
+                      <span className="text-[10px] font-black text-[#0f7a75] uppercase tracking-widest block">PATIENT FINANCING CHECK</span>
+                      <div className="flex items-center gap-1.5 bg-slate-100 border border-slate-200/80 px-2 py-0.5 rounded-md">
+                        <span className="text-[8px] uppercase tracking-wider text-slate-500 font-bold">Powered by</span>
+                        <img src="/assets/payu_logo.svg" alt="PayU" className="h-3 w-auto" />
+                        <span className="text-[8px] text-slate-400">&amp;</span>
+                        <img src="/assets/flexmoney_logo.png" alt="Flexmoney" className="h-2.5 w-auto" />
+                      </div>
+                    </div>
                     <h3 className="text-xl font-black text-[#0B2450]">
-                      {showLenderResults ? `${getMatchedLenders().length} Lenders Matched` : 'Check Financing Eligibility'}
+                      Check Financing Eligibility
                     </h3>
                     <p className="text-xs text-slate-500">
-                      {showLenderResults
-                        ? `Based on ${patientData.name}'s profile — share a link for them to apply directly`
-                        : 'Fill in the details below to find matching lenders'}
+                      Cardless EMI, Credit Card EMI (21+ Banks) &amp; Debit Card EMI options across 13+ NBFCs.
                     </p>
                   </div>
 
-              {showLenderResults ? (
-                /* ── RESULTS VIEW ── */
-                <div className="space-y-3 max-h-[65vh] overflow-y-auto pr-1">
-                  {getMatchedLenders().length === 0 ? (
-                    <div className="text-center py-8 space-y-2">
-                      <div className="text-3xl">😔</div>
-                      <p className="text-sm font-bold text-slate-600">No lenders matched this profile</p>
-                      <p className="text-xs text-slate-400">Try adjusting the profile answers</p>
-                    </div>
-                  ) : (
-                    getMatchedLenders().map(lender => (
-                      <div key={lender.id} className={`flex items-center justify-between p-3.5 rounded-2xl border ${lender.color}`}>
-                        <div className="space-y-0.5">
-                          <div className="flex items-center gap-2">
-                            <span className="text-sm font-black text-[#0B2450]">{lender.name}</span>
-                            <span className="text-[9px] font-bold px-2 py-0.5 rounded-full bg-white/70 border border-current">{lender.badge}</span>
-                          </div>
-                          <p className="text-[11px] font-medium opacity-80">{lender.rate}</p>
-                        </div>
-                        <a
-                          href={lender.url}
-                          className="shrink-0 ml-3 px-3.5 py-2 bg-[#0867E8] hover:bg-[#0756C7] text-white text-[10px] font-black uppercase tracking-wider rounded-xl transition-all shadow-sm active:scale-95"
-                        >
-                          Apply →
-                        </a>
+                  <form onSubmit={handlePatientEligibilitySubmit} className="space-y-4 max-h-[70vh] overflow-y-auto pr-1">
+                    {/* Name + Mobile */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      <div className="space-y-1">
+                        <label htmlFor="patient-name" className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Full Name *</label>
+                        <input
+                          id="patient-name"
+                          type="text"
+                          required
+                          placeholder="e.g. Ankit Sharma"
+                          value={patientData.name}
+                          onChange={e => setPatientData({ ...patientData, name: e.target.value })}
+                          className="w-full px-4 py-3 bg-[#F7FAFC] border border-slate-200 rounded-xl text-xs text-[#0B2450] placeholder-slate-400 focus:outline-none focus:border-[#0867E8]"
+                        />
                       </div>
-                    ))
-                  )}
-                  <button
-                    type="button"
-                    onClick={() => setShowLenderResults(false)}
-                    className="w-full py-3 text-xs font-bold text-slate-500 hover:text-slate-700 border border-slate-200 rounded-xl hover:bg-slate-50 transition-all mt-1"
-                  >
-                    ← Edit Patient Profile
-                  </button>
-                </div>
-              ) : (
-              <>
-
-              {eligibilityStep === 1 ? (
-                <form onSubmit={handlePatientEligibilitySubmit} className="space-y-4 max-h-[70vh] overflow-y-auto pr-1">
-
-                  {/* Name + Mobile */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div className="space-y-1">
-                      <label htmlFor="patient-name" className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Full Name *</label>
-                      <input
-                        id="patient-name"
-                        type="text"
-                        required
-                        placeholder="e.g. Ankit Sharma"
-                        value={patientData.name}
-                        onChange={e => setPatientData({ ...patientData, name: e.target.value })}
-                        className="w-full px-4 py-3 bg-[#F7FAFC] border border-slate-200 rounded-xl text-xs text-[#0B2450] placeholder-slate-400 focus:outline-none focus:border-[#0867E8]"
-                      />
+                      <div className="space-y-1">
+                        <label htmlFor="patient-mobile" className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Mobile Number *</label>
+                        <input
+                          id="patient-mobile"
+                          type="tel"
+                          required
+                          placeholder="e.g. 9876543210"
+                          value={patientData.mobile}
+                          onChange={e => setPatientData({ ...patientData, mobile: e.target.value })}
+                          className="w-full px-4 py-3 bg-[#F7FAFC] border border-slate-200 rounded-xl text-xs text-[#0B2450] placeholder-slate-400 focus:outline-none focus:border-[#0867E8]"
+                        />
+                      </div>
                     </div>
-                    <div className="space-y-1">
-                      <label htmlFor="patient-mobile" className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Mobile Number *</label>
-                      <input
-                        id="patient-mobile"
-                        type="tel"
-                        required
-                        placeholder="e.g. 9876543210"
-                        value={patientData.mobile}
-                        onChange={e => setPatientData({ ...patientData, mobile: e.target.value })}
-                        className="w-full px-4 py-3 bg-[#F7FAFC] border border-slate-200 rounded-xl text-xs text-[#0B2450] placeholder-slate-400 focus:outline-none focus:border-[#0867E8]"
-                      />
-                    </div>
-                  </div>
 
-                  {/* Treatment Category & Amount */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div className="space-y-1">
-                      <label htmlFor="patient-treatment" className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Treatment Needed *</label>
-                      <select
-                        id="patient-treatment"
-                        value={patientData.treatment}
-                        onChange={e => setPatientData({ ...patientData, treatment: e.target.value })}
-                        className="w-full px-4 py-3 bg-[#F7FAFC] border border-slate-200 rounded-xl text-xs text-[#0B2450] focus:outline-none focus:border-[#0867E8]"
-                      >
-                        <option value="Dental Implants & Aligners">🦷 Dental Implants / Clear Aligners</option>
-                        <option value="Hair Transplant & Aesthetics">🦱 Hair Transplant / Cosmetic Surgery</option>
-                        <option value="LASIK & Eye Surgery">👁️ LASIK / Contoura / Cataract</option>
-                        <option value="IVF & Fertility Treatment">👶 IVF / Fertility Treatment</option>
-                        <option value="Knee & Orthopaedic Surgery">🦴 Knee Replacement / Ortho Surgery</option>
-                        <option value="General / Laparoscopic Surgery">🏥 Laparoscopic & Other Surgeries</option>
-                      </select>
+                    {/* Treatment Category & Amount */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      <div className="space-y-1">
+                        <label htmlFor="patient-treatment" className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Treatment Needed *</label>
+                        <select
+                          id="patient-treatment"
+                          value={patientData.treatment}
+                          onChange={e => setPatientData({ ...patientData, treatment: e.target.value })}
+                          className="w-full px-4 py-3 bg-[#F7FAFC] border border-slate-200 rounded-xl text-xs text-[#0B2450] focus:outline-none focus:border-[#0867E8]"
+                        >
+                          <option value="Dental Implants & Aligners">🦷 Dental Implants / Clear Aligners</option>
+                          <option value="Hair Transplant & Aesthetics">🦱 Hair Transplant / Cosmetic Surgery</option>
+                          <option value="LASIK & Eye Surgery">👁️ LASIK / Contoura / Cataract</option>
+                          <option value="IVF & Fertility Treatment">👶 IVF / Fertility Treatment</option>
+                          <option value="Knee & Orthopaedic Surgery">🦴 Orthopaedic & Joint Treatments</option>
+                          <option value="Outpatient Elective Surgery">🩺 Outpatient & Daycare Procedures</option>
+                        </select>
+                      </div>
+                      <div className="space-y-1">
+                        <label htmlFor="patient-amount" className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Estimated Amount *</label>
+                        <select
+                          id="patient-amount"
+                          value={patientData.amount}
+                          onChange={e => setPatientData({ ...patientData, amount: e.target.value })}
+                          className="w-full px-4 py-3 bg-[#F7FAFC] border border-slate-200 rounded-xl text-xs text-[#0B2450] focus:outline-none focus:border-[#0867E8]"
+                        >
+                          <option value="₹30,000 – ₹60,000">₹30,000 – ₹60,000</option>
+                          <option value="₹60,000 – ₹1,20,000">₹60,000 – ₹1,20,000</option>
+                          <option value="₹1,20,000 – ₹2,50,000">₹1,20,000 – ₹2,50,000</option>
+                          <option value="₹2,50,000 – ₹5,00,000">₹2,50,000 – ₹5,00,000</option>
+                        </select>
+                      </div>
                     </div>
-                    <div className="space-y-1">
-                      <label htmlFor="patient-amount" className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Estimated Amount *</label>
-                      <select
-                        id="patient-amount"
-                        value={patientData.amount}
-                        onChange={e => setPatientData({ ...patientData, amount: e.target.value })}
-                        className="w-full px-4 py-3 bg-[#F7FAFC] border border-slate-200 rounded-xl text-xs text-[#0B2450] focus:outline-none focus:border-[#0867E8]"
-                      >
-                        <option value="₹30,000 – ₹60,000">₹30,000 – ₹60,000</option>
-                        <option value="₹60,000 – ₹1,20,000">₹60,000 – ₹1,20,000</option>
-                        <option value="₹1,20,000 – ₹2,50,000">₹1,20,000 – ₹2,50,000</option>
-                        <option value="₹2,50,000 – ₹5,00,000">₹2,50,000 – ₹5,00,000</option>
-                      </select>
-                    </div>
-                  </div>
 
-                  <button
-                    type="submit"
-                    disabled={!patientData.name || !patientData.mobile}
-                    className={`w-full py-4 font-black text-xs uppercase tracking-widest rounded-xl transition-all shadow-md flex items-center justify-center gap-2 active:scale-95 ${
-                      patientData.name && patientData.mobile
-                        ? 'bg-[#0867E8] hover:bg-[#0756C7] text-white cursor-pointer'
-                        : 'bg-slate-200 text-slate-400 cursor-not-allowed'
-                    }`}
-                  >
-                    Find Matching Lenders →
-                  </button>
-                  <p className="text-[10px] text-slate-500 text-center leading-relaxed">
-                    Your information will be securely queried live against Clinaza partnered bank/NBFC APIs with your consent.
-                  </p>
-                </form>
-              ) : (
-                <div className="space-y-5">
-                  {/* WhatsApp Verification Notice */}
-                  <div className="bg-[#F5F9FC] border border-blue-100 p-4 rounded-2xl flex items-start gap-3 text-left">
-                    <MessageSquare size={20} className="text-[#0f7a75] shrink-0 mt-0.5" />
-                    <div className="space-y-1 text-xs">
-                      <span className="font-bold text-[#0B2450] block">Send Documents via WhatsApp</span>
-                      <p className="text-slate-600 leading-relaxed text-[11px]">
-                        Since API connections are handled offline, please send your KYC documents directly to our Clinaza financing desk on WhatsApp for instant eligibility processing.
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Initial Eligibility Assessment Summary Card */}
-                  <div className="bg-[#F7FAFC] border border-slate-200 p-3.5 rounded-2xl space-y-1 text-xs">
-                    <span className="text-[10px] font-mono font-bold text-[#0756C7] uppercase tracking-wider block">
-                      ✓ Initial Eligibility Assessment Complete
-                    </span>
-                    <div className="text-[11px] text-slate-700 space-y-0.5 pt-1 font-medium">
-                      <p>👤 <strong>Patient Name:</strong> {patientData.name || 'Not provided'}</p>
-                      <p>📱 <strong>Mobile Number:</strong> {patientData.mobile || 'Not provided'}</p>
-                    </div>
-                    <p className="text-[10px] text-slate-500 pt-1 leading-relaxed border-t border-slate-200 mt-2">
-                      Final approval, interest rate and loan amount are subject to lender assessment.
-                    </p>
-                  </div>
-
-                  {/* Document Requirements Checklist */}
-                  <div className="space-y-2">
-                    <span className="text-[10px] font-mono font-bold text-slate-500 uppercase tracking-wider block">Documents to send on WhatsApp:</span>
-                    <ul className="space-y-2">
-                      {[
-                        { title: 'PAN Card Copy', desc: 'For credit score evaluation' },
-                        { title: 'Aadhaar / Photo ID', desc: 'Identity & address verification' },
-                        { title: 'Income Proof', desc: patientData.incomeProof }
-                      ].map((doc, idx) => (
-                        <li key={idx} className="flex items-center justify-between p-3 bg-white border border-slate-200 rounded-xl text-xs shadow-2xs">
-                          <div>
-                            <span className="font-bold text-[#0B2450] block">{doc.title}</span>
-                            <span className="text-[10px] text-slate-500">{doc.desc}</span>
-                          </div>
-                          <span className="text-[10px] font-bold text-[#0f7a75] bg-[#0f7a75]/10 px-2.5 py-1 rounded-full shrink-0">Send on WA</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <div className="flex gap-3 pt-1">
                     <button
-                      type="button"
-                      onClick={() => setEligibilityStep(1)}
-                      className="w-1/3 py-3 bg-slate-100 hover:bg-slate-200 text-[#0B2450] font-bold text-xs rounded-xl transition-all"
+                      type="submit"
+                      disabled={!patientData.name || !patientData.mobile}
+                      className={`w-full py-4 font-black text-xs uppercase tracking-widest rounded-xl transition-all shadow-md flex items-center justify-center gap-2 active:scale-95 ${
+                        patientData.name && patientData.mobile
+                          ? 'bg-[#0867E8] hover:bg-[#0756C7] text-white cursor-pointer'
+                          : 'bg-slate-200 text-slate-400 cursor-not-allowed'
+                      }`}
                     >
-                      &larr; Edit Details
+                      Find Matching Lenders →
                     </button>
-                    <a
-                      href={`https://wa.me/917292984244?text=${encodeURIComponent(
-                        `Hi Clinaza, I want to check my financing eligibility.\n\n` +
-                        `Name: ${patientData.name || 'N/A'}\n` +
-                        `Mobile: ${patientData.mobile || 'N/A'}\n\n` +
-                        `I am ready to share my details for verification.`
-                      )}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={() => {
-                        trackEvent('eligibility_whatsapp_sent', {
-                          name: patientData.name,
-                          treatment: patientData.treatment,
-                          cibil: patientData.cibilScore
-                        });
-                      }}
-                      className="w-2/3 py-3.5 bg-[#0f7a75] hover:bg-[#0c635f] text-white font-black text-xs uppercase tracking-wider rounded-xl transition-all shadow-md flex items-center justify-center gap-2"
-                    >
-                      <MessageSquare size={16} /> Send Documents on WhatsApp &rarr;
-                    </a>
-                  </div>
-
-                  <p className="text-[10px] text-slate-400 text-center">
-                    Your documents are reviewed privately by Clinaza & partnered NBFC desk officers only.
-                  </p>
-                </div>
-              )}
-              </>
-              )}
-              </>
+                    <p className="text-[10px] text-slate-500 text-center leading-relaxed">
+                      Your information will be securely queried live against Clinaza partnered bank/NBFC APIs with your consent.
+                    </p>
+                  </form>
+                </>
               )}
             </div>
           </div>
@@ -1968,7 +1916,7 @@ export default function CrmHomepage() {
                   formType === 'clinic' ? 'bg-white text-[#0B2450] shadow-xs' : 'text-slate-600 hover:text-[#0B2450]'
                 }`}
               >
-                🏥 For Clinics & Hospitals
+                🏥 For Clinics &amp; Specialty Centres
               </button>
               <button
                 type="button"
@@ -1977,7 +1925,7 @@ export default function CrmHomepage() {
                   formType === 'lender' ? 'bg-[#0867E8] text-white shadow-xs' : 'text-slate-600 hover:text-[#0B2450]'
                 }`}
               >
-                🏦 For NBFCs & Lenders
+                🏦 For NBFCs &amp; Lenders
               </button>
             </div>
 
@@ -2018,7 +1966,7 @@ export default function CrmHomepage() {
                   </div>
                 </div>
 
-                <div className="pt-2">
+                <div className="space-y-2 pt-2">
                   <Link
                     to="/clinic-onboarding?utm_source=homepage&utm_medium=website&utm_campaign=partner_form_cta"
                     className="w-full py-4 bg-[#0867E8] hover:bg-[#0756C7] text-white font-black text-sm uppercase tracking-wider rounded-xl transition-all shadow-xl shadow-[#0867E8]/25 flex items-center justify-center gap-2 transform hover:-translate-y-0.5 text-center"
@@ -2026,11 +1974,34 @@ export default function CrmHomepage() {
                     <span>Complete Clinic Onboarding (60s)</span>
                     <ArrowRight size={16} />
                   </Link>
+
+                  {/* Quick Specialty Deep-Links */}
+                  <div className="flex flex-wrap items-center justify-center gap-2 pt-1">
+                    <span className="text-[11px] text-slate-500 font-medium">Quick link:</span>
+                    <Link
+                      to="/clinic-onboarding?category=dental"
+                      className="px-2.5 py-1 bg-white hover:bg-slate-100 border border-slate-200 rounded-lg text-[11px] font-bold text-slate-700 transition-colors"
+                    >
+                      🦷 Dental Clinic
+                    </Link>
+                    <Link
+                      to="/clinic-onboarding?category=ivf"
+                      className="px-2.5 py-1 bg-white hover:bg-slate-100 border border-slate-200 rounded-lg text-[11px] font-bold text-slate-700 transition-colors"
+                    >
+                      👶 IVF &amp; Fertility Centre
+                    </Link>
+                    <Link
+                      to="/clinic-onboarding?category=aesthetics"
+                      className="px-2.5 py-1 bg-white hover:bg-slate-100 border border-slate-200 rounded-lg text-[11px] font-bold text-slate-700 transition-colors"
+                    >
+                      ✨ Skin &amp; Hair Clinic
+                    </Link>
+                  </div>
                 </div>
 
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4 text-xs text-slate-500 pt-1">
                   <span className="flex items-center gap-1.5">
-                    <ShieldCheck size={14} className="text-emerald-600" /> 13+ RBI Regulated NBFC Partners
+                    <ShieldCheck size={14} className="text-emerald-600" /> PayU &amp; Flexmoney Regulated Partner Network
                   </span>
                   <span>&middot;</span>
                   <a href="https://wa.me/917292984244?text=Hi%20Pratyush,%20interested%20in%20Clinaza%20onboarding" target="_blank" rel="noopener noreferrer" className="text-emerald-600 font-bold hover:underline">
@@ -2148,7 +2119,7 @@ export default function CrmHomepage() {
                 <Landmark size={18} aria-hidden="true" />
                 <span className="text-[10px] font-black uppercase tracking-widest text-[#12A8A0]">FOR LENDERS & NBFCS</span>
               </div>
-              <h3 className="text-base sm:text-xl font-black">Are you a Bank, NBFC or Healthcare Lender?</h3>
+              <h2 className="text-base sm:text-xl font-black">Are you a Bank, NBFC or Healthcare Lender?</h2>
               <p className="text-xs text-blue-100/90 max-w-xl">
                 Partner with Clinaza to access high-intent healthcare treatment financing demand through our growing clinic network.
               </p>
@@ -2175,28 +2146,12 @@ export default function CrmHomepage() {
           onClick={() => {
             trackEvent('click_mobile_floating_eligibility');
             setShowEligibilityModal(true);
-            setEligibilityStep(1);
           }}
           className="flex-1 py-3 px-4 bg-[#0867E8] text-white rounded-full text-xs font-black uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-md active:scale-95"
         >
           <ShieldCheck size={15} /> Check Patient Eligibility
         </button>
       </div>
-
-      {/* Remotion Clinaza EMI Reel Modal */}
-      <RemotionVideoModal
-        isOpen={showEmiReelModal}
-        onClose={() => setShowEmiReelModal(false)}
-        mode="clinaza-emi"
-        emiReelData={{
-          headline: "Don't Delay Your Dental Treatment Because of Cost 🦷💸",
-          treatmentName: "Dental Implants & Aligners",
-          totalCost: 60000,
-          monthlyEmi: 2650,
-          tenureMonths: 24,
-          websiteUrl: "clinaza.in"
-        }}
-      />
 
       {/* ── Footer ── */}
       <footer className="border-t border-slate-200 py-10 px-5 sm:px-8 bg-white text-center sm:text-left pb-24 sm:pb-12">

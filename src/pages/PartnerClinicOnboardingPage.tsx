@@ -11,7 +11,8 @@ import {
   Landmark,
   Mail,
   Star,
-  Home
+  Home,
+  Globe
 } from 'lucide-react';
 import { emailNotificationService } from '@/services/emailNotificationService';
 import { supabase } from '@/lib/supabase';
@@ -24,6 +25,7 @@ export default function PartnerClinicOnboardingPage() {
     city: '',
     phone: '',
     email: '',
+    website: '',
     chairs: '',
     premisesType: '',
     googleRating: '',
@@ -32,6 +34,8 @@ export default function PartnerClinicOnboardingPage() {
     avgMonthlyCases: '',
     expectedEmiLoans: '',
     avgTicketSize: '',
+    currentPosProvider: '',
+    category: 'dental',
     hasCurrentAccount: '',
     businessProofType: '',
     hasCancelledCheque: ''
@@ -41,10 +45,27 @@ export default function PartnerClinicOnboardingPage() {
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
+    const source = params.get('utm_source') || '';
+    const medium = params.get('utm_medium') || '';
+    const campaign = params.get('utm_campaign') || '';
+    const categoryParam = params.get('category') || '';
+    
+    // Auto-detect category from URL or campaign
+    let detectedCategory = 'dental';
+    if (categoryParam === 'ivf' || campaign.toLowerCase().includes('ivf')) {
+      detectedCategory = 'ivf';
+    } else if (categoryParam === 'hospital' || categoryParam === 'multispecialty') {
+      detectedCategory = 'hospital';
+    } else if (categoryParam === 'derma' || categoryParam === 'aesthetics') {
+      detectedCategory = 'derma';
+    }
+
+    setForm(prev => ({ ...prev, category: detectedCategory }));
+
     setUtmParams({
-      source: params.get('utm_source') || '',
-      medium: params.get('utm_medium') || '',
-      campaign: params.get('utm_campaign') || '',
+      source,
+      medium,
+      campaign,
     });
   }, []);
 
@@ -96,6 +117,7 @@ export default function PartnerClinicOnboardingPage() {
         city: form.city,
         phone: form.phone,
         email: form.email || null,
+        website: form.website || null,
         chairs: form.chairs || null,
         premises_type: form.premisesType || null,
         google_rating: form.googleRating || null,
@@ -104,6 +126,8 @@ export default function PartnerClinicOnboardingPage() {
         avg_monthly_cases: form.avgMonthlyCases || null,
         expected_emi_loans: form.expectedEmiLoans || null,
         avg_ticket_size: form.avgTicketSize || null,
+        current_pos_provider: form.currentPosProvider || null,
+        healthcare_category: form.category || 'dental',
         has_current_account: form.hasCurrentAccount,
         business_proof_type: form.businessProofType,
         has_cancelled_cheque: form.hasCancelledCheque,
@@ -133,26 +157,29 @@ export default function PartnerClinicOnboardingPage() {
       }
 
       // 2. Dispatch email notification alert
-      await emailNotificationService.sendNotification('🏥 New Clinic Onboarding Submitted', {
-        'Clinic Name': form.clinicName,
-        'Doctor Name': form.doctorName || 'Not provided',
+      const categoryName = form.category === 'ivf' ? '👶 IVF & Fertility Centre' : form.category === 'hospital' ? '🏥 Multi-Specialty Hospital' : form.category === 'derma' ? '✨ Dermatology & Aesthetics' : '🦷 Dental Clinic';
+      await emailNotificationService.sendNotification(`🏥 New ${form.category === 'ivf' ? 'IVF Centre' : 'Clinic'} Onboarding Submitted`, {
+        'Specialty / Category': categoryName,
+        'Clinic / Centre Name': form.clinicName,
+        'Doctor / Director Name': form.doctorName || 'Not provided',
         'City / Location': form.city,
         'Contact Phone': form.phone,
         'Email': form.email || 'Not provided',
+        'Website': form.website || 'No website',
+        'Current POS / Card Machine': form.currentPosProvider || 'None / Not specified',
         'Clinic Space': form.premisesType || 'Not specified',
         'Google Maps Rating': form.googleRating ? `${form.googleRating} ★ (${form.reviewCount || '0'} reviews)` : 'Not provided',
-        'Dental Chairs': form.chairs || 'Not specified',
-        'Most Common Treatments': form.specialties.length > 0 ? form.specialties.join(', ') : 'Not specified',
-        'Monthly High-Ticket Cases (>₹25k)': form.avgMonthlyCases || 'Not specified',
+        'Capacity / Infrastructure': form.chairs || 'Not specified',
+        'Monthly High-Ticket Cases': form.avgMonthlyCases || 'Not specified',
         'Expected Monthly Loan / EMI Applications': form.expectedEmiLoans || 'Not specified',
-        'Avg Treatment Ticket': form.avgTicketSize || 'Not specified',
+        'Avg Treatment / Package Ticket': form.avgTicketSize || 'Not specified',
         'Active Business Current Account': form.hasCurrentAccount,
         'Clinic Business Proof Available': form.businessProofType,
         'Cancelled Cheque Ready': form.hasCancelledCheque,
         'UTM Source': utmParams.source || '(direct)',
         'UTM Medium': utmParams.medium || '(none)',
         'UTM Campaign': utmParams.campaign || '(none)',
-        'Estimated Monthly Loan Volume Potential': form.expectedEmiLoans ? `₹${(parseInt(form.expectedEmiLoans.replace(/\D/g, '') || '0') * 40000).toLocaleString('en-IN')}/month` : 'Pending discussion'
+        'Estimated Monthly Loan Volume Potential': form.expectedEmiLoans ? `₹${(parseInt(form.expectedEmiLoans.replace(/\D/g, '') || '0') * (form.category === 'ivf' ? 150000 : 40000)).toLocaleString('en-IN')}/month` : 'Pending discussion'
       });
 
     } catch (err) {
@@ -212,18 +239,62 @@ export default function PartnerClinicOnboardingPage() {
 
       {/* Main Content Area */}
       <main className="max-w-3xl mx-auto px-4 sm:px-6 pt-8 sm:pt-12">
+        {/* Category Switcher Tabs */}
+        <div className="flex items-center justify-center gap-2 mb-6 flex-wrap">
+          {[
+            { id: 'dental', label: 'Dental Clinic', icon: '🦷' },
+            { id: 'ivf', label: 'Fertility & IVF Centre', icon: '👶' },
+            { id: 'hospital', label: 'Multi-Specialty Hospital', icon: '🏥' },
+            { id: 'derma', label: 'Dermatology & Aesthetics', icon: '✨' }
+          ].map((cat) => (
+            <button
+              type="button"
+              key={cat.id}
+              onClick={() => setForm(prev => ({ ...prev, category: cat.id }))}
+              className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all flex items-center gap-1.5 ${
+                form.category === cat.id
+                  ? 'bg-[#0B2450] text-white shadow-sm'
+                  : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'
+              }`}
+            >
+              <span>{cat.icon}</span>
+              <span>{cat.label}</span>
+            </button>
+          ))}
+        </div>
+
         {/* Hero Banner */}
         <div className="text-center space-y-3 mb-8">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-[#0867E8] text-xs font-bold">
             <Sparkles size={13} />
-            <span>Healthcare Patient EMI Integration</span>
+            <span>
+              {form.category === 'ivf' 
+                ? 'Fertility & IVF Patient Financing' 
+                : form.category === 'hospital' 
+                ? 'Hospital Patient Financing & Smart POS' 
+                : 'Healthcare Patient EMI Integration'}
+            </span>
           </div>
           <h1 className="text-2xl sm:text-4xl font-black text-[#0B2450] tracking-tight">
-            Clinic Partner <span className="text-[#0867E8]">Onboarding</span>
+            {form.category === 'ivf' ? 'Fertility Centre' : form.category === 'hospital' ? 'Hospital Partner' : 'Clinic Partner'} <span className="text-[#0867E8]">Onboarding</span>
           </h1>
           <p className="text-xs sm:text-sm text-slate-600 max-w-lg mx-auto leading-relaxed">
-            Please confirm your clinic's high-ticket procedure volume to activate pre-approved patient financing lines with our accredited RBI-regulated lending network.
+            {form.category === 'ivf'
+              ? "Activate instant point-of-care patient EMI lines (₹50,000 – ₹5,00,000) for IVF cycles, ICSI & donor packages with direct clinic settlement."
+              : "Please confirm your facility's high-ticket procedure volume to activate pre-approved patient financing lines with our accredited RBI-regulated lending network."}
           </p>
+
+          {/* PayU & Flexmoney Credibility Trust Badge */}
+          <div className="pt-2 flex items-center justify-center">
+            <div className="inline-flex items-center gap-2 bg-slate-100/90 border border-slate-200 px-3 py-1.5 rounded-xl text-[11px] text-slate-700 font-medium">
+              <span className="font-bold text-[#0B2450]">Powered in partnership with</span>
+              <img src="/assets/payu_logo.svg" alt="PayU" className="h-3.5 w-auto" />
+              <span className="text-slate-400">&amp;</span>
+              <img src="/assets/flexmoney_logo.png" alt="Flexmoney" className="h-3 w-auto" />
+              <span className="text-slate-300 hidden sm:inline">&bull;</span>
+              <span className="text-emerald-700 font-bold hidden sm:inline">35+ EMI Modes</span>
+            </div>
+          </div>
         </div>
 
         {submitted ? (
@@ -245,6 +316,7 @@ export default function PartnerClinicOnboardingPage() {
                     city: '',
                     phone: '',
                     email: '',
+                    website: '',
                     chairs: '',
                     premisesType: '',
                     googleRating: '',
@@ -253,6 +325,8 @@ export default function PartnerClinicOnboardingPage() {
                     avgMonthlyCases: '',
                     expectedEmiLoans: '',
                     avgTicketSize: '',
+                    currentPosProvider: '',
+                    category: 'dental',
                     hasCurrentAccount: '',
                     businessProofType: '',
                     hasCancelledCheque: ''
@@ -320,71 +394,150 @@ export default function PartnerClinicOnboardingPage() {
                 </div>
                 <div>
                   <label className="block text-xs font-bold text-slate-700 mb-1.5 flex items-center gap-1">
-                    <Mail size={12} className="text-slate-400" /> Clinic Email
+                    <Mail size={12} className="text-slate-400" /> Official Email
                   </label>
                   <input 
                     type="email"
-                    placeholder="e.g. drparmar@apexdental.in"
+                    placeholder={form.category === 'ivf' ? "e.g. contact@aurafertility.in" : "e.g. drparmar@apexdental.in"}
                     value={form.email}
                     onChange={e => setForm({...form, email: e.target.value})}
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:bg-white focus:border-[#0867E8] focus:ring-1 focus:ring-[#0867E8]"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-bold text-slate-700 mb-1.5 flex items-center gap-1">
+                    <Globe size={12} className="text-slate-400" /> Clinic / Hospital Website
+                  </label>
+                  <input 
+                    type="url"
+                    placeholder="e.g. https://www.yourclinic.com (or leave empty)"
+                    value={form.website}
+                    onChange={e => setForm({...form, website: e.target.value})}
                     className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:bg-white focus:border-[#0867E8] focus:ring-1 focus:ring-[#0867E8]"
                   />
                 </div>
               </div>
             </div>
 
-            {/* 2. Most Common Treatments & Chairs */}
+            {/* 2. Clinical Infrastructure & Existing POS / Card Machine */}
             <div className="space-y-4">
               <div className="flex items-center gap-2 border-b border-slate-100 pb-2.5">
                 <Stethoscope className="text-[#0867E8]" size={17} />
-                <h2 className="text-xs font-bold text-slate-800 uppercase tracking-wider">2. Most Common Treatments & Chairs</h2>
+                <h2 className="text-xs font-bold text-slate-800 uppercase tracking-wider">
+                  {form.category === 'ivf' ? '2. Facility Setup & Existing Payment Terminal' : '2. Clinical Setup & Card Machine'}
+                </h2>
               </div>
 
-              <div>
-                <label className="block text-xs font-bold text-slate-700 mb-2">Most Number of Treatment Types at Clinic:</label>
-                <div className="flex flex-wrap gap-2">
-                  {[
-                    'Dental Implants',
-                    'Clear Aligners',
-                    'Orthodontic Braces',
-                    'Full Mouth Rehabilitation',
-                    'Zirconia Crowns & Makeovers',
-                    'Root Canal (RCT)'
-                  ].map((item) => {
-                    const active = form.specialties.includes(item);
-                    return (
+              {/* Only show treatments if dental */}
+              {form.category === 'dental' && (
+                <div>
+                  <label className="block text-xs font-bold text-slate-700 mb-2">Most Common Treatments at Clinic:</label>
+                  <div className="flex flex-wrap gap-2">
+                    {[
+                      'Dental Implants',
+                      'Clear Aligners',
+                      'Orthodontic Braces',
+                      'Full Mouth Rehabilitation',
+                      'Zirconia Crowns & Makeovers',
+                      'Root Canal (RCT)'
+                    ].map((item) => {
+                      const active = form.specialties.includes(item);
+                      return (
+                        <button
+                          type="button"
+                          key={item}
+                          onClick={() => toggleSpecialty(item)}
+                          className={`px-3 py-1.5 rounded-xl text-xs font-semibold border transition-all ${
+                            active
+                              ? 'bg-blue-50 border-[#0867E8] text-[#0867E8]'
+                              : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300'
+                          }`}
+                        >
+                          {active ? '✓ ' : '+ '}{item}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+
+              {/* Capacity / Infrastructure */}
+              {form.category === 'dental' ? (
+                <div>
+                  <label className="block text-xs font-bold text-slate-700 mb-1.5">Number of Active Dental Chairs</label>
+                  <div className="grid grid-cols-4 gap-2">
+                    {['1 Chair', '2 Chairs', '3 Chairs', '4+ Chairs'].map((opt) => (
                       <button
                         type="button"
-                        key={item}
-                        onClick={() => toggleSpecialty(item)}
-                        className={`px-3 py-1.5 rounded-xl text-xs font-semibold border transition-all ${
-                          active
-                            ? 'bg-blue-50 border-[#0867E8] text-[#0867E8]'
-                            : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300'
+                        key={opt}
+                        onClick={() => setForm({...form, chairs: opt})}
+                        className={`py-2 text-xs font-bold rounded-xl border text-center transition-all ${
+                          form.chairs === opt
+                            ? 'bg-[#0867E8] text-white border-[#0867E8] shadow-xs'
+                            : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-50'
                         }`}
                       >
-                        {active ? '✓ ' : '+ '}{item}
+                        {opt}
                       </button>
-                    );
-                  })}
+                    ))}
+                  </div>
                 </div>
-              </div>
+              ) : (
+                <div>
+                  <label className="block text-xs font-bold text-slate-700 mb-1.5">Centre Type / Facility Scale</label>
+                  <div className="grid grid-cols-3 gap-2">
+                    {['Standalone IVF Centre', 'Hospital ART Wing', 'Consultation & IUI Unit'].map((opt) => (
+                      <button
+                        type="button"
+                        key={opt}
+                        onClick={() => setForm({...form, chairs: opt})}
+                        className={`py-2 px-2 text-[11px] font-bold rounded-xl border text-center transition-all ${
+                          form.chairs === opt
+                            ? 'bg-[#0867E8] text-white border-[#0867E8] shadow-xs'
+                            : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-50'
+                        }`}
+                      >
+                        {opt}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
 
-              <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1.5">Number of Active Dental Chairs</label>
-                <div className="grid grid-cols-4 gap-2">
-                  {['1 Chair', '2 Chairs', '3 Chairs', '4+ Chairs'].map((opt) => (
+              {/* NEW: Existing POS / PG Machine Question */}
+              <div className="pt-1">
+                <label className="block text-xs font-bold text-slate-700 mb-1.5">
+                  Which POS Terminal / Card Machine do you currently use at the billing desk?
+                </label>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                  {[
+                    'Pine Labs Plutus',
+                    'MSwipe Wisepos',
+                    'Bank EDC (HDFC / ICICI / Axis / SBI)',
+                    'Paytm All-in-One POS',
+                    'PhonePe POS',
+                    'BharatPe Swipe',
+                    'Innoviti uniPAY',
+                    'Mosambee / Dspread',
+                    'Razorpay / Ezetap POS',
+                    'Worldline / Ingenico',
+                    'Bijlipay',
+                    'None (Only UPI QR / Cash)'
+                  ].map((provider) => (
                     <button
                       type="button"
-                      key={opt}
-                      onClick={() => setForm({...form, chairs: opt})}
-                      className={`py-2 text-xs font-bold rounded-xl border text-center transition-all ${
-                        form.chairs === opt
-                          ? 'bg-[#0867E8] text-white border-[#0867E8] shadow-xs'
+                      key={provider}
+                      onClick={() => setForm({ ...form, currentPosProvider: provider })}
+                      className={`py-2 px-2.5 text-xs font-medium rounded-xl border text-left transition-all ${
+                        form.currentPosProvider === provider
+                          ? 'bg-blue-50 border-[#0867E8] text-[#0867E8] font-bold shadow-xs'
                           : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-50'
                       }`}
                     >
-                      {opt}
+                      <div className="flex items-center justify-between">
+                        <span>{provider}</span>
+                        {form.currentPosProvider === provider && <Check size={12} className="text-[#0867E8] shrink-0" />}
+                      </div>
                     </button>
                   ))}
                 </div>
@@ -441,18 +594,22 @@ export default function PartnerClinicOnboardingPage() {
             <div className="space-y-4">
               <div className="flex items-center gap-2 border-b border-slate-100 pb-2.5">
                 <TrendingUp className="text-emerald-600" size={17} />
-                <h2 className="text-xs font-bold text-slate-800 uppercase tracking-wider">3. Case Volume & Monthly Loan Demand</h2>
+                <h2 className="text-xs font-bold text-slate-800 uppercase tracking-wider">
+                  {form.category === 'ivf' ? '3. IVF Cycle Volume & Patient Financing Demand' : '3. Case Volume & Monthly Loan Demand'}
+                </h2>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div className="bg-slate-50 border border-slate-200 rounded-xl p-3.5 space-y-1.5">
                   <label className="block text-[11px] font-bold text-slate-800 uppercase tracking-wide">
-                    High-Ticket Cases (&gt;₹25k)
+                    {form.category === 'ivf' ? 'Monthly IVF / IUI Cycles' : 'High-Ticket Cases (>₹25k)'}
                   </label>
-                  <p className="text-[10px] text-slate-500">Approx. implants/aligners/rehabs seen per month</p>
+                  <p className="text-[10px] text-slate-500">
+                    {form.category === 'ivf' ? 'Approx. cycles started per month' : 'Approx. implants/aligners seen per month'}
+                  </p>
                   <input 
                     type="text"
-                    placeholder="e.g. 8 - 12 cases"
+                    placeholder={form.category === 'ivf' ? 'e.g. 10 - 20 cycles' : 'e.g. 8 - 12 cases'}
                     value={form.avgMonthlyCases}
                     onChange={e => setForm({...form, avgMonthlyCases: e.target.value})}
                     className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-xs text-slate-900 font-bold focus:outline-none focus:border-[#0867E8]"
@@ -463,10 +620,10 @@ export default function PartnerClinicOnboardingPage() {
                   <label className="block text-[11px] font-bold text-emerald-800 uppercase tracking-wide">
                     Likely Monthly Loans / EMIs
                   </label>
-                  <p className="text-[10px] text-emerald-600/80">Patients opting for EMI at front-desk</p>
+                  <p className="text-[10px] text-emerald-600/80">Couples/patients opting for monthly EMI</p>
                   <input 
                     type="text"
-                    placeholder="e.g. 5 - 8 loans"
+                    placeholder="e.g. 5 - 8 patients"
                     value={form.expectedEmiLoans}
                     onChange={e => setForm({...form, expectedEmiLoans: e.target.value})}
                     className="w-full bg-white border border-emerald-300 rounded-lg px-3 py-2 text-xs text-emerald-700 font-bold focus:outline-none focus:ring-1 focus:ring-emerald-500"
@@ -475,12 +632,12 @@ export default function PartnerClinicOnboardingPage() {
 
                 <div className="bg-slate-50 border border-slate-200 rounded-xl p-3.5 space-y-1.5">
                   <label className="block text-[11px] font-bold text-slate-800 uppercase tracking-wide">
-                    Avg Treatment Ticket Size
+                    {form.category === 'ivf' ? 'Avg Cycle / Package Cost' : 'Avg Treatment Ticket Size'}
                   </label>
                   <p className="text-[10px] text-slate-500">Typical package cost for these cases</p>
                   <input 
                     type="text"
-                    placeholder="e.g. ₹40,000"
+                    placeholder={form.category === 'ivf' ? 'e.g. ₹1,80,000' : 'e.g. ₹40,000'}
                     value={form.avgTicketSize}
                     onChange={e => setForm({...form, avgTicketSize: e.target.value})}
                     className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-xs text-slate-900 font-bold focus:outline-none focus:border-[#0867E8]"

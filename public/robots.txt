@@ -51,6 +51,21 @@ Allow: /
 Disallow: /reactivation/
 Disallow: /api/
 
+User-agent: Amazonbot
+Allow: /
+Disallow: /reactivation/
+Disallow: /api/
+
+User-agent: cohere-ai
+Allow: /
+Disallow: /reactivation/
+Disallow: /api/
+
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /reactivation/
+Disallow: /api/
+
 # Social Media Previews
 User-agent: facebookexternalhit
 Allow: /

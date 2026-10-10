@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { SEOHead } from '@/components/seo/SEOHead';
 import { 
   FileText, 
@@ -23,7 +23,20 @@ import {
 } from 'lucide-react';
 
 export default function FreeToolsHub() {
-  const [activeTab, setActiveTab] = useState<'rx' | 'setup' | 'emi' | 'seo'>('rx');
+  const location = useLocation();
+
+  const getInitialTab = (): 'rx' | 'setup' | 'emi' | 'seo' => {
+    if (location.pathname === '/rx') return 'rx';
+    if (location.pathname === '/calculator') return 'setup';
+    return 'rx';
+  };
+
+  const [activeTab, setActiveTab] = useState<'rx' | 'setup' | 'emi' | 'seo'>(getInitialTab);
+
+  useEffect(() => {
+    if (location.pathname === '/rx') setActiveTab('rx');
+    else if (location.pathname === '/calculator') setActiveTab('setup');
+  }, [location.pathname]);
 
   // --- Clinic Local SEO & Maps Checker State ---
   const [clinicSearchName, setClinicSearchName] = useState('');
@@ -201,13 +214,40 @@ export default function FreeToolsHub() {
     }
   ];
 
+  const isRxRoute = location.pathname === '/rx';
+  const isCalcRoute = location.pathname === '/calculator';
+
+  const seoTitle = isRxRoute
+    ? "Free Digital Dental Prescription Maker & Online Rx Generator"
+    : isCalcRoute
+    ? "Dental Clinic Setup Cost & Equipment Loan Calculator India"
+    : "Free Dental Tools, Rx Maker & Setup Loan Calculator | Clinaza";
+
+  const seoDescription = isRxRoute
+    ? "Create and print professional digital dental prescriptions with pre-filled dosages, FDI tooth indications, and custom clinic headers 100% free."
+    : isCalcRoute
+    ? "Estimate dental clinic launch costs for 1-3 chairs, equipment hypothecation, interior capex, and monthly EMI for doctor loans across Indian cities."
+    : "Free dental practice tools: Digital Dental Rx Prescription Maker, Clinic Setup Equipment Loan EMI Calculator, and patient treatment financing estimator.";
+
+  const seoCanonical = isRxRoute
+    ? "https://clinaza.in/rx"
+    : isCalcRoute
+    ? "https://clinaza.in/calculator"
+    : "https://clinaza.in/tools";
+
+  const seoKeywords = isRxRoute
+    ? ["free dental prescription maker", "online rx generator dental india", "digital dental rx template", "dental prescription software free", "clinaza rx"]
+    : isCalcRoute
+    ? ["dental clinic setup cost calculator", "loan for dental clinic setup", "डेंटल क्लिनिक के लिए लोन", "dental equipment loan emi", "doctor loan for dental clinic"]
+    : ["free dental prescription maker", "online rx generator dental india", "dental clinic setup cost calculator", "loan for dental clinic setup", "डेंटल क्लिनिक के लिए लोन", "dental equipment loan emi", "clinaza free tools"];
+
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col justify-between">
       <SEOHead 
-        title="Free Dental Tools, Rx Maker & Setup Loan Calculator"
-        description="Free dental practice tools: Digital Dental Rx Prescription Maker, Clinic Setup Equipment Loan EMI Calculator, and patient treatment financing estimator."
-        keywords={["free dental prescription maker", "online rx generator dental india", "dental clinic setup cost calculator", "loan for dental clinic setup", "डेंटल क्लिनिक के लिए लोन", "dental clinic loan in india", "msme loan for dental clinic", "mudra loan for dental clinic", "dental equipment loan emi", "clinaza free tools"]}
-        canonicalUrl="https://clinaza.in/tools"
+        title={seoTitle}
+        description={seoDescription}
+        keywords={seoKeywords}
+        canonicalUrl={seoCanonical}
         jsonLd={toolsSchema}
       />
 
@@ -854,7 +894,7 @@ export default function FreeToolsHub() {
                   ₹{monthlyEmi.toLocaleString()} <span className="text-sm font-semibold text-blue-100">/ month</span>
                 </div>
                 <p className="text-xs text-blue-100 max-w-sm mx-auto">
-                  ₹{treatmentAmount.toLocaleString()} estimated over {emiTenure} monthly installments. Actual interest &amp; EMI terms depend on partner lender approval.
+                  ₹{treatmentAmount.toLocaleString()} estimated over {emiTenure} monthly installments. Cardless EMI, Credit &amp; Debit Card EMI powered in partnership with PayU &amp; Flexmoney.
                 </p>
                 <div className="pt-2">
                   <a

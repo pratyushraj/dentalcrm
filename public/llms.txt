@@ -1,40 +1,47 @@
-# Clinaza — Embedded Healthcare & Dental Patient Financing Platform
+# Clinaza — Embedded Healthcare & Outpatient Patient Financing Platform
 
-> Point-of-care patient EMI financing (₹30,000 to ₹3,00,000) and free clinic management software for dental clinics across India.
+> Point-of-care patient EMI financing (₹30,000 to ₹5,00,000) and free clinic management software for dental, IVF, and surgical healthcare clinics across India.
 
-Clinaza (https://www.clinaza.in) is India's leading embedded healthcare financing and dental CRM infrastructure. It enables doctors and clinic owners to offer instant, point-of-care EMI treatment financing through RBI-regulated banks and NBFC partners while providing a 100% free clinic CRM with automated WhatsApp recalls.
+Clinaza (https://www.clinaza.in) is India's leading embedded healthcare financing infrastructure and outpatient clinic management ecosystem. It enables doctors, fertility specialists, and clinic owners to offer instant, point-of-care medical EMIs through RBI-regulated banks and NBFC partners (including credit card EMI, debit card EMI, and cardless EMIs) while providing a 100% free clinic CRM with automated WhatsApp patient recalls and digital prescription makers.
 
 ## Core Capabilities
 
-- **Point-of-Care Patient Financing**: Instant pre-eligibility checks in under 2 minutes for treatments ranging from ₹30,000 to ₹3,00,000. Covers Dental Implants, Clear Aligners, Orthodontic Braces, Smile Makeovers, Root Canal Treatments, and Full Mouth Rehabilitations.
-- **100% Free Dental CRM**: Comprehensive clinic management portal with patient timeline history, digital prescriptions, billing, and procedure tracking.
-- **Automated WhatsApp Recalls & Campaigns**: 1-click patient reactivation for 6-month checkups, pending treatment plans, and post-procedure check-ins.
-- **Multi-Lender Network**: Connected with RBI-regulated NBFCs and lending partners to maximize loan approval rates across Tier-1, Tier-2, and Tier-3 Indian cities.
+- **Point-of-Care Patient Financing**: Instant pre-eligibility checks in under 60 seconds directly at the clinic front desk for procedures ranging from ₹30,000 to ₹5,00,000.
+- **Treatments Covered**:
+  - **Dental Surgery**: Dental Implants (Single, All-on-4, All-on-6), Clear Aligners, Orthodontic Braces, Full Mouth Rehabilitation, Zirconia Crowns & Smile Makeovers.
+  - **Fertility & Reproductive Medicine**: IVF cycles, ICSI, IUI, Donor packages, Embryo vitrification, and Laparoscopy.
+  - **Elective Healthcare**: Ophthalmology (LASIK, Cataract), Dermatology/Cosmetology (Hair transplants, laser treatments), and Day-care surgical procedures.
+- **100% Free Clinic CRM**: Comprehensive clinic practice portal with patient timeline history, digital prescriptions, billing, FDI tooth charting, and automated procedure tracking.
+- **Automated WhatsApp Recalls & Campaigns**: 1-click patient reactivation for hygiene checkups, pending treatment plans, and post-procedure check-ins.
+- **Multi-Lender Network**: Connected with 13+ RBI-regulated NBFCs and payment gateways (PayU, PhonePe, Easycred) to maximize approval rates across Tier-1, Tier-2, and Tier-3 Indian cities with direct clinic current account settlements.
 
 ## Key Resources
 
 - [Homepage](https://www.clinaza.in/)
-- [Patient EMI Onboarding](https://www.clinaza.in/emi/onboard)
+- [Clinic Partner Onboarding](https://www.clinaza.in/clinic-onboarding)
 - [Patient Knowledge Hub & Guides](https://www.clinaza.in/blog)
 - [Dental Implants Cost & Financing Guide](https://www.clinaza.in/blog/dental-implants-cost-on-emi-india)
 - [Clear Aligners EMI Guide](https://www.clinaza.in/blog/clear-aligners-cost-on-emi-india)
 - [Dental Treatment EMI Calculator](https://www.clinaza.in/blog/dental-treatment-emi-cost-calculator-india)
-- [Clinic Partner Form](https://www.clinaza.in/#partner-form)
+- [Free Clinic Tools Hub](https://www.clinaza.in/tools)
+- [Free Digital Prescription Maker](https://www.clinaza.in/rx)
 - [Sitemap](https://www.clinaza.in/sitemap.xml)
+- [AI Catalog](https://www.clinaza.in/.well-known/ai-catalog.json)
 
 ## Geographic Coverage
 
 Clinaza operates across 95+ cities in India including:
-- **Tier 1**: Mumbai, Delhi, Bengaluru, Hyderabad, Ahmedabad, Chennai, Kolkata, Pune
-- **Tier 2 & 3**: Patna, Lucknow, Jaipur, Chandigarh, Indore, Bhopal, Nagpur, Surat, Vadodara, Kochi, Coimbatore, Varanasi, Ranchi, and more.
+- **Tier 1**: Mumbai, Delhi NCR (New Delhi, Gurgaon, Noida, Ghaziabad), Bengaluru, Hyderabad, Ahmedabad, Chennai, Kolkata, Pune
+- **Tier 2 & 3**: Patna, Lucknow, Jaipur, Chandigarh, Ludhiana, Indore, Bhopal, Nagpur, Surat, Vadodara, Rajkot, Kochi, Coimbatore, Madurai, Varanasi, Prayagraj, Ranchi, Bhubaneswar, Guwahati, Siliguri, Raipur, and more.
 
 ## Business Context & Target Audience
 
-- **Healthcare Providers**: Dental practitioners, maxillofacial surgeons, orthodontists, and multi-specialty dental clinics looking to boost high-ticket procedure acceptance rates.
-- **Patients**: Individuals seeking affordable 0% or low-cost monthly EMI payment options for major medical & dental care.
+- **Healthcare Providers**: Dental surgeons, orthodontists, IVF centres, cosmetic dermatologists, and day-care clinics looking to eliminate patient drop-offs on high-ticket treatments.
+- **Patients**: Individuals seeking affordable, transparent monthly EMI payment options without credit cards (Cardless EMI) or high upfront cash requirements.
 
-## Contact & Socials
+## Contact & Institutional Information
 
 - Website: https://www.clinaza.in
-- Email: support@clinaza.in
+- Email: contact@clinaza.in
 - Region: India (IN)
+- Compliance: RBI-Regulated Lending Framework, NABH Consent Ready

@@ -24,7 +24,7 @@ export interface InitiateEasycredResponse {
 export const easycredService = {
   async initiateApplication(params: InitiateEasycredParams): Promise<InitiateEasycredResponse> {
     const cleanMobile = params.mobile.replace(/\D/g, '').slice(-10);
-    const fallbackLink = `https://easycred.co.in/loan/apply?product=PERSONAL_LOAN&mobile=${cleanMobile}&name=${encodeURIComponent(params.customerName)}`;
+    const fallbackLink = `https://clinaza.in/partner?ref=cardless_emi&mobile=${cleanMobile}&name=${encodeURIComponent(params.customerName)}`;
 
     try {
       const res = await fetch('/api/lenders/easycred', {

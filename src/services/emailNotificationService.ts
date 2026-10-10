@@ -175,7 +175,7 @@ export const emailNotificationService = {
     const patientName = data.patientName || 'Patient';
     const mobile = data.mobile || 'N/A';
     const treatment = data.treatment || 'Dental / Aesthetic Procedure';
-    const lender = data.lender || 'Easycred / Partner NBFC';
+    const lender = data.lender || 'PayU / Flexmoney Lending Network';
     const reason = data.reason || 'Bureau Cutoff / Incomplete Eligibility / Low Credit Score';
     const amount = data.amount ? `₹${data.amount}` : 'N/A';
     const timestamp = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }) + ' (IST)';
@@ -188,7 +188,7 @@ export const emailNotificationService = {
     } else if (rLower.includes('foir') || rLower.includes('debt') || rLower.includes('obligation') || rLower.includes('income')) {
       recoveryTip = 'Existing monthly debt ratio too high. Solution: Reduce requested loan amount with a small upfront clinic down-payment (20-30%) and finance the remainder over 12-18 months.';
     } else if (rLower.includes('pincode') || rLower.includes('negative') || rLower.includes('location')) {
-      recoveryTip = 'Pincode serviceable constraint by primary NBFC. Solution: Route application through alternate NBFC partner on Easycred network or use co-applicant with metro/urban permanent address.';
+      recoveryTip = 'Pincode serviceable constraint by primary NBFC. Solution: Route application through alternate cardless lender on PayU/Flexmoney network (Fibe, Axio, CASHe, KreditBee, TVS Credit) or select debit/credit card EMI.';
     } else if (rLower.includes('kyc') || rLower.includes('pan') || rLower.includes('aadhaar')) {
       recoveryTip = 'KYC mismatch or mobile-Aadhaar link issue. Solution: Verify patient mobile matches Aadhaar OTP and PAN name matches dental records exactly.';
     }

@@ -99,7 +99,7 @@ export default function EmiCallbackPage() {
         mobile: mobileParam || 'Not specified',
         treatment: treatmentParam ? decodeURIComponent(treatmentParam) : 'Dental Procedure',
         amount: amountParam || undefined,
-        lender: lenderParam ? decodeURIComponent(lenderParam) : 'Easycred NBFC Partner',
+        lender: lenderParam ? decodeURIComponent(lenderParam) : 'PayU / Flexmoney Partner',
         reason: reasonParam ? decodeURIComponent(reasonParam) : 'Credit Bureau cutoff / FOIR obligation threshold'
       });
     }

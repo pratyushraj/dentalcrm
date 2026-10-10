@@ -82,7 +82,7 @@ export const PatientEligibilityModal: React.FC<PatientEligibilityModalProps> = (
         checkedAt: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })
       });
 
-      // 2. Initiate application with Easycred Partner API (standard ONLINE_PERSONAL)
+      // 2. Initiate application via PayU & Flexmoney Cardless Network
       const result = await easycredService.initiateApplication({
         customerName: name.trim(),
         mobile: cleanMobile,
@@ -91,7 +91,7 @@ export const PatientEligibilityModal: React.FC<PatientEligibilityModalProps> = (
 
       const link = (result.success && result.data?.customerLink)
         ? result.data.customerLink
-        : (result.fallbackLink || `https://easycred.co.in/loan/apply?product=PERSONAL_LOAN&mobile=${cleanMobile}&name=${encodeURIComponent(name)}`);
+        : (result.fallbackLink || `https://clinaza.in/partner?ref=cardless_emi&mobile=${cleanMobile}&name=${encodeURIComponent(name)}`);
 
       const masked = (result.success && result.data?.maskedMobile)
         ? result.data.maskedMobile
@@ -104,7 +104,7 @@ export const PatientEligibilityModal: React.FC<PatientEligibilityModalProps> = (
       toast.success('Financing verification sent to your mobile!');
     } catch (err) {
       console.error('Error submitting eligibility form:', err);
-      const fallback = `https://easycred.co.in/loan/apply?product=PERSONAL_LOAN&mobile=${cleanMobile}&name=${encodeURIComponent(name)}`;
+      const fallback = `https://clinaza.in/partner?ref=cardless_emi&mobile=${cleanMobile}&name=${encodeURIComponent(name)}`;
       setCustomerLink(fallback);
       setMaskedMobile(`••••••${cleanMobile.slice(-4)}`);
       setIsSuccess(true);
@@ -222,7 +222,7 @@ export const PatientEligibilityModal: React.FC<PatientEligibilityModalProps> = (
                 </div>
                 <div>
                   <span className="text-[9px] uppercase tracking-wider text-slate-400 block">Lender Network</span>
-                  <span className="font-bold text-slate-200">Easycred / 13 Live NBFCs</span>
+                  <span className="font-bold text-slate-200">PayU & Flexmoney Cardless Network</span>
                 </div>
               </div>
             </div>

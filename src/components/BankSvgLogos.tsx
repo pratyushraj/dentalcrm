@@ -7,94 +7,84 @@ interface BankLogoProps {
   size?: number;
 }
 
-// Map of lenders with local static assets (highest reliability, no CORS/404 risk) and remote fallbacks
+// Map of PayU & Flexmoney Cardless EMI and Bank Affordability Partners
 const BANK_LOGOS: Record<string, { src: string; fallback: string; name: string }> = {
-  // Easycred 13 Multi-Lender Network
-  bajaj: {
-    src: '/assets/lenders/bajaj.png',
-    fallback: 'https://icon.horse/icon/bajajfinserv.in',
-    name: 'Bajaj Finserv',
+  // Infrastructure Gateways
+  payu: {
+    src: '/assets/payu_logo.svg',
+    fallback: '/assets/payu_logo.png',
+    name: 'PayU Affordability',
   },
-  tata: {
-    src: '/assets/lenders/tata.png',
-    fallback: 'https://icon.horse/icon/tatacapital.com',
-    name: 'Tata Capital',
+  flexmoney: {
+    src: '/assets/flexmoney_logo.png',
+    fallback: 'https://flexmoney.in/logo.png',
+    name: 'Flexmoney InstaCred',
   },
-  poonawalla: {
-    src: '/assets/lenders/poonawalla.png',
-    fallback: 'https://icon.horse/icon/poonawallafincorp.com',
-    name: 'Poonawalla Fincorp',
-  },
-  godrej: {
-    src: '/assets/lenders/godrej.png',
-    fallback: 'https://icon.horse/icon/godrejcapital.com',
-    name: 'Godrej Capital',
-  },
-  incred: {
-    src: '/assets/lenders/incred.png',
-    fallback: 'https://icon.horse/icon/incred.com',
-    name: 'InCred Finance',
-  },
-  chola: {
-    src: '/assets/lenders/chola.png',
-    fallback: 'https://icon.horse/icon/cholamandalam.com',
-    name: 'Cholamandalam',
-  },
-  chinmay: {
-    src: '/assets/lenders/chinmay.png',
-    fallback: 'https://icon.horse/icon/chinmayfinlease.com',
-    name: 'Chinmay Finlease',
-  },
+  // PayU & Flexmoney Cardless EMI Lenders
   fibe: {
     src: '/assets/lenders/fibe.png',
     fallback: 'https://icon.horse/icon/fibe.in',
     name: 'FIBE',
   },
-  faircent: {
-    src: '/assets/lenders/faircent.png',
-    fallback: 'https://icon.horse/icon/faircent.in',
-    name: 'Faircent',
+  axio: {
+    src: '/assets/lenders/axio.png',
+    fallback: 'https://icon.horse/icon/axio.co.in',
+    name: 'Axio (ZestMoney)',
   },
-  zype: {
-    src: '/assets/lenders/zype.png',
-    fallback: 'https://icon.horse/icon/getzype.com',
-    name: 'ZYPE',
+  cashe: {
+    src: '/assets/lenders/cashe.png',
+    fallback: 'https://icon.horse/icon/cashe.co.in',
+    name: 'CASHe',
   },
-  olyv: {
-    src: '/assets/lenders/olyv.png',
-    fallback: 'https://icon.horse/icon/olyv.in',
-    name: 'OLYV',
+  kreditbee: {
+    src: '/assets/lenders/kreditbee.png',
+    fallback: 'https://icon.horse/icon/kreditbee.in',
+    name: 'KreditBee',
   },
-  truefund: {
-    src: '/assets/lenders/truefund.png',
-    fallback: 'https://icon.horse/icon/truefund.in',
-    name: 'TrueFund',
+  tvs: {
+    src: '/assets/lenders/tvs.png',
+    fallback: 'https://icon.horse/icon/tvscredit.com',
+    name: 'TVS Credit',
   },
-  mymudra: {
-    src: '/assets/lenders/mymudra.png',
-    fallback: 'https://icon.horse/icon/mymudra.com',
-    name: 'MyMudra',
+  homecredit: {
+    src: '/assets/lenders/homecredit.png',
+    fallback: 'https://icon.horse/icon/homecredit.co.in',
+    name: 'Home Credit',
   },
-  // Major Bank Co-Lending Partners
-  hdfc: {
-    src: '/assets/lenders/hdfc.png',
-    fallback: 'https://icon.horse/icon/hdfcbank.com',
-    name: 'HDFC Bank',
+  lazypay: {
+    src: '/assets/lenders/lazypay.png',
+    fallback: 'https://icon.horse/icon/lazypay.in',
+    name: 'LazyPay',
+  },
+  idfc: {
+    src: '/assets/lenders/idfc.png',
+    fallback: 'https://icon.horse/icon/idfcfirstbank.com',
+    name: 'IDFC FIRST Bank',
   },
   icici: {
     src: '/assets/lenders/icici.png',
     fallback: 'https://icon.horse/icon/icicibank.com',
     name: 'ICICI Bank',
   },
-  axis: {
-    src: '/assets/lenders/axis.png',
-    fallback: 'https://icon.horse/icon/axisbank.com',
-    name: 'Axis Bank',
+  hdfc: {
+    src: '/assets/lenders/hdfc.png',
+    fallback: 'https://icon.horse/icon/hdfcbank.com',
+    name: 'HDFC Bank',
   },
   kotak: {
     src: '/assets/lenders/kotak.png',
     fallback: 'https://icon.horse/icon/kotak.com',
     name: 'Kotak Bank',
+  },
+  axis: {
+    src: '/assets/lenders/axis.png',
+    fallback: 'https://icon.horse/icon/axisbank.com',
+    name: 'Axis Bank',
+  },
+  federal: {
+    src: '/assets/lenders/federal.png',
+    fallback: 'https://icon.horse/icon/federalbank.co.in',
+    name: 'Federal Bank',
   },
 };
 

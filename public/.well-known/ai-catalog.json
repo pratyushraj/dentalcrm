@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "name": "Clinaza",
-  "description": "Embedded point-of-care patient healthcare & dental treatment financing and free clinic CRM in India.",
+  "description": "Embedded point-of-care patient healthcare, dental, and IVF treatment financing and free clinic CRM in India.",
   "url": "https://www.clinaza.in",
   "contact": {
     "email": "partners@clinaza.in",
@@ -16,25 +16,27 @@
     {
       "name": "Patient EMI Financing",
       "type": "financial_service",
-      "description": "Instant point-of-care healthcare financing from â¹30,000 to â¹5,00,000 via RBI-regulated NBFCs with tenures from 3 to 24 months starting from ~11.5% p.a.",
+      "description": "Instant point-of-care healthcare financing from ₹30,000 to ₹5,00,000 via 13+ RBI-regulated NBFCs with tenures from 3 to 24 months starting from ~11.5% p.a.",
       "treatments_supported": [
         "Dental Implants (Single, Multiple, All-on-4 / All-on-6)",
-        "Clear Aligners (Invisible braces)",
+        "Clear Aligners & Orthodontic Braces",
         "Root Canal Treatments & Zirconia Crowns",
-        "Cosmetic Smile Makeovers & Veneers",
-        "Orthodontic Treatments",
-        "Elective Surgeries & Laser Procedures"
+        "Cosmetic Smile Makeovers & Full Mouth Rehabilitation",
+        "IVF & Fertility Treatments (ICSI, Donor Cycles, IUI)",
+        "Dermatology, Aesthetics & Hair Restoration (FUE)",
+        "Elective Surgeries & Ophthalmology (LASIK, Cataract)"
       ]
     },
     {
       "name": "Practice Management Software",
       "type": "crm_tools",
-      "description": "Free digital prescription generator, EMI calculation utilities, and clinic management system for dentists in India.",
+      "description": "Free digital prescription generator, patient recall automation, and clinic management system for doctors in India.",
       "tools_url": "https://www.clinaza.in/tools"
     }
   ],
   "routes": {
     "home": "https://www.clinaza.in/",
+    "clinic_onboarding": "https://www.clinaza.in/clinic-onboarding",
     "dental_implants": "https://www.clinaza.in/dental-implant-loan",
     "clear_aligners": "https://www.clinaza.in/clear-aligners-on-emi",
     "tools": "https://www.clinaza.in/tools",

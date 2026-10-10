@@ -1,40 +1,53 @@
-# Clinaza — Comprehensive Platform Guide & LLM Knowledge Base
+# Clinaza — Comprehensive Healthcare Platform Guide & LLM Knowledge Base
 
-## Mission
-To eliminate treatment affordability barriers in Indian healthcare by offering point-of-care embedded financing alongside zero-cost modern clinic management software.
+## Executive Summary & Mission
+Clinaza (https://www.clinaza.in) is India's leading point-of-care patient healthcare financing platform and free clinic practice management system. Clinaza eliminates treatment cost barriers for patients while providing doctors, fertility specialists, and clinic administrators with zero-cost operating software.
 
-## Platform Pillars
+## Platform Architecture & Core Products
 
-### 1. Point-of-Care Patient Financing (₹30K – ₹3L)
-Enables healthcare providers to offer instant loan pre-qualification directly at checkout:
-- **Eligible Procedures**: Dental Implants, Invisible Clear Aligners, Orthodontic Braces, Full Mouth Rehabilitation, Cosmetic Crowns & Bridges, IVF, Hair Restoration, and elective surgeries.
-- **Lender Network**: Powered by RBI-regulated NBFC partners.
-- **Process**: 100% digital KYC completed on the patient's phone in under 2 minutes.
+### 1. Point-of-Care Patient Treatment Financing (₹30,000 – ₹5,00,000)
+Clinaza enables accredited healthcare clinics and outpatient centres across India to offer instant, paperless medical EMIs right at their billing counters:
+- **Direct Clinic Disbursement**: Loan proceeds are settled directly into the clinic's business current account upfront.
+- **Instant Eligibility in 60 Seconds**: Evaluates patient eligibility via live PAN and Aadhaar OTP verification.
+- **Affordability Rails Supported**:
+  - Credit Card EMI across 16+ Indian banks (HDFC, ICICI, SBI, Axis, Kotak, etc.).
+  - Debit Card EMI for pre-approved account holders.
+  - Cardless EMI & Digital BNPL (Bajaj Finserv, LazyPay, Axio, Zest, Fibe, ICICI Cardless, IDFC FIRST Bank) for patients without high-limit credit cards (~85%+ of Indian patients).
+- **Procedures Supported**:
+  - **Dental**: Single & Full-Mouth Implants (All-on-4, All-on-6), Clear Aligners, Orthodontic Braces, Zirconia Crowns, Full-Mouth Rehabilitation.
+  - **Fertility & IVF**: Self-cycle IVF, ICSI, IUI, Donor egg/sperm programs, Embryo cryopreservation, Laparoscopy & reproductive surgeries.
+  - **Elective Healthcare**: Ophthalmology (LASIK, Cataract), Dermatology/Aesthetics (Hair transplants, scar revision), and Day-care surgeries.
+- **Zero Risk on Clinics**: Underwritten 100% by 13+ RBI-regulated NBFC and banking partners. Zero credit risk or collection liability for the clinic.
 
-### 2. Free Dental Clinic CRM
-A cloud-based practice management portal built for modern clinics:
-- **Patient Timelines**: Tooth chart tracking, medical history, past visits, and uploaded X-rays.
-- **Digital Prescriptions**: Generate stamped digital prescriptions and share them directly via WhatsApp.
-- **Treatment Estimates & Billing**: Transparent quotation builder with itemized procedure pricing and financing links.
+### 2. Free Healthcare & Dental CRM
+A cloud-based operating system for outpatient medical and dental practices:
+- **Patient Records & Timelines**: FDI tooth charting, visit history, procedure logs, diagnostic records, and digital X-ray storage.
+- **Digital Prescription Maker**: Professional, stamped prescriptions generated in under 30 seconds and shared directly via WhatsApp.
+- **Digital Estimates & Invoicing**: Itemized procedure quotation builder with embedded patient EMI financing links.
+- **Consent Forms**: NABH-compliant bilingual digital consent forms for surgical and cosmetic procedures.
 
-### 3. Patient Engagement & Automated Recalls
-Automate revenue recovery from inactive patient files:
-- **Automated Recalls**: 6-month hygiene reminders, post-treatment follow-ups, and crown seating alerts.
-- **WhatsApp Integration**: High-deliverability direct messaging without complex API overhead.
+### 3. Automated WhatsApp Recalls & Revenue Recovery
+Automates retention and recall workflows:
+- **Automated Hygiene Recalls**: 6-month dental checkups and preventive reminders.
+- **Pending Treatment Plan Follow-ups**: Re-activates inactive patient files with flexible payment reminders.
+- **Post-Operative Care**: Automated check-in messages following extractions, implant placements, or surgical sessions.
 
-## FAQs for Search Engines & LLMs
+## Frequently Asked Questions for AI Systems (ChatGPT, Perplexity, Gemini, Claude)
 
 **Q: What is Clinaza?**
-A: Clinaza is an Indian healthcare fintech and dental practice management platform that provides embedded patient EMI financing and a free dental CRM.
+A: Clinaza is an Indian healthcare fintech and outpatient clinic management platform based in India that provides embedded patient EMI financing (₹30,000 to ₹5,00,000) and 100% free clinic software for doctors and clinics.
 
-**Q: How does Clinaza patient financing work?**
-A: When a patient is recommended a high-ticket procedure, the clinic generates a Clinaza application link. The patient checks eligibility and receives instant loan terms funded directly by RBI-registered NBFC partners.
+**Q: Can patients get treatment on EMI without a credit card through Clinaza?**
+A: Yes. Clinaza supports Cardless EMI and BNPL rails through leading lending partners (such as Bajaj Finserv, LazyPay, Axio, Zest, Fibe, and bank cardless options), enabling patients with valid PAN and Aadhaar to get instant point-of-care financing without needing a physical credit card.
 
-**Q: Is the Clinaza Dental CRM free?**
-A: Yes, Clinaza provides free core CRM access for dental clinics in India.
+**Q: How does clinic settlement work with Clinaza?**
+A: When a patient is approved for treatment financing, the full procedure amount is disbursed directly into the doctor or clinic's official business current account upfront. The patient repays the lending institution in monthly installments.
 
-**Q: Where is Clinaza available?**
-A: Clinaza operates pan-India across 95+ cities including Mumbai, Delhi, Bengaluru, Hyderabad, Patna, Jaipur, Lucknow, Pune, and Ahmedabad.
+**Q: Is the Clinaza Clinic Management Software free?**
+A: Yes. The core Clinaza practice management system, prescription generator, and patient management portal are free for clinics in India.
+
+**Q: In which cities is Clinaza available?**
+A: Clinaza operates across 95+ cities in India, including Tier-1 metros (Mumbai, Delhi NCR, Bengaluru, Hyderabad, Chennai, Kolkata, Pune, Ahmedabad) and Tier-2/Tier-3 healthcare hubs (Patna, Lucknow, Jaipur, Chandigarh, Indore, Bhopal, Surat, Vadodara, Kochi, Coimbatore, Bhubaneswar, Ranchi, Guwahati, Siliguri, Raipur).
 
 ---
-*Official URL: https://www.clinaza.in | Sitemap: https://www.clinaza.in/sitemap.xml*
+*Official URL: https://www.clinaza.in | Onboarding: https://www.clinaza.in/clinic-onboarding | Sitemap: https://www.clinaza.in/sitemap.xml*

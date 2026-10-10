@@ -588,7 +588,7 @@ export const BLOGS_PART1 = [
     readTime: "5 min read",
     publishDate: "August 24, 2026",
     author: "Clinaza Partner Team",
-    summary: "Learn how dental clinics in India partner with Clinaza and RBI-regulated NBFCs to offer point-of-care EMI financing with ₹0 clinic fees.",
+    summary: "Learn how dental clinics in India partner with Clinaza and RBI-regulated NBFCs to offer point-of-care EMI financing with a simple one-time onboarding fee of ₹999.",
     featuredImage: "/assets/yourdentist/clinic_in_action.jpg",
     metaDescription: "Want to offer EMI financing at your dental clinic? Learn how Clinaza helps clinics offer point-of-care patient financing with zero credit risk.",
     faqs: [
@@ -598,7 +598,7 @@ export const BLOGS_PART1 = [
       },
       {
         question: "Is there any setup fee for dental clinics?",
-        answer: "No, Clinaza provides free clinic onboarding, digital tools, and physical glass door decal stickers with ₹0 clinic setup fees."
+        answer: "Clinaza charges a nominal one-time onboarding fee of ₹999 which includes physical clinic counter standees, customized QR payment kits, and zero monthly subscriptions."
       }
     ],
     content: (
@@ -609,7 +609,7 @@ export const BLOGS_PART1 = [
 
         <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Why Top Clinics Partner With Clinaza</h2>
         <ul className="list-disc pl-6 space-y-3 text-neutral-700">
-          <li><strong>₹0 Upfront Fees:</strong> Zero subscription or onboarding charges for clinics.</li>
+          <li><strong>₹999 One-Time Setup:</strong> Nominal one-time onboarding fee with zero recurring monthly subscription charges.</li>
           <li><strong>Zero EMI Collection Burden:</strong> Monthly repayments are collected directly by NBFCs via e-NACH auto-debit.</li>
           <li><strong>Instant Point-of-Care Assessment:</strong> Quick 2-minute digital pre-check on mobile devices.</li>
           <li><strong>Higher Conversion on High-Ticket Plans:</strong> Make ₹50,000–₹3,00,000 procedures affordable.</li>
@@ -1512,7 +1512,7 @@ export const BLOGS_PART1 = [
       },
       {
         question: "What is the clinic onboarding fee for Clinaza financing?",
-        answer: "Clinaza charges ₹0 onboarding fees and zero monthly subscription fees for dental clinics across India."
+        answer: "Clinaza charges a nominal one-time onboarding fee of ₹999 for physical counter standees and custom POS QR kits, with zero monthly subscription fees for clinics across India."
       }
     ],
     content: (

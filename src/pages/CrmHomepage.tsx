@@ -276,8 +276,8 @@ export default function CrmHomepage() {
       a: 'Zero credit risk on the clinic. The loan is funded, serviced, and collected directly by PayU & Flexmoney regulated lending partners via automated monthly e-NACH auto-debit.'
     },
     {
-      q: 'Does the clinic pay any upfront fee?',
-      a: 'No upfront fees for clinics. Partner clinics receive physical branding kits, QR standees, and onboarding support free of charge.'
+      q: 'What is the onboarding fee for clinics?',
+      a: 'Clinaza charges a nominal one-time onboarding fee of ₹999 for physical counter QR standees, clinic marketing kits, and lending gateway integration. There are zero recurring monthly subscriptions.'
     },
     {
       q: 'What documents does the patient need?',
@@ -379,10 +379,10 @@ export default function CrmHomepage() {
               },
               {
                 "@type": "Question",
-                "name": "Does the clinic pay any upfront fee?",
+                "name": "What is the onboarding fee for clinics?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "No upfront fees for clinics. Partner clinics receive physical branding kits, QR standees, and onboarding support free of charge."
+                  "text": "Clinaza charges a nominal one-time onboarding fee of ₹999 for physical counter QR standees, clinic marketing kits, and lending gateway integration. There are zero recurring monthly subscriptions."
                 }
               },
               {
@@ -1325,7 +1325,6 @@ export default function CrmHomepage() {
                     title: 'Debit Card EMI',
                     partner: 'HDFC, ICICI, Axis, Kotak, Federal',
                     desc: 'Pre-approved EMIs directly on patient’s existing savings bank debit card with zero additional paperwork.',
-                    badge: 'No New Credit Card',
                     tagColor: 'bg-purple-50 text-purple-700 border-purple-200'
                   },
                   {
@@ -1339,9 +1338,11 @@ export default function CrmHomepage() {
                   <div key={idx} className="bg-white border border-slate-200/90 rounded-2xl p-4 space-y-2 shadow-2xs hover:shadow-xs transition-shadow">
                     <div className="flex items-center justify-between gap-1">
                       <span className="text-xs font-black text-[#0B2450]">{mode.title}</span>
-                      <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded border ${mode.tagColor}`}>
-                        {mode.badge}
-                      </span>
+                      {mode.badge && (
+                        <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded border ${mode.tagColor}`}>
+                          {mode.badge}
+                        </span>
+                      )}
                     </div>
                     <div className="text-[10px] font-bold text-[#0867E8]">{mode.partner}</div>
                     <p className="text-[11px] text-slate-600 leading-relaxed">{mode.desc}</p>
@@ -1359,15 +1360,15 @@ export default function CrmHomepage() {
             <h2 className="text-2xl sm:text-4xl font-black text-[#0B2450]">Why Clinics Use Clinaza</h2>
           </div>
 
-          {/* Prominent ₹0 Clinic Fees Highlight Badge */}
-          <div className="bg-gradient-to-r from-[#0f7a75]/10 to-[#0867E8]/10 border border-[#0f7a75]/30 p-5 rounded-2xl text-center max-w-2xl mx-auto shadow-2xs">
-            <span className="text-2xl font-black text-[#0f7a75] block">₹0 Clinic Fees</span>
-            <p className="text-xs font-bold text-[#0B2450] mt-0.5">No upfront fee or EMI collection responsibility for the clinic.</p>
+          {/* Prominent ₹999 One-Time Onboarding Fee Highlight Badge */}
+          <div className="bg-gradient-to-r from-blue-50/80 via-emerald-50/50 to-blue-50/80 border border-blue-200/90 p-5 rounded-2xl text-center max-w-2xl mx-auto shadow-2xs">
+            <span className="text-2xl font-black text-[#0867E8] block">₹999 One-Time Onboarding Fee</span>
+            <p className="text-xs font-bold text-[#0B2450] mt-1">One-time setup for custom counter QR standee &amp; lending integration. Zero recurring monthly subscriptions.</p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-left">
             {[
-              { title: '₹0 Upfront Fee', desc: 'Free setup and branding materials for onboarded clinics.' },
+              { title: '₹999 One-Time Setup', desc: 'One-time onboarding includes custom QR standee kit. Zero recurring monthly fees.' },
               { title: 'Free Clinic CRM & EMR Portal', desc: '100% free patient reactivation & treatment follow-up portal for life.' },
               { title: 'No EMI Collection Burden', desc: 'No chasing patients for repayments — handled entirely by NBFC.' },
               { title: 'Financing by Partners', desc: 'All loans funded and serviced by RBI-regulated lenders.' },

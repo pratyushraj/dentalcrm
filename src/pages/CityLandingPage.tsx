@@ -218,12 +218,12 @@ export default function CityLandingPage() {
           </p>
         </section>
 
-        {/* ₹0 Clinic Fee Banner */}
-        <section className="py-6 px-4 sm:px-6 bg-gradient-to-r from-[#0f7a75]/10 to-[#0867E8]/10 border-y border-[#0f7a75]/20">
+        {/* ₹999 One-Time Clinic Onboarding Fee Banner */}
+        <section className="py-6 px-4 sm:px-6 bg-gradient-to-r from-blue-50/80 via-emerald-50/50 to-blue-50/80 border-y border-blue-200/90">
           <div className="max-w-3xl mx-auto text-center space-y-1">
-            <p className="text-2xl font-black text-[#0f7a75]">₹0 Clinic Fees</p>
+            <p className="text-2xl font-black text-[#0867E8]">₹999 One-Time Onboarding Fee</p>
             <p className="text-xs font-bold text-[#0B2450]">
-              No upfront fee or EMI collection responsibility for {name} dental clinics.
+              One-time setup for {name} dental clinics including counter QR kit. No recurring monthly subscriptions.
             </p>
           </div>
         </section>
@@ -296,7 +296,7 @@ export default function CityLandingPage() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {[
-              { title: '₹0 Upfront Fee', desc: 'Free setup, free branding materials. No monthly charges.' },
+              { title: '₹999 One-Time Setup', desc: 'One-time onboarding includes custom QR standee kit. No monthly charges.' },
               { title: 'No EMI Collection Burden', desc: 'EMIs auto-debited by NBFC. Clinic has zero collection risk.' },
               { title: 'RBI-Regulated Partners', desc: 'All financing provided by licensed banks and NBFCs.' },
               { title: 'Convert High-Ticket Cases', desc: 'Turn ₹50,000+ treatment hesitations into immediate appointments.' },
@@ -329,7 +329,7 @@ export default function CityLandingPage() {
               },
               {
                 q: `Is there any fee for dental clinics in ${name} to join Clinaza?`,
-                a: `No. Clinaza onboarding is completely free for dental clinics in ${name}. There is no monthly subscription, no setup fee, and no EMI collection responsibility for the clinic.`,
+                a: `Clinaza charges a nominal one-time onboarding fee of ₹999 for dental clinics in ${name}, which includes custom counter QR standees and lending gateway setup. There are zero monthly subscriptions and zero EMI collection responsibilities for your clinic.`,
               },
             ].map((faq, i) => (
               <div key={i} className="bg-white border border-slate-200 p-5 rounded-2xl space-y-2 shadow-sm">

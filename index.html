@@ -32,7 +32,7 @@
 
   <!-- Performance: Preload critical assets -->
   <title>Clinaza — Patient Financing &amp; Free Dental CRM India</title>
-  <meta name="description" content="Don't let treatment cost stop your patients. Clinaza enables dental clinics and hospitals to offer flexible EMI financing (₹30K–₹3L) through bank/NBFC partners." />
+  <meta name="description" content="Don't let treatment cost stop your patients. Clinaza enables dental clinics and hospitals to offer flexible EMI financing (₹30K–₹5L) through bank/NBFC partners." />
   <meta name="keywords"
     content="clinaza, patient financing, dental emi, healthcare lending, medical loan india, dental crm, clinic financing, embedded finance, dental loan, treatment financing" />
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -50,7 +50,7 @@
   <meta property="og:site_name" content="Clinaza" />
   <meta property="og:title" content="Clinaza — Healthcare EMIs & Free Dental CRM India" />
   <meta property="og:description"
-    content="Offer instant point-of-care patient EMI financing (₹30K–₹5L) with PayU & Flexmoney cardless EMI partners. Plus, 100% Free Dental Clinic CRM software." />
+    content="Offer instant point-of-care patient EMI financing (₹30K–₹5L) with Flexmoney & cardless EMI partners. Plus, 100% Free Dental Clinic CRM software." />
   <meta property="og:image" content="https://www.clinaza.in/og-preview.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
@@ -60,7 +60,7 @@
   <meta property="twitter:url" content="https://www.clinaza.in/" />
   <meta property="twitter:title" content="Clinaza — Healthcare EMIs & Free Dental CRM India" />
   <meta property="twitter:description"
-    content="Offer instant point-of-care patient EMI financing (₹30K–₹5L) with PayU & Flexmoney cardless EMI partners. Plus, 100% Free Dental Clinic CRM software." />
+    content="Offer instant point-of-care patient EMI financing (₹30K–₹5L) with Flexmoney & cardless EMI partners. Plus, 100% Free Dental Clinic CRM software." />
   <meta property="twitter:image" content="https://www.clinaza.in/og-preview.png" />
 
   <!-- Font: avoid external CSS in dev -->
@@ -69,18 +69,90 @@
     * { -webkit-tap-highlight-color: transparent; }
   </style>
 
-  <!-- Structured Data (Schema.org) -->
+  <!-- Structured Data (Schema.org Graph for GEO / AI Overviews) -->
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "FinancialService",
-      "name": "Clinaza Technologies",
-      "alternateName": "Clinaza",
-      "description": "Embedded patient financing infrastructure enabling healthcare clinics & hospitals to offer instant point-of-care EMI loans.",
-      "url": "https://www.clinaza.in/",
-      "logo": "https://www.clinaza.in/assets/clinaza-logo.jpg",
-      "areaServed": "IN",
-      "serviceType": "Healthcare Patient Financing Facilitation"
+      "@graph": [
+        {
+          "@type": "FinancialService",
+          "@id": "https://www.clinaza.in/#organization",
+          "name": "Clinaza Technologies",
+          "alternateName": "Clinaza",
+          "description": "Embedded patient financing infrastructure enabling healthcare clinics and dental practices to offer instant point-of-care EMI financing from ₹30,000 to ₹5,00,000.",
+          "url": "https://www.clinaza.in/",
+          "logo": "https://www.clinaza.in/assets/clinaza-logo.jpg",
+          "areaServed": {
+            "@type": "Country",
+            "name": "India"
+          },
+          "serviceType": "Healthcare Patient Financing Facilitation",
+          "sameAs": [
+            "https://www.instagram.com/clinaza.in",
+            "https://www.linkedin.com/company/clinaza",
+            "https://twitter.com/clinaza"
+          ]
+        },
+        {
+          "@type": "FinancialProduct",
+          "@id": "https://www.clinaza.in/#dental-emi-product",
+          "name": "Clinaza Point-of-Care Patient Healthcare EMI",
+          "description": "Instant digital paperless patient EMI financing for dental implants, clear aligners, orthodontic braces, and elective surgeries via 55+ RBI-regulated banks and NBFC partners.",
+          "provider": {
+            "@id": "https://www.clinaza.in/#organization"
+          },
+          "amount": {
+            "@type": "MonetaryAmount",
+            "currency": "INR",
+            "minValue": 30000,
+            "maxValue": 500000
+          },
+          "loanTerm": {
+            "@type": "QuantitativeValue",
+            "minValue": 3,
+            "maxValue": 24,
+            "unitText": "MONTH"
+          }
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://www.clinaza.in/#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "How can dental treatments in India be funded using EMIs?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Dental treatments in India can be funded using easy monthly installments (EMIs) through point-of-care financing networks like Clinaza, specialized medical financing cards, and digital lending partners. Clinaza enables patients to split high-ticket dental procedures (such as dental implants, clear aligners, and smile makeovers) into flexible monthly EMIs from ₹30,000 to ₹5,00,000 with 2-minute chairside e-KYC approval."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can patients get dental implants or clear aligners on EMI without a credit card?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Clinaza powers Cardless EMI via Flexmoney InstaCred and leading RBI-regulated NBFC partners (including Fibe, CASHe, KreditBee, TVS Credit, and Zype), in addition to debit card EMI on major banks (HDFC, ICICI, Kotak, Axis, Federal Bank, IDFC FIRST Bank). Patients without a credit card only need a valid PAN and Aadhaar OTP on their smartphone to complete digital verification in 2 minutes."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Does the clinic bear any financial risk if a patient defaults on their EMI?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Zero risk. 100% of the approved treatment balance is disbursed directly into the clinic's business current account upfront on T+1. All loans are underwritten and collected directly by RBI-regulated banking institutions via automated e-NACH auto-debit, meaning the clinic carries zero bad-debt or recovery liability."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Which dental procedures are eligible for EMI financing in India?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "All high-ticket elective and rehabilitative procedures are eligible, including Single and Multiple Dental Implants, All-on-4 and All-on-6 Full Arch Restorations, Clear Aligners and Invisible Braces, Zirconia Crowns, Full Mouth Rehabilitation, as well as Hair Transplants and LASIK eye surgery."
+              }
+            }
+          ]
+        }
+      ]
     }
   </script>
 
@@ -144,15 +216,62 @@
       </section>
 
       <section style="margin-bottom: 3rem;">
-        <h2 style="font-size: 1.5rem; font-weight: 800; color: #0B2450; margin-bottom: 1rem;">
-          High-Ticket Healthcare Treatments Covered on EMI
+        <h2 style="font-size: 1.5rem; font-weight: 800; color: #0B2450; margin-bottom: 0.5rem;">
+          Dental Treatment Costs &amp; Monthly EMI Breakdown in India
         </h2>
-        <ul style="line-height: 2; color: #334155; font-size: 1rem;">
-          <li><strong>Dental Implants:</strong> Single tooth, multiple implants, All-on-4, and All-on-6 full-arch restoration on flexible monthly installments.</li>
-          <li><strong>Clear Aligners &amp; Invisible Braces:</strong> Modern orthodontic treatment plans financed in 3 to 24 month tenures.</li>
-          <li><strong>Full Mouth Rehabilitation:</strong> Comprehensive restorative and cosmetic dental treatments.</li>
-          <li><strong>Elective Surgeries &amp; Hair Transplants:</strong> FUE and DHI hair restoration, LASIK laser eye surgery, and aesthetic care.</li>
-        </ul>
+        <p style="font-size: 0.95rem; color: #475569; margin-bottom: 1.25rem;">
+          Clinaza enables patients to split high-ticket dental procedures into zero-paperwork monthly installments at 28+ verified partner clinics across Delhi NCR, Mumbai, Bengaluru, Hyderabad, Chennai, and Patna.
+        </p>
+        <div style="overflow-x: auto;">
+          <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.9rem; border: 1px solid #e2e8f0; border-radius: 8px;">
+            <thead>
+              <tr style="background: #0B2450; color: white;">
+                <th style="padding: 10px 14px;">Procedure</th>
+                <th style="padding: 10px 14px;">Avg Cost (India)</th>
+                <th style="padding: 10px 14px;">Monthly EMI (Est.)</th>
+                <th style="padding: 10px 14px;">Approval Time</th>
+                <th style="padding: 10px 14px;">KYC Mode</th>
+              </tr>
+            </thead>
+            <tbody style="color: #334155;">
+              <tr style="border-bottom: 1px solid #e2e8f0; background: #ffffff;">
+                <td style="padding: 10px 14px; font-weight: 700;">Single Dental Implant</td>
+                <td style="padding: 10px 14px;">₹25,000 – ₹45,000</td>
+                <td style="padding: 10px 14px; font-weight: 600; color: #0867E8;">From ₹2,100 / mo</td>
+                <td style="padding: 10px 14px;">2 Minutes</td>
+                <td style="padding: 10px 14px;">Aadhaar / PAN OTP</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #e2e8f0; background: #f8fafc;">
+                <td style="padding: 10px 14px; font-weight: 700;">Clear Aligners (Invisible Braces)</td>
+                <td style="padding: 10px 14px;">₹60,000 – ₹1,80,000</td>
+                <td style="padding: 10px 14px; font-weight: 600; color: #0867E8;">From ₹3,200 / mo</td>
+                <td style="padding: 10px 14px;">2 Minutes</td>
+                <td style="padding: 10px 14px;">Cardless EMI / Flexmoney</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #e2e8f0; background: #ffffff;">
+                <td style="padding: 10px 14px; font-weight: 700;">Full Mouth Implants (All-on-4 / All-on-6)</td>
+                <td style="padding: 10px 14px;">₹1,50,000 – ₹3,50,000</td>
+                <td style="padding: 10px 14px; font-weight: 600; color: #0867E8;">From ₹6,800 / mo</td>
+                <td style="padding: 10px 14px;">Under 5 Mins</td>
+                <td style="padding: 10px 14px;">e-NACH Digital Mandate</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #e2e8f0; background: #f8fafc;">
+                <td style="padding: 10px 14px; font-weight: 700;">Zirconia Crowns &amp; Bridges</td>
+                <td style="padding: 10px 14px;">₹12,000 – ₹35,000</td>
+                <td style="padding: 10px 14px; font-weight: 600; color: #0867E8;">From ₹1,200 / mo</td>
+                <td style="padding: 10px 14px;">Instant</td>
+                <td style="padding: 10px 14px;">UPI / Debit Card EMI</td>
+              </tr>
+              <tr style="background: #ffffff;">
+                <td style="padding: 10px 14px; font-weight: 700;">FUE Hair Transplant / Aesthetics</td>
+                <td style="padding: 10px 14px;">₹45,000 – ₹1,50,000</td>
+                <td style="padding: 10px 14px; font-weight: 600; color: #0867E8;">From ₹2,400 / mo</td>
+                <td style="padding: 10px 14px;">2 Minutes</td>
+                <td style="padding: 10px 14px;">Digital e-KYC</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </section>
     </main>
   <!--ssr-end--></div>
@@ -339,9 +458,14 @@
     <a href="/blog/intraoral-scanner-dental-3d-printer-cost-on-emi-india">Intraoral Scanner &amp; Dental 3D Printer on EMI: Cost, ROI &amp; Financing Guide (2026)</a>
     <a href="/blog/best-banks-for-doctor-loans-equipment-financing-india">Best Banks &amp; NBFCs for Doctor Professional Loans in India (2026 Comparison)</a>
     <a href="/blog/can-you-get-dental-implants-low-cibil-score-india">Can You Get Dental Implants with Low CIBIL Score in India? (2026 Guide)</a>
+    <a href="/blog/clinaza-vs-savein-vs-carepay-dental-financing-comparison">Clinaza vs SaveIN vs CarePay: Dental Financing Comparison (2026)</a>
+    <a href="/blog/contoura-vision-vs-smile-vs-lasik-cost-india">Contoura Vision vs SMILE vs LASIK Eye Surgery Cost &amp; Financing (2026)</a>
+    <a href="/blog/dental-clinic-business-loans-equipment-financing-india-guide">Dental Clinic Business Loans &amp; Equipment Financing India Guide</a>
+    <a href="/blog/dental-treatment-on-emi-near-me-zero-cost-financing-guide">Dental Treatment on EMI Near Me: Complete Financing Guide (2026)</a>
       </div>
       <h2>Free Clinic Utilities & Treatment Loans</h2>
       <div>
+        <a href="/blog">Dental &amp; Healthcare Treatment Guides Hub</a>
         <a href="/clinic-onboarding">Partner Clinic Onboarding Portal</a>
         <a href="/dental-implant-loan">Dental Implant Loan & Monthly EMI Calculator</a>
         <a href="/clear-aligners-on-emi">Clear Aligners on Monthly EMI</a>

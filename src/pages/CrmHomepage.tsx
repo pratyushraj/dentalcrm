@@ -28,6 +28,7 @@ import { toast } from 'sonner';
 import { SEOHead } from '@/components/seo/SEOHead';
 import { BankSvgLogo } from '@/components/BankSvgLogos';
 import { CITIES } from '@/data/cities';
+import { TaglineReveal } from '@/components/TaglineReveal';
 // ── Scroll Fade-In Wrapper ──────────────────────────────
 const FadeIn: React.FC<{ children: React.ReactNode; className?: string }> = ({ children, className = '' }) => {
   const { ref, visible } = useInView(0.12);
@@ -180,7 +181,7 @@ export default function CrmHomepage() {
 
       const redirectUrl = (result.success && result.data?.customerLink)
         ? result.data.customerLink
-        : (result.fallbackLink || `https://clinaza.in/partner?ref=cardless_emi&mobile=${cleanMobile}&name=${encodeURIComponent(patientData.name)}`);
+        : (result.fallbackLink || `https://www.clinaza.in/partner?ref=cardless_emi&mobile=${cleanMobile}&name=${encodeURIComponent(patientData.name)}`);
 
       const masked = (result.success && result.data?.maskedMobile)
         ? result.data.maskedMobile
@@ -191,7 +192,7 @@ export default function CrmHomepage() {
       setIsFinancingSuccess(true);
     } catch (err) {
       console.error('Error initiating financing:', err);
-      const fallbackUrl = `https://clinaza.in/partner?ref=cardless_emi&mobile=${cleanMobile}&name=${encodeURIComponent(patientData.name)}`;
+      const fallbackUrl = `https://www.clinaza.in/partner?ref=cardless_emi&mobile=${cleanMobile}&name=${encodeURIComponent(patientData.name)}`;
       setCustomerLink(fallbackUrl);
       setMaskedMobile(`••••••${cleanMobile.slice(-4)}`);
       setIsFinancingSuccess(true);
@@ -265,7 +266,7 @@ export default function CrmHomepage() {
     },
     {
       q: 'Can patients get treatment on EMI without a credit card (Cardless EMI)?',
-      a: 'Yes. Clinaza powers Cardless EMIs exclusively in partnership with PayU and Flexmoney (InstaCred) cardless lenders (including Fibe, Axio, LazyPay, CASHe, KreditBee, TVS Credit, and Home Credit). Patients without a credit card only need a valid PAN and Aadhaar OTP to split treatments into monthly EMIs. Additionally, Credit Card EMI across 21+ banks, Debit Card EMI, and Down Payment + EMI options are fully supported.'
+      a: 'Yes. Clinaza powers Cardless EMIs in partnership with Flexmoney (InstaCred) and leading cardless healthcare lenders (including Fibe, CASHe, KreditBee, TVS Credit, and Zype). Patients without a credit card only need a valid PAN and Aadhaar OTP to split treatments into monthly EMIs. Additionally, Credit Card EMI across 21+ banks, Debit Card EMI, and Down Payment + EMI options are fully supported.'
     },
     {
       q: 'Are IVF and fertility treatments eligible for monthly EMI financing?',
@@ -273,7 +274,7 @@ export default function CrmHomepage() {
     },
     {
       q: 'Does the clinic bear any credit risk?',
-      a: 'Zero credit risk on the clinic. The loan is funded, serviced, and collected directly by PayU & Flexmoney regulated lending partners via automated monthly e-NACH auto-debit.'
+      a: 'Zero credit risk on the clinic. The loan is funded, serviced, and collected directly by Flexmoney & regulated lending partners via automated monthly e-NACH auto-debit.'
     },
     {
       q: 'What is the onboarding fee for clinics?',
@@ -297,7 +298,7 @@ export default function CrmHomepage() {
     <div className="min-h-screen bg-white text-[#0B2450] font-sora antialiased overflow-x-hidden selection:bg-[#0867E8] selection:text-white">
       <SEOHead
         title="Clinaza — Healthcare EMIs & Free Dental CRM India"
-        description="Offer instant point-of-care patient EMI financing (₹30K–₹5L) with PayU & Flexmoney cardless EMI lenders. Plus, 100% Free Dental Clinic CRM software."
+        description="Offer instant point-of-care patient EMI financing (₹30K–₹5L) with Flexmoney & cardless EMI lenders. Plus, 100% Free Dental Clinic CRM software."
         keywords={[
           'clinaza', 'clinaza patient financing', 'clinaza healthpay', 'clinaza healthcare emi',
           'medical equipment loan for dentist', 'loan for dental clinic', 'loan for dentist', 'dental equipment loan emi',
@@ -308,8 +309,8 @@ export default function CrmHomepage() {
           'dental prescription software free', 'whatsapp patient recall dental',
           'lasik on emi', 'ivf treatment emi', 'hair transplant financing india'
         ]}
-        image="https://clinaza.in/og-clinaza.png"
-        canonicalUrl="https://clinaza.in/"
+        image="https://www.clinaza.in/og-clinaza.png"
+        canonicalUrl="https://www.clinaza.in/"
         jsonLd={[
           {
             "@context": "https://schema.org",
@@ -323,11 +324,11 @@ export default function CrmHomepage() {
               "priceCurrency": "INR"
             },
             "description": "100% Free Dental Clinic Management CRM in India with automated WhatsApp patient recalls, digital FDI tooth charting, digital prescriptions, and point-of-care patient EMI financing.",
-            "url": "https://clinaza.in/",
+            "url": "https://www.clinaza.in/",
             "author": {
               "@type": "Organization",
               "name": "Clinaza Technologies",
-              "url": "https://clinaza.in"
+              "url": "https://www.clinaza.in"
             }
           },
           {
@@ -335,9 +336,9 @@ export default function CrmHomepage() {
             "@type": "FinancialService",
             "name": "Clinaza",
             "description": "Embedded patient financing infrastructure enabling healthcare clinics & hospitals to offer point-of-care EMI loans.",
-            "url": "https://clinaza.in/",
-            "logo": "https://clinaza.in/assets/clinaza-logo.jpg",
-            "image": "https://clinaza.in/og-clinaza.png",
+            "url": "https://www.clinaza.in/",
+            "logo": "https://www.clinaza.in/assets/clinaza-logo.jpg",
+            "image": "https://www.clinaza.in/og-clinaza.png",
             "areaServed": "IN",
             "serviceType": "Healthcare Patient Financing Infrastructure"
           },
@@ -374,7 +375,7 @@ export default function CrmHomepage() {
                 "name": "Does the clinic bear any credit risk?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Zero credit risk on the clinic. The loan is funded, serviced, and collected directly by PayU & Flexmoney regulated lending partners via automated monthly e-NACH auto-debit."
+                  "text": "Zero credit risk on the clinic. The loan is funded, serviced, and collected directly by Flexmoney & regulated lending partners via automated monthly e-NACH auto-debit."
                 }
               },
               {
@@ -398,7 +399,7 @@ export default function CrmHomepage() {
                 "name": "Can patients get treatment on EMI without a credit card (Cardless EMI)?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Yes. Clinaza powers Cardless EMIs exclusively in partnership with PayU and Flexmoney (InstaCred) cardless lenders (including Fibe, Axio, LazyPay, CASHe, KreditBee, TVS Credit, and Home Credit). Patients without a credit card only need a valid PAN and Aadhaar OTP to split treatments into monthly EMIs. Additionally, Credit Card EMI across 21+ banks, Debit Card EMI, and Down Payment + EMI options are fully supported."
+                  "text": "Yes. Clinaza powers Cardless EMIs in partnership with Flexmoney (InstaCred) and leading cardless healthcare lenders (including Fibe, CASHe, KreditBee, TVS Credit, and Zype). Patients without a credit card only need a valid PAN and Aadhaar OTP to split treatments into monthly EMIs. Additionally, Credit Card EMI across 21+ banks, Debit Card EMI, and Down Payment + EMI options are fully supported."
                 }
               },
               {
@@ -425,15 +426,15 @@ export default function CrmHomepage() {
             "name": "Clinaza Partner Dental Clinics",
             "description": "Dental clinics across India offering Clinaza point-of-care EMI patient financing",
             "itemListElement": [
-              { "@type": "ListItem", "position": 1, "name": "YOUR DENTIST Patna", "url": "https://clinaza.in/cities/patna" },
-              { "@type": "ListItem", "position": 2, "name": "PRODENT Patna", "url": "https://clinaza.in/cities/patna" },
-              { "@type": "ListItem", "position": 3, "name": "GuMzy Dental Gurgaon", "url": "https://clinaza.in/cities/gurgaon" },
-              { "@type": "ListItem", "position": 4, "name": "Facio Dental Patna", "url": "https://clinaza.in/cities/patna" },
-              { "@type": "ListItem", "position": 5, "name": "Smile Dental Clinic Patna", "url": "https://clinaza.in/cities/patna" },
-              { "@type": "ListItem", "position": 6, "name": "Smile Point Dental Care Patna", "url": "https://clinaza.in/cities/patna" },
-              { "@type": "ListItem", "position": 7, "name": "YouthONN Multispeciality Dental Patna", "url": "https://clinaza.in/cities/patna" },
-              { "@type": "ListItem", "position": 8, "name": "Mundeshwari Dental Hub & Implant Patna", "url": "https://clinaza.in/cities/patna" },
-              { "@type": "ListItem", "position": 9, "name": "Pratima Dental Hospital Patna", "url": "https://clinaza.in/cities/patna" },
+              { "@type": "ListItem", "position": 1, "name": "YOUR DENTIST Patna", "url": "https://www.clinaza.in/cities/patna" },
+              { "@type": "ListItem", "position": 2, "name": "PRODENT Patna", "url": "https://www.clinaza.in/cities/patna" },
+              { "@type": "ListItem", "position": 3, "name": "GuMzy Dental Gurgaon", "url": "https://www.clinaza.in/cities/gurgaon" },
+              { "@type": "ListItem", "position": 4, "name": "Facio Dental Patna", "url": "https://www.clinaza.in/cities/patna" },
+              { "@type": "ListItem", "position": 5, "name": "Smile Dental Clinic Patna", "url": "https://www.clinaza.in/cities/patna" },
+              { "@type": "ListItem", "position": 6, "name": "Smile Point Dental Care Patna", "url": "https://www.clinaza.in/cities/patna" },
+              { "@type": "ListItem", "position": 7, "name": "YouthONN Multispeciality Dental Patna", "url": "https://www.clinaza.in/cities/patna" },
+              { "@type": "ListItem", "position": 8, "name": "Mundeshwari Dental Hub & Implant Patna", "url": "https://www.clinaza.in/cities/patna" },
+              { "@type": "ListItem", "position": 9, "name": "Pratima Dental Hospital Patna", "url": "https://www.clinaza.in/cities/patna" },
               { "@type": "ListItem", "position": 10, "name": "Dantsri Dental Hospital Jhanjharpur", "url": "https://www.instagram.com/dantsri_dental/" }
             ]
           }
@@ -453,11 +454,9 @@ export default function CrmHomepage() {
             </Link>
 
             {/* Header Co-brand Trust Pill */}
-            <div className="hidden xl:flex items-center gap-2.5 px-3 py-1.5 bg-slate-50/90 border border-slate-200/90 rounded-xl shadow-2xs">
-              <span className="text-[10px] font-black uppercase text-slate-500 tracking-wider">Affordability Partners:</span>
-              <img src="/assets/payu_logo.svg" alt="PayU" style={{ height: '13px', width: 'auto' }} className="object-contain shrink-0" />
-              <span className="text-slate-300">|</span>
-              <img src="/assets/flexmoney_logo.png" alt="Flexmoney" style={{ height: '18px', width: 'auto' }} className="object-contain shrink-0" />
+            <div className="hidden xl:flex items-center gap-2 px-3 py-1.5 bg-slate-50/90 border border-slate-200/90 rounded-xl shadow-2xs">
+              <span className="text-[10px] font-black uppercase text-slate-500 tracking-wider">Affordability Partner:</span>
+              <img src="/assets/flexmoney_logo.png" alt="Flexmoney InstaCred" style={{ height: '18px', width: 'auto' }} className="object-contain shrink-0" />
             </div>
           </div>
           <div className="flex items-center gap-1.5 sm:gap-2.5">
@@ -519,9 +518,7 @@ export default function CrmHomepage() {
             <div className="md:col-span-7 space-y-3.5 sm:space-y-5">
               <div className="inline-flex items-center gap-2 sm:gap-2.5 px-3 sm:px-3.5 py-1 sm:py-1.5 bg-gradient-to-r from-blue-50/90 to-slate-100 border border-blue-200/80 rounded-full text-xs font-semibold text-slate-800 shadow-2xs flex-wrap">
                 <span className="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-                <span className="text-[10px] font-black text-slate-600 uppercase tracking-widest">Official Partnership:</span>
-                <img src="/assets/payu_logo.svg" alt="PayU" style={{ height: '13px', width: 'auto' }} className="object-contain shrink-0" />
-                <span className="text-slate-400 font-normal">&amp;</span>
+                <span className="text-[10px] font-black text-slate-600 uppercase tracking-widest">Official Lending Partner:</span>
                 <img src="/assets/flexmoney_logo.png" alt="Flexmoney InstaCred" style={{ height: '17px', width: 'auto' }} className="object-contain shrink-0" />
                 <span className="text-slate-300 hidden sm:inline">&bull;</span>
                 <span className="text-[10px] font-bold text-slate-600 hidden sm:inline">35+ EMI Modes</span>
@@ -556,7 +553,7 @@ export default function CrmHomepage() {
                 </Link>
               </div>
 
-              {/* ── Official PayU & Flexmoney Partnership Institutional Card ── */}
+              {/* ── Official Flexmoney Partnership Institutional Card ── */}
               <div className="p-3 sm:p-4 rounded-2xl bg-gradient-to-br from-white via-slate-50 to-blue-50/50 border border-blue-200/90 shadow-sm space-y-2.5">
                 <div className="flex items-center justify-between gap-2 border-b border-slate-200/80 pb-2">
                   <div className="flex items-center gap-1.5 sm:gap-2">
@@ -577,16 +574,14 @@ export default function CrmHomepage() {
                 <div className="hidden sm:flex flex-row items-center justify-between gap-3.5 pt-0.5">
                   <div className="space-y-1">
                     <p className="text-sm font-black text-[#0B2450] tracking-tight">
-                      Healthcare Affordability In Partnership with PayU &amp; Flexmoney
+                      Healthcare Affordability In Partnership with Flexmoney (InstaCred)
                     </p>
                     <p className="text-[11px] text-slate-600 leading-relaxed">
-                      Clinaza has partnered with <strong>PayU</strong> and <strong>Flexmoney (InstaCred)</strong> to provide point-of-care patient financing directly at dental and outpatient clinic counters. Patients get paperless Cardless EMIs, pre-approved Debit Card EMIs, and 21+ major banks' Credit Card EMIs in 2 minutes.
+                      Clinaza has partnered with <strong>Flexmoney (InstaCred)</strong> to provide point-of-care patient financing directly at dental and outpatient clinic counters. Patients get paperless Cardless EMIs, pre-approved Debit Card EMIs, and 21+ major banks' Credit Card EMIs in 2 minutes.
                     </p>
                   </div>
                   <div className="flex items-center gap-3.5 bg-white px-4 py-2 rounded-xl border border-slate-200 shadow-2xs shrink-0">
-                    <img src="/assets/payu_logo.svg" alt="PayU Official Affordability Partner" style={{ height: '16px', width: 'auto' }} className="object-contain shrink-0" />
-                    <span className="h-5 w-px bg-slate-200" />
-                    <img src="/assets/flexmoney_logo.png" alt="Flexmoney Official InstaCred Partner" style={{ height: '20px', width: 'auto' }} className="object-contain shrink-0" />
+                    <img src="/assets/flexmoney_logo.png" alt="Flexmoney Official InstaCred Partner" style={{ height: '22px', width: 'auto' }} className="object-contain shrink-0" />
                   </div>
                 </div>
 
@@ -595,11 +590,9 @@ export default function CrmHomepage() {
                   <div className="flex items-center justify-between gap-2.5 bg-white px-3 py-2 rounded-xl border border-slate-200 shadow-2xs">
                     <div className="flex flex-col min-w-0">
                       <span className="text-[11px] font-extrabold text-[#0B2450] leading-tight truncate">Cardless &amp; Card EMIs</span>
-                      <span className="text-[9.5px] font-semibold text-slate-500 tracking-wide">Official Partners</span>
+                      <span className="text-[9.5px] font-semibold text-slate-500 tracking-wide">Official Partner</span>
                     </div>
                     <div className="flex items-center gap-2.5 shrink-0 bg-slate-50/80 px-2.5 py-1 rounded-lg border border-slate-100">
-                      <img src="/assets/payu_logo.svg" alt="PayU" style={{ height: '14px', width: 'auto' }} className="object-contain shrink-0" />
-                      <span className="h-3.5 w-px bg-slate-300" />
                       <img src="/assets/flexmoney_logo.png" alt="Flexmoney" style={{ height: '17px', width: 'auto' }} className="object-contain shrink-0" />
                     </div>
                   </div>
@@ -641,8 +634,6 @@ export default function CrmHomepage() {
                 <span className="text-slate-300 hidden sm:inline">&bull;</span>
                 <div className="flex items-center gap-2.5 bg-white px-3 py-1.5 rounded-xl border border-slate-200 shadow-2xs">
                   <span className="text-[10px] font-black text-slate-700 uppercase tracking-wider">Powered by</span>
-                  <img src="/assets/payu_logo.svg" alt="PayU" style={{ height: '13px', width: 'auto' }} className="object-contain shrink-0" />
-                  <span className="text-slate-300">|</span>
                   <img src="/assets/flexmoney_logo.png" alt="Flexmoney" style={{ height: '18px', width: 'auto' }} className="object-contain shrink-0" />
                 </div>
               </div>
@@ -659,15 +650,12 @@ export default function CrmHomepage() {
 
               <div className="flex w-max gap-4 animate-marquee group-hover:[animation-play-state:paused]">
                 {[
-                  { id: 'payu', name: 'PayU', sub: 'Affordability Gateway', badge: 'Gateway' },
                   { id: 'flexmoney', name: 'Flexmoney', sub: 'InstaCred Network', badge: 'Cardless' },
                   { id: 'fibe', name: 'FIBE', sub: 'Instant Cardless Credit', badge: 'Cardless' },
-                  { id: 'axio', name: 'Axio', sub: 'Zest Digital Credit', badge: 'Cardless' },
-                  { id: 'lazypay', name: 'LazyPay', sub: 'PayU 1-Click Credit', badge: 'Cardless' },
                   { id: 'cashe', name: 'CASHe', sub: 'Cardless Healthcare Credit', badge: 'Cardless' },
                   { id: 'kreditbee', name: 'KreditBee', sub: 'Cardless Checkout EMI', badge: 'Cardless' },
                   { id: 'tvs', name: 'TVS Credit', sub: 'Point-of-Sale Finance', badge: 'Cardless' },
-                  { id: 'homecredit', name: 'Home Credit', sub: 'Instant Retail EMI', badge: 'Cardless' },
+                  { id: 'zype', name: 'Zype', sub: 'Instant Credit Line', badge: 'Cardless' },
                   { id: 'idfc', name: 'IDFC FIRST Bank', sub: 'Cardless Digital EMI', badge: 'Bank' },
                   { id: 'icici', name: 'ICICI Bank', sub: 'Cardless & Debit EMI', badge: 'Bank' },
                   { id: 'hdfc', name: 'HDFC Bank', sub: 'Credit & Debit Card EMI', badge: 'Bank' },
@@ -675,15 +663,12 @@ export default function CrmHomepage() {
                   { id: 'axis', name: 'Axis Bank', sub: 'Credit & Debit Card EMI', badge: 'Bank' },
                   { id: 'federal', name: 'Federal Bank', sub: 'Pre-Approved Debit EMI', badge: 'Bank' }
                 ].concat([
-                  { id: 'payu', name: 'PayU', sub: 'Affordability Gateway', badge: 'Gateway' },
                   { id: 'flexmoney', name: 'Flexmoney', sub: 'InstaCred Network', badge: 'Cardless' },
                   { id: 'fibe', name: 'FIBE', sub: 'Instant Cardless Credit', badge: 'Cardless' },
-                  { id: 'axio', name: 'Axio', sub: 'Zest Digital Credit', badge: 'Cardless' },
-                  { id: 'lazypay', name: 'LazyPay', sub: 'PayU 1-Click Credit', badge: 'Cardless' },
                   { id: 'cashe', name: 'CASHe', sub: 'Cardless Healthcare Credit', badge: 'Cardless' },
                   { id: 'kreditbee', name: 'KreditBee', sub: 'Cardless Checkout EMI', badge: 'Cardless' },
                   { id: 'tvs', name: 'TVS Credit', sub: 'Point-of-Sale Finance', badge: 'Cardless' },
-                  { id: 'homecredit', name: 'Home Credit', sub: 'Instant Retail EMI', badge: 'Cardless' },
+                  { id: 'zype', name: 'Zype', sub: 'Instant Credit Line', badge: 'Cardless' },
                   { id: 'idfc', name: 'IDFC FIRST Bank', sub: 'Cardless Digital EMI', badge: 'Bank' },
                   { id: 'icici', name: 'ICICI Bank', sub: 'Cardless & Debit EMI', badge: 'Bank' },
                   { id: 'hdfc', name: 'HDFC Bank', sub: 'Credit & Debit Card EMI', badge: 'Bank' },
@@ -696,7 +681,9 @@ export default function CrmHomepage() {
                     className="flex items-center gap-3 px-3.5 py-2 rounded-xl bg-slate-50/90 border border-slate-200/90 shrink-0 transition-all hover:bg-white hover:border-slate-300 hover:shadow-xs"
                   >
                     {/* Logo container */}
-                    <div className="w-8 h-8 rounded-lg overflow-hidden flex items-center justify-center shrink-0 shadow-2xs bg-white border border-slate-100 p-0.5">
+                    <div className={`h-8 rounded-lg overflow-hidden flex items-center justify-center shrink-0 shadow-2xs bg-white border border-slate-100 p-0.5 ${
+                      item.id === 'flexmoney' ? 'w-20 px-1.5' : 'w-8'
+                    }`}>
                       <BankSvgLogo id={item.id} size={28} />
                     </div>
                     <div className="text-left">
@@ -744,7 +731,10 @@ export default function CrmHomepage() {
           </div>
         </section>
 
-        {/* ── 2. PROBLEM & CLINIC VALUE ("TURN I'LL DO IT LATER INTO LET'S START") ── */}
+        {/* ── 2. MANDATORY TAGLINE REVEAL (LANDING-PAGE-DESIGN B11) ── */}
+        <TaglineReveal />
+
+        {/* ── 3. PROBLEM & CLINIC VALUE ("TURN I'LL DO IT LATER INTO LET'S START") ── */}
         <section aria-label="The Problem & Value" className="py-12 sm:py-16 px-4 sm:px-6 bg-[#F5F9FC] border-y border-blue-50">
           <FadeIn className="max-w-5xl mx-auto space-y-8">
             <div className="text-center space-y-2">
@@ -880,7 +870,7 @@ export default function CrmHomepage() {
             <div className="text-center space-y-2">
               <span className="text-[10px] font-black text-[#0f7a75] uppercase tracking-widest">AFFORDABILITY SUITE &amp; RECEPTION WORKFLOW</span>
               <h2 className="text-2xl sm:text-4xl font-black text-[#0B2450]">Calculate Patient EMI &amp; Reception Workflow</h2>
-              <p className="text-xs sm:text-sm text-slate-600">35+ EMI payment modes powered in partnership with PayU &amp; Flexmoney.</p>
+              <p className="text-xs sm:text-sm text-slate-600">35+ EMI payment modes powered in partnership with Flexmoney (InstaCred) &amp; regulated banks.</p>
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
@@ -1014,8 +1004,6 @@ export default function CrmHomepage() {
                     </div>
                     <div className="flex items-center gap-1.5 bg-white/10 border border-white/15 px-2 py-1 rounded-lg">
                       <span className="text-[8px] uppercase tracking-wider text-slate-300 font-bold">Partnered with</span>
-                      <img src="/assets/payu_logo.svg" alt="PayU" style={{ height: '11px', width: 'auto' }} className="object-contain" />
-                      <span className="text-[9px] text-slate-400">&amp;</span>
                       <img src="/assets/flexmoney_logo.png" alt="Flexmoney" style={{ height: '14px', width: 'auto' }} className="object-contain" />
                     </div>
                   </div>
@@ -1043,13 +1031,13 @@ export default function CrmHomepage() {
                         step: '2',
                         icon: <ShieldCheck size={16} className="text-emerald-400" />,
                         title: 'Cardless, Credit or Debit Card EMI',
-                        desc: 'Choose from 35+ modes: Cardless EMI (2-min Aadhaar OTP via PayU & Flexmoney), 21+ Credit Card EMIs, or Debit Card EMI.',
+                        desc: 'Choose from 35+ modes: Cardless EMI (2-min Aadhaar OTP via Flexmoney InstaCred), 21+ Credit Card EMIs, or Debit Card EMI.',
                         badge: 'Cardless + Card'
                       },
                       {
                         step: '3',
                         icon: <Clock size={16} className="text-amber-400" />,
-                        title: 'Real-Time Sanction (PayU & Flexmoney Network)',
+                        title: 'Real-Time Sanction (Flexmoney Lending Network)',
                         desc: 'Algorithm matches patient with best lender offer. Patient selects flexible 3 to 24-month EMI plan.',
                         badge: 'High approval rate'
                       },
@@ -1111,14 +1099,12 @@ export default function CrmHomepage() {
                     35+ Ways For Patients To Pay Over Time
                   </h3>
                   <p className="text-xs text-slate-500">
-                    Integrated directly at the clinic counter in partnership with PayU &amp; Flexmoney.
+                    Integrated directly at the clinic counter in partnership with Flexmoney (InstaCred).
                   </p>
                 </div>
-                <div className="flex items-center gap-3 bg-white border border-slate-200 px-4 py-2 rounded-xl shadow-xs">
-                  <span className="text-[10px] text-slate-500 font-black uppercase tracking-wider">Official Partners:</span>
-                  <img src="/assets/payu_logo.svg" alt="PayU Affordability Partner" style={{ height: '15px', width: 'auto' }} className="object-contain shrink-0" />
-                  <span className="text-slate-300">|</span>
-                  <img src="/assets/flexmoney_logo.png" alt="Flexmoney InstaCred Partner" style={{ height: '21px', width: 'auto' }} className="object-contain shrink-0" />
+                <div className="flex items-center gap-2.5 bg-white border border-slate-200 px-3 py-1.5 rounded-xl shadow-xs">
+                  <span className="text-[10px] text-slate-500 font-black uppercase tracking-wider">Official Partner:</span>
+                  <img src="/assets/flexmoney_logo.png" alt="Flexmoney InstaCred Partner" style={{ height: '20px', width: 'auto' }} className="object-contain shrink-0" />
                 </div>
               </div>
 
@@ -1126,7 +1112,7 @@ export default function CrmHomepage() {
                 {[
                   {
                     title: 'Cardless EMI',
-                    partner: 'PayU & Flexmoney InstaCred',
+                    partner: 'Flexmoney InstaCred Network',
                     desc: 'No credit or debit card required. 2-min paperless digital KYC via Aadhaar & PAN OTP with instant loan sanction.',
                     badge: 'Most Popular',
                     tagColor: 'bg-emerald-50 text-emerald-700 border-emerald-200'
@@ -1591,7 +1577,7 @@ export default function CrmHomepage() {
                       </div>
                       <div>
                         <span className="text-[9px] uppercase tracking-wider text-slate-400 block">Lender Network</span>
-                        <span className="font-bold text-slate-200">PayU &amp; Flexmoney (35+ Options)</span>
+                        <span className="font-bold text-slate-200">Flexmoney InstaCred (35+ Options)</span>
                       </div>
                     </div>
                   </div>
@@ -1642,8 +1628,6 @@ export default function CrmHomepage() {
                       <span className="text-[10px] font-black text-[#0f7a75] uppercase tracking-widest block">PATIENT FINANCING CHECK</span>
                       <div className="flex items-center gap-1.5 bg-slate-100 border border-slate-200/80 px-2 py-0.5 rounded-md">
                         <span className="text-[8px] uppercase tracking-wider text-slate-500 font-bold">Powered by</span>
-                        <img src="/assets/payu_logo.svg" alt="PayU" style={{ height: '11px', width: 'auto' }} className="object-contain" />
-                        <span className="text-[8px] text-slate-400">&amp;</span>
                         <img src="/assets/flexmoney_logo.png" alt="Flexmoney" style={{ height: '14px', width: 'auto' }} className="object-contain" />
                       </div>
                     </div>
@@ -1871,7 +1855,7 @@ export default function CrmHomepage() {
 
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-4 text-xs text-slate-500 pt-2 border-t border-slate-200/60">
                   <span className="flex items-center gap-1.5 text-[11px] sm:text-xs font-medium text-slate-600">
-                    <ShieldCheck size={14} className="text-emerald-600 shrink-0" /> PayU &amp; Flexmoney Regulated Partner Network
+                    <ShieldCheck size={14} className="text-emerald-600 shrink-0" /> Flexmoney Regulated Lending Network
                   </span>
                   <span className="hidden sm:inline text-slate-300">&bull;</span>
                   <a
@@ -2060,12 +2044,10 @@ export default function CrmHomepage() {
               {/* Footer Partnership Trust Badge */}
               <div className="pt-2 border-t border-slate-100 space-y-1.5">
                 <span className="text-[10px] font-black uppercase tracking-wider text-slate-400 block">
-                  Official Affordability Partners
+                  Official Affordability Partner
                 </span>
-                <div className="flex items-center gap-2.5 bg-slate-50 border border-slate-200/80 px-3 py-1.5 rounded-xl w-fit">
-                  <img src="/assets/payu_logo.svg" alt="PayU" style={{ height: '14px', width: 'auto' }} className="object-contain shrink-0" />
-                  <span className="text-slate-300">|</span>
-                  <img src="/assets/flexmoney_logo.png" alt="Flexmoney" style={{ height: '18px', width: 'auto' }} className="object-contain shrink-0" />
+                <div className="flex items-center gap-2 bg-slate-50 border border-slate-200/80 px-3 py-1.5 rounded-xl w-fit">
+                  <img src="/assets/flexmoney_logo.png" alt="Flexmoney InstaCred" style={{ height: '18px', width: 'auto' }} className="object-contain shrink-0" />
                 </div>
               </div>
             </div>

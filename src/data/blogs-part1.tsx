@@ -330,13 +330,13 @@ export const BLOGS_PART1 = [
           </p>
           <div className="pt-2 flex flex-col sm:flex-row justify-center gap-3">
             <a
-              href="https://clinaza.in/#patient-form"
+              href="/#check-eligibility"
               className="inline-block bg-[#0867E8] text-white font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-[#0756C7] transition-colors shadow-md"
             >
               Book Clinic Consultation →
             </a>
             <a
-              href="https://clinaza.in/#calculator"
+              href="/calculator"
               className="inline-block bg-white text-slate-800 border border-slate-300 font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-slate-50 transition-colors shadow-xs"
             >
               Calculate EMI Installments
@@ -572,7 +572,7 @@ export const BLOGS_PART1 = [
           <h3 className="text-lg font-bold">Calculate Your Dental Implant EMI</h3>
           <p className="text-xs text-blue-100 max-w-lg mx-auto">Check exact monthly installments across tenures for single tooth & full mouth dental implants.</p>
           <a
-            href="https://clinaza.in/#calculator"
+            href="/calculator"
             className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md"
           >
             Calculate Monthly EMI Now →
@@ -912,7 +912,7 @@ export const BLOGS_PART1 = [
         </p>
 
         <div className="pt-4">
-          <a href="https://clinaza.in/apply" className="inline-block px-6 py-3 bg-emerald-600 text-white font-bold text-xs uppercase tracking-wider rounded-xl shadow-lg hover:bg-emerald-700 transition-all">
+          <a href="/#check-eligibility" className="inline-block px-6 py-3 bg-emerald-600 text-white font-bold text-xs uppercase tracking-wider rounded-xl shadow-lg hover:bg-emerald-700 transition-all">
             Check Eligibility for PRODENT EMI &rarr;
           </a>
         </div>
@@ -959,7 +959,7 @@ export const BLOGS_PART1 = [
         </p>
 
         <div className="pt-4">
-          <a href="https://clinaza.in/apply" className="inline-block px-6 py-3 bg-emerald-600 text-white font-bold text-xs uppercase tracking-wider rounded-xl shadow-lg hover:bg-emerald-700 transition-all">
+          <a href="/#check-eligibility" className="inline-block px-6 py-3 bg-emerald-600 text-white font-bold text-xs uppercase tracking-wider rounded-xl shadow-lg hover:bg-emerald-700 transition-all">
             Check Eligibility for YOUR DENTIST EMI &rarr;
           </a>
         </div>
@@ -1269,9 +1269,18 @@ export const BLOGS_PART1 = [
               <tr><td className="px-4 py-3 font-semibold text-neutral-800">Single Tooth Dental Implant</td><td className="px-4 py-3 text-neutral-600">₹35,000 – ₹60,000</td><td className="px-4 py-3 text-[#5b72ff] font-bold">₹2,916 – ₹5,000 / mo</td></tr>
               <tr><td className="px-4 py-3 font-semibold text-neutral-800">Clear Aligners (Invisible Braces)</td><td className="px-4 py-3 text-neutral-600">₹50,000 – ₹1,50,000</td><td className="px-4 py-3 text-[#5b72ff] font-bold">₹4,166 – ₹12,500 / mo</td></tr>
               <tr><td className="px-4 py-3 font-semibold text-neutral-800">Orthodontic Metal/Ceramic Braces</td><td className="px-4 py-3 text-neutral-600">₹30,000 – ₹75,000</td><td className="px-4 py-3 text-[#5b72ff] font-bold">₹2,500 – ₹6,250 / mo</td></tr>
+              <tr><td className="px-4 py-3 font-semibold text-neutral-800"><a href="/blog/zirconia-crown-cost-on-emi-india" className="text-blue-600 hover:underline">Zirconia Tooth Crown / Cap</a></td><td className="px-4 py-3 text-neutral-600">₹7,500 – ₹18,000</td><td className="px-4 py-3 text-[#5b72ff] font-bold">₹800 – ₹1,500 / mo</td></tr>
               <tr><td className="px-4 py-3 font-semibold text-neutral-800">Full Mouth Rehabilitation / All-on-4</td><td className="px-4 py-3 text-neutral-600">₹1,80,000 – ₹3,00,000</td><td className="px-4 py-3 text-[#5b72ff] font-bold">₹15,000 – ₹25,000 / mo</td></tr>
             </tbody>
           </table>
+        </div>
+
+        <div className="p-4 bg-slate-50 border border-slate-200 rounded-xl my-4 space-y-2">
+          <p className="text-xs font-bold text-slate-800 uppercase tracking-wide">Explore Specific Procedure Guides:</p>
+          <ul className="text-xs text-blue-600 space-y-1">
+            <li>👉 <a href="/blog/zirconia-crown-cost-on-emi-india" className="hover:underline font-semibold">Zirconia Crown Cost & 15-Year Warranty Guide (Tooth Caps on EMI)</a></li>
+            <li>👉 <a href="/blog/dental-treatment-on-emi-near-me-zero-cost-financing-guide" className="hover:underline font-semibold">Find Dental Clinics Offering EMI Near You (City-wise List)</a></li>
+          </ul>
         </div>
 
         <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">3 Steps to Get Dental EMI at Clinic Checkout</h2>
@@ -1285,7 +1294,7 @@ export const BLOGS_PART1 = [
           <h3 className="text-lg font-bold">Check Your Dental EMI Eligibility Online</h3>
           <p className="text-sm text-blue-100 max-w-lg mx-auto">Calculate your monthly EMI and locate a Clinaza partner dental clinic near you.</p>
           <a
-            href="https://clinaza.in/#calculator"
+            href="/calculator"
             className="inline-block bg-white text-blue-600 font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md"
           >
             Calculate Monthly EMI Now →
@@ -1404,7 +1413,7 @@ export const BLOGS_PART1 = [
           </p>
           <div className="pt-2">
             <a
-              href="https://clinaza.in/#calculator"
+              href="/calculator"
               className="inline-block bg-[#0867E8] text-white font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-[#0756C7] transition-colors shadow-md"
             >
               Check My Dental Loan Eligibility →
@@ -1419,7 +1428,7 @@ export const BLOGS_PART1 = [
             Enable point-of-care patient EMI financing at your front desk with zero clinic setup fees or software charges.
           </p>
           <a
-            href="https://clinaza.in/#partner-form"
+            href="/clinic-onboarding"
             className="inline-block bg-white text-slate-900 font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-slate-100 transition-colors shadow-md"
           >
             Onboard Your Clinic Free →
@@ -1482,7 +1491,7 @@ export const BLOGS_PART1 = [
           <h3 className="text-lg font-bold">Start Using Clinaza Free Dental CRM Today</h3>
           <p className="text-sm text-emerald-100 max-w-lg mx-auto">Instant setup. No credit card or upfront fee required.</p>
           <a
-            href="https://clinaza.in/reactivation/login"
+            href="/reactivation/login"
             className="inline-block bg-white text-emerald-800 font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-emerald-50 transition-colors shadow-md"
           >
             Access Free CRM Portal →
@@ -1562,7 +1571,7 @@ export const BLOGS_PART1 = [
 
         <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">3 Steps to Enable Patient EMI in Your Clinic</h2>
         <ol className="list-decimal pl-6 space-y-3 text-neutral-700">
-          <li><strong>Register Your Clinic:</strong> Sign up for free at <a href="https://clinaza.in/#partner-form" className="text-[#0867E8] font-bold underline">clinaza.in</a> in under 2 minutes.</li>
+          <li><strong>Register Your Clinic:</strong> Sign up for free at <a href="/clinic-onboarding" className="text-[#0867E8] font-bold underline">clinaza.in</a> in under 2 minutes.</li>
           <li><strong>Receive Your Clinic Portal:</strong> Access your digital checkout widget, treatment estimation builder, and clinic QR standee.</li>
           <li><strong>Offer at Checkout:</strong> When presenting treatment plans above ₹30,000, share your Clinaza link. The patient checks eligibility instantly on their phone.</li>
         </ol>
@@ -1571,7 +1580,7 @@ export const BLOGS_PART1 = [
           <h3 className="text-lg font-bold">Start Offering EMI at Your Clinic Today</h3>
           <p className="text-sm text-blue-100 max-w-lg mx-auto">Join 500+ dental clinics across India scaling case acceptance with ₹0 setup fees.</p>
           <a
-            href="https://clinaza.in/#partner-form"
+            href="/clinic-onboarding"
             className="inline-block bg-white text-blue-600 font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md"
           >
             Partner With Clinaza (Free) →
@@ -1648,7 +1657,7 @@ export const BLOGS_PART1 = [
           <h3 className="text-lg font-bold">Check Full Mouth Implant Financing Eligibility</h3>
           <p className="text-xs text-neutral-300 max-w-lg mx-auto">Instant 2-minute digital pre-check with zero credit score impact.</p>
           <a
-            href="https://clinaza.in/#calculator"
+            href="/calculator"
             className="inline-block bg-[#0867E8] text-white font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-[#0756C7] transition-colors shadow-md"
           >
             Calculate Monthly EMI Now →
@@ -1763,7 +1772,7 @@ export const BLOGS_PART1 = [
           <h3 className="text-lg font-bold">Check Your Invisalign EMI Eligibility Now</h3>
           <p className="text-xs text-blue-100 max-w-lg mx-auto">Get approved for ₹50,000 to ₹2,50,000 in under 2 minutes with zero impact on your CIBIL score.</p>
           <a
-            href="https://clinaza.in/#calculator"
+            href="/calculator"
             className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md"
           >
             Check Instant EMI Eligibility →
@@ -1857,7 +1866,7 @@ export const BLOGS_PART1 = [
           <h3 className="text-lg font-bold">Get 100% Treatment Financing on easy EMI</h3>
           <p className="text-xs text-blue-100 max-w-lg mx-auto">No insurance? No problem. Check your soft pre-eligibility in 2 minutes with zero impact on your CIBIL score.</p>
           <a
-            href="https://clinaza.in/#calculator"
+            href="/calculator"
             className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md"
           >
             Check Financing Eligibility Now →
@@ -1984,7 +1993,7 @@ export const BLOGS_PART1 = [
           <h3 className="text-lg font-bold">Get Your Free Clinic Digital Profile & EMI Standee</h3>
           <p className="text-xs text-blue-100 max-w-lg mx-auto">Join hundreds of dental practices across India offering point-of-care patient financing for ₹0 setup fee.</p>
           <a
-            href="https://clinaza.in/#partner-form"
+            href="/clinic-onboarding"
             className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md"
           >
             Claim Free Clinic Profile Now →
@@ -1995,14 +2004,14 @@ export const BLOGS_PART1 = [
   },
     {
     slug: "zirconia-crown-cost-on-emi-india",
-    title: "Zirconia Crown Cost in India (2026): ₹7,500–₹18,000 Tooth Cap Prices & 15-Yr Warranty",
+    title: "Zirconia Crown Cost on EMI in India (2026): Tooth Cap Prices, 15-Yr Warranty & Monthly Plans",
     category: "Restorative Dentistry",
     readTime: "6 min read",
     publishDate: "September 6, 2026",
     author: "Clinaza Medical Desk",
-    summary: "2026 price guide for dental crowns and tooth caps in India: Compare Monolithic CAD/CAM Zirconia, 3M Lava (₹7,500 to ₹18,000), and PFM caps with 10–15 year warranties and EMI options from ₹800/mo.",
+    summary: "2026 price guide for dental crowns and tooth caps in India: Compare Monolithic CAD/CAM Zirconia, 3M Lava (₹7,500 to ₹18,000), and PFM caps with 10–15 year warranties and monthly EMI options from ₹800/mo.",
     featuredImage: "/assets/yourdentist/laser_whitening.png",
-    metaDescription: "Zirconia crown cost in India (2026): CAD/CAM monolithic & 3M Lava tooth caps (₹7,500–₹18,000 per tooth) with 15-year warranty and low monthly EMI from ₹800/mo.",
+    metaDescription: "Zirconia crown cost on EMI in India (2026): Compare tooth cap prices (₹7,500–₹18,000), 15-year warranty, CAD/CAM monolithic & 3M Lava with monthly EMIs from ₹800/mo.",
     faqs: [
       {
         question: "How much does a Zirconia crown cost in India?",
@@ -2095,11 +2104,19 @@ export const BLOGS_PART1 = [
           </div>
         </div>
 
+        <div className="p-4 bg-slate-50 border border-slate-200 rounded-xl my-6 space-y-2">
+          <p className="text-xs font-bold text-slate-800 uppercase tracking-wide">Related Patient Financing Guides:</p>
+          <ul className="text-xs text-blue-600 space-y-1">
+            <li>👉 <a href="/blog/dental-treatment-on-emi-india-guide" className="hover:underline font-semibold">How to Get Any Dental Treatment on EMI in India (Full 2026 Guide)</a></li>
+            <li>👉 <a href="/blog/dental-treatment-on-emi-near-me-zero-cost-financing-guide" className="hover:underline font-semibold">Find Verified Dental Clinics Offering Monthly EMI Near You</a></li>
+          </ul>
+        </div>
+
         <div className="bg-gradient-to-r from-[#0867E8] to-blue-700 text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
           <h3 className="text-lg font-bold">Calculate Your Dental Crown EMI Plan</h3>
           <p className="text-xs text-blue-100 max-w-lg mx-auto">Financing available from ₹25,000 to ₹3,00,000 with 2-minute soft digital KYC approval.</p>
           <a
-            href="https://clinaza.in/#calculator"
+            href="/calculator"
             className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md"
           >
             Check Crown EMI Eligibility →
@@ -2214,7 +2231,7 @@ export const BLOGS_PART1 = [
           <h3 className="text-lg font-bold">Get Instant Pre-Approval for Your Smile Makeover</h3>
           <p className="text-xs text-blue-100 max-w-lg mx-auto">Check your soft eligibility for ₹30,000 to ₹3,00,000 in under 2 minutes with zero impact on your CIBIL score.</p>
           <a
-            href="https://clinaza.in/#calculator"
+            href="/calculator"
             className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md"
           >
             Check Smile Makeover EMI →
@@ -2361,7 +2378,7 @@ export const BLOGS_PART1 = [
           </p>
           <div className="flex flex-wrap gap-3 pt-2">
             <a
-              href="https://clinaza.in/reactivation/login"
+              href="/reactivation/login"
               className="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs uppercase tracking-wider px-5 py-3 rounded-xl transition-all shadow-md"
             >
               Open Doctor Portal →
@@ -2400,7 +2417,7 @@ export const BLOGS_PART1 = [
           <h3 className="text-lg font-bold">Check Patient Treatment EMI Options</h3>
           <p className="text-xs text-blue-100 max-w-lg mx-auto">Help your patients afford implants, braces, and smile makeovers with flexible EMI plans from ₹30,000 to ₹3,00,000.</p>
           <a
-            href="https://clinaza.in/#calculator"
+            href="/calculator"
             className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md"
           >
             Calculate Patient EMIs →
@@ -2523,7 +2540,7 @@ export const BLOGS_PART1 = [
           </p>
           <div className="flex flex-wrap gap-3 pt-2">
             <a
-              href="https://clinaza.in/reactivation/login"
+              href="/reactivation/login"
               className="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs uppercase tracking-wider px-5 py-3 rounded-xl transition-all shadow-md"
             >
               Open Free Doctor Portal →
@@ -2554,7 +2571,7 @@ export const BLOGS_PART1 = [
           <h3 className="text-lg font-bold">Partner With Clinaza For Patient Financing</h3>
           <p className="text-xs text-blue-100 max-w-lg mx-auto">Enable your clinic to offer ₹30,000 to ₹3,00,000 patient EMI financing at zero merchant onboarding fees.</p>
           <a
-            href="https://clinaza.in/#partner-form"
+            href="/clinic-onboarding"
             className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md"
           >
             Register Your Clinic →
@@ -2668,7 +2685,7 @@ export const BLOGS_PART1 = [
           <h3 className="text-lg font-bold">Check Full Mouth Implant EMI Pre-Approval</h3>
           <p className="text-xs text-blue-100 max-w-lg mx-auto">Check instant EMI eligibility for ₹30,000 to ₹3,00,000 in 2 minutes without affecting your credit score.</p>
           <a
-            href="https://clinaza.in/#calculator"
+            href="/calculator"
             className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md"
           >
             Calculate Implant EMI →
@@ -2759,7 +2776,7 @@ export const BLOGS_PART1 = [
           </p>
           <div className="flex flex-wrap gap-3 pt-2">
             <a
-              href="https://clinaza.in/reactivation/login"
+              href="/reactivation/login"
               className="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs uppercase tracking-wider px-5 py-3 rounded-xl transition-all shadow-md"
             >
               Access Doctor Portal →
@@ -2779,7 +2796,7 @@ export const BLOGS_PART1 = [
           <h3 className="text-lg font-bold">Check Patient EMI Eligibility</h3>
           <p className="text-xs text-blue-100 max-w-lg mx-auto">Help patients approve treatments faster with flexible point-of-care monthly installments.</p>
           <a
-            href="https://clinaza.in/#calculator"
+            href="/calculator"
             className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md"
           >
             Calculate Patient EMIs →
@@ -2921,7 +2938,7 @@ export const BLOGS_PART1 = [
           </p>
           <div className="flex flex-wrap gap-3 pt-2">
             <a
-              href="https://clinaza.in/reactivation/login"
+              href="/reactivation/login"
               className="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs uppercase tracking-wider px-5 py-3 rounded-xl transition-all shadow-md"
             >
               Open Free Doctor Portal →
@@ -2941,7 +2958,7 @@ export const BLOGS_PART1 = [
           <h3 className="text-lg font-bold">Partner With Clinaza For Patient Treatment EMIs</h3>
           <p className="text-xs text-blue-100 max-w-lg mx-auto">Enable your dental practice to offer instant ₹30,000 to ₹3,00,000 easy EMIs to patients with zero merchant onboarding fees.</p>
           <a
-            href="https://clinaza.in/#partner-form"
+            href="/clinic-onboarding"
             className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md"
           >
             Register Clinic as Partner →
@@ -3037,7 +3054,7 @@ export const BLOGS_PART1 = [
           </p>
           <div className="flex flex-wrap gap-3 pt-2">
             <a
-              href="https://clinaza.in/#partner-form"
+              href="/clinic-onboarding"
               className="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs uppercase tracking-wider px-5 py-3 rounded-xl transition-all shadow-md"
             >
               Partner With Clinaza →
@@ -3057,7 +3074,7 @@ export const BLOGS_PART1 = [
           <h3 className="text-lg font-bold">Check Patient Treatment EMI Calculator</h3>
           <p className="text-xs text-blue-100 max-w-lg mx-auto">Explore monthly installment breakdowns from ₹30,000 to ₹3,00,000 for your dental patients.</p>
           <a
-            href="https://clinaza.in/#calculator"
+            href="/calculator"
             className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md"
           >
             Open EMI Calculator →
@@ -3159,7 +3176,7 @@ export const BLOGS_PART1 = [
           </p>
           <div className="flex flex-wrap gap-3 pt-2">
             <a
-              href="https://clinaza.in/reactivation/login"
+              href="/reactivation/login"
               className="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs uppercase tracking-wider px-5 py-3 rounded-xl transition-all shadow-md"
             >
               Open Free Doctor Portal →
@@ -3171,7 +3188,7 @@ export const BLOGS_PART1 = [
           <h3 className="text-lg font-bold">Offer Treatment EMIs at Your Clinic</h3>
           <p className="text-xs text-blue-100 max-w-lg mx-auto">Make comprehensive treatments affordable for your patients with instant point-of-care easy EMIs.</p>
           <a
-            href="https://clinaza.in/#calculator"
+            href="/calculator"
             className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md"
           >
             Calculate Patient EMIs →
@@ -3280,7 +3297,7 @@ export const BLOGS_PART1 = [
           <h3 className="text-lg font-bold">Check Root Canal & Crown EMI Pre-Approval</h3>
           <p className="text-xs text-blue-100 max-w-lg mx-auto">Check instant soft eligibility for ₹30,000 to ₹3,00,000 in under 2 minutes with zero impact on your CIBIL score.</p>
           <a
-            href="https://clinaza.in/#calculator"
+            href="/calculator"
             className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md"
           >
             Calculate Treatment EMI →
@@ -3384,7 +3401,7 @@ export const BLOGS_PART1 = [
           </p>
           <div className="flex flex-wrap gap-3 pt-2">
             <a
-              href="https://clinaza.in/reactivation/login"
+              href="/reactivation/login"
               className="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs uppercase tracking-wider px-5 py-3 rounded-xl transition-all shadow-md"
             >
               Open Free Doctor Portal →
@@ -3396,7 +3413,7 @@ export const BLOGS_PART1 = [
           <h3 className="text-lg font-bold">Partner With Clinaza For Patient Financing</h3>
           <p className="text-xs text-blue-100 max-w-lg mx-auto">Enable your clinic to offer ₹30,000 to ₹3,00,000 easy EMIs directly through WhatsApp links.</p>
           <a
-            href="https://clinaza.in/#partner-form"
+            href="/clinic-onboarding"
             className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md"
           >
             Register Clinic as Partner →
@@ -3473,7 +3490,7 @@ export const BLOGS_PART1 = [
           </p>
           <div className="flex flex-wrap gap-3 pt-2">
             <a
-              href="https://clinaza.in/reactivation/login"
+              href="/reactivation/login"
               className="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs uppercase tracking-wider px-5 py-3 rounded-xl transition-all shadow-md"
             >
               Open Free Doctor Portal →
@@ -3485,7 +3502,7 @@ export const BLOGS_PART1 = [
           <h3 className="text-lg font-bold">Enable Patient EMI Financing at Your Clinic</h3>
           <p className="text-xs text-blue-100 max-w-lg mx-auto">Help patients afford root canals, crowns, and implants with flexible monthly installments from ₹30,000 to ₹3,00,000.</p>
           <a
-            href="https://clinaza.in/#calculator"
+            href="/calculator"
             className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md"
           >
             Calculate Patient EMIs →
@@ -3614,7 +3631,7 @@ export const BLOGS_PART1 = [
           <h3 className="text-lg font-bold">Check Teeth Alignment easy EMI Pre-Approval</h3>
           <p className="text-xs text-blue-100 max-w-lg mx-auto">Get instant pre-approval for ₹30,000 to ₹3,00,000 in under 2 minutes without affecting your credit score.</p>
           <a
-            href="https://clinaza.in/#calculator"
+            href="/calculator"
             className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md"
           >
             Calculate Aligners EMI →
@@ -3723,7 +3740,7 @@ export const BLOGS_PART1 = [
           <h3 className="text-lg font-bold">Check Wisdom Tooth Surgery EMI Eligibility</h3>
           <p className="text-xs text-blue-100 max-w-lg mx-auto">Check instant easy EMI pre-approval for surgical dental procedures in under 2 minutes.</p>
           <a
-            href="https://clinaza.in/#calculator"
+            href="/calculator"
             className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md"
           >
             Calculate Surgery EMI →
@@ -3832,7 +3849,7 @@ export const BLOGS_PART1 = [
           <h3 className="text-lg font-bold">Check Sinus Lift & Implant EMI Eligibility</h3>
           <p className="text-xs text-blue-100 max-w-lg mx-auto">Get instant pre-approval for ₹30,000 to ₹3,00,000 in 2 minutes with zero impact on your CIBIL score.</p>
           <a
-            href="https://clinaza.in/#calculator"
+            href="/calculator"
             className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md"
           >
             Calculate Implant EMI →
@@ -3945,7 +3962,7 @@ export const BLOGS_PART1 = [
           </p>
           <div className="flex flex-wrap gap-3 pt-2">
             <a
-              href="https://clinaza.in/reactivation/login"
+              href="/reactivation/login"
               className="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs uppercase tracking-wider px-5 py-3 rounded-xl transition-all shadow-md"
             >
               Open Free Doctor Portal →
@@ -3957,7 +3974,7 @@ export const BLOGS_PART1 = [
           <h3 className="text-lg font-bold">Partner With Clinaza For Patient Treatment EMIs</h3>
           <p className="text-xs text-blue-100 max-w-lg mx-auto">Enable your clinic to offer ₹30,000 to ₹3,00,000 patient EMI financing at zero merchant onboarding fees.</p>
           <a
-            href="https://clinaza.in/#partner-form"
+            href="/clinic-onboarding"
             className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md"
           >
             Register Clinic as Partner →
@@ -4109,7 +4126,7 @@ export const BLOGS_PART1 = [
           <h3 className="text-lg font-bold">Calculate Your Monthly Medical EMI</h3>
           <p className="text-xs text-blue-100 max-w-lg mx-auto">Get instant pre-approval for ₹30,000 to ₹3,00,000 in under 2 minutes with zero paperwork.</p>
           <a
-            href="https://clinaza.in/#calculator"
+            href="/calculator"
             className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md"
           >
             Check Medical Loan EMI →

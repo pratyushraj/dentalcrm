@@ -51,7 +51,8 @@ export default function PitchDeckPage() {
       <SEOHead 
         title="Clinaza x Vrozart — Strategic Partnership Deck"
         description="Investor and Partnership Presentation for Clinaza Healthcare Financing Infrastructure"
-        image="https://clinaza.in/deck-og.png"
+        image="https://www.clinaza.in/deck-og.png"
+        robots="noindex, nofollow"
       />
 
       {/* Top Bar Navigation */}

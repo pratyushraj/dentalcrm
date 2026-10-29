@@ -81,19 +81,19 @@ export default function BlogArticlePage() {
     '@type': 'Article',
     'headline': article.title,
     'description': article.metaDescription,
-    'image': article.featuredImage || 'https://clinaza.in/og-clinaza.png',
+    'image': article.featuredImage || 'https://www.clinaza.in/og-clinaza.png',
     'author': {
       '@type': 'Person',
       'name': article.author,
-      'url': 'https://clinaza.in/blog'
+      'url': 'https://www.clinaza.in/blog'
     },
     'publisher': {
       '@type': 'Organization',
       'name': 'Clinaza',
-      'url': 'https://clinaza.in',
+      'url': 'https://www.clinaza.in',
       'logo': {
         '@type': 'ImageObject',
-        'url': 'https://clinaza.in/assets/clinaza-logo.jpg'
+        'url': 'https://www.clinaza.in/assets/clinaza-logo.jpg'
       },
       'sameAs': [
         'https://instagram.com/clinaza.in',
@@ -104,7 +104,7 @@ export default function BlogArticlePage() {
     'dateModified': isoDate,
     'mainEntityOfPage': {
       '@type': 'WebPage',
-      '@id': `https://clinaza.in/blog/${article.slug}`
+      '@id': `https://www.clinaza.in/blog/${article.slug}`
     }
   };
 
@@ -117,19 +117,19 @@ export default function BlogArticlePage() {
         '@type': 'ListItem',
         'position': 1,
         'name': 'Home',
-        'item': 'https://clinaza.in/'
+        'item': 'https://www.clinaza.in/'
       },
       {
         '@type': 'ListItem',
         'position': 2,
         'name': 'Patient Guides',
-        'item': 'https://clinaza.in/blog'
+        'item': 'https://www.clinaza.in/blog'
       },
       {
         '@type': 'ListItem',
         'position': 3,
         'name': article.title,
-        'item': `https://clinaza.in/blog/${article.slug}`
+        'item': `https://www.clinaza.in/blog/${article.slug}`
       }
     ]
   };
@@ -154,7 +154,7 @@ export default function BlogArticlePage() {
         title={seoTitle}
         description={article.metaDescription}
         keywords={[article.category.toLowerCase(), 'clinaza financing', 'dental care emi india']}
-        canonicalUrl={`https://clinaza.in/blog/${article.slug}`}
+        canonicalUrl={`https://www.clinaza.in/blog/${article.slug}`}
         type="article"
         publishedTime={isoDate}
         modifiedTime={isoDate}
@@ -208,7 +208,7 @@ export default function BlogArticlePage() {
             {/* Social Share Buttons */}
             <div className="flex items-center gap-2">
               <a
-                href={`https://api.whatsapp.com/send?text=${encodeURIComponent(`${article.title} — Read on Clinaza: https://clinaza.in/blog/${article.slug}`)}`}
+                href={`https://api.whatsapp.com/send?text=${encodeURIComponent(`${article.title} — Read on Clinaza: https://www.clinaza.in/blog/${article.slug}`)}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-3 py-1.5 bg-[#25D366] hover:bg-[#20bd5a] text-white rounded-lg font-bold text-[11px] flex items-center gap-1.5 shadow-xs transition-all"
@@ -217,7 +217,7 @@ export default function BlogArticlePage() {
               </a>
               <button
                 onClick={() => {
-                  navigator.clipboard.writeText(`https://clinaza.in/blog/${article.slug}`);
+                  navigator.clipboard.writeText(`https://www.clinaza.in/blog/${article.slug}`);
                   alert('Link copied to clipboard!');
                 }}
                 className="p-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg border border-slate-200 transition-all text-[11px]"

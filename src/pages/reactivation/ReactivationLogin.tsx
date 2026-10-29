@@ -14,6 +14,7 @@ import {
   EyeOff,
   Sparkles,
   ArrowRight,
+  ArrowLeft,
 } from 'lucide-react';
 
 const ReactivationLogin: React.FC = () => {
@@ -100,22 +101,22 @@ const ReactivationLogin: React.FC = () => {
           'clinaza doctor login',
           'dental practice crm india'
         ]}
-        canonicalUrl="https://clinaza.in/reactivation/login"
-        image="https://clinaza.in/og-doctor-login.png"
+        canonicalUrl="https://www.clinaza.in/reactivation/login"
+        image="https://www.clinaza.in/og-doctor-login.png"
         imageAlt="Clinaza Dental CRM Doctor Portal Login & Clinic Management"
-        robots="index, follow"
+        robots="noindex, nofollow"
         jsonLd={{
           '@context': 'https://schema.org',
           '@type': 'WebApplication',
           'name': 'Clinaza Dental CRM Doctor Portal',
-          'url': 'https://clinaza.in/reactivation/login',
+          'url': 'https://www.clinaza.in/reactivation/login',
           'applicationCategory': 'BusinessApplication',
           'operatingSystem': 'All',
           'description': 'Doctor and clinic staff management dashboard for dental patient records, recalls, and treatment financing.',
           'provider': {
             '@type': 'Organization',
             'name': 'Clinaza',
-            'url': 'https://clinaza.in'
+            'url': 'https://www.clinaza.in'
           }
         }}
       />
@@ -124,12 +125,28 @@ const ReactivationLogin: React.FC = () => {
       <div className="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] bg-teal-500/10 rounded-full blur-[100px] pointer-events-none" />
       <div className="absolute bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/2 w-[350px] h-[350px] bg-indigo-500/10 rounded-full blur-[100px] pointer-events-none" />
 
+      {/* Top Navigation - Back to Homepage */}
+      <div className="absolute top-5 left-5 sm:top-8 sm:left-8 z-20">
+        <Link
+          to="/"
+          className="inline-flex items-center gap-2 text-xs font-semibold text-slate-400 hover:text-white transition-all bg-slate-900/80 hover:bg-slate-800 px-3.5 py-2 rounded-full border border-slate-800/80 backdrop-blur-md shadow-lg group"
+        >
+          <ArrowLeft size={14} className="text-teal-400 group-hover:-translate-x-0.5 transition-transform" />
+          <span>Back to Clinaza Home</span>
+        </Link>
+      </div>
+
       <div className="sm:mx-auto w-full max-w-md z-10 px-4">
         {/* Top Logo */}
         <div className="text-center">
-          <div className="inline-flex items-center justify-center w-14 h-14 bg-gradient-to-r from-teal-500 to-emerald-500 text-slate-950 rounded-2xl shadow-xl shadow-teal-500/15 mb-4">
-            <Stethoscope size={28} />
-          </div>
+          <Link to="/" className="inline-block group mb-3 focus:outline-none">
+            <div className="inline-flex items-center justify-center w-14 h-14 bg-gradient-to-r from-teal-500 to-emerald-500 text-slate-950 rounded-2xl shadow-xl shadow-teal-500/15 group-hover:scale-105 transition-transform">
+              <Stethoscope size={28} />
+            </div>
+            <div className="mt-2 text-[11px] font-black tracking-widest text-teal-400/90 uppercase flex items-center justify-center gap-1 group-hover:text-teal-300 transition-colors">
+              <span>CLINAZA.IN</span>
+            </div>
+          </Link>
           <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
             Dentist Clinic Portal
           </h2>
@@ -214,12 +231,20 @@ const ReactivationLogin: React.FC = () => {
 
           </form>
 
-          {/* Signup redirection */}
-          <div className="mt-4 text-center">
-            <span className="text-xs text-slate-500">Don't have a clinic registered? </span>
-            <Link to="/reactivation/signup" className="text-xs text-teal-400 hover:text-teal-300 font-bold underline">
-              Register clinic here
-            </Link>
+          {/* Signup redirection & Home link */}
+          <div className="mt-4 text-center space-y-2">
+            <div>
+              <span className="text-xs text-slate-500">Don't have a clinic registered? </span>
+              <Link to="/reactivation/signup" className="text-xs text-teal-400 hover:text-teal-300 font-bold underline">
+                Register clinic here
+              </Link>
+            </div>
+            <div>
+              <Link to="/" className="text-xs text-slate-400 hover:text-white transition-colors inline-flex items-center gap-1.5 pt-1">
+                <ArrowLeft size={12} className="text-teal-400" />
+                <span>Return to clinaza.in homepage</span>
+              </Link>
+            </div>
           </div>
 
           {/* Bottom security assurance */}

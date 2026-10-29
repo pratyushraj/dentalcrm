@@ -99,7 +99,7 @@ export default function EmiCallbackPage() {
         mobile: mobileParam || 'Not specified',
         treatment: treatmentParam ? decodeURIComponent(treatmentParam) : 'Dental Procedure',
         amount: amountParam || undefined,
-        lender: lenderParam ? decodeURIComponent(lenderParam) : 'PayU / Flexmoney Partner',
+        lender: lenderParam ? decodeURIComponent(lenderParam) : 'Flexmoney Lending Partner',
         reason: reasonParam ? decodeURIComponent(reasonParam) : 'Credit Bureau cutoff / FOIR obligation threshold'
       });
     }
@@ -116,7 +116,7 @@ export default function EmiCallbackPage() {
       <SEOHead 
         title={`${isRejected ? 'Application Update' : 'Application Status'} | Clinaza Patient Financing`}
         description="Patient treatment financing status and lender registration confirmation."
-        canonicalUrl="https://clinaza.in/emi/callback"
+        canonicalUrl="https://www.clinaza.in/emi/callback"
         robots="noindex, nofollow"
       />
 

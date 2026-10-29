@@ -38,13 +38,13 @@ interface BreadcrumbSchemaProps {
 export const ArticleSchema: React.FC<ArticleSchemaProps> = ({
   title,
   description,
-  image = 'https://clinaza.in/og-clinaza.png',
+  image = 'https://www.clinaza.in/og-clinaza.png',
   datePublished,
   dateModified,
   author = { name: 'Clinaza Technologies', type: 'Organization' },
   publisher = {
     name: 'Clinaza Technologies',
-    logo: 'https://clinaza.in/assets/clinaza-logo.jpg',
+    logo: 'https://www.clinaza.in/assets/clinaza-logo.jpg',
   },
 }) => {
   useEffect(() => {
@@ -65,12 +65,12 @@ export const ArticleSchema: React.FC<ArticleSchemaProps> = ({
         name: publisher.name,
         logo: {
           '@type': 'ImageObject',
-          url: publisher.logo || 'https://clinaza.in/assets/clinaza-logo.jpg',
+          url: publisher.logo || 'https://www.clinaza.in/assets/clinaza-logo.jpg',
         },
       },
       mainEntityOfPage: {
         '@type': 'WebPage',
-        '@id': typeof window !== 'undefined' ? window.location.href : 'https://clinaza.in',
+        '@id': typeof window !== 'undefined' ? window.location.href : 'https://www.clinaza.in',
       },
     };
 

@@ -4,6 +4,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useSession } from '@/contexts/SessionContext';
 import { toast } from 'sonner';
 import { motion } from 'framer-motion';
+import { SEOHead } from '@/components/seo/SEOHead';
 import {
   Stethoscope,
   ShieldCheck,
@@ -15,6 +16,7 @@ import {
   Building2,
   Phone,
   ArrowRight,
+  ArrowLeft,
 } from 'lucide-react';
 
 const generateUUID = () => {
@@ -129,17 +131,39 @@ const ReactivationSignup: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-slate-950 flex flex-col justify-center py-12 sm:px-6 lg:px-8 relative overflow-hidden">
+      <SEOHead 
+        title="Register Your Clinic — Clinaza Doctor Portal"
+        description="Doctor and clinic staff management dashboard registration for dental patient records, recalls, and treatment financing."
+        canonicalUrl="https://www.clinaza.in/reactivation/signup"
+        robots="noindex, nofollow"
+      />
       
       {/* Decorative gradients */}
       <div className="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] bg-teal-500/10 rounded-full blur-[100px] pointer-events-none" />
       <div className="absolute bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/2 w-[350px] h-[350px] bg-indigo-500/10 rounded-full blur-[100px] pointer-events-none" />
 
+      {/* Top Navigation - Back to Homepage */}
+      <div className="absolute top-5 left-5 sm:top-8 sm:left-8 z-20">
+        <Link
+          to="/"
+          className="inline-flex items-center gap-2 text-xs font-semibold text-slate-400 hover:text-white transition-all bg-slate-900/80 hover:bg-slate-800 px-3.5 py-2 rounded-full border border-slate-800/80 backdrop-blur-md shadow-lg group"
+        >
+          <ArrowLeft size={14} className="text-teal-400 group-hover:-translate-x-0.5 transition-transform" />
+          <span>Back to Clinaza Home</span>
+        </Link>
+      </div>
+
       <div className="sm:mx-auto w-full max-w-md z-10 px-4">
         {/* Top Logo */}
         <div className="text-center">
-          <div className="inline-flex items-center justify-center w-14 h-14 bg-gradient-to-r from-teal-500 to-emerald-500 text-slate-950 rounded-2xl shadow-xl shadow-teal-500/15 mb-4">
-            <Stethoscope size={28} />
-          </div>
+          <Link to="/" className="inline-block group mb-3 focus:outline-none">
+            <div className="inline-flex items-center justify-center w-14 h-14 bg-gradient-to-r from-teal-500 to-emerald-500 text-slate-950 rounded-2xl shadow-xl shadow-teal-500/15 group-hover:scale-105 transition-transform">
+              <Stethoscope size={28} />
+            </div>
+            <div className="mt-2 text-[11px] font-black tracking-widest text-teal-400/90 uppercase flex items-center justify-center gap-1 group-hover:text-teal-300 transition-colors">
+              <span>CLINAZA.IN</span>
+            </div>
+          </Link>
           <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
             Register Your Clinic
           </h2>
@@ -318,6 +342,16 @@ const ReactivationSignup: React.FC = () => {
           </div>
 
         </motion.div>
+
+        {/* Footer home link */}
+        <div className="mt-8 text-center">
+          <Link
+            to="/"
+            className="text-xs text-slate-500 hover:text-slate-300 transition-colors inline-flex items-center gap-1.5"
+          >
+            <span>← Return to Clinaza.in homepage</span>
+          </Link>
+        </div>
       </div>
     </div>
   );

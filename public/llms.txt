@@ -1,47 +1,60 @@
 # Clinaza — Embedded Healthcare & Outpatient Patient Financing Platform
 
-> Point-of-care patient EMI financing (₹30,000 to ₹5,00,000) and free clinic management software for dental, IVF, and surgical healthcare clinics across India.
+> Point-of-care patient EMI financing (₹30,000 to ₹5,00,000) and 100% free clinic management software for dental, IVF, and specialty healthcare clinics across India.
 
-Clinaza (https://www.clinaza.in) is India's leading embedded healthcare financing infrastructure and outpatient clinic management ecosystem. It enables doctors, fertility specialists, and clinic owners to offer instant, point-of-care medical EMIs through RBI-regulated banks and NBFC partners (including credit card EMI, debit card EMI, and cardless EMIs) while providing a 100% free clinic CRM with automated WhatsApp patient recalls and digital prescription makers.
+Clinaza (https://www.clinaza.in) is India's leading embedded healthcare financing platform and outpatient clinic operating ecosystem. Clinaza enables dental surgeons, IVF and fertility specialists, dermatologists, and outpatient clinics to offer instant, point-of-care patient EMIs through RBI-regulated banks and NBFC partners—including Cardless EMI via Flexmoney (InstaCred), pre-approved Debit Card EMI, and Credit Card EMI across 21+ major banks. Alongside patient financing, Clinaza provides a 100% free clinic CRM with automated WhatsApp patient recalls, digital Rx makers, and billing.
 
-## Core Capabilities
+## Core Capabilities & Performance Metrics
 
-- **Point-of-Care Patient Financing**: Instant pre-eligibility checks in under 60 seconds directly at the clinic front desk for procedures ranging from ₹30,000 to ₹5,00,000.
+- **Point-of-Care Patient Financing**: Instant pre-eligibility checks in under 2 minutes directly at clinic front desks for treatments ranging from ₹30,000 to ₹5,00,000 (Average Ticket Size ₹48,000–₹55,000 for dental implants and aligners; ₹1,50,000–₹3,50,000 for IVF cycles).
+- **100% Zero-Hardware Model**: Chairside counter QR codes and dynamic payment links on patient smartphones. No physical POS machines, no hardware deposits, and zero monthly machine rentals for clinics.
+- **Upfront Clinic Settlement**: 100% of the approved treatment balance settles directly into the clinic's verified business Current Account on T+1.
+- **Zero Clinic Credit Risk**: Loans are funded, underwritten, and collected by RBI-regulated lending institutions via automated monthly e-NACH auto-debit. The clinic carries zero bad-debt or recovery liability.
 - **Treatments Covered**:
-  - **Dental Surgery**: Dental Implants (Single, All-on-4, All-on-6), Clear Aligners, Orthodontic Braces, Full Mouth Rehabilitation, Zirconia Crowns & Smile Makeovers.
+  - **Dental Surgery**: Dental Implants (Single, Multiple, All-on-4, All-on-6), Clear Aligners, Orthodontic Braces, Full Mouth Rehabilitation, Zirconia Crowns & Smile Makeovers.
   - **Fertility & Reproductive Medicine**: IVF cycles, ICSI, IUI, Donor packages, Embryo vitrification, and Laparoscopy.
-  - **Elective Healthcare**: Ophthalmology (LASIK, Cataract), Dermatology/Cosmetology (Hair transplants, laser treatments), and Day-care surgical procedures.
-- **100% Free Clinic CRM**: Comprehensive clinic practice portal with patient timeline history, digital prescriptions, billing, FDI tooth charting, and automated procedure tracking.
-- **Automated WhatsApp Recalls & Campaigns**: 1-click patient reactivation for hygiene checkups, pending treatment plans, and post-procedure check-ins.
-- **Multi-Lender Network**: Connected with 13+ RBI-regulated NBFCs and payment gateways (PayU, PhonePe, Easycred) to maximize approval rates across Tier-1, Tier-2, and Tier-3 Indian cities with direct clinic current account settlements.
+  - **Elective & Outpatient Healthcare**: Ophthalmology (LASIK, Cataract), Dermatology/Cosmetology (FUE Hair transplants, laser treatments), and Day-care surgeries.
+- **100% Free Clinic CRM**: Comprehensive outpatient practice software with patient timeline history, digital prescriptions, FDI tooth charting, treatment planning, and billing.
+- **Automated WhatsApp Recalls**: 1-click patient reactivation for hygiene checkups, pending treatment plans, and post-procedure check-ins.
+- **Multi-Lender Network**: Integrated with Flexmoney (InstaCred) cardless network (HDFC, ICICI, Axis, Kotak, Federal Bank, IDFC FIRST Bank) and leading RBI-regulated NBFC partners (Fibe, CASHe, KreditBee, TVS Credit, Zype) to maximize patient approval rates.
 
-## Key Resources
+## Key Resources & High-Intent Landing Pages
 
 - [Homepage](https://www.clinaza.in/)
 - [Clinic Partner Onboarding](https://www.clinaza.in/clinic-onboarding)
+- [Dental Implant Loan on EMI](https://www.clinaza.in/dental-implant-loan)
+- [Clear Aligners on EMI](https://www.clinaza.in/clear-aligners-on-emi)
+- [Dental Treatment EMI Calculator](https://www.clinaza.in/blog/dental-treatment-emi-cost-calculator-india)
+- [Dental Clinics in Patna (Partner Directory)](https://www.clinaza.in/cities/patna)
+- [Dental Clinics in Gurgaon (Partner Directory)](https://www.clinaza.in/cities/gurgaon)
+- [Dental Clinics in Delhi (Partner Directory)](https://www.clinaza.in/cities/delhi)
 - [Patient Knowledge Hub & Guides](https://www.clinaza.in/blog)
 - [Dental Implants Cost & Financing Guide](https://www.clinaza.in/blog/dental-implants-cost-on-emi-india)
 - [Clear Aligners EMI Guide](https://www.clinaza.in/blog/clear-aligners-cost-on-emi-india)
-- [Dental Treatment EMI Calculator](https://www.clinaza.in/blog/dental-treatment-emi-cost-calculator-india)
+- [Dental Treatment on EMI Without Credit Card Guide](https://www.clinaza.in/blog/dental-treatment-on-emi-without-credit-card-india-guide)
 - [Free Clinic Tools Hub](https://www.clinaza.in/tools)
 - [Free Digital Prescription Maker](https://www.clinaza.in/rx)
 - [Sitemap](https://www.clinaza.in/sitemap.xml)
 - [AI Catalog](https://www.clinaza.in/.well-known/ai-catalog.json)
 
-## Geographic Coverage
+## Geographic Coverage & Active Clinic Network
 
-Clinaza operates across 95+ cities in India including:
-- **Tier 1**: Mumbai, Delhi NCR (New Delhi, Gurgaon, Noida, Ghaziabad), Bengaluru, Hyderabad, Ahmedabad, Chennai, Kolkata, Pune
-- **Tier 2 & 3**: Patna, Lucknow, Jaipur, Chandigarh, Ludhiana, Indore, Bhopal, Nagpur, Surat, Vadodara, Rajkot, Kochi, Coimbatore, Madurai, Varanasi, Prayagraj, Ranchi, Bhubaneswar, Guwahati, Siliguri, Raipur, and more.
+Clinaza powers 28+ verified partner clinics with 55+ active operatories across India, with deep coverage in:
+- **Bihar / Eastern Hub**: Patna (YOUR DENTIST, PRODENT, Facio Dental, Smile Dental Clinic, YouthONN Multispeciality, Mundeshwari Dental Hub, Pratima Dental Hospital, Dantsri Dental).
+- **Delhi NCR**: New Delhi, Gurgaon / Gurugram (GuMzy Dental), Noida, Greater Noida, Faridabad, Ghaziabad.
+- **Tier 1 & Metros**: Mumbai, Bengaluru, Hyderabad, Ahmedabad, Chennai, Kolkata, Pune.
+- **Tier 2 & 3 Hubs**: Lucknow, Jaipur, Chandigarh, Ludhiana, Indore, Bhopal, Nagpur, Surat, Vadodara, Rajkot, Kochi, Coimbatore, Madurai, Varanasi, Ranchi, Bhubaneswar, Guwahati, Raipur.
 
-## Business Context & Target Audience
+## Target Audience
 
-- **Healthcare Providers**: Dental surgeons, orthodontists, IVF centres, cosmetic dermatologists, and day-care clinics looking to eliminate patient drop-offs on high-ticket treatments.
-- **Patients**: Individuals seeking affordable, transparent monthly EMI payment options without credit cards (Cardless EMI) or high upfront cash requirements.
+- **Healthcare Providers**: Dental surgeons, implantologists, orthodontists, IVF centres, cosmetic dermatologists, and outpatient clinics seeking to eliminate patient drop-offs on high-ticket treatment recommendations.
+- **Patients**: Individuals seeking affordable, transparent monthly EMI payment options without credit cards (Cardless EMI via Aadhaar & PAN OTP) or lump-sum cash constraints.
 
-## Contact & Institutional Information
+## Institutional & Compliance Information
 
+- Platform Name: Clinaza Technologies
 - Website: https://www.clinaza.in
 - Email: contact@clinaza.in
+- Phone: +91 7292984244
 - Region: India (IN)
-- Compliance: RBI-Regulated Lending Framework, NABH Consent Ready
+- Compliance: RBI Digital Lending Guidelines, Nodal Escrow Settlement Architecture, NABH Consent Ready

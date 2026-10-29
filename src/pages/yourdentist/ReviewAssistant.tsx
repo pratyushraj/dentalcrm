@@ -158,7 +158,7 @@ export default function ReviewAssistant() {
         <SEOHead 
           title="Review Assistant | Clinaza"
           description="Google review generation assistant for partnered clinics."
-          canonicalUrl="https://clinaza.in/review/assist"
+          canonicalUrl="https://www.clinaza.in/review/assist"
           robots="noindex, nofollow"
         />
         <div className="flex flex-col items-center gap-3">
@@ -175,7 +175,7 @@ export default function ReviewAssistant() {
         <SEOHead 
           title="Review Assistant | Clinaza"
           description="Google review generation assistant for partnered clinics."
-          canonicalUrl="https://clinaza.in/review/assist"
+          canonicalUrl="https://www.clinaza.in/review/assist"
           robots="noindex, nofollow"
         />
         <div className="w-full max-w-md bg-white border border-slate-200 rounded-3xl p-6 text-center shadow-lg space-y-4">
@@ -196,7 +196,7 @@ export default function ReviewAssistant() {
       <SEOHead 
         title={`${clinic.name} — Review Assistant`}
         description="Share your treatment feedback and review for the clinic."
-        canonicalUrl="https://clinaza.in/review/assist"
+        canonicalUrl="https://www.clinaza.in/review/assist"
         robots="noindex, nofollow"
       />
       <div className="w-full max-w-xl bg-white border border-slate-200 rounded-3xl shadow-xl overflow-hidden flex flex-col">

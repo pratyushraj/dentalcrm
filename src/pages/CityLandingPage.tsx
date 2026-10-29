@@ -36,19 +36,19 @@ export default function CityLandingPage() {
         '@type': 'ListItem',
         position: 1,
         name: 'Home',
-        item: 'https://clinaza.in/',
+        item: 'https://www.clinaza.in/',
       },
       {
         '@type': 'ListItem',
         position: 2,
         name: 'Cities',
-        item: 'https://clinaza.in/#cities',
+        item: 'https://www.clinaza.in/#cities',
       },
       {
         '@type': 'ListItem',
         position: 3,
         name: `${name} Dental Financing`,
-        item: `https://clinaza.in/cities/${city}`,
+        item: `https://www.clinaza.in/cities/${city}`,
       },
     ],
   };
@@ -58,8 +58,8 @@ export default function CityLandingPage() {
     '@type': 'FinancialService',
     name: `Clinaza Dental Financing — ${name}`,
     description: `Point-of-care dental treatment EMI financing network serving clinics and patients in ${name}, ${state}.`,
-    url: `https://clinaza.in/cities/${city}`,
-    logo: 'https://clinaza.in/assets/clinaza-logo.jpg',
+    url: `https://www.clinaza.in/cities/${city}`,
+    logo: 'https://www.clinaza.in/assets/clinaza-logo.jpg',
     areaServed: {
       '@type': 'City',
       name: name,
@@ -69,11 +69,11 @@ export default function CityLandingPage() {
       },
     },
     serviceType: 'Healthcare Patient Financing & Dental EMI Plans',
-    priceRange: '₹30,000 to ₹3,00,000',
+    priceRange: '₹30,000 to ₹5,00,000',
     provider: {
       '@type': 'Organization',
       name: 'Clinaza Technologies',
-      url: 'https://clinaza.in',
+      url: 'https://www.clinaza.in',
     },
   };
 
@@ -85,7 +85,7 @@ export default function CityLandingPage() {
     provider: {
       '@type': 'Organization',
       name: 'Clinaza Technologies',
-      url: 'https://clinaza.in',
+      url: 'https://www.clinaza.in',
     },
     areaServed: {
       '@type': 'City',
@@ -95,7 +95,7 @@ export default function CityLandingPage() {
       '@type': 'MonetaryAmount',
       currency: 'INR',
       minValue: 30000,
-      maxValue: 300000,
+      maxValue: 500000,
     },
     annualPercentageRate: {
       '@type': 'QuantitativeValue',
@@ -151,7 +151,7 @@ export default function CityLandingPage() {
       <SEOHead
         title={metaTitle}
         description={metaDescription}
-        image="https://clinaza.in/og-clinaza.png"
+        image="https://www.clinaza.in/og-clinaza.png"
         keywords={[
           `dental emi ${name.toLowerCase()}`,
           `dental implants on emi ${name.toLowerCase()}`,
@@ -159,7 +159,7 @@ export default function CityLandingPage() {
           `dental financing ${name.toLowerCase()}`,
           `clear aligners ${name.toLowerCase()} emi`,
         ]}
-        canonicalUrl={`https://clinaza.in/cities/${city}`}
+        canonicalUrl={`https://www.clinaza.in/cities/${city}`}
         jsonLd={[breadcrumbSchema, medicalFinancingSchema, financialProductSchema, faqSchema]}
       />
 
@@ -174,7 +174,7 @@ export default function CityLandingPage() {
             </div>
           </Link>
           <a
-            href="https://clinaza.in/#partner-form"
+            href="/clinic-onboarding"
             className="px-4 py-2 bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-black uppercase tracking-wider rounded-xl transition-all"
           >
             Partner With Clinaza →
@@ -199,13 +199,13 @@ export default function CityLandingPage() {
 
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <a
-              href="https://clinaza.in/#check-eligibility"
+              href="/#check-eligibility"
               className="px-6 py-3.5 bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-black uppercase tracking-wider rounded-xl transition-all flex items-center justify-center gap-2 shadow-lg shadow-[#0867E8]/25"
             >
               <ShieldCheck size={15} /> Check Patient Eligibility
             </a>
             <a
-              href="https://clinaza.in/#partner-form"
+              href="/clinic-onboarding"
               className="px-5 py-3.5 bg-[#F7FAFC] hover:bg-slate-100 text-[#0B2450] border border-slate-200 text-xs font-black uppercase tracking-wider rounded-xl transition-all flex items-center justify-center gap-2"
             >
               Partner With Clinaza <ArrowRight size={13} />
@@ -235,7 +235,7 @@ export default function CityLandingPage() {
               How Dental Treatment EMI Financing Works in {name}, {state}
             </h2>
             <p className="text-xs sm:text-sm text-slate-700 leading-relaxed">
-              <strong>Dental treatment EMI financing in {name} enables patients to pay for expensive planned dental procedures—including titanium implants, invisible aligners, orthodontic braces, root canal treatments, and smile makeovers—in predictable monthly installments rather than lump-sum cash.</strong> Through Clinaza's point-of-care patient financing network powered in partnership with PayU and Flexmoney (InstaCred), partnered dental clinics across {name} provide instant paperless eligibility checks in under 2 minutes. Patients can access sanctioned amounts from ₹30,000 up to ₹5,00,000 across Cardless EMI, Credit Card EMI (21+ banks), and Debit Card EMI with transparent interest rates via RBI-regulated NBFC and banking partners. Patients require only basic digital KYC (Aadhaar OTP and PAN) with no physical documentation, and loans are repaid seamlessly via automated monthly e-NACH auto-debit.
+              <strong>Dental treatment EMI financing in {name} enables patients to pay for expensive planned dental procedures—including titanium implants, invisible aligners, orthodontic braces, root canal treatments, and smile makeovers—in predictable monthly installments rather than lump-sum cash.</strong> Through Clinaza's point-of-care patient financing network powered in partnership with Flexmoney (InstaCred) and leading lending institutions, partnered dental clinics across {name} provide instant paperless eligibility checks in under 2 minutes. Patients can access sanctioned amounts from ₹30,000 up to ₹5,00,000 across Cardless EMI, Credit Card EMI (21+ banks), and Debit Card EMI with transparent interest rates via RBI-regulated NBFC and banking partners. Patients require only basic digital KYC (Aadhaar OTP and PAN) with no physical documentation, and loans are repaid seamlessly via automated monthly e-NACH auto-debit.
             </p>
           </div>
         </section>
@@ -420,7 +420,7 @@ export default function CityLandingPage() {
           </h2>
           <p className="text-sm text-slate-600">Offer financing through Clinaza. Tell us about your clinic and we will get in touch.</p>
           <a
-            href="https://clinaza.in/#partner-form"
+            href="/clinic-onboarding"
             className="inline-flex items-center gap-2 px-8 py-4 bg-[#0867E8] hover:bg-[#0756C7] text-white font-black text-xs uppercase tracking-wider rounded-xl transition-all shadow-lg shadow-[#0867E8]/25"
           >
             Partner With Clinaza →

@@ -9,10 +9,10 @@ export default function BlogHub() {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     'name': 'Clinaza',
-    'url': 'https://clinaza.in',
+    'url': 'https://www.clinaza.in',
     'logo': {
       '@type': 'ImageObject',
-      'url': 'https://clinaza.in/assets/clinaza-logo.jpg'
+      'url': 'https://www.clinaza.in/assets/clinaza-logo.jpg'
     },
     'description': 'Embedded healthcare patient financing infrastructure and dental care guides across India.',
     'sameAs': [
@@ -29,13 +29,13 @@ export default function BlogHub() {
         '@type': 'ListItem',
         'position': 1,
         'name': 'Home',
-        'item': 'https://clinaza.in/'
+        'item': 'https://www.clinaza.in/'
       },
       {
         '@type': 'ListItem',
         'position': 2,
         'name': 'Patient Guides & Dental Financing',
-        'item': 'https://clinaza.in/blog'
+        'item': 'https://www.clinaza.in/blog'
       }
     ]
   };
@@ -46,7 +46,7 @@ export default function BlogHub() {
         title="Patient Guides: Dental & Medical Treatment Costs | Clinaza"
         description="Read comprehensive patient guides on dental implants, braces, clear aligners, LASIK, and surgery costs in India, with flexible monthly EMI financing options."
         keywords={['patient guides', 'treatment costs india', 'medical emi financing', 'dental emi financing', 'implants cost guide', 'braces on emi', 'clinaza financing']}
-        canonicalUrl="https://clinaza.in/blog"
+        canonicalUrl="https://www.clinaza.in/blog"
         jsonLd={[organizationSchema, breadcrumbSchema]}
       />
 

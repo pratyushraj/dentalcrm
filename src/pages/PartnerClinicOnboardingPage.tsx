@@ -275,21 +275,19 @@ export default function PartnerClinicOnboardingPage() {
                 : 'Healthcare Patient EMI Integration'}
             </span>
           </div>
-          <h1 className="text-2xl sm:text-4xl font-black text-[#0B2450] tracking-tight">
+          <h1 className="text-2xl sm:text-4xl font-bold text-[#0B2450] tracking-tight [text-wrap:balance]">
             {form.category === 'ivf' ? 'Fertility Centre' : form.category === 'hospital' ? 'Hospital Partner' : 'Clinic Partner'} <span className="text-[#0867E8]">Onboarding</span>
           </h1>
-          <p className="text-xs sm:text-sm text-slate-600 max-w-lg mx-auto leading-relaxed">
+          <p className="text-xs sm:text-sm text-slate-600 max-w-lg mx-auto leading-relaxed [text-wrap:pretty]">
             {form.category === 'ivf'
               ? "Activate instant point-of-care patient EMI lines (₹50,000 – ₹5,00,000) for IVF cycles, ICSI & donor packages with direct clinic settlement."
               : "Please confirm your facility's high-ticket procedure volume to activate pre-approved patient financing lines with our accredited RBI-regulated lending network."}
           </p>
 
-          {/* PayU & Flexmoney Credibility Trust Banner */}
+          {/* Flexmoney Credibility Trust Banner */}
           <div className="pt-2 flex items-center justify-center">
             <div className="inline-flex flex-wrap items-center justify-center gap-3 bg-white border border-slate-200/90 px-4 py-2 rounded-2xl shadow-xs text-xs text-slate-700">
-              <span className="font-extrabold text-[#0B2450] text-[11px] uppercase tracking-wider">Official Partners:</span>
-              <img src="/assets/payu_logo.svg" alt="PayU Affordability Partner" style={{ height: '15px', width: 'auto' }} className="object-contain shrink-0" />
-              <span className="text-slate-300">|</span>
+              <span className="font-extrabold text-[#0B2450] text-[11px] uppercase tracking-wider">Official Partner:</span>
               <img src="/assets/flexmoney_logo.png" alt="Flexmoney InstaCred Partner" style={{ height: '21px', width: 'auto' }} className="object-contain shrink-0" />
               <span className="text-slate-300 hidden sm:inline">&bull;</span>
               <span className="text-emerald-700 font-bold text-[11px] bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-full">

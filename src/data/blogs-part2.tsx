@@ -88,7 +88,7 @@ export const BLOGS_PART2 = [
           <h3 className="text-lg font-bold">Check Hair Transplant easy EMI Pre-Approval</h3>
           <p className="text-xs text-blue-100 max-w-lg mx-auto">Get instant pre-approval for ₹30,000 to ₹3,00,000 in 2 minutes without affecting your credit score.</p>
           <a
-            href="https://clinaza.in/#calculator"
+            href="/calculator"
             className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md"
           >
             Calculate Hair Transplant EMI →
@@ -182,7 +182,7 @@ export const BLOGS_PART2 = [
           <h3 className="text-lg font-bold">Check IVF Treatment EMI Pre-Approval</h3>
           <p className="text-xs text-blue-100 max-w-lg mx-auto">Get instant pre-approval for ₹30,000 to ₹3,00,000 in under 2 minutes without impacting your credit score.</p>
           <a
-            href="https://clinaza.in/#calculator"
+            href="/calculator"
             className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md"
           >
             Calculate IVF EMI →
@@ -276,7 +276,7 @@ export const BLOGS_PART2 = [
           <h3 className="text-lg font-bold">Check LASIK Surgery easy EMI Pre-Approval</h3>
           <p className="text-xs text-blue-100 max-w-lg mx-auto">Get instant pre-approval for ₹30,000 to ₹3,00,000 in under 2 minutes with zero collateral.</p>
           <a
-            href="https://clinaza.in/#calculator"
+            href="/calculator"
             className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md"
           >
             Calculate LASIK EMI →
@@ -375,7 +375,7 @@ export const BLOGS_PART2 = [
         <div className="bg-slate-900 text-white p-6 rounded-2xl my-8 space-y-4">
           <h3 className="text-lg font-bold">Are you a hospital or orthopaedic clinic?</h3>
           <p className="text-sm text-slate-300">Partner with Clinaza to offer easy EMI at the point of care. Increase surgery conversions by 40%. Onboard in 24 hours — no setup fee.</p>
-          <a href="https://clinaza.in/#partner-form" className="inline-block bg-[#0867E8] text-white font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-600 transition-colors">Partner with Clinaza →</a>
+          <a href="/clinic-onboarding" className="inline-block bg-[#0867E8] text-white font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-600 transition-colors">Partner with Clinaza →</a>
         </div>
 
         <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Indian vs Imported Knee Implants — Which Should You Choose?</h2>
@@ -384,7 +384,7 @@ export const BLOGS_PART2 = [
         <div className="bg-gradient-to-r from-[#0867E8] to-blue-700 text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
           <h3 className="text-lg font-bold">Check Knee Replacement EMI Eligibility — Free in 2 Minutes</h3>
           <p className="text-xs text-blue-100 max-w-lg mx-auto">Get pre-approved for ₹1 lakh to ₹5 lakh. flexible. No collateral. Instant decision.</p>
-          <a href="https://clinaza.in/#calculator" className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md">Calculate My Knee EMI →</a>
+          <a href="/calculator" className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md">Calculate My Knee EMI →</a>
         </div>
       </div>
     )
@@ -478,7 +478,7 @@ export const BLOGS_PART2 = [
         <div className="bg-slate-900 text-white p-6 rounded-2xl my-8 space-y-4">
           <h3 className="text-lg font-bold">Are you a bariatric or metabolic surgery centre?</h3>
           <p className="text-sm text-slate-300">Partner with Clinaza and offer easy EMI at the point of consultation. Convert hesitant patients into confirmed surgeries. Free onboarding.</p>
-          <a href="https://clinaza.in/#partner-form" className="inline-block bg-[#0867E8] text-white font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-600 transition-colors">Partner with Clinaza →</a>
+          <a href="/clinic-onboarding" className="inline-block bg-[#0867E8] text-white font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-600 transition-colors">Partner with Clinaza →</a>
         </div>
 
         <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">What Does Bariatric Surgery Cure or Improve?</h2>
@@ -493,7 +493,7 @@ export const BLOGS_PART2 = [
         <div className="bg-gradient-to-r from-[#0867E8] to-blue-700 text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
           <h3 className="text-lg font-bold">Check Bariatric Surgery easy EMI Eligibility Now</h3>
           <p className="text-xs text-blue-100 max-w-lg mx-auto">Get pre-approved for ₹1.5 lakh to ₹5 lakh. Instant approval. No collateral. No guarantor.</p>
-          <a href="https://clinaza.in/#calculator" className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md">Calculate My Bariatric EMI →</a>
+          <a href="/calculator" className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md">Calculate My Bariatric EMI →</a>
         </div>
       </div>
     )
@@ -593,13 +593,13 @@ export const BLOGS_PART2 = [
         <div className="bg-slate-900 text-white p-6 rounded-2xl my-8 space-y-4">
           <h3 className="text-lg font-bold">Are you a plastic surgery or ENT clinic?</h3>
           <p className="text-sm text-slate-300">Offer easy EMI for rhinoplasty and all cosmetic procedures. Patients who hesitate at ₹1.5 lakh book immediately when offered ₹6,000/month. Partner with Clinaza — free onboarding.</p>
-          <a href="https://clinaza.in/#partner-form" className="inline-block bg-[#0867E8] text-white font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-600 transition-colors">Partner with Clinaza →</a>
+          <a href="/clinic-onboarding" className="inline-block bg-[#0867E8] text-white font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-600 transition-colors">Partner with Clinaza →</a>
         </div>
 
         <div className="bg-gradient-to-r from-[#0867E8] to-blue-700 text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
           <h3 className="text-lg font-bold">Check Rhinoplasty EMI in 2 Minutes — flexible</h3>
           <p className="text-xs text-blue-100 max-w-lg mx-auto">Get instant pre-approval for ₹50,000 to ₹2.5 lakh. No collateral, no guarantor. EMI from ₹2,000/month.</p>
-          <a href="https://clinaza.in/#calculator" className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md">Calculate My Rhinoplasty EMI →</a>
+          <a href="/calculator" className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md">Calculate My Rhinoplasty EMI →</a>
         </div>
       </div>
     )
@@ -692,13 +692,13 @@ export const BLOGS_PART2 = [
         <div className="bg-slate-900 text-white p-6 rounded-2xl my-8 space-y-4">
           <h3 className="text-lg font-bold">Are you a plastic or cosmetic surgery clinic?</h3>
           <p className="text-sm text-slate-300">Gynecomastia is one of the highest-converting cosmetic procedures with EMI. Partner with Clinaza and start converting hesitant consultations into confirmed surgeries.</p>
-          <a href="https://clinaza.in/#partner-form" className="inline-block bg-[#0867E8] text-white font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-600 transition-colors">Partner with Clinaza →</a>
+          <a href="/clinic-onboarding" className="inline-block bg-[#0867E8] text-white font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-600 transition-colors">Partner with Clinaza →</a>
         </div>
 
         <div className="bg-gradient-to-r from-[#0867E8] to-blue-700 text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
           <h3 className="text-lg font-bold">Check Gynecomastia Surgery EMI — Instant Approval</h3>
           <p className="text-xs text-blue-100 max-w-lg mx-auto">Get pre-approved for ₹50,000 to ₹2 lakh. flexible. No collateral. EMI from ₹2,500/month.</p>
-          <a href="https://clinaza.in/#calculator" className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md">Calculate My Gynecomastia EMI →</a>
+          <a href="/calculator" className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md">Calculate My Gynecomastia EMI →</a>
         </div>
       </div>
     )
@@ -798,7 +798,7 @@ export const BLOGS_PART2 = [
         <div className="bg-slate-900 text-white p-6 rounded-2xl my-8 space-y-4">
           <h3 className="text-lg font-bold">Are you a cosmetic surgery or aesthetic clinic?</h3>
           <p className="text-sm text-slate-300">Offer easy EMI on liposuction and body contouring. Patients who walk out at ₹1.5 lakh stay and book when you show them ₹6,250/month. Partner with Clinaza — free, 24-hour onboarding.</p>
-          <a href="https://clinaza.in/#partner-form" className="inline-block bg-[#0867E8] text-white font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-600 transition-colors">Partner with Clinaza →</a>
+          <a href="/clinic-onboarding" className="inline-block bg-[#0867E8] text-white font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-600 transition-colors">Partner with Clinaza →</a>
         </div>
 
         <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Liposuction Recovery Timeline</h2>
@@ -813,7 +813,7 @@ export const BLOGS_PART2 = [
         <div className="bg-gradient-to-r from-[#0867E8] to-blue-700 text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
           <h3 className="text-lg font-bold">Check Liposuction EMI Eligibility — flexible</h3>
           <p className="text-xs text-blue-100 max-w-lg mx-auto">Get pre-approved for ₹50,000 to ₹3 lakh. Instant approval. No collateral. EMI from ₹3,000/month.</p>
-          <a href="https://clinaza.in/#calculator" className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md">Calculate My Liposuction EMI →</a>
+          <a href="/calculator" className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md">Calculate My Liposuction EMI →</a>
         </div>
       </div>
     )
@@ -904,13 +904,13 @@ export const BLOGS_PART2 = [
         <div className="bg-slate-900 text-white p-6 rounded-2xl my-8 space-y-4">
           <h3 className="text-lg font-bold">Are you an Oncology Day Care or Cancer Hospital?</h3>
           <p className="text-sm text-slate-300">Empower patients to undergo timely chemotherapy and advanced therapies without financial roadblocks. Clinaza integrates seamless point-of-care easy EMI financing. Partner with us today.</p>
-          <a href="https://clinaza.in/#partner-form" className="inline-block bg-[#0867E8] text-white font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-600 transition-colors">Onboard Your Hospital →</a>
+          <a href="/clinic-onboarding" className="inline-block bg-[#0867E8] text-white font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-600 transition-colors">Onboard Your Hospital →</a>
         </div>
 
         <div className="bg-gradient-to-r from-[#0867E8] to-blue-700 text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
           <h3 className="text-lg font-bold">Check easy EMI Medical Loan Eligibility</h3>
           <p className="text-xs text-blue-100 max-w-lg mx-auto">Instant pre-approval up to ₹5,00,000 in under 2 minutes. Paperless, confidential, and flexible options available.</p>
-          <a href="https://clinaza.in/#calculator" className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md">Calculate Cancer Treatment EMI →</a>
+          <a href="/calculator" className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md">Calculate Cancer Treatment EMI →</a>
         </div>
       </div>
     )
@@ -988,7 +988,7 @@ export const BLOGS_PART2 = [
         <div className="bg-gradient-to-r from-[#0867E8] to-blue-700 text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
           <h3 className="text-lg font-bold">Check Hearing Surgery EMI Options</h3>
           <p className="text-xs text-blue-100 max-w-lg mx-auto">Get up to ₹5 lakh pre-approval with flexible affordable monthly tenures. Give your loved one the gift of sound today.</p>
-          <a href="https://clinaza.in/#calculator" className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md">Calculate Cochlear EMI →</a>
+          <a href="/calculator" className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md">Calculate Cochlear EMI →</a>
         </div>
       </div>
     )
@@ -1090,7 +1090,7 @@ export const BLOGS_PART2 = [
         <div className="bg-slate-900 text-white p-6 rounded-2xl my-8 space-y-4">
           <h3 className="text-lg font-bold">Upgrade from Excel to Free Cloud Dental EMR Today</h3>
           <p className="text-sm text-slate-300">Join over 1,200+ clinics using Clinaza to manage appointments, billing, digital Rx, and patient recalls with zero monthly fees.</p>
-          <a href="https://clinaza.in/reactivation/login" className="inline-block bg-[#0867E8] text-white font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-600 transition-colors">Launch Free Doctor Portal →</a>
+          <a href="/reactivation/login" className="inline-block bg-[#0867E8] text-white font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-600 transition-colors">Launch Free Doctor Portal →</a>
         </div>
       </div>
     )
@@ -1180,7 +1180,7 @@ export const BLOGS_PART2 = [
         <div className="bg-gradient-to-r from-[#0867E8] to-blue-700 text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
           <h3 className="text-lg font-bold">Simplify Your Dental Practice Operations</h3>
           <p className="text-xs text-blue-100 max-w-lg mx-auto">Free cloud dental management system with digital treatment plans, patient recall automations, and point-of-care 0% patient EMI financing.</p>
-          <a href="https://clinaza.in/reactivation/login" className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md">Start Using Clinaza Free →</a>
+          <a href="/reactivation/login" className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md">Start Using Clinaza Free →</a>
         </div>
       </div>
     )
@@ -1265,7 +1265,7 @@ export const BLOGS_PART2 = [
         <div className="bg-gradient-to-r from-[#0867E8] to-blue-700 text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
           <h3 className="text-lg font-bold">Check easy EMI Pre-Approval for ICL Surgery</h3>
           <p className="text-xs text-blue-100 max-w-lg mx-auto">Get approved up to ₹3,00,000 with zero downpayment and flexible monthly installments across India's top eye hospitals.</p>
-          <a href="https://clinaza.in/#calculator" className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md">Calculate ICL EMI →</a>
+          <a href="/calculator" className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md">Calculate ICL EMI →</a>
         </div>
       </div>
     )
@@ -1340,13 +1340,13 @@ export const BLOGS_PART2 = [
         <div className="bg-slate-900 text-white p-6 rounded-2xl my-8 space-y-4">
           <h3 className="text-lg font-bold">Partner Eye Hospitals &amp; Cataract Surgeons</h3>
           <p className="text-sm text-slate-300">Upgrade more patients to premium Trifocal and Toric IOLs with on-spot easy EMI subvention. Increase surgical revenue and patient satisfaction. Partner with Clinaza today.</p>
-          <a href="https://clinaza.in/#partner-form" className="inline-block bg-[#0867E8] text-white font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-600 transition-colors">Partner With Clinaza →</a>
+          <a href="/clinic-onboarding" className="inline-block bg-[#0867E8] text-white font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-600 transition-colors">Partner With Clinaza →</a>
         </div>
 
         <div className="bg-gradient-to-r from-[#0867E8] to-blue-700 text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
           <h3 className="text-lg font-bold">Check Cataract Surgery easy EMI Pre-Approval</h3>
           <p className="text-xs text-blue-100 max-w-lg mx-auto">Instant approval in 2 minutes for yourself or elderly parents. Zero collateral, minimal KYC.</p>
-          <a href="https://clinaza.in/#calculator" className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md">Calculate Cataract EMI →</a>
+          <a href="/calculator" className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md">Calculate Cataract EMI →</a>
         </div>
       </div>
     )
@@ -1434,7 +1434,7 @@ export const BLOGS_PART2 = [
         <div className="bg-gradient-to-r from-[#0867E8] to-blue-700 text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
           <h3 className="text-lg font-bold">Check Laser Vision Correction EMI Eligibility</h3>
           <p className="text-xs text-blue-100 max-w-lg mx-auto">Pre-approved limits from ₹30,000 to ₹3,00,000 in under 2 minutes. Transparent, flexible monthly EMI options.</p>
-          <a href="https://clinaza.in/#calculator" className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md">Calculate Eye Surgery EMI →</a>
+          <a href="/calculator" className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md">Calculate Eye Surgery EMI →</a>
         </div>
       </div>
     )
@@ -1520,7 +1520,7 @@ export const BLOGS_PART2 = [
         <div className="bg-gradient-to-r from-[#0867E8] to-blue-700 text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
           <h3 className="text-lg font-bold">Plan Your Maternity Hospital Package on Easy EMI</h3>
           <p className="text-xs text-blue-100 max-w-lg mx-auto">Instant paperless approval up to ₹5,00,000. Give your family the best hospital care without financial stress.</p>
-          <a href="https://clinaza.in/#calculator" className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md">Check Maternity EMI Eligibility →</a>
+          <a href="/calculator" className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md">Check Maternity EMI Eligibility →</a>
         </div>
       </div>
     )
@@ -1610,7 +1610,7 @@ export const BLOGS_PART2 = [
         <div className="bg-gradient-to-r from-[#0867E8] to-blue-700 text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
           <h3 className="text-lg font-bold">Get Your Dream Smile on Easy Monthly EMI</h3>
           <p className="text-xs text-blue-100 max-w-lg mx-auto">Start teeth alignment today with zero upfront budget delay. Check instant pre-approval in 2 minutes.</p>
-          <a href="https://clinaza.in/#calculator" className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md">Check Braces EMI Eligibility →</a>
+          <a href="/calculator" className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md">Check Braces EMI Eligibility →</a>
         </div>
       </div>
     )
@@ -1698,7 +1698,7 @@ export const BLOGS_PART2 = [
         <div className="bg-gradient-to-r from-[#0867E8] to-blue-700 text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
           <h3 className="text-lg font-bold">Avail Instant Point-of-Care Hospital Surgery Financing</h3>
           <p className="text-xs text-blue-100 max-w-lg mx-auto">Get pre-approved in under 2 minutes. Transparent EMIs with direct hospital settlement.</p>
-          <a href="https://clinaza.in/#calculator" className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md">Check Surgery EMI Eligibility →</a>
+          <a href="/calculator" className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md">Check Surgery EMI Eligibility →</a>
         </div>
       </div>
     )
@@ -1760,7 +1760,7 @@ export const BLOGS_PART2 = [
         <div className="bg-gradient-to-r from-emerald-600 to-teal-700 text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
           <h3 className="text-lg font-bold">Partner Your Clinic with Clinaza Today</h3>
           <p className="text-xs text-emerald-100 max-w-lg mx-auto">Access 100% Free Practice CRM + Instant Point-of-Care Patient Financing.</p>
-          <a href="https://clinaza.in/reactivation/login" className="inline-block bg-white text-emerald-900 font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-emerald-50 transition-colors shadow-md">Get Free Clinic Portal Access →</a>
+          <a href="/reactivation/login" className="inline-block bg-white text-emerald-900 font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-emerald-50 transition-colors shadow-md">Get Free Clinic Portal Access →</a>
         </div>
       </div>
     )
@@ -1823,7 +1823,7 @@ export const BLOGS_PART2 = [
         <div className="bg-gradient-to-r from-[#0867E8] to-[#0B2450] text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
           <h3 className="text-lg font-bold">Generate Free Legal Digital Consent Forms for Your Clinic</h3>
           <p className="text-xs text-blue-100 max-w-lg mx-auto">Create customized, NABH-ready consent templates and send directly to patient WhatsApp in 2 clicks.</p>
-          <a href="https://clinaza.in/reactivation/login" className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md">Open Free Clinaza Consent Maker →</a>
+          <a href="/reactivation/login" className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md">Open Free Clinaza Consent Maker →</a>
         </div>
       </div>
     )
@@ -1904,7 +1904,7 @@ export const BLOGS_PART2 = [
         <div className="bg-gradient-to-r from-emerald-600 to-teal-700 text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
           <h3 className="text-lg font-bold">Calculate Your Treatment EMI in Seconds</h3>
           <p className="text-xs text-emerald-100 max-w-lg mx-auto">Explore indicative monthly installments for dental implants, braces, aligners, and surgeries.</p>
-          <a href="https://clinaza.in/#calculator" className="inline-block bg-white text-emerald-900 font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-emerald-50 transition-colors shadow-md">Open Free EMI Calculator →</a>
+          <a href="/calculator" className="inline-block bg-white text-emerald-900 font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-emerald-50 transition-colors shadow-md">Open Free EMI Calculator →</a>
         </div>
       </div>
     )
@@ -1966,7 +1966,7 @@ export const BLOGS_PART2 = [
         <div className="bg-gradient-to-r from-[#0B2450] to-[#0867E8] text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
           <h3 className="text-lg font-bold">Launch Automated WhatsApp Recalls on Clinaza Free CRM</h3>
           <p className="text-xs text-blue-100 max-w-lg mx-auto">Reactivate dormant patients, generate digital prescriptions, and offer point-of-care financing with zero monthly fees.</p>
-          <a href="https://clinaza.in/reactivation/login" className="inline-block bg-white text-[#0B2450] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-slate-100 transition-colors shadow-md">Get Free Doctor Login 🔐 →</a>
+          <a href="/reactivation/login" className="inline-block bg-white text-[#0B2450] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-slate-100 transition-colors shadow-md">Get Free Doctor Login 🔐 →</a>
         </div>
       </div>
     )
@@ -2029,7 +2029,7 @@ export const BLOGS_PART2 = [
         <div className="bg-gradient-to-r from-[#0867E8] to-[#0B2450] text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
           <h3 className="text-lg font-bold">Enable 55+ Lending Partners at Your Clinic Reception</h3>
           <p className="text-xs text-blue-100 max-w-lg mx-auto">Zero upfront setup fees, free physical counter kits, and automated clinical software.</p>
-          <a href="https://clinaza.in/#partner-form" className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md">Partner Your Clinic with Clinaza →</a>
+          <a href="/clinic-onboarding" className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md">Partner Your Clinic with Clinaza →</a>
         </div>
       </div>
     )
@@ -2104,7 +2104,7 @@ export const BLOGS_PART2 = [
           <p className="text-xs text-blue-100 max-w-xl mx-auto">
             Discuss API co-lending, credit line origination, and nationwide healthcare point-of-care distribution with our institutional partnerships team.
           </p>
-          <a href="https://clinaza.in/#partner-form" className="inline-block bg-white text-[#0B2450] font-bold text-xs uppercase tracking-widest px-7 py-3.5 rounded-xl hover:bg-slate-100 transition-colors shadow-lg">
+          <a href="/clinic-onboarding" className="inline-block bg-white text-[#0B2450] font-bold text-xs uppercase tracking-widest px-7 py-3.5 rounded-xl hover:bg-slate-100 transition-colors shadow-lg">
             Submit Institutional LSP Inquiry →
           </a>
         </div>
@@ -2167,7 +2167,7 @@ export const BLOGS_PART2 = [
         <div className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
           <h3 className="text-lg font-bold">Calculate Your LASIK & Contoura Monthly EMI</h3>
           <p className="text-xs text-blue-100 max-w-lg mx-auto">Instant 2-minute paperless assessment with top regulated healthcare lenders.</p>
-          <a href="https://clinaza.in/#calculator" className="inline-block bg-white text-blue-900 font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md">Check LASIK EMI Options →</a>
+          <a href="/calculator" className="inline-block bg-white text-blue-900 font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md">Check LASIK EMI Options →</a>
         </div>
       </div>
     )
@@ -2230,7 +2230,7 @@ export const BLOGS_PART2 = [
         <div className="bg-gradient-to-r from-emerald-600 to-teal-700 text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
           <h3 className="text-lg font-bold">Never Delay Critical Healthcare Due to Insurance Delays</h3>
           <p className="text-xs text-emerald-100 max-w-lg mx-auto">Get pre-approved medical financing limits from ₹30,000 to ₹5,00,000 instantly.</p>
-          <a href="https://clinaza.in/#calculator" className="inline-block bg-white text-emerald-900 font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-emerald-50 transition-colors shadow-md">Check Instant Medical EMI Limit →</a>
+          <a href="/calculator" className="inline-block bg-white text-emerald-900 font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-emerald-50 transition-colors shadow-md">Check Instant Medical EMI Limit →</a>
         </div>
       </div>
     )
@@ -2308,7 +2308,7 @@ export const BLOGS_PART2 = [
         <div className="bg-gradient-to-r from-[#0867E8] to-[#0B2450] text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
           <h3 className="text-lg font-bold">Start Your Dental Treatment with Zero Financial Stress</h3>
           <p className="text-xs text-blue-100 max-w-lg mx-auto">Flexible EMIs from 55+ regulated lenders accepted at top clinics across India.</p>
-          <a href="https://clinaza.in/#calculator" className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md">Calculate Dental Treatment EMI →</a>
+          <a href="/calculator" className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md">Calculate Dental Treatment EMI →</a>
         </div>
       </div>
     )
@@ -2394,7 +2394,7 @@ export const BLOGS_PART2 = [
         <div className="bg-gradient-to-r from-[#0867E8] to-[#0B2450] text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
           <h3 className="text-lg font-bold">Get Dental Implants with Easy Monthly Payments</h3>
           <p className="text-xs text-blue-100 max-w-lg mx-auto">Convert implants and full mouth rehabilitation into flexible monthly EMIs across 55+ lending partners.</p>
-          <a href="https://clinaza.in/#calculator" className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md">Calculate Your Implant EMI →</a>
+          <a href="/calculator" className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md">Calculate Your Implant EMI →</a>
         </div>
       </div>
     )
@@ -2474,7 +2474,7 @@ export const BLOGS_PART2 = [
         <div className="bg-gradient-to-r from-[#0867E8] to-[#0B2450] text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
           <h3 className="text-lg font-bold">Finance Your Clear Aligners with Instant Approvals</h3>
           <p className="text-xs text-blue-100 max-w-lg mx-auto">Get your dream smile without upfront lump sum stress. Check your eligibility in 2 minutes.</p>
-          <a href="https://clinaza.in/#calculator" className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md">Check Aligner Financing Eligibility →</a>
+          <a href="/calculator" className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md">Check Aligner Financing Eligibility →</a>
         </div>
       </div>
     )
@@ -2554,7 +2554,7 @@ export const BLOGS_PART2 = [
         <div className="bg-gradient-to-r from-[#0867E8] to-[#0B2450] text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
           <h3 className="text-lg font-bold">Bundle Your Multiple RCTs & Crowns into Affordable EMIs</h3>
           <p className="text-xs text-blue-100 max-w-lg mx-auto">When multiple teeth need root canals and crowns, split the total bill into monthly instalments with zero paperwork.</p>
-          <a href="https://clinaza.in/#calculator" className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md">Calculate Your Dental EMI →</a>
+          <a href="/calculator" className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md">Calculate Your Dental EMI →</a>
         </div>
       </div>
     )

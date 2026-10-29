@@ -24,7 +24,7 @@ export default function DentalImplantLoanPage() {
       "provider": {
         "@type": "Organization",
         "name": "Clinaza Technologies",
-        "url": "https://clinaza.in"
+        "url": "https://www.clinaza.in"
       },
       "areaServed": "IN",
       "amount": {
@@ -49,7 +49,7 @@ export default function DentalImplantLoanPage() {
         title="Dental Implant Loan & EMI in India (From ₹2,400/mo)"
         description="Get a dental implant loan in India. Finance single tooth, multiple implants & All-on-4 with flexible monthly EMI from ~11.5% p.a. 2-min digital approval."
         keywords={["dental implant loan", "dental implants loan", "dental implant on emi india", "dental surgery loan", "medical loan for dental implants", "dental financing india"]}
-        canonicalUrl="https://clinaza.in/dental-implant-loan"
+        canonicalUrl="https://www.clinaza.in/dental-implant-loan"
         jsonLd={implantLoanSchema}
       />
 
@@ -76,15 +76,15 @@ export default function DentalImplantLoanPage() {
       </header>
 
       {/* Hero Section */}
-      <section className="bg-gradient-to-b from-blue-900 via-[#0B2450] to-slate-900 text-white py-14 px-4 text-center">
+      <section className="bg-[#0B2450] text-white py-14 sm:py-16 px-4 text-center border-b border-slate-800">
         <div className="max-w-4xl mx-auto space-y-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/20 border border-blue-400/30 text-blue-300 text-[11px] font-bold tracking-wide">
-            <ShieldCheck size={14} className="text-blue-400" /> Powered by RBI-Regulated NBFC & Banking Partners
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/15 border border-blue-400/25 text-blue-300 text-xs font-semibold tracking-wide">
+            <ShieldCheck size={14} className="text-blue-400" /> Powered by RBI-Regulated NBFC &amp; Banking Partners
           </div>
-          <h1 className="text-3xl sm:text-5xl font-black tracking-tight leading-tight">
+          <h1 className="text-3xl sm:text-5xl font-bold tracking-tight leading-tight bg-gradient-to-r from-white via-slate-100 to-slate-300 bg-clip-text text-transparent [text-wrap:balance]">
             Dental Implant Loans &amp; Flexible Monthly EMIs in India
           </h1>
-          <p className="text-sm sm:text-base text-slate-300 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-sm sm:text-base text-slate-300 max-w-2xl mx-auto leading-relaxed [text-wrap:pretty]">
             Don't let treatment expenses delay your smile restoration. Finance single implants, bridges, or full-mouth All-on-4 procedures with 2-minute digital pre-approval starting from ~11.5% p.a.
           </p>
 

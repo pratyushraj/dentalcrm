@@ -107,16 +107,47 @@ verified_leads_*.json
 verified_leads_*.csv
 *.db
 src/scripts/outreach/__pycache__/
-src/scripts/outreach/logs/
 src/scripts/outreach/dental_leads_master.db
+src/scripts/outreach/*batch*.json
+src/scripts/outreach/candidates_to_verify.json
+src/scripts/outreach/verified_*.json
+src/scripts/outreach/pending_*.json
+src/scripts/outreach/final_*.json
+src/scripts/outreach/dpanda_cardless_emi.html
 # leads_data.json IS tracked — it's the persistent lead state for GitHub Actions autopilot
 !src/scripts/outreach/leads_data.json
 
 # Temp scrapers & lead batches
 batch*.json
 fresh_*.json
+fresh_*.csv
 new_dentists_*.*
 master_nbfc_directory.json
 target_*.json
 src/all_sent_emails.json
 *.DS_Store
+
+# Root proposals & presentation binaries
+*.pdf
+!public/**/*.pdf
+*.pptx
+clinaza_deck_swiss/
+__pycache__/
+*.pyc
+
+# Root outreach dumps & scratch scripts
+*leads*.json
+*dentists*.json
+opened_no_signup*
+resend_all_emails_dump.json
+retarget_leads_*.json
+incubators_*.json
+dispatch_*.py
+scripts/dispatch_*.py
+compare_metrics.py
+parse_agreements.py
+fill_script.js
+generate_*.py
+!scripts/**/*.py
+
+

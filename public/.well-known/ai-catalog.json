@@ -1,10 +1,11 @@
 {
   "schema_version": "1.0",
   "name": "Clinaza",
-  "description": "Embedded point-of-care patient healthcare, dental, and IVF treatment financing and free clinic CRM in India.",
+  "description": "Embedded point-of-care patient healthcare, dental, and IVF treatment financing platform and 100% free outpatient clinic CRM in India.",
   "url": "https://www.clinaza.in",
   "contact": {
-    "email": "partners@clinaza.in",
+    "email": "contact@clinaza.in",
+    "phone": "+917292984244",
     "website": "https://www.clinaza.in"
   },
   "documentation": {
@@ -14,15 +15,15 @@
   },
   "capabilities": [
     {
-      "name": "Patient EMI Financing",
+      "name": "Patient Point-of-Care EMI Financing",
       "type": "financial_service",
-      "description": "Instant point-of-care healthcare financing from ₹30,000 to ₹5,00,000 via 13+ RBI-regulated NBFCs with tenures from 3 to 24 months starting from ~11.5% p.a.",
+      "description": "Instant chairside healthcare financing from ₹30,000 to ₹5,00,000 via RBI-regulated NBFCs and major banking partners (Flexmoney InstaCred, HDFC, ICICI, Axis, Kotak, IDFC FIRST Bank) with tenures from 3 to 24 months starting from ~11.5% p.a. Upfront T+1 nodal settlement to clinic current account with zero clinic credit risk.",
       "treatments_supported": [
         "Dental Implants (Single, Multiple, All-on-4 / All-on-6)",
         "Clear Aligners & Orthodontic Braces",
         "Root Canal Treatments & Zirconia Crowns",
         "Cosmetic Smile Makeovers & Full Mouth Rehabilitation",
-        "IVF & Fertility Treatments (ICSI, Donor Cycles, IUI)",
+        "IVF & Fertility Treatments (ICSI, Donor Cycles, IUI, Cryopreservation)",
         "Dermatology, Aesthetics & Hair Restoration (FUE)",
         "Elective Surgeries & Ophthalmology (LASIK, Cataract)"
       ]
@@ -30,7 +31,7 @@
     {
       "name": "Practice Management Software",
       "type": "crm_tools",
-      "description": "Free digital prescription generator, patient recall automation, and clinic management system for doctors in India.",
+      "description": "Free digital prescription generator, FDI tooth charting, automated WhatsApp patient recalls, and clinic management system for doctors in India.",
       "tools_url": "https://www.clinaza.in/tools"
     }
   ],
@@ -39,8 +40,12 @@
     "clinic_onboarding": "https://www.clinaza.in/clinic-onboarding",
     "dental_implants": "https://www.clinaza.in/dental-implant-loan",
     "clear_aligners": "https://www.clinaza.in/clear-aligners-on-emi",
+    "calculator": "https://www.clinaza.in/blog/dental-treatment-emi-cost-calculator-india",
     "tools": "https://www.clinaza.in/tools",
-    "calculator": "https://www.clinaza.in/calculator",
+    "rx_maker": "https://www.clinaza.in/rx",
+    "patna_clinics": "https://www.clinaza.in/cities/patna",
+    "gurgaon_clinics": "https://www.clinaza.in/cities/gurgaon",
+    "delhi_clinics": "https://www.clinaza.in/cities/delhi",
     "blog": "https://www.clinaza.in/blog"
   }
 }

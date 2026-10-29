@@ -7,29 +7,19 @@ interface BankLogoProps {
   size?: number;
 }
 
-// Map of PayU & Flexmoney Cardless EMI and Bank Affordability Partners
+// Map of Flexmoney Cardless EMI and Bank Affordability Partners
 const BANK_LOGOS: Record<string, { src: string; fallback: string; name: string }> = {
   // Infrastructure Gateways
-  payu: {
-    src: '/assets/payu_logo.svg',
-    fallback: '/assets/payu_logo.png',
-    name: 'PayU Affordability',
-  },
   flexmoney: {
     src: '/assets/flexmoney_logo.png',
     fallback: 'https://flexmoney.in/logo.png',
     name: 'Flexmoney InstaCred',
   },
-  // PayU & Flexmoney Cardless EMI Lenders
+  // Flexmoney & Cardless EMI Lenders
   fibe: {
     src: '/assets/lenders/fibe.png',
     fallback: 'https://icon.horse/icon/fibe.in',
     name: 'FIBE',
-  },
-  axio: {
-    src: '/assets/lenders/axio.png',
-    fallback: 'https://icon.horse/icon/axio.co.in',
-    name: 'Axio (ZestMoney)',
   },
   cashe: {
     src: '/assets/lenders/cashe.png',
@@ -46,15 +36,10 @@ const BANK_LOGOS: Record<string, { src: string; fallback: string; name: string }
     fallback: 'https://icon.horse/icon/tvscredit.com',
     name: 'TVS Credit',
   },
-  homecredit: {
-    src: '/assets/lenders/homecredit.png',
-    fallback: 'https://icon.horse/icon/homecredit.co.in',
-    name: 'Home Credit',
-  },
-  lazypay: {
-    src: '/assets/lenders/lazypay.png',
-    fallback: 'https://icon.horse/icon/lazypay.in',
-    name: 'LazyPay',
+  zype: {
+    src: '/assets/lenders/zype.png',
+    fallback: 'https://icon.horse/icon/getzype.com',
+    name: 'Zype',
   },
   idfc: {
     src: '/assets/lenders/idfc.png',
@@ -147,8 +132,10 @@ export const BankSvgLogo: React.FC<BankLogoProps> = ({ id, className = '', size 
       loading="eager"
       decoding="async"
       style={{
-        width: size,
+        width: normalizedId === 'flexmoney' ? 'auto' : size,
         height: size,
+        maxHeight: size,
+        maxWidth: normalizedId === 'flexmoney' ? size * 2.8 : size,
         objectFit: 'contain',
         borderRadius: 4,
         background: '#ffffff',

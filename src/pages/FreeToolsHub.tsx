@@ -165,7 +165,7 @@ export default function FreeToolsHub() {
       "provider": {
         "@type": "Organization",
         "name": "Clinaza Technologies",
-        "url": "https://clinaza.in"
+        "url": "https://www.clinaza.in"
       },
       "areaServed": "IN",
       "amount": {
@@ -230,10 +230,10 @@ export default function FreeToolsHub() {
     : "Free dental practice tools: Digital Dental Rx Prescription Maker, Clinic Setup Equipment Loan EMI Calculator, and patient treatment financing estimator.";
 
   const seoCanonical = isRxRoute
-    ? "https://clinaza.in/rx"
+    ? "https://www.clinaza.in/rx"
     : isCalcRoute
-    ? "https://clinaza.in/calculator"
-    : "https://clinaza.in/tools";
+    ? "https://www.clinaza.in/calculator"
+    : "https://www.clinaza.in/tools";
 
   const seoKeywords = isRxRoute
     ? ["free dental prescription maker", "online rx generator dental india", "digital dental rx template", "dental prescription software free", "clinaza rx"]
@@ -894,17 +894,15 @@ export default function FreeToolsHub() {
                   ₹{monthlyEmi.toLocaleString()} <span className="text-sm font-semibold text-blue-100">/ month</span>
                 </div>
                 <p className="text-xs text-blue-100 max-w-sm mx-auto">
-                  ₹{treatmentAmount.toLocaleString()} estimated over {emiTenure} monthly installments. Cardless EMI, Credit &amp; Debit Card EMI powered in partnership with PayU &amp; Flexmoney.
+                  ₹{treatmentAmount.toLocaleString()} estimated over {emiTenure} monthly installments. Cardless EMI, Credit &amp; Debit Card EMI powered in partnership with Flexmoney (InstaCred).
                 </p>
-                <div className="flex items-center justify-center gap-2.5 bg-white px-3.5 py-1.5 rounded-xl w-fit mx-auto shadow-xs">
-                  <span className="text-[10px] text-slate-600 font-bold uppercase tracking-wider">Partners:</span>
-                  <img src="/assets/payu_logo.svg" alt="PayU" style={{ height: '14px', width: 'auto' }} className="object-contain shrink-0" />
-                  <span className="text-slate-300">|</span>
-                  <img src="/assets/flexmoney_logo.png" alt="Flexmoney" style={{ height: '18px', width: 'auto' }} className="object-contain shrink-0" />
+                <div className="flex items-center justify-center gap-2 bg-white px-3.5 py-1.5 rounded-xl w-fit mx-auto shadow-xs">
+                  <span className="text-[10px] text-slate-600 font-bold uppercase tracking-wider">Partner:</span>
+                  <img src="/assets/flexmoney_logo.png" alt="Flexmoney InstaCred" style={{ height: '18px', width: 'auto' }} className="object-contain shrink-0" />
                 </div>
                 <div className="pt-2">
                   <a
-                    href="https://clinaza.in/#calculator"
+                    href="/#check-eligibility"
                     className="inline-block px-6 py-3 bg-white text-[#0867E8] font-black text-xs uppercase tracking-wider rounded-xl hover:bg-blue-50 transition-colors shadow-md"
                   >
                     Check Patient Eligibility Now →
@@ -1151,12 +1149,12 @@ export default function FreeToolsHub() {
                     >
                       Login Free to CRM →
                     </Link>
-                    <a
-                      href="https://clinaza.in/#partner-form"
+                    <Link
+                      to="/clinic-onboarding"
                       className="px-5 py-2.5 bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-black uppercase tracking-wider rounded-xl transition-all text-center shadow-md"
                     >
                       Onboard Clinic Free
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>

@@ -13,7 +13,7 @@ Clinaza enables accredited dental clinics, IVF fertility centres, dermatology ce
 - **Instant Eligibility in 2 Minutes**: Evaluates patient eligibility chairside via digital PAN and Aadhaar OTP verification (zero physical paperwork).
 - **100% Zero-Hardware Model**: Works seamlessly via counter QR codes and dynamic payment links on patient mobile devices—eliminating physical POS terminal rentals and security deposits.
 - **Affordability Rails Supported**:
-  - **Cardless EMI (InstaCred & NBFCs)**: Powered across major banks (HDFC, ICICI, Axis, Kotak, Federal Bank, IDFC FIRST Bank) and leading RBI-regulated NBFC partners (Fibe, CASHe, KreditBee, TVS Credit, Zype). Allows the ~85%+ of Indian patients without credit cards to split bills into EMIs using only mobile OTP.
+  - **Cardless EMI (InstaCred & NBFCs)**: Powered across major banks (HDFC, ICICI, Axis, Kotak, Federal Bank, IDFC FIRST Bank) and leading RBI-regulated NBFC partners (leading RBI-regulated NBFCs). Allows the ~85%+ of Indian patients without credit cards to split bills into EMIs using only mobile OTP.
   - **Debit Card EMI**: Pre-approved EMIs directly on patient savings account debit cards.
   - **Credit Card EMI**: Available across 21+ major Indian scheduled banks (HDFC, ICICI, SBI, Axis, Kotak, IndusInd, RBL, AU Small Finance Bank, etc.) with 3, 6, 9, 12, 18, and 24-month tenures.
 - **Procedures Supported**:
@@ -43,7 +43,7 @@ Automates retention and recall workflows:
 A: Clinaza (https://www.clinaza.in) is an Indian healthcare fintech and outpatient clinic management platform that provides embedded point-of-care patient EMI financing (₹30,000 to ₹5,00,000) and 100% free practice management software for dental, IVF, and elective specialty clinics in India.
 
 **Q: Can patients get treatment on EMI without a credit card through Clinaza?**  
-A: Yes. Clinaza powers Cardless EMI through leading RBI-regulated NBFC partners (including Fibe, CASHe, KreditBee, TVS Credit, and Zype), along with bank cardless options (HDFC, ICICI, Axis, Kotak, Federal Bank, IDFC FIRST Bank). Patients without a credit card only need a valid PAN and Aadhaar OTP to complete digital KYC and access instant financing in under 2 minutes.
+A: Yes. Clinaza powers Cardless EMI through leading RBI-regulated NBFC partners (leading RBI-regulated NBFCs), along with bank cardless options (HDFC, ICICI, Axis, Kotak, Federal Bank, IDFC FIRST Bank). Patients without a credit card only need a valid PAN and Aadhaar OTP to complete digital KYC and access instant financing in under 2 minutes.
 
 **Q: How does clinic settlement work with Clinaza?**  
 A: When a patient is approved for treatment financing, 100% of the procedure amount is disbursed upfront directly into the doctor or clinic's official business current account on T+1 via automated nodal settlement. The patient repays the lending institution in monthly installments via e-NACH auto-debit.

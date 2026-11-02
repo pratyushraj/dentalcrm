@@ -26,7 +26,6 @@ import { emailNotificationService } from '../services/emailNotificationService';
 import { easycredService } from '../services/easycredService';
 import { toast } from 'sonner';
 import { SEOHead } from '@/components/seo/SEOHead';
-import { BankSvgLogo } from '@/components/BankSvgLogos';
 import { CITIES } from '@/data/cities';
 import { TaglineReveal } from '@/components/TaglineReveal';
 // ── Scroll Fade-In Wrapper ──────────────────────────────
@@ -266,7 +265,7 @@ export default function CrmHomepage() {
     },
     {
       q: 'Can patients get treatment on EMI without a credit card (Cardless EMI)?',
-      a: 'Yes. Clinaza powers Cardless EMIs in partnership with leading RBI-regulated cardless healthcare lenders (including Fibe, CASHe, KreditBee, TVS Credit, and Zype). Patients without a credit card only need a valid PAN and Aadhaar OTP to split treatments into monthly EMIs. Additionally, Credit Card EMI across 21+ banks, Debit Card EMI, and Down Payment + EMI options are fully supported.'
+      a: 'Yes. Clinaza powers Cardless EMIs in partnership with leading RBI-regulated cardless healthcare lenders (powered by RBI-regulated banking and NBFC institutions). Patients without a credit card only need a valid PAN and Aadhaar OTP to split treatments into monthly EMIs. Additionally, Credit Card EMI across 21+ banks, Debit Card EMI, and Down Payment + EMI options are fully supported.'
     },
     {
       q: 'Are IVF and fertility treatments eligible for monthly EMI financing?',
@@ -399,7 +398,7 @@ export default function CrmHomepage() {
                 "name": "Can patients get treatment on EMI without a credit card (Cardless EMI)?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Yes. Clinaza powers Cardless EMIs in partnership with leading RBI-regulated cardless healthcare lenders (including Fibe, CASHe, KreditBee, TVS Credit, and Zype). Patients without a credit card only need a valid PAN and Aadhaar OTP to split treatments into monthly EMIs. Additionally, Credit Card EMI across 21+ banks, Debit Card EMI, and Down Payment + EMI options are fully supported."
+                  "text": "Yes. Clinaza powers Cardless EMIs in partnership with leading RBI-regulated cardless healthcare lenders (powered by RBI-regulated banking and NBFC institutions). Patients without a credit card only need a valid PAN and Aadhaar OTP to split treatments into monthly EMIs. Additionally, Credit Card EMI across 21+ banks, Debit Card EMI, and Down Payment + EMI options are fully supported."
                 }
               },
               {
@@ -649,54 +648,35 @@ export default function CrmHomepage() {
 
               <div className="flex w-max gap-4 animate-marquee group-hover:[animation-play-state:paused]">
                 {[
-                  { id: 'hdfc', name: 'HDFC Bank', sub: 'Instant Debit/Credit', badge: 'Bank' },
-                  { id: 'fibe', name: 'FIBE', sub: 'Instant Cardless Credit', badge: 'Cardless' },
-                  { id: 'cashe', name: 'CASHe', sub: 'Cardless Healthcare Credit', badge: 'Cardless' },
-                  { id: 'kreditbee', name: 'KreditBee', sub: 'Cardless Checkout EMI', badge: 'Cardless' },
-                  { id: 'tvs', name: 'TVS Credit', sub: 'Point-of-Sale Finance', badge: 'Cardless' },
-                  { id: 'zype', name: 'Zype', sub: 'Instant Credit Line', badge: 'Cardless' },
-                  { id: 'idfc', name: 'IDFC FIRST Bank', sub: 'Cardless Digital EMI', badge: 'Bank' },
-                  { id: 'icici', name: 'ICICI Bank', sub: 'Cardless & Debit EMI', badge: 'Bank' },
-                  { id: 'hdfc', name: 'HDFC Bank', sub: 'Credit & Debit Card EMI', badge: 'Bank' },
-                  { id: 'kotak', name: 'Kotak Bank', sub: 'Smart EMI & Debit Card', badge: 'Bank' },
-                  { id: 'axis', name: 'Axis Bank', sub: 'Credit & Debit Card EMI', badge: 'Bank' },
-                  { id: 'federal', name: 'Federal Bank', sub: 'Pre-Approved Debit EMI', badge: 'Bank' }
+                  { name: 'Credit Card EMI', sub: '20+ Major Banks', badge: 'Card EMI' },
+                  { name: 'Debit Card EMI', sub: 'Instant Bank Sanctions', badge: 'Debit EMI' },
+                  { name: 'Cardless Patient EMI', sub: 'Zero Credit Card Needed', badge: 'Cardless' },
+                  { name: 'Digital e-KYC', sub: '2-Minute Chairside Approval', badge: 'Paperless' },
+                  { name: 'UPI & Dynamic QR', sub: 'Instant Front-Desk Collection', badge: 'UPI' },
+                  { name: 'Net Banking', sub: '50+ Scheduled Commercial Banks', badge: 'Banking' },
+                  { name: 'Upfront T+1 Disbursal', sub: 'Direct Current A/c Credit', badge: 'Settlement' },
+                  { name: 'Zero Clinic Liability', sub: '100% Non-Recourse Payouts', badge: 'Guaranteed' }
                 ].concat([
-                  { id: 'hdfc', name: 'HDFC Bank', sub: 'Instant Debit/Credit', badge: 'Bank' },
-                  { id: 'fibe', name: 'FIBE', sub: 'Instant Cardless Credit', badge: 'Cardless' },
-                  { id: 'cashe', name: 'CASHe', sub: 'Cardless Healthcare Credit', badge: 'Cardless' },
-                  { id: 'kreditbee', name: 'KreditBee', sub: 'Cardless Checkout EMI', badge: 'Cardless' },
-                  { id: 'tvs', name: 'TVS Credit', sub: 'Point-of-Sale Finance', badge: 'Cardless' },
-                  { id: 'zype', name: 'Zype', sub: 'Instant Credit Line', badge: 'Cardless' },
-                  { id: 'idfc', name: 'IDFC FIRST Bank', sub: 'Cardless Digital EMI', badge: 'Bank' },
-                  { id: 'icici', name: 'ICICI Bank', sub: 'Cardless & Debit EMI', badge: 'Bank' },
-                  { id: 'hdfc', name: 'HDFC Bank', sub: 'Credit & Debit Card EMI', badge: 'Bank' },
-                  { id: 'kotak', name: 'Kotak Bank', sub: 'Smart EMI & Debit Card', badge: 'Bank' },
-                  { id: 'axis', name: 'Axis Bank', sub: 'Credit & Debit Card EMI', badge: 'Bank' },
-                  { id: 'federal', name: 'Federal Bank', sub: 'Pre-Approved Debit EMI', badge: 'Bank' }
+                  { name: 'Credit Card EMI', sub: '20+ Major Banks', badge: 'Card EMI' },
+                  { name: 'Debit Card EMI', sub: 'Instant Bank Sanctions', badge: 'Debit EMI' },
+                  { name: 'Cardless Patient EMI', sub: 'Zero Credit Card Needed', badge: 'Cardless' },
+                  { name: 'Digital e-KYC', sub: '2-Minute Chairside Approval', badge: 'Paperless' },
+                  { name: 'UPI & Dynamic QR', sub: 'Instant Front-Desk Collection', badge: 'UPI' },
+                  { name: 'Net Banking', sub: '50+ Scheduled Commercial Banks', badge: 'Banking' },
+                  { name: 'Upfront T+1 Disbursal', sub: 'Direct Current A/c Credit', badge: 'Settlement' },
+                  { name: 'Zero Clinic Liability', sub: '100% Non-Recourse Payouts', badge: 'Guaranteed' }
                 ]).map((item, idx) => (
                   <div
                     key={idx}
                     className="flex items-center gap-3 px-3.5 py-2 rounded-xl bg-slate-50/90 border border-slate-200/90 shrink-0 transition-all hover:bg-white hover:border-slate-300 hover:shadow-xs"
                   >
-                    {/* Logo container */}
-                    <div className={`h-8 rounded-lg overflow-hidden flex items-center justify-center shrink-0 shadow-2xs bg-white border border-slate-100 p-0.5 ${
-                      'w-8'
-                    }`}>
-                      <BankSvgLogo id={item.id} size={28} />
+                    <div className="w-8 h-8 rounded-lg overflow-hidden flex items-center justify-center shrink-0 shadow-2xs bg-white border border-slate-100 p-0.5 text-[#0867E8] font-black text-xs">
+                      ✓
                     </div>
                     <div className="text-left">
                       <div className="flex items-center gap-1.5 mb-0.5">
                         <span className="text-xs font-bold text-[#0B2450] whitespace-nowrap">{item.name}</span>
-                        <span className={`text-[8px] font-bold px-1.5 py-0.5 rounded uppercase tracking-wide ${
-                          item.badge === 'Bank'
-                            ? 'bg-blue-50 text-blue-600'
-                            : item.badge === 'Gateway'
-                            ? 'bg-purple-50 text-purple-700'
-                            : item.badge === 'Cardless'
-                            ? 'bg-emerald-50 text-emerald-700'
-                            : 'bg-orange-50 text-orange-600'
-                        }`}>
+                        <span className="text-[8px] font-bold px-1.5 py-0.5 rounded uppercase tracking-wide bg-blue-50 text-[#0867E8]">
                           {item.badge}
                         </span>
                       </div>

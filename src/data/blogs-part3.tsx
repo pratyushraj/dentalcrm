@@ -2189,7 +2189,7 @@ export const BLOGS_PART3 = [
     faqs: [
       {
         question: "Can I get dental implants or aligners on EMI without a credit card in India?",
-        answer: "Yes. Over 85% of Indian dental patients finance procedures without a credit card using Cardless EMI networks (such as Instant Cardless EMI, Fibe, TVS Credit, Zype, and CASHe) or pre-approved Debit Card EMI across banks like HDFC, ICICI, Kotak, Axis, and Federal Bank. Approvals require only a valid PAN card, mobile-linked Aadhaar OTP, and an active bank account for automated e-NACH mandate setup."
+        answer: "Yes. Over 85% of Indian dental patients finance procedures without a credit card using Cardless EMI networks (such as instant digital KYC and scheduled bank rails) or pre-approved Debit Card EMI across banks like HDFC, ICICI, Kotak, Axis, and Federal Bank. Approvals require only a valid PAN card, mobile-linked Aadhaar OTP, and an active bank account for automated e-NACH mandate setup."
       },
       {
         question: "What is the minimum and maximum treatment amount eligible for Cardless EMI?",
@@ -2266,7 +2266,7 @@ export const BLOGS_PART3 = [
                 <td className="px-4 py-3 font-semibold text-emerald-700">❌ No (Only Mobile + OTP)</td>
                 <td className="px-4 py-3 font-bold text-emerald-600">2 Minutes Chairside</td>
                 <td className="px-4 py-3">₹30,000 – ₹5,00,000</td>
-                <td className="px-4 py-3 text-xs">Healthcare Lending Network, TVS Credit, Zype, Fibe, CASHe</td>
+                <td className="px-4 py-3 text-xs">Instant Cardless & Bank EMI Rails</td>
               </tr>
               <tr>
                 <td className="px-4 py-3 font-bold text-neutral-900">Debit Card EMI</td>

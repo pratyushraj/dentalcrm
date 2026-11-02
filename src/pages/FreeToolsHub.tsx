@@ -894,11 +894,11 @@ export default function FreeToolsHub() {
                   ₹{monthlyEmi.toLocaleString()} <span className="text-sm font-semibold text-blue-100">/ month</span>
                 </div>
                 <p className="text-xs text-blue-100 max-w-sm mx-auto">
-                  ₹{treatmentAmount.toLocaleString()} estimated over {emiTenure} monthly installments. Cardless EMI, Credit &amp; Debit Card EMI powered in partnership with Flexmoney (InstaCred).
+                  ₹{treatmentAmount.toLocaleString()} estimated over {emiTenure} monthly installments. Cardless EMI, Credit &amp; Debit Card EMI powered in partnership with RBI-Regulated Lenders.
                 </p>
                 <div className="flex items-center justify-center gap-2 bg-white px-3.5 py-1.5 rounded-xl w-fit mx-auto shadow-xs">
                   <span className="text-[10px] text-slate-600 font-bold uppercase tracking-wider">Partner:</span>
-                  <img src="/assets/flexmoney_logo.png" alt="Flexmoney InstaCred" style={{ height: '18px', width: 'auto' }} className="object-contain shrink-0" />
+                  
                 </div>
                 <div className="pt-2">
                   <a

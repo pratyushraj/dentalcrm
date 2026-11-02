@@ -82,7 +82,7 @@ export const PatientEligibilityModal: React.FC<PatientEligibilityModalProps> = (
         checkedAt: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })
       });
 
-      // 2. Initiate application via Flexmoney & Cardless Network
+      // 2. Initiate application via Multi-Lender Cardless Network
       const result = await easycredService.initiateApplication({
         customerName: name.trim(),
         mobile: cleanMobile,
@@ -222,7 +222,7 @@ export const PatientEligibilityModal: React.FC<PatientEligibilityModalProps> = (
                 </div>
                 <div>
                   <span className="text-[9px] uppercase tracking-wider text-slate-400 block">Lender Network</span>
-                  <span className="font-bold text-slate-200">Flexmoney & Cardless Lender Network</span>
+                  <span className="font-bold text-slate-200">Multi-Lender Cardless Network</span>
                 </div>
               </div>
             </div>

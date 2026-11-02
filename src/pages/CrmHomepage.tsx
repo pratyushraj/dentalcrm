@@ -266,7 +266,7 @@ export default function CrmHomepage() {
     },
     {
       q: 'Can patients get treatment on EMI without a credit card (Cardless EMI)?',
-      a: 'Yes. Clinaza powers Cardless EMIs in partnership with Flexmoney (InstaCred) and leading cardless healthcare lenders (including Fibe, CASHe, KreditBee, TVS Credit, and Zype). Patients without a credit card only need a valid PAN and Aadhaar OTP to split treatments into monthly EMIs. Additionally, Credit Card EMI across 21+ banks, Debit Card EMI, and Down Payment + EMI options are fully supported.'
+      a: 'Yes. Clinaza powers Cardless EMIs in partnership with leading RBI-regulated cardless healthcare lenders (including Fibe, CASHe, KreditBee, TVS Credit, and Zype). Patients without a credit card only need a valid PAN and Aadhaar OTP to split treatments into monthly EMIs. Additionally, Credit Card EMI across 21+ banks, Debit Card EMI, and Down Payment + EMI options are fully supported.'
     },
     {
       q: 'Are IVF and fertility treatments eligible for monthly EMI financing?',
@@ -274,7 +274,7 @@ export default function CrmHomepage() {
     },
     {
       q: 'Does the clinic bear any credit risk?',
-      a: 'Zero credit risk on the clinic. The loan is funded, serviced, and collected directly by Flexmoney & regulated lending partners via automated monthly e-NACH auto-debit.'
+      a: 'Zero credit risk on the clinic. The loan is funded, serviced, and collected directly by regulated lending institutions via automated monthly e-NACH auto-debit.'
     },
     {
       q: 'What is the onboarding fee for clinics?',
@@ -298,7 +298,7 @@ export default function CrmHomepage() {
     <div className="min-h-screen bg-white text-[#0B2450] font-sora antialiased overflow-x-hidden selection:bg-[#0867E8] selection:text-white">
       <SEOHead
         title="Clinaza — Healthcare EMIs & Free Dental CRM India"
-        description="Offer instant point-of-care patient EMI financing (₹30K–₹5L) with Flexmoney & cardless EMI lenders. Plus, 100% Free Dental Clinic CRM software."
+        description="Offer instant point-of-care patient EMI financing (₹30K–₹5L) with 55+ RBI-regulated bank & cardless EMI lenders. Plus, 100% Free Dental Clinic CRM software."
         keywords={[
           'clinaza', 'clinaza patient financing', 'clinaza healthpay', 'clinaza healthcare emi',
           'medical equipment loan for dentist', 'loan for dental clinic', 'loan for dentist', 'dental equipment loan emi',
@@ -375,7 +375,7 @@ export default function CrmHomepage() {
                 "name": "Does the clinic bear any credit risk?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Zero credit risk on the clinic. The loan is funded, serviced, and collected directly by Flexmoney & regulated lending partners via automated monthly e-NACH auto-debit."
+                  "text": "Zero credit risk on the clinic. The loan is funded, serviced, and collected directly by regulated lending institutions via automated monthly e-NACH auto-debit."
                 }
               },
               {
@@ -399,7 +399,7 @@ export default function CrmHomepage() {
                 "name": "Can patients get treatment on EMI without a credit card (Cardless EMI)?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Yes. Clinaza powers Cardless EMIs in partnership with Flexmoney (InstaCred) and leading cardless healthcare lenders (including Fibe, CASHe, KreditBee, TVS Credit, and Zype). Patients without a credit card only need a valid PAN and Aadhaar OTP to split treatments into monthly EMIs. Additionally, Credit Card EMI across 21+ banks, Debit Card EMI, and Down Payment + EMI options are fully supported."
+                  "text": "Yes. Clinaza powers Cardless EMIs in partnership with leading RBI-regulated cardless healthcare lenders (including Fibe, CASHe, KreditBee, TVS Credit, and Zype). Patients without a credit card only need a valid PAN and Aadhaar OTP to split treatments into monthly EMIs. Additionally, Credit Card EMI across 21+ banks, Debit Card EMI, and Down Payment + EMI options are fully supported."
                 }
               },
               {
@@ -455,8 +455,8 @@ export default function CrmHomepage() {
 
             {/* Header Co-brand Trust Pill */}
             <div className="hidden xl:flex items-center gap-2 px-3 py-1.5 bg-slate-50/90 border border-slate-200/90 rounded-xl shadow-2xs">
-              <span className="text-[10px] font-black uppercase text-slate-500 tracking-wider">Affordability Partner:</span>
-              <img src="/assets/flexmoney_logo.png" alt="Flexmoney InstaCred" style={{ height: '18px', width: 'auto' }} className="object-contain shrink-0" />
+              <span className="text-[10px] font-black uppercase text-slate-500 tracking-wider">Affordability:</span>
+              <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">55+ Lenders Live</span>
             </div>
           </div>
           <div className="flex items-center gap-1.5 sm:gap-2.5">
@@ -518,8 +518,8 @@ export default function CrmHomepage() {
             <div className="md:col-span-7 space-y-3.5 sm:space-y-5">
               <div className="inline-flex items-center gap-2 sm:gap-2.5 px-3 sm:px-3.5 py-1 sm:py-1.5 bg-gradient-to-r from-blue-50/90 to-slate-100 border border-blue-200/80 rounded-full text-xs font-semibold text-slate-800 shadow-2xs flex-wrap">
                 <span className="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-                <span className="text-[10px] font-black text-slate-600 uppercase tracking-widest">Official Lending Partner:</span>
-                <img src="/assets/flexmoney_logo.png" alt="Flexmoney InstaCred" style={{ height: '17px', width: 'auto' }} className="object-contain shrink-0" />
+                <span className="text-[10px] font-black text-slate-600 uppercase tracking-widest">Multi-Lender Network:</span>
+                <span className="text-[10px] font-bold text-slate-700">55+ Banks &amp; NBFCs</span>
                 <span className="text-slate-300 hidden sm:inline">&bull;</span>
                 <span className="text-[10px] font-bold text-slate-600 hidden sm:inline">35+ EMI Modes</span>
               </div>
@@ -553,7 +553,7 @@ export default function CrmHomepage() {
                 </Link>
               </div>
 
-              {/* ── Official Flexmoney Partnership Institutional Card ── */}
+              {/* ── Official Healthcare Lending Network Partnership Institutional Card ── */}
               <div className="p-3 sm:p-4 rounded-2xl bg-gradient-to-br from-white via-slate-50 to-blue-50/50 border border-blue-200/90 shadow-sm space-y-2.5">
                 <div className="flex items-center justify-between gap-2 border-b border-slate-200/80 pb-2">
                   <div className="flex items-center gap-1.5 sm:gap-2">
@@ -574,14 +574,14 @@ export default function CrmHomepage() {
                 <div className="hidden sm:flex flex-row items-center justify-between gap-3.5 pt-0.5">
                   <div className="space-y-1">
                     <p className="text-sm font-black text-[#0B2450] tracking-tight">
-                      Healthcare Affordability In Partnership with Flexmoney (InstaCred)
+                      Healthcare Affordability & Patient Financing
                     </p>
                     <p className="text-[11px] text-slate-600 leading-relaxed">
-                      Clinaza has partnered with <strong>Flexmoney (InstaCred)</strong> to provide point-of-care patient financing directly at dental and outpatient clinic counters. Patients get paperless Cardless EMIs, pre-approved Debit Card EMIs, and 21+ major banks' Credit Card EMIs in 2 minutes.
+                      Clinaza provides instant point-of-care patient financing directly at dental and outpatient clinic counters powered by 55+ RBI-regulated banks and NBFCs. Patients get paperless Cardless EMIs, pre-approved Debit Card EMIs, and 21+ major banks' Credit Card EMIs in 2 minutes.
                     </p>
                   </div>
-                  <div className="flex items-center gap-3.5 bg-white px-4 py-2 rounded-xl border border-slate-200 shadow-2xs shrink-0">
-                    <img src="/assets/flexmoney_logo.png" alt="Flexmoney Official InstaCred Partner" style={{ height: '22px', width: 'auto' }} className="object-contain shrink-0" />
+                  <div className="flex items-center gap-2 bg-emerald-50 px-3 py-1.5 rounded-xl border border-emerald-200 shadow-2xs shrink-0">
+                    <span className="text-[11px] font-bold text-emerald-800">55+ Regulated Lenders</span>
                   </div>
                 </div>
 
@@ -590,10 +590,10 @@ export default function CrmHomepage() {
                   <div className="flex items-center justify-between gap-2.5 bg-white px-3 py-2 rounded-xl border border-slate-200 shadow-2xs">
                     <div className="flex flex-col min-w-0">
                       <span className="text-[11px] font-extrabold text-[#0B2450] leading-tight truncate">Cardless &amp; Card EMIs</span>
-                      <span className="text-[9.5px] font-semibold text-slate-500 tracking-wide">Official Partner</span>
+                      <span className="text-[9.5px] font-semibold text-slate-500 tracking-wide">Multi-Lender Network</span>
                     </div>
-                    <div className="flex items-center gap-2.5 shrink-0 bg-slate-50/80 px-2.5 py-1 rounded-lg border border-slate-100">
-                      <img src="/assets/flexmoney_logo.png" alt="Flexmoney" style={{ height: '17px', width: 'auto' }} className="object-contain shrink-0" />
+                    <div className="flex items-center gap-1.5 shrink-0 bg-emerald-50 px-2 py-1 rounded-lg border border-emerald-200">
+                      <span className="text-[10px] font-bold text-emerald-700">55+ Lenders</span>
                     </div>
                   </div>
                 </div>
@@ -632,9 +632,8 @@ export default function CrmHomepage() {
                   <Landmark size={14} className="text-[#0867E8]" /> AFFORDABILITY &amp; LENDING PARTNERS
                 </span>
                 <span className="text-slate-300 hidden sm:inline">&bull;</span>
-                <div className="flex items-center gap-2.5 bg-white px-3 py-1.5 rounded-xl border border-slate-200 shadow-2xs">
-                  <span className="text-[10px] font-black text-slate-700 uppercase tracking-wider">Powered by</span>
-                  <img src="/assets/flexmoney_logo.png" alt="Flexmoney" style={{ height: '18px', width: 'auto' }} className="object-contain shrink-0" />
+                <div className="flex items-center gap-2 bg-white px-3 py-1.5 rounded-xl border border-slate-200 shadow-2xs">
+                  <span className="text-[10px] font-black text-slate-700 uppercase tracking-wider">Multi-Lender Network</span>
                 </div>
               </div>
               <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200/70 px-2.5 py-0.5 rounded-full shrink-0">
@@ -650,7 +649,7 @@ export default function CrmHomepage() {
 
               <div className="flex w-max gap-4 animate-marquee group-hover:[animation-play-state:paused]">
                 {[
-                  { id: 'flexmoney', name: 'Flexmoney', sub: 'InstaCred Network', badge: 'Cardless' },
+                  { id: 'hdfc', name: 'HDFC Bank', sub: 'Instant Debit/Credit', badge: 'Bank' },
                   { id: 'fibe', name: 'FIBE', sub: 'Instant Cardless Credit', badge: 'Cardless' },
                   { id: 'cashe', name: 'CASHe', sub: 'Cardless Healthcare Credit', badge: 'Cardless' },
                   { id: 'kreditbee', name: 'KreditBee', sub: 'Cardless Checkout EMI', badge: 'Cardless' },
@@ -663,7 +662,7 @@ export default function CrmHomepage() {
                   { id: 'axis', name: 'Axis Bank', sub: 'Credit & Debit Card EMI', badge: 'Bank' },
                   { id: 'federal', name: 'Federal Bank', sub: 'Pre-Approved Debit EMI', badge: 'Bank' }
                 ].concat([
-                  { id: 'flexmoney', name: 'Flexmoney', sub: 'InstaCred Network', badge: 'Cardless' },
+                  { id: 'hdfc', name: 'HDFC Bank', sub: 'Instant Debit/Credit', badge: 'Bank' },
                   { id: 'fibe', name: 'FIBE', sub: 'Instant Cardless Credit', badge: 'Cardless' },
                   { id: 'cashe', name: 'CASHe', sub: 'Cardless Healthcare Credit', badge: 'Cardless' },
                   { id: 'kreditbee', name: 'KreditBee', sub: 'Cardless Checkout EMI', badge: 'Cardless' },
@@ -682,7 +681,7 @@ export default function CrmHomepage() {
                   >
                     {/* Logo container */}
                     <div className={`h-8 rounded-lg overflow-hidden flex items-center justify-center shrink-0 shadow-2xs bg-white border border-slate-100 p-0.5 ${
-                      item.id === 'flexmoney' ? 'w-20 px-1.5' : 'w-8'
+                      'w-8'
                     }`}>
                       <BankSvgLogo id={item.id} size={28} />
                     </div>
@@ -870,7 +869,7 @@ export default function CrmHomepage() {
             <div className="text-center space-y-2">
               <span className="text-[10px] font-black text-[#0f7a75] uppercase tracking-widest">AFFORDABILITY SUITE &amp; RECEPTION WORKFLOW</span>
               <h2 className="text-2xl sm:text-4xl font-black text-[#0B2450]">Calculate Patient EMI &amp; Reception Workflow</h2>
-              <p className="text-xs sm:text-sm text-slate-600">35+ EMI payment modes powered in partnership with Flexmoney (InstaCred) &amp; regulated banks.</p>
+              <p className="text-xs sm:text-sm text-slate-600">35+ EMI payment modes powered in partnership with 55+ RBI-regulated banks &amp; NBFC lenders.</p>
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
@@ -1004,7 +1003,7 @@ export default function CrmHomepage() {
                     </div>
                     <div className="flex items-center gap-1.5 bg-white/10 border border-white/15 px-2 py-1 rounded-lg">
                       <span className="text-[8px] uppercase tracking-wider text-slate-300 font-bold">Partnered with</span>
-                      <img src="/assets/flexmoney_logo.png" alt="Flexmoney" style={{ height: '14px', width: 'auto' }} className="object-contain" />
+                      
                     </div>
                   </div>
 
@@ -1031,13 +1030,13 @@ export default function CrmHomepage() {
                         step: '2',
                         icon: <ShieldCheck size={16} className="text-emerald-400" />,
                         title: 'Cardless, Credit or Debit Card EMI',
-                        desc: 'Choose from 35+ modes: Cardless EMI (2-min Aadhaar OTP via Flexmoney InstaCred), 21+ Credit Card EMIs, or Debit Card EMI.',
+                        desc: 'Choose from 35+ modes: Cardless EMI (2-min Aadhaar OTP via digital KYC), 21+ Credit Card EMIs, or Debit Card EMI.',
                         badge: 'Cardless + Card'
                       },
                       {
                         step: '3',
                         icon: <Clock size={16} className="text-amber-400" />,
-                        title: 'Real-Time Sanction (Flexmoney Lending Network)',
+                        title: 'Real-Time Sanction (55+ RBI-Regulated Lenders)',
                         desc: 'Algorithm matches patient with best lender offer. Patient selects flexible 3 to 24-month EMI plan.',
                         badge: 'High approval rate'
                       },
@@ -1099,12 +1098,12 @@ export default function CrmHomepage() {
                     35+ Ways For Patients To Pay Over Time
                   </h3>
                   <p className="text-xs text-slate-500">
-                    Integrated directly at the clinic counter in partnership with Flexmoney (InstaCred).
+                    Integrated directly at the clinic counter in partnership with RBI-Regulated Lenders.
                   </p>
                 </div>
                 <div className="flex items-center gap-2.5 bg-white border border-slate-200 px-3 py-1.5 rounded-xl shadow-xs">
                   <span className="text-[10px] text-slate-500 font-black uppercase tracking-wider">Official Partner:</span>
-                  <img src="/assets/flexmoney_logo.png" alt="Flexmoney InstaCred Partner" style={{ height: '20px', width: 'auto' }} className="object-contain shrink-0" />
+                  
                 </div>
               </div>
 
@@ -1112,7 +1111,7 @@ export default function CrmHomepage() {
                 {[
                   {
                     title: 'Cardless EMI',
-                    partner: 'Flexmoney InstaCred Network',
+                    partner: '55+ Regulated Lenders',
                     desc: 'No credit or debit card required. 2-min paperless digital KYC via Aadhaar & PAN OTP with instant loan sanction.',
                     badge: 'Most Popular',
                     tagColor: 'bg-emerald-50 text-emerald-700 border-emerald-200'
@@ -1577,7 +1576,7 @@ export default function CrmHomepage() {
                       </div>
                       <div>
                         <span className="text-[9px] uppercase tracking-wider text-slate-400 block">Lender Network</span>
-                        <span className="font-bold text-slate-200">Flexmoney InstaCred (35+ Options)</span>
+                        <span className="font-bold text-slate-200">Instant Digital EMI (35+ Options)</span>
                       </div>
                     </div>
                   </div>
@@ -1628,7 +1627,7 @@ export default function CrmHomepage() {
                       <span className="text-[10px] font-black text-[#0f7a75] uppercase tracking-widest block">PATIENT FINANCING CHECK</span>
                       <div className="flex items-center gap-1.5 bg-slate-100 border border-slate-200/80 px-2 py-0.5 rounded-md">
                         <span className="text-[8px] uppercase tracking-wider text-slate-500 font-bold">Powered by</span>
-                        <img src="/assets/flexmoney_logo.png" alt="Flexmoney" style={{ height: '14px', width: 'auto' }} className="object-contain" />
+                        
                       </div>
                     </div>
                     <h3 className="text-xl font-black text-[#0B2450]">
@@ -1855,7 +1854,7 @@ export default function CrmHomepage() {
 
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-4 text-xs text-slate-500 pt-2 border-t border-slate-200/60">
                   <span className="flex items-center gap-1.5 text-[11px] sm:text-xs font-medium text-slate-600">
-                    <ShieldCheck size={14} className="text-emerald-600 shrink-0" /> Flexmoney Regulated Lending Network
+                    <ShieldCheck size={14} className="text-emerald-600 shrink-0" /> 55+ Regulated Banking & NBFC Rails
                   </span>
                   <span className="hidden sm:inline text-slate-300">&bull;</span>
                   <a
@@ -2047,7 +2046,7 @@ export default function CrmHomepage() {
                   Official Affordability Partner
                 </span>
                 <div className="flex items-center gap-2 bg-slate-50 border border-slate-200/80 px-3 py-1.5 rounded-xl w-fit">
-                  <img src="/assets/flexmoney_logo.png" alt="Flexmoney InstaCred" style={{ height: '18px', width: 'auto' }} className="object-contain shrink-0" />
+                  
                 </div>
               </div>
             </div>

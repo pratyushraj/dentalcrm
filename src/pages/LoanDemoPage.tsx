@@ -204,7 +204,7 @@ export default function LoanDemoPage() {
                     PRE-APPROVED SANCTION LIMIT
                   </div>
                   <div className="text-3xl font-black text-white mt-1">₹1,50,000</div>
-                  <p className="text-xs text-slate-400">Allocated across Flexmoney (InstaCred) Cardless Lending Network</p>
+                  <p className="text-xs text-slate-400">Allocated across RBI-Regulated Lenders Cardless Lending Network</p>
                 </div>
                 <div className="bg-blue-600/20 border border-blue-500/30 rounded-xl px-3 py-2 text-right">
                   <div className="text-[10px] text-blue-300 font-bold uppercase">Processing Fee</div>
@@ -254,7 +254,7 @@ export default function LoanDemoPage() {
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-slate-400">Lender Network Allocation</span>
-                  <span className="font-bold text-slate-300">Flexmoney Cardless Lending Network</span>
+                  <span className="font-bold text-slate-300">Cardless Healthcare Lending Network</span>
                 </div>
               </div>
 

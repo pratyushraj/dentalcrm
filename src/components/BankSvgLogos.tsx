@@ -7,15 +7,10 @@ interface BankLogoProps {
   size?: number;
 }
 
-// Map of Flexmoney Cardless EMI and Bank Affordability Partners
+// Map of Cardless EMI and Bank Affordability Partners
 const BANK_LOGOS: Record<string, { src: string; fallback: string; name: string }> = {
-  // Infrastructure Gateways
-  flexmoney: {
-    src: '/assets/flexmoney_logo.png',
-    fallback: 'https://flexmoney.in/logo.png',
-    name: 'Flexmoney InstaCred',
-  },
-  // Flexmoney & Cardless EMI Lenders
+
+  // Cardless EMI Lenders
   fibe: {
     src: '/assets/lenders/fibe.png',
     fallback: 'https://icon.horse/icon/fibe.in',
@@ -132,10 +127,10 @@ export const BankSvgLogo: React.FC<BankLogoProps> = ({ id, className = '', size 
       loading="eager"
       decoding="async"
       style={{
-        width: normalizedId === 'flexmoney' ? 'auto' : size,
+        width: size,
         height: size,
         maxHeight: size,
-        maxWidth: normalizedId === 'flexmoney' ? size * 2.8 : size,
+        maxWidth: size,
         objectFit: 'contain',
         borderRadius: 4,
         background: '#ffffff',

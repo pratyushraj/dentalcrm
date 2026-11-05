@@ -12,11 +12,18 @@ import {
   Mail,
   Star,
   Home,
-  Globe
+  Globe,
+  CreditCard,
+  Download,
+  ArrowRight,
+  QrCode,
+  CheckCircle2,
+  PackageCheck
 } from 'lucide-react';
 import { emailNotificationService } from '@/services/emailNotificationService';
 import { supabase } from '@/lib/supabase';
 import { toast } from 'sonner';
+import { initiateRazorpayPayment, RAZORPAY_CONFIG } from '@/services/razorpayService';
 
 export default function PartnerClinicOnboardingPage() {
   const [form, setForm] = useState({
@@ -72,6 +79,43 @@ export default function PartnerClinicOnboardingPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [copiedLink, setCopiedLink] = useState(false);
+  const [paymentId, setPaymentId] = useState<string | null>(null);
+
+  const handlePayWithRazorpay = () => {
+    initiateRazorpayPayment({
+      amount: RAZORPAY_CONFIG.kitAmount,
+      name: 'CLINAZA',
+      description: `Clinic Kit & Lifetime CRM: ${form.clinicName || 'Partner Clinic'}`,
+      prefill: {
+        name: form.doctorName || form.clinicName,
+        email: form.email,
+        contact: form.phone
+      },
+      notes: {
+        clinic_name: form.clinicName,
+        city: form.city,
+        doctor_name: form.doctorName
+      },
+      onSuccess: async (res) => {
+        setPaymentId(res.razorpay_payment_id);
+        toast.success(`Payment of ₹${RAZORPAY_CONFIG.kitAmount} verified! (Ref: ${res.razorpay_payment_id})`);
+        
+        try {
+          await emailNotificationService.sendNotification(`🎉 ₹999 Clinic Kit Paid via Razorpay: ${form.clinicName}`, {
+            'Payment ID': res.razorpay_payment_id,
+            'Order ID': res.razorpay_order_id || 'N/A',
+            'Clinic Name': form.clinicName,
+            'Doctor Name': form.doctorName || 'N/A',
+            'Phone': form.phone,
+            'City': form.city,
+            'Amount': `₹${RAZORPAY_CONFIG.kitAmount}`
+          });
+        } catch (e) {
+          console.warn('[Email] Error sending payment confirmation alert', e);
+        }
+      }
+    });
+  };
 
   const toggleSpecialty = (item: string) => {
     setForm(prev => {
@@ -298,45 +342,175 @@ export default function PartnerClinicOnboardingPage() {
         </div>
 
         {submitted ? (
-          <div className="bg-white border border-emerald-200 rounded-2xl p-8 text-center space-y-4 shadow-sm">
-            <div className="w-14 h-14 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center mx-auto text-2xl font-bold">
-              ✓
+          <div className="space-y-6">
+            {/* Accreditation Header */}
+            <div className="bg-emerald-50/90 border border-emerald-200 rounded-2xl p-5 text-center space-y-2 shadow-2xs">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 border border-emerald-300 text-emerald-800 text-xs font-black uppercase tracking-wider">
+                <CheckCircle2 size={14} />
+                <span>Step 1 Complete: Clinic Profile Accredited</span>
+              </div>
+              <h2 className="text-xl sm:text-2xl font-black text-[#0B2450]">
+                {form.clinicName ? `${form.clinicName} Accredited!` : 'Clinic Details Submitted!'}
+              </h2>
+              <p className="text-xs text-slate-600 max-w-lg mx-auto">
+                Your profile has been logged in the Clinaza partner network. Complete Step 2 below to order your custom reception acrylic standee and activate your financing portal.
+              </p>
             </div>
-            <h2 className="text-xl sm:text-2xl font-bold text-slate-900">Clinic Details Submitted!</h2>
-            <p className="text-xs sm:text-sm text-slate-600 max-w-md mx-auto leading-relaxed">
-              Thank you! Your clinic has been logged for merchant accreditation. Our team will share your digital merchant QR and front-desk portal.
-            </p>
-            <div className="pt-4 flex justify-center">
-              <button
-                onClick={() => {
-                  setSubmitted(false);
-                  setForm({
-                    clinicName: '',
-                    doctorName: '',
-                    city: '',
-                    phone: '',
-                    email: '',
-                    website: '',
-                    chairs: '',
-                    premisesType: '',
-                    googleRating: '',
-                    reviewCount: '',
-                    specialties: [],
-                    avgMonthlyCases: '',
-                    expectedEmiLoans: '',
-                    avgTicketSize: '',
-                    currentPosProvider: '',
-                    category: 'dental',
-                    hasCurrentAccount: '',
-                    businessProofType: '',
-                    hasCancelledCheque: ''
-                  });
-                }}
-                className="px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold rounded-xl transition-all"
-              >
-                Submit Another Clinic
-              </button>
-            </div>
+
+            {/* Payment Completed Card */}
+            {paymentId ? (
+              <div className="bg-white border-2 border-emerald-400 rounded-2xl p-6 sm:p-8 text-center space-y-4 shadow-sm">
+                <div className="w-16 h-16 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center mx-auto text-3xl font-black">
+                  <PackageCheck size={36} />
+                </div>
+                <div className="space-y-1">
+                  <span className="px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold">
+                    Payment Verified via Razorpay
+                  </span>
+                  <h3 className="text-xl font-black text-[#0B2450] mt-2">Clinic Activation Kit Queued for Dispatch!</h3>
+                  <p className="text-xs text-slate-600 font-mono">
+                    Razorpay Reference: <strong className="text-emerald-700">{paymentId}</strong>
+                  </p>
+                </div>
+                <p className="text-xs text-slate-600 max-w-md mx-auto leading-relaxed">
+                  Your custom countertop acrylic QR standee and staff pitch cards are being laser-printed and will be couriered via Bluedart/Delhivery within 48 hours. Your dedicated Relationship Manager will reach out on WhatsApp shortly!
+                </p>
+                <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
+                  <a
+                    href="/docs/Clinaza_Clinic_Partner_Onboarding_Guide.pdf"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#0867E8] text-white text-xs font-bold hover:bg-[#0756C7] transition-all shadow-sm"
+                  >
+                    <Download size={14} />
+                    <span>Download Partner Guide (PDF)</span>
+                  </a>
+                  <button
+                    onClick={() => {
+                      setSubmitted(false);
+                      setPaymentId(null);
+                    }}
+                    className="px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold transition-all"
+                  >
+                    Submit Another Clinic
+                  </button>
+                </div>
+              </div>
+            ) : (
+              /* Step 2: Pay ₹999 via Razorpay Card */
+              <div className="bg-white border-2 border-[#0867E8] rounded-2xl p-6 sm:p-8 shadow-md relative overflow-hidden">
+                <div className="absolute top-0 right-0 bg-[#0867E8] text-white text-[10px] font-black uppercase tracking-wider px-3.5 py-1 rounded-bl-xl">
+                  Step 2 of 2
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+                  {/* Left: Commercial Details & Pay Button */}
+                  <div className="md:col-span-7 space-y-4">
+                    <div>
+                      <span className="inline-block bg-blue-50 border border-blue-200 text-[#0867E8] text-[10px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full mb-1.5">
+                        One-Time Clinic Kit Activation
+                      </span>
+                      <div className="flex items-baseline gap-2">
+                        <span className="text-3xl font-black text-[#0B2450]">₹999</span>
+                        <span className="text-xs font-bold text-slate-500">One-Time Only &bull; Zero AMC Lifetime</span>
+                      </div>
+                      <p className="text-xs text-slate-600 mt-1">
+                        Includes custom reception acrylic QR standee, full Practice Cloud CRM, and front-desk patient healthcare EMI activation.
+                      </p>
+                    </div>
+
+                    {/* Features checklist */}
+                    <ul className="space-y-2 text-xs text-slate-700 border-t border-b border-slate-100 py-3">
+                      <li className="flex items-start gap-2">
+                        <Check size={14} className="text-emerald-600 shrink-0 mt-0.5" />
+                        <span><strong>Custom Acrylic QR Standee:</strong> Laser-printed with your clinic logo.</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <Check size={14} className="text-emerald-600 shrink-0 mt-0.5" />
+                        <span><strong>Practice CRM &amp; Rx Maker:</strong> Unlimited patients, digital treatment charts.</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <Check size={14} className="text-emerald-600 shrink-0 mt-0.5" />
+                        <span><strong>Front-Desk Patient EMIs:</strong> Instant 3–24 month patient EMI financing.</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <Check size={14} className="text-emerald-600 shrink-0 mt-0.5" />
+                        <span><strong>Dedicated Relationship Manager:</strong> WhatsApp priority desk &amp; staff pitch cards.</span>
+                      </li>
+                    </ul>
+
+                    {/* Razorpay CTA Button */}
+                    <div className="space-y-2 pt-1">
+                      <button
+                        type="button"
+                        onClick={handlePayWithRazorpay}
+                        className="w-full bg-[#0867E8] hover:bg-[#0756C7] text-white font-black py-3.5 px-6 rounded-xl flex items-center justify-center gap-2 shadow-lg shadow-[#0867E8]/25 transition-all text-sm"
+                      >
+                        <CreditCard size={17} />
+                        <span>Pay ₹999 via Razorpay</span>
+                        <ArrowRight size={16} />
+                      </button>
+
+                      <div className="flex items-center justify-between text-[11px] text-slate-500 pt-1">
+                        <span>Secured by <strong>Razorpay</strong></span>
+                        <a
+                          href={RAZORPAY_CONFIG.paymentHandle}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="text-[#0867E8] font-bold hover:underline inline-flex items-center gap-1"
+                        >
+                          Direct Web Link (razorpay.me/@clinaza) &rarr;
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Right: Countertop QR Standee Card */}
+                  <div className="md:col-span-5 bg-slate-50 border border-slate-200 rounded-xl p-4 text-center space-y-2">
+                    <div className="bg-white p-2.5 rounded-lg border border-slate-200/90 shadow-2xs inline-block">
+                      <img 
+                        src={RAZORPAY_CONFIG.qrAsset} 
+                        alt="Clinaza Activation QR" 
+                        className="w-40 h-auto mx-auto rounded"
+                      />
+                    </div>
+                    <div className="space-y-0.5">
+                      <p className="text-[11px] font-black text-[#0B2450]">Scan with Any UPI App</p>
+                      <p className="text-[10px] text-slate-500 font-mono">GPay, PhonePe, Paytm, Cred</p>
+                      <p className="text-[10px] font-bold text-[#0867E8] font-mono select-all">
+                        {RAZORPAY_CONFIG.upiId}
+                      </p>
+                    </div>
+                    <p className="text-[10px] text-slate-400">
+                      Amount: <strong>₹999</strong> (Fixed)
+                    </p>
+                  </div>
+                </div>
+
+                {/* Bottom Footer Actions */}
+                <div className="mt-6 pt-4 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3 text-xs">
+                  <a
+                    href="/docs/Clinaza_Clinic_Partner_Onboarding_Guide.pdf"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-slate-600 hover:text-[#0867E8] font-bold inline-flex items-center gap-1.5 transition-colors"
+                  >
+                    <Download size={13} />
+                    <span>Download Partner Enablement PDF (2 Pages)</span>
+                  </a>
+
+                  <button
+                    onClick={() => {
+                      setSubmitted(false);
+                      setPaymentId(null);
+                    }}
+                    className="text-slate-500 hover:text-slate-800 font-medium transition-colors"
+                  >
+                    Submit Another Clinic &rarr;
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="bg-white border border-slate-200/90 rounded-2xl p-5 sm:p-8 shadow-sm space-y-6">

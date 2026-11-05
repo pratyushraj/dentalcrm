@@ -22,6 +22,11 @@ const ClearAlignersEmiPage = lazy(() => import("@/pages/ClearAlignersEmiPage"));
 const PartnerClinicOnboardingPage = lazy(() => import("@/pages/PartnerClinicOnboardingPage"));
 const AdminClinicOnboardingsPage = lazy(() => import("@/pages/AdminClinicOnboardingsPage"));
 const PartnerPipelinePreviewPage = lazy(() => import("@/pages/PartnerPipelinePreviewPage"));
+const TermsPage = lazy(() => import("@/pages/TermsPage"));
+const PrivacyPolicyPage = lazy(() => import("@/pages/PrivacyPolicyPage"));
+const RefundPolicyPage = lazy(() => import("@/pages/RefundPolicyPage"));
+const ShippingPolicyPage = lazy(() => import("@/pages/ShippingPolicyPage"));
+const ContactUsPage = lazy(() => import("@/pages/ContactUsPage"));
 const NotFoundPage = lazy(() => import("@/pages/NotFoundPage"));
 
 export default function AppRoutes() {
@@ -85,6 +90,18 @@ export default function AppRoutes() {
 
           {/* Reactivation Dashboard Portal Routes */}
           {ReactivationRoutes()}
+
+          {/* Mandatory Regulatory & Legal Compliance Routes (Razorpay / RBI / MeitY) */}
+          <Route path="/terms" element={<LazyRoute><TermsPage /></LazyRoute>} />
+          <Route path="/terms-and-conditions" element={<Navigate to="/terms" replace />} />
+          <Route path="/privacy" element={<LazyRoute><PrivacyPolicyPage /></LazyRoute>} />
+          <Route path="/privacy-policy" element={<Navigate to="/privacy" replace />} />
+          <Route path="/refund-policy" element={<LazyRoute><RefundPolicyPage /></LazyRoute>} />
+          <Route path="/cancellation-policy" element={<Navigate to="/refund-policy" replace />} />
+          <Route path="/shipping-policy" element={<LazyRoute><ShippingPolicyPage /></LazyRoute>} />
+          <Route path="/delivery-policy" element={<Navigate to="/shipping-policy" replace />} />
+          <Route path="/contact" element={<LazyRoute><ContactUsPage /></LazyRoute>} />
+          <Route path="/contact-us" element={<Navigate to="/contact" replace />} />
 
           {/* Direct Login Alias */}
           <Route path="/login" element={<Navigate to="/reactivation/login" replace />} />

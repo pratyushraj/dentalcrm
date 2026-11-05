@@ -1995,8 +1995,8 @@ export default function CrmHomepage() {
       <footer className="border-t border-slate-200 py-10 px-5 sm:px-8 bg-white text-center sm:text-left pb-24 sm:pb-12">
         <div className="max-w-6xl mx-auto space-y-8">
           {/* Main Footer Directory Columns */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 text-left">
-            {/* Col 1: Brand & Contact */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 text-left">
+            {/* Col 1: Brand & Operating Entity Details */}
             <div className="space-y-4">
               <div className="flex items-center gap-3">
                 <img src="/assets/clinaza-logo.jpg" alt="CLINAZA" className="h-8 w-auto rounded-lg border border-slate-200" />
@@ -2006,32 +2006,71 @@ export default function CrmHomepage() {
                 </div>
               </div>
               <p className="text-xs text-slate-500 leading-relaxed">
-                Empowering healthcare clinics with point-of-care EMI financing and 100% free cloud practice management software.
+                Operated by <strong>MELLOWPRINTS</strong>. India's point-of-care healthcare EMI platform and free cloud practice management software for dental clinics.
               </p>
               <div className="space-y-1.5 text-xs text-slate-600 font-medium pt-1">
                 <a href="tel:+917292984244" className="hover:text-[#0867E8] transition-colors font-bold flex items-center gap-2">
                   📞 +91 7292984244
                 </a>
                 <a href="https://wa.me/917292984244" target="_blank" rel="noopener noreferrer" className="hover:text-emerald-600 transition-colors font-bold flex items-center gap-2">
-                  💬 WhatsApp Support
+                  💬 WhatsApp Desk
                 </a>
                 <a href="mailto:contact@clinaza.in" className="hover:text-[#0867E8] transition-colors block">
                   ✉️ contact@clinaza.in
                 </a>
               </div>
 
-              {/* Footer Partnership Trust Badge */}
-              <div className="pt-2 border-t border-slate-100 space-y-1.5">
-                <span className="text-[10px] font-black uppercase tracking-wider text-slate-400 block">
-                  Official Affordability Partner
-                </span>
-                <div className="flex items-center gap-2 bg-slate-50 border border-slate-200/80 px-3 py-1.5 rounded-xl w-fit">
-                  
+              {/* Regulatory Secretariat Badge */}
+              <div className="pt-2 border-t border-slate-100 space-y-1">
+                <div className="flex items-center gap-1.5 bg-blue-50 border border-blue-200/80 px-2.5 py-1 rounded-lg w-fit text-[10px] font-bold text-blue-800">
+                  <ShieldCheck size={13} className="text-blue-600" />
+                  <span>RBI Compliant LSP Architecture</span>
                 </div>
+                <p className="text-[10px] text-slate-400">
+                  GSTIN: 10DXRPR3052Q1ZV<br />
+                  Udyam: UDYAM-BR-26-0005161
+                </p>
               </div>
             </div>
 
-            {/* Col 2: Popular Patient Guides & Blogs */}
+            {/* Col 2: Legal & Regulatory Policies (Razorpay Mandatory) */}
+            <div className="space-y-3">
+              <h4 className="text-xs font-black uppercase tracking-wider text-[#0B2450]">Legal &amp; Compliance</h4>
+              <ul className="space-y-2 text-xs text-slate-600">
+                <li>
+                  <Link to="/terms" className="hover:text-[#0867E8] font-semibold text-slate-700 transition-colors">
+                    Terms of Service
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/privacy" className="hover:text-[#0867E8] font-semibold text-slate-700 transition-colors">
+                    Privacy Policy
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/refund-policy" className="hover:text-[#0867E8] font-semibold text-slate-700 transition-colors">
+                    Cancellation &amp; Refund Policy
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/shipping-policy" className="hover:text-[#0867E8] font-semibold text-slate-700 transition-colors">
+                    Shipping &amp; Delivery Policy
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/contact" className="hover:text-[#0867E8] font-semibold text-slate-700 transition-colors">
+                    Contact Us &amp; Support
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/clinic-onboarding" className="text-[#0867E8] font-bold inline-flex items-center gap-1 mt-1 hover:underline">
+                    Partner Clinic Onboarding (₹999) &rarr;
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            {/* Col 3: Popular Patient Guides & Blogs */}
             <div className="space-y-3">
               <h4 className="text-xs font-black uppercase tracking-wider text-[#0B2450]">Patient EMI Guides</h4>
               <ul className="space-y-2 text-xs text-slate-600">
@@ -2056,11 +2095,6 @@ export default function CrmHomepage() {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/blog/gap-closure-cost-in-patna" className="hover:text-[#0867E8] transition-colors">
-                    Teeth Gap Filling &amp; Treatment Cost
-                  </Link>
-                </li>
-                <li>
                   <Link to="/blog/hair-transplant-cost-on-emi-india-guide" className="hover:text-[#0867E8] transition-colors">
                     Hair Transplant EMI Guide
                   </Link>
@@ -2073,7 +2107,7 @@ export default function CrmHomepage() {
               </ul>
             </div>
 
-            {/* Col 3: Free Tools & Clinic Software */}
+            {/* Col 4: Free Tools & Clinic Software */}
             <div className="space-y-3">
               <h4 className="text-xs font-black uppercase tracking-wider text-[#0B2450]">Clinic Software &amp; Tools</h4>
               <ul className="space-y-2 text-xs text-slate-600">
@@ -2105,7 +2139,7 @@ export default function CrmHomepage() {
               </ul>
             </div>
 
-            {/* Col 4: Partner Cities Directory */}
+            {/* Col 5: Partner Cities Directory */}
             <div className="space-y-3">
               <h4 className="text-xs font-black uppercase tracking-wider text-[#0B2450]">Clinaza Network Cities</h4>
               <div className="flex flex-wrap gap-1 text-[10px] max-h-48 overflow-y-auto pr-1">
@@ -2122,15 +2156,27 @@ export default function CrmHomepage() {
             </div>
           </div>
 
-          {/* Bottom Copyright & Disclaimer Strip */}
-          <div className="pt-6 pb-6 sm:pb-2 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500 font-sans">
-            <div className="text-center sm:text-left space-y-0.5">
-              <p className="font-medium text-slate-600">© 2026 CLINAZA Technologies. All Rights Reserved.</p>
+          {/* Bottom Copyright, Legal Entity & Compliance Strip */}
+          <div className="pt-6 pb-6 sm:pb-2 border-t border-slate-200 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-500 font-sans">
+            <div className="text-center md:text-left space-y-1">
+              <p className="font-semibold text-slate-700">
+                © 2026 CLINAZA. All Rights Reserved. Operated by MELLOWPRINTS (Sole Proprietorship).
+              </p>
               <p className="text-[11px] text-slate-400">
-                Direct Helpline: <a href="tel:+917292984244" className="font-semibold text-slate-600 hover:text-[#0867E8] transition-colors">+91 7292984244</a>
+                Principal Office: Sharma Sadan, Road No-1, Mahesh Nagar, S.K. Puri, Patna, Bihar &ndash; 800024 | GSTIN: 10DXRPR3052Q1ZV | Helpline: <a href="tel:+917292984244" className="font-semibold text-slate-600 hover:text-[#0867E8] transition-colors">+91 7292984244</a>
               </p>
             </div>
-            <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-xs font-medium text-slate-600 pt-1 sm:pt-0">
+            <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-xs font-medium text-slate-600">
+              <Link to="/terms" className="hover:text-[#0867E8] transition-colors whitespace-nowrap">Terms of Service</Link>
+              <span className="text-slate-300">&bull;</span>
+              <Link to="/privacy" className="hover:text-[#0867E8] transition-colors whitespace-nowrap">Privacy Policy</Link>
+              <span className="text-slate-300">&bull;</span>
+              <Link to="/refund-policy" className="hover:text-[#0867E8] transition-colors whitespace-nowrap">Refund Policy</Link>
+              <span className="text-slate-300">&bull;</span>
+              <Link to="/shipping-policy" className="hover:text-[#0867E8] transition-colors whitespace-nowrap">Shipping &amp; Delivery</Link>
+              <span className="text-slate-300">&bull;</span>
+              <Link to="/contact" className="hover:text-[#0867E8] transition-colors whitespace-nowrap">Contact Us</Link>
+              <span className="text-slate-300">&bull;</span>
               <a 
                 href="https://instagram.com/clinaza.in" 
                 target="_blank" 
@@ -2142,11 +2188,6 @@ export default function CrmHomepage() {
                 </svg>
                 <span>Instagram</span>
               </a>
-              <Link to="/tools" className="hover:text-[#0867E8] transition-colors whitespace-nowrap">Free Tools</Link>
-              <span className="text-slate-300">&bull;</span>
-              <Link to="/blog" className="hover:text-[#0867E8] transition-colors whitespace-nowrap">Blog Hub</Link>
-              <span className="text-slate-300">&bull;</span>
-              <Link to="/reactivation/login" className="hover:text-[#0B2450] font-bold text-slate-800 transition-colors whitespace-nowrap">Doctor Login &rarr;</Link>
             </div>
           </div>
         </div>

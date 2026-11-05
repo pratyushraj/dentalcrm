@@ -52,7 +52,7 @@ const htmlContent = `<!DOCTYPE html>
     max-height: 297mm;
     background: #ffffff;
     box-sizing: border-box;
-    padding: 8mm 10mm 7mm 10mm;
+    padding: 6mm 10mm 6mm 10mm;
     margin: 0 auto;
     page-break-after: always;
     display: flex;
@@ -363,8 +363,75 @@ const htmlContent = `<!DOCTYPE html>
 
   .plan-card {
     border-radius: 14px;
-    padding: 14px 16px;
+    padding: 13px 16px;
     position: relative;
+  }
+
+  .plan-allinone {
+    background: linear-gradient(135deg, #f8fafc 0%, #eff6ff 100%);
+    border: 2px solid #3b82f6;
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.1);
+    border-radius: 14px;
+    padding: 12px 18px;
+    position: relative;
+  }
+
+  .plan-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1.5px dashed #cbd5e1;
+    padding-bottom: 8px;
+    margin-bottom: 8px;
+  }
+
+  .plan-allinone .plan-price {
+    font-size: 30px;
+    font-weight: 900;
+    color: #0b2450;
+    line-height: 1.05;
+    margin-bottom: 3px;
+  }
+
+  .plan-allinone .price-sub {
+    font-size: 13px;
+    font-weight: 800;
+    color: #1e40af;
+  }
+
+  .plan-allinone .plan-sub {
+    font-size: 11px;
+    color: #475569;
+    font-weight: 600;
+    margin-bottom: 0;
+  }
+
+  .allinone-badge {
+    background: #0867e8;
+    color: #ffffff;
+    padding: 6px 12px;
+    border-radius: 8px;
+    text-align: center;
+    min-width: 120px;
+  }
+
+  .allinone-badge .badge-title {
+    font-size: 10.5px;
+    font-weight: 900;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+  }
+
+  .allinone-badge .badge-desc {
+    font-size: 9px;
+    color: #bfdbfe;
+    font-weight: 700;
+  }
+
+  .features-2col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
   }
 
   .plan-software {
@@ -440,16 +507,16 @@ const htmlContent = `<!DOCTYPE html>
   .mdr-table th {
     background: #0b2450;
     color: #ffffff;
-    padding: 8px 12px;
+    padding: 6px 12px;
     text-align: left;
     font-weight: 800;
-    font-size: 10.5px;
+    font-size: 10px;
     text-transform: uppercase;
     letter-spacing: 0.6px;
   }
 
   .mdr-table td {
-    padding: 7px 12px;
+    padding: 5.5px 12px;
     border-bottom: 1px solid #e2e8f0;
     color: #334155;
     font-weight: 600;
@@ -468,7 +535,7 @@ const htmlContent = `<!DOCTYPE html>
     padding: 2px 8px;
     border-radius: 6px;
     font-weight: 900;
-    font-size: 11px;
+    font-size: 10.5px;
   }
 
   .rate-green { background: #dcfce7; color: #166534; }
@@ -480,15 +547,15 @@ const htmlContent = `<!DOCTYPE html>
     background: #f8fafc;
     border: 2.5px dashed #0867e8;
     border-radius: 14px;
-    padding: 12px 16px;
+    padding: 10px 14px;
     display: flex;
-    gap: 18px;
+    gap: 16px;
     align-items: center;
   }
 
   .qr-box {
     background: #ffffff;
-    padding: 8px;
+    padding: 7px;
     border-radius: 12px;
     border: 1.5px solid #cbd5e1;
     display: flex;
@@ -499,7 +566,7 @@ const htmlContent = `<!DOCTYPE html>
   }
 
   .qr-img {
-    width: 140px;
+    width: 130px;
     height: auto;
     display: block;
     border-radius: 6px;
@@ -742,8 +809,8 @@ const htmlContent = `<!DOCTYPE html>
       </div>
     </div>
     <div class="header-badge">
-      <div class="badge-pill">Transparent Commercials</div>
-      <div class="badge-sub">₹0 AMC &bull; Zero Disguised Platform Fees</div>
+      <div class="badge-pill">All-Inclusive Commercials</div>
+      <div class="badge-sub">One-Time ₹999 &bull; Zero Recurring Fees Ever</div>
     </div>
   </div>
 
@@ -751,32 +818,33 @@ const htmlContent = `<!DOCTYPE html>
   <div>
     <div class="section-title">
       <span class="dot"></span>
-      1. Platform Membership &amp; Clinic Starter Kit
+      1. All-Inclusive Clinic Partner Activation Kit
     </div>
-    <div class="commercial-grid">
-      <!-- Card 1: Cloud CRM Software -->
-      <div class="plan-card plan-software">
-        <span class="plan-tag tag-green">Lifetime Zero Software Fee</span>
-        <div class="plan-price">₹0 <span style="font-size: 14px; font-weight: 800; color: #166534;">/ Lifetime Free</span></div>
-        <div class="plan-sub">Cloud Dental CRM &amp; Practice Utility Suite</div>
-        <ul class="plan-features">
-          <li>✓ <strong>Cloud Practice CRM:</strong> Unlimited patients, digital treatment records &amp; case notes.</li>
-          <li>✓ <strong>Rx Prescription Maker:</strong> 1-click WhatsApp &amp; PDF printable dental prescriptions.</li>
-          <li>✓ <strong>Patient Recall Automation:</strong> Automated 6-month cleaning &amp; recall WhatsApp reminders.</li>
-          <li>✓ <strong>Zero AMC Forever:</strong> No monthly software rent, no annual maintenance renewals.</li>
-        </ul>
+    <!-- Single Unified Plan Card -->
+    <div class="plan-allinone">
+      <div class="plan-header-row">
+        <div>
+          <span class="plan-tag tag-blue">Complete Practice Suite &bull; All Included</span>
+          <div class="plan-price">₹999 <span class="price-sub">One-Time Onboarding &bull; Zero Recurring AMC Ever</span></div>
+          <div class="plan-sub">Everything your clinic needs: full practice software, patient EMI financing gateway &amp; reception acrylic standee.</div>
+        </div>
+        <div class="allinone-badge">
+          <div class="badge-title">ALL-IN-ONE</div>
+          <div class="badge-desc">Zero Hidden Fees</div>
+        </div>
       </div>
-
-      <!-- Card 2: Activation Kit -->
-      <div class="plan-card plan-kit">
-        <span class="plan-tag tag-blue">One-Time Activation</span>
-        <div class="plan-price">₹999 <span style="font-size: 14px; font-weight: 800; color: #1e40af;">One-Time Only</span></div>
-        <div class="plan-sub">Custom Clinic Welcome &amp; Front-Desk Standee Kit</div>
+      <div class="features-2col">
         <ul class="plan-features">
-          <li>✓ <strong>Countertop Acrylic Standee:</strong> Laser-printed reception QR standee with clinic logo.</li>
-          <li>✓ <strong>Staff Script &amp; Pitch Cards:</strong> Ready-made 10-second conversion cards for reception staff.</li>
-          <li>✓ <strong>Dedicated Relationship Manager:</strong> Priority onboarding &amp; instant WhatsApp support desk.</li>
-          <li>✓ <strong>Doorstep Courier Delivery:</strong> Dispatched via Bluedart/Delhivery within 48 business hours.</li>
+          <li>✓ <strong>Cloud Practice CRM Suite:</strong> Unlimited patients, digital treatment plans &amp; case records.</li>
+          <li>✓ <strong>WhatsApp Rx Prescriptions:</strong> 1-click digital prescriptions sent directly to patient phones.</li>
+          <li>✓ <strong>Automated Patient Recalls:</strong> Automated 6-month cleaning &amp; recall WhatsApp reminders.</li>
+          <li>✓ <strong>Point-of-Care Patient EMIs:</strong> Instant 3–24 mo patient EMI approvals at reception.</li>
+        </ul>
+        <ul class="plan-features">
+          <li>✓ <strong>Custom Acrylic Standee:</strong> Laser-printed reception QR standee with clinic logo &amp; doctor name.</li>
+          <li>✓ <strong>Front-Desk Pitch Cards:</strong> Ready-made 10-second conversion cards for reception staff.</li>
+          <li>✓ <strong>Dedicated Relationship Manager:</strong> Priority onboarding &amp; direct WhatsApp support desk.</li>
+          <li>✓ <strong>Doorstep Express Delivery:</strong> Dispatched via Bluedart / Delhivery within 48 business hours.</li>
         </ul>
       </div>
     </div>

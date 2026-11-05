@@ -65,10 +65,11 @@ export async function initiateRazorpayPayment(options: RazorpayCheckoutOptions =
     // Attempt to create an order from serverless backend
     let orderId: string | undefined;
     try {
-      const res = await fetch('/api/razorpay-order', {
+      const res = await fetch('/api/payments?gateway=razorpay', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          gateway: 'razorpay',
           amount,
           notes: options.notes || {}
         })

@@ -806,16 +806,16 @@ const htmlContent = `<!DOCTYPE html>
       </div>
       <div class="features-2col">
         <ul class="plan-features">
+          <li>✓ <strong>Works Standalone with Your Clinic:</strong> Zero forced migration — works with Practo / existing EMR.</li>
+          <li>✓ <strong>Point-of-Care Patient EMIs:</strong> Instant 3–24 mo patient EMI approvals at reception.</li>
           <li>✓ <strong>Cloud Practice CRM Suite:</strong> Unlimited patients, digital treatment plans &amp; case records.</li>
           <li>✓ <strong>WhatsApp Rx Prescriptions:</strong> 1-click digital prescriptions sent directly to patient phones.</li>
-          <li>✓ <strong>Automated Patient Recalls:</strong> Automated 6-month cleaning &amp; recall WhatsApp reminders.</li>
-          <li>✓ <strong>Point-of-Care Patient EMIs:</strong> Instant 3–24 mo patient EMI approvals at reception.</li>
         </ul>
         <ul class="plan-features">
           <li>✓ <strong>Custom Acrylic Standee:</strong> Laser-printed reception QR standee with clinic logo &amp; doctor name.</li>
           <li>✓ <strong>Front-Desk Pitch Cards:</strong> Ready-made 10-second conversion cards for reception staff.</li>
           <li>✓ <strong>Dedicated Relationship Manager:</strong> Priority onboarding &amp; direct WhatsApp support desk.</li>
-          <li>✓ <strong>Doorstep Express Delivery:</strong> Dispatched via Bluedart / Delhivery within 48 business hours.</li>
+          <li>✓ <strong>Subsidized Platform Setup:</strong> ₹999 covers standee laser fabrication &amp; express courier delivery.</li>
         </ul>
       </div>
     </div>
@@ -838,7 +838,7 @@ const htmlContent = `<!DOCTYPE html>
       </thead>
       <tbody>
         <tr>
-          <td><strong>UPI / QR Dynamic Checkout</strong></td>
+          <td><strong>UPI / Dynamic Gateway QR</strong></td>
           <td>GPay, PhonePe, Paytm, BHIM, Cred</td>
           <td><span class="rate-badge rate-green">0.65%</span></td>
           <td>T+1 Banking Day</td>
@@ -864,7 +864,7 @@ const htmlContent = `<!DOCTYPE html>
         <tr>
           <td><strong>Cardless Healthcare NBFC EMI</strong></td>
           <td>Bajaj Finserv, Piramal, Tata Capital, L&amp;T Finance</td>
-          <td><span class="rate-badge rate-green">Custom Plan</span></td>
+          <td><span class="rate-badge rate-green">0% Subvention</span></td>
           <td>Full Upfront Payout (T+1)</td>
         </tr>
       </tbody>
@@ -884,7 +884,7 @@ const htmlContent = `<!DOCTYPE html>
       </div>
       <div class="act-info">
         <h3>Activate Your Clinic in 3 Simple Steps</h3>
-        <p>Scan the Razorpay QR code with any UPI app (GPay, PhonePe, Paytm) to order your custom reception acrylic standee and activate your clinic financing portal.</p>
+        <p>Scan the Razorpay QR code with any UPI app to order your custom reception acrylic standee and activate your clinic financing portal.</p>
         
         <div class="payment-steps">
           <div class="step-pill">
@@ -892,8 +892,8 @@ const htmlContent = `<!DOCTYPE html>
             Scan QR or visit <span style="color:#0867e8;font-weight:800;">razorpay.me/@clinaza</span>
           </div>
           <div class="step-pill">
-            <strong>STEP 2 &bull; ADD CLINIC NAME</strong>
-            Mention Clinic Name in the payment notes/comment
+            <strong>STEP 2 &bull; LOGO &amp; ADDRESS</strong>
+            Instant WhatsApp link sent to upload logo &amp; address
           </div>
         </div>
 
@@ -911,7 +911,7 @@ const htmlContent = `<!DOCTYPE html>
   <!-- Corporate Legal Secretariat Footer -->
   <div class="footer">
     <div>
-      <strong>MELLOWPRINTS</strong> (Brand: <strong>CLINAZA</strong>) &bull; Sharma Sadan, Road No-1, Mahesh Nagar, S.K. Puri, Patna, Bihar - 800024
+      <strong>CLINAZA</strong> &bull; Healthcare Fintech Division of <strong>MELLOWPRINTS</strong> (GSTIN: 10DXRPR3052Q1ZV &bull; Udyam: UDYAM-BR-26-0005161)
     </div>
     <div class="footer-links">
       <span>Helpline: +91 7292984244</span> &bull; <span>contact@clinaza.in</span> &bull; <span>www.clinaza.in</span> &bull; <strong>Page 2 of 2</strong>

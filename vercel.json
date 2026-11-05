@@ -111,6 +111,46 @@
       "destination": "/api/meta"
     },
     {
+      "source": "/terms",
+      "destination": "/api/meta"
+    },
+    {
+      "source": "/terms-and-conditions",
+      "destination": "/api/meta"
+    },
+    {
+      "source": "/privacy",
+      "destination": "/api/meta"
+    },
+    {
+      "source": "/privacy-policy",
+      "destination": "/api/meta"
+    },
+    {
+      "source": "/refund-policy",
+      "destination": "/api/meta"
+    },
+    {
+      "source": "/cancellation-policy",
+      "destination": "/api/meta"
+    },
+    {
+      "source": "/shipping-policy",
+      "destination": "/api/meta"
+    },
+    {
+      "source": "/delivery-policy",
+      "destination": "/api/meta"
+    },
+    {
+      "source": "/contact",
+      "destination": "/api/meta"
+    },
+    {
+      "source": "/contact-us",
+      "destination": "/api/meta"
+    },
+    {
       "source": "/",
       "destination": "/api/meta"
     },

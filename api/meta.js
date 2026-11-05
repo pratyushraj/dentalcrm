@@ -83,6 +83,56 @@ const STATIC_ROUTES = {
     h1: 'Pre-Qualified Dental Merchant Network',
     image: 'https://www.clinaza.in/og-partner-pipeline.png',
     robots: 'noindex, nofollow'
+  },
+  '/terms': {
+    title: 'Terms of Service | Clinaza',
+    desc: 'Terms of service and operating conditions for Clinaza healthcare financing platform. Owned and operated by MELLOWPRINTS (GSTIN: 10DXRPR3052Q1ZV, Patna, Bihar).',
+    h1: 'Terms of Service & Platform Conditions'
+  },
+  '/terms-and-conditions': {
+    title: 'Terms of Service | Clinaza',
+    desc: 'Terms of service and operating conditions for Clinaza healthcare financing platform. Owned and operated by MELLOWPRINTS (GSTIN: 10DXRPR3052Q1ZV, Patna, Bihar).',
+    h1: 'Terms of Service & Platform Conditions'
+  },
+  '/privacy': {
+    title: 'Privacy Policy | Clinaza',
+    desc: 'Clinaza privacy policy complying with IT Act 2000, DPDPA 2023, and RBI Digital Lending Guidelines. Operated by MELLOWPRINTS.',
+    h1: 'Privacy & Data Protection Policy'
+  },
+  '/privacy-policy': {
+    title: 'Privacy Policy | Clinaza',
+    desc: 'Clinaza privacy policy complying with IT Act 2000, DPDPA 2023, and RBI Digital Lending Guidelines. Operated by MELLOWPRINTS.',
+    h1: 'Privacy & Data Protection Policy'
+  },
+  '/refund-policy': {
+    title: 'Cancellation & Refund Policy | Clinaza',
+    desc: 'Clear terms on Clinic Activation Kit cancellations, physical reception standee returns, and refund processing timelines by MELLOWPRINTS.',
+    h1: 'Cancellation & Refund Policy'
+  },
+  '/cancellation-policy': {
+    title: 'Cancellation & Refund Policy | Clinaza',
+    desc: 'Clear terms on Clinic Activation Kit cancellations, physical reception standee returns, and refund processing timelines by MELLOWPRINTS.',
+    h1: 'Cancellation & Refund Policy'
+  },
+  '/shipping-policy': {
+    title: 'Shipping & Delivery Policy | Clinaza',
+    desc: 'Fulfillment schedules, courier timelines, and delivery terms for physical clinic welcome kits and digital platform activation.',
+    h1: 'Shipping & Delivery Policy'
+  },
+  '/delivery-policy': {
+    title: 'Shipping & Delivery Policy | Clinaza',
+    desc: 'Fulfillment schedules, courier timelines, and delivery terms for physical clinic welcome kits and digital platform activation.',
+    h1: 'Shipping & Delivery Policy'
+  },
+  '/contact': {
+    title: 'Contact Us & Grievance Officer | Clinaza',
+    desc: 'Contact Clinaza (MELLOWPRINTS) at Sharma Sadan, Road No-1, Mahesh Nagar, Patna, Bihar - 800024. Phone: +91 7292984244, Email: contact@clinaza.in. Includes RBI Grievance Officer.',
+    h1: 'Contact Us & Regulatory Secretariat'
+  },
+  '/contact-us': {
+    title: 'Contact Us & Grievance Officer | Clinaza',
+    desc: 'Contact Clinaza (MELLOWPRINTS) at Sharma Sadan, Road No-1, Mahesh Nagar, Patna, Bihar - 800024. Phone: +91 7292984244, Email: contact@clinaza.in. Includes RBI Grievance Officer.',
+    h1: 'Contact Us & Regulatory Secretariat'
   }
 };
 

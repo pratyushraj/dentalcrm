@@ -14,11 +14,7 @@ async function generateHomepageOG() {
   await page.setViewport({ width: 1200, height: 630, deviceScaleFactor: 2 });
 
   // Read assets
-  const payuSvgRaw = fs.readFileSync(path.join(process.cwd(), 'public/assets/payu_logo.svg'), 'utf8');
-  // Strip xml header from svg if present
-  const payuSvg = payuSvgRaw.replace(/<\?xml[\s\S]*?\?>/i, '').trim();
-
-  const flexPngBase64 = fs.readFileSync(path.join(process.cwd(), 'public/assets/flexmoney_logo.png')).toString('base64');
+  const pluralPngBase64 = fs.readFileSync(path.join(process.cwd(), 'public/assets/plural_by_pinelabs_transparent.png')).toString('base64');
   const clinazaJpgBase64 = fs.readFileSync(path.join(process.cwd(), 'public/assets/clinaza-logo.jpg')).toString('base64');
 
   const html = `<!DOCTYPE html>
@@ -169,8 +165,8 @@ async function generateHomepageOG() {
     }
     /* Partner Card */
     .partner-card {
-      background: rgba(15, 23, 42, 0.82);
-      border: 1.5px solid rgba(56, 189, 248, 0.32);
+      background: rgba(15, 23, 42, 0.85);
+      border: 1.5px solid rgba(56, 189, 248, 0.35);
       backdrop-filter: blur(14px);
       border-radius: 20px;
       padding: 16px 24px;
@@ -209,78 +205,51 @@ async function generateHomepageOG() {
     .partner-logos-row {
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 24px;
     }
     .logo-box {
       background: #ffffff;
       border-radius: 16px;
-      padding: 11px 18px;
+      padding: 10px 22px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       gap: 7px;
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.22);
-      width: 250px;
-      height: 86px;
+      width: 290px;
+      height: 88px;
       flex-shrink: 0;
     }
-    .payu-svg-container {
-      height: 34px;
+    .plural-img-container {
+      height: 40px;
       display: flex;
       align-items: center;
       justify-content: center;
     }
-    .payu-svg-container svg {
-      height: 32px;
-      width: auto;
-    }
-    .flex-img-container {
+    .plural-img {
       height: 34px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .flex-img {
-      height: 27px;
       width: auto;
       object-fit: contain;
     }
-    .logo-badge-payu {
-      font-size: 10px;
+    .logo-badge-plural {
+      font-size: 9.5px;
       font-weight: 800;
       color: #0284c7;
       background: #f0f9ff;
       border: 1px solid #bae6fd;
-      padding: 2.5px 10px;
+      padding: 2px 10px;
       border-radius: 6px;
       text-transform: uppercase;
       letter-spacing: 0.04em;
       white-space: nowrap;
-    }
-    .logo-badge-flex {
-      font-size: 10px;
-      font-weight: 800;
-      color: #059669;
-      background: #ecfdf5;
-      border: 1px solid #a7f3d0;
-      padding: 2.5px 10px;
-      border-radius: 6px;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      white-space: nowrap;
-    }
-    .plus-badge {
-      color: #94a3b8;
-      font-size: 26px;
-      font-weight: 900;
     }
     .partner-perks {
       display: flex;
       flex-direction: column;
       gap: 7px;
       margin-left: auto;
-      padding-left: 20px;
+      padding-left: 24px;
       border-left: 1px solid rgba(255, 255, 255, 0.1);
     }
     .perk-item {
@@ -302,7 +271,7 @@ async function generateHomepageOG() {
       flex-shrink: 0;
     }
     .perk-text {
-      font-size: 12.5px;
+      font-size: 13px;
       font-weight: 700;
       color: #f1f5f9;
       letter-spacing: -0.01em;
@@ -353,7 +322,7 @@ async function generateHomepageOG() {
     </div>
     <div class="top-badge">
       <span class="badge-dot"></span>
-      <span>Front-Desk Patient EMIs Live</span>
+      <span>Point-of-Care Patient EMIs Live</span>
     </div>
   </div>
 
@@ -369,47 +338,37 @@ async function generateHomepageOG() {
       Convert dental, IVF & aesthetic consultations instantly. <strong>Direct clinic bank payout</strong> on sanction, zero credit risk for doctors, and <strong>100% Free Clinic CRM</strong> with automated WhatsApp recalls.
     </p>
 
-    <!-- Partner Card with PayU and Flexmoney Logos -->
+    <!-- Partner Card with Plural by Pine Labs Logo -->
     <div class="partner-card">
       <div class="partner-header">
         <div class="partner-title-group">
           <span>🤝</span>
-          <span class="partner-title">OFFICIAL CARDLESS EMI &amp; AFFORDABILITY PARTNERS</span>
+          <span class="partner-title">OFFICIAL AFFORDABILITY &amp; GATEWAY PARTNER</span>
         </div>
-        <span class="partner-subtag">🛡️ RBI-Regulated Lender Network</span>
+        <span class="partner-subtag">🛡️ RBI-Regulated Multi-Lender Rails</span>
       </div>
       <div class="partner-logos-row">
-        <!-- PayU Card -->
+        <!-- Plural by Pine Labs Card -->
         <div class="logo-box">
-          <div class="payu-svg-container">
-            ${payuSvg}
+          <div class="plural-img-container">
+            <img src="data:image/png;base64,${pluralPngBase64}" alt="Plural by Pine Labs" class="plural-img" />
           </div>
-          <span class="logo-badge-payu">PayU &bull; Cardless &amp; Debit EMI</span>
-        </div>
-
-        <span class="plus-badge">+</span>
-
-        <!-- Flexmoney Card -->
-        <div class="logo-box">
-          <div class="flex-img-container">
-            <img src="data:image/png;base64,${flexPngBase64}" alt="Flexmoney" class="flex-img" />
-          </div>
-          <span class="logo-badge-flex">InstaCred &bull; Cardless Credit</span>
+          <span class="logo-badge-plural">Plural by Pine Labs &bull; Multi-Bank EMIs</span>
         </div>
 
         <!-- Benefits on the right -->
         <div class="partner-perks">
           <div class="perk-item">
             <span class="perk-check">✓</span>
-            <span class="perk-text">No Credit Card Needed (Aadhaar / Mobile OTP)</span>
+            <span class="perk-text">16+ Banks Credit &amp; Debit Card EMIs (3–24 Months)</span>
           </div>
           <div class="perk-item">
             <span class="perk-check">✓</span>
-            <span class="perk-text">Direct Payout to Clinic Current Account</span>
+            <span class="perk-text">Cardless Healthcare EMIs via RBI Account Aggregator (AA)</span>
           </div>
           <div class="perk-item">
             <span class="perk-check">✓</span>
-            <span class="perk-text">Zero Non-Payment Liability for Clinic</span>
+            <span class="perk-text">100% Upfront T+1 Current Account Payouts &bull; Zero Recourse</span>
           </div>
         </div>
       </div>

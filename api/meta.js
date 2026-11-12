@@ -16,7 +16,7 @@ try {
 const STATIC_ROUTES = {
   '/': {
     title: 'Clinaza — Healthcare EMIs & Free Dental CRM India',
-    desc: 'Offer instant point-of-care patient EMI financing (₹30K–₹5L) with PayU & Flexmoney cardless EMI partners. Plus, 100% Free Dental Clinic CRM software.',
+    desc: 'Offer instant point-of-care patient EMI financing (₹30K–₹5L) powered by Plural by Pine Labs & multi-bank cardless EMI partners. Plus, 100% Free Dental Clinic CRM software.',
     h1: 'Dental Treatment on EMI. Zero Patient Drop-Offs.'
   },
   '/tools': {

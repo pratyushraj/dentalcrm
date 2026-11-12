@@ -791,24 +791,82 @@ export default function CrmHomepage() {
           </FadeIn>
         </section>
 
-        {/* ── 3. HOW CLINAZA WORKS (SIMPLE 3-STEP) ── */}
+        {/* ── 3. HOW CLINAZA WORKS (DUAL-ENGINE AFFORDABILITY: ETB & NTB) ── */}
         <section aria-label="How Clinaza Works" className="py-12 sm:py-16 px-4 sm:px-6">
           <FadeIn className="max-w-5xl mx-auto space-y-8">
             <div className="text-center space-y-2">
-              <h2 className="text-2xl sm:text-3xl font-bold text-[#0B2450]">How Clinaza works</h2>
+              <span className="text-[10px] font-black text-[#0f7a75] uppercase tracking-widest">DUAL-ENGINE PATIENT AFFORDABILITY</span>
+              <h2 className="text-2xl sm:text-3xl font-bold text-[#0B2450]">How Patient Financing Works In Under 60 Seconds</h2>
+              <p className="text-sm text-slate-500 max-w-2xl mx-auto">
+                Over 70% of dental patients do not carry a credit card. Clinaza &amp; Plural by Pine Labs eliminate patient drop-offs with seamless Existing-to-Bank (ETB) and New-to-Bank (NTB) paperless journeys.
+              </p>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-              {[
-                { num: '01', title: 'Patient Chooses Treatment', desc: 'Patient discusses treatment and total estimate with your clinic.' },
-                { num: '02', title: 'Check Financing Eligibility', desc: 'Clinaza helps the patient apply with a suitable financing partner in minutes.' },
-                { num: '03', title: 'Treatment Goes Ahead', desc: 'Once approved and disbursed, patient receives care and pays lender in EMIs.' }
-              ].map((step, idx) => (
-                <div key={idx} className="bg-[#F7FAFC] border border-slate-200/80 p-6 rounded-2xl space-y-3 text-left shadow-2xs">
-                  <span className="text-3xl font-mono font-black text-[#0f7a75] block">{step.num}</span>
-                  <h3 className="text-sm font-black text-[#0B2450]">{step.title}</h3>
-                  <p className="text-xs text-slate-600 leading-relaxed">{step.desc}</p>
+
+            {/* ETB vs NTB Journey Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 text-left">
+              {/* ETB: Existing-to-Bank Flow */}
+              <div className="bg-gradient-to-br from-white via-slate-50 to-blue-50/40 border border-blue-200/90 p-6 rounded-2xl space-y-4 shadow-sm relative overflow-hidden">
+                <div className="flex items-center justify-between gap-2">
+                  <span className="px-2.5 py-1 rounded-lg text-[10px] font-black uppercase tracking-wider bg-blue-100 text-[#0867E8] border border-blue-200">
+                    ETB Flow &bull; Existing Bank Customers
+                  </span>
+                  <span className="text-[10px] font-black text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
+                    &gt;85% Approval &bull; &lt;60s
+                  </span>
                 </div>
-              ))}
+                <div>
+                  <h3 className="text-base font-black text-[#0B2450]">Instant Pre-Approved Bank Limits</h3>
+                  <p className="text-xs text-slate-600 mt-1 leading-relaxed">
+                    For patients with existing savings accounts, debit or credit cards at major banks (HDFC, ICICI, SBI, Axis, Kotak).
+                  </p>
+                </div>
+                <ul className="space-y-3 text-xs text-slate-700 font-medium">
+                  <li className="flex items-start gap-2.5">
+                    <span className="text-blue-600 font-black">01</span>
+                    <span><strong>Enter PAN + Mobile:</strong> Instant validation against pre-approved lender records in under 10 seconds.</span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <span className="text-blue-600 font-black">02</span>
+                    <span><strong>Select Tenure:</strong> Choose 3, 6, 9, 12, or 24-month flexible EMI plan suited to patient budget.</span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <span className="text-blue-600 font-black">03</span>
+                    <span><strong>1-Click e-Mandate:</strong> Instant auto-repayment authorization via UPI or Netbanking. Zero paperwork.</span>
+                  </li>
+                </ul>
+              </div>
+
+              {/* NTB: Cardless / New-to-Bank Flow */}
+              <div className="bg-gradient-to-br from-white via-slate-50 to-emerald-50/40 border border-emerald-200/90 p-6 rounded-2xl space-y-4 shadow-sm relative overflow-hidden">
+                <div className="flex items-center justify-between gap-2">
+                  <span className="px-2.5 py-1 rounded-lg text-[10px] font-black uppercase tracking-wider bg-emerald-100 text-[#0f7a75] border border-emerald-200">
+                    NTB Flow &bull; Cardless Patients (No Credit Card)
+                  </span>
+                  <span className="text-[10px] font-black text-[#0867E8] bg-blue-50 px-2 py-0.5 rounded border border-blue-200">
+                    RBI Account Aggregator
+                  </span>
+                </div>
+                <div>
+                  <h3 className="text-base font-black text-[#0B2450]">100% Paperless Digital Underwriting</h3>
+                  <p className="text-xs text-slate-600 mt-1 leading-relaxed">
+                    Unlocks treatment access for the 24 Cr+ transacting Indians who lack a credit card. No PDF uploads, no salary slips.
+                  </p>
+                </div>
+                <ul className="space-y-3 text-xs text-slate-700 font-medium">
+                  <li className="flex items-start gap-2.5">
+                    <span className="text-emerald-600 font-black">01</span>
+                    <span><strong>Soft Bureau Check:</strong> Instant multi-lender eligibility without impacting the patient's CIBIL score.</span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <span className="text-emerald-600 font-black">02</span>
+                    <span><strong>Account Aggregator (AA) Fetch:</strong> Direct consented bank cashflow verification in seconds via secure OTP.</span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <span className="text-emerald-600 font-black">03</span>
+                    <span><strong>Digital e-KYC:</strong> 2-minute selfie &amp; Aadhaar OTP validation + auto-repayment setup. Immediate clinic payout.</span>
+                  </li>
+                </ul>
+              </div>
             </div>
           </FadeIn>
         </section>
@@ -1011,9 +1069,9 @@ export default function CrmHomepage() {
                         Reception Desk Flow
                       </span>
                     </div>
-                    <div className="flex items-center gap-1.5 bg-white/10 border border-white/15 px-2 py-1 rounded-lg">
-                      <span className="text-[8px] uppercase tracking-wider text-slate-300 font-bold">Partnered with</span>
-                      
+                    <div className="flex items-center gap-1.5 bg-white/10 border border-white/15 px-2.5 py-1 rounded-lg">
+                      <span className="text-[8px] uppercase tracking-wider text-slate-300 font-bold">Powered by</span>
+                      <img src="/assets/plural_by_pinelabs_transparent.png" alt="Plural by Pine Labs" className="h-3.5 w-auto object-contain brightness-0 invert opacity-90" />
                     </div>
                   </div>
 
@@ -1033,28 +1091,28 @@ export default function CrmHomepage() {
                         step: '1',
                         icon: <QrCode size={16} className="text-sky-400" />,
                         title: 'Scan Clinic Counter QR',
-                        desc: 'Patient scans your custom Clinaza QR code with their phone camera. No app download needed.',
-                        badge: 'Zero hardware cost'
+                        desc: 'Patient scans your custom Clinaza QR code with their phone camera. No app download or registration needed.',
+                        badge: 'Zero app download'
                       },
                       {
                         step: '2',
                         icon: <ShieldCheck size={16} className="text-emerald-400" />,
                         title: 'Cardless, Credit or Debit Card EMI',
-                        desc: 'Choose from 35+ modes: Cardless EMI (2-min Aadhaar OTP via digital KYC), 21+ Credit Card EMIs, or Debit Card EMI.',
-                        badge: 'Cardless + Card'
+                        desc: '60s ETB check with PAN + Mobile (>85% approval) or 100% paperless RBI Account Aggregator (AA) verification for cardless patients.',
+                        badge: 'RBI Account Aggregator'
                       },
                       {
                         step: '3',
                         icon: <Clock size={16} className="text-amber-400" />,
-                        title: 'Real-Time Sanction (55+ RBI-Regulated Lenders)',
-                        desc: 'Algorithm matches patient with best lender offer. Patient selects flexible 3 to 24-month EMI plan.',
-                        badge: 'High approval rate'
+                        title: 'Intelligent BRE Sanction (55+ Lenders)',
+                        desc: 'Multi-lender Business Rules Engine soft-matches patient with optimal bank or NBFC without impacting CIBIL score.',
+                        badge: '76%+ approval rate'
                       },
                       {
                         step: '4',
                         icon: <Building2 size={16} className="text-blue-400" />,
-                        title: '100% Upfront Clinic Disbursal',
-                        desc: 'Treatment amount is disbursed directly into your clinic account. Start treatment immediately.',
+                        title: '100% Upfront T+1 Clinic Disbursal',
+                        desc: '1-click UPI / eNACH mandate setup. Full treatment fee disbursed directly into clinic bank account on guaranteed T+1 cycle.',
                         badge: '₹0 clinic credit risk'
                       }
                     ].map((item, idx) => (
@@ -1111,9 +1169,9 @@ export default function CrmHomepage() {
                     Integrated directly at the clinic counter in partnership with RBI-Regulated Lenders.
                   </p>
                 </div>
-                <div className="flex items-center gap-2.5 bg-white border border-slate-200 px-3 py-1.5 rounded-xl shadow-xs">
-                  <span className="text-[10px] text-slate-500 font-black uppercase tracking-wider">Official Partner:</span>
-                  
+                <div className="flex items-center gap-2 bg-white border border-slate-200 px-3 py-1.5 rounded-xl shadow-xs">
+                  <span className="text-[10px] text-slate-500 font-black uppercase tracking-wider">Official Gateway:</span>
+                  <img src="/assets/plural_by_pinelabs_transparent.png" alt="Plural by Pine Labs" className="h-4 w-auto object-contain" />
                 </div>
               </div>
 
@@ -1121,9 +1179,9 @@ export default function CrmHomepage() {
                 {[
                   {
                     title: 'Cardless EMI',
-                    partner: '55+ Regulated Lenders',
-                    desc: 'No credit or debit card required. 2-min paperless digital KYC via Aadhaar & PAN OTP with instant loan sanction.',
-                    badge: 'Most Popular',
+                    partner: '55+ Regulated Banks & NBFCs',
+                    desc: 'No credit card needed. Instant RBI Account Aggregator (AA) verification & Aadhaar OTP KYC with zero paperwork or PDF uploads.',
+                    badge: 'RBI Account Aggregator',
                     tagColor: 'bg-emerald-50 text-emerald-700 border-emerald-200'
                   },
                   {
@@ -1163,6 +1221,111 @@ export default function CrmHomepage() {
               </div>
             </div>
           </div>
+        </section>
+
+        {/* ── 6B. THE CLINAZA & PINE LABS CMP DIFFERENCE (COMPARISON MATRIX) ── */}
+        <section aria-label="Why Clinaza Outperforms Traditional Financing" className="py-12 sm:py-16 px-4 sm:px-6 bg-gradient-to-b from-white to-[#F5F9FC]">
+          <FadeIn className="max-w-5xl mx-auto space-y-8">
+            <div className="text-center space-y-2">
+              <span className="text-[10px] font-black text-[#0867E8] uppercase tracking-widest bg-blue-50 border border-blue-200 px-3 py-1 rounded-full inline-block">
+                THE PINE LABS AFFORDABILITY ADVANTAGE
+              </span>
+              <h2 className="text-2xl sm:text-4xl font-black text-[#0B2450]">
+                Why Clinaza &amp; Plural by Pine Labs Outperform Traditional Medical Loans
+              </h2>
+              <p className="text-xs sm:text-sm text-slate-600 max-w-2xl mx-auto">
+                Traditional healthcare finance is fragmented, slow, and causes high drop-offs at the reception desk. Our unified multi-lender credit layer solves every point of friction.
+              </p>
+            </div>
+
+            {/* Comparison Table */}
+            <div className="bg-white border border-slate-200 rounded-3xl shadow-sm overflow-hidden">
+              <div className="overflow-x-auto">
+                <table className="w-full text-left border-collapse min-w-[640px]">
+                  <thead>
+                    <tr className="border-b border-slate-200 bg-slate-50/80">
+                      <th className="py-4 px-5 text-xs font-black text-slate-500 uppercase tracking-wider w-1/4">Key Capability</th>
+                      <th className="py-4 px-5 text-xs font-black text-rose-600 uppercase tracking-wider w-3/8 bg-rose-50/40">
+                        Traditional Medical EMI / 3rd Party Apps
+                      </th>
+                      <th className="py-4 px-5 text-xs font-black text-[#0867E8] uppercase tracking-wider w-3/8 bg-blue-50/50">
+                        <div className="flex items-center gap-2">
+                          <span>Clinaza &times; Plural by Pine Labs</span>
+                          <span className="text-[9px] bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded-full border border-emerald-300">
+                            Enterprise Grade
+                          </span>
+                        </div>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-100 text-xs">
+                    {[
+                      {
+                        feature: 'Patient Checkout Flow',
+                        traditional: 'Redirected to 3rd party apps or lender portals; requires mandatory app installation & login.',
+                        clinaza: 'Seamless single flow directly in-browser via counter QR code. Zero app download required (<60 seconds).',
+                        highlight: true
+                      },
+                      {
+                        feature: 'Income & Cashflow Proof',
+                        traditional: 'Manual PDF bank statement & salary slip downloads with passwords; 80% patient abandonment at reception.',
+                        clinaza: 'Native RBI Account Aggregator (AA) integration. Fetches verified bank cashflow in seconds via secure OTP.',
+                        highlight: true
+                      },
+                      {
+                        feature: 'KYC & Verification',
+                        traditional: 'Fragmented KYC process repeated separately for each prospective lender.',
+                        clinaza: 'Unified 1-time digital Aadhaar & selfie KYC shared securely across the multi-lender network.',
+                        highlight: false
+                      },
+                      {
+                        feature: 'Lender Matching & Approval',
+                        traditional: 'Single-lender integration. Narrow credit policies reject over 50% of walk-in patients.',
+                        clinaza: 'Intelligent Multi-Lender BRE. Matches patient profile across 55+ banks & NBFCs, driving 76%+ approval rates.',
+                        highlight: true
+                      },
+                      {
+                        feature: 'Credit Score Impact',
+                        traditional: 'Hard bureau checks trigger multiple credit inquiries that pull down the patient’s CIBIL score.',
+                        clinaza: 'Soft bureau pull pre-assessment. Patients check multi-bank eligibility with 0 impact on credit score.',
+                        highlight: false
+                      },
+                      {
+                        feature: 'Repayment & Mandate Setup',
+                        traditional: 'Physical paper NACH forms or delayed debit card netbanking logins with slow activation.',
+                        clinaza: '1-Click e-Mandate setup via UPI or Netbanking for instantaneous auto-repayment authorization.',
+                        highlight: false
+                      },
+                      {
+                        feature: 'Clinic Settlement & Recourse',
+                        traditional: 'Manual reconciliation, delayed 3–7 day payouts, or hidden recourse on patient default.',
+                        clinaza: 'Guaranteed upfront T+1 direct current account payout. 100% non-recourse with zero clinic credit liability.',
+                        highlight: true
+                      }
+                    ].map((row, idx) => (
+                      <tr key={idx} className={row.highlight ? 'bg-slate-50/30' : 'bg-white'}>
+                        <td className="py-3.5 px-5 font-bold text-[#0B2450] whitespace-nowrap align-top">
+                          {row.feature}
+                        </td>
+                        <td className="py-3.5 px-5 text-slate-500 bg-rose-50/20 align-top">
+                          <div className="flex items-start gap-2">
+                            <span className="text-rose-500 font-bold shrink-0">✕</span>
+                            <span>{row.traditional}</span>
+                          </div>
+                        </td>
+                        <td className="py-3.5 px-5 text-slate-800 font-medium bg-blue-50/20 align-top">
+                          <div className="flex items-start gap-2">
+                            <CheckCircle2 size={15} className="text-[#0f7a75] shrink-0 mt-0.5" />
+                            <span>{row.clinaza}</span>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </FadeIn>
         </section>
 
         {/* ── 7. WHY CLINICS USE CLINAZA ── */}

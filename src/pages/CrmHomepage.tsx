@@ -252,6 +252,10 @@ export default function CrmHomepage() {
 
   const comprehensiveFaqs = [
     {
+      q: 'Who powers Clinaza’s payment and patient EMI financing gateway?',
+      a: 'Clinaza is officially partnered with Plural by Pine Labs, India’s leading omnichannel merchant commerce network. Through this partnership, Clinaza equips private dental and specialty clinics with instant point-of-care patient financing across 16+ major banks, paperless cardless medical loans, and low-fee front-desk UPI collections — with all treatment payouts deposited directly into the clinic’s current account on a guaranteed T+1 settlement cycle.'
+    },
+    {
       q: 'What is Clinaza?',
       a: 'Clinaza is an embedded healthcare patient financing platform that connects clinics with RBI-regulated Banks and NBFCs, allowing patients to pay for high-ticket treatments in flexible monthly EMIs.'
     },
@@ -345,6 +349,14 @@ export default function CrmHomepage() {
             "@context": "https://schema.org",
             "@type": "FAQPage",
             "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Who powers Clinaza's payment and patient EMI financing gateway?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Clinaza is officially partnered with Plural by Pine Labs, India’s leading omnichannel merchant commerce network, providing multi-bank Credit Card EMIs, Debit Card EMIs, cardless healthcare financing, and low-fee UPI with direct T+1 clinic settlements."
+                }
+              },
               {
                 "@type": "Question",
                 "name": "What is Clinaza?",
@@ -453,9 +465,19 @@ export default function CrmHomepage() {
             </Link>
 
             {/* Header Co-brand Trust Pill */}
-            <div className="hidden xl:flex items-center gap-2 px-3 py-1.5 bg-slate-50/90 border border-slate-200/90 rounded-xl shadow-2xs">
-              <span className="text-[10px] font-black uppercase text-slate-500 tracking-wider">Affordability:</span>
-              <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">55+ Lenders Live</span>
+            <div className="hidden xl:flex items-center gap-2.5 px-3 py-1.5 bg-slate-50/90 border border-slate-200/90 rounded-xl shadow-2xs">
+              <div className="flex items-center gap-1.5 border-r border-slate-200 pr-2">
+                <span className="text-[9px] font-black uppercase text-slate-400 tracking-wider">Powered by</span>
+                <img
+                  src="/assets/plural_by_pinelabs_transparent.png"
+                  alt="Plural by Pine Labs"
+                  className="h-4 w-auto object-contain"
+                />
+              </div>
+              <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200 inline-flex items-center gap-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                Official Gateway Partner
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1.5 sm:gap-2.5">
@@ -517,10 +539,10 @@ export default function CrmHomepage() {
             <div className="md:col-span-7 space-y-3.5 sm:space-y-5">
               <div className="inline-flex items-center gap-2 sm:gap-2.5 px-3 sm:px-3.5 py-1 sm:py-1.5 bg-gradient-to-r from-blue-50/90 to-slate-100 border border-blue-200/80 rounded-full text-xs font-semibold text-slate-800 shadow-2xs flex-wrap">
                 <span className="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-                <span className="text-[10px] font-black text-slate-600 uppercase tracking-widest">Multi-Lender Network:</span>
-                <span className="text-[10px] font-bold text-slate-700">55+ Banks &amp; NBFCs</span>
+                <span className="text-[10px] font-black text-slate-600 uppercase tracking-widest">Gateway Infrastructure:</span>
+                <span className="text-[10px] font-bold text-slate-800">Plural by Pine Labs</span>
                 <span className="text-slate-300 hidden sm:inline">&bull;</span>
-                <span className="text-[10px] font-bold text-slate-600 hidden sm:inline">35+ EMI Modes</span>
+                <span className="text-[10px] font-bold text-slate-600 hidden sm:inline">16+ Banks &amp; 35+ EMI Modes</span>
               </div>
 
               <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold tracking-[-0.025em] leading-[1.2] text-[#0B2450]">
@@ -552,48 +574,50 @@ export default function CrmHomepage() {
                 </Link>
               </div>
 
-              {/* ── Official Healthcare Lending Network Partnership Institutional Card ── */}
-              <div className="p-3 sm:p-4 rounded-2xl bg-gradient-to-br from-white via-slate-50 to-blue-50/50 border border-blue-200/90 shadow-sm space-y-2.5">
-                <div className="flex items-center justify-between gap-2 border-b border-slate-200/80 pb-2">
+              {/* ── Official Healthcare Lending Network & Pine Labs Partnership Institutional Card ── */}
+              <div className="p-3.5 sm:p-4 rounded-2xl bg-gradient-to-br from-white via-slate-50 to-blue-50/60 border border-blue-200/90 shadow-sm space-y-3">
+                <div className="flex items-center justify-between gap-2 border-b border-slate-200/80 pb-2.5">
                   <div className="flex items-center gap-1.5 sm:gap-2">
                     <span className="text-[10px] sm:text-xs font-black uppercase tracking-wide bg-emerald-50 text-emerald-800 border border-emerald-300/80 px-2 sm:px-2.5 py-0.5 rounded-full inline-flex items-center gap-1.5 whitespace-nowrap">
                       <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse shrink-0"></span>
-                      <span className="sm:hidden">Verified Lending</span>
-                      <span className="hidden sm:inline">Verified Lending Partnership</span>
+                      <span>Official Partnership</span>
                     </span>
-                    <span className="text-[10px] font-bold text-slate-500 hidden sm:inline">&bull; RBI-Regulated Rails</span>
+                    <span className="text-[10px] font-bold text-slate-500 hidden sm:inline">&bull; RBI-Regulated Gateway Rails</span>
                   </div>
-                  <span className="text-[10px] sm:text-xs font-black text-[#0867E8] bg-blue-50 border border-blue-200 px-2 sm:px-2.5 py-0.5 rounded-md whitespace-nowrap shrink-0">
-                    <span className="sm:hidden">35+ EMI Modes</span>
-                    <span className="hidden sm:inline">35+ EMI Modes Live</span>
-                  </span>
+                  <div className="flex items-center gap-1.5 shrink-0 bg-white border border-slate-200 px-2.5 py-1 rounded-lg shadow-2xs">
+                    <span className="text-[9px] font-bold uppercase text-slate-400">Powered by</span>
+                    <img src="/assets/plural_by_pinelabs_transparent.png" alt="Plural by Pine Labs" className="h-3.5 sm:h-4 w-auto object-contain" />
+                  </div>
                 </div>
 
                 {/* Desktop detailed text + logo block */}
-                <div className="hidden sm:flex flex-row items-center justify-between gap-3.5 pt-0.5">
+                <div className="hidden sm:flex flex-row items-center justify-between gap-4 pt-0.5">
                   <div className="space-y-1">
                     <p className="text-sm font-black text-[#0B2450] tracking-tight">
-                      Healthcare Affordability & Patient Financing
+                      Clinaza &times; Plural by Pine Labs Healthcare Affordability
                     </p>
                     <p className="text-[11px] text-slate-600 leading-relaxed">
-                      Clinaza provides instant point-of-care patient financing directly at dental and outpatient clinic counters powered by 55+ RBI-regulated banks and NBFCs. Patients get paperless Cardless EMIs, pre-approved Debit Card EMIs, and 21+ major banks' Credit Card EMIs in 2 minutes.
+                      Clinaza has partnered with <strong>Plural by Pine Labs</strong> to power point-of-care patient financing directly chairside. Clinics offer multi-bank Credit &amp; Debit Card EMIs across 16+ major banks (HDFC, ICICI, SBI, Axis, Kotak), paperless 2-minute cardless financing, and low-fee front-desk UPI &mdash; with guaranteed 100% upfront T+1 clinic settlements and zero default recourse.
                     </p>
                   </div>
-                  <div className="flex items-center gap-2 bg-emerald-50 px-3 py-1.5 rounded-xl border border-emerald-200 shadow-2xs shrink-0">
-                    <span className="text-[11px] font-bold text-emerald-800">55+ Regulated Lenders</span>
+                  <div className="flex flex-col gap-1.5 shrink-0">
+                    <div className="flex items-center gap-1.5 bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-200">
+                      <span className="text-[10px] font-bold text-emerald-800">✓ 16+ Major Banks</span>
+                    </div>
+                    <div className="flex items-center gap-1.5 bg-blue-50 px-2.5 py-1 rounded-lg border border-blue-200">
+                      <span className="text-[10px] font-bold text-[#0867E8]">✓ T+1 Current A/c Payout</span>
+                    </div>
                   </div>
                 </div>
 
                 {/* Mobile streamlined row */}
-                <div className="sm:hidden pt-0.5">
-                  <div className="flex items-center justify-between gap-2.5 bg-white px-3 py-2 rounded-xl border border-slate-200 shadow-2xs">
-                    <div className="flex flex-col min-w-0">
-                      <span className="text-[11px] font-extrabold text-[#0B2450] leading-tight truncate">Cardless &amp; Card EMIs</span>
-                      <span className="text-[9.5px] font-semibold text-slate-500 tracking-wide">Multi-Lender Network</span>
-                    </div>
-                    <div className="flex items-center gap-1.5 shrink-0 bg-emerald-50 px-2 py-1 rounded-lg border border-emerald-200">
-                      <span className="text-[10px] font-bold text-emerald-700">55+ Lenders</span>
-                    </div>
+                <div className="sm:hidden pt-0.5 space-y-2">
+                  <p className="text-[11px] text-slate-600 leading-relaxed">
+                    Powered by <strong>Plural by Pine Labs</strong>: 16+ banks credit/debit card EMIs, 2-min paperless digital KYC loans, and upfront T+1 clinic current account payouts with 0% risk.
+                  </p>
+                  <div className="flex items-center justify-between gap-2 bg-white px-3 py-2 rounded-xl border border-slate-200 shadow-2xs">
+                    <span className="text-[10px] font-bold text-slate-700">16+ Banks &bull; Multi-Bank EMIs</span>
+                    <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">T+1 Settled</span>
                   </div>
                 </div>
               </div>
@@ -648,20 +672,22 @@ export default function CrmHomepage() {
 
               <div className="flex w-max gap-4 animate-marquee group-hover:[animation-play-state:paused]">
                 {[
-                  { name: 'Credit Card EMI', sub: '20+ Major Banks', badge: 'Card EMI' },
+                  { name: 'Plural by Pine Labs', sub: 'Official Gateway Partner', badge: 'Infrastructure', logo: '/assets/plural_by_pinelabs_transparent.png' },
+                  { name: 'Credit Card EMI', sub: '16+ Major Commercial Banks', badge: 'Card EMI' },
                   { name: 'Debit Card EMI', sub: 'Instant Bank Sanctions', badge: 'Debit EMI' },
                   { name: 'Cardless Patient EMI', sub: 'Zero Credit Card Needed', badge: 'Cardless' },
                   { name: 'Digital e-KYC', sub: '2-Minute Chairside Approval', badge: 'Paperless' },
-                  { name: 'UPI & Dynamic QR', sub: 'Instant Front-Desk Collection', badge: 'UPI' },
+                  { name: 'Instant UPI (0.40%)', sub: 'Front-Desk Dynamic QR', badge: 'Low MDR' },
                   { name: 'Net Banking', sub: '50+ Scheduled Commercial Banks', badge: 'Banking' },
                   { name: 'Upfront T+1 Disbursal', sub: 'Direct Current A/c Credit', badge: 'Settlement' },
                   { name: 'Zero Clinic Liability', sub: '100% Non-Recourse Payouts', badge: 'Guaranteed' }
                 ].concat([
-                  { name: 'Credit Card EMI', sub: '20+ Major Banks', badge: 'Card EMI' },
+                  { name: 'Plural by Pine Labs', sub: 'Official Gateway Partner', badge: 'Infrastructure', logo: '/assets/plural_by_pinelabs_transparent.png' },
+                  { name: 'Credit Card EMI', sub: '16+ Major Commercial Banks', badge: 'Card EMI' },
                   { name: 'Debit Card EMI', sub: 'Instant Bank Sanctions', badge: 'Debit EMI' },
                   { name: 'Cardless Patient EMI', sub: 'Zero Credit Card Needed', badge: 'Cardless' },
                   { name: 'Digital e-KYC', sub: '2-Minute Chairside Approval', badge: 'Paperless' },
-                  { name: 'UPI & Dynamic QR', sub: 'Instant Front-Desk Collection', badge: 'UPI' },
+                  { name: 'Instant UPI (0.40%)', sub: 'Front-Desk Dynamic QR', badge: 'Low MDR' },
                   { name: 'Net Banking', sub: '50+ Scheduled Commercial Banks', badge: 'Banking' },
                   { name: 'Upfront T+1 Disbursal', sub: 'Direct Current A/c Credit', badge: 'Settlement' },
                   { name: 'Zero Clinic Liability', sub: '100% Non-Recourse Payouts', badge: 'Guaranteed' }
@@ -671,7 +697,11 @@ export default function CrmHomepage() {
                     className="flex items-center gap-3 px-3.5 py-2 rounded-xl bg-slate-50/90 border border-slate-200/90 shrink-0 transition-all hover:bg-white hover:border-slate-300 hover:shadow-xs"
                   >
                     <div className="w-8 h-8 rounded-lg overflow-hidden flex items-center justify-center shrink-0 shadow-2xs bg-white border border-slate-100 p-0.5 text-[#0867E8] font-black text-xs">
-                      ✓
+                      {'logo' in item && item.logo ? (
+                        <img src={item.logo} alt={item.name} className="h-4 w-auto object-contain" />
+                      ) : (
+                        '✓'
+                      )}
                     </div>
                     <div className="text-left">
                       <div className="flex items-center gap-1.5 mb-0.5">
@@ -2020,11 +2050,15 @@ export default function CrmHomepage() {
                 </a>
               </div>
 
-              {/* Regulatory Secretariat Badge */}
-              <div className="pt-2 border-t border-slate-100 space-y-1">
+              {/* Regulatory & Payment Infrastructure Partner Badge */}
+              <div className="pt-2 border-t border-slate-100 space-y-1.5">
                 <div className="flex items-center gap-1.5 bg-blue-50 border border-blue-200/80 px-2.5 py-1 rounded-lg w-fit text-[10px] font-bold text-blue-800">
                   <ShieldCheck size={13} className="text-blue-600" />
                   <span>RBI Compliant LSP Architecture</span>
+                </div>
+                <div className="flex items-center gap-2 bg-slate-50 border border-slate-200 px-2.5 py-1.5 rounded-lg w-fit">
+                  <span className="text-[9px] font-black uppercase text-slate-500">Gateway Partner:</span>
+                  <img src="/assets/plural_by_pinelabs_transparent.png" alt="Plural by Pine Labs" className="h-3.5 w-auto object-contain" />
                 </div>
                 <p className="text-[10px] text-slate-400">
                   GSTIN: 10DXRPR3052Q1ZV<br />

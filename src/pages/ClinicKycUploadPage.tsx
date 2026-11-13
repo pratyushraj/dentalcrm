@@ -195,7 +195,7 @@ export default function ClinicKycUploadPage() {
     }
 
     if (!regDoc.uploadedUrl) {
-      toast.error('Medical Practice Proof (Dental Council / Degree) is mandatory.');
+      toast.error('Medical Practice Proof (Dental Council Reg. / CEA / Udyam / GST) is mandatory.');
       return;
     }
 
@@ -654,7 +654,7 @@ export default function ClinicKycUploadPage() {
                         <span className="text-rose-500">*</span>
                       </h3>
                       <p className="text-[11px] text-slate-500">
-                        State Dental Council Registration, BDS/MDS Degree, Clinical Establishment Act, or GST.
+                        State Dental Council Registration Certificate, Clinical Establishment Act (CEA), Udyam / MSME Certificate, Shop &amp; Establishment, or GST.
                       </p>
                     </div>
                   </div>
@@ -707,7 +707,7 @@ export default function ClinicKycUploadPage() {
                     />
                     <Camera size={22} className="text-[#0867E8] mx-auto" />
                     <p className="text-xs font-bold text-slate-800">
-                      Snap Photo of Registration Certificate or Degree
+                      Snap Photo of Dental Council Reg. or Business License
                     </p>
                     <p className="text-[10px] text-slate-400">
                       Supports JPG, PNG, PDF up to 20MB

@@ -199,6 +199,11 @@ export default function ClinicKycUploadPage() {
       return;
     }
 
+    if (!aadhaarDoc.uploadedUrl) {
+      toast.error('Authorized Signatory Aadhaar Card (Front & Back) is mandatory for RBI Proof of Address.');
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
@@ -228,7 +233,7 @@ export default function ClinicKycUploadPage() {
         'PAN Card Proof': panDoc.uploadedUrl || 'Attached',
         'Cancelled Cheque Proof': chequeDoc.uploadedUrl || 'Attached',
         'Medical Practice Proof': regDoc.uploadedUrl || 'Attached',
-        'Aadhaar Proof': aadhaarDoc.uploadedUrl || 'Not provided',
+        'Aadhaar Proof': aadhaarDoc.uploadedUrl || 'Attached',
         'Compliance Status': 'Ready for ₹1 Automated Penny Drop'
       });
 
@@ -716,20 +721,20 @@ export default function ClinicKycUploadPage() {
                 )}
               </div>
 
-              {/* 5. Document: Aadhaar Card (Optional 4th slot) */}
+              {/* 5. Document: Aadhaar Card (Mandatory 4th slot) */}
               <div className="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-5 shadow-xs space-y-3">
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex items-center gap-2.5">
-                    <div className="w-7 h-7 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center font-bold text-xs">
+                    <div className="w-7 h-7 rounded-lg bg-blue-50 text-[#0867E8] flex items-center justify-center font-bold text-xs">
                       4
                     </div>
                     <div>
                       <h3 className="text-xs sm:text-sm font-bold text-slate-900 flex items-center gap-1.5">
                         <span>Authorized Signatory Aadhaar Card</span>
-                        <span className="text-[10px] text-slate-400 font-normal">(Optional &bull; Speeds up CKYC)</span>
+                        <span className="text-rose-500">*</span>
                       </h3>
                       <p className="text-[11px] text-slate-500">
-                        Used for fast-track DigiLocker merchant verification.
+                        Front &amp; back photo for RBI Proof of Address (POA) &amp; merchant whitelisting. Masked Aadhaar accepted.
                       </p>
                     </div>
                   </div>
@@ -753,7 +758,9 @@ export default function ClinicKycUploadPage() {
                         <p className="text-xs font-bold text-slate-800 truncate">
                           {aadhaarDoc.file?.name || 'aadhaar_card.jpg'}
                         </p>
-                        <p className="text-[10px] text-emerald-600 font-bold">✓ Attached</p>
+                        <p className="text-[10px] text-emerald-600 font-bold">
+                          {aadhaarDoc.isUploading ? 'Uploading to secure banking bucket...' : '✓ Ready for verification'}
+                        </p>
                       </div>
                     </div>
 
@@ -767,7 +774,7 @@ export default function ClinicKycUploadPage() {
                     </button>
                   </div>
                 ) : (
-                  <label className="border-2 border-dashed border-slate-200 hover:border-[#0867E8] bg-slate-50/60 hover:bg-blue-50/20 rounded-xl p-3 sm:p-4 text-center cursor-pointer transition-all block space-y-1">
+                  <label className="border-2 border-dashed border-slate-200 hover:border-[#0867E8] bg-slate-50/60 hover:bg-blue-50/20 rounded-xl p-4 sm:p-5 text-center cursor-pointer transition-all block space-y-1.5">
                     <input
                       type="file"
                       accept="image/*,application/pdf"
@@ -778,9 +785,12 @@ export default function ClinicKycUploadPage() {
                         if (f) handleFileUpload(f, 'aadhaar', setAadhaarDoc);
                       }}
                     />
-                    <FileText size={20} className="text-slate-400 mx-auto" />
-                    <p className="text-xs font-semibold text-slate-700">
-                      Snap or Upload Aadhaar Front &amp; Back
+                    <FileText size={22} className="text-[#0867E8] mx-auto" />
+                    <p className="text-xs font-bold text-slate-800">
+                      Snap or Upload Aadhaar (Front &amp; Back)
+                    </p>
+                    <p className="text-[10px] text-slate-400">
+                      Supports JPG, PNG, PDF up to 20MB &bull; Masked Aadhaar Accepted
                     </p>
                   </label>
                 )}

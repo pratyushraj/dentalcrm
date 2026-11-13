@@ -20,6 +20,7 @@ const LoanDemoPage = lazy(() => import("@/pages/LoanDemoPage"));
 const DentalImplantLoanPage = lazy(() => import("@/pages/DentalImplantLoanPage"));
 const ClearAlignersEmiPage = lazy(() => import("@/pages/ClearAlignersEmiPage"));
 const PartnerClinicOnboardingPage = lazy(() => import("@/pages/PartnerClinicOnboardingPage"));
+const ClinicKycUploadPage = lazy(() => import("@/pages/ClinicKycUploadPage"));
 const AdminClinicOnboardingsPage = lazy(() => import("@/pages/AdminClinicOnboardingsPage"));
 const PartnerPipelinePreviewPage = lazy(() => import("@/pages/PartnerPipelinePreviewPage"));
 const TermsPage = lazy(() => import("@/pages/TermsPage"));
@@ -56,6 +57,8 @@ export default function AppRoutes() {
           <Route path="/apply" element={<Navigate to="/#check-eligibility" replace />} />
           <Route path="/demo/loan" element={<LazyRoute><LoanDemoPage /></LazyRoute>} />
           <Route path="/clinic-onboarding" element={<LazyRoute><PartnerClinicOnboardingPage /></LazyRoute>} />
+          <Route path="/clinic-kyc" element={<LazyRoute><ClinicKycUploadPage /></LazyRoute>} />
+          <Route path="/clinic-onboarding/kyc" element={<Navigate to="/clinic-kyc" replace />} />
           <Route path="/pilot-onboarding" element={<Navigate to="/clinic-onboarding" replace />} />
           <Route path="/clinic-pilot" element={<Navigate to="/clinic-onboarding" replace />} />
           <Route path="/admin/clinics" element={<LazyRoute><AdminClinicOnboardingsPage /></LazyRoute>} />

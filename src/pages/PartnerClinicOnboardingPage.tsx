@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { SEOHead } from '@/components/seo/SEOHead';
 import { 
   Building2, 
@@ -18,7 +19,9 @@ import {
   ArrowRight,
   QrCode,
   CheckCircle2,
-  PackageCheck
+  PackageCheck,
+  FileText,
+  MessageCircle
 } from 'lucide-react';
 import { emailNotificationService } from '@/services/emailNotificationService';
 import { supabase } from '@/lib/supabase';
@@ -80,6 +83,7 @@ export default function PartnerClinicOnboardingPage() {
   const [submitted, setSubmitted] = useState(false);
   const [copiedLink, setCopiedLink] = useState(false);
   const [paymentId, setPaymentId] = useState<string | null>(null);
+  const [savedClinicId, setSavedClinicId] = useState<string>('');
 
   const handlePayWithRazorpay = () => {
     initiateRazorpayPayment({
@@ -136,25 +140,10 @@ export default function PartnerClinicOnboardingPage() {
       return;
     }
 
-    if (!form.hasCurrentAccount) {
-      toast.error('Please specify if you have an active Current / Business Account.');
-      return;
-    }
-
-    if (!form.hasCancelledCheque) {
-      toast.error('Please specify if you have a Cancelled Cheque ready.');
-      return;
-    }
-
-    if (!form.businessProofType) {
-      toast.error('Please select your available Business Proof.');
-      return;
-    }
-
     setIsSubmitting(true);
 
     try {
-    // 1. Save directly to Supabase
+      // 1. Save directly to Supabase
       const payload = {
         clinic_name: form.clinicName,
         doctor_name: form.doctorName || null,
@@ -172,9 +161,9 @@ export default function PartnerClinicOnboardingPage() {
         avg_ticket_size: form.avgTicketSize || null,
         current_pos_provider: form.currentPosProvider || null,
         healthcare_category: form.category || 'dental',
-        has_current_account: form.hasCurrentAccount,
-        business_proof_type: form.businessProofType,
-        has_cancelled_cheque: form.hasCancelledCheque,
+        has_current_account: form.hasCurrentAccount || 'Yes',
+        business_proof_type: form.businessProofType || 'Pending Step 2 Upload',
+        has_cancelled_cheque: form.hasCancelledCheque || 'Pending Step 2 Upload',
         utm_source: utmParams.source || null,
         utm_medium: utmParams.medium || null,
         utm_campaign: utmParams.campaign || null,
@@ -183,7 +172,10 @@ export default function PartnerClinicOnboardingPage() {
       };
 
       try {
-        await supabase.from('clinic_onboardings').insert([payload]);
+        const { data: insertRes } = await supabase.from('clinic_onboardings').insert([payload]).select('id').single();
+        if (insertRes?.id) {
+          setSavedClinicId(insertRes.id);
+        }
       } catch (dbErr) {
         console.warn('[Supabase] Storing in clinic_onboardings fallback:', dbErr);
         // Fallback to generic leads table if clinic_onboardings does not exist yet
@@ -353,8 +345,51 @@ export default function PartnerClinicOnboardingPage() {
                 {form.clinicName ? `${form.clinicName} Accredited!` : 'Clinic Details Submitted!'}
               </h2>
               <p className="text-xs text-slate-600 max-w-lg mx-auto">
-                Your profile has been logged in the Clinaza partner network. Complete Step 2 below to order your custom reception acrylic standee and activate your financing portal.
+                Your profile has been logged in the Clinaza partner network. Complete Step 2 below to whitelist your current account for direct T+1 patient treatment payouts.
               </p>
+            </div>
+
+            {/* Step 2: Dedicated KYC & Bank Whitelisting Card */}
+            <div className="bg-gradient-to-r from-[#0B2450] via-[#0867E8] to-[#0756C7] text-white rounded-2xl p-6 sm:p-7 shadow-lg space-y-4">
+              <div className="flex items-center justify-between flex-wrap gap-2">
+                <span className="px-3 py-1 rounded-full bg-white/20 backdrop-blur-sm text-white text-[10px] font-black uppercase tracking-wider">
+                  Step 2 of 2: Recommended Next Step
+                </span>
+                <span className="text-emerald-300 font-bold text-xs flex items-center gap-1">
+                  <Sparkles size={13} /> Fast-Track 2-Min Whitelisting
+                </span>
+              </div>
+
+              <div>
+                <h3 className="text-xl sm:text-2xl font-black text-white tracking-tight">
+                  Whitelist Clinic Current Account for T+1 Treatment Payouts
+                </h3>
+                <p className="text-xs sm:text-sm text-blue-100/90 mt-1.5 max-w-lg leading-relaxed">
+                  Required by Plural by Pine Labs &amp; partner banking compliance to verify your account so patient treatment funds (₹30,000–₹1,50,000) are disbursed directly to your clinic current account.
+                </p>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-3 pt-2">
+                <Link
+                  to={`/clinic-kyc?id=${savedClinicId}&clinic=${encodeURIComponent(form.clinicName)}&phone=${encodeURIComponent(form.phone)}&doctor=${encodeURIComponent(form.doctorName || '')}&city=${encodeURIComponent(form.city)}`}
+                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-white hover:bg-slate-100 text-[#0B2450] text-xs font-black shadow-md transition-all transform hover:-translate-y-0.5"
+                >
+                  <FileText size={16} className="text-[#0867E8]" />
+                  <span>Upload KYC &amp; Cheque on Secure Page &rarr;</span>
+                </Link>
+
+                <a
+                  href={`https://wa.me/917292984244?text=${encodeURIComponent(
+                    `Hi Clinaza, sharing KYC documents for clinic whitelisting:\n• Clinic: ${form.clinicName}\n• Doctor: ${form.doctorName || 'Doctor'}\n• City: ${form.city}\n• Phone: ${form.phone}`
+                  )}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 px-5 py-3.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-bold transition-all shadow-sm"
+                >
+                  <MessageCircle size={15} />
+                  <span>Send via WhatsApp Instead</span>
+                </a>
+              </div>
             </div>
 
             {/* Payment Completed Card */}
@@ -820,100 +855,26 @@ export default function PartnerClinicOnboardingPage() {
               </div>
             </div>
 
-            {/* Section 3: Settlement Account & KYC Readiness */}
-            <div className="bg-white border border-slate-200/90 rounded-2xl p-5 shadow-xs space-y-4">
-              <div className="flex items-center gap-2 border-b border-slate-100 pb-3">
-                <div className="w-7 h-7 rounded-lg bg-blue-50 text-[#0867E8] flex items-center justify-center font-bold text-xs">
-                  <Landmark size={15} />
+            {/* Section 3: Settlement Whitelisting Callout */}
+            <div className="bg-gradient-to-r from-blue-50/80 to-slate-50 border border-blue-200/90 rounded-2xl p-4 sm:p-5 flex flex-wrap items-center justify-between gap-4">
+              <div className="flex items-center gap-3">
+                <div className="w-9 h-9 rounded-xl bg-blue-100 text-[#0867E8] flex items-center justify-center font-bold shrink-0">
+                  <Landmark size={18} />
                 </div>
                 <div>
-                  <h3 className="text-sm font-bold text-slate-900">Direct Payout Account &amp; Clinic Proof</h3>
-                  <p className="text-[11px] text-slate-500">Required by banking &amp; lending rails to route patient loan disbursals directly to the clinic</p>
+                  <h3 className="text-xs sm:text-sm font-bold text-[#0B2450]">
+                    Direct Payout Whitelisting (KYC)
+                  </h3>
+                  <p className="text-[11px] text-slate-500">
+                    To keep registration fast, clinic bank proof (cancelled cheque) is uploaded on a <strong>dedicated secure page in Step 2</strong> or sent via WhatsApp.
+                  </p>
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {/* 1. Active Current Account */}
-                <div className="space-y-2">
-                  <label className="block text-xs font-bold text-slate-800">
-                    Active Current / Business Bank Account? <span className="text-rose-500">*</span>
-                  </label>
-                  <p className="text-[11px] text-slate-500">For daily/weekly loan disbursals directly into clinic account</p>
-                  <div className="grid grid-cols-2 gap-2">
-                    {['Yes', 'No'].map((opt) => (
-                      <button
-                        key={opt}
-                        type="button"
-                        onClick={() => setForm({ ...form, hasCurrentAccount: opt })}
-                        className={`py-2 px-3 rounded-lg text-xs font-bold border transition-all text-center ${
-                          form.hasCurrentAccount === opt
-                            ? 'bg-[#0867E8] text-white border-[#0867E8] shadow-xs'
-                            : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
-                        }`}
-                      >
-                        {opt === 'Yes' ? '✅ Yes' : '❌ No'}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                {/* 2. Cancelled Cheque */}
-                <div className="space-y-2">
-                  <label className="block text-xs font-bold text-slate-800">
-                    Cancelled Cheque / Bank Statement Ready? <span className="text-rose-500">*</span>
-                  </label>
-                  <p className="text-[11px] text-slate-500">Required for bank IFSC &amp; account name verification</p>
-                  <div className="grid grid-cols-2 gap-2">
-                    {['Yes', 'No'].map((opt) => (
-                      <button
-                        key={opt}
-                        type="button"
-                        onClick={() => setForm({ ...form, hasCancelledCheque: opt })}
-                        className={`py-2 px-3 rounded-lg text-xs font-bold border transition-all text-center ${
-                          form.hasCancelledCheque === opt
-                            ? 'bg-[#0867E8] text-white border-[#0867E8] shadow-xs'
-                            : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
-                        }`}
-                      >
-                        {opt === 'Yes' ? '✅ Yes' : '❌ No'}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              {/* 3. Business Proof Type */}
-              <div className="pt-2 border-t border-slate-100 space-y-2">
-                <label className="block text-xs font-bold text-slate-800">
-                  Business Proof Available (Any valid clinic registration / license) <span className="text-rose-500">*</span>
-                </label>
-                <p className="text-[11px] text-slate-500">Select which clinic proof you have ready for the lending partnership:</p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                  {[
-                    { label: 'GST Registration Certificate', desc: 'Active GSTIN in clinic/proprietor name' },
-                    { label: 'Shop & Establishment Act License', desc: 'Municipal trade / Gumasta certificate' },
-                    { label: 'Clinical Establishment / Municipal Registration', desc: 'State health / CEA license' },
-                    { label: 'Drug License / Professional Degree Registration', desc: 'State Dental Council / Pharmacy license' },
-                    { label: 'Will arrange during onboarding', desc: 'Need guidance from Clinaza team' }
-                  ].map((item) => (
-                    <button
-                      key={item.label}
-                      type="button"
-                      onClick={() => setForm({ ...form, businessProofType: item.label })}
-                      className={`text-left p-2.5 rounded-xl border text-xs transition-all ${
-                        form.businessProofType === item.label
-                          ? 'border-[#0867E8] bg-blue-50/70 text-[#0867E8] font-bold shadow-xs'
-                          : 'border-slate-200 bg-slate-50/60 hover:bg-slate-100 text-slate-700 font-medium'
-                      }`}
-                    >
-                      <div className="flex items-center justify-between">
-                        <span className="font-semibold text-slate-900">{item.label}</span>
-                        {form.businessProofType === item.label && <Check size={14} className="text-[#0867E8] shrink-0" />}
-                      </div>
-                      <p className="text-[10px] text-slate-500 mt-0.5">{item.desc}</p>
-                    </button>
-                  ))}
-                </div>
+              <div className="flex items-center gap-2">
+                <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded-full flex items-center gap-1">
+                  <Check size={12} /> Zero Upfront Friction
+                </span>
               </div>
             </div>
 

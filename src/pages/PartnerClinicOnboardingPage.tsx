@@ -84,6 +84,7 @@ export default function PartnerClinicOnboardingPage() {
   const [copiedLink, setCopiedLink] = useState(false);
   const [paymentId, setPaymentId] = useState<string | null>(null);
   const [savedClinicId, setSavedClinicId] = useState<string>('');
+  const [websiteReady, setWebsiteReady] = useState<'yes' | 'no'>('no');
 
   const handlePayWithRazorpay = () => {
     initiateRazorpayPayment({
@@ -143,14 +144,13 @@ export default function PartnerClinicOnboardingPage() {
     setIsSubmitting(true);
 
     try {
-      // 1. Save directly to Supabase
-      const payload = {
+      // 1. Save directly to Supabase with schema-validated columns
+      const payload: Record<string, any> = {
         clinic_name: form.clinicName,
         doctor_name: form.doctorName || null,
         city: form.city,
         phone: form.phone,
         email: form.email || null,
-        website: form.website || null,
         chairs: form.chairs || null,
         premises_type: form.premisesType || null,
         google_rating: form.googleRating || null,
@@ -159,10 +159,8 @@ export default function PartnerClinicOnboardingPage() {
         avg_monthly_cases: form.avgMonthlyCases || null,
         expected_emi_loans: form.expectedEmiLoans || null,
         avg_ticket_size: form.avgTicketSize || null,
-        current_pos_provider: form.currentPosProvider || null,
-        healthcare_category: form.category || 'dental',
         has_current_account: form.hasCurrentAccount || 'Yes',
-        business_proof_type: form.businessProofType || 'Pending Step 2 Upload',
+        business_proof_type: form.website ? `Website: ${form.website}` : (form.businessProofType || 'Pending Step 2 Upload'),
         has_cancelled_cheque: form.hasCancelledCheque || 'Pending Step 2 Upload',
         utm_source: utmParams.source || null,
         utm_medium: utmParams.medium || null,
@@ -172,9 +170,16 @@ export default function PartnerClinicOnboardingPage() {
       };
 
       try {
-        const { data: insertRes } = await supabase.from('clinic_onboardings').insert([payload]).select('id').single();
+        const { data: insertRes, error: insertError } = await supabase
+          .from('clinic_onboardings')
+          .insert([payload])
+          .select('id')
+          .single();
+
         if (insertRes?.id) {
           setSavedClinicId(insertRes.id);
+        } else if (insertError) {
+          console.warn('[Supabase] Insert notice:', insertError);
         }
       } catch (dbErr) {
         console.warn('[Supabase] Storing in clinic_onboardings fallback:', dbErr);
@@ -371,7 +376,7 @@ export default function PartnerClinicOnboardingPage() {
 
               <div className="flex flex-wrap items-center gap-3 pt-2">
                 <Link
-                  to={`/clinic-kyc?id=${savedClinicId}&clinic=${encodeURIComponent(form.clinicName)}&phone=${encodeURIComponent(form.phone)}&doctor=${encodeURIComponent(form.doctorName || '')}&city=${encodeURIComponent(form.city)}`}
+                  to={`/clinic-kyc?id=${savedClinicId}&clinic=${encodeURIComponent(form.clinicName)}&phone=${encodeURIComponent(form.phone)}&doctor=${encodeURIComponent(form.doctorName || '')}&city=${encodeURIComponent(form.city)}&website=${encodeURIComponent(form.website || '')}`}
                   className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-white hover:bg-slate-100 text-[#0B2450] text-xs font-black shadow-md transition-all transform hover:-translate-y-0.5"
                 >
                   <FileText size={16} className="text-[#0867E8]" />
@@ -613,17 +618,56 @@ export default function PartnerClinicOnboardingPage() {
                     className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:bg-white focus:border-[#0867E8] focus:ring-1 focus:ring-[#0867E8]"
                   />
                 </div>
-                <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1.5 flex items-center gap-1">
-                    <Globe size={12} className="text-slate-400" /> Clinic / Hospital Website
+                <div className="space-y-2">
+                  <label className="block text-xs font-bold text-slate-700 flex items-center justify-between">
+                    <span className="flex items-center gap-1">
+                      <Globe size={12} className="text-slate-400" /> Is your Clinic Website ready?
+                    </span>
+                    <span className="text-[10px] text-slate-400 font-normal">PG Underwriting</span>
                   </label>
-                  <input 
-                    type="url"
-                    placeholder="e.g. https://www.yourclinic.com (or leave empty)"
-                    value={form.website}
-                    onChange={e => setForm({...form, website: e.target.value})}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:bg-white focus:border-[#0867E8] focus:ring-1 focus:ring-[#0867E8]"
-                  />
+
+                  <div className="grid grid-cols-2 gap-2">
+                    <button
+                      type="button"
+                      onClick={() => setWebsiteReady('yes')}
+                      className={`py-2 px-2.5 rounded-xl border text-[11px] font-bold flex items-center justify-center gap-1.5 transition-all ${
+                        websiteReady === 'yes'
+                          ? 'bg-blue-50 border-[#0867E8] text-[#0867E8] shadow-xs'
+                          : 'bg-slate-50 border-slate-200 text-slate-600 hover:bg-slate-100'
+                      }`}
+                    >
+                      <span>🌐 Yes, Live Website</span>
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setWebsiteReady('no');
+                        setForm(prev => ({ ...prev, website: '' }));
+                      }}
+                      className={`py-2 px-2.5 rounded-xl border text-[11px] font-bold flex items-center justify-center gap-1.5 transition-all ${
+                        websiteReady === 'no'
+                          ? 'bg-blue-50 border-[#0867E8] text-[#0867E8] shadow-xs'
+                          : 'bg-slate-50 border-slate-200 text-slate-600 hover:bg-slate-100'
+                      }`}
+                    >
+                      <span>⚡ Not Yet / In Progress</span>
+                    </button>
+                  </div>
+
+                  {websiteReady === 'yes' ? (
+                    <input 
+                      type="url"
+                      placeholder="e.g. https://www.yourclinic.com"
+                      value={form.website}
+                      onChange={e => setForm({...form, website: e.target.value})}
+                      className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:bg-white focus:border-[#0867E8] font-mono"
+                    />
+                  ) : (
+                    <p className="text-[10px] text-emerald-700 bg-emerald-50/70 border border-emerald-200/80 rounded-xl p-2 font-medium">
+                      ✓ Clinaza auto-assigns an accredited partner profile or uses Google Maps for PG whitelisting.
+                    </p>
+                  )}
                 </div>
               </div>
             </div>

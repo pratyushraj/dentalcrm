@@ -20,7 +20,8 @@ import {
   Download,
   Landmark,
   CreditCard,
-  AlertCircle
+  AlertCircle,
+  Globe
 } from 'lucide-react';
 
 interface UploadedDoc {
@@ -39,11 +40,14 @@ export default function ClinicKycUploadPage() {
   const initialDoctorName = searchParams.get('doctor') || searchParams.get('doctor_name') || '';
   const initialPhone = searchParams.get('phone') || '';
   const initialCity = searchParams.get('city') || '';
+  const initialWebsite = searchParams.get('website') || '';
 
   const [clinicName, setClinicName] = useState(initialClinicName);
   const [doctorName, setDoctorName] = useState(initialDoctorName);
   const [phone, setPhone] = useState(initialPhone);
   const [city, setCity] = useState(initialCity);
+  const [websiteStatus, setWebsiteStatus] = useState<'yes' | 'no'>(initialWebsite ? 'yes' : 'no');
+  const [websiteUrl, setWebsiteUrl] = useState(initialWebsite);
 
   // Bank Account Fields (Instant ₹1 Penny Drop)
   const [accountHolderName, setAccountHolderName] = useState('');
@@ -204,13 +208,18 @@ export default function ClinicKycUploadPage() {
       return;
     }
 
+    if (websiteStatus === 'yes' && !websiteUrl.trim()) {
+      toast.error('Please enter your Clinic Website URL or select "Not yet / In progress".');
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
       const updatePayload: Record<string, any> = {
         has_cancelled_cheque: 'Yes',
         has_current_account: 'Yes',
-        business_proof_type: 'Full KYC & Penny Drop Submitted'
+        business_proof_type: websiteStatus === 'yes' && websiteUrl ? `Website: ${websiteUrl} | KYC Done` : 'Full KYC & Penny Drop Submitted'
       };
 
       if (clinicId) {
@@ -230,6 +239,7 @@ export default function ClinicKycUploadPage() {
         'Account Holder Name': accountHolderName,
         'Account Number': accountNumber,
         'IFSC Code': ifscCode,
+        'Clinic Website': websiteStatus === 'yes' ? websiteUrl : 'Not Ready (Assign Clinaza Portal Profile)',
         'PAN Card Proof': panDoc.uploadedUrl || 'Attached',
         'Cancelled Cheque Proof': chequeDoc.uploadedUrl || 'Attached',
         'Medical Practice Proof': regDoc.uploadedUrl || 'Attached',
@@ -494,6 +504,93 @@ export default function ClinicKycUploadPage() {
                     <p className="text-[10px] text-slate-400">11-character alphanumeric code on your cheque / passbook</p>
                   </div>
                 </div>
+              </div>
+
+              {/* 2. Clinic Website & Online Presence (PG Underwriting Requirement) */}
+              <div className="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-5 shadow-xs space-y-3">
+                <div className="flex items-start justify-between gap-3">
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-7 h-7 rounded-lg bg-blue-50 text-[#0867E8] flex items-center justify-center font-bold text-xs">
+                      <Globe size={15} />
+                    </div>
+                    <div>
+                      <h3 className="text-xs sm:text-sm font-bold text-slate-900 flex items-center gap-1.5">
+                        <span>Is your Clinic Website ready?</span>
+                        <span className="text-rose-500">*</span>
+                      </h3>
+                      <p className="text-[11px] text-slate-500">
+                        Payment Gateway underwriters require an online practice link to activate your merchant terminal.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
+                  <button
+                    type="button"
+                    onClick={() => setWebsiteStatus('yes')}
+                    className={`p-3 rounded-xl border text-left transition-all ${
+                      websiteStatus === 'yes'
+                        ? 'bg-blue-50/80 border-[#0867E8] ring-1 ring-[#0867E8]'
+                        : 'bg-slate-50 border-slate-200 hover:bg-slate-100'
+                    }`}
+                  >
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm">🌐</span>
+                      <span className="text-xs font-bold text-slate-900">Yes, Website is Live &amp; Ready</span>
+                    </div>
+                    <p className="text-[10px] text-slate-500 mt-1 pl-6">
+                      Enter your domain for instant PG terminal mapping.
+                    </p>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setWebsiteStatus('no');
+                      setWebsiteUrl('');
+                    }}
+                    className={`p-3 rounded-xl border text-left transition-all ${
+                      websiteStatus === 'no'
+                        ? 'bg-blue-50/80 border-[#0867E8] ring-1 ring-[#0867E8]'
+                        : 'bg-slate-50 border-slate-200 hover:bg-slate-100'
+                    }`}
+                  >
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm">⚡</span>
+                      <span className="text-xs font-bold text-slate-900">Not Yet / In Progress</span>
+                    </div>
+                    <p className="text-[10px] text-slate-500 mt-1 pl-6">
+                      Auto-assign accredited Clinaza profile or Google Maps.
+                    </p>
+                  </button>
+                </div>
+
+                {websiteStatus === 'yes' ? (
+                  <div className="pt-1.5 space-y-1">
+                    <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wide">
+                      Clinic Website URL <span className="text-rose-500">*</span>
+                    </label>
+                    <input
+                      type="url"
+                      placeholder="e.g. https://www.yourclinic.com"
+                      value={websiteUrl}
+                      onChange={(e) => setWebsiteUrl(e.target.value)}
+                      className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 font-mono focus:outline-none focus:bg-white focus:border-[#0867E8]"
+                    />
+                    <p className="text-[10px] text-slate-400">Underwriting team maps this URL to your payment processing MID</p>
+                  </div>
+                ) : (
+                  <div className="p-3 bg-emerald-50/70 border border-emerald-200/90 rounded-xl flex items-start gap-2.5 text-xs text-emerald-900">
+                    <Sparkles size={16} className="text-emerald-600 shrink-0 mt-0.5" />
+                    <div>
+                      <p className="font-bold text-emerald-950">Clinaza Instant PG Gateway Whitelisting:</p>
+                      <p className="text-[11px] text-emerald-800 leading-relaxed mt-0.5">
+                        We will auto-generate an accredited clinic profile (<code>clinaza.in/clinic/{clinicName ? clinicName.toLowerCase().replace(/[^a-z0-9]/g, '-') : 'partner'}</code>) so your PG merchant account is approved with zero delays.
+                      </p>
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* 2. Document: Cancelled Cheque */}

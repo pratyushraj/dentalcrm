@@ -320,6 +320,189 @@ export const emailNotificationService = {
       console.error('[EmailNotification] Failed to send rejection alert email:', error);
       return null;
     }
+  },
+
+  /**
+   * Automated confirmation email sent directly to the Doctor after completing KYC.
+   * Clarifies the 48–72 hours underwriting SLA, automated penny drop, and partner guide.
+   */
+  sendDoctorKycConfirmationEmail: async (doctorEmail: string, details: {
+    doctorName?: string;
+    clinicName?: string;
+    city?: string;
+  }) => {
+    if (!doctorEmail || !doctorEmail.includes('@')) {
+      console.warn('[EmailNotification] Invalid doctor email for KYC confirmation:', doctorEmail);
+      return null;
+    }
+
+    const defaultKey = atob('cmVfN01ZTnl1V3RfUUZMU3dqcmZhaEEyMVV1Q3pIRXdEdXJw');
+    const resendApiKey = import.meta.env.VITE_RESEND_API_KEY || defaultKey;
+
+    const doctorName = details.doctorName || 'Doctor';
+    const clinicName = details.clinicName || 'Your Clinic';
+    const city = details.city || '';
+    const dateSubmitted = new Date().toLocaleDateString('en-IN', {
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric'
+    });
+
+    const emailSubject = `Whitelisting in Progress: ${clinicName} Partner Terminal (48–72h SLA)`;
+
+    const htmlBody = `
+      <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 620px; margin: 0 auto; border: 1px solid #e2e8f0; border-radius: 16px; padding: 32px 24px; background: #ffffff; color: #0f172a; box-shadow: 0 4px 20px rgba(0,0,0,0.04);">
+        
+        <!-- Header -->
+        <div style="border-bottom: 1px solid #f1f5f9; padding-bottom: 20px; margin-bottom: 24px;">
+          <table style="width: 100%;">
+            <tr>
+              <td>
+                <span style="font-size: 22px; font-weight: 900; letter-spacing: -0.5px; color: #0867E8;">CLINAZA</span>
+                <span style="display: block; font-size: 11px; font-weight: 700; color: #64748b; letter-spacing: 0.5px; text-transform: uppercase; margin-top: 2px;">Banking &amp; Settlement Desk</span>
+              </td>
+              <td style="text-align: right;">
+                <span style="display: inline-block; background: #eff6ff; color: #0867E8; font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 20px; border: 1px solid #bfdbfe;">
+                  Dossier Ref: #CLN-${Date.now().toString().slice(-6)}
+                </span>
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <!-- Greeting -->
+        <h2 style="font-size: 18px; font-weight: 800; color: #0B2450; margin: 0 0 12px 0;">
+          Dear ${doctorName.startsWith('Dr') ? doctorName : `Dr. ${doctorName}`},
+        </h2>
+
+        <p style="font-size: 14px; line-height: 1.6; color: #334155; margin: 0 0 20px 0;">
+          Thank you for submitting your clinic banking details and practice KYC documents for <strong>${clinicName}</strong>${city ? ` (${city})` : ''}. Your onboarding file has been successfully uploaded to the banking compliance desk.
+        </p>
+
+        <!-- Status Tracker Card -->
+        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; margin-bottom: 24px;">
+          <div style="font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; color: #64748b; margin-bottom: 14px;">
+            Onboarding &amp; Whitelisting Status
+          </div>
+
+          <table style="width: 100%; border-collapse: collapse;">
+            <tr>
+              <td style="width: 28px; vertical-align: top; padding-bottom: 12px;">
+                <div style="background: #10b981; color: white; width: 22px; height: 22px; border-radius: 50%; text-align: center; line-height: 22px; font-size: 12px; font-weight: bold;">✓</div>
+              </td>
+              <td style="padding-bottom: 12px; padding-left: 8px;">
+                <div style="font-size: 13px; font-weight: 700; color: #0f172a;">1. KYC Documents &amp; Current A/C Details Uploaded</div>
+                <div style="font-size: 11px; color: #64748b;">Completed on ${dateSubmitted}</div>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="width: 28px; vertical-align: top; padding-bottom: 12px;">
+                <div style="background: #0867E8; color: white; width: 22px; height: 22px; border-radius: 50%; text-align: center; line-height: 22px; font-size: 12px; font-weight: bold;">⟳</div>
+              </td>
+              <td style="padding-bottom: 12px; padding-left: 8px;">
+                <div style="font-size: 13px; font-weight: 700; color: #0867E8;">2. Bank Penny Drop &amp; Payment Gateway Underwriting</div>
+                <div style="font-size: 12px; color: #334155; font-weight: 600; margin-top: 2px;">
+                  In Progress &bull; Estimated Turnaround: <strong>48–72 Business Hours</strong>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="width: 28px; vertical-align: top;">
+                <div style="background: #e2e8f0; color: #94a3b8; width: 22px; height: 22px; border-radius: 50%; text-align: center; line-height: 22px; font-size: 12px; font-weight: bold;">3</div>
+              </td>
+              <td style="padding-left: 8px;">
+                <div style="font-size: 13px; font-weight: 700; color: #64748b;">3. Merchant ID (MID) Whitelisting &amp; Kit Dispatch</div>
+                <div style="font-size: 11px; color: #94a3b8;">Activates 100% upfront T+1 treatment payouts directly to your current account</div>
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <!-- What Happens Next -->
+        <div style="margin-bottom: 24px;">
+          <h3 style="font-size: 14px; font-weight: 800; color: #0B2450; margin: 0 0 10px 0;">What to expect during the 48–72 hour underwriting window:</h3>
+          <ul style="font-size: 13px; line-height: 1.6; color: #475569; padding-left: 20px; margin: 0;">
+            <li style="margin-bottom: 6px;"><strong>Automated ₹1 Penny Drop:</strong> Our banking rail deposits ₹1 into your current account to automatically verify the beneficiary name and IFSC.</li>
+            <li style="margin-bottom: 6px;"><strong>PG Underwriting Approval:</strong> Your clinic merchant ID (MID) is configured with Plural by Pine Labs and partner NBFCs.</li>
+            <li style="margin-bottom: 6px;"><strong>Welcome Kit Dispatch:</strong> Your acrylic countertop patient EMI standee and staff prompt cards are prepared for courier dispatch.</li>
+          </ul>
+        </div>
+
+        <!-- Call to Action Buttons -->
+        <table style="width: 100%; margin-bottom: 24px;">
+          <tr>
+            <td style="padding-right: 8px; width: 50%;">
+              <a href="https://www.clinaza.in/docs/Clinaza_Clinic_Partner_Onboarding_Guide.pdf" target="_blank" style="display: block; background: #0867E8; color: #ffffff; text-decoration: none; padding: 12px 16px; border-radius: 10px; font-size: 12px; font-weight: 700; text-align: center;">
+                Download Partner Guide (PDF) &rarr;
+              </a>
+            </td>
+            <td style="padding-left: 8px; width: 50%;">
+              <a href="https://wa.me/917292984244?text=${encodeURIComponent(`Hi Clinaza Team, inquiring about KYC whitelisting status for ${clinicName}`)}" target="_blank" style="display: block; background: #22c55e; color: #ffffff; text-decoration: none; padding: 12px 16px; border-radius: 10px; font-size: 12px; font-weight: 700; text-align: center;">
+                WhatsApp Priority Desk &rarr;
+              </a>
+            </td>
+          </tr>
+        </table>
+
+        <!-- Footer -->
+        <div style="border-top: 1px solid #f1f5f9; padding-top: 16px; font-size: 11px; color: #94a3b8; text-align: center; line-height: 1.5;">
+          Clinaza Healthcare Technologies &bull; Powered by Plural by Pine Labs &amp; RBI-Regulated Lending Partners<br>
+          For any updates or fast-track requests, reply to this email (<a href="mailto:contact@clinaza.in" style="color: #0867E8; text-decoration: none;">contact@clinaza.in</a>) or WhatsApp +91 72929 84244.
+        </div>
+      </div>
+    `;
+
+    // 1. Send via Resend API
+    if (resendApiKey) {
+      try {
+        const response = await fetch('https://api.resend.com/emails', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${resendApiKey}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            from: 'Clinaza Banking Desk <contact@clinaza.in>',
+            to: [doctorEmail],
+            bcc: ['funnyraj10@gmail.com'],
+            subject: emailSubject,
+            html: htmlBody
+          })
+        });
+        const result = await response.json();
+        console.log('[EmailNotification] Doctor KYC confirmation sent via Resend:', result);
+        return result;
+      } catch (error) {
+        console.warn('[EmailNotification] Resend failed for doctor KYC confirmation, falling back to FormSubmit:', error);
+      }
+    }
+
+    // 2. Fallback via FormSubmit to admin with doctor's email specified
+    try {
+      const response = await fetch('https://formsubmit.co/ajax/funnyraj10@gmail.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          _subject: `[Doctor Copy] ${emailSubject}`,
+          doctorEmail,
+          doctorName,
+          clinicName,
+          city,
+          timeline: '48–72 Business Hours',
+          _replyto: doctorEmail
+        })
+      });
+      const result = await response.json();
+      return result;
+    } catch (e) {
+      console.error('[EmailNotification] Error dispatching fallback doctor email:', e);
+      return null;
+    }
   }
 };
 

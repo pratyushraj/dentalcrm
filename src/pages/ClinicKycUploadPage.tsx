@@ -41,11 +41,13 @@ export default function ClinicKycUploadPage() {
   const initialPhone = searchParams.get('phone') || '';
   const initialCity = searchParams.get('city') || '';
   const initialWebsite = searchParams.get('website') || '';
+  const initialEmail = searchParams.get('email') || '';
 
   const [clinicName, setClinicName] = useState(initialClinicName);
   const [doctorName, setDoctorName] = useState(initialDoctorName);
   const [phone, setPhone] = useState(initialPhone);
   const [city, setCity] = useState(initialCity);
+  const [email, setEmail] = useState(initialEmail);
   const [websiteStatus, setWebsiteStatus] = useState<'yes' | 'no'>(initialWebsite ? 'yes' : 'no');
   const [websiteUrl, setWebsiteUrl] = useState(initialWebsite);
 
@@ -98,7 +100,7 @@ export default function ClinicKycUploadPage() {
         try {
           const { data } = await supabase
             .from('clinic_onboardings')
-            .select('clinic_name, doctor_name, phone, city')
+            .select('clinic_name, doctor_name, phone, city, email')
             .eq('id', clinicId)
             .single();
 
@@ -110,6 +112,7 @@ export default function ClinicKycUploadPage() {
             }
             if (data.phone) setPhone(data.phone);
             if (data.city) setCity(data.city);
+            if (data.email && !email) setEmail(data.email);
           }
         } catch {
           // fallback gracefully
@@ -233,6 +236,7 @@ export default function ClinicKycUploadPage() {
       await emailNotificationService.sendNotification(`🎉 PG Whitelisting & KYC Submitted: ${clinicName || 'Partner Clinic'}`, {
         'Clinic Name': clinicName || 'Not specified',
         'Doctor Name': doctorName || 'Not specified',
+        'Doctor Email': email || 'Not specified',
         'Contact Phone': phone || 'Not specified',
         'City': city || 'Not specified',
         'Clinic ID': clinicId || 'N/A',
@@ -246,6 +250,19 @@ export default function ClinicKycUploadPage() {
         'Aadhaar Proof': aadhaarDoc.uploadedUrl || 'Attached',
         'Compliance Status': 'Ready for ₹1 Automated Penny Drop'
       });
+
+      // Dispatch automated branded confirmation email to the Doctor (48–72h SLA)
+      if (email) {
+        try {
+          await emailNotificationService.sendDoctorKycConfirmationEmail(email, {
+            doctorName,
+            clinicName,
+            city
+          });
+        } catch (e) {
+          console.warn('[Email] Doctor confirmation email error:', e);
+        }
+      }
 
       setIsCompleted(true);
       toast.success('KYC & Banking details submitted for automated whitelisting!');
@@ -323,13 +340,18 @@ export default function ClinicKycUploadPage() {
 
             <div className="space-y-1.5">
               <span className="px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold inline-block">
-                ₹1 Penny Drop in Progress
+                ₹1 Penny Drop &amp; Underwriting in Progress (48–72h SLA)
               </span>
               <h1 className="text-2xl sm:text-3xl font-black text-[#0B2450]">
                 Banking Whitelisting Initiated for {clinicName || 'Your Clinic'}!
               </h1>
               <p className="text-xs sm:text-sm text-slate-600 max-w-md mx-auto leading-relaxed">
-                Your account details and PAN have been queued with Plural by Pine Labs. An automated ₹1 penny deposit verifies your account within <strong>2–4 business hours</strong>.
+                Your account details and KYC dossier have been submitted to the banking compliance desk. Terminal whitelisting is completed within <strong>48–72 business hours</strong>.
+                {email && (
+                  <span className="block mt-1.5 font-semibold text-emerald-700">
+                    ✉️ A formal confirmation email has been dispatched to {email}.
+                  </span>
+                )}
               </p>
             </div>
 
@@ -502,6 +524,20 @@ export default function ClinicKycUploadPage() {
                       className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 font-mono font-bold uppercase focus:outline-none focus:bg-white focus:border-[#0867E8]"
                     />
                     <p className="text-[10px] text-slate-400">11-character alphanumeric code on your cheque / passbook</p>
+                  </div>
+
+                  {/* Doctor / Clinic Email */}
+                  <div className="space-y-1 sm:col-span-2">
+                    <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wide">
+                      Doctor / Clinic Email <span className="text-[10px] text-slate-400 font-normal">(Receives 48–72h whitelisting updates &amp; settlement reports)</span>
+                    </label>
+                    <input
+                      type="email"
+                      placeholder="e.g. doctor@yourclinic.com"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 focus:outline-none focus:bg-white focus:border-[#0867E8]"
+                    />
                   </div>
                 </div>
               </div>

@@ -376,7 +376,7 @@ export default function PartnerClinicOnboardingPage() {
 
               <div className="flex flex-wrap items-center gap-3 pt-2">
                 <Link
-                  to={`/clinic-kyc?id=${savedClinicId}&clinic=${encodeURIComponent(form.clinicName)}&phone=${encodeURIComponent(form.phone)}&doctor=${encodeURIComponent(form.doctorName || '')}&city=${encodeURIComponent(form.city)}&website=${encodeURIComponent(form.website || '')}`}
+                  to={`/clinic-kyc?id=${savedClinicId}&clinic=${encodeURIComponent(form.clinicName)}&phone=${encodeURIComponent(form.phone)}&doctor=${encodeURIComponent(form.doctorName || '')}&city=${encodeURIComponent(form.city)}&email=${encodeURIComponent(form.email || '')}&website=${encodeURIComponent(form.website || '')}`}
                   className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-white hover:bg-slate-100 text-[#0B2450] text-xs font-black shadow-md transition-all transform hover:-translate-y-0.5"
                 >
                   <FileText size={16} className="text-[#0867E8]" />

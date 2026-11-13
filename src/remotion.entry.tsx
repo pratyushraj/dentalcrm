@@ -13,10 +13,21 @@ import {
   Slide4Script,
   Slide5Cta,
 } from './components/remotion/ClinazaCarouselPost';
+import { DiwaliPostComposition } from './components/remotion/DiwaliPostComposition';
 
 export const RemotionRoot: React.FC = () => {
   return (
     <>
+      {/* ── Instagram 4:5 Diwali Post (1080 x 1350) ── */}
+      <Composition
+        id="DiwaliPost"
+        component={DiwaliPostComposition}
+        durationInFrames={30}
+        fps={30}
+        width={1080}
+        height={1350}
+      />
+
       {/* ── Instagram 4:5 Carousel Slides (1080 x 1350) ── */}
       <Composition
         id="ClinazaCarouselFull"

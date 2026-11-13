@@ -52,7 +52,7 @@ const htmlContent = `<!DOCTYPE html>
     max-height: 297mm;
     background: #ffffff;
     box-sizing: border-box;
-    padding: 8mm 12mm 7mm 12mm;
+    padding: 7mm 11mm 6mm 11mm;
     margin: 0 auto;
     page-break-after: always;
     display: flex;
@@ -68,7 +68,7 @@ const htmlContent = `<!DOCTYPE html>
     justify-content: space-between;
     align-items: center;
     border-bottom: 2.5px solid #e2e8f0;
-    padding-bottom: 8px;
+    padding-bottom: 7px;
   }
 
   .logo-block {
@@ -111,7 +111,7 @@ const htmlContent = `<!DOCTYPE html>
     background: #eff6ff;
     border: 1.5px solid #93c5fd;
     color: #1d4ed8;
-    font-size: 11.5px;
+    font-size: 12px;
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.6px;
@@ -128,7 +128,7 @@ const htmlContent = `<!DOCTYPE html>
 
   /* ===== SECTION TITLE ===== */
   .section-title {
-    font-size: 14.5px;
+    font-size: 15px;
     font-weight: 900;
     color: #0b2450;
     text-transform: uppercase;
@@ -136,7 +136,7 @@ const htmlContent = `<!DOCTYPE html>
     display: flex;
     align-items: center;
     gap: 8px;
-    margin-bottom: 6px;
+    margin-bottom: 5px;
   }
 
   .section-title span.dot {
@@ -151,7 +151,7 @@ const htmlContent = `<!DOCTYPE html>
   .hero-box {
     background: linear-gradient(135deg, #0b2450 0%, #1e3a8a 100%);
     border-radius: 14px;
-    padding: 14px 18px;
+    padding: 13px 18px;
     color: #ffffff;
     display: flex;
     justify-content: space-between;
@@ -160,14 +160,14 @@ const htmlContent = `<!DOCTYPE html>
   }
 
   .hero-text h2 {
-    font-size: 18.5px;
+    font-size: 19.5px;
     font-weight: 900;
     line-height: 1.25;
     margin-bottom: 4px;
   }
 
   .hero-text p {
-    font-size: 12px;
+    font-size: 12.5px;
     color: #e2e8f0;
     line-height: 1.45;
     max-width: 440px;
@@ -183,20 +183,20 @@ const htmlContent = `<!DOCTYPE html>
     text-align: center;
     background: rgba(255, 255, 255, 0.12);
     border: 1.5px solid rgba(255, 255, 255, 0.25);
-    padding: 8px 12px;
+    padding: 7px 12px;
     border-radius: 10px;
     min-width: 105px;
   }
 
   .hero-stat .num {
-    font-size: 24px;
+    font-size: 25px;
     font-weight: 900;
     color: #38bdf8;
     line-height: 1;
   }
 
   .hero-stat .lbl {
-    font-size: 9.5px;
+    font-size: 10px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     color: #ffffff;
@@ -208,12 +208,12 @@ const htmlContent = `<!DOCTYPE html>
   .script-container {
     display: flex;
     flex-direction: column;
-    gap: 7px;
+    gap: 6px;
   }
 
   .script-card {
     border-radius: 12px;
-    padding: 11px 15px;
+    padding: 10px 14px;
     font-size: 12.5px;
     line-height: 1.45;
   }
@@ -232,10 +232,10 @@ const htmlContent = `<!DOCTYPE html>
   .script-header-bad {
     color: #b91c1c;
     font-weight: 900;
-    font-size: 11.5px;
+    font-size: 12.5px;
     text-transform: uppercase;
     letter-spacing: 0.6px;
-    margin-bottom: 4px;
+    margin-bottom: 3px;
     display: flex;
     align-items: center;
     gap: 6px;
@@ -244,10 +244,10 @@ const htmlContent = `<!DOCTYPE html>
   .script-header-good {
     color: #15803d;
     font-weight: 900;
-    font-size: 11.5px;
+    font-size: 12.5px;
     text-transform: uppercase;
     letter-spacing: 0.6px;
-    margin-bottom: 4px;
+    margin-bottom: 3px;
     display: flex;
     align-items: center;
     gap: 6px;
@@ -256,12 +256,12 @@ const htmlContent = `<!DOCTYPE html>
   .quote-box {
     font-weight: 700;
     color: #0f172a;
-    font-size: 13px;
+    font-size: 14px;
     margin-bottom: 3px;
   }
 
   .result-tag {
-    font-size: 11.5px;
+    font-size: 12px;
     font-weight: 600;
   }
 
@@ -269,18 +269,18 @@ const htmlContent = `<!DOCTYPE html>
   .pillars-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 9px;
+    gap: 8px;
   }
 
   .pillar-box {
     background: #f8fafc;
     border: 1.5px solid #e2e8f0;
     border-radius: 10px;
-    padding: 10px 12px;
+    padding: 9px 11px;
   }
 
   .pillar-box h4 {
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 800;
     color: #0b2450;
     margin-bottom: 3px;
@@ -290,9 +290,9 @@ const htmlContent = `<!DOCTYPE html>
   }
 
   .pillar-box p {
-    font-size: 11px;
-    color: #475569;
-    line-height: 1.4;
+    font-size: 12px;
+    color: #334155;
+    line-height: 1.42;
     font-weight: 500;
   }
 
@@ -309,7 +309,7 @@ const htmlContent = `<!DOCTYPE html>
     background: #0b2450;
     color: #ffffff;
     padding: 7px 14px;
-    font-size: 11.5px;
+    font-size: 12px;
     font-weight: 900;
     display: flex;
     justify-content: space-between;
@@ -321,7 +321,7 @@ const htmlContent = `<!DOCTYPE html>
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 8px;
-    padding: 9px 14px;
+    padding: 8px 14px;
     background: #f8fafc;
   }
 
@@ -332,8 +332,8 @@ const htmlContent = `<!DOCTYPE html>
   }
 
   .doc-num {
-    width: 22px;
-    height: 22px;
+    width: 24px;
+    height: 24px;
     border-radius: 50%;
     background: #0867e8;
     color: #ffffff;
@@ -341,7 +341,7 @@ const htmlContent = `<!DOCTYPE html>
     align-items: center;
     justify-content: center;
     font-weight: 900;
-    font-size: 11px;
+    font-size: 12px;
     flex-shrink: 0;
     margin-top: 1px;
   }
@@ -349,13 +349,13 @@ const htmlContent = `<!DOCTYPE html>
   .doc-info strong {
     color: #0b2450;
     display: block;
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 800;
   }
 
   .doc-info span {
-    color: #64748b;
-    font-size: 11px;
+    color: #475569;
+    font-size: 11.5px;
     font-weight: 600;
   }
 
@@ -365,7 +365,7 @@ const htmlContent = `<!DOCTYPE html>
     border: 2px solid #3b82f6;
     box-shadow: 0 4px 14px rgba(37, 99, 235, 0.1);
     border-radius: 14px;
-    padding: 11px 16px;
+    padding: 10px 15px;
     position: relative;
   }
 
@@ -409,14 +409,14 @@ const htmlContent = `<!DOCTYPE html>
   }
 
   .allinone-badge .badge-title {
-    font-size: 10.5px;
+    font-size: 11px;
     font-weight: 900;
     letter-spacing: 0.6px;
     text-transform: uppercase;
   }
 
   .allinone-badge .badge-desc {
-    font-size: 9px;
+    font-size: 9.5px;
     color: #bfdbfe;
     font-weight: 700;
   }
@@ -428,7 +428,7 @@ const htmlContent = `<!DOCTYPE html>
   }
 
   .plan-tag {
-    font-size: 10px;
+    font-size: 10.5px;
     font-weight: 900;
     letter-spacing: 0.7px;
     text-transform: uppercase;
@@ -442,7 +442,7 @@ const htmlContent = `<!DOCTYPE html>
 
   .plan-features {
     list-style: none;
-    font-size: 11px;
+    font-size: 12px;
     color: #334155;
   }
 
@@ -463,7 +463,7 @@ const htmlContent = `<!DOCTYPE html>
   .mdr-table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 11px;
+    font-size: 12px;
     background: #ffffff;
     border-radius: 10px;
     overflow: hidden;
@@ -476,7 +476,7 @@ const htmlContent = `<!DOCTYPE html>
     padding: 6px 12px;
     text-align: left;
     font-weight: 800;
-    font-size: 10px;
+    font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 0.6px;
   }
@@ -498,10 +498,10 @@ const htmlContent = `<!DOCTYPE html>
 
   .rate-badge {
     display: inline-block;
-    padding: 2px 8px;
+    padding: 2.5px 8px;
     border-radius: 6px;
     font-weight: 900;
-    font-size: 10.5px;
+    font-size: 11.5px;
   }
 
   .rate-green { background: #dcfce7; color: #166534; }
@@ -513,15 +513,15 @@ const htmlContent = `<!DOCTYPE html>
     background: #f8fafc;
     border: 2.5px dashed #0867e8;
     border-radius: 14px;
-    padding: 10px 14px;
+    padding: 9px 13px;
     display: flex;
-    gap: 16px;
+    gap: 15px;
     align-items: center;
   }
 
   .qr-box {
     background: #ffffff;
-    padding: 7px;
+    padding: 6px;
     border-radius: 12px;
     border: 1.5px solid #cbd5e1;
     display: flex;
@@ -532,14 +532,14 @@ const htmlContent = `<!DOCTYPE html>
   }
 
   .qr-img {
-    width: 130px;
+    width: 124px;
     height: auto;
     display: block;
     border-radius: 6px;
   }
 
   .qr-label {
-    font-size: 9px;
+    font-size: 9.5px;
     font-weight: 800;
     color: #0b2450;
     margin-top: 4px;
@@ -551,25 +551,25 @@ const htmlContent = `<!DOCTYPE html>
   }
 
   .act-info h3 {
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 900;
     color: #0b2450;
     margin-bottom: 3px;
   }
 
   .act-info p {
-    font-size: 11px;
+    font-size: 12px;
     color: #475569;
     line-height: 1.4;
-    margin-bottom: 7px;
+    margin-bottom: 6px;
     font-weight: 500;
   }
 
   .payment-steps {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 7px;
-    margin-bottom: 7px;
+    gap: 6px;
+    margin-bottom: 6px;
   }
 
   .step-pill {
@@ -577,7 +577,7 @@ const htmlContent = `<!DOCTYPE html>
     border: 1.5px solid #cbd5e1;
     padding: 5px 9px;
     border-radius: 8px;
-    font-size: 10px;
+    font-size: 11px;
     color: #334155;
     font-weight: 600;
   }
@@ -585,7 +585,7 @@ const htmlContent = `<!DOCTYPE html>
   .step-pill strong {
     color: #0867e8;
     display: block;
-    font-size: 10px;
+    font-size: 11px;
     font-weight: 800;
     margin-bottom: 1px;
   }
@@ -598,7 +598,7 @@ const htmlContent = `<!DOCTYPE html>
     display: flex;
     align-items: center;
     justify-content: space-between;
-    font-size: 10.5px;
+    font-size: 11px;
   }
 
   .pay-handle-banner a {
@@ -610,7 +610,7 @@ const htmlContent = `<!DOCTYPE html>
   /* ===== FOOTER ===== */
   .footer {
     border-top: 2px solid #e2e8f0;
-    padding-top: 6px;
+    padding-top: 5px;
     display: flex;
     justify-content: space-between;
     align-items: center;

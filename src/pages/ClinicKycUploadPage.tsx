@@ -807,7 +807,7 @@ export default function ClinicKycUploadPage() {
                     <span>Submitting to Banking Compliance Desk...</span>
                   ) : (
                     <>
-                      <span>Complete Payment Gateway Whitelisting &rarr;</span>
+                      <span>Complete KYC</span>
                       <ArrowRight size={16} />
                     </>
                   )}

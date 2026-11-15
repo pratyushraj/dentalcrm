@@ -39,3 +39,34 @@ export function useCountUp(target: number, duration = 1400, trigger = false) {
 
   return count;
 }
+
+/** Smoothly interpolates from current value to new target value on change */
+export function useSmoothValue(target: number, duration = 300) {
+  const [current, setCurrent] = useState(target);
+  const prevRef = useRef(target);
+
+  useEffect(() => {
+    const from = prevRef.current;
+    const to = target;
+    if (from === to) return;
+
+    let start: number | null = null;
+    let animId: number;
+    const step = (ts: number) => {
+      if (!start) start = ts;
+      const progress = Math.min((ts - start) / duration, 1);
+      // ease-out cubic
+      const ease = 1 - Math.pow(1 - progress, 3);
+      setCurrent(Math.round(from + (to - from) * ease));
+      if (progress < 1) {
+        animId = requestAnimationFrame(step);
+      } else {
+        prevRef.current = to;
+      }
+    };
+    animId = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(animId);
+  }, [target, duration]);
+
+  return current;
+}

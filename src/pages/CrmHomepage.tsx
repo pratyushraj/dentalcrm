@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useInView, useCountUp } from '../hooks/useScrollAnimation';
+import { useInView, useCountUp, useSmoothValue } from '../hooks/useScrollAnimation';
 import { Link, useLocation } from 'react-router-dom';
 import { 
   ShieldCheck, 
@@ -156,13 +156,57 @@ export default function CrmHomepage() {
 
   // Interactive Phone Simulator tenure state & Front-Desk Bento Step
   const [phoneTenure, setPhoneTenure] = useState<number>(12);
+  const [phoneSanctionedStamp, setPhoneSanctionedStamp] = useState<boolean>(false);
+  const phoneEmiTarget = Math.round(calcEMI(85000, phoneTenure, 14));
+  const phoneEmi = useSmoothValue(phoneEmiTarget, 280);
+
+  const handlePhoneTenureChange = (t: number) => {
+    setPhoneTenure(t);
+    setPhoneSanctionedStamp(true);
+    setTimeout(() => setPhoneSanctionedStamp(false), 2200);
+  };
+
+  // Bento Timeline Auto-Advancing with Pause-on-Hover
   const [bentoStep, setBentoStep] = useState<number>(1);
-  const phoneEmi = Math.round(calcEMI(85000, phoneTenure, 14));
+  const [bentoPaused, setBentoPaused] = useState<boolean>(false);
+  const [bentoProgress, setBentoProgress] = useState<number>(0);
+
+  useEffect(() => {
+    if (bentoPaused) return;
+    const interval = 50;
+    const totalDuration = 4500;
+    const timer = setInterval(() => {
+      setBentoProgress((prev) => {
+        if (prev >= 100) {
+          setBentoStep((s) => (s % 3) + 1);
+          return 0;
+        }
+        return prev + (interval / totalDuration) * 100;
+      });
+    }, interval);
+    return () => clearInterval(timer);
+  }, [bentoPaused, bentoStep]);
+
+  // Spotlight mouse tracking handler for Bento cards
+  const handleSpotlightMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    e.currentTarget.style.setProperty('--mouse-x', `${x}px`);
+    e.currentTarget.style.setProperty('--mouse-y', `${y}px`);
+  };
 
   const roiLostCases = Math.round(roiConsultations * 0.6); // 60% industry front-desk drop-off
   const roiRecoveredCases = Math.max(1, Math.round(roiLostCases * 0.5)); // ~50% converted via instant EMIs
   const roiMonthlyUnlocked = roiRecoveredCases * roiAvgTicket;
   const roiAnnualUnlocked = roiMonthlyUnlocked * 12;
+
+  // Smooth numeric interpolation for ROI and Patient calculations
+  const smoothRoiMonthly = useSmoothValue(roiMonthlyUnlocked, 300);
+  const smoothRoiAnnual = useSmoothValue(roiAnnualUnlocked, 300);
+  const smoothMonthlyEMI = useSmoothValue(monthlyEMI, 250);
+  const smoothTotalPayable = useSmoothValue(totalPayable, 250);
+  const smoothTotalInterest = useSmoothValue(totalInterest, 250);
   // Analytics event tracking placeholder function
   const trackEvent = (eventName: string, payload?: Record<string, any>) => {
     if (typeof window !== 'undefined' && (window as any).gtag) {
@@ -757,26 +801,38 @@ export default function CrmHomepage() {
                       </div>
                       <div className="text-right">
                         <span className="text-[9px] text-slate-400 line-through">₹85,000</span>
-                        <p className="text-sm font-extrabold text-[#0867E8]">
+                        <p className="text-sm font-extrabold text-[#0867E8] transition-transform duration-200">
                           ₹{phoneEmi.toLocaleString('en-IN')}<span className="text-[9px] font-medium text-slate-500">/mo</span>
                         </p>
                       </div>
                     </div>
 
                     {/* Interactive Tenure Selector inside phone */}
-                    <div className="pt-1">
-                      <span className="text-[9px] font-bold text-slate-400 uppercase tracking-wider block mb-1">
-                        Select Tenure ({phoneTenure} Months)
-                      </span>
+                    <div className="pt-1 space-y-1">
+                      <div className="flex items-center justify-between min-h-[20px]">
+                        <span className="text-[9px] font-bold text-slate-400 uppercase tracking-wider block">
+                          Select Tenure ({phoneTenure} Months)
+                        </span>
+                        {phoneSanctionedStamp ? (
+                          <span className="inline-flex items-center gap-1 text-[8.5px] font-extrabold text-emerald-800 bg-emerald-100/90 px-2 py-0.5 rounded-full border border-emerald-300 animate-in fade-in zoom-in-95 duration-200">
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping" />
+                            Sanctioned in 92s
+                          </span>
+                        ) : (
+                          <span className="text-[8.5px] font-bold text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded">
+                            ✓ Instant Decision
+                          </span>
+                        )}
+                      </div>
                       <div className="grid grid-cols-4 gap-1">
                         {[3, 6, 12, 24].map((t) => (
                           <button
                             key={t}
                             type="button"
-                            onClick={() => setPhoneTenure(t)}
+                            onClick={() => handlePhoneTenureChange(t)}
                             className={`py-2 min-h-[40px] text-[11px] font-extrabold rounded-lg border transition-all flex items-center justify-center ${
                               phoneTenure === t
-                                ? 'bg-[#0867E8] text-white border-[#0867E8] shadow-xs'
+                                ? 'bg-[#0867E8] text-white border-[#0867E8] shadow-xs scale-[1.02]'
                                 : 'bg-white text-slate-600 border-slate-200 hover:border-[#0867E8]'
                             }`}
                           >
@@ -932,11 +988,20 @@ export default function CrmHomepage() {
             {/* Asymmetric Bento Grid (12-col) */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 text-left">
               {/* Bento Tile 1: Interactive 3-Step Front-Desk Journey (8 cols) */}
-              <div className="lg:col-span-8 bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 space-y-6 shadow-sm flex flex-col justify-between">
-                <div className="space-y-4">
+              <div 
+                onMouseMove={handleSpotlightMouseMove}
+                onMouseEnter={() => setBentoPaused(true)}
+                onMouseLeave={() => setBentoPaused(false)}
+                className="lg:col-span-8 bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 space-y-6 shadow-sm flex flex-col justify-between bento-spotlight-card relative"
+              >
+                <div className="space-y-4 relative z-10">
                   <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b border-slate-100 pb-4">
                     <div>
-                      <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#0867E8]">CHAIRSIDE PROCESS</span>
+                      <div className="flex items-center gap-2">
+                        <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#0867E8]">CHAIRSIDE PROCESS</span>
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                        <span className="text-[9px] font-bold text-slate-400">Auto-playing (hover to pause)</span>
+                      </div>
                       <h3 className="text-lg sm:text-xl font-extrabold text-[#0B2450]">How Patient Financing Works In 3 Steps</h3>
                     </div>
                     {/* Step selector tabs */}
@@ -949,7 +1014,11 @@ export default function CrmHomepage() {
                         <button
                           key={s.step}
                           type="button"
-                          onClick={() => setBentoStep(s.step)}
+                          onClick={() => {
+                            setBentoStep(s.step);
+                            setBentoProgress(0);
+                            setBentoPaused(true);
+                          }}
                           className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
                             bentoStep === s.step
                               ? 'bg-[#0867E8] text-white shadow-xs'
@@ -1046,30 +1115,96 @@ export default function CrmHomepage() {
                       </div>
                     </div>
                   )}
+
+                  {/* ── Animated Money Flow Rail (Clinic Counter ──▶ Pine Labs ──▶ Current A/c) ── */}
+                  <div className="p-3 bg-slate-50/90 rounded-2xl border border-slate-200/80 space-y-2 relative overflow-hidden">
+                    <div className="flex items-center justify-between text-[10px] font-bold text-slate-600">
+                      <span className="flex items-center gap-1.5">
+                        <span className="w-2 h-2 rounded-full bg-blue-600 shrink-0" />
+                        <span>Clinic Counter</span>
+                      </span>
+                      <span className="flex items-center gap-1 text-slate-400">
+                        <span>Plural by Pine Labs Clearing</span>
+                      </span>
+                      <span className="flex items-center gap-1.5 text-emerald-700">
+                        <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping shrink-0" />
+                        <span>T+1 Bank Credit</span>
+                      </span>
+                    </div>
+
+                    {/* Flow Rail with animated traveling light beam */}
+                    <div className="relative h-2 w-full bg-slate-200 rounded-full overflow-hidden">
+                      <div className="absolute inset-y-0 w-28 bg-gradient-to-r from-transparent via-[#0867E8] to-emerald-400 rounded-full animate-money-beam" />
+                    </div>
+
+                    <div className="flex items-center justify-between text-[9px] text-slate-400">
+                      <span>1. Patient Scans QR</span>
+                      <span>2. 16+ Banks OTP Underwriting</span>
+                      <span className="font-bold text-emerald-700">3. 100% Upfront Disbursal</span>
+                    </div>
+                  </div>
                 </div>
 
-                {/* 3 Step Visual Progress Bar */}
-                <div className="grid grid-cols-3 gap-3 pt-4 border-t border-slate-100 text-[11px]">
-                  <div className="space-y-1">
-                    <div className="h-1.5 w-full bg-[#0867E8] rounded-full" />
-                    <span className="font-extrabold text-[#0B2450] block">1. Prescribe</span>
+                {/* 3 Step Visual Progress Bar with Dynamic Filling Fill */}
+                <div className="grid grid-cols-3 gap-3 pt-4 border-t border-slate-100 text-[11px] relative z-10">
+                  <button
+                    type="button"
+                    onClick={() => { setBentoStep(1); setBentoProgress(0); setBentoPaused(true); }}
+                    className="text-left space-y-1 group cursor-pointer"
+                  >
+                    <div className="h-1.5 w-full bg-slate-200 rounded-full overflow-hidden">
+                      <div
+                        className="h-full bg-[#0867E8] transition-all duration-75"
+                        style={{
+                          width: `${bentoStep === 1 ? bentoProgress : bentoStep > 1 ? 100 : 0}%`
+                        }}
+                      />
+                    </div>
+                    <span className="font-extrabold text-[#0B2450] block group-hover:text-[#0867E8] transition-colors">1. Prescribe</span>
                     <span className="text-[10px] text-slate-500">10-sec counter link</span>
-                  </div>
-                  <div className="space-y-1">
-                    <div className={`h-1.5 w-full rounded-full ${bentoStep >= 2 ? 'bg-[#0f7a75]' : 'bg-slate-200'}`} />
-                    <span className="font-extrabold text-[#0B2450] block">2. Patient EMI</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => { setBentoStep(2); setBentoProgress(0); setBentoPaused(true); }}
+                    className="text-left space-y-1 group cursor-pointer"
+                  >
+                    <div className="h-1.5 w-full bg-slate-200 rounded-full overflow-hidden">
+                      <div
+                        className="h-full bg-[#0f7a75] transition-all duration-75"
+                        style={{
+                          width: `${bentoStep === 2 ? bentoProgress : bentoStep > 2 ? 100 : 0}%`
+                        }}
+                      />
+                    </div>
+                    <span className="font-extrabold text-[#0B2450] block group-hover:text-[#0f7a75] transition-colors">2. Patient EMI</span>
                     <span className="text-[10px] text-slate-500">2-min digital KYC</span>
-                  </div>
-                  <div className="space-y-1">
-                    <div className={`h-1.5 w-full rounded-full ${bentoStep === 3 ? 'bg-purple-600' : 'bg-slate-200'}`} />
-                    <span className="font-extrabold text-[#0B2450] block">3. T+1 Settlement</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => { setBentoStep(3); setBentoProgress(0); setBentoPaused(true); }}
+                    className="text-left space-y-1 group cursor-pointer"
+                  >
+                    <div className="h-1.5 w-full bg-slate-200 rounded-full overflow-hidden">
+                      <div
+                        className="h-full bg-purple-600 transition-all duration-75"
+                        style={{
+                          width: `${bentoStep === 3 ? bentoProgress : 0}%`
+                        }}
+                      />
+                    </div>
+                    <span className="font-extrabold text-[#0B2450] block group-hover:text-purple-600 transition-colors">3. T+1 Settlement</span>
                     <span className="text-[10px] text-slate-500">Direct current a/c payout</span>
-                  </div>
+                  </button>
                 </div>
               </div>
 
               {/* Bento Tile 2: The Margin Protector (Dark Obsidian Luxury finish, 4 cols) */}
-              <div className="lg:col-span-4 bg-[#0B132B] text-white border border-slate-800 rounded-3xl p-6 sm:p-7 space-y-6 shadow-xl flex flex-col justify-between relative overflow-hidden">
+              <div 
+                onMouseMove={handleSpotlightMouseMove}
+                className="lg:col-span-4 bg-[#0B132B] text-white border border-slate-800 rounded-3xl p-6 sm:p-7 space-y-6 shadow-xl flex flex-col justify-between relative overflow-hidden bento-spotlight-card bento-spotlight-dark"
+              >
                 <div className="absolute top-0 right-0 w-48 h-48 bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
 
                 <div className="relative z-10 space-y-4">
@@ -1119,8 +1254,11 @@ export default function CrmHomepage() {
               </div>
 
               {/* Bento Tile 3: Dual-Engine Underwriting (ETB & NTB) (4 cols) */}
-              <div className="lg:col-span-4 bg-white border border-slate-200 rounded-3xl p-6 sm:p-7 space-y-4 shadow-sm flex flex-col justify-between">
-                <div className="space-y-3">
+              <div 
+                onMouseMove={handleSpotlightMouseMove}
+                className="lg:col-span-4 bg-white border border-slate-200 rounded-3xl p-6 sm:p-7 space-y-4 shadow-sm flex flex-col justify-between bento-spotlight-card relative"
+              >
+                <div className="space-y-3 relative z-10">
                   <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#0867E8] bg-blue-50 px-2.5 py-1 rounded-full border border-blue-200/80 inline-block">
                     UNDERWRITING ARCHITECTURE
                   </span>
@@ -1152,15 +1290,19 @@ export default function CrmHomepage() {
                   </div>
                 </div>
 
-                <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500 font-medium">
+                <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500 font-medium relative z-10">
                   <span>Credit bureau impact:</span>
                   <strong className="text-emerald-700">Zero (Soft Pull)</strong>
                 </div>
               </div>
 
               {/* Bento Tile 4: Practice Revenue Recovery ROI & Affordability Suite (8 cols) */}
-              <div id="calculator" className="lg:col-span-8 bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 space-y-6 shadow-sm flex flex-col justify-between">
-                <div>
+              <div 
+                id="calculator" 
+                onMouseMove={handleSpotlightMouseMove}
+                className="lg:col-span-8 bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 space-y-6 shadow-sm flex flex-col justify-between bento-spotlight-card relative"
+              >
+                <div className="relative z-10">
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-4">
                     <div>
                       <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#0f7a75]">AFFORDABILITY SUITE</span>
@@ -1266,18 +1408,18 @@ export default function CrmHomepage() {
                         </div>
                       </div>
 
-                      {/* Right Result Card */}
+                      {/* Right Result Card with Smooth Interpolation */}
                       <div className="md:col-span-6 bg-gradient-to-br from-[#0B2450] to-[#0867E8] text-white p-5 sm:p-6 rounded-2xl space-y-4 shadow-lg text-left">
                         <div>
                           <span className="text-[10px] font-extrabold uppercase tracking-widest text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
                             MONTHLY REVENUE UPSIDE
                           </span>
-                          <p className="text-3xl font-extrabold tracking-tight text-white pt-1">
-                            +₹{roiMonthlyUnlocked.toLocaleString('en-IN')}
+                          <p className="text-3xl font-extrabold tracking-tight text-white pt-1 tabular-nums">
+                            +₹{smoothRoiMonthly.toLocaleString('en-IN')}
                             <span className="text-xs font-normal text-slate-300"> / month</span>
                           </p>
                           <p className="text-xs text-slate-200 mt-0.5">
-                            Annual practice upside: <strong className="text-white">+₹{(roiAnnualUnlocked / 100000).toFixed(1)} Lakhs / year</strong>
+                            Annual practice upside: <strong className="text-white">+₹{(smoothRoiAnnual / 100000).toFixed(1)} Lakhs / year</strong>
                           </p>
                         </div>
 
@@ -1302,7 +1444,7 @@ export default function CrmHomepage() {
                       </div>
                     </div>
                   ) : (
-                    /* Patient EMI Suite */
+                    /* Patient EMI Suite with Smooth Interpolation */
                     <div className="grid grid-cols-1 md:grid-cols-12 gap-6 pt-5 items-center">
                       <div className="md:col-span-6 space-y-5">
                         <div className="space-y-2">
@@ -1368,11 +1510,11 @@ export default function CrmHomepage() {
                         </div>
                       </div>
 
-                      {/* Right EMI Result */}
+                      {/* Right EMI Result with Smooth Rolling Numbers */}
                       <div className="md:col-span-6 bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-4 text-left">
                         <div className="bg-gradient-to-br from-[#0867E8] to-[#0f7a75] rounded-xl p-4 text-white text-center space-y-0.5 shadow-sm">
                           <span className="text-[10px] font-bold uppercase tracking-widest text-white/70">Indicative Monthly EMI</span>
-                          <p className="text-3xl font-extrabold">₹{monthlyEMI.toLocaleString('en-IN')}</p>
+                          <p className="text-3xl font-extrabold tabular-nums">₹{smoothMonthlyEMI.toLocaleString('en-IN')}</p>
                           <p className="text-[10px] text-white/80 font-medium">per month &times; {emiTenure} months</p>
                         </div>
 
@@ -1383,11 +1525,11 @@ export default function CrmHomepage() {
                           </div>
                           <div className="flex justify-between items-center py-1 border-b border-slate-200/60">
                             <span className="text-slate-500 font-medium">Est. Interest (15% p.a.):</span>
-                            <span className="font-bold text-slate-700">₹{totalInterest.toLocaleString('en-IN')}</span>
+                            <span className="font-bold text-slate-700 tabular-nums">₹{smoothTotalInterest.toLocaleString('en-IN')}</span>
                           </div>
                           <div className="flex justify-between items-center py-1 font-bold text-[#0867E8]">
                             <span>Est. Total Payable:</span>
-                            <span>₹{totalPayable.toLocaleString('en-IN')}</span>
+                            <span className="tabular-nums">₹{smoothTotalPayable.toLocaleString('en-IN')}</span>
                           </div>
                         </div>
 

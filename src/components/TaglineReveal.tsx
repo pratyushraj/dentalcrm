@@ -82,7 +82,7 @@ export const TaglineReveal: React.FC<TaglineRevealProps> = ({
           return (
             <span
               key={index}
-              className={`inline-block mr-[0.28em] transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+              className={`inline-block mr-[0.28em] transition-all duration-300 [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] ${
                 isRevealed
                   ? isHighlighted
                     ? 'text-[#0867E8] font-black'

@@ -27,7 +27,11 @@ import {
   Baby,
   Activity,
   Sparkles,
-  Stethoscope
+  Stethoscope,
+  TrendingUp,
+  Smartphone,
+  FileCheck,
+  CreditCard
 } from 'lucide-react';
 import { emailNotificationService } from '../services/emailNotificationService';
 import { easycredService } from '../services/easycredService';
@@ -144,6 +148,16 @@ export default function CrmHomepage() {
   const monthlyEMI = calcEMI(emiAmount, emiTenure, emiRate);
   const totalPayable = monthlyEMI * emiTenure;
   const totalInterest = totalPayable - emiAmount;
+
+  // Calculator mode: 'patient' (Monthly EMI) vs 'doctor' (Clinic ROI Recovery)
+  const [calcMode, setCalcMode] = useState<'patient' | 'doctor'>('patient');
+  const [roiConsultations, setRoiConsultations] = useState(35);
+  const [roiAvgTicket, setRoiAvgTicket] = useState(65000);
+
+  const roiLostCases = Math.round(roiConsultations * 0.6); // 60% industry front-desk drop-off
+  const roiRecoveredCases = Math.max(1, Math.round(roiLostCases * 0.5)); // ~50% converted via instant EMIs
+  const roiMonthlyUnlocked = roiRecoveredCases * roiAvgTicket;
+  const roiAnnualUnlocked = roiMonthlyUnlocked * 12;
   // Analytics event tracking placeholder function
   const trackEvent = (eventName: string, payload?: Record<string, any>) => {
     if (typeof window !== 'undefined' && (window as any).gtag) {
@@ -563,6 +577,13 @@ export default function CrmHomepage() {
               </p>
 
               <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 pt-1">
+                <Link
+                  to="/clinic-onboarding"
+                  className="px-6 sm:px-7 py-3.5 sm:py-4 bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs sm:text-sm font-bold uppercase tracking-wider rounded-xl transition-all flex items-center justify-center gap-2 shadow-[0_10px_25px_rgba(8,103,232,0.22)] active:scale-95"
+                >
+                  <span>Onboard Clinic &bull; ₹999 Setup</span>
+                  <ArrowRight size={15} />
+                </Link>
                 <button
                   type="button"
                   onClick={() => {
@@ -570,17 +591,10 @@ export default function CrmHomepage() {
                     trackEvent('eligibility_started', { source: 'hero_cta' });
                     setShowEligibilityModal(true);
                   }}
-                  className="px-6 sm:px-7 py-3.5 sm:py-4 bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs sm:text-sm font-bold uppercase tracking-wider rounded-xl transition-all flex items-center justify-center gap-2 shadow-[0_10px_25px_rgba(8,103,232,0.22)] active:scale-95"
-                >
-                  <ShieldCheck size={18} /> Check Patient Eligibility
-                </button>
-                <Link
-                  to="/clinic-onboarding"
                   className="px-6 sm:px-7 py-3.5 sm:py-4 bg-white hover:bg-slate-50 text-slate-700 border border-slate-200/90 hover:border-slate-300 text-xs sm:text-sm font-bold uppercase tracking-wider rounded-xl transition-all flex items-center justify-center gap-2 active:scale-95 shadow-2xs"
                 >
-                  <span>Clinic Onboarding</span>
-                  <ArrowRight size={14} />
-                </Link>
+                  <ShieldCheck size={16} /> Check Patient Eligibility
+                </button>
               </div>
 
               {/* ── Official Healthcare Lending Network & Pine Labs Partnership Institutional Card ── */}
@@ -632,26 +646,78 @@ export default function CrmHomepage() {
               </div>
             </div>
 
-            {/* Authentic Clinic Photo with subtle glass badge */}
-            <div className="md:col-span-5 relative mt-2 md:mt-0">
-              <div className="relative rounded-2xl sm:rounded-3xl p-1 bg-gradient-to-b from-slate-200 to-slate-100 shadow-[0_20px_40px_rgba(0,0,0,0.06)]">
-                <picture>
-                  <source srcSet="/assets/clinic-hero-real.webp" type="image/webp" />
-                  <img
-                    src="/assets/clinic-hero-real.png"
-                    alt="Modern authentic dental clinic treatment room in India"
-                    {...({ fetchPriority: 'high' } as any)}
-                    loading="eager"
-                    decoding="async"
-                    width={800}
-                    height={600}
-                    className="w-full h-auto rounded-[14px] sm:rounded-[22px] object-cover aspect-[4/3]"
-                  />
-                </picture>
-              </div>
-              <div className="absolute -bottom-2 -left-2 sm:-bottom-3 sm:-left-3 bg-white/95 backdrop-blur-xl border border-slate-200/80 px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-xl sm:rounded-2xl shadow-[0_8px_24px_rgba(0,0,0,0.08)] flex items-center gap-2 sm:gap-2.5">
-                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                <span className="text-[10px] sm:text-[11px] font-bold text-[#0B2450] tracking-tight">Point-of-Care EMI Ready</span>
+            {/* Live Front-Desk POS Terminal Card + Authentic Clinic Verification */}
+            <div className="md:col-span-5 relative mt-4 md:mt-0">
+              <div className="bg-white/95 backdrop-blur-xl border border-slate-200/90 rounded-2xl sm:rounded-3xl p-4 sm:p-5 shadow-[0_20px_50px_rgba(11,36,80,0.08)] space-y-3.5 relative overflow-hidden">
+                {/* Top accent line */}
+                <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-[#0867E8] via-[#0f7a75] to-[#0867E8]" />
+
+                {/* Terminal Header */}
+                <div className="flex items-center justify-between pb-2.5 border-b border-slate-100">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                    <div>
+                      <p className="text-[11px] font-black text-[#0B2450] leading-tight">Smile Point Dental Care</p>
+                      <p className="text-[9px] text-slate-500 font-medium">Front-Desk Terminal &bull; Patna, Bihar</p>
+                    </div>
+                  </div>
+                  <span className="text-[9px] font-black uppercase tracking-wider bg-emerald-50 text-emerald-800 border border-emerald-200/80 px-2 py-0.5 rounded-full">
+                    Active &bull; T+1 Settled
+                  </span>
+                </div>
+
+                {/* Treatment & Instant Affordability Card */}
+                <div className="bg-slate-50/80 border border-slate-200/80 rounded-xl p-3 space-y-2">
+                  <div className="flex justify-between items-start">
+                    <div>
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Treatment Prescribed</span>
+                      <p className="text-xs font-black text-[#0B2450]">Full Arch Implant &amp; Zirconia Crown</p>
+                    </div>
+                    <div className="text-right">
+                      <span className="text-[10px] text-slate-400 line-through">₹1,20,000</span>
+                      <p className="text-sm font-black text-[#0867E8]">₹3,150<span className="text-[10px] font-bold text-slate-500">/mo</span></p>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-2 pt-1">
+                    <div className="bg-white px-2.5 py-1.5 rounded-lg border border-slate-200/60">
+                      <span className="text-[9px] text-slate-400 block font-medium">Chairside Decision</span>
+                      <span className="text-[11px] font-bold text-[#0B2450]">92 seconds flat</span>
+                    </div>
+                    <div className="bg-white px-2.5 py-1.5 rounded-lg border border-slate-200/60">
+                      <span className="text-[9px] text-slate-400 block font-medium">Lending Partner</span>
+                      <span className="text-[11px] font-bold text-[#0f7a75]">ICICI Bank &bull; 16 Banks</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Settlement Confirmation Strip */}
+                <div className="flex items-center justify-between text-[10px] bg-emerald-50/70 border border-emerald-200/60 px-3 py-2 rounded-xl text-emerald-900 font-medium">
+                  <span className="flex items-center gap-1.5 font-bold">
+                    <CheckCircle2 size={13} className="text-emerald-600 shrink-0" />
+                    <span>Clinic Bank Disbursal:</span>
+                  </span>
+                  <span className="font-black text-emerald-800">100% Upfront in T+1</span>
+                </div>
+
+                {/* Authentic Clinic Thumbnail Strip */}
+                <div className="pt-1 flex items-center gap-2.5 border-t border-slate-100">
+                  <picture className="shrink-0 w-12 h-10 rounded-lg overflow-hidden border border-slate-200 shadow-2xs">
+                    <source srcSet="/assets/clinic-hero-real.webp" type="image/webp" />
+                    <img
+                      src="/assets/clinic-hero-real.png"
+                      alt="Verified Clinic Reception"
+                      className="w-full h-full object-cover"
+                      width={48}
+                      height={40}
+                      loading="eager"
+                    />
+                  </picture>
+                  <div className="text-[10px] text-slate-600 leading-tight">
+                    <p className="font-bold text-[#0B2450]">Verified Partner Clinic Network</p>
+                    <p className="text-slate-500 text-[9px]">Zero collection chasing &bull; 100% Non-Recourse</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -756,43 +822,68 @@ export default function CrmHomepage() {
         <section aria-label="The Problem & Value" className="py-16 sm:py-24 px-4 sm:px-6 bg-[#F5F9FC]/80 border-y border-slate-100">
           <FadeIn className="max-w-5xl mx-auto space-y-10">
             <div className="text-center space-y-3">
-              <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-[#0B2450]">Turn "I'll do it later" into "Let's start."</h2>
-              <p className="text-sm sm:text-base text-slate-500 max-w-xl mx-auto">Patients say yes when treatment feels affordable. Clinaza makes that possible at the point of care.</p>
+              <span className="text-[11px] font-bold text-[#0f7a75] uppercase tracking-widest bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200/60 inline-block">THE FRONT-DESK BOTTLENECK</span>
+              <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-[#0B2450]">Turn "I'll do it later" into "Let's start today."</h2>
+              <p className="text-sm sm:text-base text-slate-500 max-w-xl mx-auto">60%+ of high-ticket dental and surgical cases are lost at reception when patients face upfront sticker shock.</p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Without Financing */}
-              <div className="bg-white border border-rose-100/80 p-6 sm:p-7 rounded-2xl space-y-4 text-left shadow-[0_4px_20px_rgba(0,0,0,0.02)]">
-                <div className="flex items-center gap-2 text-rose-600 font-black text-xs uppercase tracking-wider">
-                  <X size={16} /> Without Financing
+              <div className="bg-white border border-rose-200/80 p-6 sm:p-7 rounded-2xl space-y-4 text-left shadow-[0_4px_20px_rgba(244,63,94,0.04)] relative">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2 text-rose-600 font-black text-xs uppercase tracking-wider">
+                    <X size={16} /> The Traditional Clinic Way
+                  </div>
+                  <span className="text-[10px] font-bold text-rose-600 bg-rose-50 px-2.5 py-0.5 rounded-full border border-rose-200">
+                    60% Patient Drop-Off
+                  </span>
                 </div>
-                <ul className="space-y-3 text-xs text-slate-700 font-medium">
+                <ul className="space-y-3.5 text-xs text-slate-700 font-medium">
                   <li className="flex items-start gap-2.5">
-                    <span className="text-rose-500 font-bold">•</span> High upfront treatment estimates paralyze decision-making
+                    <span className="text-rose-500 font-black shrink-0 mt-0.5">✕</span>
+                    <span><strong>₹1,20,000 Upfront Shock:</strong> High upfront procedure quotes paralyze patient decisions; 6 in 10 walk away to "think about it".</span>
                   </li>
                   <li className="flex items-start gap-2.5">
-                    <span className="text-rose-500 font-bold">•</span> Patients postpone treatment plans for months or walk away
+                    <span className="text-rose-500 font-black shrink-0 mt-0.5">✕</span>
+                    <span><strong>Forced Clinical Discounts:</strong> Doctors are forced to slash 20%–30% margins just to retain price-sensitive patients.</span>
                   </li>
                   <li className="flex items-start gap-2.5">
-                    <span className="text-rose-500 font-bold">•</span> Treatment delays lead to worsening health & lost clinic revenue
+                    <span className="text-rose-500 font-black shrink-0 mt-0.5">✕</span>
+                    <span><strong>Manual Khata &amp; Bad Debt:</strong> Clinics maintain risky personal credit ledgers, wasting front-desk time chasing delayed installments.</span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <span className="text-rose-500 font-black shrink-0 mt-0.5">✕</span>
+                    <span><strong>Slow 3-Day Paperwork:</strong> Traditional medical loans require bank statements, physical agents, and days of waiting.</span>
                   </li>
                 </ul>
               </div>
 
               {/* With Clinaza */}
-              <div className="bg-white border border-[#0f7a75]/30 p-6 rounded-2xl space-y-4 text-left shadow-sm">
-                <div className="flex items-center gap-2 text-[#0f7a75] font-black text-xs uppercase tracking-wider">
-                  <Check size={16} /> With Clinaza
+              <div className="bg-white border border-emerald-300/80 p-6 sm:p-7 rounded-2xl space-y-4 text-left shadow-[0_4px_20px_rgba(15,122,117,0.06)] relative">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2 text-[#0f7a75] font-black text-xs uppercase tracking-wider">
+                    <Check size={16} /> The Clinaza Standard
+                  </div>
+                  <span className="text-[10px] font-bold text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
+                    +45% Acceptance Rate
+                  </span>
                 </div>
-                <ul className="space-y-3 text-xs text-slate-700 font-medium">
+                <ul className="space-y-3.5 text-xs text-slate-700 font-medium">
                   <li className="flex items-start gap-2.5">
-                    <span className="text-[#0f7a75] font-bold">✓</span> Flexible financing option for eligible patients right at checkout
+                    <span className="text-[#0f7a75] font-black shrink-0 mt-0.5">✓</span>
+                    <span><strong>₹2,400 – ₹3,500/mo Easy EMIs:</strong> Patients immediately say yes when full-mouth implants or aligners fit their monthly budget.</span>
                   </li>
                   <li className="flex items-start gap-2.5">
-                    <span className="text-[#0f7a75] font-bold">✓</span> High-value procedures (Implants, Aligners) become affordable
+                    <span className="text-[#0f7a75] font-black shrink-0 mt-0.5">✓</span>
+                    <span><strong>Full Clinical Margins Preserved:</strong> Stop discounting treatments. Get paid 100% of your standard procedure fee.</span>
                   </li>
                   <li className="flex items-start gap-2.5">
-                    <span className="text-[#0f7a75] font-bold">✓</span> Zero clinic burden — NBFC handles collections directly
+                    <span className="text-[#0f7a75] font-black shrink-0 mt-0.5">✓</span>
+                    <span><strong>Zero Clinic Bad Debt:</strong> Regulated bank/NBFC partners assume 100% collection liability. Completely non-recourse to doctor.</span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <span className="text-[#0f7a75] font-black shrink-0 mt-0.5">✓</span>
+                    <span><strong>Instant 2-Minute Digital KYC:</strong> 16+ banks credit/debit card &amp; cardless OTP underwriting with guaranteed T+1 clinic payout.</span>
                   </li>
                 </ul>
               </div>
@@ -804,11 +895,61 @@ export default function CrmHomepage() {
         <section aria-label="How Clinaza Works" className="py-16 sm:py-24 px-4 sm:px-6">
           <FadeIn className="max-w-5xl mx-auto space-y-10">
             <div className="text-center space-y-3">
-              <span className="text-[11px] font-bold text-[#0f7a75] uppercase tracking-widest bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200/60 inline-block">DUAL-ENGINE PATIENT AFFORDABILITY</span>
+              <span className="text-[11px] font-bold text-[#0f7a75] uppercase tracking-widest bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200/60 inline-block">FRONT-DESK RECEPTION WORKFLOW</span>
               <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-[#0B2450]">How Patient Financing Works In Under 60 Seconds</h2>
               <p className="text-sm sm:text-base text-slate-500 max-w-2xl mx-auto">
-                Over 70% of dental patients do not carry a credit card. Clinaza &amp; Plural by Pine Labs eliminate patient drop-offs with seamless Existing-to-Bank (ETB) and New-to-Bank (NTB) paperless journeys.
+                Simple 3-step chairside workflow powered by Plural by Pine Labs. Zero paperwork, zero clinic collection chasing, and instant T+1 bank settlement.
               </p>
+            </div>
+
+            {/* Visual 3-Step Front-Desk Journey */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5 text-left">
+              {[
+                {
+                  step: '01',
+                  time: '10 SECONDS',
+                  title: 'Prescribe & Send Link',
+                  desc: 'Doctor or receptionist enters treatment estimate and patient mobile number. An instant digital payment link is delivered via WhatsApp/SMS.',
+                  icon: Smartphone,
+                  accent: 'border-blue-200 bg-blue-50/60 text-[#0867E8]'
+                },
+                {
+                  step: '02',
+                  time: '2 MINUTES',
+                  title: 'Patient Chooses EMI',
+                  desc: 'Patient opens link on their own smartphone, selects preferred 3 to 24-month tenure across 16+ banks, and validates OTP eKYC.',
+                  icon: ShieldCheck,
+                  accent: 'border-emerald-200 bg-emerald-50/60 text-[#0f7a75]'
+                },
+                {
+                  step: '03',
+                  time: 'T+1 SETTLED',
+                  title: 'Direct Bank Settlement',
+                  desc: 'Procedure begins immediately. Lender transfers 100% treatment amount directly to the clinic current account with zero default recourse.',
+                  icon: CheckCircle2,
+                  accent: 'border-purple-200 bg-purple-50/60 text-purple-700'
+                }
+              ].map((s, idx) => {
+                const IconComponent = s.icon;
+                return (
+                  <div key={idx} className="bg-white border border-slate-200/90 rounded-2xl p-5 space-y-3 shadow-2xs hover:shadow-xs transition-all">
+                    <div className="flex items-center justify-between">
+                      <span className={`text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-lg border ${s.accent}`}>
+                        STEP {s.step} &bull; {s.time}
+                      </span>
+                      <IconComponent size={20} className="text-slate-400" />
+                    </div>
+                    <h3 className="text-sm font-black text-[#0B2450]">{s.title}</h3>
+                    <p className="text-xs text-slate-600 leading-relaxed">{s.desc}</p>
+                  </div>
+                );
+              })}
+            </div>
+
+            <div className="text-center pt-2">
+              <span className="text-[10px] font-black uppercase tracking-widest text-slate-500">
+                DUAL-ENGINE UNDERWRITING ARCHITECTURE (ETB &amp; NTB)
+              </span>
             </div>
 
             {/* ETB vs NTB Journey Cards */}
@@ -953,13 +1094,164 @@ export default function CrmHomepage() {
         {/* ── 6. EMI CALCULATOR & FRONT-DESK WORKFLOW ── */}
         <section aria-label="EMI Calculator" className="py-12 sm:py-16 px-4 sm:px-6 bg-[#F7FAFC] border-y border-slate-200/60">
           <FadeIn className="max-w-6xl mx-auto space-y-8">
-            <div className="text-center space-y-2">
+            <div className="text-center space-y-3">
               <span className="text-[10px] font-black text-[#0f7a75] uppercase tracking-widest">AFFORDABILITY SUITE &amp; RECEPTION WORKFLOW</span>
-              <h2 className="text-2xl sm:text-4xl font-black text-[#0B2450]">Calculate Patient EMI &amp; Reception Workflow</h2>
-              <p className="text-xs sm:text-sm text-slate-600">35+ EMI payment modes powered in partnership with 55+ RBI-regulated banks &amp; NBFC lenders.</p>
+              <h2 className="text-2xl sm:text-4xl font-black text-[#0B2450]">Calculate Patient EMI &amp; Clinic Revenue Upside</h2>
+              <p className="text-xs sm:text-sm text-slate-600">Simulate chairside patient EMIs or compute your clinic's monthly recovered treatment revenue.</p>
+
+              {/* Mode Toggle Selector */}
+              <div className="inline-flex bg-slate-200/80 p-1 rounded-xl shadow-2xs max-w-md mx-auto">
+                <button
+                  type="button"
+                  onClick={() => setCalcMode('patient')}
+                  className={`px-4 sm:px-5 py-2 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 ${
+                    calcMode === 'patient'
+                      ? 'bg-white text-[#0B2450] shadow-xs'
+                      : 'text-slate-600 hover:text-[#0B2450]'
+                  }`}
+                >
+                  <CreditCard size={14} className="shrink-0" />
+                  <span>Patient Monthly EMI</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setCalcMode('doctor')}
+                  className={`px-4 sm:px-5 py-2 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 ${
+                    calcMode === 'doctor'
+                      ? 'bg-[#0867E8] text-white shadow-xs'
+                      : 'text-slate-600 hover:text-[#0B2450]'
+                  }`}
+                >
+                  <TrendingUp size={14} className="shrink-0" />
+                  <span>Clinic Revenue Recovery (ROI)</span>
+                </button>
+              </div>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            {calcMode === 'doctor' ? (
+              <div className="bg-white border border-slate-200 rounded-3xl shadow-sm overflow-hidden p-6 sm:p-8">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center text-left">
+                  {/* Left Column: Sliders */}
+                  <div className="lg:col-span-6 space-y-6">
+                    <div className="space-y-3">
+                      <div className="flex justify-between items-center">
+                        <label className="text-xs font-black text-[#0B2450] uppercase tracking-wider">
+                          Monthly High-Ticket Consultations
+                        </label>
+                        <span className="text-base font-black text-[#0867E8]">{roiConsultations} Cases/mo</span>
+                      </div>
+                      <input
+                        type="range"
+                        min={10}
+                        max={100}
+                        step={5}
+                        value={roiConsultations}
+                        onChange={e => setRoiConsultations(Number(e.target.value))}
+                        className="w-full h-2 bg-slate-200 rounded-full appearance-none cursor-pointer accent-[#0867E8]"
+                        aria-label="Monthly Consultations Slider"
+                      />
+                      <div className="flex justify-between text-[10px] text-slate-400 font-bold">
+                        <span>10 cases</span>
+                        <span>100 cases</span>
+                      </div>
+                      <p className="text-[11px] text-slate-500">
+                        Implants, Aligners, Full-mouth rehab, Lasik, or Surgical inquiries per month.
+                      </p>
+                    </div>
+
+                    <div className="space-y-3">
+                      <div className="flex justify-between items-center">
+                        <label className="text-xs font-black text-[#0B2450] uppercase tracking-wider">
+                          Average Procedure Ticket Size
+                        </label>
+                        <span className="text-base font-black text-[#0867E8]">₹{roiAvgTicket.toLocaleString('en-IN')}</span>
+                      </div>
+
+                      {/* Presets */}
+                      <div className="flex flex-wrap gap-1.5 pt-0.5">
+                        {[
+                          { label: 'Implants (₹45K)', val: 45000 },
+                          { label: 'Aligners (₹75K)', val: 75000 },
+                          { label: 'Rehab (₹1.5L)', val: 150000 },
+                          { label: 'Full Arch (₹2.5L)', val: 250000 }
+                        ].map((p, idx) => (
+                          <button
+                            key={idx}
+                            type="button"
+                            onClick={() => setRoiAvgTicket(p.val)}
+                            className={`px-2.5 py-1 text-xs font-bold rounded-lg border transition-all ${
+                              roiAvgTicket === p.val
+                                ? 'bg-[#0867E8] text-white border-[#0867E8]'
+                                : 'bg-slate-50 text-slate-600 border-slate-200 hover:border-[#0867E8]'
+                            }`}
+                          >
+                            {p.label}
+                          </button>
+                        ))}
+                      </div>
+
+                      <input
+                        type="range"
+                        min={30000}
+                        max={300000}
+                        step={5000}
+                        value={roiAvgTicket}
+                        onChange={e => setRoiAvgTicket(Number(e.target.value))}
+                        className="w-full h-2 bg-slate-200 rounded-full appearance-none cursor-pointer accent-[#0867E8]"
+                        aria-label="Average Ticket Slider"
+                      />
+                      <div className="flex justify-between text-[10px] text-slate-400 font-bold">
+                        <span>₹30,000</span>
+                        <span>₹3,00,000</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Right Column: ROI Results Display */}
+                  <div className="lg:col-span-6 bg-gradient-to-br from-[#0B2450] via-[#0D2E68] to-[#0867E8] text-white p-6 sm:p-8 rounded-2xl sm:rounded-3xl space-y-6 shadow-xl relative overflow-hidden">
+                    <div className="space-y-1">
+                      <span className="text-[10px] font-black uppercase tracking-widest text-[#12A8A0] bg-[#12A8A0]/15 px-2.5 py-1 rounded-full border border-[#12A8A0]/30 inline-block">
+                        ESTIMATED PRACTICE REVENUE UPSIDE
+                      </span>
+                      <p className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white pt-1">
+                        +₹{roiMonthlyUnlocked.toLocaleString('en-IN')}<span className="text-sm sm:text-base font-normal text-slate-300"> / month</span>
+                      </p>
+                      <p className="text-xs text-slate-300">
+                        Annual practice upside: <strong className="text-white font-bold">+₹{(roiAnnualUnlocked / 100000).toFixed(1)} Lakhs / year</strong>
+                      </p>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-3 pt-1 border-t border-white/10 text-xs">
+                      <div className="bg-white/10 backdrop-blur-sm p-3 rounded-xl border border-white/10 space-y-0.5">
+                        <span className="text-[10px] text-slate-300 block">Lost Cases Without EMI</span>
+                        <span className="font-extrabold text-rose-300 text-sm">{roiLostCases} Patients (60%)</span>
+                        <span className="text-[9px] text-slate-400 block">Drop off due to upfront price</span>
+                      </div>
+                      <div className="bg-white/10 backdrop-blur-sm p-3 rounded-xl border border-white/10 space-y-0.5">
+                        <span className="text-[10px] text-slate-300 block">Converted with Clinaza</span>
+                        <span className="font-extrabold text-emerald-300 text-sm">+{roiRecoveredCases} Patients</span>
+                        <span className="text-[9px] text-slate-400 block">Instant front-desk financing</span>
+                      </div>
+                    </div>
+
+                    <div className="pt-2">
+                      <Link
+                        to="/clinic-onboarding"
+                        className="w-full py-3.5 bg-white hover:bg-slate-100 text-[#0B2450] text-xs sm:text-sm font-bold uppercase tracking-wider rounded-xl transition-all flex items-center justify-center gap-2 shadow-lg active:scale-95"
+                      >
+                        <span>Activate Financing For Your Clinic &bull; ₹999 Setup</span>
+                        <ArrowRight size={14} />
+                      </Link>
+                      <p className="text-[10px] text-slate-300 text-center mt-2">
+                        Zero recurring monthly fees &bull; 100% Non-recourse bank disbursals &bull; T+1 payout
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <>
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
               {/* Left Column: Interactive Calculator (7 cols) */}
               <div className="lg:col-span-7 bg-white border border-slate-200 rounded-3xl shadow-sm overflow-hidden">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
@@ -1239,6 +1531,8 @@ export default function CrmHomepage() {
                 ))}
               </div>
             </div>
+            </>
+            )}
           </FadeIn>
         </section>
 

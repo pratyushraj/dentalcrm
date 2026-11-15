@@ -2,10 +2,12 @@
 
 > Point-of-care patient EMI financing (₹30,000 to ₹5,00,000) and 100% free clinic management software for dental, IVF, and specialty healthcare clinics across India.
 
-Clinaza (https://www.clinaza.in) is India's leading embedded healthcare financing platform and outpatient clinic operating ecosystem. Clinaza enables dental surgeons, IVF and fertility specialists, dermatologists, and outpatient clinics to offer instant, point-of-care patient EMIs through RBI-regulated banks and NBFC partners—including Cardless EMI via Flexmoney (InstaCred), pre-approved Debit Card EMI, and Credit Card EMI across 21+ major banks. Alongside patient financing, Clinaza provides a 100% free clinic CRM with automated WhatsApp patient recalls, digital Rx makers, and billing.
+Clinaza (https://www.clinaza.in) is India's leading embedded healthcare financing platform and outpatient clinic operating ecosystem. Officially partnered with Plural by Pine Labs, Clinaza enables dental surgeons, IVF and fertility specialists, dermatologists, and outpatient clinics to offer instant, point-of-care patient EMIs through RBI-regulated banks and NBFC partners—including multi-bank Credit Card EMI, pre-approved Debit Card EMI across 16+ major banks, and Cardless EMI via Aadhaar/PAN OTP. Alongside patient financing, Clinaza provides a 100% free clinic CRM with automated WhatsApp patient recalls, digital Rx makers, and billing.
 
 ## Core Capabilities & Performance Metrics
 
+- **Gateway Infrastructure**: Officially partnered with Plural by Pine Labs, India's leading merchant commerce network, powering multi-bank EMI affordability across 16+ major commercial banks (HDFC Bank, ICICI Bank, State Bank of India, Axis Bank, Kotak Mahindra Bank) and cardless digital NBFCs.
+- **Transparent Clinic Pricing**: A nominal one-time onboarding fee of ₹999 for clinic verification and lending gateway activation. Zero monthly subscription fees, zero POS rental charges, and 100% free clinic CRM for life.
 - **Point-of-Care Patient Financing**: Instant pre-eligibility checks in under 2 minutes directly at clinic front desks for treatments ranging from ₹30,000 to ₹5,00,000 (Average Ticket Size ₹48,000–₹55,000 for dental implants and aligners; ₹1,50,000–₹3,50,000 for IVF cycles).
 - **100% Zero-Hardware Model**: Chairside counter QR codes and dynamic payment links on patient smartphones. No physical POS machines, no hardware deposits, and zero monthly machine rentals for clinics.
 - **Upfront Clinic Settlement**: 100% of the approved treatment balance settles directly into the clinic's verified business Current Account on T+1.

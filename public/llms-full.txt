@@ -9,6 +9,8 @@ Clinaza (https://www.clinaza.in) is India's leading point-of-care patient health
 
 ### 1. Point-of-Care Patient Treatment Financing (₹30,000 – ₹5,00,000)
 Clinaza enables accredited dental clinics, IVF fertility centres, dermatology centres, and day-care surgical hospitals across India to offer instant, paperless medical EMIs at their reception desks:
+- **Gateway Infrastructure**: Officially partnered with Plural by Pine Labs, India's leading omnichannel merchant commerce network, powering multi-bank Credit Card and Debit Card EMIs across 16+ major commercial banks (HDFC Bank, ICICI Bank, State Bank of India, Axis Bank, Kotak Mahindra Bank) and cardless digital lenders.
+- **Transparent Clinic Setup**: Nominal one-time onboarding fee of ₹999 for clinic verification and lending gateway activation. Zero monthly subscriptions, zero hardware rentals, and 100% free clinic CRM for life.
 - **Direct Clinic Disbursement**: 100% of the approved treatment amount is disbursed upfront directly into the clinic's verified business Current Account on T+1.
 - **Instant Eligibility in 2 Minutes**: Evaluates patient eligibility chairside via digital PAN and Aadhaar OTP verification (zero physical paperwork).
 - **100% Zero-Hardware Model**: Works seamlessly via counter QR codes and dynamic payment links on patient mobile devices—eliminating physical POS terminal rentals and security deposits.

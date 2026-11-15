@@ -321,14 +321,12 @@ export default function CrmHomepage() {
   return (
     <div className="min-h-screen bg-white text-[#0B2450] font-sora antialiased overflow-x-hidden selection:bg-[#0867E8] selection:text-white">
       <SEOHead
-        title="Clinaza — Healthcare EMIs & Free Dental CRM India"
-        description="Offer instant point-of-care patient EMI financing (₹30K–₹5L) with 55+ RBI-regulated bank & cardless EMI lenders. Plus, 100% Free Dental Clinic CRM software."
+        title="Clinaza — Point-of-Care Patient Financing & Healthcare EMIs India"
+        description="Enable instant 2-minute paperless patient EMIs (₹30K–₹5L) across 16+ major banks for dental, IVF & surgery clinics. Direct T+1 settlement with zero default risk."
         keywords={[
           'clinaza', 'clinaza patient financing', 'clinaza healthpay', 'clinaza healthcare emi',
-          'medical equipment loan for dentist', 'loan for dental clinic', 'loan for dentist', 'dental equipment loan emi',
-          'dental clinic setup cost calculator', 'डेंटल क्लिनिक के लिए लोन',
-          'patient financing india', 'healthcare emi india', 'dental emi', 'dental loan india',
-          'point of care patient financing', 'dental implants emi', 'clear aligners emi cost',
+          'point of care patient financing', 'dental treatment on emi', 'dental implants emi',
+          'clear aligners emi cost', 'medical loan india', 'loan for dental clinic', 'dental clinic setup cost calculator',
           'free dental crm', 'free dental crm software india', 'best free dental clinic management software',
           'dental prescription software free', 'whatsapp patient recall dental',
           'lasik on emi', 'ivf treatment emi', 'hair transplant financing india'
@@ -336,6 +334,74 @@ export default function CrmHomepage() {
         image="https://www.clinaza.in/og-clinaza.png"
         canonicalUrl="https://www.clinaza.in/"
         jsonLd={[
+          {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "Clinaza Technologies",
+            "alternateName": "Clinaza",
+            "url": "https://www.clinaza.in/",
+            "logo": "https://www.clinaza.in/assets/clinaza-logo.jpg",
+            "sameAs": [
+              "https://www.instagram.com/clinaza.in",
+              "https://twitter.com/clinazain",
+              "https://www.linkedin.com/company/clinaza/"
+            ],
+            "contactPoint": {
+              "@type": "ContactPoint",
+              "telephone": "+91-7292984244",
+              "contactType": "customer service",
+              "areaServed": "IN",
+              "availableLanguage": ["en", "hi"]
+            }
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "LoanOrCredit",
+            "name": "Clinaza Healthcare Patient Financing",
+            "description": "Instant point-of-care patient EMI financing from ₹30,000 to ₹5,00,000 across 16+ major banks with direct T+1 clinic settlements and zero default recourse.",
+            "provider": {
+              "@type": "FinancialService",
+              "name": "Clinaza & Plural by Pine Labs",
+              "url": "https://www.clinaza.in/"
+            },
+            "amount": {
+              "@type": "MonetaryAmount",
+              "currency": "INR",
+              "minValue": 30000,
+              "maxValue": 500000
+            },
+            "loanTerm": {
+              "@type": "QuantitativeValue",
+              "minValue": 3,
+              "maxValue": 24,
+              "unitCode": "MON"
+            },
+            "currency": "INR"
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://www.clinaza.in/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Clinic Onboarding",
+                "item": "https://www.clinaza.in/clinic-onboarding"
+              },
+              {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "Free Dental Tools",
+                "item": "https://www.clinaza.in/tools"
+              }
+            ]
+          },
           {
             "@context": "https://schema.org",
             "@type": "SoftwareApplication",

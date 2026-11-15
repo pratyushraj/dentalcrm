@@ -535,11 +535,11 @@ export default function CrmHomepage() {
 
       <main>
         {/* ── 1. HERO (MINIMAL LUXURY) ── */}
-        <section aria-label="Hero" className="relative pt-6 sm:pt-14 pb-10 sm:pb-16 px-4 sm:px-6 max-w-5xl mx-auto space-y-6 sm:space-y-8">
+        <section aria-label="Hero" className="relative pt-8 sm:pt-16 pb-12 sm:pb-20 px-4 sm:px-6 max-w-5xl mx-auto space-y-8 sm:space-y-12">
 
 
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6 sm:gap-8 items-center text-left">
-            <div className="md:col-span-7 space-y-3.5 sm:space-y-5">
+            <div className="md:col-span-7 space-y-4 sm:space-y-6">
               <div className="inline-flex items-center gap-2 sm:gap-2.5 px-3 sm:px-3.5 py-1 sm:py-1.5 bg-gradient-to-r from-blue-50/90 to-slate-100 border border-blue-200/80 rounded-full text-xs font-semibold text-slate-800 shadow-2xs flex-wrap">
                 <span className="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
                 <span className="text-[10px] font-black text-slate-600 uppercase tracking-widest">Gateway Infrastructure:</span>
@@ -548,16 +548,16 @@ export default function CrmHomepage() {
                 <span className="text-[10px] font-bold text-slate-600 hidden sm:inline">16+ Banks &amp; 35+ EMI Modes</span>
               </div>
 
-              <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold tracking-[-0.025em] leading-[1.2] text-[#0B2450]">
-                Healthcare Treatments on EMI.<br />
-                <span className="text-[#0867E8]">Stop patient drop-offs.</span>
+              <h1 className="text-3xl sm:text-5xl md:text-[54px] font-extrabold tracking-[-0.035em] leading-[1.12] text-[#0B2450]">
+                Point-of-Care Patient Financing.<br />
+                <span className="text-[#0867E8]">Zero Clinic Default Risk.</span>
               </h1>
 
-              <p className="text-sm sm:text-base text-slate-600 font-medium leading-relaxed max-w-xl">
-                Offer instant point-of-care patient financing &amp; medical loans from <strong className="text-[#0B2450] font-bold">₹30,000 to ₹5,00,000</strong> across Dental, IVF &amp; Fertility, Dermatology, Ophthalmology, and Outpatient Specialty Clinics.
+              <p className="text-sm sm:text-base md:text-lg text-slate-600 font-normal leading-relaxed max-w-xl">
+                Empower patients with instant 2-minute paperless EMIs across <strong className="text-[#0B2450] font-semibold">16+ major banks</strong> for treatments from ₹30,000 to ₹5,00,000. Disbursed upfront via Plural by Pine Labs with guaranteed T+1 settlements.
               </p>
 
-              <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-2.5 sm:gap-3 pt-1">
+              <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 pt-1">
                 <button
                   type="button"
                   onClick={() => {
@@ -565,49 +565,50 @@ export default function CrmHomepage() {
                     trackEvent('eligibility_started', { source: 'hero_cta' });
                     setShowEligibilityModal(true);
                   }}
-                  className="px-5 sm:px-6 py-3 sm:py-3.5 bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-black uppercase tracking-wider rounded-xl transition-all flex items-center justify-center gap-2 shadow-[0_8px_20px_rgba(8,103,232,0.25)] hover:shadow-[0_12px_28px_rgba(8,103,232,0.35)] transform active:scale-95"
+                  className="px-6 sm:px-7 py-3.5 sm:py-4 bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs sm:text-sm font-bold uppercase tracking-wider rounded-xl transition-all flex items-center justify-center gap-2 shadow-[0_10px_25px_rgba(8,103,232,0.22)] active:scale-95"
                 >
-                  <ShieldCheck size={16} /> Check Patient Eligibility
+                  <ShieldCheck size={18} /> Check Patient Eligibility
                 </button>
                 <Link
                   to="/clinic-onboarding"
-                  className="px-5 py-3 sm:py-3.5 bg-white hover:bg-slate-50 text-slate-800 border-2 border-slate-200 hover:border-slate-300 text-xs font-black uppercase tracking-wider rounded-xl transition-all flex items-center justify-center gap-2 active:scale-95 shadow-sm"
+                  className="px-6 sm:px-7 py-3.5 sm:py-4 bg-white hover:bg-slate-50 text-slate-700 border border-slate-200/90 hover:border-slate-300 text-xs sm:text-sm font-bold uppercase tracking-wider rounded-xl transition-all flex items-center justify-center gap-2 active:scale-95 shadow-2xs"
                 >
-                  Clinic Onboarding →
+                  <span>Clinic Onboarding</span>
+                  <ArrowRight size={14} />
                 </Link>
               </div>
 
               {/* ── Official Healthcare Lending Network & Pine Labs Partnership Institutional Card ── */}
-              <div className="p-3.5 sm:p-4 rounded-2xl bg-gradient-to-br from-white via-slate-50 to-blue-50/60 border border-blue-200/90 shadow-sm space-y-3">
-                <div className="flex items-center justify-between gap-2 border-b border-slate-200/80 pb-2.5">
-                  <div className="flex items-center gap-1.5 sm:gap-2">
-                    <span className="text-[10px] sm:text-xs font-black uppercase tracking-wide bg-emerald-50 text-emerald-800 border border-emerald-300/80 px-2 sm:px-2.5 py-0.5 rounded-full inline-flex items-center gap-1.5 whitespace-nowrap">
+              <div className="p-4 sm:p-5 rounded-2xl bg-white/90 backdrop-blur-sm border border-slate-200/70 shadow-[0_4px_20px_rgba(11,36,80,0.04)] space-y-3">
+                <div className="flex items-center justify-between gap-2 border-b border-slate-100 pb-3">
+                  <div className="flex items-center gap-2">
+                    <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wide bg-emerald-50 text-emerald-800 border border-emerald-200/80 px-2.5 py-0.5 rounded-full inline-flex items-center gap-1.5 whitespace-nowrap">
                       <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse shrink-0"></span>
                       <span>Official Partnership</span>
                     </span>
-                    <span className="text-[10px] font-bold text-slate-500 hidden sm:inline">&bull; RBI-Regulated Gateway Rails</span>
+                    <span className="text-[11px] font-medium text-slate-500 hidden sm:inline">&bull; RBI-Regulated Gateway Rails</span>
                   </div>
-                  <div className="flex items-center gap-1.5 shrink-0 bg-white border border-slate-200 px-2.5 py-1 rounded-lg shadow-2xs">
+                  <div className="flex items-center gap-1.5 shrink-0 bg-slate-50 px-2.5 py-1 rounded-lg border border-slate-200/60">
                     <span className="text-[9px] font-bold uppercase text-slate-400">Powered by</span>
                     <img src="/assets/plural_by_pinelabs_transparent.png" alt="Plural by Pine Labs" className="h-3.5 sm:h-4 w-auto object-contain" />
                   </div>
                 </div>
 
                 {/* Desktop detailed text + logo block */}
-                <div className="hidden sm:flex flex-row items-center justify-between gap-4 pt-0.5">
+                <div className="hidden sm:flex flex-row items-center justify-between gap-4 pt-1">
                   <div className="space-y-1">
-                    <p className="text-sm font-black text-[#0B2450] tracking-tight">
+                    <p className="text-sm font-bold text-[#0B2450] tracking-tight">
                       Clinaza &times; Plural by Pine Labs Healthcare Affordability
                     </p>
-                    <p className="text-[11px] text-slate-600 leading-relaxed">
-                      Clinaza has partnered with <strong>Plural by Pine Labs</strong> to power point-of-care patient financing directly chairside. Clinics offer multi-bank Credit &amp; Debit Card EMIs across 16+ major banks (HDFC, ICICI, SBI, Axis, Kotak), paperless 2-minute cardless financing, and low-fee front-desk UPI &mdash; with guaranteed 100% upfront T+1 clinic settlements and zero default recourse.
+                    <p className="text-xs text-slate-600 leading-relaxed max-w-md">
+                      Powering chairside point-of-care patient financing across 16+ major banks (HDFC, ICICI, SBI, Axis, Kotak) with guaranteed 100% upfront T+1 clinic settlements and zero default recourse.
                     </p>
                   </div>
                   <div className="flex flex-col gap-1.5 shrink-0">
-                    <div className="flex items-center gap-1.5 bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-200">
+                    <div className="flex items-center gap-1.5 bg-emerald-50/80 px-2.5 py-1 rounded-lg border border-emerald-200/70">
                       <span className="text-[10px] font-bold text-emerald-800">✓ 16+ Major Banks</span>
                     </div>
-                    <div className="flex items-center gap-1.5 bg-blue-50 px-2.5 py-1 rounded-lg border border-blue-200">
+                    <div className="flex items-center gap-1.5 bg-blue-50/80 px-2.5 py-1 rounded-lg border border-blue-200/70">
                       <span className="text-[10px] font-bold text-[#0867E8]">✓ T+1 Current A/c Payout</span>
                     </div>
                   </div>
@@ -615,10 +616,10 @@ export default function CrmHomepage() {
 
                 {/* Mobile streamlined row */}
                 <div className="sm:hidden pt-0.5 space-y-2">
-                  <p className="text-[11px] text-slate-600 leading-relaxed">
-                    Powered by <strong>Plural by Pine Labs</strong>: 16+ banks credit/debit card EMIs, 2-min paperless digital KYC loans, and upfront T+1 clinic current account payouts with 0% risk.
+                  <p className="text-xs text-slate-600 leading-relaxed">
+                    Powered by <strong>Plural by Pine Labs</strong>: 16+ banks credit/debit card EMIs, 2-min paperless digital KYC, and upfront T+1 clinic payouts with 0% risk.
                   </p>
-                  <div className="flex items-center justify-between gap-2 bg-white px-3 py-2 rounded-xl border border-slate-200 shadow-2xs">
+                  <div className="flex items-center justify-between gap-2 bg-slate-50 px-3 py-2 rounded-xl border border-slate-200/70">
                     <span className="text-[10px] font-bold text-slate-700">16+ Banks &bull; Multi-Bank EMIs</span>
                     <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">T+1 Settled</span>
                   </div>
@@ -747,16 +748,16 @@ export default function CrmHomepage() {
         <TaglineReveal />
 
         {/* ── 3. PROBLEM & CLINIC VALUE ("TURN I'LL DO IT LATER INTO LET'S START") ── */}
-        <section aria-label="The Problem & Value" className="py-12 sm:py-16 px-4 sm:px-6 bg-[#F5F9FC] border-y border-blue-50">
-          <FadeIn className="max-w-5xl mx-auto space-y-8">
-            <div className="text-center space-y-2">
-              <h2 className="text-2xl sm:text-3xl font-bold text-[#0B2450]">Turn "I'll do it later" into "Let's start."</h2>
-              <p className="text-sm text-slate-500 max-w-xl mx-auto">Patients say yes when treatment feels affordable. Clinaza makes that possible at the point of care.</p>
+        <section aria-label="The Problem & Value" className="py-16 sm:py-24 px-4 sm:px-6 bg-[#F5F9FC]/80 border-y border-slate-100">
+          <FadeIn className="max-w-5xl mx-auto space-y-10">
+            <div className="text-center space-y-3">
+              <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-[#0B2450]">Turn "I'll do it later" into "Let's start."</h2>
+              <p className="text-sm sm:text-base text-slate-500 max-w-xl mx-auto">Patients say yes when treatment feels affordable. Clinaza makes that possible at the point of care.</p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Without Financing */}
-              <div className="bg-white border border-rose-100 p-6 rounded-2xl space-y-4 text-left shadow-2xs">
+              <div className="bg-white border border-rose-100/80 p-6 sm:p-7 rounded-2xl space-y-4 text-left shadow-[0_4px_20px_rgba(0,0,0,0.02)]">
                 <div className="flex items-center gap-2 text-rose-600 font-black text-xs uppercase tracking-wider">
                   <X size={16} /> Without Financing
                 </div>
@@ -795,20 +796,20 @@ export default function CrmHomepage() {
         </section>
 
         {/* ── 3. HOW CLINAZA WORKS (DUAL-ENGINE AFFORDABILITY: ETB & NTB) ── */}
-        <section aria-label="How Clinaza Works" className="py-12 sm:py-16 px-4 sm:px-6">
-          <FadeIn className="max-w-5xl mx-auto space-y-8">
-            <div className="text-center space-y-2">
-              <span className="text-[10px] font-black text-[#0f7a75] uppercase tracking-widest">DUAL-ENGINE PATIENT AFFORDABILITY</span>
-              <h2 className="text-2xl sm:text-3xl font-bold text-[#0B2450]">How Patient Financing Works In Under 60 Seconds</h2>
-              <p className="text-sm text-slate-500 max-w-2xl mx-auto">
+        <section aria-label="How Clinaza Works" className="py-16 sm:py-24 px-4 sm:px-6">
+          <FadeIn className="max-w-5xl mx-auto space-y-10">
+            <div className="text-center space-y-3">
+              <span className="text-[11px] font-bold text-[#0f7a75] uppercase tracking-widest bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200/60 inline-block">DUAL-ENGINE PATIENT AFFORDABILITY</span>
+              <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-[#0B2450]">How Patient Financing Works In Under 60 Seconds</h2>
+              <p className="text-sm sm:text-base text-slate-500 max-w-2xl mx-auto">
                 Over 70% of dental patients do not carry a credit card. Clinaza &amp; Plural by Pine Labs eliminate patient drop-offs with seamless Existing-to-Bank (ETB) and New-to-Bank (NTB) paperless journeys.
               </p>
             </div>
 
             {/* ETB vs NTB Journey Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 text-left">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
               {/* ETB: Existing-to-Bank Flow */}
-              <div className="bg-gradient-to-br from-white via-slate-50 to-blue-50/40 border border-blue-200/90 p-6 rounded-2xl space-y-4 shadow-sm relative overflow-hidden">
+              <div className="bg-gradient-to-br from-white via-slate-50 to-blue-50/30 border border-blue-200/60 p-6 sm:p-7 rounded-2xl space-y-4 shadow-[0_4px_20px_rgba(8,103,232,0.04)] relative overflow-hidden">
                 <div className="flex items-center justify-between gap-2">
                   <span className="px-2.5 py-1 rounded-lg text-[10px] font-black uppercase tracking-wider bg-blue-100 text-[#0867E8] border border-blue-200">
                     ETB Flow &bull; Existing Bank Customers
@@ -840,7 +841,7 @@ export default function CrmHomepage() {
               </div>
 
               {/* NTB: Cardless / New-to-Bank Flow */}
-              <div className="bg-gradient-to-br from-white via-slate-50 to-emerald-50/40 border border-emerald-200/90 p-6 rounded-2xl space-y-4 shadow-sm relative overflow-hidden">
+              <div className="bg-gradient-to-br from-white via-slate-50 to-emerald-50/30 border border-emerald-200/60 p-6 sm:p-7 rounded-2xl space-y-4 shadow-[0_4px_20px_rgba(15,122,117,0.04)] relative overflow-hidden">
                 <div className="flex items-center justify-between gap-2">
                   <span className="px-2.5 py-1 rounded-lg text-[10px] font-black uppercase tracking-wider bg-emerald-100 text-[#0f7a75] border border-emerald-200">
                     NTB Flow &bull; Cardless Patients (No Credit Card)

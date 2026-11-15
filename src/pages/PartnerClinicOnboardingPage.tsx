@@ -292,7 +292,7 @@ export default function PartnerClinicOnboardingPage() {
               type="button"
               key={cat.id}
               onClick={() => setForm(prev => ({ ...prev, category: cat.id }))}
-              className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all flex items-center gap-1.5 ${
+              className={`px-3.5 py-2 min-h-[38px] rounded-full text-xs font-bold transition-all flex items-center gap-1.5 active:scale-95 ${
                 form.category === cat.id
                   ? 'bg-[#0B2450] text-white shadow-sm'
                   : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'
@@ -630,7 +630,7 @@ export default function PartnerClinicOnboardingPage() {
                     <button
                       type="button"
                       onClick={() => setWebsiteReady('yes')}
-                      className={`py-2 px-2.5 rounded-xl border text-[11px] font-bold flex items-center justify-center gap-1.5 transition-all ${
+                      className={`py-2.5 px-3 min-h-[42px] rounded-xl border text-[11px] sm:text-xs font-bold flex items-center justify-center gap-1.5 transition-all active:scale-95 ${
                         websiteReady === 'yes'
                           ? 'bg-blue-50 border-[#0867E8] text-[#0867E8] shadow-xs'
                           : 'bg-slate-50 border-slate-200 text-slate-600 hover:bg-slate-100'
@@ -645,7 +645,7 @@ export default function PartnerClinicOnboardingPage() {
                         setWebsiteReady('no');
                         setForm(prev => ({ ...prev, website: '' }));
                       }}
-                      className={`py-2 px-2.5 rounded-xl border text-[11px] font-bold flex items-center justify-center gap-1.5 transition-all ${
+                      className={`py-2.5 px-3 min-h-[42px] rounded-xl border text-[11px] sm:text-xs font-bold flex items-center justify-center gap-1.5 transition-all active:scale-95 ${
                         websiteReady === 'no'
                           ? 'bg-blue-50 border-[#0867E8] text-[#0867E8] shadow-xs'
                           : 'bg-slate-50 border-slate-200 text-slate-600 hover:bg-slate-100'
@@ -700,7 +700,7 @@ export default function PartnerClinicOnboardingPage() {
                           type="button"
                           key={item}
                           onClick={() => toggleSpecialty(item)}
-                          className={`px-3 py-1.5 rounded-xl text-xs font-semibold border transition-all ${
+                          className={`px-3.5 py-2 min-h-[40px] rounded-xl text-xs font-semibold border transition-all flex items-center justify-center active:scale-95 ${
                             active
                               ? 'bg-blue-50 border-[#0867E8] text-[#0867E8]'
                               : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300'
@@ -724,7 +724,7 @@ export default function PartnerClinicOnboardingPage() {
                         type="button"
                         key={opt}
                         onClick={() => setForm({...form, chairs: opt})}
-                        className={`py-2 text-xs font-bold rounded-xl border text-center transition-all ${
+                        className={`py-2.5 min-h-[42px] flex items-center justify-center text-xs font-bold rounded-xl border text-center transition-all active:scale-95 ${
                           form.chairs === opt
                             ? 'bg-[#0867E8] text-white border-[#0867E8] shadow-xs'
                             : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-50'
@@ -744,7 +744,7 @@ export default function PartnerClinicOnboardingPage() {
                         type="button"
                         key={opt}
                         onClick={() => setForm({...form, chairs: opt})}
-                        className={`py-2 px-2 text-[11px] font-bold rounded-xl border text-center transition-all ${
+                        className={`py-2.5 min-h-[42px] flex items-center justify-center text-[11px] font-bold rounded-xl border text-center transition-all active:scale-95 ${
                           form.chairs === opt
                             ? 'bg-[#0867E8] text-white border-[#0867E8] shadow-xs'
                             : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-50'
@@ -781,13 +781,13 @@ export default function PartnerClinicOnboardingPage() {
                       type="button"
                       key={provider}
                       onClick={() => setForm({ ...form, currentPosProvider: provider })}
-                      className={`py-2 px-2.5 text-xs font-medium rounded-xl border text-left transition-all ${
+                      className={`py-2.5 px-3 min-h-[44px] text-xs font-medium rounded-xl border text-left transition-all active:scale-95 flex items-center ${
                         form.currentPosProvider === provider
                           ? 'bg-blue-50 border-[#0867E8] text-[#0867E8] font-bold shadow-xs'
                           : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-50'
                       }`}
                     >
-                      <div className="flex items-center justify-between">
+                      <div className="flex items-center justify-between w-full">
                         <span>{provider}</span>
                         {form.currentPosProvider === provider && <Check size={12} className="text-[#0867E8] shrink-0" />}
                       </div>

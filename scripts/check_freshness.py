@@ -33,8 +33,8 @@ def load_database():
         conn.close()
         
     for p in JSON_PATHS:
-        # Ignore our target file if it already exists during editing
-        if "fresh_leads_central_east_nov12" in p:
+        # Ignore target files if they already exist during editing / re-runs
+        if "nov16" in p or "fresh_leads_central_east_nov12" in p:
             continue
         try:
             with open(p, "r", encoding="utf-8") as f:

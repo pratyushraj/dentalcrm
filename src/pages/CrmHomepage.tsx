@@ -631,7 +631,7 @@ export default function CrmHomepage() {
                   <img
                     src="/assets/clinic-hero-real.png"
                     alt="Modern authentic dental clinic treatment room in India"
-                    fetchPriority="high"
+                    {...({ fetchPriority: 'high' } as any)}
                     loading="eager"
                     decoding="async"
                     width={800}

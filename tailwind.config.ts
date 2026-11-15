@@ -22,6 +22,7 @@ export default {
       fontFamily: {
         editorial: ['"Cormorant Garamond"', 'Georgia', 'serif'],
         sora: ['Sora', 'sans-serif'],
+        jakarta: ['"Plus Jakarta Sans"', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",

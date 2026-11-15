@@ -21,7 +21,9 @@ import {
   CheckCircle2,
   PackageCheck,
   FileText,
-  MessageCircle
+  MessageCircle,
+  Baby,
+  Clock
 } from 'lucide-react';
 import { emailNotificationService } from '@/services/emailNotificationService';
 import { supabase } from '@/lib/supabase';
@@ -269,7 +271,7 @@ export default function PartnerClinicOnboardingPage() {
         <div className="flex items-center gap-2">
           <button
             onClick={copyShareLink}
-            className="px-3.5 py-1.5 rounded-xl bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-bold flex items-center gap-1.5 transition-all shadow-sm shadow-[#0867E8]/20"
+            className="px-3.5 py-2 min-h-[40px] rounded-xl bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-bold flex items-center gap-1.5 transition-all shadow-sm shadow-[#0867E8]/20 active:scale-95"
           >
             {copiedLink ? <Check size={13} /> : <Share2 size={13} />}
             <span className="hidden sm:inline">{copiedLink ? 'Copied Link!' : 'Share Form'}</span>
@@ -279,29 +281,32 @@ export default function PartnerClinicOnboardingPage() {
       </header>
 
       {/* Main Content Area */}
-      <main className="max-w-3xl mx-auto px-4 sm:px-6 pt-8 sm:pt-12">
+      <main className="max-w-3xl mx-auto px-4 sm:px-6 pt-8 sm:pt-12 pb-24 sm:pb-12">
         {/* Category Switcher Tabs */}
         <div className="flex items-center justify-center gap-2 mb-6 flex-wrap">
           {[
-            { id: 'dental', label: 'Dental Clinic', icon: '🦷' },
-            { id: 'ivf', label: 'Fertility & IVF Centre', icon: '👶' },
-            { id: 'hospital', label: 'Multi-Specialty Hospital', icon: '🏥' },
-            { id: 'derma', label: 'Dermatology & Aesthetics', icon: '✨' }
-          ].map((cat) => (
-            <button
-              type="button"
-              key={cat.id}
-              onClick={() => setForm(prev => ({ ...prev, category: cat.id }))}
-              className={`px-3.5 py-2 min-h-[38px] rounded-full text-xs font-bold transition-all flex items-center gap-1.5 active:scale-95 ${
-                form.category === cat.id
-                  ? 'bg-[#0B2450] text-white shadow-sm'
-                  : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'
-              }`}
-            >
-              <span>{cat.icon}</span>
-              <span>{cat.label}</span>
-            </button>
-          ))}
+            { id: 'dental', label: 'Dental Clinic', icon: Stethoscope },
+            { id: 'ivf', label: 'Fertility & IVF Centre', icon: Baby },
+            { id: 'hospital', label: 'Multi-Specialty Hospital', icon: Building2 },
+            { id: 'derma', label: 'Dermatology & Aesthetics', icon: Sparkles }
+          ].map((cat) => {
+            const Icon = cat.icon;
+            return (
+              <button
+                type="button"
+                key={cat.id}
+                onClick={() => setForm(prev => ({ ...prev, category: cat.id }))}
+                className={`px-4 py-2.5 min-h-[42px] rounded-full text-xs font-bold transition-all flex items-center gap-2 active:scale-95 ${
+                  form.category === cat.id
+                    ? 'bg-[#0B2450] text-white shadow-sm'
+                    : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'
+                }`}
+              >
+                <Icon size={14} className={form.category === cat.id ? 'text-white' : 'text-slate-500'} />
+                <span>{cat.label}</span>
+              </button>
+            );
+          })}
         </div>
 
         {/* Hero Banner */}
@@ -636,7 +641,8 @@ export default function PartnerClinicOnboardingPage() {
                           : 'bg-slate-50 border-slate-200 text-slate-600 hover:bg-slate-100'
                       }`}
                     >
-                      <span>🌐 Yes, Live Website</span>
+                      <Globe size={14} className="shrink-0 text-current" />
+                      <span>Yes, Live Website</span>
                     </button>
 
                     <button
@@ -651,7 +657,8 @@ export default function PartnerClinicOnboardingPage() {
                           : 'bg-slate-50 border-slate-200 text-slate-600 hover:bg-slate-100'
                       }`}
                     >
-                      <span>⚡ Not Yet / In Progress</span>
+                      <Clock size={14} className="shrink-0 text-current" />
+                      <span>Not Yet / In Progress</span>
                     </button>
                   </div>
 
@@ -944,6 +951,34 @@ export default function PartnerClinicOnboardingPage() {
           </form>
         )}
       </main>
+
+      {/* Mobile Sticky Bottom Conversion Bar */}
+      {!submitted && (
+        <div className="fixed bottom-0 inset-x-0 sm:hidden bg-white/95 backdrop-blur-md border-t border-slate-200/90 px-4 py-2.5 z-40 shadow-[0_-4px_16px_rgba(0,0,0,0.06)] flex items-center justify-between gap-3">
+          <div className="flex flex-col min-w-0">
+            <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Step 1 of 2</span>
+            <span className="text-xs font-black text-[#0B2450] truncate">{form.clinicName || 'Clinic Profile'}</span>
+          </div>
+          <button
+            type="button"
+            onClick={() => {
+              const formEl = document.querySelector('form');
+              if (formEl) formEl.requestSubmit();
+            }}
+            disabled={isSubmitting}
+            className="px-4 py-2.5 min-h-[42px] rounded-xl bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-black uppercase tracking-wider transition-all shadow-md flex items-center gap-1.5 shrink-0 active:scale-95"
+          >
+            {isSubmitting ? (
+              <span>Submitting...</span>
+            ) : (
+              <>
+                <span>Submit</span>
+                <ArrowRight size={14} />
+              </>
+            )}
+          </button>
+        </div>
+      )}
     </div>
   );
 }

@@ -308,7 +308,7 @@ export default function ClinicKycUploadPage() {
           href={`https://wa.me/917292984244?text=${whatsappMessage}`}
           target="_blank"
           rel="noreferrer"
-          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold transition-all shadow-sm"
+          className="inline-flex items-center gap-1.5 px-3.5 py-2 min-h-[40px] rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold transition-all shadow-sm active:scale-95"
         >
           <MessageCircle size={14} />
           <span className="hidden sm:inline">WhatsApp Priority Desk</span>
@@ -317,7 +317,7 @@ export default function ClinicKycUploadPage() {
       </header>
 
       {/* Main Container */}
-      <main className="max-w-2xl mx-auto px-4 sm:px-6 pt-6 sm:pt-10">
+      <main className="max-w-2xl mx-auto px-4 sm:px-6 pt-6 sm:pt-10 pb-24 sm:pb-12">
         {/* Step Breadcrumb */}
         <div className="flex items-center justify-center gap-2 mb-6 text-xs text-slate-500 font-medium">
           <span className="flex items-center gap-1 text-emerald-600 font-bold">
@@ -627,6 +627,24 @@ export default function ClinicKycUploadPage() {
                     </div>
                   </div>
                 )}
+              </div>
+
+              {/* Bank-Grade Security & RBI Compliance Trust Banner */}
+              <div className="bg-gradient-to-r from-blue-50/90 via-slate-50 to-emerald-50/70 border border-blue-200/80 rounded-2xl p-4 shadow-xs flex items-start sm:items-center gap-3">
+                <div className="w-9 h-9 rounded-xl bg-blue-100 text-[#0867E8] flex items-center justify-center shrink-0">
+                  <ShieldCheck size={20} />
+                </div>
+                <div className="space-y-0.5">
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <p className="text-xs font-bold text-[#0B2450]">Bank-Grade 256-Bit SSL Encrypted</p>
+                    <span className="text-[10px] font-bold text-emerald-800 bg-emerald-100/80 px-2 py-0.5 rounded-full border border-emerald-300">
+                      RBI Digital Lending Framework Compliant
+                    </span>
+                  </div>
+                  <p className="text-[11px] text-slate-500 leading-relaxed">
+                    Documents are securely processed solely for payment gateway merchant onboarding (MID issuance) via Plural by Pine Labs. Masked documents accepted.
+                  </p>
+                </div>
               </div>
 
               {/* 2. Document: Cancelled Cheque */}
@@ -970,6 +988,34 @@ export default function ClinicKycUploadPage() {
           </div>
         )}
       </main>
+
+      {/* Mobile Sticky Bottom Conversion Bar */}
+      {!isCompleted && (
+        <div className="fixed bottom-0 inset-x-0 sm:hidden bg-white/95 backdrop-blur-md border-t border-slate-200/90 px-4 py-2.5 z-40 shadow-[0_-4px_16px_rgba(0,0,0,0.06)] flex items-center justify-between gap-3">
+          <div className="flex flex-col min-w-0">
+            <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Step 2 of 2</span>
+            <span className="text-xs font-black text-[#0B2450] truncate">{clinicName || 'PG Whitelisting'}</span>
+          </div>
+          <button
+            type="button"
+            onClick={() => {
+              const formEl = document.querySelector('form');
+              if (formEl) formEl.requestSubmit();
+            }}
+            disabled={isSubmitting}
+            className="px-4 py-2.5 min-h-[42px] rounded-xl bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-black uppercase tracking-wider transition-all shadow-md flex items-center gap-1.5 shrink-0 active:scale-95"
+          >
+            {isSubmitting ? (
+              <span>Submitting...</span>
+            ) : (
+              <>
+                <span>Complete KYC</span>
+                <ArrowRight size={14} />
+              </>
+            )}
+          </button>
+        </div>
+      )}
     </div>
   );
 }

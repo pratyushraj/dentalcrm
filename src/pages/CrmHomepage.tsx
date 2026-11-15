@@ -20,7 +20,9 @@ import {
   Copy,
   QrCode,
   Zap,
-  Clock
+  Clock,
+  Wrench,
+  BookOpen
 } from 'lucide-react';
 import { emailNotificationService } from '../services/emailNotificationService';
 import { easycredService } from '../services/easycredService';
@@ -456,7 +458,7 @@ export default function CrmHomepage() {
       <header className="border-b border-slate-100 backdrop-blur-xl sticky top-0 z-50 bg-white/95 shadow-sm">
         <div className="max-w-7xl mx-auto px-3 sm:px-6 h-16 sm:h-20 flex justify-between items-center gap-2">
           <div className="flex items-center gap-3">
-            <Link to="/" className="flex items-center gap-3 group shrink-0">
+            <Link to="/" className="flex items-center gap-3 group shrink-0 min-h-[44px] min-w-[44px] p-1 -m-1">
               <img src="/assets/clinaza-logo.jpg" alt="CLINAZA" className="h-9 sm:h-10 w-auto rounded-xl border border-slate-200 shadow-sm group-hover:scale-105 transition-transform" />
               <div className="hidden sm:block">
                 <span className="text-xs font-black tracking-widest text-[#0B2450] block">CLINAZA</span>
@@ -485,13 +487,13 @@ export default function CrmHomepage() {
               to="/tools"
               className="hidden xl:flex items-center gap-1.5 px-3 py-2 bg-slate-100 hover:bg-slate-200 text-xs font-bold text-slate-800 rounded-xl transition-all"
             >
-              <span>🛠️</span> Free Tools &amp; Rx
+              <Wrench size={13} className="text-slate-600" /> Free Tools &amp; Rx
             </Link>
             <Link
               to="/blog"
               className="hidden lg:flex items-center gap-1.5 px-3 py-2 hover:bg-slate-100 text-xs font-bold text-slate-700 rounded-xl transition-all"
             >
-              <span>📖</span> Guides &amp; EMI
+              <BookOpen size={13} className="text-slate-600" /> Guides &amp; EMI
             </Link>
             <button
               type="button"
@@ -505,10 +507,11 @@ export default function CrmHomepage() {
             </button>
             <Link
               to="/reactivation/login"
-              className="flex items-center gap-1.5 px-2.5 sm:px-3.5 py-1.5 sm:py-2 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-[11px] sm:text-xs font-bold text-emerald-800 rounded-xl transition-all whitespace-nowrap"
+              className="flex items-center gap-1.5 px-3 sm:px-3.5 py-2 sm:py-2.5 min-h-[42px] bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-[11px] sm:text-xs font-bold text-emerald-800 rounded-xl transition-all whitespace-nowrap active:scale-95"
             >
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-              <span className="hidden sm:inline">Doctor </span>Login 🔐
+              <span className="hidden sm:inline">Doctor </span>Login
+              <Lock size={12} className="text-emerald-700 ml-0.5" />
             </Link>
             <a
               href="https://wa.me/917292984244?text=Hi%20Clinaza%20team%2C%20I%20want%20to%20know%20more%20about%20Clinaza"
@@ -520,7 +523,7 @@ export default function CrmHomepage() {
             </a>
             <Link
               to="/clinic-onboarding"
-              className="px-3 sm:px-5 py-2 sm:py-3 bg-[#0867E8] hover:bg-[#0756C7] text-white text-[11px] sm:text-xs font-black uppercase tracking-wider rounded-xl transition-all shadow-md sm:shadow-lg shadow-[#0867E8]/25 flex items-center gap-1.5 sm:gap-2 whitespace-nowrap active:scale-95"
+              className="px-3.5 sm:px-5 py-2 sm:py-2.5 min-h-[42px] bg-[#0867E8] hover:bg-[#0756C7] text-white text-[11px] sm:text-xs font-black uppercase tracking-wider rounded-xl transition-all shadow-md sm:shadow-lg shadow-[#0867E8]/25 flex items-center justify-center gap-1.5 sm:gap-2 whitespace-nowrap active:scale-95"
             >
               <span className="sm:hidden">Onboarding</span>
               <span className="hidden sm:inline">Clinic Onboarding</span>
@@ -955,10 +958,10 @@ export default function CrmHomepage() {
                       {/* Quick Treatment Presets */}
                       <div className="flex flex-wrap gap-1.5 pt-0.5">
                         {[
-                          { label: '🦷 Implant', amount: 45000 },
-                          { label: '😁 Aligners', amount: 75000 },
-                          { label: '👶 IVF Cycle', amount: 150000 },
-                          { label: '✨ Full Mouth', amount: 250000 },
+                          { label: 'Implant', amount: 45000 },
+                          { label: 'Aligners', amount: 75000 },
+                          { label: 'IVF Cycle', amount: 150000 },
+                          { label: 'Full Mouth', amount: 250000 },
                         ].map((preset) => (
                           <button
                             key={preset.label}
@@ -967,7 +970,7 @@ export default function CrmHomepage() {
                               setEmiAmount(preset.amount);
                               trackEvent('calculator_preset_clicked', { preset: preset.label, amount: preset.amount });
                             }}
-                            className={`px-2.5 py-1 rounded-lg text-[10px] font-bold border transition-all ${
+                            className={`px-3 py-1.5 min-h-[36px] rounded-lg text-xs font-bold border transition-all active:scale-95 flex items-center justify-center ${
                               emiAmount === preset.amount
                                 ? 'bg-[#0867E8] text-white border-[#0867E8]'
                                 : 'bg-[#F7FAFC] text-slate-700 border-slate-200 hover:border-[#0867E8]'
@@ -2034,9 +2037,10 @@ export default function CrmHomepage() {
                     href="https://wa.me/917292984244?text=Hi%20Pratyush,%20interested%20in%20Clinaza%20onboarding"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-50 hover:bg-emerald-100 border border-emerald-200/80 text-emerald-800 text-[11px] sm:text-xs font-bold transition-colors"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 min-h-[36px] rounded-full bg-emerald-50 hover:bg-emerald-100 border border-emerald-200/80 text-emerald-800 text-[11px] sm:text-xs font-bold transition-colors active:scale-95"
                   >
-                    <span>💬 Question on WhatsApp →</span>
+                    <MessageSquare size={13} className="text-emerald-700" />
+                    <span>Question on WhatsApp →</span>
                   </a>
                 </div>
               </div>
@@ -2324,8 +2328,9 @@ export default function CrmHomepage() {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/reactivation/login" className="hover:text-[#0867E8] transition-colors font-bold text-[#0B2450]">
-                    Free Cloud Dental CRM Login 🔐
+                  <Link to="/reactivation/login" className="hover:text-[#0867E8] transition-colors font-bold text-[#0B2450] inline-flex items-center gap-1.5">
+                    <span>Free Cloud Dental CRM Login</span>
+                    <Lock size={12} className="text-emerald-700" />
                   </Link>
                 </li>
                 <li>

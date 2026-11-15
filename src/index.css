@@ -1,9 +1,10 @@
 
-/* ── Scroll-triggered section fade-in ── */
+/* ── Scroll-triggered section fade-in (Restrained Fintech Motion) ── */
 .section-hidden {
   opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.55s ease, transform 0.55s ease;
+  transform: translateY(18px);
+  transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1), transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
 }
 
 .section-visible {
@@ -15,5 +16,5 @@
 .section-visible > * { transition-delay: calc(var(--stagger-index, 0) * 60ms); }
 
 @media (prefers-reduced-motion: reduce) {
-  .section-hidden { opacity: 1; transform: none; transition: none; }
+  .section-hidden { opacity: 1; transform: none; transition: none; will-change: auto; }
 }

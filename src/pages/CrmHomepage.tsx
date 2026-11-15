@@ -22,7 +22,12 @@ import {
   Zap,
   Clock,
   Wrench,
-  BookOpen
+  BookOpen,
+  Eye,
+  Baby,
+  Activity,
+  Sparkles,
+  Stethoscope
 } from 'lucide-react';
 import { emailNotificationService } from '../services/emailNotificationService';
 import { easycredService } from '../services/easycredService';
@@ -886,58 +891,68 @@ export default function CrmHomepage() {
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3.5 text-left">
               {[
                 { 
-                  emoji: '🦷', 
+                  icon: Stethoscope,
+                  badgeColor: 'bg-blue-50 text-[#0867E8] border-blue-100',
                   category: 'Dental Care', 
                   treatments: 'Implants, Aligners, Crowns & Full Mouth Rehab',
                   link: '/blog/dental-implants-cost-on-emi-india'
                 },
                 { 
-                  emoji: '🦱', 
+                  icon: Sparkles,
+                  badgeColor: 'bg-amber-50 text-amber-600 border-amber-100',
                   category: 'Hair & Aesthetics', 
                   treatments: 'Hair Transplant (FUE), Liposuction & Gynecomastia',
                   link: '/blog/hair-transplant-cost-on-emi-india-guide'
                 },
                 { 
-                  emoji: '👁️', 
+                  icon: Eye,
+                  badgeColor: 'bg-emerald-50 text-[#0f7a75] border-emerald-100',
                   category: 'Ophthalmology', 
                   treatments: 'Contoura Vision, SMILE, ICL & Cataract Lenses',
                   link: '/blog/lasik-eye-surgery-cost-on-emi-india-guide'
                 },
                 { 
-                  emoji: '👶', 
+                  icon: Baby,
+                  badgeColor: 'bg-purple-50 text-purple-600 border-purple-100',
                   category: 'IVF & Fertility', 
                   treatments: 'IVF Cycles, ICSI, IUI & Egg Freezing Packages',
                   link: '/blog/ivf-cost-on-emi-fertility-treatment-financing-india'
                 },
                 { 
-                  emoji: '🦴', 
+                  icon: Activity,
+                  badgeColor: 'bg-indigo-50 text-indigo-600 border-indigo-100',
                   category: 'Orthopaedics & Surgeries', 
                   treatments: 'Knee Replacement, Bariatric, ACL & Daycare Surgeries',
                   link: '/blog/knee-replacement-surgery-cost-on-emi-india'
                 }
-              ].map((cat, idx) => (
-                <Link 
-                  key={idx} 
-                  to={cat.link}
-                  className="bg-white border border-slate-200 hover:border-blue-500/50 p-4 rounded-2xl space-y-2 transition-all shadow-2xs hover:shadow-md group block"
-                >
-                  <span className="text-2xl block group-hover:scale-110 transition-transform" role="img" aria-label={cat.category}>{cat.emoji}</span>
-                  <div>
-                    <h3 className="text-xs font-black text-[#0B2450] group-hover:text-[#0867E8] transition-colors leading-tight">{cat.category}</h3>
-                    <p className="text-[10px] text-slate-500 mt-1 leading-snug">{cat.treatments}</p>
-                  </div>
-                  <span className="text-[9px] font-bold text-[#0867E8] inline-flex items-center gap-0.5 pt-1">
-                    View Pricing &rarr;
-                  </span>
-                </Link>
-              ))}
+              ].map((cat, idx) => {
+                const IconComponent = cat.icon;
+                return (
+                  <Link 
+                    key={idx} 
+                    to={cat.link}
+                    className="bg-white border border-slate-200 hover:border-[#0867E8]/50 p-4 rounded-2xl space-y-3 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md group block active:scale-[0.98]"
+                  >
+                    <div className={`w-9 h-9 rounded-xl flex items-center justify-center border ${cat.badgeColor} group-hover:scale-105 transition-transform duration-300`}>
+                      <IconComponent size={18} aria-hidden="true" />
+                    </div>
+                    <div>
+                      <h3 className="text-xs font-black text-[#0B2450] group-hover:text-[#0867E8] transition-colors leading-tight">{cat.category}</h3>
+                      <p className="text-[10px] text-slate-500 mt-1 leading-snug">{cat.treatments}</p>
+                    </div>
+                    <span className="text-[9px] font-bold text-[#0867E8] inline-flex items-center gap-0.5 pt-0.5">
+                      View Pricing &rarr;
+                    </span>
+                  </Link>
+                );
+              })}
             </div>
           </FadeIn>
         </section>
 
         {/* ── 6. EMI CALCULATOR & FRONT-DESK WORKFLOW ── */}
         <section aria-label="EMI Calculator" className="py-12 sm:py-16 px-4 sm:px-6 bg-[#F7FAFC] border-y border-slate-200/60">
-          <div className="max-w-6xl mx-auto space-y-8">
+          <FadeIn className="max-w-6xl mx-auto space-y-8">
             <div className="text-center space-y-2">
               <span className="text-[10px] font-black text-[#0f7a75] uppercase tracking-widest">AFFORDABILITY SUITE &amp; RECEPTION WORKFLOW</span>
               <h2 className="text-2xl sm:text-4xl font-black text-[#0B2450]">Calculate Patient EMI &amp; Reception Workflow</h2>
@@ -1224,7 +1239,7 @@ export default function CrmHomepage() {
                 ))}
               </div>
             </div>
-          </div>
+          </FadeIn>
         </section>
 
         {/* ── 6B. THE CLINAZA & PINE LABS CMP DIFFERENCE (COMPARISON MATRIX) ── */}
@@ -1333,36 +1348,38 @@ export default function CrmHomepage() {
         </section>
 
         {/* ── 7. WHY CLINICS USE CLINAZA ── */}
-        <section aria-label="Why Clinics Use Clinaza" className="py-12 sm:py-16 px-4 sm:px-6 max-w-5xl mx-auto space-y-8">
-          <div className="text-center space-y-2">
-            <span className="text-[10px] font-black text-[#0f7a75] uppercase tracking-widest">FOR CLINIC OWNERS</span>
-            <h2 className="text-2xl sm:text-4xl font-black text-[#0B2450]">Why Clinics Use Clinaza</h2>
-          </div>
+        <section aria-label="Why Clinics Use Clinaza" className="py-12 sm:py-16 px-4 sm:px-6">
+          <FadeIn className="max-w-5xl mx-auto space-y-8">
+            <div className="text-center space-y-2">
+              <span className="text-[10px] font-black text-[#0f7a75] uppercase tracking-widest">FOR CLINIC OWNERS</span>
+              <h2 className="text-2xl sm:text-4xl font-black text-[#0B2450]">Why Clinics Use Clinaza</h2>
+            </div>
 
-          {/* Prominent ₹999 One-Time Onboarding Fee Highlight Badge */}
-          <div className="bg-gradient-to-r from-blue-50/80 via-emerald-50/50 to-blue-50/80 border border-blue-200/90 p-5 rounded-2xl text-center max-w-2xl mx-auto shadow-2xs">
-            <span className="text-2xl font-black text-[#0867E8] block">₹999 One-Time Onboarding Fee</span>
-            <p className="text-xs font-bold text-[#0B2450] mt-1">One-time clinic onboarding &amp; lending gateway integration. Zero recurring monthly subscriptions.</p>
-          </div>
+            {/* Prominent ₹999 One-Time Onboarding Fee Highlight Badge */}
+            <div className="bg-gradient-to-r from-blue-50/80 via-emerald-50/50 to-blue-50/80 border border-blue-200/90 p-5 rounded-2xl text-center max-w-2xl mx-auto shadow-2xs">
+              <span className="text-2xl font-black text-[#0867E8] block">₹999 One-Time Onboarding Fee</span>
+              <p className="text-xs font-bold text-[#0B2450] mt-1">One-time clinic onboarding &amp; lending gateway integration. Zero recurring monthly subscriptions.</p>
+            </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-left">
-            {[
-              { title: '₹999 One-Time Setup', desc: 'One-time clinic onboarding & lending gateway integration. Zero recurring monthly fees.' },
-              { title: 'Free Clinic CRM & EMR Portal', desc: '100% free patient reactivation & treatment follow-up portal for life.' },
-              { title: 'No EMI Collection Burden', desc: 'No chasing patients for repayments — handled entirely by NBFC.' },
-              { title: 'Financing by Partners', desc: 'All loans funded and serviced by RBI-regulated lenders.' },
-              { title: 'Higher Ticket Conversions', desc: 'Helps eligible patients manage higher treatment costs easily.' },
-              { title: 'Digital Application', desc: 'Paperless 100% online point-of-care pre-assessment.' }
-            ].map((item, idx) => (
-              <div key={idx} className="bg-[#F7FAFC] border border-slate-200 p-5 rounded-2xl space-y-1.5 shadow-2xs">
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 size={16} className="text-[#0f7a75] shrink-0" />
-                  <strong className="text-xs font-black text-[#0B2450]">{item.title}</strong>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-left">
+              {[
+                { title: '₹999 One-Time Setup', desc: 'One-time clinic onboarding & lending gateway integration. Zero recurring monthly fees.' },
+                { title: 'Free Clinic CRM & EMR Portal', desc: '100% free patient reactivation & treatment follow-up portal for life.' },
+                { title: 'No EMI Collection Burden', desc: 'No chasing patients for repayments — handled entirely by NBFC.' },
+                { title: 'Financing by Partners', desc: 'All loans funded and serviced by RBI-regulated lenders.' },
+                { title: 'Higher Ticket Conversions', desc: 'Helps eligible patients manage higher treatment costs easily.' },
+                { title: 'Digital Application', desc: 'Paperless 100% online point-of-care pre-assessment.' }
+              ].map((item, idx) => (
+                <div key={idx} className="bg-[#F7FAFC] border border-slate-200 p-5 rounded-2xl space-y-1.5 shadow-2xs">
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 size={16} className="text-[#0f7a75] shrink-0" />
+                    <strong className="text-xs font-black text-[#0B2450]">{item.title}</strong>
+                  </div>
+                  <p className="text-[11px] text-slate-600 pl-6 leading-relaxed">{item.desc}</p>
                 </div>
-                <p className="text-[11px] text-slate-600 pl-6 leading-relaxed">{item.desc}</p>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          </FadeIn>
         </section>
 
         {/* ── 8. ONBOARDED PARTNER CLINICS NETWORK (SLIDESHOW CAROUSEL) ── */}
@@ -1900,62 +1917,67 @@ export default function CrmHomepage() {
         )}
 
         {/* ── 7. COMPREHENSIVE FAQ ── */}
-        <section aria-label="Frequently Asked Questions" className="py-16 px-6 max-w-4xl mx-auto space-y-8">
-          <div className="text-center space-y-2">
-            <span className="text-[10px] font-black text-[#0f7a75] uppercase tracking-widest flex items-center justify-center gap-1.5">
-              <HelpCircle size={16} aria-hidden="true" /> FREQUENTLY ASKED QUESTIONS
-            </span>
-            <h2 className="text-2xl sm:text-4xl font-black text-[#0B2450]">Common Questions</h2>
-            <p className="text-xs text-slate-600">Everything doctors and patients ask about Clinaza financing.</p>
-          </div>
+        <section aria-label="Frequently Asked Questions" className="py-16 px-6">
+          <FadeIn className="max-w-4xl mx-auto space-y-8">
+            <div className="text-center space-y-2">
+              <span className="text-[10px] font-black text-[#0f7a75] uppercase tracking-widest flex items-center justify-center gap-1.5">
+                <HelpCircle size={16} aria-hidden="true" /> FREQUENTLY ASKED QUESTIONS
+              </span>
+              <h2 className="text-2xl sm:text-4xl font-black text-[#0B2450]">Common Questions</h2>
+              <p className="text-xs text-slate-600">Everything doctors and patients ask about Clinaza financing.</p>
+            </div>
 
-          <div className="space-y-3">
-            {comprehensiveFaqs.map((faq, idx) => {
-              const isOpen = activeFaq === idx;
-              return (
-                <div key={idx} className="bg-[#F7FAFC] border border-slate-200 rounded-2xl overflow-hidden shadow-2xs transition-all">
-                  <button
-                    type="button"
-                    onClick={() => setActiveFaq(isOpen ? null : idx)}
-                    aria-expanded={isOpen}
-                    className="w-full px-6 py-4 flex justify-between items-center text-left hover:bg-slate-100/60 transition-colors"
-                  >
-                    <span className="text-xs sm:text-sm font-bold text-[#0B2450]">{faq.q}</span>
-                    <ChevronDown size={16} className={`text-slate-400 transition-transform duration-200 shrink-0 ${isOpen ? 'rotate-180 text-[#0756C7]' : ''}`} aria-hidden="true" />
-                  </button>
-                  {isOpen && (
-                    <div className="px-6 pb-4 pt-1 text-xs text-slate-600 leading-relaxed border-t border-slate-200/60 bg-white">
-                      {faq.a}
-                    </div>
-                  )}
-                </div>
-              );
-            })}
-          </div>
+            <div className="space-y-3">
+              {comprehensiveFaqs.map((faq, idx) => {
+                const isOpen = activeFaq === idx;
+                return (
+                  <div key={idx} className="bg-[#F7FAFC] border border-slate-200 rounded-2xl overflow-hidden shadow-2xs transition-all">
+                    <button
+                      type="button"
+                      onClick={() => setActiveFaq(isOpen ? null : idx)}
+                      aria-expanded={isOpen}
+                      className="w-full px-6 py-4 flex justify-between items-center text-left hover:bg-slate-100/60 transition-colors"
+                    >
+                      <span className="text-xs sm:text-sm font-bold text-[#0B2450]">{faq.q}</span>
+                      <ChevronDown size={16} className={`text-slate-400 transition-transform duration-200 shrink-0 ${isOpen ? 'rotate-180 text-[#0756C7]' : ''}`} aria-hidden="true" />
+                    </button>
+                    {isOpen && (
+                      <div className="px-6 pb-4 pt-1 text-xs text-slate-600 leading-relaxed border-t border-slate-200/60 bg-white">
+                        {faq.a}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          </FadeIn>
         </section>
 
         {/* ── 8. CLINIC CTA & REGISTRATION FORM ── */}
-        <section id="partner-form" aria-label="Clinic Partner Registration" className="py-10 sm:py-16 px-3.5 sm:px-6 max-w-2xl mx-auto">
-          <div className="bg-gradient-to-b from-[#F7FAFC] to-white border border-slate-200/90 rounded-2xl sm:rounded-3xl p-5 sm:p-8 shadow-xl space-y-5 text-left">
+        <section id="partner-form" aria-label="Clinic Partner Registration" className="py-10 sm:py-16 px-3.5 sm:px-6">
+          <FadeIn className="max-w-2xl mx-auto">
+            <div className="bg-gradient-to-b from-[#F7FAFC] to-white border border-slate-200/90 rounded-2xl sm:rounded-3xl p-5 sm:p-8 shadow-xl space-y-5 text-left">
             {/* Form Toggle Header */}
             <div className="flex bg-slate-200/70 p-1 rounded-xl mb-2">
               <button
                 type="button"
                 onClick={() => setFormType('clinic')}
-                className={`flex-1 py-2 text-xs font-bold rounded-lg transition-all ${
+                className={`flex-1 py-2 text-xs font-bold rounded-lg transition-all flex items-center justify-center gap-1.5 ${
                   formType === 'clinic' ? 'bg-white text-[#0B2450] shadow-xs' : 'text-slate-600 hover:text-[#0B2450]'
                 }`}
               >
-                🏥 For Clinics<span className="hidden sm:inline"> &amp; Specialty Centres</span>
+                <Building2 size={14} className="shrink-0" />
+                <span>For Clinics<span className="hidden sm:inline"> &amp; Specialty Centres</span></span>
               </button>
               <button
                 type="button"
                 onClick={() => setFormType('lender')}
-                className={`flex-1 py-2 text-xs font-bold rounded-lg transition-all ${
+                className={`flex-1 py-2 text-xs font-bold rounded-lg transition-all flex items-center justify-center gap-1.5 ${
                   formType === 'lender' ? 'bg-[#0867E8] text-white shadow-xs' : 'text-slate-600 hover:text-[#0B2450]'
                 }`}
               >
-                🏦 For NBFCs &amp; Lenders
+                <Landmark size={14} className="shrink-0" />
+                <span>For NBFCs &amp; Lenders</span>
               </button>
             </div>
 
@@ -2144,7 +2166,8 @@ export default function CrmHomepage() {
                 </form>
               )
             )}
-          </div>
+            </div>
+          </FadeIn>
         </section>
 
         {/* ── 9. LENDER CTA FOOTER STRIP ("FOR LENDERS") ── */}

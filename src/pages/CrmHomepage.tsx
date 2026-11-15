@@ -154,10 +154,17 @@ export default function CrmHomepage() {
   const [roiConsultations, setRoiConsultations] = useState(35);
   const [roiAvgTicket, setRoiAvgTicket] = useState(65000);
 
-  // Interactive Phone Simulator tenure state & Front-Desk Bento Step
+  // Interactive Hero Phone Simulator procedure & tenure state (Improvement 1)
+  const HERO_TREATMENT_PRESETS = [
+    { id: 'implants', name: 'Dental Implants & Crown', amount: 85000, label: '🦷 Single Implant' },
+    { id: 'aligners', name: 'Invisible Clear Aligners', amount: 65000, label: '💎 Clear Aligners' },
+    { id: 'fullarch', name: 'Full Arch Rehabilitation', amount: 120000, label: '👑 Full Arch All-on-4' },
+    { id: 'smile', name: 'Zirconia Smile Makeover', amount: 48000, label: '✨ Smile Makeover' },
+  ];
+  const [heroTreatment, setHeroTreatment] = useState(HERO_TREATMENT_PRESETS[0]);
   const [phoneTenure, setPhoneTenure] = useState<number>(12);
   const [phoneSanctionedStamp, setPhoneSanctionedStamp] = useState<boolean>(false);
-  const phoneEmiTarget = Math.round(calcEMI(85000, phoneTenure, 14));
+  const phoneEmiTarget = Math.round(calcEMI(heroTreatment.amount, phoneTenure, 14));
   const phoneEmi = useSmoothValue(phoneEmiTarget, 280);
 
   const handlePhoneTenureChange = (t: number) => {
@@ -165,6 +172,44 @@ export default function CrmHomepage() {
     setPhoneSanctionedStamp(true);
     setTimeout(() => setPhoneSanctionedStamp(false), 2200);
   };
+
+  const handleHeroTreatmentChange = (t: typeof HERO_TREATMENT_PRESETS[0]) => {
+    setHeroTreatment(t);
+    setPhoneSanctionedStamp(true);
+    setTimeout(() => setPhoneSanctionedStamp(false), 2200);
+  };
+
+  // Interactive Front-Desk WhatsApp Link Generator state (Improvement 3)
+  const [simPatientName, setSimPatientName] = useState('Pooja Verma');
+  const [simTreatment, setSimTreatment] = useState('Invisible Clear Aligners');
+  const [simAmount, setSimAmount] = useState(65000);
+  const [simTenure, setSimTenure] = useState(12);
+  const [simCopied, setSimCopied] = useState(false);
+  const simEmiTarget = Math.round(calcEMI(simAmount, simTenure, 14));
+  const simEmi = useSmoothValue(simEmiTarget, 220);
+
+  const handleCopySimTemplate = () => {
+    const text = `Namaste ${simPatientName || 'Patient'} ji,\n\nDr. Vikram's team has prepared your customized treatment plan for ${simTreatment} at Smile Point Dental Clinic.\n\n💳 Treatment Cost: ₹${simAmount.toLocaleString('en-IN')}\n✨ Flexible Monthly EMI: ₹${simEmi.toLocaleString('en-IN')} / month (${simTenure} Months)\n⏱️ Instant 92-sec OTP verification • Zero paperwork\n\nTap here to activate your Clinaza Treatment Pass:\n👉 https://clinaza.in/pay/sp-8842`;
+    navigator.clipboard?.writeText(text);
+    setSimCopied(true);
+    toast.success('WhatsApp prescription template copied!');
+    setTimeout(() => setSimCopied(false), 2400);
+  };
+
+  const handleLaunchSimPass = () => {
+    setPatientData((prev) => ({
+      ...prev,
+      name: simPatientName || 'Pooja Verma',
+      treatment: simTreatment,
+      amount: String(simAmount),
+      tenure: String(simTenure),
+    }));
+    setShowEligibilityModal(true);
+  };
+
+  // FAQ Category Filter and Search state (Improvement 5)
+  const [faqCategory, setFaqCategory] = useState<'all' | 'clinics' | 'patients' | 'compliance'>('all');
+  const [faqSearchQuery, setFaqSearchQuery] = useState('');
 
   // Bento Timeline Auto-Advancing with Pause-on-Hover
   const [bentoStep, setBentoStep] = useState<number>(1);
@@ -320,52 +365,92 @@ export default function CrmHomepage() {
     }, 1000);
   };
 
-  const comprehensiveFaqs = [
+  interface FAQItem {
+    category: 'clinics' | 'patients' | 'compliance';
+    q: string;
+    a: string;
+  }
+
+  const comprehensiveFaqs: FAQItem[] = [
     {
+      category: 'clinics',
+      q: 'How does Clinaza help private dental clinics increase treatment acceptance?',
+      a: 'Over 60% of high-ticket dental cases (implants, aligners, full-mouth rehab) drop out at the reception desk due to price shock. Clinaza enables clinic front desks to instantly prescribe flexible monthly EMIs via SMS or WhatsApp link, converting hesitant patients on the spot without manual paperwork.'
+    },
+    {
+      category: 'clinics',
+      q: 'Does the clinic bear any credit default risk or patient non-payment liability?',
+      a: 'Zero credit risk on the clinic. Clinaza operates on a 100% non-recourse model. Loans are underwritten, funded, serviced, and collected directly by RBI-registered banks and NBFC partners. The clinic receives full payment and has no liability if a patient misses an installment.'
+    },
+    {
+      category: 'clinics',
+      q: 'How fast does the clinic receive treatment funds in its bank account?',
+      a: 'Clinaza disburses 100% of the approved treatment invoice directly into your clinic’s verified current account on a guaranteed T+1 business day cycle, processed through Plural by Pine Labs.'
+    },
+    {
+      category: 'clinics',
+      q: 'What is the onboarding fee for dental clinics?',
+      a: 'Clinaza charges a nominal one-time onboarding fee of ₹999 for clinic onboarding and lending gateway integration. There are zero recurring monthly subscriptions, zero software maintenance fees, and zero hidden charges.'
+    },
+    {
+      category: 'clinics',
+      q: 'Can clinic reception staff learn how to send EMI links in 10 minutes?',
+      a: 'Yes. Generating a patient EMI link requires only entering the patient’s mobile number and the treatment amount. Patients complete their 2-minute paperless Aadhaar OTP verification on their own mobile device while your front-desk dashboard tracks sanction status in real time.'
+    },
+    {
+      category: 'patients',
+      q: 'Can patients get treatment on EMI without a credit card (Cardless EMI)?',
+      a: 'Yes. Clinaza powers Cardless EMIs in partnership with leading RBI-regulated cardless healthcare lenders. Patients without a credit card only need a valid PAN and Aadhaar OTP to split treatments into monthly EMIs. Additionally, Credit Card EMI across 16+ banks, Debit Card EMI, and Down Payment + EMI hybrid options are fully supported.'
+    },
+    {
+      category: 'patients',
+      q: 'Which dental and medical treatments are eligible for monthly EMIs?',
+      a: 'High-value planned procedures ranging from ₹30,000 to ₹5,00,000 including Dental Implants, Clear Aligners, Braces, Zirconia Crowns, Full Mouth Rehabilitation, Orthopaedic surgeries, IVF/Fertility, and LASIK/Ophthalmology.'
+    },
+    {
+      category: 'patients',
+      q: 'What documents does the patient need to apply at the clinic counter?',
+      a: 'Basic digital KYC: PAN card, Aadhaar card for instant OTP eKYC verification, and bank account / debit card details for setting up auto-repayment via e-NACH or UPI mandate. Zero physical paperwork required.'
+    },
+    {
+      category: 'patients',
+      q: 'Does checking patient EMI eligibility harm their CIBIL score?',
+      a: 'No. The preliminary eligibility assessment is conducted as a soft credit bureau check with zero negative impact on the patient’s CIBIL score. Hard credit inquiries only occur when a patient explicitly sanctions an offer with a chosen lender.'
+    },
+    {
+      category: 'patients',
+      q: 'What repayment tenures and interest rates are available?',
+      a: 'Patients can choose flexible tenures from 3 to 24 months. Interest rates start from ~11.5% to 15% p.a., determined directly by the regulated lending partner based on the patient’s credit and cashflow assessment.'
+    },
+    {
+      category: 'patients',
+      q: 'Is loan approval guaranteed?',
+      a: 'No. Clinaza facilitates the multi-lender application process. Final loan approval, interest rate, and sanctioned amount are determined independently by the financing partner based on patient credit eligibility and bureau underwriting.'
+    },
+    {
+      category: 'compliance',
       q: 'Who powers Clinaza’s payment and patient EMI financing gateway?',
       a: 'Clinaza is officially partnered with Plural by Pine Labs, India’s leading omnichannel merchant commerce network. Through this partnership, Clinaza equips private dental and specialty clinics with instant point-of-care patient financing across 16+ major banks, paperless cardless medical loans, and low-fee front-desk UPI collections — with all treatment payouts deposited directly into the clinic’s current account on a guaranteed T+1 settlement cycle.'
     },
     {
-      q: 'What is Clinaza?',
-      a: 'Clinaza is an embedded healthcare patient financing platform that connects clinics with RBI-regulated Banks and NBFCs, allowing patients to pay for high-ticket treatments in flexible monthly EMIs.'
+      category: 'compliance',
+      q: 'Are the lending partners regulated by the Reserve Bank of India (RBI)?',
+      a: 'Yes. All loans and credit lines facilitated through Clinaza are underwritten and disbursed exclusively by RBI-registered Scheduled Commercial Banks and RBI-licensed Non-Banking Financial Companies (NBFCs) in strict compliance with RBI Digital Lending Guidelines.'
     },
     {
-      q: 'How does Clinaza patient financing work?',
-      a: 'Clinaza connects clinic patients directly with regulated lending partners to offer flexible monthly EMI options for treatments ranging from ₹30,000 to ₹5,00,000 with 2-minute paperless digital KYC.'
-    },
-    {
-      q: 'Which treatments are eligible for EMI?',
-      a: 'High-value planned procedures ranging from ₹30,000 to ₹5,00,000 including Dental Implants, Clear Aligners, Braces, Crowns, Orthopaedic surgeries, IVF/Fertility, and LASIK/Ophthalmology.'
-    },
-    {
-      q: 'Can patients get treatment on EMI without a credit card (Cardless EMI)?',
-      a: 'Yes. Clinaza powers Cardless EMIs in partnership with leading RBI-regulated cardless healthcare lenders (powered by RBI-regulated banking and NBFC institutions). Patients without a credit card only need a valid PAN and Aadhaar OTP to split treatments into monthly EMIs. Additionally, Credit Card EMI across 21+ banks, Debit Card EMI, and Down Payment + EMI options are fully supported.'
-    },
-    {
-      q: 'Are IVF and fertility treatments eligible for monthly EMI financing?',
-      a: 'Yes. Clinaza covers high-ticket IVF cycles, ICSI, IUI, and reproductive healthcare packages from ₹50,000 to ₹5,00,000 with upfront clinic disbursement and flexible 3 to 24 month repayment tenures.'
-    },
-    {
-      q: 'Does the clinic bear any credit risk?',
-      a: 'Zero credit risk on the clinic. The loan is funded, serviced, and collected directly by regulated lending institutions via automated monthly e-NACH auto-debit.'
-    },
-    {
-      q: 'What is the onboarding fee for clinics?',
-      a: 'Clinaza charges a nominal one-time onboarding fee of ₹999 for clinic onboarding and lending gateway integration. There are zero recurring monthly subscriptions.'
-    },
-    {
-      q: 'What documents does the patient need?',
-      a: 'Basic digital KYC: PAN card, Aadhaar card (eKYC), proof of income (salary slip, bank statement, or ITR), and bank account details for e-NACH auto-debit setup.'
-    },
-    {
-      q: 'What determines the interest rate & terms?',
-      a: 'Interest rates (starting from ~11.5% to 15% p.a.) and tenures (3–24 months) are set directly by the lending partner based on credit assessment.'
-    },
-    {
-      q: 'Is loan approval guaranteed?',
-      a: 'No. Clinaza facilitates the application process. Final loan approval, interest rate, and sanctioned amount are determined independently by the financing partner based on patient credit eligibility.'
+      category: 'compliance',
+      q: 'How is patient clinical and financial data kept secure?',
+      a: 'All data transmissions are encrypted using bank-grade 256-bit SSL encryption. Clinaza adheres strictly to India’s Digital Personal Data Protection (DPDP) Act and RBI data localization requirements. Patient health records and financial credentials are never sold or shared with unapproved third parties.'
     }
   ];
+
+  const filteredFaqs = comprehensiveFaqs.filter((faq) => {
+    const matchesCategory = faqCategory === 'all' || faq.category === faqCategory;
+    const matchesSearch = !faqSearchQuery.trim() || 
+      faq.q.toLowerCase().includes(faqSearchQuery.toLowerCase()) || 
+      faq.a.toLowerCase().includes(faqSearchQuery.toLowerCase());
+    return matchesCategory && matchesSearch;
+  });
 
   return (
     <div className="min-h-screen bg-white text-[#0B2450] font-jakarta antialiased overflow-x-hidden selection:bg-[#0867E8] selection:text-white">
@@ -402,6 +487,68 @@ export default function CrmHomepage() {
               "areaServed": "IN",
               "availableLanguage": ["en", "hi"]
             }
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "FinancialService",
+            "name": "Clinaza Healthcare Patient Financing & Dental Practice OS",
+            "url": "https://www.clinaza.in/",
+            "logo": "https://www.clinaza.in/assets/clinaza-logo.jpg",
+            "description": "Instant point-of-care patient EMI financing from ₹30,000 to ₹5,00,000 across 16+ major banks with direct T+1 clinic settlements and zero default recourse.",
+            "areaServed": {
+              "@type": "Country",
+              "name": "India"
+            },
+            "hasOfferCatalog": {
+              "@type": "OfferCatalog",
+              "name": "Dental & Specialty Healthcare Patient Financing Plans",
+              "itemListElement": [
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Invisible Clear Aligners Financing",
+                    "description": "Flexible monthly EMIs from ₹2,600/month for clear aligners and orthodontic treatments."
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Dental Implants & Crown Financing",
+                    "description": "Point-of-care EMI plans for single, multiple, and full-arch dental implants."
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Full Mouth Rehabilitation Financing",
+                    "description": "Comprehensive restorative dental surgery financing with 3 to 24 month tenures."
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Zirconia Smile Makeovers & Ceramic Veneers",
+                    "description": "Aesthetic cosmetic dentistry financing with instant paperless Aadhaar OTP verification."
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": comprehensiveFaqs.map((faq) => ({
+              "@type": "Question",
+              "name": faq.q,
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": faq.a
+              }
+            }))
           },
           {
             "@context": "https://schema.org",
@@ -756,7 +903,43 @@ export default function CrmHomepage() {
             </div>
 
             {/* Right Column: Realistic Smartphone Showcase with Live Interactive EMI (5 cols) */}
-            <div className="lg:col-span-5 relative mt-4 lg:mt-0 flex justify-center">
+            <div className="lg:col-span-5 relative mt-4 lg:mt-0 flex flex-col items-center justify-center">
+              {/* Interactive Procedure Chips Above Phone (Improvement 1) */}
+              <div className="w-full max-w-[340px] mb-3 z-10 relative">
+                <div className="flex items-center justify-between pb-1.5 px-1">
+                  <span className="text-[10px] font-extrabold uppercase tracking-wider text-slate-400">
+                    Live Simulator Preset
+                  </span>
+                  <span className="text-[10px] font-bold text-[#0867E8]">
+                    Tap to Switch Procedure
+                  </span>
+                </div>
+                <div className="grid grid-cols-2 gap-1.5">
+                  {HERO_TREATMENT_PRESETS.map((t) => {
+                    const isSelected = heroTreatment.id === t.id;
+                    return (
+                      <button
+                        key={t.id}
+                        type="button"
+                        onClick={() => handleHeroTreatmentChange(t)}
+                        className={`px-2.5 py-2 min-h-[40px] text-[11px] font-bold rounded-xl border transition-all text-left flex items-center justify-between cursor-pointer ${
+                          isSelected
+                            ? 'bg-[#0B2450] text-white border-[#0B2450] shadow-sm'
+                            : 'bg-white/90 hover:bg-white text-slate-700 border-slate-200/90 hover:border-slate-300'
+                        }`}
+                      >
+                        <span className="truncate">{t.label}</span>
+                        <span className={`text-[9.5px] font-extrabold px-1.5 py-0.5 rounded shrink-0 ml-1 ${
+                          isSelected ? 'bg-white/20 text-white' : 'bg-slate-100 text-slate-600'
+                        }`}>
+                          ₹{(t.amount / 1000).toFixed(0)}k
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
               {/* Decorative Glow behind phone */}
               <div className="absolute -inset-4 bg-gradient-to-tr from-blue-500/15 via-emerald-500/10 to-transparent rounded-[3rem] blur-2xl pointer-events-none" />
 
@@ -797,10 +980,10 @@ export default function CrmHomepage() {
                     <div className="flex justify-between items-start">
                       <div>
                         <span className="text-[9px] font-bold uppercase tracking-wider text-slate-400">Treatment Plan</span>
-                        <p className="text-xs font-extrabold text-[#0B2450]">Dental Implants &amp; Crown</p>
+                        <p className="text-xs font-extrabold text-[#0B2450] transition-colors duration-200">{heroTreatment.name}</p>
                       </div>
                       <div className="text-right">
-                        <span className="text-[9px] text-slate-400 line-through">₹85,000</span>
+                        <span className="text-[9px] text-slate-400 line-through">₹{heroTreatment.amount.toLocaleString('en-IN')}</span>
                         <p className="text-sm font-extrabold text-[#0867E8] transition-transform duration-200">
                           ₹{phoneEmi.toLocaleString('en-IN')}<span className="text-[9px] font-medium text-slate-500">/mo</span>
                         </p>
@@ -1572,6 +1755,264 @@ export default function CrmHomepage() {
           </FadeIn>
         </section>
 
+        {/* ── 3B. FRONT-DESK 10-SECOND LINK GENERATOR (INTERACTIVE LIVE DEMO) (Improvement 3) ── */}
+        <section id="front-desk-simulator" aria-label="Interactive Front-Desk Prescription Simulator" className="py-14 sm:py-20 px-4 sm:px-6 bg-white border-b border-slate-200/80">
+          <FadeIn className="max-w-6xl mx-auto space-y-10">
+            <div className="text-center space-y-2">
+              <span className="text-[10px] font-black text-[#0867E8] uppercase tracking-widest bg-blue-50 border border-blue-200 px-3 py-1 rounded-full inline-block">
+                LIVE INTERACTIVE SIMULATOR
+              </span>
+              <h2 className="text-2xl sm:text-4xl font-black text-[#0B2450]">
+                Experience the 10-Second Reception Workflow
+              </h2>
+              <p className="text-xs sm:text-sm text-slate-600 max-w-2xl mx-auto">
+                See exactly how your front desk prescribes flexible monthly EMIs. Enter a patient and procedure to preview the real-time WhatsApp pass.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-[#F7FAFC] border border-slate-200/90 rounded-3xl p-6 sm:p-10 shadow-sm">
+              {/* Left Column: Front-Desk Controls (6 cols) */}
+              <div className="lg:col-span-6 space-y-6 text-left">
+                <div className="flex items-center gap-2.5 pb-3 border-b border-slate-200">
+                  <div className="w-8 h-8 rounded-lg bg-[#0867E8] text-white flex items-center justify-center font-bold text-xs">
+                    01
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-extrabold text-[#0B2450]">Reception Prescription Desk</h3>
+                    <p className="text-[11px] text-slate-500">Configure simulated patient treatment</p>
+                  </div>
+                </div>
+
+                {/* Patient Name Input */}
+                <div className="space-y-1.5">
+                  <label htmlFor="sim-patient-name" className="text-xs font-bold text-slate-700 block">
+                    Patient Name
+                  </label>
+                  <input
+                    id="sim-patient-name"
+                    type="text"
+                    value={simPatientName}
+                    onChange={(e) => setSimPatientName(e.target.value)}
+                    placeholder="e.g. Rahul Sharma"
+                    className="w-full px-4 py-2.5 min-h-[44px] bg-white border border-slate-300 rounded-xl text-base sm:text-sm text-[#0B2450] font-semibold focus:outline-hidden focus:border-[#0867E8] focus:ring-2 focus:ring-[#0867E8]/20 transition-all"
+                  />
+                </div>
+
+                {/* Procedure Preset Chips */}
+                <div className="space-y-1.5">
+                  <label className="text-xs font-bold text-slate-700 block">
+                    Procedure Type
+                  </label>
+                  <div className="flex flex-wrap gap-1.5">
+                    {[
+                      { name: 'Invisible Clear Aligners', defaultAmt: 65000 },
+                      { name: 'Single Dental Implant', defaultAmt: 35000 },
+                      { name: 'Full Arch All-on-4', defaultAmt: 120000 },
+                      { name: 'Smile Makeover', defaultAmt: 48000 },
+                      { name: 'Root Canal + Crown', defaultAmt: 18000 }
+                    ].map((proc) => (
+                      <button
+                        key={proc.name}
+                        type="button"
+                        onClick={() => {
+                          setSimTreatment(proc.name);
+                          setSimAmount(proc.defaultAmt);
+                        }}
+                        className={`px-3 py-2 min-h-[40px] text-xs font-bold rounded-lg border transition-all cursor-pointer ${
+                          simTreatment === proc.name
+                            ? 'bg-[#0867E8] text-white border-[#0867E8] shadow-xs'
+                            : 'bg-white text-slate-600 border-slate-200 hover:border-slate-300'
+                        }`}
+                      >
+                        {proc.name}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Treatment Amount Slider & Quick Buttons */}
+                <div className="space-y-2">
+                  <div className="flex justify-between items-center">
+                    <label htmlFor="sim-amount-slider" className="text-xs font-bold text-slate-700">
+                      Treatment Amount
+                    </label>
+                    <span className="text-base font-extrabold text-[#0867E8] tabular-nums">
+                      ₹{simAmount.toLocaleString('en-IN')}
+                    </span>
+                  </div>
+                  <input
+                    id="sim-amount-slider"
+                    type="range"
+                    min={15000}
+                    max={250000}
+                    step={5000}
+                    value={simAmount}
+                    onChange={(e) => setSimAmount(Number(e.target.value))}
+                    className="w-full accent-[#0867E8] cursor-pointer"
+                  />
+                  <div className="flex gap-1.5 flex-wrap pt-1">
+                    {[25000, 45000, 65000, 85000, 120000, 150000].map((amt) => (
+                      <button
+                        key={amt}
+                        type="button"
+                        onClick={() => setSimAmount(amt)}
+                        className={`px-2.5 py-1.5 min-h-[40px] text-[11px] font-bold rounded-md border transition-all cursor-pointer ${
+                          simAmount === amt
+                            ? 'bg-[#0B2450] text-white border-[#0B2450]'
+                            : 'bg-white text-slate-600 border-slate-200 hover:border-slate-300'
+                        }`}
+                      >
+                        ₹{(amt / 1000).toFixed(0)}k
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Tenure Selector */}
+                <div className="space-y-1.5">
+                  <label className="text-xs font-bold text-slate-700 block">
+                    Financing Tenure
+                  </label>
+                  <div className="grid grid-cols-4 gap-2">
+                    {[6, 12, 18, 24].map((t) => (
+                      <button
+                        key={t}
+                        type="button"
+                        onClick={() => setSimTenure(t)}
+                        className={`py-2 min-h-[40px] text-xs font-extrabold rounded-xl border transition-all cursor-pointer ${
+                          simTenure === t
+                            ? 'bg-[#0867E8] text-white border-[#0867E8] shadow-xs'
+                            : 'bg-white text-slate-600 border-slate-200 hover:border-slate-300'
+                        }`}
+                      >
+                        {t} Months
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-3 flex items-center justify-between text-xs text-emerald-900 font-bold">
+                  <span className="flex items-center gap-1.5">
+                    <CheckCircle2 size={15} className="text-emerald-600 shrink-0" />
+                    <span>Calculated Monthly EMI:</span>
+                  </span>
+                  <span className="text-base font-extrabold text-emerald-800 tabular-nums">
+                    ₹{simEmi.toLocaleString('en-IN')}<span className="text-xs font-medium text-emerald-600">/mo</span>
+                  </span>
+                </div>
+              </div>
+
+              {/* Right Column: Authentic WhatsApp Chat Simulation (6 cols) */}
+              <div className="lg:col-span-6 flex flex-col items-center">
+                <div className="w-full max-w-md bg-[#EFEAE2] rounded-3xl overflow-hidden shadow-lg border border-slate-300 text-left">
+                  {/* WhatsApp Header */}
+                  <div className="bg-[#075E54] text-white px-4 py-3 flex items-center justify-between">
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-9 h-9 rounded-full bg-emerald-700 border border-white/30 flex items-center justify-center font-extrabold text-sm text-white">
+                        C
+                      </div>
+                      <div>
+                        <p className="text-xs font-bold leading-tight flex items-center gap-1.5">
+                          <span>Smile Point Dental &bull; Indiranagar</span>
+                          <span className="text-[9px] bg-emerald-500/40 text-emerald-100 px-1 rounded">Clinic</span>
+                        </p>
+                        <p className="text-[10px] text-emerald-100/80 font-normal">Online &bull; Front-Desk Automated Dispatch</p>
+                      </div>
+                    </div>
+                    <span className="text-[10px] font-bold bg-white/10 px-2 py-0.5 rounded text-white/90">
+                      WhatsApp Verified
+                    </span>
+                  </div>
+
+                  {/* Chat Canvas */}
+                  <div className="p-4 space-y-3 min-h-[300px] flex flex-col justify-end bg-[#EFEAE2] relative">
+                    <div className="text-center">
+                      <span className="text-[9px] font-bold uppercase tracking-wider bg-white/70 text-slate-500 px-2.5 py-1 rounded-full shadow-2xs">
+                        Today &bull; Front-Desk Instant Share
+                      </span>
+                    </div>
+
+                    {/* Chat Bubble */}
+                    <div className="bg-white rounded-2xl rounded-tl-xs p-3.5 shadow-sm border border-slate-200/60 max-w-[95%] space-y-2 text-xs text-slate-800">
+                      <p className="leading-snug">
+                        Namaste <strong className="text-[#0B2450]">{simPatientName || 'Patient'} ji</strong>,
+                      </p>
+                      <p className="text-slate-600 leading-relaxed text-[11.5px]">
+                        Dr. Vikram’s team has prepared your treatment plan for <strong className="text-[#0867E8]">{simTreatment}</strong> at Smile Point Dental Clinic.
+                      </p>
+
+                      {/* Card Inside WhatsApp */}
+                      <div className="bg-slate-50 rounded-xl p-2.5 border border-slate-200 space-y-1">
+                        <div className="flex justify-between items-center text-[11px]">
+                          <span className="text-slate-500 font-medium">Treatment Total:</span>
+                          <span className="font-bold text-slate-800">₹{simAmount.toLocaleString('en-IN')}</span>
+                        </div>
+                        <div className="flex justify-between items-center text-[11px] pt-0.5 border-t border-slate-200/60">
+                          <span className="text-[#0867E8] font-bold">Flexible Monthly EMI:</span>
+                          <span className="font-extrabold text-[#0867E8]">₹{simEmi.toLocaleString('en-IN')}/mo</span>
+                        </div>
+                        <div className="flex justify-between items-center text-[10px] text-slate-500 pt-0.5">
+                          <span>Tenure:</span>
+                          <span className="font-semibold text-slate-700">{simTenure} Months</span>
+                        </div>
+                      </div>
+
+                      <div className="bg-blue-50/80 rounded-xl p-2.5 border border-blue-200/80 space-y-1">
+                        <p className="text-[11px] font-bold text-[#0B2450]">
+                          ⚡ Instant 92-Second Paperless Approval
+                        </p>
+                        <p className="text-[10px] text-slate-600">
+                          Tap link below to complete 2-minute Aadhaar OTP verification and activate your treatment pass:
+                        </p>
+                        <p className="text-xs font-mono font-bold text-[#0867E8] underline break-all">
+                          https://clinaza.in/pay/sp-8842
+                        </p>
+                      </div>
+
+                      <div className="flex items-center justify-between pt-1 text-[9px] text-slate-400">
+                        <span>Powered by Clinaza &times; Pine Labs</span>
+                        <div className="flex items-center gap-1">
+                          <span>11:42 AM</span>
+                          <span className="text-blue-500 font-bold">✓✓</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Actions inside simulator */}
+                  <div className="bg-white p-3 border-t border-slate-200 flex flex-col sm:flex-row gap-2">
+                    <button
+                      type="button"
+                      onClick={handleCopySimTemplate}
+                      className="flex-1 py-2.5 min-h-[40px] px-3 bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold rounded-xl transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+                    >
+                      {simCopied ? (
+                        <>
+                          <Check size={14} className="text-emerald-600" />
+                          <span>Copied to Clipboard!</span>
+                        </>
+                      ) : (
+                        <>
+                          <Copy size={14} />
+                          <span>Copy WhatsApp Script</span>
+                        </>
+                      )}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={handleLaunchSimPass}
+                      className="flex-1 py-2.5 min-h-[40px] px-3 bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-extrabold rounded-xl transition-all shadow-xs flex items-center justify-center gap-1.5 cursor-pointer"
+                    >
+                      <span>Simulate Patient Tap</span>
+                      <ArrowRight size={14} />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </FadeIn>
+        </section>
+
         {/* ── 4. MULTI-SPECIALTY TREATMENT SHOWCASE ── */}
         <section id="treatments" aria-label="Supported Treatments" className="py-14 sm:py-20 px-4 sm:px-6 bg-white">
           <FadeIn className="max-w-6xl mx-auto space-y-8 text-center">
@@ -2333,39 +2774,118 @@ export default function CrmHomepage() {
           </div>
         )}
 
-        {/* ── 7. COMPREHENSIVE FAQ ── */}
-        <section aria-label="Frequently Asked Questions" className="py-16 px-6">
+        {/* ── 7. COMPREHENSIVE FAQ (Improvement 5) ── */}
+        <section aria-label="Frequently Asked Questions" className="py-16 px-4 sm:px-6">
           <FadeIn className="max-w-4xl mx-auto space-y-8">
             <div className="text-center space-y-2">
               <span className="text-[10px] font-black text-[#0f7a75] uppercase tracking-widest flex items-center justify-center gap-1.5">
                 <HelpCircle size={16} aria-hidden="true" /> FREQUENTLY ASKED QUESTIONS
               </span>
               <h2 className="text-2xl sm:text-4xl font-black text-[#0B2450]">Common Questions</h2>
-              <p className="text-xs text-slate-600">Everything doctors and patients ask about Clinaza financing.</p>
+              <p className="text-xs sm:text-sm text-slate-600">
+                Clear answers for dental clinic directors and prospective patients.
+              </p>
             </div>
 
+            {/* Category Tabs */}
+            <div className="flex flex-wrap items-center justify-center gap-1.5">
+              {[
+                { id: 'all', label: 'All Questions', count: comprehensiveFaqs.length },
+                { id: 'clinics', label: 'For Dental Clinics', count: comprehensiveFaqs.filter(f => f.category === 'clinics').length },
+                { id: 'patients', label: 'For Patients', count: comprehensiveFaqs.filter(f => f.category === 'patients').length },
+                { id: 'compliance', label: 'RBI & Security', count: comprehensiveFaqs.filter(f => f.category === 'compliance').length }
+              ].map((tab) => (
+                <button
+                  key={tab.id}
+                  type="button"
+                  onClick={() => {
+                    setFaqCategory(tab.id as any);
+                    setActiveFaq(null);
+                  }}
+                  className={`px-3.5 py-2 min-h-[40px] text-xs font-bold rounded-full border transition-all flex items-center gap-1.5 cursor-pointer ${
+                    faqCategory === tab.id
+                      ? 'bg-[#0867E8] text-white border-[#0867E8] shadow-xs'
+                      : 'bg-white text-slate-600 border-slate-200 hover:border-slate-300'
+                  }`}
+                >
+                  <span>{tab.label}</span>
+                  <span className={`text-[10px] font-extrabold px-1.5 py-0.2 rounded-full ${
+                    faqCategory === tab.id ? 'bg-white/20 text-white' : 'bg-slate-100 text-slate-500'
+                  }`}>
+                    {tab.count}
+                  </span>
+                </button>
+              ))}
+            </div>
+
+            {/* Keyword Search Bar */}
+            <div className="relative max-w-md mx-auto">
+              <input
+                type="text"
+                value={faqSearchQuery}
+                onChange={(e) => setFaqSearchQuery(e.target.value)}
+                placeholder="Search FAQs: e.g. T+1, non-recourse, CIBIL, interest..."
+                className="w-full px-4 py-2.5 min-h-[44px] bg-slate-50 border border-slate-200 rounded-xl text-base sm:text-xs text-[#0B2450] placeholder-slate-400 focus:outline-hidden focus:bg-white focus:border-[#0867E8] transition-all"
+              />
+              {faqSearchQuery && (
+                <button
+                  type="button"
+                  onClick={() => setFaqSearchQuery('')}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 text-xs font-bold px-1.5 py-0.5 rounded cursor-pointer"
+                >
+                  Clear
+                </button>
+              )}
+            </div>
+
+            {/* FAQ List */}
             <div className="space-y-3">
-              {comprehensiveFaqs.map((faq, idx) => {
-                const isOpen = activeFaq === idx;
-                return (
-                  <div key={idx} className="bg-[#F7FAFC] border border-slate-200 rounded-2xl overflow-hidden shadow-2xs transition-all">
-                    <button
-                      type="button"
-                      onClick={() => setActiveFaq(isOpen ? null : idx)}
-                      aria-expanded={isOpen}
-                      className="w-full px-6 py-4 flex justify-between items-center text-left hover:bg-slate-100/60 transition-colors"
-                    >
-                      <span className="text-xs sm:text-sm font-bold text-[#0B2450]">{faq.q}</span>
-                      <ChevronDown size={16} className={`text-slate-400 transition-transform duration-200 shrink-0 ${isOpen ? 'rotate-180 text-[#0756C7]' : ''}`} aria-hidden="true" />
-                    </button>
-                    {isOpen && (
-                      <div className="px-6 pb-4 pt-1 text-xs text-slate-600 leading-relaxed border-t border-slate-200/60 bg-white">
-                        {faq.a}
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
+              {filteredFaqs.length === 0 ? (
+                <div className="text-center py-8 bg-slate-50 rounded-2xl border border-slate-200 space-y-2">
+                  <p className="text-xs font-bold text-slate-500">No matching questions found for "{faqSearchQuery}"</p>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setFaqSearchQuery('');
+                      setFaqCategory('all');
+                    }}
+                    className="text-xs font-bold text-[#0867E8] hover:underline cursor-pointer"
+                  >
+                    Reset FAQ filters
+                  </button>
+                </div>
+              ) : (
+                filteredFaqs.map((faq, idx) => {
+                  const isOpen = activeFaq === idx;
+                  return (
+                    <div key={idx} className="bg-[#F7FAFC] border border-slate-200 rounded-2xl overflow-hidden shadow-2xs transition-all">
+                      <button
+                        type="button"
+                        onClick={() => setActiveFaq(isOpen ? null : idx)}
+                        aria-expanded={isOpen}
+                        className="w-full px-5 sm:px-6 py-4 min-h-[44px] flex justify-between items-center text-left hover:bg-slate-100/60 transition-colors gap-3 cursor-pointer"
+                      >
+                        <div className="flex items-center gap-2 flex-wrap sm:flex-nowrap">
+                          <span className={`text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded shrink-0 ${
+                            faq.category === 'clinics' ? 'bg-blue-100 text-[#0867E8]' :
+                            faq.category === 'patients' ? 'bg-emerald-100 text-emerald-800' :
+                            'bg-purple-100 text-purple-800'
+                          }`}>
+                            {faq.category === 'clinics' ? 'Clinic' : faq.category === 'patients' ? 'Patient' : 'Security'}
+                          </span>
+                          <span className="text-xs sm:text-sm font-bold text-[#0B2450]">{faq.q}</span>
+                        </div>
+                        <ChevronDown size={16} className={`text-slate-400 transition-transform duration-200 shrink-0 ${isOpen ? 'rotate-180 text-[#0756C7]' : ''}`} aria-hidden="true" />
+                      </button>
+                      {isOpen && (
+                        <div className="px-5 sm:px-6 pb-4 pt-1 text-xs text-slate-600 leading-relaxed border-t border-slate-200/60 bg-white">
+                          {faq.a}
+                        </div>
+                      )}
+                    </div>
+                  );
+                })
+              )}
             </div>
           </FadeIn>
         </section>

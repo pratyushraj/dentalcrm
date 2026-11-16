@@ -736,31 +736,33 @@ export default function CrmHomepage() {
       />
 
       {/* ── Precision Floating Frosted-Glass Pill Navigation ── */}
-      <header className="fixed top-3 sm:top-5 inset-x-0 z-50 max-w-6xl mx-auto px-3 sm:px-6 pointer-events-none">
-        <nav className="pointer-events-auto bg-white/85 backdrop-blur-xl border border-slate-200/90 rounded-full px-3.5 sm:px-5 py-2 sm:py-2.5 shadow-[0_8px_32px_rgba(15,23,42,0.08)] flex items-center justify-between gap-3 transition-all duration-300">
+      <header className="fixed top-3 sm:top-5 inset-x-0 z-50 max-w-7xl mx-auto px-3 sm:px-6 pointer-events-none">
+        <nav className="pointer-events-auto bg-white/90 backdrop-blur-xl border border-slate-200/90 rounded-full px-3.5 sm:px-5 py-2 sm:py-2.5 shadow-[0_8px_32px_rgba(15,23,42,0.08)] flex items-center justify-between gap-2 sm:gap-3 transition-all duration-300">
           {/* Left Brand & Co-Brand Group */}
-          <div className="flex items-center gap-2.5 sm:gap-3.5">
+          <div className="flex items-center gap-2.5 sm:gap-3 shrink-0">
             <Link to="/" className="flex items-center gap-2.5 group shrink-0 min-h-[44px] min-w-[44px] p-0.5">
               <img
                 src="/assets/clinaza-logo.jpg"
                 alt="CLINAZA"
-                className="h-8 sm:h-9 w-auto rounded-xl border border-slate-200 shadow-2xs group-hover:scale-105 transition-transform"
+                className="h-8 sm:h-9 w-auto rounded-xl border border-slate-200 shadow-2xs group-hover:scale-105 transition-transform shrink-0"
                 width={36}
                 height={36}
               />
-              <div className="hidden xs:block sm:block text-left">
-                <div className="flex items-center gap-1.5">
+              <div className="hidden sm:block text-left shrink-0">
+                <div className="flex items-center gap-1.5 whitespace-nowrap">
                   <span className="text-xs sm:text-[13px] font-extrabold tracking-wider text-[#0B2450]">CLINAZA</span>
                   <span className="text-[8px] font-black uppercase tracking-widest bg-blue-50 text-[#0867E8] px-1.5 py-0.5 rounded border border-blue-200/60">
                     HealthPay
                   </span>
                 </div>
-                <span className="text-[9px] font-bold tracking-wider text-[#0f7a75] block uppercase">Point-of-Care Patient Financing</span>
+                <span className="hidden xl:block text-[9px] font-bold tracking-wider text-[#0f7a75] uppercase whitespace-nowrap">
+                  Point-of-Care Patient Financing
+                </span>
               </div>
             </Link>
 
-            {/* Pine Labs Official Gateway Micro-Pill */}
-            <div className="hidden lg:flex items-center gap-2 px-3 py-1 bg-slate-50/90 border border-slate-200/80 rounded-full">
+            {/* Pine Labs Official Gateway Micro-Pill (visible on ultra-wide screens to maintain breathing room) */}
+            <div className="hidden 2xl:flex items-center gap-2 px-3 py-1 bg-slate-50/90 border border-slate-200/80 rounded-full shrink-0">
               <span className="text-[9px] font-bold uppercase text-slate-400 tracking-wider">Gateway:</span>
               <img
                 src="/assets/plural_by_pinelabs_transparent.png"
@@ -773,30 +775,30 @@ export default function CrmHomepage() {
             </div>
           </div>
 
-          {/* Center Navigation Links (Desktop) */}
-          <div className="hidden md:flex items-center gap-1 text-xs font-semibold text-slate-600">
-            <a href="#how-it-works" className="px-3 py-1.5 rounded-full hover:text-[#0867E8] hover:bg-slate-50 transition-colors">
+          {/* Center Navigation Links (Desktop: lg+) */}
+          <div className="hidden lg:flex items-center gap-0.5 xl:gap-1 text-[11.5px] xl:text-xs font-semibold text-slate-600 shrink-0">
+            <a href="#how-it-works" className="px-2 xl:px-2.5 py-1.5 rounded-full hover:text-[#0867E8] hover:bg-slate-50 transition-colors whitespace-nowrap">
               How It Works
             </a>
-            <a href="#calculator" className="px-3 py-1.5 rounded-full hover:text-[#0867E8] hover:bg-slate-50 transition-colors">
+            <a href="#calculator" className="px-2 xl:px-2.5 py-1.5 rounded-full hover:text-[#0867E8] hover:bg-slate-50 transition-colors whitespace-nowrap">
               Practice ROI
             </a>
-            <a href="#treatments" className="px-3 py-1.5 rounded-full hover:text-[#0867E8] hover:bg-slate-50 transition-colors">
+            <a href="#treatments" className="px-2 xl:px-2.5 py-1.5 rounded-full hover:text-[#0867E8] hover:bg-slate-50 transition-colors whitespace-nowrap">
               Treatments
             </a>
-            <Link to="/tools" className="px-3 py-1.5 rounded-full hover:text-[#0867E8] hover:bg-slate-50 transition-colors">
+            <Link to="/tools" className="px-2 xl:px-2.5 py-1.5 rounded-full hover:text-[#0867E8] hover:bg-slate-50 transition-colors whitespace-nowrap">
               Free Rx Tools
             </Link>
-            <Link to="/blog" className="px-3 py-1.5 rounded-full hover:text-[#0867E8] hover:bg-slate-50 transition-colors">
+            <Link to="/blog" className="px-2 xl:px-2.5 py-1.5 rounded-full hover:text-[#0867E8] hover:bg-slate-50 transition-colors whitespace-nowrap">
               Guides
             </Link>
           </div>
 
           {/* Right Action Group */}
-          <div className="flex items-center gap-1.5 sm:gap-2">
+          <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
             <Link
               to="/reactivation/login"
-              className="flex items-center gap-1.5 px-3 sm:px-3.5 py-2 min-h-[44px] bg-slate-50 hover:bg-slate-100 border border-slate-200 text-xs font-bold text-slate-700 rounded-full transition-all whitespace-nowrap active:scale-95"
+              className="flex items-center gap-1.5 px-3 sm:px-3.5 py-2 min-h-[44px] bg-slate-50 hover:bg-slate-100 border border-slate-200 text-xs font-bold text-slate-700 rounded-full transition-all whitespace-nowrap shrink-0 active:scale-95"
             >
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
               <span className="hidden sm:inline">Doctor </span>Login
@@ -805,10 +807,11 @@ export default function CrmHomepage() {
 
             <Link
               to="/clinic-onboarding"
-              className="px-4 sm:px-5 py-2 sm:py-2.5 min-h-[44px] bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-extrabold uppercase tracking-wider rounded-full transition-all shadow-[0_4px_16px_rgba(8,103,232,0.25)] hover:shadow-[0_6px_20px_rgba(8,103,232,0.35)] flex items-center justify-center gap-1.5 whitespace-nowrap active:scale-95"
+              className="px-3 sm:px-4 xl:px-5 py-2 sm:py-2.5 min-h-[44px] bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-extrabold uppercase tracking-wider rounded-full transition-all shadow-[0_4px_16px_rgba(8,103,232,0.25)] hover:shadow-[0_6px_20px_rgba(8,103,232,0.35)] flex items-center justify-center gap-1.5 whitespace-nowrap shrink-0 active:scale-95"
             >
               <span className="sm:hidden">Onboard</span>
-              <span className="hidden sm:inline">Onboard Clinic &bull; ₹999</span>
+              <span className="hidden sm:inline xl:hidden">Onboard &bull; ₹999</span>
+              <span className="hidden xl:inline">Onboard Clinic &bull; ₹999</span>
               <ArrowRight size={13} />
             </Link>
           </div>

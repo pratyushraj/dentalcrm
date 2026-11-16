@@ -72,6 +72,7 @@ export default function AppRoutes() {
           <Route path="/tools" element={<LazyRoute><FreeToolsHub /></LazyRoute>} />
           <Route path="/rx" element={<LazyRoute><FreeToolsHub /></LazyRoute>} />
           <Route path="/calculator" element={<LazyRoute><FreeToolsHub /></LazyRoute>} />
+          <Route path="/costing" element={<LazyRoute><FreeToolsHub /></LazyRoute>} />
 
           {/* Clinaza SEO Patient & Clinic Guides */}
           <Route path="/blog" element={<LazyRoute><BlogHub /></LazyRoute>} />

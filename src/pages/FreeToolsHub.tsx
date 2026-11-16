@@ -19,24 +19,153 @@ import {
   Search,
   MapPin,
   Globe,
-  ExternalLink
+  ExternalLink,
+  TableProperties,
+  Check,
+  Copy
 } from 'lucide-react';
 
 export default function FreeToolsHub() {
   const location = useLocation();
 
-  const getInitialTab = (): 'rx' | 'setup' | 'emi' | 'seo' => {
+  const getInitialTab = (): 'rx' | 'setup' | 'emi' | 'seo' | 'costing' => {
     if (location.pathname === '/rx') return 'rx';
     if (location.pathname === '/calculator') return 'setup';
+    if (location.pathname === '/costing') return 'costing';
     return 'rx';
   };
 
-  const [activeTab, setActiveTab] = useState<'rx' | 'setup' | 'emi' | 'seo'>(getInitialTab);
+  const [activeTab, setActiveTab] = useState<'rx' | 'setup' | 'emi' | 'seo' | 'costing'>(getInitialTab);
 
   useEffect(() => {
     if (location.pathname === '/rx') setActiveTab('rx');
     else if (location.pathname === '/calculator') setActiveTab('setup');
+    else if (location.pathname === '/costing') setActiveTab('costing');
   }, [location.pathname]);
+
+  // --- Clinical Treatment Costing & Settlement Sheet State ---
+  const [sheetMode, setSheetMode] = useState<'costing' | 'settlement'>('costing');
+  const [costingPatientName, setCostingPatientName] = useState('Ananya Verma');
+  const [costingPatientPhone, setCostingPatientPhone] = useState('+91 98765 43210');
+  const [costingRows, setCostingRows] = useState([
+    { id: 1, tooth: '#11', procedure: 'Straumann SLA Dental Implant + Custom Abutment', category: 'Implants', unitFee: 42000, qty: 1, labCost: 6500 },
+    { id: 2, tooth: '#21', procedure: 'Zirconia Monolithic Crown (15-Yr Warranty)', category: 'Crowns', unitFee: 14000, qty: 1, labCost: 2800 },
+    { id: 3, tooth: '#36', procedure: 'Micro-Endodontic Root Canal + Fiber Post', category: 'Endodontics', unitFee: 8500, qty: 1, labCost: 900 },
+    { id: 4, tooth: 'Full Arch', procedure: 'Clear Invisible Aligners (Moderate Case - 22 Trays)', category: 'Aligners', unitFee: 65000, qty: 1, labCost: 18000 },
+  ]);
+  const [discountPercent, setDiscountPercent] = useState<number>(5);
+  const [downPayment, setDownPayment] = useState<number>(10000);
+  const [costingCopied, setCostingCopied] = useState(false);
+
+  const addCostingRow = () => {
+    setCostingRows([
+      ...costingRows,
+      { id: Date.now(), tooth: '#', procedure: 'New Clinical Procedure', category: 'General', unitFee: 5000, qty: 1, labCost: 1000 }
+    ]);
+  };
+
+  const updateCostingRow = (id: number, field: string, value: any) => {
+    setCostingRows(costingRows.map(row => {
+      if (row.id === id) {
+        return { ...row, [field]: value };
+      }
+      return row;
+    }));
+  };
+
+  const removeCostingRow = (id: number) => {
+    if (costingRows.length <= 1) return;
+    setCostingRows(costingRows.filter(row => row.id !== id));
+  };
+
+  const grossTreatmentTotal = costingRows.reduce((sum, r) => sum + (Number(r.unitFee || 0) * Number(r.qty || 1)), 0);
+  const discountAmount = Math.round((grossTreatmentTotal * (discountPercent || 0)) / 100);
+  const netPayable = Math.max(0, grossTreatmentTotal - discountAmount);
+  const loanPrincipal = Math.max(0, netPayable - (downPayment || 0));
+  const totalLabExpenses = costingRows.reduce((sum, r) => sum + (Number(r.labCost || 0) * Number(r.qty || 1)), 0);
+  const clinicNetProfit = netPayable - totalLabExpenses;
+
+  // Monthly EMIs
+  const emi3Mo = Math.round(loanPrincipal / 3);
+  const emi6Mo = Math.round(loanPrincipal / 6);
+  const emi12Mo = Math.round((loanPrincipal * 1.08) / 12);
+  const emi24Mo = Math.round((loanPrincipal * 1.15) / 24);
+
+  // Settlement sample ledger
+  const settlementLedger = [
+    { id: 'TXN-9021', date: '2026-11-15', patient: 'Vikram Sengupta', procedure: 'Dual Implants & Bone Graft', gross: 88000, partner: 'HDFC Bank (Pine Labs)', mdr: 3.5, status: 'Settled (T+1)' },
+    { id: 'TXN-9022', date: '2026-11-15', patient: 'Pooja Iyer', procedure: 'Clear Aligners (Comprehensive)', gross: 72000, partner: 'ICICI Bank (Pine Labs)', mdr: 3.5, status: 'Settled (T+1)' },
+    { id: 'TXN-9023', date: '2026-11-14', patient: 'Amitav Ghosh', procedure: 'Smile Makeover (6 Veneers)', gross: 95000, partner: 'Bajaj Finserv (EasyCred)', mdr: 4.2, status: 'Settled (T+1)' },
+    { id: 'TXN-9024', date: '2026-11-14', patient: 'Sneha Kulkarni', procedure: 'Surgical Extraction + PRF', gross: 24000, partner: 'Kotak Bank (Pine Labs)', mdr: 3.5, status: 'Settled (T+1)' },
+    { id: 'TXN-9025', date: '2026-11-13', patient: 'Rohan Deshmukh', procedure: 'Full Arch Ceramic Bridge', gross: 66000, partner: 'Axis Bank (Pine Labs)', mdr: 3.8, status: 'Settled (T+1)' },
+  ];
+
+  const downloadCostingCSV = () => {
+    let csv = "Tooth,Procedure,Category,Unit Fee (INR),Qty,Subtotal (INR),Lab Cost (INR)\n";
+    costingRows.forEach(r => {
+      csv += `"${r.tooth}","${r.procedure}","${r.category}",${r.unitFee},${r.qty},${r.unitFee * r.qty},${r.labCost * r.qty}\n`;
+    });
+    csv += `\nGross Total,,,,,${grossTreatmentTotal},\n`;
+    csv += `Clinic Courtesy Discount (${discountPercent}%),,,,,${discountAmount},\n`;
+    csv += `Net Payable,,,,,${netPayable},\n`;
+    csv += `Patient Down Payment,,,,,${downPayment},\n`;
+    csv += `Loan Principal Financed,,,,,${loanPrincipal},\n`;
+    csv += `\nEstimated Monthly EMIs:\n`;
+    csv += `3 Months EMI,,,,,${emi3Mo} / month,\n`;
+    csv += `6 Months EMI,,,,,${emi6Mo} / month,\n`;
+    csv += `12 Months EMI,,,,,${emi12Mo} / month,\n`;
+    csv += `24 Months EMI,,,,,${emi24Mo} / month,\n`;
+
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.setAttribute('download', `Clinaza_Treatment_Costing_${costingPatientName.replace(/\s+/g, '_')}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  const downloadSettlementCSV = () => {
+    let csv = "Txn ID,Date,Patient Name,Procedure,Gross Loan (INR),Partner,MDR Subvention (%),Net T+1 Bank Credit (INR),Status\n";
+    settlementLedger.forEach(s => {
+      const net = Math.round(s.gross * (1 - s.mdr / 100));
+      csv += `"${s.id}","${s.date}","${s.patient}","${s.procedure}",${s.gross},"${s.partner}",${s.mdr}%,${net},"${s.status}"\n`;
+    });
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.setAttribute('download', `Clinaza_Clinic_Settlement_Ledger.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  const copyWhatsAppCostingQuote = () => {
+    const text = `🦷 *CLINAZA TREATMENT ESTIMATE & EMI PLAN*\n` +
+      `Patient: *${costingPatientName}*\n` +
+      `Date: ${new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}\n` +
+      `--------------------------------\n` +
+      costingRows.map((r, i) => `${i + 1}. *${r.tooth}*: ${r.procedure} (₹${(r.unitFee * r.qty).toLocaleString('en-IN')})`).join('\n') +
+      `\n--------------------------------\n` +
+      `💰 *Total Estimate:* ₹${grossTreatmentTotal.toLocaleString('en-IN')}\n` +
+      (discountPercent > 0 ? `🎁 *Clinic Courtesy Discount (${discountPercent}%):* -₹${discountAmount.toLocaleString('en-IN')}\n` : '') +
+      `✨ *Net Payable:* ₹${netPayable.toLocaleString('en-IN')}\n` +
+      (downPayment > 0 ? `💵 *Initial Deposit:* ₹${downPayment.toLocaleString('en-IN')}\n` : '') +
+      `🏥 *Financed Principal:* ₹${loanPrincipal.toLocaleString('en-IN')}\n` +
+      `--------------------------------\n` +
+      `💳 *Instant Patient EMI Options (Pine Labs & 55+ Banks):*\n` +
+      `• *3 Months:* ₹${emi3Mo.toLocaleString('en-IN')}/mo\n` +
+      `• *6 Months:* ₹${emi6Mo.toLocaleString('en-IN')}/mo\n` +
+      `• *12 Months:* ₹${emi12Mo.toLocaleString('en-IN')}/mo\n` +
+      `• *24 Months:* ₹${emi24Mo.toLocaleString('en-IN')}/mo\n` +
+      `--------------------------------\n` +
+      `⚡ *2-minute instant paperless approval with zero clinic khata!*\n` +
+      `Check your instant eligibility: https://www.clinaza.in/#check-eligibility`;
+
+    navigator.clipboard.writeText(text);
+    setCostingCopied(true);
+    setTimeout(() => setCostingCopied(false), 2500);
+  };
 
   // --- Clinic Local SEO & Maps Checker State ---
   const [clinicSearchName, setClinicSearchName] = useState('');
@@ -332,6 +461,17 @@ export default function FreeToolsHub() {
             >
               <Search size={15} className={activeTab === 'seo' ? 'text-indigo-600' : ''} />
               Clinic Google Maps &amp; SEO Audit
+            </button>
+            <button
+              onClick={() => setActiveTab('costing')}
+              className={`px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 ${
+                activeTab === 'costing' 
+                  ? 'bg-white text-slate-950 shadow-lg' 
+                  : 'bg-slate-800/80 text-slate-300 hover:bg-slate-800 border border-slate-700'
+              }`}
+            >
+              <TableProperties size={15} className={activeTab === 'costing' ? 'text-teal-500' : ''} />
+              Treatment Costing &amp; Settlement Sheet
             </button>
           </div>
         </div>
@@ -1154,6 +1294,439 @@ export default function FreeToolsHub() {
                       className="px-5 py-2.5 bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-black uppercase tracking-wider rounded-xl transition-all text-center shadow-md"
                     >
                       Onboard Clinic Free
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* ========================================================================= */}
+        {/* TAB 5: TREATMENT COSTING & SETTLEMENT SPREADSHEET (Univer-Compatible Matrix) */}
+        {/* ========================================================================= */}
+        {activeTab === 'costing' && (
+          <div className="space-y-6">
+            {/* Top Toolbar Card */}
+            <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+              <div>
+                <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-teal-50 border border-teal-200 text-teal-700 text-[10px] font-black uppercase tracking-wider mb-2">
+                  <TableProperties size={11} /> Universal Clinical Spreadsheet Matrix
+                </div>
+                <h2 className="text-xl font-black text-slate-900 mb-1">Dental Treatment Costing &amp; Clinic Settlement Ledger</h2>
+                <p className="text-xs text-slate-600">
+                  Calculate multi-stage patient procedure costs, compute live monthly EMI brackets, and reconcile T+1 bank disbursements.
+                </p>
+              </div>
+
+              {/* View Switcher & Action Buttons */}
+              <div className="flex flex-wrap items-center gap-2 w-full md:w-auto">
+                <div className="inline-flex p-1 bg-slate-100 rounded-xl border border-slate-200 text-xs font-bold">
+                  <button
+                    onClick={() => setSheetMode('costing')}
+                    className={`px-3 py-1.5 rounded-lg transition-all ${
+                      sheetMode === 'costing'
+                        ? 'bg-white text-[#0B2450] shadow-xs'
+                        : 'text-slate-600 hover:text-slate-900'
+                    }`}
+                  >
+                    Patient Costing Sheet
+                  </button>
+                  <button
+                    onClick={() => setSheetMode('settlement')}
+                    className={`px-3 py-1.5 rounded-lg transition-all ${
+                      sheetMode === 'settlement'
+                        ? 'bg-white text-[#0B2450] shadow-xs'
+                        : 'text-slate-600 hover:text-slate-900'
+                    }`}
+                  >
+                    Clinic Settlement Ledger
+                  </button>
+                </div>
+
+                {sheetMode === 'costing' ? (
+                  <>
+                    <button
+                      onClick={copyWhatsAppCostingQuote}
+                      className="px-3.5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-xl transition-all flex items-center gap-1.5 shadow-xs"
+                    >
+                      {costingCopied ? <Check size={13} /> : <MessageSquare size={13} />}
+                      {costingCopied ? 'Copied to WhatsApp!' : 'WhatsApp Quote'}
+                    </button>
+                    <button
+                      onClick={downloadCostingCSV}
+                      className="px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-xl border border-slate-300 transition-all flex items-center gap-1.5"
+                    >
+                      <Download size={13} />
+                      Export CSV
+                    </button>
+                  </>
+                ) : (
+                  <button
+                    onClick={downloadSettlementCSV}
+                    className="px-3.5 py-2 bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-bold rounded-xl transition-all flex items-center gap-1.5 shadow-xs"
+                  >
+                    <Download size={13} />
+                    Export Ledger CSV
+                  </button>
+                )}
+              </div>
+            </div>
+
+            {/* MODE 1: PATIENT TREATMENT COSTING SHEET */}
+            {sheetMode === 'costing' && (
+              <div className="space-y-6">
+                {/* Patient Header Details */}
+                <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4 sm:p-5 grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  <div>
+                    <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block mb-1">Patient Full Name</label>
+                    <input
+                      type="text"
+                      value={costingPatientName}
+                      onChange={(e) => setCostingPatientName(e.target.value)}
+                      placeholder="e.g. Rahul Sharma"
+                      className="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-800 focus:outline-none focus:border-[#0867E8]"
+                    />
+                  </div>
+                  <div>
+                    <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block mb-1">Patient WhatsApp Number</label>
+                    <input
+                      type="text"
+                      value={costingPatientPhone}
+                      onChange={(e) => setCostingPatientPhone(e.target.value)}
+                      placeholder="+91 98765 43210"
+                      className="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-800 focus:outline-none focus:border-[#0867E8]"
+                    />
+                  </div>
+                  <div>
+                    <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block mb-1">Financing Channel</label>
+                    <div className="bg-white border border-slate-200 rounded-xl px-3 py-2 text-xs font-extrabold text-[#0B2450] flex items-center gap-1.5">
+                      <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                      Pine Labs (16+ Banks) &bull; T+1 Disbursed
+                    </div>
+                  </div>
+                </div>
+
+                {/* The Interactive Costing Spreadsheet Grid */}
+                <div className="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden">
+                  <div className="p-4 bg-slate-50 border-b border-slate-200 flex justify-between items-center">
+                    <h3 className="text-xs font-extrabold uppercase tracking-wider text-slate-700 flex items-center gap-2">
+                      <TableProperties size={14} className="text-[#0867E8]" />
+                      Procedure Line Items &bull; Live Calculation Matrix
+                    </h3>
+                    <button
+                      onClick={addCostingRow}
+                      className="px-3 py-1.5 bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-bold rounded-lg transition-all flex items-center gap-1 shadow-xs"
+                    >
+                      <Plus size={12} /> Add Row
+                    </button>
+                  </div>
+
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-left border-collapse text-xs">
+                      <thead>
+                        <tr className="bg-slate-100/80 border-b border-slate-200 text-slate-600 font-extrabold text-[11px] uppercase tracking-wider">
+                          <th className="py-3 px-3 w-20">Tooth / Site</th>
+                          <th className="py-3 px-3">Clinical Procedure / Material</th>
+                          <th className="py-3 px-3 w-28">Category</th>
+                          <th className="py-3 px-3 w-28 text-right">Unit Fee (₹)</th>
+                          <th className="py-3 px-3 w-16 text-center">Qty</th>
+                          <th className="py-3 px-3 w-28 text-right">Lab Cost (₹)</th>
+                          <th className="py-3 px-3 w-28 text-right">Subtotal (₹)</th>
+                          <th className="py-3 px-3 w-12 text-center">Del</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-slate-100">
+                        {costingRows.map((row) => (
+                          <tr key={row.id} className="hover:bg-slate-50/80 transition-colors">
+                            <td className="py-2.5 px-3">
+                              <input
+                                type="text"
+                                value={row.tooth}
+                                onChange={(e) => updateCostingRow(row.id, 'tooth', e.target.value)}
+                                className="w-full bg-white border border-slate-200 rounded-lg px-2 py-1 font-bold text-slate-800 text-xs focus:border-[#0867E8] focus:outline-none"
+                              />
+                            </td>
+                            <td className="py-2.5 px-3">
+                              <input
+                                type="text"
+                                value={row.procedure}
+                                onChange={(e) => updateCostingRow(row.id, 'procedure', e.target.value)}
+                                className="w-full bg-white border border-slate-200 rounded-lg px-2 py-1 text-slate-800 text-xs focus:border-[#0867E8] focus:outline-none"
+                              />
+                            </td>
+                            <td className="py-2.5 px-3">
+                              <select
+                                value={row.category}
+                                onChange={(e) => updateCostingRow(row.id, 'category', e.target.value)}
+                                className="w-full bg-white border border-slate-200 rounded-lg px-2 py-1 text-slate-700 text-xs focus:border-[#0867E8] focus:outline-none"
+                              >
+                                <option value="Implants">Implants</option>
+                                <option value="Aligners">Aligners</option>
+                                <option value="Crowns">Crowns</option>
+                                <option value="Endodontics">Endodontics</option>
+                                <option value="Surgery">Surgery</option>
+                                <option value="General">General</option>
+                              </select>
+                            </td>
+                            <td className="py-2.5 px-3 text-right">
+                              <input
+                                type="number"
+                                value={row.unitFee}
+                                onChange={(e) => updateCostingRow(row.id, 'unitFee', Number(e.target.value))}
+                                className="w-full bg-white border border-slate-200 rounded-lg px-2 py-1 text-right font-bold text-slate-800 text-xs focus:border-[#0867E8] focus:outline-none"
+                              />
+                            </td>
+                            <td className="py-2.5 px-3 text-center">
+                              <input
+                                type="number"
+                                min={1}
+                                max={32}
+                                value={row.qty}
+                                onChange={(e) => updateCostingRow(row.id, 'qty', Number(e.target.value))}
+                                className="w-full bg-white border border-slate-200 rounded-lg px-2 py-1 text-center font-bold text-slate-800 text-xs focus:border-[#0867E8] focus:outline-none"
+                              />
+                            </td>
+                            <td className="py-2.5 px-3 text-right">
+                              <input
+                                type="number"
+                                value={row.labCost}
+                                onChange={(e) => updateCostingRow(row.id, 'labCost', Number(e.target.value))}
+                                className="w-full bg-white border border-slate-200 rounded-lg px-2 py-1 text-right text-slate-500 text-xs focus:border-[#0867E8] focus:outline-none"
+                              />
+                            </td>
+                            <td className="py-2.5 px-3 text-right font-extrabold text-[#0B2450]">
+                              ₹{(row.unitFee * row.qty).toLocaleString('en-IN')}
+                            </td>
+                            <td className="py-2.5 px-3 text-center">
+                              <button
+                                onClick={() => removeCostingRow(row.id)}
+                                className="p-1 hover:bg-rose-50 text-slate-400 hover:text-rose-600 rounded transition-colors"
+                                title="Remove row"
+                              >
+                                <Trash2 size={13} />
+                              </button>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+
+                  {/* Table Footer Controls */}
+                  <div className="p-4 bg-slate-50 border-t border-slate-200 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs font-semibold text-slate-600">
+                    <div className="flex items-center gap-4">
+                      <span>Total Procedure Items: <strong>{costingRows.length}</strong></span>
+                      <span>Total Lab &amp; Material Expense: <strong>₹{totalLabExpenses.toLocaleString('en-IN')}</strong></span>
+                    </div>
+                    <div className="text-right">
+                      <span className="text-emerald-700 font-bold bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">
+                        Estimated Clinic Margin: ₹{clinicNetProfit.toLocaleString('en-IN')} ({grossTreatmentTotal > 0 ? Math.round((clinicNetProfit / netPayable) * 100) : 0}%)
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Financial Summary & EMI Computation Deck */}
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                  {/* Gross Total */}
+                  <div className="bg-white border border-slate-200 rounded-2xl p-4 shadow-xs">
+                    <span className="text-[10px] font-black uppercase tracking-wider text-slate-400 block mb-1">Gross Treatment Fee</span>
+                    <div className="text-xl font-black text-[#0B2450]">
+                      ₹{grossTreatmentTotal.toLocaleString('en-IN')}
+                    </div>
+                    <span className="text-[10px] text-slate-500">Sum of all procedure line items</span>
+                  </div>
+
+                  {/* Discount Control */}
+                  <div className="bg-white border border-slate-200 rounded-2xl p-4 shadow-xs">
+                    <div className="flex justify-between items-center mb-1">
+                      <span className="text-[10px] font-black uppercase tracking-wider text-slate-400 block">Courtesy Discount</span>
+                      <span className="text-xs font-bold text-rose-600">-₹{discountAmount.toLocaleString('en-IN')}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <input
+                        type="range"
+                        min={0}
+                        max={25}
+                        step={1}
+                        value={discountPercent}
+                        onChange={(e) => setDiscountPercent(Number(e.target.value))}
+                        className="w-full accent-[#0867E8]"
+                      />
+                      <span className="text-xs font-extrabold text-[#0B2450] w-10 text-right">{discountPercent}%</span>
+                    </div>
+                    <span className="text-[10px] text-slate-500">Doctor discretionary reduction</span>
+                  </div>
+
+                  {/* Down Payment */}
+                  <div className="bg-white border border-slate-200 rounded-2xl p-4 shadow-xs">
+                    <span className="text-[10px] font-black uppercase tracking-wider text-slate-400 block mb-1">Patient Upfront Deposit</span>
+                    <div className="flex items-center gap-1">
+                      <span className="text-sm font-bold text-slate-400">₹</span>
+                      <input
+                        type="number"
+                        step={1000}
+                        value={downPayment}
+                        onChange={(e) => setDownPayment(Number(e.target.value))}
+                        className="w-full bg-slate-50 border border-slate-200 rounded-lg px-2 py-1 text-sm font-black text-[#0B2450] focus:outline-none focus:border-[#0867E8]"
+                      />
+                    </div>
+                    <span className="text-[10px] text-slate-500">Collected at clinic reception</span>
+                  </div>
+
+                  {/* Net Financed Amount */}
+                  <div className="bg-[#0B2450] text-white border border-slate-800 rounded-2xl p-4 shadow-xs">
+                    <span className="text-[10px] font-black uppercase tracking-wider text-blue-200 block mb-1">Financed via Clinaza EMI</span>
+                    <div className="text-xl font-black text-white">
+                      ₹{loanPrincipal.toLocaleString('en-IN')}
+                    </div>
+                    <span className="text-[10px] text-emerald-300 font-semibold flex items-center gap-1 mt-0.5">
+                      <CheckCircle2 size={11} /> 100% T+1 Disbursed to Clinic
+                    </span>
+                  </div>
+                </div>
+
+                {/* Instant Patient EMI Brackets Deck */}
+                <div className="bg-gradient-to-br from-blue-50/80 via-white to-slate-50 border border-blue-200/60 rounded-2xl p-6 shadow-sm">
+                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-4">
+                    <div>
+                      <h4 className="text-sm font-extrabold text-[#0B2450] flex items-center gap-2">
+                        <Sparkles size={14} className="text-[#0867E8]" />
+                        Instant Point-of-Care Monthly EMI Brackets for Patient
+                      </h4>
+                      <p className="text-xs text-slate-600">
+                        Based on Clinaza's front-desk lending gateway via Pine Labs (HDFC, ICICI, SBI, Axis, Kotak &amp; 16+ banks).
+                      </p>
+                    </div>
+                    <div className="text-[10px] font-black uppercase tracking-wider px-2.5 py-1 bg-blue-100 text-[#0867E8] rounded-full border border-blue-200">
+                      Zero Bad Clinic Debt
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                    <div className="bg-white p-3.5 rounded-xl border border-slate-200 shadow-2xs text-center">
+                      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">3 Months</span>
+                      <div className="text-base font-extrabold text-[#0B2450] my-0.5">
+                        ₹{emi3Mo.toLocaleString('en-IN')}<span className="text-[10px] font-normal text-slate-500">/mo</span>
+                      </div>
+                      <span className="text-[9px] font-bold text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded">Short Tenure</span>
+                    </div>
+
+                    <div className="bg-white p-3.5 rounded-xl border-2 border-[#0867E8] shadow-xs text-center relative">
+                      <span className="absolute -top-2 left-1/2 -translate-x-1/2 text-[8px] font-black uppercase tracking-widest bg-[#0867E8] text-white px-2 py-0.5 rounded-full">
+                        POPULAR
+                      </span>
+                      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">6 Months</span>
+                      <div className="text-base font-extrabold text-[#0867E8] my-0.5">
+                        ₹{emi6Mo.toLocaleString('en-IN')}<span className="text-[10px] font-normal text-slate-500">/mo</span>
+                      </div>
+                      <span className="text-[9px] font-bold text-blue-700 bg-blue-50 px-1.5 py-0.5 rounded">Balanced Plan</span>
+                    </div>
+
+                    <div className="bg-white p-3.5 rounded-xl border border-slate-200 shadow-2xs text-center">
+                      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">12 Months</span>
+                      <div className="text-base font-extrabold text-[#0B2450] my-0.5">
+                        ₹{emi12Mo.toLocaleString('en-IN')}<span className="text-[10px] font-normal text-slate-500">/mo</span>
+                      </div>
+                      <span className="text-[9px] font-bold text-slate-600 bg-slate-100 px-1.5 py-0.5 rounded">Low Monthly</span>
+                    </div>
+
+                    <div className="bg-white p-3.5 rounded-xl border border-slate-200 shadow-2xs text-center">
+                      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">24 Months</span>
+                      <div className="text-base font-extrabold text-[#0B2450] my-0.5">
+                        ₹{emi24Mo.toLocaleString('en-IN')}<span className="text-[10px] font-normal text-slate-500">/mo</span>
+                      </div>
+                      <span className="text-[9px] font-bold text-purple-700 bg-purple-50 px-1.5 py-0.5 rounded">High Value Surgery</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* MODE 2: CLINIC T+1 SETTLEMENT & RECONCILIATION LEDGER */}
+            {sheetMode === 'settlement' && (
+              <div className="space-y-6">
+                {/* Settlement KPI Summary */}
+                <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
+                  <div className="bg-white border border-slate-200 rounded-2xl p-4 shadow-xs">
+                    <span className="text-[10px] font-black uppercase tracking-wider text-slate-400 block mb-1">Total Loan Volume (30D)</span>
+                    <div className="text-xl font-black text-[#0B2450]">₹3,45,000</div>
+                    <span className="text-[10px] text-slate-500">5 Financed Treatments</span>
+                  </div>
+                  <div className="bg-white border border-slate-200 rounded-2xl p-4 shadow-xs">
+                    <span className="text-[10px] font-black uppercase tracking-wider text-slate-400 block mb-1">Net T+1 Bank Disbursals</span>
+                    <div className="text-xl font-black text-emerald-600">₹3,31,200</div>
+                    <span className="text-[10px] text-emerald-700 font-semibold">Credited to Clinic Current A/C</span>
+                  </div>
+                  <div className="bg-white border border-slate-200 rounded-2xl p-4 shadow-xs">
+                    <span className="text-[10px] font-black uppercase tracking-wider text-slate-400 block mb-1">Blended Subvention / MDR</span>
+                    <div className="text-xl font-black text-[#0867E8]">3.7%</div>
+                    <span className="text-[10px] text-slate-500">Pine Labs &amp; Lender Network</span>
+                  </div>
+                  <div className="bg-[#0B2450] text-white border border-slate-800 rounded-2xl p-4 shadow-xs">
+                    <span className="text-[10px] font-black uppercase tracking-wider text-emerald-300 block mb-1">Clinic Bad Debt Risk</span>
+                    <div className="text-xl font-black text-white">₹0</div>
+                    <span className="text-[10px] text-emerald-300 font-semibold flex items-center gap-1 mt-0.5">
+                      <ShieldCheck size={11} /> 100% Non-Recourse to Doctor
+                    </span>
+                  </div>
+                </div>
+
+                {/* Settlement Ledger Table */}
+                <div className="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden">
+                  <div className="p-4 bg-slate-50 border-b border-slate-200 flex justify-between items-center">
+                    <h3 className="text-xs font-extrabold uppercase tracking-wider text-slate-700 flex items-center gap-2">
+                      <Building2 size={14} className="text-emerald-600" />
+                      Clinic Bank Settlement &amp; Payout Audit Log
+                    </h3>
+                    <span className="text-[11px] font-bold text-slate-500">Automated T+1 Pine Labs Direct Deposit</span>
+                  </div>
+
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-left border-collapse text-xs">
+                      <thead>
+                        <tr className="bg-slate-100/80 border-b border-slate-200 text-slate-600 font-extrabold text-[11px] uppercase tracking-wider">
+                          <th className="py-3 px-3">Txn ID</th>
+                          <th className="py-3 px-3">Date</th>
+                          <th className="py-3 px-3">Patient</th>
+                          <th className="py-3 px-3">Procedure</th>
+                          <th className="py-3 px-3 text-right">Gross Loan (₹)</th>
+                          <th className="py-3 px-3">Lending Partner</th>
+                          <th className="py-3 px-3 text-center">MDR</th>
+                          <th className="py-3 px-3 text-right">Net Bank Credit (₹)</th>
+                          <th className="py-3 px-3 text-center">Status</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-slate-100">
+                        {settlementLedger.map((s) => {
+                          const netCredit = Math.round(s.gross * (1 - s.mdr / 100));
+                          return (
+                            <tr key={s.id} className="hover:bg-slate-50/80 transition-colors">
+                              <td className="py-3 px-3 font-mono font-bold text-slate-700">{s.id}</td>
+                              <td className="py-3 px-3 text-slate-600">{s.date}</td>
+                              <td className="py-3 px-3 font-bold text-[#0B2450]">{s.patient}</td>
+                              <td className="py-3 px-3 text-slate-600">{s.procedure}</td>
+                              <td className="py-3 px-3 text-right font-bold text-slate-900">₹{s.gross.toLocaleString('en-IN')}</td>
+                              <td className="py-3 px-3 text-slate-600 font-medium">{s.partner}</td>
+                              <td className="py-3 px-3 text-center font-bold text-slate-500">{s.mdr}%</td>
+                              <td className="py-3 px-3 text-right font-extrabold text-emerald-600">₹{netCredit.toLocaleString('en-IN')}</td>
+                              <td className="py-3 px-3 text-center">
+                                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-black bg-emerald-50 text-emerald-700 border border-emerald-200">
+                                  <CheckCircle2 size={10} /> {s.status}
+                                </span>
+                              </td>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
+                  </div>
+
+                  <div className="p-4 bg-slate-50 border-t border-slate-200 flex flex-col sm:flex-row justify-between items-center gap-3 text-xs text-slate-500">
+                    <p>💡 All loans are disbursed non-recourse: patient repayments are collected directly by lending banks.</p>
+                    <Link to="/clinic-onboarding" className="text-[#0867E8] font-bold hover:underline flex items-center gap-1">
+                      Link Verified Current Account for T+1 Payouts →
                     </Link>
                   </div>
                 </div>

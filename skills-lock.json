@@ -1,11 +1,59 @@
 {
   "version": 2,
   "skills": {
+    "enhance-prompt": {
+      "source": "google-labs-code/stitch-skills",
+      "sourceType": "github",
+      "skillPath": "plugins/stitch-utilities/skills/enhance-prompt/SKILL.md",
+      "computedHash": "db82ccce387dbe18310325d77e66d72f2d64948838dfb456103d558c58c62dbb"
+    },
     "modern-web-guidance": {
       "source": "GoogleChrome/modern-web-guidance",
       "sourceType": "github",
       "skillPath": "skills/modern-web-guidance/SKILL.md",
       "computedHash": "9e69ce00dc314b64f6664031b70295ea46c7de93ac682c624808df6e48e08b66"
+    },
+    "react-vite-dashboard": {
+      "source": "google-labs-code/stitch-skills",
+      "sourceType": "github",
+      "skillPath": "plugins/stitch-build/skills/react-vite-dashboard/SKILL.md",
+      "computedHash": "51579332c6abffcbf325e91a63468f4fd44216abc2187ad24ead213fe8f19800"
+    },
+    "remotion": {
+      "source": "google-labs-code/stitch-skills",
+      "sourceType": "github",
+      "skillPath": "plugins/stitch-build/skills/remotion/SKILL.md",
+      "computedHash": "394d5cfcb175f4db20c7e2a45ee8580f72c5c81d1c409a0b0a73fb33956e0921"
+    },
+    "stitch-loop": {
+      "source": "google-labs-code/stitch-skills",
+      "sourceType": "github",
+      "skillPath": "plugins/stitch-utilities/skills/stitch-loop/SKILL.md",
+      "computedHash": "23e76b90139337f40e9fe270144e34942215a8f896183dbf62f0454b872ee4c2"
+    },
+    "stitch::extract-design-md": {
+      "source": "google-labs-code/stitch-skills",
+      "sourceType": "github",
+      "skillPath": "plugins/stitch-design/skills/extract-design-md/SKILL.md",
+      "computedHash": "ebbb969798ca2c97764cc42f1378bdb532202bfa40d0d393414a46857d303454"
+    },
+    "taste-design": {
+      "source": "google-labs-code/stitch-skills",
+      "sourceType": "github",
+      "skillPath": "plugins/stitch-utilities/skills/taste-design/SKILL.md",
+      "computedHash": "4ff03a5f77abd909807af1f9921266483caf14eed4f1228bcfc3b4fa93bda4b4"
+    },
+    "univer-cli": {
+      "source": "dream-num/skills",
+      "sourceType": "github",
+      "skillPath": "skills/univer-cli/SKILL.md",
+      "computedHash": "09fc06720618356eded8d06d757cb60c42d616f0faeb8fa479b45759585a1589"
+    },
+    "univer-integrate": {
+      "source": "dream-num/skills",
+      "sourceType": "github",
+      "skillPath": "skills/univer-integrate/SKILL.md",
+      "computedHash": "09e6742e8dae872e3f5a95466026541bd680db9a258983af3b22ec7feda4e274"
     }
   }
 }

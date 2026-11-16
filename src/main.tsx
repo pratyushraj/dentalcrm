@@ -2,7 +2,12 @@ import { validateEnv, silenceConsoleInProduction } from "./lib/validateEnv";
 
 // Handle Vite dynamic import errors (when new version is deployed)
 window.addEventListener('vite:preloadError', () => {
-  window.location.reload();
+  const lastReload = Number(sessionStorage.getItem('clinaza-chunk-reload-ts') || 0);
+  const now = Date.now();
+  if (now - lastReload > 10000) {
+    sessionStorage.setItem('clinaza-chunk-reload-ts', String(now));
+    window.location.reload();
+  }
 });
 
 window.addEventListener('error', (e) => {
@@ -15,13 +20,14 @@ window.addEventListener('error', (e) => {
   if (
     e.message?.includes('Failed to fetch dynamically imported module') || 
     e.message?.includes('Importing a module script failed') ||
+    e.message?.includes('error loading dynamically imported module') ||
     e.message?.includes('module script but the server responded with a MIME type of "text/html"')
   ) {
     // Avoid infinite reloads if the server is actually returning HTML for assets
-    const lastReload = Number(sessionStorage.getItem('ca-last-reload') || 0);
+    const lastReload = Number(sessionStorage.getItem('clinaza-chunk-reload-ts') || 0);
     const now = Date.now();
-    if (now - lastReload > 5000) {
-      sessionStorage.setItem('ca-last-reload', String(now));
+    if (now - lastReload > 10000) {
+      sessionStorage.setItem('clinaza-chunk-reload-ts', String(now));
       window.location.reload();
     }
   }
@@ -36,12 +42,13 @@ window.addEventListener('unhandledrejection', (e) => {
 
   if (
     e.reason?.message?.includes('Failed to fetch dynamically imported module') || 
-    e.reason?.message?.includes('Importing a module script failed')
+    e.reason?.message?.includes('Importing a module script failed') ||
+    e.reason?.message?.includes('error loading dynamically imported module')
   ) {
-    const lastReload = Number(sessionStorage.getItem('ca-last-reload') || 0);
+    const lastReload = Number(sessionStorage.getItem('clinaza-chunk-reload-ts') || 0);
     const now = Date.now();
-    if (now - lastReload > 5000) {
-      sessionStorage.setItem('ca-last-reload', String(now));
+    if (now - lastReload > 10000) {
+      sessionStorage.setItem('clinaza-chunk-reload-ts', String(now));
       window.location.reload();
     }
   }

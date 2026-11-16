@@ -5,8 +5,8 @@
  * Used by ErrorBoundary components throughout the app
  */
 
-import React from 'react';
-import { AlertTriangle, RefreshCw, Home } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { AlertTriangle, RefreshCw, Home, Sparkles } from 'lucide-react';
 import { BaseCard } from '@/components/ui/card-variants';
 import { typography, spacing, iconSizes, buttons, gradients } from '@/lib/design-system';
 import { motion } from 'framer-motion';
@@ -38,16 +38,48 @@ export const ErrorFallback: React.FC<ErrorFallbackProps> = ({
 }) => {
   const debug = isDebugEnabled();
 
+  const isChunkError = Boolean(
+    error?.message?.includes('Failed to fetch dynamically imported module') ||
+    error?.message?.includes('Importing a module script failed') ||
+    error?.message?.includes('Loading chunk') ||
+    error?.message?.includes('error loading dynamically imported module') ||
+    error?.message?.includes('MIME type of "text/html"') ||
+    error?.name === 'ChunkLoadError'
+  );
+
+  const [isAutoReloading, setIsAutoReloading] = useState(false);
+
+  useEffect(() => {
+    if (!isChunkError) return;
+    const lastReload = Number(sessionStorage.getItem('clinaza-chunk-reload-ts') || 0);
+    const now = Date.now();
+    // Guard against reload loops; auto-reload at most once every 10 seconds
+    if (now - lastReload > 10000) {
+      sessionStorage.setItem('clinaza-chunk-reload-ts', String(now));
+      setIsAutoReloading(true);
+      const timer = setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [isChunkError]);
+
+  const handleRetry = () => {
+    if (isChunkError) {
+      window.location.reload();
+    } else {
+      resetError();
+    }
+  };
+
   const handleGoHome = () => {
     resetError();
-    // Use window.location with hash for HashRouter compatibility
-    // This works even when ErrorBoundary is rendered outside Router context
-    window.location.href = '/creator-dashboard';
+    window.location.href = '/';
   };
 
   const handleCopyError = async () => {
     const payload = [
-      `Title: ${title || 'Something went wrong'}`,
+      `Title: ${title || (isChunkError ? 'New Version Available' : 'Something went wrong')}`,
       error ? `Name: ${error.name}` : '',
       error ? `Message: ${error.message}` : '',
       error?.stack ? `Stack:\n${error.stack}` : '',
@@ -60,39 +92,66 @@ export const ErrorFallback: React.FC<ErrorFallbackProps> = ({
     }
   };
 
+  const resolvedTitle = title || (
+    isChunkError
+      ? (isAutoReloading ? 'Updating Clinaza...' : 'New Version Available')
+      : 'Something went wrong'
+  );
+
+  const resolvedDescription = description || (
+    isChunkError
+      ? (isAutoReloading 
+          ? 'A newer version of Clinaza has been deployed. Refreshing your browser to load the latest features...'
+          : 'A new deployment is active. Please reload your browser to load the latest features.')
+      : (error?.message || 'An unexpected error occurred. Please try again.')
+  );
+
   const content = (
     <div className="text-center text-muted-foreground dark:text-foreground">
       <motion.div
         initial={{ scale: 0.8, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
-        className="w-16 h-16 rounded-full bg-destructive/20 flex items-center justify-center mx-auto mb-4"
+        className={`w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 ${
+          isChunkError 
+            ? 'bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-800 text-blue-600 dark:text-blue-400 shadow-sm'
+            : 'bg-destructive/15 border border-destructive/20 text-destructive'
+        }`}
       >
-        <AlertTriangle className={`${iconSizes.xl} text-destructive`} />
+        {isChunkError ? (
+          <RefreshCw className={`${iconSizes.xl} ${isAutoReloading ? 'animate-spin' : ''}`} />
+        ) : (
+          <AlertTriangle className={`${iconSizes.xl}`} />
+        )}
       </motion.div>
       
-      <h2 className={`${typography.h3} mb-2 text-muted-foreground dark:text-foreground`}>
-        {title || 'Something went wrong'}
+      <h2 className={`${typography.h3} mb-2 text-foreground font-bold tracking-tight`}>
+        {resolvedTitle}
       </h2>
       
-      <p className={`${typography.bodySmall} mb-6 max-w-md mx-auto text-muted-foreground dark:text-foreground/80`}>
-        {description || error?.message || 'An unexpected error occurred. Please try again.'}
+      <p className={`${typography.bodySmall} mb-6 max-w-md mx-auto text-muted-foreground dark:text-foreground/80 leading-relaxed`}>
+        {resolvedDescription}
       </p>
 
       <div className="flex flex-col sm:flex-row gap-3 justify-center">
-        <button type="button"
-          onClick={resetError}
+        <button
+          type="button"
+          onClick={handleRetry}
           className={`${buttons.primary} flex items-center justify-center gap-2`}
         >
-          <RefreshCw className={iconSizes.md} />
-          Try Again
+          <RefreshCw className={`${iconSizes.md} ${isAutoReloading ? 'animate-spin' : ''}`} />
+          {isChunkError 
+            ? (isAutoReloading ? 'Reloading...' : 'Reload App')
+            : 'Try Again'
+          }
         </button>
         
-        <button type="button"
+        <button
+          type="button"
           onClick={handleGoHome}
           className={`${buttons.secondary} flex items-center justify-center gap-2`}
         >
           <Home className={iconSizes.md} />
-          Go Home
+          Go to Clinaza Home
         </button>
       </div>
 
@@ -129,7 +188,7 @@ export const ErrorFallback: React.FC<ErrorFallbackProps> = ({
   if (variant === 'modal') {
     return (
       <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
-        <BaseCard variant="primary" className="max-w-md w-full">
+        <BaseCard variant="primary" className="max-w-md w-full shadow-2xl">
           {content}
         </BaseCard>
       </div>
@@ -139,7 +198,7 @@ export const ErrorFallback: React.FC<ErrorFallbackProps> = ({
   // Full page variant
   return (
     <div className={`nb-screen-height ${gradients.page} flex items-center justify-center ${spacing.page}`}>
-      <BaseCard variant="primary" className="max-w-lg w-full">
+      <BaseCard variant="primary" className="max-w-lg w-full shadow-2xl">
         {content}
       </BaseCard>
     </div>

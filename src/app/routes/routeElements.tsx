@@ -11,7 +11,7 @@ const RouteFallback = () => (
 );
 
 export const LazyRoute = ({ children }: { children: ReactNode }) => (
-  <ErrorBoundary variant="inline">
+  <ErrorBoundary variant="full">
     <Suspense fallback={<RouteFallback />}>{children}</Suspense>
   </ErrorBoundary>
 );

@@ -9,13 +9,14 @@ const razorpay = new Razorpay({
   key_secret: RAZORPAY_KEY_SECRET
 });
 
-// Plural config
+// Plural / Pine Labs config
 const PLURAL_ENV = process.env.PLURAL_ENV || 'staging';
 const PLURAL_BASE_URL = PLURAL_ENV === 'production'
   ? 'https://api.pluralpay.in'
   : 'https://pluraluat.v2.pinepg.in';
-const PLURAL_CLIENT_ID = process.env.PLURAL_CLIENT_ID || '31ace78b-4116-4a2c-9828-9b622042c2c7';
-const PLURAL_CLIENT_SECRET = process.env.PLURAL_CLIENT_SECRET || 'dfa924c1a93b4ac18b8199c708325452';
+const PLURAL_MID = process.env.PLURAL_MID || '111077';
+const PLURAL_CLIENT_ID = process.env.PLURAL_CLIENT_ID || '59194fe5-4c27-4e6e-8deb-4e59f8f4fd7b';
+const PLURAL_CLIENT_SECRET = process.env.PLURAL_CLIENT_SECRET || '024dd66a367549b380bd322ff6c3b279';
 
 let cachedPluralToken = null;
 let pluralTokenExpiresAt = 0;

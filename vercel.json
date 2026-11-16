@@ -133,6 +133,18 @@
       "destination": "/api/meta"
     },
     {
+      "source": "/clinic-agreement",
+      "destination": "/api/meta"
+    },
+    {
+      "source": "/sub-merchant-terms",
+      "destination": "/api/meta"
+    },
+    {
+      "source": "/sub-merchant-agreement",
+      "destination": "/api/meta"
+    },
+    {
       "source": "/terms",
       "destination": "/api/meta"
     },
@@ -177,7 +189,7 @@
       "destination": "/api/meta"
     },
     {
-      "source": "/((?!api/|assets/|favicon|.*\\.(?:jpg|jpeg|png|webp|svg|ico|json|txt|xml)|sw\\.js|site\\.webmanifest|manifest\\.json).*)",
+      "source": "/((?!api/|assets/|docs/|favicon|.*\\.(?:jpg|jpeg|png|webp|svg|ico|json|txt|xml|pdf|docx|xlsx)|sw\\.js|site\\.webmanifest|manifest\\.json).*)",
       "destination": "/index.html"
     }
   ]

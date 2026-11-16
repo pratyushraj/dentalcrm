@@ -84,6 +84,21 @@ const STATIC_ROUTES = {
     image: 'https://www.clinaza.in/og-partner-pipeline.png',
     robots: 'noindex, nofollow'
   },
+  '/clinic-agreement': {
+    title: 'Clinic Master Services & Sub-Merchant Agreement | Clinaza',
+    desc: 'Standard bilateral agreement governing dental clinic onboarding, sub-merchant MID mapping, point-of-care payment collection, and T+1 patient EMI settlement under RBI guidelines.',
+    h1: 'Clinic Master Services & Sub-Merchant Agreement'
+  },
+  '/sub-merchant-terms': {
+    title: 'Clinic Sub-Merchant Agreement | Clinaza',
+    desc: 'Standard bilateral agreement governing dental clinic onboarding, sub-merchant MID mapping, point-of-care payment collection, and T+1 patient EMI settlement under RBI guidelines.',
+    h1: 'Clinic Master Services & Sub-Merchant Agreement'
+  },
+  '/sub-merchant-agreement': {
+    title: 'Clinic Sub-Merchant Agreement | Clinaza',
+    desc: 'Standard bilateral agreement governing dental clinic onboarding, sub-merchant MID mapping, point-of-care payment collection, and T+1 patient EMI settlement under RBI guidelines.',
+    h1: 'Clinic Master Services & Sub-Merchant Agreement'
+  },
   '/terms': {
     title: 'Terms of Service | Clinaza',
     desc: 'Terms of service and operating conditions for Clinaza healthcare financing platform. Owned and operated by MELLOWPRINTS (GSTIN: 10DXRPR3052Q1ZV, Patna, Bihar).',

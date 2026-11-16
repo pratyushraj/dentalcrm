@@ -456,7 +456,7 @@ export default function CrmHomepage() {
     <div className="min-h-screen bg-white text-[#0B2450] font-jakarta antialiased overflow-x-hidden selection:bg-[#0867E8] selection:text-white">
       <SEOHead
         title="Clinaza — Point-of-Care Patient Financing & Healthcare EMIs India"
-        description="Enable instant 2-minute paperless patient EMIs (₹30K–₹5L) across 16+ major banks for dental, IVF & surgery clinics. Direct T+1 settlement with zero default risk."
+        description="Enable instant 2-minute paperless patient treatment financing & EMIs (₹30K–₹5L) across 16+ major banks for dental, IVF & surgery clinics. Direct T+1 settlement with zero default risk."
         keywords={[
           'clinaza', 'clinaza patient financing', 'clinaza healthpay', 'clinaza healthcare emi',
           'point of care patient financing', 'dental treatment on emi', 'dental implants emi',

@@ -11,7 +11,7 @@ const CHECKS = [
   {
     path: '/',
     expectedTitleSnippet: 'Clinaza',
-    expectedDescSnippet: 'treatment'
+    expectedDescSnippet: 'patient'
   },
   {
     path: '/tools',

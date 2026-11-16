@@ -51,6 +51,10 @@
   ],
   "rewrites": [
     {
+      "source": "/api/webhook/:provider",
+      "destination": "/api/webhook?provider=:provider"
+    },
+    {
       "source": "/api/push/:path*",
       "destination": "https://creatorarmour-api-k86q.onrender.com/api/push/:path*"
     },

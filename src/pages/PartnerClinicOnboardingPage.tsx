@@ -87,8 +87,13 @@ export default function PartnerClinicOnboardingPage() {
   const [paymentId, setPaymentId] = useState<string | null>(null);
   const [savedClinicId, setSavedClinicId] = useState<string>('');
   const [websiteReady, setWebsiteReady] = useState<'yes' | 'no'>('no');
+  const [agreedToAgreement, setAgreedToAgreement] = useState(true);
 
   const handlePayWithRazorpay = () => {
+    if (!agreedToAgreement) {
+      toast.error('Please accept the Clinic Sub-Merchant Agreement to proceed with onboarding.');
+      return;
+    }
     initiateRazorpayPayment({
       amount: RAZORPAY_CONFIG.kitAmount,
       name: 'CLINAZA',
@@ -483,6 +488,24 @@ export default function PartnerClinicOnboardingPage() {
                         <span><strong>Dedicated Relationship Manager:</strong> WhatsApp priority desk &amp; staff pitch cards.</span>
                       </li>
                     </ul>
+
+                    {/* Agreement Acceptance Checkbox */}
+                    <div className="flex items-start gap-2.5 pt-1 text-xs text-slate-600 bg-blue-50/70 border border-blue-100 rounded-xl p-3">
+                      <input
+                        type="checkbox"
+                        id="agreeTerms"
+                        checked={agreedToAgreement}
+                        onChange={(e) => setAgreedToAgreement(e.target.checked)}
+                        className="mt-0.5 h-4 w-4 rounded border-slate-300 text-[#0867E8] focus:ring-[#0867E8] cursor-pointer shrink-0"
+                      />
+                      <label htmlFor="agreeTerms" className="cursor-pointer select-none leading-relaxed text-[11.5px] text-slate-700">
+                        I accept the{' '}
+                        <Link to="/clinic-agreement" target="_blank" className="text-[#0867E8] font-bold underline hover:text-blue-800">
+                          Clinic Master Services &amp; Sub-Merchant Agreement
+                        </Link>{' '}
+                        and authorize Clinaza &amp; licensed payment partners to map our clinic under the Sub-Merchant Model for payment collection and T+1 patient EMI settlement.
+                      </label>
+                    </div>
 
                     {/* Razorpay CTA Button */}
                     <div className="space-y-2 pt-1">

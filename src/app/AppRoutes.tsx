@@ -24,6 +24,7 @@ const ClinicKycUploadPage = lazy(() => import("@/pages/ClinicKycUploadPage"));
 const AdminClinicOnboardingsPage = lazy(() => import("@/pages/AdminClinicOnboardingsPage"));
 const PartnerPipelinePreviewPage = lazy(() => import("@/pages/PartnerPipelinePreviewPage"));
 const TermsPage = lazy(() => import("@/pages/TermsPage"));
+const ClinicAgreementPage = lazy(() => import("@/pages/ClinicAgreementPage"));
 const PrivacyPolicyPage = lazy(() => import("@/pages/PrivacyPolicyPage"));
 const RefundPolicyPage = lazy(() => import("@/pages/RefundPolicyPage"));
 const ShippingPolicyPage = lazy(() => import("@/pages/ShippingPolicyPage"));
@@ -95,7 +96,10 @@ export default function AppRoutes() {
           {/* Reactivation Dashboard Portal Routes */}
           {ReactivationRoutes()}
 
-          {/* Mandatory Regulatory & Legal Compliance Routes (Razorpay / RBI / MeitY) */}
+          {/* Mandatory Regulatory & Legal Compliance Routes (Razorpay / Easebuzz / RBI / MeitY) */}
+          <Route path="/clinic-agreement" element={<LazyRoute><ClinicAgreementPage /></LazyRoute>} />
+          <Route path="/sub-merchant-terms" element={<Navigate to="/clinic-agreement" replace />} />
+          <Route path="/sub-merchant-agreement" element={<Navigate to="/clinic-agreement" replace />} />
           <Route path="/terms" element={<LazyRoute><TermsPage /></LazyRoute>} />
           <Route path="/terms-and-conditions" element={<Navigate to="/terms" replace />} />
           <Route path="/privacy" element={<LazyRoute><PrivacyPolicyPage /></LazyRoute>} />

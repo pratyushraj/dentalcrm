@@ -114,6 +114,8 @@ export const LegalPageLayout: React.FC<LegalPageLayoutProps> = ({
             <p className="text-[11px] text-slate-400 mt-0.5">Sharma Sadan, Road No-1, Mahesh Nagar, Patna, Bihar - 800024</p>
           </div>
           <div className="flex flex-wrap items-center justify-center gap-4 text-xs font-medium text-slate-600">
+            <Link to="/clinic-agreement" className="hover:text-[#0867E8] transition-colors font-semibold">Clinic Sub-Merchant Agreement</Link>
+            <span>&bull;</span>
             <Link to="/terms" className="hover:text-[#0867E8] transition-colors">Terms of Service</Link>
             <span>&bull;</span>
             <Link to="/privacy" className="hover:text-[#0867E8] transition-colors">Privacy Policy</Link>

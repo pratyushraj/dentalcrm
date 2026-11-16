@@ -53,13 +53,13 @@ export const ErrorFallback: React.FC<ErrorFallbackProps> = ({
     if (!isChunkError) return;
     const lastReload = Number(sessionStorage.getItem('clinaza-chunk-reload-ts') || 0);
     const now = Date.now();
-    // Guard against reload loops; auto-reload at most once every 10 seconds
-    if (now - lastReload > 10000) {
+    // Guard against reload loops; auto-reload at most once every 3 seconds
+    if (now - lastReload > 3000) {
       sessionStorage.setItem('clinaza-chunk-reload-ts', String(now));
       setIsAutoReloading(true);
       const timer = setTimeout(() => {
         window.location.reload();
-      }, 1000);
+      }, 500);
       return () => clearTimeout(timer);
     }
   }, [isChunkError]);
@@ -92,19 +92,15 @@ export const ErrorFallback: React.FC<ErrorFallbackProps> = ({
     }
   };
 
-  const resolvedTitle = title || (
-    isChunkError
-      ? (isAutoReloading ? 'Updating Clinaza...' : 'New Version Available')
-      : 'Something went wrong'
-  );
+  const resolvedTitle = isChunkError
+    ? (isAutoReloading ? 'Updating Clinaza...' : 'New Version Available')
+    : (title || 'Something went wrong');
 
-  const resolvedDescription = description || (
-    isChunkError
-      ? (isAutoReloading 
-          ? 'A newer version of Clinaza has been deployed. Refreshing your browser to load the latest features...'
-          : 'A new deployment is active. Please reload your browser to load the latest features.')
-      : (error?.message || 'An unexpected error occurred. Please try again.')
-  );
+  const resolvedDescription = isChunkError
+    ? (isAutoReloading 
+        ? 'A newer version of Clinaza has been deployed. Refreshing your browser to load the latest features...'
+        : 'A new deployment is active. Please reload your browser to load the latest features.')
+    : (description || error?.message || 'An unexpected error occurred. Please try again.');
 
   const content = (
     <div className="text-center text-muted-foreground dark:text-foreground">

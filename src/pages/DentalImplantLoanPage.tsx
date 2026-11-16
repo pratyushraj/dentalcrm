@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { SEOHead } from '@/components/seo/SEOHead';
 import { ShieldCheck, CheckCircle2, ArrowRight, Calculator, Clock, CreditCard, Sparkles, Building2 } from 'lucide-react';
+import { ReadingProgressBar } from '@/components/ReadingProgressBar';
 
 export default function DentalImplantLoanPage() {
   const [loanAmount, setLoanAmount] = useState(60000);
@@ -45,6 +46,7 @@ export default function DentalImplantLoanPage() {
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col justify-between">
+      <ReadingProgressBar />
       <SEOHead
         title="Dental Implant Loan & EMI in India (From ₹2,400/mo)"
         description="Get a dental implant loan in India. Finance single tooth, multiple implants & All-on-4 with flexible monthly EMI from ~11.5% p.a. 2-min digital approval."

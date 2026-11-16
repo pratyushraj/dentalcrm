@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { SEOHead } from '@/components/seo/SEOHead';
 import { ShieldCheck, CheckCircle2, ArrowRight, Calculator, Clock, CreditCard, Sparkles, Smile } from 'lucide-react';
+import { ReadingProgressBar } from '@/components/ReadingProgressBar';
 
 export default function ClearAlignersEmiPage() {
   const [loanAmount, setLoanAmount] = useState(65000);
@@ -45,6 +46,7 @@ export default function ClearAlignersEmiPage() {
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col justify-between">
+      <ReadingProgressBar />
       <SEOHead
         title="Clear Aligners Cost on EMI in India (From ₹2,600/mo)"
         description="Looking for clear aligners on EMI in India? Compare Invisalign, Flash & Toothsi alternatives with flexible monthly financing from ~11.5% p.a. 2-min approval."

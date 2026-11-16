@@ -1,10 +1,11 @@
 import { validateEnv, silenceConsoleInProduction } from "./lib/validateEnv";
 
 // Handle Vite dynamic import errors (when new version is deployed)
-window.addEventListener('vite:preloadError', () => {
+window.addEventListener('vite:preloadError', (event) => {
+  event.preventDefault();
   const lastReload = Number(sessionStorage.getItem('clinaza-chunk-reload-ts') || 0);
   const now = Date.now();
-  if (now - lastReload > 10000) {
+  if (now - lastReload > 3000) {
     sessionStorage.setItem('clinaza-chunk-reload-ts', String(now));
     window.location.reload();
   }
@@ -26,7 +27,7 @@ window.addEventListener('error', (e) => {
     // Avoid infinite reloads if the server is actually returning HTML for assets
     const lastReload = Number(sessionStorage.getItem('clinaza-chunk-reload-ts') || 0);
     const now = Date.now();
-    if (now - lastReload > 10000) {
+    if (now - lastReload > 3000) {
       sessionStorage.setItem('clinaza-chunk-reload-ts', String(now));
       window.location.reload();
     }
@@ -47,7 +48,7 @@ window.addEventListener('unhandledrejection', (e) => {
   ) {
     const lastReload = Number(sessionStorage.getItem('clinaza-chunk-reload-ts') || 0);
     const now = Date.now();
-    if (now - lastReload > 10000) {
+    if (now - lastReload > 3000) {
       sessionStorage.setItem('clinaza-chunk-reload-ts', String(now));
       window.location.reload();
     }

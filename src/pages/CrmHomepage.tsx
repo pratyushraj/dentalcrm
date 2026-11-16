@@ -807,12 +807,15 @@ export default function CrmHomepage() {
 
             <Link
               to="/clinic-onboarding"
-              className="px-3 sm:px-4 xl:px-5 py-2 sm:py-2.5 min-h-[44px] bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-extrabold uppercase tracking-wider rounded-full transition-all shadow-[0_4px_16px_rgba(8,103,232,0.25)] hover:shadow-[0_6px_20px_rgba(8,103,232,0.35)] flex items-center justify-center gap-1.5 whitespace-nowrap shrink-0 active:scale-95"
+              className="relative overflow-hidden group px-3 sm:px-4 xl:px-5 py-2 sm:py-2.5 min-h-[44px] bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-extrabold uppercase tracking-wider rounded-full transition-all shadow-[0_4px_16px_rgba(8,103,232,0.25)] hover:shadow-[0_6px_20px_rgba(8,103,232,0.35)] flex items-center justify-center gap-1.5 whitespace-nowrap shrink-0 active:scale-95"
             >
-              <span className="sm:hidden">Onboard</span>
-              <span className="hidden sm:inline xl:hidden">Onboard &bull; ₹999</span>
-              <span className="hidden xl:inline">Onboard Clinic &bull; ₹999</span>
-              <ArrowRight size={13} />
+              <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-full" aria-hidden="true">
+                <div className="w-16 h-full bg-gradient-to-r from-transparent via-white/35 to-transparent absolute top-0 -left-16 animate-cta-sheen" />
+              </div>
+              <span className="sm:hidden relative z-10">Onboard</span>
+              <span className="hidden sm:inline xl:hidden relative z-10">Onboard &bull; ₹999</span>
+              <span className="hidden xl:inline relative z-10">Onboard Clinic &bull; ₹999</span>
+              <ArrowRight size={13} className="relative z-10" />
             </Link>
           </div>
         </nav>
@@ -854,10 +857,13 @@ export default function CrmHomepage() {
               <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 pt-1">
                 <Link
                   to="/clinic-onboarding"
-                  className="px-6 sm:px-7 py-3.5 sm:py-4 bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs sm:text-sm font-extrabold uppercase tracking-wider rounded-2xl transition-all flex items-center justify-center gap-2 shadow-[0_10px_25px_rgba(8,103,232,0.25)] hover:shadow-[0_14px_30px_rgba(8,103,232,0.35)] active:scale-95"
+                  className="relative overflow-hidden group px-6 sm:px-7 py-3.5 sm:py-4 bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs sm:text-sm font-extrabold uppercase tracking-wider rounded-2xl transition-all flex items-center justify-center gap-2 shadow-[0_10px_25px_rgba(8,103,232,0.25)] hover:shadow-[0_14px_30px_rgba(8,103,232,0.35)] active:scale-95"
                 >
-                  <span>Onboard Clinic &bull; ₹999 Setup</span>
-                  <ArrowRight size={15} />
+                  <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-2xl" aria-hidden="true">
+                    <div className="w-20 h-full bg-gradient-to-r from-transparent via-white/35 to-transparent absolute top-0 -left-20 animate-cta-sheen" />
+                  </div>
+                  <span className="relative z-10">Onboard Clinic &bull; ₹999 Setup</span>
+                  <ArrowRight size={15} className="relative z-10" />
                 </Link>
                 <button
                   type="button"
@@ -2077,7 +2083,7 @@ export default function CrmHomepage() {
                   <Link 
                     key={idx} 
                     to={cat.link}
-                    className="bg-white border border-slate-200 hover:border-[#0867E8]/60 p-5 rounded-2xl space-y-3 transition-all duration-300 hover:-translate-y-1 hover:shadow-md group block active:scale-[0.98]"
+                    className="bg-white border border-slate-200 hover:border-[#0867E8]/60 p-5 rounded-2xl space-y-3 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_12px_28px_rgba(8,103,232,0.12)] group block active:scale-[0.98]"
                   >
                     <div className="flex items-center justify-between">
                       <div className={`w-10 h-10 rounded-xl flex items-center justify-center border ${cat.badgeColor} group-hover:scale-105 transition-transform duration-300`}>
@@ -3146,9 +3152,13 @@ export default function CrmHomepage() {
             trackEvent('click_mobile_floating_eligibility');
             setShowEligibilityModal(true);
           }}
-          className="flex-1 py-3 px-4 bg-[#0867E8] text-white rounded-full text-xs font-black uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-md active:scale-95"
+          className="relative overflow-hidden group flex-1 py-3 px-4 bg-[#0867E8] text-white rounded-full text-xs font-black uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-md active:scale-95"
         >
-          <ShieldCheck size={15} /> Check Patient Eligibility
+          <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-full" aria-hidden="true">
+            <div className="w-16 h-full bg-gradient-to-r from-transparent via-white/35 to-transparent absolute top-0 -left-16 animate-cta-sheen" />
+          </div>
+          <ShieldCheck size={15} className="relative z-10" />
+          <span className="relative z-10">Check Patient Eligibility</span>
         </button>
       </div>
 
@@ -3202,6 +3212,11 @@ export default function CrmHomepage() {
             <div className="space-y-3">
               <h4 className="text-xs font-black uppercase tracking-wider text-[#0B2450]">Legal &amp; Compliance</h4>
               <ul className="space-y-2 text-xs text-slate-600">
+                <li>
+                  <Link to="/clinic-agreement" className="hover:text-[#0867E8] font-bold text-[#0867E8] transition-colors">
+                    Clinic Sub-Merchant Agreement
+                  </Link>
+                </li>
                 <li>
                   <Link to="/terms" className="hover:text-[#0867E8] font-semibold text-slate-700 transition-colors">
                     Terms of Service
@@ -3333,6 +3348,8 @@ export default function CrmHomepage() {
               </p>
             </div>
             <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-xs font-medium text-slate-600">
+              <Link to="/clinic-agreement" className="hover:text-[#0867E8] font-semibold text-[#0867E8] transition-colors whitespace-nowrap">Clinic Agreement</Link>
+              <span className="text-slate-300">&bull;</span>
               <Link to="/terms" className="hover:text-[#0867E8] transition-colors whitespace-nowrap">Terms of Service</Link>
               <span className="text-slate-300">&bull;</span>
               <Link to="/privacy" className="hover:text-[#0867E8] transition-colors whitespace-nowrap">Privacy Policy</Link>

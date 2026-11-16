@@ -4,6 +4,7 @@ import { BLOGS } from '@/data/blogs';
 import { SEOHead } from '@/components/seo/SEOHead';
 import { Calendar, Clock, ChevronLeft, Shield, User, Sparkles, CreditCard, Share2, MessageSquare, Check } from 'lucide-react';
 import { PatientEligibilityModal } from '@/components/PatientEligibilityModal';
+import { ReadingProgressBar } from '@/components/ReadingProgressBar';
 
 export default function BlogArticlePage() {
   const { slug } = useParams<{ slug: string }>();
@@ -150,6 +151,7 @@ export default function BlogArticlePage() {
 
   return (
     <div className="min-h-screen bg-[#fafafa] text-neutral-900 font-sora antialiased selection:bg-[#5b72ff] selection:text-white pb-16 sm:pb-0">
+      <ReadingProgressBar />
       <SEOHead
         title={seoTitle}
         description={article.metaDescription}

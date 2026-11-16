@@ -41,8 +41,11 @@ export default function TermsPage() {
         </section>
 
         <section>
-          <h2 className="text-lg font-bold text-[#0B2450] mb-2">4. Clinic Partner Obligations &amp; Compliance</h2>
-          <p>Partner clinics agree to:</p>
+          <h2 className="text-lg font-bold text-[#0B2450] mb-2">4. Clinic Partner Obligations &amp; Sub-Merchant Governance</h2>
+          <p>
+            Partner clinics onboarded to collect patient treatment payments and EMI disbursements are mapped under Clinaza's Master Merchant ID (Master MID) across authorized Payment Aggregators (including <strong>Easebuzz Private Limited</strong>) under the Sub-Merchant Model. All partner clinics are governed by the comprehensive <a href="/clinic-agreement" className="text-blue-600 underline font-semibold">Clinic Master Services &amp; Sub-Merchant Agreement</a>, incorporated herein by reference.
+          </p>
+          <p className="mt-2">Partner clinics agree to:</p>
           <ul className="list-disc pl-5 mt-2 space-y-1">
             <li>Hold valid, unencumbered medical or dental registrations from the Dental Council of India (DCI) or relevant State Dental/Medical Council.</li>
             <li>Submit authentic Know Your Customer (KYC) documentation, bank account proof for settlement, and entity credentials upon onboarding.</li>

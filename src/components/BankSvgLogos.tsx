@@ -61,6 +61,36 @@ const BANK_LOGOS: Record<string, { src: string; fallback: string; name: string }
     fallback: 'https://icon.horse/icon/axisbank.com',
     name: 'Axis Bank',
   },
+  sbi: {
+    src: '/assets/lenders/sbi.png',
+    fallback: 'https://icon.horse/icon/sbi.co.in',
+    name: 'State Bank of India',
+  },
+  bajaj: {
+    src: '/assets/lenders/bajaj.png',
+    fallback: 'https://icon.horse/icon/bajajfinserv.in',
+    name: 'Bajaj Finserv',
+  },
+  bob: {
+    src: '/assets/lenders/bob.png',
+    fallback: 'https://icon.horse/icon/bankofbaroda.in',
+    name: 'Bank of Baroda',
+  },
+  indusind: {
+    src: '/assets/lenders/indusind.png',
+    fallback: 'https://icon.horse/icon/indusind.com',
+    name: 'IndusInd Bank',
+  },
+  yesbank: {
+    src: '/assets/lenders/yesbank.png',
+    fallback: 'https://icon.horse/icon/yesbank.in',
+    name: 'Yes Bank',
+  },
+  pinelabs: {
+    src: '/assets/plural_by_pinelabs_transparent.png',
+    fallback: 'https://icon.horse/icon/pinelabs.com',
+    name: 'Plural by Pine Labs',
+  },
   federal: {
     src: '/assets/lenders/federal.png',
     fallback: 'https://icon.horse/icon/federalbank.co.in',

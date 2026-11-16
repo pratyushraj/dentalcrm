@@ -145,6 +145,7 @@ export default function AdminClinicOnboardingsPage() {
           <input
             type="password"
             autoFocus
+            autoComplete="current-password"
             placeholder="Admin password"
             value={pwInput}
             onChange={e => { setPwInput(e.target.value); setPwError(false); }}

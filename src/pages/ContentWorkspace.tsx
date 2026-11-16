@@ -742,7 +742,7 @@ export default function ContentWorkspace() {
                       value={newTaskText}
                       onChange={(e) => setNewTaskText(e.target.value)}
                       onKeyDown={(e) => {
-                        if (e.key === 'Enter' && newTaskText.trim()) {
+                        if (e.key === 'Enter' && !e.nativeEvent.isComposing && e.keyCode !== 229 && newTaskText.trim()) {
                           setShootTasks(prev => [...prev, { id: Date.now(), text: newTaskText.trim(), dueDate: 'Soon', checked: false }]);
                           setNewTaskText('');
                           toast.success('Task added');

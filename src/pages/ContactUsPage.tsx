@@ -201,7 +201,7 @@ export default function ContactUsPage() {
                     className="w-full px-3.5 py-2.5 text-xs bg-white border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-slate-900"
                   >
                     <option value="Clinic Partnership / Activation Kit">Clinic Partnership &amp; Activation Kit (₹999)</option>
-                    <option value="Healthcare EMI Integration">Healthcare EMI &amp; Pine Labs/PayU Setup</option>
+                    <option value="Healthcare EMI Integration">Healthcare EMI &amp; Pine Labs / Easebuzz Setup</option>
                     <option value="Billing & Payment Inquiries">Billing, Settlement &amp; Payment Inquiries</option>
                     <option value="Patient Support">Patient EMI Application Assistance</option>
                     <option value="Grievance / Regulatory">Regulatory / Grievance Redressal</option>

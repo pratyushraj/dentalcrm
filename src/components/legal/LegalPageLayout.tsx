@@ -14,7 +14,7 @@ interface LegalPageLayoutProps {
 export const LegalPageLayout: React.FC<LegalPageLayoutProps> = ({
   title,
   subtitle,
-  lastUpdated = 'November 05, 2026',
+  lastUpdated = 'November 17, 2026',
   children,
   canonicalPath,
 }) => {

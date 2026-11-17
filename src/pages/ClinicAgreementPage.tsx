@@ -8,7 +8,7 @@ export default function ClinicAgreementPage() {
       title="Clinic Master Services & Sub-Merchant Agreement"
       subtitle="Standard bilateral master terms and conditions governing clinic onboarding, sub-merchant MID mapping, point-of-care payment aggregation, and patient EMI settlements."
       canonicalPath="/clinic-agreement"
-      lastUpdated="November 16, 2026"
+      lastUpdated="November 17, 2026"
     >
       <div className="space-y-8 text-slate-700 leading-relaxed">
         {/* Document Download Banners */}
@@ -210,7 +210,7 @@ export default function ClinicAgreementPage() {
         <div className="pt-6 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-slate-500">
             For legal inquiries, tripartite executions, or compliance audits, contact our Grievance Redressal Officer at{' '}
-            <a href="mailto:support@clinaza.in" className="text-blue-600 underline font-semibold">support@clinaza.in</a>.
+            <a href="mailto:contact@clinaza.in" className="text-blue-600 underline font-semibold">contact@clinaza.in</a>.
           </p>
           <a
             href="/docs/Clinaza_Clinic_Sub_Merchant_Master_Services_Agreement.pdf"

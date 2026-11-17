@@ -193,6 +193,12 @@ async function worker() {
         html = html.replace(/<meta\s+name=["']description["']\s+content="[^"]*"/i, `<meta name="description" content="${resolvedDesc.replace(/"/g, '&quot;')}"`);
       }
 
+      if (route === '/checkout-flow' || route === '/demo/loan') {
+        const ogImg = 'https://www.clinaza.in/assets/og-checkout-flow.png';
+        html = html.replace(/<meta\s+property=["']og:image["']\s+content="[^"]*"/i, `<meta property="og:image" content="${ogImg}"`);
+        html = html.replace(/<meta\s+property=["']twitter:image["']\s+content="[^"]*"/i, `<meta property="twitter:image" content="${ogImg}"`);
+      }
+
       if (!/rel=["']canonical["']/i.test(html)) {
         const canonicalUrl = `https://www.clinaza.in${route === '/' ? '/' : route.replace(/\/$/, '')}`;
         html = html.replace(/<\/head>/i, `<link rel="canonical" href="${canonicalUrl}" />\n</head>`);

@@ -15,7 +15,17 @@ import {
   Smartphone,
   BadgeCheck,
   HelpCircle,
-  MessageSquare
+  MessageSquare,
+  Zap,
+  TrendingUp,
+  Layers,
+  ArrowUpRight,
+  FileText,
+  AlertCircle,
+  RefreshCw,
+  Wallet,
+  Building2,
+  CheckCheck
 } from 'lucide-react';
 import { toast } from 'sonner';
 
@@ -34,6 +44,7 @@ export default function LoanDemoPage() {
   const [selectedTenure, setSelectedTenure] = useState(12);
   const [simulatorStep, setSimulatorStep] = useState<1 | 2 | 3 | 4 | 5>(2);
   const [selectedLender, setSelectedLender] = useState('Piramal Capital');
+  const [selectedPaymentModality, setSelectedPaymentModality] = useState<'cardless' | 'debit_emi' | 'credit_emi' | 'bnpl'>('cardless');
   const [clinicName] = useState('Dr. Sharma’s Dental Clinic');
 
   // Calculation (Annualized indicative rate ~11.5% p.a. reducing)
@@ -62,8 +73,9 @@ export default function LoanDemoPage() {
     <div className="min-h-screen bg-[#F8FAFC] text-slate-900 flex flex-col font-sans selection:bg-[#0867E8] selection:text-white">
       <SEOHead
         title="Patient EMI Checkout Flow & Interactive Simulator | Clinaza"
-        description="Experience Clinaza's 2-minute paperless patient financing checkout: multi-lender approval, 1-click UPI autopay, and T+1 direct clinic settlement."
+        description="Experience Clinaza's 2-minute paperless patient financing checkout: 76.4% multi-lender approval, 1-click UPI autopay, and T+1 direct clinic settlement."
         canonicalUrl="https://www.clinaza.in/checkout-flow"
+        image="https://www.clinaza.in/assets/og-checkout-flow.png"
       />
 
       {/* Top Professional Header */}
@@ -101,10 +113,10 @@ export default function LoanDemoPage() {
       </header>
 
       {/* Hero Showcase Section */}
-      <section className="px-4 sm:px-6 pt-10 pb-8 max-w-6xl mx-auto w-full text-center space-y-4">
+      <section className="px-4 sm:px-6 pt-10 pb-6 max-w-6xl mx-auto w-full text-center space-y-4">
         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-200 text-[#0867E8] text-xs font-extrabold uppercase tracking-wider shadow-xs">
           <Sparkles size={13} className="text-blue-600 animate-pulse" />
-          <span>Interactive Front-Desk Patient Financing Simulator</span>
+          <span>Interactive Patient Checkout & Infrastructure Walkthrough</span>
         </div>
 
         <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-[#0B2450] max-w-4xl mx-auto leading-tight">
@@ -118,29 +130,87 @@ export default function LoanDemoPage() {
           Zero clinic credit risk, guaranteed T+1 direct settlement to your current account, and instant multi-lender paperless approval in under 120 seconds.
         </p>
 
-        {/* 3 Core Doctor Invariants */}
-        <div className="pt-2 flex flex-wrap items-center justify-center gap-2.5 sm:gap-4 text-xs font-bold">
-          <span className="flex items-center gap-1.5 text-emerald-800 bg-emerald-50 border border-emerald-200 px-3.5 py-1.5 rounded-full shadow-xs">
-            <Check size={14} className="text-emerald-600 stroke-[3]" /> 100% Non-Recourse (₹0 Clinic Liability)
-          </span>
-          <span className="flex items-center gap-1.5 text-blue-800 bg-blue-50 border border-blue-200 px-3.5 py-1.5 rounded-full shadow-xs">
-            <Clock size={14} className="text-blue-600 stroke-[2.5]" /> 2-Minute Digital Approval
-          </span>
-          <span className="flex items-center gap-1.5 text-purple-800 bg-purple-50 border border-purple-200 px-3.5 py-1.5 rounded-full shadow-xs">
-            <CreditCard size={14} className="text-purple-600 stroke-[2.5]" /> No Physical POS Machine Needed
-          </span>
+        {/* ── POINT 3: HARD PRODUCTION BENCHMARKS TICKER ── */}
+        <div className="pt-2 grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 max-w-4xl mx-auto text-left">
+          <div className="bg-white border border-slate-200/90 rounded-2xl p-3.5 shadow-xs">
+            <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider block">Multi-Lender Match</span>
+            <div className="text-xl sm:text-2xl font-black text-emerald-600 font-mono mt-0.5">76.4%</div>
+            <span className="text-[10px] text-slate-500">Platform approval benchmark</span>
+          </div>
+
+          <div className="bg-white border border-slate-200/90 rounded-2xl p-3.5 shadow-xs">
+            <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider block">Pre-Approved ETB</span>
+            <div className="text-xl sm:text-2xl font-black text-[#0867E8] font-mono mt-0.5">&lt; 60s</div>
+            <span className="text-[10px] text-slate-500">Instant OTP verification</span>
+          </div>
+
+          <div className="bg-white border border-slate-200/90 rounded-2xl p-3.5 shadow-xs">
+            <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider block">Approval Uplift</span>
+            <div className="text-xl sm:text-2xl font-black text-purple-600 font-mono mt-0.5">+15% to 20%</div>
+            <span className="text-[10px] text-slate-500">Over single-lender setups</span>
+          </div>
+
+          <div className="bg-white border border-slate-200/90 rounded-2xl p-3.5 shadow-xs">
+            <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider block">Doctor Recourse</span>
+            <div className="text-xl sm:text-2xl font-black text-emerald-700 font-mono mt-0.5">₹0 Risk</div>
+            <span className="text-[10px] text-slate-500">100% Non-recourse T+1 payout</span>
+          </div>
         </div>
       </section>
 
       {/* Main Experience Grid */}
       <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 pb-20 space-y-12">
 
-        {/* ── INTERACTIVE SPLIT-SCREEN SIMULATOR ── */}
+        {/* ── 1. INTERACTIVE SPLIT-SCREEN SIMULATOR ── */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start animate-in fade-in duration-300">
           
           {/* Left Column (7 cols): Front-Desk Control Center & Case Economics */}
           <div className="lg:col-span-7 space-y-6">
             
+            {/* ── POINT 5: MULTI-MODALITY PAYMENT MODES SWITCHER ── */}
+            <div className="bg-white border border-slate-200 rounded-3xl p-5 sm:p-6 shadow-sm space-y-3">
+              <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+                <span className="text-[10px] font-black text-[#0867E8] uppercase tracking-widest block">
+                  FULL AFFORDABILITY SPECTRUM
+                </span>
+                <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-md">
+                  All Patient Segments Covered
+                </span>
+              </div>
+
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                {[
+                  { id: 'cardless', title: 'Cardless EMI', sub: 'Up to ₹2.5L (Uncarded)', icon: Wallet },
+                  { id: 'debit_emi', title: 'Debit Card EMI', sub: 'HDFC, ICICI, Kotak, Axis', icon: CreditCard },
+                  { id: 'credit_emi', title: 'Credit Card EMI', sub: '16+ Banks (Zero Paper)', icon: Layers },
+                  { id: 'bnpl', title: 'PayLater / BNPL', sub: '₹3k–₹25k (RCT & Scaling)', icon: Zap }
+                ].map((mode) => {
+                  const Icon = mode.icon;
+                  const isSelected = selectedPaymentModality === mode.id;
+                  return (
+                    <button
+                      key={mode.id}
+                      type="button"
+                      onClick={() => setSelectedPaymentModality(mode.id as any)}
+                      className={`p-2.5 rounded-2xl border text-left transition-all cursor-pointer flex flex-col justify-between gap-1 ${
+                        isSelected
+                          ? 'bg-blue-50/80 border-[#0867E8] shadow-xs'
+                          : 'bg-slate-50/70 border-slate-200 hover:border-slate-300'
+                      }`}
+                    >
+                      <Icon size={14} className={isSelected ? 'text-[#0867E8]' : 'text-slate-400'} />
+                      <div>
+                        <div className={`text-xs font-extrabold ${isSelected ? 'text-[#0867E8]' : 'text-[#0B2450]'}`}>
+                          {mode.title}
+                        </div>
+                        <div className="text-[9px] text-slate-500 leading-tight">{mode.sub}</div>
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
             {/* Card 1: Procedure Selector */}
             <div className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-7 shadow-sm space-y-5">
               <div className="flex items-center justify-between border-b border-slate-100 pb-4">
@@ -153,7 +223,7 @@ export default function LoanDemoPage() {
                   </h3>
                 </div>
                 <span className="text-xs font-mono text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded-lg font-bold">
-                  T+1 Payout
+                  T+1 Direct Payout
                 </span>
               </div>
 
@@ -408,7 +478,7 @@ export default function LoanDemoPage() {
                       </div>
                     )}
 
-                    {/* Screen 2: Multi-Lender Match Engine */}
+                    {/* Screen 2: Multi-Lender Match Engine with Waterfall Cascading */}
                     {simulatorStep === 2 && (
                       <div className="space-y-3 animate-in fade-in duration-200">
                         <div className="text-center space-y-0.5">
@@ -416,7 +486,7 @@ export default function LoanDemoPage() {
                             STEP 2: PRE-APPROVAL FOUND
                           </span>
                           <h5 className="text-sm font-extrabold text-slate-900">
-                            Instant Multi-Lender Limits
+                            76.4% Multi-Lender Match
                           </h5>
                         </div>
 
@@ -429,10 +499,10 @@ export default function LoanDemoPage() {
                           <div className="text-[10px] text-blue-200">Covers 100% of ₹{customAmount.toLocaleString('en-IN')}</div>
                         </div>
 
-                        {/* Lender Choices */}
+                        {/* Lender Choices with Cascading indicator */}
                         <div className="space-y-1.5">
                           <span className="text-[9px] font-bold text-slate-500 uppercase tracking-wider block">
-                            Select Lending Partner:
+                            Matched via BRE Cascading Engine:
                           </span>
                           {[
                             { name: 'Piramal Capital', tag: 'ETB Pre-Approved', badge: 'Fastest (30s)' },
@@ -649,74 +719,191 @@ export default function LoanDemoPage() {
 
         </div>
 
-        {/* ── SECTION 2: WHY CLINICS CHOOSE CLINAZA OVER DISCOUNTS & KHATA ── */}
+        {/* ── POINT 2: THE MULTI-LENDER BRE & ACCOUNT AGGREGATOR ARCHITECTURE ── */}
         <div className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-sm space-y-6">
           <div className="text-center max-w-2xl mx-auto space-y-1.5">
             <span className="text-[10px] font-black text-[#0867E8] uppercase tracking-widest">
-              PRACTICE MARGIN PROTECTION
+              INTELLIGENT ROUTING ENGINE
             </span>
             <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0B2450] tracking-tight">
-              Stop Slashing 25% Margins or Chasing Khata Installments
+              Why Multi-Lender Cascading Drives 76.4% Approvals
             </h2>
             <p className="text-xs sm:text-sm text-slate-600">
-              How Clinaza’s point-of-care financing transforms clinical revenue and collections.
+              Single-lender integrations reject 60%+ of patients. Clinaza connects to a unified multi-partner credit layer with automated waterfall matching.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-2">
+            
+            <div className="p-5 rounded-2xl bg-blue-50/50 border border-blue-200 space-y-2">
+              <div className="w-9 h-9 rounded-xl bg-blue-100 text-[#0867E8] flex items-center justify-center font-bold text-sm">
+                01
+              </div>
+              <h4 className="font-extrabold text-[#0B2450] text-sm">Soft Bureau Pre-Check</h4>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Non-intrusive credit assessment that checks eligibility across multiple lenders with <strong>zero impact on patient's CIBIL score</strong>.
+              </p>
+            </div>
+
+            <div className="p-5 rounded-2xl bg-emerald-50/50 border border-emerald-200 space-y-2">
+              <div className="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-sm">
+                02
+              </div>
+              <h4 className="font-extrabold text-[#0B2450] text-sm">BRE-Driven Matching</h4>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Business Rules Engine (BRE) intelligently cascades applicants: if Bank A declines, the engine automatically matches to Lender B in milliseconds.
+              </p>
+            </div>
+
+            <div className="p-5 rounded-2xl bg-purple-50/50 border border-purple-200 space-y-2">
+              <div className="w-9 h-9 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center font-bold text-sm">
+                03
+              </div>
+              <h4 className="font-extrabold text-[#0B2450] text-sm">RBI Account Aggregator</h4>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Fetches real-time verified bank cashflows with a 1-time OTP. <strong>Zero PDF password uploads</strong> and zero passbook scanning.
+              </p>
+            </div>
+
+            <div className="p-5 rounded-2xl bg-amber-50/50 border border-amber-200 space-y-2">
+              <div className="w-9 h-9 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center font-bold text-sm">
+                04
+              </div>
+              <h4 className="font-extrabold text-[#0B2450] text-sm">Instant Digital KFS</h4>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                RBI-mandated Key Fact Statement generated upfront. 100% transparent terms with ₹0 hidden charges, protecting doctor reputation.
+              </p>
+            </div>
+
+          </div>
+        </div>
+
+        {/* ── POINT 1: WHY TRADITIONAL EMI FAILS VS CLINAZA ── */}
+        <div className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-sm space-y-6">
+          <div className="text-center max-w-2xl mx-auto space-y-1.5">
+            <span className="text-[10px] font-black text-[#0867E8] uppercase tracking-widest">
+              THE LAST-MILE DROP-OFF PROBLEM
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0B2450] tracking-tight">
+              Why Traditional Patient Financing Fails at the Counter
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-600">
+              Why dental practices lose high-value cases when relying on traditional bank agents or standalone apps.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
             
-            {/* Column 1: Forced Cash Discount */}
-            <div className="p-5 rounded-2xl bg-rose-50/50 border border-rose-200 space-y-3">
-              <div className="w-8 h-8 rounded-xl bg-rose-100 text-rose-700 flex items-center justify-center font-bold text-sm">
+            {/* Pitfall 1 */}
+            <div className="p-5 rounded-2xl bg-rose-50/50 border border-rose-200 space-y-2.5">
+              <div className="w-8 h-8 rounded-xl bg-rose-100 text-rose-700 flex items-center justify-center font-bold text-xs">
                 ✕
               </div>
-              <div>
-                <h4 className="font-extrabold text-[#0B2450] text-sm">Forced Cash Discounts</h4>
-                <p className="text-xs text-slate-600 mt-1 leading-relaxed">
-                  Doctor slashes ₹15,000–₹25,000 on implants just to get the case closed today. Clinic absorbs the heavy revenue loss.
-                </p>
-              </div>
+              <h4 className="font-extrabold text-[#0B2450] text-sm">Multiple External Redirections</h4>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Patients are bounced between merchant links and third-party bank sites. Slow page loads and expired sessions break the checkout flow chairside.
+              </p>
               <div className="text-[11px] font-bold text-rose-700 bg-white border border-rose-200 p-2 rounded-xl">
-                Result: Destroys Practice Profit Margin
+                Impact: 45%+ Patient Abandonment
               </div>
             </div>
 
-            {/* Column 2: In-House Khata / Bad Debt */}
-            <div className="p-5 rounded-2xl bg-amber-50/50 border border-amber-200 space-y-3">
-              <div className="w-8 h-8 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center font-bold text-sm">
-                !
+            {/* Pitfall 2 */}
+            <div className="p-5 rounded-2xl bg-rose-50/50 border border-rose-200 space-y-2.5">
+              <div className="w-8 h-8 rounded-xl bg-rose-100 text-rose-700 flex items-center justify-center font-bold text-xs">
+                ✕
               </div>
-              <div>
-                <h4 className="font-extrabold text-[#0B2450] text-sm">In-House Clinic Installments (Khata)</h4>
-                <p className="text-xs text-slate-600 mt-1 leading-relaxed">
-                  Patient pays 40% upfront and promises post-dated cheques. After month 3, patient delays visits or stops paying.
-                </p>
-              </div>
-              <div className="text-[11px] font-bold text-amber-800 bg-white border border-amber-200 p-2 rounded-xl">
-                Result: Doctor becomes an unpaid debt collector
+              <h4 className="font-extrabold text-[#0B2450] text-sm">Manual PDF Bank Statement Uploads</h4>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Asking a patient to search their email for password-protected PDF bank statements causes instant fatigue. Most patients postpone treatment indefinitely.
+              </p>
+              <div className="text-[11px] font-bold text-rose-700 bg-white border border-rose-200 p-2 rounded-xl">
+                Impact: Lost Implant & Aligner Cases
               </div>
             </div>
 
-            {/* Column 3: The Clinaza Advantage */}
-            <div className="p-5 rounded-2xl bg-emerald-50/70 border-2 border-emerald-400 space-y-3 shadow-xs">
-              <div className="w-8 h-8 rounded-xl bg-emerald-600 text-white flex items-center justify-center font-bold text-sm">
-                ✓
+            {/* Pitfall 3 */}
+            <div className="p-5 rounded-2xl bg-rose-50/50 border border-rose-200 space-y-2.5">
+              <div className="w-8 h-8 rounded-xl bg-rose-100 text-rose-700 flex items-center justify-center font-bold text-xs">
+                ✕
               </div>
-              <div>
-                <h4 className="font-extrabold text-[#0B2450] text-sm">Clinaza Point-of-Care Financing</h4>
-                <p className="text-xs text-slate-700 mt-1 leading-relaxed">
-                  Patient gets comfortable ₹4,000–₹6,500/mo EMI on phone in 2 mins. Clinic gets 100% of treatment fee deposited T+1.
-                </p>
-              </div>
-              <div className="text-[11px] font-extrabold text-emerald-800 bg-white border border-emerald-300 p-2 rounded-xl">
-                Result: 100% Revenue Protected • Zero Risk
+              <h4 className="font-extrabold text-[#0B2450] text-sm">Narrow Single-Lender Criteria</h4>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Standalone lenders reject any borrower who doesn't fit their narrow credit score box. A rejected patient feels embarrassed and walks away.
+              </p>
+              <div className="text-[11px] font-bold text-rose-700 bg-white border border-rose-200 p-2 rounded-xl">
+                Impact: 60%+ Hard Rejection Rates
               </div>
             </div>
 
           </div>
         </div>
 
-        {/* ── SECTION 3: SIMPLE SOLE PROPRIETOR CLINIC ONBOARDING ── */}
+        {/* ── POINT 4: COMPLETE COMPETITIVE COMPARISON MATRIX ── */}
+        <div className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-sm space-y-6">
+          <div className="text-center max-w-2xl mx-auto space-y-1.5">
+            <span className="text-[10px] font-black text-[#0867E8] uppercase tracking-widest">
+              COMPETITIVE BENCHMARKS
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0B2450] tracking-tight">
+              Clinaza vs. Traditional Financing Solutions
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-600">
+              See why leading dental practices choose Clinaza’s unified point-of-care financing network.
+            </p>
+          </div>
+
+          <div className="overflow-x-auto pt-2">
+            <table className="w-full text-left text-xs border border-slate-200 rounded-2xl overflow-hidden">
+              <thead className="bg-slate-100/90 text-slate-800 font-black">
+                <tr>
+                  <th className="p-3.5 sm:p-4">Financing Capability</th>
+                  <th className="p-3.5 sm:p-4 text-slate-500">Traditional Bank / NBFC Rep</th>
+                  <th className="p-3.5 sm:p-4 text-[#0867E8] bg-blue-50/80">Clinaza Unified Checkout OS</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-200 text-slate-700">
+                <tr>
+                  <td className="p-3.5 sm:p-4 font-bold text-slate-900">Patient Checkout Journey</td>
+                  <td className="p-3.5 sm:p-4 text-rose-600">Redirected to 3rd-party banking sites</td>
+                  <td className="p-3.5 sm:p-4 font-bold text-emerald-700 bg-blue-50/40">✓ Unified single linear screen (Zero redirects)</td>
+                </tr>
+                <tr>
+                  <td className="p-3.5 sm:p-4 font-bold text-slate-900">Bank Statement Verification</td>
+                  <td className="p-3.5 sm:p-4 text-rose-600">Manual PDF uploads + password friction</td>
+                  <td className="p-3.5 sm:p-4 font-bold text-emerald-700 bg-blue-50/40">✓ Native RBI Account Aggregator (1 OTP)</td>
+                </tr>
+                <tr>
+                  <td className="p-3.5 sm:p-4 font-bold text-slate-900">Identity &amp; KYC</td>
+                  <td className="p-3.5 sm:p-4 text-slate-500">Repeated per lender with paperwork</td>
+                  <td className="p-3.5 sm:p-4 font-bold text-emerald-700 bg-blue-50/40">✓ 100% Digital One-Time Aadhaar e-KYC</td>
+                </tr>
+                <tr>
+                  <td className="p-3.5 sm:p-4 font-bold text-slate-900">Lender Network Architecture</td>
+                  <td className="p-3.5 sm:p-4 text-slate-500">Single lender (rejects 60%+ applicants)</td>
+                  <td className="p-3.5 sm:p-4 font-bold text-emerald-700 bg-blue-50/40">✓ BRE Cascading Grid (Piramal, Tata, Bajaj, L&amp;T)</td>
+                </tr>
+                <tr>
+                  <td className="p-3.5 sm:p-4 font-bold text-slate-900">Approval Rate Benchmark</td>
+                  <td className="p-3.5 sm:p-4 text-slate-500">35% – 42% single-shot</td>
+                  <td className="p-3.5 sm:p-4 font-black text-[#0867E8] bg-blue-50/40">✓ 76.4% Multi-Lender Match</td>
+                </tr>
+                <tr>
+                  <td className="p-3.5 sm:p-4 font-bold text-slate-900">Hardware &amp; Machine Rental</td>
+                  <td className="p-3.5 sm:p-4 text-slate-500">₹600–₹1,200/mo POS machine rental &amp; deposit</td>
+                  <td className="p-3.5 sm:p-4 font-bold text-emerald-700 bg-blue-50/40">✓ ₹0 Hardware (Counter QR &amp; WhatsApp Links)</td>
+                </tr>
+                <tr>
+                  <td className="p-3.5 sm:p-4 font-bold text-slate-900">Clinic Default Recourse</td>
+                  <td className="p-3.5 sm:p-4 text-slate-500">Collection follow-ups &amp; bad clinic debt</td>
+                  <td className="p-3.5 sm:p-4 font-bold text-emerald-700 bg-blue-50/40">✓ 100% Non-Recourse (T+1 Guaranteed Settlement)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        {/* ── SECTION: SIMPLE SOLE PROPRIETOR CLINIC ONBOARDING ── */}
         <div className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-sm space-y-6">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-5">
             <div>
@@ -828,7 +1015,7 @@ export default function LoanDemoPage() {
           </div>
         </div>
 
-        {/* ── SECTION 4: DOCTOR FAQ ACCORDION ── */}
+        {/* ── SECTION: DOCTOR FAQ ACCORDION ── */}
         <div className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-sm space-y-6">
           <div className="text-center max-w-xl mx-auto space-y-1">
             <span className="text-[10px] font-black text-[#0867E8] uppercase tracking-widest">
@@ -882,7 +1069,7 @@ export default function LoanDemoPage() {
           </div>
         </div>
 
-        {/* ── SECTION 5: BOTTOM CONVERSION & WHATSAPP SHARE ── */}
+        {/* ── SECTION: BOTTOM CONVERSION & WHATSAPP SHARE ── */}
         <div className="bg-gradient-to-r from-[#0B2450] to-[#0F172A] text-white rounded-3xl p-6 sm:p-10 text-center space-y-4 shadow-xl">
           <h3 className="text-2xl sm:text-3xl font-black">
             Ready to Offer Instant Patient EMIs at Your Front Desk?

@@ -1,7 +1,8 @@
 {
   "/checkout-flow": {
-    "title": "Patient EMI Checkout Flow & Infrastructure Demo | Clinaza",
-    "desc": "Experience Clinaza’s 2-minute paperless patient financing checkout: multi-lender approval, 1-click UPI autopay, and T+1 direct clinic settlement."
+    "title": "Patient EMI Checkout Flow & Interactive Simulator | Clinaza",
+    "desc": "Experience Clinaza’s 2-minute paperless patient financing checkout: multi-lender approval, 1-click UPI autopay, and T+1 direct clinic settlement.",
+    "image": "https://www.clinaza.in/assets/og-checkout-flow.png"
   },
   "/blog/best-dentist-in-patna-for-braces": {
     "title": "Best Dentist in Patna for Braces",

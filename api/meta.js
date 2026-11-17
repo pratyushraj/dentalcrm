@@ -54,10 +54,17 @@ const STATIC_ROUTES = {
     desc: 'Explore Clinaza\\\'s healthcare point-of-care patient financing network, NBFC underwriting architecture, and partner clinic distribution model.',
     h1: 'Clinaza Healthcare Financing & Strategic Partnership Overview'
   },
+  '/checkout-flow': {
+    title: 'Patient EMI Checkout Flow & Interactive Simulator | Clinaza',
+    desc: 'Experience Clinaza\'s 2-minute paperless patient financing checkout: multi-lender approval, 1-click UPI autopay, and T+1 direct clinic settlement.',
+    h1: 'Interactive Patient EMI Checkout Flow & Clinic Simulator',
+    image: 'https://www.clinaza.in/assets/og-checkout-flow.png'
+  },
   '/demo/loan': {
-    title: 'Clinaza Patient Healthcare Financing & Instant EMI Demo',
-    desc: 'Experience Clinaza\\\'s seamless point-of-care patient financing journey with 2-minute digital KYC, zero CIBIL impact, and flexible monthly tenures.',
-    h1: 'Interactive Patient EMI & Healthcare Financing Demo Sandbox'
+    title: 'Patient EMI Checkout Flow & Interactive Simulator | Clinaza',
+    desc: 'Experience Clinaza\'s 2-minute paperless patient financing checkout: multi-lender approval, 1-click UPI autopay, and T+1 direct clinic settlement.',
+    h1: 'Interactive Patient EMI Checkout Flow & Clinic Simulator',
+    image: 'https://www.clinaza.in/assets/og-checkout-flow.png'
   },
   '/review/assist': {
     title: 'Review Assistant | Clinaza',

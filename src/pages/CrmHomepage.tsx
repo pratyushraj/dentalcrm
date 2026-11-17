@@ -1362,8 +1362,8 @@ export default function CrmHomepage() {
                   to="/checkout-flow"
                   className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#0867E8] text-white text-xs sm:text-sm font-extrabold hover:bg-[#0756c7] transition-all shadow-md shadow-blue-500/20 active:scale-95"
                 >
-                  <Play size={14} className="fill-white" />
-                  <span>Watch Patient Checkout Demo Video & Flow</span>
+                  <Smartphone size={14} />
+                  <span>Try Patient Checkout Flow & Simulator</span>
                   <ArrowRight size={14} />
                 </Link>
               </div>

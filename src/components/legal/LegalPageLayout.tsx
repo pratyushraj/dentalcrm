@@ -19,41 +19,56 @@ export const LegalPageLayout: React.FC<LegalPageLayoutProps> = ({
   canonicalPath,
 }) => {
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col justify-between selection:bg-blue-100 selection:text-blue-900">
+    <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col justify-between selection:bg-blue-100 selection:text-blue-900 relative">
       <SEOHead
         title={`${title} | Clinaza`}
         description={subtitle}
         canonicalUrl={`https://www.clinaza.in${canonicalPath}`}
       />
 
-      {/* Header */}
-      <header className="border-b border-slate-200/80 sticky top-0 z-40 bg-white/95 backdrop-blur-md shadow-2xs">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+      {/* Atmospheric ambient fintech canvas */}
+      <div className="fixed inset-0 pointer-events-none z-0">
+        <div className="absolute inset-0 bg-radial-fintech" />
+        <div className="absolute inset-0 bg-grid-fintech mask-radial-fade opacity-60" />
+      </div>
+
+      {/* Floating Frosted Pill Navbar */}
+      <header className="sticky top-3 sm:top-5 z-50 px-3 sm:px-6 max-w-6xl mx-auto w-full transition-all duration-300">
+        <div className="bg-white/90 backdrop-blur-xl border border-slate-200/90 shadow-[0_8px_32px_rgba(15,23,42,0.08)] rounded-full px-3.5 sm:px-5 py-2.5 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <Link to="/" className="flex items-center gap-2.5 group">
+            <Link to="/" className="flex items-center gap-2 group">
               <img
                 src="/assets/clinaza-logo.jpg"
                 alt="CLINAZA"
-                className="h-9 w-auto rounded-xl border border-slate-200 shadow-2xs group-hover:scale-105 transition-transform"
+                className="h-8 w-8 sm:h-9 sm:w-9 rounded-xl border border-slate-200/80 shadow-xs group-hover:scale-105 transition-transform"
               />
-              <div>
-                <span className="text-xs font-black tracking-widest text-[#0B2450] block">CLINAZA</span>
-                <span className="text-[9px] font-bold tracking-wider text-[#0f7a75] block uppercase">Healthcare Financing</span>
+              <div className="flex flex-col">
+                <span className="text-xs sm:text-sm font-black tracking-widest text-[#0B2450] leading-none">
+                  CLINAZA
+                </span>
+                <span className="text-[9px] font-bold tracking-wider text-[#0f7a75] uppercase leading-tight mt-0.5">
+                  Healthcare Financing
+                </span>
               </div>
             </Link>
+            <div className="hidden md:flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-100/80 border border-slate-200/60 text-[10px] font-semibold text-slate-600">
+              <ShieldCheck size={12} className="text-emerald-600" />
+              <span>RBI Compliance Framework</span>
+            </div>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
             <Link
               to="/"
-              className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-600 hover:text-[#0867E8] transition-colors py-1.5 px-3 rounded-lg hover:bg-slate-100"
+              className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-600 hover:text-[#0867E8] transition-colors py-2 px-3 rounded-full hover:bg-slate-100 min-h-[44px]"
             >
               <ArrowLeft size={14} />
-              <span>Back to Home</span>
+              <span className="hidden sm:inline">Back to Home</span>
+              <span className="sm:hidden">Home</span>
             </Link>
             <Link
               to="/reactivation/login"
-              className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#0B2450] text-white hover:bg-slate-800 text-xs font-bold rounded-lg transition-colors"
+              className="inline-flex items-center gap-1.5 px-3.5 sm:px-4 py-2 bg-[#0B2450] hover:bg-slate-800 text-white text-xs font-bold rounded-full transition-all shadow-xs hover:shadow-md min-h-[44px]"
             >
               Doctor Login
             </Link>
@@ -62,7 +77,7 @@ export const LegalPageLayout: React.FC<LegalPageLayoutProps> = ({
       </header>
 
       {/* Main Content Area */}
-      <main className="flex-1 py-10 sm:py-14">
+      <main className="flex-1 pt-6 pb-12 sm:pt-8 sm:pb-16 relative z-10">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
           {/* Top Title Banner */}
           <div className="bg-white rounded-2xl border border-slate-200 p-6 sm:p-10 shadow-sm mb-8">
@@ -107,7 +122,7 @@ export const LegalPageLayout: React.FC<LegalPageLayoutProps> = ({
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-slate-200 bg-white py-8 text-xs text-slate-500">
+      <footer className="border-t border-slate-200/80 bg-white/80 backdrop-blur-md py-8 text-xs text-slate-500 relative z-10">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div>
             <p className="font-semibold text-slate-700">© 2026 CLINAZA (A Mellowprints Enterprise). All Rights Reserved.</p>

@@ -2366,7 +2366,7 @@ const ReactivationClinicSettings: React.FC = () => {
               </div>
               <div>
                 <h3 className="text-sm font-bold text-slate-800">NBFC Treatment Financing</h3>
-                <p className="text-[11px] text-slate-400">Offer 0% interest monthly installments to your patients through premium NBFC partners.</p>
+                <p className="text-[11px] text-slate-400">Offer flexible monthly installments to your patients through premium NBFC partners.</p>
               </div>
             </div>
           </div>
@@ -2382,7 +2382,7 @@ const ReactivationClinicSettings: React.FC = () => {
                     name: 'LendSure AI',
                     desc: 'AI-native unified lending control ecosystem built for India. Single integration, multiple NBFC credit lanes, instant KYC & underwriting — get patients approved in under 60 seconds with zero paperwork.',
                     tenures: '3, 6, 12, 18, 24 Months',
-                    interest: '0% Interest & Subsidized Plans',
+                    interest: 'Flexible Monthly EMIs & Subvention Plans',
                     approvalTime: 'Instant (< 60 seconds)',
                     fee: '1% processing fee'
                   }

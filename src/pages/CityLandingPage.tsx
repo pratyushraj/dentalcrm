@@ -151,7 +151,7 @@ export default function CityLandingPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-white text-[#0B2450] font-sans antialiased">
+    <div className="min-h-screen bg-slate-50 text-[#0B2450] font-sans antialiased relative selection:bg-blue-100 selection:text-blue-900">
       <SEOHead
         title={metaTitle}
         description={metaDescription}
@@ -167,28 +167,50 @@ export default function CityLandingPage() {
         jsonLd={[breadcrumbSchema, medicalFinancingSchema, financialProductSchema, faqSchema]}
       />
 
-      {/* Header */}
-      <header className="border-b border-slate-200 bg-white/80 backdrop-blur-md sticky top-0 z-50">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-2">
-            <img src="/assets/clinaza-logo.jpg" alt="Clinaza" className="h-9 w-9 rounded-xl border border-slate-200" />
-            <div>
-              <span className="text-xs font-black uppercase tracking-widest text-[#0B2450] block">CLINAZA</span>
-              <span className="text-[9px] text-slate-500 font-bold uppercase tracking-wider">EMI for Dental Care</span>
+      {/* Atmospheric ambient fintech canvas */}
+      <div className="fixed inset-0 pointer-events-none z-0">
+        <div className="absolute inset-0 bg-radial-fintech" />
+        <div className="absolute inset-0 bg-grid-fintech mask-radial-fade opacity-60" />
+      </div>
+
+      {/* Floating Frosted Pill Navbar */}
+      <header className="sticky top-3 sm:top-5 z-50 px-3 sm:px-6 max-w-5xl mx-auto w-full transition-all duration-300">
+        <div className="bg-white/90 backdrop-blur-xl border border-slate-200/90 shadow-[0_8px_32px_rgba(15,23,42,0.08)] rounded-full px-3.5 sm:px-5 py-2.5 flex items-center justify-between">
+          <Link to="/" className="flex items-center gap-2.5 group">
+            <img
+              src="/assets/clinaza-logo.jpg"
+              alt="Clinaza"
+              className="h-8 w-8 sm:h-9 sm:w-9 rounded-xl border border-slate-200 shadow-xs group-hover:scale-105 transition-transform"
+            />
+            <div className="flex flex-col">
+              <span className="text-xs sm:text-sm font-black uppercase tracking-widest text-[#0B2450] leading-none">
+                CLINAZA
+              </span>
+              <span className="text-[9px] text-[#0f7a75] font-bold uppercase tracking-wider leading-tight mt-0.5">
+                Dental EMI · {name}
+              </span>
             </div>
           </Link>
-          <a
-            href="/clinic-onboarding"
-            className="px-4 py-2 bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-black uppercase tracking-wider rounded-xl transition-all"
-          >
-            Partner With Clinaza →
-          </a>
+
+          <div className="flex items-center gap-2 sm:gap-3">
+            <div className="hidden md:flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-100/80 border border-slate-200/60 text-[10px] font-semibold text-slate-600">
+              <ShieldCheck size={12} className="text-emerald-600" />
+              <span>RBI Regulated Lenders</span>
+            </div>
+            <Link
+              to="/clinic-onboarding"
+              className="inline-flex items-center gap-1 px-4 py-2 bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-black uppercase tracking-wider rounded-full transition-all shadow-xs hover:shadow-md min-h-[44px]"
+            >
+              <span>Partner With Clinaza</span>
+              <ArrowRight size={13} />
+            </Link>
+          </div>
         </div>
       </header>
 
-      <main>
+      <main className="relative z-10">
         {/* Hero */}
-        <section className="pt-12 pb-10 px-4 sm:px-6 max-w-4xl mx-auto text-center space-y-6">
+        <section className="pt-8 pb-10 px-4 sm:px-6 max-w-4xl mx-auto text-center space-y-6">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#F5F9FC] border border-blue-100 rounded-full text-[10px] font-bold text-[#0756C7]">
             <Building2 size={12} /> DENTAL EMI FINANCING · {name.toUpperCase()}, {state.toUpperCase()}
           </div>
@@ -482,22 +504,23 @@ export default function CityLandingPage() {
       />
 
       {/* Footer */}
-      <footer className="py-8 px-4 sm:px-6 border-t border-slate-200 bg-white text-center space-y-3">
+      <footer className="py-8 px-4 sm:px-6 border-t border-slate-200/80 bg-white/80 backdrop-blur-md text-center space-y-3 relative z-10">
         <div className="flex flex-col sm:flex-row justify-center items-center gap-6 text-xs text-slate-600 font-medium">
-          <a href="tel:+917292984244" className="hover:text-[#0867E8] transition-colors font-bold flex items-center gap-1.5">
+          <a href="tel:+917292984244" className="hover:text-[#0867E8] transition-colors font-bold flex items-center gap-1.5 min-h-[44px]">
             📞 +91 7292984244
           </a>
           <span className="hidden sm:inline text-slate-300" aria-hidden="true">&middot;</span>
-          <a href="https://wa.me/917292984244" target="_blank" rel="noopener noreferrer" className="hover:text-emerald-600 transition-colors font-bold flex items-center gap-1.5">
+          <a href="https://wa.me/917292984244" target="_blank" rel="noopener noreferrer" className="hover:text-emerald-600 transition-colors font-bold flex items-center gap-1.5 min-h-[44px]">
             💬 WhatsApp Support
           </a>
           <span className="hidden sm:inline text-slate-300" aria-hidden="true">&middot;</span>
-          <a href="mailto:contact@clinaza.in" className="hover:text-[#0867E8] transition-colors">contact@clinaza.in</a>
+          <a href="mailto:contact@clinaza.in" className="hover:text-[#0867E8] transition-colors flex items-center min-h-[44px]">contact@clinaza.in</a>
         </div>
         <p className="text-[10px] text-slate-400 font-mono uppercase tracking-widest">
           © 2026 CLINAZA Technologies · Connecting Clinics with Financing Partners ·{' '}
           <Link to="/tools" className="underline hover:text-[#0867E8]">Free Tools</Link> ·{' '}
-          <Link to="/blog" className="underline hover:text-[#0f7a75]">Patient Guides</Link>
+          <Link to="/blog" className="underline hover:text-[#0f7a75]">Patient Guides</Link> ·{' '}
+          <Link to="/clinic-onboarding" className="underline hover:text-[#0867E8]">Clinic Partner</Link>
         </p>
       </footer>
     </div>

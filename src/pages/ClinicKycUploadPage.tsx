@@ -988,21 +988,44 @@ export default function ClinicKycUploadPage() {
                   )}
                 </div>
 
-                {/* Sample Letterhead Format Helper */}
-                <div className="bg-blue-50/70 border border-blue-200/80 rounded-xl p-3 space-y-2">
-                  <div className="flex items-center justify-between">
+                {/* Sample Letterhead Format Helper with 1-Click Downloads */}
+                <div className="bg-blue-50/70 border border-blue-200/80 rounded-xl p-3.5 space-y-2.5">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                     <div className="flex items-center gap-1.5 text-xs font-bold text-[#0B2450]">
-                      <FileCheck size={14} className="text-[#0867E8]" />
-                      <span>Official Letterhead Declaration Format (Advaita / Pine Labs Verified)</span>
+                      <FileCheck size={15} className="text-[#0867E8] shrink-0" />
+                      <span>Official Letterhead Declaration Format</span>
                     </div>
-                    <button
-                      type="button"
-                      onClick={() => setShowGstTemplate(!showGstTemplate)}
-                      className="text-[11px] font-bold text-[#0867E8] hover:underline flex items-center gap-1 cursor-pointer"
-                    >
-                      <span>{showGstTemplate ? 'Hide Format' : 'View & Copy Format'}</span>
-                      {showGstTemplate ? <ChevronUp size={13} /> : <ChevronDown size={13} />}
-                    </button>
+
+                    <div className="flex items-center gap-1.5 flex-wrap">
+                      <a
+                        href="/docs/Clinaza_GST_Exemption_Declaration_Letterhead_Format.docx"
+                        download="Clinaza_GST_Exemption_Declaration_Letterhead_Format.docx"
+                        className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-white hover:bg-slate-50 border border-blue-300 text-[11px] font-bold text-[#0867E8] transition-all shadow-2xs active:scale-95"
+                      >
+                        <Download size={12} />
+                        <span>Download Word (.docx)</span>
+                      </a>
+
+                      <a
+                        href="/docs/Clinaza_GST_Exemption_Declaration_Letterhead_Format.pdf"
+                        target="_blank"
+                        rel="noreferrer"
+                        download="Clinaza_GST_Exemption_Declaration_Letterhead_Format.pdf"
+                        className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-white hover:bg-slate-50 border border-slate-300 text-[11px] font-bold text-slate-700 transition-all shadow-2xs active:scale-95"
+                      >
+                        <Download size={12} />
+                        <span>Download PDF</span>
+                      </a>
+
+                      <button
+                        type="button"
+                        onClick={() => setShowGstTemplate(!showGstTemplate)}
+                        className="text-[11px] font-bold text-[#0867E8] hover:underline flex items-center gap-0.5 cursor-pointer ml-1"
+                      >
+                        <span>{showGstTemplate ? 'Hide' : 'Preview'}</span>
+                        {showGstTemplate ? <ChevronUp size={13} /> : <ChevronDown size={13} />}
+                      </button>
+                    </div>
                   </div>
 
                   {showGstTemplate && (

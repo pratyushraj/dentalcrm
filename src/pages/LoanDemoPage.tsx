@@ -29,7 +29,8 @@ import {
   Sliders,
   ChevronDown,
   Lock,
-  Landmark
+  Landmark,
+  Download
 } from 'lucide-react';
 import { toast } from 'sonner';
 
@@ -1189,7 +1190,27 @@ export default function LoanDemoPage() {
                 </div>
                 <div className="flex items-start gap-2 sm:gap-2.5">
                   <BadgeCheck size={16} className="text-emerald-600 shrink-0 mt-0.5" />
-                  <span><strong>5. GST Exemption Self-Declaration</strong> (Standard 1-page form, healthcare is legally exempt)</span>
+                  <div className="flex items-center gap-1.5 flex-wrap">
+                    <span><strong>5. GST Exemption Self-Declaration</strong> (Simple clinic letterhead format)</span>
+                    <a
+                      href="/docs/Clinaza_GST_Exemption_Declaration_Letterhead_Format.docx"
+                      download="Clinaza_GST_Exemption_Declaration_Letterhead_Format.docx"
+                      className="inline-flex items-center gap-1 text-[10px] font-bold text-[#0867E8] bg-blue-50 border border-blue-200 px-1.5 py-0.5 rounded hover:bg-blue-100 transition-colors"
+                    >
+                      <Download size={10} />
+                      <span>Download .docx</span>
+                    </a>
+                    <a
+                      href="/docs/Clinaza_GST_Exemption_Declaration_Letterhead_Format.pdf"
+                      target="_blank"
+                      rel="noreferrer"
+                      download="Clinaza_GST_Exemption_Declaration_Letterhead_Format.pdf"
+                      className="inline-flex items-center gap-1 text-[10px] font-bold text-slate-700 bg-slate-100 border border-slate-200 px-1.5 py-0.5 rounded hover:bg-slate-200 transition-colors"
+                    >
+                      <Download size={10} />
+                      <span>PDF</span>
+                    </a>
+                  </div>
                 </div>
               </div>
 

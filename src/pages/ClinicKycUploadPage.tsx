@@ -34,7 +34,11 @@ import {
   FileSpreadsheet,
   FileSignature,
   ChevronDown,
-  ChevronUp
+  ChevronUp,
+  UserCheck,
+  Mail,
+  Phone,
+  MapPin
 } from 'lucide-react';
 
 interface UploadedDoc {
@@ -49,12 +53,12 @@ export default function ClinicKycUploadPage() {
   const [searchParams] = useSearchParams();
 
   const clinicId = searchParams.get('id') || searchParams.get('clinic_id') || '';
-  const initialClinicName = searchParams.get('clinic') || searchParams.get('clinic_name') || '';
-  const initialDoctorName = searchParams.get('doctor') || searchParams.get('doctor_name') || '';
-  const initialPhone = searchParams.get('phone') || '';
-  const initialCity = searchParams.get('city') || '';
+  const initialClinicName = searchParams.get('clinic') || searchParams.get('clinic_name') || searchParams.get('name') || '';
+  const initialDoctorName = searchParams.get('doctor') || searchParams.get('doctor_name') || searchParams.get('dr') || '';
+  const initialPhone = searchParams.get('phone') || searchParams.get('mobile') || '';
+  const initialCity = searchParams.get('city') || searchParams.get('location') || '';
   const initialWebsite = searchParams.get('website') || '';
-  const initialEmail = searchParams.get('email') || '';
+  const initialEmail = searchParams.get('email') || searchParams.get('mail') || '';
 
   const [clinicName, setClinicName] = useState(initialClinicName);
   const [doctorName, setDoctorName] = useState(initialDoctorName);
@@ -245,7 +249,28 @@ export default function ClinicKycUploadPage() {
   const handleFinalSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // 1. Bank Account Validation
+    // 1. Clinic & Authorized Signatory Profile Validation
+    if (!clinicName.trim()) {
+      toast.error('Please enter your Clinic / Hospital Name.');
+      return;
+    }
+
+    if (!doctorName.trim()) {
+      toast.error('Please enter Doctor / Director Name.');
+      return;
+    }
+
+    if (!email.trim() || !email.includes('@')) {
+      toast.error('Please enter a valid Registered Clinic Email.');
+      return;
+    }
+
+    if (!phone.trim() || phone.replace(/\D/g, '').length < 10) {
+      toast.error('Please enter a valid 10-digit Phone / WhatsApp number.');
+      return;
+    }
+
+    // 2. Bank Account Validation
     if (!accountHolderName.trim()) {
       toast.error('Please enter Beneficiary / Account Holder Name.');
       return;
@@ -266,7 +291,7 @@ export default function ClinicKycUploadPage() {
       return;
     }
 
-    // 2. Mandatory KYC Document Validation
+    // 3. Mandatory KYC Document Validation
     if (entityType === 'sole_prop') {
       if (!panDoc.uploadedUrl) {
         toast.error('Doctor / Clinic PAN Card is mandatory for Payment Gateway compliance.');
@@ -308,6 +333,11 @@ export default function ClinicKycUploadPage() {
 
     try {
       const updatePayload: Record<string, any> = {
+        clinic_name: clinicName,
+        doctor_name: doctorName,
+        email: email,
+        phone: phone,
+        city: city || 'Not specified',
         has_cancelled_cheque: 'Yes',
         has_current_account: 'Yes',
         business_proof_type: websiteStatus === 'yes' && websiteUrl ? `Website: ${websiteUrl} | KYC Done` : 'Full KYC & Penny Drop Submitted'
@@ -318,6 +348,24 @@ export default function ClinicKycUploadPage() {
           .from('clinic_onboardings')
           .update(updatePayload)
           .eq('id', clinicId);
+      } else {
+        // Direct signup or cold email invite without clinicId: insert full record into Supabase
+        await supabase
+          .from('clinic_onboardings')
+          .insert({
+            clinic_name: clinicName,
+            doctor_name: doctorName,
+            email: email,
+            phone: phone,
+            city: city || 'Not specified',
+            has_current_account: 'Yes',
+            has_cancelled_cheque: 'Yes',
+            business_proof_type: websiteStatus === 'yes' && websiteUrl ? `Website: ${websiteUrl} | KYC Done` : 'Full KYC & Penny Drop Submitted',
+            utm_source: searchParams.get('utm_source') || 'cold_email_kyc_direct',
+            utm_medium: searchParams.get('utm_medium') || 'email',
+            utm_campaign: searchParams.get('utm_campaign') || 'pine_labs_kyc',
+            source: 'kyc-upload-portal'
+          });
       }
 
       const isCorp = entityType === 'pvt_ltd';
@@ -507,29 +555,150 @@ export default function ClinicKycUploadPage() {
               </p>
             </div>
 
-            {/* Clinic Dossier Header Pill */}
-            {(clinicName || phone || city) && (
-              <div className="bg-white border border-slate-200/90 rounded-2xl p-4 shadow-2xs flex flex-wrap items-center justify-between gap-3 text-xs">
+            {/* Dynamic Verified Invite Banner if URL params present */}
+            {(initialClinicName || initialEmail || initialPhone) && (
+              <div className="bg-emerald-50/90 border border-emerald-200 rounded-2xl p-4 shadow-2xs flex flex-wrap items-center justify-between gap-3 text-xs">
                 <div className="flex items-center gap-2.5">
-                  <div className="w-8 h-8 rounded-xl bg-blue-50 text-[#0867E8] flex items-center justify-center font-bold">
-                    <Building2 size={16} />
+                  <div className="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center font-bold shrink-0">
+                    <Sparkles size={16} />
                   </div>
                   <div>
-                    <h2 className="font-bold text-slate-900">{clinicName || 'Partner Clinic'}</h2>
-                    <p className="text-[11px] text-slate-500 font-mono">
-                      {doctorName ? `${doctorName} • ` : ''}{city ? `${city} • ` : ''}{phone}
+                    <h2 className="font-bold text-emerald-950 flex items-center gap-2">
+                      <span>{initialClinicName ? `Verified Invite for ${initialClinicName}` : 'Verified Partner Invite'}</span>
+                      <span className="text-[10px] font-black text-emerald-800 bg-emerald-200/60 px-2 py-0.5 rounded-full">
+                        Fast-Track KYC
+                      </span>
+                    </h2>
+                    <p className="text-[11px] text-emerald-800/90">
+                      Pre-filled from your outreach invitation. You can review and edit any details below.
                     </p>
                   </div>
                 </div>
 
-                <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-full">
-                  Profile Accredited
+                <span className="text-[10px] font-bold text-emerald-700 bg-emerald-100/70 border border-emerald-300 px-2.5 py-1 rounded-full">
+                  Profile Linked
                 </span>
               </div>
             )}
 
             <form onSubmit={handleFinalSubmit} className="space-y-5">
-              {/* 1. Entity Type Selector: Sole Proprietor vs Pvt Ltd / IVF */}
+              {/* 1. Clinic & Authorized Signatory Profile */}
+              <div className="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-6 shadow-xs space-y-4">
+                <div className="flex items-center justify-between border-b border-slate-100 pb-3 flex-wrap gap-2">
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-8 h-8 rounded-xl bg-blue-50 text-[#0867E8] flex items-center justify-center font-bold">
+                      <Building2 size={17} />
+                    </div>
+                    <div>
+                      <h3 className="text-xs sm:text-sm font-bold text-slate-900 flex items-center gap-1.5">
+                        <span>1. Clinic &amp; Signatory Profile</span>
+                        <span className="text-rose-500">*</span>
+                      </h3>
+                      <p className="text-[11px] text-slate-500">
+                        Required for RBI merchant underwriting, settlement alerts &amp; auto-filling your Board Resolution
+                      </p>
+                    </div>
+                  </div>
+
+                  <span className="text-[10px] font-black text-[#0867E8] bg-blue-50 border border-blue-200 px-2.5 py-1 rounded-full">
+                    Required for MID
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                  {/* Clinic Legal Name */}
+                  <div className="space-y-1 sm:col-span-2">
+                    <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wide">
+                      Clinic / Hospital Legal Name <span className="text-rose-500">*</span>
+                    </label>
+                    <div className="relative">
+                      <Building2 size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+                      <input
+                        type="text"
+                        placeholder="e.g. Apex Multispeciality Dental Center or Nova IVF Fertility"
+                        value={clinicName}
+                        onChange={(e) => setClinicName(e.target.value)}
+                        className="w-full bg-slate-50 border border-slate-300 rounded-xl pl-9 pr-3.5 py-2.5 text-xs text-slate-900 font-semibold focus:outline-none focus:bg-white focus:border-[#0867E8]"
+                      />
+                    </div>
+                    <p className="text-[10px] text-slate-400">Must match registered trade name on Bank Cheque, GST, or MCA registration</p>
+                  </div>
+
+                  {/* Doctor / Director Name */}
+                  <div className="space-y-1">
+                    <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wide">
+                      Doctor / Director / Authorized Signatory <span className="text-rose-500">*</span>
+                    </label>
+                    <div className="relative">
+                      <UserCheck size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+                      <input
+                        type="text"
+                        placeholder="e.g. Dr. Rajesh Sharma"
+                        value={doctorName}
+                        onChange={(e) => setDoctorName(e.target.value)}
+                        className="w-full bg-slate-50 border border-slate-300 rounded-xl pl-9 pr-3.5 py-2.5 text-xs text-slate-900 font-semibold focus:outline-none focus:bg-white focus:border-[#0867E8]"
+                      />
+                    </div>
+                    <p className="text-[10px] text-slate-400">Signatory on Board Resolution, MAF &amp; bank authorization</p>
+                  </div>
+
+                  {/* Work Email */}
+                  <div className="space-y-1">
+                    <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wide">
+                      Registered Clinic / Doctor Email <span className="text-rose-500">*</span>
+                    </label>
+                    <div className="relative">
+                      <Mail size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+                      <input
+                        type="email"
+                        placeholder="e.g. director@apexdental.in"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        className="w-full bg-slate-50 border border-slate-300 rounded-xl pl-9 pr-3.5 py-2.5 text-xs text-slate-900 font-semibold focus:outline-none focus:bg-white focus:border-[#0867E8]"
+                      />
+                    </div>
+                    <p className="text-[10px] text-slate-400">48-72h SLA onboarding updates &amp; daily settlement reports sent here</p>
+                  </div>
+
+                  {/* Phone Number */}
+                  <div className="space-y-1">
+                    <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wide">
+                      Mobile / WhatsApp Number <span className="text-rose-500">*</span>
+                    </label>
+                    <div className="relative">
+                      <Phone size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+                      <input
+                        type="tel"
+                        placeholder="e.g. 98765 43210"
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value)}
+                        className="w-full bg-slate-50 border border-slate-300 rounded-xl pl-9 pr-3.5 py-2.5 text-xs text-slate-900 font-semibold focus:outline-none focus:bg-white focus:border-[#0867E8]"
+                      />
+                    </div>
+                    <p className="text-[10px] text-slate-400">For instant penny drop SMS alerts and underwriting desk contact</p>
+                  </div>
+
+                  {/* City */}
+                  <div className="space-y-1">
+                    <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wide">
+                      Practice City / Location
+                    </label>
+                    <div className="relative">
+                      <MapPin size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+                      <input
+                        type="text"
+                        placeholder="e.g. Mumbai, Maharashtra"
+                        value={city}
+                        onChange={(e) => setCity(e.target.value)}
+                        className="w-full bg-slate-50 border border-slate-300 rounded-xl pl-9 pr-3.5 py-2.5 text-xs text-slate-900 font-semibold focus:outline-none focus:bg-white focus:border-[#0867E8]"
+                      />
+                    </div>
+                    <p className="text-[10px] text-slate-400">City of operation for regional settlement routing</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* 2. Entity Type Selector: Sole Proprietor vs Pvt Ltd / IVF */}
               <div className="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-5 shadow-xs space-y-3">
                 <div className="flex items-center justify-between flex-wrap gap-2">
                   <div className="flex items-center gap-2.5">
@@ -538,7 +707,7 @@ export default function ClinicKycUploadPage() {
                     </div>
                     <div>
                       <h3 className="text-xs sm:text-sm font-bold text-slate-900 flex items-center gap-1.5">
-                        <span>Clinic Legal Entity Type</span>
+                        <span>2. Clinic Legal Entity Type</span>
                         <span className="text-rose-500">*</span>
                       </h3>
                       <p className="text-[11px] text-slate-500">
@@ -599,7 +768,7 @@ export default function ClinicKycUploadPage() {
                 </div>
               </div>
 
-              {/* 2. Direct Bank Account Details (Penny Drop) */}
+              {/* 3. Direct Bank Account Details (Penny Drop) */}
               <div className="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-6 shadow-xs space-y-4">
                 <div className="flex items-center justify-between border-b border-slate-100 pb-3 flex-wrap gap-2">
                   <div className="flex items-center gap-2.5">
@@ -608,7 +777,7 @@ export default function ClinicKycUploadPage() {
                     </div>
                     <div>
                       <h3 className="text-xs sm:text-sm font-bold text-slate-900 flex items-center gap-1.5">
-                        <span>Clinic Current Bank Account</span>
+                        <span>3. Clinic Current Bank Account</span>
                         <span className="text-rose-500">*</span>
                       </h3>
                       <p className="text-[11px] text-slate-500">
@@ -690,24 +859,10 @@ export default function ClinicKycUploadPage() {
                     />
                     <p className="text-[10px] text-slate-400">11-character alphanumeric code on your cheque / passbook</p>
                   </div>
-
-                  {/* Doctor / Clinic Email */}
-                  <div className="space-y-1 sm:col-span-2">
-                    <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wide">
-                      Doctor / Clinic Email <span className="text-[10px] text-slate-400 font-normal">(Receives 48–72h whitelisting updates &amp; settlement reports)</span>
-                    </label>
-                    <input
-                      type="email"
-                      placeholder="e.g. doctor@yourclinic.com"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 focus:outline-none focus:bg-white focus:border-[#0867E8]"
-                    />
-                  </div>
                 </div>
               </div>
 
-              {/* 2. Clinic Website & Online Presence (PG Underwriting Requirement) */}
+              {/* 4. Clinic Website & Online Presence (PG Underwriting Requirement) */}
               <div className="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-5 shadow-xs space-y-3">
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex items-center gap-2.5">
@@ -716,7 +871,7 @@ export default function ClinicKycUploadPage() {
                     </div>
                     <div>
                       <h3 className="text-xs sm:text-sm font-bold text-slate-900 flex items-center gap-1.5">
-                        <span>Is your Clinic Website ready?</span>
+                        <span>4. Is your Clinic Website ready?</span>
                         <span className="text-rose-500">*</span>
                       </h3>
                       <p className="text-[11px] text-slate-500">
@@ -792,6 +947,22 @@ export default function ClinicKycUploadPage() {
                     </div>
                   </div>
                 )}
+              </div>
+
+              {/* 5. Mandatory KYC Verification Documents */}
+              <div className="flex items-center justify-between pt-1">
+                <div>
+                  <h3 className="text-xs sm:text-sm font-bold text-slate-900 flex items-center gap-1.5">
+                    <span>5. Mandatory KYC Verification Documents</span>
+                    <span className="text-rose-500">*</span>
+                  </h3>
+                  <p className="text-[11px] text-slate-500">
+                    Upload official proofs for fast-track Pine Labs merchant ID issuance
+                  </p>
+                </div>
+                <span className="text-[10px] font-black text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded-full">
+                  Fast-Track 48–72h SLA
+                </span>
               </div>
 
               {/* Bank-Grade Security & RBI Compliance Trust Banner */}

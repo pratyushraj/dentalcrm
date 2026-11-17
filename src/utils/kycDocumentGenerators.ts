@@ -1,4 +1,4 @@
-import { Document, Paragraph, TextRun, Packer, AlignmentType, Table, TableRow, TableCell, WidthType } from 'docx';
+import { Document, Paragraph, TextRun, Packer, AlignmentType, Table, TableRow, TableCell, WidthType, Footer } from 'docx';
 
 export interface ClinicKycData {
   clinicName?: string;
@@ -41,6 +41,23 @@ export async function downloadAutoFilledBoardResolutionDocx({
               right: 1440,
             },
           },
+        },
+        footers: {
+          default: new Footer({
+            children: [
+              new Paragraph({
+                alignment: AlignmentType.RIGHT,
+                children: [
+                  new TextRun({
+                    text: `For ${companyTitle}  |  Authorized Signatory: _________________________ (Sign & Stamp Each Page)`,
+                    size: 16,
+                    color: "64748B",
+                    italics: true,
+                  }),
+                ],
+              }),
+            ],
+          }),
         },
         children: [
           // Letterhead instruction
@@ -237,6 +254,23 @@ export async function downloadAutoFilledGstExemptionDocx({
             margin: { top: 1440, bottom: 1440, left: 1440, right: 1440 },
           },
         },
+        footers: {
+          default: new Footer({
+            children: [
+              new Paragraph({
+                alignment: AlignmentType.RIGHT,
+                children: [
+                  new TextRun({
+                    text: `For ${cName}  |  Authorized Doctor: _________________________ (Sign & Stamp Each Page)`,
+                    size: 16,
+                    color: "64748B",
+                    italics: true,
+                  }),
+                ],
+              }),
+            ],
+          }),
+        },
         children: [
           new Paragraph({
             alignment: AlignmentType.CENTER,
@@ -346,6 +380,8 @@ export function printAutoFilledBoardResolution({
         .sig-table { width: 100%; border-collapse: collapse; margin-top: 15px; }
         .sig-table td { width: 50%; vertical-align: top; font-size: 12px; line-height: 1.5; }
         .sig-line { display: inline-block; width: 180px; border-bottom: 1.5px solid #0f172a; margin-bottom: 8px; }
+        .page-footer-note { margin-top: 25px; padding-top: 10px; border-top: 1px dashed #cbd5e1; font-size: 10.5px; color: #475569; display: flex; justify-content: space-between; align-items: center; }
+        .sign-box { border: 1px dashed #94a3b8; padding: 4px 10px; border-radius: 4px; font-weight: 700; font-size: 10px; color: #0b2450; }
         @media print { .header-note { display: none; } }
       </style>
     </head>
@@ -401,6 +437,10 @@ export function printAutoFilledBoardResolution({
           </tr>
         </table>
       </div>
+      <div class="page-footer-note">
+        <span>* Pine Labs Compliance Invariant: Authorized Signatory must Sign &amp; Stamp on Every Page</span>
+        <span class="sign-box">[ Director Signature &amp; Round Stamp Here ]</span>
+      </div>
       <script>
         window.onload = function() { setTimeout(function(){ window.print(); }, 200); }
       </script>
@@ -441,6 +481,8 @@ export function printAutoFilledGstExemption({
         .p-block { margin-bottom: 14px; text-align: justify; }
         .sig-block { margin-top: 40px; }
         .sig-line { display: inline-block; width: 200px; border-bottom: 1.5px solid #0f172a; margin-bottom: 8px; }
+        .page-footer-note { margin-top: 25px; padding-top: 10px; border-top: 1px dashed #cbd5e1; font-size: 10.5px; color: #475569; display: flex; justify-content: space-between; align-items: center; }
+        .sign-box { border: 1px dashed #94a3b8; padding: 4px 10px; border-radius: 4px; font-weight: 700; font-size: 10px; color: #0b2450; }
         @media print { .header-note { display: none; } }
       </style>
     </head>
@@ -473,6 +515,10 @@ export function printAutoFilledGstExemption({
         <strong>Date:</strong> ${todayFormatted}<br>
         <strong>Place:</strong> ${cCity}<br>
         <em>[Clinic Round Seal & Doctor Stamp]</em>
+      </div>
+      <div class="page-footer-note">
+        <span>* Healthcare Exemption Compliance: Doctor must Sign &amp; Stamp on Every Page</span>
+        <span class="sign-box">[ Doctor Sign &amp; Clinic Stamp Here ]</span>
       </div>
       <script>
         window.onload = function() { setTimeout(function(){ window.print(); }, 200); }

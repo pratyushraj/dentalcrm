@@ -217,13 +217,14 @@ export const BLOGS_PART1 = [
     {
     slug: "gap-closure-cost-in-patna",
     title: "Teeth Gap Filling Cost & Treatment Price in India: Diastema Closure Guide (From ₹999)",
+    seoTitle: "Teeth Gap Filling Cost & Diastema Price (From ₹999)",
     category: "Aesthetics",
     readTime: "5 min read",
     publishDate: "June 24, 2026",
     author: "Dr. Aryan Parmar",
     summary: "Want to fix gaps in your front teeth? Compare costs, duration, and durability of teeth gap filling with composite bonding, porcelain veneers, and invisible aligners.",
     featuredImage: "/assets/yourdentist/clinic_in_action.jpg",
-    metaDescription: "Teeth gap filling cost in India starts from ₹999 for composite bonding to ₹45,000 for aligners. Compare diastema closure options and 2026 pricing.",
+    metaDescription: "Teeth gap filling cost in India starts from ₹999 for composite bonding up to ₹45,000 for aligners. Compare 1-day diastema closure options & monthly EMI plans.",
     faqs: [
       {
         question: "What is the average teeth gap filling cost in India?",
@@ -1224,13 +1225,14 @@ export const BLOGS_PART1 = [
     {
     slug: "dental-treatment-on-emi-india-guide",
     title: "How to Get Dental Treatment on EMI in India: Step-by-Step 2026 Patient Guide",
+    seoTitle: "Dental Treatment on EMI in India: Front-Desk Plans",
     category: "Patient Financing",
     readTime: "6 min read",
     publishDate: "September 6, 2026",
     author: "Clinaza Health Desk",
     summary: "Need dental implants, clear aligners, or crowns but worried about upfront cost? Learn how to get dental treatment on flexible monthly EMI across India at partner clinics.",
     featuredImage: "/assets/yourdentist/clinic_in_action.jpg",
-    metaDescription: "Step-by-step guide to dental treatments on EMI in India: Compare monthly payment plans, eligibility criteria, required documents, and approved procedures.",
+    metaDescription: "Get dental treatment on easy monthly EMI in India (2026): ₹30,000 to ₹3,00,000 for implants, aligners & root canals with 2-min instant front-desk approval.",
     faqs: [
       {
         question: "Can I get dental treatment on EMI in India?",
@@ -2005,13 +2007,14 @@ export const BLOGS_PART1 = [
     {
     slug: "zirconia-crown-cost-on-emi-india",
     title: "Zirconia Crown Cost on EMI in India (2026): Tooth Cap Prices, 15-Yr Warranty & Monthly Plans",
+    seoTitle: "Zirconia Cap & Crown Price in India (From ₹7,500)",
     category: "Restorative Dentistry",
     readTime: "6 min read",
     publishDate: "September 6, 2026",
     author: "Clinaza Medical Desk",
     summary: "2026 price guide for dental crowns and tooth caps in India: Compare Monolithic CAD/CAM Zirconia, 3M Lava (₹7,500 to ₹18,000), and PFM caps with 10–15 year warranties and monthly EMI options from ₹800/mo.",
     featuredImage: "/assets/yourdentist/laser_whitening.png",
-    metaDescription: "Zirconia crown cost on EMI in India (2026): Compare tooth cap prices (₹7,500–₹18,000), 15-year warranty, CAD/CAM monolithic & 3M Lava with monthly EMIs from ₹800/mo.",
+    metaDescription: "Zirconia cap & crown price in India (2026): ₹7,500 to ₹18,000 per tooth with 15-yr warranty. Compare monolithic CAD/CAM & 3M Lava caps with easy EMIs from ₹800/mo.",
     faqs: [
       {
         question: "How much does a Zirconia crown cost in India?",

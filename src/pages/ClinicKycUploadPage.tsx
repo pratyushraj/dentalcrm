@@ -4,6 +4,7 @@ import { supabase } from '@/lib/supabase';
 import { emailNotificationService } from '@/services/emailNotificationService';
 import { SEOHead } from '@/components/seo/SEOHead';
 import { toast } from 'sonner';
+import { analytics } from '@/utils/analytics';
 import {
   downloadAutoFilledBoardResolutionDocx,
   downloadAutoFilledGstExemptionDocx,
@@ -1765,6 +1766,7 @@ DIN: [DIN Number]                      DIN: [DIN Number]`}
                                   websiteUrl
                                 });
                                 toast.success(`Plural MAF auto-filled for ${clinicName || 'your company'} downloaded!`);
+                                analytics.trackMafDownload(clinicName || 'Clinic');
                               } catch (e) {
                                 console.error('Failed to generate MAF:', e);
                                 toast.error('Failed to auto-fill MAF. You can download the blank template below.');

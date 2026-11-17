@@ -260,6 +260,116 @@ class Analytics {
   setEnabled(enabled: boolean) {
     this.enabled = enabled;
   }
+
+  /**
+   * Track high-intent Patient Eligibility Check (GA4 recommended event: generate_lead)
+   */
+  trackPatientLead(data: {
+    treatment: string;
+    amount?: string;
+    city?: string;
+    sourcePage?: string;
+    phone?: string;
+  }) {
+    const numericAmount = parseInt((data.amount || '').replace(/[^0-9]/g, '')) || 50000;
+    this.track('generate_lead', {
+      category: 'Patient Financing',
+      label: data.treatment,
+      lead_type: 'patient_eligibility_check',
+      treatment: data.treatment,
+      city: data.city || 'India',
+      source_page: data.sourcePage || 'Website',
+      value: numericAmount,
+      currency: 'INR',
+    });
+  }
+
+  /**
+   * Track Clinic Partner Registration (GA4 recommended event: sign_up & generate_lead)
+   */
+  trackClinicPartnerLead(data: {
+    clinicName: string;
+    city: string;
+    category?: string;
+    phone?: string;
+    expectedEmiLoans?: string;
+  }) {
+    this.track('sign_up', {
+      method: 'partner_clinic_form',
+      category: 'Clinic Partnership',
+      label: data.clinicName,
+      lead_type: 'clinic_partner_onboarding',
+      clinic_name: data.clinicName,
+      city: data.city,
+      clinic_category: data.category,
+      value: 999,
+      currency: 'INR',
+    });
+    this.track('generate_lead', {
+      category: 'Clinic Partnership',
+      label: data.clinicName,
+      lead_type: 'clinic_partner_onboarding',
+      clinic_name: data.clinicName,
+      city: data.city,
+      value: 999,
+      currency: 'INR',
+    });
+  }
+
+  /**
+   * Track Razorpay Kit Purchase (GA4 standard ecommerce event: purchase)
+   */
+  trackKitPurchase(data: {
+    paymentId: string;
+    clinicName: string;
+    amount?: number;
+  }) {
+    this.track('purchase', {
+      transaction_id: data.paymentId,
+      value: data.amount || 999,
+      currency: 'INR',
+      items: [
+        {
+          item_name: 'Counter QR Kit + Onboarding',
+          affiliation: 'Clinaza',
+          price: data.amount || 999,
+          quantity: 1,
+        },
+      ],
+    });
+  }
+
+  /**
+   * Track WhatsApp Support Outreach (GA4 recommended event: contact)
+   */
+  trackWhatsAppContact(source: string) {
+    this.track('contact', {
+      method: 'whatsapp',
+      category: 'Support',
+      label: source,
+      source_page: source,
+    });
+  }
+
+  /**
+   * Track Auto-Filled MAF Excel Download (GA4 recommended event: file_download)
+   */
+  trackMafDownload(clinicName: string) {
+    this.track('file_download', {
+      category: 'KYC Documents',
+      label: clinicName,
+      file_name: `Plural_MAF_BO_PEP_${clinicName}.xlsx`,
+      file_extension: 'xlsx',
+      lead_type: 'maf_excel_download',
+    });
+    this.track('generate_lead', {
+      category: 'KYC Documents',
+      label: clinicName,
+      lead_type: 'maf_excel_download',
+      currency: 'INR',
+      value: 500,
+    });
+  }
 }
 
 // Singleton instance

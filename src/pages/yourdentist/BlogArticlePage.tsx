@@ -74,7 +74,9 @@ export default function BlogArticlePage() {
     return `${cleaned}${brand}`;
   };
 
-  const seoTitle = formatBlogSeoTitle(article.title);
+  const seoTitle = article.seoTitle
+    ? (article.seoTitle.includes('Clinaza') ? article.seoTitle : `${article.seoTitle} | Clinaza`)
+    : formatBlogSeoTitle(article.title);
 
   // Article schema — powers Google rich results & date signals
   const articleSchema = {

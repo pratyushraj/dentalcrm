@@ -3,6 +3,7 @@ import type { ReactNode } from 'react';
 export interface BlogArticle {
   slug: string;
   title: string;
+  seoTitle?: string;
   category: string;
   readTime: string;
   publishDate: string;

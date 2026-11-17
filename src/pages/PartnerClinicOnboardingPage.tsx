@@ -28,6 +28,7 @@ import {
 import { emailNotificationService } from '@/services/emailNotificationService';
 import { supabase } from '@/lib/supabase';
 import { toast } from 'sonner';
+import { analytics } from '@/utils/analytics';
 import { initiateRazorpayPayment, RAZORPAY_CONFIG } from '@/services/razorpayService';
 
 export default function PartnerClinicOnboardingPage() {
@@ -113,6 +114,13 @@ export default function PartnerClinicOnboardingPage() {
         toast.success(`Payment of ₹${RAZORPAY_CONFIG.kitAmount} verified! (Ref: ${res.razorpay_payment_id})`);
         
         try {
+          // Track GA4 Ecommerce Purchase
+          analytics.trackKitPurchase({
+            paymentId: res.razorpay_payment_id,
+            clinicName: form.clinicName,
+            amount: RAZORPAY_CONFIG.kitAmount
+          });
+
           await emailNotificationService.sendNotification(`🎉 ₹999 Clinic Kit Paid via Razorpay: ${form.clinicName}`, {
             'Payment ID': res.razorpay_payment_id,
             'Order ID': res.razorpay_order_id || 'N/A',
@@ -228,6 +236,15 @@ export default function PartnerClinicOnboardingPage() {
         'UTM Medium': utmParams.medium || '(none)',
         'UTM Campaign': utmParams.campaign || '(none)',
         'Estimated Monthly Loan Volume Potential': form.expectedEmiLoans ? `₹${(parseInt(form.expectedEmiLoans.replace(/\D/g, '') || '0') * (form.category === 'ivf' ? 150000 : 40000)).toLocaleString('en-IN')}/month` : 'Pending discussion'
+      });
+
+      // Track GA4 Key Lead Event for Clinic Partner
+      analytics.trackClinicPartnerLead({
+        clinicName: form.clinicName,
+        city: form.city,
+        category: form.category,
+        phone: form.phone,
+        expectedEmiLoans: form.expectedEmiLoans
       });
 
     } catch (err) {

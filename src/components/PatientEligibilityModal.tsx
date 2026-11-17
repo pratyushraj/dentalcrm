@@ -14,6 +14,7 @@ import {
 import { toast } from 'sonner';
 import { emailNotificationService } from '@/services/emailNotificationService';
 import { easycredService } from '@/services/easycredService';
+import { analytics } from '@/utils/analytics';
 
 interface PatientEligibilityModalProps {
   isOpen: boolean;
@@ -89,6 +90,15 @@ export const PatientEligibilityModal: React.FC<PatientEligibilityModalProps> = (
         city: city || 'Not specified',
         source: sourcePage,
         checkedAt: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })
+      });
+
+      // 1b. Track GA4 Key Event
+      analytics.trackPatientLead({
+        treatment,
+        amount,
+        city,
+        sourcePage,
+        phone: cleanMobile,
       });
 
       // 2. Initiate application via Multi-Lender Cardless Network

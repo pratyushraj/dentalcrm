@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { CheckCircle2, Phone, ShieldCheck, Sparkles, Send, ArrowRight } from 'lucide-react';
+import { analytics } from '@/utils/analytics';
 
 interface PatientLeadFormProps {
   defaultTreatment?: string;
@@ -46,6 +47,13 @@ export const PatientLeadForm: React.FC<PatientLeadFormProps> = ({
       const data = await response.json();
       if (response.ok && data.success) {
         setSubmitted(true);
+        // Track GA4 key conversion event
+        analytics.trackPatientLead({
+          treatment,
+          city,
+          sourcePage: sourceArticle,
+          phone: phone.trim(),
+        });
       } else {
         setError(data.error || 'Unable to submit right now. Please try again.');
       }

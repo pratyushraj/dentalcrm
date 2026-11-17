@@ -6,13 +6,14 @@ export const BLOGS_PART3 = [
     {
     slug: "cheapest-invisible-aligners-india-under-40000-guide",
     title: "Cheapest Invisible Aligners in India (Under ₹40,000): 2026 Price & Brand Comparison",
+    seoTitle: "Cheapest Invisible Aligners in India (Under ₹40K)",
     category: "Orthodontics",
     readTime: "6 min read",
     publishDate: "September 12, 2026",
     author: "Clinaza Clinical Insights",
     summary: "Complete guide to finding affordable clear aligners in India under ₹40,000. Compare top Indian certified aligners vs Invisalign, at-home vs clinic-monitored aligners, and 0-downpayment monthly EMI plans.",
     featuredImage: "/assets/yourdentist/clear_aligners.png",
-    metaDescription: "Cheapest invisible aligners in India: Compare verified clear aligner brands starting under ₹40,000, doctor-supervised kits, and monthly EMI options.",
+    metaDescription: "Cheapest invisible aligners in India under ₹40,000 (2026): Compare doctor-supervised brands, at-home vs clinic kits, and easy monthly EMIs from ₹2,900/mo.",
     faqs: [
       {
         question: "Can I get clear invisible aligners in India for under ₹40,000?",

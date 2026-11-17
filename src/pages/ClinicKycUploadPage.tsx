@@ -5,6 +5,10 @@ import { emailNotificationService } from '@/services/emailNotificationService';
 import { SEOHead } from '@/components/seo/SEOHead';
 import { toast } from 'sonner';
 import {
+  downloadAutoFilledBoardResolutionDocx,
+  downloadAutoFilledGstExemptionDocx
+} from '@/utils/kycDocumentGenerators';
+import {
   ShieldCheck,
   Building2,
   FileText,
@@ -1152,14 +1156,29 @@ export default function ClinicKycUploadPage() {
                     </div>
 
                     <div className="flex items-center gap-1.5 flex-wrap">
-                      <a
-                        href="/docs/Clinaza_GST_Exemption_Declaration_Letterhead_Format.docx"
-                        download="Clinaza_GST_Exemption_Declaration_Letterhead_Format.docx"
-                        className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-white hover:bg-slate-50 border border-blue-300 text-[11px] font-bold text-[#0867E8] transition-all shadow-2xs active:scale-95"
+                      <button
+                        type="button"
+                        onClick={async (e) => {
+                          e.preventDefault();
+                          try {
+                            toast.info('Generating auto-filled letterhead declaration (.docx)...');
+                            await downloadAutoFilledGstExemptionDocx({
+                              clinicName,
+                              doctorName,
+                              city
+                            });
+                            toast.success(`Word document auto-filled for ${clinicName || 'your practice'} downloaded!`);
+                          } catch (err) {
+                            console.error('Docx download fallback:', err);
+                            window.open('/docs/Clinaza_GST_Exemption_Declaration_Letterhead_Format.docx', '_blank');
+                          }
+                        }}
+                        className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-white hover:bg-slate-50 border border-blue-300 text-[11px] font-bold text-[#0867E8] transition-all shadow-2xs active:scale-95 cursor-pointer"
+                        title="Downloads pre-filled Word document with your clinic name and details"
                       >
                         <Download size={12} />
-                        <span>Download Word (.docx)</span>
-                      </a>
+                        <span>Download Auto-Filled Word (.docx)</span>
+                      </button>
 
                       <a
                         href="/docs/Clinaza_GST_Exemption_Declaration_Letterhead_Format.pdf"
@@ -1323,14 +1342,31 @@ Dr. ${doctorName || '[Doctor Name]'}
                         </div>
 
                         <div className="flex items-center gap-1.5 flex-wrap">
-                          <a
-                            href="/docs/Clinaza_Pine_Labs_Board_Resolution_Format.docx"
-                            download="Clinaza_Pine_Labs_Board_Resolution_Format.docx"
-                            className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-white hover:bg-slate-50 border border-blue-300 text-[11px] font-bold text-[#0867E8] transition-all shadow-2xs active:scale-95"
+                          <button
+                            type="button"
+                            onClick={async (e) => {
+                              e.preventDefault();
+                              try {
+                                toast.info('Generating auto-filled Board Resolution (.docx)...');
+                                await downloadAutoFilledBoardResolutionDocx({
+                                  clinicName,
+                                  doctorName,
+                                  city,
+                                  accountNumber,
+                                  ifscCode
+                                });
+                                toast.success(`Board Resolution auto-filled for ${clinicName || 'your company'} downloaded!`);
+                              } catch (err) {
+                                console.error('Docx download fallback:', err);
+                                window.open('/docs/Clinaza_Pine_Labs_Board_Resolution_Format.docx', '_blank');
+                              }
+                            }}
+                            className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-white hover:bg-slate-50 border border-blue-300 text-[11px] font-bold text-[#0867E8] transition-all shadow-2xs active:scale-95 cursor-pointer"
+                            title="Downloads pre-filled Word document with your company name, directors, and settlement account"
                           >
                             <Download size={12} />
-                            <span>Download Word (.docx)</span>
-                          </a>
+                            <span>Download Auto-Filled Word (.docx)</span>
+                          </button>
 
                           <a
                             href="/docs/Clinaza_Pine_Labs_Board_Resolution_Format.pdf"

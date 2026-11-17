@@ -24,6 +24,7 @@ import {
   Globe,
   Copy,
   FileCheck,
+  FileSpreadsheet,
   ChevronDown,
   ChevronUp
 } from 'lucide-react';
@@ -103,6 +104,60 @@ export default function ClinicKycUploadPage() {
   });
 
   const [showGstTemplate, setShowGstTemplate] = useState(false);
+
+  // Legal Entity Structure (Sole Proprietorship vs Corporate / Pvt Ltd / IVF)
+  const [entityType, setEntityType] = useState<'sole_prop' | 'pvt_ltd'>('sole_prop');
+  const [showBrTemplate, setShowBrTemplate] = useState(false);
+
+  // Corporate / Pvt Ltd & IVF Documents (Pine Labs Plural Verified)
+  const [brDoc, setBrDoc] = useState<UploadedDoc>({
+    file: null,
+    previewUrl: null,
+    uploadedUrl: null,
+    isUploading: false,
+    docName: 'Board Resolution on Letterhead'
+  });
+
+  const [mafDoc, setMafDoc] = useState<UploadedDoc>({
+    file: null,
+    previewUrl: null,
+    uploadedUrl: null,
+    isUploading: false,
+    docName: 'Plural MAF & BO/PEP Declaration'
+  });
+
+  const [coiDoc, setCoiDoc] = useState<UploadedDoc>({
+    file: null,
+    previewUrl: null,
+    uploadedUrl: null,
+    isUploading: false,
+    docName: 'Certificate of Incorporation (COI)'
+  });
+
+  const [companyPanDoc, setCompanyPanDoc] = useState<UploadedDoc>({
+    file: null,
+    previewUrl: null,
+    uploadedUrl: null,
+    isUploading: false,
+    docName: 'Company PAN Card'
+  });
+
+  const [companyGstDoc, setCompanyGstDoc] = useState<UploadedDoc>({
+    file: null,
+    previewUrl: null,
+    uploadedUrl: null,
+    isUploading: false,
+    docName: 'Company GST Registration Certificate'
+  });
+
+  const [moaDoc, setMoaDoc] = useState<UploadedDoc>({
+    file: null,
+    previewUrl: null,
+    uploadedUrl: null,
+    isUploading: false,
+    docName: 'MOA & AOA / LLP Agreement'
+  });
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isCompleted, setIsCompleted] = useState(false);
 
@@ -137,7 +192,7 @@ export default function ClinicKycUploadPage() {
   // Generic document upload handler
   const handleFileUpload = async (
     file: File,
-    docType: 'cheque' | 'pan' | 'reg' | 'aadhaar' | 'gst',
+    docType: string,
     setter: React.Dispatch<React.SetStateAction<UploadedDoc>>
   ) => {
     const preview = URL.createObjectURL(file);
@@ -203,25 +258,37 @@ export default function ClinicKycUploadPage() {
       return;
     }
 
-    // 2. Mandatory KYC Document Validation for PG
-    if (!panDoc.uploadedUrl) {
-      toast.error('Doctor / Clinic PAN Card is mandatory for Payment Gateway compliance.');
-      return;
-    }
+    // 2. Mandatory KYC Document Validation
+    if (entityType === 'sole_prop') {
+      if (!panDoc.uploadedUrl) {
+        toast.error('Doctor / Clinic PAN Card is mandatory for Payment Gateway compliance.');
+        return;
+      }
 
-    if (!chequeDoc.uploadedUrl) {
-      toast.error('Clinic Cancelled Cheque is mandatory for bank whitelisting.');
-      return;
-    }
+      if (!chequeDoc.uploadedUrl) {
+        toast.error('Clinic Cancelled Cheque is mandatory for bank whitelisting.');
+        return;
+      }
 
-    if (!regDoc.uploadedUrl) {
-      toast.error('Medical Practice Proof (Dental Council Reg. / CEA / Udyam / GST) is mandatory.');
-      return;
-    }
+      if (!regDoc.uploadedUrl) {
+        toast.error('Medical Practice Proof (Dental Council Reg. / CEA / Udyam / GST) is mandatory.');
+        return;
+      }
 
-    if (!aadhaarDoc.uploadedUrl) {
-      toast.error('Authorized Signatory Aadhaar Card (Front & Back) is mandatory for RBI Proof of Address.');
-      return;
+      if (!aadhaarDoc.uploadedUrl) {
+        toast.error('Authorized Signatory Aadhaar Card (Front & Back) is mandatory for RBI Proof of Address.');
+        return;
+      }
+    } else {
+      if (!chequeDoc.uploadedUrl) {
+        toast.error('Company Current Account Cancelled Cheque is mandatory for direct settlement.');
+        return;
+      }
+
+      if (!brDoc.uploadedUrl && !mafDoc.uploadedUrl && !coiDoc.uploadedUrl && !companyPanDoc.uploadedUrl) {
+        toast.error('Please upload at least your Board Resolution, Plural MAF, COI or Company PAN.');
+        return;
+      }
     }
 
     if (websiteStatus === 'yes' && !websiteUrl.trim()) {
@@ -245,10 +312,13 @@ export default function ClinicKycUploadPage() {
           .eq('id', clinicId);
       }
 
+      const isCorp = entityType === 'pvt_ltd';
+
       // Dispatch alert to Clinaza Admin team with full banking & document dossier
-      await emailNotificationService.sendNotification(`🎉 PG Whitelisting & KYC Submitted: ${clinicName || 'Partner Clinic'}`, {
-        'Clinic Name': clinicName || 'Not specified',
-        'Doctor Name': doctorName || 'Not specified',
+      await emailNotificationService.sendNotification(`🎉 ${isCorp ? 'Corporate (Pvt Ltd / IVF)' : 'Sole Proprietor'} KYC Submitted: ${clinicName || 'Partner Clinic'}`, {
+        'Entity Structure': isCorp ? 'Corporate (Pvt Ltd / LLP / IVF Center)' : 'Individual Doctor / Sole Proprietorship',
+        'Clinic / Company Name': clinicName || 'Not specified',
+        'Doctor / Director Name': doctorName || 'Not specified',
         'Doctor Email': email || 'Not specified',
         'Contact Phone': phone || 'Not specified',
         'City': city || 'Not specified',
@@ -257,11 +327,14 @@ export default function ClinicKycUploadPage() {
         'Account Number': accountNumber,
         'IFSC Code': ifscCode,
         'Clinic Website': websiteStatus === 'yes' ? websiteUrl : 'Not Ready (Assign Clinaza Portal Profile)',
-        'PAN Card Proof': panDoc.uploadedUrl || 'Attached',
+        'Board Resolution (BR)': brDoc.uploadedUrl || 'Pending / N/A',
+        'Plural MAF & BO/PEP': mafDoc.uploadedUrl || 'Pending / N/A',
+        'COI Proof': coiDoc.uploadedUrl || 'N/A (Sole Prop)',
+        'Company PAN / Doctor PAN': companyPanDoc.uploadedUrl || panDoc.uploadedUrl || 'Attached',
+        'GST Certificate / Exemption': companyGstDoc.uploadedUrl || gstDoc.uploadedUrl || 'Attached',
         'Cancelled Cheque Proof': chequeDoc.uploadedUrl || 'Attached',
-        'Medical Practice Proof': regDoc.uploadedUrl || 'Attached',
-        'Aadhaar Proof': aadhaarDoc.uploadedUrl || 'Attached',
-        'GST Exemption / Certificate': gstDoc.uploadedUrl || 'Self-Exempt (Letterhead Pending or Healthcare Exempt)',
+        'MOA & AOA': moaDoc.uploadedUrl || 'N/A (Sole Prop)',
+        'Director KYC / Aadhaar': aadhaarDoc.uploadedUrl || 'Attached',
         'Compliance Status': 'Ready for ₹1 Automated Penny Drop'
       });
 
@@ -448,7 +521,77 @@ export default function ClinicKycUploadPage() {
             )}
 
             <form onSubmit={handleFinalSubmit} className="space-y-5">
-              {/* 1. Direct Bank Account Details (Penny Drop) */}
+              {/* 1. Entity Type Selector: Sole Proprietor vs Pvt Ltd / IVF */}
+              <div className="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-5 shadow-xs space-y-3">
+                <div className="flex items-center justify-between flex-wrap gap-2">
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-8 h-8 rounded-xl bg-blue-50 text-[#0867E8] flex items-center justify-center font-bold">
+                      <Building2 size={16} />
+                    </div>
+                    <div>
+                      <h3 className="text-xs sm:text-sm font-bold text-slate-900 flex items-center gap-1.5">
+                        <span>Clinic Legal Entity Type</span>
+                        <span className="text-rose-500">*</span>
+                      </h3>
+                      <p className="text-[11px] text-slate-500">
+                        Choose your healthcare legal structure for verified Pine Labs PG underwriting
+                      </p>
+                    </div>
+                  </div>
+
+                  <span className="text-[10px] font-black text-[#0867E8] bg-blue-50 border border-blue-200 px-2.5 py-0.5 rounded-full">
+                    {entityType === 'sole_prop' ? 'Sole Proprietor Track' : 'Corporate / IVF Track'}
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                  <button
+                    type="button"
+                    onClick={() => setEntityType('sole_prop')}
+                    className={`p-3.5 rounded-xl border text-left transition-all cursor-pointer relative ${
+                      entityType === 'sole_prop'
+                        ? 'bg-blue-50/80 border-[#0867E8] ring-2 ring-[#0867E8]/20 shadow-xs'
+                        : 'bg-slate-50 border-slate-200 hover:bg-slate-100'
+                    }`}
+                  >
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-black text-[#0B2450] flex items-center gap-1.5">
+                        <span>🩺 Individual / Sole Proprietorship</span>
+                      </span>
+                      {entityType === 'sole_prop' && (
+                        <CheckCircle2 size={16} className="text-[#0867E8]" />
+                      )}
+                    </div>
+                    <p className="text-[11px] text-slate-600 mt-1">
+                      95% of Dental Clinics. Zero corporate paperwork, no Board Resolution, no MOA/AOA needed.
+                    </p>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => setEntityType('pvt_ltd')}
+                    className={`p-3.5 rounded-xl border text-left transition-all cursor-pointer relative ${
+                      entityType === 'pvt_ltd'
+                        ? 'bg-blue-50/80 border-[#0867E8] ring-2 ring-[#0867E8]/20 shadow-xs'
+                        : 'bg-slate-50 border-slate-200 hover:bg-slate-100'
+                    }`}
+                  >
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-black text-[#0B2450] flex items-center gap-1.5">
+                        <span>🏢 Pvt Ltd / LLP / IVF Center</span>
+                      </span>
+                      {entityType === 'pvt_ltd' && (
+                        <CheckCircle2 size={16} className="text-[#0867E8]" />
+                      )}
+                    </div>
+                    <p className="text-[11px] text-slate-600 mt-1">
+                      IVF Centers, Hospital Chains &amp; Dental Networks. Includes 1-click Board Resolution &amp; MAF formats.
+                    </p>
+                  </button>
+                </div>
+              </div>
+
+              {/* 2. Direct Bank Account Details (Penny Drop) */}
               <div className="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-6 shadow-xs space-y-4">
                 <div className="flex items-center justify-between border-b border-slate-100 pb-3 flex-wrap gap-2">
                   <div className="flex items-center gap-2.5">
@@ -661,7 +804,19 @@ export default function ClinicKycUploadPage() {
                 </div>
               </div>
 
-              {/* 2. Document: Cancelled Cheque */}
+              {entityType === 'sole_prop' ? (
+                /* ── SOLE PROPRIETORSHIP / DENTAL CLINIC SLOTS (5 SLOTS) ── */
+                <div className="space-y-4">
+                  <div className="p-3 bg-blue-50/70 border border-blue-200/80 rounded-xl flex items-center justify-between gap-2 text-xs">
+                    <span className="font-bold text-[#0B2450] flex items-center gap-1.5">
+                      <span>🩺 Showing Sole Proprietor / Individual Doctor Checklist (5 Docs)</span>
+                    </span>
+                    <span className="text-[10px] font-bold text-[#0867E8] bg-white px-2 py-0.5 rounded-full border border-blue-200">
+                      Zero Board Resolution / MOA Needed
+                    </span>
+                  </div>
+
+{/* 2. Document: Cancelled Cheque */}
               <div className="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-5 shadow-xs space-y-3">
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex items-center gap-2.5">
@@ -1113,6 +1268,559 @@ Dr. ${doctorName || '[Doctor Name]'}
                   </label>
                 )}
               </div>
+                </div>
+              ) : (
+                /* ── CORPORATE / PVT LTD / IVF CENTER SLOTS (8 SLOTS - PINE LABS VERIFIED) ── */
+                <div className="space-y-4">
+                  <div className="p-3.5 bg-blue-50/70 border border-blue-200/80 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
+                    <div>
+                      <span className="font-bold text-[#0B2450] flex items-center gap-1.5">
+                        <span>🏢 Corporate / Private Limited & IVF Center Onboarding</span>
+                      </span>
+                      <p className="text-[11px] text-slate-500 mt-0.5">
+                        Verified checklist from Advita / Pine Labs underwriting desk for corporate healthcare entities.
+                      </p>
+                    </div>
+                    <span className="text-[10px] font-bold text-[#0867E8] bg-white px-2 py-0.5 rounded-full border border-blue-200 shrink-0">
+                      Standard Corporate SLA: 24–48h
+                    </span>
+                  </div>
+
+                  {/* Corporate Slot 1: Board Resolution (BR) on Letterhead */}
+                  <div className="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-5 shadow-xs space-y-3">
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="flex items-center gap-2.5">
+                        <div className="w-7 h-7 rounded-lg bg-blue-50 text-[#0867E8] flex items-center justify-center font-bold text-xs shrink-0">
+                          1
+                        </div>
+                        <div>
+                          <h3 className="text-xs sm:text-sm font-bold text-slate-900 flex items-center gap-1.5 flex-wrap">
+                            <span>Board Resolution (BR) on Company Letterhead</span>
+                            <span className="text-rose-500">*</span>
+                            <span className="text-[10px] font-bold text-[#0867E8] bg-blue-50 border border-blue-200 px-1.5 py-0.5 rounded-md">
+                              Advita / Pine Labs Format
+                            </span>
+                          </h3>
+                          <p className="text-[11px] text-slate-500 leading-relaxed">
+                            Official resolution on company letterhead with round stamp, authorizing the director to onboard with Plural by Pine Labs & Clinaza.
+                          </p>
+                        </div>
+                      </div>
+
+                      {brDoc.uploadedUrl && (
+                        <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full shrink-0 flex items-center gap-1">
+                          <CheckCircle2 size={11} /> Attached
+                        </span>
+                      )}
+                    </div>
+
+                    {/* BR Downloads & Interactive Preview */}
+                    <div className="bg-blue-50/70 border border-blue-200/80 rounded-xl p-3.5 space-y-2.5">
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                        <div className="flex items-center gap-1.5 text-xs font-bold text-[#0B2450]">
+                          <FileCheck size={15} className="text-[#0867E8] shrink-0" />
+                          <span>Official Board Resolution Format (BR Format.docx)</span>
+                        </div>
+
+                        <div className="flex items-center gap-1.5 flex-wrap">
+                          <a
+                            href="/docs/Clinaza_Pine_Labs_Board_Resolution_Format.docx"
+                            download="Clinaza_Pine_Labs_Board_Resolution_Format.docx"
+                            className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-white hover:bg-slate-50 border border-blue-300 text-[11px] font-bold text-[#0867E8] transition-all shadow-2xs active:scale-95"
+                          >
+                            <Download size={12} />
+                            <span>Download Word (.docx)</span>
+                          </a>
+
+                          <a
+                            href="/docs/Clinaza_Pine_Labs_Board_Resolution_Format.pdf"
+                            target="_blank"
+                            rel="noreferrer"
+                            download="Clinaza_Pine_Labs_Board_Resolution_Format.pdf"
+                            className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-white hover:bg-slate-50 border border-slate-300 text-[11px] font-bold text-slate-700 transition-all shadow-2xs active:scale-95"
+                          >
+                            <Download size={12} />
+                            <span>Download PDF</span>
+                          </a>
+
+                          <button
+                            type="button"
+                            onClick={() => setShowBrTemplate(!showBrTemplate)}
+                            className="text-[11px] font-bold text-[#0867E8] hover:underline flex items-center gap-0.5 cursor-pointer ml-1"
+                          >
+                            <span>{showBrTemplate ? 'Hide' : 'Preview'}</span>
+                            {showBrTemplate ? <ChevronUp size={13} /> : <ChevronDown size={13} />}
+                          </button>
+                        </div>
+                      </div>
+
+                      {showBrTemplate && (
+                        <div className="pt-2 border-t border-blue-200/60 space-y-2">
+                          <p className="text-[10px] text-slate-600">
+                            Print this resolution on your corporate letterhead, signed by 2 directors with company seal, and upload:
+                          </p>
+                          <pre className="p-2.5 bg-white border border-blue-200 rounded-lg text-[10px] font-mono text-slate-800 whitespace-pre-wrap leading-relaxed select-all max-h-48 overflow-y-auto">
+{`CERTIFIED TRUE COPY OF THE RESOLUTION PASSED AT THE MEETING OF THE BOARD OF DIRECTORS OF ${clinicName ? clinicName.toUpperCase() : '[COMPANY NAME]'} PRIVATE LIMITED / LLP HELD ON [DATE] AT [REGISTERED OFFICE ADDRESS, ${city ? city.toUpperCase() : 'CITY'}]
+
+"RESOLVED THAT the consent and approval of the Board of Directors of the Company be and is hereby accorded to enter into a merchant services arrangement with Pine Labs Private Limited ("Plural by Pine Labs") and its healthcare platform partner Clinaza Technologies Private Limited ("Clinaza") for availing online payment gateway facilities, point-of-care patient checkout, multi-bank credit/debit card EMI infrastructure, and T+1 direct settlement services.
+
+RESOLVED FURTHER THAT Dr. / Mr. / Ms. ${doctorName || '[Authorized Director Name]'}, [Designation] (DIN: [DIN Number]), be and is hereby authorized on behalf of the Company to negotiate, sign, execute, and deliver:
+  (a) The Plural Merchant Application Form (MAF);
+  (b) The Beneficial Ownership (BO) and Politically Exposed Persons (PEP) declarations;
+  (c) The Merchant Master Services Agreement (MSA);
+  (d) All necessary declarations, KYC schedules, and compliance undertakings.
+
+RESOLVED FURTHER THAT the Company’s Current Bank Account maintained with [Bank Name], bearing Account No. ${accountNumber || '[Current Account Number]'}, IFSC: ${ifscCode || '[IFSC Code]'}, be and is hereby designated as the official registered settlement bank account for receiving all merchant payouts and credits.
+
+RESOLVED FURTHER THAT a certified true copy of this resolution signed by any Director or Company Secretary of the Company be furnished to Pine Labs Private Limited and Clinaza Technologies."
+
+CERTIFIED TRUE COPY
+For ${clinicName ? clinicName.toUpperCase() : '[COMPANY NAME]'} PRIVATE LIMITED / LLP
+
+_____________________________          _____________________________
+[Director 1 Signature & Stamp]         [Director 2 / CS Signature]
+DIN: [DIN Number]                      DIN: [DIN Number]`}
+                          </pre>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const text = `CERTIFIED TRUE COPY OF THE RESOLUTION PASSED AT THE MEETING OF THE BOARD OF DIRECTORS OF ${clinicName ? clinicName.toUpperCase() : '[COMPANY NAME]'} PRIVATE LIMITED / LLP HELD ON [DATE] AT [REGISTERED OFFICE ADDRESS, ${city ? city.toUpperCase() : 'CITY'}]\n\n"RESOLVED THAT the consent and approval of the Board of Directors of the Company be and is hereby accorded to enter into a merchant services arrangement with Pine Labs Private Limited (\"Plural by Pine Labs\") and its healthcare platform partner Clinaza Technologies Private Limited (\"Clinaza\") for availing online payment gateway facilities, point-of-care patient checkout, multi-bank credit/debit card EMI infrastructure, and T+1 direct settlement services.\n\nRESOLVED FURTHER THAT Dr. / Mr. / Ms. ${doctorName || '[Authorized Director Name]'}, [Designation] (DIN: [DIN Number]), be and is hereby authorized on behalf of the Company to negotiate, sign, execute, and deliver:\n  (a) The Plural Merchant Application Form (MAF);\n  (b) The Beneficial Ownership (BO) and Politically Exposed Persons (PEP) declarations;\n  (c) The Merchant Master Services Agreement (MSA);\n  (d) All necessary declarations, KYC schedules, and compliance undertakings.\n\nRESOLVED FURTHER THAT the Company’s Current Bank Account maintained with [Bank Name], bearing Account No. ${accountNumber || '[Current Account Number]'}, IFSC: ${ifscCode || '[IFSC Code]'}, be and is hereby designated as the official registered settlement bank account for receiving all merchant payouts and credits.\n\nRESOLVED FURTHER THAT a certified true copy of this resolution signed by any Director or Company Secretary of the Company be furnished to Pine Labs Private Limited and Clinaza Technologies."\n\nCERTIFIED TRUE COPY\nFor ${clinicName ? clinicName.toUpperCase() : '[COMPANY NAME]'} PRIVATE LIMITED / LLP\n\n_____________________________          _____________________________\n[Director 1 Signature & Stamp]         [Director 2 / CS Signature]\nDIN: [DIN Number]                      DIN: [DIN Number]`;
+                              navigator.clipboard?.writeText(text);
+                              toast.success('Board Resolution format copied! Print on company letterhead, sign & upload.');
+                            }}
+                            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white hover:bg-slate-50 border border-blue-300 text-xs font-bold text-[#0867E8] transition-all cursor-pointer shadow-2xs active:scale-95"
+                          >
+                            <Copy size={13} />
+                            <span>Copy Resolution Text</span>
+                          </button>
+                        </div>
+                      )}
+                    </div>
+
+                    {brDoc.previewUrl ? (
+                      <div className="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-200">
+                        <div className="flex items-center gap-3 truncate">
+                          <div className="w-12 h-12 rounded-lg bg-blue-50 text-[#0867E8] border border-blue-200 flex items-center justify-center font-bold text-xs shrink-0">
+                            DOC
+                          </div>
+                          <div className="truncate">
+                            <p className="text-xs font-bold text-slate-800 truncate">
+                              {brDoc.file?.name || 'board_resolution.pdf'}
+                            </p>
+                            <p className="text-[10px] text-emerald-600 font-bold">
+                              {brDoc.isUploading ? 'Uploading...' : '✓ Ready for verification'}
+                            </p>
+                          </div>
+                        </div>
+
+                        <button
+                          type="button"
+                          onClick={() => setBrDoc({ file: null, previewUrl: null, uploadedUrl: null, isUploading: false, docName: '' })}
+                          className="text-slate-400 hover:text-rose-600 p-1.5 transition-colors"
+                          title="Remove file"
+                        >
+                          <Trash2 size={15} />
+                        </button>
+                      </div>
+                    ) : (
+                      <label className="border-2 border-dashed border-slate-200 hover:border-[#0867E8] bg-slate-50/60 hover:bg-blue-50/20 rounded-xl p-4 sm:p-5 text-center cursor-pointer transition-all block space-y-1.5">
+                        <input
+                          type="file"
+                          accept="image/*,application/pdf,.docx"
+                          className="hidden"
+                          onChange={(e) => {
+                            const f = e.target.files?.[0];
+                            if (f) handleFileUpload(f, 'br', setBrDoc);
+                          }}
+                        />
+                        <FileCheck size={22} className="text-[#0867E8] mx-auto" />
+                        <p className="text-xs font-bold text-slate-800">
+                          Upload Signed &amp; Stamped Board Resolution
+                        </p>
+                        <p className="text-[10px] text-slate-400">
+                          Supports PDF, JPG, PNG, DOCX up to 20MB
+                        </p>
+                      </label>
+                    )}
+                  </div>
+
+                  {/* Corporate Slot 2: Plural MAF + BO / PEP List */}
+                  <div className="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-5 shadow-xs space-y-3">
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="flex items-center gap-2.5">
+                        <div className="w-7 h-7 rounded-lg bg-blue-50 text-[#0867E8] flex items-center justify-center font-bold text-xs shrink-0">
+                          2
+                        </div>
+                        <div>
+                          <h3 className="text-xs sm:text-sm font-bold text-slate-900 flex items-center gap-1.5 flex-wrap">
+                            <span>Plural MAF + BO &amp; PEP List</span>
+                            <span className="text-rose-500">*</span>
+                            <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-1.5 py-0.5 rounded-md">
+                              Official Excel Form
+                            </span>
+                          </h3>
+                          <p className="text-[11px] text-slate-500 leading-relaxed">
+                            Official Pine Labs onboarding workbook containing the Merchant Application Form, Beneficial Ownership (&gt;10% equity) and PEP declaration.
+                          </p>
+                        </div>
+                      </div>
+
+                      {mafDoc.uploadedUrl && (
+                        <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full shrink-0 flex items-center gap-1">
+                          <CheckCircle2 size={11} /> Attached
+                        </span>
+                      )}
+                    </div>
+
+                    {/* MAF Download Helper */}
+                    <div className="bg-emerald-50/70 border border-emerald-200/80 rounded-xl p-3.5 space-y-2">
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                        <div className="flex items-center gap-1.5 text-xs font-bold text-emerald-950">
+                          <FileSpreadsheet size={15} className="text-emerald-700 shrink-0" />
+                          <span>Plural_MAF_BO_PEP_Key Personnel List_Format.xlsx</span>
+                        </div>
+
+                        <a
+                          href="/docs/Plural_MAF_BO_PEP_Key_Personnel_List_Format.xlsx"
+                          download="Plural_MAF_BO_PEP_Key_Personnel_List_Format.xlsx"
+                          className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-white hover:bg-emerald-50 border border-emerald-300 text-[11px] font-bold text-emerald-800 transition-all shadow-2xs active:scale-95"
+                        >
+                          <Download size={12} />
+                          <span>Download Excel (.xlsx)</span>
+                        </a>
+                      </div>
+                      <p className="text-[10px] text-emerald-800">
+                        Fill in your basic company details, shareholder equity % on the BO sheet, and upload the completed Excel or signed copy.
+                      </p>
+                    </div>
+
+                    {mafDoc.previewUrl ? (
+                      <div className="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-200">
+                        <div className="flex items-center gap-3 truncate">
+                          <div className="w-12 h-12 rounded-lg bg-emerald-50 text-emerald-700 border border-emerald-200 flex items-center justify-center font-bold text-xs shrink-0">
+                            XLSX
+                          </div>
+                          <div className="truncate">
+                            <p className="text-xs font-bold text-slate-800 truncate">
+                              {mafDoc.file?.name || 'maf_bo_pep_form.xlsx'}
+                            </p>
+                            <p className="text-[10px] text-emerald-600 font-bold">
+                              {mafDoc.isUploading ? 'Uploading...' : '✓ Ready for verification'}
+                            </p>
+                          </div>
+                        </div>
+
+                        <button
+                          type="button"
+                          onClick={() => setMafDoc({ file: null, previewUrl: null, uploadedUrl: null, isUploading: false, docName: '' })}
+                          className="text-slate-400 hover:text-rose-600 p-1.5 transition-colors"
+                          title="Remove file"
+                        >
+                          <Trash2 size={15} />
+                        </button>
+                      </div>
+                    ) : (
+                      <label className="border-2 border-dashed border-slate-200 hover:border-[#0867E8] bg-slate-50/60 hover:bg-blue-50/20 rounded-xl p-4 sm:p-5 text-center cursor-pointer transition-all block space-y-1.5">
+                        <input
+                          type="file"
+                          accept=".xlsx,.xls,application/pdf,image/*"
+                          className="hidden"
+                          onChange={(e) => {
+                            const f = e.target.files?.[0];
+                            if (f) handleFileUpload(f, 'maf', setMafDoc);
+                          }}
+                        />
+                        <FileSpreadsheet size={22} className="text-[#0867E8] mx-auto" />
+                        <p className="text-xs font-bold text-slate-800">
+                          Upload Completed MAF &amp; BO/PEP Form
+                        </p>
+                        <p className="text-[10px] text-slate-400">
+                          Supports XLSX, XLS, PDF up to 20MB
+                        </p>
+                      </label>
+                    )}
+                  </div>
+
+                  {/* Corporate Slot 3: Certificate of Incorporation (COI) */}
+                  <div className="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-5 shadow-xs space-y-3">
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="flex items-center gap-2.5">
+                        <div className="w-7 h-7 rounded-lg bg-blue-50 text-[#0867E8] flex items-center justify-center font-bold text-xs shrink-0">
+                          3
+                        </div>
+                        <div>
+                          <h3 className="text-xs sm:text-sm font-bold text-slate-900 flex items-center gap-1.5">
+                            <span>Certificate of Incorporation (COI)</span>
+                            <span className="text-rose-500">*</span>
+                          </h3>
+                          <p className="text-[11px] text-slate-500">
+                            Issued by Ministry of Corporate Affairs (MCA) verifying registration of the Pvt Ltd / LLP.
+                          </p>
+                        </div>
+                      </div>
+
+                      {coiDoc.uploadedUrl && (
+                        <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full shrink-0 flex items-center gap-1">
+                          <CheckCircle2 size={11} /> Attached
+                        </span>
+                      )}
+                    </div>
+
+                    {coiDoc.previewUrl ? (
+                      <div className="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-200">
+                        <div className="flex items-center gap-3 truncate">
+                          <img src={coiDoc.previewUrl} alt="COI" className="w-12 h-12 rounded-lg object-cover border border-slate-200 shrink-0" />
+                          <div className="truncate">
+                            <p className="text-xs font-bold text-slate-800 truncate">{coiDoc.file?.name || 'coi.pdf'}</p>
+                            <p className="text-[10px] text-emerald-600 font-bold">{coiDoc.isUploading ? 'Uploading...' : '✓ Ready'}</p>
+                          </div>
+                        </div>
+                        <button type="button" onClick={() => setCoiDoc({ file: null, previewUrl: null, uploadedUrl: null, isUploading: false, docName: '' })} className="text-slate-400 hover:text-rose-600 p-1.5"><Trash2 size={15} /></button>
+                      </div>
+                    ) : (
+                      <label className="border-2 border-dashed border-slate-200 hover:border-[#0867E8] bg-slate-50/60 hover:bg-blue-50/20 rounded-xl p-4 sm:p-5 text-center cursor-pointer transition-all block space-y-1.5">
+                        <input type="file" accept="image/*,application/pdf" className="hidden" onChange={(e) => { const f = e.target.files?.[0]; if (f) handleFileUpload(f, 'coi', setCoiDoc); }} />
+                        <Building2 size={22} className="text-[#0867E8] mx-auto" />
+                        <p className="text-xs font-bold text-slate-800">Upload Certificate of Incorporation (COI)</p>
+                        <p className="text-[10px] text-slate-400">PDF, JPG, PNG up to 20MB</p>
+                      </label>
+                    )}
+                  </div>
+
+                  {/* Corporate Slot 4: Company Corporate PAN Card */}
+                  <div className="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-5 shadow-xs space-y-3">
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="flex items-center gap-2.5">
+                        <div className="w-7 h-7 rounded-lg bg-blue-50 text-[#0867E8] flex items-center justify-center font-bold text-xs shrink-0">
+                          4
+                        </div>
+                        <div>
+                          <h3 className="text-xs sm:text-sm font-bold text-slate-900 flex items-center gap-1.5">
+                            <span>Company PAN Card</span>
+                            <span className="text-rose-500">*</span>
+                          </h3>
+                          <p className="text-[11px] text-slate-500">
+                            Permanent Account Number issued in the corporate entity’s legal name.
+                          </p>
+                        </div>
+                      </div>
+
+                      {companyPanDoc.uploadedUrl && (
+                        <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full shrink-0 flex items-center gap-1">
+                          <CheckCircle2 size={11} /> Attached
+                        </span>
+                      )}
+                    </div>
+
+                    {companyPanDoc.previewUrl ? (
+                      <div className="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-200">
+                        <div className="flex items-center gap-3 truncate">
+                          <img src={companyPanDoc.previewUrl} alt="Company PAN" className="w-12 h-12 rounded-lg object-cover border border-slate-200 shrink-0" />
+                          <div className="truncate">
+                            <p className="text-xs font-bold text-slate-800 truncate">{companyPanDoc.file?.name || 'company_pan.jpg'}</p>
+                            <p className="text-[10px] text-emerald-600 font-bold">{companyPanDoc.isUploading ? 'Uploading...' : '✓ Ready'}</p>
+                          </div>
+                        </div>
+                        <button type="button" onClick={() => setCompanyPanDoc({ file: null, previewUrl: null, uploadedUrl: null, isUploading: false, docName: '' })} className="text-slate-400 hover:text-rose-600 p-1.5"><Trash2 size={15} /></button>
+                      </div>
+                    ) : (
+                      <label className="border-2 border-dashed border-slate-200 hover:border-[#0867E8] bg-slate-50/60 hover:bg-blue-50/20 rounded-xl p-4 sm:p-5 text-center cursor-pointer transition-all block space-y-1.5">
+                        <input type="file" accept="image/*,application/pdf" className="hidden" onChange={(e) => { const f = e.target.files?.[0]; if (f) handleFileUpload(f, 'company_pan', setCompanyPanDoc); }} />
+                        <CreditCard size={22} className="text-[#0867E8] mx-auto" />
+                        <p className="text-xs font-bold text-slate-800">Upload Company PAN Card</p>
+                        <p className="text-[10px] text-slate-400">PDF, JPG, PNG up to 20MB</p>
+                      </label>
+                    )}
+                  </div>
+
+                  {/* Corporate Slot 5: Company GST Registration Certificate */}
+                  <div className="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-5 shadow-xs space-y-3">
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="flex items-center gap-2.5">
+                        <div className="w-7 h-7 rounded-lg bg-blue-50 text-[#0867E8] flex items-center justify-center font-bold text-xs shrink-0">
+                          5
+                        </div>
+                        <div>
+                          <h3 className="text-xs sm:text-sm font-bold text-slate-900 flex items-center gap-1.5">
+                            <span>Company GST Registration Certificate</span>
+                            <span className="text-rose-500">*</span>
+                          </h3>
+                          <p className="text-[11px] text-slate-500">
+                            Standard 3-page GST certificate (Form GST REG-06) showing principal place of business.
+                          </p>
+                        </div>
+                      </div>
+
+                      {companyGstDoc.uploadedUrl && (
+                        <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full shrink-0 flex items-center gap-1">
+                          <CheckCircle2 size={11} /> Attached
+                        </span>
+                      )}
+                    </div>
+
+                    {companyGstDoc.previewUrl ? (
+                      <div className="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-200">
+                        <div className="flex items-center gap-3 truncate">
+                          <img src={companyGstDoc.previewUrl} alt="Company GST" className="w-12 h-12 rounded-lg object-cover border border-slate-200 shrink-0" />
+                          <div className="truncate">
+                            <p className="text-xs font-bold text-slate-800 truncate">{companyGstDoc.file?.name || 'gst_cert.pdf'}</p>
+                            <p className="text-[10px] text-emerald-600 font-bold">{companyGstDoc.isUploading ? 'Uploading...' : '✓ Ready'}</p>
+                          </div>
+                        </div>
+                        <button type="button" onClick={() => setCompanyGstDoc({ file: null, previewUrl: null, uploadedUrl: null, isUploading: false, docName: '' })} className="text-slate-400 hover:text-rose-600 p-1.5"><Trash2 size={15} /></button>
+                      </div>
+                    ) : (
+                      <label className="border-2 border-dashed border-slate-200 hover:border-[#0867E8] bg-slate-50/60 hover:bg-blue-50/20 rounded-xl p-4 sm:p-5 text-center cursor-pointer transition-all block space-y-1.5">
+                        <input type="file" accept="image/*,application/pdf" className="hidden" onChange={(e) => { const f = e.target.files?.[0]; if (f) handleFileUpload(f, 'company_gst', setCompanyGstDoc); }} />
+                        <FileText size={22} className="text-[#0867E8] mx-auto" />
+                        <p className="text-xs font-bold text-slate-800">Upload Company GST Certificate</p>
+                        <p className="text-[10px] text-slate-400">PDF, JPG, PNG up to 20MB</p>
+                      </label>
+                    )}
+                  </div>
+
+                  {/* Corporate Slot 6: Company Current Account Cancelled Cheque */}
+                  <div className="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-5 shadow-xs space-y-3">
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="flex items-center gap-2.5">
+                        <div className="w-7 h-7 rounded-lg bg-blue-50 text-[#0867E8] flex items-center justify-center font-bold text-xs shrink-0">
+                          6
+                        </div>
+                        <div>
+                          <h3 className="text-xs sm:text-sm font-bold text-slate-900 flex items-center gap-1.5">
+                            <span>Company Current Account Cancelled Cheque</span>
+                            <span className="text-rose-500">*</span>
+                          </h3>
+                          <p className="text-[11px] text-slate-500">
+                            Validates the corporate Current A/C Number &amp; IFSC code entered above.
+                          </p>
+                        </div>
+                      </div>
+
+                      {chequeDoc.uploadedUrl && (
+                        <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full shrink-0 flex items-center gap-1">
+                          <CheckCircle2 size={11} /> Attached
+                        </span>
+                      )}
+                    </div>
+
+                    {chequeDoc.previewUrl ? (
+                      <div className="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-200">
+                        <div className="flex items-center gap-3 truncate">
+                          <img src={chequeDoc.previewUrl} alt="Cheque" className="w-12 h-12 rounded-lg object-cover border border-slate-200 shrink-0" />
+                          <div className="truncate">
+                            <p className="text-xs font-bold text-slate-800 truncate">{chequeDoc.file?.name || 'cheque.jpg'}</p>
+                            <p className="text-[10px] text-emerald-600 font-bold">{chequeDoc.isUploading ? 'Uploading...' : '✓ Ready'}</p>
+                          </div>
+                        </div>
+                        <button type="button" onClick={() => setChequeDoc({ file: null, previewUrl: null, uploadedUrl: null, isUploading: false, docName: '' })} className="text-slate-400 hover:text-rose-600 p-1.5"><Trash2 size={15} /></button>
+                      </div>
+                    ) : (
+                      <label className="border-2 border-dashed border-slate-200 hover:border-[#0867E8] bg-slate-50/60 hover:bg-blue-50/20 rounded-xl p-4 sm:p-5 text-center cursor-pointer transition-all block space-y-1.5">
+                        <input type="file" accept="image/*,application/pdf" className="hidden" onChange={(e) => { const f = e.target.files?.[0]; if (f) handleFileUpload(f, 'cheque', setChequeDoc); }} />
+                        <UploadCloud size={22} className="text-[#0867E8] mx-auto" />
+                        <p className="text-xs font-bold text-slate-800">Upload Company Current Account Cheque</p>
+                        <p className="text-[10px] text-slate-400">PDF, JPG, PNG up to 20MB</p>
+                      </label>
+                    )}
+                  </div>
+
+                  {/* Corporate Slot 7: Director PAN & Aadhaar */}
+                  <div className="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-5 shadow-xs space-y-3">
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="flex items-center gap-2.5">
+                        <div className="w-7 h-7 rounded-lg bg-blue-50 text-[#0867E8] flex items-center justify-center font-bold text-xs shrink-0">
+                          7
+                        </div>
+                        <div>
+                          <h3 className="text-xs sm:text-sm font-bold text-slate-900 flex items-center gap-1.5">
+                            <span>Authorized Signatory Director PAN &amp; Aadhaar</span>
+                            <span className="text-rose-500">*</span>
+                          </h3>
+                          <p className="text-[11px] text-slate-500">
+                            Identity &amp; address proof of the director authorized in the Board Resolution. Masked Aadhaar accepted.
+                          </p>
+                        </div>
+                      </div>
+
+                      {aadhaarDoc.uploadedUrl && (
+                        <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full shrink-0 flex items-center gap-1">
+                          <CheckCircle2 size={11} /> Attached
+                        </span>
+                      )}
+                    </div>
+
+                    {aadhaarDoc.previewUrl ? (
+                      <div className="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-200">
+                        <div className="flex items-center gap-3 truncate">
+                          <img src={aadhaarDoc.previewUrl} alt="Director KYC" className="w-12 h-12 rounded-lg object-cover border border-slate-200 shrink-0" />
+                          <div className="truncate">
+                            <p className="text-xs font-bold text-slate-800 truncate">{aadhaarDoc.file?.name || 'director_kyc.jpg'}</p>
+                            <p className="text-[10px] text-emerald-600 font-bold">{aadhaarDoc.isUploading ? 'Uploading...' : '✓ Ready'}</p>
+                          </div>
+                        </div>
+                        <button type="button" onClick={() => setAadhaarDoc({ file: null, previewUrl: null, uploadedUrl: null, isUploading: false, docName: '' })} className="text-slate-400 hover:text-rose-600 p-1.5"><Trash2 size={15} /></button>
+                      </div>
+                    ) : (
+                      <label className="border-2 border-dashed border-slate-200 hover:border-[#0867E8] bg-slate-50/60 hover:bg-blue-50/20 rounded-xl p-4 sm:p-5 text-center cursor-pointer transition-all block space-y-1.5">
+                        <input type="file" accept="image/*,application/pdf" className="hidden" onChange={(e) => { const f = e.target.files?.[0]; if (f) handleFileUpload(f, 'aadhaar', setAadhaarDoc); }} />
+                        <FileText size={22} className="text-[#0867E8] mx-auto" />
+                        <p className="text-xs font-bold text-slate-800">Upload Director PAN &amp; Aadhaar (Front &amp; Back)</p>
+                        <p className="text-[10px] text-slate-400">PDF, JPG, PNG up to 20MB</p>
+                      </label>
+                    )}
+                  </div>
+
+                  {/* Corporate Slot 8: MOA & AOA / LLP Agreement */}
+                  <div className="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-5 shadow-xs space-y-3">
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="flex items-center gap-2.5">
+                        <div className="w-7 h-7 rounded-lg bg-blue-50 text-[#0867E8] flex items-center justify-center font-bold text-xs shrink-0">
+                          8
+                        </div>
+                        <div>
+                          <h3 className="text-xs sm:text-sm font-bold text-slate-900 flex items-center gap-1.5">
+                            <span>MOA &amp; AOA / LLP Agreement</span>
+                            <span className="text-rose-500">*</span>
+                          </h3>
+                          <p className="text-[11px] text-slate-500">
+                            Memorandum &amp; Articles of Association filed with the Registrar of Companies (ROC).
+                          </p>
+                        </div>
+                      </div>
+
+                      {moaDoc.uploadedUrl && (
+                        <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full shrink-0 flex items-center gap-1">
+                          <CheckCircle2 size={11} /> Attached
+                        </span>
+                      )}
+                    </div>
+
+                    {moaDoc.previewUrl ? (
+                      <div className="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-200">
+                        <div className="flex items-center gap-3 truncate">
+                          <div className="w-12 h-12 rounded-lg bg-blue-50 text-[#0867E8] border border-blue-200 flex items-center justify-center font-bold text-xs shrink-0">
+                            MOA
+                          </div>
+                          <div className="truncate">
+                            <p className="text-xs font-bold text-slate-800 truncate">{moaDoc.file?.name || 'moa_aoa.pdf'}</p>
+                            <p className="text-[10px] text-emerald-600 font-bold">{moaDoc.isUploading ? 'Uploading...' : '✓ Ready'}</p>
+                          </div>
+                        </div>
+                        <button type="button" onClick={() => setMoaDoc({ file: null, previewUrl: null, uploadedUrl: null, isUploading: false, docName: '' })} className="text-slate-400 hover:text-rose-600 p-1.5"><Trash2 size={15} /></button>
+                      </div>
+                    ) : (
+                      <label className="border-2 border-dashed border-slate-200 hover:border-[#0867E8] bg-slate-50/60 hover:bg-blue-50/20 rounded-xl p-4 sm:p-5 text-center cursor-pointer transition-all block space-y-1.5">
+                        <input type="file" accept="image/*,application/pdf" className="hidden" onChange={(e) => { const f = e.target.files?.[0]; if (f) handleFileUpload(f, 'moa', setMoaDoc); }} />
+                        <FileText size={22} className="text-[#0867E8] mx-auto" />
+                        <p className="text-xs font-bold text-slate-800">Upload MOA &amp; AOA / LLP Agreement</p>
+                        <p className="text-[10px] text-slate-400">PDF up to 20MB</p>
+                      </label>
+                    )}
+                  </div>
+                </div>
+              )}
+
 
               {/* Submit CTA Button */}
               <div className="pt-2 space-y-3">

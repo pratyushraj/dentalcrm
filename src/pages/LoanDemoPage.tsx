@@ -1223,41 +1223,81 @@ export default function LoanDemoPage() {
             {/* Pvt Ltd / LLP Clinic */}
             <div className="p-4 sm:p-6 rounded-2xl bg-slate-50 border border-slate-200 space-y-3.5 sm:space-y-4">
               <div className="inline-block text-[10px] font-black uppercase tracking-wider bg-slate-200 text-slate-700 px-2.5 py-1 rounded-full">
-                Corporate / Chains
+                Corporate / Chains &amp; IVF Centers
               </div>
 
               <div>
                 <h3 className="text-sm sm:text-base font-extrabold text-[#0B2450]">
-                  Corporate Clinic (Pvt Ltd / LLP / Hospital)
+                  Corporate Practice (Pvt Ltd / LLP / IVF Center)
                 </h3>
-                <p className="text-xs text-slate-600">Dental chain entities registered under MCA.</p>
+                <p className="text-xs text-slate-600">IVF &amp; dental chain entities registered under MCA.</p>
               </div>
 
-              <div className="space-y-2 sm:space-y-2.5 text-xs text-slate-700">
+              <div className="space-y-2.5 text-xs text-slate-700">
+                <div className="flex items-start justify-between gap-2 flex-wrap">
+                  <div className="flex items-start gap-2 sm:gap-2.5">
+                    <CheckCircle2 size={16} className="text-slate-400 shrink-0 mt-0.5" />
+                    <span>1. <strong>Board Resolution (BR)</strong></span>
+                  </div>
+                  <div className="flex items-center gap-1.5 ml-6 sm:ml-0">
+                    <a
+                      href="/docs/Clinaza_Pine_Labs_Board_Resolution_Format.docx"
+                      download="Clinaza_Pine_Labs_Board_Resolution_Format.docx"
+                      className="inline-flex items-center gap-1 text-[10px] font-bold text-[#0867E8] bg-blue-50 border border-blue-200 px-1.5 py-0.5 rounded hover:bg-blue-100 transition-colors"
+                    >
+                      <Download size={10} />
+                      <span>Download .docx</span>
+                    </a>
+                    <a
+                      href="/docs/Clinaza_Pine_Labs_Board_Resolution_Format.pdf"
+                      target="_blank"
+                      rel="noreferrer"
+                      download="Clinaza_Pine_Labs_Board_Resolution_Format.pdf"
+                      className="inline-flex items-center gap-1 text-[10px] font-bold text-slate-700 bg-slate-100 border border-slate-200 px-1.5 py-0.5 rounded hover:bg-slate-200 transition-colors"
+                    >
+                      <Download size={10} />
+                      <span>PDF</span>
+                    </a>
+                  </div>
+                </div>
+
+                <div className="flex items-start justify-between gap-2 flex-wrap">
+                  <div className="flex items-start gap-2 sm:gap-2.5">
+                    <CheckCircle2 size={16} className="text-slate-400 shrink-0 mt-0.5" />
+                    <span>2. <strong>Plural MAF + BO &amp; PEP List</strong></span>
+                  </div>
+                  <div className="ml-6 sm:ml-0">
+                    <a
+                      href="/docs/Plural_MAF_BO_PEP_Key_Personnel_List_Format.xlsx"
+                      download="Plural_MAF_BO_PEP_Key_Personnel_List_Format.xlsx"
+                      className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-1.5 py-0.5 rounded hover:bg-emerald-100 transition-colors"
+                    >
+                      <Download size={10} />
+                      <span>Download .xlsx</span>
+                    </a>
+                  </div>
+                </div>
+
                 <div className="flex items-start gap-2 sm:gap-2.5">
                   <CheckCircle2 size={16} className="text-slate-400 shrink-0 mt-0.5" />
-                  <span>1. Company PAN Card &amp; Certificate of Incorporation (COI)</span>
+                  <span>3. Company PAN Card &amp; Certificate of Incorporation (COI)</span>
                 </div>
                 <div className="flex items-start gap-2 sm:gap-2.5">
                   <CheckCircle2 size={16} className="text-slate-400 shrink-0 mt-0.5" />
-                  <span>2. MOA &amp; AOA / LLP Agreement</span>
+                  <span>4. Company Current Account Cancelled Cheque &amp; GSTIN</span>
                 </div>
                 <div className="flex items-start gap-2 sm:gap-2.5">
                   <CheckCircle2 size={16} className="text-slate-400 shrink-0 mt-0.5" />
-                  <span>3. Board Resolution (BR) on Company Letterhead</span>
+                  <span>5. PAN &amp; Aadhaar of Authorized Signatory Directors</span>
                 </div>
                 <div className="flex items-start gap-2 sm:gap-2.5">
                   <CheckCircle2 size={16} className="text-slate-400 shrink-0 mt-0.5" />
-                  <span>4. PAN &amp; Aadhaar of Authorized Signatory Directors</span>
-                </div>
-                <div className="flex items-start gap-2 sm:gap-2.5">
-                  <CheckCircle2 size={16} className="text-slate-400 shrink-0 mt-0.5" />
-                  <span>5. Company Current Account Cancelled Cheque &amp; GST</span>
+                  <span>6. MOA &amp; AOA / LLP Agreement</span>
                 </div>
               </div>
 
               <div className="p-2.5 sm:p-3 bg-white border border-slate-200 rounded-xl text-[11px] text-slate-500">
-                Standard corporate KYC processed in 24 hours via Plural by Pine Labs underwriting desk.
+                Standard corporate underwriting processed in 24 hours via Plural by Pine Labs.
               </div>
             </div>
 

@@ -1,12 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { getCityBySlug, CITIES, CityData } from '@/data/cities';
 import { SEOHead } from '@/components/seo/SEOHead';
 import { ShieldCheck, CheckCircle2, ArrowRight, Building2 } from 'lucide-react';
+import { PatientEligibilityModal } from '@/components/PatientEligibilityModal';
+import { ClinicCityFinder } from '@/components/ClinicCityFinder';
 
 export default function CityLandingPage() {
   const { city } = useParams<{ city: string }>();
   const cityData = city ? getCityBySlug(city) : undefined;
+  const [isEligibilityOpen, setIsEligibilityOpen] = useState(false);
+  const [eligibilityCity, setEligibilityCity] = useState(cityData?.name || '');
 
   // If city slug not found redirect to homepage
   if (!cityData) {
@@ -21,7 +25,7 @@ export default function CityLandingPage() {
       : `Affordable Dental EMI Plans for Patients in ${name}`;
 
   const metaTitle = city === 'kochi'
-    ? `Braces & Dental Treatment Cost in Kochi (From ₹1,200/mo)`
+    ? `Braces & Dental Treatment Cost in Kochi (From ₹1,200/mo) | Clinaza`
     : `Best Dental Treatment EMI Plans in ${name} | Clinaza`;
 
   const metaDescription = city === 'kochi'
@@ -198,12 +202,16 @@ export default function CityLandingPage() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <a
-              href="/#check-eligibility"
-              className="px-6 py-3.5 bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-black uppercase tracking-wider rounded-xl transition-all flex items-center justify-center gap-2 shadow-lg shadow-[#0867E8]/25"
+            <button
+              type="button"
+              onClick={() => {
+                setEligibilityCity(name);
+                setIsEligibilityOpen(true);
+              }}
+              className="px-6 py-3.5 bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-black uppercase tracking-wider rounded-xl transition-all flex items-center justify-center gap-2 shadow-lg shadow-[#0867E8]/25 cursor-pointer"
             >
               <ShieldCheck size={15} /> Check Patient Eligibility
-            </a>
+            </button>
             <a
               href="/clinic-onboarding"
               className="px-5 py-3.5 bg-[#F7FAFC] hover:bg-slate-100 text-[#0B2450] border border-slate-200 text-xs font-black uppercase tracking-wider rounded-xl transition-all flex items-center justify-center gap-2"
@@ -430,6 +438,19 @@ export default function CityLandingPage() {
           </p>
         </section>
 
+        {/* Find Clinic Near You / Pincode Finder */}
+        <section className="py-12 px-4 sm:px-6 max-w-5xl mx-auto">
+          <ClinicCityFinder
+            currentCitySlug={city}
+            onCheckEligibility={(selectedCity) => {
+              setEligibilityCity(selectedCity);
+              setIsEligibilityOpen(true);
+            }}
+            title={`Find a Partner Dental Clinic in ${name} or Nearby`}
+            subtitle={`Search by local 6-digit Pincode or explore neighboring cities to access instant point-of-care patient financing.`}
+          />
+        </section>
+
         {/* Other Cities */}
         <section className="py-10 px-4 sm:px-6 bg-[#F7FAFC] border-t border-slate-200/60">
           <div className="max-w-5xl mx-auto space-y-4">
@@ -450,6 +471,15 @@ export default function CityLandingPage() {
           </div>
         </section>
       </main>
+
+      {/* Patient Eligibility In-Place Modal */}
+      <PatientEligibilityModal
+        isOpen={isEligibilityOpen}
+        onClose={() => setIsEligibilityOpen(false)}
+        defaultTreatment="Dental Implants"
+        defaultCity={eligibilityCity || name}
+        sourcePage={`City Landing Page - ${name}`}
+      />
 
       {/* Footer */}
       <footer className="py-8 px-4 sm:px-6 border-t border-slate-200 bg-white text-center space-y-3">

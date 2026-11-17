@@ -20,19 +20,21 @@ interface PatientEligibilityModalProps {
   onClose: () => void;
   defaultTreatment?: string;
   sourcePage?: string;
+  defaultCity?: string;
 }
 
 export const PatientEligibilityModal: React.FC<PatientEligibilityModalProps> = ({
   isOpen,
   onClose,
   defaultTreatment = 'Dental Implants',
-  sourcePage = 'Blog Article'
+  sourcePage = 'Blog Article',
+  defaultCity = ''
 }) => {
   const [name, setName] = useState('');
   const [mobile, setMobile] = useState('');
   const [treatment, setTreatment] = useState(defaultTreatment);
   const [amount, setAmount] = useState('₹50,000 - ₹1,50,000');
-  const [city, setCity] = useState('');
+  const [city, setCity] = useState(defaultCity);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [customerLink, setCustomerLink] = useState('');
@@ -40,6 +42,13 @@ export const PatientEligibilityModal: React.FC<PatientEligibilityModalProps> = (
   const [countdown, setCountdown] = useState(5);
   const [copied, setCopied] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
+
+  // Sync defaultCity if changed when modal opens
+  useEffect(() => {
+    if (defaultCity) {
+      setCity(defaultCity);
+    }
+  }, [defaultCity, isOpen]);
 
   // Auto-redirect timer with pause/resume control
   useEffect(() => {

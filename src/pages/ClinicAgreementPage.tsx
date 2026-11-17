@@ -83,14 +83,14 @@ export default function ClinicAgreementPage() {
             Sub-Merchant Appointment &amp; Payment Gateway Mapping
           </h2>
           <p>
-            Clinaza operates a proprietary healthcare fintech, patient financing facilitation, and clinic practice management platform. Clinaza has established payment aggregation and routing infrastructure powered by authorized Payment Aggregators (including <strong>Easebuzz Private Limited</strong>) and RBI-regulated Scheduled Commercial Banks and NBFCs.
+            Clinaza operates a proprietary healthcare fintech, patient financing facilitation, and clinic practice management platform. Clinaza has established payment aggregation and routing infrastructure powered by authorized Payment Aggregators (including <strong>Plural by Pine Labs</strong> and <strong>Easebuzz Private Limited</strong>) and RBI-regulated Scheduled Commercial Banks and NBFCs.
           </p>
           <ul className="list-disc pl-5 space-y-2 text-sm">
             <li>
-              <strong>Sub-MID Mapping:</strong> The Partner Clinic expressly appoints Clinaza as its Technology Facilitator and Merchant Aggregator, authorizing Clinaza and Easebuzz to board the Clinic as an authorized <strong>Sub-Merchant</strong> under Clinaza's Master Merchant ID (Master MID).
+              <strong>Sub-MID Mapping:</strong> The Partner Clinic expressly appoints Clinaza as its Technology Facilitator and Merchant Aggregator, authorizing Clinaza and its authorized Payment Aggregator partners to board the Clinic as an authorized <strong>Sub-Merchant</strong> under Clinaza's Master Merchant ID (Master MID).
             </li>
             <li>
-              <strong>Escrow / Nodal Collection:</strong> The Partner Clinic authorizes Easebuzz, as the RBI-licensed Payment Aggregator, to collect, process, hold in settlement nodal/escrow accounts, and remit patient payments and loan proceeds directly to the Partner Clinic's verified bank account.
+              <strong>Escrow / Nodal Collection:</strong> The Partner Clinic authorizes the Payment Aggregator, as the RBI-licensed Payment Aggregator, to collect, process, hold in settlement nodal/escrow accounts, and remit patient payments and loan proceeds directly to the Partner Clinic's verified bank account.
             </li>
             <li>
               <strong>LSP Conduit Role:</strong> Clinaza acts solely as a Lending Service Provider (LSP) and technology facilitator. Clinaza does not disburse credit or loans on its own balance sheet. All loan facilities, interest rates, Key Fact Statements (KFS), and approval decisions are granted solely by partner RBI-regulated lending institutions.
@@ -125,19 +125,29 @@ export default function ClinicAgreementPage() {
                   <td className="p-3 text-slate-600">Zero recurring hardware rentals or annual platform dues.</td>
                 </tr>
                 <tr className="hover:bg-slate-50">
-                  <td className="p-3 font-semibold text-slate-900">UPI &amp; RuPay Debit Collections</td>
-                  <td className="p-3 font-bold text-emerald-700">0.00% (Zero MDR)</td>
-                  <td className="p-3 text-slate-600">Settled 100% net to the clinic's bank account.</td>
+                  <td className="p-3 font-semibold text-slate-900">Counter UPI Collections (Dynamic QR / Link)</td>
+                  <td className="p-3 font-bold text-emerald-700">0.00% Clinic Deduction (Patient Convenience Mode) OR 0.75% MDR (Clinic-Borne)</td>
+                  <td className="p-3 text-slate-600">Default: Clinic receives 100% full net payout on T+1; standard ₹19–₹49 patient digital fee covers 0.40% gateway processing &amp; reconciliation.</td>
                 </tr>
                 <tr className="hover:bg-slate-50">
-                  <td className="p-3 font-semibold text-slate-900">Credit Cards &amp; NetBanking</td>
-                  <td className="p-3">1.85% to 2.10% MDR</td>
-                  <td className="p-3 text-slate-600">Standard Payment Gateway MDR deducted at source by Payment Aggregator.</td>
+                  <td className="p-3 font-semibold text-slate-900">Debit Cards (Visa / Mastercard)</td>
+                  <td className="p-3 font-semibold text-slate-800">1.35% MDR</td>
+                  <td className="p-3 text-slate-600">Deducted at source on T+1 settlement.</td>
                 </tr>
                 <tr className="hover:bg-slate-50">
-                  <td className="p-3 font-semibold text-slate-900">Healthcare Cardless EMIs</td>
-                  <td className="p-3">Subvened or Patient-Borne</td>
-                  <td className="p-3 text-slate-600">Disbursed directly into the clinic's bank account on T+1.</td>
+                  <td className="p-3 font-semibold text-slate-900">Credit Cards (Non-EMI Full Payment)</td>
+                  <td className="p-3 font-semibold text-slate-800">2.35% MDR</td>
+                  <td className="p-3 text-slate-600">Deducted at source on T+1 settlement.</td>
+                </tr>
+                <tr className="hover:bg-slate-50">
+                  <td className="p-3 font-semibold text-slate-900">Multi-Bank Card EMI (Financed)</td>
+                  <td className="p-3 font-semibold text-slate-800">3.75% Subvention (or 0% Clinic Deduction)</td>
+                  <td className="p-3 text-slate-600">100% full invoice credit disbursed to Clinic current account on T+1.</td>
+                </tr>
+                <tr className="hover:bg-slate-50">
+                  <td className="p-3 font-semibold text-slate-900">Healthcare Cardless EMIs / NBFC Loans</td>
+                  <td className="p-3 font-semibold text-slate-800">As per Lender Grid (3%–5% subvention or 0% clinic deduction)</td>
+                  <td className="p-3 text-slate-600">100% Non-recourse direct disbursal into clinic bank account on T+1 upon sanction.</td>
                 </tr>
                 <tr className="hover:bg-slate-50">
                   <td className="p-3 font-semibold text-slate-900">Settlement Payout Cycle</td>

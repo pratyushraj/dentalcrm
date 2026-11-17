@@ -33,3 +33,29 @@ When the user asks to generate an Instagram carousel post for Clinaza (`@clinaza
   ```bash
   npx remotion still src/remotion.entry.tsx <CompositionId> <OutputPath> --gl=angle
   ```
+
+---
+
+# Clinaza Fintech Partnerships & Contractual Invariants
+
+Adhere strictly to the following active commercial contracts and partner agreements:
+
+## 1. Pine Labs / Plural (Active Agreement)
+- **Signed Commercial Terms**: Clinaza (Mellowprints) is fully signed and onboarded under an institutional agreement with **₹0 Setup / Onboarding Fee**, **₹0 Annual Maintenance Charges (AMC)**, and **No minimum monthly commitment**.
+- **Never Re-negotiate Setup Fees**: Never ask for, accept, or suggest setup/onboarding fees with Pine Labs. All discussions with Advaita Parmar or technical teams must assume the ₹0 onboarding agreement is already locked and active.
+- **Transaction-Based MDR Only**: Multi-Bank Credit Card EMI (1.85%), EMI processing fee (0.50%), Debit Card EMI (0.90%), RuPay (0.00%), and UPI (0.40%).
+- **Integration Setup**: Online Gateway (UAT MID `111077`, Production pending). No hardware POS rental or terminal deposit. Dynamic return/callback URLs with live webhook at `/api/webhook/pinelabs`.
+
+## 2. Easebuzz (Active Sub-Merchant Integration)
+- **Model**: Sub-merchant model with EasySplit for automated T+1 clinic settlements.
+- **Agreements**: Clinic Sub-Merchant Master Services Agreement and executed pilot agreements hosted publicly at `/docs/Clinaza_Clinic_Sub_Merchant_Master_Services_Agreement.pdf` and `/clinic-agreement`.
+
+## 3. Patient Healthcare Financing Rules
+- **No 0% Interest Claims**: Never claim 0% interest or zero-interest financing in outreach, UI, or marketing unless explicitly authorized by a specific subvention scheme. Always use *flexible monthly EMIs*, *paperless EMIs*, or *instant point-of-care patient financing*.
+
+## 4. Commercial UPI & Payment Processing Invariants
+- **UPI is NOT Free for Payment Gateways**: In commercial merchant aggregations and payment gateway integrations, UPI is **not free**. Never state or assume that UPI carries 0% cost for Clinaza.
+- **Contracted UPI MDR**: Under Clinaza's executed Pine Labs agreement, standard UPI incurs a commercial MDR of **0.40%** (and PPI / Wallet UPI up to 1.10%).
+- **Margin & Settlement Modeling**:
+  - Always factor in the wholesale **0.40% UPI cost** when designing clinic settlement splits, revenue projections, or platform markups.
+  - To monetize counter UPI transactions, apply either a **B2C Digital Convenience Fee** (₹19–₹49 per transaction) or a **B2B Smart Reconciliation Fee** (0.60%–0.75%), ensuring a positive net margin after absorbing the 0.40% gateway MDR.

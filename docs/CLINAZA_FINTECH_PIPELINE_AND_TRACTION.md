@@ -23,11 +23,18 @@
 
 ---
 
-### B. Pine Labs (Plural) — Priority 2 (Warm Leadership Referral)
-* **Lead Contact:** **Nishant Gupta** (Former SVP Easebuzz, connected to Pine Labs Affordability).
-* **Current Status:** Nishant highlighted: *"Pinelabs has best Affordability suit available in the market... cc emi, cardless, brand emi and 1/4 emi"* and noted: *"will ask team to connect and share the details with you"*. Pratyush shared phone and email (`7292984244`, `pratyushraj@outlook.com`).
-* **Objective:** Access Pine Labs’ market-leading Affordability Suite (Online via Plural Gateway API + optional Android Smart POS terminals for high-end clinic counters) under an institutional zero-setup-fee agreement.
-* **Key Leverage:** Nishant’s referral flags Clinaza as an SVP/Leadership Inbound lead, avoiding standard sales rep rack fees.
+### B. Pine Labs (Plural) — Priority 2 (UAT Active & Commercials in Progress)
+* **Lead Contacts:**
+  * **Nishant Gupta** (Leadership Sponsor).
+  * **Mohammed Nadir Fahim** (Integration Engineer, `mohammed.fahim@pinelabs.com`).
+  * **Advaita Parmar** (Commercials & Account Setup, `advaita.parmar@pinelabs.com`).
+  * **Divya Goel** (`divya.goel9@pinelabs.com`), **Pallovi Roy** (`pallovi.roy4@pinelabs.com`).
+* **Current Status (Nov 16, 2026):**
+  * **UAT MID Issued:** `111077` configured on Plural Sandbox (`https://pluraluat.v2.pinepg.in`).
+  * **Webhook Configured:** Live on MID 111077 pointing to `https://www.clinaza.in/api/webhook/pinelabs`.
+  * **Return URL:** Dynamically passed via API (`callback_url: https://www.clinaza.in/onboarding/callback`).
+  * **Integration Verified:** S2S OAuth token generation (HTTP 200) and Order Creation (HTTP 201 `CREATED`) verified live with all payment modes (`CARD`, `CREDIT_EMI`, `DEBIT_EMI`, `CARDLESS_EMI`, `BNPL`, `UPI`, `NETBANKING`).
+  * **Next Step:** Connect with Advaita Parmar for commercial rate matrix and production MID allocation.
 
 ---
 

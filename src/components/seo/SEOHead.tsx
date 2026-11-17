@@ -57,6 +57,7 @@ export const SEOHead: React.FC<SEOHeadProps> = ({
   return (
     <Helmet>
       {/* Basic */}
+      <meta charSet="utf-8" />
       <title>{title}</title>
       <meta name="description" content={description} />
       {keywords.length > 0 && (

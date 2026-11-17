@@ -187,12 +187,14 @@ def build_pdf(filename, is_sample=False):
         [Paragraph("<b>Component</b>", body_style), Paragraph("<b>Rate / Terms</b>", body_style), Paragraph("<b>Billing / Settlement Mode</b>", body_style)],
         [Paragraph("Clinic Onboarding &amp; Hardware Activation Kit", body_style), Paragraph("₹999 (One-time, inclusive of taxes &amp; shipping)", body_style), Paragraph("Paid during initial clinic enrollment", body_style)],
         [Paragraph("Annual Maintenance Charges (AMC)", body_style), Paragraph("₹0 (Zero AMC for lifetime)", body_style), Paragraph("No recurring rental fees", body_style)],
-        [Paragraph("UPI &amp; RuPay Debit Card Collections", body_style), Paragraph("0.00% (Zero MDR)", body_style), Paragraph("Instant / T+1 Escrow Settlement", body_style)],
-        [Paragraph("Credit Cards &amp; NetBanking MDR", body_style), Paragraph("1.85% to 2.10% (As per Payment Gateway schedule)", body_style), Paragraph("Deducted at source by Payment Aggregator", body_style)],
-        [Paragraph("Healthcare Cardless EMIs / NBFC Loans", body_style), Paragraph("Subvened or Patient-Borne (0% clinic deduction available)", body_style), Paragraph("Direct T+1 disbursement to Clinic Bank Account", body_style)],
-        [Paragraph("Settlement Payout Cycle", body_style), Paragraph("T+1 / T+2 Business Days", body_style), Paragraph("Direct Nodal Bank NEFT/RTGS to Clinic", body_style)]
+        [Paragraph("Counter UPI Collections (Dynamic QR / Link)", body_style), Paragraph("0.00% Clinic Deduction (Patient Convenience Mode) OR 0.75% MDR (Clinic-Borne Mode)", body_style), Paragraph("T+1 Settlement; standard ₹19–₹49 patient digital fee covers 0.40% gateway MDR + reconciliation", body_style)],
+        [Paragraph("Debit Cards (Visa / Mastercard)", body_style), Paragraph("1.35% MDR", body_style), Paragraph("Deducted at source on T+1 settlement", body_style)],
+        [Paragraph("Credit Cards (Non-EMI Full Payment)", body_style), Paragraph("2.35% MDR", body_style), Paragraph("Deducted at source on T+1 settlement", body_style)],
+        [Paragraph("Multi-Bank Card EMI (Financed)", body_style), Paragraph("3.75% Subvention (or 0% Clinic deduction if patient-borne)", body_style), Paragraph("100% full invoice credit to Clinic on T+1", body_style)],
+        [Paragraph("Healthcare Cardless EMIs / NBFC Loans", body_style), Paragraph("As per Lender Grid (3%–5% subvention or 0% clinic deduction)", body_style), Paragraph("Direct T+1 disbursement to Clinic Bank Account", body_style)],
+        [Paragraph("Settlement Payout Cycle", body_style), Paragraph("Guaranteed T+1 Business Days", body_style), Paragraph("Direct Nodal Bank NEFT/RTGS to Clinic Account", body_style)]
     ]
-    t_comm = Table(comm_data, colWidths=[160, 180, 175])
+    t_comm = Table(comm_data, colWidths=[150, 195, 170])
     t_comm.setStyle(TableStyle([
         ('BACKGROUND', (0,0), (-1,0), accent_bg),
         ('GRID', (0,0), (-1,-1), 0.5, border_color),
@@ -214,7 +216,7 @@ def build_pdf(filename, is_sample=False):
             [Paragraph("<b>Designated Settlement Bank:</b>", body_style), Paragraph("State Bank of India (SBI)", body_style)],
             [Paragraph("<b>Bank Account Number:</b>", body_style), Paragraph("38920198421 (Current Account)", body_style)],
             [Paragraph("<b>IFSC Code:</b>", body_style), Paragraph("SBIN0001235 (Boring Road Branch, Patna)", body_style)],
-            [Paragraph("<b>Sub-Merchant MID Mapping:</b>", body_style), Paragraph("Mapped under Clinaza Easebuzz Master MID", body_style)]
+            [Paragraph("<b>Sub-Merchant MID Mapping:</b>", body_style), Paragraph("Mapped under Clinaza Authorized Payment Gateway (Plural by Pine Labs / Easebuzz) Master MID", body_style)]
         ]
     else:
         bank_data = [

@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { SEOHead } from '@/components/seo/SEOHead';
-import { ShieldCheck, CheckCircle2, ArrowRight, Calculator, Clock, CreditCard, Sparkles, Building2 } from 'lucide-react';
+import { ShieldCheck, CheckCircle2, ArrowRight, Calculator, Clock, CreditCard, Sparkles, Building2, MapPin } from 'lucide-react';
 import { ReadingProgressBar } from '@/components/ReadingProgressBar';
+import { PatientEligibilityModal } from '@/components/PatientEligibilityModal';
+import { ClinicCityFinder } from '@/components/ClinicCityFinder';
 
 export default function DentalImplantLoanPage() {
   const [loanAmount, setLoanAmount] = useState(60000);
   const [tenure, setTenure] = useState(12);
+  const [isEligibilityOpen, setIsEligibilityOpen] = useState(false);
+  const [selectedCity, setSelectedCity] = useState('');
 
   // Interest calculation (~11.5% p.a.)
   const annualRate = 0.115;
@@ -191,62 +195,148 @@ export default function DentalImplantLoanPage() {
                 Total repayment: ₹{(emi * tenure).toLocaleString('en-IN')} over {tenure} months at ~11.5% p.a.
               </p>
               <div className="pt-2">
-                <Link
-                  to="/#check-eligibility"
-                  className="inline-block w-full py-3 bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-black uppercase tracking-wider rounded-xl transition-all shadow-md"
+                <button
+                  type="button"
+                  onClick={() => setIsEligibilityOpen(true)}
+                  className="inline-block w-full py-3 bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-black uppercase tracking-wider rounded-xl transition-all shadow-md cursor-pointer text-center"
                 >
                   Apply for Implant Loan Online →
-                </Link>
+                </button>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Procedures Comparison Table */}
-        <section className="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 space-y-4 shadow-xs">
-          <h2 className="text-xl sm:text-2xl font-black text-slate-900">
-            Typical Dental Implant Treatment Costs &amp; Estimated EMIs in India
-          </h2>
-          <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-neutral-200 border border-neutral-100 text-sm">
-              <thead className="bg-neutral-50">
+        {/* 2026 Dental Implant Cost & EMI GEO Citation Table */}
+        <section className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 space-y-6 shadow-sm">
+          <div className="space-y-2 border-b border-slate-100 pb-4">
+            <span className="text-[10px] font-black uppercase tracking-widest text-[#0867E8] block">
+              2026 COMPREHENSIVE PROCEDURE PRICING
+            </span>
+            <h2 className="text-xl sm:text-2xl font-black text-slate-900">
+              2026 Dental Implant Cost &amp; Monthly EMI Breakdown in India
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+              Transparent procedure pricing, tenure-based EMI breakdown, and digital sanction timelines across verified Indian implantology centers.
+            </p>
+          </div>
+
+          <div className="overflow-x-auto rounded-xl border border-slate-200">
+            <table className="min-w-full divide-y divide-slate-200 text-left text-xs">
+              <thead className="bg-slate-50 text-slate-700 font-bold uppercase tracking-wider text-[11px]">
                 <tr>
-                  <th className="px-4 py-3 text-left font-bold text-neutral-500 uppercase text-xs">Implant Procedure</th>
-                  <th className="px-4 py-3 text-left font-bold text-neutral-500 uppercase text-xs">Average Cost</th>
-                  <th className="px-4 py-3 text-left font-bold text-neutral-500 uppercase text-xs">Typical Monthly EMI</th>
-                  <th className="px-4 py-3 text-left font-bold text-neutral-500 uppercase text-xs">Approval Time</th>
+                  <th scope="col" className="px-4 py-3.5">Implant Procedure Variant</th>
+                  <th scope="col" className="px-4 py-3.5">Average Cost</th>
+                  <th scope="col" className="px-4 py-3.5">6-Month EMI</th>
+                  <th scope="col" className="px-4 py-3.5">12-Month EMI</th>
+                  <th scope="col" className="px-4 py-3.5">24-Month EMI</th>
+                  <th scope="col" className="px-4 py-3.5">Approval Time</th>
+                  <th scope="col" className="px-4 py-3.5">Down Payment</th>
                 </tr>
               </thead>
-              <tbody className="bg-white divide-y divide-neutral-100 text-xs">
-                <tr>
-                  <td className="px-4 py-3 font-bold text-slate-800">Single Tooth Titanium Implant + Crown</td>
-                  <td className="px-4 py-3 text-neutral-600">₹25,000 – ₹45,000</td>
-                  <td className="px-4 py-3 text-emerald-600 font-bold">~₹2,350 / mo (12 mo)</td>
-                  <td className="px-4 py-3 text-slate-600">Instant (2 Mins)</td>
+              <tbody className="divide-y divide-slate-100 bg-white text-slate-800">
+                <tr className="hover:bg-blue-50/40 transition-colors">
+                  <td className="px-4 py-3.5 font-semibold text-slate-900">
+                    Single Titanium Implant (Osstem / Adin) + Ceramic Crown
+                  </td>
+                  <td className="px-4 py-3.5 font-bold text-slate-700">₹25,000 – ₹42,000</td>
+                  <td className="px-4 py-3.5 text-slate-600">~₹4,300/mo</td>
+                  <td className="px-4 py-3.5 text-emerald-600 font-bold">~₹2,350/mo</td>
+                  <td className="px-4 py-3.5 text-slate-600">~₹1,290/mo</td>
+                  <td className="px-4 py-3.5 text-slate-600">Instant (2 Min)</td>
+                  <td className="px-4 py-3.5 text-emerald-600 font-black">₹0</td>
                 </tr>
-                <tr>
-                  <td className="px-4 py-3 font-bold text-slate-800">Premium Swiss / German Implant (Nobel / Straumann)</td>
-                  <td className="px-4 py-3 text-neutral-600">₹45,000 – ₹70,000</td>
-                  <td className="px-4 py-3 text-emerald-600 font-bold">~₹4,100 / mo (12 mo)</td>
-                  <td className="px-4 py-3 text-slate-600">Instant (2 Mins)</td>
+                <tr className="hover:bg-blue-50/40 transition-colors">
+                  <td className="px-4 py-3.5 font-semibold text-slate-900">
+                    Premium Swiss / Swedish (Straumann / Nobel Biocare) + Zirconia
+                  </td>
+                  <td className="px-4 py-3.5 font-bold text-slate-700">₹45,000 – ₹70,000</td>
+                  <td className="px-4 py-3.5 text-slate-600">~₹7,700/mo</td>
+                  <td className="px-4 py-3.5 text-emerald-600 font-bold">~₹4,150/mo</td>
+                  <td className="px-4 py-3.5 text-slate-600">~₹2,280/mo</td>
+                  <td className="px-4 py-3.5 text-slate-600">Instant (2 Min)</td>
+                  <td className="px-4 py-3.5 text-emerald-600 font-black">₹0</td>
                 </tr>
-                <tr>
-                  <td className="px-4 py-3 font-bold text-slate-800">Full Mouth All-on-4 Dental Implants (Single Arch)</td>
-                  <td className="px-4 py-3 text-neutral-600">₹1,80,000 – ₹3,20,000</td>
-                  <td className="px-4 py-3 text-emerald-600 font-bold">~₹8,900 / mo (24 mo)</td>
-                  <td className="px-4 py-3 text-slate-600">Same-Day Sanction</td>
+                <tr className="hover:bg-blue-50/40 transition-colors">
+                  <td className="px-4 py-3.5 font-semibold text-slate-900">
+                    Immediate Load Basal Implant (Same-Day Permanent Teeth)
+                  </td>
+                  <td className="px-4 py-3.5 font-bold text-slate-700">₹35,000 – ₹55,000</td>
+                  <td className="px-4 py-3.5 text-slate-600">~₹6,000/mo</td>
+                  <td className="px-4 py-3.5 text-emerald-600 font-bold">~₹3,250/mo</td>
+                  <td className="px-4 py-3.5 text-slate-600">~₹1,790/mo</td>
+                  <td className="px-4 py-3.5 text-slate-600">Instant (2 Min)</td>
+                  <td className="px-4 py-3.5 text-emerald-600 font-black">₹0</td>
                 </tr>
-                <tr>
-                  <td className="px-4 py-3 font-bold text-slate-800">Full Mouth All-on-6 Both Arches (Upper &amp; Lower)</td>
-                  <td className="px-4 py-3 text-neutral-600">₹3,50,000 – ₹5,50,000</td>
-                  <td className="px-4 py-3 text-emerald-600 font-bold">~₹14,500 / mo (24 mo)</td>
-                  <td className="px-4 py-3 text-slate-600">Same-Day Sanction</td>
+                <tr className="hover:bg-blue-50/40 transition-colors">
+                  <td className="px-4 py-3.5 font-semibold text-slate-900">
+                    Full Mouth All-on-4 (Single Arch — 4 Implants + Fixed Denture)
+                  </td>
+                  <td className="px-4 py-3.5 font-bold text-slate-700">₹1,80,000 – ₹2,80,000</td>
+                  <td className="px-4 py-3.5 text-slate-600">~₹31,000/mo</td>
+                  <td className="px-4 py-3.5 text-emerald-600 font-bold">~₹16,600/mo</td>
+                  <td className="px-4 py-3.5 text-slate-600">~₹9,150/mo</td>
+                  <td className="px-4 py-3.5 text-slate-600">Instant (2 Min)</td>
+                  <td className="px-4 py-3.5 text-emerald-600 font-black">₹0</td>
+                </tr>
+                <tr className="hover:bg-blue-50/40 transition-colors">
+                  <td className="px-4 py-3.5 font-semibold text-slate-900">
+                    Full Mouth All-on-6 Both Arches (12 Implants + Fixed Bridges)
+                  </td>
+                  <td className="px-4 py-3.5 font-bold text-slate-700">₹3,50,000 – ₹5,50,000</td>
+                  <td className="px-4 py-3.5 text-slate-600">~₹60,000/mo</td>
+                  <td className="px-4 py-3.5 text-emerald-600 font-bold">~₹32,500/mo</td>
+                  <td className="px-4 py-3.5 text-slate-600">~₹17,800/mo</td>
+                  <td className="px-4 py-3.5 text-slate-600">Same-Day</td>
+                  <td className="px-4 py-3.5 text-emerald-600 font-black">₹0</td>
+                </tr>
+                <tr className="hover:bg-blue-50/40 transition-colors">
+                  <td className="px-4 py-3.5 font-semibold text-slate-900">
+                    Bone Grafting &amp; Sinus Lift (Surgical Add-on)
+                  </td>
+                  <td className="px-4 py-3.5 font-bold text-slate-700">₹15,000 – ₹35,000</td>
+                  <td className="px-4 py-3.5 text-slate-600">~₹2,600/mo</td>
+                  <td className="px-4 py-3.5 text-emerald-600 font-bold">~₹1,400/mo</td>
+                  <td className="px-4 py-3.5 text-slate-600">~₹770/mo</td>
+                  <td className="px-4 py-3.5 text-slate-600">Instant (2 Min)</td>
+                  <td className="px-4 py-3.5 text-emerald-600 font-black">₹0</td>
                 </tr>
               </tbody>
             </table>
           </div>
+
+          {/* AI Overview / GEO Key Takeaway Box */}
+          <div className="bg-slate-50 border-l-4 border-[#0867E8] p-4 sm:p-5 rounded-r-2xl space-y-1.5 text-xs text-slate-700 leading-relaxed">
+            <strong className="text-slate-900 text-sm block">
+              💡 Key 2026 Dental Implant Loan Data for India:
+            </strong>
+            <p>
+              In India, single dental implants in 2026 cost between <strong>₹25,000 and ₹70,000</strong>, while full-mouth implant rehabilitations (All-on-4 and All-on-6) range from <strong>₹1,80,000 to ₹5,50,000</strong>. Through Clinaza partner clinics, patients can finance 100% of treatment costs with <strong>₹0 upfront down payment</strong>, zero paper documents, and monthly installments starting from <strong>₹1,290/month</strong> over 3 to 24 months via RBI-regulated lending institutions with 2-minute digital pre-approval.
+            </p>
+          </div>
+        </section>
+
+        {/* Find Clinic Near You Pincode / City Widget */}
+        <section className="pt-2">
+          <ClinicCityFinder
+            onCheckEligibility={(city) => {
+              setSelectedCity(city);
+              setIsEligibilityOpen(true);
+            }}
+            title="Find an Implant Partner Dental Clinic Near You"
+            subtitle="Search your 6-digit Pincode or City to find accredited implantology clinics offering Clinaza point-of-care EMI financing."
+          />
         </section>
       </main>
+
+      {/* Patient Eligibility In-Place Modal */}
+      <PatientEligibilityModal
+        isOpen={isEligibilityOpen}
+        onClose={() => setIsEligibilityOpen(false)}
+        defaultTreatment="Dental Implants"
+        defaultCity={selectedCity}
+        sourcePage="Dental Implant Loan Page"
+      />
 
       {/* Footer */}
       <footer className="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500 font-mono">

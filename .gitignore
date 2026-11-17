@@ -151,3 +151,7 @@ generate_*.py
 !scripts/**/*.py
 
 
+flexmoney_faq_raw.js
+scripts/dispatch_*.py
+scripts/build_all_*.py
+scripts/test_*.py

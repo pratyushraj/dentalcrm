@@ -31,7 +31,8 @@ import {
   TrendingUp,
   Smartphone,
   FileCheck,
-  CreditCard
+  CreditCard,
+  Play
 } from 'lucide-react';
 import { emailNotificationService } from '../services/emailNotificationService';
 import { easycredService } from '../services/easycredService';
@@ -39,6 +40,7 @@ import { toast } from 'sonner';
 import { SEOHead } from '@/components/seo/SEOHead';
 import { CITIES } from '@/data/cities';
 import { TaglineReveal } from '@/components/TaglineReveal';
+import { ClinicCityFinder } from '@/components/ClinicCityFinder';
 // ── Scroll Fade-In Wrapper ──────────────────────────────
 const FadeIn: React.FC<{ children: React.ReactNode; className?: string }> = ({ children, className = '' }) => {
   const { ref, visible } = useInView(0.12);
@@ -216,6 +218,35 @@ export default function CrmHomepage() {
   const [bentoPaused, setBentoPaused] = useState<boolean>(false);
   const [bentoProgress, setBentoProgress] = useState<number>(0);
 
+  // Front-Desk 10-Second Chairside Objection Handling Playbook
+  const [activeObjection, setActiveObjection] = useState<number>(0);
+  const OBJECTION_SCRIPTS = [
+    {
+      id: 0,
+      badge: "Price Shock Resistance",
+      patientSays: "₹65,000 is too expensive right now, doctor. I need to think about it and discuss with family.",
+      expensiveMistake: "Receptionist offers an instant 15% discount (giving up ₹9,750 of clinic profit) or lets the patient walk out empty-handed.",
+      clinazaScript: "Doctor has already approved our flexible payment plan. Instead of ₹65,000 upfront, it's just ₹3,200/month. We can activate it right here in 2 minutes before you leave.",
+      clinicUpside: "100% of procedure fee preserved; ₹0 discount haircut; instant T+1 current account settlement."
+    },
+    {
+      id: 1,
+      badge: "Direct Installments / Khata",
+      patientSays: "Can I pay ₹10,000 today and pay the remaining balance directly to the clinic over the next 4 months?",
+      expensiveMistake: "Clinic accepts an informal ledger (khata), absorbing patient credit default risk and spending staff hours chasing overdue payments.",
+      clinazaScript: "We partner with scheduled banks so you get flexible monthly instalments with zero clinic paperwork. Your treatment starts today, and the bank handles the debits automatically.",
+      clinicUpside: "Zero collection follow-ups; 100% non-recourse guarantee; clinic carries ₹0 default liability."
+    },
+    {
+      id: 2,
+      badge: "Credit Card & Paperwork Hesitation",
+      patientSays: "I don't have a credit card and I don't want to submit salary slips or go through tedious loan paperwork.",
+      expensiveMistake: "Front desk assumes the patient cannot qualify for patient financing and loses a high-value implant or aligner case.",
+      clinazaScript: "You don't need a credit card or salary slips. We check pre-approved limits across 16+ banks with just your mobile number and Aadhaar OTP in 90 seconds.",
+      clinicUpside: "92-second paperless OTP decision across 16+ major banks with 0 impact on patient credit score."
+    }
+  ];
+
   useEffect(() => {
     if (bentoPaused) return;
     const interval = 50;
@@ -245,10 +276,12 @@ export default function CrmHomepage() {
   const roiRecoveredCases = Math.max(1, Math.round(roiLostCases * 0.5)); // ~50% converted via instant EMIs
   const roiMonthlyUnlocked = roiRecoveredCases * roiAvgTicket;
   const roiAnnualUnlocked = roiMonthlyUnlocked * 12;
+  const roiLostMonthly = roiLostCases * roiAvgTicket;
 
   // Smooth numeric interpolation for ROI and Patient calculations
   const smoothRoiMonthly = useSmoothValue(roiMonthlyUnlocked, 300);
   const smoothRoiAnnual = useSmoothValue(roiAnnualUnlocked, 300);
+  const smoothRoiLost = useSmoothValue(roiLostMonthly, 300);
   const smoothMonthlyEMI = useSmoothValue(monthlyEMI, 250);
   const smoothTotalPayable = useSmoothValue(totalPayable, 250);
   const smoothTotalInterest = useSmoothValue(totalInterest, 250);
@@ -780,6 +813,10 @@ export default function CrmHomepage() {
             <a href="#how-it-works" className="px-2 xl:px-2.5 py-1.5 rounded-full hover:text-[#0867E8] hover:bg-slate-50 transition-colors whitespace-nowrap">
               How It Works
             </a>
+            <Link to="/checkout-flow" className="px-2 xl:px-2.5 py-1.5 rounded-full hover:text-[#0867E8] hover:bg-blue-50/60 text-[#0867E8] font-bold transition-colors whitespace-nowrap flex items-center gap-1">
+              <span>Checkout Demo</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-blue-600 animate-ping"></span>
+            </Link>
             <a href="#calculator" className="px-2 xl:px-2.5 py-1.5 rounded-full hover:text-[#0867E8] hover:bg-slate-50 transition-colors whitespace-nowrap">
               Practice ROI
             </a>
@@ -841,7 +878,7 @@ export default function CrmHomepage() {
               </div>
 
               {/* H1 Headline */}
-              <h1 className="text-3xl sm:text-5xl lg:text-[54px] font-extrabold tracking-[-0.035em] leading-[1.08] text-[#0B2450]">
+              <h1 className="text-3xl sm:text-5xl lg:text-[54px] font-extrabold tracking-[-0.035em] leading-[1.08] text-[#0B2450] [text-wrap:balance]">
                 Point-of-Care Patient Financing.<br />
                 <span className="bg-gradient-to-r from-[#0867E8] via-[#0D72EB] to-[#0f7a75] bg-clip-text text-transparent">
                   Zero Clinic Default Risk.
@@ -849,7 +886,7 @@ export default function CrmHomepage() {
               </h1>
 
               {/* Balanced Subhead */}
-              <p className="text-sm sm:text-base md:text-lg text-slate-600 font-normal leading-relaxed max-w-xl">
+              <p className="text-sm sm:text-base md:text-lg text-slate-600 font-normal leading-relaxed max-w-xl [text-wrap:pretty]">
                 Empower patients with instant 2-minute paperless EMIs across <strong className="text-[#0B2450] font-semibold">16+ major banks</strong> for treatments from ₹30,000 to ₹5,00,000. Upfront disbursement directly to your clinic current account on a guaranteed T+1 settlement cycle.
               </p>
 
@@ -878,201 +915,346 @@ export default function CrmHomepage() {
                 </button>
               </div>
 
-              {/* Institutional Co-Brand Guarantee Strip */}
-              <div className="p-4 sm:p-5 rounded-2xl bg-white/90 backdrop-blur-md border border-slate-200/80 shadow-[0_4px_24px_rgba(11,36,80,0.04)] space-y-3">
-                <div className="flex items-center justify-between gap-2 border-b border-slate-100 pb-2.5">
+              {/* Institutional Co-Brand Guarantee Strip (4-Item Verification Grid - Improvement 5) */}
+              <div className="p-3.5 sm:p-4 rounded-2xl bg-white/95 backdrop-blur-md border border-slate-200/90 shadow-[0_4px_24px_rgba(11,36,80,0.05)] space-y-2.5">
+                <div className="flex items-center justify-between gap-2 border-b border-slate-100 pb-2">
                   <div className="flex items-center gap-2">
-                    <span className="text-[10px] font-bold uppercase tracking-wide bg-emerald-50 text-emerald-800 border border-emerald-200/80 px-2.5 py-0.5 rounded-full inline-flex items-center gap-1.5 whitespace-nowrap">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse shrink-0"></span>
-                      <span>Institutional Gateway</span>
+                    <span className="text-[10px] font-extrabold uppercase tracking-wide bg-emerald-50 text-emerald-800 border border-emerald-200/90 px-2.5 py-0.5 rounded-full inline-flex items-center gap-1.5 whitespace-nowrap">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse shrink-0" />
+                      <span>RBI-Regulated Ecosystem</span>
                     </span>
-                    <span className="text-[11px] font-medium text-slate-500 hidden sm:inline">&bull; Direct Bank Payouts</span>
+                    <span className="text-[11px] font-semibold text-slate-500 hidden sm:inline">&bull; Direct Bank Payouts</span>
                   </div>
-                  <div className="flex items-center gap-1.5 shrink-0 bg-slate-50 px-2.5 py-1 rounded-lg border border-slate-200/60">
+                  <div className="flex items-center gap-1.5 shrink-0 bg-slate-50 px-2.5 py-1 rounded-lg border border-slate-200/70">
                     <span className="text-[9px] font-bold uppercase text-slate-400">Powered by</span>
                     <img src="/assets/plural_by_pinelabs_transparent.png" alt="Plural by Pine Labs" className="h-3.5 sm:h-4 w-auto object-contain" width={80} height={16} />
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs">
-                  <div className="bg-slate-50/80 p-2.5 rounded-xl border border-slate-200/60">
-                    <span className="text-[9px] text-slate-400 block font-bold uppercase">Setup Fee</span>
-                    <span className="font-extrabold text-[#0B2450] text-xs">₹999 One-Time</span>
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
+                  <div className="bg-slate-50/90 p-2.5 rounded-xl border border-slate-200/70">
+                    <div className="flex items-center gap-1 text-slate-400 mb-0.5">
+                      <ShieldCheck size={11} className="text-[#0867E8]" />
+                      <span className="text-[9px] font-bold uppercase tracking-wider">Gateway Rail</span>
+                    </div>
+                    <span className="font-extrabold text-[#0B2450] text-xs block truncate">Plural Pine Labs</span>
+                    <span className="text-[9.5px] text-slate-500 block truncate">Official Partner</span>
                   </div>
-                  <div className="bg-slate-50/80 p-2.5 rounded-xl border border-slate-200/60">
-                    <span className="text-[9px] text-slate-400 block font-bold uppercase">Settlement</span>
-                    <span className="font-extrabold text-emerald-700 text-xs">T+1 Direct Bank</span>
+
+                  <div className="bg-slate-50/90 p-2.5 rounded-xl border border-slate-200/70">
+                    <div className="flex items-center gap-1 text-slate-400 mb-0.5">
+                      <Landmark size={11} className="text-blue-600" />
+                      <span className="text-[9px] font-bold uppercase tracking-wider">Lending Rails</span>
+                    </div>
+                    <span className="font-extrabold text-[#0B2450] text-xs block truncate">16+ Major Banks</span>
+                    <span className="text-[9.5px] text-slate-500 block truncate">RBI Regulated</span>
                   </div>
-                  <div className="bg-slate-50/80 p-2.5 rounded-xl border border-slate-200/60 col-span-2 sm:col-span-1">
-                    <span className="text-[9px] text-slate-400 block font-bold uppercase">Credit Liability</span>
-                    <span className="font-extrabold text-[#0867E8] text-xs">100% Non-Recourse</span>
+
+                  <div className="bg-slate-50/90 p-2.5 rounded-xl border border-slate-200/70">
+                    <div className="flex items-center gap-1 text-slate-400 mb-0.5">
+                      <Clock size={11} className="text-emerald-600" />
+                      <span className="text-[9px] font-bold uppercase tracking-wider">Settlement</span>
+                    </div>
+                    <span className="font-extrabold text-emerald-700 text-xs block truncate">T+1 Guaranteed</span>
+                    <span className="text-[9.5px] text-slate-500 block truncate">Direct Current A/C</span>
+                  </div>
+
+                  <div className="bg-slate-50/90 p-2.5 rounded-xl border border-slate-200/70">
+                    <div className="flex items-center gap-1 text-slate-400 mb-0.5">
+                      <CheckCircle2 size={11} className="text-emerald-600" />
+                      <span className="text-[9px] font-bold uppercase tracking-wider">Default Risk</span>
+                    </div>
+                    <span className="font-extrabold text-[#0867E8] text-xs block truncate">100% Non-Recourse</span>
+                    <span className="text-[9.5px] text-slate-500 block truncate">₹0 Clinic Liability</span>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Right Column: Realistic Smartphone Showcase with Live Interactive EMI (5 cols) */}
+            {/* Right Column: Realistic Smartphone Showcase on Desktop / Streamlined Interactive Card on Mobile (5 cols - Improvement 2) */}
             <div className="lg:col-span-5 relative mt-4 lg:mt-0 flex flex-col items-center justify-center">
-              {/* Interactive Procedure Chips Above Phone (Improvement 1) */}
-              <div className="w-full max-w-[340px] mb-3 z-10 relative">
-                <div className="flex items-center justify-between pb-1.5 px-1">
-                  <span className="text-[10px] font-extrabold uppercase tracking-wider text-slate-400">
-                    Live Simulator Preset
-                  </span>
-                  <span className="text-[10px] font-bold text-[#0867E8]">
-                    Tap to Switch Procedure
-                  </span>
-                </div>
-                <div className="grid grid-cols-2 gap-1.5">
-                  {HERO_TREATMENT_PRESETS.map((t) => {
-                    const isSelected = heroTreatment.id === t.id;
-                    return (
-                      <button
-                        key={t.id}
-                        type="button"
-                        onClick={() => handleHeroTreatmentChange(t)}
-                        className={`px-2.5 py-2 min-h-[40px] text-[11px] font-bold rounded-xl border transition-all text-left flex items-center justify-between cursor-pointer ${
-                          isSelected
-                            ? 'bg-[#0B2450] text-white border-[#0B2450] shadow-sm'
-                            : 'bg-white/90 hover:bg-white text-slate-700 border-slate-200/90 hover:border-slate-300'
-                        }`}
-                      >
-                        <span className="truncate">{t.label}</span>
-                        <span className={`text-[9.5px] font-extrabold px-1.5 py-0.5 rounded shrink-0 ml-1 ${
-                          isSelected ? 'bg-white/20 text-white' : 'bg-slate-100 text-slate-600'
-                        }`}>
-                          ₹{(t.amount / 1000).toFixed(0)}k
+              {/* Mobile-Only Streamlined Front-Desk Affordability Card (< lg) */}
+              <div className="block lg:hidden w-full max-w-md mx-auto z-10 relative">
+                <div className="bg-white/95 backdrop-blur-md rounded-2xl p-4 border border-slate-200/90 shadow-[0_8px_30px_rgba(11,36,80,0.06)] space-y-3 text-left">
+                  {/* Top Status */}
+                  <div className="flex items-center justify-between pb-2 border-b border-slate-100">
+                    <div className="flex items-center gap-1.5">
+                      <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                      <span className="text-[11px] font-extrabold uppercase tracking-wider text-[#0B2450]">
+                        Front-Desk Simulator
+                      </span>
+                    </div>
+                    <span className="text-[9.5px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200/80 px-2 py-0.5 rounded-full">
+                      Instant Pre-Approval
+                    </span>
+                  </div>
+
+                  {/* Procedure Quick Select Grid */}
+                  <div className="space-y-1">
+                    <span className="text-[9px] font-extrabold uppercase tracking-wider text-slate-500 block">
+                      Select Clinical Procedure
+                    </span>
+                    <div className="grid grid-cols-2 gap-1.5">
+                      {HERO_TREATMENT_PRESETS.map((t) => {
+                        const isSelected = heroTreatment.id === t.id;
+                        return (
+                          <button
+                            key={t.id}
+                            type="button"
+                            onClick={() => handleHeroTreatmentChange(t)}
+                            className={`px-2.5 py-2 min-h-[44px] text-[11px] font-bold rounded-xl border transition-all text-left flex items-center justify-between cursor-pointer active:scale-[0.98] ${
+                              isSelected
+                                ? 'bg-[#0B2450] text-white border-[#0B2450] shadow-2xs'
+                                : 'bg-slate-50 hover:bg-slate-100 text-slate-700 border-slate-200/80'
+                            }`}
+                          >
+                            <span className="truncate">{t.label}</span>
+                            <span className={`text-[9.5px] font-extrabold px-1.5 py-0.5 rounded shrink-0 ml-1 ${
+                              isSelected ? 'bg-white/20 text-white' : 'bg-white text-slate-600'
+                            }`}>
+                              ₹{(t.amount / 1000).toFixed(0)}k
+                            </span>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  {/* Dynamic EMI & Tenure Box */}
+                  <div className="bg-slate-50/90 rounded-xl p-3 border border-slate-200/70 space-y-2">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <span className="text-[9px] font-bold uppercase text-slate-500 block tracking-wider">
+                          Patient Monthly EMI
                         </span>
-                      </button>
-                    );
-                  })}
+                        <div className="flex items-baseline gap-1.5">
+                          <span className="text-xl font-extrabold text-[#0867E8] tabular-nums">
+                            ₹{phoneEmi.toLocaleString('en-IN')}
+                          </span>
+                          <span className="text-[10px] text-slate-600 font-medium">/mo</span>
+                          <span className="text-[10px] text-slate-500 line-through ml-1">
+                            ₹{heroTreatment.amount.toLocaleString('en-IN')}
+                          </span>
+                        </div>
+                      </div>
+                      {phoneSanctionedStamp ? (
+                        <span className="inline-flex items-center gap-1 text-[8.5px] font-extrabold text-emerald-800 bg-emerald-100 px-2 py-1 rounded-lg border border-emerald-300">
+                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping" />
+                          Sanctioned in 92s
+                        </span>
+                      ) : (
+                        <span className="text-[8.5px] font-bold text-slate-600 bg-white px-2 py-1 rounded-lg border border-slate-200/70">
+                          {phoneTenure}M Tenure
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Tenure Buttons */}
+                    <div className="grid grid-cols-4 gap-1">
+                      {[3, 6, 12, 24].map((t) => (
+                        <button
+                          key={t}
+                          type="button"
+                          onClick={() => handlePhoneTenureChange(t)}
+                          className={`py-1.5 min-h-[44px] text-[11px] font-extrabold rounded-lg border transition-all flex items-center justify-center cursor-pointer active:scale-[0.98] ${
+                            phoneTenure === t
+                              ? 'bg-[#0867E8] text-white border-[#0867E8] shadow-2xs'
+                              : 'bg-white text-slate-600 border-slate-200 hover:border-[#0867E8]'
+                          }`}
+                        >
+                          {t}M
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* 1-Tap CTA */}
+                  <button
+                    type="button"
+                    onClick={() => {
+                      trackEvent('click_hero_mobile_eligibility');
+                      trackEvent('eligibility_started', { source: 'hero_mobile_card' });
+                      setShowEligibilityModal(true);
+                    }}
+                    className="w-full py-3 min-h-[48px] bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-extrabold uppercase tracking-wider rounded-xl transition-all shadow-md flex items-center justify-center gap-1.5 active:scale-[0.98] cursor-pointer"
+                  >
+                    <ShieldCheck size={14} />
+                    <span>Check Patient Eligibility &bull; 2-Min eKYC</span>
+                  </button>
+
+                  <div className="flex items-center justify-between text-[9px] text-slate-500 px-1 pt-0.5">
+                    <span className="flex items-center gap-1">
+                      <CheckCircle2 size={10} className="text-emerald-600 shrink-0" />
+                      <span>16+ Banks &bull; OTP eKYC</span>
+                    </span>
+                    <span>Plural by Pine Labs &bull; T+1 Payout</span>
+                  </div>
                 </div>
               </div>
 
-              {/* Decorative Glow behind phone */}
-              <div className="absolute -inset-4 bg-gradient-to-tr from-blue-500/15 via-emerald-500/10 to-transparent rounded-[3rem] blur-2xl pointer-events-none" />
-
-              {/* Phone Frame Device */}
-              <div className="relative w-full max-w-[340px] bg-slate-900 rounded-[2.5rem] p-3 shadow-[0_25px_60px_rgba(15,23,42,0.25)] border-[6px] border-slate-800 text-left">
-                {/* Dynamic Island Notch */}
-                <div className="absolute top-5 inset-x-0 mx-auto w-24 h-4 bg-slate-950 rounded-full flex items-center justify-end px-2 gap-1.5 z-20">
-                  <div className="w-2 h-2 rounded-full bg-slate-800" />
-                  <div className="w-1.5 h-1.5 rounded-full bg-blue-500/80" />
+              {/* Desktop-Only Realistic Smartphone Showcase (>= lg) */}
+              <div className="hidden lg:flex lg:flex-col items-center justify-center w-full">
+                {/* Interactive Procedure Chips Above Phone (Improvement 1) */}
+                <div className="w-full max-w-[340px] mb-3 z-10 relative">
+                  <div className="flex items-center justify-between pb-1.5 px-1">
+                    <span className="text-[10px] font-extrabold uppercase tracking-wider text-slate-400">
+                      Live Simulator Preset
+                    </span>
+                    <span className="text-[10px] font-bold text-[#0867E8]">
+                      Tap to Switch Procedure
+                    </span>
+                  </div>
+                  <div className="grid grid-cols-2 gap-1.5">
+                    {HERO_TREATMENT_PRESETS.map((t) => {
+                      const isSelected = heroTreatment.id === t.id;
+                      return (
+                        <button
+                          key={t.id}
+                          type="button"
+                          onClick={() => handleHeroTreatmentChange(t)}
+                          className={`px-2.5 py-2 min-h-[40px] text-[11px] font-bold rounded-xl border transition-all text-left flex items-center justify-between cursor-pointer ${
+                            isSelected
+                              ? 'bg-[#0B2450] text-white border-[#0B2450] shadow-sm'
+                              : 'bg-white/90 hover:bg-white text-slate-700 border-slate-200/90 hover:border-slate-300'
+                          }`}
+                        >
+                          <span className="truncate">{t.label}</span>
+                          <span className={`text-[9.5px] font-extrabold px-1.5 py-0.5 rounded shrink-0 ml-1 ${
+                            isSelected ? 'bg-white/20 text-white' : 'bg-slate-100 text-slate-600'
+                          }`}>
+                            ₹{(t.amount / 1000).toFixed(0)}k
+                          </span>
+                        </button>
+                      );
+                    })}
+                  </div>
                 </div>
 
-                {/* Smartphone Display */}
-                <div className="bg-white rounded-[2rem] pt-7 pb-4 px-3.5 space-y-3 overflow-hidden text-[#0B2450]">
-                  {/* Browser / Security Bar */}
-                  <div className="flex items-center justify-between pb-2 border-b border-slate-100 text-[10px] text-slate-500">
-                    <div className="flex items-center gap-1 font-mono text-[9px] bg-slate-100 px-2 py-0.5 rounded-full">
-                      <Lock size={9} className="text-emerald-600" />
-                      <span>clinaza.in/pay</span>
-                    </div>
-                    <span className="text-[9px] font-bold text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded">
-                      256-Bit SSL
-                    </span>
+                {/* Decorative Glow behind phone */}
+                <div className="absolute -inset-4 bg-gradient-to-tr from-blue-500/15 via-emerald-500/10 to-transparent rounded-[3rem] blur-2xl pointer-events-none" />
+
+                {/* Phone Frame Device */}
+                <div className="relative w-full max-w-[340px] bg-slate-900 rounded-[2.5rem] p-3 shadow-[0_25px_60px_rgba(15,23,42,0.25)] border-[6px] border-slate-800 text-left">
+                  {/* Dynamic Island Notch */}
+                  <div className="absolute top-5 inset-x-0 mx-auto w-24 h-4 bg-slate-950 rounded-full flex items-center justify-end px-2 gap-1.5 z-20">
+                    <div className="w-2 h-2 rounded-full bg-slate-800" />
+                    <div className="w-1.5 h-1.5 rounded-full bg-blue-500/80" />
                   </div>
 
-                  {/* Clinic Header */}
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <p className="text-[11px] font-extrabold text-[#0B2450]">Smile Point Dental Care</p>
-                      <p className="text-[9px] text-slate-400 font-medium">Front-Desk Link &bull; Patna</p>
+                  {/* Smartphone Display */}
+                  <div className="bg-white rounded-[2rem] pt-7 pb-4 px-3.5 space-y-3 overflow-hidden text-[#0B2450]">
+                    {/* Browser / Security Bar */}
+                    <div className="flex items-center justify-between pb-2 border-b border-slate-100 text-[10px] text-slate-500">
+                      <div className="flex items-center gap-1 font-mono text-[9px] bg-slate-100 px-2 py-0.5 rounded-full">
+                        <Lock size={9} className="text-emerald-600" />
+                        <span>clinaza.in/pay</span>
+                      </div>
+                      <span className="text-[9px] font-bold text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded">
+                        256-Bit SSL
+                      </span>
                     </div>
-                    <span className="text-[8px] font-extrabold uppercase tracking-wide bg-emerald-50 text-emerald-700 border border-emerald-200 px-2 py-0.5 rounded-full">
-                      Verified
-                    </span>
-                  </div>
 
-                  {/* Treatment Card */}
-                  <div className="bg-slate-50 rounded-xl p-3 border border-slate-200/80 space-y-2">
-                    <div className="flex justify-between items-start">
+                    {/* Clinic Header */}
+                    <div className="flex items-center justify-between">
                       <div>
-                        <span className="text-[9px] font-bold uppercase tracking-wider text-slate-400">Treatment Plan</span>
-                        <p className="text-xs font-extrabold text-[#0B2450] transition-colors duration-200">{heroTreatment.name}</p>
+                        <p className="text-[11px] font-extrabold text-[#0B2450]">Smile Point Dental Care</p>
+                        <p className="text-[9px] text-slate-400 font-medium">Front-Desk Link &bull; Patna</p>
                       </div>
-                      <div className="text-right">
-                        <span className="text-[9px] text-slate-400 line-through">₹{heroTreatment.amount.toLocaleString('en-IN')}</span>
-                        <p className="text-sm font-extrabold text-[#0867E8] transition-transform duration-200">
-                          ₹{phoneEmi.toLocaleString('en-IN')}<span className="text-[9px] font-medium text-slate-500">/mo</span>
-                        </p>
+                      <span className="text-[8px] font-extrabold uppercase tracking-wide bg-emerald-50 text-emerald-700 border border-emerald-200 px-2 py-0.5 rounded-full">
+                        Verified
+                      </span>
+                    </div>
+
+                    {/* Treatment Card */}
+                    <div className="bg-slate-50 rounded-xl p-3 border border-slate-200/80 space-y-2">
+                      <div className="flex justify-between items-start">
+                        <div>
+                          <span className="text-[9px] font-bold uppercase tracking-wider text-slate-400">Treatment Plan</span>
+                          <p className="text-xs font-extrabold text-[#0B2450] transition-colors duration-200">{heroTreatment.name}</p>
+                        </div>
+                        <div className="text-right">
+                          <span className="text-[9px] text-slate-400 line-through">₹{heroTreatment.amount.toLocaleString('en-IN')}</span>
+                          <p className="text-sm font-extrabold text-[#0867E8] transition-transform duration-200">
+                            ₹{phoneEmi.toLocaleString('en-IN')}<span className="text-[9px] font-medium text-slate-500">/mo</span>
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Interactive Tenure Selector inside phone */}
+                      <div className="pt-1 space-y-1">
+                        <div className="flex items-center justify-between min-h-[20px]">
+                          <span className="text-[9px] font-bold text-slate-400 uppercase tracking-wider block">
+                            Select Tenure ({phoneTenure} Months)
+                          </span>
+                          {phoneSanctionedStamp ? (
+                            <span className="inline-flex items-center gap-1 text-[8.5px] font-extrabold text-emerald-800 bg-emerald-100/90 px-2 py-0.5 rounded-full border border-emerald-300 animate-in fade-in zoom-in-95 duration-200">
+                              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping" />
+                              Sanctioned in 92s
+                            </span>
+                          ) : (
+                            <span className="text-[8.5px] font-bold text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded">
+                              ✓ Instant Decision
+                            </span>
+                          )}
+                        </div>
+                        <div className="grid grid-cols-4 gap-1">
+                          {[3, 6, 12, 24].map((t) => (
+                            <button
+                              key={t}
+                              type="button"
+                              onClick={() => handlePhoneTenureChange(t)}
+                              className={`py-2 min-h-[40px] text-[11px] font-extrabold rounded-lg border transition-all flex items-center justify-center ${
+                                phoneTenure === t
+                                  ? 'bg-[#0867E8] text-white border-[#0867E8] shadow-xs scale-[1.02]'
+                                  : 'bg-white text-slate-600 border-slate-200 hover:border-[#0867E8]'
+                              }`}
+                            >
+                              {t}M
+                            </button>
+                          ))}
+                        </div>
                       </div>
                     </div>
 
-                    {/* Interactive Tenure Selector inside phone */}
-                    <div className="pt-1 space-y-1">
-                      <div className="flex items-center justify-between min-h-[20px]">
-                        <span className="text-[9px] font-bold text-slate-400 uppercase tracking-wider block">
-                          Select Tenure ({phoneTenure} Months)
-                        </span>
-                        {phoneSanctionedStamp ? (
-                          <span className="inline-flex items-center gap-1 text-[8.5px] font-extrabold text-emerald-800 bg-emerald-100/90 px-2 py-0.5 rounded-full border border-emerald-300 animate-in fade-in zoom-in-95 duration-200">
-                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping" />
-                            Sanctioned in 92s
-                          </span>
-                        ) : (
-                          <span className="text-[8.5px] font-bold text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded">
-                            ✓ Instant Decision
-                          </span>
-                        )}
-                      </div>
-                      <div className="grid grid-cols-4 gap-1">
-                        {[3, 6, 12, 24].map((t) => (
-                          <button
-                            key={t}
-                            type="button"
-                            onClick={() => handlePhoneTenureChange(t)}
-                            className={`py-2 min-h-[40px] text-[11px] font-extrabold rounded-lg border transition-all flex items-center justify-center ${
-                              phoneTenure === t
-                                ? 'bg-[#0867E8] text-white border-[#0867E8] shadow-xs scale-[1.02]'
-                                : 'bg-white text-slate-600 border-slate-200 hover:border-[#0867E8]'
-                            }`}
-                          >
-                            {t}M
-                          </button>
-                        ))}
-                      </div>
+                    {/* Pre-Approved Multi-Bank Pill */}
+                    <div className="flex items-center justify-between bg-emerald-50/80 border border-emerald-200/80 px-2.5 py-1.5 rounded-xl text-[10px] text-emerald-900 font-semibold">
+                      <span className="flex items-center gap-1">
+                        <CheckCircle2 size={12} className="text-emerald-600 shrink-0" />
+                        <span>Instant Approval:</span>
+                      </span>
+                      <span className="font-extrabold text-emerald-800">16+ Banks &bull; OTP eKYC</span>
+                    </div>
+
+                    {/* Primary Button */}
+                    <button
+                      type="button"
+                      onClick={() => setShowEligibilityModal(true)}
+                      className="w-full py-3.5 min-h-[44px] bg-[#0867E8] hover:bg-[#0756C7] text-white text-[11px] font-extrabold uppercase tracking-wider rounded-xl transition-all shadow-md flex items-center justify-center gap-1.5 active:scale-95 cursor-pointer"
+                    >
+                      <span>Proceed to 2-Min eKYC</span>
+                      <ArrowRight size={12} />
+                    </button>
+
+                    <div className="flex items-center justify-center gap-1 text-[8.5px] text-slate-400 pt-0.5">
+                      <ShieldCheck size={10} className="text-emerald-600" />
+                      <span>Powered by Plural by Pine Labs &bull; RBI Regulated</span>
                     </div>
                   </div>
 
-                  {/* Pre-Approved Multi-Bank Pill */}
-                  <div className="flex items-center justify-between bg-emerald-50/80 border border-emerald-200/80 px-2.5 py-1.5 rounded-xl text-[10px] text-emerald-900 font-semibold">
-                    <span className="flex items-center gap-1">
-                      <CheckCircle2 size={12} className="text-emerald-600 shrink-0" />
-                      <span>Instant Approval:</span>
-                    </span>
-                    <span className="font-extrabold text-emerald-800">16+ Banks &bull; OTP eKYC</span>
+                  {/* Floating Glass Pill Top Left */}
+                  <div className="absolute -top-3 -left-4 bg-white/95 backdrop-blur-md border border-slate-200/90 rounded-xl px-3 py-1.5 shadow-lg text-[10px] font-extrabold text-[#0B2450] flex items-center gap-1.5 hidden sm:flex">
+                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                    <span>100% Non-Recourse Payout</span>
                   </div>
 
-                  {/* Primary Button */}
-                  <button
-                    type="button"
-                    onClick={() => setShowEligibilityModal(true)}
-                    className="w-full py-3.5 min-h-[44px] bg-[#0867E8] hover:bg-[#0756C7] text-white text-[11px] font-extrabold uppercase tracking-wider rounded-xl transition-all shadow-md flex items-center justify-center gap-1.5 active:scale-95 cursor-pointer"
-                  >
-                    <span>Proceed to 2-Min eKYC</span>
-                    <ArrowRight size={12} />
-                  </button>
-
-                  <div className="flex items-center justify-center gap-1 text-[8.5px] text-slate-400 pt-0.5">
-                    <ShieldCheck size={10} className="text-emerald-600" />
-                    <span>Powered by Plural by Pine Labs &bull; RBI Regulated</span>
+                  {/* Floating Glass Card Bottom Right */}
+                  <div className="absolute -bottom-4 -right-4 bg-[#0B2450] text-white rounded-xl p-2.5 shadow-xl border border-slate-700 text-[10px] space-y-0.5 hidden sm:block">
+                    <div className="flex items-center gap-1.5 text-emerald-400 font-bold">
+                      <CheckCircle2 size={12} />
+                      <span>T+1 Bank Settlement</span>
+                    </div>
+                    <p className="text-slate-300 text-[9px]">100% credited to current a/c</p>
                   </div>
-                </div>
-
-                {/* Floating Glass Pill Top Left */}
-                <div className="absolute -top-3 -left-4 bg-white/95 backdrop-blur-md border border-slate-200/90 rounded-xl px-3 py-1.5 shadow-lg text-[10px] font-extrabold text-[#0B2450] flex items-center gap-1.5 hidden sm:flex">
-                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                  <span>100% Non-Recourse Payout</span>
-                </div>
-
-                {/* Floating Glass Card Bottom Right */}
-                <div className="absolute -bottom-4 -right-4 bg-[#0B2450] text-white rounded-xl p-2.5 shadow-xl border border-slate-700 text-[10px] space-y-0.5 hidden sm:block">
-                  <div className="flex items-center gap-1.5 text-emerald-400 font-bold">
-                    <CheckCircle2 size={12} />
-                    <span>T+1 Bank Settlement</span>
-                  </div>
-                  <p className="text-slate-300 text-[9px]">100% credited to current a/c</p>
                 </div>
               </div>
             </div>
@@ -1100,7 +1282,7 @@ export default function CrmHomepage() {
               <div className="absolute left-0 inset-y-0 w-16 sm:w-24 bg-gradient-to-r from-white via-white/80 to-transparent z-10 pointer-events-none" />
               <div className="absolute right-0 inset-y-0 w-16 sm:w-24 bg-gradient-to-l from-white via-white/80 to-transparent z-10 pointer-events-none" />
 
-              <div className="flex w-max gap-3.5 animate-marquee group-hover:[animation-play-state:paused]">
+              <div className="flex w-max gap-3.5 animate-marquee group-hover:[animation-play-state:paused] focus-within:[animation-play-state:paused] motion-reduce:animate-none">
                 {[
                   { name: 'Plural by Pine Labs', sub: 'Official Gateway Partner', logo: '/assets/plural_by_pinelabs_transparent.png', badge: 'Gateway' },
                   { name: 'HDFC Bank', sub: 'Credit & Debit EMI', logo: '/assets/lenders/hdfc.png', badge: 'Bank EMI' },
@@ -1175,6 +1357,16 @@ export default function CrmHomepage() {
               <p className="text-sm sm:text-base text-slate-600 max-w-2xl mx-auto leading-relaxed">
                 60%+ of high-ticket dental, hair, and surgical cases drop off at reception due to upfront price shock. Clinaza replaces price friction with an instant 3-step financing journey.
               </p>
+              <div className="pt-2 flex items-center justify-center gap-3">
+                <Link
+                  to="/checkout-flow"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#0867E8] text-white text-xs sm:text-sm font-extrabold hover:bg-[#0756c7] transition-all shadow-md shadow-blue-500/20 active:scale-95"
+                >
+                  <Play size={14} className="fill-white" />
+                  <span>Watch Patient Checkout Demo Video & Flow</span>
+                  <ArrowRight size={14} />
+                </Link>
+              </div>
             </div>
 
             {/* Asymmetric Bento Grid (12-col) */}
@@ -1600,37 +1792,87 @@ export default function CrmHomepage() {
                         </div>
                       </div>
 
-                      {/* Right Result Card with Smooth Interpolation */}
-                      <div className="md:col-span-6 bg-gradient-to-br from-[#0B2450] to-[#0867E8] text-white p-5 sm:p-6 rounded-2xl space-y-4 shadow-lg text-left">
-                        <div>
-                          <span className="text-[10px] font-extrabold uppercase tracking-widest text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
-                            MONTHLY REVENUE UPSIDE
+                      {/* Right Result Card: Revenue Leak Diagnostic & Recovery Engine (Improvement 3) */}
+                      <div className="md:col-span-6 bg-[#0B2450] text-white p-5 sm:p-6 rounded-2xl space-y-4 shadow-xl border border-slate-700/80 text-left relative overflow-hidden">
+                        {/* Background subtle radial glow */}
+                        <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl from-[#0867E8]/30 via-emerald-500/10 to-transparent rounded-full blur-3xl pointer-events-none" />
+
+                        {/* Diagnostic Header */}
+                        <div className="flex items-center justify-between relative z-10">
+                          <span className="text-[10px] font-extrabold uppercase tracking-widest text-emerald-400 bg-emerald-500/15 px-2.5 py-0.5 rounded-md border border-emerald-500/30">
+                            REVENUE LEAK DIAGNOSTIC
                           </span>
-                          <p className="text-3xl font-extrabold tracking-tight text-white pt-1 tabular-nums">
-                            +₹{smoothRoiMonthly.toLocaleString('en-IN')}
-                            <span className="text-xs font-normal text-slate-300"> / month</span>
-                          </p>
-                          <p className="text-xs text-slate-200 mt-0.5">
-                            Annual practice upside: <strong className="text-white">+₹{(smoothRoiAnnual / 100000).toFixed(1)} Lakhs / year</strong>
-                          </p>
+                          <span className="text-[9px] font-bold text-slate-300 bg-white/10 px-2 py-0.5 rounded-md">
+                            Front-Desk Drop-Off Analysis
+                          </span>
                         </div>
 
-                        <div className="grid grid-cols-2 gap-2 text-xs border-t border-white/10 pt-3">
-                          <div className="bg-white/10 p-2.5 rounded-xl space-y-0.5">
-                            <span className="text-[9px] text-slate-300 block">Lost Cases Without EMI</span>
-                            <span className="font-extrabold text-rose-300 text-sm">{roiLostCases} Patients</span>
+                        {/* High-Contrast Side-by-Side: The Walkout Bleed vs The Clinaza Recovery */}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 relative z-10">
+                          {/* Red Card: The Walkout Bleed */}
+                          <div className="bg-rose-950/40 border border-rose-500/30 p-3 rounded-xl space-y-1">
+                            <div className="flex items-center justify-between">
+                              <span className="text-[9.5px] font-bold uppercase tracking-wider text-rose-300 flex items-center gap-1">
+                                <span>❌ Walkout Bleed</span>
+                              </span>
+                              <span className="text-[8.5px] font-extrabold bg-rose-500/20 text-rose-300 px-1.5 py-0.5 rounded">
+                                ~60% Drop
+                              </span>
+                            </div>
+                            <p className="text-xl font-extrabold text-rose-200 tabular-nums">
+                              -₹{smoothRoiLost.toLocaleString('en-IN')}
+                              <span className="text-[10px] font-normal text-rose-300/80">/mo</span>
+                            </p>
+                            <p className="text-[10px] text-rose-300/80 leading-tight">
+                              <strong>{roiLostCases} cases lost</strong> to upfront price shock & quote hesitation.
+                            </p>
                           </div>
-                          <div className="bg-white/10 p-2.5 rounded-xl space-y-0.5">
-                            <span className="text-[9px] text-slate-300 block">Recovered with EMI</span>
-                            <span className="font-extrabold text-emerald-300 text-sm">+{roiRecoveredCases} Patients</span>
+
+                          {/* Green Card: The Clinaza Recovery */}
+                          <div className="bg-emerald-950/40 border border-emerald-500/40 p-3 rounded-xl space-y-1">
+                            <div className="flex items-center justify-between">
+                              <span className="text-[9.5px] font-bold uppercase tracking-wider text-emerald-300 flex items-center gap-1">
+                                <span>✅ Recaptured Cash</span>
+                              </span>
+                              <span className="text-[8.5px] font-extrabold bg-emerald-500/20 text-emerald-300 px-1.5 py-0.5 rounded">
+                                ~50% Recovered
+                              </span>
+                            </div>
+                            <p className="text-xl font-extrabold text-emerald-300 tabular-nums">
+                              +₹{smoothRoiMonthly.toLocaleString('en-IN')}
+                              <span className="text-[10px] font-normal text-emerald-300/80">/mo</span>
+                            </p>
+                            <p className="text-[10px] text-emerald-300/80 leading-tight">
+                              <strong>+{roiRecoveredCases} cases closed</strong> via instant 2-min paperless bank EMIs.
+                            </p>
+                          </div>
+                        </div>
+
+                        {/* Annual Practice Impact & Payback Metric */}
+                        <div className="bg-white/5 border border-white/10 rounded-xl p-3 space-y-2 relative z-10">
+                          <div className="flex items-center justify-between">
+                            <span className="text-[10px] font-bold uppercase text-slate-300">
+                              Annual Practice Net Upside
+                            </span>
+                            <span className="text-base font-extrabold text-white">
+                              +₹{(smoothRoiAnnual / 100000).toFixed(1)} Lakhs / year
+                            </span>
+                          </div>
+
+                          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-[9.5px] text-slate-300 pt-1 border-t border-white/10">
+                            <span className="flex items-center gap-1 text-emerald-400 font-semibold">
+                              <CheckCircle2 size={11} className="shrink-0" />
+                              <span>₹999 setup fee recovered on Day 1 (Case #1)</span>
+                            </span>
+                            <span className="text-slate-400">100% Non-Recourse &bull; T+1 Payout</span>
                           </div>
                         </div>
 
                         <Link
                           to="/clinic-onboarding"
-                          className="w-full py-2.5 bg-white hover:bg-slate-100 text-[#0B2450] text-xs font-extrabold uppercase tracking-wider rounded-xl transition-all flex items-center justify-center gap-1.5 shadow-md active:scale-95"
+                          className="w-full py-3 bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-extrabold uppercase tracking-wider rounded-xl transition-all flex items-center justify-center gap-1.5 shadow-lg active:scale-95 cursor-pointer relative z-10"
                         >
-                          <span>Activate For Clinic &bull; ₹999 Setup</span>
+                          <span>Claim Clinic Territory &bull; ₹999 Setup</span>
                           <ArrowRight size={13} />
                         </Link>
                       </div>
@@ -1760,6 +2002,115 @@ export default function CrmHomepage() {
                   </div>
                 </div>
               </div>
+            </div>
+
+            {/* ── 3C. THE 10-SECOND CHAIRSIDE SCRIPT (FRONT-DESK OBJECTION HANDLING CHEAT SHEET) ── */}
+            <div className="bg-white border border-slate-200/90 rounded-3xl p-6 sm:p-8 shadow-sm space-y-6 text-left">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-4">
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#0f7a75]">
+                      FRONT-DESK PLAYBOOK
+                    </span>
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                    <span className="text-[10px] font-bold text-slate-500">Zero Clinic Discounts Needed</span>
+                  </div>
+                  <h3 className="text-xl sm:text-2xl font-extrabold text-[#0B2450] tracking-tight [text-wrap:balance]">
+                    The 10-Second Chairside Script: Turn "Too Expensive" Into Closed Cases
+                  </h3>
+                  <p className="text-xs sm:text-sm text-slate-600 mt-1 [text-wrap:pretty]">
+                    60% of high-ticket dental cases drop off because reception staff don't have a structured answer to upfront price shock. Here is how Clinaza converts resistance instantly:
+                  </p>
+                </div>
+              </div>
+
+              {/* Objection Tabs */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                {OBJECTION_SCRIPTS.map((obj) => (
+                  <button
+                    key={obj.id}
+                    type="button"
+                    onClick={() => setActiveObjection(obj.id)}
+                    className={`p-3 min-h-[48px] rounded-2xl border text-left transition-all cursor-pointer flex flex-col justify-between active:scale-[0.98] ${
+                      activeObjection === obj.id
+                        ? 'bg-[#0B2450] text-white border-[#0B2450] shadow-sm'
+                        : 'bg-slate-50 hover:bg-slate-100 text-slate-700 border-slate-200/80'
+                    }`}
+                  >
+                    <span className={`text-[9.5px] font-extrabold uppercase tracking-wider block mb-1 ${
+                      activeObjection === obj.id ? 'text-emerald-400' : 'text-[#0867E8]'
+                    }`}>
+                      Objection #{obj.id + 1}: {obj.badge}
+                    </span>
+                    <span className="text-xs font-bold line-clamp-2">
+                      "{obj.patientSays.slice(0, 52)}..."
+                    </span>
+                  </button>
+                ))}
+              </div>
+
+              {/* Active Objection Deep-Dive Comparison */}
+              {(() => {
+                const currentObj = OBJECTION_SCRIPTS[activeObjection];
+                return (
+                  <div className="grid grid-cols-1 md:grid-cols-12 gap-4 pt-2">
+                    {/* Left: The Patient Objection & The Expensive Mistake (5 cols) */}
+                    <div className="md:col-span-5 space-y-3">
+                      <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200/80 space-y-2">
+                        <span className="text-[10px] font-extrabold uppercase tracking-wider text-slate-500 block">
+                          Patient Objection at Front Desk
+                        </span>
+                        <p className="text-sm font-bold text-[#0B2450] italic leading-snug">
+                          "{currentObj.patientSays}"
+                        </p>
+                      </div>
+
+                      <div className="bg-rose-50/80 p-4 rounded-2xl border border-rose-200/80 space-y-1.5">
+                        <span className="text-[10px] font-extrabold uppercase tracking-wider text-rose-700 flex items-center gap-1.5">
+                          <X size={12} className="text-rose-600" />
+                          <span>The Costly Front-Desk Mistake</span>
+                        </span>
+                        <p className="text-xs text-rose-900 leading-relaxed">
+                          {currentObj.expensiveMistake}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Right: The Clinaza 10-Second Script & Clinic Upside (7 cols) */}
+                    <div className="md:col-span-7 bg-gradient-to-br from-[#0B2450] to-[#0D3B7A] text-white p-5 sm:p-6 rounded-2xl space-y-4 shadow-md flex flex-col justify-between">
+                      <div className="space-y-2">
+                        <div className="flex items-center justify-between">
+                          <span className="text-[10px] font-extrabold uppercase tracking-widest text-emerald-400 bg-emerald-500/20 px-2.5 py-0.5 rounded-full border border-emerald-500/30">
+                            THE 10-SECOND FRONT-DESK SCRIPT
+                          </span>
+                          <span className="text-[9px] font-semibold text-slate-300">
+                            Say This Verbatim
+                          </span>
+                        </div>
+                        <p className="text-sm sm:text-base font-medium text-white leading-relaxed pt-1 bg-white/10 p-3.5 rounded-xl border border-white/15">
+                          "{currentObj.clinazaScript}"
+                        </p>
+                      </div>
+
+                      <div className="pt-2 border-t border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
+                        <div className="flex items-center gap-2 text-emerald-300">
+                          <CheckCircle2 size={16} className="text-emerald-400 shrink-0" />
+                          <span className="font-semibold text-[11px] leading-tight">
+                            {currentObj.clinicUpside}
+                          </span>
+                        </div>
+                        <Link
+                          to="/clinic-onboarding"
+                          className="px-3.5 py-2 min-h-[44px] bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-extrabold rounded-xl transition-all shadow-sm shrink-0 flex items-center justify-center gap-1 active:scale-[0.98]"
+                        >
+                          <span>Onboard Clinic &bull; ₹999</span>
+                          <ArrowRight size={13} />
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })()}
             </div>
           </FadeIn>
         </section>
@@ -1993,7 +2344,7 @@ export default function CrmHomepage() {
                     <button
                       type="button"
                       onClick={handleCopySimTemplate}
-                      className="flex-1 py-2.5 min-h-[40px] px-3 bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold rounded-xl transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+                      className="flex-1 py-2.5 min-h-[44px] px-3 bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold rounded-xl transition-all flex items-center justify-center gap-1.5 cursor-pointer active:scale-[0.98]"
                     >
                       {simCopied ? (
                         <>
@@ -2007,10 +2358,21 @@ export default function CrmHomepage() {
                         </>
                       )}
                     </button>
+                    <a
+                      href={`https://api.whatsapp.com/send?text=${encodeURIComponent(
+                        `Namaste ${simPatientName || 'Patient'} ji,\n\nDr. Vikram's team has prepared your treatment plan for *${simTreatment}* at Smile Point Dental Clinic.\n\n*Treatment Total:* ₹${simAmount.toLocaleString('en-IN')}\n*Flexible Monthly EMI:* ₹${simEmi.toLocaleString('en-IN')}/mo (${simTenure} Months)\n\n⚡ *Instant 92-Second Paperless Approval*\nComplete 2-minute verification here:\nhttps://clinaza.in/pay/sp-8842\n\n_Powered by Clinaza × Pine Labs_`
+                      )}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 py-2.5 min-h-[44px] px-3 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-xl transition-all shadow-xs flex items-center justify-center gap-1.5 active:scale-[0.98] cursor-pointer"
+                    >
+                      <MessageSquare size={14} />
+                      <span>Test Send on WhatsApp</span>
+                    </a>
                     <button
                       type="button"
                       onClick={handleLaunchSimPass}
-                      className="flex-1 py-2.5 min-h-[40px] px-3 bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-extrabold rounded-xl transition-all shadow-xs flex items-center justify-center gap-1.5 cursor-pointer"
+                      className="flex-1 py-2.5 min-h-[44px] px-3 bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-extrabold rounded-xl transition-all shadow-xs flex items-center justify-center gap-1.5 cursor-pointer active:scale-[0.98]"
                     >
                       <span>Simulate Patient Tap</span>
                       <ArrowRight size={14} />
@@ -2268,7 +2630,7 @@ export default function CrmHomepage() {
               <div className="absolute left-0 inset-y-0 w-12 sm:w-20 bg-gradient-to-r from-[#F7FAFC] via-[#F7FAFC]/80 to-transparent z-10 pointer-events-none" />
               <div className="absolute right-0 inset-y-0 w-12 sm:w-20 bg-gradient-to-l from-[#F7FAFC] via-[#F7FAFC]/80 to-transparent z-10 pointer-events-none" />
 
-              <div className="flex w-max gap-4 animate-marquee-slow group-hover:[animation-play-state:paused]">
+              <div className="flex w-max gap-4 animate-marquee-slow group-hover:[animation-play-state:paused] focus-within:[animation-play-state:paused] motion-reduce:animate-none">
                 {[
                   // Set 1
                   {
@@ -2543,7 +2905,17 @@ export default function CrmHomepage() {
               </div>
             </div>
 
-            <div className="pt-2 flex flex-wrap items-center justify-center gap-2 text-xs font-bold text-slate-500">
+            {/* Interactive Clinic / Pincode Finder Widget */}
+            <div className="pt-8 max-w-4xl mx-auto w-full">
+              <ClinicCityFinder
+                onCheckEligibility={(cityName) => {
+                  setPatientData((prev) => ({ ...prev, city: cityName }));
+                  setShowEligibilityModal(true);
+                }}
+              />
+            </div>
+
+            <div className="pt-4 flex flex-wrap items-center justify-center gap-2 text-xs font-bold text-slate-500">
               <span>Explore Clinaza partner network in 50+ cities:</span>
               <div className="flex items-center gap-2">
                 {['Patna', 'Delhi', 'Mumbai', 'Bengaluru', 'Hyderabad', 'Pune'].map(c => (
@@ -3140,26 +3512,43 @@ export default function CrmHomepage() {
         </section>
       </main>
 
-      {/* ── Mobile Floating Quick Action Pill (Appears only after scrolling past hero) ── */}
+      {/* ── Mobile & Tablet Sticky Bottom Conversion Bar (< lg) ── */}
       <div 
-        className={`sm:hidden fixed bottom-4 left-4 right-4 z-40 transition-all duration-300 transform ${
-          showMobileFloating ? 'translate-y-0 opacity-100 pointer-events-auto' : 'translate-y-12 opacity-0 pointer-events-none'
-        } flex items-center gap-2 p-1.5 bg-[#0B2450]/95 backdrop-blur-xl border border-white/15 rounded-full shadow-[0_12px_36px_rgba(0,0,0,0.35)]`}
+        className={`lg:hidden fixed bottom-3 inset-x-3 sm:inset-x-6 z-40 transition-all duration-300 transform ${
+          showMobileFloating ? 'translate-y-0 opacity-100 pointer-events-auto' : 'translate-y-16 opacity-0 pointer-events-none'
+        } max-w-lg mx-auto p-2 bg-[#0B2450]/95 backdrop-blur-xl border border-white/15 rounded-2xl shadow-[0_12px_36px_rgba(0,0,0,0.4)] flex items-center justify-between gap-2`}
         style={{ marginBottom: 'env(safe-area-inset-bottom, 0px)' }}
       >
-        <button
-          onClick={() => {
-            trackEvent('click_mobile_floating_eligibility');
-            setShowEligibilityModal(true);
-          }}
-          className="relative overflow-hidden group flex-1 py-3 px-4 bg-[#0867E8] text-white rounded-full text-xs font-black uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-md active:scale-95"
-        >
-          <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-full" aria-hidden="true">
-            <div className="w-16 h-full bg-gradient-to-r from-transparent via-white/35 to-transparent absolute top-0 -left-16 animate-cta-sheen" />
+        <div className="hidden min-[390px]:flex items-center gap-1.5 text-white/90 pl-1.5 shrink-0">
+          <ShieldCheck size={14} className="text-[#0867E8]" />
+          <div className="leading-tight">
+            <span className="text-[9px] font-extrabold text-slate-300 block uppercase tracking-wider">Plural &bull; Pine Labs</span>
+            <span className="text-[10px] font-bold text-emerald-400">T+1 Direct Payout</span>
           </div>
-          <ShieldCheck size={15} className="relative z-10" />
-          <span className="relative z-10">Check Patient Eligibility</span>
-        </button>
+        </div>
+
+        <div className="flex items-center gap-1.5 flex-1 justify-end">
+          <button
+            type="button"
+            onClick={() => {
+              trackEvent('click_mobile_floating_eligibility');
+              setShowEligibilityModal(true);
+            }}
+            className="flex-1 min-h-[44px] py-2 px-2.5 bg-white/10 hover:bg-white/15 text-white text-[11px] font-bold rounded-xl transition-all flex items-center justify-center gap-1 active:scale-[0.98] border border-white/10 cursor-pointer"
+          >
+            <ShieldCheck size={13} className="text-[#0867E8]" />
+            <span>Check Eligibility</span>
+          </button>
+
+          <Link
+            to="/clinic-onboarding"
+            onClick={() => trackEvent('click_mobile_floating_onboard')}
+            className="flex-1 min-h-[44px] py-2 px-3 bg-[#0867E8] hover:bg-[#0756C7] text-white text-[11px] font-extrabold uppercase tracking-wide rounded-xl transition-all shadow-md flex items-center justify-center gap-1 active:scale-[0.98] cursor-pointer"
+          >
+            <span>Onboard &bull; ₹999</span>
+            <ArrowRight size={13} />
+          </Link>
+        </div>
       </div>
 
       {/* ── Footer ── */}

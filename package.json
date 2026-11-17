@@ -158,6 +158,7 @@
     "inlineCss": false,
     "include": [
       "/",
+      "/checkout-flow",
       "/dental-implant-loan",
       "/clear-aligners-on-emi",
       "/clinic-onboarding",

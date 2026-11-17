@@ -14,13 +14,27 @@ const ROOT = join(__dirname, '..');
 const DIST = join(ROOT, 'dist');
 const pkg = JSON.parse(readFileSync(join(ROOT, 'package.json'), 'utf-8'));
 const routes = pkg.reactSnap?.include || ['/'];
+
+let metaMap = {};
+try {
+  metaMap = JSON.parse(readFileSync(join(ROOT, 'api', 'meta-map.json'), 'utf-8'));
+} catch {}
+
+const cityNames = {};
+try {
+  const citiesCode = readFileSync(join(ROOT, 'src', 'data', 'cities.ts'), 'utf-8');
+  for (const m of citiesCode.matchAll(/{\s*slug:\s*"([^"]+)",\s*name:\s*"([^"]+)"/g)) {
+    cityNames[m[1]] = m[2];
+  }
+} catch {}
+
 // Allow skipping prerender via SKIP_PRERENDER=1 or PRERENDER=0
 if (process.env.SKIP_PRERENDER === '1' || process.env.PRERENDER === '0') {
   console.log('[prerender] ⏩ Skipping prerender via environment flag.');
   process.exit(0);
 }
 
-const CONCURRENCY = parseInt(process.env.PRERENDER_CONCURRENCY || '6', 10);
+const CONCURRENCY = parseInt(process.env.PRERENDER_CONCURRENCY || '4', 10);
 const waitFor = Math.min(pkg.reactSnap?.waitFor || 1000, 1200);
 const PORT = pkg.reactSnap?.port || 45789;
 
@@ -112,10 +126,73 @@ async function worker() {
 
     try {
       await page.goto(`http://localhost:${PORT}${route}`, { waitUntil: 'domcontentloaded', timeout: 15000 });
+      if (route !== '/') {
+        await page.waitForFunction(
+          () => document.title && !document.title.startsWith('Clinaza — Point-of-Care'),
+          { timeout: 3500 }
+        ).catch(() => {});
+      } else {
+        await page.waitForSelector('#root > *', { timeout: 3500 }).catch(() => {});
+      }
       if (waitFor > 0) {
         await new Promise(r => setTimeout(r, waitFor));
       }
       let html = await page.content();
+      const pageTitle = await page.title();
+      let resolvedTitle = pageTitle;
+      if (!resolvedTitle || resolvedTitle.startsWith('Clinaza — Point-of-Care Patient Financing')) {
+        const cityMatch = route.match(/^\/cities\/([a-z0-9-]+)/i);
+        if (cityMatch) {
+          const cSlug = cityMatch[1];
+          const cName = cityNames[cSlug] || (cSlug.charAt(0).toUpperCase() + cSlug.slice(1));
+          resolvedTitle = cSlug === 'kochi'
+            ? 'Braces & Dental Treatment Cost in Kochi (From ₹1,200/mo) | Clinaza'
+            : `Best Dental Treatment EMI Plans in ${cName} | Clinaza`;
+        } else if (route === '/dental-implant-loan') {
+          resolvedTitle = 'Dental Implant Loan & EMI in India (From ₹2,400/mo)';
+        } else if (route === '/clear-aligners-on-emi') {
+          resolvedTitle = 'Clear Aligners Cost on EMI in India (From ₹2,600/mo)';
+        } else if (route === '/checkout-flow' || route === '/demo/loan') {
+          resolvedTitle = 'Patient EMI Checkout Flow & Infrastructure Demo | Clinaza';
+        } else if (metaMap[route]?.title) {
+          resolvedTitle = metaMap[route].title;
+        }
+      }
+      if (resolvedTitle) {
+        html = html.replace(/<title>[^<]*<\/title>/i, `<title>${resolvedTitle}</title>`);
+      }
+
+      let resolvedDesc = null;
+      try {
+        const metaDesc = await page.$eval('meta[name="description"]', (el) => el.getAttribute('content'));
+        if (metaDesc && !metaDesc.startsWith('Enable instant 2-minute paperless patient')) {
+          resolvedDesc = metaDesc;
+        }
+      } catch {}
+
+      if (!resolvedDesc) {
+        const cityMatch = route.match(/^\/cities\/([a-z0-9-]+)/i);
+        if (cityMatch) {
+          const cSlug = cityMatch[1];
+          const cName = cityNames[cSlug] || (cSlug.charAt(0).toUpperCase() + cSlug.slice(1));
+          resolvedDesc = cSlug === 'kochi'
+            ? 'Compare braces cost in Kochi (₹18K–₹50K) & dental implants on EMI. Explore easy monthly financing (₹30K–₹3L) at top clinics with 2-min instant approval.'
+            : `Compare dental costs in ${cName}. Explore easy EMI options (₹30K–₹3L) for dental implants, braces, aligners & RCT at top clinics. Fast 2-min approval.`;
+        } else if (route === '/dental-implant-loan') {
+          resolvedDesc = 'Get a dental implant loan in India. Finance single tooth, multiple implants & All-on-4 with flexible monthly EMI from ~11.5% p.a. 2-min digital approval.';
+        } else if (route === '/clear-aligners-on-emi') {
+          resolvedDesc = 'Looking for clear aligners on EMI in India? Compare Invisalign, Flash & Toothsi alternatives with flexible monthly financing from ~11.5% p.a. 2-min approval.';
+        } else if (route === '/checkout-flow' || route === '/demo/loan') {
+          resolvedDesc = 'Experience Clinaza’s 2-minute paperless patient financing checkout: multi-lender approval, 1-click UPI autopay, and T+1 direct clinic settlement.';
+        } else if (metaMap[route]?.desc) {
+          resolvedDesc = metaMap[route].desc;
+        }
+      }
+
+      if (resolvedDesc) {
+        html = html.replace(/<meta\s+name=["']description["']\s+content="[^"]*"/i, `<meta name="description" content="${resolvedDesc.replace(/"/g, '&quot;')}"`);
+      }
+
       if (!/rel=["']canonical["']/i.test(html)) {
         const canonicalUrl = `https://www.clinaza.in${route === '/' ? '/' : route.replace(/\/$/, '')}`;
         html = html.replace(/<\/head>/i, `<link rel="canonical" href="${canonicalUrl}" />\n</head>`);
@@ -137,7 +214,9 @@ async function worker() {
     }
   }
 
-  await page.close();
+  try {
+    await page.close();
+  } catch {}
 }
 
 console.log(`[prerender] Running ${CONCURRENCY} parallel workers across ${routes.length} routes...`);
@@ -145,7 +224,11 @@ const startTime = Date.now();
 const workers = Array.from({ length: CONCURRENCY }, () => worker());
 await Promise.all(workers);
 
-await browser.close();
-preview.kill();
+try {
+  await browser.close();
+} catch {}
+try {
+  preview.kill();
+} catch {}
 const elapsedSec = ((Date.now() - startTime) / 1000).toFixed(1);
 console.log(`[prerender] ⚡ Finished in ${elapsedSec}s: ${success} succeeded, ${failed} failed out of ${routes.length} routes`);

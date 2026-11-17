@@ -25,7 +25,8 @@ import {
   RefreshCw,
   Wallet,
   Building2,
-  CheckCheck
+  Sliders,
+  ChevronDown
 } from 'lucide-react';
 import { toast } from 'sonner';
 
@@ -38,6 +39,9 @@ const PROCEDURES = [
 ];
 
 export default function LoanDemoPage() {
+  // Mobile View Switcher: 'phone' or 'controls'
+  const [mobileTab, setMobileTab] = useState<'phone' | 'controls'>('phone');
+
   // Interactive Simulator state
   const [selectedProcId, setSelectedProcId] = useState('aligners');
   const [customAmount, setCustomAmount] = useState(75000);
@@ -70,7 +74,7 @@ export default function LoanDemoPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] text-slate-900 flex flex-col font-sans selection:bg-[#0867E8] selection:text-white">
+    <div className="min-h-screen bg-[#F8FAFC] text-slate-900 flex flex-col font-sans selection:bg-[#0867E8] selection:text-white pb-20 sm:pb-0">
       <SEOHead
         title="Patient EMI Checkout Flow & Interactive Simulator | Clinaza"
         description="Experience Clinaza's 2-minute paperless patient financing checkout: 76.4% multi-lender approval, 1-click UPI autopay, and T+1 direct clinic settlement."
@@ -79,32 +83,32 @@ export default function LoanDemoPage() {
       />
 
       {/* Top Professional Header */}
-      <header className="border-b border-slate-200/80 bg-white/95 backdrop-blur-md sticky top-0 z-40 px-4 sm:px-8 py-3.5 flex items-center justify-between shadow-xs">
-        <Link to="/" className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-xl bg-[#0867E8] text-white flex items-center justify-center font-black text-base shadow-md shadow-blue-500/20">
+      <header className="border-b border-slate-200/80 bg-white/95 backdrop-blur-md sticky top-0 z-40 px-3.5 sm:px-8 py-3 flex items-center justify-between shadow-xs">
+        <Link to="/" className="flex items-center gap-2.5">
+          <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-[#0867E8] text-white flex items-center justify-center font-black text-sm sm:text-base shadow-md shadow-blue-500/20 shrink-0">
             C
           </div>
           <div className="flex flex-col">
-            <span className="text-sm font-black tracking-tight text-[#0B2450] flex items-center gap-2">
-              CLINAZA <span className="text-[10px] font-bold text-[#0867E8] bg-blue-50 border border-blue-200 px-1.5 py-0.5 rounded-md">CHECKOUT OS</span>
+            <span className="text-xs sm:text-sm font-black tracking-tight text-[#0B2450] flex items-center gap-1.5">
+              CLINAZA <span className="text-[9px] sm:text-[10px] font-bold text-[#0867E8] bg-blue-50 border border-blue-200 px-1 py-0.2 rounded">CHECKOUT OS</span>
             </span>
-            <span className="text-[10px] text-slate-500 font-medium">Point-of-Care Healthcare Financing Network</span>
+            <span className="text-[9px] sm:text-[10px] text-slate-500 font-medium hidden xs:inline">Point-of-Care Healthcare Financing Network</span>
           </div>
         </Link>
 
-        <div className="flex items-center gap-2 sm:gap-3">
+        <div className="flex items-center gap-2">
           <button
             type="button"
             onClick={handleShare}
-            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 border border-emerald-300 text-emerald-800 text-xs font-bold transition-all shadow-xs"
+            className="inline-flex items-center gap-1.5 px-3 py-2 min-h-[44px] rounded-xl bg-emerald-50 hover:bg-emerald-100 border border-emerald-300 text-emerald-800 text-xs font-bold transition-all shadow-xs"
             title="Share with Clinic Reception"
           >
-            <Share2 size={13} className="text-emerald-600" />
-            <span className="hidden sm:inline">Share with Reception</span>
+            <Share2 size={14} className="text-emerald-600 shrink-0" />
+            <span className="hidden md:inline">Share with Reception</span>
           </button>
           <Link
             to="/clinic-kyc"
-            className="px-4 py-2 bg-[#0867E8] hover:bg-[#0756c7] text-white rounded-xl text-xs font-black transition-all shadow-md shadow-blue-500/20 flex items-center gap-1.5 active:scale-95"
+            className="px-3.5 sm:px-4 py-2 min-h-[44px] bg-[#0867E8] hover:bg-[#0756c7] text-white rounded-xl text-xs font-black transition-all shadow-md shadow-blue-500/20 flex items-center gap-1 active:scale-95 shrink-0"
           >
             <span>Onboard Clinic</span>
             <ArrowRight size={13} />
@@ -113,62 +117,92 @@ export default function LoanDemoPage() {
       </header>
 
       {/* Hero Showcase Section */}
-      <section className="px-4 sm:px-6 pt-10 pb-6 max-w-6xl mx-auto w-full text-center space-y-4">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-200 text-[#0867E8] text-xs font-extrabold uppercase tracking-wider shadow-xs">
-          <Sparkles size={13} className="text-blue-600 animate-pulse" />
-          <span>Interactive Patient Checkout & Infrastructure Walkthrough</span>
+      <section className="px-4 sm:px-6 pt-8 pb-4 max-w-6xl mx-auto w-full text-center space-y-3.5">
+        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-50 border border-blue-200 text-[#0867E8] text-[11px] sm:text-xs font-extrabold uppercase tracking-wider shadow-xs">
+          <Sparkles size={13} className="text-blue-600 animate-pulse shrink-0" />
+          <span>Interactive Patient Checkout &amp; Infrastructure Walkthrough</span>
         </div>
 
-        <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-[#0B2450] max-w-4xl mx-auto leading-tight">
+        <h1 className="text-2xl xs:text-3xl sm:text-5xl font-black tracking-tight text-[#0B2450] max-w-4xl mx-auto leading-tight">
           How Patient EMI Financing Works <br className="hidden sm:block" />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0867E8] via-[#0284c7] to-[#0f766e]">
             At Your Dental Clinic Front Desk
           </span>
         </h1>
 
-        <p className="text-sm sm:text-base text-slate-600 max-w-2xl mx-auto leading-relaxed">
+        <p className="text-xs sm:text-base text-slate-600 max-w-2xl mx-auto leading-relaxed">
           Zero clinic credit risk, guaranteed T+1 direct settlement to your current account, and instant multi-lender paperless approval in under 120 seconds.
         </p>
 
         {/* ── POINT 3: HARD PRODUCTION BENCHMARKS TICKER ── */}
         <div className="pt-2 grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 max-w-4xl mx-auto text-left">
-          <div className="bg-white border border-slate-200/90 rounded-2xl p-3.5 shadow-xs">
+          <div className="bg-white border border-slate-200/90 rounded-2xl p-3 sm:p-3.5 shadow-xs">
             <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider block">Multi-Lender Match</span>
-            <div className="text-xl sm:text-2xl font-black text-emerald-600 font-mono mt-0.5">76.4%</div>
+            <div className="text-lg sm:text-2xl font-black text-emerald-600 font-mono mt-0.5">76.4%</div>
             <span className="text-[10px] text-slate-500">Platform approval benchmark</span>
           </div>
 
-          <div className="bg-white border border-slate-200/90 rounded-2xl p-3.5 shadow-xs">
+          <div className="bg-white border border-slate-200/90 rounded-2xl p-3 sm:p-3.5 shadow-xs">
             <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider block">Pre-Approved ETB</span>
-            <div className="text-xl sm:text-2xl font-black text-[#0867E8] font-mono mt-0.5">&lt; 60s</div>
+            <div className="text-lg sm:text-2xl font-black text-[#0867E8] font-mono mt-0.5">&lt; 60s</div>
             <span className="text-[10px] text-slate-500">Instant OTP verification</span>
           </div>
 
-          <div className="bg-white border border-slate-200/90 rounded-2xl p-3.5 shadow-xs">
+          <div className="bg-white border border-slate-200/90 rounded-2xl p-3 sm:p-3.5 shadow-xs">
             <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider block">Approval Uplift</span>
-            <div className="text-xl sm:text-2xl font-black text-purple-600 font-mono mt-0.5">+15% to 20%</div>
+            <div className="text-lg sm:text-2xl font-black text-purple-600 font-mono mt-0.5">+15% to 20%</div>
             <span className="text-[10px] text-slate-500">Over single-lender setups</span>
           </div>
 
-          <div className="bg-white border border-slate-200/90 rounded-2xl p-3.5 shadow-xs">
+          <div className="bg-white border border-slate-200/90 rounded-2xl p-3 sm:p-3.5 shadow-xs">
             <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider block">Doctor Recourse</span>
-            <div className="text-xl sm:text-2xl font-black text-emerald-700 font-mono mt-0.5">₹0 Risk</div>
+            <div className="text-lg sm:text-2xl font-black text-emerald-700 font-mono mt-0.5">₹0 Risk</div>
             <span className="text-[10px] text-slate-500">100% Non-recourse T+1 payout</span>
+          </div>
+        </div>
+
+        {/* ── Mobile Tab Segmented Switcher (Visible only on < lg) ── */}
+        <div className="lg:hidden pt-3 flex justify-center">
+          <div className="p-1 bg-slate-200/80 rounded-2xl flex items-center gap-1 border border-slate-300/80 shadow-inner w-full max-w-sm">
+            <button
+              type="button"
+              onClick={() => setMobileTab('phone')}
+              className={`flex-1 py-2.5 min-h-[44px] rounded-xl text-xs font-black transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
+                mobileTab === 'phone'
+                  ? 'bg-white text-[#0B2450] shadow-sm border border-slate-200/80'
+                  : 'text-slate-600 hover:text-slate-900'
+              }`}
+            >
+              <Smartphone size={15} className={mobileTab === 'phone' ? 'text-[#0867E8]' : 'text-slate-400'} />
+              <span>Patient Screen</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => setMobileTab('controls')}
+              className={`flex-1 py-2.5 min-h-[44px] rounded-xl text-xs font-black transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
+                mobileTab === 'controls'
+                  ? 'bg-white text-[#0B2450] shadow-sm border border-slate-200/80'
+                  : 'text-slate-600 hover:text-slate-900'
+              }`}
+            >
+              <Sliders size={15} className={mobileTab === 'controls' ? 'text-[#0867E8]' : 'text-slate-400'} />
+              <span>Clinic Controls &amp; Script</span>
+            </button>
           </div>
         </div>
       </section>
 
       {/* Main Experience Grid */}
-      <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 pb-20 space-y-12">
+      <main className="flex-1 max-w-6xl w-full mx-auto px-3.5 sm:px-6 pb-16 space-y-10 sm:space-y-12">
 
         {/* ── 1. INTERACTIVE SPLIT-SCREEN SIMULATOR ── */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start animate-in fade-in duration-300">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start animate-in fade-in duration-300">
           
           {/* Left Column (7 cols): Front-Desk Control Center & Case Economics */}
-          <div className="lg:col-span-7 space-y-6">
+          <div className={`lg:col-span-7 space-y-5 sm:space-y-6 ${mobileTab === 'controls' ? 'block' : 'hidden lg:block'}`}>
             
             {/* ── POINT 5: MULTI-MODALITY PAYMENT MODES SWITCHER ── */}
-            <div className="bg-white border border-slate-200 rounded-3xl p-5 sm:p-6 shadow-sm space-y-3">
+            <div className="bg-white border border-slate-200 rounded-3xl p-4 sm:p-6 shadow-sm space-y-3">
               <div className="flex items-center justify-between border-b border-slate-100 pb-3">
                 <span className="text-[10px] font-black text-[#0867E8] uppercase tracking-widest block">
                   FULL AFFORDABILITY SPECTRUM
@@ -192,7 +226,7 @@ export default function LoanDemoPage() {
                       key={mode.id}
                       type="button"
                       onClick={() => setSelectedPaymentModality(mode.id as any)}
-                      className={`p-2.5 rounded-2xl border text-left transition-all cursor-pointer flex flex-col justify-between gap-1 ${
+                      className={`p-2.5 min-h-[52px] rounded-2xl border text-left transition-all cursor-pointer flex flex-col justify-between gap-1 active:scale-98 ${
                         isSelected
                           ? 'bg-blue-50/80 border-[#0867E8] shadow-xs'
                           : 'bg-slate-50/70 border-slate-200 hover:border-slate-300'
@@ -212,22 +246,22 @@ export default function LoanDemoPage() {
             </div>
 
             {/* Card 1: Procedure Selector */}
-            <div className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-7 shadow-sm space-y-5">
-              <div className="flex items-center justify-between border-b border-slate-100 pb-4">
+            <div className="bg-white border border-slate-200 rounded-3xl p-4 sm:p-7 shadow-sm space-y-4 sm:space-y-5">
+              <div className="flex items-center justify-between border-b border-slate-100 pb-3.5">
                 <div>
                   <span className="text-[10px] font-black text-[#0867E8] uppercase tracking-widest block">
                     CHAIRSIDE CASE CONFIGURATOR
                   </span>
-                  <h3 className="text-xl font-extrabold text-[#0B2450] mt-0.5">
+                  <h3 className="text-lg sm:text-xl font-extrabold text-[#0B2450] mt-0.5">
                     1. Select Dental Treatment Case
                   </h3>
                 </div>
-                <span className="text-xs font-mono text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded-lg font-bold">
+                <span className="text-xs font-mono text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-lg font-bold">
                   T+1 Direct Payout
                 </span>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-2.5">
                 {PROCEDURES.map((proc) => {
                   const isSelected = selectedProcId === proc.id;
                   return (
@@ -239,7 +273,7 @@ export default function LoanDemoPage() {
                         setCustomAmount(proc.amount);
                         setSelectedTenure(proc.tenure);
                       }}
-                      className={`p-3.5 rounded-2xl border text-left transition-all cursor-pointer flex flex-col justify-between gap-2 ${
+                      className={`p-3 min-h-[54px] rounded-2xl border text-left transition-all cursor-pointer flex flex-col justify-between gap-1.5 active:scale-98 ${
                         isSelected
                           ? 'bg-blue-50/70 border-[#0867E8] shadow-xs'
                           : 'bg-slate-50/60 border-slate-200 hover:border-slate-300 hover:bg-slate-50'
@@ -253,8 +287,8 @@ export default function LoanDemoPage() {
                           {proc.tag}
                         </span>
                       </div>
-                      <div className="flex items-baseline justify-between pt-1">
-                        <span className="text-base font-black text-[#0B2450] font-mono">
+                      <div className="flex items-baseline justify-between pt-0.5">
+                        <span className="text-sm sm:text-base font-black text-[#0B2450] font-mono">
                           ₹{proc.amount.toLocaleString('en-IN')}
                         </span>
                         <span className="text-[11px] font-bold text-emerald-600">
@@ -267,10 +301,10 @@ export default function LoanDemoPage() {
               </div>
 
               {/* Custom Amount Slider */}
-              <div className="p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-2">
+              <div className="p-3.5 sm:p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-2">
                 <div className="flex justify-between items-center text-xs">
                   <span className="font-bold text-slate-700">Or Slide Custom Treatment Cost:</span>
-                  <span className="text-base font-black text-[#0867E8] font-mono">
+                  <span className="text-sm sm:text-base font-black text-[#0867E8] font-mono">
                     ₹{customAmount.toLocaleString('en-IN')}
                   </span>
                 </div>
@@ -281,7 +315,7 @@ export default function LoanDemoPage() {
                   step={5000}
                   value={customAmount}
                   onChange={(e) => setCustomAmount(Number(e.target.value))}
-                  className="w-full accent-[#0867E8] cursor-pointer"
+                  className="w-full accent-[#0867E8] cursor-pointer h-2"
                 />
                 <div className="flex justify-between text-[10px] text-slate-400 font-mono">
                   <span>₹15,000</span>
@@ -291,36 +325,36 @@ export default function LoanDemoPage() {
               </div>
 
               {/* Live Settlement & Non-Recourse Guarantee Box */}
-              <div className="p-4 bg-gradient-to-r from-emerald-50/80 to-blue-50/50 border border-emerald-200/80 rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div className="p-3.5 sm:p-4 bg-gradient-to-r from-emerald-50/80 to-blue-50/50 border border-emerald-200/80 rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 <div>
                   <span className="text-[10px] font-extrabold text-emerald-800 uppercase tracking-widest block">
                     DOCTOR SETTLEMENT BREAKDOWN
                   </span>
                   <div className="flex items-baseline gap-2 mt-0.5">
-                    <span className="text-2xl font-black text-[#0B2450] font-mono">
+                    <span className="text-xl sm:text-2xl font-black text-[#0B2450] font-mono">
                       ₹{customAmount.toLocaleString('en-IN')}
                     </span>
-                    <span className="text-xs font-bold text-emerald-700 bg-emerald-100/80 px-2 py-0.5 rounded-md">
+                    <span className="text-[11px] font-bold text-emerald-700 bg-emerald-100/80 px-2 py-0.5 rounded-md">
                       Direct Current Account
                     </span>
                   </div>
-                  <span className="text-xs text-slate-500 block mt-0.5">
+                  <span className="text-[11px] text-slate-500 block mt-0.5">
                     Settles T+1 • Zero Default Risk to Clinic • Bank manages collections
                   </span>
                 </div>
 
-                <div className="bg-white border border-emerald-300 rounded-xl px-3.5 py-2 text-right shadow-xs shrink-0">
-                  <span className="text-[10px] text-slate-500 uppercase block font-bold">Clinic Recourse</span>
+                <div className="bg-white border border-emerald-300 rounded-xl px-3 py-1.5 sm:px-3.5 sm:py-2 text-left sm:text-right shadow-xs shrink-0 flex items-center sm:block justify-between">
+                  <span className="text-[10px] text-slate-500 uppercase font-bold sm:block">Clinic Recourse</span>
                   <span className="text-xs font-black text-emerald-700">₹0 (Zero Risk)</span>
                 </div>
               </div>
             </div>
 
             {/* Card 2: The 10-Second Chairside Script (Doctor Objection Handling) */}
-            <div className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-7 shadow-sm space-y-4">
+            <div className="bg-white border border-slate-200 rounded-3xl p-4 sm:p-7 shadow-sm space-y-3 sm:space-y-4">
               <div className="flex items-center gap-2 text-[#0867E8]">
                 <MessageSquare size={18} />
-                <h4 className="text-base font-extrabold text-[#0B2450]">
+                <h4 className="text-sm sm:text-base font-extrabold text-[#0B2450]">
                   The 10-Second Chairside Closing Script
                 </h4>
               </div>
@@ -328,22 +362,22 @@ export default function LoanDemoPage() {
                 When a patient hesitates at high treatment quotes, train your doctor and reception to use this exact 2-sentence script:
               </p>
 
-              <div className="space-y-3 bg-slate-50 border border-slate-200 rounded-2xl p-4 text-xs">
-                <div className="flex items-start gap-2.5">
-                  <span className="font-black text-[#0867E8] shrink-0 bg-blue-100 px-2 py-0.5 rounded-md">Doctor:</span>
-                  <p className="text-slate-800 font-medium italic leading-relaxed">
+              <div className="space-y-3 bg-slate-50 border border-slate-200 rounded-2xl p-3 sm:p-4 text-xs">
+                <div className="flex items-start gap-2 sm:gap-2.5">
+                  <span className="font-black text-[#0867E8] shrink-0 bg-blue-100 px-1.5 py-0.5 rounded text-[11px]">Doctor:</span>
+                  <p className="text-slate-800 font-medium italic leading-relaxed text-[11px] sm:text-xs">
                     "Rahul, the complete treatment is ₹{customAmount.toLocaleString('en-IN')}. Would you prefer paying in full today, or should we set up an easy monthly EMI of around ₹{calculatedEmi.toLocaleString('en-IN')}/mo on your phone in 2 minutes?"
                   </p>
                 </div>
-                <div className="flex items-start gap-2.5 pt-1 border-t border-slate-200">
-                  <span className="font-black text-emerald-700 shrink-0 bg-emerald-100 px-2 py-0.5 rounded-md">Patient:</span>
-                  <p className="text-slate-800 font-medium italic leading-relaxed">
+                <div className="flex items-start gap-2 sm:gap-2.5 pt-1 border-t border-slate-200">
+                  <span className="font-black text-emerald-700 shrink-0 bg-emerald-100 px-1.5 py-0.5 rounded text-[11px]">Patient:</span>
+                  <p className="text-slate-800 font-medium italic leading-relaxed text-[11px] sm:text-xs">
                     "Wait doctor, I can do ₹{calculatedEmi.toLocaleString('en-IN')}/mo without a credit card?"
                   </p>
                 </div>
-                <div className="flex items-start gap-2.5 pt-1 border-t border-slate-200">
-                  <span className="font-black text-[#0867E8] shrink-0 bg-blue-100 px-2 py-0.5 rounded-md">Doctor:</span>
-                  <p className="text-slate-800 font-medium italic leading-relaxed">
+                <div className="flex items-start gap-2 sm:gap-2.5 pt-1 border-t border-slate-200">
+                  <span className="font-black text-[#0867E8] shrink-0 bg-blue-100 px-1.5 py-0.5 rounded text-[11px]">Doctor:</span>
+                  <p className="text-slate-800 font-medium italic leading-relaxed text-[11px] sm:text-xs">
                     "Yes, our front desk sends a secure link to your WhatsApp right now. You verify your Aadhaar OTP, approve in Google Pay or PhonePe, and we start your procedure today."
                   </p>
                 </div>
@@ -356,11 +390,11 @@ export default function LoanDemoPage() {
             </div>
 
             {/* Card 3: Step-by-Step Stage Navigator */}
-            <div className="bg-white border border-slate-200 rounded-3xl p-5 shadow-sm space-y-3">
+            <div className="bg-white border border-slate-200 rounded-3xl p-4 sm:p-5 shadow-sm space-y-3">
               <span className="text-[10px] font-black text-slate-400 uppercase tracking-wider block">
-                FAST-FORWARD MOBILE SCREEN ON THE RIGHT:
+                FAST-FORWARD MOBILE SCREEN:
               </span>
-              <div className="grid grid-cols-5 gap-1.5">
+              <div className="grid grid-cols-5 gap-1 sm:gap-1.5">
                 {[
                   { s: 1, label: '1. WhatsApp' },
                   { s: 2, label: '2. Lenders' },
@@ -371,49 +405,80 @@ export default function LoanDemoPage() {
                   <button
                     key={item.s}
                     type="button"
-                    onClick={() => setSimulatorStep(item.s as any)}
-                    className={`py-2 px-1 text-center rounded-xl border text-[11px] font-extrabold transition-all cursor-pointer ${
+                    onClick={() => {
+                      setSimulatorStep(item.s as any);
+                      setMobileTab('phone');
+                    }}
+                    className={`py-2 px-1 min-h-[44px] text-center rounded-xl border text-[10px] sm:text-[11px] font-extrabold transition-all cursor-pointer flex items-center justify-center ${
                       simulatorStep === item.s
                         ? 'bg-[#0867E8] text-white border-[#0867E8] shadow-sm'
                         : 'bg-slate-50 text-slate-600 border-slate-200 hover:border-slate-300'
                     }`}
                   >
-                    {item.label}
+                    <span>{item.label}</span>
                   </button>
                 ))}
               </div>
             </div>
           </div>
 
-          {/* Right Column (5 cols): Realistic iPhone 16 Device Frame */}
-          <div className="lg:col-span-5 flex flex-col items-center">
-            <div className="sticky top-20 w-full max-w-[360px]">
+          {/* Right Column (5 cols): Realistic iPhone 16 Device Frame (Full-width responsive on mobile) */}
+          <div className={`lg:col-span-5 flex flex-col items-center ${mobileTab === 'phone' ? 'block' : 'hidden lg:block'}`}>
+            <div className="sticky top-20 w-full max-w-[360px] mx-auto">
               
+              {/* Quick Case Switcher Strip on Mobile */}
+              <div className="lg:hidden mb-3 bg-white border border-slate-200 rounded-2xl p-2.5 shadow-xs space-y-1.5">
+                <div className="flex items-center justify-between text-[11px]">
+                  <span className="text-slate-500 font-bold">Selected Case:</span>
+                  <span className="font-extrabold text-[#0867E8]">{selectedProcedure.name}</span>
+                </div>
+                <div className="flex gap-1.5 overflow-x-auto pb-1 no-scrollbar">
+                  {PROCEDURES.map((p) => (
+                    <button
+                      key={p.id}
+                      type="button"
+                      onClick={() => {
+                        setSelectedProcId(p.id);
+                        setCustomAmount(p.amount);
+                        setSelectedTenure(p.tenure);
+                      }}
+                      className={`px-2.5 py-1.5 min-h-[38px] rounded-xl text-[10px] font-bold whitespace-nowrap border shrink-0 ${
+                        selectedProcId === p.id
+                          ? 'bg-[#0867E8] text-white border-[#0867E8]'
+                          : 'bg-slate-50 text-slate-600 border-slate-200'
+                      }`}
+                    >
+                      {p.name.split(' ')[0]} (₹{(p.amount/1000).toFixed(0)}k)
+                    </button>
+                  ))}
+                </div>
+              </div>
+
               {/* Device Frame */}
-              <div className="relative bg-[#0F172A] rounded-[52px] p-3.5 shadow-2xl border-[5px] border-[#334155] shadow-slate-900/40">
+              <div className="relative bg-[#0F172A] rounded-3xl sm:rounded-[52px] p-2.5 sm:p-3.5 shadow-2xl border-2 sm:border-[5px] border-[#334155] shadow-slate-900/40">
                 
                 {/* Dynamic Island Notch */}
-                <div className="absolute top-6 left-1/2 -translate-x-1/2 w-28 h-6 bg-black rounded-full z-30 flex items-center justify-between px-2.5">
-                  <div className="w-2.5 h-2.5 rounded-full bg-slate-900 border border-slate-800" />
-                  <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                <div className="absolute top-5 sm:top-6 left-1/2 -translate-x-1/2 w-24 sm:w-28 h-5 sm:h-6 bg-black rounded-full z-30 flex items-center justify-between px-2 sm:px-2.5">
+                  <div className="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-slate-900 border border-slate-800" />
+                  <div className="w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full bg-emerald-500 animate-pulse" />
                 </div>
 
                 {/* Device Screen Content */}
-                <div className="bg-white rounded-[40px] overflow-hidden min-h-[580px] flex flex-col justify-between text-slate-900 relative">
+                <div className="bg-white rounded-2xl sm:rounded-[40px] overflow-hidden min-h-[550px] sm:min-h-[580px] flex flex-col justify-between text-slate-900 relative">
                   
                   {/* iOS Status Bar */}
-                  <div className="pt-3 px-6 pb-2 flex justify-between items-center text-[11px] font-bold text-slate-800 border-b border-slate-100 bg-white">
+                  <div className="pt-2.5 sm:pt-3 px-5 sm:px-6 pb-2 flex justify-between items-center text-[10px] sm:text-[11px] font-bold text-slate-800 border-b border-slate-100 bg-white">
                     <span>9:41</span>
                     <div className="flex items-center gap-1.5">
                       <span className="text-[10px] font-mono">5G</span>
-                      <div className="w-5 h-2.5 border border-slate-800 rounded-sm p-0.5">
+                      <div className="w-4.5 sm:w-5 h-2 sm:h-2.5 border border-slate-800 rounded-sm p-0.5">
                         <div className="w-full h-full bg-slate-800 rounded-xs" />
                       </div>
                     </div>
                   </div>
 
                   {/* App Header */}
-                  <div className="bg-slate-900 text-white px-4 py-3 flex items-center justify-between">
+                  <div className="bg-slate-900 text-white px-3.5 sm:px-4 py-2.5 sm:py-3 flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <div className="w-6 h-6 rounded-lg bg-[#0867E8] text-white flex items-center justify-center font-black text-xs">
                         C
@@ -429,7 +494,7 @@ export default function LoanDemoPage() {
                   </div>
 
                   {/* Dynamic Screen States */}
-                  <div className="p-4 flex-1 flex flex-col justify-between space-y-4">
+                  <div className="p-3.5 sm:p-4 flex-1 flex flex-col justify-between space-y-3.5 sm:space-y-4">
 
                     {/* Screen 1: WhatsApp Dispatch Simulation */}
                     {simulatorStep === 1 && (
@@ -457,7 +522,7 @@ export default function LoanDemoPage() {
                           </div>
                         </div>
 
-                        <div className="p-3 bg-blue-50 border border-blue-200 rounded-xl text-[11px] text-slate-700 space-y-1">
+                        <div className="p-2.5 sm:p-3 bg-blue-50 border border-blue-200 rounded-xl text-[11px] text-slate-700 space-y-1">
                           <div className="font-bold text-[#0B2450] flex items-center gap-1.5">
                             <Shield size={13} className="text-blue-600" />
                             <span>Zero CIBIL Impact Soft Pull</span>
@@ -470,7 +535,7 @@ export default function LoanDemoPage() {
                         <button
                           type="button"
                           onClick={() => setSimulatorStep(2)}
-                          className="w-full py-3 bg-[#0867E8] hover:bg-[#0756c7] text-white font-extrabold text-xs uppercase tracking-wider rounded-xl transition-all shadow-md flex items-center justify-center gap-1.5 cursor-pointer"
+                          className="w-full py-3 min-h-[44px] bg-[#0867E8] hover:bg-[#0756c7] text-white font-extrabold text-xs uppercase tracking-wider rounded-xl transition-all shadow-md flex items-center justify-center gap-1.5 cursor-pointer active:scale-98"
                         >
                           <span>Open EMI Pre-Approval</span>
                           <ChevronRight size={14} />
@@ -514,7 +579,7 @@ export default function LoanDemoPage() {
                               key={i}
                               type="button"
                               onClick={() => setSelectedLender(lender.name)}
-                              className={`w-full p-2.5 rounded-xl border text-left transition-all cursor-pointer flex items-center justify-between ${
+                              className={`w-full p-2.5 min-h-[44px] rounded-xl border text-left transition-all cursor-pointer flex items-center justify-between active:scale-98 ${
                                 selectedLender === lender.name
                                   ? 'bg-blue-50/80 border-[#0867E8] text-[#0B2450] shadow-xs'
                                   : 'bg-white border-slate-200 text-slate-700 hover:border-slate-300'
@@ -534,7 +599,7 @@ export default function LoanDemoPage() {
                         <button
                           type="button"
                           onClick={() => setSimulatorStep(3)}
-                          className="w-full py-3 bg-[#0867E8] hover:bg-[#0756c7] text-white font-extrabold text-xs uppercase tracking-wider rounded-xl transition-all shadow-md flex items-center justify-center gap-1.5 cursor-pointer"
+                          className="w-full py-3 min-h-[44px] bg-[#0867E8] hover:bg-[#0756c7] text-white font-extrabold text-xs uppercase tracking-wider rounded-xl transition-all shadow-md flex items-center justify-center gap-1.5 cursor-pointer active:scale-98"
                         >
                           <span>Choose Repayment Tenure</span>
                           <ChevronRight size={14} />
@@ -554,7 +619,7 @@ export default function LoanDemoPage() {
                           </h5>
                         </div>
 
-                        <div className="p-3 bg-slate-50 border border-slate-200 rounded-2xl flex items-center justify-between text-xs">
+                        <div className="p-2.5 sm:p-3 bg-slate-50 border border-slate-200 rounded-2xl flex items-center justify-between text-xs">
                           <span className="text-slate-500 font-bold">Treatment Amount:</span>
                           <span className="font-black text-[#0B2450] font-mono text-sm">
                             ₹{customAmount.toLocaleString('en-IN')}
@@ -572,9 +637,9 @@ export default function LoanDemoPage() {
                                 key={t}
                                 type="button"
                                 onClick={() => setSelectedTenure(t)}
-                                className={`py-2 rounded-xl text-xs font-bold border transition-all cursor-pointer ${
+                                className={`py-2.5 min-h-[44px] rounded-xl text-xs font-bold border transition-all cursor-pointer flex items-center justify-center active:scale-98 ${
                                   selectedTenure === t
-                                    ? 'bg-[#0867E8] border-[#0867E8] text-white shadow-xs'
+                                    ? 'bg-[#0867E8] border-[#0867E8] text-white shadow-xs font-black'
                                     : 'bg-white border-slate-200 text-slate-700 hover:border-slate-300'
                                 }`}
                               >
@@ -585,7 +650,7 @@ export default function LoanDemoPage() {
                         </div>
 
                         {/* Live Monthly Debit Card */}
-                        <div className="p-3.5 bg-emerald-50 border border-emerald-300 rounded-2xl space-y-1 text-center">
+                        <div className="p-3 bg-emerald-50 border border-emerald-300 rounded-2xl space-y-1 text-center">
                           <span className="text-[10px] font-bold text-emerald-800 uppercase tracking-wider block">
                             Monthly Debit
                           </span>
@@ -600,7 +665,7 @@ export default function LoanDemoPage() {
                         <button
                           type="button"
                           onClick={() => setSimulatorStep(4)}
-                          className="w-full py-3 bg-[#0867E8] hover:bg-[#0756c7] text-white font-extrabold text-xs uppercase tracking-wider rounded-xl transition-all shadow-md flex items-center justify-center gap-1.5 cursor-pointer"
+                          className="w-full py-3 min-h-[44px] bg-[#0867E8] hover:bg-[#0756c7] text-white font-extrabold text-xs uppercase tracking-wider rounded-xl transition-all shadow-md flex items-center justify-center gap-1.5 cursor-pointer active:scale-98"
                         >
                           <span>Setup 1-Click UPI Autopay</span>
                           <ChevronRight size={14} />
@@ -620,7 +685,7 @@ export default function LoanDemoPage() {
                           </h5>
                         </div>
 
-                        <div className="p-3 bg-purple-50 border border-purple-200 rounded-2xl space-y-2 text-xs">
+                        <div className="p-2.5 sm:p-3 bg-purple-50 border border-purple-200 rounded-2xl space-y-1.5 text-xs">
                           <div className="flex justify-between">
                             <span className="text-slate-500">Monthly Debit:</span>
                             <span className="font-bold text-[#0B2450] font-mono">₹{calculatedEmi.toLocaleString('en-IN')}/mo</span>
@@ -635,7 +700,7 @@ export default function LoanDemoPage() {
                           </div>
                         </div>
 
-                        <div className="p-3 bg-white border border-slate-200 rounded-xl text-[11px] text-slate-600 space-y-1">
+                        <div className="p-2.5 sm:p-3 bg-white border border-slate-200 rounded-xl text-[11px] text-slate-600 space-y-1">
                           <div className="font-bold text-slate-900 flex items-center gap-1">
                             <CheckCircle2 size={13} className="text-emerald-600" />
                             <span>Zero Physical Cheques or Paperwork</span>
@@ -648,7 +713,7 @@ export default function LoanDemoPage() {
                         <button
                           type="button"
                           onClick={() => setSimulatorStep(5)}
-                          className="w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-xs uppercase tracking-wider rounded-xl transition-all shadow-md shadow-emerald-600/20 flex items-center justify-center gap-1.5 cursor-pointer"
+                          className="w-full py-3 min-h-[44px] bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-xs uppercase tracking-wider rounded-xl transition-all shadow-md shadow-emerald-600/20 flex items-center justify-center gap-1.5 cursor-pointer active:scale-98"
                         >
                           <CheckCircle2 size={15} />
                           <span>Authorize Mandate with UPI PIN</span>
@@ -672,7 +737,7 @@ export default function LoanDemoPage() {
                           </h5>
                         </div>
 
-                        <div className="p-3 bg-slate-50 border border-slate-200 rounded-2xl text-left space-y-2 text-xs">
+                        <div className="p-2.5 sm:p-3 bg-slate-50 border border-slate-200 rounded-2xl text-left space-y-1.5 text-xs">
                           <div className="flex justify-between">
                             <span className="text-slate-500">Clinic Payout:</span>
                             <span className="font-mono font-black text-emerald-700 text-sm">
@@ -692,7 +757,7 @@ export default function LoanDemoPage() {
                         <button
                           type="button"
                           onClick={() => setSimulatorStep(1)}
-                          className="w-full py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs uppercase tracking-wider rounded-xl transition-all cursor-pointer"
+                          className="w-full py-2.5 min-h-[44px] bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs uppercase tracking-wider rounded-xl transition-all cursor-pointer flex items-center justify-center"
                         >
                           Restart Patient Journey
                         </button>
@@ -703,14 +768,14 @@ export default function LoanDemoPage() {
 
                   {/* Bottom Home Indicator Bar */}
                   <div className="py-2 flex justify-center bg-white">
-                    <div className="w-28 h-1 bg-slate-300 rounded-full" />
+                    <div className="w-24 sm:w-28 h-1 bg-slate-300 rounded-full" />
                   </div>
 
                 </div>
               </div>
 
-              <div className="mt-3 text-center">
-                <span className="text-[11px] text-slate-500 font-medium">
+              <div className="mt-2.5 text-center">
+                <span className="text-[10px] sm:text-[11px] text-slate-500 font-medium">
                   ⚡ 100% Client-side instant simulation • Zero latency
                 </span>
               </div>
@@ -720,12 +785,12 @@ export default function LoanDemoPage() {
         </div>
 
         {/* ── POINT 2: THE MULTI-LENDER BRE & ACCOUNT AGGREGATOR ARCHITECTURE ── */}
-        <div className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-sm space-y-6">
+        <div className="bg-white border border-slate-200 rounded-3xl p-5 sm:p-8 shadow-sm space-y-5 sm:space-y-6">
           <div className="text-center max-w-2xl mx-auto space-y-1.5">
             <span className="text-[10px] font-black text-[#0867E8] uppercase tracking-widest">
               INTELLIGENT ROUTING ENGINE
             </span>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0B2450] tracking-tight">
+            <h2 className="text-xl sm:text-3xl font-extrabold text-[#0B2450] tracking-tight">
               Why Multi-Lender Cascading Drives 76.4% Approvals
             </h2>
             <p className="text-xs sm:text-sm text-slate-600">
@@ -733,10 +798,10 @@ export default function LoanDemoPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-2">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 pt-1">
             
-            <div className="p-5 rounded-2xl bg-blue-50/50 border border-blue-200 space-y-2">
-              <div className="w-9 h-9 rounded-xl bg-blue-100 text-[#0867E8] flex items-center justify-center font-bold text-sm">
+            <div className="p-4 sm:p-5 rounded-2xl bg-blue-50/50 border border-blue-200 space-y-1.5 sm:space-y-2">
+              <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-blue-100 text-[#0867E8] flex items-center justify-center font-bold text-sm">
                 01
               </div>
               <h4 className="font-extrabold text-[#0B2450] text-sm">Soft Bureau Pre-Check</h4>
@@ -745,8 +810,8 @@ export default function LoanDemoPage() {
               </p>
             </div>
 
-            <div className="p-5 rounded-2xl bg-emerald-50/50 border border-emerald-200 space-y-2">
-              <div className="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-sm">
+            <div className="p-4 sm:p-5 rounded-2xl bg-emerald-50/50 border border-emerald-200 space-y-1.5 sm:space-y-2">
+              <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-sm">
                 02
               </div>
               <h4 className="font-extrabold text-[#0B2450] text-sm">BRE-Driven Matching</h4>
@@ -755,8 +820,8 @@ export default function LoanDemoPage() {
               </p>
             </div>
 
-            <div className="p-5 rounded-2xl bg-purple-50/50 border border-purple-200 space-y-2">
-              <div className="w-9 h-9 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center font-bold text-sm">
+            <div className="p-4 sm:p-5 rounded-2xl bg-purple-50/50 border border-purple-200 space-y-1.5 sm:space-y-2">
+              <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center font-bold text-sm">
                 03
               </div>
               <h4 className="font-extrabold text-[#0B2450] text-sm">RBI Account Aggregator</h4>
@@ -765,8 +830,8 @@ export default function LoanDemoPage() {
               </p>
             </div>
 
-            <div className="p-5 rounded-2xl bg-amber-50/50 border border-amber-200 space-y-2">
-              <div className="w-9 h-9 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center font-bold text-sm">
+            <div className="p-4 sm:p-5 rounded-2xl bg-amber-50/50 border border-amber-200 space-y-1.5 sm:space-y-2">
+              <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center font-bold text-sm">
                 04
               </div>
               <h4 className="font-extrabold text-[#0B2450] text-sm">Instant Digital KFS</h4>
@@ -779,12 +844,12 @@ export default function LoanDemoPage() {
         </div>
 
         {/* ── POINT 1: WHY TRADITIONAL EMI FAILS VS CLINAZA ── */}
-        <div className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-sm space-y-6">
+        <div className="bg-white border border-slate-200 rounded-3xl p-5 sm:p-8 shadow-sm space-y-5 sm:space-y-6">
           <div className="text-center max-w-2xl mx-auto space-y-1.5">
             <span className="text-[10px] font-black text-[#0867E8] uppercase tracking-widest">
               THE LAST-MILE DROP-OFF PROBLEM
             </span>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0B2450] tracking-tight">
+            <h2 className="text-xl sm:text-3xl font-extrabold text-[#0B2450] tracking-tight">
               Why Traditional Patient Financing Fails at the Counter
             </h2>
             <p className="text-xs sm:text-sm text-slate-600">
@@ -792,46 +857,46 @@ export default function LoanDemoPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5 sm:gap-4 pt-1">
             
             {/* Pitfall 1 */}
-            <div className="p-5 rounded-2xl bg-rose-50/50 border border-rose-200 space-y-2.5">
-              <div className="w-8 h-8 rounded-xl bg-rose-100 text-rose-700 flex items-center justify-center font-bold text-xs">
+            <div className="p-4 sm:p-5 rounded-2xl bg-rose-50/50 border border-rose-200 space-y-2">
+              <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-rose-100 text-rose-700 flex items-center justify-center font-bold text-xs">
                 ✕
               </div>
               <h4 className="font-extrabold text-[#0B2450] text-sm">Multiple External Redirections</h4>
               <p className="text-xs text-slate-600 leading-relaxed">
                 Patients are bounced between merchant links and third-party bank sites. Slow page loads and expired sessions break the checkout flow chairside.
               </p>
-              <div className="text-[11px] font-bold text-rose-700 bg-white border border-rose-200 p-2 rounded-xl">
+              <div className="text-[10px] sm:text-[11px] font-bold text-rose-700 bg-white border border-rose-200 p-2 rounded-xl">
                 Impact: 45%+ Patient Abandonment
               </div>
             </div>
 
             {/* Pitfall 2 */}
-            <div className="p-5 rounded-2xl bg-rose-50/50 border border-rose-200 space-y-2.5">
-              <div className="w-8 h-8 rounded-xl bg-rose-100 text-rose-700 flex items-center justify-center font-bold text-xs">
+            <div className="p-4 sm:p-5 rounded-2xl bg-rose-50/50 border border-rose-200 space-y-2">
+              <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-rose-100 text-rose-700 flex items-center justify-center font-bold text-xs">
                 ✕
               </div>
               <h4 className="font-extrabold text-[#0B2450] text-sm">Manual PDF Bank Statement Uploads</h4>
               <p className="text-xs text-slate-600 leading-relaxed">
                 Asking a patient to search their email for password-protected PDF bank statements causes instant fatigue. Most patients postpone treatment indefinitely.
               </p>
-              <div className="text-[11px] font-bold text-rose-700 bg-white border border-rose-200 p-2 rounded-xl">
-                Impact: Lost Implant & Aligner Cases
+              <div className="text-[10px] sm:text-[11px] font-bold text-rose-700 bg-white border border-rose-200 p-2 rounded-xl">
+                Impact: Lost Implant &amp; Aligner Cases
               </div>
             </div>
 
             {/* Pitfall 3 */}
-            <div className="p-5 rounded-2xl bg-rose-50/50 border border-rose-200 space-y-2.5">
-              <div className="w-8 h-8 rounded-xl bg-rose-100 text-rose-700 flex items-center justify-center font-bold text-xs">
+            <div className="p-4 sm:p-5 rounded-2xl bg-rose-50/50 border border-rose-200 space-y-2">
+              <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-rose-100 text-rose-700 flex items-center justify-center font-bold text-xs">
                 ✕
               </div>
               <h4 className="font-extrabold text-[#0B2450] text-sm">Narrow Single-Lender Criteria</h4>
               <p className="text-xs text-slate-600 leading-relaxed">
                 Standalone lenders reject any borrower who doesn't fit their narrow credit score box. A rejected patient feels embarrassed and walks away.
               </p>
-              <div className="text-[11px] font-bold text-rose-700 bg-white border border-rose-200 p-2 rounded-xl">
+              <div className="text-[10px] sm:text-[11px] font-bold text-rose-700 bg-white border border-rose-200 p-2 rounded-xl">
                 Impact: 60%+ Hard Rejection Rates
               </div>
             </div>
@@ -839,13 +904,13 @@ export default function LoanDemoPage() {
           </div>
         </div>
 
-        {/* ── POINT 4: COMPLETE COMPETITIVE COMPARISON MATRIX ── */}
-        <div className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-sm space-y-6">
+        {/* ── POINT 4: COMPLETE COMPETITIVE COMPARISON MATRIX (MOBILE-OPTIMIZED) ── */}
+        <div className="bg-white border border-slate-200 rounded-3xl p-4 sm:p-8 shadow-sm space-y-5">
           <div className="text-center max-w-2xl mx-auto space-y-1.5">
             <span className="text-[10px] font-black text-[#0867E8] uppercase tracking-widest">
               COMPETITIVE BENCHMARKS
             </span>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0B2450] tracking-tight">
+            <h2 className="text-xl sm:text-3xl font-extrabold text-[#0B2450] tracking-tight">
               Clinaza vs. Traditional Financing Solutions
             </h2>
             <p className="text-xs sm:text-sm text-slate-600">
@@ -853,50 +918,55 @@ export default function LoanDemoPage() {
             </p>
           </div>
 
-          <div className="overflow-x-auto pt-2">
-            <table className="w-full text-left text-xs border border-slate-200 rounded-2xl overflow-hidden">
+          <div className="flex items-center justify-between text-[11px] text-slate-500 font-bold px-1 sm:hidden">
+            <span>Scroll horizontally to view full matrix</span>
+            <span className="text-[#0867E8]">Swipe ➔</span>
+          </div>
+
+          <div className="overflow-x-auto pb-2 -mx-2 sm:mx-0">
+            <table className="w-full min-w-[560px] text-left text-xs border border-slate-200 rounded-2xl overflow-hidden">
               <thead className="bg-slate-100/90 text-slate-800 font-black">
                 <tr>
-                  <th className="p-3.5 sm:p-4">Financing Capability</th>
-                  <th className="p-3.5 sm:p-4 text-slate-500">Traditional Bank / NBFC Rep</th>
-                  <th className="p-3.5 sm:p-4 text-[#0867E8] bg-blue-50/80">Clinaza Unified Checkout OS</th>
+                  <th className="p-3 sm:p-4">Financing Capability</th>
+                  <th className="p-3 sm:p-4 text-slate-500">Traditional Bank / NBFC Rep</th>
+                  <th className="p-3 sm:p-4 text-[#0867E8] bg-blue-50/80">Clinaza Unified Checkout OS</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-200 text-slate-700">
                 <tr>
-                  <td className="p-3.5 sm:p-4 font-bold text-slate-900">Patient Checkout Journey</td>
-                  <td className="p-3.5 sm:p-4 text-rose-600">Redirected to 3rd-party banking sites</td>
-                  <td className="p-3.5 sm:p-4 font-bold text-emerald-700 bg-blue-50/40">✓ Unified single linear screen (Zero redirects)</td>
+                  <td className="p-3 sm:p-4 font-bold text-slate-900">Patient Checkout Journey</td>
+                  <td className="p-3 sm:p-4 text-rose-600">Redirected to 3rd-party banking sites</td>
+                  <td className="p-3 sm:p-4 font-bold text-emerald-700 bg-blue-50/40">✓ Unified single linear screen (Zero redirects)</td>
                 </tr>
                 <tr>
-                  <td className="p-3.5 sm:p-4 font-bold text-slate-900">Bank Statement Verification</td>
-                  <td className="p-3.5 sm:p-4 text-rose-600">Manual PDF uploads + password friction</td>
-                  <td className="p-3.5 sm:p-4 font-bold text-emerald-700 bg-blue-50/40">✓ Native RBI Account Aggregator (1 OTP)</td>
+                  <td className="p-3 sm:p-4 font-bold text-slate-900">Bank Statement Verification</td>
+                  <td className="p-3 sm:p-4 text-rose-600">Manual PDF uploads + password friction</td>
+                  <td className="p-3 sm:p-4 font-bold text-emerald-700 bg-blue-50/40">✓ Native RBI Account Aggregator (1 OTP)</td>
                 </tr>
                 <tr>
-                  <td className="p-3.5 sm:p-4 font-bold text-slate-900">Identity &amp; KYC</td>
-                  <td className="p-3.5 sm:p-4 text-slate-500">Repeated per lender with paperwork</td>
-                  <td className="p-3.5 sm:p-4 font-bold text-emerald-700 bg-blue-50/40">✓ 100% Digital One-Time Aadhaar e-KYC</td>
+                  <td className="p-3 sm:p-4 font-bold text-slate-900">Identity &amp; KYC</td>
+                  <td className="p-3 sm:p-4 text-slate-500">Repeated per lender with paperwork</td>
+                  <td className="p-3 sm:p-4 font-bold text-emerald-700 bg-blue-50/40">✓ 100% Digital One-Time Aadhaar e-KYC</td>
                 </tr>
                 <tr>
-                  <td className="p-3.5 sm:p-4 font-bold text-slate-900">Lender Network Architecture</td>
-                  <td className="p-3.5 sm:p-4 text-slate-500">Single lender (rejects 60%+ applicants)</td>
-                  <td className="p-3.5 sm:p-4 font-bold text-emerald-700 bg-blue-50/40">✓ BRE Cascading Grid (Piramal, Tata, Bajaj, L&amp;T)</td>
+                  <td className="p-3 sm:p-4 font-bold text-slate-900">Lender Network Architecture</td>
+                  <td className="p-3 sm:p-4 text-slate-500">Single lender (rejects 60%+ applicants)</td>
+                  <td className="p-3 sm:p-4 font-bold text-emerald-700 bg-blue-50/40">✓ BRE Cascading Grid (Piramal, Tata, Bajaj, L&amp;T)</td>
                 </tr>
                 <tr>
-                  <td className="p-3.5 sm:p-4 font-bold text-slate-900">Approval Rate Benchmark</td>
-                  <td className="p-3.5 sm:p-4 text-slate-500">35% – 42% single-shot</td>
-                  <td className="p-3.5 sm:p-4 font-black text-[#0867E8] bg-blue-50/40">✓ 76.4% Multi-Lender Match</td>
+                  <td className="p-3 sm:p-4 font-bold text-slate-900">Approval Rate Benchmark</td>
+                  <td className="p-3 sm:p-4 text-slate-500">35% – 42% single-shot</td>
+                  <td className="p-3 sm:p-4 font-black text-[#0867E8] bg-blue-50/40">✓ 76.4% Multi-Lender Match</td>
                 </tr>
                 <tr>
-                  <td className="p-3.5 sm:p-4 font-bold text-slate-900">Hardware &amp; Machine Rental</td>
-                  <td className="p-3.5 sm:p-4 text-slate-500">₹600–₹1,200/mo POS machine rental &amp; deposit</td>
-                  <td className="p-3.5 sm:p-4 font-bold text-emerald-700 bg-blue-50/40">✓ ₹0 Hardware (Counter QR &amp; WhatsApp Links)</td>
+                  <td className="p-3 sm:p-4 font-bold text-slate-900">Hardware &amp; Machine Rental</td>
+                  <td className="p-3 sm:p-4 text-slate-500">₹600–₹1,200/mo POS machine rental &amp; deposit</td>
+                  <td className="p-3 sm:p-4 font-bold text-emerald-700 bg-blue-50/40">✓ ₹0 Hardware (Counter QR &amp; WhatsApp Links)</td>
                 </tr>
                 <tr>
-                  <td className="p-3.5 sm:p-4 font-bold text-slate-900">Clinic Default Recourse</td>
-                  <td className="p-3.5 sm:p-4 text-slate-500">Collection follow-ups &amp; bad clinic debt</td>
-                  <td className="p-3.5 sm:p-4 font-bold text-emerald-700 bg-blue-50/40">✓ 100% Non-Recourse (T+1 Guaranteed Settlement)</td>
+                  <td className="p-3 sm:p-4 font-bold text-slate-900">Clinic Default Recourse</td>
+                  <td className="p-3 sm:p-4 text-slate-500">Collection follow-ups &amp; bad clinic debt</td>
+                  <td className="p-3 sm:p-4 font-bold text-emerald-700 bg-blue-50/40">✓ 100% Non-Recourse (T+1 Guaranteed Settlement)</td>
                 </tr>
               </tbody>
             </table>
@@ -904,8 +974,8 @@ export default function LoanDemoPage() {
         </div>
 
         {/* ── SECTION: SIMPLE SOLE PROPRIETOR CLINIC ONBOARDING ── */}
-        <div className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-sm space-y-6">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-5">
+        <div className="bg-white border border-slate-200 rounded-3xl p-5 sm:p-8 shadow-sm space-y-5 sm:space-y-6">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 border-b border-slate-100 pb-4 sm:pb-5">
             <div>
               <span className="text-[10px] font-black text-[#0867E8] uppercase tracking-widest block">
                 ZERO CORPORATE COMPLEXITY
@@ -920,94 +990,94 @@ export default function LoanDemoPage() {
 
             <Link
               to="/clinic-kyc"
-              className="px-5 py-2.5 bg-[#0867E8] hover:bg-[#0756c7] text-white rounded-xl text-xs font-black transition-all shadow-md shadow-blue-500/20 flex items-center gap-1.5 shrink-0 self-start sm:self-center"
+              className="px-4 sm:px-5 py-2.5 min-h-[44px] bg-[#0867E8] hover:bg-[#0756c7] text-white rounded-xl text-xs font-black transition-all shadow-md shadow-blue-500/20 flex items-center justify-center gap-1.5 shrink-0 self-start sm:self-center active:scale-95"
             >
               <span>Upload Clinic KYC Online</span>
               <ArrowRight size={13} />
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5 sm:gap-4">
             
             {/* Sole Proprietorship Card (Highlighted) */}
-            <div className="p-6 rounded-2xl bg-blue-50/40 border-2 border-[#0867E8] space-y-4 relative overflow-hidden">
+            <div className="p-4 sm:p-6 rounded-2xl bg-blue-50/40 border-2 border-[#0867E8] space-y-3.5 sm:space-y-4 relative overflow-hidden">
               <div className="inline-block text-[10px] font-black uppercase tracking-wider bg-[#0867E8] text-white px-2.5 py-1 rounded-full">
                 Most Common (95% of Clinics)
               </div>
 
               <div>
-                <h3 className="text-base font-extrabold text-[#0B2450]">
+                <h3 className="text-sm sm:text-base font-extrabold text-[#0B2450]">
                   Individual Doctor / Sole Proprietorship Clinic
                 </h3>
                 <p className="text-xs text-slate-600">Standard practice registered in doctor's individual name.</p>
               </div>
 
-              <div className="space-y-2.5 text-xs text-slate-800">
-                <div className="flex items-start gap-2.5">
+              <div className="space-y-2 sm:space-y-2.5 text-xs text-slate-800">
+                <div className="flex items-start gap-2 sm:gap-2.5">
                   <BadgeCheck size={16} className="text-emerald-600 shrink-0 mt-0.5" />
                   <span><strong>1. Doctor PAN &amp; Aadhaar Card</strong> (Self-attested)</span>
                 </div>
-                <div className="flex items-start gap-2.5">
+                <div className="flex items-start gap-2 sm:gap-2.5">
                   <BadgeCheck size={16} className="text-emerald-600 shrink-0 mt-0.5" />
                   <span><strong>2. Clinic Current Account Cancelled Cheque</strong> (or last 3-month statement)</span>
                 </div>
-                <div className="flex items-start gap-2.5">
+                <div className="flex items-start gap-2 sm:gap-2.5">
                   <BadgeCheck size={16} className="text-emerald-600 shrink-0 mt-0.5" />
                   <span><strong>3. Business Proof</strong> (Any ONE: Udyam MSME / State Dental Council Reg / Shop Act)</span>
                 </div>
-                <div className="flex items-start gap-2.5">
+                <div className="flex items-start gap-2 sm:gap-2.5">
                   <BadgeCheck size={16} className="text-emerald-600 shrink-0 mt-0.5" />
                   <span><strong>4. Signed Plural MAF</strong> (Merchant Application Form)</span>
                 </div>
-                <div className="flex items-start gap-2.5">
+                <div className="flex items-start gap-2 sm:gap-2.5">
                   <BadgeCheck size={16} className="text-emerald-600 shrink-0 mt-0.5" />
                   <span><strong>5. GST Exemption Self-Declaration</strong> (Standard 1-page form, healthcare is legally exempt)</span>
                 </div>
               </div>
 
-              <div className="p-3 bg-emerald-100/80 border border-emerald-300 rounded-xl text-[11px] text-emerald-900 flex items-center gap-2 font-medium">
+              <div className="p-2.5 sm:p-3 bg-emerald-100/80 border border-emerald-300 rounded-xl text-[11px] text-emerald-900 flex items-center gap-2 font-medium">
                 <Check size={14} className="text-emerald-700 stroke-[3] shrink-0" />
                 <span>Zero Corporate Friction: No Company PAN, No Board Resolution, No MOA/AOA needed.</span>
               </div>
             </div>
 
             {/* Pvt Ltd / LLP Clinic */}
-            <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200 space-y-4">
+            <div className="p-4 sm:p-6 rounded-2xl bg-slate-50 border border-slate-200 space-y-3.5 sm:space-y-4">
               <div className="inline-block text-[10px] font-black uppercase tracking-wider bg-slate-200 text-slate-700 px-2.5 py-1 rounded-full">
                 Corporate / Chains
               </div>
 
               <div>
-                <h3 className="text-base font-extrabold text-[#0B2450]">
+                <h3 className="text-sm sm:text-base font-extrabold text-[#0B2450]">
                   Corporate Clinic (Pvt Ltd / LLP / Hospital)
                 </h3>
                 <p className="text-xs text-slate-600">Dental chain entities registered under MCA.</p>
               </div>
 
-              <div className="space-y-2.5 text-xs text-slate-700">
-                <div className="flex items-start gap-2.5">
+              <div className="space-y-2 sm:space-y-2.5 text-xs text-slate-700">
+                <div className="flex items-start gap-2 sm:gap-2.5">
                   <CheckCircle2 size={16} className="text-slate-400 shrink-0 mt-0.5" />
                   <span>1. Company PAN Card &amp; Certificate of Incorporation (COI)</span>
                 </div>
-                <div className="flex items-start gap-2.5">
+                <div className="flex items-start gap-2 sm:gap-2.5">
                   <CheckCircle2 size={16} className="text-slate-400 shrink-0 mt-0.5" />
                   <span>2. MOA &amp; AOA / LLP Agreement</span>
                 </div>
-                <div className="flex items-start gap-2.5">
+                <div className="flex items-start gap-2 sm:gap-2.5">
                   <CheckCircle2 size={16} className="text-slate-400 shrink-0 mt-0.5" />
                   <span>3. Board Resolution (BR) on Company Letterhead</span>
                 </div>
-                <div className="flex items-start gap-2.5">
+                <div className="flex items-start gap-2 sm:gap-2.5">
                   <CheckCircle2 size={16} className="text-slate-400 shrink-0 mt-0.5" />
                   <span>4. PAN &amp; Aadhaar of Authorized Signatory Directors</span>
                 </div>
-                <div className="flex items-start gap-2.5">
+                <div className="flex items-start gap-2 sm:gap-2.5">
                   <CheckCircle2 size={16} className="text-slate-400 shrink-0 mt-0.5" />
                   <span>5. Company Current Account Cancelled Cheque &amp; GST</span>
                 </div>
               </div>
 
-              <div className="p-3 bg-white border border-slate-200 rounded-xl text-[11px] text-slate-500">
+              <div className="p-2.5 sm:p-3 bg-white border border-slate-200 rounded-xl text-[11px] text-slate-500">
                 Standard corporate KYC processed in 24 hours via Plural by Pine Labs underwriting desk.
               </div>
             </div>
@@ -1016,7 +1086,7 @@ export default function LoanDemoPage() {
         </div>
 
         {/* ── SECTION: DOCTOR FAQ ACCORDION ── */}
-        <div className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-sm space-y-6">
+        <div className="bg-white border border-slate-200 rounded-3xl p-5 sm:p-8 shadow-sm space-y-5">
           <div className="text-center max-w-xl mx-auto space-y-1">
             <span className="text-[10px] font-black text-[#0867E8] uppercase tracking-widest">
               DOCTOR CLARIFICATIONS
@@ -1026,8 +1096,8 @@ export default function LoanDemoPage() {
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-            <div className="p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-1.5">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 text-xs">
+            <div className="p-3.5 sm:p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-1.5">
               <h4 className="font-extrabold text-[#0B2450] text-sm flex items-center gap-1.5">
                 <HelpCircle size={15} className="text-[#0867E8]" />
                 <span>What happens if the patient defaults on EMIs?</span>
@@ -1037,7 +1107,7 @@ export default function LoanDemoPage() {
               </p>
             </div>
 
-            <div className="p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-1.5">
+            <div className="p-3.5 sm:p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-1.5">
               <h4 className="font-extrabold text-[#0B2450] text-sm flex items-center gap-1.5">
                 <HelpCircle size={15} className="text-[#0867E8]" />
                 <span>Do I need to buy or rent a physical POS machine?</span>
@@ -1047,7 +1117,7 @@ export default function LoanDemoPage() {
               </p>
             </div>
 
-            <div className="p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-1.5">
+            <div className="p-3.5 sm:p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-1.5">
               <h4 className="font-extrabold text-[#0B2450] text-sm flex items-center gap-1.5">
                 <HelpCircle size={15} className="text-[#0867E8]" />
                 <span>When does the clinic receive the money?</span>
@@ -1057,7 +1127,7 @@ export default function LoanDemoPage() {
               </p>
             </div>
 
-            <div className="p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-1.5">
+            <div className="p-3.5 sm:p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-1.5">
               <h4 className="font-extrabold text-[#0B2450] text-sm flex items-center gap-1.5">
                 <HelpCircle size={15} className="text-[#0867E8]" />
                 <span>Why don’t dental clinics need GST registration?</span>
@@ -1070,8 +1140,8 @@ export default function LoanDemoPage() {
         </div>
 
         {/* ── SECTION: BOTTOM CONVERSION & WHATSAPP SHARE ── */}
-        <div className="bg-gradient-to-r from-[#0B2450] to-[#0F172A] text-white rounded-3xl p-6 sm:p-10 text-center space-y-4 shadow-xl">
-          <h3 className="text-2xl sm:text-3xl font-black">
+        <div className="bg-gradient-to-r from-[#0B2450] to-[#0F172A] text-white rounded-3xl p-5 sm:p-10 text-center space-y-4 shadow-xl">
+          <h3 className="text-xl sm:text-3xl font-black">
             Ready to Offer Instant Patient EMIs at Your Front Desk?
           </h3>
           <p className="text-xs sm:text-sm text-slate-300 max-w-xl mx-auto leading-relaxed">
@@ -1081,7 +1151,7 @@ export default function LoanDemoPage() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
             <Link
               to="/clinic-kyc"
-              className="w-full sm:w-auto px-6 py-3.5 bg-[#0867E8] hover:bg-[#0756c7] text-white rounded-xl text-xs font-black transition-all shadow-lg shadow-blue-500/30 flex items-center justify-center gap-2"
+              className="w-full sm:w-auto px-6 py-3.5 min-h-[46px] bg-[#0867E8] hover:bg-[#0756c7] text-white rounded-xl text-xs font-black transition-all shadow-lg shadow-blue-500/30 flex items-center justify-center gap-2 active:scale-98"
             >
               <span>Submit Clinic Documents Online</span>
               <ArrowRight size={15} />
@@ -1090,7 +1160,7 @@ export default function LoanDemoPage() {
             <button
               type="button"
               onClick={handleShare}
-              className="w-full sm:w-auto px-6 py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-black transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md shadow-emerald-900/30"
+              className="w-full sm:w-auto px-6 py-3.5 min-h-[46px] bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-black transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md shadow-emerald-900/30 active:scale-98"
             >
               <Share2 size={15} />
               <span>Share Flow via WhatsApp</span>
@@ -1099,6 +1169,26 @@ export default function LoanDemoPage() {
         </div>
 
       </main>
+
+      {/* ── STICKY MOBILE ACTION BAR (Fixed at bottom for easy thumb access on mobile) ── */}
+      <aside aria-label="Mobile Action Bar" className="fixed bottom-0 inset-x-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200/90 px-3 py-2.5 flex sm:hidden items-center justify-between gap-2 shadow-lg">
+        <button
+          type="button"
+          onClick={handleShare}
+          className="flex-1 min-h-[44px] px-3 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-extrabold flex items-center justify-center gap-1.5 shadow-sm active:scale-98"
+        >
+          <Share2 size={14} />
+          <span>Share WhatsApp</span>
+        </button>
+        <Link
+          to="/clinic-kyc"
+          className="flex-1 min-h-[44px] px-3 py-2 bg-[#0867E8] hover:bg-[#0756c7] text-white rounded-xl text-xs font-extrabold flex items-center justify-center gap-1.5 shadow-sm active:scale-98"
+        >
+          <span>Onboard Clinic</span>
+          <ArrowRight size={14} />
+        </Link>
+      </aside>
+
     </div>
   );
 }

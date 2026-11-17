@@ -38,6 +38,51 @@ const PROCEDURES = [
   { id: 'rct-crown', name: 'Root Canal + Zirconia Crown', amount: 22000, tenure: 6, tag: 'Daily Flow', emiEst: '₹3,790' }
 ];
 
+const COMPARISON_METRICS = [
+  {
+    capability: 'Patient Checkout Journey',
+    traditional: 'Redirected to 3rd-party banking sites (45%+ drop-off)',
+    clinaza: 'Unified single linear screen (Zero redirects)',
+    tag: 'Zero Redirects'
+  },
+  {
+    capability: 'Bank Statement Verification',
+    traditional: 'Manual PDF uploads + password friction',
+    clinaza: 'Native RBI Account Aggregator (1 OTP)',
+    tag: '1 OTP Only'
+  },
+  {
+    capability: 'Identity & KYC Verification',
+    traditional: 'Repeated per lender with offline paperwork',
+    clinaza: '100% Digital One-Time Aadhaar e-KYC',
+    tag: 'Paperless'
+  },
+  {
+    capability: 'Lender Network Architecture',
+    traditional: 'Single lender (rejects 60%+ applicants)',
+    clinaza: 'BRE Cascading Grid (Piramal, Tata, Bajaj, L&T)',
+    tag: 'Waterfall'
+  },
+  {
+    capability: 'Approval Rate Benchmark',
+    traditional: '35% – 42% single-shot approval',
+    clinaza: '76.4% Multi-Lender Match Benchmark',
+    tag: '+20% Uplift'
+  },
+  {
+    capability: 'Hardware & Machine Rental',
+    traditional: '₹600–₹1,200/mo POS machine rental & deposit',
+    clinaza: '₹0 Hardware (Counter QR & WhatsApp Links)',
+    tag: '₹0 Hardware'
+  },
+  {
+    capability: 'Clinic Default Recourse',
+    traditional: 'Collection follow-ups & bad clinic debt risk',
+    clinaza: '100% Non-Recourse (T+1 Guaranteed Settlement)',
+    tag: '₹0 Recourse'
+  }
+];
+
 export default function LoanDemoPage() {
   // Mobile View Switcher: 'phone' or 'controls'
   const [mobileTab, setMobileTab] = useState<'phone' | 'controls'>('phone');
@@ -74,7 +119,7 @@ export default function LoanDemoPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] text-slate-900 flex flex-col font-sans selection:bg-[#0867E8] selection:text-white pb-20 sm:pb-0">
+    <div className="min-h-screen bg-[#F8FAFC] text-slate-900 flex flex-col font-sans selection:bg-[#0867E8] selection:text-white pb-24 sm:pb-0">
       <SEOHead
         title="Patient EMI Checkout Flow & Interactive Simulator | Clinaza"
         description="Experience Clinaza's 2-minute paperless patient financing checkout: 76.4% multi-lender approval, 1-click UPI autopay, and T+1 direct clinic settlement."
@@ -90,7 +135,7 @@ export default function LoanDemoPage() {
           </div>
           <div className="flex flex-col">
             <span className="text-xs sm:text-sm font-black tracking-tight text-[#0B2450] flex items-center gap-1.5">
-              CLINAZA <span className="text-[9px] sm:text-[10px] font-bold text-[#0867E8] bg-blue-50 border border-blue-200 px-1 py-0.2 rounded">CHECKOUT OS</span>
+              CLINAZA <span className="text-[9px] sm:text-[10px] font-bold text-[#0867E8] bg-blue-50 border border-blue-200 px-1.5 py-0.5 rounded whitespace-nowrap">CHECKOUT OS</span>
             </span>
             <span className="text-[9px] sm:text-[10px] text-slate-500 font-medium hidden xs:inline">Point-of-Care Healthcare Financing Network</span>
           </div>
@@ -160,43 +205,45 @@ export default function LoanDemoPage() {
             <span className="text-[10px] text-slate-500">100% Non-recourse T+1 payout</span>
           </div>
         </div>
-
-        {/* ── Mobile Tab Segmented Switcher (Visible only on < lg) ── */}
-        <div className="lg:hidden pt-3 flex justify-center">
-          <div className="p-1 bg-slate-200/80 rounded-2xl flex items-center gap-1 border border-slate-300/80 shadow-inner w-full max-w-sm">
-            <button
-              type="button"
-              onClick={() => setMobileTab('phone')}
-              className={`flex-1 py-2.5 min-h-[44px] rounded-xl text-xs font-black transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
-                mobileTab === 'phone'
-                  ? 'bg-white text-[#0B2450] shadow-sm border border-slate-200/80'
-                  : 'text-slate-600 hover:text-slate-900'
-              }`}
-            >
-              <Smartphone size={15} className={mobileTab === 'phone' ? 'text-[#0867E8]' : 'text-slate-400'} />
-              <span>Patient Screen</span>
-            </button>
-            <button
-              type="button"
-              onClick={() => setMobileTab('controls')}
-              className={`flex-1 py-2.5 min-h-[44px] rounded-xl text-xs font-black transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
-                mobileTab === 'controls'
-                  ? 'bg-white text-[#0B2450] shadow-sm border border-slate-200/80'
-                  : 'text-slate-600 hover:text-slate-900'
-              }`}
-            >
-              <Sliders size={15} className={mobileTab === 'controls' ? 'text-[#0867E8]' : 'text-slate-400'} />
-              <span>Clinic Controls &amp; Script</span>
-            </button>
-          </div>
-        </div>
       </section>
 
       {/* Main Experience Grid */}
-      <main className="flex-1 max-w-6xl w-full mx-auto px-3.5 sm:px-6 pb-16 space-y-10 sm:space-y-12">
+      <main className="flex-1 max-w-6xl w-full mx-auto px-3.5 sm:px-6 pb-28 sm:pb-16 space-y-10 sm:space-y-12">
 
-        {/* ── 1. INTERACTIVE SPLIT-SCREEN SIMULATOR ── */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start animate-in fade-in duration-300">
+        {/* ── 1. INTERACTIVE SPLIT-SCREEN SIMULATOR (Scoped container for sticky mobile switcher) ── */}
+        <div className="relative">
+
+          {/* Mobile Tab Segmented Switcher (Sticky ONLY while exploring the simulator) */}
+          <div className="lg:hidden sticky top-[57px] z-30 bg-[#F8FAFC]/95 backdrop-blur-md pt-2 pb-2.5 -mx-3.5 px-3.5 border-b border-slate-200/80 shadow-xs mb-4">
+            <div className="p-1 bg-slate-200/80 rounded-2xl flex items-center gap-1 border border-slate-300/80 shadow-inner w-full max-w-md mx-auto">
+              <button
+                type="button"
+                onClick={() => setMobileTab('phone')}
+                className={`flex-1 py-2.5 min-h-[44px] rounded-xl text-xs font-black transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
+                  mobileTab === 'phone'
+                    ? 'bg-white text-[#0B2450] shadow-sm border border-slate-200/80'
+                    : 'text-slate-600 hover:text-slate-900'
+                }`}
+              >
+                <Smartphone size={15} className={mobileTab === 'phone' ? 'text-[#0867E8]' : 'text-slate-400'} />
+                <span>Patient Screen</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setMobileTab('controls')}
+                className={`flex-1 py-2.5 min-h-[44px] rounded-xl text-xs font-black transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
+                  mobileTab === 'controls'
+                    ? 'bg-white text-[#0B2450] shadow-sm border border-slate-200/80'
+                    : 'text-slate-600 hover:text-slate-900'
+                }`}
+              >
+                <Sliders size={15} className={mobileTab === 'controls' ? 'text-[#0867E8]' : 'text-slate-400'} />
+                <span>Clinic Controls &amp; Script</span>
+              </button>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start animate-in fade-in duration-300">
           
           {/* Left Column (7 cols): Front-Desk Control Center & Case Economics */}
           <div className={`lg:col-span-7 space-y-5 sm:space-y-6 ${mobileTab === 'controls' ? 'block' : 'hidden lg:block'}`}>
@@ -432,25 +479,28 @@ export default function LoanDemoPage() {
                   <span className="text-slate-500 font-bold">Selected Case:</span>
                   <span className="font-extrabold text-[#0867E8]">{selectedProcedure.name}</span>
                 </div>
-                <div className="flex gap-1.5 overflow-x-auto pb-1 no-scrollbar">
-                  {PROCEDURES.map((p) => (
-                    <button
-                      key={p.id}
-                      type="button"
-                      onClick={() => {
-                        setSelectedProcId(p.id);
-                        setCustomAmount(p.amount);
-                        setSelectedTenure(p.tenure);
-                      }}
-                      className={`px-2.5 py-1.5 min-h-[38px] rounded-xl text-[10px] font-bold whitespace-nowrap border shrink-0 ${
-                        selectedProcId === p.id
-                          ? 'bg-[#0867E8] text-white border-[#0867E8]'
-                          : 'bg-slate-50 text-slate-600 border-slate-200'
-                      }`}
-                    >
-                      {p.name.split(' ')[0]} (₹{(p.amount/1000).toFixed(0)}k)
-                    </button>
-                  ))}
+                <div className="relative">
+                  <div className="flex gap-1.5 overflow-x-auto pb-1 no-scrollbar pr-6">
+                    {PROCEDURES.map((p) => (
+                      <button
+                        key={p.id}
+                        type="button"
+                        onClick={() => {
+                          setSelectedProcId(p.id);
+                          setCustomAmount(p.amount);
+                          setSelectedTenure(p.tenure);
+                        }}
+                        className={`px-3 py-2 min-h-[44px] rounded-xl text-[11px] font-bold whitespace-nowrap border shrink-0 transition-all active:scale-95 flex items-center justify-center ${
+                          selectedProcId === p.id
+                            ? 'bg-[#0867E8] text-white border-[#0867E8] shadow-xs font-black'
+                            : 'bg-slate-50 text-slate-700 border-slate-200 hover:border-slate-300'
+                        }`}
+                      >
+                        {p.name.split(' ')[0]} (₹{(p.amount/1000).toFixed(0)}k)
+                      </button>
+                    ))}
+                  </div>
+                  <div className="absolute right-0 top-0 bottom-1 w-6 bg-gradient-to-l from-white to-transparent pointer-events-none" />
                 </div>
               </div>
 
@@ -783,6 +833,7 @@ export default function LoanDemoPage() {
           </div>
 
         </div>
+        </div>
 
         {/* ── POINT 2: THE MULTI-LENDER BRE & ACCOUNT AGGREGATOR ARCHITECTURE ── */}
         <div className="bg-white border border-slate-200 rounded-3xl p-5 sm:p-8 shadow-sm space-y-5 sm:space-y-6">
@@ -918,12 +969,37 @@ export default function LoanDemoPage() {
             </p>
           </div>
 
-          <div className="flex items-center justify-between text-[11px] text-slate-500 font-bold px-1 sm:hidden">
-            <span>Scroll horizontally to view full matrix</span>
-            <span className="text-[#0867E8]">Swipe ➔</span>
+          {/* Mobile Card Comparison (Zero Horizontal Scroll Needed - Side-by-Side Clarity) */}
+          <div className="block sm:hidden space-y-3">
+            {COMPARISON_METRICS.map((row) => (
+              <div key={row.capability} className="p-3.5 bg-slate-50/80 border border-slate-200/90 rounded-2xl space-y-2">
+                <div className="flex items-center justify-between gap-2">
+                  <span className="text-xs font-black text-[#0B2450]">{row.capability}</span>
+                  <span className="text-[9px] font-bold text-[#0867E8] bg-blue-50 border border-blue-200 px-1.5 py-0.5 rounded-md shrink-0">
+                    {row.tag}
+                  </span>
+                </div>
+                <div className="grid grid-cols-2 gap-2 text-[11px]">
+                  <div className="p-2.5 bg-white border border-rose-200/80 rounded-xl space-y-1 shadow-2xs">
+                    <div className="text-[9px] font-black uppercase text-rose-600 tracking-wider flex items-center gap-1">
+                      <span>✕ Traditional</span>
+                    </div>
+                    <div className="text-rose-950 leading-tight font-medium text-[11px]">{row.traditional}</div>
+                  </div>
+                  <div className="p-2.5 bg-blue-50/90 border border-blue-200 rounded-xl space-y-1 shadow-2xs">
+                    <div className="text-[9px] font-black uppercase text-[#0867E8] tracking-wider flex items-center gap-1">
+                      <CheckCircle2 size={11} className="text-[#0867E8] shrink-0" />
+                      <span>Clinaza OS</span>
+                    </div>
+                    <div className="text-blue-950 leading-tight font-extrabold text-[11px]">{row.clinaza}</div>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
 
-          <div className="overflow-x-auto pb-2 -mx-2 sm:mx-0">
+          {/* Desktop & Tablet Wide Table View */}
+          <div className="hidden sm:block overflow-x-auto pb-2">
             <table className="w-full min-w-[560px] text-left text-xs border border-slate-200 rounded-2xl overflow-hidden">
               <thead className="bg-slate-100/90 text-slate-800 font-black">
                 <tr>
@@ -933,41 +1009,13 @@ export default function LoanDemoPage() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-200 text-slate-700">
-                <tr>
-                  <td className="p-3 sm:p-4 font-bold text-slate-900">Patient Checkout Journey</td>
-                  <td className="p-3 sm:p-4 text-rose-600">Redirected to 3rd-party banking sites</td>
-                  <td className="p-3 sm:p-4 font-bold text-emerald-700 bg-blue-50/40">✓ Unified single linear screen (Zero redirects)</td>
-                </tr>
-                <tr>
-                  <td className="p-3 sm:p-4 font-bold text-slate-900">Bank Statement Verification</td>
-                  <td className="p-3 sm:p-4 text-rose-600">Manual PDF uploads + password friction</td>
-                  <td className="p-3 sm:p-4 font-bold text-emerald-700 bg-blue-50/40">✓ Native RBI Account Aggregator (1 OTP)</td>
-                </tr>
-                <tr>
-                  <td className="p-3 sm:p-4 font-bold text-slate-900">Identity &amp; KYC</td>
-                  <td className="p-3 sm:p-4 text-slate-500">Repeated per lender with paperwork</td>
-                  <td className="p-3 sm:p-4 font-bold text-emerald-700 bg-blue-50/40">✓ 100% Digital One-Time Aadhaar e-KYC</td>
-                </tr>
-                <tr>
-                  <td className="p-3 sm:p-4 font-bold text-slate-900">Lender Network Architecture</td>
-                  <td className="p-3 sm:p-4 text-slate-500">Single lender (rejects 60%+ applicants)</td>
-                  <td className="p-3 sm:p-4 font-bold text-emerald-700 bg-blue-50/40">✓ BRE Cascading Grid (Piramal, Tata, Bajaj, L&amp;T)</td>
-                </tr>
-                <tr>
-                  <td className="p-3 sm:p-4 font-bold text-slate-900">Approval Rate Benchmark</td>
-                  <td className="p-3 sm:p-4 text-slate-500">35% – 42% single-shot</td>
-                  <td className="p-3 sm:p-4 font-black text-[#0867E8] bg-blue-50/40">✓ 76.4% Multi-Lender Match</td>
-                </tr>
-                <tr>
-                  <td className="p-3 sm:p-4 font-bold text-slate-900">Hardware &amp; Machine Rental</td>
-                  <td className="p-3 sm:p-4 text-slate-500">₹600–₹1,200/mo POS machine rental &amp; deposit</td>
-                  <td className="p-3 sm:p-4 font-bold text-emerald-700 bg-blue-50/40">✓ ₹0 Hardware (Counter QR &amp; WhatsApp Links)</td>
-                </tr>
-                <tr>
-                  <td className="p-3 sm:p-4 font-bold text-slate-900">Clinic Default Recourse</td>
-                  <td className="p-3 sm:p-4 text-slate-500">Collection follow-ups &amp; bad clinic debt</td>
-                  <td className="p-3 sm:p-4 font-bold text-emerald-700 bg-blue-50/40">✓ 100% Non-Recourse (T+1 Guaranteed Settlement)</td>
-                </tr>
+                {COMPARISON_METRICS.map((row) => (
+                  <tr key={row.capability}>
+                    <td className="p-3 sm:p-4 font-bold text-slate-900">{row.capability}</td>
+                    <td className="p-3 sm:p-4 text-rose-600">{row.traditional}</td>
+                    <td className="p-3 sm:p-4 font-bold text-emerald-700 bg-blue-50/40">✓ {row.clinaza}</td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>
@@ -1171,7 +1219,7 @@ export default function LoanDemoPage() {
       </main>
 
       {/* ── STICKY MOBILE ACTION BAR (Fixed at bottom for easy thumb access on mobile) ── */}
-      <aside aria-label="Mobile Action Bar" className="fixed bottom-0 inset-x-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200/90 px-3 py-2.5 flex sm:hidden items-center justify-between gap-2 shadow-lg">
+      <aside aria-label="Mobile Action Bar" className="fixed bottom-0 inset-x-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200/90 px-3 pt-2.5 pb-[max(0.625rem,env(safe-area-inset-bottom))] flex sm:hidden items-center justify-between gap-2 shadow-lg">
         <button
           type="button"
           onClick={handleShare}

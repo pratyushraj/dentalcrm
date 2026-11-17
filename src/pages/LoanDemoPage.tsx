@@ -310,9 +310,12 @@ export default function LoanDemoPage() {
 
           {/* Mobile Tab Segmented Switcher (Sticky ONLY while exploring the simulator) */}
           <div className="lg:hidden sticky top-[68px] sm:top-[76px] z-30 bg-[#F8FAFC]/95 backdrop-blur-md pt-2 pb-2.5 -mx-3.5 px-3.5 border-b border-slate-200/80 shadow-xs mb-4">
-            <div className="p-1 bg-slate-200/80 rounded-2xl flex items-center gap-1 border border-slate-300/80 shadow-inner w-full max-w-md mx-auto">
+            <div role="tablist" aria-label="Simulator Views" className="p-1 bg-slate-200/80 rounded-2xl flex items-center gap-1 border border-slate-300/80 shadow-inner w-full max-w-md mx-auto">
               <button
                 type="button"
+                role="tab"
+                aria-selected={mobileTab === 'phone'}
+                aria-controls="patient-screen-panel"
                 onClick={() => setMobileTab('phone')}
                 className={`flex-1 py-2.5 min-h-[44px] rounded-xl text-xs font-black transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
                   mobileTab === 'phone'
@@ -325,6 +328,9 @@ export default function LoanDemoPage() {
               </button>
               <button
                 type="button"
+                role="tab"
+                aria-selected={mobileTab === 'controls'}
+                aria-controls="clinic-controls-panel"
                 onClick={() => setMobileTab('controls')}
                 className={`flex-1 py-2.5 min-h-[44px] rounded-xl text-xs font-black transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
                   mobileTab === 'controls'
@@ -341,7 +347,7 @@ export default function LoanDemoPage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start animate-in fade-in duration-300">
           
           {/* Left Column (7 cols): Front-Desk Control Center & Case Economics */}
-          <div className={`lg:col-span-7 space-y-5 sm:space-y-6 ${mobileTab === 'controls' ? 'block' : 'hidden lg:block'}`}>
+          <div id="clinic-controls-panel" role="tabpanel" aria-labelledby="clinic-controls-tab" className={`lg:col-span-7 space-y-5 sm:space-y-6 ${mobileTab === 'controls' ? 'block' : 'hidden lg:block'}`}>
             
             {/* ── POINT 5: MULTI-MODALITY PAYMENT MODES SWITCHER ── */}
             <div className="bg-white border border-slate-200 rounded-3xl p-4 sm:p-6 shadow-sm space-y-3">
@@ -367,6 +373,7 @@ export default function LoanDemoPage() {
                     <button
                       key={mode.id}
                       type="button"
+                      aria-pressed={isSelected}
                       onClick={() => setSelectedPaymentModality(mode.id as any)}
                       className={`p-2.5 min-h-[52px] rounded-2xl border text-left transition-all cursor-pointer flex flex-col justify-between gap-1 active:scale-98 ${
                         isSelected
@@ -410,6 +417,7 @@ export default function LoanDemoPage() {
                     <button
                       key={proc.id}
                       type="button"
+                      aria-pressed={isSelected}
                       onClick={() => {
                         setSelectedProcId(proc.id);
                         setCustomAmount(proc.amount);
@@ -456,6 +464,10 @@ export default function LoanDemoPage() {
                   max={250000}
                   step={5000}
                   value={customAmount}
+                  aria-label="Custom Treatment Cost"
+                  aria-valuemin={15000}
+                  aria-valuemax={250000}
+                  aria-valuenow={customAmount}
                   onChange={(e) => setCustomAmount(Number(e.target.value))}
                   className="w-full accent-[#0867E8] cursor-pointer h-2"
                 />
@@ -547,6 +559,7 @@ export default function LoanDemoPage() {
                   <button
                     key={item.s}
                     type="button"
+                    aria-current={simulatorStep === item.s ? 'step' : undefined}
                     onClick={() => {
                       setSimulatorStep(item.s as any);
                       setMobileTab('phone');
@@ -565,7 +578,7 @@ export default function LoanDemoPage() {
           </div>
 
           {/* Right Column (5 cols): Realistic iPhone 16 Device Frame (Full-width responsive on mobile) */}
-          <div className={`lg:col-span-5 flex flex-col items-center ${mobileTab === 'phone' ? 'block' : 'hidden lg:block'}`}>
+          <div id="patient-screen-panel" role="tabpanel" aria-labelledby="patient-screen-tab" className={`lg:col-span-5 flex flex-col items-center ${mobileTab === 'phone' ? 'block' : 'hidden lg:block'}`}>
             <div className="sticky top-20 w-full max-w-[360px] mx-auto">
               
               {/* Quick Case Switcher Strip on Mobile */}
@@ -580,6 +593,7 @@ export default function LoanDemoPage() {
                       <button
                         key={p.id}
                         type="button"
+                        aria-pressed={selectedProcId === p.id}
                         onClick={() => {
                           setSelectedProcId(p.id);
                           setCustomAmount(p.amount);
@@ -781,6 +795,7 @@ export default function LoanDemoPage() {
                               <button
                                 key={t}
                                 type="button"
+                                aria-pressed={selectedTenure === t}
                                 onClick={() => setSelectedTenure(t)}
                                 className={`py-2.5 min-h-[44px] rounded-xl text-xs font-bold border transition-all cursor-pointer flex items-center justify-center active:scale-98 ${
                                   selectedTenure === t

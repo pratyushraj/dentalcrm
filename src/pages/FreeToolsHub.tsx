@@ -371,7 +371,7 @@ export default function FreeToolsHub() {
     : ["free dental prescription maker", "online rx generator dental india", "dental clinic setup cost calculator", "loan for dental clinic setup", "डेंटल क्लिनिक के लिए लोन", "dental equipment loan emi", "clinaza free tools"];
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col justify-between">
+    <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col justify-between relative overflow-hidden">
       <SEOHead 
         title={seoTitle}
         description={seoDescription}
@@ -380,39 +380,68 @@ export default function FreeToolsHub() {
         jsonLd={toolsSchema}
       />
 
-      {/* Header Bar */}
-      <header className="bg-white border-b border-slate-200 sticky top-0 z-30">
-        <div className="max-w-6xl mx-auto px-4 py-3.5 flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-2">
-            <span className="text-xl font-black tracking-tight text-[#0B2450]">
-              CLIN<span className="text-[#0867E8]">AZA</span>
-            </span>
-            <span className="text-[10px] uppercase font-extrabold px-2 py-0.5 bg-blue-50 text-blue-600 rounded-md border border-blue-200">
-              Free Utilities
-            </span>
+      {/* Atmospheric Ambient Background Canvas */}
+      <div className="absolute inset-0 bg-radial-fintech pointer-events-none -z-10" />
+      <div className="absolute inset-0 bg-grid-fintech mask-radial-fade opacity-60 pointer-events-none -z-10" />
+
+      {/* Top Floating Pill Navbar */}
+      <header className="fixed top-3 sm:top-5 inset-x-0 z-50 pointer-events-none px-4 sm:px-6">
+        <nav className="max-w-5xl mx-auto bg-white/90 backdrop-blur-xl border border-slate-200/90 shadow-[0_8px_32px_rgba(15,23,42,0.08)] rounded-full px-3.5 sm:px-5 py-2.5 flex items-center justify-between gap-3 pointer-events-auto transition-all">
+          <Link to="/" className="flex items-center gap-2.5 shrink-0 group">
+            <img 
+              src="/assets/clinaza-logo.jpg" 
+              alt="CLINAZA" 
+              className="h-8 w-8 sm:h-9 sm:w-9 rounded-xl border border-slate-200 shadow-xs object-cover group-hover:scale-105 transition-transform" 
+              width={36}
+              height={36}
+            />
+            <div className="flex flex-col">
+              <div className="flex items-center gap-1.5">
+                <span className="text-xs font-black tracking-widest text-[#0B2450] uppercase">CLINAZA</span>
+                <span className="px-2 py-0.5 rounded-full bg-blue-50 border border-blue-200 text-[9px] font-bold text-[#0867E8]">
+                  FREE UTILITIES
+                </span>
+              </div>
+              <span className="text-[10px] text-slate-500 font-mono hidden sm:inline">Dental Practice OS Tools</span>
+            </div>
           </Link>
 
-          <div className="flex items-center gap-3">
+          {/* Official Pine Labs Badge */}
+          <div className="hidden md:flex items-center gap-1.5 pl-3 border-l border-slate-200/80">
+            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Powered by</span>
+            <img
+              src="/assets/plural_by_pinelabs_transparent.png"
+              alt="Plural by Pine Labs"
+              className="h-3.5 w-auto object-contain"
+              width={80}
+              height={14}
+            />
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse ml-0.5"></span>
+          </div>
+
+          <div className="flex items-center gap-2 shrink-0">
             <Link
               to="/reactivation/login"
-              className="px-4 py-2 bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-black uppercase tracking-wider rounded-xl transition-all shadow-sm"
+              className="px-3.5 sm:px-4 py-2 min-h-[40px] bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-extrabold uppercase tracking-wider rounded-full transition-all shadow-xs flex items-center gap-1.5 active:scale-95"
             >
-              Doctor Portal →
+              <span>Doctor Portal</span>
+              <ArrowRight size={13} />
             </Link>
           </div>
-        </div>
+        </nav>
       </header>
 
       {/* Hero Banner */}
-      <section className="bg-gradient-to-b from-blue-900 via-[#0B2450] to-slate-900 text-white py-10 px-4 text-center">
+      <section className="pt-24 sm:pt-36 pb-8 sm:pb-12 px-4 text-center">
         <div className="max-w-4xl mx-auto space-y-3">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 text-[10px] font-black uppercase tracking-widest">
-            <Sparkles size={12} /> 100% Free For All Indian Dentists &amp; Patients
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/90 backdrop-blur-md border border-slate-200/90 text-slate-800 text-xs font-semibold shadow-2xs">
+            <Sparkles size={13} className="text-amber-500" />
+            <span className="text-[#0B2450] font-bold">100% Free For All Indian Dentists &amp; Clinics</span>
           </div>
-          <h1 className="text-2xl sm:text-4xl font-black tracking-tight">
+          <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-[#0B2450] [text-wrap:balance]">
             Free Dental Practice Utilities &amp; Cost Calculators
           </h1>
-          <p className="text-xs sm:text-sm text-slate-300 max-w-2xl mx-auto">
+          <p className="text-xs sm:text-sm text-slate-600 max-w-2xl mx-auto leading-relaxed [text-wrap:pretty]">
             Generate printable digital prescriptions, calculate dental clinic launch expenses, estimate monthly treatment EMIs, or audit your clinic's Google Maps visibility.
           </p>
 
@@ -420,57 +449,57 @@ export default function FreeToolsHub() {
           <div className="flex flex-wrap justify-center gap-2 pt-4">
             <button
               onClick={() => setActiveTab('rx')}
-              className={`px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 ${
+              className={`px-4 py-2.5 min-h-[44px] rounded-full text-xs font-bold transition-all flex items-center gap-2 active:scale-95 cursor-pointer ${
                 activeTab === 'rx' 
-                  ? 'bg-white text-slate-950 shadow-lg' 
-                  : 'bg-slate-800/80 text-slate-300 hover:bg-slate-800 border border-slate-700'
+                  ? 'bg-[#0B2450] text-white shadow-xs' 
+                  : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'
               }`}
             >
-              <FileText size={15} className={activeTab === 'rx' ? 'text-[#0867E8]' : ''} />
+              <FileText size={15} className={activeTab === 'rx' ? 'text-[#0867E8]' : 'text-slate-400'} />
               Digital Rx Prescription Maker
             </button>
             <button
               onClick={() => setActiveTab('setup')}
-              className={`px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 ${
+              className={`px-4 py-2.5 min-h-[44px] rounded-full text-xs font-bold transition-all flex items-center gap-2 active:scale-95 cursor-pointer ${
                 activeTab === 'setup' 
-                  ? 'bg-white text-slate-950 shadow-lg' 
-                  : 'bg-slate-800/80 text-slate-300 hover:bg-slate-800 border border-slate-700'
+                  ? 'bg-[#0B2450] text-white shadow-xs' 
+                  : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'
               }`}
             >
-              <Building2 size={15} className={activeTab === 'setup' ? 'text-emerald-600' : ''} />
+              <Building2 size={15} className={activeTab === 'setup' ? 'text-emerald-400' : 'text-slate-400'} />
               Clinic Setup Cost Calculator
             </button>
             <button
               onClick={() => setActiveTab('emi')}
-              className={`px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 ${
+              className={`px-4 py-2.5 min-h-[44px] rounded-full text-xs font-bold transition-all flex items-center gap-2 active:scale-95 cursor-pointer ${
                 activeTab === 'emi' 
-                  ? 'bg-white text-slate-950 shadow-lg' 
-                  : 'bg-slate-800/80 text-slate-300 hover:bg-slate-800 border border-slate-700'
+                  ? 'bg-[#0B2450] text-white shadow-xs' 
+                  : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'
               }`}
             >
-              <Calculator size={15} className={activeTab === 'emi' ? 'text-blue-500' : ''} />
+              <Calculator size={15} className={activeTab === 'emi' ? 'text-blue-400' : 'text-slate-400'} />
               Treatment EMI Estimator
             </button>
             <button
               onClick={() => setActiveTab('seo')}
-              className={`px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 ${
+              className={`px-4 py-2.5 min-h-[44px] rounded-full text-xs font-bold transition-all flex items-center gap-2 active:scale-95 cursor-pointer ${
                 activeTab === 'seo' 
-                  ? 'bg-white text-slate-950 shadow-lg' 
-                  : 'bg-slate-800/80 text-slate-300 hover:bg-slate-800 border border-slate-700'
+                  ? 'bg-[#0B2450] text-white shadow-xs' 
+                  : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'
               }`}
             >
-              <Search size={15} className={activeTab === 'seo' ? 'text-indigo-600' : ''} />
+              <Search size={15} className={activeTab === 'seo' ? 'text-indigo-400' : 'text-slate-400'} />
               Clinic Google Maps &amp; SEO Audit
             </button>
             <button
               onClick={() => setActiveTab('costing')}
-              className={`px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 ${
+              className={`px-4 py-2.5 min-h-[44px] rounded-full text-xs font-bold transition-all flex items-center gap-2 active:scale-95 cursor-pointer ${
                 activeTab === 'costing' 
-                  ? 'bg-white text-slate-950 shadow-lg' 
-                  : 'bg-slate-800/80 text-slate-300 hover:bg-slate-800 border border-slate-700'
+                  ? 'bg-[#0B2450] text-white shadow-xs' 
+                  : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'
               }`}
             >
-              <TableProperties size={15} className={activeTab === 'costing' ? 'text-teal-500' : ''} />
+              <TableProperties size={15} className={activeTab === 'costing' ? 'text-teal-400' : 'text-slate-400'} />
               Treatment Costing &amp; Settlement Sheet
             </button>
           </div>

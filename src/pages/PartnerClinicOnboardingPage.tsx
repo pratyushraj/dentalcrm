@@ -247,46 +247,75 @@ export default function PartnerClinicOnboardingPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 font-sans selection:bg-[#0867E8] selection:text-white pb-20">
+    <div className="min-h-screen bg-slate-50 text-slate-900 font-sans selection:bg-[#0867E8] selection:text-white pb-24 relative overflow-hidden">
       <SEOHead 
         title="Partner Clinic Onboarding — Clinaza Point-of-Care EMI"
         description="Official onboarding portal for partner dental clinics to activate instant point-of-care patient EMI financing."
         image="https://www.clinaza.in/og-clinic-onboarding.png"
       />
 
-      {/* Top Header */}
-      <header className="border-b border-slate-200/80 bg-white/90 backdrop-blur-md sticky top-0 z-50 px-4 sm:px-8 py-3.5 flex items-center justify-between shadow-xs">
-        <div className="flex items-center gap-3">
-          <img 
-            src="/assets/clinaza-logo.jpg" 
-            alt="CLINAZA" 
-            className="h-10 w-10 rounded-xl border border-slate-200 shadow-sm object-cover" 
-          />
-          <div>
-            <div className="flex items-center gap-2">
-              <span className="text-xs font-black tracking-widest text-[#0B2450] uppercase">CLINAZA</span>
-              <span className="px-2 py-0.5 rounded-full bg-blue-50 border border-blue-200 text-[10px] font-bold text-[#0867E8]">
-                CLINIC ONBOARDING
-              </span>
-            </div>
-            <p className="text-[10px] text-slate-500 font-mono">Point-of-Care Patient EMI Network</p>
-          </div>
-        </div>
+      {/* Atmospheric Ambient Background Canvas */}
+      <div className="absolute inset-0 bg-radial-fintech pointer-events-none -z-10" />
+      <div className="absolute inset-0 bg-grid-fintech mask-radial-fade opacity-60 pointer-events-none -z-10" />
 
-        <div className="flex items-center gap-2">
-          <button
-            onClick={copyShareLink}
-            className="px-3.5 py-2 min-h-[40px] rounded-xl bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-bold flex items-center gap-1.5 transition-all shadow-sm shadow-[#0867E8]/20 active:scale-95"
-          >
-            {copiedLink ? <Check size={13} /> : <Share2 size={13} />}
-            <span className="hidden sm:inline">{copiedLink ? 'Copied Link!' : 'Share Form'}</span>
-            <span className="sm:hidden">Share</span>
-          </button>
-        </div>
+      {/* Top Floating Pill Navbar */}
+      <header className="fixed top-3 sm:top-5 inset-x-0 z-50 pointer-events-none px-4 sm:px-6">
+        <nav className="max-w-4xl mx-auto bg-white/90 backdrop-blur-xl border border-slate-200/90 shadow-[0_8px_32px_rgba(15,23,42,0.08)] rounded-full px-3.5 sm:px-5 py-2.5 flex items-center justify-between gap-3 pointer-events-auto transition-all">
+          <Link to="/" className="flex items-center gap-2.5 shrink-0 group">
+            <img 
+              src="/assets/clinaza-logo.jpg" 
+              alt="CLINAZA" 
+              className="h-8 w-8 sm:h-9 sm:w-9 rounded-xl border border-slate-200 shadow-xs object-cover group-hover:scale-105 transition-transform" 
+              width={36}
+              height={36}
+            />
+            <div className="flex flex-col">
+              <div className="flex items-center gap-1.5">
+                <span className="text-xs font-black tracking-widest text-[#0B2450] uppercase">CLINAZA</span>
+                <span className="px-2 py-0.5 rounded-full bg-blue-50 border border-blue-200 text-[9px] font-bold text-[#0867E8]">
+                  ONBOARDING
+                </span>
+              </div>
+              <span className="text-[10px] text-slate-500 font-mono hidden sm:inline">Point-of-Care Healthcare Financing</span>
+            </div>
+          </Link>
+
+          {/* Official Pine Labs Badge */}
+          <div className="hidden md:flex items-center gap-1.5 pl-3 border-l border-slate-200/80">
+            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Powered by</span>
+            <img
+              src="/assets/plural_by_pinelabs_transparent.png"
+              alt="Plural by Pine Labs"
+              className="h-3.5 w-auto object-contain"
+              width={80}
+              height={14}
+            />
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse ml-0.5"></span>
+          </div>
+
+          <div className="flex items-center gap-2 shrink-0">
+            <button
+              onClick={copyShareLink}
+              className="px-3 sm:px-3.5 py-1.5 min-h-[38px] rounded-full bg-slate-50 hover:bg-slate-100 border border-slate-200 text-xs font-bold text-slate-700 flex items-center gap-1.5 transition-all active:scale-95 cursor-pointer"
+            >
+              {copiedLink ? <Check size={13} className="text-emerald-600" /> : <Share2 size={13} />}
+              <span className="hidden sm:inline">{copiedLink ? 'Copied!' : 'Share Form'}</span>
+              <span className="sm:hidden">Share</span>
+            </button>
+
+            <Link
+              to="/reactivation/login"
+              className="px-3 sm:px-3.5 py-1.5 min-h-[38px] rounded-full bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-bold flex items-center gap-1.5 transition-all shadow-xs active:scale-95"
+            >
+              <span>Doctor Login</span>
+              <ArrowRight size={12} />
+            </Link>
+          </div>
+        </nav>
       </header>
 
       {/* Main Content Area */}
-      <main className="max-w-3xl mx-auto px-4 sm:px-6 pt-8 sm:pt-12 pb-24 sm:pb-12">
+      <main className="max-w-3xl mx-auto px-4 sm:px-6 pt-24 sm:pt-32 pb-24 sm:pb-12">
         {/* Category Switcher Tabs */}
         <div className="flex items-center justify-center gap-2 mb-6 flex-wrap">
           {[
@@ -301,9 +330,9 @@ export default function PartnerClinicOnboardingPage() {
                 type="button"
                 key={cat.id}
                 onClick={() => setForm(prev => ({ ...prev, category: cat.id }))}
-                className={`px-4 py-2.5 min-h-[42px] rounded-full text-xs font-bold transition-all flex items-center gap-2 active:scale-95 ${
+                className={`px-4 py-2.5 min-h-[44px] rounded-full text-xs font-bold transition-all flex items-center gap-2 active:scale-95 cursor-pointer ${
                   form.category === cat.id
-                    ? 'bg-[#0B2450] text-white shadow-sm'
+                    ? 'bg-[#0B2450] text-white shadow-xs'
                     : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'
                 }`}
               >
@@ -326,7 +355,7 @@ export default function PartnerClinicOnboardingPage() {
                 : 'Healthcare Patient EMI Integration'}
             </span>
           </div>
-          <h1 className="text-2xl sm:text-4xl font-bold text-[#0B2450] tracking-tight [text-wrap:balance]">
+          <h1 className="text-2xl sm:text-4xl font-extrabold text-[#0B2450] tracking-tight [text-wrap:balance]">
             {form.category === 'ivf' ? 'Fertility Centre' : form.category === 'hospital' ? 'Hospital Partner' : 'Clinic Partner'} <span className="text-[#0867E8]">Onboarding</span>
           </h1>
           <p className="text-xs sm:text-sm text-slate-600 max-w-lg mx-auto leading-relaxed [text-wrap:pretty]">
@@ -339,7 +368,13 @@ export default function PartnerClinicOnboardingPage() {
           <div className="pt-2 flex items-center justify-center">
             <div className="inline-flex flex-wrap items-center justify-center gap-3 bg-white border border-slate-200/90 px-4 py-2 rounded-2xl shadow-xs text-xs text-slate-700">
               <span className="font-extrabold text-[#0B2450] text-[11px] uppercase tracking-wider">Official Partner:</span>
-              
+              <img
+                src="/assets/plural_by_pinelabs_transparent.png"
+                alt="Plural by Pine Labs"
+                className="h-3.5 w-auto object-contain"
+                width={78}
+                height={14}
+              />
               <span className="text-slate-300 hidden sm:inline">&bull;</span>
               <span className="text-emerald-700 font-bold text-[11px] bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-full">
                 ✓ 35+ EMI Modes &bull; Instant Point-of-Care Sanction

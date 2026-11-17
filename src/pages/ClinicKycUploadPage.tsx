@@ -423,45 +423,68 @@ export default function ClinicKycUploadPage() {
   );
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 font-sans selection:bg-[#0867E8] selection:text-white pb-20">
+    <div className="min-h-screen bg-slate-50 text-slate-900 font-sans selection:bg-[#0867E8] selection:text-white pb-24 relative overflow-hidden">
       <SEOHead 
         title="Clinic Bank Whitelisting & PG KYC — Clinaza"
         description="Secure Payment Gateway onboarding & direct settlement whitelisting portal for partner clinics."
       />
 
-      {/* Top Header */}
-      <header className="border-b border-slate-200/80 bg-white/95 backdrop-blur-md sticky top-0 z-50 px-4 sm:px-8 py-3.5 flex items-center justify-between shadow-xs">
-        <Link to="/" className="flex items-center gap-3">
-          <img 
-            src="/assets/clinaza-logo.jpg" 
-            alt="CLINAZA" 
-            className="h-9 w-9 rounded-xl border border-slate-200 shadow-sm object-cover" 
-          />
-          <div>
-            <div className="flex items-center gap-2">
-              <span className="text-xs font-black tracking-widest text-[#0B2450] uppercase">CLINAZA</span>
-              <span className="px-2 py-0.5 rounded-full bg-blue-50 border border-blue-200 text-[10px] font-bold text-[#0867E8]">
-                PG ONBOARDING &bull; KYC DESK
-              </span>
-            </div>
-            <p className="text-[10px] text-slate-500 font-mono">T+1 Direct Settlement Rails</p>
-          </div>
-        </Link>
+      {/* Atmospheric Ambient Background Canvas */}
+      <div className="absolute inset-0 bg-radial-fintech pointer-events-none -z-10" />
+      <div className="absolute inset-0 bg-grid-fintech mask-radial-fade opacity-60 pointer-events-none -z-10" />
 
-        <a
-          href={`https://wa.me/917292984244?text=${whatsappMessage}`}
-          target="_blank"
-          rel="noreferrer"
-          className="inline-flex items-center gap-1.5 px-3.5 py-2 min-h-[40px] rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold transition-all shadow-sm active:scale-95"
-        >
-          <MessageCircle size={14} />
-          <span className="hidden sm:inline">WhatsApp Priority Desk</span>
-          <span className="sm:hidden">WhatsApp</span>
-        </a>
+      {/* Top Floating Pill Navbar */}
+      <header className="fixed top-3 sm:top-5 inset-x-0 z-50 pointer-events-none px-4 sm:px-6">
+        <nav className="max-w-3xl mx-auto bg-white/90 backdrop-blur-xl border border-slate-200/90 shadow-[0_8px_32px_rgba(15,23,42,0.08)] rounded-full px-3.5 sm:px-5 py-2.5 flex items-center justify-between gap-3 pointer-events-auto transition-all">
+          <Link to="/" className="flex items-center gap-2.5 shrink-0 group">
+            <img 
+              src="/assets/clinaza-logo.jpg" 
+              alt="CLINAZA" 
+              className="h-8 w-8 sm:h-9 sm:w-9 rounded-xl border border-slate-200 shadow-xs object-cover group-hover:scale-105 transition-transform" 
+              width={36}
+              height={36}
+            />
+            <div className="flex flex-col">
+              <div className="flex items-center gap-1.5">
+                <span className="text-xs font-black tracking-widest text-[#0B2450] uppercase">CLINAZA</span>
+                <span className="px-2 py-0.5 rounded-full bg-blue-50 border border-blue-200 text-[9px] font-bold text-[#0867E8]">
+                  PG KYC DESK
+                </span>
+              </div>
+              <span className="text-[10px] text-slate-500 font-mono hidden sm:inline">T+1 Direct Settlement Rails</span>
+            </div>
+          </Link>
+
+          {/* Official Pine Labs Badge */}
+          <div className="hidden sm:flex items-center gap-1.5 pl-3 border-l border-slate-200/80">
+            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Gateway:</span>
+            <img
+              src="/assets/plural_by_pinelabs_transparent.png"
+              alt="Plural by Pine Labs"
+              className="h-3.5 w-auto object-contain"
+              width={80}
+              height={14}
+            />
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse ml-0.5"></span>
+          </div>
+
+          <div className="flex items-center gap-2 shrink-0">
+            <a
+              href={`https://wa.me/917292984244?text=${whatsappMessage}`}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 min-h-[38px] rounded-full bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold transition-all shadow-xs active:scale-95 cursor-pointer"
+            >
+              <MessageCircle size={13} />
+              <span className="hidden sm:inline">WhatsApp Priority Desk</span>
+              <span className="sm:hidden">Help</span>
+            </a>
+          </div>
+        </nav>
       </header>
 
       {/* Main Container */}
-      <main className="max-w-2xl mx-auto px-4 sm:px-6 pt-6 sm:pt-10 pb-24 sm:pb-12">
+      <main className="max-w-2xl mx-auto px-4 sm:px-6 pt-24 sm:pt-32 pb-24 sm:pb-12">
         {/* Step Breadcrumb */}
         <div className="flex items-center justify-center gap-2 mb-6 text-xs text-slate-500 font-medium">
           <span className="flex items-center gap-1 text-emerald-600 font-bold">

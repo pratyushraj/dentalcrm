@@ -1177,7 +1177,7 @@ export default function LoanDemoPage() {
                 </div>
                 <div className="flex items-start gap-2 sm:gap-2.5">
                   <BadgeCheck size={16} className="text-emerald-600 shrink-0 mt-0.5" />
-                  <span><strong>2. Clinic Current Account Cancelled Cheque</strong> (or last 3-month statement)</span>
+                  <span><strong>2. Clinic Current Account Cancelled Cheque</strong> (Zero bank statements required)</span>
                 </div>
                 <div className="flex items-start gap-2 sm:gap-2.5">
                   <BadgeCheck size={16} className="text-emerald-600 shrink-0 mt-0.5" />
@@ -1195,7 +1195,7 @@ export default function LoanDemoPage() {
 
               <div className="p-2.5 sm:p-3 bg-emerald-100/80 border border-emerald-300 rounded-xl text-[11px] text-emerald-900 flex items-center gap-2 font-medium">
                 <Check size={14} className="text-emerald-700 stroke-[3] shrink-0" />
-                <span>Zero Corporate Friction: No Company PAN, No Board Resolution, No MOA/AOA needed.</span>
+                <span>Zero Friction: No Bank Statements, No Company PAN, No Board Resolution, No MOA/AOA needed.</span>
               </div>
             </div>
 

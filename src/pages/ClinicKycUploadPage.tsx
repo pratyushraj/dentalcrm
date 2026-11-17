@@ -63,7 +63,7 @@ export default function ClinicKycUploadPage() {
     previewUrl: null,
     uploadedUrl: null,
     isUploading: false,
-    docName: 'Clinic Cancelled Cheque / Bank Statement'
+    docName: 'Clinic Cancelled Cheque'
   });
 
   const [panDoc, setPanDoc] = useState<UploadedDoc>({
@@ -656,11 +656,11 @@ export default function ClinicKycUploadPage() {
                     </div>
                     <div>
                       <h3 className="text-xs sm:text-sm font-bold text-slate-900 flex items-center gap-1.5">
-                        <span>Clinic Cancelled Cheque / Bank Statement</span>
+                        <span>Clinic Cancelled Cheque</span>
                         <span className="text-rose-500">*</span>
                       </h3>
                       <p className="text-[11px] text-slate-500">
-                        Validates the Current A/C Number &amp; IFSC code entered above.
+                        Validates the Current A/C Number &amp; IFSC code entered above. Zero bank statements required.
                       </p>
                     </div>
                   </div>

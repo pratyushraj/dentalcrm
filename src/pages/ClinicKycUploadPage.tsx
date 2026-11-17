@@ -6,7 +6,9 @@ import { SEOHead } from '@/components/seo/SEOHead';
 import { toast } from 'sonner';
 import {
   downloadAutoFilledBoardResolutionDocx,
-  downloadAutoFilledGstExemptionDocx
+  downloadAutoFilledGstExemptionDocx,
+  printAutoFilledBoardResolution,
+  printAutoFilledGstExemption
 } from '@/utils/kycDocumentGenerators';
 import {
   ShieldCheck,
@@ -22,6 +24,7 @@ import {
   MessageCircle,
   ExternalLink,
   Download,
+  Printer,
   Landmark,
   CreditCard,
   AlertCircle,
@@ -1180,16 +1183,21 @@ export default function ClinicKycUploadPage() {
                         <span>Download Auto-Filled Word (.docx)</span>
                       </button>
 
-                      <a
-                        href="/docs/Clinaza_GST_Exemption_Declaration_Letterhead_Format.pdf"
-                        target="_blank"
-                        rel="noreferrer"
-                        download="Clinaza_GST_Exemption_Declaration_Letterhead_Format.pdf"
-                        className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-white hover:bg-slate-50 border border-slate-300 text-[11px] font-bold text-slate-700 transition-all shadow-2xs active:scale-95"
+                      <button
+                        type="button"
+                        onClick={() => {
+                          printAutoFilledGstExemption({
+                            clinicName,
+                            doctorName,
+                            city
+                          });
+                        }}
+                        className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-white hover:bg-slate-50 border border-slate-300 text-[11px] font-bold text-slate-700 transition-all shadow-2xs active:scale-95 cursor-pointer"
+                        title="Instant 1-click print on clinic letterhead or Save as PDF"
                       >
-                        <Download size={12} />
-                        <span>Download PDF</span>
-                      </a>
+                        <Printer size={12} />
+                        <span>Print on Letterhead / PDF</span>
+                      </button>
 
                       <button
                         type="button"
@@ -1368,16 +1376,23 @@ Dr. ${doctorName || '[Doctor Name]'}
                             <span>Download Auto-Filled Word (.docx)</span>
                           </button>
 
-                          <a
-                            href="/docs/Clinaza_Pine_Labs_Board_Resolution_Format.pdf"
-                            target="_blank"
-                            rel="noreferrer"
-                            download="Clinaza_Pine_Labs_Board_Resolution_Format.pdf"
-                            className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-white hover:bg-slate-50 border border-slate-300 text-[11px] font-bold text-slate-700 transition-all shadow-2xs active:scale-95"
+                          <button
+                            type="button"
+                            onClick={() => {
+                              printAutoFilledBoardResolution({
+                                clinicName,
+                                doctorName,
+                                city,
+                                accountNumber,
+                                ifscCode
+                              });
+                            }}
+                            className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-white hover:bg-slate-50 border border-slate-300 text-[11px] font-bold text-slate-700 transition-all shadow-2xs active:scale-95 cursor-pointer"
+                            title="Instant 1-click print on corporate letterhead or Save as PDF"
                           >
-                            <Download size={12} />
-                            <span>Download PDF</span>
-                          </a>
+                            <Printer size={12} />
+                            <span>Print on Letterhead / PDF</span>
+                          </button>
 
                           <button
                             type="button"

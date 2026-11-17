@@ -21,7 +21,11 @@ import {
   Landmark,
   CreditCard,
   AlertCircle,
-  Globe
+  Globe,
+  Copy,
+  FileCheck,
+  ChevronDown,
+  ChevronUp
 } from 'lucide-react';
 
 interface UploadedDoc {
@@ -90,6 +94,15 @@ export default function ClinicKycUploadPage() {
     docName: 'Doctor Aadhaar Card'
   });
 
+  const [gstDoc, setGstDoc] = useState<UploadedDoc>({
+    file: null,
+    previewUrl: null,
+    uploadedUrl: null,
+    isUploading: false,
+    docName: 'GST Exemption Declaration or GST Certificate'
+  });
+
+  const [showGstTemplate, setShowGstTemplate] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isCompleted, setIsCompleted] = useState(false);
 
@@ -124,7 +137,7 @@ export default function ClinicKycUploadPage() {
   // Generic document upload handler
   const handleFileUpload = async (
     file: File,
-    docType: 'cheque' | 'pan' | 'reg' | 'aadhaar',
+    docType: 'cheque' | 'pan' | 'reg' | 'aadhaar' | 'gst',
     setter: React.Dispatch<React.SetStateAction<UploadedDoc>>
   ) => {
     const preview = URL.createObjectURL(file);
@@ -248,6 +261,7 @@ export default function ClinicKycUploadPage() {
         'Cancelled Cheque Proof': chequeDoc.uploadedUrl || 'Attached',
         'Medical Practice Proof': regDoc.uploadedUrl || 'Attached',
         'Aadhaar Proof': aadhaarDoc.uploadedUrl || 'Attached',
+        'GST Exemption / Certificate': gstDoc.uploadedUrl || 'Self-Exempt (Letterhead Pending or Healthcare Exempt)',
         'Compliance Status': 'Ready for ₹1 Automated Penny Drop'
       });
 
@@ -942,6 +956,136 @@ export default function ClinicKycUploadPage() {
                     </p>
                     <p className="text-[10px] text-slate-400">
                       Supports JPG, PNG, PDF up to 20MB &bull; Masked Aadhaar Accepted
+                    </p>
+                  </label>
+                )}
+              </div>
+
+              {/* 5. Document: GST Exemption Declaration or GST Certificate */}
+              <div className="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-5 shadow-xs space-y-3">
+                <div className="flex items-start justify-between gap-3">
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-7 h-7 rounded-lg bg-blue-50 text-[#0867E8] flex items-center justify-center font-bold text-xs">
+                      5
+                    </div>
+                    <div>
+                      <h3 className="text-xs sm:text-sm font-bold text-slate-900 flex items-center gap-1.5 flex-wrap">
+                        <span>GST Exemption Self-Declaration</span>
+                        <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-1.5 py-0.5 rounded-md">
+                          Letterhead Format
+                        </span>
+                      </h3>
+                      <p className="text-[11px] text-slate-500">
+                        Since clinical healthcare services are legally exempt from GST under Notification No. 12/2017, upload a photo of your signed declaration on clinic letterhead. If your clinic carries a GSTIN, upload your GST certificate instead.
+                      </p>
+                    </div>
+                  </div>
+
+                  {gstDoc.uploadedUrl && (
+                    <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full shrink-0 flex items-center gap-1">
+                      <CheckCircle2 size={11} /> Attached
+                    </span>
+                  )}
+                </div>
+
+                {/* Sample Letterhead Format Helper */}
+                <div className="bg-blue-50/70 border border-blue-200/80 rounded-xl p-3 space-y-2">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-1.5 text-xs font-bold text-[#0B2450]">
+                      <FileCheck size={14} className="text-[#0867E8]" />
+                      <span>Official Letterhead Declaration Format (Advaita / Pine Labs Verified)</span>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => setShowGstTemplate(!showGstTemplate)}
+                      className="text-[11px] font-bold text-[#0867E8] hover:underline flex items-center gap-1 cursor-pointer"
+                    >
+                      <span>{showGstTemplate ? 'Hide Format' : 'View & Copy Format'}</span>
+                      {showGstTemplate ? <ChevronUp size={13} /> : <ChevronDown size={13} />}
+                    </button>
+                  </div>
+
+                  {showGstTemplate && (
+                    <div className="pt-2 border-t border-blue-200/60 space-y-2">
+                      <p className="text-[10px] text-slate-600">
+                        Print this exact wording on your clinic letterhead, doctor signs &amp; stamps, and upload a phone photo:
+                      </p>
+                      <pre className="p-2.5 bg-white border border-blue-200 rounded-lg text-[10px] font-mono text-slate-800 whitespace-pre-wrap leading-relaxed select-all">
+{`TO WHOMSOEVER IT MAY CONCERN
+
+Subject: Self-Declaration for Exemption from Goods and Services Tax (GST)
+
+We, ${clinicName || '[Clinic Name]'}, situated at ${city || '[Clinic City]'}, represented by Dr. ${doctorName || '[Doctor Name]'}, hereby declare and confirm that:
+
+1. We are an authorized "Clinical Establishment" offering healthcare and dental services.
+2. Under Ministry of Finance (Department of Revenue) Notification No. 12/2017-Central Tax (Rate), healthcare services provided by a clinical establishment or an authorized medical practitioner are legally EXEMPT from GST.
+3. In view of the above statutory exemption, we are not registered under GST and carry no GSTIN.
+
+Authorized Signatory
+Dr. ${doctorName || '[Doctor Name]'}
+[Clinic Name & Official Stamp]`}
+                      </pre>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const text = `TO WHOMSOEVER IT MAY CONCERN\n\nSubject: Self-Declaration for Exemption from Goods and Services Tax (GST)\n\nWe, ${clinicName || '[Clinic Name]'}, situated at ${city || '[Clinic City]'}, represented by Dr. ${doctorName || '[Doctor Name]'}, hereby declare and confirm that:\n\n1. We are an authorized "Clinical Establishment" offering healthcare and dental services.\n2. Under Ministry of Finance (Department of Revenue) Notification No. 12/2017-Central Tax (Rate), healthcare services provided by a clinical establishment or an authorized medical practitioner are legally EXEMPT from GST.\n3. In view of the above statutory exemption, we are not registered under GST and carry no GSTIN.\n\nAuthorized Signatory\nDr. ${doctorName || '[Doctor Name]'}\n[Clinic Name & Official Stamp]`;
+                          navigator.clipboard?.writeText(text);
+                          toast.success('Letterhead declaration format copied! Print on letterhead, sign & snap a photo.');
+                        }}
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white hover:bg-slate-50 border border-blue-300 text-xs font-bold text-[#0867E8] transition-all cursor-pointer shadow-2xs active:scale-95"
+                      >
+                        <Copy size={13} />
+                        <span>Copy Letterhead Text</span>
+                      </button>
+                    </div>
+                  )}
+                </div>
+
+                {gstDoc.previewUrl ? (
+                  <div className="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-200">
+                    <div className="flex items-center gap-3 truncate">
+                      <img 
+                        src={gstDoc.previewUrl} 
+                        alt="GST Doc Preview" 
+                        className="w-12 h-12 rounded-lg object-cover border border-slate-200 shrink-0" 
+                      />
+                      <div className="truncate">
+                        <p className="text-xs font-bold text-slate-800 truncate">
+                          {gstDoc.file?.name || 'gst_exemption.jpg'}
+                        </p>
+                        <p className="text-[10px] text-emerald-600 font-bold">
+                          {gstDoc.isUploading ? 'Uploading to secure banking bucket...' : '✓ Ready for verification'}
+                        </p>
+                      </div>
+                    </div>
+
+                    <button
+                      type="button"
+                      onClick={() => setGstDoc({ file: null, previewUrl: null, uploadedUrl: null, isUploading: false, docName: '' })}
+                      className="text-slate-400 hover:text-rose-600 p-1.5 transition-colors"
+                      title="Remove file"
+                    >
+                      <Trash2 size={15} />
+                    </button>
+                  </div>
+                ) : (
+                  <label className="border-2 border-dashed border-slate-200 hover:border-[#0867E8] bg-slate-50/60 hover:bg-blue-50/20 rounded-xl p-4 sm:p-6 text-center cursor-pointer transition-all block space-y-1.5">
+                    <input
+                      type="file"
+                      accept="image/*,application/pdf"
+                      capture="environment"
+                      className="hidden"
+                      onChange={(e) => {
+                        const f = e.target.files?.[0];
+                        if (f) handleFileUpload(f, 'gst', setGstDoc);
+                      }}
+                    />
+                    <FileText size={22} className="text-[#0867E8] mx-auto" />
+                    <p className="text-xs font-bold text-slate-800">
+                      Snap Photo of Signed Clinic Letterhead (or Upload GST)
+                    </p>
+                    <p className="text-[10px] text-slate-400">
+                      Supports JPG, PNG, PDF up to 20MB
                     </p>
                   </label>
                 )}

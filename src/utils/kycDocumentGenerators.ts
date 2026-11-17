@@ -1,12 +1,135 @@
 import { Document, Paragraph, TextRun, Packer, AlignmentType, Table, TableRow, TableCell, WidthType, Footer } from 'docx';
+import JSZip from 'jszip';
 
 export interface ClinicKycData {
   clinicName?: string;
   doctorName?: string;
+  email?: string;
+  phone?: string;
   city?: string;
+  accountHolderName?: string;
   accountNumber?: string;
   ifscCode?: string;
   bankName?: string;
+  websiteUrl?: string;
+}
+
+function escapeXml(str: string): string {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&apos;');
+}
+
+function replaceAllSafe(content: string, target: string, replacement: string): string {
+  return content.split(target).join(replacement);
+}
+
+/**
+ * Loads the Pine Labs master template (Plural_MAF_BO_PEP_Key_Personnel_List_Format.xlsx),
+ * replaces placeholders across all 3 sheets (Final MAF, Final LIST & PEP, Final BO)
+ * using JSZip, and triggers a direct client-side download of the auto-filled .xlsx file.
+ */
+export async function downloadAutoFilledMafExcel({
+  clinicName,
+  doctorName,
+  email,
+  phone,
+  city,
+  accountHolderName,
+  accountNumber,
+  ifscCode,
+  websiteUrl
+}: ClinicKycData) {
+  const cName = clinicName?.trim() || 'Partner Clinic';
+  const cLegal = `${cName.toUpperCase()} PRIVATE LIMITED`;
+  const dName = doctorName?.trim() || 'Managing Director';
+  const cEmail = email?.trim() || 'director@clinic.com';
+  const cPhone = phone?.trim() || '9876543210';
+  const cCity = city?.trim() || 'India';
+  const cAccHolder = accountHolderName?.trim() || cName;
+  const cAccNo = accountNumber?.trim() || '[Bank Account Number]';
+  const cIfsc = ifscCode?.trim() || '[IFSC Code]';
+  const slug = cName.toLowerCase().replace(/[^a-z0-9]/g, '-');
+  const cWebsite = websiteUrl?.trim() || `https://clinaza.in/clinic/${slug}`;
+
+  // Fetch template from public folder
+  const response = await fetch('/docs/Plural_MAF_BO_PEP_Key_Personnel_List_Format.xlsx');
+  if (!response.ok) {
+    throw new Error('Failed to load MAF template');
+  }
+  const arrayBuffer = await response.arrayBuffer();
+
+  const zip = await JSZip.loadAsync(arrayBuffer);
+
+  // 1. Sheet 1: Final MAF
+  const sheet1File = zip.file('xl/worksheets/sheet1.xml');
+  if (sheet1File) {
+    let s1 = await sheet1File.async('string');
+    s1 = replaceAllSafe(s1, '[Enter Clinic / Brand Name]', escapeXml(cName));
+    s1 = replaceAllSafe(s1, '[Enter Corporate Legal Name Pvt Ltd / LLP]', escapeXml(cLegal));
+    s1 = replaceAllSafe(s1, '[Operating Address Line 1]', escapeXml(`${cName}, ${cCity}`));
+    s1 = replaceAllSafe(s1, '[Registered Address Line 1]', escapeXml(`${cName}, ${cCity}`));
+    s1 = replaceAllSafe(s1, '[City]', escapeXml(cCity));
+    s1 = replaceAllSafe(s1, '[State]', escapeXml(cCity));
+    s1 = replaceAllSafe(s1, '[Director 1 Name]', escapeXml(dName));
+    s1 = replaceAllSafe(s1, '[director@company.com]', escapeXml(cEmail));
+    s1 = replaceAllSafe(s1, '[Mobile Number]', escapeXml(cPhone));
+    s1 = replaceAllSafe(s1, '[Contact Person Name]', escapeXml(dName));
+    s1 = replaceAllSafe(s1, '[Finance Person Name]', escapeXml(dName));
+    s1 = replaceAllSafe(s1, '[Contact Phone]', escapeXml(cPhone));
+    s1 = replaceAllSafe(s1, '[Finance Phone]', escapeXml(cPhone));
+    s1 = replaceAllSafe(s1, '[billing@company.com]', escapeXml(cEmail));
+    s1 = replaceAllSafe(s1, '[accounts@company.com]', escapeXml(cEmail));
+    s1 = replaceAllSafe(s1, '[Company Legal Name as per Cheque]', escapeXml(cAccHolder));
+    s1 = replaceAllSafe(s1, '[Company Current Account Number]', escapeXml(cAccNo));
+    s1 = replaceAllSafe(s1, '[IFSC CODE]', escapeXml(cIfsc));
+    s1 = replaceAllSafe(s1, '[https://www.yourclinic.com]', escapeXml(cWebsite));
+    s1 = replaceAllSafe(s1, 'MELLOWPRINTS', escapeXml(cLegal));
+    s1 = replaceAllSafe(s1, '50200068453280', escapeXml(cAccNo));
+    s1 = replaceAllSafe(s1, 'For MELLOWPRINTS (CLINAZA)', escapeXml(`For ${cLegal}`));
+    s1 = replaceAllSafe(s1, 'PRATYUSH RAJ', escapeXml(dName.toUpperCase()));
+    zip.file('xl/worksheets/sheet1.xml', s1);
+  }
+
+  // 2. Sheet 2: Final LIST & PEP
+  const sheet2File = zip.file('xl/worksheets/sheet2.xml');
+  if (sheet2File) {
+    let s2 = await sheet2File.async('string');
+    s2 = replaceAllSafe(s2, '[Director 1 Name]', escapeXml(dName));
+    s2 = replaceAllSafe(s2, 'PRATYUSH RAJ', escapeXml(dName.toUpperCase()));
+    s2 = replaceAllSafe(s2, 'For MELLOWPRINTS (CLINAZA)', escapeXml(`For ${cLegal}`));
+    s2 = replaceAllSafe(s2, 'Authorised Signatory Name: PRATYUSH RAJ', escapeXml(`Authorised Signatory Name: ${dName.toUpperCase()}`));
+    zip.file('xl/worksheets/sheet2.xml', s2);
+  }
+
+  // 3. Sheet 3: Final BO
+  const sheet3File = zip.file('xl/worksheets/sheet3.xml');
+  if (sheet3File) {
+    let s3 = await sheet3File.async('string');
+    s3 = replaceAllSafe(s3, 'Name of the Merchant: MELLOWPRINTS / CLINAZA (Sole Proprietorship)', escapeXml(`Name of the Merchant: ${cLegal}`));
+    s3 = replaceAllSafe(s3, 'PRATYUSH RAJ', escapeXml(dName.toUpperCase()));
+    s3 = replaceAllSafe(s3, 'For MELLOWPRINTS (CLINAZA)', escapeXml(`For ${cLegal}`));
+    s3 = replaceAllSafe(s3, 'Authorised Signatory Name: PRATYUSH RAJ', escapeXml(`Authorised Signatory Name: ${dName.toUpperCase()}`));
+    zip.file('xl/worksheets/sheet3.xml', s3);
+  }
+
+  const generatedBlob = await zip.generateAsync({
+    type: 'blob',
+    mimeType: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+  });
+
+  const cleanName = cName.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
+  const url = URL.createObjectURL(generatedBlob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `Plural_MAF_BO_PEP_${cleanName}.xlsx`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
 }
 
 /**

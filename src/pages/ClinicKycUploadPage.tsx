@@ -7,6 +7,7 @@ import { toast } from 'sonner';
 import {
   downloadAutoFilledBoardResolutionDocx,
   downloadAutoFilledGstExemptionDocx,
+  downloadAutoFilledMafExcel,
   printAutoFilledBoardResolution,
   printAutoFilledGstExemption
 } from '@/utils/kycDocumentGenerators';
@@ -1714,25 +1715,63 @@ DIN: [DIN Number]                      DIN: [DIN Number]`}
                     </div>
 
                     {/* MAF Download Helper */}
-                    <div className="bg-emerald-50/70 border border-emerald-200/80 rounded-xl p-3.5 space-y-2">
-                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                        <div className="flex items-center gap-1.5 text-xs font-bold text-emerald-950">
-                          <FileSpreadsheet size={15} className="text-emerald-700 shrink-0" />
-                          <span>Plural_MAF_BO_PEP_Key Personnel List_Format.xlsx</span>
+                    <div className="bg-emerald-50/70 border border-emerald-200/80 rounded-xl p-3.5 space-y-3">
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
+                        <div className="flex items-center gap-2 text-xs font-bold text-emerald-950">
+                          <FileSpreadsheet size={16} className="text-emerald-700 shrink-0" />
+                          <div>
+                            <p className="font-bold text-emerald-950">Plural MAF &amp; BO/PEP Declaration Format</p>
+                            <p className="text-[10px] text-emerald-700 font-normal">Auto-fills 3 sheets: Final MAF, Key Personnel (PEP), and Beneficial Ownership (BO)</p>
+                          </div>
                         </div>
 
-                        <a
-                          href="/docs/Plural_MAF_BO_PEP_Key_Personnel_List_Format.xlsx"
-                          download="Plural_MAF_BO_PEP_Key_Personnel_List_Format.xlsx"
-                          className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-white hover:bg-emerald-50 border border-emerald-300 text-[11px] font-bold text-emerald-800 transition-all shadow-2xs active:scale-95"
-                        >
-                          <Download size={12} />
-                          <span>Download Excel (.xlsx)</span>
-                        </a>
+                        <div className="flex flex-wrap items-center gap-2">
+                          <button
+                            type="button"
+                            onClick={async () => {
+                              try {
+                                await downloadAutoFilledMafExcel({
+                                  clinicName,
+                                  doctorName,
+                                  email,
+                                  phone,
+                                  city,
+                                  accountHolderName,
+                                  accountNumber,
+                                  ifscCode,
+                                  websiteUrl
+                                });
+                                toast.success(`Plural MAF auto-filled for ${clinicName || 'your company'} downloaded!`);
+                              } catch (e) {
+                                console.error('Failed to generate MAF:', e);
+                                toast.error('Failed to auto-fill MAF. You can download the blank template below.');
+                              }
+                            }}
+                            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-black shadow-xs transition-all cursor-pointer active:scale-95"
+                          >
+                            <Sparkles size={12} className="text-amber-300" />
+                            <Download size={12} />
+                            <span>Download Auto-Filled MAF (.xlsx)</span>
+                          </button>
+
+                          <a
+                            href="/docs/Plural_MAF_BO_PEP_Key_Personnel_List_Format.xlsx"
+                            download="Plural_MAF_BO_PEP_Key_Personnel_List_Format.xlsx"
+                            className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-white hover:bg-emerald-50 border border-emerald-300 text-[10px] font-bold text-emerald-800 transition-all shadow-2xs"
+                          >
+                            <Download size={11} />
+                            <span>Blank Template</span>
+                          </a>
+                        </div>
                       </div>
-                      <p className="text-[10px] text-emerald-800">
-                        Fill in your basic company details, shareholder equity % on the BO sheet, and upload the completed Excel or signed copy.
-                      </p>
+
+                      <div className="text-[10px] text-emerald-800 bg-emerald-100/60 rounded-lg p-2.5 space-y-1">
+                        <p className="font-bold">✨ What gets auto-filled across all 3 sheets:</p>
+                        <p>• <strong>Sheet 1 (Final MAF):</strong> Trade Name, Legal Entity ({clinicName ? clinicName.toUpperCase() : 'Clinic'} Pvt Ltd), Operating City ({city || 'City'}), Director ({doctorName || 'Director'}), Work Email, Phone, Beneficiary Name, Account Number ({accountNumber ? `••••${accountNumber.slice(-4)}` : 'Bank A/C'}), and IFSC.</p>
+                        <p>• <strong>Sheet 2 (Final LIST &amp; PEP):</strong> Key Management Personnel list with statutory Non-PEP (Politically Exposed Persons) clearance.</p>
+                        <p>• <strong>Sheet 3 (Final BO):</strong> RBI statutory Beneficial Ownership declaration with Director majority equity holding.</p>
+                        <p className="pt-0.5 text-emerald-900 font-bold">👉 How to complete: Download auto-filled file, sign/stamp the signature block, and upload the completed Excel or signed PDF back here.</p>
+                      </div>
                     </div>
 
                     {mafDoc.previewUrl ? (

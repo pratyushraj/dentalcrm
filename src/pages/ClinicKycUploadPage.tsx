@@ -812,20 +812,20 @@ export default function ClinicKycUploadPage() {
                 </div>
               </div>
 
-              {/* Mandatory Banking Underwriting Invariant Banner */}
-              <div className="bg-amber-50/90 border border-amber-300 rounded-2xl p-4 shadow-xs flex items-start sm:items-center gap-3">
-                <div className="w-9 h-9 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center shrink-0">
+              {/* Frictionless Digital KYC Banner */}
+              <div className="bg-blue-50/80 border border-blue-200/90 rounded-2xl p-4 shadow-xs flex items-start sm:items-center gap-3">
+                <div className="w-9 h-9 rounded-xl bg-blue-100 text-[#0867E8] flex items-center justify-center shrink-0">
                   <FileSignature size={20} />
                 </div>
                 <div className="space-y-0.5">
                   <div className="flex items-center gap-2 flex-wrap">
-                    <p className="text-xs font-black text-amber-950">Mandatory Banking Rule: Sign &amp; Stamp Required on Every Page</p>
-                    <span className="text-[10px] font-bold text-amber-900 bg-amber-200/80 px-2 py-0.5 rounded-full border border-amber-300">
-                      Pine Labs Underwriting Requirement
+                    <p className="text-xs font-black text-[#0B2450]">Frictionless Digital Upload: No Manual Signing Needed on Government KYC</p>
+                    <span className="text-[10px] font-bold text-emerald-800 bg-emerald-100/90 px-2 py-0.5 rounded-full border border-emerald-200">
+                      Fast-Track Underwriting
                     </span>
                   </div>
-                  <p className="text-[11px] text-amber-900 leading-relaxed">
-                    Underwriting compliance requires the authorized doctor / director to <strong>sign and place the clinic round stamp on every single page</strong> of uploaded documents (especially multi-page documents like the <strong>3-page GST Certificate, Certificate of Incorporation, MOA/AOA, and Board Resolution</strong>) to prevent verification delays.
+                  <p className="text-[11px] text-slate-600 leading-relaxed">
+                    <strong>BR &amp; MAF:</strong> Sign &amp; stamp on letterhead. &bull; <strong>Government KYC Docs (COI, GSTIN, PAN, Cheque, MOA/AOA):</strong> Simply upload clean digital PDFs or scans directly — <strong>no manual signatures needed online</strong> *(physical signing is only required later when couriering hardcopies)*.
                   </p>
                 </div>
               </div>
@@ -1624,7 +1624,7 @@ DIN: [DIN Number]                      DIN: [DIN Number]`}
                             <span className="text-rose-500">*</span>
                           </h3>
                           <p className="text-[11px] text-slate-500">
-                            Issued by MCA. <strong>Self-attested:</strong> Director must sign &amp; stamp with round company seal.
+                            Issued by MCA. Upload original digital PDF or clean scan (No physical signature needed online).
                           </p>
                         </div>
                       </div>
@@ -1652,7 +1652,7 @@ DIN: [DIN Number]                      DIN: [DIN Number]`}
                         <input type="file" accept="image/*,application/pdf" className="hidden" onChange={(e) => { const f = e.target.files?.[0]; if (f) handleFileUpload(f, 'coi', setCoiDoc); }} />
                         <Building2 size={22} className="text-[#0867E8] mx-auto" />
                         <p className="text-xs font-bold text-slate-800">Upload Certificate of Incorporation (COI)</p>
-                        <p className="text-[10px] text-slate-400">PDF, JPG, PNG up to 20MB &bull; Sign &amp; Stamp Required</p>
+                        <p className="text-[10px] text-slate-400">PDF, JPG, PNG up to 20MB &bull; Clean copy accepted</p>
                       </label>
                     )}
                   </div>
@@ -1670,7 +1670,7 @@ DIN: [DIN Number]                      DIN: [DIN Number]`}
                             <span className="text-rose-500">*</span>
                           </h3>
                           <p className="text-[11px] text-slate-500">
-                            Corporate entity PAN. <strong>Self-attested:</strong> Director signs &amp; stamps with company seal.
+                            Corporate entity PAN. Upload clear photo or scan (No physical signature needed online).
                           </p>
                         </div>
                       </div>
@@ -1698,7 +1698,7 @@ DIN: [DIN Number]                      DIN: [DIN Number]`}
                         <input type="file" accept="image/*,application/pdf" className="hidden" onChange={(e) => { const f = e.target.files?.[0]; if (f) handleFileUpload(f, 'company_pan', setCompanyPanDoc); }} />
                         <CreditCard size={22} className="text-[#0867E8] mx-auto" />
                         <p className="text-xs font-bold text-slate-800">Upload Company PAN Card</p>
-                        <p className="text-[10px] text-slate-400">PDF, JPG, PNG up to 20MB &bull; Self-Attested</p>
+                        <p className="text-[10px] text-slate-400">PDF, JPG, PNG up to 20MB &bull; Clean copy accepted</p>
                       </label>
                     )}
                   </div>
@@ -1716,7 +1716,7 @@ DIN: [DIN Number]                      DIN: [DIN Number]`}
                             <span className="text-rose-500">*</span>
                           </h3>
                           <p className="text-[11px] text-slate-500">
-                            Standard 3-page GST certificate (Form GST REG-06). <strong>Mandatory:</strong> Sign &amp; stamp every page.
+                            Standard 3-page GST certificate (Form GST REG-06). Upload the clean portal PDF (No physical signature needed online).
                           </p>
                         </div>
                       </div>
@@ -1743,8 +1743,8 @@ DIN: [DIN Number]                      DIN: [DIN Number]`}
                       <label className="border-2 border-dashed border-slate-200 hover:border-[#0867E8] bg-slate-50/60 hover:bg-blue-50/20 rounded-xl p-4 sm:p-5 text-center cursor-pointer transition-all block space-y-1.5">
                         <input type="file" accept="image/*,application/pdf" className="hidden" onChange={(e) => { const f = e.target.files?.[0]; if (f) handleFileUpload(f, 'company_gst', setCompanyGstDoc); }} />
                         <FileText size={22} className="text-[#0867E8] mx-auto" />
-                        <p className="text-xs font-bold text-slate-800">Upload 3-Page Company GST Certificate</p>
-                        <p className="text-[10px] text-slate-400">PDF, JPG, PNG up to 20MB &bull; Sign &amp; Stamp on All 3 Pages</p>
+                        <p className="text-xs font-bold text-slate-800">Upload 3-Page Company GST Certificate (PDF)</p>
+                        <p className="text-[10px] text-slate-400">Direct portal PDF or scan &bull; No physical signing needed online</p>
                       </label>
                     )}
                   </div>
@@ -1808,7 +1808,7 @@ DIN: [DIN Number]                      DIN: [DIN Number]`}
                             <span className="text-rose-500">*</span>
                           </h3>
                           <p className="text-[11px] text-slate-500">
-                            Identity &amp; address proof. <strong>Self-attested:</strong> Director signs across front &amp; back copies.
+                            Identity &amp; address proof of authorized director. Upload clean photo or PDF (No physical sign needed online).
                           </p>
                         </div>
                       </div>
@@ -1836,7 +1836,7 @@ DIN: [DIN Number]                      DIN: [DIN Number]`}
                         <input type="file" accept="image/*,application/pdf" className="hidden" onChange={(e) => { const f = e.target.files?.[0]; if (f) handleFileUpload(f, 'aadhaar', setAadhaarDoc); }} />
                         <FileText size={22} className="text-[#0867E8] mx-auto" />
                         <p className="text-xs font-bold text-slate-800">Upload Director PAN &amp; Aadhaar (Front &amp; Back)</p>
-                        <p className="text-[10px] text-slate-400">PDF, JPG, PNG up to 20MB &bull; Self-Attested with Signature</p>
+                        <p className="text-[10px] text-slate-400">PDF, JPG, PNG up to 20MB &bull; Clean copy accepted</p>
                       </label>
                     )}
                   </div>
@@ -1854,7 +1854,7 @@ DIN: [DIN Number]                      DIN: [DIN Number]`}
                             <span className="text-rose-500">*</span>
                           </h3>
                           <p className="text-[11px] text-slate-500">
-                            Constitutional charter filed with ROC. <strong>Mandatory:</strong> Every page must be signed/initialed with company seal.
+                            Constitutional charter filed with ROC. Upload original digital PDF (No physical sign needed online).
                           </p>
                         </div>
                       </div>
@@ -1884,7 +1884,7 @@ DIN: [DIN Number]                      DIN: [DIN Number]`}
                         <input type="file" accept="image/*,application/pdf" className="hidden" onChange={(e) => { const f = e.target.files?.[0]; if (f) handleFileUpload(f, 'moa', setMoaDoc); }} />
                         <FileText size={22} className="text-[#0867E8] mx-auto" />
                         <p className="text-xs font-bold text-slate-800">Upload MOA &amp; AOA / LLP Agreement</p>
-                        <p className="text-[10px] text-slate-400">PDF up to 20MB &bull; Sign &amp; Stamp on Every Page</p>
+                        <p className="text-[10px] text-slate-400">Digital ROC PDF up to 20MB &bull; Clean copy accepted</p>
                       </label>
                     )}
                   </div>

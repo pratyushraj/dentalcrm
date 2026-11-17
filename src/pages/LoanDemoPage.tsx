@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { SEOHead } from '@/components/seo/SEOHead';
 import { 
   Shield, 
+  ShieldCheck,
   CheckCircle2, 
   ChevronRight, 
   CreditCard, 
@@ -26,7 +27,9 @@ import {
   Wallet,
   Building2,
   Sliders,
-  ChevronDown
+  ChevronDown,
+  Lock,
+  Landmark
 } from 'lucide-react';
 import { toast } from 'sonner';
 
@@ -119,7 +122,7 @@ export default function LoanDemoPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] text-slate-900 flex flex-col font-sans selection:bg-[#0867E8] selection:text-white pb-24 sm:pb-0">
+    <div className="min-h-screen bg-[#F8FAFC] text-[#0B2450] flex flex-col font-jakarta antialiased selection:bg-[#0867E8] selection:text-white pb-24 sm:pb-0 relative overflow-x-hidden">
       <SEOHead
         title="Patient EMI Checkout Flow & Interactive Simulator | Clinaza"
         description="Experience Clinaza's 2-minute paperless patient financing checkout: 76.4% multi-lender approval, 1-click UPI autopay, and T+1 direct clinic settlement."
@@ -127,82 +130,174 @@ export default function LoanDemoPage() {
         image="https://www.clinaza.in/assets/og-checkout-flow.png"
       />
 
-      {/* Top Professional Header */}
-      <header className="border-b border-slate-200/80 bg-white/95 backdrop-blur-md sticky top-0 z-40 px-3.5 sm:px-8 py-3 flex items-center justify-between shadow-xs">
-        <Link to="/" className="flex items-center gap-2.5">
-          <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-[#0867E8] text-white flex items-center justify-center font-black text-sm sm:text-base shadow-md shadow-blue-500/20 shrink-0">
-            C
-          </div>
-          <div className="flex flex-col">
-            <span className="text-xs sm:text-sm font-black tracking-tight text-[#0B2450] flex items-center gap-1.5">
-              CLINAZA <span className="text-[9px] sm:text-[10px] font-bold text-[#0867E8] bg-blue-50 border border-blue-200 px-1.5 py-0.5 rounded whitespace-nowrap">CHECKOUT OS</span>
-            </span>
-            <span className="text-[9px] sm:text-[10px] text-slate-500 font-medium hidden xs:inline">Point-of-Care Healthcare Financing Network</span>
-          </div>
-        </Link>
+      {/* ── Precision Floating Frosted-Glass Pill Navigation (Identical to Homepage) ── */}
+      <header className="fixed top-3 sm:top-5 inset-x-0 z-50 max-w-7xl mx-auto px-3 sm:px-6 pointer-events-none">
+        <nav className="pointer-events-auto bg-white/90 backdrop-blur-xl border border-slate-200/90 rounded-full px-3.5 sm:px-5 py-2 sm:py-2.5 shadow-[0_8px_32px_rgba(15,23,42,0.08)] flex items-center justify-between gap-2 sm:gap-3 transition-all duration-300">
+          {/* Left Brand & Co-Brand Group */}
+          <div className="flex items-center gap-2.5 sm:gap-3 shrink-0">
+            <Link to="/" className="flex items-center gap-2.5 group shrink-0 min-h-[44px] min-w-[44px] p-0.5">
+              <img
+                src="/assets/clinaza-logo.jpg"
+                alt="CLINAZA"
+                className="h-8 sm:h-9 w-auto rounded-xl border border-slate-200 shadow-2xs group-hover:scale-105 transition-transform shrink-0"
+                width={36}
+                height={36}
+              />
+              <div className="hidden sm:block text-left shrink-0">
+                <div className="flex items-center gap-1.5 whitespace-nowrap">
+                  <span className="text-xs sm:text-[13px] font-extrabold tracking-wider text-[#0B2450]">CLINAZA</span>
+                  <span className="text-[8px] font-black uppercase tracking-widest bg-blue-50 text-[#0867E8] px-1.5 py-0.5 rounded border border-blue-200/60">
+                    HealthPay
+                  </span>
+                </div>
+                <span className="hidden xl:block text-[9px] font-bold tracking-wider text-[#0f7a75] uppercase whitespace-nowrap">
+                  Point-of-Care Patient Financing
+                </span>
+              </div>
+            </Link>
 
-        <div className="flex items-center gap-2">
-          <button
-            type="button"
-            onClick={handleShare}
-            className="inline-flex items-center gap-1.5 px-3 py-2 min-h-[44px] rounded-xl bg-emerald-50 hover:bg-emerald-100 border border-emerald-300 text-emerald-800 text-xs font-bold transition-all shadow-xs"
-            title="Share with Clinic Reception"
-          >
-            <Share2 size={14} className="text-emerald-600 shrink-0" />
-            <span className="hidden md:inline">Share with Reception</span>
-          </button>
-          <Link
-            to="/clinic-kyc"
-            className="px-3.5 sm:px-4 py-2 min-h-[44px] bg-[#0867E8] hover:bg-[#0756c7] text-white rounded-xl text-xs font-black transition-all shadow-md shadow-blue-500/20 flex items-center gap-1 active:scale-95 shrink-0"
-          >
-            <span>Onboard Clinic</span>
-            <ArrowRight size={13} />
-          </Link>
-        </div>
+            {/* Pine Labs Official Gateway Micro-Pill (visible on ultra-wide screens to maintain breathing room) */}
+            <div className="hidden 2xl:flex items-center gap-2 px-3 py-1 bg-slate-50/90 border border-slate-200/80 rounded-full shrink-0">
+              <span className="text-[9px] font-bold uppercase text-slate-400 tracking-wider">Gateway:</span>
+              <img
+                src="/assets/plural_by_pinelabs_transparent.png"
+                alt="Plural by Pine Labs"
+                className="h-3.5 w-auto object-contain"
+                width={80}
+                height={14}
+              />
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse ml-0.5"></span>
+            </div>
+          </div>
+
+          {/* Center Navigation Links (Desktop: lg+) */}
+          <div className="hidden lg:flex items-center gap-0.5 xl:gap-1 text-[11.5px] xl:text-xs font-semibold text-slate-600 shrink-0">
+            <Link to="/#how-it-works" className="px-2 xl:px-2.5 py-1.5 rounded-full hover:text-[#0867E8] hover:bg-slate-50 transition-colors whitespace-nowrap">
+              How It Works
+            </Link>
+            <Link to="/checkout-flow" className="px-2 xl:px-2.5 py-1.5 rounded-full bg-blue-50/80 text-[#0867E8] font-bold transition-colors whitespace-nowrap flex items-center gap-1">
+              <span>Checkout Flow</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-blue-600 animate-ping"></span>
+            </Link>
+            <Link to="/#calculator" className="px-2 xl:px-2.5 py-1.5 rounded-full hover:text-[#0867E8] hover:bg-slate-50 transition-colors whitespace-nowrap">
+              Practice ROI
+            </Link>
+            <Link to="/#treatments" className="px-2 xl:px-2.5 py-1.5 rounded-full hover:text-[#0867E8] hover:bg-slate-50 transition-colors whitespace-nowrap">
+              Treatments
+            </Link>
+            <Link to="/tools" className="px-2 xl:px-2.5 py-1.5 rounded-full hover:text-[#0867E8] hover:bg-slate-50 transition-colors whitespace-nowrap">
+              Free Rx Tools
+            </Link>
+            <Link to="/blog" className="px-2 xl:px-2.5 py-1.5 rounded-full hover:text-[#0867E8] hover:bg-slate-50 transition-colors whitespace-nowrap">
+              Guides
+            </Link>
+          </div>
+
+          {/* Right Action Group */}
+          <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+            <Link
+              to="/reactivation/login"
+              className="flex items-center gap-1.5 px-3 sm:px-3.5 py-2 min-h-[44px] bg-slate-50 hover:bg-slate-100 border border-slate-200 text-xs font-bold text-slate-700 rounded-full transition-all whitespace-nowrap shrink-0 active:scale-95"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span className="hidden sm:inline">Doctor </span>Login
+              <Lock size={12} className="text-slate-500 ml-0.5" />
+            </Link>
+
+            <Link
+              to="/clinic-onboarding"
+              className="relative overflow-hidden group px-3 sm:px-4 xl:px-5 py-2 sm:py-2.5 min-h-[44px] bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-extrabold uppercase tracking-wider rounded-full transition-all shadow-[0_4px_16px_rgba(8,103,232,0.25)] hover:shadow-[0_6px_20px_rgba(8,103,232,0.35)] flex items-center justify-center gap-1.5 whitespace-nowrap shrink-0 active:scale-95"
+            >
+              <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-full" aria-hidden="true">
+                <div className="w-16 h-full bg-gradient-to-r from-transparent via-white/35 to-transparent absolute top-0 -left-16 animate-cta-sheen" />
+              </div>
+              <span className="sm:hidden relative z-10">ONBOARD</span>
+              <span className="hidden sm:inline xl:hidden relative z-10">Onboard &bull; ₹999</span>
+              <span className="hidden xl:inline relative z-10">Onboard Clinic &bull; ₹999</span>
+              <ArrowRight size={13} className="relative z-10" />
+            </Link>
+          </div>
+        </nav>
       </header>
 
+      {/* Subtle Atmospheric Ambient Background (Matching Homepage) */}
+      <div className="absolute inset-0 bg-radial-fintech pointer-events-none -z-10" />
+      <div className="absolute inset-0 bg-grid-fintech mask-radial-fade opacity-60 pointer-events-none -z-10" />
+
       {/* Hero Showcase Section */}
-      <section className="px-4 sm:px-6 pt-8 pb-4 max-w-6xl mx-auto w-full text-center space-y-3.5">
-        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-50 border border-blue-200 text-[#0867E8] text-[11px] sm:text-xs font-extrabold uppercase tracking-wider shadow-xs">
-          <Sparkles size={13} className="text-blue-600 animate-pulse shrink-0" />
-          <span>Interactive Patient Checkout &amp; Infrastructure Walkthrough</span>
+      <section className="px-4 sm:px-6 pt-24 sm:pt-34 pb-4 max-w-6xl mx-auto w-full text-center space-y-4">
+        {/* Category Pill Badge Matching Homepage */}
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-white/90 backdrop-blur-md border border-slate-200/90 rounded-full text-xs font-semibold text-slate-800 shadow-2xs">
+          <span className="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse shrink-0" />
+          <span className="text-[10px] font-extrabold text-[#0867E8] uppercase tracking-wider">OFFICIAL GATEWAY PARTNER:</span>
+          <span className="text-[11px] font-bold text-slate-800">Plural by Pine Labs</span>
+          <span className="text-slate-300 hidden sm:inline">&bull;</span>
+          <span className="text-[10px] font-bold text-slate-500 hidden sm:inline">16+ Banks &bull; T+1 Settlement</span>
         </div>
 
-        <h1 className="text-2xl xs:text-3xl sm:text-5xl font-black tracking-tight text-[#0B2450] max-w-4xl mx-auto leading-tight">
+        <h1 className="text-3xl sm:text-5xl lg:text-[52px] font-extrabold tracking-[-0.035em] leading-[1.08] text-[#0B2450] [text-wrap:balance]">
           How Patient EMI Financing Works <br className="hidden sm:block" />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0867E8] via-[#0284c7] to-[#0f766e]">
+          <span className="bg-gradient-to-r from-[#0867E8] via-[#0D72EB] to-[#0f7a75] bg-clip-text text-transparent">
             At Your Dental Clinic Front Desk
           </span>
         </h1>
 
-        <p className="text-xs sm:text-base text-slate-600 max-w-2xl mx-auto leading-relaxed">
+        <p className="text-sm sm:text-base md:text-lg text-slate-600 font-normal leading-relaxed max-w-2xl mx-auto [text-wrap:pretty]">
           Zero clinic credit risk, guaranteed T+1 direct settlement to your current account, and instant multi-lender paperless approval in under 120 seconds.
         </p>
 
-        {/* ── POINT 3: HARD PRODUCTION BENCHMARKS TICKER ── */}
-        <div className="pt-2 grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 max-w-4xl mx-auto text-left">
-          <div className="bg-white border border-slate-200/90 rounded-2xl p-3 sm:p-3.5 shadow-xs">
-            <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider block">Multi-Lender Match</span>
-            <div className="text-lg sm:text-2xl font-black text-emerald-600 font-mono mt-0.5">76.4%</div>
-            <span className="text-[10px] text-slate-500">Platform approval benchmark</span>
+        {/* ── POINT 3: HARD PRODUCTION BENCHMARKS TICKER (Institutional Co-Brand Guarantee Strip) ── */}
+        <div className="p-3.5 sm:p-4 rounded-2xl bg-white/95 backdrop-blur-md border border-slate-200/90 shadow-[0_4px_24px_rgba(11,36,80,0.05)] space-y-2.5 max-w-4xl mx-auto">
+          <div className="flex items-center justify-between gap-2 border-b border-slate-100 pb-2 text-left">
+            <div className="flex items-center gap-2">
+              <span className="text-[10px] font-extrabold uppercase tracking-wide bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-full border border-emerald-200/60 flex items-center gap-1">
+                <ShieldCheck size={11} className="text-emerald-600" />
+                RBI Regulated Lenders
+              </span>
+              <span className="text-[10px] text-slate-400 hidden sm:inline">&bull;</span>
+              <span className="text-[10px] font-bold text-slate-600 hidden sm:inline">
+                Piramal &bull; Bajaj &bull; Tata Capital &bull; L&amp;T Finance
+              </span>
+            </div>
+            <span className="text-[10px] font-bold text-slate-500">ISO 27001 &bull; PCI-DSS Level 1</span>
           </div>
 
-          <div className="bg-white border border-slate-200/90 rounded-2xl p-3 sm:p-3.5 shadow-xs">
-            <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider block">Pre-Approved ETB</span>
-            <div className="text-lg sm:text-2xl font-black text-[#0867E8] font-mono mt-0.5">&lt; 60s</div>
-            <span className="text-[10px] text-slate-500">Instant OTP verification</span>
-          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-left">
+            <div className="bg-slate-50/90 p-2.5 sm:p-3 rounded-xl border border-slate-200/70">
+              <div className="flex items-center gap-1 text-slate-400 mb-0.5">
+                <TrendingUp size={11} className="text-emerald-600" />
+                <span className="text-[9px] font-bold uppercase tracking-wider">Multi-Lender Match</span>
+              </div>
+              <div className="text-lg sm:text-2xl font-black text-emerald-600 font-mono">76.4%</div>
+              <span className="text-[9.5px] text-slate-500 block truncate">Platform benchmark</span>
+            </div>
 
-          <div className="bg-white border border-slate-200/90 rounded-2xl p-3 sm:p-3.5 shadow-xs">
-            <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider block">Approval Uplift</span>
-            <div className="text-lg sm:text-2xl font-black text-purple-600 font-mono mt-0.5">+15% to 20%</div>
-            <span className="text-[10px] text-slate-500">Over single-lender setups</span>
-          </div>
+            <div className="bg-slate-50/90 p-2.5 sm:p-3 rounded-xl border border-slate-200/70">
+              <div className="flex items-center gap-1 text-slate-400 mb-0.5">
+                <Zap size={11} className="text-blue-600" />
+                <span className="text-[9px] font-bold uppercase tracking-wider">Pre-Approved ETB</span>
+              </div>
+              <div className="text-lg sm:text-2xl font-black text-[#0867E8] font-mono">&lt; 60s</div>
+              <span className="text-[9.5px] text-slate-500 block truncate">Instant OTP verification</span>
+            </div>
 
-          <div className="bg-white border border-slate-200/90 rounded-2xl p-3 sm:p-3.5 shadow-xs">
-            <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider block">Doctor Recourse</span>
-            <div className="text-lg sm:text-2xl font-black text-emerald-700 font-mono mt-0.5">₹0 Risk</div>
-            <span className="text-[10px] text-slate-500">100% Non-recourse T+1 payout</span>
+            <div className="bg-slate-50/90 p-2.5 sm:p-3 rounded-xl border border-slate-200/70">
+              <div className="flex items-center gap-1 text-slate-400 mb-0.5">
+                <Layers size={11} className="text-purple-600" />
+                <span className="text-[9px] font-bold uppercase tracking-wider">Approval Uplift</span>
+              </div>
+              <div className="text-lg sm:text-2xl font-black text-purple-600 font-mono">+15% to 20%</div>
+              <span className="text-[9.5px] text-slate-500 block truncate">Over single-lender</span>
+            </div>
+
+            <div className="bg-slate-50/90 p-2.5 sm:p-3 rounded-xl border border-slate-200/70">
+              <div className="flex items-center gap-1 text-slate-400 mb-0.5">
+                <Clock size={11} className="text-emerald-600" />
+                <span className="text-[9px] font-bold uppercase tracking-wider">Doctor Recourse</span>
+              </div>
+              <div className="text-lg sm:text-2xl font-black text-emerald-700 font-mono">₹0 Risk</div>
+              <span className="text-[9.5px] text-slate-500 block truncate">100% Non-recourse T+1</span>
+            </div>
           </div>
         </div>
       </section>
@@ -214,7 +309,7 @@ export default function LoanDemoPage() {
         <div className="relative">
 
           {/* Mobile Tab Segmented Switcher (Sticky ONLY while exploring the simulator) */}
-          <div className="lg:hidden sticky top-[57px] z-30 bg-[#F8FAFC]/95 backdrop-blur-md pt-2 pb-2.5 -mx-3.5 px-3.5 border-b border-slate-200/80 shadow-xs mb-4">
+          <div className="lg:hidden sticky top-[68px] sm:top-[76px] z-30 bg-[#F8FAFC]/95 backdrop-blur-md pt-2 pb-2.5 -mx-3.5 px-3.5 border-b border-slate-200/80 shadow-xs mb-4">
             <div className="p-1 bg-slate-200/80 rounded-2xl flex items-center gap-1 border border-slate-300/80 shadow-inner w-full max-w-md mx-auto">
               <button
                 type="button"
@@ -1188,52 +1283,68 @@ export default function LoanDemoPage() {
         </div>
 
         {/* ── SECTION: BOTTOM CONVERSION & WHATSAPP SHARE ── */}
-        <div className="bg-gradient-to-r from-[#0B2450] to-[#0F172A] text-white rounded-3xl p-5 sm:p-10 text-center space-y-4 shadow-xl">
-          <h3 className="text-xl sm:text-3xl font-black">
-            Ready to Offer Instant Patient EMIs at Your Front Desk?
-          </h3>
-          <p className="text-xs sm:text-sm text-slate-300 max-w-xl mx-auto leading-relaxed">
-            Stop losing high-value implant and aligner cases to price objections. Get your clinic verified in under 24 hours with ₹0 setup fee and ₹0 AMC.
-          </p>
+        <div className="relative overflow-hidden bg-gradient-to-r from-[#0B2450] via-[#091E42] to-[#0F172A] text-white rounded-3xl p-6 sm:p-12 text-center space-y-4 shadow-xl border border-slate-800">
+          <div className="absolute inset-0 bg-radial-fintech opacity-20 pointer-events-none" />
+          
+          <div className="relative z-10 space-y-3">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-400/30 text-blue-300 text-[10px] font-extrabold uppercase tracking-wider">
+              <Sparkles size={12} className="text-blue-400" />
+              <span>Instant Front-Desk Activation</span>
+            </div>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
-            <Link
-              to="/clinic-kyc"
-              className="w-full sm:w-auto px-6 py-3.5 min-h-[46px] bg-[#0867E8] hover:bg-[#0756c7] text-white rounded-xl text-xs font-black transition-all shadow-lg shadow-blue-500/30 flex items-center justify-center gap-2 active:scale-98"
-            >
-              <span>Submit Clinic Documents Online</span>
-              <ArrowRight size={15} />
-            </Link>
+            <h3 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-white max-w-2xl mx-auto [text-wrap:balance]">
+              Ready to Offer Instant Patient EMIs at Your Front Desk?
+            </h3>
+            
+            <p className="text-xs sm:text-base text-slate-300 max-w-xl mx-auto leading-relaxed">
+              Stop losing high-value implant and aligner cases to price objections. Get your clinic verified in under 24 hours with ₹0 setup fee and ₹0 AMC.
+            </p>
 
-            <button
-              type="button"
-              onClick={handleShare}
-              className="w-full sm:w-auto px-6 py-3.5 min-h-[46px] bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-black transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md shadow-emerald-900/30 active:scale-98"
-            >
-              <Share2 size={15} />
-              <span>Share Flow via WhatsApp</span>
-            </button>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-3">
+              <Link
+                to="/clinic-onboarding"
+                className="relative overflow-hidden group w-full sm:w-auto px-7 py-3.5 sm:py-4 min-h-[48px] bg-[#0867E8] hover:bg-[#0756c7] text-white rounded-2xl text-xs sm:text-sm font-extrabold uppercase tracking-wider transition-all shadow-[0_10px_25px_rgba(8,103,232,0.25)] hover:shadow-[0_14px_30px_rgba(8,103,232,0.35)] flex items-center justify-center gap-2 active:scale-95"
+              >
+                <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-2xl" aria-hidden="true">
+                  <div className="w-20 h-full bg-gradient-to-r from-transparent via-white/35 to-transparent absolute top-0 -left-20 animate-cta-sheen" />
+                </div>
+                <span className="relative z-10">Onboard Clinic &bull; ₹999 Setup</span>
+                <ArrowRight size={15} className="relative z-10" />
+              </Link>
+
+              <button
+                type="button"
+                onClick={handleShare}
+                className="w-full sm:w-auto px-6 py-3.5 sm:py-4 min-h-[48px] bg-emerald-600 hover:bg-emerald-500 text-white rounded-2xl text-xs sm:text-sm font-extrabold uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md shadow-emerald-900/30 active:scale-95"
+              >
+                <Share2 size={15} />
+                <span>Share Flow via WhatsApp</span>
+              </button>
+            </div>
           </div>
         </div>
 
       </main>
 
       {/* ── STICKY MOBILE ACTION BAR (Fixed at bottom for easy thumb access on mobile) ── */}
-      <aside aria-label="Mobile Action Bar" className="fixed bottom-0 inset-x-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200/90 px-3 pt-2.5 pb-[max(0.625rem,env(safe-area-inset-bottom))] flex sm:hidden items-center justify-between gap-2 shadow-lg">
+      <aside aria-label="Mobile Action Bar" className="fixed bottom-0 inset-x-0 z-40 bg-white/90 backdrop-blur-xl border-t border-slate-200/90 px-3 pt-2.5 pb-[max(0.625rem,env(safe-area-inset-bottom))] flex sm:hidden items-center justify-between gap-2 shadow-[0_-8px_24px_rgba(15,23,42,0.06)]">
         <button
           type="button"
           onClick={handleShare}
-          className="flex-1 min-h-[44px] px-3 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-extrabold flex items-center justify-center gap-1.5 shadow-sm active:scale-98"
+          className="flex-1 min-h-[44px] px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-200/90 rounded-xl text-xs font-extrabold flex items-center justify-center gap-1.5 shadow-2xs active:scale-95"
         >
-          <Share2 size={14} />
-          <span>Share WhatsApp</span>
+          <Share2 size={14} className="text-[#0867E8]" />
+          <span>Share Flow</span>
         </button>
         <Link
-          to="/clinic-kyc"
-          className="flex-1 min-h-[44px] px-3 py-2 bg-[#0867E8] hover:bg-[#0756c7] text-white rounded-xl text-xs font-extrabold flex items-center justify-center gap-1.5 shadow-sm active:scale-98"
+          to="/clinic-onboarding"
+          className="relative overflow-hidden group flex-1 min-h-[44px] px-3 py-2 bg-[#0867E8] hover:bg-[#0756c7] text-white rounded-xl text-xs font-extrabold flex items-center justify-center gap-1.5 shadow-sm active:scale-95"
         >
-          <span>Onboard Clinic</span>
-          <ArrowRight size={14} />
+          <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-xl" aria-hidden="true">
+            <div className="w-16 h-full bg-gradient-to-r from-transparent via-white/35 to-transparent absolute top-0 -left-16 animate-cta-sheen" />
+          </div>
+          <span className="relative z-10">Onboard Clinic</span>
+          <ArrowRight size={14} className="relative z-10" />
         </Link>
       </aside>
 

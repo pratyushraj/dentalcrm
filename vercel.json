@@ -113,6 +113,18 @@
       "destination": "/api/meta"
     },
     {
+      "source": "/checkout-flow",
+      "destination": "/api/meta"
+    },
+    {
+      "source": "/checkout-flow/",
+      "destination": "/api/meta"
+    },
+    {
+      "source": "/checkout-demo",
+      "destination": "/api/meta"
+    },
+    {
       "source": "/review/assist",
       "destination": "/api/meta"
     },

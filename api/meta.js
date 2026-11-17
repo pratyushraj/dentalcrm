@@ -189,8 +189,8 @@ export default async function handler(req, res) {
     html = html.replace(/<meta\s+property=["']twitter:title["']\s+content=["'][\s\S]*?["']\s*\/?>/i, `<meta property="twitter:title" content="${meta.title.replace(/"/g, '&quot;')}" />`);
     html = html.replace(/<meta\s+property=["']og:description["']\s+content=["'][\s\S]*?["']\s*\/?>/i, `<meta property="og:description" content="${meta.desc.replace(/"/g, '&quot;')}" />`);
     const ogImage = meta.image || 'https://www.clinaza.in/og-clinaza.png';
-    html = html.replace(/<meta\s+property=["']og:image["']\s+content=["'][\s\S]*?["']\s*\/?>/i, `<meta property="og:image" content="${ogImage}" />`);
-    html = html.replace(/<meta\s+property=["']twitter:image["']\s+content=["'][\s\S]*?["']\s*\/?>/i, `<meta property="twitter:image" content="${ogImage}" />`);
+    html = html.replace(/<meta\s+(?:property|name)=["']og:image["']\s+content=["'][\s\S]*?["']\s*\/?>/gi, `<meta property="og:image" content="${ogImage}" />`);
+    html = html.replace(/<meta\s+(?:property|name)=["']twitter:image["']\s+content=["'][\s\S]*?["']\s*\/?>/gi, `<meta property="twitter:image" content="${ogImage}" />`);
     if (meta.robots) {
       html = html.replace(/<meta\s+name=["']robots["']\s+content=["'][\s\S]*?["']\s*\/?>/i, `<meta name="robots" content="${meta.robots}" />`);
     }

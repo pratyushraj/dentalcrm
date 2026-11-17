@@ -195,8 +195,8 @@ async function worker() {
 
       if (route === '/checkout-flow' || route === '/demo/loan') {
         const ogImg = 'https://www.clinaza.in/assets/og-checkout-flow.png';
-        html = html.replace(/<meta\s+property=["']og:image["']\s+content="[^"]*"/i, `<meta property="og:image" content="${ogImg}"`);
-        html = html.replace(/<meta\s+property=["']twitter:image["']\s+content="[^"]*"/i, `<meta property="twitter:image" content="${ogImg}"`);
+        html = html.replace(/<meta\s+(?:property|name)=["']og:image["']\s+content="[^"]*"/gi, `<meta property="og:image" content="${ogImg}"`);
+        html = html.replace(/<meta\s+(?:property|name)=["']twitter:image["']\s+content="[^"]*"/gi, `<meta property="twitter:image" content="${ogImg}"`);
       }
 
       if (!/rel=["']canonical["']/i.test(html)) {

@@ -94,6 +94,7 @@ scratch/
 !public/og-preview.png
 !public/og-clinaza.png
 !public/og-clinic-onboarding.*
+!public/og-checkout-flow.png
 !public/assets/**/*
 !public/videos/**/*.mp4
 !public/videos/*.mp4

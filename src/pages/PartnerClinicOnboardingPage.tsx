@@ -377,7 +377,9 @@ export default function PartnerClinicOnboardingPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 font-sans selection:bg-[#0867E8] selection:text-white pb-24 relative overflow-hidden">
+    <div className={`min-h-screen bg-slate-50 text-slate-900 font-sans selection:bg-[#0867E8] selection:text-white relative overflow-hidden ${
+      !submitted && (lookupStatus === 'not_found' || showFormForMatched) ? 'pb-24' : 'pb-6'
+    }`}>
       <SEOHead 
         title="Partner Clinic Onboarding — Clinaza Point-of-Care EMI"
         description="Official onboarding portal for partner dental clinics to activate instant point-of-care patient EMI financing."
@@ -446,7 +448,9 @@ export default function PartnerClinicOnboardingPage() {
       </header>
 
       {/* Main Content Area */}
-      <main className="max-w-3xl mx-auto px-4 sm:px-6 pt-28 sm:pt-36 pb-24 sm:pb-12">
+      <main className={`max-w-3xl mx-auto px-4 sm:px-6 pt-24 sm:pt-32 ${
+        !submitted && (lookupStatus === 'not_found' || showFormForMatched) ? 'pb-24 sm:pb-12' : 'pb-6 sm:pb-8'
+      }`}>
         {submitted ? (
           <div className="space-y-6">
             {/* Accreditation Header */}
@@ -697,31 +701,11 @@ export default function PartnerClinicOnboardingPage() {
             </div>
 
             {/* Smart Lookup Box */}
-            <div className="bg-white border-2 border-[#0867E8]/30 rounded-3xl p-6 sm:p-8 shadow-sm relative overflow-hidden">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-3 mb-5">
-                <div className="flex items-center gap-2.5">
-                  <div className="w-10 h-10 rounded-xl bg-blue-50 text-[#0867E8] flex items-center justify-center font-bold shrink-0">
-                    <Sparkles size={20} />
-                  </div>
-                  <div>
-                    <h3 className="text-sm sm:text-base font-black text-[#0B2450]">
-                      Smart Clinic Identity &amp; Auto-Route
-                    </h3>
-                    <p className="text-xs text-slate-500">
-                      Auto-detects registered clinics to fast-track bank KYC or starts fresh
-                    </p>
-                  </div>
-                </div>
-
-                <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-blue-50 border border-blue-200 text-[#0867E8] self-start sm:self-auto">
-                  Instant Auto-Route
-                </span>
-              </div>
-
+            <div className="bg-white border-2 border-[#0867E8]/30 rounded-3xl p-5 sm:p-7 shadow-sm relative overflow-hidden">
               {/* Search Bar Input */}
               <form 
                 onSubmit={(e) => { e.preventDefault(); handleClinicLookup(); }}
-                className="space-y-4"
+                className="space-y-3"
               >
                 <div className="flex flex-col sm:flex-row gap-2.5">
                   <div className="relative flex-1">
@@ -730,7 +714,6 @@ export default function PartnerClinicOnboardingPage() {
                     </span>
                     <input
                       type="text"
-                      autoFocus
                       value={lookupInput}
                       onChange={(e) => setLookupInput(e.target.value)}
                       placeholder="Enter 10-digit mobile number (e.g. 98765 43210) or official email"

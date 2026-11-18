@@ -423,21 +423,22 @@ export default function PartnerClinicOnboardingPage() {
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse ml-0.5"></span>
           </div>
 
-          <div className="flex items-center gap-2 shrink-0">
+          <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
             <button
               onClick={copyShareLink}
-              className="px-3 sm:px-3.5 py-1.5 min-h-[38px] rounded-full bg-slate-50 hover:bg-slate-100 border border-slate-200 text-xs font-bold text-slate-700 flex items-center gap-1.5 transition-all active:scale-95 cursor-pointer"
+              title="Share Form"
+              className="px-2.5 sm:px-3.5 py-1.5 min-h-[36px] sm:min-h-[38px] rounded-full bg-slate-50 hover:bg-slate-100 border border-slate-200 text-xs font-bold text-slate-700 flex items-center gap-1.5 transition-all active:scale-95 cursor-pointer"
             >
               {copiedLink ? <Check size={13} className="text-emerald-600" /> : <Share2 size={13} />}
               <span className="hidden sm:inline">{copiedLink ? 'Copied!' : 'Share Form'}</span>
-              <span className="sm:hidden">Share</span>
             </button>
 
             <Link
               to="/reactivation/login"
-              className="px-3 sm:px-3.5 py-1.5 min-h-[38px] rounded-full bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-bold flex items-center gap-1.5 transition-all shadow-xs active:scale-95"
+              className="px-3 sm:px-3.5 py-1.5 min-h-[36px] sm:min-h-[38px] rounded-full bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-bold flex items-center gap-1.5 transition-all shadow-xs active:scale-95"
             >
-              <span>Doctor Login</span>
+              <span className="sm:hidden">Login</span>
+              <span className="hidden sm:inline">Doctor Login</span>
               <ArrowRight size={12} />
             </Link>
           </div>
@@ -445,74 +446,7 @@ export default function PartnerClinicOnboardingPage() {
       </header>
 
       {/* Main Content Area */}
-      <main className="max-w-3xl mx-auto px-4 sm:px-6 pt-24 sm:pt-32 pb-24 sm:pb-12">
-        {/* Category Switcher Tabs */}
-        <div className="flex items-center justify-center gap-2 mb-6 flex-wrap">
-          {[
-            { id: 'dental', label: 'Dental Clinic', icon: Stethoscope },
-            { id: 'ivf', label: 'Fertility & IVF Centre', icon: Baby },
-            { id: 'hospital', label: 'Multi-Specialty Hospital', icon: Building2 },
-            { id: 'derma', label: 'Dermatology & Aesthetics', icon: Sparkles }
-          ].map((cat) => {
-            const Icon = cat.icon;
-            return (
-              <button
-                type="button"
-                key={cat.id}
-                onClick={() => setForm(prev => ({ ...prev, category: cat.id }))}
-                className={`px-4 py-2.5 min-h-[44px] rounded-full text-xs font-bold transition-all flex items-center gap-2 active:scale-95 cursor-pointer ${
-                  form.category === cat.id
-                    ? 'bg-[#0B2450] text-white shadow-xs'
-                    : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'
-                }`}
-              >
-                <Icon size={14} className={form.category === cat.id ? 'text-white' : 'text-slate-500'} />
-                <span>{cat.label}</span>
-              </button>
-            );
-          })}
-        </div>
-
-        {/* Hero Banner */}
-        <div className="text-center space-y-3 mb-8">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-[#0867E8] text-xs font-bold">
-            <Sparkles size={13} />
-            <span>
-              {form.category === 'ivf' 
-                ? 'Fertility & IVF Patient Financing' 
-                : form.category === 'hospital' 
-                ? 'Hospital Patient Financing & Smart POS' 
-                : 'Healthcare Patient EMI Integration'}
-            </span>
-          </div>
-          <h1 className="text-2xl sm:text-4xl font-extrabold text-[#0B2450] tracking-tight [text-wrap:balance]">
-            {form.category === 'ivf' ? 'Fertility Centre' : form.category === 'hospital' ? 'Hospital Partner' : 'Clinic Partner'} <span className="text-[#0867E8]">Onboarding</span>
-          </h1>
-          <p className="text-xs sm:text-sm text-slate-600 max-w-lg mx-auto leading-relaxed [text-wrap:pretty]">
-            {form.category === 'ivf'
-              ? "Activate instant point-of-care patient EMI lines (₹50,000 – ₹5,00,000) for IVF cycles, ICSI & donor packages with direct clinic settlement."
-              : "Please confirm your facility's high-ticket procedure volume to activate pre-approved patient financing lines with our accredited RBI-regulated lending network."}
-          </p>
-
-          {/* Healthcare Lending Network Credibility Trust Banner */}
-          <div className="pt-2 flex items-center justify-center">
-            <div className="inline-flex flex-wrap items-center justify-center gap-3 bg-white border border-slate-200/90 px-4 py-2 rounded-2xl shadow-xs text-xs text-slate-700">
-              <span className="font-extrabold text-[#0B2450] text-[11px] uppercase tracking-wider">Official Partner:</span>
-              <img
-                src="/assets/plural_by_pinelabs_transparent.png"
-                alt="Plural by Pine Labs"
-                className="h-3.5 w-auto object-contain"
-                width={78}
-                height={14}
-              />
-              <span className="text-slate-300 hidden sm:inline">&bull;</span>
-              <span className="text-emerald-700 font-bold text-[11px] bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-full">
-                ✓ 35+ EMI Modes &bull; Instant Point-of-Care Sanction
-              </span>
-            </div>
-          </div>
-        </div>
-
+      <main className="max-w-3xl mx-auto px-4 sm:px-6 pt-20 sm:pt-28 pb-24 sm:pb-12">
         {submitted ? (
           <div className="space-y-6">
             {/* Accreditation Header */}
@@ -745,26 +679,41 @@ export default function PartnerClinicOnboardingPage() {
               </div>
             )}
           </div>
-        ) : (
-          <div className="space-y-6">
-            {/* ── SMART CLINIC IDENTIFICATION CHECKPOINT ── */}
-            <div className="bg-white border-2 border-[#0867E8]/30 rounded-3xl p-5 sm:p-7 shadow-sm relative overflow-hidden">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-3 mb-4">
+        ) : lookupStatus === 'idle' ? (
+          /* ── SCREEN 1: PHONE OR EMAIL CHECKPOINT ONLY ── */
+          <div className="space-y-6 animate-in fade-in">
+            {/* Hero Banner */}
+            <div className="text-center space-y-3 mb-4">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-[#0867E8] text-xs font-bold">
+                <Sparkles size={13} />
+                <span>Healthcare Patient EMI Integration</span>
+              </div>
+              <h1 className="text-2xl sm:text-4xl font-extrabold text-[#0B2450] tracking-tight [text-wrap:balance]">
+                Clinic Partner <span className="text-[#0867E8]">Onboarding</span>
+              </h1>
+              <p className="text-xs sm:text-sm text-slate-600 max-w-md mx-auto leading-relaxed [text-wrap:pretty]">
+                Enter your 10-digit mobile number or official email to verify your registration or activate point-of-care patient financing.
+              </p>
+            </div>
+
+            {/* Smart Lookup Box */}
+            <div className="bg-white border-2 border-[#0867E8]/30 rounded-3xl p-6 sm:p-8 shadow-sm relative overflow-hidden">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-3 mb-5">
                 <div className="flex items-center gap-2.5">
-                  <div className="w-9 h-9 rounded-xl bg-blue-50 text-[#0867E8] flex items-center justify-center font-bold shrink-0">
-                    <Sparkles size={18} />
+                  <div className="w-10 h-10 rounded-xl bg-blue-50 text-[#0867E8] flex items-center justify-center font-bold shrink-0">
+                    <Sparkles size={20} />
                   </div>
                   <div>
                     <h3 className="text-sm sm:text-base font-black text-[#0B2450]">
-                      Smart Clinic Lookup &amp; Fast-Track
+                      Smart Clinic Identity &amp; Auto-Route
                     </h3>
                     <p className="text-xs text-slate-500">
-                      Enter your mobile number or email to auto-detect existing registration or start fresh
+                      Auto-detects registered clinics to fast-track bank KYC or starts fresh
                     </p>
                   </div>
                 </div>
 
-                <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-slate-100 text-slate-600 self-start sm:self-auto">
+                <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-blue-50 border border-blue-200 text-[#0867E8] self-start sm:self-auto">
                   Instant Auto-Route
                 </span>
               </div>
@@ -772,141 +721,225 @@ export default function PartnerClinicOnboardingPage() {
               {/* Search Bar Input */}
               <form 
                 onSubmit={(e) => { e.preventDefault(); handleClinicLookup(); }}
-                className="flex flex-col sm:flex-row gap-2.5"
+                className="space-y-4"
               >
-                <div className="relative flex-1">
-                  <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 font-mono text-xs">
-                    📞
-                  </span>
-                  <input
-                    type="text"
-                    value={lookupInput}
-                    onChange={(e) => {
-                      setLookupInput(e.target.value);
-                      if (lookupStatus !== 'idle') setLookupStatus('idle');
+                <div className="flex flex-col sm:flex-row gap-2.5">
+                  <div className="relative flex-1">
+                    <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 font-mono text-sm">
+                      📞
+                    </span>
+                    <input
+                      type="text"
+                      autoFocus
+                      value={lookupInput}
+                      onChange={(e) => setLookupInput(e.target.value)}
+                      placeholder="Enter 10-digit mobile number (e.g. 98765 43210) or official email"
+                      className="w-full pl-10 pr-4 py-3.5 rounded-xl border border-slate-300 focus:border-[#0867E8] focus:ring-2 focus:ring-blue-100 text-sm font-medium text-slate-800 placeholder-slate-400 transition-all"
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={isSearching}
+                    className="px-8 py-3.5 rounded-xl bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-black uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-md shadow-[#0867E8]/20 active:scale-95 disabled:opacity-50 cursor-pointer min-h-[48px]"
+                  >
+                    {isSearching ? (
+                      <>
+                        <RefreshCw size={14} className="animate-spin" />
+                        <span>Checking...</span>
+                      </>
+                    ) : (
+                      <>
+                        <span>Continue</span>
+                        <ArrowRight size={15} />
+                      </>
+                    )}
+                  </button>
+                </div>
+
+                <div className="flex items-center justify-between text-xs pt-1 px-1">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setLookupStatus('not_found');
+                      toast.info('Starting fresh clinic onboarding.');
                     }}
-                    placeholder="Enter 10-digit mobile number (e.g. 98765 43210) or official email"
-                    className="w-full pl-9 pr-4 py-3 rounded-xl border border-slate-300 focus:border-[#0867E8] focus:ring-2 focus:ring-blue-100 text-xs sm:text-sm font-medium text-slate-800 placeholder-slate-400 transition-all"
+                    className="text-[#0867E8] hover:text-blue-800 font-bold underline inline-flex items-center gap-1 cursor-pointer"
+                  >
+                    <span>New clinic? Skip and fill blank registration form directly &rarr;</span>
+                  </button>
+                  <span className="text-slate-400 text-[11px] hidden sm:inline">60-Sec Setup</span>
+                </div>
+              </form>
+            </div>
+
+            {/* Official Partner Credibility & Commercial Invariants */}
+            <div className="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-5 shadow-xs space-y-3">
+              <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 pb-3">
+                <div className="flex items-center gap-2">
+                  <span className="font-extrabold text-[#0B2450] text-[11px] uppercase tracking-wider">Official Partner:</span>
+                  <img
+                    src="/assets/plural_by_pinelabs_transparent.png"
+                    alt="Plural by Pine Labs"
+                    className="h-4 w-auto object-contain"
+                    width={84}
+                    height={16}
                   />
+                </div>
+                <span className="text-emerald-700 font-bold text-[11px] bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-full">
+                  ✓ 35+ EMI Modes &bull; Instant Sanction
+                </span>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs text-slate-600">
+                <div className="flex items-center gap-2">
+                  <Check size={14} className="text-emerald-600 shrink-0" />
+                  <span><strong>₹999 One-Time</strong> Setup Fee</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Check size={14} className="text-emerald-600 shrink-0" />
+                  <span><strong>₹0 AMC</strong> &bull; Zero Recurring Fees</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Check size={14} className="text-emerald-600 shrink-0" />
+                  <span><strong>0% Recourse</strong> &bull; T+1 Payouts</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        ) : lookupStatus === 'found' && matchedClinic && !showFormForMatched ? (
+          /* ── SCREEN 2A: MATCHED REGISTERED CLINIC CARD ── */
+          <div className="space-y-6 animate-in fade-in">
+            <div className="bg-white border-2 border-[#0867E8]/40 rounded-3xl p-6 sm:p-8 shadow-md space-y-5">
+              <div className="flex items-start justify-between gap-3 border-b border-slate-100 pb-4">
+                <div className="space-y-1">
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <span className="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-black uppercase tracking-wider border border-emerald-300">
+                      ✓ Registered Clinic Profile Found
+                    </span>
+                    {matchedClinic.id && (
+                      <span className="text-[11px] text-slate-500 font-mono">
+                        Ref: {matchedClinic.id.slice(0, 8)}...
+                      </span>
+                    )}
+                  </div>
+                  <h2 className="text-xl sm:text-2xl font-black text-[#0B2450]">
+                    Welcome Back, {matchedClinic.doctor_name || 'Doctor'}!
+                  </h2>
+                  <p className="text-xs sm:text-sm text-slate-600">
+                    <strong>{matchedClinic.clinic_name}</strong> &bull; {matchedClinic.city || 'India'} &bull; +91 {matchedClinic.phone}
+                  </p>
                 </div>
 
                 <button
-                  type="submit"
-                  disabled={isSearching}
-                  className="px-6 py-3 rounded-xl bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-black uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-sm active:scale-95 disabled:opacity-50 cursor-pointer min-h-[44px]"
+                  type="button"
+                  onClick={() => {
+                    setMatchedClinic(null);
+                    setLookupStatus('idle');
+                    setLookupInput('');
+                    setShowFormForMatched(false);
+                  }}
+                  className="text-xs text-slate-500 hover:text-slate-800 underline shrink-0 cursor-pointer"
                 >
-                  {isSearching ? (
-                    <>
-                      <RefreshCw size={13} className="animate-spin" />
-                      <span>Checking...</span>
-                    </>
-                  ) : (
-                    <>
-                      <span>Continue</span>
-                      <ArrowRight size={14} />
-                    </>
-                  )}
+                  Use Another Number
                 </button>
-              </form>
+              </div>
 
-              {/* STATE 1: MATCHED EXISTING CLINIC */}
-              {lookupStatus === 'found' && matchedClinic && (
-                <div className="mt-5 p-5 bg-gradient-to-br from-blue-50/90 via-indigo-50/40 to-white border border-blue-200 rounded-2xl space-y-4 animate-in fade-in slide-in-from-top-2">
-                  <div className="flex items-start justify-between gap-3">
-                    <div className="space-y-1">
-                      <div className="flex items-center gap-2 flex-wrap">
-                        <span className="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-black uppercase tracking-wider border border-emerald-300">
-                          ✓ Registered Clinic Profile Found
-                        </span>
-                        {matchedClinic.id && (
-                          <span className="text-[11px] text-slate-500 font-mono">
-                            Ref: {matchedClinic.id.slice(0, 8)}...
-                          </span>
-                        )}
-                      </div>
-                      <h4 className="text-lg sm:text-xl font-black text-[#0B2450]">
-                        Welcome Back, {matchedClinic.doctor_name || 'Doctor'}!
-                      </h4>
-                      <p className="text-xs text-slate-600">
-                        <strong>{matchedClinic.clinic_name}</strong> &bull; {matchedClinic.city || 'India'} &bull; +91 {matchedClinic.phone}
-                      </p>
-                    </div>
-
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setMatchedClinic(null);
-                        setLookupStatus('idle');
-                        setLookupInput('');
-                        setShowFormForMatched(false);
-                      }}
-                      className="text-[11px] text-slate-500 hover:text-slate-800 underline shrink-0 cursor-pointer"
-                    >
-                      Use Another Number
-                    </button>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                {/* Primary Action: Go to KYC */}
+                <Link
+                  to={`/clinic-kyc?id=${matchedClinic.id || ''}&clinic=${encodeURIComponent(matchedClinic.clinic_name || '')}&doctor=${encodeURIComponent(matchedClinic.doctor_name || '')}&phone=${encodeURIComponent(matchedClinic.phone || '')}&city=${encodeURIComponent(matchedClinic.city || '')}&email=${encodeURIComponent(matchedClinic.email || '')}`}
+                  className="p-5 rounded-2xl bg-[#0867E8] hover:bg-[#0756C7] text-white flex items-center justify-between gap-3 shadow-md transition-all active:scale-95 group"
+                >
+                  <div className="space-y-1 text-left">
+                    <span className="text-[10px] font-bold text-blue-200 uppercase tracking-wider block">Recommended Next Step</span>
+                    <span className="text-sm sm:text-base font-black block">Resume Bank Linking &amp; KYC &rarr;</span>
+                    <span className="text-xs text-blue-100 block">Upload PAN, Aadhaar &amp; Cheque for Payouts</span>
                   </div>
+                  <ArrowRight size={20} className="text-white group-hover:translate-x-1 transition-transform shrink-0" />
+                </Link>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
-                    {/* Primary Action: Go to KYC */}
-                    <Link
-                      to={`/clinic-kyc?id=${matchedClinic.id || ''}&clinic=${encodeURIComponent(matchedClinic.clinic_name || '')}&doctor=${encodeURIComponent(matchedClinic.doctor_name || '')}&phone=${encodeURIComponent(matchedClinic.phone || '')}&city=${encodeURIComponent(matchedClinic.city || '')}&email=${encodeURIComponent(matchedClinic.email || '')}`}
-                      className="p-4 rounded-xl bg-[#0867E8] hover:bg-[#0756C7] text-white flex items-center justify-between gap-3 shadow-md transition-all active:scale-95 group"
-                    >
-                      <div className="space-y-0.5 text-left">
-                        <span className="text-[10px] font-bold text-blue-200 uppercase tracking-wider block">Recommended Next Step</span>
-                        <span className="text-xs sm:text-sm font-black block">Resume Bank Linking &amp; KYC &rarr;</span>
-                        <span className="text-[11px] text-blue-100 block">Upload PAN, Aadhaar &amp; Cheque</span>
-                      </div>
-                      <ArrowRight size={18} className="text-white group-hover:translate-x-1 transition-transform shrink-0" />
-                    </Link>
-
-                    {/* Secondary Action: Pay Kit Standee */}
-                    <button
-                      type="button"
-                      onClick={handlePayWithRazorpay}
-                      className="p-4 rounded-xl bg-white hover:bg-slate-50 border border-slate-300 text-slate-800 flex items-center justify-between gap-3 shadow-xs transition-all active:scale-95 cursor-pointer text-left"
-                    >
-                      <div className="space-y-0.5">
-                        <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider block">Counter Standee Kit</span>
-                        <span className="text-xs sm:text-sm font-black text-[#0B2450] block">Activate Kit (₹999 Setup) &rarr;</span>
-                        <span className="text-[11px] text-slate-500 block">₹0 AMC &bull; Acrylic QR Couriered</span>
-                      </div>
-                      <CreditCard size={18} className="text-[#0867E8] shrink-0" />
-                    </button>
+                {/* Secondary Action: Pay Kit Standee */}
+                <button
+                  type="button"
+                  onClick={handlePayWithRazorpay}
+                  className="p-5 rounded-2xl bg-white hover:bg-slate-50 border border-slate-300 text-slate-800 flex items-center justify-between gap-3 shadow-xs transition-all active:scale-95 cursor-pointer text-left"
+                >
+                  <div className="space-y-1">
+                    <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider block">Counter Standee Kit</span>
+                    <span className="text-sm sm:text-base font-black text-[#0B2450] block">Activate Kit (₹999 Setup) &rarr;</span>
+                    <span className="text-xs text-slate-500 block">₹0 AMC &bull; Laser-Printed QR Couriered</span>
                   </div>
+                  <CreditCard size={20} className="text-[#0867E8] shrink-0" />
+                </button>
+              </div>
 
-                  <div className="pt-2 flex items-center justify-between text-xs border-t border-blue-100/80">
-                    <button
-                      type="button"
-                      onClick={() => setShowFormForMatched(!showFormForMatched)}
-                      className="text-[#0867E8] hover:text-blue-800 font-bold underline inline-flex items-center gap-1 cursor-pointer"
-                    >
-                      <span>{showFormForMatched ? 'Hide Clinic Profile Editor' : 'Need to edit or update clinic profile details?'}</span>
-                    </button>
-                    <span className="text-slate-400 text-[11px]">Zero Recourse Platform</span>
-                  </div>
-                </div>
-              )}
-
-              {/* STATE 2: NEW CLINIC CONFIRMATION */}
-              {lookupStatus === 'not_found' && (
-                <div className="mt-4 p-3.5 bg-emerald-50 border border-emerald-200 rounded-xl flex items-center justify-between gap-2 animate-in fade-in">
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 size={16} className="text-emerald-700 shrink-0" />
-                    <p className="text-xs font-bold text-emerald-950">
-                      New Clinic Profile &bull; Mobile number pre-filled. Complete your 60-second setup below!
-                    </p>
-                  </div>
-                  <span className="text-[10px] font-black text-emerald-800 uppercase bg-emerald-100 px-2 py-0.5 rounded-full shrink-0">
-                    Step 1 of 2
-                  </span>
-                </div>
-              )}
+              <div className="pt-3 flex items-center justify-between text-xs border-t border-slate-100">
+                <button
+                  type="button"
+                  onClick={() => setShowFormForMatched(true)}
+                  className="text-[#0867E8] hover:text-blue-800 font-bold underline inline-flex items-center gap-1 cursor-pointer"
+                >
+                  <span>Need to edit or update clinic profile details?</span>
+                </button>
+                <span className="text-slate-400 text-[11px]">Zero Recourse Platform</span>
+              </div>
+            </div>
+          </div>
+        ) : (
+          /* ── SCREEN 2B: FULL INTAKE FORM (New Clinic or Edit Profile Mode) ── */
+          <div className="space-y-6 animate-in fade-in">
+            {/* Top Status Banner */}
+            <div className="p-3.5 bg-blue-50/80 border border-blue-200 rounded-xl flex items-center justify-between gap-3">
+              <div className="flex items-center gap-2">
+                <CheckCircle2 size={16} className="text-[#0867E8] shrink-0" />
+                <p className="text-xs font-bold text-slate-800">
+                  {matchedClinic 
+                    ? `Editing profile for ${matchedClinic.clinic_name}`
+                    : `Mobile: +91 ${form.phone || lookupInput} • Complete your 60-second setup below`}
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={() => {
+                  setLookupStatus('idle');
+                  setShowFormForMatched(false);
+                }}
+                className="text-[11px] text-[#0867E8] hover:underline font-bold shrink-0 cursor-pointer"
+              >
+                Change Number
+              </button>
             </div>
 
-            {/* FULL INTAKE FORM (Visible for new clinics, idle state, or when explicitly requested) */}
-            {(!matchedClinic || showFormForMatched) && (
-              <form onSubmit={handleSubmit} className="bg-white border border-slate-200/90 rounded-2xl p-5 sm:p-8 shadow-sm space-y-6">
+            {/* Category Switcher Tabs */}
+            <div className="flex items-center justify-center gap-2 flex-wrap">
+              {[
+                { id: 'dental', label: 'Dental Clinic', icon: Stethoscope },
+                { id: 'ivf', label: 'Fertility & IVF Centre', icon: Baby },
+                { id: 'hospital', label: 'Multi-Specialty Hospital', icon: Building2 },
+                { id: 'derma', label: 'Dermatology & Aesthetics', icon: Sparkles }
+              ].map((cat) => {
+                const Icon = cat.icon;
+                return (
+                  <button
+                    type="button"
+                    key={cat.id}
+                    onClick={() => setForm(prev => ({ ...prev, category: cat.id }))}
+                    className={`px-4 py-2.5 min-h-[44px] rounded-full text-xs font-bold transition-all flex items-center gap-2 active:scale-95 cursor-pointer ${
+                      form.category === cat.id
+                        ? 'bg-[#0B2450] text-white shadow-xs'
+                        : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'
+                    }`}
+                  >
+                    <Icon size={14} className={form.category === cat.id ? 'text-white' : 'text-slate-500'} />
+                    <span>{cat.label}</span>
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Form */}
+            <form onSubmit={handleSubmit} id="clinic-onboarding-form" className="bg-white border border-slate-200/90 rounded-2xl p-5 sm:p-8 shadow-sm space-y-6">
             
             {/* 1. Clinic Identity */}
             <div className="space-y-4">
@@ -1297,13 +1330,12 @@ export default function PartnerClinicOnboardingPage() {
               </p>
             </div>
           </form>
-        )}
-      </div>
-    )}
-  </main>
+        </div>
+      )}
+    </main>
 
-      {/* Mobile Sticky Bottom Conversion Bar */}
-      {!submitted && (
+      {/* Mobile Sticky Bottom Conversion Bar (ONLY when filling form) */}
+      {!submitted && (lookupStatus === 'not_found' || showFormForMatched) && (
         <div className="fixed bottom-0 inset-x-0 sm:hidden bg-white/95 backdrop-blur-md border-t border-slate-200/90 px-4 py-2.5 z-40 shadow-[0_-4px_16px_rgba(0,0,0,0.06)] flex items-center justify-between gap-3">
           <div className="flex flex-col min-w-0">
             <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Step 1 of 2</span>
@@ -1312,11 +1344,11 @@ export default function PartnerClinicOnboardingPage() {
           <button
             type="button"
             onClick={() => {
-              const formEl = document.querySelector('form');
+              const formEl = document.querySelector('form#clinic-onboarding-form') as HTMLFormElement || document.querySelector('form');
               if (formEl) formEl.requestSubmit();
             }}
             disabled={isSubmitting}
-            className="px-4 py-2.5 min-h-[42px] rounded-xl bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-black uppercase tracking-wider transition-all shadow-md flex items-center gap-1.5 shrink-0 active:scale-95"
+            className="px-4 py-2.5 min-h-[42px] rounded-xl bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-black uppercase tracking-wider transition-all shadow-md flex items-center gap-1.5 shrink-0 active:scale-95 cursor-pointer"
           >
             {isSubmitting ? (
               <span>Submitting...</span>

@@ -70,7 +70,7 @@ export default function ClinicKycUploadPage() {
   const [websiteUrl, setWebsiteUrl] = useState(initialWebsite);
   const [isProfileCollapsed, setIsProfileCollapsed] = useState(Boolean(initialClinicName || clinicId));
 
-  // Bank Account Fields (Instant ₹1 Penny Drop)
+  // Bank Account Fields (Settlement Account Linking)
   const [accountHolderName, setAccountHolderName] = useState('');
   const [accountNumber, setAccountNumber] = useState('');
   const [confirmAccountNumber, setConfirmAccountNumber] = useState('');
@@ -359,7 +359,7 @@ export default function ClinicKycUploadPage() {
         city: city || 'Not specified',
         has_cancelled_cheque: 'Yes',
         has_current_account: 'Yes',
-        business_proof_type: websiteStatus === 'yes' && websiteUrl ? `Website: ${websiteUrl} | KYC Done` : 'Full KYC & Penny Drop Submitted'
+        business_proof_type: websiteStatus === 'yes' && websiteUrl ? `Website: ${websiteUrl} | KYC Done` : 'Full KYC & Bank Verification Submitted'
       };
 
       if (clinicId) {
@@ -379,7 +379,7 @@ export default function ClinicKycUploadPage() {
             city: city || 'Not specified',
             has_current_account: 'Yes',
             has_cancelled_cheque: 'Yes',
-            business_proof_type: websiteStatus === 'yes' && websiteUrl ? `Website: ${websiteUrl} | KYC Done` : 'Full KYC & Penny Drop Submitted',
+            business_proof_type: websiteStatus === 'yes' && websiteUrl ? `Website: ${websiteUrl} | KYC Done` : 'Full KYC & Bank Verification Submitted',
             utm_source: searchParams.get('utm_source') || 'cold_email_kyc_direct',
             utm_medium: searchParams.get('utm_medium') || 'email',
             utm_campaign: searchParams.get('utm_campaign') || 'pine_labs_kyc',
@@ -411,7 +411,7 @@ export default function ClinicKycUploadPage() {
         'MOA & AOA': moaDoc.uploadedUrl || 'N/A (Sole Prop)',
         'Director KYC / Aadhaar (Front)': aadhaarDoc.uploadedUrl || 'Attached',
         'Director KYC / Aadhaar (Back)': aadhaarBackDoc.uploadedUrl || (aadhaarDoc.uploadedUrl ? 'Attached / Combined' : 'Pending'),
-        'Compliance Status': 'Ready for ₹1 Automated Penny Drop'
+        'Compliance Status': 'Ready for Pine Labs Underwriting & Bank Verification'
       });
 
       // Dispatch automated branded confirmation email to the Doctor (48–72h SLA)
@@ -598,32 +598,6 @@ export default function ClinicKycUploadPage() {
               </p>
             </div>
 
-            {/* Dynamic Verified Invite Banner if URL params present */}
-            {(initialClinicName || initialEmail || initialPhone) && (
-              <div className="bg-emerald-50/90 border border-emerald-200 rounded-2xl p-4 shadow-2xs flex flex-wrap items-center justify-between gap-3 text-xs">
-                <div className="flex items-center gap-2.5">
-                  <div className="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center font-bold shrink-0">
-                    <Sparkles size={16} />
-                  </div>
-                  <div>
-                    <h2 className="font-bold text-emerald-950 flex items-center gap-2">
-                      <span>{initialClinicName ? `Verified Invite for ${initialClinicName}` : 'Verified Partner Invite'}</span>
-                      <span className="text-[10px] font-black text-emerald-800 bg-emerald-200/60 px-2 py-0.5 rounded-full">
-                        Fast-Track KYC
-                      </span>
-                    </h2>
-                    <p className="text-[11px] text-emerald-800/90">
-                      Pre-filled from your outreach invitation. You can review and edit any details below.
-                    </p>
-                  </div>
-                </div>
-
-                <span className="text-[10px] font-bold text-emerald-700 bg-emerald-100/70 border border-emerald-300 px-2.5 py-1 rounded-full">
-                  Profile Linked
-                </span>
-              </div>
-            )}
-
             <form onSubmit={handleFinalSubmit} className="space-y-5">
               {/* 1. Clinic & Authorized Signatory Profile */}
               {isProfileCollapsed ? (
@@ -666,7 +640,7 @@ export default function ClinicKycUploadPage() {
                           <span className="text-rose-500">*</span>
                         </h3>
                         <p className="text-[11px] text-slate-500">
-                          Required for RBI merchant underwriting, settlement alerts &amp; auto-filling your Board Resolution
+                          Required for Pine Labs merchant onboarding &amp; settlement notifications
                         </p>
                       </div>
                     </div>
@@ -721,7 +695,7 @@ export default function ClinicKycUploadPage() {
                           className="w-full bg-slate-50 border border-slate-300 rounded-xl pl-9 pr-3.5 py-2.5 text-xs text-slate-900 font-semibold focus:outline-none focus:bg-white focus:border-[#0867E8]"
                         />
                       </div>
-                      <p className="text-[10px] text-slate-400">Signatory on Board Resolution, MAF &amp; bank authorization</p>
+                      <p className="text-[10px] text-slate-400">Doctor / clinic head authorizing bank payouts</p>
                     </div>
 
                     {/* Work Email */}
@@ -757,7 +731,7 @@ export default function ClinicKycUploadPage() {
                           className="w-full bg-slate-50 border border-slate-300 rounded-xl pl-9 pr-3.5 py-2.5 text-xs text-slate-900 font-semibold focus:outline-none focus:bg-white focus:border-[#0867E8]"
                         />
                       </div>
-                      <p className="text-[10px] text-slate-400">For instant penny drop SMS alerts and underwriting desk contact</p>
+                      <p className="text-[10px] text-slate-400">For settlement status alerts and underwriting desk contact</p>
                     </div>
 
                     {/* City */}
@@ -823,7 +797,7 @@ export default function ClinicKycUploadPage() {
                       )}
                     </div>
                     <p className="text-[11px] text-slate-600 mt-1">
-                      95% of Dental Clinics. Zero corporate paperwork, no Board Resolution, no MOA/AOA needed.
+                      95% of Dental Clinics. Simple doctor PAN &amp; clinic cancelled cheque.
                     </p>
                   </button>
 
@@ -851,7 +825,7 @@ export default function ClinicKycUploadPage() {
                 </div>
               </div>
 
-              {/* 3. Direct Bank Account Details (Penny Drop) */}
+              {/* 3. Direct Bank Account Details (Settlement Account Linking) */}
               <div className="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-6 shadow-xs space-y-4">
                 <div className="flex items-center justify-between border-b border-slate-100 pb-3 flex-wrap gap-2">
                   <div className="flex items-center gap-2.5">
@@ -995,13 +969,10 @@ export default function ClinicKycUploadPage() {
                       <span className="text-sm">⚡</span>
                       <span className="text-xs font-bold text-slate-900">Not Yet / In Progress</span>
                     </div>
-                    <p className="text-[10px] text-slate-500 mt-1 pl-6">
-                      Auto-assign accredited Clinaza profile or Google Maps.
-                    </p>
                   </button>
                 </div>
 
-                {websiteStatus === 'yes' ? (
+                {websiteStatus === 'yes' && (
                   <div className="pt-1.5 space-y-1">
                     <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wide">
                       Clinic Website URL <span className="text-rose-500">*</span>
@@ -1014,16 +985,6 @@ export default function ClinicKycUploadPage() {
                       className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 font-mono focus:outline-none focus:bg-white focus:border-[#0867E8]"
                     />
                     <p className="text-[10px] text-slate-400">Underwriting team maps this URL to your payment processing MID</p>
-                  </div>
-                ) : (
-                  <div className="p-3 bg-emerald-50/70 border border-emerald-200/90 rounded-xl flex items-start gap-2.5 text-xs text-emerald-900">
-                    <Sparkles size={16} className="text-emerald-600 shrink-0 mt-0.5" />
-                    <div>
-                      <p className="font-bold text-emerald-950">Clinaza Fast-Track Bank Linking:</p>
-                      <p className="text-[11px] text-emerald-800 leading-relaxed mt-0.5">
-                        We will auto-generate an accredited clinic profile (<code>clinaza.in/clinic/{clinicName ? clinicName.toLowerCase().replace(/[^a-z0-9]/g, '-') : 'partner'}</code>) so your PG merchant account is approved with zero delays.
-                      </p>
-                    </div>
                   </div>
                 )}
               </div>
@@ -1067,15 +1028,6 @@ export default function ClinicKycUploadPage() {
               {entityType === 'sole_prop' ? (
                 /* ── SOLE PROPRIETORSHIP / DENTAL CLINIC SLOTS (5 SLOTS) ── */
                 <div className="space-y-4">
-                  <div className="p-3 bg-blue-50/70 border border-blue-200/80 rounded-xl flex items-center justify-between gap-2 text-xs">
-                    <span className="font-bold text-[#0B2450] flex items-center gap-1.5">
-                      <span>🩺 Showing Sole Proprietor / Individual Doctor Checklist (5 Docs)</span>
-                    </span>
-                    <span className="text-[10px] font-bold text-[#0867E8] bg-white px-2 py-0.5 rounded-full border border-blue-200">
-                      Zero Board Resolution / MOA Needed
-                    </span>
-                  </div>
-
 {/* 2. Document: Cancelled Cheque */}
               <div className="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-5 shadow-xs space-y-3">
                 <div className="flex items-start justify-between gap-3">

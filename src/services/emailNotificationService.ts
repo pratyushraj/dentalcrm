@@ -324,7 +324,7 @@ export const emailNotificationService = {
 
   /**
    * Automated confirmation email sent directly to the Doctor after completing KYC.
-   * Clarifies the 48–72 hours underwriting SLA, automated penny drop, and partner guide.
+   * Clarifies the 48–72 hours underwriting SLA, bank account verification, and partner guide.
    */
   sendDoctorKycConfirmationEmail: async (doctorEmail: string, details: {
     doctorName?: string;

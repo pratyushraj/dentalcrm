@@ -69,3 +69,12 @@ Adhere strictly to the following active commercial contracts and partner agreeme
   - *Wholesale*: Pine Labs charges Clinaza ₹0 setup fee and ₹0 AMC under our institutional agreement.
   - *Retail (Clinics)*: Clinaza charges clinics ₹999 one-time setup fee + ₹0 AMC.
 
+## 6. No Penny Drop Verification Invariant
+- **Never Claim or Mention "Penny Drop"**: Never write, state, or imply "penny drop", "₹1 penny drop", or "automated penny drop" in clinic onboarding, KYC pages, customer emails, WhatsApp desk copy, or marketing.
+- **Document-Based Bank Verification Only**: Clinic bank accounts and IFSC details are verified via **cancelled cheque upload, doctor PAN verification, and Pine Labs merchant underwriting desk reviews**.
+- **Accurate Copy Wording**: Always frame bank linking as:
+  - *Secure bank current account linking*
+  - *Cancelled cheque & doctor PAN verification*
+  - *Pine Labs underwriting & T+1 payout activation*
+
+

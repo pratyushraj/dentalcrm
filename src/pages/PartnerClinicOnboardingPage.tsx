@@ -886,27 +886,34 @@ export default function PartnerClinicOnboardingPage() {
                 </div>
               </div>
 
-              {/* Sole Primary Hero Action: Go to KYC */}
-              <div className="pt-1">
-                <Link
-                  to={`/clinic-kyc?id=${matchedClinic.id || ''}&clinic=${encodeURIComponent(matchedClinic.clinic_name || '')}&doctor=${encodeURIComponent(matchedClinic.doctor_name || '')}&phone=${encodeURIComponent(matchedClinic.phone || '')}&city=${encodeURIComponent(matchedClinic.city || '')}&email=${encodeURIComponent(matchedClinic.email || '')}`}
-                  className="w-full p-4.5 sm:p-5 rounded-2xl bg-[#0867E8] hover:bg-[#0756C7] text-white flex items-center justify-between gap-3 shadow-lg shadow-[#0867E8]/20 transition-all active:scale-98 group"
-                >
-                  <div className="space-y-1 text-left min-w-0">
-                    <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-white/20 text-white text-[10px] font-black uppercase tracking-wider">
-                      <Sparkles size={11} />
-                      <span>Recommended Next Step</span>
+              {/* Step 2 Dedicated Action Card */}
+              <div className="bg-gradient-to-b from-blue-50/60 via-white to-white border border-blue-200 rounded-2xl p-4 sm:p-5 space-y-3.5 shadow-xs">
+                <div className="flex items-start gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-[#0867E8] text-white flex items-center justify-center shrink-0 shadow-sm shadow-[#0867E8]/25">
+                    <Building2 size={20} />
+                  </div>
+                  <div className="space-y-1 min-w-0">
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <span className="text-[10px] font-black uppercase tracking-wider text-[#0867E8] bg-blue-100/70 border border-blue-200/60 px-2 py-0.5 rounded-md">
+                        Step 2 • Action Required
+                      </span>
+                      <span className="text-[11px] text-slate-400 font-medium">Takes ~2 mins</span>
                     </div>
-                    <h3 className="text-sm sm:text-base font-black text-white leading-snug">
-                      Complete Bank Account Linking &amp; KYC
+                    <h3 className="text-sm sm:text-base font-black text-[#0B2450] tracking-tight leading-snug">
+                      Link Bank Account for T+1 Payouts
                     </h3>
-                    <p className="text-[11px] sm:text-xs text-blue-100/90 leading-relaxed max-w-md">
-                      Upload cancelled cheque &amp; doctor PAN for instant ₹1 penny drop verification by Pine Labs for direct T+1 patient treatment payouts.
+                    <p className="text-xs text-slate-600 leading-relaxed">
+                      Upload cancelled cheque &amp; doctor PAN for Pine Labs merchant verification to enable direct patient treatment settlements.
                     </p>
                   </div>
-                  <div className="w-10 h-10 rounded-xl bg-white/15 flex items-center justify-center shrink-0 group-hover:translate-x-1 transition-transform shadow-inner">
-                    <ArrowRight size={20} className="text-white" />
-                  </div>
+                </div>
+
+                <Link
+                  to={`/clinic-kyc?id=${matchedClinic.id || ''}&clinic=${encodeURIComponent(matchedClinic.clinic_name || '')}&doctor=${encodeURIComponent(matchedClinic.doctor_name || '')}&phone=${encodeURIComponent(matchedClinic.phone || '')}&city=${encodeURIComponent(matchedClinic.city || '')}&email=${encodeURIComponent(matchedClinic.email || '')}`}
+                  className="w-full py-3.5 px-5 rounded-xl bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 shadow-md shadow-[#0867E8]/20 transition-all active:scale-98 cursor-pointer"
+                >
+                  <span>Upload Documents &amp; Link Account</span>
+                  <ArrowRight size={15} />
                 </Link>
               </div>
 

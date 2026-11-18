@@ -19,6 +19,7 @@ const FreeToolsHub = lazy(() => import("@/pages/FreeToolsHub"));
 const LoanDemoPage = lazy(() => import("@/pages/LoanDemoPage"));
 const DentalImplantLoanPage = lazy(() => import("@/pages/DentalImplantLoanPage"));
 const ClearAlignersEmiPage = lazy(() => import("@/pages/ClearAlignersEmiPage"));
+const AestheticTreatmentsEmiPage = lazy(() => import("@/pages/AestheticTreatmentsEmiPage"));
 const PartnerClinicOnboardingPage = lazy(() => import("@/pages/PartnerClinicOnboardingPage"));
 const ClinicKycUploadPage = lazy(() => import("@/pages/ClinicKycUploadPage"));
 const AdminClinicOnboardingsPage = lazy(() => import("@/pages/AdminClinicOnboardingsPage"));
@@ -51,6 +52,12 @@ export default function AppRoutes() {
           <Route path="/dental-implants-loan" element={<Navigate to="/dental-implant-loan" replace />} />
           <Route path="/clear-aligners-on-emi" element={<LazyRoute><ClearAlignersEmiPage /></LazyRoute>} />
           <Route path="/clear-aligners-cost-on-emi" element={<Navigate to="/clear-aligners-on-emi" replace />} />
+
+          {/* Aesthetic, Dermatology & Wellness Financing Dedicated Pages */}
+          <Route path="/aesthetic-treatments-on-emi" element={<LazyRoute><AestheticTreatmentsEmiPage /></LazyRoute>} />
+          <Route path="/aesthetics-emi" element={<Navigate to="/aesthetic-treatments-on-emi" replace />} />
+          <Route path="/aesthetics" element={<Navigate to="/aesthetic-treatments-on-emi" replace />} />
+          <Route path="/derma-emi" element={<Navigate to="/aesthetic-treatments-on-emi" replace />} />
 
           {/* Direct WhatsApp Share & Demo Links for Loan */}
           <Route path="/loan" element={<Navigate to="/#check-eligibility" replace />} />

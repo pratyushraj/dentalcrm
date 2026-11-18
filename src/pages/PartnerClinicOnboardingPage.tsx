@@ -1182,7 +1182,7 @@ export default function PartnerClinicOnboardingPage() {
                 </h2>
               </div>
 
-              {/* Only show treatments if dental */}
+              {/* Treatments for Dental */}
               {form.category === 'dental' && (
                 <div>
                   <label className="block text-xs font-bold text-slate-700 mb-2">Most Common Treatments at Clinic:</label>
@@ -1215,12 +1215,98 @@ export default function PartnerClinicOnboardingPage() {
                 </div>
               )}
 
+              {/* Treatments for Dermatology & Aesthetics */}
+              {form.category === 'derma' && (
+                <div>
+                  <label className="block text-xs font-bold text-slate-700 mb-2">Key Aesthetic & Wellness Offerings:</label>
+                  <div className="flex flex-wrap gap-2">
+                    {[
+                      'GFC / PRP Therapy (Skin & Scalp)',
+                      'HIFU Non-Surgical Face Lifting',
+                      'HIEMT Body Sculpting',
+                      'Nutrition & Metabolic Packages',
+                      'Dermal Fillers & Botox',
+                      'Chemical Peels & Pigmentation',
+                      'Hair Transplant (FUE/DHI)'
+                    ].map((item) => {
+                      const active = form.specialties.includes(item);
+                      return (
+                        <button
+                          type="button"
+                          key={item}
+                          onClick={() => toggleSpecialty(item)}
+                          className={`px-3.5 py-2 min-h-[40px] rounded-xl text-xs font-semibold border transition-all flex items-center justify-center active:scale-95 ${
+                            active
+                              ? 'bg-amber-50 border-amber-600 text-amber-700 font-bold'
+                              : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300'
+                          }`}
+                        >
+                          {active ? '✓ ' : '+ '}{item}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+
+              {/* Treatments for IVF & Fertility */}
+              {form.category === 'ivf' && (
+                <div>
+                  <label className="block text-xs font-bold text-slate-700 mb-2">Key Fertility Treatments:</label>
+                  <div className="flex flex-wrap gap-2">
+                    {[
+                      'Self-Cycle IVF & ICSI',
+                      'Donor Egg IVF Cycles',
+                      'Egg Freezing / Cryopreservation',
+                      'IUI Protocol Packages',
+                      'Blastocyst Culture & PGT'
+                    ].map((item) => {
+                      const active = form.specialties.includes(item);
+                      return (
+                        <button
+                          type="button"
+                          key={item}
+                          onClick={() => toggleSpecialty(item)}
+                          className={`px-3.5 py-2 min-h-[40px] rounded-xl text-xs font-semibold border transition-all flex items-center justify-center active:scale-95 ${
+                            active
+                              ? 'bg-purple-50 border-purple-600 text-purple-700 font-bold'
+                              : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300'
+                          }`}
+                        >
+                          {active ? '✓ ' : '+ '}{item}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+
               {/* Capacity / Infrastructure */}
               {form.category === 'dental' ? (
                 <div>
                   <label className="block text-xs font-bold text-slate-700 mb-1.5">Number of Active Dental Chairs</label>
                   <div className="grid grid-cols-4 gap-2">
                     {['1 Chair', '2 Chairs', '3 Chairs', '4+ Chairs'].map((opt) => (
+                      <button
+                        type="button"
+                        key={opt}
+                        onClick={() => setForm({...form, chairs: opt})}
+                        className={`py-2.5 min-h-[42px] flex items-center justify-center text-xs font-bold rounded-xl border text-center transition-all active:scale-95 ${
+                          form.chairs === opt
+                            ? 'bg-[#0867E8] text-white border-[#0867E8] shadow-xs'
+                            : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-50'
+                        }`}
+                      >
+                        {opt}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              ) : form.category === 'derma' ? (
+                <div>
+                  <label className="block text-xs font-bold text-slate-700 mb-1.5">Number of Treatment / Procedure Rooms</label>
+                  <div className="grid grid-cols-4 gap-2">
+                    {['1-2 Rooms', '3-4 Rooms', '5+ Rooms', 'Multi-Floor Clinic'].map((opt) => (
                       <button
                         type="button"
                         key={opt}

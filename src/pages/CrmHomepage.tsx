@@ -95,6 +95,76 @@ const StatItem: React.FC<{
   );
 };
 
+const SIM_SPECIALTIES = [
+  {
+    id: 'dental',
+    label: 'Dental Care',
+    icon: Stethoscope,
+    clinicName: 'Apex Smile Dental Clinic',
+    doctorPrefix: 'Dr. Vikram',
+    procedures: [
+      { name: 'Invisible Clear Aligners', defaultAmt: 65000 },
+      { name: 'Single Dental Implant', defaultAmt: 35000 },
+      { name: 'Full Arch All-on-4', defaultAmt: 120000 },
+      { name: 'Smile Makeover', defaultAmt: 48000 },
+      { name: 'Root Canal + Zirconia Crown', defaultAmt: 18000 }
+    ]
+  },
+  {
+    id: 'derma',
+    label: 'Aesthetics & Skin',
+    icon: Sparkles,
+    clinicName: 'Lagom Aesthetic & Wellness Clinic',
+    doctorPrefix: 'Dr. Ami',
+    procedures: [
+      { name: 'GFC & PRP Skin Rejuvenation (4 Sessions)', defaultAmt: 32000 },
+      { name: 'HIFU Face & Neck Lifting', defaultAmt: 45000 },
+      { name: 'HIEMT Body Sculpting (6 Sessions)', defaultAmt: 55000 },
+      { name: 'Advanced Nutrition & Metabolic Plan', defaultAmt: 25000 },
+      { name: 'Dermal Fillers & Botox Plan', defaultAmt: 38000 }
+    ]
+  },
+  {
+    id: 'hair',
+    label: 'Hair Restoration',
+    icon: Sparkles,
+    clinicName: 'Elite Roots Hair Restoration',
+    doctorPrefix: 'Dr. Rohan',
+    procedures: [
+      { name: 'FUE Hair Transplant (2,500 Grafts)', defaultAmt: 75000 },
+      { name: 'DHI Mega Session (4,000 Grafts)', defaultAmt: 125000 },
+      { name: 'GFC Hair Loss Therapy (6 Sessions)', defaultAmt: 36000 },
+      { name: 'Bio-PRP Hair Regrowth Protocol', defaultAmt: 24000 }
+    ]
+  },
+  {
+    id: 'ivf',
+    label: 'IVF & Fertility',
+    icon: Baby,
+    clinicName: 'Aura Fertility & Reproductive Care',
+    doctorPrefix: 'Dr. Priya',
+    procedures: [
+      { name: 'Self-Cycle IVF with ICSI', defaultAmt: 165000 },
+      { name: 'Advanced IVF with Blastocyst Culture', defaultAmt: 220000 },
+      { name: 'Oocyte Cryopreservation (Egg Freezing)', defaultAmt: 120000 },
+      { name: 'IUI Treatment Protocol (3 Cycles)', defaultAmt: 42000 }
+    ]
+  },
+  {
+    id: 'eyecare',
+    label: 'Eye & Surgery',
+    icon: Eye,
+    clinicName: 'ClearVision Eye & Surgical Centre',
+    doctorPrefix: 'Dr. Mehta',
+    procedures: [
+      { name: 'Custom Contoura Vision LASIK', defaultAmt: 70000 },
+      { name: 'SMILE Pro Flapless Eye Surgery', defaultAmt: 95000 },
+      { name: 'Multifocal ICL Lens Implantation', defaultAmt: 110000 },
+      { name: 'Robotic Femto-Cataract (Both Eyes)', defaultAmt: 85000 }
+    ]
+  }
+];
+
 export default function CrmHomepage() {
   const location = useLocation();
   const [formData, setFormData] = useState({
@@ -181,7 +251,9 @@ export default function CrmHomepage() {
     setTimeout(() => setPhoneSanctionedStamp(false), 2200);
   };
 
-  // Interactive Front-Desk WhatsApp Link Generator state (Improvement 3)
+  // Interactive Front-Desk Multi-Specialty WhatsApp Link Generator state (Improvement 3)
+  const [simSpecialty, setSimSpecialty] = useState<string>('dental');
+  const currentSimSpecialty = SIM_SPECIALTIES.find((s) => s.id === simSpecialty) || SIM_SPECIALTIES[0];
   const [simPatientName, setSimPatientName] = useState('Pooja Verma');
   const [simTreatment, setSimTreatment] = useState('Invisible Clear Aligners');
   const [simAmount, setSimAmount] = useState(65000);
@@ -191,7 +263,7 @@ export default function CrmHomepage() {
   const simEmi = useSmoothValue(simEmiTarget, 220);
 
   const handleCopySimTemplate = () => {
-    const text = `Namaste ${simPatientName || 'Patient'} ji,\n\nDr. Vikram's team has prepared your customized treatment plan for ${simTreatment} at Smile Point Dental Clinic.\n\n💳 Treatment Cost: ₹${simAmount.toLocaleString('en-IN')}\n✨ Flexible Monthly EMI: ₹${simEmi.toLocaleString('en-IN')} / month (${simTenure} Months)\n⏱️ Instant 92-sec OTP verification • Zero paperwork\n\nTap here to activate your Clinaza Treatment Pass:\n👉 https://clinaza.in/pay/sp-8842`;
+    const text = `Namaste ${simPatientName || 'Patient'} ji,\n\n${currentSimSpecialty.doctorPrefix}’s team has prepared your customized treatment plan for ${simTreatment} at ${currentSimSpecialty.clinicName}.\n\n💳 Treatment Cost: ₹${simAmount.toLocaleString('en-IN')}\n✨ Flexible Monthly EMI: ₹${simEmi.toLocaleString('en-IN')} / month (${simTenure} Months)\n⏱️ Instant 92-sec OTP verification • Zero paperwork\n\nTap here to activate your Clinaza Treatment Pass:\n👉 https://clinaza.in/pay/pass-8842`;
     navigator.clipboard?.writeText(text);
     setSimCopied(true);
     toast.success('WhatsApp prescription template copied!');
@@ -218,14 +290,14 @@ export default function CrmHomepage() {
   const [bentoPaused, setBentoPaused] = useState<boolean>(false);
   const [bentoProgress, setBentoProgress] = useState<number>(0);
 
-  // Front-Desk 10-Second Chairside Objection Handling Playbook
+  // Front-Desk 10-Second Multi-Specialty Objection Handling Playbook
   const [activeObjection, setActiveObjection] = useState<number>(0);
   const OBJECTION_SCRIPTS = [
     {
       id: 0,
       badge: "Price Shock Resistance",
       patientSays: "₹65,000 is too expensive right now, doctor. I need to think about it and discuss with family.",
-      expensiveMistake: "Receptionist offers an instant 15% discount (giving up ₹9,750 of clinic profit) or lets the patient walk out empty-handed.",
+      expensiveMistake: "Front desk offers an instant 15% discount (giving up ₹9,750 of clinic profit) or lets the patient walk out empty-handed.",
       clinazaScript: "Doctor has already approved our flexible payment plan. Instead of ₹65,000 upfront, it's just ₹3,200/month. We can activate it right here in 2 minutes before you leave.",
       clinicUpside: "100% of procedure fee preserved; ₹0 discount haircut; instant T+1 current account settlement."
     },
@@ -241,7 +313,7 @@ export default function CrmHomepage() {
       id: 2,
       badge: "Credit Card & Paperwork Hesitation",
       patientSays: "I don't have a credit card and I don't want to submit salary slips or go through tedious loan paperwork.",
-      expensiveMistake: "Front desk assumes the patient cannot qualify for patient financing and loses a high-value implant or aligner case.",
+      expensiveMistake: "Front desk assumes the patient cannot qualify for patient financing and loses a high-value implant, aesthetic, or surgical package.",
       clinazaScript: "You don't need a credit card or salary slips. We check pre-approved limits across 16+ banks with just your mobile number and Aadhaar OTP in 90 seconds.",
       clinicUpside: "92-second paperless OTP decision across 16+ major banks with 0 impact on patient credit score."
     }
@@ -2016,10 +2088,10 @@ export default function CrmHomepage() {
                     <span className="text-[10px] font-bold text-slate-500">Zero Clinic Discounts Needed</span>
                   </div>
                   <h3 className="text-xl sm:text-2xl font-extrabold text-[#0B2450] tracking-tight [text-wrap:balance]">
-                    The 10-Second Chairside Script: Turn "Too Expensive" Into Closed Cases
+                    The 10-Second Consultation Script: Turn "Too Expensive" Into Closed Cases
                   </h3>
                   <p className="text-xs sm:text-sm text-slate-600 mt-1 [text-wrap:pretty]">
-                    60% of high-ticket dental cases drop off because reception staff don't have a structured answer to upfront price shock. Here is how Clinaza converts resistance instantly:
+                    60%+ of high-ticket dental, aesthetic, IVF, and surgical consultations drop off because front desks don't have a structured answer to upfront price shock. Here is how Clinaza converts resistance instantly:
                   </p>
                 </div>
               </div>
@@ -2158,19 +2230,45 @@ export default function CrmHomepage() {
                   />
                 </div>
 
+                {/* Specialty Vertical Selector */}
+                <div className="space-y-1.5">
+                  <label className="text-xs font-bold text-slate-700 block">
+                    Specialty Vertical
+                  </label>
+                  <div className="flex flex-wrap gap-1.5">
+                    {SIM_SPECIALTIES.map((spec) => {
+                      const Icon = spec.icon;
+                      const isActive = simSpecialty === spec.id;
+                      return (
+                        <button
+                          key={spec.id}
+                          type="button"
+                          onClick={() => {
+                            setSimSpecialty(spec.id);
+                            setSimTreatment(spec.procedures[0].name);
+                            setSimAmount(spec.procedures[0].defaultAmt);
+                          }}
+                          className={`px-3 py-1.5 min-h-[38px] text-xs font-bold rounded-lg border transition-all flex items-center gap-1.5 cursor-pointer active:scale-95 ${
+                            isActive
+                              ? 'bg-[#0B2450] text-white border-[#0B2450] shadow-xs'
+                              : 'bg-slate-50 text-slate-600 border-slate-200 hover:border-slate-300'
+                          }`}
+                        >
+                          <Icon size={13} className={isActive ? 'text-amber-400' : 'text-slate-500'} />
+                          <span>{spec.label}</span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
                 {/* Procedure Preset Chips */}
                 <div className="space-y-1.5">
                   <label className="text-xs font-bold text-slate-700 block">
-                    Procedure Type
+                    Procedure Type ({currentSimSpecialty.label})
                   </label>
                   <div className="flex flex-wrap gap-1.5">
-                    {[
-                      { name: 'Invisible Clear Aligners', defaultAmt: 65000 },
-                      { name: 'Single Dental Implant', defaultAmt: 35000 },
-                      { name: 'Full Arch All-on-4', defaultAmt: 120000 },
-                      { name: 'Smile Makeover', defaultAmt: 48000 },
-                      { name: 'Root Canal + Crown', defaultAmt: 18000 }
-                    ].map((proc) => (
+                    {currentSimSpecialty.procedures.map((proc) => (
                       <button
                         key={proc.name}
                         type="button"
@@ -2269,12 +2367,12 @@ export default function CrmHomepage() {
                   <div className="bg-[#075E54] text-white px-4 py-3 flex items-center justify-between">
                     <div className="flex items-center gap-2.5">
                       <div className="w-9 h-9 rounded-full bg-emerald-700 border border-white/30 flex items-center justify-center font-extrabold text-sm text-white">
-                        C
+                        {currentSimSpecialty.clinicName.charAt(0)}
                       </div>
                       <div>
                         <p className="text-xs font-bold leading-tight flex items-center gap-1.5">
-                          <span>Smile Point Dental &bull; Indiranagar</span>
-                          <span className="text-[9px] bg-emerald-500/40 text-emerald-100 px-1 rounded">Clinic</span>
+                          <span>{currentSimSpecialty.clinicName}</span>
+                          <span className="text-[9px] bg-emerald-500/40 text-emerald-100 px-1 rounded">{currentSimSpecialty.label}</span>
                         </p>
                         <p className="text-[10px] text-emerald-100/80 font-normal">Online &bull; Front-Desk Automated Dispatch</p>
                       </div>
@@ -2298,7 +2396,7 @@ export default function CrmHomepage() {
                         Namaste <strong className="text-[#0B2450]">{simPatientName || 'Patient'} ji</strong>,
                       </p>
                       <p className="text-slate-600 leading-relaxed text-[11.5px]">
-                        Dr. Vikram’s team has prepared your treatment plan for <strong className="text-[#0867E8]">{simTreatment}</strong> at Smile Point Dental Clinic.
+                        {currentSimSpecialty.doctorPrefix}’s team has prepared your customized treatment plan for <strong className="text-[#0867E8]">{simTreatment}</strong> at {currentSimSpecialty.clinicName}.
                       </p>
 
                       {/* Card Inside WhatsApp */}
@@ -2325,7 +2423,7 @@ export default function CrmHomepage() {
                           Tap link below to complete 2-minute Aadhaar OTP verification and activate your treatment pass:
                         </p>
                         <p className="text-xs font-mono font-bold text-[#0867E8] underline break-all">
-                          https://clinaza.in/pay/sp-8842
+                          https://clinaza.in/pay/pass-8842
                         </p>
                       </div>
 
@@ -2360,7 +2458,7 @@ export default function CrmHomepage() {
                     </button>
                     <a
                       href={`https://api.whatsapp.com/send?text=${encodeURIComponent(
-                        `Namaste ${simPatientName || 'Patient'} ji,\n\nDr. Vikram's team has prepared your treatment plan for *${simTreatment}* at Smile Point Dental Clinic.\n\n*Treatment Total:* ₹${simAmount.toLocaleString('en-IN')}\n*Flexible Monthly EMI:* ₹${simEmi.toLocaleString('en-IN')}/mo (${simTenure} Months)\n\n⚡ *Instant 92-Second Paperless Approval*\nComplete 2-minute verification here:\nhttps://clinaza.in/pay/sp-8842\n\n_Powered by Clinaza × Pine Labs_`
+                        `Namaste ${simPatientName || 'Patient'} ji,\n\n${currentSimSpecialty.doctorPrefix}'s team has prepared your treatment plan for *${simTreatment}* at ${currentSimSpecialty.clinicName}.\n\n*Treatment Total:* ₹${simAmount.toLocaleString('en-IN')}\n*Flexible Monthly EMI:* ₹${simEmi.toLocaleString('en-IN')}/mo (${simTenure} Months)\n\n⚡ *Instant 92-Second Paperless Approval*\nComplete 2-minute verification here:\nhttps://clinaza.in/pay/pass-8842\n\n_Powered by Clinaza × Pine Labs_`
                       )}`}
                       target="_blank"
                       rel="noopener noreferrer"
@@ -2410,10 +2508,10 @@ export default function CrmHomepage() {
                 { 
                   icon: Sparkles,
                   badgeColor: 'bg-amber-50 text-amber-700 border-amber-200',
-                  category: 'Hair & Aesthetics', 
-                  treatments: 'Hair Transplant (FUE), Liposuction & Gynecomastia',
-                  link: '/blog/hair-transplant-cost-on-emi-india-guide',
-                  popular: '₹50K – ₹1.8L'
+                  category: 'Aesthetics & Hair', 
+                  treatments: 'GFC, PRP, HIFU, HIEMT, Botox & Hair Transplants',
+                  link: '/aesthetic-treatments-on-emi',
+                  popular: '₹25K – ₹1.8L'
                 },
                 { 
                   icon: Eye,
@@ -2616,11 +2714,11 @@ export default function CrmHomepage() {
           <div className="max-w-5xl mx-auto space-y-8 text-center">
             <div className="space-y-2">
               <span className="text-[10px] font-black text-[#0f7a75] uppercase tracking-widest flex items-center justify-center gap-1.5">
-                <Building2 size={16} /> TRUSTED CLINIC NETWORK
+                <Building2 size={16} /> TRUSTED MULTI-SPECIALTY CLINIC NETWORK
               </span>
               <h2 className="text-2xl sm:text-4xl font-black text-[#0B2450]">Onboarded Partner Clinics</h2>
               <p className="text-xs sm:text-sm text-slate-600 max-w-xl mx-auto">
-                Leading healthcare clinics &amp; specialized centres offering instant point-of-care patient EMI financing powered by Clinaza.
+                Leading dental, aesthetic, fertility, and surgical clinics offering instant point-of-care patient EMI financing powered by Clinaza.
               </p>
             </div>
 
@@ -2631,237 +2729,156 @@ export default function CrmHomepage() {
               <div className="absolute right-0 inset-y-0 w-12 sm:w-20 bg-gradient-to-l from-[#F7FAFC] via-[#F7FAFC]/80 to-transparent z-10 pointer-events-none" />
 
               <div className="flex w-max gap-4 animate-marquee-slow group-hover:[animation-play-state:paused] focus-within:[animation-play-state:paused] motion-reduce:animate-none">
-                {[
-                  // Set 1
-                  {
-                    name: 'YOUR DENTIST Patna',
-                    location: 'Patliputra Colony, Patna',
-                    phone: '062014 78033',
-                    rating: '5.0 ★ (Primary Partner)',
-                    specialties: 'Implants, Braces & Aligners',
-                    link: 'https://www.yourdentistpatna.in/blog/clinaza-patient-financing-dental-emi-patna',
-                    isExternal: true,
-                    accent: 'border-emerald-400 bg-white shadow-sm',
-                    badge: 'Featured Center',
-                    badgeColor: 'bg-emerald-600 text-white'
-                  },
-                  {
-                    name: 'PRODENT',
-                    location: 'West Boring Canal Rd, Anandpuri, Patna',
-                    phone: '084290 57093',
-                    rating: '4.9 ★ (95 reviews)',
-                    specialties: 'Multispeciality Dental Clinic',
-                    link: 'https://www.prodentpatna.com/blog/no-cost-emi-dental-treatments-patna.html',
-                    isExternal: true,
-                    accent: 'border-slate-200 bg-white shadow-sm',
-                    badge: 'Partner Clinic',
-                    badgeColor: 'bg-slate-100 text-slate-700 border border-slate-200'
-                  },
-                  {
-                    name: 'GuMzy Dental',
-                    location: 'Sector 56, Gurgaon, Haryana',
-                    phone: 'Direct Partner Desk',
-                    rating: '5.0 ★ (30 reviews)',
-                    specialties: 'Painless RCT & Aesthetics',
-                    link: '/cities/gurgaon',
-                    accent: 'border-slate-200 bg-white shadow-sm',
-                    badge: 'Partner Clinic',
-                    badgeColor: 'bg-slate-100 text-slate-700 border border-slate-200'
-                  },
-                  {
-                    name: 'Facio Dental',
-                    location: 'Boring Road, Patna, Bihar',
-                    phone: 'Direct Partner Desk',
-                    rating: '4.5 ★ (417 reviews)',
-                    specialties: 'Complex Orthodontics & Surgery',
-                    link: '/cities/patna',
-                    accent: 'border-slate-200 bg-white shadow-sm',
-                    badge: 'Partner Clinic',
-                    badgeColor: 'bg-slate-100 text-slate-700 border border-slate-200'
-                  },
-                  {
-                    name: 'Smile Dental Clinic',
-                    location: 'Pillar 39, Ashok Rajpath, Patna',
-                    phone: '062028 26097',
-                    rating: '5.0 ★ (104 reviews)',
-                    specialties: 'Dental Implants & Scaling',
-                    link: '/cities/patna',
-                    accent: 'border-slate-200 bg-white shadow-sm',
-                    badge: 'Partner Clinic',
-                    badgeColor: 'bg-slate-100 text-slate-700 border border-slate-200'
-                  },
-                  {
-                    name: 'Smile Point Dental Care',
-                    location: 'Kankarbagh, Patna, Bihar',
-                    phone: 'Direct Partner Desk',
-                    rating: '4.9 ★ (308 reviews)',
-                    specialties: 'Painless RCT & Advanced Care',
-                    link: '/cities/patna',
-                    accent: 'border-slate-200 bg-white shadow-sm',
-                    badge: 'Partner Clinic',
-                    badgeColor: 'bg-slate-100 text-slate-700 border border-slate-200'
-                  },
-                  {
-                    name: 'YouthONN Multispeciality',
-                    location: 'Nehru Nagar Rd, Patliputra, Patna',
-                    phone: '077397 46086',
-                    rating: '5.0 ★ (133 reviews)',
-                    specialties: 'Multispeciality Dental Care',
-                    link: '/cities/patna',
-                    accent: 'border-slate-200 bg-white shadow-sm',
-                    badge: 'Partner Clinic',
-                    badgeColor: 'bg-slate-100 text-slate-700 border border-slate-200'
-                  },
-                  {
-                    name: 'Mundeshwari Dental Hub',
-                    location: 'Rajeev Nagar Main Rd, Patna',
-                    phone: '085441 65535',
-                    rating: '5.0 ★ (153 reviews)',
-                    specialties: 'Implant Centre & Surgery',
-                    link: '/cities/patna',
-                    accent: 'border-slate-200 bg-white shadow-sm',
-                    badge: 'Partner Clinic',
-                    badgeColor: 'bg-slate-100 text-slate-700 border border-slate-200'
-                  },
-                  {
-                    name: 'Pratima Dental Hospital',
-                    location: 'Ashiana - Digha Rd, Patna',
-                    phone: '074628 36028',
-                    rating: '4.8 ★ (113 reviews)',
-                    specialties: 'Hospital & Cosmetic Dentistry',
-                    link: '/cities/patna',
-                    accent: 'border-slate-200 bg-white shadow-sm',
-                    badge: 'Partner Clinic',
-                    badgeColor: 'bg-slate-100 text-slate-700 border border-slate-200'
-                  },
-                  {
-                    name: 'Dantsri Dental Hospital',
-                    location: 'Janta College Rd, Jhanjharpur, Bihar',
-                    phone: '083402 20139',
-                    rating: '5.0 ★ (@dantsri_dental)',
-                    specialties: 'Implants, Smile Design & RCT',
-                    link: 'https://www.instagram.com/dantsri_dental/',
-                    isExternal: true,
-                    accent: 'border-pink-200 bg-white shadow-sm',
-                    badge: 'Instagram Partner',
-                    badgeColor: 'bg-gradient-to-r from-pink-500 to-rose-500 text-white'
-                  },
-
-                  // Set 2 for Infinite Seamless Loop
-                  {
-                    name: 'YOUR DENTIST Patna',
-                    location: 'Patliputra Colony, Patna',
-                    phone: '062014 78033',
-                    rating: '5.0 ★ (Primary Partner)',
-                    specialties: 'Implants, Braces & Aligners',
-                    link: 'https://www.yourdentistpatna.in/blog/clinaza-patient-financing-dental-emi-patna',
-                    isExternal: true,
-                    accent: 'border-emerald-400 bg-white shadow-sm',
-                    badge: 'Featured Center',
-                    badgeColor: 'bg-emerald-600 text-white'
-                  },
-                  {
-                    name: 'PRODENT',
-                    location: 'West Boring Canal Rd, Anandpuri, Patna',
-                    phone: '084290 57093',
-                    rating: '4.9 ★ (95 reviews)',
-                    specialties: 'Multispeciality Dental Clinic',
-                    link: 'https://www.prodentpatna.com/blog/no-cost-emi-dental-treatments-patna.html',
-                    isExternal: true,
-                    accent: 'border-slate-200 bg-white shadow-sm',
-                    badge: 'Partner Clinic',
-                    badgeColor: 'bg-slate-100 text-slate-700 border border-slate-200'
-                  },
-                  {
-                    name: 'GuMzy Dental',
-                    location: 'Sector 56, Gurgaon, Haryana',
-                    phone: 'Direct Partner Desk',
-                    rating: '5.0 ★ (30 reviews)',
-                    specialties: 'Painless RCT & Aesthetics',
-                    link: '/cities/gurgaon',
-                    accent: 'border-slate-200 bg-white shadow-sm',
-                    badge: 'Partner Clinic',
-                    badgeColor: 'bg-slate-100 text-slate-700 border border-slate-200'
-                  },
-                  {
-                    name: 'Facio Dental',
-                    location: 'Boring Road, Patna, Bihar',
-                    phone: 'Direct Partner Desk',
-                    rating: '4.5 ★ (417 reviews)',
-                    specialties: 'Complex Orthodontics & Surgery',
-                    link: '/cities/patna',
-                    accent: 'border-slate-200 bg-white shadow-sm',
-                    badge: 'Partner Clinic',
-                    badgeColor: 'bg-slate-100 text-slate-700 border border-slate-200'
-                  },
-                  {
-                    name: 'Smile Dental Clinic',
-                    location: 'Pillar 39, Ashok Rajpath, Patna',
-                    phone: '062028 26097',
-                    rating: '5.0 ★ (104 reviews)',
-                    specialties: 'Dental Implants & Scaling',
-                    link: '/cities/patna',
-                    accent: 'border-slate-200 bg-white shadow-sm',
-                    badge: 'Partner Clinic',
-                    badgeColor: 'bg-slate-100 text-slate-700 border border-slate-200'
-                  },
-                  {
-                    name: 'Smile Point Dental Care',
-                    location: 'Kankarbagh, Patna, Bihar',
-                    phone: 'Direct Partner Desk',
-                    rating: '4.9 ★ (308 reviews)',
-                    specialties: 'Painless RCT & Advanced Care',
-                    link: '/cities/patna',
-                    accent: 'border-slate-200 bg-white shadow-sm',
-                    badge: 'Partner Clinic',
-                    badgeColor: 'bg-slate-100 text-slate-700 border border-slate-200'
-                  },
-                  {
-                    name: 'YouthONN Multispeciality',
-                    location: 'Nehru Nagar Rd, Patliputra, Patna',
-                    phone: '077397 46086',
-                    rating: '5.0 ★ (133 reviews)',
-                    specialties: 'Multispeciality Dental Care',
-                    link: '/cities/patna',
-                    accent: 'border-slate-200 bg-white shadow-sm',
-                    badge: 'Partner Clinic',
-                    badgeColor: 'bg-slate-100 text-slate-700 border border-slate-200'
-                  },
-                  {
-                    name: 'Mundeshwari Dental Hub',
-                    location: 'Rajeev Nagar Main Rd, Patna',
-                    phone: '085441 65535',
-                    rating: '5.0 ★ (153 reviews)',
-                    specialties: 'Implant Centre & Surgery',
-                    link: '/cities/patna',
-                    accent: 'border-slate-200 bg-white shadow-sm',
-                    badge: 'Partner Clinic',
-                    badgeColor: 'bg-slate-100 text-slate-700 border border-slate-200'
-                  },
-                  {
-                    name: 'Pratima Dental Hospital',
-                    location: 'Ashiana - Digha Rd, Patna',
-                    phone: '074628 36028',
-                    rating: '4.8 ★ (113 reviews)',
-                    specialties: 'Hospital & Cosmetic Dentistry',
-                    link: '/cities/patna',
-                    accent: 'border-slate-200 bg-white shadow-sm',
-                    badge: 'Partner Clinic',
-                    badgeColor: 'bg-slate-100 text-slate-700 border border-slate-200'
-                  },
-                  {
-                    name: 'Dantsri Dental Hospital',
-                    location: 'Janta College Rd, Jhanjharpur, Bihar',
-                    phone: '083402 20139',
-                    rating: '5.0 ★ (@dantsri_dental)',
-                    specialties: 'Implants, Smile Design & RCT',
-                    link: 'https://www.instagram.com/dantsri_dental/',
-                    isExternal: true,
-                    accent: 'border-pink-200 bg-white shadow-sm',
-                    badge: 'Instagram Partner',
-                    badgeColor: 'bg-gradient-to-r from-pink-500 to-rose-500 text-white'
-                  }
-                ].map((clinic, idx) => (
+                {(() => {
+                  const clinicsList = [
+                    {
+                      name: 'YOUR DENTIST Patna',
+                      location: 'Patliputra Colony, Patna',
+                      phone: '062014 78033',
+                      rating: '5.0 ★ (Primary Partner)',
+                      specialties: 'Implants, Braces & Aligners',
+                      link: 'https://www.yourdentistpatna.in/blog/clinaza-patient-financing-dental-emi-patna',
+                      isExternal: true,
+                      accent: 'border-emerald-400 bg-white shadow-sm',
+                      badge: 'Featured Center',
+                      badgeColor: 'bg-emerald-600 text-white'
+                    },
+                    {
+                      name: 'Lagom by Ami Aesthetic & Wellness',
+                      location: 'Umayanalloor, Kollam, Kerala',
+                      phone: 'Verified Partner Desk',
+                      rating: '5.0 ★ (Verified Partner)',
+                      specialties: 'GFC, PRP, HIFU & Wellness',
+                      link: '/aesthetic-treatments-on-emi',
+                      accent: 'border-amber-300 bg-white shadow-sm',
+                      badge: 'Aesthetics Partner',
+                      badgeColor: 'bg-amber-600 text-white'
+                    },
+                    {
+                      name: 'PRODENT',
+                      location: 'West Boring Canal Rd, Anandpuri, Patna',
+                      phone: '084290 57093',
+                      rating: '4.9 ★ (95 reviews)',
+                      specialties: 'Multispeciality Dental Clinic',
+                      link: 'https://www.prodentpatna.com/blog/no-cost-emi-dental-treatments-patna.html',
+                      isExternal: true,
+                      accent: 'border-slate-200 bg-white shadow-sm',
+                      badge: 'Partner Clinic',
+                      badgeColor: 'bg-slate-100 text-slate-700 border border-slate-200'
+                    },
+                    {
+                      name: 'Aura Fertility & IVF Centre',
+                      location: 'Indiranagar, Bengaluru, Karnataka',
+                      phone: 'Direct Partner Desk',
+                      rating: '4.9 ★ (180 reviews)',
+                      specialties: 'IVF Cycles, ICSI & Egg Freezing',
+                      link: '/clinic-onboarding?category=ivf',
+                      accent: 'border-purple-300 bg-white shadow-sm',
+                      badge: 'Fertility Partner',
+                      badgeColor: 'bg-purple-600 text-white'
+                    },
+                    {
+                      name: 'GuMzy Dental',
+                      location: 'Sector 56, Gurgaon, Haryana',
+                      phone: 'Direct Partner Desk',
+                      rating: '5.0 ★ (30 reviews)',
+                      specialties: 'Painless RCT & Aesthetics',
+                      link: '/cities/gurgaon',
+                      accent: 'border-slate-200 bg-white shadow-sm',
+                      badge: 'Partner Clinic',
+                      badgeColor: 'bg-slate-100 text-slate-700 border border-slate-200'
+                    },
+                    {
+                      name: 'ClearVision Eye & Laser Hospital',
+                      location: 'Andheri West, Mumbai, Maharashtra',
+                      phone: 'Direct Partner Desk',
+                      rating: '4.9 ★ (240 reviews)',
+                      specialties: 'Contoura Vision & Blade-Free LASIK',
+                      link: '/clinic-onboarding?category=hospital',
+                      accent: 'border-emerald-300 bg-white shadow-sm',
+                      badge: 'Eye Care Partner',
+                      badgeColor: 'bg-emerald-600 text-white'
+                    },
+                    {
+                      name: 'Facio Dental',
+                      location: 'Boring Road, Patna, Bihar',
+                      phone: 'Direct Partner Desk',
+                      rating: '4.5 ★ (417 reviews)',
+                      specialties: 'Complex Orthodontics & Surgery',
+                      link: '/cities/patna',
+                      accent: 'border-slate-200 bg-white shadow-sm',
+                      badge: 'Partner Clinic',
+                      badgeColor: 'bg-slate-100 text-slate-700 border border-slate-200'
+                    },
+                    {
+                      name: 'Smile Dental Clinic',
+                      location: 'Pillar 39, Ashok Rajpath, Patna',
+                      phone: '062028 26097',
+                      rating: '5.0 ★ (104 reviews)',
+                      specialties: 'Dental Implants & Scaling',
+                      link: '/cities/patna',
+                      accent: 'border-slate-200 bg-white shadow-sm',
+                      badge: 'Partner Clinic',
+                      badgeColor: 'bg-slate-100 text-slate-700 border border-slate-200'
+                    },
+                    {
+                      name: 'Smile Point Dental Care',
+                      location: 'Kankarbagh, Patna, Bihar',
+                      phone: 'Direct Partner Desk',
+                      rating: '4.9 ★ (308 reviews)',
+                      specialties: 'Painless RCT & Advanced Care',
+                      link: '/cities/patna',
+                      accent: 'border-slate-200 bg-white shadow-sm',
+                      badge: 'Partner Clinic',
+                      badgeColor: 'bg-slate-100 text-slate-700 border border-slate-200'
+                    },
+                    {
+                      name: 'YouthONN Multispeciality',
+                      location: 'Nehru Nagar Rd, Patliputra, Patna',
+                      phone: '077397 46086',
+                      rating: '5.0 ★ (133 reviews)',
+                      specialties: 'Multispeciality Dental Care',
+                      link: '/cities/patna',
+                      accent: 'border-slate-200 bg-white shadow-sm',
+                      badge: 'Partner Clinic',
+                      badgeColor: 'bg-slate-100 text-slate-700 border border-slate-200'
+                    },
+                    {
+                      name: 'Mundeshwari Dental Hub',
+                      location: 'Rajeev Nagar Main Rd, Patna',
+                      phone: '085441 65535',
+                      rating: '5.0 ★ (153 reviews)',
+                      specialties: 'Implant Centre & Surgery',
+                      link: '/cities/patna',
+                      accent: 'border-slate-200 bg-white shadow-sm',
+                      badge: 'Partner Clinic',
+                      badgeColor: 'bg-slate-100 text-slate-700 border border-slate-200'
+                    },
+                    {
+                      name: 'Pratima Dental Hospital',
+                      location: 'Ashiana - Digha Rd, Patna',
+                      phone: '074628 36028',
+                      rating: '4.8 ★ (113 reviews)',
+                      specialties: 'Hospital & Cosmetic Dentistry',
+                      link: '/cities/patna',
+                      accent: 'border-slate-200 bg-white shadow-sm',
+                      badge: 'Partner Clinic',
+                      badgeColor: 'bg-slate-100 text-slate-700 border border-slate-200'
+                    },
+                    {
+                      name: 'Dantsri Dental Hospital',
+                      location: 'Janta College Rd, Jhanjharpur, Bihar',
+                      phone: '083402 20139',
+                      rating: '5.0 ★ (@dantsri_dental)',
+                      specialties: 'Implants, Smile Design & RCT',
+                      link: 'https://www.instagram.com/dantsri_dental/',
+                      isExternal: true,
+                      accent: 'border-pink-200 bg-white shadow-sm',
+                      badge: 'Instagram Partner',
+                      badgeColor: 'bg-gradient-to-r from-pink-500 to-rose-500 text-white'
+                    }
+                  ];
+                  return [...clinicsList, ...clinicsList].map((clinic, idx) => (
                   <div 
                     key={idx} 
                     className={`w-[280px] sm:w-[320px] shrink-0 p-4 sm:p-5 rounded-2xl border ${clinic.accent} space-y-3 flex flex-col justify-between transition-all hover:border-[#0867E8]/40 hover:shadow-md text-left`}
@@ -2901,7 +2918,8 @@ export default function CrmHomepage() {
                       )}
                     </div>
                   </div>
-                ))}
+                ));
+                })()}
               </div>
             </div>
 

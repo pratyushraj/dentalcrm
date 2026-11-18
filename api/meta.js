@@ -210,9 +210,7 @@ function isSearchBot(userAgent) {
 
 const BRANDED_SHELL = `
     <div id="clinaza-app-shell" style="min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #ffffff; font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; padding: 24px;">
-      <div style="width: 52px; height: 52px; border-radius: 14px; background: linear-gradient(135deg, #0867E8 0%, #0B2450 100%); display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 25px -5px rgba(8,103,232,0.35); margin-bottom: 16px;">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-      </div>
+      <img src="/assets/clinaza-logo.jpg" alt="CLINAZA" width="58" height="58" style="width: 58px; height: 58px; border-radius: 14px; object-fit: cover; box-shadow: 0 10px 25px -5px rgba(8,103,232,0.25); border: 1px solid #e2e8f0; margin-bottom: 16px;" />
       <div style="font-size: 1.15rem; font-weight: 800; letter-spacing: -0.02em; color: #0B2450;">CLINAZA</div>
       <div style="font-size: 0.75rem; font-weight: 600; color: #64748b; letter-spacing: 0.05em; margin-top: 4px; text-transform: uppercase;">Healthcare Financing</div>
       <div style="width: 120px; height: 3px; background: #f1f5f9; border-radius: 99px; margin-top: 16px; overflow: hidden; position: relative;">

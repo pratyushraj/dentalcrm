@@ -105,7 +105,15 @@ export default function ClinicKycUploadPage() {
     previewUrl: null,
     uploadedUrl: null,
     isUploading: false,
-    docName: 'Doctor Aadhaar Card'
+    docName: 'Authorized Signatory Aadhaar Card (Front Side)'
+  });
+
+  const [aadhaarBackDoc, setAadhaarBackDoc] = useState<UploadedDoc>({
+    file: null,
+    previewUrl: null,
+    uploadedUrl: null,
+    isUploading: false,
+    docName: 'Authorized Signatory Aadhaar Card (Back Side)'
   });
 
   const [gstDoc, setGstDoc] = useState<UploadedDoc>({
@@ -309,8 +317,17 @@ export default function ClinicKycUploadPage() {
         return;
       }
 
-      if (!aadhaarDoc.uploadedUrl) {
+      if (!aadhaarDoc.uploadedUrl && !aadhaarBackDoc.uploadedUrl) {
         toast.error('Authorized Signatory Aadhaar Card (Front & Back) is mandatory for RBI Proof of Address.');
+        return;
+      }
+      if (!aadhaarDoc.uploadedUrl) {
+        toast.error('Please upload Authorized Signatory Aadhaar Card (Front Side).');
+        return;
+      }
+      const isPdf = aadhaarDoc.file?.name?.toLowerCase().endsWith('.pdf') || aadhaarDoc.file?.type === 'application/pdf';
+      if (!isPdf && !aadhaarBackDoc.uploadedUrl) {
+        toast.error('Please upload Aadhaar Card (Back Side) with address proof (or upload a combined PDF).');
         return;
       }
     } else {
@@ -391,7 +408,8 @@ export default function ClinicKycUploadPage() {
         'GST Certificate / Exemption': companyGstDoc.uploadedUrl || gstDoc.uploadedUrl || 'Attached',
         'Cancelled Cheque Proof': chequeDoc.uploadedUrl || 'Attached',
         'MOA & AOA': moaDoc.uploadedUrl || 'N/A (Sole Prop)',
-        'Director KYC / Aadhaar': aadhaarDoc.uploadedUrl || 'Attached',
+        'Director KYC / Aadhaar (Front)': aadhaarDoc.uploadedUrl || 'Attached',
+        'Director KYC / Aadhaar (Back)': aadhaarBackDoc.uploadedUrl || (aadhaarDoc.uploadedUrl ? 'Attached / Combined' : 'Pending'),
         'Compliance Status': 'Ready for ₹1 Automated Penny Drop'
       });
 
@@ -1242,7 +1260,7 @@ export default function ClinicKycUploadPage() {
                 )}
               </div>
 
-              {/* 5. Document: Aadhaar Card (Mandatory 4th slot) */}
+              {/* 5. Document: Aadhaar Card (Mandatory 4th slot - Front & Back) */}
               <div className="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-5 shadow-xs space-y-3">
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex items-center gap-2.5">
@@ -1255,66 +1273,151 @@ export default function ClinicKycUploadPage() {
                         <span className="text-rose-500">*</span>
                       </h3>
                       <p className="text-[11px] text-slate-500">
-                        Front &amp; back photo for RBI Proof of Address (POA) &amp; merchant account verification. Masked Aadhaar accepted.
+                        Front &amp; back photos for RBI Proof of Address (POA) &amp; merchant account verification. Masked Aadhaar accepted.
                       </p>
                     </div>
                   </div>
 
-                  {aadhaarDoc.uploadedUrl && (
+                  {aadhaarDoc.uploadedUrl && aadhaarBackDoc.uploadedUrl ? (
                     <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full shrink-0 flex items-center gap-1">
-                      <CheckCircle2 size={11} /> Attached
+                      <CheckCircle2 size={11} /> Both Sides Attached
                     </span>
-                  )}
+                  ) : aadhaarDoc.uploadedUrl ? (
+                    <span className="text-[10px] font-bold text-blue-700 bg-blue-50 border border-blue-200 px-2 py-0.5 rounded-full shrink-0 flex items-center gap-1">
+                      <CheckCircle2 size={11} /> Front Attached
+                    </span>
+                  ) : null}
                 </div>
 
-                {aadhaarDoc.previewUrl ? (
-                  <div className="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-200">
-                    <div className="flex items-center gap-3 truncate">
-                      <img 
-                        src={aadhaarDoc.previewUrl} 
-                        alt="Aadhaar Preview" 
-                        className="w-12 h-12 rounded-lg object-cover border border-slate-200 shrink-0" 
-                      />
-                      <div className="truncate">
-                        <p className="text-xs font-bold text-slate-800 truncate">
-                          {aadhaarDoc.file?.name || 'aadhaar_card.jpg'}
-                        </p>
-                        <p className="text-[10px] text-emerald-600 font-bold">
-                          {aadhaarDoc.isUploading ? 'Uploading to secure banking bucket...' : '✓ Ready for verification'}
-                        </p>
-                      </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                  {/* FRONT SIDE */}
+                  <div className="space-y-1.5">
+                    <div className="flex items-center justify-between">
+                      <span className="text-[11px] font-bold text-slate-700 flex items-center gap-1">
+                        <span>Aadhaar Front Side</span>
+                        <span className="text-rose-500">*</span>
+                      </span>
+                      {aadhaarDoc.uploadedUrl && (
+                        <span className="text-[9px] font-bold text-emerald-600 flex items-center gap-0.5">
+                          <CheckCircle2 size={10} /> Front Ready
+                        </span>
+                      )}
                     </div>
 
-                    <button
-                      type="button"
-                      onClick={() => setAadhaarDoc({ file: null, previewUrl: null, uploadedUrl: null, isUploading: false, docName: '' })}
-                      className="text-slate-400 hover:text-rose-600 p-1.5 transition-colors"
-                      title="Remove file"
-                    >
-                      <Trash2 size={15} />
-                    </button>
+                    {aadhaarDoc.previewUrl ? (
+                      <div className="flex items-center justify-between p-2.5 bg-slate-50 rounded-xl border border-slate-200">
+                        <div className="flex items-center gap-2.5 truncate">
+                          <img 
+                            src={aadhaarDoc.previewUrl} 
+                            alt="Aadhaar Front Preview" 
+                            className="w-10 h-10 rounded-lg object-cover border border-slate-200 shrink-0" 
+                          />
+                          <div className="truncate">
+                            <p className="text-xs font-bold text-slate-800 truncate">
+                              {aadhaarDoc.file?.name || 'aadhaar_front.jpg'}
+                            </p>
+                            <p className="text-[10px] text-emerald-600 font-bold">
+                              {aadhaarDoc.isUploading ? 'Uploading...' : '✓ Front Attached'}
+                            </p>
+                          </div>
+                        </div>
+
+                        <button
+                          type="button"
+                          onClick={() => setAadhaarDoc({ file: null, previewUrl: null, uploadedUrl: null, isUploading: false, docName: '' })}
+                          className="text-slate-400 hover:text-rose-600 p-1 transition-colors"
+                          title="Remove front side"
+                        >
+                          <Trash2 size={14} />
+                        </button>
+                      </div>
+                    ) : (
+                      <label className="border-2 border-dashed border-slate-200 hover:border-[#0867E8] bg-slate-50/60 hover:bg-blue-50/20 rounded-xl p-3.5 text-center cursor-pointer transition-all block space-y-1">
+                        <input
+                          type="file"
+                          accept="image/*,application/pdf"
+                          capture="environment"
+                          className="hidden"
+                          onChange={(e) => {
+                            const f = e.target.files?.[0];
+                            if (f) handleFileUpload(f, 'aadhaar_front', setAadhaarDoc);
+                          }}
+                        />
+                        <FileText size={20} className="text-[#0867E8] mx-auto" />
+                        <p className="text-xs font-bold text-slate-800">
+                          Upload Front Side
+                        </p>
+                        <p className="text-[10px] text-slate-400">
+                          Photo &amp; Aadhaar No. (or combined PDF)
+                        </p>
+                      </label>
+                    )}
                   </div>
-                ) : (
-                  <label className="border-2 border-dashed border-slate-200 hover:border-[#0867E8] bg-slate-50/60 hover:bg-blue-50/20 rounded-xl p-4 sm:p-5 text-center cursor-pointer transition-all block space-y-1.5">
-                    <input
-                      type="file"
-                      accept="image/*,application/pdf"
-                      capture="environment"
-                      className="hidden"
-                      onChange={(e) => {
-                        const f = e.target.files?.[0];
-                        if (f) handleFileUpload(f, 'aadhaar', setAadhaarDoc);
-                      }}
-                    />
-                    <FileText size={22} className="text-[#0867E8] mx-auto" />
-                    <p className="text-xs font-bold text-slate-800">
-                      Snap or Upload Aadhaar (Front &amp; Back)
-                    </p>
-                    <p className="text-[10px] text-slate-400">
-                      Supports JPG, PNG, PDF up to 20MB &bull; Masked Aadhaar Accepted
-                    </p>
-                  </label>
-                )}
+
+                  {/* BACK SIDE */}
+                  <div className="space-y-1.5">
+                    <div className="flex items-center justify-between">
+                      <span className="text-[11px] font-bold text-slate-700 flex items-center gap-1">
+                        <span>Aadhaar Back Side</span>
+                        <span className="text-rose-500">*</span>
+                      </span>
+                      {aadhaarBackDoc.uploadedUrl && (
+                        <span className="text-[9px] font-bold text-emerald-600 flex items-center gap-0.5">
+                          <CheckCircle2 size={10} /> Back Ready
+                        </span>
+                      )}
+                    </div>
+
+                    {aadhaarBackDoc.previewUrl ? (
+                      <div className="flex items-center justify-between p-2.5 bg-slate-50 rounded-xl border border-slate-200">
+                        <div className="flex items-center gap-2.5 truncate">
+                          <img 
+                            src={aadhaarBackDoc.previewUrl} 
+                            alt="Aadhaar Back Preview" 
+                            className="w-10 h-10 rounded-lg object-cover border border-slate-200 shrink-0" 
+                          />
+                          <div className="truncate">
+                            <p className="text-xs font-bold text-slate-800 truncate">
+                              {aadhaarBackDoc.file?.name || 'aadhaar_back.jpg'}
+                            </p>
+                            <p className="text-[10px] text-emerald-600 font-bold">
+                              {aadhaarBackDoc.isUploading ? 'Uploading...' : '✓ Back Attached'}
+                            </p>
+                          </div>
+                        </div>
+
+                        <button
+                          type="button"
+                          onClick={() => setAadhaarBackDoc({ file: null, previewUrl: null, uploadedUrl: null, isUploading: false, docName: '' })}
+                          className="text-slate-400 hover:text-rose-600 p-1 transition-colors"
+                          title="Remove back side"
+                        >
+                          <Trash2 size={14} />
+                        </button>
+                      </div>
+                    ) : (
+                      <label className="border-2 border-dashed border-slate-200 hover:border-[#0867E8] bg-slate-50/60 hover:bg-blue-50/20 rounded-xl p-3.5 text-center cursor-pointer transition-all block space-y-1">
+                        <input
+                          type="file"
+                          accept="image/*,application/pdf"
+                          capture="environment"
+                          className="hidden"
+                          onChange={(e) => {
+                            const f = e.target.files?.[0];
+                            if (f) handleFileUpload(f, 'aadhaar_back', setAadhaarBackDoc);
+                          }}
+                        />
+                        <FileText size={20} className="text-[#0867E8] mx-auto" />
+                        <p className="text-xs font-bold text-slate-800">
+                          Upload Back Side
+                        </p>
+                        <p className="text-[10px] text-slate-400">
+                          Address Proof for RBI POA
+                        </p>
+                      </label>
+                    )}
+                  </div>
+                </div>
               </div>
 
               {/* 5. Document: GST Exemption Declaration or GST Certificate */}
@@ -2009,7 +2112,7 @@ DIN: [DIN Number]                      DIN: [DIN Number]`}
                     )}
                   </div>
 
-                  {/* Corporate Slot 7: Director PAN & Aadhaar */}
+                  {/* Corporate Slot 7: Director PAN & Aadhaar (Front & Back) */}
                   <div className="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-5 shadow-xs space-y-3">
                     <div className="flex items-start justify-between gap-3">
                       <div className="flex items-center gap-2.5">
@@ -2027,32 +2130,88 @@ DIN: [DIN Number]                      DIN: [DIN Number]`}
                         </div>
                       </div>
 
-                      {aadhaarDoc.uploadedUrl && (
+                      {aadhaarDoc.uploadedUrl && aadhaarBackDoc.uploadedUrl ? (
                         <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full shrink-0 flex items-center gap-1">
-                          <CheckCircle2 size={11} /> Attached
+                          <CheckCircle2 size={11} /> Both Sides Attached
                         </span>
-                      )}
+                      ) : aadhaarDoc.uploadedUrl ? (
+                        <span className="text-[10px] font-bold text-blue-700 bg-blue-50 border border-blue-200 px-2 py-0.5 rounded-full shrink-0 flex items-center gap-1">
+                          <CheckCircle2 size={11} /> Front Attached
+                        </span>
+                      ) : null}
                     </div>
 
-                    {aadhaarDoc.previewUrl ? (
-                      <div className="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-200">
-                        <div className="flex items-center gap-3 truncate">
-                          <img src={aadhaarDoc.previewUrl} alt="Director KYC" className="w-12 h-12 rounded-lg object-cover border border-slate-200 shrink-0" />
-                          <div className="truncate">
-                            <p className="text-xs font-bold text-slate-800 truncate">{aadhaarDoc.file?.name || 'director_kyc.jpg'}</p>
-                            <p className="text-[10px] text-emerald-600 font-bold">{aadhaarDoc.isUploading ? 'Uploading...' : '✓ Ready'}</p>
-                          </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                      {/* FRONT SIDE / PAN */}
+                      <div className="space-y-1.5">
+                        <div className="flex items-center justify-between">
+                          <span className="text-[11px] font-bold text-slate-700 flex items-center gap-1">
+                            <span>Director Aadhaar Front / PAN</span>
+                            <span className="text-rose-500">*</span>
+                          </span>
+                          {aadhaarDoc.uploadedUrl && (
+                            <span className="text-[9px] font-bold text-emerald-600 flex items-center gap-0.5">
+                              <CheckCircle2 size={10} /> Ready
+                            </span>
+                          )}
                         </div>
-                        <button type="button" onClick={() => setAadhaarDoc({ file: null, previewUrl: null, uploadedUrl: null, isUploading: false, docName: '' })} className="text-slate-400 hover:text-rose-600 p-1.5"><Trash2 size={15} /></button>
+
+                        {aadhaarDoc.previewUrl ? (
+                          <div className="flex items-center justify-between p-2.5 bg-slate-50 rounded-xl border border-slate-200">
+                            <div className="flex items-center gap-2.5 truncate">
+                              <img src={aadhaarDoc.previewUrl} alt="Director KYC Front" className="w-10 h-10 rounded-lg object-cover border border-slate-200 shrink-0" />
+                              <div className="truncate">
+                                <p className="text-xs font-bold text-slate-800 truncate">{aadhaarDoc.file?.name || 'director_kyc_front.jpg'}</p>
+                                <p className="text-[10px] text-emerald-600 font-bold">{aadhaarDoc.isUploading ? 'Uploading...' : '✓ Attached'}</p>
+                              </div>
+                            </div>
+                            <button type="button" onClick={() => setAadhaarDoc({ file: null, previewUrl: null, uploadedUrl: null, isUploading: false, docName: '' })} className="text-slate-400 hover:text-rose-600 p-1 transition-colors"><Trash2 size={14} /></button>
+                          </div>
+                        ) : (
+                          <label className="border-2 border-dashed border-slate-200 hover:border-[#0867E8] bg-slate-50/60 hover:bg-blue-50/20 rounded-xl p-3.5 text-center cursor-pointer transition-all block space-y-1">
+                            <input type="file" accept="image/*,application/pdf" className="hidden" onChange={(e) => { const f = e.target.files?.[0]; if (f) handleFileUpload(f, 'director_front', setAadhaarDoc); }} />
+                            <FileText size={20} className="text-[#0867E8] mx-auto" />
+                            <p className="text-xs font-bold text-slate-800">Upload Front Side / PAN</p>
+                            <p className="text-[10px] text-slate-400">Photo &amp; ID Proof (or combined PDF)</p>
+                          </label>
+                        )}
                       </div>
-                    ) : (
-                      <label className="border-2 border-dashed border-slate-200 hover:border-[#0867E8] bg-slate-50/60 hover:bg-blue-50/20 rounded-xl p-4 sm:p-5 text-center cursor-pointer transition-all block space-y-1.5">
-                        <input type="file" accept="image/*,application/pdf" className="hidden" onChange={(e) => { const f = e.target.files?.[0]; if (f) handleFileUpload(f, 'aadhaar', setAadhaarDoc); }} />
-                        <FileText size={22} className="text-[#0867E8] mx-auto" />
-                        <p className="text-xs font-bold text-slate-800">Upload Director PAN &amp; Aadhaar (Front &amp; Back)</p>
-                        <p className="text-[10px] text-slate-400">PDF, JPG, PNG up to 20MB &bull; Clean copy accepted</p>
-                      </label>
-                    )}
+
+                      {/* BACK SIDE */}
+                      <div className="space-y-1.5">
+                        <div className="flex items-center justify-between">
+                          <span className="text-[11px] font-bold text-slate-700 flex items-center gap-1">
+                            <span>Director Aadhaar Back</span>
+                            <span className="text-rose-500">*</span>
+                          </span>
+                          {aadhaarBackDoc.uploadedUrl && (
+                            <span className="text-[9px] font-bold text-emerald-600 flex items-center gap-0.5">
+                              <CheckCircle2 size={10} /> Back Ready
+                            </span>
+                          )}
+                        </div>
+
+                        {aadhaarBackDoc.previewUrl ? (
+                          <div className="flex items-center justify-between p-2.5 bg-slate-50 rounded-xl border border-slate-200">
+                            <div className="flex items-center gap-2.5 truncate">
+                              <img src={aadhaarBackDoc.previewUrl} alt="Director KYC Back" className="w-10 h-10 rounded-lg object-cover border border-slate-200 shrink-0" />
+                              <div className="truncate">
+                                <p className="text-xs font-bold text-slate-800 truncate">{aadhaarBackDoc.file?.name || 'director_kyc_back.jpg'}</p>
+                                <p className="text-[10px] text-emerald-600 font-bold">{aadhaarBackDoc.isUploading ? 'Uploading...' : '✓ Back Attached'}</p>
+                              </div>
+                            </div>
+                            <button type="button" onClick={() => setAadhaarBackDoc({ file: null, previewUrl: null, uploadedUrl: null, isUploading: false, docName: '' })} className="text-slate-400 hover:text-rose-600 p-1 transition-colors"><Trash2 size={14} /></button>
+                          </div>
+                        ) : (
+                          <label className="border-2 border-dashed border-slate-200 hover:border-[#0867E8] bg-slate-50/60 hover:bg-blue-50/20 rounded-xl p-3.5 text-center cursor-pointer transition-all block space-y-1">
+                            <input type="file" accept="image/*,application/pdf" className="hidden" onChange={(e) => { const f = e.target.files?.[0]; if (f) handleFileUpload(f, 'director_back', setAadhaarBackDoc); }} />
+                            <FileText size={20} className="text-[#0867E8] mx-auto" />
+                            <p className="text-xs font-bold text-slate-800">Upload Back Side</p>
+                            <p className="text-[10px] text-slate-400">Address Proof for RBI POA</p>
+                          </label>
+                        )}
+                      </div>
+                    </div>
                   </div>
 
                   {/* Corporate Slot 8: MOA & AOA / LLP Agreement */}

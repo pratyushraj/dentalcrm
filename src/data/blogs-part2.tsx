@@ -85,14 +85,22 @@ export const BLOGS_PART2 = [
         </ul>
 
         <div className="bg-gradient-to-r from-[#0867E8] to-blue-700 text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
-          <h3 className="text-lg font-bold">Check Hair Transplant easy EMI Pre-Approval</h3>
+          <h3 className="text-lg font-bold">Check Hair Transplant & Aesthetic Treatment EMI Pre-Approval</h3>
           <p className="text-xs text-blue-100 max-w-lg mx-auto">Get instant pre-approval for ₹30,000 to ₹3,00,000 in 2 minutes without affecting your credit score.</p>
-          <a
-            href="/calculator"
-            className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md"
-          >
-            Calculate Hair Transplant EMI →
-          </a>
+          <div className="flex flex-wrap items-center justify-center gap-3 pt-1">
+            <a
+              href="/aesthetic-treatments-on-emi"
+              className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-5 py-2.5 rounded-xl hover:bg-blue-50 transition-colors shadow-md"
+            >
+              Calculate Aesthetic & Hair EMI →
+            </a>
+            <a
+              href="/clinic-onboarding?category=derma"
+              className="inline-block bg-blue-900/60 text-white border border-blue-300/40 font-bold text-xs uppercase tracking-wider px-5 py-2.5 rounded-xl hover:bg-blue-900 transition-colors"
+            >
+              For Hair & Skin Clinics: Onboard →
+            </a>
+          </div>
         </div>
       </div>
     )
@@ -178,15 +186,23 @@ export const BLOGS_PART2 = [
           <li><strong>Cover Medications & Multi-Cycle Packages:</strong> Bundle expensive gonadotropin injections, lab vitrification, and doctor fees into a single EMI.</li>
         </ul>
 
-        <div className="bg-gradient-to-r from-[#0867E8] to-blue-700 text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
+        <div className="bg-gradient-to-r from-[#0867E8] to-purple-800 text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
           <h3 className="text-lg font-bold">Check IVF Treatment EMI Pre-Approval</h3>
-          <p className="text-xs text-blue-100 max-w-lg mx-auto">Get instant pre-approval for ₹30,000 to ₹3,00,000 in under 2 minutes without impacting your credit score.</p>
-          <a
-            href="/calculator"
-            className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md"
-          >
-            Calculate IVF EMI →
-          </a>
+          <p className="text-xs text-blue-100 max-w-lg mx-auto">Get instant pre-approval for ₹50,000 to ₹3,00,000 in under 2 minutes without impacting your credit score.</p>
+          <div className="flex flex-wrap items-center justify-center gap-3 pt-1">
+            <a
+              href="/#calculator"
+              className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-5 py-2.5 rounded-xl hover:bg-blue-50 transition-colors shadow-md"
+            >
+              Calculate IVF EMI →
+            </a>
+            <a
+              href="/clinic-onboarding?category=ivf"
+              className="inline-block bg-purple-900/60 text-white border border-purple-300/40 font-bold text-xs uppercase tracking-wider px-5 py-2.5 rounded-xl hover:bg-purple-900 transition-colors"
+            >
+              For Fertility Centres: Onboard Desk →
+            </a>
+          </div>
         </div>
       </div>
     )
@@ -272,15 +288,23 @@ export const BLOGS_PART2 = [
           <li><strong>Zero Flap Complications with SMILE:</strong> 2mm keyhole incision preserves maximum corneal biomechanical strength.</li>
         </ul>
 
-        <div className="bg-gradient-to-r from-[#0867E8] to-blue-700 text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
+        <div className="bg-gradient-to-r from-[#0867E8] to-emerald-800 text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
           <h3 className="text-lg font-bold">Check LASIK Surgery easy EMI Pre-Approval</h3>
           <p className="text-xs text-blue-100 max-w-lg mx-auto">Get instant pre-approval for ₹30,000 to ₹3,00,000 in under 2 minutes with zero collateral.</p>
-          <a
-            href="/calculator"
-            className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md"
-          >
-            Calculate LASIK EMI →
-          </a>
+          <div className="flex flex-wrap items-center justify-center gap-3 pt-1">
+            <a
+              href="/#calculator"
+              className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-5 py-2.5 rounded-xl hover:bg-blue-50 transition-colors shadow-md"
+            >
+              Calculate LASIK EMI →
+            </a>
+            <a
+              href="/clinic-onboarding?category=hospital"
+              className="inline-block bg-emerald-900/60 text-white border border-emerald-300/40 font-bold text-xs uppercase tracking-wider px-5 py-2.5 rounded-xl hover:bg-emerald-900 transition-colors"
+            >
+              For Eye Hospitals: Onboard Desk →
+            </a>
+          </div>
         </div>
       </div>
     )

@@ -3,12 +3,15 @@ import { AbsoluteFill, Img, staticFile } from 'remotion';
 
 // =========================================================================
 // CLINAZA WHATSAPP STORY / STATUS POST (1080 x 1920 - 9:16 Portrait)
-// Focused announcement graphic:
-// - Official Onboarding Partner Clinics Across India
-// - Point-of-care patient EMIs for dental, aesthetic, IVF, daycare
-// - 100% Upfront T+1 payouts directly to clinic bank account
-// - 0% recourse — zero risk on patient EMIs
-// Safe Zones: Top 220px, Bottom 260px, Horizontal padding 72px
+// Balanced, high-density layout:
+// - Official Pan-India Onboarding Announcement
+// - Point-of-Care Patient EMIs for Dental, Aesthetic, IVF, Daycare
+// - Core Guarantees: 100% Upfront T+1 payouts & 0% Recourse
+// - 3 Mandatory Onboarding Documents:
+//   1. Doctor PAN & Aadhaar
+//   2. Clinic Current Account Cancelled Cheque
+//   3. Business Proof (Udyam / Shop Act / State Dental Council Reg)
+// - Safe Zones: Top 210px free, Bottom 260px free for WhatsApp Reply field
 // =========================================================================
 
 export const WhatsAppOnboardingStoryComposition: React.FC = () => {
@@ -24,12 +27,12 @@ export const WhatsAppOnboardingStoryComposition: React.FC = () => {
         height: 1920,
       }}
     >
-      {/* ── Layer 1: Subtle Authentic Clinic Backdrop (Atmospheric) ── */}
+      {/* ── Background Layer 1: Atmospheric Clinic Visual ── */}
       <div
         style={{
           position: 'absolute',
           inset: 0,
-          opacity: 0.22,
+          opacity: 0.16,
           mixBlendMode: 'luminosity',
           pointerEvents: 'none',
         }}
@@ -44,21 +47,21 @@ export const WhatsAppOnboardingStoryComposition: React.FC = () => {
         />
       </div>
 
-      {/* ── Layer 2: Deep Dark Obsidian Gradient Overlay ── */}
+      {/* ── Background Layer 2: Deep Obsidian Tint Overlay ── */}
       <div
         style={{
           position: 'absolute',
           inset: 0,
-          background: 'linear-gradient(180deg, rgba(2, 6, 23, 0.94) 0%, rgba(2, 6, 23, 0.88) 40%, rgba(2, 6, 23, 0.96) 100%)',
+          background: 'linear-gradient(180deg, rgba(2, 6, 23, 0.95) 0%, rgba(2, 6, 23, 0.88) 45%, rgba(2, 6, 23, 0.97) 100%)',
           pointerEvents: 'none',
         }}
       />
 
-      {/* ── Layer 3: Vibrant Ambient Neon Radial Glows ── */}
+      {/* ── Background Layer 3: Vibrant Radial Ambient Glows ── */}
       <div
         style={{
           position: 'absolute',
-          top: 150,
+          top: 120,
           left: -80,
           width: 750,
           height: 750,
@@ -71,12 +74,12 @@ export const WhatsAppOnboardingStoryComposition: React.FC = () => {
       <div
         style={{
           position: 'absolute',
-          top: 800,
+          top: 750,
           right: -100,
           width: 800,
           height: 800,
           borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(16, 185, 129, 0.26) 0%, rgba(2, 6, 23, 0) 70%)',
+          background: 'radial-gradient(circle, rgba(16, 185, 129, 0.25) 0%, rgba(2, 6, 23, 0) 70%)',
           filter: 'blur(100px)',
           pointerEvents: 'none',
         }}
@@ -84,7 +87,7 @@ export const WhatsAppOnboardingStoryComposition: React.FC = () => {
       <div
         style={{
           position: 'absolute',
-          bottom: 200,
+          bottom: 180,
           left: '20%',
           width: 700,
           height: 700,
@@ -95,7 +98,7 @@ export const WhatsAppOnboardingStoryComposition: React.FC = () => {
         }}
       />
 
-      {/* ── Layer 4: Subtle Tech Grid Pattern ── */}
+      {/* Subtle Grid Pattern Overlay */}
       <div
         style={{
           position: 'absolute',
@@ -104,22 +107,21 @@ export const WhatsAppOnboardingStoryComposition: React.FC = () => {
             linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
             linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px)
           `,
-          backgroundSize: '48px 48px',
+          backgroundSize: '44px 44px',
           opacity: 0.6,
           pointerEvents: 'none',
         }}
       />
 
       {/* ── SAFE ZONE CONTENT WRAPPER ── */}
-      {/* Strict boundary: Starts at Y = 220px, ends at Y = 1660px */}
-      {/* Leaves 220px top headroom for WhatsApp header and 260px bottom footroom for reply bar */}
+      {/* Strict boundary: Starts at Y = 210px, ends at Y = 1650px (270px bottom safe zone) */}
       <div
         style={{
           position: 'absolute',
-          top: 220,
-          bottom: 260,
-          left: 72,
-          right: 72,
+          top: 210,
+          bottom: 270,
+          left: 64,
+          right: 64,
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between',
@@ -135,23 +137,23 @@ export const WhatsAppOnboardingStoryComposition: React.FC = () => {
           }}
         >
           {/* Logo & Brand Name */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: 18 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
             <Img
               src={staticFile('assets/clinaza-logo.jpg')}
               style={{
-                width: 76,
-                height: 76,
-                borderRadius: 22,
+                width: 70,
+                height: 70,
+                borderRadius: 20,
                 border: '2px solid rgba(255, 255, 255, 0.25)',
-                boxShadow: '0 10px 30px rgba(0, 0, 0, 0.6)',
+                boxShadow: '0 8px 24px rgba(0, 0, 0, 0.5)',
                 objectFit: 'cover',
               }}
             />
             <div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                 <span
                   style={{
-                    fontSize: 32,
+                    fontSize: 28,
                     fontWeight: 900,
                     letterSpacing: '0.12em',
                     color: '#FFFFFF',
@@ -161,13 +163,13 @@ export const WhatsAppOnboardingStoryComposition: React.FC = () => {
                 </span>
                 <span
                   style={{
-                    fontSize: 13,
+                    fontSize: 12,
                     fontWeight: 900,
                     letterSpacing: '0.08em',
                     background: 'rgba(8, 103, 232, 0.35)',
                     color: '#60A5FA',
                     border: '1.5px solid rgba(96, 165, 250, 0.55)',
-                    padding: '4px 12px',
+                    padding: '3px 10px',
                     borderRadius: 8,
                   }}
                 >
@@ -176,8 +178,8 @@ export const WhatsAppOnboardingStoryComposition: React.FC = () => {
               </div>
               <p
                 style={{
-                  margin: '3px 0 0',
-                  fontSize: 13.5,
+                  margin: '2px 0 0',
+                  fontSize: 12.5,
                   color: '#94A3B8',
                   fontWeight: 700,
                   letterSpacing: '0.06em',
@@ -189,39 +191,26 @@ export const WhatsAppOnboardingStoryComposition: React.FC = () => {
             </div>
           </div>
 
-          {/* Announcement Live Pill */}
+          {/* Plural by Pine Labs Partner Badge */}
           <div
             style={{
               display: 'flex',
               alignItems: 'center',
-              gap: 9,
-              background: 'rgba(16, 185, 129, 0.16)',
-              border: '1.5px solid rgba(52, 211, 153, 0.5)',
-              padding: '9px 18px',
-              borderRadius: 24,
-              backdropFilter: 'blur(10px)',
+              gap: 8,
+              background: '#FFFFFF',
+              border: '1.5px solid rgba(255, 255, 255, 0.4)',
+              padding: '7px 15px',
+              borderRadius: 22,
+              boxShadow: '0 6px 18px rgba(0, 0, 0, 0.35)',
             }}
           >
-            <span
-              style={{
-                width: 9,
-                height: 9,
-                borderRadius: '50%',
-                backgroundColor: '#10B981',
-                boxShadow: '0 0 10px #10B981',
-              }}
-            />
-            <span
-              style={{
-                fontSize: 12.5,
-                fontWeight: 900,
-                letterSpacing: '0.1em',
-                color: '#6EE7B7',
-                textTransform: 'uppercase',
-              }}
-            >
-              Pan-India Live
+            <span style={{ fontSize: 10.5, fontWeight: 900, color: '#475569', letterSpacing: '0.08em' }}>
+              GATEWAY:
             </span>
+            <Img
+              src={staticFile('assets/plural_by_pinelabs_transparent.png')}
+              style={{ height: 19, width: 'auto', objectFit: 'contain' }}
+            />
           </div>
         </div>
 
@@ -232,34 +221,42 @@ export const WhatsAppOnboardingStoryComposition: React.FC = () => {
               display: 'inline-flex',
               alignItems: 'center',
               gap: 8,
-              background: 'rgba(255, 255, 255, 0.07)',
-              border: '1px solid rgba(255, 255, 255, 0.14)',
-              padding: '7px 18px',
+              background: 'linear-gradient(90deg, rgba(16, 185, 129, 0.22) 0%, rgba(8, 103, 232, 0.22) 100%)',
+              border: '1.5px solid rgba(52, 211, 153, 0.55)',
+              padding: '6px 16px',
               borderRadius: 20,
-              marginBottom: 16,
+              marginBottom: 10,
             }}
           >
-            <span style={{ fontSize: 14 }}>🚀</span>
             <span
               style={{
-                fontSize: 13,
-                fontWeight: 800,
+                width: 8,
+                height: 8,
+                borderRadius: '50%',
+                backgroundColor: '#10B981',
+                boxShadow: '0 0 10px #10B981',
+              }}
+            />
+            <span
+              style={{
+                fontSize: 12,
+                fontWeight: 900,
                 letterSpacing: '0.12em',
                 textTransform: 'uppercase',
-                color: '#93C5FD',
+                color: '#A7F3D0',
               }}
             >
-              Partner Clinic Network
+              OFFICIAL ANNOUNCEMENT • NOW LIVE
             </span>
           </div>
 
           <h1
             style={{
               margin: 0,
-              fontSize: 58,
+              fontSize: 50,
               fontWeight: 900,
               lineHeight: 1.12,
-              letterSpacing: '-0.03em',
+              letterSpacing: '-0.025em',
             }}
           >
             We have officially <br />
@@ -273,196 +270,113 @@ export const WhatsAppOnboardingStoryComposition: React.FC = () => {
               started onboarding
             </span>{' '}
             <br />
-            partner clinics <br />
-            across India!
+            partner clinics across India!
           </h1>
         </div>
 
         {/* ── 3. SECONDARY EXPLANATORY CARD ── */}
         <div
           style={{
-            background: 'linear-gradient(180deg, rgba(15, 23, 42, 0.85) 0%, rgba(15, 23, 42, 0.95) 100%)',
-            border: '1.5px solid rgba(255, 255, 255, 0.14)',
-            borderRadius: 26,
-            padding: '28px 32px',
-            boxShadow: '0 16px 40px rgba(0, 0, 0, 0.45)',
+            background: 'linear-gradient(180deg, rgba(15, 23, 42, 0.88) 0%, rgba(15, 23, 42, 0.96) 100%)',
+            border: '1.5px solid rgba(255, 255, 255, 0.12)',
+            borderRadius: 20,
+            padding: '18px 24px',
+            boxShadow: '0 12px 30px rgba(0, 0, 0, 0.4)',
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 12 }}>
-            <span style={{ fontSize: 20 }}>⚡</span>
-            <span
-              style={{
-                fontSize: 13,
-                fontWeight: 900,
-                letterSpacing: '0.14em',
-                color: '#38BDF8',
-                textTransform: 'uppercase',
-              }}
-            >
-              Chairside & Reception Financing
-            </span>
-          </div>
-
           <p
             style={{
               margin: 0,
-              fontSize: 27,
+              fontSize: 21,
               fontWeight: 600,
-              color: '#F1F5F9',
-              lineHeight: 1.4,
-              letterSpacing: '-0.01em',
+              color: '#E2E8F0',
+              lineHeight: 1.35,
             }}
           >
             Equip your reception desk with instant point-of-care patient EMIs for{' '}
-            <span style={{ color: '#FFFFFF', fontWeight: 800, textDecoration: 'underline', textDecorationColor: '#38BDF8' }}>
+            <span style={{ color: '#38BDF8', fontWeight: 800 }}>
               high-ticket dental, aesthetic, IVF, and daycare treatments
             </span>
             :
           </p>
         </div>
 
-        {/* ── 4. THE TWO CORE VALUE CARDS (EXACT BULLET POINTS) ── */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
-          {/* Bullet 1: 100% Upfront T+1 Payouts */}
+        {/* ── 4. THE 2 CORE GUARANTEES ── */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+          {/* Bullet 1 */}
           <div
             style={{
-              background: 'linear-gradient(90deg, rgba(16, 185, 129, 0.16) 0%, rgba(15, 23, 42, 0.92) 100%)',
-              border: '2px solid rgba(52, 211, 153, 0.55)',
-              borderRadius: 24,
-              padding: '24px 28px',
+              background: 'linear-gradient(90deg, rgba(16, 185, 129, 0.15) 0%, rgba(15, 23, 42, 0.9) 100%)',
+              border: '1.5px solid rgba(52, 211, 153, 0.5)',
+              borderRadius: 18,
+              padding: '16px 20px',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
-              boxShadow: '0 12px 36px rgba(16, 185, 129, 0.15)',
             }}
           >
-            <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
-              <div
-                style={{
-                  width: 58,
-                  height: 58,
-                  borderRadius: 18,
-                  background: 'rgba(16, 185, 129, 0.25)',
-                  border: '1.5px solid rgba(52, 211, 153, 0.7)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontSize: 28,
-                  flexShrink: 0,
-                }}
-              >
-                ✅
-              </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+              <span style={{ fontSize: 24 }}>✅</span>
               <div>
-                <h3
-                  style={{
-                    margin: 0,
-                    fontSize: 27,
-                    fontWeight: 900,
-                    color: '#FFFFFF',
-                    letterSpacing: '-0.01em',
-                  }}
-                >
+                <h3 style={{ margin: 0, fontSize: 22, fontWeight: 900, color: '#FFFFFF' }}>
                   100% Upfront T+1 payouts
                 </h3>
-                <p
-                  style={{
-                    margin: '6px 0 0',
-                    fontSize: 20,
-                    fontWeight: 600,
-                    color: '#A7F3D0',
-                  }}
-                >
+                <p style={{ margin: '3px 0 0', fontSize: 16, fontWeight: 600, color: '#A7F3D0' }}>
                   Directly to your clinic bank account
                 </p>
               </div>
             </div>
-
             <span
               style={{
-                fontSize: 12,
+                fontSize: 10.5,
                 fontWeight: 900,
-                letterSpacing: '0.08em',
+                letterSpacing: '0.06em',
                 color: '#34D399',
-                background: 'rgba(0, 0, 0, 0.5)',
+                background: 'rgba(0, 0, 0, 0.45)',
                 border: '1px solid rgba(52, 211, 153, 0.4)',
-                padding: '8px 16px',
-                borderRadius: 12,
+                padding: '6px 12px',
+                borderRadius: 8,
                 whiteSpace: 'nowrap',
-                flexShrink: 0,
               }}
             >
               T+1 DIRECT
             </span>
           </div>
 
-          {/* Bullet 2: 0% Recourse */}
+          {/* Bullet 2 */}
           <div
             style={{
-              background: 'linear-gradient(90deg, rgba(8, 103, 232, 0.16) 0%, rgba(15, 23, 42, 0.92) 100%)',
-              border: '2px solid rgba(96, 165, 250, 0.55)',
-              borderRadius: 24,
-              padding: '24px 28px',
+              background: 'linear-gradient(90deg, rgba(8, 103, 232, 0.15) 0%, rgba(15, 23, 42, 0.9) 100%)',
+              border: '1.5px solid rgba(96, 165, 250, 0.5)',
+              borderRadius: 18,
+              padding: '16px 20px',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
-              boxShadow: '0 12px 36px rgba(8, 103, 232, 0.15)',
             }}
           >
-            <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
-              <div
-                style={{
-                  width: 58,
-                  height: 58,
-                  borderRadius: 18,
-                  background: 'rgba(8, 103, 232, 0.25)',
-                  border: '1.5px solid rgba(96, 165, 250, 0.7)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontSize: 28,
-                  flexShrink: 0,
-                }}
-              >
-                ✅
-              </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+              <span style={{ fontSize: 24 }}>✅</span>
               <div>
-                <h3
-                  style={{
-                    margin: 0,
-                    fontSize: 27,
-                    fontWeight: 900,
-                    color: '#FFFFFF',
-                    letterSpacing: '-0.01em',
-                  }}
-                >
+                <h3 style={{ margin: 0, fontSize: 22, fontWeight: 900, color: '#FFFFFF' }}>
                   0% recourse
                 </h3>
-                <p
-                  style={{
-                    margin: '6px 0 0',
-                    fontSize: 20,
-                    fontWeight: 600,
-                    color: '#BAE6FD',
-                  }}
-                >
+                <p style={{ margin: '3px 0 0', fontSize: 16, fontWeight: 600, color: '#BAE6FD' }}>
                   You carry zero risk on patient EMIs
                 </p>
               </div>
             </div>
-
             <span
               style={{
-                fontSize: 12,
+                fontSize: 10.5,
                 fontWeight: 900,
-                letterSpacing: '0.08em',
+                letterSpacing: '0.06em',
                 color: '#60A5FA',
-                background: 'rgba(0, 0, 0, 0.5)',
+                background: 'rgba(0, 0, 0, 0.45)',
                 border: '1px solid rgba(96, 165, 250, 0.4)',
-                padding: '8px 16px',
-                borderRadius: 12,
+                padding: '6px 12px',
+                borderRadius: 8,
                 whiteSpace: 'nowrap',
-                flexShrink: 0,
               }}
             >
               0% RECOURSE
@@ -470,36 +384,267 @@ export const WhatsAppOnboardingStoryComposition: React.FC = () => {
           </div>
         </div>
 
-        {/* ── 5. CLEAN BRAND FOOTER ── */}
+        {/* ── 5. REQUIRED DOCUMENTS FOR ACTIVATION (NEW HERO SECTION) ── */}
         <div
           style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            padding: '16px 20px',
-            background: 'rgba(255, 255, 255, 0.04)',
-            border: '1px solid rgba(255, 255, 255, 0.08)',
-            borderRadius: 18,
+            background: 'linear-gradient(180deg, rgba(30, 41, 59, 0.85) 0%, rgba(15, 23, 42, 0.96) 100%)',
+            border: '2px solid rgba(251, 191, 36, 0.45)',
+            borderRadius: 24,
+            padding: '22px 24px',
+            boxShadow: '0 18px 45px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.15)',
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-            <span style={{ fontSize: 16 }}>🔗</span>
-            <span style={{ fontSize: 17, fontWeight: 800, color: '#FFFFFF', letterSpacing: '0.02em' }}>
-              clinaza.in/clinic-onboarding
+          {/* Header of docs card */}
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 14 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+              <span style={{ fontSize: 22 }}>📋</span>
+              <div>
+                <h4
+                  style={{
+                    margin: 0,
+                    fontSize: 18,
+                    fontWeight: 900,
+                    letterSpacing: '0.04em',
+                    color: '#FDE68A',
+                    textTransform: 'uppercase',
+                  }}
+                >
+                  Documents Required for Instant Activation
+                </h4>
+                <p style={{ margin: '2px 0 0', fontSize: 12.5, color: '#94A3B8', fontWeight: 600 }}>
+                  Fast-track paperless desk approval within 24 hours
+                </p>
+              </div>
+            </div>
+
+            <span
+              style={{
+                fontSize: 11,
+                fontWeight: 900,
+                color: '#F59E0B',
+                background: 'rgba(245, 158, 11, 0.18)',
+                border: '1px solid rgba(245, 158, 11, 0.45)',
+                padding: '5px 12px',
+                borderRadius: 10,
+                letterSpacing: '0.06em',
+              }}
+            >
+              3 EASY DOCS
             </span>
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: 14, fontSize: 14, color: '#94A3B8', fontWeight: 700 }}>
-            <span>Direct WhatsApp: +91 96081 29767</span>
+          {/* The 3 Documents List */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+            {/* Doc 1 */}
+            <div
+              style={{
+                background: 'rgba(255, 255, 255, 0.05)',
+                border: '1px solid rgba(255, 255, 255, 0.1)',
+                borderRadius: 14,
+                padding: '12px 16px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: 14,
+              }}
+            >
+              <div
+                style={{
+                  width: 34,
+                  height: 34,
+                  borderRadius: 10,
+                  background: 'linear-gradient(135deg, #0867E8 0%, #0052CC 100%)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: 16,
+                  fontWeight: 900,
+                  color: '#FFFFFF',
+                  flexShrink: 0,
+                }}
+              >
+                1
+              </div>
+              <div style={{ flex: 1 }}>
+                <span style={{ fontSize: 17.5, fontWeight: 900, color: '#FFFFFF' }}>
+                  Doctor PAN & Aadhaar
+                </span>
+                <span style={{ display: 'block', fontSize: 12, color: '#94A3B8', fontWeight: 500, marginTop: 1 }}>
+                  Primary practitioner identity & underwriting verification
+                </span>
+              </div>
+              <span style={{ fontSize: 11, fontWeight: 800, color: '#60A5FA', background: 'rgba(96, 165, 250, 0.12)', padding: '3px 8px', borderRadius: 6 }}>
+                Identity
+              </span>
+            </div>
+
+            {/* Doc 2 */}
+            <div
+              style={{
+                background: 'rgba(255, 255, 255, 0.05)',
+                border: '1px solid rgba(255, 255, 255, 0.1)',
+                borderRadius: 14,
+                padding: '12px 16px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: 14,
+              }}
+            >
+              <div
+                style={{
+                  width: 34,
+                  height: 34,
+                  borderRadius: 10,
+                  background: 'linear-gradient(135deg, #10B981 0%, #059669 100%)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: 16,
+                  fontWeight: 900,
+                  color: '#FFFFFF',
+                  flexShrink: 0,
+                }}
+              >
+                2
+              </div>
+              <div style={{ flex: 1 }}>
+                <span style={{ fontSize: 17.5, fontWeight: 900, color: '#FFFFFF' }}>
+                  Clinic Current Account Cancelled Cheque
+                </span>
+                <span style={{ display: 'block', fontSize: 12, color: '#94A3B8', fontWeight: 500, marginTop: 1 }}>
+                  For direct daily T+1 automated payout routing
+                </span>
+              </div>
+              <span style={{ fontSize: 11, fontWeight: 800, color: '#34D399', background: 'rgba(52, 211, 153, 0.12)', padding: '3px 8px', borderRadius: 6 }}>
+                Settlement
+              </span>
+            </div>
+
+            {/* Doc 3 */}
+            <div
+              style={{
+                background: 'rgba(255, 255, 255, 0.05)',
+                border: '1px solid rgba(255, 255, 255, 0.1)',
+                borderRadius: 14,
+                padding: '12px 16px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: 14,
+              }}
+            >
+              <div
+                style={{
+                  width: 34,
+                  height: 34,
+                  borderRadius: 10,
+                  background: 'linear-gradient(135deg, #F59E0B 0%, #D97706 100%)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: 16,
+                  fontWeight: 900,
+                  color: '#FFFFFF',
+                  flexShrink: 0,
+                }}
+              >
+                3
+              </div>
+              <div style={{ flex: 1 }}>
+                <span style={{ fontSize: 17.5, fontWeight: 900, color: '#FFFFFF' }}>
+                  Business Proof
+                </span>
+                <span style={{ display: 'block', fontSize: 12, color: '#CBD5E1', fontWeight: 600, marginTop: 1 }}>
+                  Udyam Registration / Shop Act / State Dental Council Reg
+                </span>
+              </div>
+              <span style={{ fontSize: 11, fontWeight: 800, color: '#FBBF24', background: 'rgba(251, 191, 36, 0.12)', padding: '3px 8px', borderRadius: 6 }}>
+                Registration
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* ── 6. TRANSPARENT COMMERCIALS STRIP ── */}
+        <div
+          style={{
+            background: 'linear-gradient(90deg, rgba(8, 103, 232, 0.16) 0%, rgba(16, 185, 129, 0.16) 100%)',
+            borderRadius: 18,
+            border: '1.5px solid rgba(255, 255, 255, 0.14)',
+            padding: '12px 22px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+          }}
+        >
+          <div>
+            <span style={{ fontSize: 10, fontWeight: 900, color: '#38BDF8', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+              TRANSPARENT CLINIC PRICING
+            </span>
+            <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginTop: 1 }}>
+              <span style={{ fontSize: 24, fontWeight: 900, color: '#FFFFFF' }}>₹999</span>
+              <span style={{ fontSize: 12, fontWeight: 700, color: '#CBD5E1' }}>One-Time Onboarding & Activation Kit</span>
+            </div>
+          </div>
+
+          <div style={{ display: 'flex', gap: 16, alignItems: 'center' }}>
+            <div style={{ textAlign: 'right' }}>
+              <span style={{ display: 'block', fontSize: 14, fontWeight: 900, color: '#34D399' }}>₹0 AMC</span>
+              <span style={{ fontSize: 10, color: '#94A3B8', fontWeight: 600 }}>Zero annual fees</span>
+            </div>
+            <div style={{ width: 1, height: 26, background: 'rgba(255, 255, 255, 0.2)' }} />
+            <div style={{ textAlign: 'right' }}>
+              <span style={{ display: 'block', fontSize: 14, fontWeight: 900, color: '#34D399' }}>₹0 / Month</span>
+              <span style={{ fontSize: 10, color: '#94A3B8', fontWeight: 600 }}>Zero subscription</span>
+            </div>
+          </div>
+        </div>
+
+        {/* ── 7. PRIMARY ACTION BUTTON & FOOTER ── */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+          {/* Action Button */}
+          <div
+            style={{
+              width: '100%',
+              background: 'linear-gradient(90deg, #0867E8 0%, #0052CC 100%)',
+              padding: '16px 24px',
+              borderRadius: 20,
+              border: '2px solid rgba(255, 255, 255, 0.3)',
+              boxShadow: '0 8px 30px rgba(8, 103, 232, 0.5)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: 12,
+            }}
+          >
+            <span style={{ fontSize: 19, fontWeight: 900, letterSpacing: '0.04em', textTransform: 'uppercase', color: '#FFFFFF' }}>
+              Reply with your docs to WhatsApp +91 96081 29767
+            </span>
+            <span style={{ fontSize: 20, fontWeight: 900, color: '#FFFFFF' }}>→</span>
+          </div>
+
+          {/* Footer Metadata */}
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              padding: '0 8px',
+              fontSize: 12.5,
+              color: '#94A3B8',
+              fontWeight: 700,
+            }}
+          >
+            <span>🔗 clinaza.in/clinic-onboarding</span>
             <span>&bull;</span>
             <span>@clinaza.in</span>
+            <span>&bull;</span>
+            <span>Pan-India Courier Dispatch</span>
           </div>
         </div>
       </div>
 
-      {/* ── 6. RESERVED SAFE ZONES ── */}
-      {/* Top 220px: clean headroom for WhatsApp Story top bars & sender info */}
-      {/* Bottom 260px: clean footroom for WhatsApp floating "Reply" message input bar */}
+      {/* ── 8. RESERVED SAFE ZONES ── */}
+      {/* Top 210px: pristine space for WhatsApp Story progress bars, sender avatar & time */}
+      {/* Bottom 270px: pristine space for WhatsApp's floating "Type a reply..." input box */}
     </AbsoluteFill>
   );
 };

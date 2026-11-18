@@ -987,26 +987,44 @@ export default function PartnerClinicOnboardingPage() {
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1.5">Direct WhatsApp / Mobile *</label>
+                  <label className="block text-xs font-bold text-slate-700 mb-1.5 flex items-center justify-between">
+                    <span>Direct WhatsApp / Mobile *</span>
+                    {form.phone && (
+                      <span className="text-[10px] text-emerald-700 font-bold flex items-center gap-1 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full">
+                        <Check size={11} className="text-emerald-600" /> Auto-filled from lookup
+                      </span>
+                    )}
+                  </label>
                   <input 
                     type="tel"
                     required
                     placeholder="e.g. 9876543210"
                     value={form.phone}
                     onChange={e => setForm({...form, phone: e.target.value})}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:bg-white focus:border-[#0867E8] focus:ring-1 focus:ring-[#0867E8]"
+                    className={`w-full border rounded-xl px-3.5 py-2.5 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:border-[#0867E8] focus:ring-1 focus:ring-[#0867E8] ${
+                      form.phone ? 'bg-emerald-50/30 border-emerald-200/80 font-medium' : 'bg-slate-50 border-slate-200'
+                    }`}
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1.5 flex items-center gap-1">
-                    <Mail size={12} className="text-slate-400" /> Official Email
+                  <label className="block text-xs font-bold text-slate-700 mb-1.5 flex items-center justify-between">
+                    <span className="flex items-center gap-1">
+                      <Mail size={12} className="text-slate-400" /> Official Email
+                    </span>
+                    {form.email && lookupInput.includes('@') && (
+                      <span className="text-[10px] text-emerald-700 font-bold flex items-center gap-1 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full">
+                        <Check size={11} className="text-emerald-600" /> Auto-filled from lookup
+                      </span>
+                    )}
                   </label>
                   <input 
                     type="email"
                     placeholder={form.category === 'ivf' ? "e.g. contact@aurafertility.in" : "e.g. drparmar@apexdental.in"}
                     value={form.email}
                     onChange={e => setForm({...form, email: e.target.value})}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:bg-white focus:border-[#0867E8] focus:ring-1 focus:ring-[#0867E8]"
+                    className={`w-full border rounded-xl px-3.5 py-2.5 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:border-[#0867E8] focus:ring-1 focus:ring-[#0867E8] ${
+                      form.email && lookupInput.includes('@') ? 'bg-emerald-50/30 border-emerald-200/80 font-medium' : 'bg-slate-50 border-slate-200'
+                    }`}
                   />
                 </div>
                 <div className="space-y-2">

@@ -68,6 +68,7 @@ export default function ClinicKycUploadPage() {
   const [email, setEmail] = useState(initialEmail);
   const [websiteStatus, setWebsiteStatus] = useState<'yes' | 'no'>(initialWebsite ? 'yes' : 'no');
   const [websiteUrl, setWebsiteUrl] = useState(initialWebsite);
+  const [isProfileCollapsed, setIsProfileCollapsed] = useState(Boolean(initialClinicName || clinicId));
 
   // Bank Account Fields (Instant ₹1 Penny Drop)
   const [accountHolderName, setAccountHolderName] = useState('');
@@ -625,120 +626,160 @@ export default function ClinicKycUploadPage() {
 
             <form onSubmit={handleFinalSubmit} className="space-y-5">
               {/* 1. Clinic & Authorized Signatory Profile */}
-              <div className="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-6 shadow-xs space-y-4">
-                <div className="flex items-center justify-between border-b border-slate-100 pb-3 flex-wrap gap-2">
-                  <div className="flex items-center gap-2.5">
-                    <div className="w-8 h-8 rounded-xl bg-blue-50 text-[#0867E8] flex items-center justify-center font-bold">
-                      <Building2 size={17} />
+              {isProfileCollapsed ? (
+                <div className="bg-emerald-50/70 border border-emerald-200/90 rounded-2xl p-4 sm:p-5 shadow-xs flex items-center justify-between gap-4">
+                  <div className="flex items-center gap-3 min-w-0">
+                    <div className="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold shrink-0">
+                      <CheckCircle2 size={20} />
                     </div>
-                    <div>
-                      <h3 className="text-xs sm:text-sm font-bold text-slate-900 flex items-center gap-1.5">
-                        <span>1. Clinic &amp; Signatory Profile</span>
-                        <span className="text-rose-500">*</span>
-                      </h3>
-                      <p className="text-[11px] text-slate-500">
-                        Required for RBI merchant underwriting, settlement alerts &amp; auto-filling your Board Resolution
+                    <div className="min-w-0">
+                      <div className="flex items-center gap-2 flex-wrap">
+                        <span className="text-[10px] font-black uppercase tracking-wider text-emerald-800 bg-emerald-200/60 px-2 py-0.5 rounded-full">
+                          ✓ 1. Clinic Profile Linked
+                        </span>
+                        <span className="text-xs sm:text-sm font-black text-[#0B2450] truncate">{clinicName || 'Partner Clinic'}</span>
+                      </div>
+                      <p className="text-[11px] text-slate-600 truncate mt-0.5">
+                        {doctorName && `${doctorName} • `}{city && `${city} • `}{phone && `+91 ${phone}`}
+                        {email && ` • ${email}`}
                       </p>
                     </div>
                   </div>
-
-                  <span className="text-[10px] font-black text-[#0867E8] bg-blue-50 border border-blue-200 px-2.5 py-1 rounded-full">
-                    Required for MID
-                  </span>
+                  <button
+                    type="button"
+                    onClick={() => setIsProfileCollapsed(false)}
+                    className="px-3.5 py-1.5 rounded-lg bg-white border border-slate-200 hover:bg-slate-50 text-xs font-bold text-[#0867E8] transition-all shadow-2xs shrink-0 cursor-pointer"
+                  >
+                    Edit Profile
+                  </button>
                 </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                  {/* Clinic Legal Name */}
-                  <div className="space-y-1 sm:col-span-2">
-                    <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wide">
-                      Clinic / Hospital Legal Name <span className="text-rose-500">*</span>
-                    </label>
-                    <div className="relative">
-                      <Building2 size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
-                      <input
-                        type="text"
-                        placeholder="e.g. Apex Multispeciality Dental Center or Nova IVF Fertility"
-                        value={clinicName}
-                        onChange={(e) => setClinicName(e.target.value)}
-                        className="w-full bg-slate-50 border border-slate-300 rounded-xl pl-9 pr-3.5 py-2.5 text-xs text-slate-900 font-semibold focus:outline-none focus:bg-white focus:border-[#0867E8]"
-                      />
+              ) : (
+                <div className="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-6 shadow-xs space-y-4">
+                  <div className="flex items-center justify-between border-b border-slate-100 pb-3 flex-wrap gap-2">
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-8 h-8 rounded-xl bg-blue-50 text-[#0867E8] flex items-center justify-center font-bold">
+                        <Building2 size={17} />
+                      </div>
+                      <div>
+                        <h3 className="text-xs sm:text-sm font-bold text-slate-900 flex items-center gap-1.5">
+                          <span>1. Clinic &amp; Signatory Profile</span>
+                          <span className="text-rose-500">*</span>
+                        </h3>
+                        <p className="text-[11px] text-slate-500">
+                          Required for RBI merchant underwriting, settlement alerts &amp; auto-filling your Board Resolution
+                        </p>
+                      </div>
                     </div>
-                    <p className="text-[10px] text-slate-400">Must match registered trade name on Bank Cheque, GST, or MCA registration</p>
+
+                    <div className="flex items-center gap-2">
+                      {Boolean(initialClinicName || clinicId) && (
+                        <button
+                          type="button"
+                          onClick={() => setIsProfileCollapsed(true)}
+                          className="px-3 py-1 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-bold hover:bg-emerald-100 cursor-pointer transition-all"
+                        >
+                          ✓ Done Editing
+                        </button>
+                      )}
+                      <span className="text-[10px] font-black text-[#0867E8] bg-blue-50 border border-blue-200 px-2.5 py-1 rounded-full">
+                        Required for MID
+                      </span>
+                    </div>
                   </div>
 
-                  {/* Doctor / Director Name */}
-                  <div className="space-y-1">
-                    <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wide">
-                      Doctor / Director / Authorized Signatory <span className="text-rose-500">*</span>
-                    </label>
-                    <div className="relative">
-                      <UserCheck size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
-                      <input
-                        type="text"
-                        placeholder="e.g. Dr. Rajesh Sharma"
-                        value={doctorName}
-                        onChange={(e) => setDoctorName(e.target.value)}
-                        className="w-full bg-slate-50 border border-slate-300 rounded-xl pl-9 pr-3.5 py-2.5 text-xs text-slate-900 font-semibold focus:outline-none focus:bg-white focus:border-[#0867E8]"
-                      />
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                    {/* Clinic Legal Name */}
+                    <div className="space-y-1 sm:col-span-2">
+                      <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wide">
+                        Clinic / Hospital Legal Name <span className="text-rose-500">*</span>
+                      </label>
+                      <div className="relative">
+                        <Building2 size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+                        <input
+                          type="text"
+                          placeholder="e.g. Apex Multispeciality Dental Center or Nova IVF Fertility"
+                          value={clinicName}
+                          onChange={(e) => setClinicName(e.target.value)}
+                          className="w-full bg-slate-50 border border-slate-300 rounded-xl pl-9 pr-3.5 py-2.5 text-xs text-slate-900 font-semibold focus:outline-none focus:bg-white focus:border-[#0867E8]"
+                        />
+                      </div>
+                      <p className="text-[10px] text-slate-400">Must match registered trade name on Bank Cheque, GST, or MCA registration</p>
                     </div>
-                    <p className="text-[10px] text-slate-400">Signatory on Board Resolution, MAF &amp; bank authorization</p>
-                  </div>
 
-                  {/* Work Email */}
-                  <div className="space-y-1">
-                    <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wide">
-                      Registered Clinic / Doctor Email <span className="text-rose-500">*</span>
-                    </label>
-                    <div className="relative">
-                      <Mail size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
-                      <input
-                        type="email"
-                        placeholder="e.g. director@apexdental.in"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        className="w-full bg-slate-50 border border-slate-300 rounded-xl pl-9 pr-3.5 py-2.5 text-xs text-slate-900 font-semibold focus:outline-none focus:bg-white focus:border-[#0867E8]"
-                      />
+                    {/* Doctor / Director Name */}
+                    <div className="space-y-1">
+                      <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wide">
+                        Doctor / Director / Authorized Signatory <span className="text-rose-500">*</span>
+                      </label>
+                      <div className="relative">
+                        <UserCheck size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+                        <input
+                          type="text"
+                          placeholder="e.g. Dr. Rajesh Sharma"
+                          value={doctorName}
+                          onChange={(e) => setDoctorName(e.target.value)}
+                          className="w-full bg-slate-50 border border-slate-300 rounded-xl pl-9 pr-3.5 py-2.5 text-xs text-slate-900 font-semibold focus:outline-none focus:bg-white focus:border-[#0867E8]"
+                        />
+                      </div>
+                      <p className="text-[10px] text-slate-400">Signatory on Board Resolution, MAF &amp; bank authorization</p>
                     </div>
-                    <p className="text-[10px] text-slate-400">48-72h SLA onboarding updates &amp; daily settlement reports sent here</p>
-                  </div>
 
-                  {/* Phone Number */}
-                  <div className="space-y-1">
-                    <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wide">
-                      Mobile / WhatsApp Number <span className="text-rose-500">*</span>
-                    </label>
-                    <div className="relative">
-                      <Phone size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
-                      <input
-                        type="tel"
-                        placeholder="e.g. 98765 43210"
-                        value={phone}
-                        onChange={(e) => setPhone(e.target.value)}
-                        className="w-full bg-slate-50 border border-slate-300 rounded-xl pl-9 pr-3.5 py-2.5 text-xs text-slate-900 font-semibold focus:outline-none focus:bg-white focus:border-[#0867E8]"
-                      />
+                    {/* Work Email */}
+                    <div className="space-y-1">
+                      <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wide">
+                        Registered Clinic / Doctor Email <span className="text-rose-500">*</span>
+                      </label>
+                      <div className="relative">
+                        <Mail size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+                        <input
+                          type="email"
+                          placeholder="e.g. director@apexdental.in"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                          className="w-full bg-slate-50 border border-slate-300 rounded-xl pl-9 pr-3.5 py-2.5 text-xs text-slate-900 font-semibold focus:outline-none focus:bg-white focus:border-[#0867E8]"
+                        />
+                      </div>
+                      <p className="text-[10px] text-slate-400">48-72h SLA onboarding updates &amp; daily settlement reports sent here</p>
                     </div>
-                    <p className="text-[10px] text-slate-400">For instant penny drop SMS alerts and underwriting desk contact</p>
-                  </div>
 
-                  {/* City */}
-                  <div className="space-y-1">
-                    <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wide">
-                      Practice City / Location
-                    </label>
-                    <div className="relative">
-                      <MapPin size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
-                      <input
-                        type="text"
-                        placeholder="e.g. Mumbai, Maharashtra"
-                        value={city}
-                        onChange={(e) => setCity(e.target.value)}
-                        className="w-full bg-slate-50 border border-slate-300 rounded-xl pl-9 pr-3.5 py-2.5 text-xs text-slate-900 font-semibold focus:outline-none focus:bg-white focus:border-[#0867E8]"
-                      />
+                    {/* Phone Number */}
+                    <div className="space-y-1">
+                      <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wide">
+                        Mobile / WhatsApp Number <span className="text-rose-500">*</span>
+                      </label>
+                      <div className="relative">
+                        <Phone size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+                        <input
+                          type="tel"
+                          placeholder="e.g. 98765 43210"
+                          value={phone}
+                          onChange={(e) => setPhone(e.target.value)}
+                          className="w-full bg-slate-50 border border-slate-300 rounded-xl pl-9 pr-3.5 py-2.5 text-xs text-slate-900 font-semibold focus:outline-none focus:bg-white focus:border-[#0867E8]"
+                        />
+                      </div>
+                      <p className="text-[10px] text-slate-400">For instant penny drop SMS alerts and underwriting desk contact</p>
                     </div>
-                    <p className="text-[10px] text-slate-400">City of operation for regional settlement routing</p>
+
+                    {/* City */}
+                    <div className="space-y-1 sm:col-span-2">
+                      <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wide">
+                        Practice City / Location
+                      </label>
+                      <div className="relative">
+                        <MapPin size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+                        <input
+                          type="text"
+                          placeholder="e.g. Mumbai, Maharashtra"
+                          value={city}
+                          onChange={(e) => setCity(e.target.value)}
+                          className="w-full bg-slate-50 border border-slate-300 rounded-xl pl-9 pr-3.5 py-2.5 text-xs text-slate-900 font-semibold focus:outline-none focus:bg-white focus:border-[#0867E8]"
+                        />
+                      </div>
+                      <p className="text-[10px] text-slate-400">City of operation for regional settlement routing</p>
+                    </div>
                   </div>
                 </div>
-              </div>
+              )}
 
               {/* 2. Entity Type Selector: Sole Proprietor vs Pvt Ltd / IVF */}
               <div className="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-5 shadow-xs space-y-3">

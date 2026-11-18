@@ -133,6 +133,14 @@
       "destination": "/api/meta"
     },
     {
+      "source": "/clinic-kyc",
+      "destination": "/api/meta"
+    },
+    {
+      "source": "/clinic-onboarding/kyc",
+      "destination": "/api/meta"
+    },
+    {
       "source": "/pilot-onboarding",
       "destination": "/api/meta"
     },

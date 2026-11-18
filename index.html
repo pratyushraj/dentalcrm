@@ -170,114 +170,80 @@
 
 <body>
   <div id="root"><!--ssr-start-->
-    <header style="padding: 1rem 1.5rem; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center;">
-      <div>
-        <a href="/" style="font-weight: 900; font-size: 1.25rem; color: #0B2450; text-decoration: none;">CLINAZA</a>
-        <span style="font-size: 0.75rem; color: #0f7a75; font-weight: bold; margin-left: 0.5rem;">HEALTHCARE EMI &amp; PATIENT FINANCING</span>
+    <div id="clinaza-app-shell" style="min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #ffffff; font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; padding: 24px;">
+      <div style="width: 52px; height: 52px; border-radius: 14px; background: linear-gradient(135deg, #0867E8 0%, #0B2450 100%); display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 25px -5px rgba(8,103,232,0.35); margin-bottom: 16px;">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
       </div>
-      <nav>
-        <a href="/clinic-onboarding" style="padding: 0.5rem 1rem; background: #0867E8; color: white; text-decoration: none; border-radius: 0.5rem; font-weight: bold; font-size: 0.85rem;">Clinic Onboarding</a>
-        <a href="/tools" style="margin-left: 1rem; color: #0B2450; text-decoration: none; font-size: 0.85rem; font-weight: bold;">Free Tools</a>
-        <a href="/blog" style="margin-left: 1rem; color: #0B2450; text-decoration: none; font-size: 0.85rem; font-weight: bold;">Treatment Guides</a>
-      </nav>
-    </header>
-
-    <main style="max-width: 1100px; margin: 0 auto; padding: 2.5rem 1.5rem; font-family: system-ui, sans-serif;">
-      <section style="margin-bottom: 3rem;">
-        <span style="display: inline-block; padding: 0.25rem 0.75rem; background: #f1f5f9; border-radius: 9999px; font-size: 0.8rem; font-weight: 600; color: #0867E8; margin-bottom: 1rem;">
-          Point-of-care treatment financing for clinics across India
-        </span>
+      <div style="font-size: 1.15rem; font-weight: 800; letter-spacing: -0.02em; color: #0B2450;">CLINAZA</div>
+      <div style="font-size: 0.75rem; font-weight: 600; color: #64748b; letter-spacing: 0.05em; margin-top: 4px; text-transform: uppercase;">Healthcare Financing</div>
+      <div style="width: 120px; height: 3px; background: #f1f5f9; border-radius: 99px; margin-top: 16px; overflow: hidden; position: relative;">
+        <div style="position: absolute; top: 0; left: 0; bottom: 0; width: 45%; background: #0867E8; border-radius: 99px; animation: clinaza-shimmer 1.2s infinite ease-in-out;"></div>
+      </div>
+    </div>
+    <style>
+      @keyframes clinaza-shimmer {
+        0% { transform: translateX(-100%); }
+        50% { transform: translateX(100%); }
+        100% { transform: translateX(250%); }
+      }
+    </style>
+  <!--ssr-end--></div>
+  <noscript>
+    <div style="max-width: 1100px; margin: 0 auto; padding: 1.5rem; font-family: system-ui, sans-serif;">
+      <header style="padding: 1rem 0; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <a href="/" style="font-weight: 900; font-size: 1.25rem; color: #0B2450; text-decoration: none;">CLINAZA</a>
+          <span style="font-size: 0.75rem; color: #0f7a75; font-weight: bold; margin-left: 0.5rem;">HEALTHCARE EMI &amp; PATIENT FINANCING</span>
+        </div>
+        <nav>
+          <a href="/clinic-onboarding" style="padding: 0.5rem 1rem; background: #0867E8; color: white; text-decoration: none; border-radius: 0.5rem; font-weight: bold; font-size: 0.85rem;">Clinic Onboarding</a>
+          <a href="/tools" style="margin-left: 1rem; color: #0B2450; text-decoration: none; font-size: 0.85rem; font-weight: bold;">Free Tools</a>
+          <a href="/blog" style="margin-left: 1rem; color: #0B2450; text-decoration: none; font-size: 0.85rem; font-weight: bold;">Treatment Guides</a>
+        </nav>
+      </header>
+      <main style="padding: 2rem 0;">
         <h1 style="font-size: 2.5rem; font-weight: 800; color: #0B2450; line-height: 1.2; margin-bottom: 1rem;">
           Dental Treatment on EMI.<br /><span style="color: #0867E8;">Zero Patient Drop-Offs.</span>
         </h1>
         <p style="font-size: 1.15rem; color: #475569; max-width: 700px; line-height: 1.6; margin-bottom: 1.5rem;">
           Clinaza enables dental clinics and healthcare providers across India to offer instant, paperless patient EMI financing from <strong>₹30,000 to ₹5,00,000</strong>. Close high-ticket treatment plans for Dental Implants, Clear Aligners, Braces, Full Mouth Rehabilitation, Hair Transplants, and Elective Surgeries with zero balance risk to your clinic.
         </p>
-        <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem;">
-          <a href="/clinic-onboarding" style="display: inline-block; padding: 0.85rem 1.5rem; background: #0867E8; color: white; border-radius: 0.75rem; text-decoration: none; font-weight: 800; font-size: 0.9rem;">
-            Onboard Your Clinic &rarr;
-          </a>
-          <a href="/dental-implant-loan" style="display: inline-block; padding: 0.85rem 1.5rem; background: #f8fafc; border: 1px solid #cbd5e1; color: #0B2450; border-radius: 0.75rem; text-decoration: none; font-weight: 700; font-size: 0.9rem;">
-            Calculate Dental EMI &rarr;
-          </a>
-        </div>
-        <p style="font-size: 0.8rem; color: #64748b;">
-          ✓ Instant 3-Minute Digital KYC &bull; ✓ Direct 100% Upfront Clinic Account Disbursement &bull; ✓ 13+ RBI-Regulated Banks &amp; NBFC Partners &bull; ✓ Zero Clinic Liability
-        </p>
-      </section>
-
-      <section style="margin-bottom: 3rem; background: #f8fafc; padding: 2rem; border-radius: 1rem; border: 1px solid #e2e8f0;">
-        <h2 style="font-size: 1.5rem; font-weight: 800; color: #0B2450; margin-bottom: 1rem;">
-          Regulated Lending Ecosystem &amp; NBFC Partners
-        </h2>
-        <p style="font-size: 0.95rem; color: #475569; line-height: 1.5; margin-bottom: 1rem;">
-          Clinaza connects healthcare providers directly with India's leading digital financial institutions: India's leading scheduled commercial banks and RBI-regulated financial institutions.
-        </p>
-      </section>
-
-      <section style="margin-bottom: 3rem;">
-        <h2 style="font-size: 1.5rem; font-weight: 800; color: #0B2450; margin-bottom: 0.5rem;">
-          Dental Treatment Costs &amp; Monthly EMI Breakdown in India
-        </h2>
-        <p style="font-size: 0.95rem; color: #475569; margin-bottom: 1.25rem;">
-          Clinaza enables patients to split high-ticket dental procedures into zero-paperwork monthly installments at 28+ verified partner clinics across Delhi NCR, Mumbai, Bengaluru, Hyderabad, Chennai, and Patna.
-        </p>
-        <div style="overflow-x: auto;">
-          <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.9rem; border: 1px solid #e2e8f0; border-radius: 8px;">
-            <thead>
-              <tr style="background: #0B2450; color: white;">
-                <th style="padding: 10px 14px;">Procedure</th>
-                <th style="padding: 10px 14px;">Avg Cost (India)</th>
-                <th style="padding: 10px 14px;">Monthly EMI (Est.)</th>
-                <th style="padding: 10px 14px;">Approval Time</th>
-                <th style="padding: 10px 14px;">KYC Mode</th>
-              </tr>
-            </thead>
-            <tbody style="color: #334155;">
-              <tr style="border-bottom: 1px solid #e2e8f0; background: #ffffff;">
-                <td style="padding: 10px 14px; font-weight: 700;">Single Dental Implant</td>
-                <td style="padding: 10px 14px;">₹25,000 – ₹45,000</td>
-                <td style="padding: 10px 14px; font-weight: 600; color: #0867E8;">From ₹2,100 / mo</td>
-                <td style="padding: 10px 14px;">2 Minutes</td>
-                <td style="padding: 10px 14px;">Aadhaar / PAN OTP</td>
-              </tr>
-              <tr style="border-bottom: 1px solid #e2e8f0; background: #f8fafc;">
-                <td style="padding: 10px 14px; font-weight: 700;">Clear Aligners (Invisible Braces)</td>
-                <td style="padding: 10px 14px;">₹60,000 – ₹1,80,000</td>
-                <td style="padding: 10px 14px; font-weight: 600; color: #0867E8;">From ₹3,200 / mo</td>
-                <td style="padding: 10px 14px;">2 Minutes</td>
-                <td style="padding: 10px 14px;">Cardless EMI / NBFC Network</td>
-              </tr>
-              <tr style="border-bottom: 1px solid #e2e8f0; background: #ffffff;">
-                <td style="padding: 10px 14px; font-weight: 700;">Full Mouth Implants (All-on-4 / All-on-6)</td>
-                <td style="padding: 10px 14px;">₹1,50,000 – ₹3,50,000</td>
-                <td style="padding: 10px 14px; font-weight: 600; color: #0867E8;">From ₹6,800 / mo</td>
-                <td style="padding: 10px 14px;">Under 5 Mins</td>
-                <td style="padding: 10px 14px;">e-NACH Digital Mandate</td>
-              </tr>
-              <tr style="border-bottom: 1px solid #e2e8f0; background: #f8fafc;">
-                <td style="padding: 10px 14px; font-weight: 700;">Zirconia Crowns &amp; Bridges</td>
-                <td style="padding: 10px 14px;">₹12,000 – ₹35,000</td>
-                <td style="padding: 10px 14px; font-weight: 600; color: #0867E8;">From ₹1,200 / mo</td>
-                <td style="padding: 10px 14px;">Instant</td>
-                <td style="padding: 10px 14px;">UPI / Debit Card EMI</td>
-              </tr>
-              <tr style="background: #ffffff;">
-                <td style="padding: 10px 14px; font-weight: 700;">FUE Hair Transplant / Aesthetics</td>
-                <td style="padding: 10px 14px;">₹45,000 – ₹1,50,000</td>
-                <td style="padding: 10px 14px; font-weight: 600; color: #0867E8;">From ₹2,400 / mo</td>
-                <td style="padding: 10px 14px;">2 Minutes</td>
-                <td style="padding: 10px 14px;">Digital e-KYC</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-    </main>
-  <!--ssr-end--></div>
-  <noscript>
-    <div style="max-width: 1100px; margin: 0 auto; padding: 1.5rem;">
-      <p style="font-size: 1.25rem; font-weight: bold; color: #0B2450;">Clinaza: Dental Treatment on EMI</p>
+        <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.9rem; border: 1px solid #e2e8f0; border-radius: 8px; margin-top: 1rem;">
+          <thead>
+            <tr style="background: #0B2450; color: white;">
+              <th style="padding: 10px 14px;">Procedure</th>
+              <th style="padding: 10px 14px;">Avg Cost (India)</th>
+              <th style="padding: 10px 14px;">Monthly EMI (Est.)</th>
+              <th style="padding: 10px 14px;">Approval Time</th>
+              <th style="padding: 10px 14px;">KYC Mode</th>
+            </tr>
+          </thead>
+          <tbody style="color: #334155;">
+            <tr style="border-bottom: 1px solid #e2e8f0; background: #ffffff;">
+              <td style="padding: 10px 14px; font-weight: 700;">Single Dental Implant</td>
+              <td style="padding: 10px 14px;">₹25,000 – ₹45,000</td>
+              <td style="padding: 10px 14px; font-weight: 600; color: #0867E8;">From ₹2,100 / mo</td>
+              <td style="padding: 10px 14px;">2 Minutes</td>
+              <td style="padding: 10px 14px;">Aadhaar / PAN OTP</td>
+            </tr>
+            <tr style="border-bottom: 1px solid #e2e8f0; background: #f8fafc;">
+              <td style="padding: 10px 14px; font-weight: 700;">Clear Aligners (Invisible Braces)</td>
+              <td style="padding: 10px 14px;">₹60,000 – ₹1,80,000</td>
+              <td style="padding: 10px 14px; font-weight: 600; color: #0867E8;">From ₹3,200 / mo</td>
+              <td style="padding: 10px 14px;">2 Minutes</td>
+              <td style="padding: 10px 14px;">Cardless EMI / NBFC Network</td>
+            </tr>
+            <tr style="border-bottom: 1px solid #e2e8f0; background: #ffffff;">
+              <td style="padding: 10px 14px; font-weight: 700;">Full Mouth Implants (All-on-4 / All-on-6)</td>
+              <td style="padding: 10px 14px;">₹1,50,000 – ₹3,50,000</td>
+              <td style="padding: 10px 14px; font-weight: 600; color: #0867E8;">From ₹6,800 / mo</td>
+              <td style="padding: 10px 14px;">Under 5 Mins</td>
+              <td style="padding: 10px 14px;">e-NACH Digital Mandate</td>
+            </tr>
+          </tbody>
+        </table>
+      </main>
+      <p style="font-size: 1.25rem; font-weight: bold; color: #0B2450; margin-top: 2rem;">Clinaza: Dental Treatment on EMI</p>
     <nav aria-label="Directory of Indian Cities & Treatment Guides">
       <h2>Clinaza Dental Financing Network Cities</h2>
       <div>

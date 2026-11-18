@@ -78,6 +78,18 @@ const STATIC_ROUTES = {
     h1: 'Partner Clinic Onboarding & Point-of-Care EMI Activation',
     image: 'https://www.clinaza.in/og-clinic-onboarding.png'
   },
+  '/clinic-kyc': {
+    title: 'Clinic Bank Verification & KYC Portal | Clinaza',
+    desc: 'Secure digital bank account verification and merchant underwriting documentation portal for Clinaza partner dental clinics.',
+    h1: 'Clinic Bank Verification & Onboarding Documentation',
+    robots: 'noindex, nofollow'
+  },
+  '/clinic-onboarding/kyc': {
+    title: 'Clinic Bank Verification & KYC Portal | Clinaza',
+    desc: 'Secure digital bank account verification and merchant underwriting documentation portal for Clinaza partner dental clinics.',
+    h1: 'Clinic Bank Verification & Onboarding Documentation',
+    robots: 'noindex, nofollow'
+  },
   '/pilot-onboarding': {
     title: 'Partner Clinic Onboarding — Clinaza Point-of-Care EMI',
     desc: 'Official partner clinic onboarding portal to activate instant point-of-care patient EMI financing.',
@@ -157,6 +169,63 @@ const STATIC_ROUTES = {
     h1: 'Contact Us & Regulatory Secretariat'
   }
 };
+
+const CRAWLER_USER_AGENTS = [
+  'googlebot',
+  'bingbot',
+  'yandex',
+  'baiduspider',
+  'duckduckbot',
+  'slurp',
+  'twitterbot',
+  'facebookexternalhit',
+  'linkedinbot',
+  'whatsapp',
+  'slackbot',
+  'telegrambot',
+  'pinterest',
+  'applebot',
+  'semrushbot',
+  'ahrefsbot',
+  'dotbot',
+  'mj12bot',
+  'openseo',
+  'crawler',
+  'spider',
+  'robot',
+  'crawling',
+  'curl',
+  'wget',
+  'screaming frog',
+  'bytespider',
+  'seznambot',
+  'ia_archiver'
+];
+
+function isSearchBot(userAgent) {
+  if (!userAgent) return false;
+  const ua = userAgent.toLowerCase();
+  return CRAWLER_USER_AGENTS.some(bot => ua.includes(bot));
+}
+
+const BRANDED_SHELL = `
+    <div id="clinaza-app-shell" style="min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #ffffff; font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; padding: 24px;">
+      <div style="width: 52px; height: 52px; border-radius: 14px; background: linear-gradient(135deg, #0867E8 0%, #0B2450 100%); display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 25px -5px rgba(8,103,232,0.35); margin-bottom: 16px;">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+      </div>
+      <div style="font-size: 1.15rem; font-weight: 800; letter-spacing: -0.02em; color: #0B2450;">CLINAZA</div>
+      <div style="font-size: 0.75rem; font-weight: 600; color: #64748b; letter-spacing: 0.05em; margin-top: 4px; text-transform: uppercase;">Healthcare Financing</div>
+      <div style="width: 120px; height: 3px; background: #f1f5f9; border-radius: 99px; margin-top: 16px; overflow: hidden; position: relative;">
+        <div style="position: absolute; top: 0; left: 0; bottom: 0; width: 45%; background: #0867E8; border-radius: 99px; animation: clinaza-shimmer 1.2s infinite ease-in-out;"></div>
+      </div>
+    </div>
+    <style>
+      @keyframes clinaza-shimmer {
+        0% { transform: translateX(-100%); }
+        50% { transform: translateX(100%); }
+        100% { transform: translateX(250%); }
+      }
+    </style>`;
 
 export default async function handler(req, res) {
   const url = new URL(req.url, `https://${req.headers.host || 'www.clinaza.in'}`);
@@ -256,14 +325,24 @@ export default async function handler(req, res) {
       </nav>
     </div>`;
 
-    // Always inject SSR content for every request (not just known bots).
-    // React will hydrate and replace this on client-side rendering.
-    // This ensures any crawler — including non-standard ones like OpenSEO — sees
-    // the H1, description text, and outgoing links immediately.
-    if (html.includes('<!--ssr-start-->') && html.includes('<!--ssr-end-->')) {
-      html = html.replace(/<!--ssr-start-->[\s\S]*?<!--ssr-end-->/, `<!--ssr-start-->${ssrContent}<!--ssr-end-->`);
-    } else if (html.includes('<div id="root"></div>')) {
-      html = html.replace('<div id="root"></div>', `<div id="root">${ssrContent}</div>`);
+    const userAgent = req.headers['user-agent'] || '';
+    const isBot = isSearchBot(userAgent);
+
+    if (isBot) {
+      // For search bots and crawlers: inject semantic SSR text into root so crawlers
+      // see H1, description text, and outgoing links immediately.
+      if (html.includes('<!--ssr-start-->') && html.includes('<!--ssr-end-->')) {
+        html = html.replace(/<!--ssr-start-->[\s\S]*?<!--ssr-end-->/, `<!--ssr-start-->${ssrContent}<!--ssr-end-->`);
+      } else if (html.includes('<div id="root"></div>')) {
+        html = html.replace('<div id="root"></div>', `<div id="root">${ssrContent}</div>`);
+      }
+    } else {
+      // For real human visitors: deliver clean, branded loading shell to completely eliminate FOUC.
+      if (html.includes('<!--ssr-start-->') && html.includes('<!--ssr-end-->')) {
+        html = html.replace(/<!--ssr-start-->[\s\S]*?<!--ssr-end-->/, `<!--ssr-start-->${BRANDED_SHELL}<!--ssr-end-->`);
+      } else if (html.includes('<div id="root"></div>')) {
+        html = html.replace('<div id="root"></div>', `<div id="root">${BRANDED_SHELL}</div>`);
+      }
     }
 
     res.setHeader('Content-Type', 'text/html; charset=utf-8');

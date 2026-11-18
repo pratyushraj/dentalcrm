@@ -1,0 +1,263 @@
+[
+  {
+    "id": "937323a9-a773-432d-afc9-4256aa25762d",
+    "clinic": "Kashmir Clinics Central",
+    "doctor": "Dr. Masarat lilly",
+    "email": "kashmirclinicscentral@gmail.com",
+    "phone": "9596072897",
+    "city": "Srinagar, Jammu and Kashmir",
+    "created_at": "2026-11-16T08:47:29.032+00:00"
+  },
+  {
+    "id": "a300d913-7c53-4522-b695-327b5ac7ae1b",
+    "clinic": "Dr Desais advance dental speciality centre",
+    "doctor": "Dr. Abhinay Desai",
+    "email": "abvide007@gmail.com",
+    "phone": "07219399494",
+    "city": "Mumbai vasai",
+    "created_at": "2026-11-13T20:34:13.792+00:00"
+  },
+  {
+    "id": "06ea8709-2d06-4c64-a4d1-73af827d2cff",
+    "clinic": "Dr varun dental clinic",
+    "doctor": "Dr varun goyal",
+    "email": "varun1851996@gmail.com",
+    "phone": "8800713623",
+    "city": "Delhi",
+    "created_at": "2026-11-13T14:02:17.372+00:00"
+  },
+  {
+    "id": "7ec744c9-aeed-4763-b4fa-87ae023faa73",
+    "clinic": "Shan glow healthcare",
+    "doctor": "Shanmuga teja",
+    "email": "shanglowclinic@gmail.com",
+    "phone": "7904972727",
+    "city": "Chennai",
+    "created_at": "2026-10-10T09:59:08.753+00:00"
+  },
+  {
+    "id": "17f2adf5-228c-42ae-b1d8-7ea326a5ec55",
+    "clinic": "Kids and braces dental clijic",
+    "doctor": "Rahul tiwari",
+    "email": "rahuuul.tiwari@gmail.com",
+    "phone": "7692000010",
+    "city": "Prayagraj uttar pradesh",
+    "created_at": "2026-10-10T05:17:50.184+00:00"
+  },
+  {
+    "id": "3cb77221-142b-4320-8a4d-c7bab2129dd8",
+    "clinic": "Dental world Dwarka",
+    "doctor": "Dr. Anuradha Singh",
+    "email": "anuradhagdcr@gmail.com",
+    "phone": "8800908833",
+    "city": "Delhi",
+    "created_at": "2026-10-07T06:22:38.218+00:00"
+  },
+  {
+    "id": "0af11827-2e02-4c20-bec8-5c5427820625",
+    "clinic": "Exl dentists",
+    "doctor": "Dr Priyanka Kumar",
+    "email": "exldentist@gmail.com",
+    "phone": "9910119555",
+    "city": "gurugram",
+    "created_at": "2026-10-07T06:03:55.208+00:00"
+  },
+  {
+    "id": "7137e301-5a09-42e8-954d-c7891a29c4ab",
+    "clinic": "Kidz N Family TRUESMILE DENTAL CLINIC",
+    "doctor": "Dr. Yashwanth Sreedhara",
+    "email": "dryashwanthsreedhara@gmail.com",
+    "phone": "9494221375",
+    "city": "Kurnool",
+    "created_at": "2026-10-06T08:47:47.393+00:00"
+  },
+  {
+    "id": "a1cc6551-2120-485e-8705-a2455e6883ef",
+    "clinic": "Sai Multispeciality Dental Clinic and Implant Center",
+    "doctor": "Shivendivar Vishwakarma",
+    "email": "shivendivar@gmail.com",
+    "phone": "9920041439",
+    "city": "NAVI Mumbai",
+    "created_at": "2026-10-06T06:05:40.987+00:00"
+  },
+  {
+    "id": "aa2450ba-e4fb-4d31-8258-d259cd0f8e37",
+    "clinic": "Dr. Pawar's Advanced Dentistry",
+    "doctor": "Pallavi Pawar",
+    "email": "dr.pawars.advanceddentistry@gmail.com",
+    "phone": "7718938111",
+    "city": "Thane, Maharashtra",
+    "created_at": "2026-10-05T19:33:09.249+00:00"
+  },
+  {
+    "id": "d04e72e5-f18c-42e4-ab73-9fad84b025ad",
+    "clinic": "RATAN KRISHNA DENTAL CARE",
+    "doctor": "Dr Dinesh Gupta Malla",
+    "email": "ratankrishnadental@gmail.com",
+    "phone": "07995389489",
+    "city": "VISAKHAPATNAM",
+    "created_at": "2026-09-30T12:55:54.425+00:00"
+  },
+  {
+    "id": "c8aa8f8b-97d6-46b0-895f-2199e9efecf5",
+    "clinic": "KEEP SMILING DENTAL CLINIC",
+    "doctor": "DR ANIL SANGWAN",
+    "email": "doctor.sangwan@gmail.com",
+    "phone": "9958269175",
+    "city": "DELHI",
+    "created_at": "2026-09-29T11:07:00.518+00:00"
+  },
+  {
+    "id": "2ce64093-b385-4a91-bf90-1365f177952e",
+    "clinic": "Impressions dental clinic and dr shalini's homeo skin and laser clinic",
+    "doctor": "DR Dushyant Soni, DR SHALINI SHARMA",
+    "email": "dushyantsoni5@gmail.com",
+    "phone": "9413145672",
+    "city": "Jodhpur",
+    "created_at": "2026-09-29T05:25:12.108+00:00"
+  },
+  {
+    "id": "ea6edb39-9025-44a6-ad95-99770aa37dc2",
+    "clinic": "My Family Dentist Dental Implants Centre",
+    "doctor": "Dr shikha tripathi",
+    "email": "myfamilydentists@gmail.com",
+    "phone": "9456190901",
+    "city": "Haridwar",
+    "created_at": "2026-09-28T15:20:05.063+00:00"
+  },
+  {
+    "id": "607ec789-0bc7-41e7-8e57-cfa5493fc113",
+    "clinic": "Dantsri Dental Hospital",
+    "doctor": "Doctor",
+    "email": "dantsridental@gmail.com",
+    "phone": "8340220139",
+    "city": "Jhanjharpur",
+    "created_at": "2026-09-28T09:48:04.906+00:00"
+  },
+  {
+    "id": "fa16433b-e158-4b23-a122-36f95d5ac2b0",
+    "clinic": "AMBIKA DENTAL CARE",
+    "doctor": "Dr.Anant kumar",
+    "email": "ambikadentalcare740@gmail.com",
+    "phone": "9473240183",
+    "city": "patna",
+    "created_at": "2026-09-26T12:26:40.222+00:00"
+  },
+  {
+    "id": "e960313c-2765-45ab-8d45-2a92c9661171",
+    "clinic": "Trimurti multi Speciality Dental Clinic",
+    "doctor": "Dr.priyal patel",
+    "email": "trimurtidentalclinic23@gmail.com",
+    "phone": "8619904869",
+    "city": "Mumbai",
+    "created_at": "2026-09-25T13:55:44.865+00:00"
+  },
+  {
+    "id": "0b11b111-b673-468b-9d07-f43a39d95a94",
+    "clinic": "Smile Nation Multi-speciality Dental Clinic",
+    "doctor": "Dr Komal Bagde Waghole",
+    "email": "smilenationdentalclinic@gmail.com",
+    "phone": "9881015151",
+    "city": "Chinchwad Pune19",
+    "created_at": "2026-09-25T12:35:14.397+00:00"
+  },
+  {
+    "id": "e06bc80e-a398-446a-8a61-da64937c084b",
+    "clinic": "Prodent clinic",
+    "doctor": "Dr sakshi",
+    "email": "prodentclinic4@gmail.com",
+    "phone": "8429057093",
+    "city": "Patna",
+    "created_at": "2026-09-25T08:11:36.631+00:00"
+  },
+  {
+    "id": "53db5a2d-407a-49d1-b410-4afb686dcb85",
+    "clinic": "Your dentist payna",
+    "doctor": "Dr aryan parmar",
+    "email": "yourdentistpatna@gmail.com",
+    "phone": "6201478033",
+    "city": "Patna, bihar",
+    "created_at": "2026-09-25T08:07:02.775+00:00"
+  },
+  {
+    "id": "a26d458c-01ce-4657-8eef-366b4a590e05",
+    "clinic": "Kiran Dental Care",
+    "doctor": "Dr.Shubham Dangroliya",
+    "email": "dangroliyashubham1995@gmail.com",
+    "phone": "08003379790",
+    "city": "Dholpur Rajasthan",
+    "created_at": "2026-09-25T07:06:50.75+00:00"
+  },
+  {
+    "id": "692b634f-deed-41df-a638-079912b1bda6",
+    "clinic": "Step to smile dental clinic",
+    "doctor": "Dr Naveen Konatham",
+    "email": "konathamnaveen97@gmail.com",
+    "phone": "8977251048",
+    "city": "Hyderabad",
+    "created_at": "2026-09-25T07:05:30.379+00:00"
+  },
+  {
+    "id": "f14ed367-7bf2-4d01-a50c-b65026993035",
+    "clinic": "Smile Dental Clinic",
+    "doctor": "Dr. Harshit Kumar",
+    "email": "kharshit909@gmail.com",
+    "phone": "6202821102",
+    "city": "patna  and bihar",
+    "created_at": "2026-09-25T06:58:37.286+00:00"
+  },
+  {
+    "id": "6de7ea67-dc07-4863-9de2-43013d04b9e3",
+    "clinic": "Tirupati Balaji Dental and Face Clinic",
+    "doctor": "Dr. Himanshu Garg",
+    "email": "tirupatibalajidentalcare@gmail.com",
+    "phone": "9569232953",
+    "city": "Chandigarh",
+    "created_at": "2026-09-25T06:57:05.963+00:00"
+  },
+  {
+    "id": "de35f0fd-becd-4a55-a20b-d75f6b9212dd",
+    "clinic": "Tandon dental care and implant centre",
+    "doctor": "Devan tandon",
+    "email": "devantandon81@gmail.com",
+    "phone": "9646176220",
+    "city": "Ludhiana, Punjab",
+    "created_at": "2026-09-25T06:49:32.641+00:00"
+  },
+  {
+    "id": "3bef38bd-50ed-4294-a6d2-ecd39983887e",
+    "clinic": "YFDL DENTAL LAB EXPERTS LLP",
+    "doctor": "Dr. Nihar Prakash Bhayani",
+    "email": "info@yfdlmumbai.com",
+    "phone": "9869242157",
+    "city": "mumbai",
+    "created_at": "2026-09-25T04:43:49.844+00:00"
+  },
+  {
+    "id": "55cb07ad-d900-476d-85dc-eb057f7e2396",
+    "clinic": "Whitedent Dental Clinic by Dr Anshuman",
+    "doctor": "Dr Anshuman Nagre",
+    "email": "anshunagre@gmail.com",
+    "phone": "9765606927",
+    "city": "Buldhana",
+    "created_at": "2026-09-25T03:32:02.253+00:00"
+  },
+  {
+    "id": "61f81476-b301-4538-bab6-ad08d187d8b5",
+    "clinic": "Auro dental & healthcare",
+    "doctor": "Dr. Akshit Juneja",
+    "email": "smilewithauro@gmail.com",
+    "phone": "94610-33005",
+    "city": "Hanumangarh , Rajasthan",
+    "created_at": "2026-09-24T18:58:18.778+00:00"
+  },
+  {
+    "id": "7f6616cb-7c96-49cd-8d25-0c252eb48808",
+    "clinic": "Vasantha dental clinic and implant center",
+    "doctor": "Dr.Siddardha Chaitanya",
+    "email": "vasanthadental.2008@gmail.com",
+    "phone": "7989696670",
+    "city": "Visakhapatnam Andhrapradesh",
+    "created_at": "2026-09-24T18:03:42.587+00:00"
+  }
+]

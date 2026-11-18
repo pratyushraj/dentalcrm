@@ -249,46 +249,61 @@ export const WhatsAppOnboardingStoryComposition: React.FC = () => {
           zIndex: 20,
         }}
       >
-        {/* Left: Physical Acrylic QR Standee Asset */}
+        {/* Left: Authentic Doctor & Tablet Consultation Visual */}
         <div
           style={{
-            flex: '0 0 340px',
+            flex: '0 0 350px',
+            height: 420,
             position: 'relative',
             borderRadius: 24,
             overflow: 'hidden',
-            background: 'linear-gradient(135deg, rgba(8, 103, 232, 0.15) 0%, rgba(16, 185, 129, 0.1) 100%)',
-            border: '1px solid rgba(96, 165, 250, 0.3)',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            padding: 16,
+            border: '1.5px solid rgba(96, 165, 250, 0.35)',
+            boxShadow: '0 16px 36px rgba(0, 0, 0, 0.5)',
           }}
         >
           <Img
-            src={staticFile('assets/clinaza_activation_kit_qr.png')}
+            src={staticFile('assets/carousel_v2/doctor_tablet_new.jpg')}
             style={{
               width: '100%',
-              height: 380,
-              objectFit: 'contain',
-              filter: 'drop-shadow(0 16px 30px rgba(0,0,0,0.7))',
+              height: '100%',
+              objectFit: 'cover',
             }}
           />
-          <span
+          {/* Subtle bottom gradient overlay for contrast */}
+          <div
             style={{
-              marginTop: 10,
-              fontSize: 12,
-              fontWeight: 800,
-              letterSpacing: '0.08em',
-              textTransform: 'uppercase',
-              color: '#38BDF8',
-              background: 'rgba(15, 23, 42, 0.9)',
-              padding: '6px 14px',
-              borderRadius: 20,
-              border: '1px solid rgba(56, 189, 248, 0.3)',
+              position: 'absolute',
+              inset: 0,
+              background: 'linear-gradient(180deg, rgba(2, 6, 23, 0.05) 45%, rgba(2, 6, 23, 0.9) 100%)',
+            }}
+          />
+          {/* Floating Pill on image */}
+          <div
+            style={{
+              position: 'absolute',
+              bottom: 16,
+              left: 16,
+              right: 16,
+              background: 'rgba(15, 23, 42, 0.88)',
+              border: '1px solid rgba(56, 189, 248, 0.4)',
+              borderRadius: 16,
+              padding: '10px 14px',
+              backdropFilter: 'blur(10px)',
+              display: 'flex',
+              alignItems: 'center',
+              gap: 8,
             }}
           >
-            Counter Acrylic Standee Included
-          </span>
+            <span style={{ fontSize: 16 }}>⚡</span>
+            <div>
+              <p style={{ margin: 0, fontSize: 13, fontWeight: 900, color: '#FFFFFF' }}>
+                Instant Front-Desk eKYC
+              </p>
+              <p style={{ margin: 0, fontSize: 11, color: '#93C5FD', fontWeight: 600 }}>
+                2-Min Paperless Patient Approval
+              </p>
+            </div>
+          </div>
         </div>
 
         {/* Right: The 4 Core Commercial Guarantees */}

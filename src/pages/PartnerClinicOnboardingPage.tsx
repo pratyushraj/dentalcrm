@@ -775,6 +775,44 @@ export default function PartnerClinicOnboardingPage() {
                 </div>
               </div>
             </div>
+
+            {/* 3-Step Simple Onboarding Flow */}
+            <div className="bg-slate-100/70 border border-slate-200/80 rounded-2xl p-4 space-y-2.5">
+              <span className="text-[10px] font-black uppercase tracking-wider text-slate-500">How Onboarding Works:</span>
+              <div className="grid grid-cols-3 gap-2 text-center">
+                <div className="bg-white rounded-xl p-2.5 border border-slate-200/60 shadow-2xs space-y-1">
+                  <div className="w-5 h-5 rounded-full bg-blue-100 text-[#0867E8] font-black text-[10px] flex items-center justify-center mx-auto">1</div>
+                  <div className="text-[11px] font-bold text-[#0B2450] leading-tight">Verify Identity</div>
+                  <div className="text-[9.5px] text-slate-500 leading-tight">Phone or email</div>
+                </div>
+                <div className="bg-white rounded-xl p-2.5 border border-slate-200/60 shadow-2xs space-y-1">
+                  <div className="w-5 h-5 rounded-full bg-blue-100 text-[#0867E8] font-black text-[10px] flex items-center justify-center mx-auto">2</div>
+                  <div className="text-[11px] font-bold text-[#0B2450] leading-tight">Submit KYC</div>
+                  <div className="text-[9.5px] text-slate-500 leading-tight">Bank &amp; license</div>
+                </div>
+                <div className="bg-white rounded-xl p-2.5 border border-slate-200/60 shadow-2xs space-y-1">
+                  <div className="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 font-black text-[10px] flex items-center justify-center mx-auto">3</div>
+                  <div className="text-[11px] font-bold text-[#0B2450] leading-tight">Get QR Standee</div>
+                  <div className="text-[9.5px] text-slate-500 leading-tight">T+1 EMI payouts</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Trust & Direct Help Bar */}
+            <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-2 text-center sm:text-left text-[11px] text-slate-500">
+              <div className="flex items-center gap-1.5">
+                <ShieldCheck size={13} className="text-[#0867E8] shrink-0" />
+                <span>256-bit SSL &bull; RBI-Regulated Lending &bull; 0% Recourse</span>
+              </div>
+              <a
+                href="https://wa.me/919693244747?text=Hi%20Clinaza%20Team%2C%20I%20have%20a%20question%20regarding%20clinic%20onboarding."
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-1 text-[#0867E8] font-semibold hover:underline"
+              >
+                <span>Need help? WhatsApp Desk</span> &rarr;
+              </a>
+            </div>
           </div>
         ) : lookupStatus === 'found' && matchedClinic && !showFormForMatched ? (
           /* ── SCREEN 2A: MATCHED REGISTERED CLINIC CARD ── */

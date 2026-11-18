@@ -17,6 +17,8 @@ import {
   CreditCard,
   Download,
   ArrowRight,
+  ArrowLeft,
+  Lock,
   QrCode,
   CheckCircle2,
   PackageCheck,
@@ -814,7 +816,7 @@ export default function PartnerClinicOnboardingPage() {
           </div>
         ) : lookupStatus === 'found' && matchedClinic && !showFormForMatched ? (
           /* ── SCREEN 2A: MATCHED REGISTERED CLINIC CARD ── */
-          <div className="space-y-6 animate-in fade-in">
+          <div className="space-y-6 sm:space-y-7 animate-in fade-in">
             <div className="bg-white border-2 border-[#0867E8]/40 rounded-3xl p-6 sm:p-8 shadow-md space-y-5">
               <div className="flex items-start justify-between gap-3 border-b border-slate-100 pb-4">
                 <div className="space-y-1">
@@ -823,8 +825,8 @@ export default function PartnerClinicOnboardingPage() {
                       ✓ Registered Clinic Profile Found
                     </span>
                     {matchedClinic.id && (
-                      <span className="text-[11px] text-slate-500 font-mono">
-                        Ref: {matchedClinic.id.slice(0, 8)}...
+                      <span className="text-[10px] font-bold text-slate-500 bg-slate-100 border border-slate-200 px-2 py-0.5 rounded">
+                        Partner ID: #{matchedClinic.id.slice(0, 6).toUpperCase()}
                       </span>
                     )}
                   </div>
@@ -844,51 +846,131 @@ export default function PartnerClinicOnboardingPage() {
                     setLookupInput('');
                     setShowFormForMatched(false);
                   }}
-                  className="text-xs text-slate-500 hover:text-slate-800 underline shrink-0 cursor-pointer"
+                  className="px-2.5 sm:px-3 py-1.5 rounded-full bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-700 text-xs font-bold flex items-center gap-1.5 transition-all shrink-0 cursor-pointer active:scale-95"
                 >
-                  Use Another Number
+                  <ArrowLeft size={12} />
+                  <span>Change</span>
                 </button>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
-                {/* Primary Action: Go to KYC */}
+              {/* 3-Step Milestone Status Card (KYC is Step 2) */}
+              <div className="bg-slate-50 border border-slate-200/80 rounded-2xl p-4 space-y-2.5">
+                <div className="flex items-center justify-between text-[11px] font-bold text-slate-700">
+                  <span className="uppercase tracking-wider text-slate-500 text-[10px]">Onboarding Stage</span>
+                  <span className="text-[#0867E8] bg-blue-50 border border-blue-200 px-2 py-0.5 rounded-full text-[10px] font-extrabold">Step 2 of 3</span>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs">
+                  <div className="bg-white border border-slate-200 rounded-xl p-2.5 flex items-center gap-2 shadow-2xs">
+                    <CheckCircle2 size={16} className="text-emerald-600 shrink-0" />
+                    <div>
+                      <div className="font-bold text-slate-800 text-[11px]">1. Clinic Profile</div>
+                      <div className="text-[10px] text-emerald-700 font-semibold">✓ Accredited</div>
+                    </div>
+                  </div>
+                  <div className="bg-blue-50 border border-[#0867E8]/40 rounded-xl p-2.5 flex items-center gap-2 shadow-2xs">
+                    <Clock size={16} className="text-[#0867E8] shrink-0" />
+                    <div>
+                      <div className="font-bold text-[#0B2450] text-[11px]">2. Bank KYC</div>
+                      <div className="text-[10px] text-[#0867E8] font-bold">Action Required</div>
+                    </div>
+                  </div>
+                  <div className="bg-slate-100/60 border border-slate-200/60 rounded-xl p-2.5 flex items-center gap-2 opacity-70">
+                    <Lock size={15} className="text-slate-400 shrink-0" />
+                    <div>
+                      <div className="font-bold text-slate-600 text-[11px]">3. Standee Dispatch</div>
+                      <div className="text-[10px] text-slate-400">Unlocked after KYC</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Sole Primary Hero Action: Go to KYC */}
+              <div className="pt-1">
                 <Link
                   to={`/clinic-kyc?id=${matchedClinic.id || ''}&clinic=${encodeURIComponent(matchedClinic.clinic_name || '')}&doctor=${encodeURIComponent(matchedClinic.doctor_name || '')}&phone=${encodeURIComponent(matchedClinic.phone || '')}&city=${encodeURIComponent(matchedClinic.city || '')}&email=${encodeURIComponent(matchedClinic.email || '')}`}
-                  className="p-5 rounded-2xl bg-[#0867E8] hover:bg-[#0756C7] text-white flex items-center justify-between gap-3 shadow-md transition-all active:scale-95 group"
+                  className="w-full p-5 sm:p-6 rounded-2xl bg-[#0867E8] hover:bg-[#0756C7] text-white flex items-center justify-between gap-4 shadow-lg shadow-[#0867E8]/25 transition-all active:scale-98 group"
                 >
-                  <div className="space-y-1 text-left">
-                    <span className="text-[10px] font-bold text-blue-200 uppercase tracking-wider block">Recommended Next Step</span>
-                    <span className="text-sm sm:text-base font-black block">Resume Bank Linking &amp; KYC &rarr;</span>
-                    <span className="text-xs text-blue-100 block">Upload PAN, Aadhaar &amp; Cheque for Payouts</span>
+                  <div className="space-y-1.5 text-left">
+                    <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-white/20 text-white text-[10px] font-black uppercase tracking-wider">
+                      <Sparkles size={11} />
+                      <span>Recommended Next Step</span>
+                    </div>
+                    <h3 className="text-base sm:text-lg font-black text-white flex items-center gap-1.5">
+                      <span>Complete Bank Account Linking &amp; KYC</span>
+                      <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                    </h3>
+                    <p className="text-xs text-blue-100/90 leading-relaxed max-w-md">
+                      Upload cancelled cheque &amp; doctor PAN for instant ₹1 penny drop verification by Pine Labs to enable direct T+1 patient treatment payouts.
+                    </p>
                   </div>
-                  <ArrowRight size={20} className="text-white group-hover:translate-x-1 transition-transform shrink-0" />
+                  <div className="w-11 h-11 rounded-2xl bg-white/15 flex items-center justify-center shrink-0 group-hover:translate-x-1.5 transition-transform shadow-inner">
+                    <ArrowRight size={22} className="text-white" />
+                  </div>
                 </Link>
-
-                {/* Secondary Action: Pay Kit Standee */}
-                <button
-                  type="button"
-                  onClick={handlePayWithRazorpay}
-                  className="p-5 rounded-2xl bg-white hover:bg-slate-50 border border-slate-300 text-slate-800 flex items-center justify-between gap-3 shadow-xs transition-all active:scale-95 cursor-pointer text-left"
-                >
-                  <div className="space-y-1">
-                    <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider block">Counter Standee Kit</span>
-                    <span className="text-sm sm:text-base font-black text-[#0B2450] block">Activate Kit (₹999 Setup) &rarr;</span>
-                    <span className="text-xs text-slate-500 block">₹0 AMC &bull; Laser-Printed QR Couriered</span>
-                  </div>
-                  <CreditCard size={20} className="text-[#0867E8] shrink-0" />
-                </button>
               </div>
 
-              <div className="pt-3 flex items-center justify-between text-xs border-t border-slate-100">
+              <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-2.5 text-xs border-t border-slate-100">
                 <button
                   type="button"
                   onClick={() => setShowFormForMatched(true)}
-                  className="text-[#0867E8] hover:text-blue-800 font-bold underline inline-flex items-center gap-1 cursor-pointer"
+                  className="text-[#0867E8] hover:text-blue-800 font-bold underline cursor-pointer"
                 >
-                  <span>Need to edit or update clinic profile details?</span>
+                  Need to edit or update clinic profile details?
                 </button>
-                <span className="text-slate-400 text-[11px]">Zero Recourse Platform</span>
+                <span className="text-slate-400 text-[11px] font-medium">
+                  🔒 Pine Labs Regulated Lending Rails
+                </span>
               </div>
+            </div>
+
+            {/* Official Partner Credibility & Commercial Invariants */}
+            <div className="bg-white border border-slate-200/90 rounded-2xl p-5 sm:p-6 shadow-xs space-y-4">
+              <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 pb-3.5">
+                <div className="flex items-center gap-2">
+                  <span className="font-extrabold text-[#0B2450] text-[11px] uppercase tracking-wider">Official Partner:</span>
+                  <img
+                    src="/assets/plural_by_pinelabs_transparent.png"
+                    alt="Plural by Pine Labs"
+                    className="h-4 w-auto object-contain"
+                    width={84}
+                    height={16}
+                  />
+                </div>
+                <span className="text-emerald-700 font-bold text-[11px] bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-full">
+                  ✓ 35+ EMI Modes &bull; Instant Sanction
+                </span>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 text-xs text-slate-600">
+                <div className="flex items-center gap-2.5">
+                  <Check size={14} className="text-emerald-600 shrink-0" />
+                  <span><strong>₹999 One-Time</strong> Setup Fee</span>
+                </div>
+                <div className="flex items-center gap-2.5">
+                  <Check size={14} className="text-emerald-600 shrink-0" />
+                  <span><strong>₹0 AMC</strong> &bull; Zero Recurring Fees</span>
+                </div>
+                <div className="flex items-center gap-2.5">
+                  <Check size={14} className="text-emerald-600 shrink-0" />
+                  <span><strong>0% Recourse</strong> &bull; T+1 Payouts</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Trust & Direct Help Bar */}
+            <div className="pt-2 pb-2 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left text-[11px] text-slate-500">
+              <div className="flex items-center gap-1.5">
+                <ShieldCheck size={13} className="text-[#0867E8] shrink-0" />
+                <span>256-bit SSL &bull; RBI-Regulated Lending &bull; 0% Recourse</span>
+              </div>
+              <a
+                href="https://wa.me/919693244747?text=Hi%20Clinaza%20Team%2C%20I%20have%20a%20question%20regarding%20clinic%20onboarding."
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-1 text-[#0867E8] font-semibold hover:underline"
+              >
+                <span>Need help? WhatsApp Desk</span> &rarr;
+              </a>
             </div>
           </div>
         ) : (

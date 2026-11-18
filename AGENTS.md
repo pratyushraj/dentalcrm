@@ -77,4 +77,10 @@ Adhere strictly to the following active commercial contracts and partner agreeme
   - *Cancelled cheque & doctor PAN verification*
   - *Pine Labs underwriting & T+1 payout activation*
 
+## 7. Fast Development & Build Speed Invariants
+- **Never Run Full `npm run build` During Iterative Tasks**: `npm run build` executes `scripts/prerender.mjs`, which crawls and snapshots all 195+ routes in headless Chrome, taking 4+ minutes (250+ seconds). Never run this during routine coding, UI changes, or intermediate iterations.
+- **Fast 6-Second Verification**: Always use `npx tsc --noEmit` (~6–8 seconds) to verify TypeScript safety, syntax, and imports during code changes.
+- **Prerender on Final Milestones Only**: Execute the full `npm run build` (or `node scripts/prerender.mjs`) ONLY when explicitly instructed by the user or when cutting a final production deployment.
+- **Immediate Backgrounding**: Long-running commands (such as batch outreach or heavy scripts) must be run asynchronously as background tasks so the user is never blocked from interacting.
+
 

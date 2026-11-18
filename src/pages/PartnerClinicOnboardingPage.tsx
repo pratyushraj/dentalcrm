@@ -437,11 +437,11 @@ export default function PartnerClinicOnboardingPage() {
 
             <Link
               to="/reactivation/login"
-              className="px-3 sm:px-3.5 py-1.5 min-h-[36px] sm:min-h-[38px] rounded-full bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-bold flex items-center gap-1.5 transition-all shadow-xs active:scale-95"
+              className="px-3 sm:px-3.5 py-1.5 min-h-[36px] sm:min-h-[38px] rounded-full bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-200/80 text-xs font-bold flex items-center gap-1.5 transition-all active:scale-95"
             >
               <span className="sm:hidden">Login</span>
               <span className="hidden sm:inline">Doctor Login</span>
-              <ArrowRight size={12} />
+              <ArrowRight size={12} className="text-slate-500" />
             </Link>
           </div>
         </nav>
@@ -709,15 +709,13 @@ export default function PartnerClinicOnboardingPage() {
               >
                 <div className="flex flex-col sm:flex-row gap-2.5">
                   <div className="relative flex-1">
-                    <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 font-mono text-sm">
-                      📞
-                    </span>
+                    <Phone size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
                     <input
                       type="text"
                       value={lookupInput}
                       onChange={(e) => setLookupInput(e.target.value)}
-                      placeholder="Enter 10-digit mobile number (e.g. 98765 43210) or official email"
-                      className="w-full pl-10 pr-4 py-3.5 rounded-xl border border-slate-300 focus:border-[#0867E8] focus:ring-2 focus:ring-blue-100 text-sm font-medium text-slate-800 placeholder-slate-400 transition-all"
+                      placeholder="Enter 10-digit mobile or official email"
+                      className="w-full pl-10 pr-4 py-3.5 rounded-xl border border-slate-300 focus:border-[#0867E8] focus:ring-2 focus:ring-blue-100 text-base sm:text-sm font-medium text-slate-800 placeholder-slate-400 transition-all"
                     />
                   </div>
 

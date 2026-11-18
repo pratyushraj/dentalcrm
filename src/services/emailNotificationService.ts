@@ -401,7 +401,7 @@ export const emailNotificationService = {
                 <div style="background: #0867E8; color: white; width: 22px; height: 22px; border-radius: 50%; text-align: center; line-height: 22px; font-size: 12px; font-weight: bold;">⟳</div>
               </td>
               <td style="padding-bottom: 12px; padding-left: 8px;">
-                <div style="font-size: 13px; font-weight: 700; color: #0867E8;">2. Bank Penny Drop &amp; Payment Gateway Underwriting</div>
+                <div style="font-size: 13px; font-weight: 700; color: #0867E8;">2. Bank Verification &amp; Gateway Underwriting</div>
                 <div style="font-size: 12px; color: #334155; font-weight: 600; margin-top: 2px;">
                   In Progress &bull; Estimated Turnaround: <strong>48–72 Business Hours</strong>
                 </div>
@@ -413,7 +413,7 @@ export const emailNotificationService = {
                 <div style="background: #e2e8f0; color: #94a3b8; width: 22px; height: 22px; border-radius: 50%; text-align: center; line-height: 22px; font-size: 12px; font-weight: bold;">3</div>
               </td>
               <td style="padding-left: 8px;">
-                <div style="font-size: 13px; font-weight: 700; color: #64748b;">3. Merchant ID (MID) Whitelisting &amp; Kit Dispatch</div>
+                <div style="font-size: 13px; font-weight: 700; color: #64748b;">3. Merchant Terminal Activation &amp; Kit Dispatch</div>
                 <div style="font-size: 11px; color: #94a3b8;">Activates 100% upfront T+1 treatment payouts directly to your current account</div>
               </td>
             </tr>
@@ -424,7 +424,7 @@ export const emailNotificationService = {
         <div style="margin-bottom: 24px;">
           <h3 style="font-size: 14px; font-weight: 800; color: #0B2450; margin: 0 0 10px 0;">What to expect during the 48–72 hour underwriting window:</h3>
           <ul style="font-size: 13px; line-height: 1.6; color: #475569; padding-left: 20px; margin: 0;">
-            <li style="margin-bottom: 6px;"><strong>Automated ₹1 Penny Drop:</strong> Our banking rail deposits ₹1 into your current account to automatically verify the beneficiary name and IFSC.</li>
+            <li style="margin-bottom: 6px;"><strong>Bank Account Verification:</strong> Plural by Pine Labs verifies your clinic current account beneficiary name and IFSC for automated settlements.</li>
             <li style="margin-bottom: 6px;"><strong>PG Underwriting Approval:</strong> Your clinic merchant ID (MID) is configured with Plural by Pine Labs and partner NBFCs.</li>
             <li style="margin-bottom: 6px;"><strong>Welcome Kit Dispatch:</strong> Your acrylic countertop patient EMI standee and staff prompt cards are prepared for courier dispatch.</li>
           </ul>

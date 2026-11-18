@@ -508,13 +508,13 @@ export default function ClinicKycUploadPage() {
 
             <div className="space-y-1.5">
               <span className="px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold inline-block">
-                ₹1 Penny Drop &amp; Verification in Progress (24–48h SLA)
+                Bank Account Verification in Progress (48–72h SLA)
               </span>
               <h1 className="text-2xl sm:text-3xl font-black text-[#0B2450]">
                 Bank Account Verification Initiated for {clinicName || 'Your Clinic'}!
               </h1>
               <p className="text-xs sm:text-sm text-slate-600 max-w-md mx-auto leading-relaxed">
-                Your account details and verification documents have been submitted to the banking desk. Bank account linking is completed within <strong>24–48 business hours</strong>.
+                Your account details and verification documents have been submitted to the banking desk. Bank account linking is completed within <strong>48–72 business hours</strong>.
                 {email && (
                   <span className="block mt-1.5 font-semibold text-emerald-700">
                     ✉️ A formal confirmation email has been dispatched to {email}.
@@ -810,10 +810,6 @@ export default function ClinicKycUploadPage() {
                       </p>
                     </div>
                   </div>
-
-                  <span className="text-[10px] font-black text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded-full flex items-center gap-1">
-                    <Sparkles size={11} /> Instant ₹1 Penny Drop
-                  </span>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">

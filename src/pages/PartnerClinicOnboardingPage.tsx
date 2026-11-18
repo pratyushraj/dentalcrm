@@ -142,7 +142,6 @@ export default function PartnerClinicOnboardingPage() {
           email: matched.email || prev.email,
           city: matched.city || prev.city,
         }));
-        toast.success(`Welcome back, ${matched.doctor_name || matched.clinic_name}!`);
       } else {
         setMatchedClinic(null);
         setLookupStatus('not_found');
@@ -393,13 +392,13 @@ export default function PartnerClinicOnboardingPage() {
       <div className="absolute inset-0 bg-grid-fintech mask-radial-fade opacity-60 pointer-events-none -z-10" />
 
       {/* Top Floating Pill Navbar */}
-      <header className="fixed top-3 sm:top-5 inset-x-0 z-50 pointer-events-none px-4 sm:px-6">
-        <nav className="max-w-4xl mx-auto bg-white/90 backdrop-blur-xl border border-slate-200/90 shadow-[0_8px_32px_rgba(15,23,42,0.08)] rounded-full px-3.5 sm:px-5 py-2.5 flex items-center justify-between gap-3 pointer-events-auto transition-all">
-          <Link to="/" className="flex items-center gap-2.5 shrink-0 group">
+      <header className="fixed top-2.5 sm:top-5 inset-x-0 z-50 pointer-events-none px-3 sm:px-6">
+        <nav className="max-w-4xl mx-auto bg-white/95 backdrop-blur-xl border border-slate-200/90 shadow-[0_8px_32px_rgba(15,23,42,0.08)] rounded-full px-3.5 sm:px-5 py-2 sm:py-2.5 flex items-center justify-between gap-3 pointer-events-auto transition-all">
+          <Link to="/" className="flex items-center gap-2 sm:gap-2.5 shrink-0 group">
             <img 
               src="/assets/clinaza-logo.jpg" 
               alt="CLINAZA" 
-              className="h-8 w-8 sm:h-9 sm:w-9 rounded-xl border border-slate-200 shadow-xs object-cover group-hover:scale-105 transition-transform" 
+              className="h-7 w-7 sm:h-9 sm:w-9 rounded-xl border border-slate-200 shadow-xs object-cover group-hover:scale-105 transition-transform" 
               width={36}
               height={36}
             />
@@ -431,7 +430,7 @@ export default function PartnerClinicOnboardingPage() {
             <button
               onClick={copyShareLink}
               title="Share Form"
-              className="px-2.5 sm:px-3.5 py-1.5 min-h-[36px] sm:min-h-[38px] rounded-full bg-slate-50 hover:bg-slate-100 border border-slate-200 text-xs font-bold text-slate-700 flex items-center gap-1.5 transition-all active:scale-95 cursor-pointer"
+              className="px-2.5 sm:px-3.5 py-1.5 min-h-[34px] sm:min-h-[38px] rounded-full bg-slate-50 hover:bg-slate-100 border border-slate-200 text-xs font-bold text-slate-700 flex items-center gap-1.5 transition-all active:scale-95 cursor-pointer"
             >
               {copiedLink ? <Check size={13} className="text-emerald-600" /> : <Share2 size={13} />}
               <span className="hidden sm:inline">{copiedLink ? 'Copied!' : 'Share Form'}</span>
@@ -439,18 +438,18 @@ export default function PartnerClinicOnboardingPage() {
 
             <Link
               to="/reactivation/login"
-              className="px-3 sm:px-3.5 py-1.5 min-h-[36px] sm:min-h-[38px] rounded-full bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-200/80 text-xs font-bold flex items-center gap-1.5 transition-all active:scale-95"
+              className="px-3 sm:px-3.5 py-1.5 min-h-[34px] sm:min-h-[38px] rounded-full bg-[#0867E8] hover:bg-[#0756C7] text-white border border-[#0867E8] text-xs font-bold flex items-center gap-1.5 shadow-sm transition-all active:scale-95"
             >
               <span className="sm:hidden">Login</span>
               <span className="hidden sm:inline">Doctor Login</span>
-              <ArrowRight size={12} className="text-slate-500" />
+              <ArrowRight size={12} className="text-white/80" />
             </Link>
           </div>
         </nav>
       </header>
 
       {/* Main Content Area */}
-      <main className={`max-w-3xl mx-auto px-4 sm:px-6 pt-28 sm:pt-36 ${
+      <main className={`max-w-3xl mx-auto px-4 sm:px-6 pt-20 sm:pt-36 ${
         !submitted && (lookupStatus === 'not_found' || showFormForMatched) ? 'pb-24 sm:pb-12' : 'pb-8 sm:pb-12'
       }`}>
         {submitted ? (
@@ -819,14 +818,12 @@ export default function PartnerClinicOnboardingPage() {
           <div className="space-y-6 sm:space-y-7 animate-in fade-in">
             <div className="bg-white border-2 border-[#0867E8]/30 rounded-3xl p-5 sm:p-7 shadow-sm space-y-4">
               {/* Card Top Utility Bar */}
-              <div className="flex items-center justify-between gap-2 border-b border-slate-100 pb-3.5">
-                <div className="flex items-center gap-2 flex-wrap">
-                  <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-[11px] font-bold">
-                    <CheckCircle2 size={13} className="text-emerald-600" />
-                    <span>Registered Clinic</span>
-                  </span>
+              <div className="flex items-center justify-between gap-2 border-b border-slate-100 pb-3">
+                <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-[11px] font-bold">
+                  <CheckCircle2 size={13} className="text-emerald-600 shrink-0" />
+                  <span>Registered Clinic</span>
                   {matchedClinic.id && (
-                    <span className="text-[11px] font-mono font-semibold text-slate-400">
+                    <span className="font-mono text-[10.5px] font-semibold text-emerald-700/80 border-l border-emerald-200 pl-1.5 ml-0.5">
                       #{matchedClinic.id.slice(0, 6).toUpperCase()}
                     </span>
                   )}
@@ -840,49 +837,49 @@ export default function PartnerClinicOnboardingPage() {
                     setLookupInput('');
                     setShowFormForMatched(false);
                   }}
-                  className="inline-flex items-center gap-1 text-xs font-semibold text-slate-500 hover:text-slate-800 hover:underline transition-colors shrink-0 cursor-pointer py-1 px-2 rounded-lg active:bg-slate-100"
+                  className="inline-flex items-center gap-1 text-xs font-semibold text-slate-500 hover:text-slate-800 transition-colors shrink-0 cursor-pointer py-1 px-2 rounded-lg active:bg-slate-100"
                 >
                   <ArrowLeft size={12} />
-                  <span>Change number</span>
+                  <span>Change</span>
                 </button>
               </div>
 
               {/* Clinic & Doctor Greeting */}
               <div className="space-y-1">
-                <h2 className="text-xl sm:text-2xl font-black text-[#0B2450] tracking-tight [text-wrap:balance]">
+                <h2 className="text-xl sm:text-2xl font-black text-[#0B2450] tracking-tight">
                   Welcome Back, {matchedClinic.doctor_name || 'Doctor'}!
                 </h2>
-                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed flex flex-wrap items-center gap-x-2 gap-y-0.5">
                   <strong className="text-slate-800">{matchedClinic.clinic_name}</strong>
                   {matchedClinic.city && (
                     <>
-                      <span className="text-slate-300 mx-1.5">•</span>
+                      <span className="text-slate-300">•</span>
                       <span>{matchedClinic.city}</span>
                     </>
                   )}
-                  <span className="text-slate-300 mx-1.5">•</span>
-                  <span className="font-mono text-slate-500">+91 {matchedClinic.phone}</span>
+                  <span className="text-slate-300">•</span>
+                  <span className="font-mono text-slate-500 whitespace-nowrap">+91 {matchedClinic.phone}</span>
                 </p>
               </div>
 
               {/* Compact 3-Step Milestone Status Card */}
-              <div className="bg-slate-50/80 border border-slate-200/80 rounded-2xl p-3.5 space-y-2">
+              <div className="bg-slate-50/80 border border-slate-200/80 rounded-2xl p-3 sm:p-3.5 space-y-2">
                 <div className="flex items-center justify-between text-[11px] font-bold text-slate-700">
-                  <span className="uppercase tracking-wider text-slate-400 text-[10px]">Onboarding Stage</span>
+                  <span className="uppercase tracking-wider text-slate-400 text-[10px] font-bold">Onboarding Progress</span>
                   <span className="text-[#0867E8] bg-blue-50 border border-blue-200 px-2 py-0.5 rounded-full text-[10px] font-extrabold">Step 2 of 3</span>
                 </div>
                 <div className="grid grid-cols-3 gap-1.5 sm:gap-2 text-center">
-                  <div className="bg-white border border-slate-200/70 rounded-xl p-2 shadow-2xs space-y-0.5">
-                    <div className="text-[10px] font-bold text-slate-700 leading-tight">1. Profile</div>
-                    <div className="text-[9.5px] text-emerald-700 font-semibold flex items-center justify-center gap-0.5">
-                      <Check size={11} className="text-emerald-600" /> Done
+                  <div className="bg-emerald-50/70 border border-emerald-200/80 rounded-xl p-2 shadow-2xs space-y-0.5">
+                    <div className="text-[10px] font-bold text-emerald-950 leading-tight">1. Profile</div>
+                    <div className="text-[9.5px] text-emerald-700 font-bold flex items-center justify-center gap-0.5">
+                      <Check size={11} className="text-emerald-600 shrink-0" /> Done
                     </div>
                   </div>
-                  <div className="bg-blue-50 border border-[#0867E8]/40 rounded-xl p-2 shadow-2xs space-y-0.5">
-                    <div className="text-[10px] font-bold text-[#0B2450] leading-tight">2. Bank KYC</div>
-                    <div className="text-[9.5px] text-[#0867E8] font-bold">Action Needed</div>
+                  <div className="bg-blue-50/90 border-2 border-[#0867E8]/60 rounded-xl p-2 shadow-2xs space-y-0.5 ring-2 ring-blue-100/50">
+                    <div className="text-[10px] font-black text-[#0B2450] leading-tight">2. Bank KYC</div>
+                    <div className="text-[9.5px] text-[#0867E8] font-black uppercase tracking-wider">Action Needed</div>
                   </div>
-                  <div className="bg-slate-100/50 border border-slate-200/50 rounded-xl p-2 opacity-60 space-y-0.5">
+                  <div className="bg-slate-100/60 border border-slate-200/60 rounded-xl p-2 opacity-60 space-y-0.5">
                     <div className="text-[10px] font-bold text-slate-500 leading-tight">3. Standee</div>
                     <div className="text-[9.5px] text-slate-400">After KYC</div>
                   </div>
@@ -900,9 +897,8 @@ export default function PartnerClinicOnboardingPage() {
                       <Sparkles size={11} />
                       <span>Recommended Next Step</span>
                     </div>
-                    <h3 className="text-sm sm:text-base font-black text-white flex items-center gap-1.5">
-                      <span>Complete Bank Account Linking &amp; KYC</span>
-                      <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform shrink-0" />
+                    <h3 className="text-sm sm:text-base font-black text-white leading-snug">
+                      Complete Bank Account Linking &amp; KYC
                     </h3>
                     <p className="text-[11px] sm:text-xs text-blue-100/90 leading-relaxed max-w-md">
                       Upload cancelled cheque &amp; doctor PAN for instant ₹1 penny drop verification by Pine Labs for direct T+1 patient treatment payouts.

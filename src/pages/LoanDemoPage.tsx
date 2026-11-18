@@ -37,7 +37,9 @@ import { toast } from 'sonner';
 const PROCEDURES = [
   { id: 'aligners', name: 'Clear Aligners', amount: 75000, tenure: 12, tag: 'Most Popular', emiEst: '₹6,680' },
   { id: 'implant-single', name: 'Single Dental Implant', amount: 45000, tenure: 12, tag: 'High Conversion', emiEst: '₹4,010' },
+  { id: 'ortho-braces', name: 'Ceramic / Metal Braces', amount: 40000, tenure: 12, tag: 'Teen & Young Adult', emiEst: '₹3,560' },
   { id: 'full-mouth', name: 'Full Mouth Rehab / All-on-4', amount: 160000, tenure: 18, tag: 'High Ticket', emiEst: '₹9,720' },
+  { id: 'veneers', name: 'Smile Makeover / Veneers', amount: 65000, tenure: 12, tag: 'Aesthetic Flow', emiEst: '₹5,790' },
   { id: 'implants-multi', name: 'Multiple Implants & Bridges', amount: 95000, tenure: 12, tag: 'Common Case', emiEst: '₹8,460' },
   { id: 'rct-crown', name: 'Root Canal + Zirconia Crown', amount: 22000, tenure: 6, tag: 'Daily Flow', emiEst: '₹3,790' }
 ];
@@ -52,7 +54,7 @@ const COMPARISON_METRICS = [
   {
     capability: 'Bank Statement Verification',
     traditional: 'Manual PDF uploads + password friction',
-    clinaza: 'Native RBI Account Aggregator (1 OTP)',
+    clinaza: '1-Minute Paperless Bank OTP (Zero passbooks/PDFs)',
     tag: '1 OTP Only'
   },
   {
@@ -63,9 +65,9 @@ const COMPARISON_METRICS = [
   },
   {
     capability: 'Lender Network Architecture',
-    traditional: 'Single lender (rejects 60%+ applicants)',
-    clinaza: 'BRE Cascading Grid (Piramal, Tata, Bajaj, L&T)',
-    tag: 'Waterfall'
+    traditional: 'Single bank (rejects 60%+ patients at counter)',
+    clinaza: 'Multi-Bank Waterfall (Auto-routes across Piramal, Tata, Bajaj, L&T)',
+    tag: 'Auto-Backup'
   },
   {
     capability: 'Approval Rate Benchmark',
@@ -76,13 +78,13 @@ const COMPARISON_METRICS = [
   {
     capability: 'Hardware & Machine Rental',
     traditional: '₹600–₹1,200/mo POS machine rental & deposit',
-    clinaza: '₹0 Hardware (Counter QR & WhatsApp Links)',
+    clinaza: '₹0 Hardware (Counter QR Standee & WhatsApp Links)',
     tag: '₹0 Hardware'
   },
   {
     capability: 'Clinic Default Recourse',
     traditional: 'Collection follow-ups & bad clinic debt risk',
-    clinaza: '100% Non-Recourse (T+1 Guaranteed Settlement)',
+    clinaza: '0% Clinic Risk (100% Non-Recourse T+1 Payout)',
     tag: '₹0 Recourse'
   }
 ];
@@ -276,7 +278,7 @@ export default function LoanDemoPage() {
             <div className="bg-slate-50/90 p-2.5 sm:p-3 rounded-xl border border-slate-200/70">
               <div className="flex items-center gap-1 text-slate-400 mb-0.5">
                 <Zap size={11} className="text-blue-600" />
-                <span className="text-[9px] font-bold uppercase tracking-wider">Pre-Approved ETB</span>
+                <span className="text-[9px] font-bold uppercase tracking-wider">Instant Bank Limit</span>
               </div>
               <div className="text-lg sm:text-2xl font-black text-[#0867E8] font-mono">&lt; 60s</div>
               <span className="text-[9.5px] text-slate-500 block truncate">Instant OTP verification</span>
@@ -521,19 +523,19 @@ export default function LoanDemoPage() {
                 <div className="flex items-start gap-2 sm:gap-2.5">
                   <span className="font-black text-[#0867E8] shrink-0 bg-blue-100 px-1.5 py-0.5 rounded text-[11px]">Doctor:</span>
                   <p className="text-slate-800 font-medium italic leading-relaxed text-[11px] sm:text-xs">
-                    "Rahul, the complete treatment is ₹{customAmount.toLocaleString('en-IN')}. Would you prefer paying in full today, or should we set up an easy monthly EMI of around ₹{calculatedEmi.toLocaleString('en-IN')}/mo on your phone in 2 minutes?"
+                    "Rahul, the complete treatment plan is ₹{customAmount.toLocaleString('en-IN')}. Would you prefer paying in full today, or should we set up an easy monthly installment of around ₹{calculatedEmi.toLocaleString('en-IN')}/mo on your phone in 2 minutes?"
                   </p>
                 </div>
                 <div className="flex items-start gap-2 sm:gap-2.5 pt-1 border-t border-slate-200">
                   <span className="font-black text-emerald-700 shrink-0 bg-emerald-100 px-1.5 py-0.5 rounded text-[11px]">Patient:</span>
                   <p className="text-slate-800 font-medium italic leading-relaxed text-[11px] sm:text-xs">
-                    "Wait doctor, I can do ₹{calculatedEmi.toLocaleString('en-IN')}/mo without a credit card?"
+                    "Wait doctor, I can do ₹{calculatedEmi.toLocaleString('en-IN')}/mo without a credit card? Are there hidden fees or high interest?"
                   </p>
                 </div>
                 <div className="flex items-start gap-2 sm:gap-2.5 pt-1 border-t border-slate-200">
                   <span className="font-black text-[#0867E8] shrink-0 bg-blue-100 px-1.5 py-0.5 rounded text-[11px]">Doctor:</span>
                   <p className="text-slate-800 font-medium italic leading-relaxed text-[11px] sm:text-xs">
-                    "Yes, our front desk sends a secure link to your WhatsApp right now. You verify your Aadhaar OTP, approve in Google Pay or PhonePe, and we start your procedure today."
+                    "No hidden traps at all. It's transparent bank reducing interest—about ₹150–₹200/mo on your EMI, far cheaper than a credit card penalty. Our front desk sends a secure link to your WhatsApp right now, you approve the exact schedule inside Google Pay or PhonePe, and we start your procedure today."
                   </p>
                 </div>
               </div>
@@ -724,16 +726,16 @@ export default function LoanDemoPage() {
                           <div className="text-[10px] text-blue-200">Covers 100% of ₹{customAmount.toLocaleString('en-IN')}</div>
                         </div>
 
-                        {/* Lender Choices with Cascading indicator */}
+                        {/* Lender Choices with Multi-Bank waterfall indicator */}
                         <div className="space-y-1.5">
                           <span className="text-[9px] font-bold text-slate-500 uppercase tracking-wider block">
-                            Matched via BRE Cascading Engine:
+                            Matched via Multi-Bank Approval Engine:
                           </span>
                           {[
-                            { name: 'Piramal Capital', tag: 'ETB Pre-Approved', badge: 'Fastest (30s)' },
-                            { name: 'Bajaj Finserv', tag: 'ETB Instant Limit', badge: 'High Approval' },
-                            { name: 'Tata Capital', tag: 'ETB Flexi EMI', badge: '₹0 Foreclosure' },
-                            { name: 'L&T Finance / Aditya Birla', tag: 'NTB Bureau Match', badge: 'New Borrowers' }
+                            { name: 'Piramal Capital', tag: 'Pre-Approved Instant Limit', badge: 'Fastest (30s)' },
+                            { name: 'Bajaj Finserv', tag: 'Instant Cardless Limit', badge: 'High Approval' },
+                            { name: 'Tata Capital', tag: 'Flexible Monthly EMI', badge: '₹0 Foreclosure' },
+                            { name: 'L&T Finance / Aditya Birla', tag: 'New Patient Bureau Match', badge: 'New Borrowers' }
                           ].map((lender, i) => (
                             <button
                               key={i}
@@ -976,9 +978,9 @@ export default function LoanDemoPage() {
               <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-sm">
                 02
               </div>
-              <h4 className="font-extrabold text-[#0B2450] text-sm">BRE-Driven Matching</h4>
+              <h4 className="font-extrabold text-[#0B2450] text-sm">Auto-Backup Matching</h4>
               <p className="text-xs text-slate-600 leading-relaxed">
-                Business Rules Engine (BRE) intelligently cascades applicants: if Bank A declines, the engine automatically matches to Lender B in milliseconds.
+                Intelligent waterfall routing: if Bank A declines, the engine automatically matches to Lender B in milliseconds so your patient isn't rejected at the counter.
               </p>
             </div>
 
@@ -986,9 +988,9 @@ export default function LoanDemoPage() {
               <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center font-bold text-sm">
                 03
               </div>
-              <h4 className="font-extrabold text-[#0B2450] text-sm">RBI Account Aggregator</h4>
+              <h4 className="font-extrabold text-[#0B2450] text-sm">1-Min Paperless Verification</h4>
               <p className="text-xs text-slate-600 leading-relaxed">
-                Fetches real-time verified bank cashflows with a 1-time OTP. <strong>Zero PDF password uploads</strong> and zero passbook scanning.
+                Fetches real-time verified bank cashflows with a simple 1-time OTP. <strong>Zero PDF password uploads</strong>, zero passbook scanning, and zero printouts.
               </p>
             </div>
 
@@ -996,9 +998,9 @@ export default function LoanDemoPage() {
               <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center font-bold text-sm">
                 04
               </div>
-              <h4 className="font-extrabold text-[#0B2450] text-sm">Instant Digital KFS</h4>
+              <h4 className="font-extrabold text-[#0B2450] text-sm">Transparent Cost Schedule</h4>
               <p className="text-xs text-slate-600 leading-relaxed">
-                RBI-mandated Key Fact Statement generated upfront. 100% transparent terms with ₹0 hidden charges, protecting doctor reputation.
+                RBI-mandated Key Fact Statement generated upfront. 100% transparent terms with ₹0 hidden charges, protecting doctor-patient trust.
               </p>
             </div>
 
@@ -1373,7 +1375,7 @@ export default function LoanDemoPage() {
             </h3>
             
             <p className="text-xs sm:text-base text-slate-300 max-w-xl mx-auto leading-relaxed">
-              Stop losing high-value implant and aligner cases to price objections. Get your clinic verified in under 24 hours with ₹0 setup fee and ₹0 AMC.
+              Stop losing high-value implant and aligner cases to price objections. Get your clinic verified in under 24 hours with ₹0 monthly subscription, ₹0 AMC, and a nominal ₹999 one-time activation kit.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-3">

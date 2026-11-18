@@ -23,13 +23,19 @@ import {
   FileText,
   MessageCircle,
   Baby,
-  Clock
+  Clock,
+  Search,
+  Phone,
+  UserCheck,
+  RefreshCw,
+  HelpCircle
 } from 'lucide-react';
 import { emailNotificationService } from '@/services/emailNotificationService';
 import { supabase } from '@/lib/supabase';
 import { toast } from 'sonner';
 import { analytics } from '@/utils/analytics';
 import { initiateRazorpayPayment, RAZORPAY_CONFIG } from '@/services/razorpayService';
+import preloadedClinics from '@/data/onboarded_clinics.json';
 
 export default function PartnerClinicOnboardingPage() {
   const [form, setForm] = useState({
@@ -56,6 +62,103 @@ export default function PartnerClinicOnboardingPage() {
 
   const [utmParams, setUtmParams] = useState({ source: '', medium: '', campaign: '' });
 
+  // Smart Identity Lookup states
+  const [lookupInput, setLookupInput] = useState('');
+  const [isSearching, setIsSearching] = useState(false);
+  const [matchedClinic, setMatchedClinic] = useState<any | null>(null);
+  const [lookupStatus, setLookupStatus] = useState<'idle' | 'found' | 'not_found'>('idle');
+  const [showFormForMatched, setShowFormForMatched] = useState(false);
+
+  const handleClinicLookup = async (inputVal?: string) => {
+    const raw = (inputVal !== undefined ? inputVal : lookupInput).trim();
+    if (!raw) {
+      toast.error('Please enter a 10-digit mobile number or email.');
+      return;
+    }
+
+    setIsSearching(true);
+    const cleanPhone = raw.replace(/\D/g, '').slice(-10);
+    const isEmail = raw.includes('@');
+
+    try {
+      let matched: any = null;
+
+      // 1. Check Supabase clinic_onboardings
+      if (cleanPhone.length >= 10) {
+        const { data } = await supabase
+          .from('clinic_onboardings')
+          .select('*')
+          .ilike('phone', `%${cleanPhone}%`)
+          .order('created_at', { ascending: false })
+          .limit(1);
+
+        if (data && data.length > 0) {
+          matched = data[0];
+        }
+      } else if (isEmail) {
+        const { data } = await supabase
+          .from('clinic_onboardings')
+          .select('*')
+          .ilike('email', `%${raw}%`)
+          .order('created_at', { ascending: false })
+          .limit(1);
+
+        if (data && data.length > 0) {
+          matched = data[0];
+        }
+      }
+
+      // 2. Fallback check local preloaded clinics
+      if (!matched) {
+        const local = (preloadedClinics as any[]).find((c: any) =>
+          (cleanPhone.length >= 10 && c.phone && c.phone.replace(/\D/g, '').includes(cleanPhone)) ||
+          (isEmail && c.email && c.email.toLowerCase() === raw.toLowerCase()) ||
+          (c.id && c.id === raw)
+        );
+        if (local) {
+          matched = {
+            id: local.id,
+            clinic_name: local.clinic,
+            doctor_name: local.doctor,
+            phone: local.phone,
+            email: local.email,
+            city: local.city,
+            created_at: local.created_at
+          };
+        }
+      }
+
+      if (matched) {
+        setMatchedClinic(matched);
+        setSavedClinicId(matched.id || '');
+        setLookupStatus('found');
+        setForm(prev => ({
+          ...prev,
+          clinicName: matched.clinic_name || prev.clinicName,
+          doctorName: matched.doctor_name || prev.doctorName,
+          phone: matched.phone || prev.phone,
+          email: matched.email || prev.email,
+          city: matched.city || prev.city,
+        }));
+        toast.success(`Welcome back, ${matched.doctor_name || matched.clinic_name}!`);
+      } else {
+        setMatchedClinic(null);
+        setLookupStatus('not_found');
+        if (cleanPhone.length === 10) {
+          setForm(prev => ({ ...prev, phone: cleanPhone }));
+        } else if (isEmail) {
+          setForm(prev => ({ ...prev, email: raw }));
+        }
+        toast.info('New clinic profile. Please complete the quick details below!');
+      }
+    } catch (err) {
+      console.warn('[Clinic lookup error]', err);
+      setLookupStatus('not_found');
+    } finally {
+      setIsSearching(false);
+    }
+  };
+
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const source = params.get('utm_source') || '';
@@ -80,6 +183,16 @@ export default function PartnerClinicOnboardingPage() {
       medium,
       campaign,
     });
+
+    // Check for auto-lookup params
+    const phoneParam = params.get('phone') || '';
+    const emailParam = params.get('email') || '';
+    const idParam = params.get('id') || '';
+    if (phoneParam || emailParam || idParam) {
+      const q = phoneParam || emailParam || idParam;
+      setLookupInput(q);
+      handleClinicLookup(q);
+    }
   }, []);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -633,7 +746,167 @@ export default function PartnerClinicOnboardingPage() {
             )}
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="bg-white border border-slate-200/90 rounded-2xl p-5 sm:p-8 shadow-sm space-y-6">
+          <div className="space-y-6">
+            {/* ── SMART CLINIC IDENTIFICATION CHECKPOINT ── */}
+            <div className="bg-white border-2 border-[#0867E8]/30 rounded-3xl p-5 sm:p-7 shadow-sm relative overflow-hidden">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-3 mb-4">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-9 h-9 rounded-xl bg-blue-50 text-[#0867E8] flex items-center justify-center font-bold shrink-0">
+                    <Sparkles size={18} />
+                  </div>
+                  <div>
+                    <h3 className="text-sm sm:text-base font-black text-[#0B2450]">
+                      Smart Clinic Lookup &amp; Fast-Track
+                    </h3>
+                    <p className="text-xs text-slate-500">
+                      Enter your mobile number or email to auto-detect existing registration or start fresh
+                    </p>
+                  </div>
+                </div>
+
+                <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-slate-100 text-slate-600 self-start sm:self-auto">
+                  Instant Auto-Route
+                </span>
+              </div>
+
+              {/* Search Bar Input */}
+              <form 
+                onSubmit={(e) => { e.preventDefault(); handleClinicLookup(); }}
+                className="flex flex-col sm:flex-row gap-2.5"
+              >
+                <div className="relative flex-1">
+                  <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 font-mono text-xs">
+                    📞
+                  </span>
+                  <input
+                    type="text"
+                    value={lookupInput}
+                    onChange={(e) => {
+                      setLookupInput(e.target.value);
+                      if (lookupStatus !== 'idle') setLookupStatus('idle');
+                    }}
+                    placeholder="Enter 10-digit mobile number (e.g. 98765 43210) or official email"
+                    className="w-full pl-9 pr-4 py-3 rounded-xl border border-slate-300 focus:border-[#0867E8] focus:ring-2 focus:ring-blue-100 text-xs sm:text-sm font-medium text-slate-800 placeholder-slate-400 transition-all"
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={isSearching}
+                  className="px-6 py-3 rounded-xl bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-black uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-sm active:scale-95 disabled:opacity-50 cursor-pointer min-h-[44px]"
+                >
+                  {isSearching ? (
+                    <>
+                      <RefreshCw size={13} className="animate-spin" />
+                      <span>Checking...</span>
+                    </>
+                  ) : (
+                    <>
+                      <span>Continue</span>
+                      <ArrowRight size={14} />
+                    </>
+                  )}
+                </button>
+              </form>
+
+              {/* STATE 1: MATCHED EXISTING CLINIC */}
+              {lookupStatus === 'found' && matchedClinic && (
+                <div className="mt-5 p-5 bg-gradient-to-br from-blue-50/90 via-indigo-50/40 to-white border border-blue-200 rounded-2xl space-y-4 animate-in fade-in slide-in-from-top-2">
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="space-y-1">
+                      <div className="flex items-center gap-2 flex-wrap">
+                        <span className="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-black uppercase tracking-wider border border-emerald-300">
+                          ✓ Registered Clinic Profile Found
+                        </span>
+                        {matchedClinic.id && (
+                          <span className="text-[11px] text-slate-500 font-mono">
+                            Ref: {matchedClinic.id.slice(0, 8)}...
+                          </span>
+                        )}
+                      </div>
+                      <h4 className="text-lg sm:text-xl font-black text-[#0B2450]">
+                        Welcome Back, {matchedClinic.doctor_name || 'Doctor'}!
+                      </h4>
+                      <p className="text-xs text-slate-600">
+                        <strong>{matchedClinic.clinic_name}</strong> &bull; {matchedClinic.city || 'India'} &bull; +91 {matchedClinic.phone}
+                      </p>
+                    </div>
+
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setMatchedClinic(null);
+                        setLookupStatus('idle');
+                        setLookupInput('');
+                        setShowFormForMatched(false);
+                      }}
+                      className="text-[11px] text-slate-500 hover:text-slate-800 underline shrink-0 cursor-pointer"
+                    >
+                      Use Another Number
+                    </button>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                    {/* Primary Action: Go to KYC */}
+                    <Link
+                      to={`/clinic-kyc?id=${matchedClinic.id || ''}&clinic=${encodeURIComponent(matchedClinic.clinic_name || '')}&doctor=${encodeURIComponent(matchedClinic.doctor_name || '')}&phone=${encodeURIComponent(matchedClinic.phone || '')}&city=${encodeURIComponent(matchedClinic.city || '')}&email=${encodeURIComponent(matchedClinic.email || '')}`}
+                      className="p-4 rounded-xl bg-[#0867E8] hover:bg-[#0756C7] text-white flex items-center justify-between gap-3 shadow-md transition-all active:scale-95 group"
+                    >
+                      <div className="space-y-0.5 text-left">
+                        <span className="text-[10px] font-bold text-blue-200 uppercase tracking-wider block">Recommended Next Step</span>
+                        <span className="text-xs sm:text-sm font-black block">Resume Bank Linking &amp; KYC &rarr;</span>
+                        <span className="text-[11px] text-blue-100 block">Upload PAN, Aadhaar &amp; Cheque</span>
+                      </div>
+                      <ArrowRight size={18} className="text-white group-hover:translate-x-1 transition-transform shrink-0" />
+                    </Link>
+
+                    {/* Secondary Action: Pay Kit Standee */}
+                    <button
+                      type="button"
+                      onClick={handlePayWithRazorpay}
+                      className="p-4 rounded-xl bg-white hover:bg-slate-50 border border-slate-300 text-slate-800 flex items-center justify-between gap-3 shadow-xs transition-all active:scale-95 cursor-pointer text-left"
+                    >
+                      <div className="space-y-0.5">
+                        <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider block">Counter Standee Kit</span>
+                        <span className="text-xs sm:text-sm font-black text-[#0B2450] block">Activate Kit (₹999 Setup) &rarr;</span>
+                        <span className="text-[11px] text-slate-500 block">₹0 AMC &bull; Acrylic QR Couriered</span>
+                      </div>
+                      <CreditCard size={18} className="text-[#0867E8] shrink-0" />
+                    </button>
+                  </div>
+
+                  <div className="pt-2 flex items-center justify-between text-xs border-t border-blue-100/80">
+                    <button
+                      type="button"
+                      onClick={() => setShowFormForMatched(!showFormForMatched)}
+                      className="text-[#0867E8] hover:text-blue-800 font-bold underline inline-flex items-center gap-1 cursor-pointer"
+                    >
+                      <span>{showFormForMatched ? 'Hide Clinic Profile Editor' : 'Need to edit or update clinic profile details?'}</span>
+                    </button>
+                    <span className="text-slate-400 text-[11px]">Zero Recourse Platform</span>
+                  </div>
+                </div>
+              )}
+
+              {/* STATE 2: NEW CLINIC CONFIRMATION */}
+              {lookupStatus === 'not_found' && (
+                <div className="mt-4 p-3.5 bg-emerald-50 border border-emerald-200 rounded-xl flex items-center justify-between gap-2 animate-in fade-in">
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 size={16} className="text-emerald-700 shrink-0" />
+                    <p className="text-xs font-bold text-emerald-950">
+                      New Clinic Profile &bull; Mobile number pre-filled. Complete your 60-second setup below!
+                    </p>
+                  </div>
+                  <span className="text-[10px] font-black text-emerald-800 uppercase bg-emerald-100 px-2 py-0.5 rounded-full shrink-0">
+                    Step 1 of 2
+                  </span>
+                </div>
+              )}
+            </div>
+
+            {/* FULL INTAKE FORM (Visible for new clinics, idle state, or when explicitly requested) */}
+            {(!matchedClinic || showFormForMatched) && (
+              <form onSubmit={handleSubmit} className="bg-white border border-slate-200/90 rounded-2xl p-5 sm:p-8 shadow-sm space-y-6">
             
             {/* 1. Clinic Identity */}
             <div className="space-y-4">
@@ -1025,7 +1298,9 @@ export default function PartnerClinicOnboardingPage() {
             </div>
           </form>
         )}
-      </main>
+      </div>
+    )}
+  </main>
 
       {/* Mobile Sticky Bottom Conversion Bar */}
       {!submitted && (

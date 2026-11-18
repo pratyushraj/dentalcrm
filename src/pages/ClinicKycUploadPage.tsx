@@ -34,7 +34,6 @@ import {
   Copy,
   FileCheck,
   FileSpreadsheet,
-  FileSignature,
   ChevronDown,
   ChevronUp,
   UserCheck,
@@ -1004,23 +1003,7 @@ export default function ClinicKycUploadPage() {
                 </div>
               </div>
 
-              {/* Frictionless Digital KYC Banner */}
-              <div className="bg-blue-50/80 border border-blue-200/90 rounded-2xl p-4 shadow-xs flex items-start sm:items-center gap-3">
-                <div className="w-9 h-9 rounded-xl bg-blue-100 text-[#0867E8] flex items-center justify-center shrink-0">
-                  <FileSignature size={20} />
-                </div>
-                <div className="space-y-0.5">
-                  <div className="flex items-center gap-2 flex-wrap">
-                    <p className="text-xs font-black text-[#0B2450]">Frictionless Digital Upload: No Manual Signing Needed on Government KYC</p>
-                    <span className="text-[10px] font-bold text-emerald-800 bg-emerald-100/90 px-2 py-0.5 rounded-full border border-emerald-200">
-                      Fast-Track Underwriting
-                    </span>
-                  </div>
-                  <p className="text-[11px] text-slate-600 leading-relaxed">
-                    <strong>BR &amp; MAF:</strong> Sign &amp; stamp on letterhead. &bull; <strong>Government KYC Docs (COI, GSTIN, PAN, Cheque, MOA/AOA):</strong> Simply upload clean digital PDFs or scans directly — <strong>no manual signatures needed online</strong> *(physical signing is only required later when couriering hardcopies)*.
-                  </p>
-                </div>
-              </div>
+
 
               {entityType === 'sole_prop' ? (
                 /* ── SOLE PROPRIETORSHIP / DENTAL CLINIC SLOTS (5 SLOTS) ── */

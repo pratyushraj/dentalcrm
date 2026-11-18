@@ -817,25 +817,19 @@ export default function PartnerClinicOnboardingPage() {
         ) : lookupStatus === 'found' && matchedClinic && !showFormForMatched ? (
           /* ── SCREEN 2A: MATCHED REGISTERED CLINIC CARD ── */
           <div className="space-y-6 sm:space-y-7 animate-in fade-in">
-            <div className="bg-white border-2 border-[#0867E8]/40 rounded-3xl p-6 sm:p-8 shadow-md space-y-5">
-              <div className="flex items-start justify-between gap-3 border-b border-slate-100 pb-4">
-                <div className="space-y-1">
-                  <div className="flex items-center gap-2 flex-wrap">
-                    <span className="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-black uppercase tracking-wider border border-emerald-300">
-                      ✓ Registered Clinic Profile Found
+            <div className="bg-white border-2 border-[#0867E8]/30 rounded-3xl p-5 sm:p-7 shadow-sm space-y-4">
+              {/* Card Top Utility Bar */}
+              <div className="flex items-center justify-between gap-2 border-b border-slate-100 pb-3.5">
+                <div className="flex items-center gap-2 flex-wrap">
+                  <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-[11px] font-bold">
+                    <CheckCircle2 size={13} className="text-emerald-600" />
+                    <span>Registered Clinic</span>
+                  </span>
+                  {matchedClinic.id && (
+                    <span className="text-[11px] font-mono font-semibold text-slate-400">
+                      #{matchedClinic.id.slice(0, 6).toUpperCase()}
                     </span>
-                    {matchedClinic.id && (
-                      <span className="text-[10px] font-bold text-slate-500 bg-slate-100 border border-slate-200 px-2 py-0.5 rounded">
-                        Partner ID: #{matchedClinic.id.slice(0, 6).toUpperCase()}
-                      </span>
-                    )}
-                  </div>
-                  <h2 className="text-xl sm:text-2xl font-black text-[#0B2450]">
-                    Welcome Back, {matchedClinic.doctor_name || 'Doctor'}!
-                  </h2>
-                  <p className="text-xs sm:text-sm text-slate-600">
-                    <strong>{matchedClinic.clinic_name}</strong> &bull; {matchedClinic.city || 'India'} &bull; +91 {matchedClinic.phone}
-                  </p>
+                  )}
                 </div>
 
                 <button
@@ -846,40 +840,51 @@ export default function PartnerClinicOnboardingPage() {
                     setLookupInput('');
                     setShowFormForMatched(false);
                   }}
-                  className="px-2.5 sm:px-3 py-1.5 rounded-full bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-700 text-xs font-bold flex items-center gap-1.5 transition-all shrink-0 cursor-pointer active:scale-95"
+                  className="inline-flex items-center gap-1 text-xs font-semibold text-slate-500 hover:text-slate-800 hover:underline transition-colors shrink-0 cursor-pointer py-1 px-2 rounded-lg active:bg-slate-100"
                 >
                   <ArrowLeft size={12} />
-                  <span>Change</span>
+                  <span>Change number</span>
                 </button>
               </div>
 
-              {/* 3-Step Milestone Status Card (KYC is Step 2) */}
-              <div className="bg-slate-50 border border-slate-200/80 rounded-2xl p-4 space-y-2.5">
+              {/* Clinic & Doctor Greeting */}
+              <div className="space-y-1">
+                <h2 className="text-xl sm:text-2xl font-black text-[#0B2450] tracking-tight [text-wrap:balance]">
+                  Welcome Back, {matchedClinic.doctor_name || 'Doctor'}!
+                </h2>
+                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                  <strong className="text-slate-800">{matchedClinic.clinic_name}</strong>
+                  {matchedClinic.city && (
+                    <>
+                      <span className="text-slate-300 mx-1.5">•</span>
+                      <span>{matchedClinic.city}</span>
+                    </>
+                  )}
+                  <span className="text-slate-300 mx-1.5">•</span>
+                  <span className="font-mono text-slate-500">+91 {matchedClinic.phone}</span>
+                </p>
+              </div>
+
+              {/* Compact 3-Step Milestone Status Card */}
+              <div className="bg-slate-50/80 border border-slate-200/80 rounded-2xl p-3.5 space-y-2">
                 <div className="flex items-center justify-between text-[11px] font-bold text-slate-700">
-                  <span className="uppercase tracking-wider text-slate-500 text-[10px]">Onboarding Stage</span>
+                  <span className="uppercase tracking-wider text-slate-400 text-[10px]">Onboarding Stage</span>
                   <span className="text-[#0867E8] bg-blue-50 border border-blue-200 px-2 py-0.5 rounded-full text-[10px] font-extrabold">Step 2 of 3</span>
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs">
-                  <div className="bg-white border border-slate-200 rounded-xl p-2.5 flex items-center gap-2 shadow-2xs">
-                    <CheckCircle2 size={16} className="text-emerald-600 shrink-0" />
-                    <div>
-                      <div className="font-bold text-slate-800 text-[11px]">1. Clinic Profile</div>
-                      <div className="text-[10px] text-emerald-700 font-semibold">✓ Accredited</div>
+                <div className="grid grid-cols-3 gap-1.5 sm:gap-2 text-center">
+                  <div className="bg-white border border-slate-200/70 rounded-xl p-2 shadow-2xs space-y-0.5">
+                    <div className="text-[10px] font-bold text-slate-700 leading-tight">1. Profile</div>
+                    <div className="text-[9.5px] text-emerald-700 font-semibold flex items-center justify-center gap-0.5">
+                      <Check size={11} className="text-emerald-600" /> Done
                     </div>
                   </div>
-                  <div className="bg-blue-50 border border-[#0867E8]/40 rounded-xl p-2.5 flex items-center gap-2 shadow-2xs">
-                    <Clock size={16} className="text-[#0867E8] shrink-0" />
-                    <div>
-                      <div className="font-bold text-[#0B2450] text-[11px]">2. Bank KYC</div>
-                      <div className="text-[10px] text-[#0867E8] font-bold">Action Required</div>
-                    </div>
+                  <div className="bg-blue-50 border border-[#0867E8]/40 rounded-xl p-2 shadow-2xs space-y-0.5">
+                    <div className="text-[10px] font-bold text-[#0B2450] leading-tight">2. Bank KYC</div>
+                    <div className="text-[9.5px] text-[#0867E8] font-bold">Action Needed</div>
                   </div>
-                  <div className="bg-slate-100/60 border border-slate-200/60 rounded-xl p-2.5 flex items-center gap-2 opacity-70">
-                    <Lock size={15} className="text-slate-400 shrink-0" />
-                    <div>
-                      <div className="font-bold text-slate-600 text-[11px]">3. Standee Dispatch</div>
-                      <div className="text-[10px] text-slate-400">Unlocked after KYC</div>
-                    </div>
+                  <div className="bg-slate-100/50 border border-slate-200/50 rounded-xl p-2 opacity-60 space-y-0.5">
+                    <div className="text-[10px] font-bold text-slate-500 leading-tight">3. Standee</div>
+                    <div className="text-[9.5px] text-slate-400">After KYC</div>
                   </div>
                 </div>
               </div>
@@ -888,36 +893,36 @@ export default function PartnerClinicOnboardingPage() {
               <div className="pt-1">
                 <Link
                   to={`/clinic-kyc?id=${matchedClinic.id || ''}&clinic=${encodeURIComponent(matchedClinic.clinic_name || '')}&doctor=${encodeURIComponent(matchedClinic.doctor_name || '')}&phone=${encodeURIComponent(matchedClinic.phone || '')}&city=${encodeURIComponent(matchedClinic.city || '')}&email=${encodeURIComponent(matchedClinic.email || '')}`}
-                  className="w-full p-5 sm:p-6 rounded-2xl bg-[#0867E8] hover:bg-[#0756C7] text-white flex items-center justify-between gap-4 shadow-lg shadow-[#0867E8]/25 transition-all active:scale-98 group"
+                  className="w-full p-4.5 sm:p-5 rounded-2xl bg-[#0867E8] hover:bg-[#0756C7] text-white flex items-center justify-between gap-3 shadow-lg shadow-[#0867E8]/20 transition-all active:scale-98 group"
                 >
-                  <div className="space-y-1.5 text-left">
+                  <div className="space-y-1 text-left min-w-0">
                     <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-white/20 text-white text-[10px] font-black uppercase tracking-wider">
                       <Sparkles size={11} />
                       <span>Recommended Next Step</span>
                     </div>
-                    <h3 className="text-base sm:text-lg font-black text-white flex items-center gap-1.5">
+                    <h3 className="text-sm sm:text-base font-black text-white flex items-center gap-1.5">
                       <span>Complete Bank Account Linking &amp; KYC</span>
-                      <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                      <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform shrink-0" />
                     </h3>
-                    <p className="text-xs text-blue-100/90 leading-relaxed max-w-md">
-                      Upload cancelled cheque &amp; doctor PAN for instant ₹1 penny drop verification by Pine Labs to enable direct T+1 patient treatment payouts.
+                    <p className="text-[11px] sm:text-xs text-blue-100/90 leading-relaxed max-w-md">
+                      Upload cancelled cheque &amp; doctor PAN for instant ₹1 penny drop verification by Pine Labs for direct T+1 patient treatment payouts.
                     </p>
                   </div>
-                  <div className="w-11 h-11 rounded-2xl bg-white/15 flex items-center justify-center shrink-0 group-hover:translate-x-1.5 transition-transform shadow-inner">
-                    <ArrowRight size={22} className="text-white" />
+                  <div className="w-10 h-10 rounded-xl bg-white/15 flex items-center justify-center shrink-0 group-hover:translate-x-1 transition-transform shadow-inner">
+                    <ArrowRight size={20} className="text-white" />
                   </div>
                 </Link>
               </div>
 
-              <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-2.5 text-xs border-t border-slate-100">
+              <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs border-t border-slate-100">
                 <button
                   type="button"
                   onClick={() => setShowFormForMatched(true)}
-                  className="text-[#0867E8] hover:text-blue-800 font-bold underline cursor-pointer"
+                  className="text-[#0867E8] hover:text-blue-800 font-bold underline cursor-pointer text-[11px]"
                 >
                   Need to edit or update clinic profile details?
                 </button>
-                <span className="text-slate-400 text-[11px] font-medium">
+                <span className="text-slate-400 text-[10.5px] font-medium">
                   🔒 Pine Labs Regulated Lending Rails
                 </span>
               </div>

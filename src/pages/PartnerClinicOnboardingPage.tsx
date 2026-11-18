@@ -149,7 +149,7 @@ export default function PartnerClinicOnboardingPage() {
         } else if (isEmail) {
           setForm(prev => ({ ...prev, email: raw }));
         }
-        toast.info('New clinic profile. Please complete the quick details below!');
+        toast.info('Please complete your clinic profile details below.');
       }
     } catch (err) {
       console.warn('[Clinic lookup error]', err);
@@ -446,7 +446,7 @@ export default function PartnerClinicOnboardingPage() {
       </header>
 
       {/* Main Content Area */}
-      <main className="max-w-3xl mx-auto px-4 sm:px-6 pt-20 sm:pt-28 pb-24 sm:pb-12">
+      <main className="max-w-3xl mx-auto px-4 sm:px-6 pt-28 sm:pt-36 pb-24 sm:pb-12">
         {submitted ? (
           <div className="space-y-6">
             {/* Accreditation Header */}
@@ -755,20 +755,6 @@ export default function PartnerClinicOnboardingPage() {
                       </>
                     )}
                   </button>
-                </div>
-
-                <div className="flex items-center justify-between text-xs pt-1 px-1">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setLookupStatus('not_found');
-                      toast.info('Starting fresh clinic onboarding.');
-                    }}
-                    className="text-[#0867E8] hover:text-blue-800 font-bold underline inline-flex items-center gap-1 cursor-pointer"
-                  >
-                    <span>New clinic? Skip and fill blank registration form directly &rarr;</span>
-                  </button>
-                  <span className="text-slate-400 text-[11px] hidden sm:inline">60-Sec Setup</span>
                 </div>
               </form>
             </div>

@@ -59,3 +59,13 @@ Adhere strictly to the following active commercial contracts and partner agreeme
 - **Margin & Settlement Modeling**:
   - Always factor in the wholesale **0.40% UPI cost** when designing clinic settlement splits, revenue projections, or platform markups.
   - To monetize counter UPI transactions, apply either a **B2C Digital Convenience Fee** (₹19–₹49 per transaction) or a **B2B Smart Reconciliation Fee** (0.60%–0.75%), ensuring a positive net margin after absorbing the 0.40% gateway MDR.
+
+## 5. Clinaza Clinic B2B Commercial Pricing Invariants
+- **₹999 One-Time Setup Fee**: Clinaza charges partner dental clinics a nominal **₹999 one-time onboarding / activation kit fee** (covers physical reception acrylic QR standee, pan-India courier shipping, clinic verification, and lending gateway integration).
+- **Never Claim ₹0 Setup Fee for Clinics**: Never write, state, or imply in clinic outreach, emails, KYC requests, or marketing that the setup fee is ₹0 or free for clinics.
+- **₹0 Recurring Fees**: Always emphasize that there are **₹0 Annual Maintenance Charges (AMC)** and **₹0 monthly subscription fees**.
+- **0% Clinic Recourse**: Highlight that clinics get paid upfront on a T+1 schedule with 0% risk or collection responsibility on patient EMIs.
+- **Distinguish Wholesale vs. Retail**:
+  - *Wholesale*: Pine Labs charges Clinaza ₹0 setup fee and ₹0 AMC under our institutional agreement.
+  - *Retail (Clinics)*: Clinaza charges clinics ₹999 one-time setup fee + ₹0 AMC.
+

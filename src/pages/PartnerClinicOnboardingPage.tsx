@@ -412,27 +412,27 @@ export default function PartnerClinicOnboardingPage() {
                 {form.clinicName ? `${form.clinicName} Accredited!` : 'Clinic Details Submitted!'}
               </h2>
               <p className="text-xs text-slate-600 max-w-lg mx-auto">
-                Your profile has been logged in the Clinaza partner network. Complete Step 2 below to whitelist your current account for direct T+1 patient treatment payouts.
+                Your profile has been logged in the Clinaza partner network. Complete Step 2 below to link your current account for direct T+1 patient treatment payouts.
               </p>
             </div>
 
-            {/* Step 2: Dedicated KYC & Bank Whitelisting Card */}
+            {/* Step 2: Dedicated KYC & Bank Account Linking Card */}
             <div className="bg-gradient-to-r from-[#0B2450] via-[#0867E8] to-[#0756C7] text-white rounded-2xl p-6 sm:p-7 shadow-lg space-y-4">
               <div className="flex items-center justify-between flex-wrap gap-2">
                 <span className="px-3 py-1 rounded-full bg-white/20 backdrop-blur-sm text-white text-[10px] font-black uppercase tracking-wider">
                   Step 2 of 2: Recommended Next Step
                 </span>
                 <span className="text-emerald-300 font-bold text-xs flex items-center gap-1">
-                  <Sparkles size={13} /> Fast-Track 2-Min Whitelisting
+                  <Sparkles size={13} /> Fast-Track 2-Min Bank Linking
                 </span>
               </div>
 
               <div>
                 <h3 className="text-xl sm:text-2xl font-black text-white tracking-tight">
-                  Whitelist Clinic Current Account for T+1 Treatment Payouts
+                  Link Clinic Current Account for T+1 Treatment Payouts
                 </h3>
                 <p className="text-xs sm:text-sm text-blue-100/90 mt-1.5 max-w-lg leading-relaxed">
-                  Required by Plural by Pine Labs &amp; partner banking compliance to verify your account so patient treatment funds (₹30,000–₹1,50,000) are disbursed directly to your clinic current account.
+                  Required by Pine Labs &amp; partner banking compliance to verify your bank account so patient treatment funds (₹30,000–₹1,50,000) are disbursed directly to your clinic current account.
                 </p>
               </div>
 
@@ -442,12 +442,12 @@ export default function PartnerClinicOnboardingPage() {
                   className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-white hover:bg-slate-100 text-[#0B2450] text-xs font-black shadow-md transition-all transform hover:-translate-y-0.5"
                 >
                   <FileText size={16} className="text-[#0867E8]" />
-                  <span>Upload KYC &amp; Cheque on Secure Page &rarr;</span>
+                  <span>Upload Cheque &amp; Documents on Secure Page &rarr;</span>
                 </Link>
 
                 <a
                   href={`https://wa.me/917292984244?text=${encodeURIComponent(
-                    `Hi Clinaza, sharing KYC documents for clinic whitelisting:\n• Clinic: ${form.clinicName}\n• Doctor: ${form.doctorName || 'Doctor'}\n• City: ${form.city}\n• Phone: ${form.phone}`
+                    `Hi Clinaza, sharing KYC documents to link bank account for clinic payouts:\n• Clinic: ${form.clinicName}\n• Doctor: ${form.doctorName || 'Doctor'}\n• City: ${form.city}\n• Phone: ${form.phone}`
                   )}`}
                   target="_blank"
                   rel="noreferrer"
@@ -747,7 +747,7 @@ export default function PartnerClinicOnboardingPage() {
                     />
                   ) : (
                     <p className="text-[10px] text-emerald-700 bg-emerald-50/70 border border-emerald-200/80 rounded-xl p-2 font-medium">
-                      ✓ Clinaza auto-assigns an accredited partner profile or uses Google Maps for PG whitelisting.
+                      ✓ Clinaza auto-assigns an accredited partner profile or uses Google Maps for partner bank verification.
                     </p>
                   )}
                 </div>
@@ -981,7 +981,7 @@ export default function PartnerClinicOnboardingPage() {
               </div>
             </div>
 
-            {/* Section 3: Settlement Whitelisting Callout */}
+            {/* Section 3: Settlement Bank Linking Callout */}
             <div className="bg-gradient-to-r from-blue-50/80 to-slate-50 border border-blue-200/90 rounded-2xl p-4 sm:p-5 flex flex-wrap items-center justify-between gap-4">
               <div className="flex items-center gap-3">
                 <div className="w-9 h-9 rounded-xl bg-blue-100 text-[#0867E8] flex items-center justify-center font-bold shrink-0">
@@ -989,7 +989,7 @@ export default function PartnerClinicOnboardingPage() {
                 </div>
                 <div>
                   <h3 className="text-xs sm:text-sm font-bold text-[#0B2450]">
-                    Direct Payout Whitelisting (KYC)
+                    Direct Payout Bank Account Linking (KYC)
                   </h3>
                   <p className="text-[11px] text-slate-500">
                     To keep registration fast, clinic bank proof (cancelled cheque) is uploaded on a <strong>dedicated secure page in Step 2</strong> or sent via WhatsApp.

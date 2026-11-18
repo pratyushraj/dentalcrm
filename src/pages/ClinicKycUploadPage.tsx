@@ -301,7 +301,7 @@ export default function ClinicKycUploadPage() {
       }
 
       if (!chequeDoc.uploadedUrl) {
-        toast.error('Clinic Cancelled Cheque is mandatory for bank whitelisting.');
+        toast.error('Clinic Cancelled Cheque is required to verify your payout account.');
         return;
       }
 
@@ -410,7 +410,7 @@ export default function ClinicKycUploadPage() {
       }
 
       setIsCompleted(true);
-      toast.success('KYC & Banking details submitted for automated whitelisting!');
+      toast.success('Bank details and documents submitted for verification!');
     } catch (err) {
       console.error('Final KYC submit error:', err);
       setIsCompleted(true);
@@ -420,14 +420,14 @@ export default function ClinicKycUploadPage() {
   };
 
   const whatsappMessage = encodeURIComponent(
-    `Hi Clinaza Team, sharing PG whitelisting details for ${clinicName || 'my clinic'}:\n• Doctor: ${doctorName || 'Doctor'}\n• A/C Holder: ${accountHolderName || ''}\n• A/C No: ${accountNumber || ''}\n• IFSC: ${ifscCode || ''}\n• City: ${city || ''}`
+    `Hi Clinaza Team, sharing bank account details for patient payouts at ${clinicName || 'my clinic'}:\n• Doctor: ${doctorName || 'Doctor'}\n• A/C Holder: ${accountHolderName || ''}\n• A/C No: ${accountNumber || ''}\n• IFSC: ${ifscCode || ''}\n• City: ${city || ''}`
   );
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 font-sans selection:bg-[#0867E8] selection:text-white pb-24 relative overflow-hidden">
       <SEOHead 
-        title="Clinic Bank Whitelisting & PG KYC — Clinaza"
-        description="Secure Payment Gateway onboarding & direct settlement whitelisting portal for partner clinics."
+        title="Link Clinic Bank Account for Patient Payouts — Clinaza"
+        description="Secure clinic bank account linking and verification portal to receive direct T+1 patient treatment payouts."
       />
 
       {/* Atmospheric Ambient Background Canvas */}
@@ -489,14 +489,14 @@ export default function ClinicKycUploadPage() {
         {/* Step Breadcrumb */}
         <div className="flex items-center justify-center gap-2 mb-6 text-xs text-slate-500 font-medium">
           <span className="flex items-center gap-1 text-emerald-600 font-bold">
-            <CheckCircle2 size={13} /> 1. Clinic Accreditation
+            <CheckCircle2 size={13} /> 1. Clinic Profile
           </span>
           <span>&rarr;</span>
           <span className="px-2.5 py-0.5 rounded-full bg-blue-100 text-[#0867E8] font-black">
-            2. PG Whitelisting &amp; KYC
+            2. Link Bank Account &amp; KYC
           </span>
           <span>&rarr;</span>
-          <span className="text-slate-400">3. Counter Standee Dispatch</span>
+          <span className="text-slate-400">3. Counter QR &amp; Terminal Activation</span>
         </div>
 
         {isCompleted ? (
@@ -508,13 +508,13 @@ export default function ClinicKycUploadPage() {
 
             <div className="space-y-1.5">
               <span className="px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold inline-block">
-                ₹1 Penny Drop &amp; Underwriting in Progress (48–72h SLA)
+                ₹1 Penny Drop &amp; Verification in Progress (24–48h SLA)
               </span>
               <h1 className="text-2xl sm:text-3xl font-black text-[#0B2450]">
-                Banking Whitelisting Initiated for {clinicName || 'Your Clinic'}!
+                Bank Account Verification Initiated for {clinicName || 'Your Clinic'}!
               </h1>
               <p className="text-xs sm:text-sm text-slate-600 max-w-md mx-auto leading-relaxed">
-                Your account details and KYC dossier have been submitted to the banking compliance desk. Terminal whitelisting is completed within <strong>48–72 business hours</strong>.
+                Your account details and verification documents have been submitted to the banking desk. Bank account linking is completed within <strong>24–48 business hours</strong>.
                 {email && (
                   <span className="block mt-1.5 font-semibold text-emerald-700">
                     ✉️ A formal confirmation email has been dispatched to {email}.
@@ -573,10 +573,10 @@ export default function ClinicKycUploadPage() {
                 <span>RBI Merchant Guidelines &bull; 256-Bit SSL Encrypted</span>
               </div>
               <h1 className="text-2xl sm:text-3xl font-extrabold text-[#0B2450] tracking-tight">
-                Payment Gateway &amp; Direct Settlement Onboarding
+                Link Clinic Bank Account for Direct Patient Payouts
               </h1>
               <p className="text-xs sm:text-sm text-slate-600 max-w-lg mx-auto leading-relaxed">
-                To whitelist your clinic current account for <strong>100% upfront T+1 treatment payouts</strong> via Plural by Pine Labs, please provide your payout bank details and KYC documents below.
+                To link your clinic current account for <strong>100% upfront T+1 treatment payouts</strong> via Pine Labs, please provide your payout bank details and verification documents below.
               </p>
             </div>
 
@@ -965,7 +965,7 @@ export default function ClinicKycUploadPage() {
                   <div className="p-3 bg-emerald-50/70 border border-emerald-200/90 rounded-xl flex items-start gap-2.5 text-xs text-emerald-900">
                     <Sparkles size={16} className="text-emerald-600 shrink-0 mt-0.5" />
                     <div>
-                      <p className="font-bold text-emerald-950">Clinaza Instant PG Gateway Whitelisting:</p>
+                      <p className="font-bold text-emerald-950">Clinaza Fast-Track Bank Linking:</p>
                       <p className="text-[11px] text-emerald-800 leading-relaxed mt-0.5">
                         We will auto-generate an accredited clinic profile (<code>clinaza.in/clinic/{clinicName ? clinicName.toLowerCase().replace(/[^a-z0-9]/g, '-') : 'partner'}</code>) so your PG merchant account is approved with zero delays.
                       </p>
@@ -1276,7 +1276,7 @@ export default function ClinicKycUploadPage() {
                         <span className="text-rose-500">*</span>
                       </h3>
                       <p className="text-[11px] text-slate-500">
-                        Front &amp; back photo for RBI Proof of Address (POA) &amp; merchant whitelisting. Masked Aadhaar accepted.
+                        Front &amp; back photo for RBI Proof of Address (POA) &amp; merchant account verification. Masked Aadhaar accepted.
                       </p>
                     </div>
                   </div>
@@ -2174,7 +2174,7 @@ DIN: [DIN Number]                      DIN: [DIN Number]`}
         <div className="fixed bottom-0 inset-x-0 sm:hidden bg-white/95 backdrop-blur-md border-t border-slate-200/90 px-4 py-2.5 z-40 shadow-[0_-4px_16px_rgba(0,0,0,0.06)] flex items-center justify-between gap-3">
           <div className="flex flex-col min-w-0">
             <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Step 2 of 2</span>
-            <span className="text-xs font-black text-[#0B2450] truncate">{clinicName || 'PG Whitelisting'}</span>
+            <span className="text-xs font-black text-[#0B2450] truncate">{clinicName || 'Link Bank Account'}</span>
           </div>
           <button
             type="button"

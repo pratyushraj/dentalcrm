@@ -14,10 +14,21 @@ import {
   Slide5Cta,
 } from './components/remotion/ClinazaCarouselPost';
 import { DiwaliPostComposition } from './components/remotion/DiwaliPostComposition';
+import { WhatsAppOnboardingStoryComposition } from './components/remotion/WhatsAppOnboardingStoryComposition';
 
 export const RemotionRoot: React.FC = () => {
   return (
     <>
+      {/* ── WhatsApp Story / Status 9:16 (1080 x 1920) ── */}
+      <Composition
+        id="WhatsAppOnboardingStory"
+        component={WhatsAppOnboardingStoryComposition}
+        durationInFrames={30}
+        fps={30}
+        width={1080}
+        height={1920}
+      />
+
       {/* ── Instagram 4:5 Diwali Post (1080 x 1350) ── */}
       <Composition
         id="DiwaliPost"

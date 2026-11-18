@@ -448,8 +448,8 @@ export default function PartnerClinicOnboardingPage() {
       </header>
 
       {/* Main Content Area */}
-      <main className={`max-w-3xl mx-auto px-4 sm:px-6 pt-24 sm:pt-32 ${
-        !submitted && (lookupStatus === 'not_found' || showFormForMatched) ? 'pb-24 sm:pb-12' : 'pb-6 sm:pb-8'
+      <main className={`max-w-3xl mx-auto px-4 sm:px-6 pt-28 sm:pt-36 ${
+        !submitted && (lookupStatus === 'not_found' || showFormForMatched) ? 'pb-24 sm:pb-12' : 'pb-8 sm:pb-12'
       }`}>
         {submitted ? (
           <div className="space-y-6">
@@ -685,10 +685,10 @@ export default function PartnerClinicOnboardingPage() {
           </div>
         ) : lookupStatus === 'idle' ? (
           /* ── SCREEN 1: PHONE OR EMAIL CHECKPOINT ONLY ── */
-          <div className="space-y-6 animate-in fade-in">
+          <div className="space-y-6 sm:space-y-7 animate-in fade-in">
             {/* Hero Banner */}
-            <div className="text-center space-y-3 mb-4">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-[#0867E8] text-xs font-bold">
+            <div className="text-center space-y-3.5 mb-6">
+              <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-200 text-[#0867E8] text-xs font-bold shadow-2xs">
                 <Sparkles size={13} />
                 <span>Healthcare Patient EMI Integration</span>
               </div>
@@ -701,28 +701,28 @@ export default function PartnerClinicOnboardingPage() {
             </div>
 
             {/* Smart Lookup Box */}
-            <div className="bg-white border-2 border-[#0867E8]/30 rounded-3xl p-5 sm:p-7 shadow-sm relative overflow-hidden">
+            <div className="bg-white border-2 border-[#0867E8]/30 rounded-3xl p-6 sm:p-8 shadow-sm relative overflow-hidden">
               {/* Search Bar Input */}
               <form 
                 onSubmit={(e) => { e.preventDefault(); handleClinicLookup(); }}
-                className="space-y-3"
+                className="space-y-4"
               >
-                <div className="flex flex-col sm:flex-row gap-2.5">
+                <div className="flex flex-col sm:flex-row gap-3.5 sm:gap-3">
                   <div className="relative flex-1">
-                    <Phone size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
+                    <Phone size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
                     <input
                       type="text"
                       value={lookupInput}
                       onChange={(e) => setLookupInput(e.target.value)}
-                      placeholder="Enter 10-digit mobile or official email"
-                      className="w-full pl-10 pr-4 py-3.5 rounded-xl border border-slate-300 focus:border-[#0867E8] focus:ring-2 focus:ring-blue-100 text-base sm:text-sm font-medium text-slate-800 placeholder-slate-400 transition-all"
+                      placeholder="10-digit mobile or official email"
+                      className="w-full pl-11 pr-4 py-4 rounded-xl border border-slate-300 focus:border-[#0867E8] focus:ring-2 focus:ring-blue-100 text-base sm:text-sm font-medium text-slate-800 placeholder-slate-400 transition-all shadow-2xs"
                     />
                   </div>
 
                   <button
                     type="submit"
                     disabled={isSearching}
-                    className="px-8 py-3.5 rounded-xl bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-black uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-md shadow-[#0867E8]/20 active:scale-95 disabled:opacity-50 cursor-pointer min-h-[48px]"
+                    className="px-8 py-4 rounded-xl bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-black uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-md shadow-[#0867E8]/20 active:scale-95 disabled:opacity-50 cursor-pointer min-h-[50px]"
                   >
                     {isSearching ? (
                       <>
@@ -741,8 +741,8 @@ export default function PartnerClinicOnboardingPage() {
             </div>
 
             {/* Official Partner Credibility & Commercial Invariants */}
-            <div className="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-5 shadow-xs space-y-3">
-              <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 pb-3">
+            <div className="bg-white border border-slate-200/90 rounded-2xl p-5 sm:p-6 shadow-xs space-y-4">
+              <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 pb-3.5">
                 <div className="flex items-center gap-2">
                   <span className="font-extrabold text-[#0B2450] text-[11px] uppercase tracking-wider">Official Partner:</span>
                   <img
@@ -758,16 +758,16 @@ export default function PartnerClinicOnboardingPage() {
                 </span>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs text-slate-600">
-                <div className="flex items-center gap-2">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 text-xs text-slate-600">
+                <div className="flex items-center gap-2.5">
                   <Check size={14} className="text-emerald-600 shrink-0" />
                   <span><strong>₹999 One-Time</strong> Setup Fee</span>
                 </div>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2.5">
                   <Check size={14} className="text-emerald-600 shrink-0" />
                   <span><strong>₹0 AMC</strong> &bull; Zero Recurring Fees</span>
                 </div>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2.5">
                   <Check size={14} className="text-emerald-600 shrink-0" />
                   <span><strong>0% Recourse</strong> &bull; T+1 Payouts</span>
                 </div>
@@ -775,20 +775,20 @@ export default function PartnerClinicOnboardingPage() {
             </div>
 
             {/* 3-Step Simple Onboarding Flow */}
-            <div className="bg-slate-100/70 border border-slate-200/80 rounded-2xl p-4 space-y-2.5">
+            <div className="bg-slate-100/70 border border-slate-200/80 rounded-2xl p-5 space-y-3">
               <span className="text-[10px] font-black uppercase tracking-wider text-slate-500">How Onboarding Works:</span>
-              <div className="grid grid-cols-3 gap-2 text-center">
-                <div className="bg-white rounded-xl p-2.5 border border-slate-200/60 shadow-2xs space-y-1">
+              <div className="grid grid-cols-3 gap-2.5 sm:gap-3 text-center">
+                <div className="bg-white rounded-xl p-3 border border-slate-200/60 shadow-2xs space-y-1.5">
                   <div className="w-5 h-5 rounded-full bg-blue-100 text-[#0867E8] font-black text-[10px] flex items-center justify-center mx-auto">1</div>
                   <div className="text-[11px] font-bold text-[#0B2450] leading-tight">Verify Identity</div>
                   <div className="text-[9.5px] text-slate-500 leading-tight">Phone or email</div>
                 </div>
-                <div className="bg-white rounded-xl p-2.5 border border-slate-200/60 shadow-2xs space-y-1">
+                <div className="bg-white rounded-xl p-3 border border-slate-200/60 shadow-2xs space-y-1.5">
                   <div className="w-5 h-5 rounded-full bg-blue-100 text-[#0867E8] font-black text-[10px] flex items-center justify-center mx-auto">2</div>
                   <div className="text-[11px] font-bold text-[#0B2450] leading-tight">Submit KYC</div>
                   <div className="text-[9.5px] text-slate-500 leading-tight">Bank &amp; license</div>
                 </div>
-                <div className="bg-white rounded-xl p-2.5 border border-slate-200/60 shadow-2xs space-y-1">
+                <div className="bg-white rounded-xl p-3 border border-slate-200/60 shadow-2xs space-y-1.5">
                   <div className="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 font-black text-[10px] flex items-center justify-center mx-auto">3</div>
                   <div className="text-[11px] font-bold text-[#0B2450] leading-tight">Get QR Standee</div>
                   <div className="text-[9.5px] text-slate-500 leading-tight">T+1 EMI payouts</div>
@@ -797,7 +797,7 @@ export default function PartnerClinicOnboardingPage() {
             </div>
 
             {/* Trust & Direct Help Bar */}
-            <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-2 text-center sm:text-left text-[11px] text-slate-500">
+            <div className="pt-3 pb-2 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left text-[11px] text-slate-500">
               <div className="flex items-center gap-1.5">
                 <ShieldCheck size={13} className="text-[#0867E8] shrink-0" />
                 <span>256-bit SSL &bull; RBI-Regulated Lending &bull; 0% Recourse</span>

@@ -420,36 +420,6 @@ export default function PineLabsUnderwritingPage() {
 
       {/* ── MAIN CONTENT ── */}
       <main className="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8 space-y-6">
-        {/* Banner Card */}
-        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-blue-50/90 via-indigo-50/40 to-slate-50 border border-blue-200/80 p-6 sm:p-8 shadow-xs">
-          <div className="relative z-10 max-w-3xl space-y-3">
-            <div className="inline-flex items-center gap-2 bg-blue-100/70 text-[#0867E8] border border-blue-300/60 px-3 py-1 rounded-full text-[11px] font-extrabold uppercase tracking-wider">
-              <ShieldCheck size={13} className="text-[#0867E8]" />
-              <span>Pine Labs Sub-Merchant Desk • Active Institutional Partnership</span>
-            </div>
-            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 tracking-tight">
-              Sub-Merchant Underwriting &amp; T+1 Payout Desk
-            </h1>
-            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-              Verify clinic KYC, cancelled cheques, and auto-generate Pine Labs Sub-Merchant MAF Excel packages for instant terminal MID activation under our locked ₹0 Setup / ₹0 AMC institutional agreement.
-            </p>
-
-            <div className="flex flex-wrap items-center gap-4 pt-2 text-xs text-slate-600">
-              <div className="flex items-center gap-1.5">
-                <CheckCircle2 size={14} className="text-emerald-600" />
-                <span>Aggregator UAT MID: <strong className="text-slate-900 font-mono">111077</strong></span>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <CheckCircle2 size={14} className="text-emerald-600" />
-                <span>Dynamic Callback Webhook: <strong className="text-slate-900 font-mono">/api/webhook/pinelabs</strong></span>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <CheckCircle2 size={14} className="text-emerald-600" />
-                <span>Settlement Cycle: <strong className="text-slate-900">T+1 Direct Nodal Bank Credit</strong></span>
-              </div>
-            </div>
-          </div>
-        </div>
 
         {!activeDossier ? (
           /* ══════════════════════════════════════════════════════════════
@@ -893,21 +863,6 @@ export default function PineLabsUnderwritingPage() {
             </div>
           </div>
         )}
-
-        {/* ── UNIFIED INSTITUTIONAL STATUS FOOTER ── */}
-        <div className="bg-white border border-slate-200 rounded-2xl px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs shadow-xs text-slate-600">
-          <div className="flex items-center gap-2">
-            <CheckCircle2 size={15} className="text-emerald-600" />
-            <span>
-              All KYC proofs, doctor identity, and nodal bank accounts verified for <strong>{VERIFIED_DOSSIERS.length} clinics</strong>.
-            </span>
-          </div>
-          <div className="text-[11px] text-slate-400 font-mono">
-            Pine Labs Wholesale MID 111077 &bull; T+1 Nodal Settlement
-          </div>
-        </div>
-
-
       </main>
     </div>
   );

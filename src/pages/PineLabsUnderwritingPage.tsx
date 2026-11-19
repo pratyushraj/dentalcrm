@@ -305,6 +305,7 @@ export default function PineLabsUnderwritingPage() {
         <SEOHead
           title="Pine Labs Underwriting Portal | Clinaza Sub-Merchant Desk"
           description="Dedicated underwriting and KYC verification portal for Advaita Parmar and Pine Labs risk operations."
+          image="https://www.clinaza.in/og-plural-underwriting.png"
         />
         <div className="max-w-md w-full bg-white border border-slate-200 rounded-3xl p-8 shadow-xl space-y-6">
           <div className="flex items-center justify-between pb-4 border-b border-slate-100">
@@ -372,6 +373,7 @@ export default function PineLabsUnderwritingPage() {
       <SEOHead
         title="Clinaza × Pine Labs Plural | Sub-Merchant Underwriting Desk"
         description="Exclusive underwriting portal for Pine Labs Plural risk operations. Access verified doctor KYC, cancelled cheques, and auto-filled MAF templates."
+        image="https://www.clinaza.in/og-plural-underwriting.png"
       />
 
       {/* ── TOP INSTITUTIONAL BAR ── */}

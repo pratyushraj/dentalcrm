@@ -96,6 +96,7 @@ scratch/
 !public/og-clinaza.png
 !public/og-clinic-onboarding.*
 !public/og-checkout-flow.png
+!public/og-plural-underwriting.png
 !public/assets/**/*
 !public/docs/**/*
 !public/videos/**/*.mp4

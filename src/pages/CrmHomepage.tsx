@@ -2734,7 +2734,7 @@ export default function CrmHomepage() {
                       phone: 'Direct Partner Desk',
                       rating: '4.9 ★ (240 reviews)',
                       specialties: 'Contoura Vision & Blade-Free LASIK',
-                      link: '/clinic-onboarding?category=hospital',
+                      link: '/clinic-onboarding?category=lasik',
                       accent: 'border-emerald-300 bg-white shadow-sm',
                       badge: 'Eye Care Partner',
                       badgeColor: 'bg-emerald-600 text-white'
@@ -3304,13 +3304,19 @@ export default function CrmHomepage() {
                   </Link>
 
                   {/* Quick Specialty Deep-Links in a single line */}
-                  <div className="flex items-center justify-center gap-1 sm:gap-2 pt-0.5 whitespace-nowrap text-[10px] sm:text-[11px]">
+                  <div className="flex items-center justify-center gap-1 sm:gap-2 pt-0.5 whitespace-nowrap text-[10px] sm:text-[11px] flex-wrap">
                     <span className="text-slate-400 font-bold uppercase tracking-wider shrink-0">Fast-track:</span>
                     <Link
                       to="/clinic-onboarding?category=dental"
                       className="px-2 py-0.5 sm:px-2.5 sm:py-1 bg-white hover:bg-slate-50 border border-slate-200 rounded-lg font-bold text-slate-700 transition-colors shadow-2xs shrink-0"
                     >
                       🦷 Dental
+                    </Link>
+                    <Link
+                      to="/clinic-onboarding?category=lasik"
+                      className="px-2 py-0.5 sm:px-2.5 sm:py-1 bg-white hover:bg-slate-50 border border-blue-200 rounded-lg font-bold text-[#0867E8] transition-colors shadow-2xs shrink-0"
+                    >
+                      👁️ LASIK &amp; Eye
                     </Link>
                     <Link
                       to="/clinic-onboarding?category=ivf"

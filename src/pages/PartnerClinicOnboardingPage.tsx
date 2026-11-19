@@ -25,6 +25,7 @@ import {
   FileText,
   MessageCircle,
   Baby,
+  Eye,
   Clock,
   Search,
   Phone,
@@ -171,6 +172,8 @@ export default function PartnerClinicOnboardingPage() {
     let detectedCategory = 'dental';
     if (categoryParam === 'ivf' || campaign.toLowerCase().includes('ivf')) {
       detectedCategory = 'ivf';
+    } else if (categoryParam === 'lasik' || categoryParam === 'eye' || categoryParam === 'ophthalmology' || campaign.toLowerCase().includes('lasik')) {
+      detectedCategory = 'lasik';
     } else if (categoryParam === 'hospital' || categoryParam === 'multispecialty') {
       detectedCategory = 'hospital';
     } else if (categoryParam === 'derma' || categoryParam === 'aesthetics') {
@@ -327,8 +330,17 @@ export default function PartnerClinicOnboardingPage() {
       }
 
       // 2. Dispatch email notification alert
-      const categoryName = form.category === 'ivf' ? '👶 IVF & Fertility Centre' : form.category === 'hospital' ? '🏥 Multi-Specialty Hospital' : form.category === 'derma' ? '✨ Dermatology & Aesthetics' : '🦷 Dental Clinic';
-      await emailNotificationService.sendNotification(`🏥 New ${form.category === 'ivf' ? 'IVF Centre' : 'Clinic'} Onboarding Submitted`, {
+      const categoryName = 
+        form.category === 'ivf' ? '👶 IVF & Fertility Centre' :
+        form.category === 'lasik' ? '👁️ Eye Hospital & LASIK Centre' :
+        form.category === 'hospital' ? '🏥 Multi-Specialty Hospital' :
+        form.category === 'derma' ? '✨ Dermatology & Aesthetics' : '🦷 Dental Clinic';
+
+      const categoryTitle = 
+        form.category === 'ivf' ? 'IVF Centre' : 
+        form.category === 'lasik' ? 'Eye Hospital (LASIK)' : 'Clinic';
+
+      await emailNotificationService.sendNotification(`🏥 New ${categoryTitle} Onboarding Submitted`, {
         'Specialty / Category': categoryName,
         'Clinic / Centre Name': form.clinicName,
         'Doctor / Director Name': form.doctorName || 'Not provided',
@@ -349,7 +361,7 @@ export default function PartnerClinicOnboardingPage() {
         'UTM Source': utmParams.source || '(direct)',
         'UTM Medium': utmParams.medium || '(none)',
         'UTM Campaign': utmParams.campaign || '(none)',
-        'Estimated Monthly Loan Volume Potential': form.expectedEmiLoans ? `₹${(parseInt(form.expectedEmiLoans.replace(/\D/g, '') || '0') * (form.category === 'ivf' ? 150000 : 40000)).toLocaleString('en-IN')}/month` : 'Pending discussion'
+        'Estimated Monthly Loan Volume Potential': form.expectedEmiLoans ? `₹${(parseInt(form.expectedEmiLoans.replace(/\D/g, '') || '0') * (form.category === 'ivf' ? 150000 : form.category === 'lasik' ? 85000 : 40000)).toLocaleString('en-IN')}/month` : 'Pending discussion'
       });
 
       // Track GA4 Key Lead Event for Clinic Partner
@@ -1010,6 +1022,7 @@ export default function PartnerClinicOnboardingPage() {
             <div className="flex items-center justify-center gap-2 flex-wrap">
               {[
                 { id: 'dental', label: 'Dental Clinic', icon: Stethoscope },
+                { id: 'lasik', label: 'Eye Hospital & LASIK', icon: Eye },
                 { id: 'ivf', label: 'Fertility & IVF Centre', icon: Baby },
                 { id: 'hospital', label: 'Multi-Specialty Hospital', icon: Building2 },
                 { id: 'derma', label: 'Dermatology & Aesthetics', icon: Sparkles }
@@ -1109,7 +1122,13 @@ export default function PartnerClinicOnboardingPage() {
                   </label>
                   <input 
                     type="email"
-                    placeholder={form.category === 'ivf' ? "e.g. contact@aurafertility.in" : "e.g. drparmar@apexdental.in"}
+                    placeholder={
+                      form.category === 'ivf' 
+                        ? "e.g. contact@aurafertility.in" 
+                        : form.category === 'lasik'
+                        ? "e.g. lasik@visioneye.in"
+                        : "e.g. drparmar@apexdental.in"
+                    }
                     value={form.email}
                     onChange={e => setForm({...form, email: e.target.value})}
                     className={`w-full border rounded-xl px-3.5 py-2.5 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:border-[#0867E8] focus:ring-1 focus:ring-[#0867E8] ${
@@ -1178,7 +1197,11 @@ export default function PartnerClinicOnboardingPage() {
               <div className="flex items-center gap-2 border-b border-slate-100 pb-2.5">
                 <Stethoscope className="text-[#0867E8]" size={17} />
                 <h2 className="text-xs font-bold text-slate-800 uppercase tracking-wider">
-                  {form.category === 'ivf' ? '2. Facility Setup & Existing Payment Terminal' : '2. Clinical Setup & Card Machine'}
+                  {form.category === 'ivf' 
+                    ? '2. Facility Setup & Existing Payment Terminal' 
+                    : form.category === 'lasik'
+                    ? '2. Refractive Suite & Existing POS Terminal'
+                    : '2. Clinical Setup & Card Machine'}
                 </h2>
               </div>
 
@@ -1204,6 +1227,39 @@ export default function PartnerClinicOnboardingPage() {
                           className={`px-3.5 py-2 min-h-[40px] rounded-xl text-xs font-semibold border transition-all flex items-center justify-center active:scale-95 ${
                             active
                               ? 'bg-blue-50 border-[#0867E8] text-[#0867E8]'
+                              : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300'
+                          }`}
+                        >
+                          {active ? '✓ ' : '+ '}{item}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+
+              {/* Treatments for LASIK & Eye Hospitals */}
+              {form.category === 'lasik' && (
+                <div>
+                  <label className="block text-xs font-bold text-slate-700 mb-2">Key Refractive &amp; Eye Surgeries Offered:</label>
+                  <div className="flex flex-wrap gap-2">
+                    {[
+                      'Contoura Vision (Topography-Guided)',
+                      'SMILE / SMILE Pro (Lenticule Extraction)',
+                      'Blade-Free Femto LASIK',
+                      'Phakic ICL (Collamer Lens Implants)',
+                      'PRK / Surface Laser Ablation',
+                      'Premium Multifocal / Toric Cataract'
+                    ].map((item) => {
+                      const active = form.specialties.includes(item);
+                      return (
+                        <button
+                          type="button"
+                          key={item}
+                          onClick={() => toggleSpecialty(item)}
+                          className={`px-3.5 py-2 min-h-[40px] rounded-xl text-xs font-semibold border transition-all flex items-center justify-center active:scale-95 ${
+                            active
+                              ? 'bg-blue-50 border-blue-600 text-blue-700 font-bold'
                               : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300'
                           }`}
                         >
@@ -1312,6 +1368,26 @@ export default function PartnerClinicOnboardingPage() {
                         key={opt}
                         onClick={() => setForm({...form, chairs: opt})}
                         className={`py-2.5 min-h-[42px] flex items-center justify-center text-xs font-bold rounded-xl border text-center transition-all active:scale-95 ${
+                          form.chairs === opt
+                            ? 'bg-[#0867E8] text-white border-[#0867E8] shadow-xs'
+                            : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-50'
+                        }`}
+                      >
+                        {opt}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              ) : form.category === 'lasik' ? (
+                <div>
+                  <label className="block text-xs font-bold text-slate-700 mb-1.5">Refractive Surgical Setup</label>
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                    {['1 Refractive Laser OT', '2+ Laser Suites', 'Dedicated Eye Hospital', 'Eye Care Network'].map((opt) => (
+                      <button
+                        type="button"
+                        key={opt}
+                        onClick={() => setForm({...form, chairs: opt})}
+                        className={`py-2.5 min-h-[42px] flex items-center justify-center text-[11px] font-bold rounded-xl border text-center transition-all active:scale-95 ${
                           form.chairs === opt
                             ? 'bg-[#0867E8] text-white border-[#0867E8] shadow-xs'
                             : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-50'
@@ -1435,21 +1511,39 @@ export default function PartnerClinicOnboardingPage() {
               <div className="flex items-center gap-2 border-b border-slate-100 pb-2.5">
                 <TrendingUp className="text-emerald-600" size={17} />
                 <h2 className="text-xs font-bold text-slate-800 uppercase tracking-wider">
-                  {form.category === 'ivf' ? '3. IVF Cycle Volume & Patient Financing Demand' : '3. Case Volume & Monthly Loan Demand'}
+                  {form.category === 'ivf' 
+                    ? '3. IVF Cycle Volume & Patient Financing Demand' 
+                    : form.category === 'lasik'
+                    ? '3. Refractive Case Volume & Monthly Financing Demand'
+                    : '3. Case Volume & Monthly Loan Demand'}
                 </h2>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div className="bg-slate-50 border border-slate-200 rounded-xl p-3.5 space-y-1.5">
                   <label className="block text-[11px] font-bold text-slate-800 uppercase tracking-wide">
-                    {form.category === 'ivf' ? 'Monthly IVF / IUI Cycles' : 'High-Ticket Cases (>₹25k)'}
+                    {form.category === 'ivf' 
+                      ? 'Monthly IVF / IUI Cycles' 
+                      : form.category === 'lasik'
+                      ? 'Monthly Refractive Surgeries'
+                      : 'High-Ticket Cases (>₹25k)'}
                   </label>
                   <p className="text-[10px] text-slate-500">
-                    {form.category === 'ivf' ? 'Approx. cycles started per month' : 'Approx. implants/aligners seen per month'}
+                    {form.category === 'ivf' 
+                      ? 'Approx. cycles started per month' 
+                      : form.category === 'lasik'
+                      ? 'Approx. eyes / procedures per month'
+                      : 'Approx. implants/aligners seen per month'}
                   </p>
                   <input 
                     type="text"
-                    placeholder={form.category === 'ivf' ? 'e.g. 10 - 20 cycles' : 'e.g. 8 - 12 cases'}
+                    placeholder={
+                      form.category === 'ivf' 
+                        ? 'e.g. 10 - 20 cycles' 
+                        : form.category === 'lasik'
+                        ? 'e.g. 20 - 40 eyes'
+                        : 'e.g. 8 - 12 cases'
+                    }
                     value={form.avgMonthlyCases}
                     onChange={e => setForm({...form, avgMonthlyCases: e.target.value})}
                     className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-xs text-slate-900 font-bold focus:outline-none focus:border-[#0867E8]"
@@ -1460,7 +1554,7 @@ export default function PartnerClinicOnboardingPage() {
                   <label className="block text-[11px] font-bold text-emerald-800 uppercase tracking-wide">
                     Likely Monthly Loans / EMIs
                   </label>
-                  <p className="text-[10px] text-emerald-600/80">Couples/patients opting for monthly EMI</p>
+                  <p className="text-[10px] text-emerald-600/80">Candidates/patients opting for monthly EMI</p>
                   <input 
                     type="text"
                     placeholder="e.g. 5 - 8 patients"
@@ -1472,12 +1566,22 @@ export default function PartnerClinicOnboardingPage() {
 
                 <div className="bg-slate-50 border border-slate-200 rounded-xl p-3.5 space-y-1.5">
                   <label className="block text-[11px] font-bold text-slate-800 uppercase tracking-wide">
-                    {form.category === 'ivf' ? 'Avg Cycle / Package Cost' : 'Avg Treatment Ticket Size'}
+                    {form.category === 'ivf' 
+                      ? 'Avg Cycle / Package Cost' 
+                      : form.category === 'lasik'
+                      ? 'Avg Surgery / Package Cost'
+                      : 'Avg Treatment Ticket Size'}
                   </label>
                   <p className="text-[10px] text-slate-500">Typical package cost for these cases</p>
                   <input 
                     type="text"
-                    placeholder={form.category === 'ivf' ? 'e.g. ₹1,80,000' : 'e.g. ₹40,000'}
+                    placeholder={
+                      form.category === 'ivf' 
+                        ? 'e.g. ₹1,80,000' 
+                        : form.category === 'lasik'
+                        ? 'e.g. ₹85,000'
+                        : 'e.g. ₹40,000'
+                    }
                     value={form.avgTicketSize}
                     onChange={e => setForm({...form, avgTicketSize: e.target.value})}
                     className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-xs text-slate-900 font-bold focus:outline-none focus:border-[#0867E8]"

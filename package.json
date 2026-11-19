@@ -24,6 +24,7 @@
     "build:fast": "tsc && vite build",
     "postbuild": "node -e \"console.log('Build complete')\"",
     "prerender": "node scripts/prerender.mjs",
+    "kyc:process": "python3 scripts/process_clinic_kyc.py",
     "seo:drift": "node scripts/seo-drift.mjs",
     "lint": "eslint .",
     "preview": "vite preview"

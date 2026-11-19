@@ -83,4 +83,21 @@ Adhere strictly to the following active commercial contracts and partner agreeme
 - **Prerender on Final Milestones Only**: Execute the full `npm run build` (or `node scripts/prerender.mjs`) ONLY when explicitly instructed by the user or when cutting a final production deployment.
 - **Immediate Backgrounding**: Long-running commands (such as batch outreach or heavy scripts) must be run asynchronously as background tasks so the user is never blocked from interacting.
 
+## 8. Pine Labs Sub-Merchant Desk & Partner Portal UI Invariants
+- **Hospital-Grade Light Theme Only**: Never use dark/black palettes (`bg-[#020617]`, `bg-slate-900`) for underwriting portals, partner desks, or risk reviews. Use hospital-grade light themes: `bg-slate-50` canvas, crisp `bg-white` cards, `border-slate-200`, high-contrast text (`text-slate-900`, `text-slate-600`), and Clinaza Blue (`#0867E8`) accents.
+- **De-cluttered Action Layout**: Avoid duplicating table rows and action buttons on single-clinic reviews. Keep action bars unified: *Doctor Signing PDF* (primary emerald), *Download MAF Excel* (brand blue), and *Full ZIP* (slate).
+- **No Filler Disclaimers**: Do not add repetitive contractual disclaimer footer cards or legal boilerplates unless explicitly requested.
+
+## 9. Doctor KYC Signing Dossier (5-Page Standard)
+- **Strict 5-Page Structure**: When generating a dossier for the doctor to sign:
+  - **Pages 1–3**: Untouched official Pine Labs Sub-Merchant MAF sheets, converted directly from the `.xlsx` template via LibreOffice `soffice`.
+  - **Page 4**: Clean white page with Doctor PAN Card (`125mm` width) + Doctor Self-Attestation declaration & signature line.
+  - **Page 5**: Clean white page with Doctor Aadhaar Card (`110mm` width) + Doctor Self-Attestation declaration & signature line.
+- **Exclude Clinic Docs**: Never include clinic business proofs (Udyam, establishment license, or cancelled cheques) in the doctor signing PDF unless explicitly requested.
+
+## 10. Instant Clinic Onboarding & Zero-Redeploy Invariant
+- **Never Redeploy Vercel for New Clinics**: Never commit static KYC files to Git or push to `main` for routine clinic onboardings. Full Vercel builds trigger headless Chrome pre-rendering on 195+ routes (taking 4+ minutes).
+- **Dynamic Database & Script-Driven Ingestion**: New clinic onboardings must be handled dynamically via database records (`clinic_onboardings`) and cloud storage, or through automated ingestion scripts (`scripts/process_clinic_kyc.py`) executing OCR, MAF generation, and dossier creation locally in under 10 seconds.
+
+
 

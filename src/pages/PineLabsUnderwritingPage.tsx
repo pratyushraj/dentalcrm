@@ -87,6 +87,7 @@ export interface VerifiedDossier {
     signing_pdf: string;
     zip_bundle: string;
     maf_excel: string;
+    gst_declaration_pdf?: string;
     cancelled_cheque: string;
     doctor_pan: string;
     aadhaar_front: string;
@@ -135,6 +136,7 @@ const VERIFIED_DOSSIERS: VerifiedDossier[] = [
       signing_pdf: '/docs/kyc/vasantha_dental/Plural_MAF_and_Doctor_KYC_Signing_Dossier_Vasantha_Dental.pdf',
       zip_bundle: '/docs/kyc/vasantha_dental/Vasantha_Dental_Complete_KYC_Dossier.zip',
       maf_excel: '/docs/kyc/vasantha_dental/Plural_MAF_BO_PEP_Vasantha_Dental.xlsx',
+      gst_declaration_pdf: '/docs/kyc/vasantha_dental/GST_Exemption_Declaration_vasantha_dental.pdf',
       cancelled_cheque: '/docs/kyc/vasantha_dental/vasantha_dental_cancelled_cheque.jpg',
       doctor_pan: '/docs/kyc/vasantha_dental/dr_siddardha_chaitanya_pan.jpg',
       aadhaar_front: '/docs/kyc/vasantha_dental/dr_siddardha_chaitanya_aadhaar.jpg',
@@ -180,6 +182,7 @@ const VERIFIED_DOSSIERS: VerifiedDossier[] = [
       signing_pdf: '/docs/kyc/hear_one/Plural_MAF_and_Doctor_KYC_Signing_Dossier_Hear_One.pdf',
       zip_bundle: '/docs/kyc/hear_one/Hear_One_Complete_KYC_Dossier.zip',
       maf_excel: '/docs/kyc/hear_one/Plural_MAF_BO_PEP_Hear_One.xlsx',
+      gst_declaration_pdf: '/docs/kyc/hear_one/GST_Exemption_Declaration_hear_one.pdf',
       cancelled_cheque: '/docs/kyc/hear_one/hear_one_cancelled_cheque.jpg',
       doctor_pan: '/docs/kyc/hear_one/dr_angiras_vishnu_pan.jpg',
       aadhaar_front: '/docs/kyc/hear_one/dr_angiras_vishnu_aadhaar_front.jpg',
@@ -224,6 +227,7 @@ const VERIFIED_DOSSIERS: VerifiedDossier[] = [
       signing_pdf: '/docs/kyc/nitya_dental/Plural_MAF_and_Doctor_KYC_Signing_Dossier_Nitya_Dental.pdf',
       zip_bundle: '/docs/kyc/nitya_dental/Nitya_Dental_Complete_KYC_Dossier.zip',
       maf_excel: '/docs/kyc/nitya_dental/Plural_MAF_BO_PEP_Nitya_Dental.xlsx',
+      gst_declaration_pdf: '/docs/kyc/nitya_dental/GST_Exemption_Declaration_nitya_dental.pdf',
       cancelled_cheque: '/docs/kyc/nitya_dental/nitya_dental_cancelled_cheque.jpg',
       doctor_pan: '/docs/kyc/nitya_dental/dr_bhanu_prakash_pan.jpg',
       aadhaar_front: '/docs/kyc/nitya_dental/dr_bhanu_prakash_aadhaar_front.jpg',
@@ -817,12 +821,29 @@ export default function PineLabsUnderwritingPage() {
                             Doctor Signing Dossier (PDF)
                           </span>
                           <span className="text-[10px] text-emerald-700 font-semibold">
-                            Official MAF + PAN + Aadhaar &bull; Ready to Sign
+                            Official MAF + GST Exemption + PAN + Aadhaar &bull; Ready to Sign
                           </span>
                         </div>
                       </div>
                       <ArrowDownToLine size={15} className="text-emerald-600 group-hover:translate-y-0.5 transition-transform" />
                     </a>
+
+                    {activeDossier.docs.gst_declaration_pdf && (
+                      <a
+                        href={activeDossier.docs.gst_declaration_pdf}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full flex items-center justify-between p-2.5 rounded-xl bg-white border border-slate-200 hover:border-emerald-400 hover:bg-emerald-50/30 transition-all text-xs group cursor-pointer shadow-2xs"
+                      >
+                        <div className="flex items-center gap-2">
+                          <FileText size={14} className="text-emerald-600" />
+                          <span className="font-bold text-slate-800 group-hover:text-emerald-700 transition-colors">
+                            GST Exemption Declaration (Sec 23)
+                          </span>
+                        </div>
+                        <ExternalLink size={13} className="text-slate-400 group-hover:text-slate-600" />
+                      </a>
+                    )}
 
                     <a
                       href={activeDossier.docs.cancelled_cheque}

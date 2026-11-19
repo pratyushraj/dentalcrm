@@ -17,7 +17,7 @@ import openpyxl
 import pypdf
 from PIL import Image as PILImage
 from reportlab.lib.pagesizes import A4
-from reportlab.platypus import SimpleDocTemplate, Image, Spacer, Paragraph
+from reportlab.platypus import SimpleDocTemplate, Image, Spacer, Paragraph, HRFlowable
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.units import mm
 
@@ -107,6 +107,55 @@ def build_signing_pages(pan_img: str, aadhaar_img: str, pan: str, doctor_name: s
     story_aadh.append(Spacer(1, 3*mm))
     story_aadh.append(Paragraph(f'<b>{doctor_name}</b> &bull; {clinic_name}', body_style))
     doc_aadh.build(story_aadh)
+
+def build_gst_exemption_page(clinic_name: str, legal_name: str, doctor_name: str, pan: str, city: str, state: str, address: str, out_gst_pdf: str):
+    """Generates hospital-grade GST Exemption Self-Declaration for healthcare clinic."""
+    styles = getSampleStyleSheet()
+    header_style = ParagraphStyle('H', parent=styles['Normal'], fontName='Helvetica-Bold', fontSize=10, leading=14, textColor='#64748b', alignment=1)
+    title_style = ParagraphStyle('T', parent=styles['Normal'], fontName='Helvetica-Bold', fontSize=13, leading=17, textColor='#0f172a', alignment=1)
+    sub_style = ParagraphStyle('Sub', parent=styles['Normal'], fontName='Helvetica-Bold', fontSize=9, leading=13, textColor='#0867e8', alignment=1)
+    to_style = ParagraphStyle('To', parent=styles['Normal'], fontName='Helvetica-Bold', fontSize=10, leading=14, textColor='#0f172a')
+    body_style = ParagraphStyle('B', parent=styles['Normal'], fontName='Helvetica', fontSize=8.8, leading=13, textColor='#1e293b')
+    bullet_style = ParagraphStyle('Bull', parent=styles['Normal'], fontName='Helvetica', fontSize=8.4, leading=12.2, textColor='#334155', leftIndent=10)
+    meta_style = ParagraphStyle('M', parent=styles['Normal'], fontName='Helvetica', fontSize=8.5, leading=12, textColor='#475569')
+    sign_style = ParagraphStyle('Sign', parent=styles['Normal'], fontName='Helvetica-Bold', fontSize=9.5, leading=14, textColor='#0f172a')
+
+    doc = SimpleDocTemplate(out_gst_pdf, pagesize=A4, leftMargin=20*mm, rightMargin=20*mm, topMargin=16*mm, bottomMargin=16*mm)
+    story = [
+        Paragraph('STATUTORY HEALTHCARE DECLARATION &bull; VALID FOR PINE LABS PLURAL UNDERWRITING', header_style),
+        Spacer(1, 4*mm),
+        Paragraph('DECLARATION FOR EXEMPTION FROM GOODS AND SERVICES TAX (GST)', title_style),
+        Spacer(1, 1.5*mm),
+        Paragraph('Pursuant to Section 23 of CGST Act, 2017 &amp; Notification No. 12/2017-Central Tax (Rate)', sub_style),
+        Spacer(1, 4*mm),
+        HRFlowable(width='100%', thickness=1, color='#cbd5e1', spaceAfter=4*mm),
+        Paragraph('<b>TO WHOMSOEVER IT MAY CONCERN</b>', to_style),
+        Spacer(1, 1.5*mm),
+        Paragraph('<b>To:</b> Pine Labs Private Limited (\'Plural by Pine Labs\') &amp; Clinaza Technologies Private Limited', meta_style),
+        Spacer(1, 2.5*mm),
+        Paragraph('We, the undersigned healthcare clinical establishment, hereby solemnly declare, certify, and affirm the following statutory facts regarding our Goods and Services Tax (GST) registration status:', body_style),
+        Spacer(1, 2.5*mm),
+        Paragraph(f'<b>1. Healthcare Clinical Establishment:</b> We are a registered healthcare clinical establishment operating under the name of <b>{legal_name}</b>, situated at {address}, represented by its Sole Proprietor &amp; Consulting Dental Surgeon, <b>{doctor_name}</b> (PAN: <b>{pan}</b>).', bullet_style),
+        Spacer(1, 2*mm),
+        Paragraph('<b>2. Statutory Exemption under Entry 74:</b> In accordance with <b>Notification No. 12/2017-Central Tax (Rate) dated 28th June, 2017 (Entry No. 74, Heading 9993 / SAC 999312)</b> issued by the Department of Revenue, Ministry of Finance, Government of India, healthcare services provided by a clinical establishment, an authorized medical practitioner, or paramedics are wholly <b>EXEMPT from Goods and Services Tax (NIL rate of GST)</b>.', bullet_style),
+        Spacer(1, 2*mm),
+        Paragraph('<b>3. Exemption from Registration under Section 23:</b> Pursuant to <b>Section 23(1)(a) of the Central Goods and Services Tax (CGST) Act, 2017</b>, any person engaged exclusively in the business of supplying goods or services that are not liable to tax or wholly exempt from tax under this Act is <b>NOT liable to obtain registration</b>. Since our entire revenue is derived exclusively from exempt healthcare treatments and dental outpatient procedures, we are legally exempt from registration and do not hold a GSTIN.', bullet_style),
+        Spacer(1, 2*mm),
+        Paragraph('<b>4. Purpose of Submission:</b> This self-declaration is executed and submitted for merchant onboarding, Sub-Merchant Payment Gateway MID allocation, and settlement bank current account whitelisting for point-of-care patient checkout facilities.', bullet_style),
+        Spacer(1, 2*mm),
+        Paragraph('<b>5. Undertaking:</b> We undertake to notify Pine Labs Private Limited and Clinaza Technologies immediately in the event of any material change in our business activities or statutory tax liability status.', bullet_style),
+        Spacer(1, 6*mm),
+        Paragraph('Sincerely,', body_style),
+        Spacer(1, 1*mm),
+        Paragraph(f'<b>For {legal_name}</b><br/>(Sole Proprietorship)', sign_style),
+        Spacer(1, 14*mm),
+        Paragraph('__________________________________________', sign_style),
+        Spacer(1, 1.5*mm),
+        Paragraph(f'<b>Authorized Signatory:</b> {doctor_name}<br/><b>Designation:</b> Proprietor &amp; Consulting Dental Surgeon<br/><b>PAN:</b> {pan} &bull; <b>Place:</b> {city}, {state}', meta_style),
+        Spacer(1, 2*mm),
+        Paragraph('<i>( Doctor Signature &amp; Clinic Round Seal )</i>', meta_style)
+    ]
+    doc.build(story)
 
 def fill_maf_excel(data: dict, out_xlsx: str):
     """Fills official Pine Labs MAF template with clinic & doctor data."""
@@ -271,7 +320,22 @@ def main():
     soffice_bin = "/opt/homebrew/bin/soffice" if os.path.exists("/opt/homebrew/bin/soffice") else "soffice"
     subprocess.run([soffice_bin, "--headless", "--convert-to", "pdf", str(maf_xlsx), "--outdir", "/tmp"], check=True, stdout=subprocess.DEVNULL)
 
-    # 3. Build PAN & Aadhaar pages if images provided
+    # 3. Build GST Exemption Page
+    gst_pdf = target_dir / f"GST_Exemption_Declaration_{slug}.pdf"
+    build_gst_exemption_page(
+        clinic_name=clinic_data['clinic_name'],
+        legal_name=clinic_data['legal_name'],
+        doctor_name=clinic_data['doctor_name'],
+        pan=clinic_data['pan'],
+        city=clinic_data['city'],
+        state=clinic_data['state'],
+        address=clinic_data['address'],
+        out_gst_pdf=str(gst_pdf)
+    )
+    shutil.copyfile(gst_pdf, DOWNLOADS_DIR / gst_pdf.name)
+    print(f"  ✓ Generated Statutory GST Exemption Page: {gst_pdf.name}")
+
+    # 4. Build PAN & Aadhaar pages if images provided
     tmp_pan_pdf = Path(f"/tmp/pan_{slug}.pdf")
     tmp_aadh_pdf = Path(f"/tmp/aadhaar_{slug}.pdf")
     if args.pan_img and args.aadhaar_img and os.path.exists(args.pan_img) and os.path.exists(args.aadhaar_img):
@@ -287,13 +351,16 @@ def main():
             out_aadhaar_pdf=str(tmp_aadh_pdf)
         )
 
-        # 4. Merge into 5-page Signing PDF
+        # 5. Merge into 6-page Signing PDF
         signing_pdf = target_dir / f"Plural_MAF_and_Doctor_KYC_Signing_Dossier_{slug}.pdf"
         merger = pypdf.PdfWriter()
 
         maf_reader = pypdf.PdfReader(str(tmp_maf_pdf))
         for i in range(min(3, len(maf_reader.pages))):
             merger.add_page(maf_reader.pages[i])
+
+        gst_reader = pypdf.PdfReader(str(gst_pdf))
+        merger.add_page(gst_reader.pages[0])
 
         pan_reader = pypdf.PdfReader(str(tmp_pan_pdf))
         merger.add_page(pan_reader.pages[0])
@@ -304,7 +371,7 @@ def main():
         with open(signing_pdf, "wb") as f:
             merger.write(f)
         shutil.copyfile(signing_pdf, DOWNLOADS_DIR / signing_pdf.name)
-        print(f"  ✓ Generated 5-Page Doctor Signing PDF: {signing_pdf.name}")
+        print(f"  ✓ Generated Consolidated 6-Page Doctor Signing PDF: {signing_pdf.name}")
 
     # 5. Build ZIP Bundle
     zip_path = target_dir / f"{slug}_Complete_KYC_Dossier.zip"

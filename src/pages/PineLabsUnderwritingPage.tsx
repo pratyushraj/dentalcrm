@@ -427,14 +427,14 @@ export default function PineLabsUnderwritingPage() {
              ══════════════════════════════════════════════════════════════ */
           <div className="space-y-6">
             <div className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-7 shadow-xs">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-slate-100">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-5 border-b border-slate-100">
                 <div>
                   <div className="flex items-center gap-2">
                     <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
-                    <h2 className="text-lg font-black text-slate-900">
+                    <h2 className="text-base sm:text-lg font-black text-slate-900">
                       Applications Ready for Underwriting ({filteredDossiers.length})
                     </h2>
-                    <span className="text-[10px] font-black uppercase px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-700 border border-emerald-300">
+                    <span className="hidden sm:inline-block text-[10px] font-black uppercase px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-700 border border-emerald-300">
                       Pine Labs Nodal Review
                     </span>
                   </div>
@@ -443,7 +443,7 @@ export default function PineLabsUnderwritingPage() {
                   </p>
                 </div>
 
-                <div className="flex items-center gap-2.5">
+                <div className="w-full sm:w-auto">
                   <div className="relative">
                     <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
                     <input
@@ -451,7 +451,7 @@ export default function PineLabsUnderwritingPage() {
                       placeholder="Search clinic, doctor, city, bank..."
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
-                      className="pl-8 pr-3 py-2 rounded-xl bg-slate-50 border border-slate-300 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-blue-500 w-56 sm:w-72"
+                      className="w-full sm:w-72 pl-8 pr-3 py-2 rounded-xl bg-slate-50 border border-slate-300 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-blue-500"
                     />
                   </div>
                 </div>
@@ -463,62 +463,80 @@ export default function PineLabsUnderwritingPage() {
                   <div
                     key={dossier.id}
                     onClick={() => handleSelectClinic(dossier.id)}
-                    className="group bg-slate-50/70 hover:bg-blue-50/20 border border-slate-200 hover:border-blue-400 rounded-2xl p-5 sm:p-6 transition-all shadow-2xs hover:shadow-md cursor-pointer flex flex-col lg:flex-row lg:items-center justify-between gap-5"
+                    className="group bg-white hover:bg-blue-50/20 border border-slate-200 hover:border-blue-400 rounded-2xl p-5 sm:p-6 transition-all shadow-2xs hover:shadow-md cursor-pointer flex flex-col lg:flex-row lg:items-center justify-between gap-5"
                   >
-                    <div className="space-y-3.5 flex-1">
+                    <div className="space-y-3.5 flex-1 min-w-0">
+                      {/* Clinic Identity & Header */}
                       <div className="flex items-start gap-3.5">
-                        <div className="w-12 h-12 rounded-2xl bg-blue-50 border border-blue-200 text-[#0867E8] font-bold flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
-                          <Building2 size={24} />
+                        <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-blue-50 border border-blue-200 text-[#0867E8] font-bold flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                          <Building2 size={22} />
                         </div>
-                        <div>
+                        <div className="min-w-0 flex-1">
                           <div className="flex flex-wrap items-center gap-2">
-                            <h3 className="text-lg font-black text-slate-900 group-hover:text-[#0867E8] transition-colors">
+                            <h3 className="text-base sm:text-lg font-black text-slate-900 group-hover:text-[#0867E8] transition-colors">
                               {dossier.clinic_name}
                             </h3>
-                            <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-slate-200 text-slate-700">
+                            <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 border border-slate-200 shrink-0">
                               {dossier.city.split(',')[0]}
                             </span>
-                            <span className="text-[10px] font-black uppercase px-2 py-0.5 rounded-md bg-amber-50 text-amber-700 border border-amber-300">
+                            <span className="text-[10px] font-black uppercase px-2 py-0.5 rounded-md bg-amber-50 text-amber-700 border border-amber-300 shrink-0">
                               {dossier.submission_badge}
                             </span>
                           </div>
-                          <p className="text-xs text-slate-600 mt-1">
+                          <p className="text-xs text-slate-600 mt-1 leading-relaxed">
                             <strong>{dossier.doctor_name}</strong> &bull; {dossier.legal_name} &bull; {dossier.phone}
                           </p>
                         </div>
                       </div>
 
-                      {/* Bank Settlement & Verified KYC Proofs */}
+                      {/* Settlement Bank Details - Structured & Responsive */}
+                      <div className="bg-slate-50/80 rounded-xl p-3 border border-slate-200 text-xs">
+                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                          <div className="flex flex-wrap items-center gap-2">
+                            <div className="flex items-center gap-1.5 font-bold text-slate-900">
+                              <Landmark size={14} className="text-emerald-600 shrink-0" />
+                              <span className="whitespace-nowrap">{dossier.bank.bank_name}</span>
+                            </div>
+                            <span className="hidden sm:inline text-slate-300">&bull;</span>
+                            <div className="flex items-center gap-1">
+                              <span className="text-slate-500 text-[11px]">A/C:</span>
+                              <span className="font-mono font-bold text-slate-800 bg-white px-1.5 py-0.5 rounded border border-slate-200 text-[11px] whitespace-nowrap">
+                                {dossier.bank.account_number}
+                              </span>
+                            </div>
+                            <span className="hidden sm:inline text-slate-300">&bull;</span>
+                            <div className="flex items-center gap-1">
+                              <span className="text-slate-500 text-[11px]">IFSC:</span>
+                              <span className="font-mono font-bold text-blue-700 bg-blue-50 px-1.5 py-0.5 rounded border border-blue-200 text-[11px] whitespace-nowrap">
+                                {dossier.bank.ifsc}
+                              </span>
+                            </div>
+                          </div>
+                          
+                          <div className="flex items-center gap-1 text-[11px] text-emerald-700 font-bold bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200 w-fit shrink-0">
+                            <CheckCircle2 size={12} />
+                            <span>Cheque &amp; Nodal Verified</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Verification Badges */}
                       <div className="flex flex-wrap items-center gap-2 text-xs">
-                        <div className="inline-flex items-center gap-1.5 bg-white px-3 py-1.5 rounded-xl border border-slate-200 text-slate-700 font-medium shadow-2xs">
-                          <Landmark size={14} className="text-emerald-600" />
-                          <span className="font-bold text-slate-900">{dossier.bank.bank_name}</span>
-                          <span className="text-slate-300">&bull;</span>
-                          <span className="font-mono text-slate-700 font-bold">A/C: {dossier.bank.account_number}</span>
-                          <span className="text-slate-300">&bull;</span>
-                          <span className="font-mono text-blue-700 font-bold">{dossier.bank.ifsc}</span>
-                        </div>
-
-                        <div className="inline-flex items-center gap-1 bg-emerald-50 text-emerald-700 border border-emerald-200 px-2.5 py-1 rounded-xl text-[11px] font-bold">
-                          <CheckCircle2 size={13} />
-                          <span>Cheque Verified</span>
-                        </div>
-
                         <div className="inline-flex items-center gap-1 bg-blue-50 text-[#0867E8] border border-blue-200 px-2.5 py-1 rounded-xl text-[11px] font-bold">
-                          <UserCheck size={13} />
+                          <UserCheck size={12} />
                           <span>Doctor PAN: {dossier.pan}</span>
                         </div>
 
                         <div className="inline-flex items-center gap-1 bg-teal-50 text-teal-700 border border-teal-200 px-2.5 py-1 rounded-xl text-[11px] font-bold">
-                          <FileCheck size={13} />
+                          <FileCheck size={12} />
                           <span>Doctor Signing PDF Ready</span>
                         </div>
                       </div>
                     </div>
 
-                    {/* Right CTA */}
-                    <div className="flex sm:flex-row lg:flex-col items-start lg:items-end justify-between gap-3 shrink-0 pt-3 lg:pt-0 border-t lg:border-t-0 border-slate-200">
-                      <span className="text-[11px] font-black uppercase px-3 py-1 rounded-xl bg-emerald-50 text-emerald-700 border border-emerald-300">
+                    {/* Right Action / CTA Button */}
+                    <div className="flex flex-col sm:flex-row lg:flex-col items-stretch sm:items-center lg:items-end justify-between gap-3 shrink-0 pt-3 lg:pt-0 border-t lg:border-t-0 border-slate-100">
+                      <span className="text-[11px] font-black uppercase px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-700 border border-emerald-300 text-center sm:text-left self-start sm:self-auto lg:self-end">
                         {dossier.status}
                       </span>
                       <button
@@ -526,7 +544,7 @@ export default function PineLabsUnderwritingPage() {
                           e.stopPropagation();
                           handleSelectClinic(dossier.id);
                         }}
-                        className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-black uppercase tracking-wider rounded-xl shadow-md shadow-blue-500/20 transition-all cursor-pointer group-hover:shadow-blue-500/30"
+                        className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 sm:py-2.5 bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-black uppercase tracking-wider rounded-xl shadow-md shadow-blue-500/20 transition-all cursor-pointer whitespace-nowrap group-hover:scale-102"
                       >
                         <span>Review Documents &amp; Dossier</span>
                         <ChevronRight size={15} className="group-hover:translate-x-0.5 transition-transform" />

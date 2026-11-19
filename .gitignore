@@ -69,6 +69,7 @@ reports/ui-audit-*/
 tmp/
 coverage/
 *.zip
+!public/docs/**/*.zip
 
 # Secrets / private exports (never commit)
 rzp.csv
@@ -96,6 +97,7 @@ scratch/
 !public/og-clinic-onboarding.*
 !public/og-checkout-flow.png
 !public/assets/**/*
+!public/docs/**/*
 !public/videos/**/*.mp4
 !public/videos/*.mp4
 

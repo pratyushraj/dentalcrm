@@ -223,6 +223,11 @@ def fill_maf_excel(data: dict, out_xlsx: str):
         ws_maf["E30"] = data.get("alt_email", data["email"])
         ws_maf["B33"] = "https://clinaza.in"
         ws_maf["B34"] = "https://clinaza.in/api/webhook/pinelabs"
+        ws_maf["E34"] = "₹18,00,000 (Projected)"
+        ws_maf["D35"] = "₹1,500"
+        ws_maf["F35"] = "₹65,000"
+        ws_maf["B36"] = "₹1,50,000"
+        ws_maf["E36"] = "10"
         ws_maf["B38"] = None
         ws_maf["D38"] = "Web only "
         ws_maf["E38"] = "Yes"

@@ -28,7 +28,8 @@ import {
   AlertCircle,
   FolderDown,
   ArrowDownToLine,
-  Archive
+  Archive,
+  FileCheck
 } from 'lucide-react';
 import { toast } from 'sonner';
 
@@ -80,6 +81,7 @@ const SPOTLIGHT_CLINIC = {
     date: '18/06/2020'
   },
   docs: {
+    signing_pdf: '/docs/kyc/hear_one/Plural_MAF_and_Doctor_KYC_Signing_Dossier_Hear_One.pdf',
     zip_bundle: '/docs/kyc/hear_one/Hear_One_Complete_KYC_Dossier.zip',
     maf_excel: '/docs/kyc/hear_one/Plural_MAF_BO_PEP_Hear_One.xlsx',
     cancelled_cheque: '/docs/kyc/hear_one/hear_one_cancelled_cheque.jpg',
@@ -360,22 +362,33 @@ export default function PineLabsUnderwritingPage() {
 
             <div className="flex flex-wrap items-center gap-2.5">
               <a
-                href={SPOTLIGHT_CLINIC.docs.zip_bundle}
-                download="Hear_One_Complete_KYC_Dossier.zip"
+                href={SPOTLIGHT_CLINIC.docs.signing_pdf}
+                download="Plural_MAF_and_Doctor_KYC_Signing_Dossier_Hear_One.pdf"
                 className="inline-flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-xs font-black uppercase tracking-wider rounded-xl shadow-lg shadow-emerald-600/30 transition-all cursor-pointer active:scale-98"
-                title="Download all 6 KYC files in a single ZIP package"
+                title="Download consolidated official MAF + Doctor PAN & Aadhaar signing dossier"
               >
-                <FolderDown size={15} />
-                <span>Download All Docs (ZIP)</span>
+                <FileCheck size={15} />
+                <span>Doctor Signing PDF</span>
               </a>
 
               <a
                 href={SPOTLIGHT_CLINIC.docs.maf_excel}
                 download="Plural_MAF_BO_PEP_Hear_One.xlsx"
-                className="inline-flex items-center gap-2 px-4 py-2.5 bg-blue-600 hover:bg-blue-500 text-white text-xs font-black uppercase tracking-wider rounded-xl shadow-lg shadow-blue-600/30 transition-all cursor-pointer active:scale-98"
+                className="inline-flex items-center gap-2 px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white text-xs font-black uppercase tracking-wider rounded-xl shadow-lg shadow-blue-600/30 transition-all cursor-pointer active:scale-98"
+                title="Download Pine Labs MAF Excel"
               >
                 <FileSpreadsheet size={15} />
-                <span>Download Plural MAF Excel</span>
+                <span>Download MAF Excel</span>
+              </a>
+
+              <a
+                href={SPOTLIGHT_CLINIC.docs.zip_bundle}
+                download="Hear_One_Complete_KYC_Dossier.zip"
+                className="inline-flex items-center gap-2 px-3.5 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold rounded-xl border border-slate-700 transition-all cursor-pointer active:scale-98"
+                title="Download all raw KYC documents in a ZIP package"
+              >
+                <FolderDown size={14} />
+                <span>Full ZIP</span>
               </a>
 
               <span className="text-[11px] font-bold px-3 py-1.5 rounded-xl bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
@@ -484,20 +497,20 @@ export default function PineLabsUnderwritingPage() {
               </h3>
               <div className="space-y-2">
                 <a
-                  href={SPOTLIGHT_CLINIC.docs.zip_bundle}
-                  download="Hear_One_Complete_KYC_Dossier.zip"
-                  className="w-full flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-emerald-950/80 via-slate-900 to-teal-950/80 border-2 border-emerald-500/60 hover:border-emerald-400 transition-all text-xs group cursor-pointer shadow-lg mb-2.5"
+                  href={SPOTLIGHT_CLINIC.docs.signing_pdf}
+                  download="Plural_MAF_and_Doctor_KYC_Signing_Dossier_Hear_One.pdf"
+                  className="w-full flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-emerald-950/90 via-slate-900 to-teal-950/90 border-2 border-emerald-500/70 hover:border-emerald-400 transition-all text-xs group cursor-pointer shadow-lg mb-2.5"
                 >
                   <div className="flex items-center gap-2.5">
                     <div className="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
-                      <FolderDown size={16} />
+                      <FileCheck size={16} />
                     </div>
                     <div className="text-left">
                       <span className="font-extrabold text-white text-[12px] block group-hover:text-emerald-300 transition-colors">
-                        Download All Documents (ZIP)
+                        Doctor Signing Dossier (PDF)
                       </span>
                       <span className="text-[10px] text-emerald-400 font-semibold">
-                        All 6 KYC Files &bull; 1.3 MB Package
+                        Official MAF + PAN + Aadhaar &bull; Ready to Sign
                       </span>
                     </div>
                   </div>
@@ -568,147 +581,164 @@ export default function PineLabsUnderwritingPage() {
           </div>
         </div>
 
-        {/* ── VERIFIED KYC PIPELINE FOR UNDERWRITING ── */}
-        <div className="rounded-3xl bg-slate-900/80 border border-slate-800 p-6 space-y-4 shadow-xl">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            <div>
-              <div className="flex items-center gap-2">
-                <h2 className="text-lg font-black text-white flex items-center gap-2">
+        {/* ── QUEUE STATUS / MULTI-CLINIC PIPELINE ── */}
+        {filteredClinics.length > 1 ? (
+          <div className="rounded-3xl bg-slate-900/80 border border-slate-800 p-6 space-y-4 shadow-xl">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <div className="flex items-center gap-2">
                   <ShieldCheck size={18} className="text-emerald-400" />
-                  <span>Verified KYC Applications ({filteredClinics.length})</span>
-                </h2>
-                <span className="text-[10px] font-black uppercase px-2 py-0.5 rounded-md bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
-                  Ready for Underwriting
-                </span>
-              </div>
-              <p className="text-xs text-slate-400 mt-1">
-                Showing only partner clinics with complete, verified doctor KYC documents and settlement bank accounts.
-              </p>
-            </div>
-
-            <div className="flex items-center gap-2.5">
-              <div className="relative">
-                <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
-                <input
-                  type="text"
-                  placeholder="Search verified clinic, doctor, city..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-8 pr-3 py-1.5 rounded-xl bg-slate-800 border border-slate-700 text-xs text-white placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-blue-500 w-52 sm:w-64"
-                />
+                  <h2 className="text-lg font-black text-white">
+                    Verified KYC Applications ({filteredClinics.length})
+                  </h2>
+                  <span className="text-[10px] font-black uppercase px-2 py-0.5 rounded-md bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                    Ready for Underwriting
+                  </span>
+                </div>
+                <p className="text-xs text-slate-400 mt-1">
+                  Showing partner clinics with verified doctor KYC documents and settlement bank accounts.
+                </p>
               </div>
 
-              <button
-                onClick={fetchClinics}
-                disabled={loading}
-                className="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors cursor-pointer"
-                title="Refresh Clinics"
-              >
-                <RefreshCw size={14} className={loading ? 'animate-spin' : ''} />
-              </button>
+              <div className="flex items-center gap-2.5">
+                <div className="relative">
+                  <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+                  <input
+                    type="text"
+                    placeholder="Search verified clinic, doctor, city..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="pl-8 pr-3 py-1.5 rounded-xl bg-slate-800 border border-slate-700 text-xs text-white placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-blue-500 w-52 sm:w-64"
+                  />
+                </div>
+
+                <button
+                  onClick={fetchClinics}
+                  disabled={loading}
+                  className="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors cursor-pointer"
+                  title="Refresh Clinics"
+                >
+                  <RefreshCw size={14} className={loading ? 'animate-spin' : ''} />
+                </button>
+              </div>
+            </div>
+
+            {/* Table */}
+            <div className="overflow-x-auto rounded-2xl border border-slate-800">
+              <table className="w-full text-left text-xs border-collapse">
+                <thead>
+                  <tr className="bg-slate-800/60 text-slate-400 border-b border-slate-800">
+                    <th className="py-3 px-4 font-bold">#</th>
+                    <th className="py-3 px-4 font-bold">Clinic &amp; Legal Entity</th>
+                    <th className="py-3 px-4 font-bold">Managing Doctor &amp; PAN</th>
+                    <th className="py-3 px-4 font-bold">City &amp; State</th>
+                    <th className="py-3 px-4 font-bold">Settlement Bank Account</th>
+                    <th className="py-3 px-4 font-bold">Verified KYC Docs</th>
+                    <th className="py-3 px-4 font-bold">Status</th>
+                    <th className="py-3 px-4 font-bold text-right">Actions</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-800/60 text-slate-300">
+                  {filteredClinics.map((clinic, index) => {
+                    const isSpotlight = clinic.id === SPOTLIGHT_CLINIC.id;
+                    return (
+                      <tr key={clinic.id} className="hover:bg-slate-800/40 transition-colors">
+                        <td className="py-3.5 px-4 font-mono text-slate-500 text-[11px]">{index + 1}</td>
+                        <td className="py-3.5 px-4">
+                          <span className="font-bold text-white block">{clinic.clinic_name}</span>
+                          <span className="text-[10.5px] text-slate-400">
+                            {isSpotlight ? SPOTLIGHT_CLINIC.legal_name : 'Sole Proprietorship'}
+                          </span>
+                        </td>
+                        <td className="py-3.5 px-4">
+                          <span className="font-bold text-slate-200 block">{clinic.doctor_name || 'Dr. Angiras Vishnu'}</span>
+                          <span className="font-mono text-emerald-400 text-[11px]">
+                            PAN: {isSpotlight ? SPOTLIGHT_CLINIC.pan : 'AZHPV0033E'}
+                          </span>
+                        </td>
+                        <td className="py-3.5 px-4 text-slate-300">
+                          <span>{clinic.city}</span>
+                          <span className="block text-[10.5px] text-slate-500 font-mono">{clinic.phone}</span>
+                        </td>
+                        <td className="py-3.5 px-4">
+                          <span className="font-medium text-white block">
+                            {isSpotlight ? SPOTLIGHT_CLINIC.bank.bank_name : 'Bank of Baroda'}
+                          </span>
+                          <span className="font-mono text-[11px] text-slate-400 block">
+                            A/C: {isSpotlight ? SPOTLIGHT_CLINIC.bank.account_number : '30580200000228'}
+                          </span>
+                          <span className="font-mono text-[10px] text-sky-400">
+                            IFSC: {isSpotlight ? SPOTLIGHT_CLINIC.bank.ifsc : 'BARB0KAKKAN'}
+                          </span>
+                        </td>
+                        <td className="py-3.5 px-4">
+                          <div className="flex flex-wrap gap-1">
+                            <span className="px-1.5 py-0.5 rounded bg-emerald-500/15 text-emerald-300 text-[10px] font-bold border border-emerald-500/30">
+                              Cheque ✓
+                            </span>
+                            <span className="px-1.5 py-0.5 rounded bg-blue-500/15 text-blue-300 text-[10px] font-bold border border-blue-500/30">
+                              PAN ✓
+                            </span>
+                            <span className="px-1.5 py-0.5 rounded bg-sky-500/15 text-sky-300 text-[10px] font-bold border border-sky-500/30">
+                              Aadhaar ✓
+                            </span>
+                            <span className="px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-300 text-[10px] font-bold border border-amber-500/30">
+                              Udyam ✓
+                            </span>
+                          </div>
+                        </td>
+                        <td className="py-3.5 px-4">
+                          <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-emerald-500/15 text-emerald-400 text-[10.5px] font-bold border border-emerald-500/30">
+                            <CheckCircle2 size={11} />
+                            <span>Ready for MID</span>
+                          </span>
+                        </td>
+                        <td className="py-3.5 px-4 text-right">
+                          <div className="flex items-center justify-end gap-1.5">
+                            <a
+                              href={SPOTLIGHT_CLINIC.docs.signing_pdf}
+                              download="Plural_MAF_and_Doctor_KYC_Signing_Dossier_Hear_One.pdf"
+                              className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 text-[11px] font-black border border-emerald-500/30 transition-colors shadow-xs"
+                              title="Download Doctor Signing PDF"
+                            >
+                              <FileCheck size={13} />
+                              <span>Signing PDF</span>
+                            </a>
+                            <a
+                              href={SPOTLIGHT_CLINIC.docs.maf_excel}
+                              download={`Plural_MAF_${clinic.clinic_name.replace(/\s+/g, '_')}.xlsx`}
+                              className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 text-[11px] font-bold border border-blue-500/30 transition-colors shadow-xs"
+                              title="Download Plural MAF Excel"
+                            >
+                              <FileSpreadsheet size={13} />
+                              <span>MAF Excel</span>
+                            </a>
+                          </div>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
             </div>
           </div>
-
-          {/* Table */}
-          <div className="overflow-x-auto rounded-2xl border border-slate-800">
-            <table className="w-full text-left text-xs border-collapse">
-              <thead>
-                <tr className="bg-slate-800/60 text-slate-400 border-b border-slate-800">
-                  <th className="py-3 px-4 font-bold">#</th>
-                  <th className="py-3 px-4 font-bold">Clinic &amp; Legal Entity</th>
-                  <th className="py-3 px-4 font-bold">Managing Doctor &amp; PAN</th>
-                  <th className="py-3 px-4 font-bold">City &amp; State</th>
-                  <th className="py-3 px-4 font-bold">Settlement Bank Account</th>
-                  <th className="py-3 px-4 font-bold">Verified KYC Docs</th>
-                  <th className="py-3 px-4 font-bold">Status</th>
-                  <th className="py-3 px-4 font-bold text-right">Actions</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-slate-800/60 text-slate-300">
-                {filteredClinics.map((clinic, index) => {
-                  const isSpotlight = clinic.id === SPOTLIGHT_CLINIC.id;
-                  return (
-                    <tr key={clinic.id} className="hover:bg-slate-800/40 transition-colors">
-                      <td className="py-3.5 px-4 font-mono text-slate-500 text-[11px]">{index + 1}</td>
-                      <td className="py-3.5 px-4">
-                        <span className="font-bold text-white block">{clinic.clinic_name}</span>
-                        <span className="text-[10.5px] text-slate-400">
-                          {isSpotlight ? SPOTLIGHT_CLINIC.legal_name : 'Sole Proprietorship'}
-                        </span>
-                      </td>
-                      <td className="py-3.5 px-4">
-                        <span className="font-bold text-slate-200 block">{clinic.doctor_name || 'Dr. Angiras Vishnu'}</span>
-                        <span className="font-mono text-emerald-400 text-[11px]">
-                          PAN: {isSpotlight ? SPOTLIGHT_CLINIC.pan : 'AZHPV0033E'}
-                        </span>
-                      </td>
-                      <td className="py-3.5 px-4 text-slate-300">
-                        <span>{clinic.city}</span>
-                        <span className="block text-[10.5px] text-slate-500 font-mono">{clinic.phone}</span>
-                      </td>
-                      <td className="py-3.5 px-4">
-                        <span className="font-medium text-white block">
-                          {isSpotlight ? SPOTLIGHT_CLINIC.bank.bank_name : 'Bank of Baroda'}
-                        </span>
-                        <span className="font-mono text-[11px] text-slate-400 block">
-                          A/C: {isSpotlight ? SPOTLIGHT_CLINIC.bank.account_number : '30580200000228'}
-                        </span>
-                        <span className="font-mono text-[10px] text-sky-400">
-                          IFSC: {isSpotlight ? SPOTLIGHT_CLINIC.bank.ifsc : 'BARB0KAKKAN'}
-                        </span>
-                      </td>
-                      <td className="py-3.5 px-4">
-                        <div className="flex flex-wrap gap-1">
-                          <span className="px-1.5 py-0.5 rounded bg-emerald-500/15 text-emerald-300 text-[10px] font-bold border border-emerald-500/30">
-                            Cheque ✓
-                          </span>
-                          <span className="px-1.5 py-0.5 rounded bg-blue-500/15 text-blue-300 text-[10px] font-bold border border-blue-500/30">
-                            PAN ✓
-                          </span>
-                          <span className="px-1.5 py-0.5 rounded bg-sky-500/15 text-sky-300 text-[10px] font-bold border border-sky-500/30">
-                            Aadhaar ✓
-                          </span>
-                          <span className="px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-300 text-[10px] font-bold border border-amber-500/30">
-                            Udyam ✓
-                          </span>
-                        </div>
-                      </td>
-                      <td className="py-3.5 px-4">
-                        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-emerald-500/15 text-emerald-400 text-[10.5px] font-bold border border-emerald-500/30">
-                          <CheckCircle2 size={11} />
-                          <span>Ready for MID</span>
-                        </span>
-                      </td>
-                      <td className="py-3.5 px-4 text-right">
-                        <div className="flex items-center justify-end gap-1.5">
-                          <a
-                            href={SPOTLIGHT_CLINIC.docs.zip_bundle}
-                            download={`${clinic.clinic_name.replace(/\s+/g, '_')}_Complete_KYC_Dossier.zip`}
-                            className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 text-[11px] font-black border border-emerald-500/30 transition-colors shadow-xs"
-                            title="Download All 6 Documents (ZIP)"
-                          >
-                            <FolderDown size={13} />
-                            <span>Download All (ZIP)</span>
-                          </a>
-
-                          <a
-                            href={SPOTLIGHT_CLINIC.docs.maf_excel}
-                            download={`Plural_MAF_${clinic.clinic_name.replace(/\s+/g, '_')}.xlsx`}
-                            className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 text-[11px] font-bold border border-blue-500/30 transition-colors shadow-xs"
-                            title="Download Plural MAF Excel"
-                          >
-                            <FileSpreadsheet size={13} />
-                            <span>MAF Excel</span>
-                          </a>
-                        </div>
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
+        ) : (
+          <div className="rounded-2xl bg-slate-900/60 border border-slate-800 px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs shadow-md">
+            <div className="flex flex-wrap items-center gap-2.5">
+              <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="text-slate-300">
+                Active Application: <strong className="text-white">{SPOTLIGHT_CLINIC.clinic_name}</strong> &bull; {SPOTLIGHT_CLINIC.doctor_name} &bull; {SPOTLIGHT_CLINIC.city}
+              </span>
+              <span className="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-extrabold text-[10px] border border-emerald-500/30 uppercase tracking-wider">
+                1 of 1 Applications &bull; Ready for Underwriting
+              </span>
+            </div>
+            <div className="text-slate-400 text-[11px] flex items-center gap-2">
+              <CheckCircle2 size={13} className="text-emerald-400" />
+              <span>Full Doctor KYC, Nodal Bank Details &amp; MAF Package Verified</span>
+            </div>
           </div>
-        </div>
+        )}
 
         {/* ── SETTLEMENT INVARIANTS FOOTER NOTE ── */}
         <div className="bg-slate-900/50 border border-slate-800 rounded-2xl p-5 text-xs text-slate-400 flex flex-col sm:flex-row items-center justify-between gap-4">

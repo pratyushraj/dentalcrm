@@ -151,7 +151,23 @@ def fill_maf_excel(data: dict, out_xlsx: str):
                     for k, v in replacements.items():
                         if k in val:
                             val = val.replace(k, v)
+                    val = val.replace("(CLINAZA)", "").replace("/ CLINAZA", "").strip()
                     cell.value = val
+
+    # Explicit cells in Final MAF
+    if "Final MAF" in wb.sheetnames:
+        ws_maf = wb["Final MAF"]
+        ws_maf["B30"] = data.get("alt_email", data["email"])
+        ws_maf["B33"] = "https://clinaza.in"
+        ws_maf["B34"] = "https://clinaza.in/api/webhook/pinelabs"
+        ws_maf["B38"] = None
+        ws_maf["D38"] = "Web only "
+        ws_maf["E38"] = "Yes"
+        ws_maf["B42"] = data.get("business_desc", "Dental and healthcare clinical practice providing outpatient dental treatments, oral surgery, cosmetic dentistry, and patient care services (MCC 8021).")
+        if data.get("bank_name"):
+            ws_maf["E48"] = data["bank_name"]
+        if data.get("bank_ifsc"):
+            ws_maf["F49"] = data["bank_ifsc"]
 
     wb.save(out_xlsx)
 

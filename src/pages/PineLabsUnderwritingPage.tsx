@@ -48,50 +48,148 @@ interface ClinicRecord {
   created_at: string;
 }
 
-// Spotlight Featured Clinic: Dr. Angiras Vishnu / HEAR ONE
-const SPOTLIGHT_CLINIC = {
-  id: 'c1b4ab14-e0a4-4a60-9a86-ebedc9616675',
-  clinic_name: 'HEAR ONE',
-  legal_name: 'HEAR ONE (Sole Proprietorship)',
-  doctor_name: 'Dr. Angiras Vishnu',
-  dob: '16/02/1991',
-  pan: 'AZHPV0033E',
-  aadhaar: '4451 2414 5591',
-  phone: '+91 85478 32924',
-  email: 'info@hearone.in',
-  city: 'Kakkanad, Ernakulam, Kerala',
-  pincode: '682030',
-  address: 'Near Civil Station, X/10 (F), Kakkanad, Ernakulam, Kerala - 682030',
-  residential_address: 'Kidangaziyath Mana, West Chalakudy, Chalakudi H.O, Thrissur, Kerala - 680307',
-  specialties: ['Audiology & Speech Rehab', 'Daycare Healthcare', 'ENT Allied Services'],
+// Verified Sub-Merchant KYC Dossiers for Pine Labs Plural Underwriting
+export interface VerifiedDossier {
+  id: string;
+  clinic_name: string;
+  legal_name: string;
+  doctor_name: string;
+  dob: string;
+  pan: string;
+  aadhaar: string;
+  phone: string;
+  email: string;
+  city: string;
+  pincode: string;
+  address: string;
+  residential_address: string;
+  specialties: string[];
+  submission_badge: string;
   bank: {
-    bank_name: 'Bank of Baroda',
-    account_holder: 'HEAR ONE',
-    account_number: '30580200000228',
-    account_type: 'Current Account',
-    ifsc: 'BARB0KAKKAN',
-    branch: 'Opp. Civil Station, Kinfra Road, Kakkanad, Kochi 682030',
-    micr: '682012009',
-    cheque_no: '000012'
-  },
+    bank_name: string;
+    account_holder: string;
+    account_number: string;
+    account_type: string;
+    ifsc: string;
+    branch: string;
+    micr: string;
+    cheque_no: string;
+  };
   business_proof: {
-    type: 'Udyam Registration Certificate',
-    number: 'UDYAM-KL-02-0000127',
-    category: 'Micro - Services',
-    date: '18/06/2020'
-  },
+    type: string;
+    number: string;
+    category: string;
+    date: string;
+  };
   docs: {
-    signing_pdf: '/docs/kyc/hear_one/Plural_MAF_and_Doctor_KYC_Signing_Dossier_Hear_One.pdf',
-    zip_bundle: '/docs/kyc/hear_one/Hear_One_Complete_KYC_Dossier.zip',
-    maf_excel: '/docs/kyc/hear_one/Plural_MAF_BO_PEP_Hear_One.xlsx',
-    cancelled_cheque: '/docs/kyc/hear_one/hear_one_cancelled_cheque.jpg',
-    doctor_pan: '/docs/kyc/hear_one/dr_angiras_vishnu_pan.jpg',
-    aadhaar_front: '/docs/kyc/hear_one/dr_angiras_vishnu_aadhaar_front.jpg',
-    aadhaar_back: '/docs/kyc/hear_one/dr_angiras_vishnu_aadhaar_back.jpg',
-    udyam_pdf: '/docs/kyc/hear_one/hear_one_udyam_certificate.pdf'
+    signing_pdf: string;
+    zip_bundle: string;
+    maf_excel: string;
+    cancelled_cheque: string;
+    doctor_pan: string;
+    aadhaar_front: string;
+    aadhaar_back?: string;
+    udyam_pdf: string;
+    establishment_reg?: string;
+    dental_council_reg?: string;
+  };
+  status: string;
+}
+
+const VERIFIED_DOSSIERS: VerifiedDossier[] = [
+  {
+    id: 'vasantha-dental',
+    clinic_name: 'Vasantha Dental Clinic & Implant Center',
+    legal_name: 'VASANTHA DENTAL CLINIC AND IMPLANT CENTER (Sole Proprietorship)',
+    doctor_name: 'Dr. V Siddardha Chaitanya',
+    dob: '03/08/1984',
+    pan: 'AIVPV7704K',
+    aadhaar: '2777 8569 7017',
+    phone: '+91 70366 83034',
+    email: 'Drchaitu.2011@gmail.com',
+    city: 'Visakhapatnam, Andhra Pradesh',
+    pincode: '530017',
+    address: 'D.No 1-56-23, Bank of India Lane, Sector 2, MVP Colony, Visakhapatnam, Andhra Pradesh - 530017',
+    residential_address: 'D.No 10-33, G-2, Visalakshi Nagar, Kailasagiri Circle, Visakhapatnam, Andhra Pradesh - 530043',
+    specialties: ['General Dentistry', 'Dental Implants', 'Oral Surgery'],
+    submission_badge: 'Latest Submission • Nov 19',
+    bank: {
+      bank_name: 'Bank of India (BOI)',
+      account_holder: 'VASANTHA DENTAL CLINIC AND IMPLANT CENTER',
+      account_number: '560320110000200',
+      account_type: 'Current Account',
+      ifsc: 'BKID0005603',
+      branch: 'MVP COLONY Branch, Visakhapatnam, Andhra Pradesh - 530017',
+      micr: '530013008',
+      cheque_no: '1045107'
+    },
+    business_proof: {
+      type: 'Udyam Registration Certificate',
+      number: 'UDYAM-AP-10-0132936',
+      category: 'Micro - Services',
+      date: '06/05/2026'
+    },
+    docs: {
+      signing_pdf: '/docs/kyc/vasantha_dental/Plural_MAF_and_Doctor_KYC_Signing_Dossier_Vasantha_Dental.pdf',
+      zip_bundle: '/docs/kyc/vasantha_dental/Vasantha_Dental_Complete_KYC_Dossier.zip',
+      maf_excel: '/docs/kyc/vasantha_dental/Plural_MAF_BO_PEP_Vasantha_Dental.xlsx',
+      cancelled_cheque: '/docs/kyc/vasantha_dental/vasantha_dental_cancelled_cheque.jpg',
+      doctor_pan: '/docs/kyc/vasantha_dental/dr_siddardha_chaitanya_pan.jpg',
+      aadhaar_front: '/docs/kyc/vasantha_dental/dr_siddardha_chaitanya_aadhaar.jpg',
+      udyam_pdf: '/docs/kyc/vasantha_dental/vasantha_dental_udyam_certificate.pdf',
+      establishment_reg: '/docs/kyc/vasantha_dental/vasantha_dental_ap_establishment_registration.jpg',
+      dental_council_reg: '/docs/kyc/vasantha_dental/dr_siddardha_chaitanya_dental_council_registration.jpg'
+    },
+    status: 'Ready for Sub-Merchant MID'
   },
-  status: 'Ready for Sub-Merchant MID'
-};
+  {
+    id: 'c1b4ab14-e0a4-4a60-9a86-ebedc9616675',
+    clinic_name: 'HEAR ONE',
+    legal_name: 'HEAR ONE (Sole Proprietorship)',
+    doctor_name: 'Dr. Angiras Vishnu',
+    dob: '16/02/1991',
+    pan: 'AZHPV0033E',
+    aadhaar: '4451 2414 5591',
+    phone: '+91 85478 32924',
+    email: 'info@hearone.in',
+    city: 'Kakkanad, Ernakulam, Kerala',
+    pincode: '682030',
+    address: 'Near Civil Station, X/10 (F), Kakkanad, Ernakulam, Kerala - 682030',
+    residential_address: 'Kidangaziyath Mana, West Chalakudy, Chalakudi H.O, Thrissur, Kerala - 680307',
+    specialties: ['Audiology & Speech Rehab', 'Daycare Healthcare', 'ENT Allied Services'],
+    submission_badge: 'Verified Submission • Nov 19',
+    bank: {
+      bank_name: 'Bank of Baroda',
+      account_holder: 'HEAR ONE',
+      account_number: '30580200000228',
+      account_type: 'Current Account',
+      ifsc: 'BARB0KAKKAN',
+      branch: 'Opp. Civil Station, Kinfra Road, Kakkanad, Kochi 682030',
+      micr: '682012009',
+      cheque_no: '000012'
+    },
+    business_proof: {
+      type: 'Udyam Registration Certificate',
+      number: 'UDYAM-KL-02-0000127',
+      category: 'Micro - Services',
+      date: '18/06/2020'
+    },
+    docs: {
+      signing_pdf: '/docs/kyc/hear_one/Plural_MAF_and_Doctor_KYC_Signing_Dossier_Hear_One.pdf',
+      zip_bundle: '/docs/kyc/hear_one/Hear_One_Complete_KYC_Dossier.zip',
+      maf_excel: '/docs/kyc/hear_one/Plural_MAF_BO_PEP_Hear_One.xlsx',
+      cancelled_cheque: '/docs/kyc/hear_one/hear_one_cancelled_cheque.jpg',
+      doctor_pan: '/docs/kyc/hear_one/dr_angiras_vishnu_pan.jpg',
+      aadhaar_front: '/docs/kyc/hear_one/dr_angiras_vishnu_aadhaar_front.jpg',
+      aadhaar_back: '/docs/kyc/hear_one/dr_angiras_vishnu_aadhaar_back.jpg',
+      udyam_pdf: '/docs/kyc/hear_one/hear_one_udyam_certificate.pdf'
+    },
+    status: 'Ready for Sub-Merchant MID'
+  }
+];
+
+// Backwards-compatibility alias
+const SPOTLIGHT_CLINIC = VERIFIED_DOSSIERS[0];
 
 export default function PineLabsUnderwritingPage() {
   const [searchParams] = useSearchParams();
@@ -108,7 +206,8 @@ export default function PineLabsUnderwritingPage() {
   const [clinics, setClinics] = useState<ClinicRecord[]>([]);
   const [loading, setLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedClinic, setSelectedClinic] = useState<typeof SPOTLIGHT_CLINIC | null>(SPOTLIGHT_CLINIC);
+  const [selectedDossierId, setSelectedDossierId] = useState<string>(VERIFIED_DOSSIERS[0].id);
+  const activeDossier = VERIFIED_DOSSIERS.find((d) => d.id === selectedDossierId) || VERIFIED_DOSSIERS[0];
   const [previewDocUrl, setPreviewDocUrl] = useState<string | null>(null);
   const [previewDocTitle, setPreviewDocTitle] = useState<string>('');
 
@@ -220,13 +319,26 @@ export default function PineLabsUnderwritingPage() {
     );
   }
 
+  // Static dossiers mapped as ClinicRecords
+  const verifiedDossierRecords: ClinicRecord[] = VERIFIED_DOSSIERS.map((d) => ({
+    id: d.id,
+    clinic_name: d.clinic_name,
+    doctor_name: d.doctor_name,
+    phone: d.phone,
+    email: d.email,
+    city: d.city,
+    has_current_account: 'Yes',
+    has_cancelled_cheque: 'Yes',
+    business_proof_type: d.business_proof.type,
+    specialties: d.specialties,
+    source: 'whatsapp-kyc-desk',
+    created_at: new Date().toISOString()
+  }));
+
   // Helper to strictly identify clinics with submitted / verified KYC
   const isKycVerifiedClinic = (c: ClinicRecord) => {
-    // Spotlight clinic (Dr. Angiras Vishnu / HEAR ONE) is verified
-    if (c.id === SPOTLIGHT_CLINIC.id) return true;
-    // Must have submitted cancelled cheque (not pending or empty)
+    if (VERIFIED_DOSSIERS.some((d) => d.id === c.id)) return true;
     if (c.has_cancelled_cheque !== 'Yes') return false;
-    // Exclude pending uploads or unverified leads
     if (
       c.business_proof_type?.includes('Pending') ||
       c.business_proof_type?.includes('Will arrange') ||
@@ -234,7 +346,6 @@ export default function PineLabsUnderwritingPage() {
     ) {
       return false;
     }
-    // Must have verified proof or whatsapp desk source or completed KYC
     return (
       c.source === 'whatsapp-kyc-desk' ||
       Boolean(c.business_proof_type?.includes('UDYAM')) ||
@@ -242,9 +353,10 @@ export default function PineLabsUnderwritingPage() {
     );
   };
 
-  // Strictly filter for clinics with KYC (guarantee SPOTLIGHT_CLINIC is present)
-  const verifiedClinics = clinics.filter(isKycVerifiedClinic);
-  const displayClinics = verifiedClinics.length > 0 ? verifiedClinics : [SPOTLIGHT_CLINIC as any];
+  const otherVerifiedClinics = clinics.filter(
+    (c) => isKycVerifiedClinic(c) && !VERIFIED_DOSSIERS.some((d) => d.id === c.id)
+  );
+  const displayClinics = [...verifiedDossierRecords, ...otherVerifiedClinics];
 
   const filteredClinics = displayClinics.filter((c) => {
     const q = searchQuery.toLowerCase();
@@ -340,8 +452,36 @@ export default function PineLabsUnderwritingPage() {
           </div>
         </div>
 
-        {/* ── SPOTLIGHT DOSSIER: DR. ANGIRAS VISHNU / HEAR ONE ── */}
+        {/* ── SPOTLIGHT DOSSIER ── */}
         <div className="rounded-3xl bg-white border border-slate-200 p-6 sm:p-7 shadow-sm space-y-6">
+          {/* Clinic Switcher Tabs */}
+          <div className="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-slate-100">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Select Dossier:</span>
+              {VERIFIED_DOSSIERS.map((d) => (
+                <button
+                  key={d.id}
+                  onClick={() => setSelectedDossierId(d.id)}
+                  className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
+                    activeDossier.id === d.id
+                      ? 'bg-[#0867E8] text-white shadow-xs'
+                      : 'bg-slate-100 hover:bg-slate-200 text-slate-700'
+                  }`}
+                >
+                  <span>{d.clinic_name}</span>
+                  <span className={`text-[9.5px] px-1.5 py-0.2 rounded-md font-extrabold ${
+                    activeDossier.id === d.id ? 'bg-white/20 text-white' : 'bg-slate-200 text-slate-600'
+                  }`}>
+                    {d.city.split(',')[0]}
+                  </span>
+                </button>
+              ))}
+            </div>
+            <span className="text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-xl border border-emerald-200 flex items-center gap-1">
+              <CheckCircle2 size={12} /> {VERIFIED_DOSSIERS.length} Verified Sub-Merchant Applications
+            </span>
+          </div>
+
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-100">
             <div className="flex items-center gap-3.5">
               <div className="w-12 h-12 rounded-2xl bg-amber-50 border border-amber-200 text-amber-600 flex items-center justify-center shrink-0">
@@ -349,21 +489,21 @@ export default function PineLabsUnderwritingPage() {
               </div>
               <div>
                 <div className="flex items-center gap-2">
-                  <h2 className="text-xl font-black text-slate-900">{SPOTLIGHT_CLINIC.clinic_name}</h2>
+                  <h2 className="text-xl font-black text-slate-900">{activeDossier.clinic_name}</h2>
                   <span className="text-[10px] font-black uppercase px-2 py-0.5 rounded-md bg-amber-50 text-amber-700 border border-amber-300">
-                    Latest Submission • Nov 19
+                    {activeDossier.submission_badge}
                   </span>
                 </div>
                 <p className="text-xs text-slate-500">
-                  {SPOTLIGHT_CLINIC.doctor_name} &bull; {SPOTLIGHT_CLINIC.city} &bull; {SPOTLIGHT_CLINIC.phone}
+                  {activeDossier.doctor_name} &bull; {activeDossier.city} &bull; {activeDossier.phone}
                 </p>
               </div>
             </div>
 
             <div className="flex flex-wrap items-center gap-2.5">
               <a
-                href={SPOTLIGHT_CLINIC.docs.signing_pdf}
-                download="Plural_MAF_and_Doctor_KYC_Signing_Dossier_Hear_One.pdf"
+                href={activeDossier.docs.signing_pdf}
+                download={`Plural_MAF_and_Doctor_KYC_Signing_Dossier_${activeDossier.clinic_name.replace(/\s+/g, '_')}.pdf`}
                 className="inline-flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-xs font-black uppercase tracking-wider rounded-xl shadow-md shadow-emerald-600/20 transition-all cursor-pointer active:scale-98"
                 title="Download consolidated official MAF + Doctor PAN & Aadhaar signing dossier"
               >
@@ -372,8 +512,8 @@ export default function PineLabsUnderwritingPage() {
               </a>
 
               <a
-                href={SPOTLIGHT_CLINIC.docs.maf_excel}
-                download="Plural_MAF_BO_PEP_Hear_One.xlsx"
+                href={activeDossier.docs.maf_excel}
+                download={`Plural_MAF_BO_PEP_${activeDossier.clinic_name.replace(/\s+/g, '_')}.xlsx`}
                 className="inline-flex items-center gap-2 px-3.5 py-2.5 bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-black uppercase tracking-wider rounded-xl shadow-md shadow-blue-500/20 transition-all cursor-pointer active:scale-98"
                 title="Download Pine Labs MAF Excel"
               >
@@ -382,8 +522,8 @@ export default function PineLabsUnderwritingPage() {
               </a>
 
               <a
-                href={SPOTLIGHT_CLINIC.docs.zip_bundle}
-                download="Hear_One_Complete_KYC_Dossier.zip"
+                href={activeDossier.docs.zip_bundle}
+                download={`${activeDossier.clinic_name.replace(/\s+/g, '_')}_Complete_KYC_Dossier.zip`}
                 className="inline-flex items-center gap-2 px-3.5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-xl border border-slate-300 transition-all cursor-pointer active:scale-98"
                 title="Download all raw KYC documents in a ZIP package"
               >
@@ -392,7 +532,7 @@ export default function PineLabsUnderwritingPage() {
               </a>
 
               <span className="text-[11px] font-bold px-3 py-1.5 rounded-xl bg-emerald-50 text-emerald-700 border border-emerald-300">
-                Status: {SPOTLIGHT_CLINIC.status}
+                Status: {activeDossier.status}
               </span>
             </div>
           </div>
@@ -408,19 +548,19 @@ export default function PineLabsUnderwritingPage() {
               <div className="space-y-2 text-xs">
                 <div>
                   <span className="text-slate-500 block text-[10.5px]">Legal Entity / DBA:</span>
-                  <span className="font-bold text-slate-900">{SPOTLIGHT_CLINIC.legal_name}</span>
+                  <span className="font-bold text-slate-900">{activeDossier.legal_name}</span>
                 </div>
                 <div>
                   <span className="text-slate-500 block text-[10.5px]">Managing Doctor:</span>
-                  <span className="font-bold text-slate-900">{SPOTLIGHT_CLINIC.doctor_name} (DOB: {SPOTLIGHT_CLINIC.dob})</span>
+                  <span className="font-bold text-slate-900">{activeDossier.doctor_name} (DOB: {activeDossier.dob})</span>
                 </div>
                 <div className="flex items-center justify-between">
                   <div>
                     <span className="text-slate-500 block text-[10.5px]">Doctor PAN:</span>
-                    <span className="font-mono font-bold text-emerald-700 text-sm bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">{SPOTLIGHT_CLINIC.pan}</span>
+                    <span className="font-mono font-bold text-emerald-700 text-sm bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">{activeDossier.pan}</span>
                   </div>
                   <button
-                    onClick={() => copyToClipboard(SPOTLIGHT_CLINIC.pan, 'Doctor PAN')}
+                    onClick={() => copyToClipboard(activeDossier.pan, 'Doctor PAN')}
                     className="p-1.5 hover:bg-slate-200 rounded-lg text-slate-500 hover:text-slate-800 transition-colors"
                     title="Copy PAN"
                   >
@@ -429,11 +569,11 @@ export default function PineLabsUnderwritingPage() {
                 </div>
                 <div>
                   <span className="text-slate-500 block text-[10.5px]">Aadhaar Number:</span>
-                  <span className="font-mono font-bold text-slate-800">{SPOTLIGHT_CLINIC.aadhaar}</span>
+                  <span className="font-mono font-bold text-slate-800">{activeDossier.aadhaar}</span>
                 </div>
                 <div>
                   <span className="text-slate-500 block text-[10.5px]">Operating Clinic Address:</span>
-                  <span className="text-slate-700 leading-tight block">{SPOTLIGHT_CLINIC.address}</span>
+                  <span className="text-slate-700 leading-tight block">{activeDossier.address}</span>
                 </div>
               </div>
             </div>
@@ -447,20 +587,20 @@ export default function PineLabsUnderwritingPage() {
               <div className="space-y-2 text-xs">
                 <div>
                   <span className="text-slate-500 block text-[10.5px]">Bank Name &amp; Branch:</span>
-                  <span className="font-bold text-slate-900">{SPOTLIGHT_CLINIC.bank.bank_name}</span>
-                  <span className="text-[11px] text-slate-500 block">{SPOTLIGHT_CLINIC.bank.branch}</span>
+                  <span className="font-bold text-slate-900">{activeDossier.bank.bank_name}</span>
+                  <span className="text-[11px] text-slate-500 block">{activeDossier.bank.branch}</span>
                 </div>
                 <div>
                   <span className="text-slate-500 block text-[10.5px]">Beneficiary Name:</span>
-                  <span className="font-bold text-emerald-700">{SPOTLIGHT_CLINIC.bank.account_holder}</span>
+                  <span className="font-bold text-emerald-700">{activeDossier.bank.account_holder}</span>
                 </div>
                 <div className="flex items-center justify-between">
                   <div>
                     <span className="text-slate-500 block text-[10.5px]">Current Account No:</span>
-                    <span className="font-mono font-bold text-slate-900 text-sm bg-slate-200/70 px-2 py-0.5 rounded">{SPOTLIGHT_CLINIC.bank.account_number}</span>
+                    <span className="font-mono font-bold text-slate-900 text-sm bg-slate-200/70 px-2 py-0.5 rounded">{activeDossier.bank.account_number}</span>
                   </div>
                   <button
-                    onClick={() => copyToClipboard(SPOTLIGHT_CLINIC.bank.account_number, 'Account Number')}
+                    onClick={() => copyToClipboard(activeDossier.bank.account_number, 'Account Number')}
                     className="p-1.5 hover:bg-slate-200 rounded-lg text-slate-500 hover:text-slate-800 transition-colors"
                     title="Copy Account No"
                   >
@@ -470,10 +610,10 @@ export default function PineLabsUnderwritingPage() {
                 <div className="flex items-center justify-between">
                   <div>
                     <span className="text-slate-500 block text-[10.5px]">RTGS / NEFT IFSC:</span>
-                    <span className="font-mono font-bold text-blue-700 text-sm bg-blue-50 px-2 py-0.5 rounded border border-blue-200">{SPOTLIGHT_CLINIC.bank.ifsc}</span>
+                    <span className="font-mono font-bold text-blue-700 text-sm bg-blue-50 px-2 py-0.5 rounded border border-blue-200">{activeDossier.bank.ifsc}</span>
                   </div>
                   <button
-                    onClick={() => copyToClipboard(SPOTLIGHT_CLINIC.bank.ifsc, 'IFSC Code')}
+                    onClick={() => copyToClipboard(activeDossier.bank.ifsc, 'IFSC Code')}
                     className="p-1.5 hover:bg-slate-200 rounded-lg text-slate-500 hover:text-slate-800 transition-colors"
                     title="Copy IFSC"
                   >
@@ -483,7 +623,7 @@ export default function PineLabsUnderwritingPage() {
                 <div>
                   <span className="text-slate-500 block text-[10.5px]">Cheque Verification:</span>
                   <span className="text-emerald-700 font-bold flex items-center gap-1">
-                    <CheckCircle2 size={12} /> "CANCELLED" written &bull; MICR {SPOTLIGHT_CLINIC.bank.micr}
+                    <CheckCircle2 size={12} /> "CANCELLED" written &bull; MICR {activeDossier.bank.micr}
                   </span>
                 </div>
               </div>
@@ -497,8 +637,8 @@ export default function PineLabsUnderwritingPage() {
               </h3>
               <div className="space-y-2">
                 <a
-                  href={SPOTLIGHT_CLINIC.docs.signing_pdf}
-                  download="Plural_MAF_and_Doctor_KYC_Signing_Dossier_Hear_One.pdf"
+                  href={activeDossier.docs.signing_pdf}
+                  download={`Plural_MAF_and_Doctor_KYC_Signing_Dossier_${activeDossier.clinic_name.replace(/\s+/g, '_')}.pdf`}
                   className="w-full flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-emerald-50 via-teal-50/60 to-blue-50/60 border-2 border-emerald-500/50 hover:border-emerald-600 transition-all text-xs group cursor-pointer shadow-xs mb-2.5"
                 >
                   <div className="flex items-center gap-2.5">
@@ -518,7 +658,7 @@ export default function PineLabsUnderwritingPage() {
                 </a>
 
                 <a
-                  href={SPOTLIGHT_CLINIC.docs.cancelled_cheque}
+                  href={activeDossier.docs.cancelled_cheque}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full flex items-center justify-between p-2.5 rounded-xl bg-white border border-slate-200 hover:border-blue-400 hover:bg-blue-50/30 transition-all text-xs group cursor-pointer shadow-2xs"
@@ -533,7 +673,7 @@ export default function PineLabsUnderwritingPage() {
                 </a>
 
                 <a
-                  href={SPOTLIGHT_CLINIC.docs.doctor_pan}
+                  href={activeDossier.docs.doctor_pan}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full flex items-center justify-between p-2.5 rounded-xl bg-white border border-slate-200 hover:border-blue-400 hover:bg-blue-50/30 transition-all text-xs group cursor-pointer shadow-2xs"
@@ -548,7 +688,7 @@ export default function PineLabsUnderwritingPage() {
                 </a>
 
                 <a
-                  href={SPOTLIGHT_CLINIC.docs.aadhaar_front}
+                  href={activeDossier.docs.aadhaar_front}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full flex items-center justify-between p-2.5 rounded-xl bg-white border border-slate-200 hover:border-blue-400 hover:bg-blue-50/30 transition-all text-xs group cursor-pointer shadow-2xs"
@@ -563,7 +703,7 @@ export default function PineLabsUnderwritingPage() {
                 </a>
 
                 <a
-                  href={SPOTLIGHT_CLINIC.docs.udyam_pdf}
+                  href={activeDossier.docs.udyam_pdf}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full flex items-center justify-between p-2.5 rounded-xl bg-white border border-slate-200 hover:border-blue-400 hover:bg-blue-50/30 transition-all text-xs group cursor-pointer shadow-2xs"
@@ -576,169 +716,220 @@ export default function PineLabsUnderwritingPage() {
                   </div>
                   <ExternalLink size={13} className="text-slate-400 group-hover:text-slate-600" />
                 </a>
+
+                {activeDossier.docs.establishment_reg && (
+                  <a
+                    href={activeDossier.docs.establishment_reg}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full flex items-center justify-between p-2.5 rounded-xl bg-white border border-slate-200 hover:border-blue-400 hover:bg-blue-50/30 transition-all text-xs group cursor-pointer shadow-2xs"
+                  >
+                    <div className="flex items-center gap-2">
+                      <ShieldCheck size={14} className="text-indigo-600" />
+                      <span className="font-bold text-slate-800 group-hover:text-blue-600 transition-colors">
+                        Medical Establishment Registration
+                      </span>
+                    </div>
+                    <ExternalLink size={13} className="text-slate-400 group-hover:text-slate-600" />
+                  </a>
+                )}
+
+                {activeDossier.docs.dental_council_reg && (
+                  <a
+                    href={activeDossier.docs.dental_council_reg}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full flex items-center justify-between p-2.5 rounded-xl bg-white border border-slate-200 hover:border-blue-400 hover:bg-blue-50/30 transition-all text-xs group cursor-pointer shadow-2xs"
+                  >
+                    <div className="flex items-center gap-2">
+                      <CheckCircle2 size={14} className="text-teal-600" />
+                      <span className="font-bold text-slate-800 group-hover:text-blue-600 transition-colors">
+                        State Dental Council Registration
+                      </span>
+                    </div>
+                    <ExternalLink size={13} className="text-slate-400 group-hover:text-slate-600" />
+                  </a>
+                )}
               </div>
             </div>
           </div>
         </div>
 
         {/* ── QUEUE STATUS / MULTI-CLINIC PIPELINE ── */}
-        {filteredClinics.length > 1 ? (
-          <div className="rounded-3xl bg-white border border-slate-200 p-6 space-y-4 shadow-sm">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-              <div>
-                <div className="flex items-center gap-2">
-                  <ShieldCheck size={18} className="text-emerald-600" />
-                  <h2 className="text-lg font-black text-slate-900">
-                    Verified KYC Applications ({filteredClinics.length})
-                  </h2>
-                  <span className="text-[10px] font-black uppercase px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-700 border border-emerald-300">
-                    Ready for Underwriting
-                  </span>
-                </div>
-                <p className="text-xs text-slate-500 mt-1">
-                  Showing partner clinics with verified doctor KYC documents and settlement bank accounts.
-                </p>
+        <div className="rounded-3xl bg-white border border-slate-200 p-6 space-y-4 shadow-sm">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+              <div className="flex items-center gap-2">
+                <ShieldCheck size={18} className="text-emerald-600" />
+                <h2 className="text-lg font-black text-slate-900">
+                  Verified KYC Applications ({filteredClinics.length})
+                </h2>
+                <span className="text-[10px] font-black uppercase px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-700 border border-emerald-300">
+                  Ready for Underwriting
+                </span>
+              </div>
+              <p className="text-xs text-slate-500 mt-1">
+                Showing partner clinics with verified doctor KYC documents and settlement bank accounts.
+              </p>
+            </div>
+
+            <div className="flex items-center gap-2.5">
+              <div className="relative">
+                <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+                <input
+                  type="text"
+                  placeholder="Search verified clinic, doctor, city..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="pl-8 pr-3 py-1.5 rounded-xl bg-slate-50 border border-slate-300 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:bg-white focus:ring-1 focus:ring-blue-500 w-52 sm:w-64"
+                />
               </div>
 
-              <div className="flex items-center gap-2.5">
-                <div className="relative">
-                  <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
-                  <input
-                    type="text"
-                    placeholder="Search verified clinic, doctor, city..."
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    className="pl-8 pr-3 py-1.5 rounded-xl bg-slate-50 border border-slate-300 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:bg-white focus:ring-1 focus:ring-blue-500 w-52 sm:w-64"
-                  />
-                </div>
-
-                <button
-                  onClick={fetchClinics}
-                  disabled={loading}
-                  className="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 hover:text-slate-900 transition-colors cursor-pointer"
-                  title="Refresh Clinics"
-                >
-                  <RefreshCw size={14} className={loading ? 'animate-spin' : ''} />
-                </button>
-              </div>
-            </div>
-
-            {/* Table */}
-            <div className="overflow-x-auto rounded-2xl border border-slate-200">
-              <table className="w-full text-left text-xs border-collapse">
-                <thead>
-                  <tr className="bg-slate-50 text-slate-600 border-b border-slate-200">
-                    <th className="py-3 px-4 font-bold">#</th>
-                    <th className="py-3 px-4 font-bold">Clinic &amp; Legal Entity</th>
-                    <th className="py-3 px-4 font-bold">Managing Doctor &amp; PAN</th>
-                    <th className="py-3 px-4 font-bold">City &amp; State</th>
-                    <th className="py-3 px-4 font-bold">Settlement Bank Account</th>
-                    <th className="py-3 px-4 font-bold">Verified KYC Docs</th>
-                    <th className="py-3 px-4 font-bold">Status</th>
-                    <th className="py-3 px-4 font-bold text-right">Actions</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-slate-100 text-slate-700">
-                  {filteredClinics.map((clinic, index) => {
-                    const isSpotlight = clinic.id === SPOTLIGHT_CLINIC.id;
-                    return (
-                      <tr key={clinic.id} className="hover:bg-slate-50 transition-colors">
-                        <td className="py-3.5 px-4 font-mono text-slate-400 text-[11px]">{index + 1}</td>
-                        <td className="py-3.5 px-4">
-                          <span className="font-bold text-slate-900 block">{clinic.clinic_name}</span>
-                          <span className="text-[10.5px] text-slate-500">
-                            {isSpotlight ? SPOTLIGHT_CLINIC.legal_name : 'Sole Proprietorship'}
-                          </span>
-                        </td>
-                        <td className="py-3.5 px-4">
-                          <span className="font-bold text-slate-800 block">{clinic.doctor_name || 'Dr. Angiras Vishnu'}</span>
-                          <span className="font-mono text-emerald-700 text-[11px] font-bold">
-                            PAN: {isSpotlight ? SPOTLIGHT_CLINIC.pan : 'AZHPV0033E'}
-                          </span>
-                        </td>
-                        <td className="py-3.5 px-4 text-slate-600">
-                          <span>{clinic.city}</span>
-                          <span className="block text-[10.5px] text-slate-400 font-mono">{clinic.phone}</span>
-                        </td>
-                        <td className="py-3.5 px-4">
-                          <span className="font-medium text-slate-900 block">
-                            {isSpotlight ? SPOTLIGHT_CLINIC.bank.bank_name : 'Bank of Baroda'}
-                          </span>
-                          <span className="font-mono text-[11px] text-slate-600 block">
-                            A/C: {isSpotlight ? SPOTLIGHT_CLINIC.bank.account_number : '30580200000228'}
-                          </span>
-                          <span className="font-mono text-[10px] text-blue-700 font-bold">
-                            IFSC: {isSpotlight ? SPOTLIGHT_CLINIC.bank.ifsc : 'BARB0KAKKAN'}
-                          </span>
-                        </td>
-                        <td className="py-3.5 px-4">
-                          <div className="flex flex-wrap gap-1">
-                            <span className="px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 text-[10px] font-bold border border-emerald-200">
-                              Cheque ✓
-                            </span>
-                            <span className="px-1.5 py-0.5 rounded bg-blue-50 text-blue-700 text-[10px] font-bold border border-blue-200">
-                              PAN ✓
-                            </span>
-                            <span className="px-1.5 py-0.5 rounded bg-sky-50 text-sky-700 text-[10px] font-bold border border-sky-200">
-                              Aadhaar ✓
-                            </span>
-                            <span className="px-1.5 py-0.5 rounded bg-amber-50 text-amber-700 text-[10px] font-bold border border-amber-200">
-                              Udyam ✓
-                            </span>
-                          </div>
-                        </td>
-                        <td className="py-3.5 px-4">
-                          <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 text-[10.5px] font-bold border border-emerald-200">
-                            <CheckCircle2 size={11} />
-                            <span>Ready for MID</span>
-                          </span>
-                        </td>
-                        <td className="py-3.5 px-4 text-right">
-                          <div className="flex items-center justify-end gap-1.5">
-                            <a
-                              href={SPOTLIGHT_CLINIC.docs.signing_pdf}
-                              download="Plural_MAF_and_Doctor_KYC_Signing_Dossier_Hear_One.pdf"
-                              className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-700 text-[11px] font-black border border-emerald-300 transition-colors shadow-2xs"
-                              title="Download Doctor Signing PDF"
-                            >
-                              <FileCheck size={13} />
-                              <span>Signing PDF</span>
-                            </a>
-                            <a
-                              href={SPOTLIGHT_CLINIC.docs.maf_excel}
-                              download={`Plural_MAF_${clinic.clinic_name.replace(/\s+/g, '_')}.xlsx`}
-                              className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-blue-50 hover:bg-blue-100 text-blue-700 text-[11px] font-bold border border-blue-200 transition-colors shadow-2xs"
-                              title="Download Plural MAF Excel"
-                            >
-                              <FileSpreadsheet size={13} />
-                              <span>MAF Excel</span>
-                            </a>
-                          </div>
-                        </td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
+              <button
+                onClick={fetchClinics}
+                disabled={loading}
+                className="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 hover:text-slate-900 transition-colors cursor-pointer"
+                title="Refresh Clinics"
+              >
+                <RefreshCw size={14} className={loading ? 'animate-spin' : ''} />
+              </button>
             </div>
           </div>
-        ) : (
-          <div className="rounded-2xl bg-white border border-slate-200 px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs shadow-xs">
-            <div className="flex flex-wrap items-center gap-2.5">
-              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
-              <span className="text-slate-600">
-                Active Application: <strong className="text-slate-900">{SPOTLIGHT_CLINIC.clinic_name}</strong> &bull; {SPOTLIGHT_CLINIC.doctor_name} &bull; {SPOTLIGHT_CLINIC.city}
-              </span>
-              <span className="px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 font-extrabold text-[10px] border border-emerald-200 uppercase tracking-wider">
-                1 of 1 Applications &bull; Ready for Underwriting
-              </span>
-            </div>
-            <div className="text-slate-500 text-[11px] flex items-center gap-2">
-              <CheckCircle2 size={13} className="text-emerald-600" />
-              <span>Full Doctor KYC, Nodal Bank Details &amp; MAF Package Verified</span>
-            </div>
+
+          {/* Table */}
+          <div className="overflow-x-auto rounded-2xl border border-slate-200">
+            <table className="w-full text-left text-xs border-collapse">
+              <thead>
+                <tr className="bg-slate-50 text-slate-600 border-b border-slate-200">
+                  <th className="py-3 px-4 font-bold">#</th>
+                  <th className="py-3 px-4 font-bold">Clinic &amp; Legal Entity</th>
+                  <th className="py-3 px-4 font-bold">Managing Doctor &amp; PAN</th>
+                  <th className="py-3 px-4 font-bold">City &amp; State</th>
+                  <th className="py-3 px-4 font-bold">Settlement Bank Account</th>
+                  <th className="py-3 px-4 font-bold">Verified KYC Docs</th>
+                  <th className="py-3 px-4 font-bold">Status</th>
+                  <th className="py-3 px-4 font-bold text-right">Actions</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-100 text-slate-700">
+                {filteredClinics.map((clinic, index) => {
+                  const dossier = VERIFIED_DOSSIERS.find((d) => d.id === clinic.id);
+                  const isCurrent = dossier ? dossier.id === activeDossier.id : false;
+                  const clinicName = dossier ? dossier.clinic_name : clinic.clinic_name;
+                  const legalName = dossier ? dossier.legal_name : 'Sole Proprietorship';
+                  const doctorName = dossier ? dossier.doctor_name : (clinic.doctor_name || 'Dr. Doctor');
+                  const pan = dossier ? dossier.pan : 'Verified PAN';
+                  const bankName = dossier ? dossier.bank.bank_name : 'Bank Account';
+                  const accNo = dossier ? dossier.bank.account_number : 'Verified A/C';
+                  const ifsc = dossier ? dossier.bank.ifsc : 'IFSC';
+                  const signingPdf = dossier ? dossier.docs.signing_pdf : '#';
+                  const mafExcel = dossier ? dossier.docs.maf_excel : '#';
+                  const zipBundle = dossier ? dossier.docs.zip_bundle : '#';
+
+                  return (
+                    <tr
+                      key={clinic.id}
+                      onClick={() => {
+                        if (dossier) setSelectedDossierId(dossier.id);
+                      }}
+                      className={`hover:bg-blue-50/40 transition-colors cursor-pointer ${
+                        isCurrent ? 'bg-blue-50/25' : ''
+                      }`}
+                    >
+                      <td className="py-3.5 px-4 font-mono text-slate-400 text-[11px]">{index + 1}</td>
+                      <td className="py-3.5 px-4">
+                        <span className="font-bold text-slate-900 block">{clinicName}</span>
+                        <span className="text-[10.5px] text-slate-500">{legalName}</span>
+                      </td>
+                      <td className="py-3.5 px-4">
+                        <span className="font-bold text-slate-800 block">{doctorName}</span>
+                        <span className="font-mono text-emerald-700 text-[11px] font-bold">
+                          PAN: {pan}
+                        </span>
+                      </td>
+                      <td className="py-3.5 px-4 text-slate-600">
+                        <span>{clinic.city}</span>
+                        <span className="block text-[10.5px] text-slate-400 font-mono">{clinic.phone}</span>
+                      </td>
+                      <td className="py-3.5 px-4">
+                        <span className="font-medium text-slate-900 block">{bankName}</span>
+                        <span className="font-mono text-[11px] text-slate-600 block">
+                          A/C: {accNo}
+                        </span>
+                        <span className="font-mono text-[10px] text-blue-700 font-bold">
+                          IFSC: {ifsc}
+                        </span>
+                      </td>
+                      <td className="py-3.5 px-4">
+                        <div className="flex flex-wrap gap-1">
+                          <span className="px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 text-[10px] font-bold border border-emerald-200">
+                            Cheque ✓
+                          </span>
+                          <span className="px-1.5 py-0.5 rounded bg-blue-50 text-blue-700 text-[10px] font-bold border border-blue-200">
+                            PAN ✓
+                          </span>
+                          <span className="px-1.5 py-0.5 rounded bg-sky-50 text-sky-700 text-[10px] font-bold border border-sky-200">
+                            Aadhaar ✓
+                          </span>
+                          <span className="px-1.5 py-0.5 rounded bg-amber-50 text-amber-700 text-[10px] font-bold border border-amber-200">
+                            Udyam ✓
+                          </span>
+                          {dossier?.docs.establishment_reg && (
+                            <span className="px-1.5 py-0.5 rounded bg-indigo-50 text-indigo-700 text-[10px] font-bold border border-indigo-200">
+                              Establishment ✓
+                            </span>
+                          )}
+                          {dossier?.docs.dental_council_reg && (
+                            <span className="px-1.5 py-0.5 rounded bg-teal-50 text-teal-700 text-[10px] font-bold border border-teal-200">
+                              Dental Council ✓
+                            </span>
+                          )}
+                        </div>
+                      </td>
+                      <td className="py-3.5 px-4">
+                        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 text-[10.5px] font-bold border border-emerald-200">
+                          <CheckCircle2 size={11} />
+                          <span>Ready for MID</span>
+                        </span>
+                      </td>
+                      <td className="py-3.5 px-4 text-right">
+                        <div className="flex items-center justify-end gap-1.5" onClick={(e) => e.stopPropagation()}>
+                          <a
+                            href={signingPdf}
+                            download={`Plural_MAF_and_Doctor_KYC_Signing_Dossier_${clinicName.replace(/\s+/g, '_')}.pdf`}
+                            className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-700 text-[11px] font-black border border-emerald-300 transition-colors shadow-2xs"
+                            title="Download Doctor Signing PDF"
+                          >
+                            <FileCheck size={13} />
+                            <span>Signing PDF</span>
+                          </a>
+                          <a
+                            href={mafExcel}
+                            download={`Plural_MAF_${clinicName.replace(/\s+/g, '_')}.xlsx`}
+                            className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-blue-50 hover:bg-blue-100 text-blue-700 text-[11px] font-bold border border-blue-200 transition-colors shadow-2xs"
+                            title="Download Plural MAF Excel"
+                          >
+                            <FileSpreadsheet size={13} />
+                            <span>MAF</span>
+                          </a>
+                          <a
+                            href={zipBundle}
+                            download={`${clinicName.replace(/\s+/g, '_')}_Complete_KYC_Dossier.zip`}
+                            className="inline-flex items-center gap-1 px-2 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-bold border border-slate-300 transition-colors shadow-2xs"
+                            title="Download Complete ZIP Package"
+                          >
+                            <FolderDown size={13} />
+                            <span>ZIP</span>
+                          </a>
+                        </div>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
           </div>
-        )}
+        </div>
 
 
       </main>

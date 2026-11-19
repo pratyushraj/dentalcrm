@@ -183,6 +183,29 @@ def fill_maf_excel(data: dict, out_xlsx: str):
         if data.get("bank_ifsc"):
             ws_maf["F49"] = data["bank_ifsc"]
 
+    # Explicit cells in Final BO
+    if "Final BO" in wb.sheetnames:
+        ws_bo = wb["Final BO"]
+        ws_bo["B4"] = f"Name of the Merchant: {data['legal_name']} (Sole Proprietorship)"
+        ws_bo["C9"] = data["doctor_name"].upper()
+        ws_bo["D9"] = data.get("dob", "01/01/1990")
+        ws_bo["E9"] = "Indian - Pan Card"
+        ws_bo["F9"] = data["pan"]
+        ws_bo["G9"] = "Aadhaar Card"
+        clean_aadh = data["aadhaar"].replace("VID:", "").replace(" ", "").replace("(", "").replace(")", "").replace("XXXX", "").strip()
+        last4 = clean_aadh[-4:] if len(clean_aadh) >= 4 else "0000"
+        ws_bo["H9"] = f"XXXX-XXXX-{last4}"
+        ws_bo["I9"] = data.get("residential_address", data["address"])
+        ws_bo["J9"] = "100%"
+
+    # Explicit cells in Final LIST & PEP
+    if "Final LIST & PEP" in wb.sheetnames:
+        ws_pep = wb["Final LIST & PEP"]
+        ws_pep["C5"] = data["doctor_name"]
+        ws_pep["D5"] = "PROPRIETOR"
+        ws_pep["C22"] = data["doctor_name"].upper()
+        ws_pep["D22"] = "PROPRIETOR / 100% BENEFICIAL OWNER"
+
     wb.save(out_xlsx)
 
 def main():
@@ -199,6 +222,7 @@ def main():
     parser.add_argument("--state", help="Clinic State", default="India")
     parser.add_argument("--pincode", help="Pincode", default="500001")
     parser.add_argument("--address", help="Full Address", default="Clinic Address")
+    parser.add_argument("--residential-address", help="Doctor Residential Address as per Aadhaar")
     parser.add_argument("--bank-name", help="Bank Name", default="Bank")
     parser.add_argument("--bank-account-name", help="Beneficiary Name")
     parser.add_argument("--bank-account-no", help="Current Account Number")
@@ -229,6 +253,7 @@ def main():
         'state': args.state,
         'pincode': args.pincode,
         'address': args.address,
+        'residential_address': args.residential_address or args.address,
         'bank_name': args.bank_name,
         'bank_account_name': args.bank_account_name or (args.clinic_name or "Partner Clinic"),
         'bank_account_no': args.bank_account_no or "000000000000",

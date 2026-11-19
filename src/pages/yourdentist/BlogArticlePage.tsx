@@ -20,6 +20,11 @@ export default function BlogArticlePage() {
     const t = (title + ' ' + category).toLowerCase();
     if (t.includes('hair') || t.includes('transplant') || t.includes('graft') || t.includes('fue') || t.includes('dhi')) return 'Hair Transplant (FUE / DHI)';
     if (t.includes('ivf') || t.includes('fertility') || t.includes('icsi') || t.includes('egg freezing') || t.includes('infertility')) return 'IVF & Fertility Treatment';
+    if (t.includes('hearing') || t.includes('audiolog') || t.includes('ear') || t.includes('deafness') || t.includes('cochlear')) return 'Digital Hearing Aids (Audiology)';
+    if (t.includes('piles') || t.includes('fistula') || t.includes('fissure') || t.includes('proctolog') || t.includes('hemorrhoid')) return 'Laser Piles & Daycare Surgery';
+    if (t.includes('maternity') || t.includes('delivery') || t.includes('pregnancy') || t.includes('c-section') || t.includes('cesarean') || t.includes('obstetric')) return 'Maternity & Normal / C-Section Delivery';
+    if (t.includes('kidney stone') || t.includes('stone') || t.includes('rirs') || t.includes('lithotripsy') || t.includes('urolog') || t.includes('circumcision') || t.includes('phimosis')) return 'Kidney Stone Laser & Urology Surgery';
+    if (t.includes('acl') || t.includes('knee') || t.includes('arthroscop') || t.includes('meniscus') || t.includes('ligament') || t.includes('rotator cuff') || t.includes('shoulder')) return 'Knee Arthroscopy & ACL Sports Surgery';
     if (t.includes('gynecomastia') || t.includes('male breast') || t.includes('rhinoplasty') || t.includes('nose job') || t.includes('cosmetic surgery') || t.includes('plastic surgery')) return 'Gynecomastia / Male Chest Reduction';
     if (t.includes('lasik') || t.includes('contoura') || t.includes('smile') || t.includes('eye') || t.includes('vision') || t.includes('refractive') || t.includes('ophthalm') || t.includes('cataract') || t.includes('icl')) return 'LASIK / Contoura Vision Eye Surgery';
     if (t.includes('full mouth') || t.includes('all-on-4') || t.includes('all-on-6')) return 'Full Mouth Dental Implants';
@@ -162,6 +167,21 @@ export default function BlogArticlePage() {
     }
     if (textLower.match(/ivf|fertility|icsi|infertility/)) {
       return [article.category.toLowerCase(), 'ivf on emi', 'ivf treatment cost emi india', 'fertility loan', 'clinaza medical financing'];
+    }
+    if (textLower.match(/hearing|audiolog|ear|deafness|cochlear/)) {
+      return [article.category.toLowerCase(), 'hearing aid on emi', 'digital hearing aids cost emi', 'audiology loan india', 'clinaza healthcare financing'];
+    }
+    if (textLower.match(/piles|fistula|fissure|proctolog|hemorrhoid/)) {
+      return [article.category.toLowerCase(), 'piles laser surgery on emi', 'laser proctology loan', 'fistula surgery cost emi', 'clinaza daycare financing'];
+    }
+    if (textLower.match(/maternity|delivery|pregnancy|c-section|cesarean|obstetric/)) {
+      return [article.category.toLowerCase(), 'maternity package on emi', 'delivery hospital cost emi', 'c section on emi india', 'clinaza pregnancy financing'];
+    }
+    if (textLower.match(/kidney stone|stone|rirs|lithotripsy|urolog|circumcision|phimosis/)) {
+      return [article.category.toLowerCase(), 'kidney stone laser surgery emi', 'rirs surgery cost emi', 'zsr circumcision on emi', 'clinaza urology financing'];
+    }
+    if (textLower.match(/acl|knee|arthroscop|meniscus|ligament|rotator cuff|shoulder/)) {
+      return [article.category.toLowerCase(), 'acl knee surgery on emi', 'knee arthroscopy loan', 'meniscus repair cost emi', 'clinaza sports injury financing'];
     }
     if (textLower.match(/gynecomastia|rhinoplasty|cosmetic|plastic/)) {
       return [article.category.toLowerCase(), 'gynecomastia surgery emi', 'cosmetic surgery loan india', 'rhinoplasty on emi', 'clinaza medical loans'];

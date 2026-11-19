@@ -24,6 +24,11 @@ const LasikEyeSurgeryEmiPage = lazy(() => import("@/pages/LasikEyeSurgeryEmiPage
 const HairTransplantEmiPage = lazy(() => import("@/pages/HairTransplantEmiPage"));
 const IvfTreatmentEmiPage = lazy(() => import("@/pages/IvfTreatmentEmiPage"));
 const GynecomastiaSurgeryEmiPage = lazy(() => import("@/pages/GynecomastiaSurgeryEmiPage"));
+const HearingAidsEmiPage = lazy(() => import("@/pages/HearingAidsEmiPage"));
+const PilesLaserSurgeryEmiPage = lazy(() => import("@/pages/PilesLaserSurgeryEmiPage"));
+const MaternityDeliveryEmiPage = lazy(() => import("@/pages/MaternityDeliveryEmiPage"));
+const KidneyStoneSurgeryEmiPage = lazy(() => import("@/pages/KidneyStoneSurgeryEmiPage"));
+const AclKneeSurgeryEmiPage = lazy(() => import("@/pages/AclKneeSurgeryEmiPage"));
 const PartnerClinicOnboardingPage = lazy(() => import("@/pages/PartnerClinicOnboardingPage"));
 const ClinicKycUploadPage = lazy(() => import("@/pages/ClinicKycUploadPage"));
 const AdminClinicOnboardingsPage = lazy(() => import("@/pages/AdminClinicOnboardingsPage"));
@@ -89,6 +94,39 @@ export default function AppRoutes() {
           <Route path="/gynecomastia-cost-on-emi" element={<Navigate to="/gynecomastia-surgery-on-emi" replace />} />
           <Route path="/male-chest-reduction-emi" element={<Navigate to="/gynecomastia-surgery-on-emi" replace />} />
           <Route path="/gynecomastia-loan" element={<Navigate to="/gynecomastia-surgery-on-emi" replace />} />
+
+          {/* Digital Hearing Aids & Audiology Dedicated Financing Pages */}
+          <Route path="/hearing-aids-on-emi" element={<LazyRoute><HearingAidsEmiPage /></LazyRoute>} />
+          <Route path="/hearing-aid-on-emi" element={<Navigate to="/hearing-aids-on-emi" replace />} />
+          <Route path="/hearing-aid-loan" element={<Navigate to="/hearing-aids-on-emi" replace />} />
+          <Route path="/hearing-aids-loan" element={<Navigate to="/hearing-aids-on-emi" replace />} />
+
+          {/* Laser Proctology (Piles, Fistula, Fissure) Dedicated Financing Pages */}
+          <Route path="/piles-laser-surgery-on-emi" element={<LazyRoute><PilesLaserSurgeryEmiPage /></LazyRoute>} />
+          <Route path="/laser-piles-surgery-on-emi" element={<Navigate to="/piles-laser-surgery-on-emi" replace />} />
+          <Route path="/piles-surgery-on-emi" element={<Navigate to="/piles-laser-surgery-on-emi" replace />} />
+          <Route path="/piles-on-emi" element={<Navigate to="/piles-laser-surgery-on-emi" replace />} />
+          <Route path="/fistula-laser-surgery-on-emi" element={<Navigate to="/piles-laser-surgery-on-emi" replace />} />
+
+          {/* Maternity & Delivery Hospital Packages Dedicated Financing Pages */}
+          <Route path="/maternity-delivery-on-emi" element={<LazyRoute><MaternityDeliveryEmiPage /></LazyRoute>} />
+          <Route path="/maternity-hospital-emi" element={<Navigate to="/maternity-delivery-on-emi" replace />} />
+          <Route path="/delivery-on-emi" element={<Navigate to="/maternity-delivery-on-emi" replace />} />
+          <Route path="/c-section-delivery-on-emi" element={<Navigate to="/maternity-delivery-on-emi" replace />} />
+          <Route path="/maternity-loan" element={<Navigate to="/maternity-delivery-on-emi" replace />} />
+
+          {/* Kidney Stone Laser & Urology Surgery Dedicated Financing Pages */}
+          <Route path="/kidney-stone-laser-surgery-on-emi" element={<LazyRoute><KidneyStoneSurgeryEmiPage /></LazyRoute>} />
+          <Route path="/kidney-stone-surgery-on-emi" element={<Navigate to="/kidney-stone-laser-surgery-on-emi" replace />} />
+          <Route path="/rirs-laser-surgery-on-emi" element={<Navigate to="/kidney-stone-laser-surgery-on-emi" replace />} />
+          <Route path="/circumcision-on-emi" element={<Navigate to="/kidney-stone-laser-surgery-on-emi" replace />} />
+          <Route path="/zsr-circumcision-emi" element={<Navigate to="/kidney-stone-laser-surgery-on-emi" replace />} />
+
+          {/* Knee Arthroscopy & ACL Sports Surgery Dedicated Financing Pages */}
+          <Route path="/acl-knee-surgery-on-emi" element={<LazyRoute><AclKneeSurgeryEmiPage /></LazyRoute>} />
+          <Route path="/acl-surgery-on-emi" element={<Navigate to="/acl-knee-surgery-on-emi" replace />} />
+          <Route path="/knee-arthroscopy-on-emi" element={<Navigate to="/acl-knee-surgery-on-emi" replace />} />
+          <Route path="/acl-reconstruction-loan" element={<Navigate to="/acl-knee-surgery-on-emi" replace />} />
 
           {/* Direct WhatsApp Share & Demo Links for Loan */}
           <Route path="/loan" element={<Navigate to="/#check-eligibility" replace />} />

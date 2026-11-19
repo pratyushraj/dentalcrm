@@ -24,6 +24,7 @@ const PartnerClinicOnboardingPage = lazy(() => import("@/pages/PartnerClinicOnbo
 const ClinicKycUploadPage = lazy(() => import("@/pages/ClinicKycUploadPage"));
 const AdminClinicOnboardingsPage = lazy(() => import("@/pages/AdminClinicOnboardingsPage"));
 const PartnerPipelinePreviewPage = lazy(() => import("@/pages/PartnerPipelinePreviewPage"));
+const PineLabsUnderwritingPage = lazy(() => import("@/pages/PineLabsUnderwritingPage"));
 const TermsPage = lazy(() => import("@/pages/TermsPage"));
 const ClinicAgreementPage = lazy(() => import("@/pages/ClinicAgreementPage"));
 const PrivacyPolicyPage = lazy(() => import("@/pages/PrivacyPolicyPage"));
@@ -74,6 +75,11 @@ export default function AppRoutes() {
           <Route path="/admin/clinics" element={<LazyRoute><AdminClinicOnboardingsPage /></LazyRoute>} />
           <Route path="/partner-pipeline" element={<LazyRoute><PartnerPipelinePreviewPage /></LazyRoute>} />
           <Route path="/pipeline" element={<Navigate to="/partner-pipeline" replace />} />
+
+          {/* Pine Labs Plural Partner Underwriting Desk */}
+          <Route path="/partner/underwriting" element={<LazyRoute><PineLabsUnderwritingPage /></LazyRoute>} />
+          <Route path="/underwriting" element={<Navigate to="/partner/underwriting" replace />} />
+          <Route path="/pinelabs-portal" element={<Navigate to="/partner/underwriting" replace />} />
 
           {/* Review Assistant Landing Page */}
           <Route path="/review/assist" element={<LazyRoute><ReviewAssistant /></LazyRoute>} />

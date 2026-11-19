@@ -107,7 +107,7 @@ const VERIFIED_DOSSIERS: VerifiedDossier[] = [
     dob: '03/08/1984',
     pan: 'AIVPV7704K',
     aadhaar: '2777 8569 7017',
-    phone: '+91 70366 83034',
+    phone: '+91 79896 96670',
     email: 'Drchaitu.2011@gmail.com',
     city: 'Visakhapatnam, Andhra Pradesh',
     pincode: '530017',
@@ -494,31 +494,24 @@ export default function PineLabsUnderwritingPage() {
 
                     {/* Settlement Bank Details - Full Width Structured Strip */}
                     <div className="bg-slate-50/80 rounded-xl p-3 sm:px-4 sm:py-3 border border-slate-200 text-xs">
-                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
-                        <div className="flex flex-wrap items-center gap-2">
-                          <div className="flex items-center gap-1.5 font-bold text-slate-900">
-                            <Landmark size={14} className="text-emerald-600 shrink-0" />
-                            <span className="whitespace-nowrap">{dossier.bank.bank_name}</span>
-                          </div>
-                          <span className="hidden sm:inline text-slate-300">&bull;</span>
-                          <div className="flex items-center gap-1">
-                            <span className="text-slate-500 text-[11px]">A/C:</span>
-                            <span className="font-mono font-bold text-slate-800 bg-white px-1.5 py-0.5 rounded border border-slate-200 text-[11px] whitespace-nowrap">
-                              {dossier.bank.account_number}
-                            </span>
-                          </div>
-                          <span className="hidden sm:inline text-slate-300">&bull;</span>
-                          <div className="flex items-center gap-1">
-                            <span className="text-slate-500 text-[11px]">IFSC:</span>
-                            <span className="font-mono font-bold text-blue-700 bg-blue-50 px-1.5 py-0.5 rounded border border-blue-200 text-[11px] whitespace-nowrap">
-                              {dossier.bank.ifsc}
-                            </span>
-                          </div>
+                      <div className="flex flex-wrap items-center gap-2">
+                        <div className="flex items-center gap-1.5 font-bold text-slate-900">
+                          <Landmark size={14} className="text-emerald-600 shrink-0" />
+                          <span className="whitespace-nowrap">{dossier.bank.bank_name}</span>
                         </div>
-                        
-                        <div className="flex items-center gap-1 text-[11px] text-emerald-700 font-bold bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200 w-fit shrink-0">
-                          <CheckCircle2 size={12} />
-                          <span>Cheque &amp; Nodal Verified</span>
+                        <span className="hidden sm:inline text-slate-300">&bull;</span>
+                        <div className="flex items-center gap-1">
+                          <span className="text-slate-500 text-[11px]">A/C:</span>
+                          <span className="font-mono font-bold text-slate-800 bg-white px-1.5 py-0.5 rounded border border-slate-200 text-[11px] whitespace-nowrap">
+                            {dossier.bank.account_number}
+                          </span>
+                        </div>
+                        <span className="hidden sm:inline text-slate-300">&bull;</span>
+                        <div className="flex items-center gap-1">
+                          <span className="text-slate-500 text-[11px]">IFSC:</span>
+                          <span className="font-mono font-bold text-blue-700 bg-blue-50 px-1.5 py-0.5 rounded border border-blue-200 text-[11px] whitespace-nowrap">
+                            {dossier.bank.ifsc}
+                          </span>
                         </div>
                       </div>
                     </div>

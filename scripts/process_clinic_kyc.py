@@ -134,8 +134,10 @@ def fill_maf_excel(data: dict, out_xlsx: str):
         "[Company Legal Name as per Cheque]": data['bank_account_name'],
         "[Company Current Account Number]": data['bank_account_no'],
         "[IFSC CODE]": data['bank_ifsc'],
-        "[https://www.yourclinic.com]": f"https://clinaza.in/partner/{data['slug']}",
+        "[https://www.yourclinic.com]": "",
         "MELLOWPRINTS": f"{data['legal_name']} (Sole Proprietorship)",
+        "(CLINAZA)": "",
+        "/ CLINAZA": "",
         "50200068453280": data['bank_account_no'],
         "PRATYUSH RAJ": data['doctor_name'].upper()
     }

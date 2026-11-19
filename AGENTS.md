@@ -99,5 +99,12 @@ Adhere strictly to the following active commercial contracts and partner agreeme
 - **Never Redeploy Vercel for New Clinics**: Never commit static KYC files to Git or push to `main` for routine clinic onboardings. Full Vercel builds trigger headless Chrome pre-rendering on 195+ routes (taking 4+ minutes).
 - **Dynamic Database & Script-Driven Ingestion**: New clinic onboardings must be handled dynamically via database records (`clinic_onboardings`) and cloud storage, or through automated ingestion scripts (`scripts/process_clinic_kyc.py`) executing OCR, MAF generation, and dossier creation locally in under 10 seconds.
 
+## 11. Pine Labs Sub-Merchant MAF Branding & Signatory Invariant
+- **Never Append "(CLINAZA)" to Clinic Legal Names or Signatures**: In Pine Labs Sub-Merchant MAF Excel files, PEP sheets, BO declarations, and doctor signing PDFs, never append `(CLINAZA)`, `/ CLINAZA`, or Clinaza branding to the partner clinic's legal entity name or doctor signature line.
+- **Sole Clinic Capacity**: The doctor signs strictly as the Proprietor, Partner, or Authorized Signatory of their clinic entity (e.g. `For NITYA DENTAL AND COSMETIC CLINIC (Sole Proprietorship)`), NOT on behalf of or co-branded with Clinaza.
+- **No Unreplaced Bracket Placeholders**: Ensure zero unreplaced template bracket placeholders remain in any generated MAF sheets (e.g. `[https://www.yourclinic.com]`, `[Pincode]`, `[Bank Name]`). Clinic website should be left blank or set to `https://clinaza.in/partner/<slug>` if applicable, with `Web only: Yes`.
+- **Clinic-Specific Description & Contacts**: Row 42 business description must describe the clinic's healthcare / dental practice (`MCC 8021`), and alternate contacts must reference the clinic's desk (`Clinic Reception Desk` / `Clinic Accounts Desk`), never `Clinaza Support Desk`.
+
+
 
 

@@ -91,7 +91,7 @@ export interface VerifiedDossier {
     doctor_pan: string;
     aadhaar_front: string;
     aadhaar_back?: string;
-    udyam_pdf: string;
+    udyam_pdf?: string;
     establishment_reg?: string;
     dental_council_reg?: string;
   };
@@ -185,6 +185,50 @@ const VERIFIED_DOSSIERS: VerifiedDossier[] = [
       aadhaar_front: '/docs/kyc/hear_one/dr_angiras_vishnu_aadhaar_front.jpg',
       aadhaar_back: '/docs/kyc/hear_one/dr_angiras_vishnu_aadhaar_back.jpg',
       udyam_pdf: '/docs/kyc/hear_one/hear_one_udyam_certificate.pdf'
+    },
+    status: 'Ready for Sub-Merchant MID'
+  },
+  {
+    id: 'nitya-dental',
+    clinic_name: 'Nitya Dental & Cosmetic Clinic',
+    legal_name: 'NITYA DENTAL AND COSMETIC CLINIC (Sole Proprietorship)',
+    doctor_name: 'Dr. Bhanu Prakash Singh',
+    dob: '25/12/1986',
+    pan: 'BZUPS9855B',
+    aadhaar: 'VID: 9104 2807 6329 2177 (XXXX 6013)',
+    phone: '+91 89890 14483',
+    email: 'bcds143@gmail.com',
+    city: 'Bhopal, Madhya Pradesh',
+    pincode: '462023',
+    address: 'Shop No. 48, Minal Gate No. 1, J. K. Road, Raj Capital, Block No. 2, Bhopal, Madhya Pradesh - 462023',
+    residential_address: 'House No. 2-H, Shri Ram Chandra Hights, Ayodhya By Pass Road, Huzur, Ayodhya Nagar, Bhopal, Madhya Pradesh - 462041',
+    specialties: ['Dental Implants', 'Cosmetic Dentistry', 'Laser & Hair', 'Clear Aligners', 'Root Canal'],
+    submission_badge: 'Fresh Submission • Nov 19',
+    bank: {
+      bank_name: 'HDFC Bank',
+      account_holder: 'NITYA DENTAL AND COSMETIC CLINIC',
+      account_number: '50200096846950',
+      account_type: 'Current Account',
+      ifsc: 'HDFC0008228',
+      branch: 'STAR SQUARE, Kasturba Nagar, Bhopal - 462023',
+      micr: '462240032',
+      cheque_no: '000002'
+    },
+    business_proof: {
+      type: 'Shop & Establishment Registration',
+      number: 'BHOP240911SE006766',
+      category: 'Labour Dept, Bhopal',
+      date: '11/09/2024'
+    },
+    docs: {
+      signing_pdf: '/docs/kyc/nitya_dental/Plural_MAF_and_Doctor_KYC_Signing_Dossier_Nitya_Dental.pdf',
+      zip_bundle: '/docs/kyc/nitya_dental/Nitya_Dental_Complete_KYC_Dossier.zip',
+      maf_excel: '/docs/kyc/nitya_dental/Plural_MAF_BO_PEP_Nitya_Dental.xlsx',
+      cancelled_cheque: '/docs/kyc/nitya_dental/nitya_dental_cancelled_cheque.jpg',
+      doctor_pan: '/docs/kyc/nitya_dental/dr_bhanu_prakash_pan.jpg',
+      aadhaar_front: '/docs/kyc/nitya_dental/dr_bhanu_prakash_aadhaar_front.jpg',
+      aadhaar_back: '/docs/kyc/nitya_dental/dr_bhanu_prakash_aadhaar_back.jpg',
+      establishment_reg: '/docs/kyc/nitya_dental/nitya_dental_establishment_registration.jpg'
     },
     status: 'Ready for Sub-Merchant MID'
   }

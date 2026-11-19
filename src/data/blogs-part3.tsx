@@ -505,7 +505,7 @@ export const BLOGS_PART3 = [
     author: "Clinaza Medical Insights",
     summary: "Complete guide to LASIK, Contoura Vision, SMILE, and FEMTO LASIK eye surgery costs in India on monthly EMI. Understand procedure differences, city-wise pricing, and why health insurance doesn't cover refractive surgery.",
     featuredImage: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=1200&auto=format&fit=crop",
-    metaDescription: "LASIK eye surgery cost on EMI in India 2026: Compare LASIK, Contoura Vision & SMILE pricing (₹20k–₹85k/eye), 0% monthly EMI from ₹1,200/mo, and top clinics.",
+    metaDescription: "LASIK eye surgery cost on EMI in India 2026: Compare LASIK, Contoura Vision & SMILE pricing (₹20k–₹85k/eye), flexible monthly EMI from ₹1,800/mo, and top clinics.",
     faqs: [
       {
         question: "How much does LASIK eye surgery cost in India per eye?",
@@ -513,7 +513,7 @@ export const BLOGS_PART3 = [
       },
       {
         question: "Can LASIK surgery be done on monthly EMI in India?",
-        answer: "Yes. Leading LASIK and ophthalmology centers partner with healthcare NBFCs and Clinaza point-of-care financing to offer 0% to low-interest EMI (3 to 24 months). You can get both eyes corrected today and repay in small monthly installments of ₹1,200 to ₹4,500/month."
+        answer: "Yes. Leading LASIK and ophthalmology centers partner with healthcare NBFCs and Clinaza point-of-care financing to offer flexible monthly EMIs (3 to 24 months) starting from ~11.5% p.a. You can get both eyes corrected today and repay in small monthly installments of ₹1,800 to ₹4,500/month."
       },
       {
         question: "Does health insurance cover LASIK surgery in India?",

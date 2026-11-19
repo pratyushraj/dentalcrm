@@ -1377,13 +1377,13 @@ export const BLOGS_PART2 = [
   },
     {
     slug: "contoura-vision-vs-smile-vs-lasik-cost-india",
-    title: "Contoura Vision vs SMILE vs Femto-LASIK — Which Eye Surgery is Best in India 2025?",
+    title: "Contoura Vision vs SMILE vs Femto-LASIK — Which Eye Surgery is Best in India 2026?",
     category: "Medical EMI",
     readTime: "8 min read",
     publishDate: "2026-09-08",
     author: "Clinaza Clinical Insights",
     summary: "Detailed comparison between Contoura Vision, Flapless SMILE Pro, Blade-Free Femto-LASIK, and Standard LASIK. Compare technology, night vision glare, corneal safety, recovery time, and costs on EMI.",
-    featuredImage: "/assets/yourdentist/laser_whitening.png",
+    featuredImage: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=1200&auto=format&fit=crop",
     metaDescription: "Contoura Vision vs SMILE vs Femto-LASIK in India: Compare night glare, corneal safety, costs (₹40K–₹1.3L) and flexible monthly EMI options on Clinaza.",
     faqs: [
       { question: "What is the difference between Contoura Vision and SMILE?", answer: "Contoura Vision is topography-guided LASIK that maps 22,000 elevation points on your cornea to eliminate minute surface irregularities for superior night vision. SMILE is a 100% flapless keyhole laser procedure with maximum corneal biomechanical stability." },

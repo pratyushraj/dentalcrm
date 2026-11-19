@@ -20,6 +20,7 @@ const LoanDemoPage = lazy(() => import("@/pages/LoanDemoPage"));
 const DentalImplantLoanPage = lazy(() => import("@/pages/DentalImplantLoanPage"));
 const ClearAlignersEmiPage = lazy(() => import("@/pages/ClearAlignersEmiPage"));
 const AestheticTreatmentsEmiPage = lazy(() => import("@/pages/AestheticTreatmentsEmiPage"));
+const LasikEyeSurgeryEmiPage = lazy(() => import("@/pages/LasikEyeSurgeryEmiPage"));
 const PartnerClinicOnboardingPage = lazy(() => import("@/pages/PartnerClinicOnboardingPage"));
 const ClinicKycUploadPage = lazy(() => import("@/pages/ClinicKycUploadPage"));
 const AdminClinicOnboardingsPage = lazy(() => import("@/pages/AdminClinicOnboardingsPage"));
@@ -59,6 +60,12 @@ export default function AppRoutes() {
           <Route path="/aesthetics-emi" element={<Navigate to="/aesthetic-treatments-on-emi" replace />} />
           <Route path="/aesthetics" element={<Navigate to="/aesthetic-treatments-on-emi" replace />} />
           <Route path="/derma-emi" element={<Navigate to="/aesthetic-treatments-on-emi" replace />} />
+
+          {/* LASIK & Refractive Eye Surgery Financing Dedicated Pages */}
+          <Route path="/lasik-eye-surgery-on-emi" element={<LazyRoute><LasikEyeSurgeryEmiPage /></LazyRoute>} />
+          <Route path="/lasik-on-emi" element={<Navigate to="/lasik-eye-surgery-on-emi" replace />} />
+          <Route path="/lasik-loan" element={<Navigate to="/lasik-eye-surgery-on-emi" replace />} />
+          <Route path="/contoura-vision-on-emi" element={<Navigate to="/lasik-eye-surgery-on-emi" replace />} />
 
           {/* Direct WhatsApp Share & Demo Links for Loan */}
           <Route path="/loan" element={<Navigate to="/#check-eligibility" replace />} />

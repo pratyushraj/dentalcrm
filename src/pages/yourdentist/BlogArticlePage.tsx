@@ -18,6 +18,7 @@ export default function BlogArticlePage() {
   // Determine default treatment category from article
   const getDefaultTreatment = (title: string, category: string) => {
     const t = (title + ' ' + category).toLowerCase();
+    if (t.includes('lasik') || t.includes('contoura') || t.includes('smile') || t.includes('eye') || t.includes('vision') || t.includes('refractive') || t.includes('ophthalm')) return 'LASIK / Contoura Vision Eye Surgery';
     if (t.includes('full mouth') || t.includes('all-on-4') || t.includes('all-on-6')) return 'Full Mouth Dental Implants';
     if (t.includes('implant')) return 'Dental Implants';
     if (t.includes('aligner') || t.includes('invisible')) return 'Clear Aligners';
@@ -151,13 +152,18 @@ export default function BlogArticlePage() {
     }))
   };
 
+  const isEyeArticle = (article.title + ' ' + article.category).toLowerCase().match(/lasik|contoura|smile|eye|vision|refractive|ophthalm/);
+  const blogKeywords = isEyeArticle
+    ? [article.category.toLowerCase(), 'lasik on emi', 'contoura vision cost emi', 'laser eye surgery financing india', 'clinaza healthcare loans']
+    : [article.category.toLowerCase(), 'clinaza financing', 'dental care emi india'];
+
   return (
     <div className="min-h-screen bg-[#fafafa] text-neutral-900 font-sora antialiased selection:bg-[#5b72ff] selection:text-white pb-16 sm:pb-0">
       <ReadingProgressBar />
       <SEOHead
         title={seoTitle}
         description={article.metaDescription}
-        keywords={[article.category.toLowerCase(), 'clinaza financing', 'dental care emi india']}
+        keywords={blogKeywords}
         canonicalUrl={`https://www.clinaza.in/blog/${article.slug}`}
         type="article"
         publishedTime={isoDate}

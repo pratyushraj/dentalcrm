@@ -235,6 +235,51 @@ const VERIFIED_DOSSIERS: VerifiedDossier[] = [
       establishment_reg: '/docs/kyc/nitya_dental/nitya_dental_establishment_registration.jpg'
     },
     status: 'Ready for Sub-Merchant MID'
+  },
+  {
+    id: 'exldentist-clinic',
+    clinic_name: 'Exldentist Clinic',
+    legal_name: 'EXLDENTIST CLINIC (Sole Proprietorship)',
+    doctor_name: 'Dr. Priyanka Kumar',
+    dob: '03/05/1981',
+    pan: 'AEKPB4894H',
+    aadhaar: '2507 3633 1374',
+    phone: '+91 99101 19555',
+    email: 'kumarpriyankaa@gmail.com',
+    city: 'Gurugram, Haryana',
+    pincode: '122009',
+    address: 'Flat No. 7702, Basement, 77th Avenue, DLF Phase 4, Gurugram, Haryana - 122009',
+    residential_address: 'Flat No. 7702, 77th Avenue, DLF Phase 4, Gurugram, Haryana - 122009',
+    specialties: ['Preventive Dentistry', 'Aesthetic & Cosmetic Dentistry', 'Dental Restorations', 'Root Canal Therapy'],
+    submission_badge: 'Fresh Submission • Nov 19',
+    bank: {
+      bank_name: 'Axis Bank',
+      account_holder: 'EXLDENTIST CLINIC',
+      account_number: '920020052899970',
+      account_type: 'Current Account',
+      ifsc: 'UTIB0000131',
+      branch: 'DLF Gurgaon Branch, Haryana - 122002',
+      micr: '110211019',
+      cheque_no: '000029'
+    },
+    business_proof: {
+      type: 'Udyam Registration Certificate',
+      number: 'UDYAM-HR-05-0120345',
+      category: 'Micro - Services',
+      date: '15/10/2024'
+    },
+    docs: {
+      signing_pdf: '/docs/kyc/exldentist_clinic/Plural_MAF_and_Doctor_KYC_Signing_Dossier_Exldentist_Clinic.pdf',
+      zip_bundle: '/docs/kyc/exldentist_clinic/Exldentist_Clinic_Complete_KYC_Dossier.zip',
+      maf_excel: '/docs/kyc/exldentist_clinic/Plural_MAF_BO_PEP_Exldentist_Clinic.xlsx',
+      gst_declaration_pdf: '/docs/kyc/exldentist_clinic/GST_Exemption_Declaration_exldentist_clinic.pdf',
+      cancelled_cheque: '/docs/kyc/exldentist_clinic/exldentist_cancelled_cheque.jpg',
+      doctor_pan: '/docs/kyc/exldentist_clinic/dr_priyanka_kumar_pan.jpg',
+      aadhaar_front: '/docs/kyc/exldentist_clinic/dr_priyanka_kumar_aadhaar.jpg',
+      dental_council_reg: '/docs/kyc/exldentist_clinic/dr_priyanka_kumar_dental_council_registration.jpg',
+      udyam_pdf: '/docs/kyc/exldentist_clinic/exldentist_udyam_certificate_p1.jpg'
+    },
+    status: 'Ready for Sub-Merchant MID'
   }
 ];
 

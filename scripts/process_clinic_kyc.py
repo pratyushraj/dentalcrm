@@ -78,7 +78,7 @@ def build_signing_pages(pan_img: str, aadhaar_img: str, pan: str, doctor_name: s
     story_pan.append(Image(pan_img, width=target_w, height=target_h))
     story_pan.append(Spacer(1, 14*mm))
     story_pan.append(Paragraph('<b>Self-Attestation &amp; Verification Declaration:</b>', sign_style))
-    story_pan.append(Paragraph('I hereby confirm that this is a true, authentic, and verified copy of my original Permanent Account Number (PAN) card provided for sub-merchant underwriting with Pine Labs Plural / Clinaza.', body_style))
+    story_pan.append(Paragraph('I hereby confirm that this is a true, authentic, and verified copy of my original Permanent Account Number (PAN) card provided for sub-merchant underwriting with Pine Labs Plural.', body_style))
     story_pan.append(Spacer(1, 16*mm))
     story_pan.append(Paragraph('<b>Signature of Managing Doctor:</b> ___________________________ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>Date:</b> ______________', sign_style))
     story_pan.append(Spacer(1, 3*mm))
@@ -101,7 +101,7 @@ def build_signing_pages(pan_img: str, aadhaar_img: str, pan: str, doctor_name: s
     story_aadh.append(Image(aadhaar_img, width=target_w, height=target_h))
     story_aadh.append(Spacer(1, 10*mm))
     story_aadh.append(Paragraph('<b>Self-Attestation &amp; Verification Declaration:</b>', sign_style))
-    story_aadh.append(Paragraph('I hereby confirm that this is a true, authentic, and verified copy of my Aadhaar card provided voluntarily for identity and address verification for sub-merchant onboarding with Pine Labs Plural / Clinaza.', body_style))
+    story_aadh.append(Paragraph('I hereby confirm that this is a true, authentic, and verified copy of my Aadhaar card provided voluntarily for identity and address verification for sub-merchant onboarding with Pine Labs Plural.', body_style))
     story_aadh.append(Spacer(1, 14*mm))
     story_aadh.append(Paragraph('<b>Signature of Managing Doctor:</b> ___________________________ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>Date:</b> ______________', sign_style))
     story_aadh.append(Spacer(1, 3*mm))
@@ -131,7 +131,7 @@ def build_gst_exemption_page(clinic_name: str, legal_name: str, doctor_name: str
         HRFlowable(width='100%', thickness=1, color='#cbd5e1', spaceAfter=4*mm),
         Paragraph('<b>TO WHOMSOEVER IT MAY CONCERN</b>', to_style),
         Spacer(1, 1.5*mm),
-        Paragraph('<b>To:</b> Pine Labs Private Limited (\'Plural by Pine Labs\') &amp; Clinaza Technologies Private Limited', meta_style),
+        Paragraph('<b>To:</b> Pine Labs Private Limited (\'Plural by Pine Labs\')', meta_style),
         Spacer(1, 2.5*mm),
         Paragraph('We, the undersigned healthcare clinical establishment, hereby solemnly declare, certify, and affirm the following statutory facts regarding our Goods and Services Tax (GST) registration status:', body_style),
         Spacer(1, 2.5*mm),
@@ -143,7 +143,7 @@ def build_gst_exemption_page(clinic_name: str, legal_name: str, doctor_name: str
         Spacer(1, 2*mm),
         Paragraph('<b>4. Purpose of Submission:</b> This self-declaration is executed and submitted for merchant onboarding, Sub-Merchant Payment Gateway MID allocation, and settlement bank current account whitelisting for point-of-care patient checkout facilities.', bullet_style),
         Spacer(1, 2*mm),
-        Paragraph('<b>5. Undertaking:</b> We undertake to notify Pine Labs Private Limited and Clinaza Technologies immediately in the event of any material change in our business activities or statutory tax liability status.', bullet_style),
+        Paragraph('<b>5. Undertaking:</b> We undertake to notify Pine Labs Private Limited immediately in the event of any material change in our business activities or statutory tax liability status.', bullet_style),
         Spacer(1, 6*mm),
         Paragraph('Sincerely,', body_style),
         Spacer(1, 1*mm),

@@ -429,7 +429,7 @@ export async function downloadAutoFilledGstExemptionDocx({
                 text: `1. We are a registered healthcare "Clinical Establishment" engaged in providing bona fide medical healthcare and dental clinical services.\n\n` +
                       `2. In accordance with the statutory provisions of Notification No. 12/2017-Central Tax (Rate) dated 28th June, 2017 (Entry No. 74) issued by the Ministry of Finance, Department of Revenue, Government of India, healthcare services provided by a clinical establishment, an authorized medical practitioner, or paramedics are EXEMPT from Goods and Services Tax (NIL rate of GST).\n\n` +
                       `3. Since the entire turnover of our practice is derived from exempt healthcare treatments, we are not required to obtain GST registration under Section 23 of the Central Goods and Services Tax (CGST) Act, 2017, and consequently carry no GSTIN.\n\n` +
-                      `4. This self-declaration is issued to Pine Labs Private Limited ("Plural") and Clinaza Technologies for the sole purpose of merchant onboarding, Payment Gateway MID issuance, and bank account settlement whitelisting.\n\n`,
+                      `4. This self-declaration is issued to Pine Labs Private Limited ("Plural") for the sole purpose of merchant onboarding, Payment Gateway MID issuance, and bank account settlement whitelisting.\n\n`,
                 size: 20,
               }),
             ],
@@ -626,7 +626,7 @@ export function printAutoFilledGstExemption({
         3. In view of the above statutory exemption, the entire turnover of our practice is exempt from GST, and we are not required to obtain GST registration under Section 23 of the CGST Act, 2017, and carry no GSTIN.
       </div>
       <div class="p-block">
-        4. This self-declaration is issued to Pine Labs Private Limited ("Plural") and Clinaza Technologies for the purpose of payment gateway merchant underwriting and bank account settlement whitelisting.
+        4. This self-declaration is issued to Pine Labs Private Limited ("Plural") for the purpose of payment gateway merchant underwriting and bank account settlement whitelisting.
       </div>
       <div class="sig-block">
         <p>Sincerely,</p>

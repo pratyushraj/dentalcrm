@@ -740,18 +740,7 @@ export default function PineLabsUnderwritingPage() {
           </div>
         )}
 
-        {/* ── SETTLEMENT INVARIANTS FOOTER NOTE ── */}
-        <div className="bg-white border border-slate-200 rounded-2xl p-5 text-xs text-slate-600 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-2xs">
-          <div className="space-y-1 text-center sm:text-left">
-            <span className="font-bold text-slate-900">Pine Labs Sub-Merchant Contractual Agreement Terms:</span>
-            <p className="text-[11px] text-slate-500">
-              ₹0 Setup / Onboarding Fee &bull; ₹0 Annual Maintenance Charges (AMC) &bull; Commercial MDR: Credit Card EMI 1.85%, Debit Card EMI 0.90%, UPI 0.40% &bull; T+1 Automatic Nodal Settlements.
-            </p>
-          </div>
-          <div className="text-[11px] text-slate-400 font-mono">
-            Portal Version: 2026.11-PLURAL
-          </div>
-        </div>
+
       </main>
     </div>
   );

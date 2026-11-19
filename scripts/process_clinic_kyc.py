@@ -139,7 +139,11 @@ def fill_maf_excel(data: dict, out_xlsx: str):
         "(CLINAZA)": "",
         "/ CLINAZA": "",
         "50200068453280": data['bank_account_no'],
-        "PRATYUSH RAJ": data['doctor_name'].upper()
+        "PRATYUSH RAJ": data['doctor_name'].upper(),
+        "Pratyush Raj": data['doctor_name'],
+        "7292984244": data['phone'].replace("+91", "").replace(" ", ""),
+        "pratyushraj@outlook.com": data['email'],
+        "support@clinaza.in": data.get('alt_email', data['email'])
     }
 
     for s in wb.sheetnames:
@@ -157,7 +161,17 @@ def fill_maf_excel(data: dict, out_xlsx: str):
     # Explicit cells in Final MAF
     if "Final MAF" in wb.sheetnames:
         ws_maf = wb["Final MAF"]
+        ws_maf["D23"] = "Primary Name -"
+        ws_maf["E23"] = data["doctor_name"]
+        ws_maf["D24"] = "Primary Contact no. -"
+        ws_maf["E24"] = data["phone"].replace("+91", "").replace(" ", "")
+        ws_maf["D25"] = "Primary Email IDs -"
+        ws_maf["E25"] = data["email"]
+        ws_maf["D28"] = "Alternate Name -"
+        ws_maf["E28"] = "Clinic Accounts Desk"
         ws_maf["B30"] = data.get("alt_email", data["email"])
+        ws_maf["D30"] = "Alternate Email ID -"
+        ws_maf["E30"] = data.get("alt_email", data["email"])
         ws_maf["B33"] = "https://clinaza.in"
         ws_maf["B34"] = "https://clinaza.in/api/webhook/pinelabs"
         ws_maf["B38"] = None

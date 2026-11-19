@@ -1,6 +1,13 @@
 {
   "version": 2,
   "skills": {
+    "antialgorithm": {
+      "source": "mankidev/antialgorithm",
+      "commit": "766e30411195a9198afad38f3d76e08701ed4516",
+      "sourceType": "github",
+      "skillPath": "SKILL.md",
+      "computedHash": "8f53c5fda30fac0e8efaa4e0062daa5ada897713272f9eff6706227e472885e5"
+    },
     "enhance-prompt": {
       "source": "google-labs-code/stitch-skills",
       "sourceType": "github",
@@ -13,6 +20,34 @@
       "skillPath": "skills/modern-web-guidance/SKILL.md",
       "computedHash": "9e69ce00dc314b64f6664031b70295ea46c7de93ac682c624808df6e48e08b66"
     },
+    "obscura-crawl": {
+      "source": "epicsagas/obscura-plugin",
+      "commit": "dbf42741ec5a12fc2544d3f023521643104aafb7",
+      "sourceType": "github",
+      "skillPath": "skills/obscura-crawl/SKILL.md",
+      "computedHash": "d60e98bf17500c3603ead7caa5bdd2212363f5798815fc85b898bd84f6c2662b"
+    },
+    "obscura-fetch": {
+      "source": "epicsagas/obscura-plugin",
+      "commit": "dbf42741ec5a12fc2544d3f023521643104aafb7",
+      "sourceType": "github",
+      "skillPath": "skills/obscura-fetch/SKILL.md",
+      "computedHash": "e8768374af1f36f96f29506f42d05ba2cd966480b2847134c6367bd2dc1b1c8c"
+    },
+    "obscura-pipeline": {
+      "source": "epicsagas/obscura-plugin",
+      "commit": "dbf42741ec5a12fc2544d3f023521643104aafb7",
+      "sourceType": "github",
+      "skillPath": "skills/obscura-pipeline/SKILL.md",
+      "computedHash": "9f12e6d4fa81f0c2ddb9ec12ffdb21f9083944bfdc1a71754b9e3f14822303db"
+    },
+    "obscura-scrape": {
+      "source": "epicsagas/obscura-plugin",
+      "commit": "dbf42741ec5a12fc2544d3f023521643104aafb7",
+      "sourceType": "github",
+      "skillPath": "skills/obscura-scrape/SKILL.md",
+      "computedHash": "2ff481e576f658a0d8c9288053fc7a75647e88454215da0c61b029b1d6750eab"
+    },
     "react-vite-dashboard": {
       "source": "google-labs-code/stitch-skills",
       "sourceType": "github",
@@ -24,6 +59,13 @@
       "sourceType": "github",
       "skillPath": "plugins/stitch-build/skills/remotion/SKILL.md",
       "computedHash": "394d5cfcb175f4db20c7e2a45ee8580f72c5c81d1c409a0b0a73fb33956e0921"
+    },
+    "stick-scene": {
+      "source": "nilbuild/stick-scene",
+      "commit": "ca84311177a020c2dff7dfd9cb2e7b786288c1ab",
+      "sourceType": "github",
+      "skillPath": "SKILL.md",
+      "computedHash": "dcae528910b2c6d187570966cbc83a51b8f569b023be166a01bfc6012e5d8f1c"
     },
     "stitch-loop": {
       "source": "google-labs-code/stitch-skills",

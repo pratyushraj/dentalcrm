@@ -315,7 +315,11 @@ export const PatientEligibilityModal: React.FC<PatientEligibilityModalProps> = (
                     onChange={(e) => setTreatment(e.target.value)}
                     className="w-full px-3.5 py-2.5 bg-[#F8FAFC] border border-slate-200 rounded-xl text-xs text-slate-900 focus:outline-none focus:border-[#0867E8] focus:bg-white transition-all"
                   >
+                    <option value="Hair Transplant (FUE / DHI)">Hair Transplant (FUE / DHI)</option>
+                    <option value="IVF & Fertility Treatment">IVF &amp; Fertility Treatment</option>
                     <option value="LASIK / Contoura Vision Eye Surgery">LASIK / Contoura Vision Eye Surgery</option>
+                    <option value="Gynecomastia / Male Chest Reduction">Gynecomastia / Male Chest Reduction</option>
+                    <option value="Cosmetic & Plastic Surgery">Cosmetic &amp; Plastic Surgery</option>
                     <option value="Dental Implants">Single / Multi Dental Implants</option>
                     <option value="Full Mouth Dental Implants">Full Mouth All-on-4 / All-on-6</option>
                     <option value="Clear Aligners">Clear Aligners / Invisible Braces</option>

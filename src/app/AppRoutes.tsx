@@ -21,6 +21,9 @@ const DentalImplantLoanPage = lazy(() => import("@/pages/DentalImplantLoanPage")
 const ClearAlignersEmiPage = lazy(() => import("@/pages/ClearAlignersEmiPage"));
 const AestheticTreatmentsEmiPage = lazy(() => import("@/pages/AestheticTreatmentsEmiPage"));
 const LasikEyeSurgeryEmiPage = lazy(() => import("@/pages/LasikEyeSurgeryEmiPage"));
+const HairTransplantEmiPage = lazy(() => import("@/pages/HairTransplantEmiPage"));
+const IvfTreatmentEmiPage = lazy(() => import("@/pages/IvfTreatmentEmiPage"));
+const GynecomastiaSurgeryEmiPage = lazy(() => import("@/pages/GynecomastiaSurgeryEmiPage"));
 const PartnerClinicOnboardingPage = lazy(() => import("@/pages/PartnerClinicOnboardingPage"));
 const ClinicKycUploadPage = lazy(() => import("@/pages/ClinicKycUploadPage"));
 const AdminClinicOnboardingsPage = lazy(() => import("@/pages/AdminClinicOnboardingsPage"));
@@ -66,6 +69,26 @@ export default function AppRoutes() {
           <Route path="/lasik-on-emi" element={<Navigate to="/lasik-eye-surgery-on-emi" replace />} />
           <Route path="/lasik-loan" element={<Navigate to="/lasik-eye-surgery-on-emi" replace />} />
           <Route path="/contoura-vision-on-emi" element={<Navigate to="/lasik-eye-surgery-on-emi" replace />} />
+
+          {/* Hair Restoration (FUE/DHI) Dedicated Financing Pages */}
+          <Route path="/hair-transplant-on-emi" element={<LazyRoute><HairTransplantEmiPage /></LazyRoute>} />
+          <Route path="/hair-transplant-cost-on-emi" element={<Navigate to="/hair-transplant-on-emi" replace />} />
+          <Route path="/hair-transplant-emi" element={<Navigate to="/hair-transplant-on-emi" replace />} />
+          <Route path="/hair-transplant-loan" element={<Navigate to="/hair-transplant-on-emi" replace />} />
+
+          {/* IVF & Fertility Treatment Dedicated Financing Pages */}
+          <Route path="/ivf-treatment-on-emi" element={<LazyRoute><IvfTreatmentEmiPage /></LazyRoute>} />
+          <Route path="/ivf-on-emi" element={<Navigate to="/ivf-treatment-on-emi" replace />} />
+          <Route path="/ivf-cost-on-emi" element={<Navigate to="/ivf-treatment-on-emi" replace />} />
+          <Route path="/fertility-loan" element={<Navigate to="/ivf-treatment-on-emi" replace />} />
+          <Route path="/ivf-loan" element={<Navigate to="/ivf-treatment-on-emi" replace />} />
+
+          {/* Gynecomastia & Male Chest Reduction Dedicated Financing Pages */}
+          <Route path="/gynecomastia-surgery-on-emi" element={<LazyRoute><GynecomastiaSurgeryEmiPage /></LazyRoute>} />
+          <Route path="/gynecomastia-on-emi" element={<Navigate to="/gynecomastia-surgery-on-emi" replace />} />
+          <Route path="/gynecomastia-cost-on-emi" element={<Navigate to="/gynecomastia-surgery-on-emi" replace />} />
+          <Route path="/male-chest-reduction-emi" element={<Navigate to="/gynecomastia-surgery-on-emi" replace />} />
+          <Route path="/gynecomastia-loan" element={<Navigate to="/gynecomastia-surgery-on-emi" replace />} />
 
           {/* Direct WhatsApp Share & Demo Links for Loan */}
           <Route path="/loan" element={<Navigate to="/#check-eligibility" replace />} />

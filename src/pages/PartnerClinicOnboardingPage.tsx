@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { SEOHead } from '@/components/seo/SEOHead';
 import { 
   Building2, 
@@ -41,6 +41,7 @@ import { initiateRazorpayPayment, RAZORPAY_CONFIG } from '@/services/razorpaySer
 import preloadedClinics from '@/data/onboarded_clinics.json';
 
 export default function PartnerClinicOnboardingPage() {
+  const navigate = useNavigate();
   const [form, setForm] = useState({
     clinicName: '',
     doctorName: '',
@@ -274,6 +275,7 @@ export default function PartnerClinicOnboardingPage() {
     }
 
     setIsSubmitting(true);
+    let newClinicId = '';
 
     try {
       // 1. Save directly to Supabase with schema-validated columns
@@ -309,6 +311,7 @@ export default function PartnerClinicOnboardingPage() {
           .single();
 
         if (insertRes?.id) {
+          newClinicId = insertRes.id;
           setSavedClinicId(insertRes.id);
         } else if (insertError) {
           console.warn('[Supabase] Insert notice:', insertError);
@@ -379,7 +382,21 @@ export default function PartnerClinicOnboardingPage() {
 
     setIsSubmitting(false);
     setSubmitted(true);
-    toast.success('Clinic profile accredited successfully!');
+    toast.success('Clinic profile accredited! Redirecting to link bank account...');
+
+    // Auto-redirect directly to Step 2 (/clinic-kyc) so doctor is never dropped
+    const kycParams = new URLSearchParams();
+    if (newClinicId) kycParams.set('id', newClinicId);
+    if (form.clinicName) kycParams.set('clinic', form.clinicName);
+    if (form.doctorName) kycParams.set('doctor', form.doctorName);
+    if (form.phone) kycParams.set('phone', form.phone);
+    if (form.city) kycParams.set('city', form.city);
+    if (form.email) kycParams.set('email', form.email);
+    if (form.website) kycParams.set('website', form.website);
+
+    setTimeout(() => {
+      navigate(`/clinic-kyc?${kycParams.toString()}`);
+    }, 1200);
   };
 
   const copyShareLink = () => {
@@ -476,8 +493,14 @@ export default function PartnerClinicOnboardingPage() {
                 {form.clinicName ? `${form.clinicName} Accredited!` : 'Clinic Details Submitted!'}
               </h2>
               <p className="text-xs text-slate-600 max-w-lg mx-auto">
-                Your profile has been logged in the Clinaza partner network. Complete Step 2 below to link your current account for direct T+1 patient treatment payouts.
+                Redirecting automatically to Step 2 to link your current account for direct T+1 patient treatment payouts...
               </p>
+              <div className="pt-1">
+                <span className="inline-flex items-center gap-2 text-xs font-bold text-[#0867E8] bg-blue-50 border border-blue-200 px-3 py-1 rounded-full animate-pulse">
+                  <RefreshCw size={12} className="animate-spin" />
+                  <span>Loading Step 2: KYC &amp; Bank Account Linking...</span>
+                </span>
+              </div>
             </div>
 
             {/* Step 2: Dedicated KYC & Bank Account Linking Card */}

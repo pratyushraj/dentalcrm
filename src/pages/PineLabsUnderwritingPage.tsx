@@ -394,12 +394,29 @@ export default function PineLabsUnderwritingPage() {
     toast.success(`${label} copied to clipboard!`);
   };
 
+  // Clinic-specific dynamic SEO & Open Graph preview for WhatsApp unfurls
+  const spotlightClinic = clinicParam
+    ? VERIFIED_DOSSIERS.find(
+        (d) =>
+          d.id === clinicParam ||
+          (clinicParam === 'hear-one' && d.id === 'c1b4ab14-e0a4-4a60-9a86-ebedc9616675')
+      )
+    : null;
+
+  const unauthTitle = spotlightClinic
+    ? `${spotlightClinic.clinic_name} (${spotlightClinic.doctor_name}) • Verified Underwriting Dossier | Clinaza`
+    : "Pine Labs Underwriting Portal | Clinaza Sub-Merchant Desk";
+
+  const unauthDescription = spotlightClinic
+    ? `Verified Sub-Merchant KYC Dossier for ${spotlightClinic.clinic_name} (${spotlightClinic.city}) for Pine Labs Plural underwriting. Doctor: ${spotlightClinic.doctor_name} • PAN: ${spotlightClinic.pan}.`
+    : "Dedicated underwriting and KYC verification portal for Advaita Parmar and Pine Labs risk operations.";
+
   if (!isAuthenticated) {
     return (
       <div className="min-h-screen bg-slate-50 text-slate-900 flex items-center justify-center p-4">
         <SEOHead
-          title="Pine Labs Underwriting Portal | Clinaza Sub-Merchant Desk"
-          description="Dedicated underwriting and KYC verification portal for Advaita Parmar and Pine Labs risk operations."
+          title={unauthTitle}
+          description={unauthDescription}
           image="https://www.clinaza.in/og-plural-underwriting.png"
         />
         <div className="max-w-md w-full bg-white border border-slate-200 rounded-3xl p-8 shadow-xl space-y-6">
@@ -463,11 +480,20 @@ export default function PineLabsUnderwritingPage() {
     );
   }
 
+  const targetClinic = activeDossier || spotlightClinic;
+  const seoTitle = targetClinic
+    ? `${targetClinic.clinic_name} (${targetClinic.doctor_name}) • Verified Underwriting Dossier | Clinaza`
+    : "Clinaza × Pine Labs Plural | Sub-Merchant Underwriting Desk";
+
+  const seoDescription = targetClinic
+    ? `Verified Sub-Merchant KYC & Underwriting Dossier for ${targetClinic.clinic_name} (${targetClinic.city}). Settlement: ${targetClinic.bank.bank_name} A/c • Doctor PAN: ${targetClinic.pan} • ${targetClinic.is_signed ? 'Signed & Stamped' : 'Ready to Sign'}.`
+    : "Exclusive underwriting portal for Pine Labs Plural risk operations. Access verified doctor KYC, cancelled cheques, and auto-filled MAF templates.";
+
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col font-sans">
       <SEOHead
-        title="Clinaza × Pine Labs Plural | Sub-Merchant Underwriting Desk"
-        description="Exclusive underwriting portal for Pine Labs Plural risk operations. Access verified doctor KYC, cancelled cheques, and auto-filled MAF templates."
+        title={seoTitle}
+        description={seoDescription}
         image="https://www.clinaza.in/og-plural-underwriting.png"
       />
 

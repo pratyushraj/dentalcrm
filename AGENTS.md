@@ -107,6 +107,12 @@ Adhere strictly to the following active commercial contracts and partner agreeme
 - **No Unreplaced Bracket Placeholders**: Ensure zero unreplaced template bracket placeholders remain in any generated MAF sheets (e.g. `[https://www.yourclinic.com]`, `[Pincode]`, `[Bank Name]`). Clinic website must be set to `https://clinaza.in` with `Web only: Yes`.
 - **Clinic-Specific Description & Contacts**: Row 42 business description must describe the clinic's healthcare / dental practice (`MCC 8021`), and alternate contacts must reference the clinic's desk (`Clinic Reception Desk` / `Clinic Accounts Desk`), never `Clinaza Support Desk`.
 
+## 12. Clinic-Specific Link Previews & Open Graph WhatsApp Metadata Invariant
+- **Dynamic Clinic Name in Link Previews**: Every clinic-specific URL or portal route (such as `/partner/underwriting?clinic=...`, `/checkout-flow?clinic=...`, doctor KYC links, or clinic payment desks) MUST dynamically render its Open Graph metadata (`og:title`, `og:description`, `title`) to explicitly feature the clinic's operating/legal name, doctor name, and city.
+- **Zero WhatsApp Chat Confusion**: Never use static or generic titles (e.g., *"Sub-Merchant Underwriting Desk"* or *"Clinaza Portal"*) on parameterized clinic routes. WhatsApp unfurls previews aggressively; when sharing links with underwriters (Advaita / Pine Labs) or doctors, each link card must immediately and unambiguously display the exact clinic identity (e.g., *"Exldentist Clinic (Dr. Priyanka Kumar, Gurugram) • Verified KYC & Underwriting Dossier | Clinaza"*).
+- **Accurate Subtext & Description**: The preview description must summarize that specific clinic's profile (e.g., *"Verified Sub-Merchant Dossier: Axis Bank Current A/c, Signed 6-Page MAF & GST Exemption, Doctor PAN & Aadhaar"*), preventing any cross-clinic ambiguity in chat threads.
+
+
 
 
 

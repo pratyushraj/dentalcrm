@@ -269,15 +269,15 @@ const VERIFIED_DOSSIERS: VerifiedDossier[] = [
       date: '15/10/2024'
     },
     docs: {
-      signing_pdf: '/docs/kyc/exldentist_clinic/Plural_MAF_and_Doctor_KYC_Signing_Dossier_Exldentist_Clinic.pdf',
-      zip_bundle: '/docs/kyc/exldentist_clinic/Exldentist_Clinic_Complete_KYC_Dossier.zip',
-      maf_excel: '/docs/kyc/exldentist_clinic/Plural_MAF_BO_PEP_Exldentist_Clinic.xlsx',
-      gst_declaration_pdf: '/docs/kyc/exldentist_clinic/GST_Exemption_Declaration_exldentist_clinic.pdf',
-      cancelled_cheque: '/docs/kyc/exldentist_clinic/exldentist_cancelled_cheque.jpg',
-      doctor_pan: '/docs/kyc/exldentist_clinic/dr_priyanka_kumar_pan.jpg',
-      aadhaar_front: '/docs/kyc/exldentist_clinic/dr_priyanka_kumar_aadhaar.jpg',
-      dental_council_reg: '/docs/kyc/exldentist_clinic/dr_priyanka_kumar_dental_council_registration.jpg',
-      udyam_pdf: '/docs/kyc/exldentist_clinic/exldentist_udyam_certificate_p1.jpg'
+      signing_pdf: 'https://sqqocqujxlgoxbcnfbfb.supabase.co/storage/v1/object/public/clinic-documents/exldentist_clinic/Signed_Doctor_KYC_Signing_Dossier_Dr_Priyanka_Kumar.pdf',
+      zip_bundle: 'https://sqqocqujxlgoxbcnfbfb.supabase.co/storage/v1/object/public/clinic-documents/exldentist_clinic/Exldentist_Clinic_Complete_KYC_Dossier.zip',
+      maf_excel: 'https://sqqocqujxlgoxbcnfbfb.supabase.co/storage/v1/object/public/clinic-documents/exldentist_clinic/Plural_MAF_BO_PEP_Exldentist_Clinic.xlsx',
+      gst_declaration_pdf: 'https://sqqocqujxlgoxbcnfbfb.supabase.co/storage/v1/object/public/clinic-documents/exldentist_clinic/GST_Exemption_Declaration_exldentist_clinic.pdf',
+      cancelled_cheque: 'https://sqqocqujxlgoxbcnfbfb.supabase.co/storage/v1/object/public/clinic-documents/exldentist_clinic/exldentist_cancelled_cheque.jpg',
+      doctor_pan: 'https://sqqocqujxlgoxbcnfbfb.supabase.co/storage/v1/object/public/clinic-documents/exldentist_clinic/dr_priyanka_kumar_pan.jpg',
+      aadhaar_front: 'https://sqqocqujxlgoxbcnfbfb.supabase.co/storage/v1/object/public/clinic-documents/exldentist_clinic/dr_priyanka_kumar_aadhaar.jpg',
+      dental_council_reg: 'https://sqqocqujxlgoxbcnfbfb.supabase.co/storage/v1/object/public/clinic-documents/exldentist_clinic/dr_priyanka_kumar_dental_council_registration.jpg',
+      udyam_pdf: 'https://sqqocqujxlgoxbcnfbfb.supabase.co/storage/v1/object/public/clinic-documents/exldentist_clinic/exldentist_udyam_certificate.jpg'
     },
     status: 'Ready for Sub-Merchant MID'
   }

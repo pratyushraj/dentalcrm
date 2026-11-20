@@ -96,6 +96,7 @@ export interface VerifiedDossier {
     establishment_reg?: string;
     dental_council_reg?: string;
   };
+  is_signed?: boolean;
   status: string;
 }
 
@@ -272,14 +273,15 @@ const VERIFIED_DOSSIERS: VerifiedDossier[] = [
       signing_pdf: 'https://sqqocqujxlgoxbcnfbfb.supabase.co/storage/v1/object/public/clinic-documents/exldentist_clinic/Signed_Doctor_KYC_Signing_Dossier_Dr_Priyanka_Kumar.pdf',
       zip_bundle: 'https://sqqocqujxlgoxbcnfbfb.supabase.co/storage/v1/object/public/clinic-documents/exldentist_clinic/Exldentist_Clinic_Complete_KYC_Dossier.zip',
       maf_excel: 'https://sqqocqujxlgoxbcnfbfb.supabase.co/storage/v1/object/public/clinic-documents/exldentist_clinic/Plural_MAF_BO_PEP_Exldentist_Clinic.xlsx',
-      gst_declaration_pdf: 'https://sqqocqujxlgoxbcnfbfb.supabase.co/storage/v1/object/public/clinic-documents/exldentist_clinic/GST_Exemption_Declaration_exldentist_clinic.pdf',
+      gst_declaration_pdf: 'https://sqqocqujxlgoxbcnfbfb.supabase.co/storage/v1/object/public/clinic-documents/exldentist_clinic/Signed_GST_Exemption_Declaration_exldentist_clinic.pdf',
       cancelled_cheque: 'https://sqqocqujxlgoxbcnfbfb.supabase.co/storage/v1/object/public/clinic-documents/exldentist_clinic/exldentist_cancelled_cheque.jpg',
       doctor_pan: 'https://sqqocqujxlgoxbcnfbfb.supabase.co/storage/v1/object/public/clinic-documents/exldentist_clinic/dr_priyanka_kumar_pan.jpg',
       aadhaar_front: 'https://sqqocqujxlgoxbcnfbfb.supabase.co/storage/v1/object/public/clinic-documents/exldentist_clinic/dr_priyanka_kumar_aadhaar.jpg',
       dental_council_reg: 'https://sqqocqujxlgoxbcnfbfb.supabase.co/storage/v1/object/public/clinic-documents/exldentist_clinic/dr_priyanka_kumar_dental_council_registration.jpg',
       udyam_pdf: 'https://sqqocqujxlgoxbcnfbfb.supabase.co/storage/v1/object/public/clinic-documents/exldentist_clinic/exldentist_udyam_certificate.jpg'
     },
-    status: 'Ready for Sub-Merchant MID'
+    is_signed: true,
+    status: 'Signed & Ready for MID'
   }
 ];
 
@@ -618,7 +620,7 @@ export default function PineLabsUnderwritingPage() {
 
                       <div className="inline-flex items-center gap-1.5 bg-teal-50 text-teal-700 border border-teal-200 px-2.5 py-1 rounded-xl text-[11px] font-bold">
                         <FileCheck size={13} />
-                        <span>Doctor Signing PDF Ready</span>
+                        <span>{dossier.is_signed ? 'Doctor Signed PDF (Verified)' : 'Doctor Signing PDF Ready'}</span>
                       </div>
                     </div>
 
@@ -721,10 +723,10 @@ export default function PineLabsUnderwritingPage() {
                     href={activeDossier.docs.signing_pdf}
                     download={`Plural_MAF_and_Doctor_KYC_Signing_Dossier_${activeDossier.clinic_name.replace(/\s+/g, '_')}.pdf`}
                     className="inline-flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-xs font-black uppercase tracking-wider rounded-xl shadow-md shadow-emerald-600/20 transition-all cursor-pointer active:scale-98"
-                    title="Download consolidated official MAF + Doctor PAN & Aadhaar signing dossier"
+                    title={activeDossier.is_signed ? "Download verified signed doctor dossier" : "Download consolidated official MAF + Doctor PAN & Aadhaar signing dossier"}
                   >
                     <FileCheck size={15} />
-                    <span>Doctor Signing PDF</span>
+                    <span>{activeDossier.is_signed ? 'Doctor Signed PDF (Verified)' : 'Doctor Signing PDF'}</span>
                   </a>
 
                   <a
@@ -863,10 +865,12 @@ export default function PineLabsUnderwritingPage() {
                         </div>
                         <div className="text-left">
                           <span className="font-extrabold text-slate-900 text-[12px] block group-hover:text-emerald-700 transition-colors">
-                            Doctor Signing Dossier (PDF)
+                            {activeDossier.is_signed ? 'Doctor Signed Dossier (PDF)' : 'Doctor Signing Dossier (PDF)'}
                           </span>
                           <span className="text-[10px] text-emerald-700 font-semibold">
-                            Official MAF + GST Exemption + PAN + Aadhaar &bull; Ready to Sign
+                            {activeDossier.is_signed
+                              ? 'Official MAF + GST Exemption + PAN + Aadhaar • Signed & Stamped (6 Pages Verified)'
+                              : 'Official MAF + GST Exemption + PAN + Aadhaar • Ready to Sign'}
                           </span>
                         </div>
                       </div>
@@ -883,7 +887,7 @@ export default function PineLabsUnderwritingPage() {
                         <div className="flex items-center gap-2">
                           <FileText size={14} className="text-emerald-600" />
                           <span className="font-bold text-slate-800 group-hover:text-emerald-700 transition-colors">
-                            GST Exemption Declaration (Sec 23)
+                            {activeDossier.is_signed ? 'GST Exemption Declaration (Signed & Stamped)' : 'GST Exemption Declaration (Sec 23)'}
                           </span>
                         </div>
                         <ExternalLink size={13} className="text-slate-400 group-hover:text-slate-600" />

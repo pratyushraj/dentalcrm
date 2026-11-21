@@ -969,7 +969,7 @@ const Scene4HappyPatientCta: React.FC<{
             Grow Your Clinic Revenue 🚀
           </h2>
           <p style={{ fontSize: 24, color: '#CBD5E1', margin: '6px 0 0 0', fontWeight: 700 }}>
-            ₹0 Setup Fee • Instant Upfront Payout • 55+ Lenders
+            ₹999 One-Time Digital Activation • Instant Upfront Payout • 55+ Lenders
           </p>
         </div>
 

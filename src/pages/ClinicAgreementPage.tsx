@@ -83,7 +83,7 @@ export default function ClinicAgreementPage() {
             Sub-Merchant Appointment &amp; Payment Gateway Mapping
           </h2>
           <p>
-            Clinaza operates a proprietary healthcare fintech, patient financing facilitation, and clinic practice management platform. Clinaza has established payment aggregation and routing infrastructure powered by authorized Payment Aggregators (including <strong>Plural by Pine Labs</strong> and <strong>Easebuzz Private Limited</strong>) and RBI-regulated Scheduled Commercial Banks and NBFCs.
+            Clinaza operates a proprietary healthcare fintech, patient financing facilitation, and clinic practice management platform. Clinaza has established payment aggregation and routing infrastructure powered by authorized Payment Aggregators and Gateways (including <strong>Plural by Pine Labs</strong>) and RBI-regulated Scheduled Commercial Banks and NBFCs.
           </p>
           <ul className="list-disc pl-5 space-y-2 text-sm">
             <li>
@@ -115,9 +115,9 @@ export default function ClinicAgreementPage() {
               </thead>
               <tbody className="divide-y divide-slate-200">
                 <tr className="hover:bg-slate-50">
-                  <td className="p-3 font-semibold text-slate-900">Clinic Activation &amp; Hardware Kit</td>
+                  <td className="p-3 font-semibold text-slate-900">Digital Desk Activation &amp; Underwriting Setup</td>
                   <td className="p-3">₹999 (One-time, all-inclusive)</td>
-                  <td className="p-3 text-slate-600">Includes countertop QR standee, dashboard setup, and pan-India shipping.</td>
+                  <td className="p-3 text-slate-600">Includes doctor KYC verification, underwriting desk processing, and multi-bank lending gateway setup.</td>
                 </tr>
                 <tr className="hover:bg-slate-50">
                   <td className="p-3 font-semibold text-slate-900">Annual Maintenance Charges (AMC)</td>
@@ -140,14 +140,24 @@ export default function ClinicAgreementPage() {
                   <td className="p-3 text-slate-600">Deducted at source on T+1 settlement.</td>
                 </tr>
                 <tr className="hover:bg-slate-50">
-                  <td className="p-3 font-semibold text-slate-900">Multi-Bank Card EMI (Financed)</td>
-                  <td className="p-3 font-semibold text-slate-800">3.75% Subvention (or 0% Clinic Deduction)</td>
-                  <td className="p-3 text-slate-600">100% full invoice credit disbursed to Clinic current account on T+1.</td>
+                  <td className="p-3 font-semibold text-slate-900">Patient Financing Platform MDR</td>
+                  <td className="p-3 font-bold text-slate-900">3.00% MDR</td>
+                  <td className="p-3 text-slate-600">Standard platform &amp; payment gateway MDR deducted at source on T+1 loan disbursement.</td>
                 </tr>
                 <tr className="hover:bg-slate-50">
-                  <td className="p-3 font-semibold text-slate-900">Healthcare Cardless EMIs / NBFC Loans</td>
-                  <td className="p-3 font-semibold text-slate-800">As per Lender Grid (3%–5% subvention or 0% clinic deduction)</td>
-                  <td className="p-3 text-slate-600">100% Non-recourse direct disbursal into clinic bank account on T+1 upon sanction.</td>
+                  <td className="p-3 font-semibold text-slate-900">Patient Interest Rate</td>
+                  <td className="p-3 font-bold text-blue-700">1.00% – 1.50% / month (Reducing)</td>
+                  <td className="p-3 text-slate-600">Determined dynamically by partner banks &amp; NBFCs based on patient CIBIL score &amp; income profile.</td>
+                </tr>
+                <tr className="hover:bg-slate-50">
+                  <td className="p-3 font-semibold text-slate-900">Model 1: Patient-Borne Interest (Standard EMI)</td>
+                  <td className="p-3 font-semibold text-emerald-700">Clinic has no patient-interest liability; patient terms are set by the lender</td>
+                  <td className="p-3 text-slate-600">Clinic receives 100% treatment invoice value (less standard 3% MDR) on guaranteed T+1 settlement.</td>
+                </tr>
+                <tr className="hover:bg-slate-50">
+                  <td className="p-3 font-semibold text-slate-900">Model 2: Clinic-Subvented Interest (No-Cost EMI)</td>
+                  <td className="p-3 font-semibold text-indigo-700">Clinic may sponsor a lender-approved promotional subvention</td>
+                  <td className="p-3 text-slate-600">Clinic receives net invoice payout (less subvention discount + 3% MDR) on guaranteed T+1 settlement.</td>
                 </tr>
                 <tr className="hover:bg-slate-50">
                   <td className="p-3 font-semibold text-slate-900">Settlement Payout Cycle</td>
@@ -180,7 +190,7 @@ export default function ClinicAgreementPage() {
             Disputes, Refunds &amp; Chargeback Indemnity
           </h2>
           <p className="text-sm">
-            Clinaza and Easebuzz provide digital settlement and financing infrastructure and do not intervene in medical, surgical, or clinical disputes between practitioners and patients. The Partner Clinic shall remain solely liable for treatment completion. In the event of a customer dispute or card network chargeback, the Partner Clinic agrees to furnish clinical documentation (patient consent, treatment records) within two (2) business days. Any legitimate chargeback resulting from failure of clinic delivery may be set off against subsequent settlement proceeds.
+            Clinaza and Pine Labs Plural provide digital settlement and financing infrastructure and do not intervene in medical, surgical, or clinical disputes between practitioners and patients. The Partner Clinic shall remain solely liable for treatment completion. In the event of a customer dispute or card network chargeback, the Partner Clinic agrees to furnish clinical documentation (patient consent, treatment records) within two (2) business days. Any legitimate chargeback resulting from failure of clinic delivery may be set off against subsequent settlement proceeds.
           </p>
         </section>
 

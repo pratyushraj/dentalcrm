@@ -556,13 +556,13 @@ export default function PartnerClinicOnboardingPage() {
                   <span className="px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold">
                     Payment Verified via Razorpay
                   </span>
-                  <h3 className="text-xl font-black text-[#0B2450] mt-2">Clinic Activation Kit Queued for Dispatch!</h3>
+                  <h3 className="text-xl font-black text-[#0B2450] mt-2">Digital Clinic Desk Activation Confirmed</h3>
                   <p className="text-xs text-slate-600 font-mono">
                     Razorpay Reference: <strong className="text-emerald-700">{paymentId}</strong>
                   </p>
                 </div>
                 <p className="text-xs text-slate-600 max-w-md mx-auto leading-relaxed">
-                  Your custom countertop acrylic QR standee and staff pitch cards are being laser-printed and will be couriered via Bluedart/Delhivery within 48 hours. Your dedicated Relationship Manager will reach out on WhatsApp shortly!
+                  Your paperless digital financing desk is being activated. Once KYC and Pine Labs underwriting are cleared, your team can generate secure payment links and on-screen QR checkouts immediately—no hardware or courier delivery required.
                 </p>
                 <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
                   <a

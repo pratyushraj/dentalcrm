@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { useParams, Link, Navigate } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { BLOGS } from '@/data/blogs';
 import { SEOHead } from '@/components/seo/SEOHead';
 import { Calendar, Clock, ChevronLeft, Shield, User, Sparkles, CreditCard, Share2, MessageSquare, Check } from 'lucide-react';
 import { PatientEligibilityModal } from '@/components/PatientEligibilityModal';
 import { ReadingProgressBar } from '@/components/ReadingProgressBar';
+import NotFoundPage from '@/pages/NotFoundPage';
 
 export default function BlogArticlePage() {
   const { slug } = useParams<{ slug: string }>();
@@ -12,7 +13,7 @@ export default function BlogArticlePage() {
   const [isEligibilityOpen, setIsEligibilityOpen] = useState(false);
 
   if (!article) {
-    return <Navigate to="/blog" replace />;
+    return <NotFoundPage />;
   }
 
   // Determine default treatment category from article

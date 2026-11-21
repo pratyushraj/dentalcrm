@@ -426,7 +426,7 @@ export const emailNotificationService = {
           <ul style="font-size: 13px; line-height: 1.6; color: #475569; padding-left: 20px; margin: 0;">
             <li style="margin-bottom: 6px;"><strong>Bank Account Verification:</strong> Plural by Pine Labs verifies your clinic current account beneficiary name and IFSC for automated settlements.</li>
             <li style="margin-bottom: 6px;"><strong>PG Underwriting Approval:</strong> Your clinic merchant ID (MID) is configured with Plural by Pine Labs and partner NBFCs.</li>
-            <li style="margin-bottom: 6px;"><strong>Welcome Kit Dispatch:</strong> Your acrylic countertop patient EMI standee and staff prompt cards are prepared for courier dispatch.</li>
+            <li style="margin-bottom: 6px;"><strong>Digital Desk Activation:</strong> Your paperless patient EMI checkout desk is being activated for secure links and on-screen QR payments.</li>
           </ul>
         </div>
 

@@ -304,6 +304,34 @@ export default function LoanDemoPage() {
               <span className="text-[9.5px] text-slate-500 block truncate">100% Non-recourse T+1</span>
             </div>
           </div>
+
+          {/* Quick Action Bar: Share, Copy & Download PDF */}
+          <div className="flex flex-wrap items-center justify-center gap-2 pt-1 border-t border-slate-100">
+            <a
+              href="/docs/Clinaza_Patient_Checkout_Flow_Guide.pdf"
+              download="Clinaza_Patient_Checkout_Flow_Guide.pdf"
+              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-blue-50 hover:bg-blue-100 text-[#0867E8] border border-blue-200/80 rounded-full text-xs font-extrabold shadow-2xs hover:shadow-xs transition-all cursor-pointer active:scale-95"
+            >
+              <Download size={13} className="text-[#0867E8]" />
+              <span>Download PDF Blueprint</span>
+            </a>
+            <button
+              type="button"
+              onClick={handleShare}
+              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200/80 rounded-full text-xs font-bold shadow-2xs transition-all cursor-pointer active:scale-95"
+            >
+              <Share2 size={13} className="text-emerald-600" />
+              <span>Share via WhatsApp</span>
+            </button>
+            <button
+              type="button"
+              onClick={handleCopyLink}
+              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-full text-xs font-bold shadow-2xs transition-all cursor-pointer active:scale-95"
+            >
+              <Copy size={13} className="text-slate-500" />
+              <span>Copy Link</span>
+            </button>
+          </div>
         </div>
       </section>
 
@@ -1400,6 +1428,15 @@ export default function LoanDemoPage() {
                 <Share2 size={15} />
                 <span>Share Flow via WhatsApp</span>
               </button>
+
+              <a
+                href="/docs/Clinaza_Patient_Checkout_Flow_Guide.pdf"
+                download="Clinaza_Patient_Checkout_Flow_Guide.pdf"
+                className="w-full sm:w-auto px-6 py-3.5 sm:py-4 min-h-[48px] bg-white/10 hover:bg-white/20 text-white border border-white/20 rounded-2xl text-xs sm:text-sm font-extrabold uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md active:scale-95"
+              >
+                <Download size={15} />
+                <span>Download PDF Guide</span>
+              </a>
             </div>
           </div>
         </div>

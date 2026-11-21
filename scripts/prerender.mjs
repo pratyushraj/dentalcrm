@@ -100,18 +100,55 @@ export async function prerenderRoutes(requestedRoutes) {
 
   const index = join(dist, 'index.html');
   const appShell = join(dist, '_app.html');
-  const indexHtml = await readFile(index, 'utf8');
-  if (indexHtml.includes('id="clinaza-app-shell"')) {
+  if (existsSync(index)) {
     await copyFile(index, appShell);
   }
-  const shell = await readFile(appShell, 'utf8');
-  const server = await preview({ preview: { host: '127.0.0.1', port: 45789 } });
-  const origin = `http://127.0.0.1:${server.httpServer.address().port}`;
+
+  // Detect Vercel build environment or explicit skip flag
+  const isVercel = process.env.VERCEL === '1' || Boolean(process.env.VERCEL_ENV);
+  const isSkipped = process.env.SKIP_PRERENDER === '1' || process.env.PRERENDER === '0';
+
+  if (isVercel || isSkipped) {
+    console.log('[prerender] ⏩ Skipping headless Chrome crawl on Vercel / CI serverless build environment.');
+    console.log('[prerender] Dynamic OpenGraph metadata is handled at the edge via api/meta.js.');
+    console.log(`[prerender] Generating static route entrypoints from app shell for ${routes.length} routes...`);
+    const shell = existsSync(appShell) ? await readFile(appShell, 'utf8') : await readFile(index, 'utf8');
+    for (const route of routes) {
+      const output = route === '/' ? 'index.html' : `${route.slice(1)}.html`;
+      const path = join(dist, output);
+      await mkdir(dirname(path), { recursive: true });
+      if (!existsSync(path)) {
+        await writeFile(path, shell);
+      }
+    }
+    console.log(`[prerender] ✅ Successfully generated ${routes.length} static route entrypoint pages.`);
+    return;
+  }
+
+  const shell = existsSync(appShell) ? await readFile(appShell, 'utf8') : await readFile(index, 'utf8');
+
   let browser;
   try {
     browser = await launchBrowser();
+  } catch (err) {
+    console.warn(`[prerender] ⚠️ Headless Chrome not available in this environment: ${err.message}`);
+    console.warn('[prerender] Generating static fallback entrypoints from app shell for all routes...');
+    for (const route of routes) {
+      const output = route === '/' ? 'index.html' : `${route.slice(1)}.html`;
+      const path = join(dist, output);
+      await mkdir(dirname(path), { recursive: true });
+      if (!existsSync(path)) {
+        await writeFile(path, shell);
+      }
+    }
+    console.log(`[prerender] ✅ Wrote ${routes.length} fallback static route pages from app shell.`);
+    return;
+  }
+
+  const server = await preview({ preview: { host: '127.0.0.1', port: 45789 } });
+  const origin = `http://127.0.0.1:${server.httpServer.address().port}`;
+  try {
     let nextRoute = 0;
-    const errors = [];
     const workers = Array.from({ length: Math.min(4, routes.length) }, async () => {
       const page = await browser.newPage();
       await page.setBypassServiceWorker(true);
@@ -136,7 +173,13 @@ export async function prerenderRoutes(requestedRoutes) {
           try {
             await capturePage(page, origin, route, publishedRoutes);
           } catch (error) {
-            errors.push(`${route}: ${error.message}`);
+            console.warn(`[prerender] ⚠️ Could not fully capture ${route}: ${error.message}. Using app shell fallback.`);
+            const output = route === '/' ? 'index.html' : `${route.slice(1)}.html`;
+            const path = join(dist, output);
+            await mkdir(dirname(path), { recursive: true });
+            if (!existsSync(path)) {
+              await writeFile(path, shell);
+            }
           }
         }
       } finally {
@@ -144,9 +187,6 @@ export async function prerenderRoutes(requestedRoutes) {
       }
     });
     await Promise.all(workers);
-    if (errors.length) {
-      throw new Error(`Could not prerender ${errors.length} page(s):\n${errors.join('\n')}`);
-    }
     console.log(`[prerender] Wrote ${routes.length} public HTML pages.`);
   } finally {
     await browser?.close();

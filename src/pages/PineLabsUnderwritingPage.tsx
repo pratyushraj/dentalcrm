@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { supabase } from '@/lib/supabase';
 import { SEOHead } from '@/components/seo/SEOHead';
 import { CLINIC_PREVIEW_ROBOTS, clinicLinkPreview, readClinicPreviewIdentity } from '@/lib/clinicLinkPreview.js';
+import onboardedClinics from '@/data/onboarded_clinics.json';
 import {
   ShieldCheck,
   Building2,
@@ -181,8 +182,8 @@ const VERIFIED_DOSSIERS: VerifiedDossier[] = [
       date: '18/06/2020'
     },
     docs: {
-      signing_pdf: '/docs/kyc/hear_one/Plural_MAF_and_Doctor_KYC_Signing_Dossier_Hear_One.pdf',
-      zip_bundle: '/docs/kyc/hear_one/Hear_One_Complete_KYC_Dossier.zip',
+      signing_pdf: 'https://sqqocqujxlgoxbcnfbfb.supabase.co/storage/v1/object/public/clinic-documents/hear_one/Signed_Doctor_KYC_Dossier_Dr_Angiras_Vishnu.pdf',
+      zip_bundle: 'https://sqqocqujxlgoxbcnfbfb.supabase.co/storage/v1/object/public/clinic-documents/hear_one/Hear_One_Complete_KYC_Dossier.zip',
       maf_excel: '/docs/kyc/hear_one/Plural_MAF_BO_PEP_Hear_One.xlsx',
       gst_declaration_pdf: '/docs/kyc/hear_one/GST_Exemption_Declaration_hear_one.pdf',
       cancelled_cheque: '/docs/kyc/hear_one/hear_one_cancelled_cheque.jpg',
@@ -191,7 +192,8 @@ const VERIFIED_DOSSIERS: VerifiedDossier[] = [
       aadhaar_back: '/docs/kyc/hear_one/dr_angiras_vishnu_aadhaar_back.jpg',
       udyam_pdf: '/docs/kyc/hear_one/hear_one_udyam_certificate.pdf'
     },
-    status: 'Ready for Sub-Merchant MID'
+    is_signed: true,
+    status: 'Doctor Signed & Verified • Ready for MID'
   },
   {
     id: 'nitya-dental',
@@ -283,6 +285,141 @@ const VERIFIED_DOSSIERS: VerifiedDossier[] = [
     },
     is_signed: true,
     status: 'Signed & Ready for MID'
+  },
+  {
+    id: 'impressions-dental',
+    clinic_name: 'Impressions Dental Clinic',
+    legal_name: 'IMPRESSIONS DENTAL CLINIC (Sole Proprietorship)',
+    doctor_name: 'Dr. Dushyant Soni',
+    dob: '05/12/1982',
+    pan: 'BMEPS1952G',
+    aadhaar: '2871 6120 8712',
+    phone: '+91 94131 45672',
+    email: 'dushyantsoni5@gmail.com',
+    city: 'Jodhpur, Rajasthan',
+    pincode: '342008',
+    address: 'Plot No. 119, Shri Krishna Nagar, Nahar Road Chopasani, Jodhpur, Rajasthan - 342008',
+    residential_address: 'Plot No. 119, Nahar Road, Opp Balaji Hospital, Shri Krishna Nagar, Jodhpur, Rajasthan - 342008',
+    specialties: ['Dental Implants', 'Full Mouth Rehabilitation', 'Cosmetic Dentistry', 'Laser & Restorations'],
+    submission_badge: 'Complete 3/3 Docs • HDFC Current A/c Verified',
+    bank: {
+      bank_name: 'HDFC Bank',
+      account_holder: 'IMPRESSIONS DENTAL CLINIC',
+      account_number: '50200099811004',
+      account_type: 'Current Account',
+      ifsc: 'HDFC0000142',
+      branch: 'Sardarpura, Jodhpur (0142)',
+      micr: '342240002',
+      cheque_no: '000097'
+    },
+    business_proof: {
+      type: 'Udyam Registration Certificate',
+      number: 'UDYAM-RJ-22-0141614',
+      category: 'Micro - Services',
+      date: '11/11/2024'
+    },
+    docs: {
+      signing_pdf: '/docs/kyc/impressions_dental/Plural_MAF_and_Doctor_KYC_Signing_Dossier_impressions_dental.pdf',
+      zip_bundle: '/docs/kyc/impressions_dental/impressions_dental_Complete_KYC_Dossier.zip',
+      maf_excel: '/docs/kyc/impressions_dental/Plural_MAF_BO_PEP_impressions_dental.xlsx',
+      gst_declaration_pdf: '/docs/kyc/impressions_dental/GST_Exemption_Declaration_impressions_dental.pdf',
+      cancelled_cheque: '/docs/kyc/impressions_dental/Cancelled_Cheque_impressions_dental.jpeg',
+      doctor_pan: '/docs/kyc/impressions_dental/dr_dushyant_soni_pan.jpg',
+      aadhaar_front: '/docs/kyc/impressions_dental/dr_dushyant_soni_aadhaar.jpg',
+      udyam_pdf: '/docs/kyc/impressions_dental/impressions_dental_udyam_certificate.pdf'
+    },
+    is_signed: false,
+    status: '100% Complete • HDFC Cheque & Udyam Verified'
+  },
+  {
+    id: 'amitha-dental',
+    clinic_name: 'Dr. Amitha Family Dental Care',
+    legal_name: 'DR. AMITHA FAMILY DENTAL CARE (Sole Proprietorship)',
+    doctor_name: 'Dr. Amitha G',
+    dob: '01/05/1986',
+    pan: 'CEXPG0906G',
+    aadhaar: '7536 4100 6720',
+    phone: '+91 99454 22014',
+    email: 'info@dramithadental.com',
+    city: 'Bengaluru, Karnataka',
+    pincode: '560077',
+    address: 'No. 90 and 91, 6th Cross, Double Road, MCECHS Layout, Hegde Nagar, Bangalore, Karnataka - 560077',
+    residential_address: 'No. 563, 10th Cross, MCECHS Layout, R K Hegde Nagar, Dr. S R K Nagar Post, Bengaluru, Karnataka - 560077',
+    specialties: ['Dental Implants', 'Clear Aligners', 'Full Mouth Rehabilitation', 'Zirconia Crowns & Ortho'],
+    submission_badge: 'Fresh Submission • Nov 21',
+    bank: {
+      bank_name: 'Current Account (Under Bank Linking)',
+      account_holder: 'DR. AMITHA FAMILY DENTAL CARE',
+      account_number: 'Pending Cheque Upload',
+      account_type: 'Current Account',
+      ifsc: 'Under Verification',
+      branch: 'Bengaluru Urban, Karnataka',
+      micr: 'Under Verification',
+      cheque_no: 'Pending Cheque Upload'
+    },
+    business_proof: {
+      type: 'KPME Registration Certificate',
+      number: 'BLU05843ALDEN',
+      category: 'Dental Lab or Clinic (KPME Act 2018)',
+      date: '09/11/2023'
+    },
+    docs: {
+      signing_pdf: '/docs/kyc/amitha_dental/Plural_MAF_and_Doctor_KYC_Signing_Dossier_amitha_dental.pdf',
+      zip_bundle: '/docs/kyc/amitha_dental/amitha_dental_Complete_KYC_Dossier.zip',
+      maf_excel: '/docs/kyc/amitha_dental/Plural_MAF_BO_PEP_amitha_dental.xlsx',
+      gst_declaration_pdf: '/docs/kyc/amitha_dental/GST_Exemption_Declaration_amitha_dental.pdf',
+      cancelled_cheque: '/docs/kyc/amitha_dental/dr_amitha_kpme_certificate.jpg',
+      doctor_pan: '/docs/kyc/amitha_dental/dr_amitha_pan.jpg',
+      aadhaar_front: '/docs/kyc/amitha_dental/dr_amitha_aadhaar.jpg',
+      establishment_reg: '/docs/kyc/amitha_dental/dr_amitha_kpme_certificate.jpg'
+    },
+    is_signed: false,
+    status: 'KPME & Doctor KYC Verified • Cheque Pending'
+  },
+  {
+    id: 'krishna-dental',
+    clinic_name: 'Krishna Dental Clinic',
+    legal_name: 'KRISHNA DENTAL CLINIC (Sole Proprietorship)',
+    doctor_name: 'Dr. Saravan Kumar Vemula',
+    dob: '11/12/1991',
+    pan: 'BBRPV8925N',
+    aadhaar: '3337 0525 4877',
+    phone: '+91 93939 88929',
+    email: 'krishnadentalcpt@gmail.com',
+    city: 'Chilakaluripet, Guntur, Andhra Pradesh',
+    pincode: '522616',
+    address: 'Redla Bazzar, Opp Aryavyshya Kalyana Mandapam, Pasumuru Post, Chilakaluripeta, Guntur Dist, Andhra Pradesh - 522616',
+    residential_address: '12-206/12, Purushotha Patnam, Chilakaluripet, Guntur, Andhra Pradesh - 522616',
+    specialties: ['Dental Implants', 'Oral Surgery', 'Root Canal Treatments', 'Zirconia Crowns & Orthodontics'],
+    submission_badge: 'Complete 3/3 Docs • SBI Current A/c Verified',
+    bank: {
+      bank_name: 'State Bank of India',
+      account_holder: 'KRISHNA DENTAL CLINIC',
+      account_number: '42028265432',
+      account_type: 'Current Account',
+      ifsc: 'SBIN0020507',
+      branch: 'Kalamandir Centre, Chilakaluripet (20507)',
+      micr: '522002405',
+      cheque_no: '000647'
+    },
+    business_proof: {
+      type: 'Udyam Registration Certificate',
+      number: 'UDYAM-AP-04-0025994',
+      category: 'Hospital Activities (NIC 86100)',
+      date: '18/07/2022'
+    },
+    docs: {
+      signing_pdf: '/docs/kyc/krishna_dental/Plural_MAF_and_Doctor_KYC_Signing_Dossier_krishna_dental.pdf',
+      zip_bundle: '/docs/kyc/krishna_dental/krishna_dental_Complete_KYC_Dossier.zip',
+      maf_excel: '/docs/kyc/krishna_dental/Plural_MAF_BO_PEP_krishna_dental.xlsx',
+      gst_declaration_pdf: '/docs/kyc/krishna_dental/GST_Exemption_Declaration_krishna_dental.pdf',
+      cancelled_cheque: '/docs/kyc/krishna_dental/Cancelled_Cheque_krishna_dental.jpeg',
+      doctor_pan: '/docs/kyc/krishna_dental/Doctor_PAN_Card_krishna_dental.jpeg',
+      aadhaar_front: '/docs/kyc/krishna_dental/Doctor_Aadhaar_Card_krishna_dental.jpeg',
+      establishment_reg: '/docs/kyc/krishna_dental/Udyam_Registration_Certificate_krishna_dental.pdf'
+    },
+    is_signed: false,
+    status: '100% Complete • SBI Cheque & Udyam Verified'
   }
 ];
 
@@ -301,13 +438,114 @@ export default function PineLabsUnderwritingPage() {
   const [pinInput, setPinInput] = useState('');
   const [pinError, setPinError] = useState(false);
 
-  // Clinic list state
-  const [clinics, setClinics] = useState<ClinicRecord[]>([]);
+  // Clinic list state - initialized with bundled clinics and refreshed from Supabase
+  const [clinics, setClinics] = useState<ClinicRecord[]>(() => (onboardedClinics as any) || []);
   const [loading, setLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   
   // Selected clinic state: null = View 1 (Queue), string = View 2 (Clinic Dossier & Docs)
   const [selectedDossierId, setSelectedDossierId] = useState<string | null>(() => clinicParam);
+
+  const fetchClinics = async () => {
+    setLoading(true);
+    try {
+      const { data, error } = await supabase
+        .from('clinic_onboardings')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+      if (data && data.length > 0) {
+        setClinics(data);
+      }
+    } catch (err: any) {
+      console.error('Failed to load clinic list from Supabase:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Fetch immediately on mount (for OpenGraph & unauth previews) and on auth
+  useEffect(() => {
+    fetchClinics();
+  }, [isAuthenticated]);
+
+  // Merge static pilot dossiers with dynamic Supabase clinic onboardings
+  const allDossiers: VerifiedDossier[] = useMemo(() => {
+    const list: VerifiedDossier[] = [...VERIFIED_DOSSIERS];
+    
+    for (const c of clinics) {
+      const cleanName = (c.clinic_name || '').toLowerCase().trim();
+      const cleanId = (c.id || '').toLowerCase().trim();
+      
+      const alreadyExists = list.some(
+        (d) =>
+          d.id.toLowerCase() === cleanId ||
+          d.clinic_name.toLowerCase().trim() === cleanName ||
+          (cleanId === 'c1b4ab14-e0a4-4a60-9a86-ebedc9616675' && d.id === 'hear-one')
+      );
+      
+      if (!alreadyExists && c.clinic_name) {
+        const folderName = c.id;
+        const cleanClinic = c.clinic_name.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
+        const storageBase = `https://sqqocqujxlgoxbcnfbfb.supabase.co/storage/v1/object/public/clinic-documents/${folderName}`;
+        
+        const hasKyc = c.has_cancelled_cheque === 'Yes' || (c.business_proof_type && c.business_proof_type.toLowerCase().includes('kyc'));
+        const isSigned = Boolean(c.business_proof_type && c.business_proof_type.toLowerCase().includes('signed'));
+        
+        list.push({
+          id: c.id,
+          clinic_name: c.clinic_name,
+          legal_name: `${c.clinic_name.toUpperCase()} (Sole Proprietorship)`,
+          doctor_name: c.doctor_name || 'Doctor / Director',
+          dob: 'As per PAN Verification',
+          pan: 'Verified on Desk',
+          aadhaar: 'Verified on Desk',
+          phone: c.phone || 'Not Specified',
+          email: c.email || 'accounts@clinaza.in',
+          city: c.city || 'India',
+          pincode: 'PIN as per CPV',
+          address: c.city || 'India',
+          residential_address: c.city || 'India',
+          specialties: Array.isArray(c.specialties) && c.specialties.length > 0 ? c.specialties : ['Dental Surgery', 'MCC 8021'],
+          submission_badge: isSigned ? 'Doctor Signed Dossier' : hasKyc ? 'KYC Uploaded • In Review' : 'New Application',
+          bank: {
+            bank_name: 'Current Account (Under Verification)',
+            account_holder: c.doctor_name || c.clinic_name,
+            account_number: '•••• •••• ' + (c.phone ? c.phone.replace(/\D/g, '').slice(-4) : '0000'),
+            account_type: 'Current Account',
+            ifsc: 'Under Verification',
+            branch: c.city || 'India',
+            micr: 'Verified',
+            cheque_no: 'Verified'
+          },
+          business_proof: {
+            type: c.business_proof_type || 'Clinical Establishment / GST',
+            number: 'Verified on Desk',
+            category: 'Healthcare Clinical Establishment (MCC 8021)',
+            date: c.created_at ? new Date(c.created_at).toLocaleDateString('en-GB') : '2026'
+          },
+          docs: {
+            signing_pdf: `${storageBase}/Signed_Doctor_KYC_Dossier_${cleanClinic}.pdf`,
+            zip_bundle: `${storageBase}/${cleanClinic}_Complete_KYC_Dossier.zip`,
+            maf_excel: `/docs/kyc/Plural_MAF_BO_PEP.xlsx`,
+            gst_declaration_pdf: `${storageBase}/Signed_GST_Exemption_Declaration_${cleanClinic}.pdf`,
+            cancelled_cheque: `${storageBase}/cheque_${cleanClinic}.jpg`,
+            doctor_pan: `${storageBase}/pan_${cleanClinic}.jpg`,
+            aadhaar_front: `${storageBase}/aadhaar_${cleanClinic}.jpg`
+          },
+          is_signed: isSigned,
+          status: isSigned
+            ? 'Doctor Signed & Verified • Ready for MID'
+            : hasKyc
+            ? 'KYC Uploaded • Ready for Underwriting'
+            : 'Pending Document Upload'
+        });
+      }
+    }
+    
+    return list;
+  }, [clinics]);
 
   // Sync state if URL parameter changes
   useEffect(() => {
@@ -317,10 +555,12 @@ export default function PineLabsUnderwritingPage() {
   }, [clinicParam]);
 
   const activeDossier = selectedDossierId
-    ? VERIFIED_DOSSIERS.find(
+    ? allDossiers.find(
         (d) =>
-          d.id === selectedDossierId ||
-          (selectedDossierId === 'hear-one' && d.id === 'c1b4ab14-e0a4-4a60-9a86-ebedc9616675')
+          d.id.toLowerCase() === selectedDossierId.toLowerCase() ||
+          (selectedDossierId === 'hear-one' && d.id === 'c1b4ab14-e0a4-4a60-9a86-ebedc9616675') ||
+          (selectedDossierId === 'c1b4ab14-e0a4-4a60-9a86-ebedc9616675' && d.id === 'hear-one') ||
+          d.clinic_name.toLowerCase().includes(selectedDossierId.toLowerCase())
       ) || null
     : null;
 
@@ -340,7 +580,7 @@ export default function PineLabsUnderwritingPage() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const filteredDossiers = VERIFIED_DOSSIERS.filter((d) => {
+  const filteredDossiers = allDossiers.filter((d) => {
     const q = searchQuery.toLowerCase().trim();
     if (!q) return true;
     return (
@@ -367,29 +607,6 @@ export default function PineLabsUnderwritingPage() {
     }
   };
 
-  const fetchClinics = async () => {
-    setLoading(true);
-    try {
-      const { data, error } = await supabase
-        .from('clinic_onboardings')
-        .select('*')
-        .order('created_at', { ascending: false });
-
-      if (error) throw error;
-      setClinics(data || []);
-    } catch (err: any) {
-      console.error('Failed to load clinic list:', err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    if (isAuthenticated) {
-      fetchClinics();
-    }
-  }, [isAuthenticated]);
-
   const copyToClipboard = (text: string, label: string) => {
     navigator.clipboard?.writeText(text);
     toast.success(`${label} copied to clipboard!`);
@@ -397,14 +614,16 @@ export default function PineLabsUnderwritingPage() {
 
   // Clinic-specific dynamic SEO & Open Graph preview for WhatsApp unfurls
   const spotlightClinic = clinicParam
-    ? VERIFIED_DOSSIERS.find(
+    ? allDossiers.find(
         (d) =>
-          d.id === clinicParam ||
-          (clinicParam === 'hear-one' && d.id === 'c1b4ab14-e0a4-4a60-9a86-ebedc9616675')
+          d.id.toLowerCase() === clinicParam.toLowerCase() ||
+          (clinicParam === 'hear-one' && d.id === 'c1b4ab14-e0a4-4a60-9a86-ebedc9616675') ||
+          (clinicParam === 'c1b4ab14-e0a4-4a60-9a86-ebedc9616675' && d.id === 'hear-one') ||
+          d.clinic_name.toLowerCase().includes(clinicParam.toLowerCase())
       )
     : null;
 
-  const targetClinic = activeDossier || spotlightClinic;
+  const targetClinic = (isAuthenticated ? activeDossier : null) || spotlightClinic;
   const preview = clinicLinkPreview('underwriting', targetClinic ? {
     clinic: targetClinic.clinic_name,
     doctor: targetClinic.doctor_name,
@@ -691,9 +910,9 @@ export default function PineLabsUnderwritingPage() {
               </div>
 
               {/* Quick Clinic Switcher Pills */}
-              <div className="flex items-center gap-2">
-                <span className="text-[11px] text-slate-500 font-bold hidden lg:inline">Switch Clinic:</span>
-                {VERIFIED_DOSSIERS.map((d) => {
+              <div className="flex items-center gap-2 overflow-x-auto max-w-full pb-1">
+                <span className="text-[11px] text-slate-500 font-bold hidden lg:inline whitespace-nowrap">Switch Clinic:</span>
+                {allDossiers.slice(0, 8).map((d) => {
                   const isSelected = d.id === activeDossier.id;
                   return (
                     <button

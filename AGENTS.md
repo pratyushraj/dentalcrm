@@ -46,8 +46,9 @@ Adhere strictly to the following active commercial contracts and partner agreeme
 - **Transaction-Based MDR Only**: Multi-Bank Credit Card EMI (1.85%), EMI processing fee (0.50%), Debit Card EMI (0.90%), RuPay (0.00%), and UPI (0.40%).
 - **Integration Setup**: Online Gateway (UAT MID `111077`, Production pending). No hardware POS rental or terminal deposit. Dynamic return/callback URLs with live webhook at `/api/webhook/pinelabs`.
 
-## 2. Easebuzz (Active Sub-Merchant Integration)
-- **Model**: Sub-merchant model with EasySplit for automated T+1 clinic settlements.
+## 2. Pine Labs Plural Sub-Merchant Architecture & Zero Easebuzz Policy
+- **Exclusive Institutional Partner**: All sub-merchant MIDs, digital financing rails, and automated T+1 settlements are powered exclusively via Plural by Pine Labs under our signed ₹0 setup fee and ₹0 AMC institutional agreement.
+- **Zero Easebuzz References**: Never re-introduce, mention, or suggest Easebuzz across clinic agreements, PDF generators, docx scripts, onboarding forms, or marketing copy.
 - **Agreements**: Clinic Sub-Merchant Master Services Agreement and executed pilot agreements hosted publicly at `/docs/Clinaza_Clinic_Sub_Merchant_Master_Services_Agreement.pdf` and `/clinic-agreement`.
 
 ## 3. Patient Healthcare Financing Rules
@@ -61,7 +62,7 @@ Adhere strictly to the following active commercial contracts and partner agreeme
   - To monetize counter UPI transactions, apply either a **B2C Digital Convenience Fee** (₹19–₹49 per transaction) or a **B2B Smart Reconciliation Fee** (0.60%–0.75%), ensuring a positive net margin after absorbing the 0.40% gateway MDR.
 
 ## 5. Clinaza Clinic B2B Commercial Pricing Invariants
-- **₹999 One-Time Setup Fee**: Clinaza charges partner dental clinics a nominal **₹999 one-time onboarding / activation kit fee** (covers physical reception acrylic QR standee, pan-India courier shipping, clinic verification, and lending gateway integration).
+- **₹999 One-Time Setup Fee**: Clinaza charges partner dental clinics a nominal **₹999 one-time digital desk activation & merchant underwriting fee** (covers clinic verification, doctor KYC underwriting, and Pine Labs multi-bank lending gateway integration).
 - **Never Claim ₹0 Setup Fee for Clinics**: Never write, state, or imply in clinic outreach, emails, KYC requests, or marketing that the setup fee is ₹0 or free for clinics.
 - **₹0 Recurring Fees**: Always emphasize that there are **₹0 Annual Maintenance Charges (AMC)** and **₹0 monthly subscription fees**.
 - **0% Clinic Recourse**: Highlight that clinics get paid upfront on a T+1 schedule with 0% risk or collection responsibility on patient EMIs.
@@ -111,6 +112,33 @@ Adhere strictly to the following active commercial contracts and partner agreeme
 - **Dynamic Clinic Name in Link Previews**: Every clinic-specific URL or portal route (such as `/partner/underwriting?clinic=...`, `/checkout-flow?clinic=...`, doctor KYC links, or clinic payment desks) MUST dynamically render its Open Graph metadata (`og:title`, `og:description`, `title`) to explicitly feature the clinic's operating/legal name, doctor name, and city.
 - **Zero WhatsApp Chat Confusion**: Never use static or generic titles (e.g., *"Sub-Merchant Underwriting Desk"* or *"Clinaza Portal"*) on parameterized clinic routes. WhatsApp unfurls previews aggressively; when sharing links with underwriters (Advaita / Pine Labs) or doctors, each link card must immediately and unambiguously display the exact clinic identity (e.g., *"Exldentist Clinic (Dr. Priyanka Kumar, Gurugram) • Verified KYC & Underwriting Dossier | Clinaza"*).
 - **Accurate Subtext & Description**: The preview description must summarize that specific clinic's profile (e.g., *"Verified Sub-Merchant Dossier: Axis Bank Current A/c, Signed 6-Page MAF & GST Exemption, Doctor PAN & Aadhaar"*), preventing any cross-clinic ambiguity in chat threads.
+
+## 13. No Physical QR Standee Invariant
+- **100% Digital Point-of-Care Checkout**: Clinaza operates entirely paperless and terminal-free. Front-desk patient checkout is powered by instant digital payment desk links (WhatsApp / SMS), doctor dashboard checkout widgets, or dynamic on-screen QR codes generated directly on the clinic's phone, tablet, or reception computer.
+- **Never Mention or Promise Physical Acrylic Standees**: Never write, state, pitch, or promise physical acrylic QR standees, countertop hardware, or pan-India courier / BlueDart delivery in clinic outreach, sales emails, WhatsApp messages, video scripts, marketing materials, or onboarding documents.
+- **No Logistics Friction or Shipping Delays**: Eliminate courier tracking dependencies. Once the doctor's 3 basic KYC documents (Doctor PAN, Aadhaar, Clinic proof/cheque) are verified and Pine Labs underwriting clears, the clinic's digital financing portal is activated immediately.
+
+## 14. ReportLab PDF Typography & Currency Glyph Invariant (Zero Missing Glyphs)
+- **Never Use Raw `₹` in Type-1 PostScript Fonts**: ReportLab's standard built-in fonts (`Helvetica`, `Times-Roman`, `Courier`) do not include the Unicode Indian Rupee symbol (`₹` / `U+20B9`), en-dashes (`–` / `U+2013`), or Unicode arrows (`→` / `U+2192`). Using them causes PDF renderers to display fallback black boxes (`■`) on mobile WhatsApp, iOS, Android, and macOS.
+- **Mandatory Safe Notation**: Always use standard, universal ASCII notation in ReportLab string definitions:
+  - Currency: `Rs. 60,000`, `Rs. 58,200`, `Rs. 999`, `Rs. 0` (or `INR`). Never raw `₹`.
+  - Punctuation & Arrows: ASCII hyphens (`-`), vertical pipes (`|`), and ASCII arrows (`->`).
+- **Table Pagination & Visual Integrity**:
+  - Never allow summary tables to split orphan rows across pages (e.g., table header + 1 row on Page 1 and remaining rows on Page 2).
+  - Use explicit `PageBreak()` and running headers (`CLINAZA HEALTHCARE TECHNOLOGIES • TERMS & CONDITIONS (PAGE 2)`) to keep commercial tables and front-desk workflows self-contained and visually balanced.
+
+## 15. Doctor Terms & Conditions vs. Bilateral Master Agreement Invariant
+- **Recitals & Commercial Overview by Default**: When prospective partner clinics or doctors ask for "Terms & Conditions", "pricing overview", or "how it works", always generate a clean 2-page executive summary focusing on:
+  - **Operational Recitals**: Platform scope, Pine Labs Plural & regulated banking rails (ICICI, HDFC, Axis, Kotak, IDFC FIRST, Bajaj Finance, Tata Capital), point-of-care financing, and guaranteed T+1 settlement with 0% clinic recourse.
+  - **Commercial Financing Models**:
+    - *Patient Interest Rate*: 1.0% to 1.5% per month (reducing balance, CIBIL/income-linked).
+    - *Platform MDR*: Standard 3.00% MDR on financed loan amount.
+    - *Model 1 (Patient-Borne Mode)*: Patient pays monthly interest; clinic bears 0% interest and receives invoice less 3% MDR on T+1.
+    - *Model 2 (Clinic-Absorbed Mode)*: Clinic funds promotional subvention + 3% MDR; patient pays 0% interest.
+  - **Commercial Summary Table**: Rs. 999 one-time activation, Rs. 0 lifetime AMC, 0.00% counter UPI, T+1 settlement, 0% clinic recourse.
+  - **Front-Desk Workflow**: 100% digital checkout, 3-step OTP sanction, cancelled cheque linking.
+- **No Bilateral Legal Boilerplate**: Never include bilateral contract preamble ("First Part / Second Part"), legal recrimination ("IN WITNESS WHEREOF", indemnity, breach, arbitration in Patna courts), or bilateral signature execution boxes unless the user explicitly requests an executed legal agreement or sub-merchant contract.
+
 
 
 

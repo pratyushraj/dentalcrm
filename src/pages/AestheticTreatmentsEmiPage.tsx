@@ -225,6 +225,20 @@ export default function AestheticTreatmentsEmiPage() {
         </div>
       </section>
 
+      {/* GEO Citability Block for AI Search & Search Engines */}
+      <section className="px-4 max-w-5xl mx-auto w-full pt-4 pb-2">
+        <div className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 space-y-3 shadow-xs">
+          <h2 className="text-xl sm:text-2xl font-black text-slate-900">
+            How Does Aesthetic &amp; Dermatology Treatment EMI Financing Work in India?
+          </h2>
+          <div className="bg-slate-50 border-l-4 border-[#0867E8] p-4 text-sm text-slate-800 leading-relaxed rounded-r-2xl">
+            <p>
+              <strong>Aesthetic and skin treatment EMI in India is a point-of-care medical financing plan allowing patients to convert high-ticket dermatology and wellness packages into flexible monthly installments.</strong> Because standard retail health insurance policies classify aesthetic dermatology (including Growth Factor Concentrate (GFC), Platelet-Rich Plasma (PRP), High-Intensity Focused Ultrasound (HIFU), HIEMT body contouring, chemical peels, and botulinum toxin) as elective out-of-pocket expenses, Clinaza provides digital front-desk financing between ₹15,000 and ₹2,50,000 with annual interest rates starting from ~11.5% via RBI-regulated NBFC partners. Approvals require zero paper documentation and are completed in under 2 minutes using Aadhaar and PAN verification at certified partner clinics across India.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* Main Content & Interactive Calculator */}
       <section id="calculator" className="py-8 sm:py-12 px-4 max-w-5xl mx-auto w-full">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">

@@ -67,15 +67,15 @@ def add_body(text):
 
 add_heading("RECITALS:")
 add_body("A. Clinaza owns and operates a proprietary healthcare fintech, point-of-care payment enablement, and practice management SaaS platform designed to empower dental clinics across India with automated patient financing, instant EMI links, digital invoicing, and reception payment infrastructure.")
-add_body("B. Clinaza has entered into payment aggregation and processing arrangements with Reserve Bank of India (\"RBI\") authorized Payment Aggregators (including Easebuzz Private Limited, hereinafter \"Easebuzz / PA\") and regulated Lending Service Providers / Scheduled Banks / NBFCs to facilitate seamless electronic transactions, point-of-sale card processing, UPI collections, and patient EMI loan disbursements.")
+add_body("B. Clinaza has entered into payment aggregation and processing arrangements with Reserve Bank of India (\"RBI\") authorized Payment Aggregators and Payment Gateways (including Pine Labs Private Limited / Plural by Pine Labs, hereinafter \"Payment Gateway / PA\") and regulated Lending Service Providers / Scheduled Banks / NBFCs to facilitate seamless electronic transactions, point-of-sale card processing, UPI collections, and patient EMI loan disbursements.")
 add_body("C. The Partner Clinic desires to be onboarded under Clinaza's Master Merchant Account (\"Master MID\") as a verified Sub-Merchant on the Payment Aggregator network to enable Patients to pay for treatment charges via digital payment instruments, cardless EMIs, and NBFC healthcare credit, with direct settlement routed to the Partner Clinic's verified bank account.")
 
 add_heading("1. APPOINTMENT & SUB-MERCHANT AUTHORIZATION")
-add_body("1.1. The Partner Clinic hereby appoints Clinaza as its technology provider, digital payment facilitator, and Merchant Aggregator. The Partner Clinic expressly authorizes Clinaza to submit the Partner Clinic's KYC documentation to Easebuzz and allied partner financial institutions for the creation and mapping of a dedicated Sub-Merchant Identifier (Sub-MID) under Clinaza's Master MID.")
-add_body("1.2. The Partner Clinic authorizes Easebuzz, as the RBI-licensed Payment Aggregator, to collect, process, hold in escrow/nodal accounts, and route patient treatment payments directly to the Partner Clinic's designated bank account as specified in Schedule B of this Agreement.")
+add_body("1.1. The Partner Clinic hereby appoints Clinaza as its technology provider, digital payment facilitator, and Merchant Aggregator. The Partner Clinic expressly authorizes Clinaza to submit the Partner Clinic's KYC documentation to Pine Labs Plural and allied partner financial institutions for the creation and mapping of a dedicated Sub-Merchant Identifier (Sub-MID) under Clinaza's Master MID.")
+add_body("1.2. The Partner Clinic authorizes Pine Labs Plural, as the authorized Payment Aggregator and Lending Gateway, to collect, process, hold in escrow/nodal accounts, and route patient treatment payments directly to the Partner Clinic's designated bank account as specified in Schedule B of this Agreement.")
 
 add_heading("2. POINT-OF-CARE PAYMENT & EMI FACILITATION SERVICES")
-add_body("2.1. Clinaza shall provide the Partner Clinic with access to the Clinaza Doctor Dashboard, digital payment link generator, physical countertop acrylic QR standee kit, and cardless healthcare EMI pre-qualification workflows.")
+add_body("2.1. Clinaza shall provide the Partner Clinic with access to the Clinaza Doctor Dashboard, digital payment link generator, dynamic on-screen reception QR checkout portal, and cardless healthcare EMI pre-qualification workflows.")
 add_body("2.2. Clinaza acts strictly as a technology facilitator and Lending Service Provider (LSP) conduit under the RBI Digital Lending Guidelines. Clinaza does not disburse loans on its own balance sheet. All EMI loans, interest rates, Key Fact Statements (KFS), and approval decisions are granted solely by partner RBI-regulated Scheduled Commercial Banks and NBFCs.")
 
 add_heading("3. SETTLEMENT MECHANISM & ESCROW ROUTING")
@@ -85,11 +85,11 @@ add_body("3.3. Zero AMC Guarantee: Clinaza covenants that the Partner Clinic sha
 
 add_heading("4. CLINIC OBLIGATIONS & REGULATORY COMPLIANCE")
 add_body("4.1. The Partner Clinic warrants that its treating dental surgeons hold valid, active registrations with the Dental Council of India (DCI) or respective State Dental Council, and that the clinic complies with all applicable local Clinical Establishments Acts.")
-add_body("4.2. Authentic Treatment Delivery: The Partner Clinic covenants that all transactions processed through Clinaza and Easebuzz represent bona fide medical, dental, or surgical treatments rendered to genuine patients.")
+add_body("4.2. Authentic Treatment Delivery: The Partner Clinic covenants that all transactions processed through Clinaza and Pine Labs Plural represent bona fide medical, dental, or surgical treatments rendered to genuine patients.")
 add_body("4.3. No Duplicate Surcharges: The Partner Clinic agrees not to levy discriminatory surcharges or additional cash markups on patients who choose digital or EMI payment methods over cash.")
 
 add_heading("5. DISPUTES, REFUNDS & CHARGEBACK INDEMNITY")
-add_body("5.1. Clinical Discretion: Clinaza and Easebuzz are technology and payment intermediaries and bear zero liability for clinical diagnosis, procedure efficacy, patient outcomes, or doctor-patient medical disputes.")
+add_body("5.1. Clinical Discretion: Clinaza and Pine Labs Plural are technology and payment intermediaries and bear zero liability for clinical diagnosis, procedure efficacy, patient outcomes, or doctor-patient medical disputes.")
 add_body("5.2. Chargeback Liability: In the event of an unauthorized transaction, fraudulent claim, or customer chargeback raised through card networks or partner banks due to clinic service failure, the Partner Clinic shall be solely responsible for providing treatment proof within two (2) working days. If unresolved, the disputed amount may be adjusted against future settlements.")
 
 add_heading("6. DATA PROTECTION & DPDP ACT 2023 COMPLIANCE")
@@ -109,12 +109,15 @@ hdr_cells[1].text = "Rate / Terms"
 hdr_cells[2].text = "Billing / Settlement Mode"
 
 items_a = [
-    ("Clinic Onboarding & Activation Kit", "₹999 (One-time, inclusive of taxes & shipping)", "Paid during initial clinic enrollment"),
-    ("Annual Maintenance Charges (AMC)", "₹0 (Zero AMC for lifetime)", "No recurring rental fees"),
-    ("UPI & RuPay Debit Card Collections", "0.00% (Zero MDR)", "Instant / T+1 Escrow Settlement"),
-    ("Credit Cards & NetBanking MDR", "1.85% to 2.10% (As per PG schedule)", "Deducted at source by Payment Aggregator"),
-    ("Healthcare Cardless EMIs / NBFC Loans", "Subvened or Patient-Borne (0% clinic deduction available)", "Direct T+1 disbursement to Clinic Bank Account"),
-    ("Settlement Payout Cycle", "T+1 / T+2 Business Days", "Direct Nodal Bank NEFT/RTGS to Clinic")
+    ("Digital Desk Activation & Setup", "₹999 (One-time, inclusive of taxes)", "Paid during initial clinic enrollment"),
+    ("Annual Maintenance Charges (AMC)", "₹0 (Zero AMC for lifetime)", "No recurring rental or platform fees"),
+    ("Patient Financing Platform MDR", "3.00% MDR on loan amount", "Deducted at source on T+1 settlement"),
+    ("Patient Monthly Interest Rate", "1.00% – 1.50% / month (Reducing)", "Dynamic based on patient CIBIL & income profile"),
+    ("Model 1: Patient-Borne Mode (Standard EMI)", "Patient pays the lender's applicable monthly rate", "Clinic receives invoice less 3% MDR on T+1"),
+    ("Model 2: Clinic-Subvented Promotional Mode", "Clinic may fund a lender-approved promotional subvention", "Clinic receives invoice less approved subvention and 3% MDR on T+1"),
+    ("UPI Collections (Dynamic QR / Link)", "0.00% Clinic Deduction (Patient Convenience Fee Mode)", "T+1 Settlement; absorbs gateway MDR"),
+    ("Debit / Credit Cards (Non-EMI)", "1.35% (Debit) / 2.35% (Credit)", "Deducted at source on T+1 settlement"),
+    ("Settlement Payout Cycle", "Guaranteed T+1 Business Days", "Direct Nodal Bank NEFT/RTGS to Clinic")
 ]
 for item, rate, mode in items_a:
     row_cells = table_a.add_row().cells
@@ -134,7 +137,7 @@ items_b = [
     ("Designated Settlement Bank:", "____________________________________________________________"),
     ("Bank Account Number:", "____________________________________________________________"),
     ("IFSC Code & Branch:", "____________________________________________________________"),
-    ("Sub-Merchant MID Mapping:", "To be mapped under Clinaza Easebuzz Master MID")
+    ("Sub-Merchant MID Mapping:", "To be mapped under Clinaza Authorized Gateway (Pine Labs Plural) Master MID")
 ]
 for label, val in items_b:
     row_cells = table_b.add_row().cells

@@ -26,7 +26,7 @@ export default function TermsPage() {
             <li><strong>Healthcare Financing Technology:</strong> Facilitating digital payment and point-of-care Equated Monthly Installment (EMI) options for patients seeking dental procedures.</li>
             <li><strong>Lending Service Provider (LSP) Operations:</strong> Acting as a technology conduit connecting clinics and patients to Reserve Bank of India (RBI)-regulated Scheduled Commercial Banks and Non-Banking Financial Companies (NBFCs).</li>
             <li><strong>Clinic Management &amp; Patient Workflow Tools:</strong> Providing prescription generation, appointment automation, and practice utility software.</li>
-            <li><strong>Physical Clinic Welcome &amp; Activation Kits:</strong> Providing customized countertop acrylic QR standees, promotional materials, and front-desk enablement resources.</li>
+            <li><strong>Digital Point-of-Care Enablement:</strong> Providing instant WhatsApp/SMS payment links, dynamic reception checkout widgets, and front-desk patient financing workflows.</li>
           </ul>
         </section>
 
@@ -43,7 +43,7 @@ export default function TermsPage() {
         <section>
           <h2 className="text-lg font-bold text-[#0B2450] mb-2">4. Clinic Partner Obligations &amp; Sub-Merchant Governance</h2>
           <p>
-            Partner clinics onboarded to collect patient treatment payments and EMI disbursements are mapped under Clinaza's Master Merchant ID (Master MID) across authorized Payment Aggregators (including <strong>Easebuzz Private Limited</strong>) under the Sub-Merchant Model. All partner clinics are governed by the comprehensive <a href="/clinic-agreement" className="text-blue-600 underline font-semibold">Clinic Master Services &amp; Sub-Merchant Agreement</a>, incorporated herein by reference.
+            Partner clinics onboarded to collect patient treatment payments and EMI disbursements are mapped under Clinaza's Master Merchant ID (Master MID) across authorized Payment Aggregators and Gateways (including <strong>Pine Labs Private Limited / Plural by Pine Labs</strong>) under the Sub-Merchant Model. All partner clinics are governed by the comprehensive <a href="/clinic-agreement" className="text-blue-600 underline font-semibold">Clinic Master Services &amp; Sub-Merchant Agreement</a>, incorporated herein by reference.
           </p>
           <p className="mt-2">Partner clinics agree to:</p>
           <ul className="list-disc pl-5 mt-2 space-y-1">
@@ -57,7 +57,7 @@ export default function TermsPage() {
         <section>
           <h2 className="text-lg font-bold text-[#0B2450] mb-2">5. Commercial Terms &amp; Settlement</h2>
           <ul className="list-disc pl-5 space-y-1.5">
-            <li><strong>Clinic Activation Kit:</strong> A one-time activation and hardware kit fee of <strong>₹999</strong> (inclusive of taxes and pan-India shipping) covers physical reception standees, setup, and dedicated partner management.</li>
+            <li><strong>Digital Desk Activation &amp; Underwriting Fee:</strong> A nominal one-time digital desk activation and underwriting fee of <strong>₹999</strong> covers clinic verification, doctor KYC underwriting, and multi-bank lending gateway integration. Zero Annual Maintenance Charges (AMC) and zero monthly subscription fees.</li>
             <li><strong>Zero Annual Maintenance Charges (AMC):</strong> Clinics are not subject to recurring monthly hardware rental fees or unexpected annual maintenance dues.</li>
             <li><strong>Merchant Discount Rate (MDR):</strong> Transactions processed through digital channels are subject to standard payment gateway and affordability MDR as specified in the merchant onboarding schedule (typically 1.85% to 2.10% for card transactions, or zero clinic deduction when patient-borne convenience mode is selected).</li>
             <li><strong>Payout Timeline:</strong> Approved treatment funds are settled directly into the clinic's registered current/savings bank account on a standard <strong>T+1 / T+2 business day schedule</strong>.</li>

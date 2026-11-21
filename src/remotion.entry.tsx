@@ -15,6 +15,12 @@ import {
 } from './components/remotion/ClinazaCarouselPost';
 import { DiwaliPostComposition } from './components/remotion/DiwaliPostComposition';
 import { WhatsAppOnboardingStoryComposition } from './components/remotion/WhatsAppOnboardingStoryComposition';
+import {
+  DentistsOnboardingChatsReelVideo,
+  dentistsOnboardingDefaults,
+} from './components/remotion/DentistsOnboardingChatsReelVideo';
+import { KineticSubtitlesReelVideo } from './components/remotion/KineticSubtitlesReelVideo';
+import { FintechMotionGraphicsReelVideo } from './components/remotion/FintechMotionGraphicsReelVideo';
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -24,6 +30,37 @@ export const RemotionRoot: React.FC = () => {
         id="WhatsAppOnboardingStory"
         component={WhatsAppOnboardingStoryComposition}
         durationInFrames={30}
+        fps={30}
+        width={1080}
+        height={1920}
+      />
+
+      {/* ── Instagram Reel 9:16 (1080 x 1920): Dentist WhatsApp Onboarding Social Proof ── */}
+      <Composition
+        id="DentistsOnboardingChatsReel"
+        component={DentistsOnboardingChatsReelVideo}
+        durationInFrames={900}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={dentistsOnboardingDefaults}
+      />
+
+      {/* ── Style 1: Kinetic Word-Level Subtitles Reel (TikTok / Whisper Style) ── */}
+      <Composition
+        id="KineticSubtitlesReel"
+        component={KineticSubtitlesReelVideo}
+        durationInFrames={540}
+        fps={30}
+        width={1080}
+        height={1920}
+      />
+
+      {/* ── Style 2: Fintech Motion Graphics & Animated Price Ticker Reel ── */}
+      <Composition
+        id="FintechMotionGraphicsReel"
+        component={FintechMotionGraphicsReelVideo}
+        durationInFrames={600}
         fps={30}
         width={1080}
         height={1920}

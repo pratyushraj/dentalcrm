@@ -1,5 +1,11 @@
 {
+  "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "vite",
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "functions": {
+    "api/meta.js": { "includeFiles": "dist/_app.html" }
+  },
   "headers": [
     {
       "source": "/(.*)",
@@ -65,7 +71,46 @@
           "value": "public, max-age=0, must-revalidate"
         }
       ]
+    },
+    {
+      "source": "/:page(_app|404|admin/clinics|partner-pipeline|deck|review/assist|dental-trends|dentist-proposal|emi/callback|costing|reactivation/[^/]+)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex"
+        }
+      ]
     }
+  ],
+  "redirects": [
+    { "source": "/dental-implants-loan", "destination": "/dental-implant-loan", "permanent": true },
+    { "source": "/clear-aligners-cost-on-emi", "destination": "/clear-aligners-on-emi", "permanent": true },
+    { "source": "/:alias(aesthetics-emi|aesthetics|derma-emi)", "destination": "/aesthetic-treatments-on-emi", "permanent": true },
+    { "source": "/:alias(lasik-on-emi|lasik-loan|contoura-vision-on-emi)", "destination": "/lasik-eye-surgery-on-emi", "permanent": true },
+    { "source": "/:alias(hair-transplant-cost-on-emi|hair-transplant-emi|hair-transplant-loan)", "destination": "/hair-transplant-on-emi", "permanent": true },
+    { "source": "/:alias(ivf-on-emi|ivf-cost-on-emi|fertility-loan|ivf-loan)", "destination": "/ivf-treatment-on-emi", "permanent": true },
+    { "source": "/:alias(gynecomastia-on-emi|gynecomastia-cost-on-emi|male-chest-reduction-emi|gynecomastia-loan)", "destination": "/gynecomastia-surgery-on-emi", "permanent": true },
+    { "source": "/:alias(hearing-aid-on-emi|hearing-aid-loan|hearing-aids-loan)", "destination": "/hearing-aids-on-emi", "permanent": true },
+    { "source": "/:alias(laser-piles-surgery-on-emi|piles-surgery-on-emi|piles-on-emi|fistula-laser-surgery-on-emi)", "destination": "/piles-laser-surgery-on-emi", "permanent": true },
+    { "source": "/:alias(maternity-hospital-emi|delivery-on-emi|c-section-delivery-on-emi|maternity-loan)", "destination": "/maternity-delivery-on-emi", "permanent": true },
+    { "source": "/:alias(kidney-stone-surgery-on-emi|rirs-laser-surgery-on-emi|circumcision-on-emi|zsr-circumcision-emi)", "destination": "/kidney-stone-laser-surgery-on-emi", "permanent": true },
+    { "source": "/:alias(acl-surgery-on-emi|knee-arthroscopy-on-emi|acl-reconstruction-loan)", "destination": "/acl-knee-surgery-on-emi", "permanent": true },
+    { "source": "/:alias(loan|loans|apply)", "destination": "/#check-eligibility", "permanent": true },
+    { "source": "/checkout-demo", "destination": "/checkout-flow", "permanent": true },
+    { "source": "/clinic-onboarding/kyc", "destination": "/clinic-kyc", "permanent": true },
+    { "source": "/:alias(pilot-onboarding|clinic-pilot)", "destination": "/clinic-onboarding", "permanent": true },
+    { "source": "/pipeline", "destination": "/partner-pipeline", "permanent": true },
+    { "source": "/:alias(underwriting|pinelabs-portal)", "destination": "/partner/underwriting", "permanent": true },
+    { "source": "/yourdentist/blog", "destination": "/blog", "permanent": true },
+    { "source": "/yourdentist/blog/:slug", "destination": "/blog/:slug", "permanent": true },
+    { "source": "/:alias(sub-merchant-terms|sub-merchant-agreement)", "destination": "/clinic-agreement", "permanent": true },
+    { "source": "/terms-and-conditions", "destination": "/terms", "permanent": true },
+    { "source": "/privacy-policy", "destination": "/privacy", "permanent": true },
+    { "source": "/cancellation-policy", "destination": "/refund-policy", "permanent": true },
+    { "source": "/delivery-policy", "destination": "/shipping-policy", "permanent": true },
+    { "source": "/contact-us", "destination": "/contact", "permanent": true },
+    { "source": "/login", "destination": "/reactivation/login", "permanent": true },
+    { "source": "/reactivation", "destination": "/reactivation/customers", "permanent": true }
   ],
   "rewrites": [
     {
@@ -76,141 +121,17 @@
       "source": "/api/push/:path*",
       "destination": "https://creatorarmour-api-k86q.onrender.com/api/push/:path*"
     },
+    { "source": "/checkout-flow", "destination": "/api/meta?preview=checkout" },
+    { "source": "/demo/loan", "destination": "/api/meta?preview=demo" },
+    { "source": "/clinic-kyc", "destination": "/api/meta?preview=kyc" },
+    { "source": "/partner/underwriting", "destination": "/api/meta?preview=underwriting" },
     {
-      "source": "/blog/:slug*",
-      "destination": "/api/meta"
+      "source": "/reactivation/(login|signup|receptionist|customers|segments|campaigns|analytics|automations|reviews|sent-messages|transformations|settings)",
+      "destination": "/_app"
     },
     {
-      "source": "/cities/:city*",
-      "destination": "/api/meta"
-    },
-    {
-      "source": "/tools",
-      "destination": "/api/meta"
-    },
-    {
-      "source": "/rx",
-      "destination": "/api/meta"
-    },
-    {
-      "source": "/calculator",
-      "destination": "/api/meta"
-    },
-    {
-      "source": "/dental-implant-loan",
-      "destination": "/api/meta"
-    },
-    {
-      "source": "/clear-aligners-on-emi",
-      "destination": "/api/meta"
-    },
-    {
-      "source": "/deck",
-      "destination": "/api/meta"
-    },
-    {
-      "source": "/demo/loan",
-      "destination": "/api/meta"
-    },
-    {
-      "source": "/checkout-flow",
-      "destination": "/api/meta"
-    },
-    {
-      "source": "/checkout-flow/",
-      "destination": "/api/meta"
-    },
-    {
-      "source": "/checkout-demo",
-      "destination": "/api/meta"
-    },
-    {
-      "source": "/review/assist",
-      "destination": "/api/meta"
-    },
-    {
-      "source": "/clinic-onboarding",
-      "destination": "/api/meta"
-    },
-    {
-      "source": "/clinic-kyc",
-      "destination": "/api/meta"
-    },
-    {
-      "source": "/clinic-onboarding/kyc",
-      "destination": "/api/meta"
-    },
-    {
-      "source": "/pilot-onboarding",
-      "destination": "/api/meta"
-    },
-    {
-      "source": "/clinic-pilot",
-      "destination": "/api/meta"
-    },
-    {
-      "source": "/partner-pipeline",
-      "destination": "/api/meta"
-    },
-    {
-      "source": "/clinic-agreement",
-      "destination": "/api/meta"
-    },
-    {
-      "source": "/sub-merchant-terms",
-      "destination": "/api/meta"
-    },
-    {
-      "source": "/sub-merchant-agreement",
-      "destination": "/api/meta"
-    },
-    {
-      "source": "/terms",
-      "destination": "/api/meta"
-    },
-    {
-      "source": "/terms-and-conditions",
-      "destination": "/api/meta"
-    },
-    {
-      "source": "/privacy",
-      "destination": "/api/meta"
-    },
-    {
-      "source": "/privacy-policy",
-      "destination": "/api/meta"
-    },
-    {
-      "source": "/refund-policy",
-      "destination": "/api/meta"
-    },
-    {
-      "source": "/cancellation-policy",
-      "destination": "/api/meta"
-    },
-    {
-      "source": "/shipping-policy",
-      "destination": "/api/meta"
-    },
-    {
-      "source": "/delivery-policy",
-      "destination": "/api/meta"
-    },
-    {
-      "source": "/contact",
-      "destination": "/api/meta"
-    },
-    {
-      "source": "/contact-us",
-      "destination": "/api/meta"
-    },
-    {
-      "source": "/",
-      "destination": "/api/meta"
-    },
-    {
-      "source": "/((?!api/|assets/|docs/|favicon|.*\\.(?:jpg|jpeg|png|webp|svg|ico|json|txt|xml|pdf|docx|xlsx)|sw\\.js|site\\.webmanifest|manifest\\.json).*)",
-      "destination": "/index.html"
+      "source": "/(admin/clinics|partner-pipeline|deck|review/assist|dental-trends|dentist-proposal|emi/callback|costing)",
+      "destination": "/_app"
     }
   ]
 }

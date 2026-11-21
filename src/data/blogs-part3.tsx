@@ -2128,7 +2128,7 @@ export const BLOGS_PART3 = [
 
         <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">1. Clinaza: Embedded Clinic OS + Instant Patient Financing</h2>
         <p className="text-neutral-700 leading-relaxed">
-          Clinaza is engineered specifically for dental surgeons, implantologists, and orthodontists. Instead of just mailing a standalone QR code standee to your reception desk, Clinaza integrates into the dentist's daily workflow:
+          Clinaza offers digital payment links and on-screen QR checkout alongside tools for dental practices:
         </p>
         <ul className="list-disc pl-6 space-y-2 text-neutral-700">
           <li><strong>Digital NABH Legal Consent:</strong> Auto-generate multilingual legal consent forms before surgery that patients can sign digitally on a tablet or mobile.</li>

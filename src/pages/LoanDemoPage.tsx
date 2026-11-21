@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { SEOHead } from '@/components/seo/SEOHead';
+import { CLINIC_PREVIEW_ROBOTS, clinicLinkPreview, readClinicPreviewIdentity } from '@/lib/clinicLinkPreview.js';
 import { 
   Shield, 
   ShieldCheck,
@@ -90,6 +91,8 @@ const COMPARISON_METRICS = [
 ];
 
 export default function LoanDemoPage() {
+  const [searchParams] = useSearchParams();
+  const preview = clinicLinkPreview('checkout', readClinicPreviewIdentity(searchParams));
   // Mobile View Switcher: 'phone' or 'controls'
   const [mobileTab, setMobileTab] = useState<'phone' | 'controls'>('phone');
 
@@ -127,10 +130,9 @@ export default function LoanDemoPage() {
   return (
     <div className="min-h-screen bg-[#F8FAFC] text-[#0B2450] flex flex-col font-jakarta antialiased selection:bg-[#0867E8] selection:text-white pb-24 sm:pb-0 relative overflow-x-hidden">
       <SEOHead
-        title="Patient EMI Checkout Flow & Interactive Simulator | Clinaza"
-        description="Experience Clinaza's 2-minute paperless patient financing checkout: 76.4% multi-lender approval, 1-click UPI autopay, and T+1 direct clinic settlement."
+        {...preview}
+        robots={CLINIC_PREVIEW_ROBOTS}
         canonicalUrl="https://www.clinaza.in/checkout-flow"
-        image="https://www.clinaza.in/assets/og-checkout-flow.png"
       />
 
       {/* ── Precision Floating Frosted-Glass Pill Navigation (Identical to Homepage) ── */}

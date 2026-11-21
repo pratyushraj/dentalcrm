@@ -5,7 +5,7 @@ import { SEOHead } from '@/components/seo/SEOHead';
 
 export default function NotFoundPage() {
   return (
-    <div className="min-h-screen bg-slate-50 flex items-center justify-center px-4 py-12">
+    <main className="min-h-screen bg-slate-50 flex items-center justify-center px-4 py-12">
       <SEOHead
         title="Page Not Found — Clinaza"
         description="The page you are looking for does not exist or has been moved."
@@ -17,7 +17,7 @@ export default function NotFoundPage() {
         </div>
         <h1 className="text-3xl font-extrabold text-slate-900 mb-2">Page Not Found</h1>
         <p className="text-slate-600 text-sm mb-6 leading-relaxed">
-          The page you are looking for doesnât exist or has moved. Explore our healthcare financing tools or return home.
+          The page you are looking for doesn’t exist or has moved. Explore our healthcare financing tools or return home.
         </p>
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
           <Link
@@ -35,6 +35,6 @@ export default function NotFoundPage() {
           </Link>
         </div>
       </div>
-    </div>
+    </main>
   );
 }

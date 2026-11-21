@@ -398,7 +398,7 @@ export const BLOGS_PART2 = [
 
         <div className="bg-slate-900 text-white p-6 rounded-2xl my-8 space-y-4">
           <h3 className="text-lg font-bold">Are you a hospital or orthopaedic clinic?</h3>
-          <p className="text-sm text-slate-300">Partner with Clinaza to offer easy EMI at the point of care. Increase surgery conversions by 40%. Onboard in 24 hours — no setup fee.</p>
+          <p className="text-sm text-slate-300">Offer flexible patient EMIs at checkout. Digital desk activation costs ₹999 one time, with ₹0 AMC and ₹0 monthly fees.</p>
           <a href="/clinic-onboarding" className="inline-block bg-[#0867E8] text-white font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-600 transition-colors">Partner with Clinaza →</a>
         </div>
 
@@ -501,7 +501,7 @@ export const BLOGS_PART2 = [
 
         <div className="bg-slate-900 text-white p-6 rounded-2xl my-8 space-y-4">
           <h3 className="text-lg font-bold">Are you a bariatric or metabolic surgery centre?</h3>
-          <p className="text-sm text-slate-300">Partner with Clinaza and offer easy EMI at the point of consultation. Convert hesitant patients into confirmed surgeries. Free onboarding.</p>
+          <p className="text-sm text-slate-300">Offer flexible patient EMIs at checkout. Digital desk activation costs ₹999 one time, with ₹0 AMC and ₹0 monthly fees.</p>
           <a href="/clinic-onboarding" className="inline-block bg-[#0867E8] text-white font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-600 transition-colors">Partner with Clinaza →</a>
         </div>
 
@@ -616,7 +616,7 @@ export const BLOGS_PART2 = [
 
         <div className="bg-slate-900 text-white p-6 rounded-2xl my-8 space-y-4">
           <h3 className="text-lg font-bold">Are you a plastic surgery or ENT clinic?</h3>
-          <p className="text-sm text-slate-300">Offer easy EMI for rhinoplasty and all cosmetic procedures. Patients who hesitate at ₹1.5 lakh book immediately when offered ₹6,000/month. Partner with Clinaza — free onboarding.</p>
+          <p className="text-sm text-slate-300">Help patients check EMI eligibility for planned cosmetic procedures. Digital desk activation costs ₹999 one time, with ₹0 AMC and ₹0 monthly fees.</p>
           <a href="/clinic-onboarding" className="inline-block bg-[#0867E8] text-white font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-600 transition-colors">Partner with Clinaza →</a>
         </div>
 
@@ -821,7 +821,7 @@ export const BLOGS_PART2 = [
 
         <div className="bg-slate-900 text-white p-6 rounded-2xl my-8 space-y-4">
           <h3 className="text-lg font-bold">Are you a cosmetic surgery or aesthetic clinic?</h3>
-          <p className="text-sm text-slate-300">Offer easy EMI on liposuction and body contouring. Patients who walk out at ₹1.5 lakh stay and book when you show them ₹6,250/month. Partner with Clinaza — free, 24-hour onboarding.</p>
+          <p className="text-sm text-slate-300">Offer flexible monthly EMIs for liposuction and body contouring. Clinic activation costs ₹999 once, with ₹0 AMC and ₹0 monthly fees.</p>
           <a href="/clinic-onboarding" className="inline-block bg-[#0867E8] text-white font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-600 transition-colors">Partner with Clinaza →</a>
         </div>
 
@@ -2053,7 +2053,7 @@ export const BLOGS_PART2 = [
 
         <div className="bg-gradient-to-r from-[#0867E8] to-[#0B2450] text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
           <h3 className="text-lg font-bold">Enable 55+ Lending Partners at Your Clinic Reception</h3>
-          <p className="text-xs text-blue-100 max-w-lg mx-auto">Zero upfront setup fees, free physical counter kits, and automated clinical software.</p>
+          <p className="text-xs text-blue-100 max-w-lg mx-auto">Set up secure payment links and on-screen QR checkout for ₹999 one time, with ₹0 AMC and ₹0 monthly fees.</p>
           <a href="/clinic-onboarding" className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md">Partner Your Clinic with Clinaza →</a>
         </div>
       </div>

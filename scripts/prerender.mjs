@@ -1,240 +1,159 @@
-#!/usr/bin/env node
-/**
- * Custom prerender script using puppeteer + system Chrome + vite preview.
- * Snapshots all routes listed in package.json reactSnap.include.
- * Falls back gracefully if Chrome is not found (non-fatal).
- */
-import { spawn } from 'child_process';
-import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'fs';
-import { join, dirname } from 'path';
-import { fileURLToPath } from 'url';
+import { copyFile, mkdir, readFile, writeFile } from 'node:fs/promises';
+import { existsSync } from 'node:fs';
+import { dirname, join, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { load } from 'cheerio';
+import puppeteer from 'puppeteer-core';
+import { preview } from 'vite';
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
-const ROOT = join(__dirname, '..');
-const DIST = join(ROOT, 'dist');
-const pkg = JSON.parse(readFileSync(join(ROOT, 'package.json'), 'utf-8'));
-const routes = pkg.reactSnap?.include || ['/'];
-
-let metaMap = {};
-try {
-  metaMap = JSON.parse(readFileSync(join(ROOT, 'api', 'meta-map.json'), 'utf-8'));
-} catch {}
-
-const cityNames = {};
-try {
-  const citiesCode = readFileSync(join(ROOT, 'src', 'data', 'cities.ts'), 'utf-8');
-  for (const m of citiesCode.matchAll(/{\s*slug:\s*"([^"]+)",\s*name:\s*"([^"]+)"/g)) {
-    cityNames[m[1]] = m[2];
-  }
-} catch {}
-
-// Allow skipping prerender via SKIP_PRERENDER=1 or PRERENDER=0
-if (process.env.SKIP_PRERENDER === '1' || process.env.PRERENDER === '0') {
-  console.log('[prerender] ⏩ Skipping prerender via environment flag.');
-  process.exit(0);
-}
-
-const CONCURRENCY = parseInt(process.env.PRERENDER_CONCURRENCY || '4', 10);
-const waitFor = Math.min(pkg.reactSnap?.waitFor || 1000, 1200);
-const PORT = pkg.reactSnap?.port || 45789;
-
-const chromePaths = [
-  '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
-  '/usr/bin/google-chrome-stable',
-  '/usr/bin/google-chrome',
-  '/usr/bin/chromium-browser',
-  '/usr/bin/chromium',
+const root = fileURLToPath(new URL('../', import.meta.url));
+const dist = join(root, 'dist');
+const site = 'https://www.clinaza.in';
+const directAccessPages = [
+  '/clinic-agreement', '/terms', '/privacy', '/refund-policy',
+  '/shipping-policy', '/contact', '/404',
 ];
-const executablePath = chromePaths.find(p => existsSync(p));
 
-if (!executablePath) {
-  console.warn('[prerender] ⚠️  No Chrome found — skipping prerender.');
-  console.warn('[prerender] SEO tags still work via react-helmet-async on client-side navigation.');
-  process.exit(0);
-}
-
-console.log(`[prerender] Chrome: ${executablePath}`);
-console.log(`[prerender] Concurrency: ${CONCURRENCY} workers | waitFor: ${waitFor}ms`);
-
-// Dynamic import of puppeteer (may be puppeteer or puppeteer-core)
-let puppeteer;
-try {
-  puppeteer = (await import('puppeteer')).default;
-} catch {
-  try {
-    puppeteer = (await import('puppeteer-core')).default;
-  } catch {
-    console.warn('[prerender] ⚠️  puppeteer not available — skipping prerender.');
-    process.exit(0);
-  }
-}
-
-// Start vite preview server
-console.log('[prerender] Starting vite preview server...');
-const preview = spawn(
-  './node_modules/.bin/vite',
-  ['preview', '--port', String(PORT), '--strictPort'],
-  { cwd: ROOT, stdio: ['ignore', 'pipe', 'pipe'] }
-);
-
-// Wait for preview to be ready
-await new Promise((resolve, reject) => {
-  const timeout = setTimeout(() => reject(new Error('Server start timeout')), 15000);
-  preview.stdout.on('data', (d) => {
-    if (d.toString().includes('Local')) { clearTimeout(timeout); resolve(); }
-  });
-  preview.stderr.on('data', (d) => {
-    if (d.toString().includes('Local')) { clearTimeout(timeout); resolve(); }
-  });
-  preview.on('error', reject);
-});
-
-console.log(`[prerender] Server ready at http://localhost:${PORT}`);
-
-const browser = await puppeteer.launch({
-  executablePath,
-  headless: true,
-  args: [
-    '--no-sandbox',
-    '--disable-setuid-sandbox',
-    '--disable-dev-shm-usage',
-    '--disable-gpu',
-    '--disable-extensions',
-    '--blink-settings=imagesEnabled=false' // Skip image downloads during static HTML snapshotting for maximum speed
-  ],
-});
-
-let success = 0, failed = 0;
-let queueIndex = 0;
-
-async function worker() {
-  const page = await browser.newPage();
-  // Block heavy assets (images, fonts, media) to make DOM snapshotting blazing fast
-  await page.setRequestInterception(true);
-  page.on('request', (req) => {
-    const resourceType = req.resourceType();
-    if (['image', 'media', 'font'].includes(resourceType)) {
-      req.abort();
-    } else {
-      req.continue();
+export async function sitemapRoutes() {
+  const xml = await readFile(join(root, 'public', 'sitemap.xml'), 'utf8');
+  const $ = load(xml, { xml: true });
+  const routes = $('urlset > url > loc').map((_, node) => {
+    const url = new URL($(node).text().trim());
+    if (url.origin !== site || !/^\/(?:[a-z0-9-]+(?:\/[a-z0-9-]+)*)?$/.test(url.pathname)
+      || url.href !== site + url.pathname) {
+      throw new Error(`Invalid sitemap URL: ${url.href}`);
     }
-  });
+    return url.pathname;
+  }).get();
+  if (!routes.includes('/') || routes.includes('/404') || new Set(routes).size !== routes.length) {
+    throw new Error('Sitemap must contain the homepage and unique public canonical URLs.');
+  }
+  return routes;
+}
 
-  while (queueIndex < routes.length) {
-    const route = routes[queueIndex++];
-    if (!route) break;
+async function launchBrowser() {
+  const localChrome = [
+    process.env.CHROME_BIN,
+    '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
+    '/usr/bin/google-chrome-stable',
+    '/usr/bin/google-chrome',
+    '/usr/bin/chromium-browser',
+    '/usr/bin/chromium',
+  ].find(path => path && existsSync(path));
+  if (localChrome) {
+    return puppeteer.launch({
+      executablePath: localChrome,
+      headless: true,
+      args: ['--no-sandbox', '--disable-dev-shm-usage'],
+    });
+  }
+  if (process.platform === 'linux' && process.arch === 'x64') {
+    const { default: chromium } = await import('@sparticuz/chromium');
+    return puppeteer.launch({
+      executablePath: await chromium.executablePath(),
+      headless: true,
+      args: chromium.args,
+    });
+  }
+  throw new Error('Install Chrome or set CHROME_BIN to build the public pages.');
+}
 
-    try {
-      await page.goto(`http://localhost:${PORT}${route}`, { waitUntil: 'domcontentloaded', timeout: 15000 });
-      if (route !== '/') {
-        await page.waitForFunction(
-          () => document.title && !document.title.startsWith('Clinaza — Point-of-Care'),
-          { timeout: 3500 }
-        ).catch(() => {});
-      } else {
-        await page.waitForSelector('#root > *', { timeout: 3500 }).catch(() => {});
-      }
-      if (waitFor > 0) {
-        await new Promise(r => setTimeout(r, waitFor));
-      }
-      let html = await page.content();
-      const pageTitle = await page.title();
-      let resolvedTitle = pageTitle;
-      if (!resolvedTitle || resolvedTitle.startsWith('Clinaza — Point-of-Care Patient Financing')) {
-        const cityMatch = route.match(/^\/cities\/([a-z0-9-]+)/i);
-        if (cityMatch) {
-          const cSlug = cityMatch[1];
-          const cName = cityNames[cSlug] || (cSlug.charAt(0).toUpperCase() + cSlug.slice(1));
-          resolvedTitle = cSlug === 'kochi'
-            ? 'Braces & Dental Treatment Cost in Kochi (From ₹1,200/mo) | Clinaza'
-            : `Best Dental Treatment EMI Plans in ${cName} | Clinaza`;
-        } else if (route === '/dental-implant-loan') {
-          resolvedTitle = 'Dental Implant Loan & EMI in India (From ₹2,400/mo)';
-        } else if (route === '/clear-aligners-on-emi') {
-          resolvedTitle = 'Clear Aligners Cost on EMI in India (From ₹2,600/mo)';
-        } else if (route === '/checkout-flow' || route === '/demo/loan') {
-          resolvedTitle = 'Patient EMI Checkout Flow & Infrastructure Demo | Clinaza';
-        } else if (metaMap[route]?.title) {
-          resolvedTitle = metaMap[route].title;
+async function capturePage(page, origin, route, publishedRoutes) {
+  const expected = site + route;
+  await page.goto(origin + route, { waitUntil: 'domcontentloaded', timeout: 20000 });
+  await page.waitForFunction((canonical, notFound) => {
+    const root = document.querySelector('#root');
+    const canonicals = document.querySelectorAll('link[rel="canonical"]');
+    return root?.querySelector('h1')?.textContent?.trim()
+      && root.querySelector('a[href]')
+      && canonicals.length === 1
+      && canonicals[0].href === canonical
+      && document.querySelectorAll('meta[name="description"]').length === 1
+      && document.querySelector('meta[name="description"]').content.trim()
+      && Boolean(document.querySelector('meta[name="robots"]')?.content.includes('noindex')) === notFound;
+  }, { timeout: 12000 }, expected, route === '/404');
+
+  const html = await page.content();
+  const family = route === '/' ? '/cities/' : route === '/blog' ? '/blog/' : null;
+  if (family) {
+    const $ = load(html);
+    const links = $('#root a[href]').map((_, link) => new URL($(link).attr('href'), site)).get();
+    const missing = links.filter(url => url.origin === site && url.pathname.startsWith(family)
+      && !publishedRoutes.has(url.pathname));
+    if (missing.length) {
+      throw new Error(`Public links missing from the sitemap: ${[...new Set(missing.map(url => url.pathname))].join(', ')}`);
+    }
+  }
+  const output = route === '/' ? 'index.html' : `${route.slice(1)}.html`;
+  const path = join(dist, output);
+  await mkdir(dirname(path), { recursive: true });
+  await writeFile(path, html);
+}
+
+export async function prerenderRoutes(requestedRoutes) {
+  const publishedRoutes = new Set(await sitemapRoutes());
+  const allowed = [...new Set([...publishedRoutes, ...directAccessPages])];
+  const routes = requestedRoutes ?? allowed;
+  if (!routes.length || routes.some(route => !allowed.includes(route))) {
+    throw new Error('Select routes from the sitemap or the direct-access pages.');
+  }
+
+  const index = join(dist, 'index.html');
+  const appShell = join(dist, '_app.html');
+  const indexHtml = await readFile(index, 'utf8');
+  if (indexHtml.includes('id="clinaza-app-shell"')) {
+    await copyFile(index, appShell);
+  }
+  const shell = await readFile(appShell, 'utf8');
+  const server = await preview({ preview: { host: '127.0.0.1', port: 45789 } });
+  const origin = `http://127.0.0.1:${server.httpServer.address().port}`;
+  let browser;
+  try {
+    browser = await launchBrowser();
+    let nextRoute = 0;
+    const errors = [];
+    const workers = Array.from({ length: Math.min(4, routes.length) }, async () => {
+      const page = await browser.newPage();
+      await page.setBypassServiceWorker(true);
+      await page.setRequestInterception(true);
+      page.on('request', request => {
+        if (!request.url().startsWith(origin + '/')) {
+          return request.abort();
         }
-      }
-      if (resolvedTitle) {
-        html = html.replace(/<title>[^<]*<\/title>/i, `<title>${resolvedTitle}</title>`);
-      }
+        // Every capture starts with the unrendered shell at its own URL, even on reruns.
+        if (request.isNavigationRequest() && request.frame() === page.mainFrame()) {
+          return request.respond({ status: 200, contentType: 'text/html; charset=utf-8', body: shell });
+        }
+        if (['script', 'stylesheet'].includes(request.resourceType()) && request.url().startsWith(origin + '/assets/')) {
+          return request.continue();
+        }
+        return request.abort();
+      });
 
-      let resolvedDesc = null;
       try {
-        const metaDesc = await page.$eval('meta[name="description"]', (el) => el.getAttribute('content'));
-        if (metaDesc && !metaDesc.startsWith('Enable instant 2-minute paperless patient')) {
-          resolvedDesc = metaDesc;
+        while (nextRoute < routes.length) {
+          const route = routes[nextRoute++];
+          try {
+            await capturePage(page, origin, route, publishedRoutes);
+          } catch (error) {
+            errors.push(`${route}: ${error.message}`);
+          }
         }
-      } catch {}
-
-      if (!resolvedDesc) {
-        const cityMatch = route.match(/^\/cities\/([a-z0-9-]+)/i);
-        if (cityMatch) {
-          const cSlug = cityMatch[1];
-          const cName = cityNames[cSlug] || (cSlug.charAt(0).toUpperCase() + cSlug.slice(1));
-          resolvedDesc = cSlug === 'kochi'
-            ? 'Compare braces cost in Kochi (₹18K–₹50K) & dental implants on EMI. Explore easy monthly financing (₹30K–₹3L) at top clinics with 2-min instant approval.'
-            : `Compare dental costs in ${cName}. Explore easy EMI options (₹30K–₹3L) for dental implants, braces, aligners & RCT at top clinics. Fast 2-min approval.`;
-        } else if (route === '/dental-implant-loan') {
-          resolvedDesc = 'Get a dental implant loan in India. Finance single tooth, multiple implants & All-on-4 with flexible monthly EMI from ~11.5% p.a. 2-min digital approval.';
-        } else if (route === '/clear-aligners-on-emi') {
-          resolvedDesc = 'Looking for clear aligners on EMI in India? Compare Invisalign, Flash & Toothsi alternatives with flexible monthly financing from ~11.5% p.a. 2-min approval.';
-        } else if (route === '/checkout-flow' || route === '/demo/loan') {
-          resolvedDesc = 'Experience Clinaza’s 2-minute paperless patient financing checkout: multi-lender approval, 1-click UPI autopay, and T+1 direct clinic settlement.';
-        } else if (metaMap[route]?.desc) {
-          resolvedDesc = metaMap[route].desc;
-        }
+      } finally {
+        await page.close();
       }
-
-      if (resolvedDesc) {
-        html = html.replace(/<meta\s+name=["']description["']\s+content="[^"]*"/i, `<meta name="description" content="${resolvedDesc.replace(/"/g, '&quot;')}"`);
-      }
-
-      if (route === '/checkout-flow' || route === '/demo/loan') {
-        const ogImg = 'https://www.clinaza.in/assets/og-checkout-flow.png';
-        html = html.replace(/<meta\s+(?:property|name)=["']og:image["']\s+content="[^"]*"/gi, `<meta property="og:image" content="${ogImg}"`);
-        html = html.replace(/<meta\s+(?:property|name)=["']twitter:image["']\s+content="[^"]*"/gi, `<meta property="twitter:image" content="${ogImg}"`);
-      }
-
-      if (!/rel=["']canonical["']/i.test(html)) {
-        const canonicalUrl = `https://www.clinaza.in${route === '/' ? '/' : route.replace(/\/$/, '')}`;
-        html = html.replace(/<\/head>/i, `<link rel="canonical" href="${canonicalUrl}" />\n</head>`);
-      }
-
-      const filePath = route === '/'
-        ? join(DIST, 'index.html')
-        : join(DIST, route.replace(/^\//, ''), 'index.html');
-      mkdirSync(dirname(filePath), { recursive: true });
-      writeFileSync(filePath, html, 'utf-8');
-      success++;
-
-      if (success % 25 === 0 || success === routes.length) {
-        console.log(`[prerender] ${success}/${routes.length} routes snapshotted...`);
-      }
-    } catch (e) {
-      console.warn(`[prerender] ⚠️  Error at ${route}: ${e.message}`);
-      failed++;
+    });
+    await Promise.all(workers);
+    if (errors.length) {
+      throw new Error(`Could not prerender ${errors.length} page(s):\n${errors.join('\n')}`);
     }
+    console.log(`[prerender] Wrote ${routes.length} public HTML pages.`);
+  } finally {
+    await browser?.close();
+    await new Promise(resolve => server.httpServer.close(resolve));
   }
-
-  try {
-    await page.close();
-  } catch {}
 }
 
-console.log(`[prerender] Running ${CONCURRENCY} parallel workers across ${routes.length} routes...`);
-const startTime = Date.now();
-const workers = Array.from({ length: CONCURRENCY }, () => worker());
-await Promise.all(workers);
-
-try {
-  await browser.close();
-} catch {}
-try {
-  preview.kill();
-} catch {}
-const elapsedSec = ((Date.now() - startTime) / 1000).toFixed(1);
-console.log(`[prerender] ⚡ Finished in ${elapsedSec}s: ${success} succeeded, ${failed} failed out of ${routes.length} routes`);
+if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  await prerenderRoutes();
+}

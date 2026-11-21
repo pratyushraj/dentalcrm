@@ -24,8 +24,7 @@ interface SEOHeadProps {
 
 /**
  * SEO Head Component
- * Uses react-helmet-async's <Helmet> for static pre-rendering compatibility.
- * Tags are injected into <head> during react-snap prerender AND on client-side navigation.
+ * The same tags are used in prerendered documents and after client-side navigation.
  */
 export const SEOHead: React.FC<SEOHeadProps> = ({
   title,
@@ -49,8 +48,11 @@ export const SEOHead: React.FC<SEOHeadProps> = ({
   const location = useLocation();
   const baseUrl = 'https://www.clinaza.in';
   // Ensure canonical URL is always normalized to www.clinaza.in to prevent canonical domain split in search engines
-  const rawUrl = canonicalUrl || `${baseUrl}${location.pathname}`;
-  const currentUrl = rawUrl.replace(/^https?:\/\/clinaza\.in/, 'https://www.clinaza.in');
+  const canonical = new URL(canonicalUrl || location.pathname, baseUrl);
+  canonical.hostname = canonical.hostname === 'clinaza.in' ? 'www.clinaza.in' : canonical.hostname;
+  canonical.pathname = canonical.pathname.replace(/\/+$/, '') || '/';
+  const currentUrl = canonical.href;
+  const imageUrl = new URL(image, baseUrl).href;
 
   const twitterCard = video ? 'player' : 'summary_large_image';
 
@@ -70,7 +72,7 @@ export const SEOHead: React.FC<SEOHeadProps> = ({
       <meta property="og:type" content={type} />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
-      <meta property="og:image" content={image} />
+      <meta property="og:image" content={imageUrl} />
       {imageAlt && <meta property="og:image:alt" content={imageAlt} />}
       <meta property="og:url" content={currentUrl} />
       <meta property="og:site_name" content="Clinaza" />
@@ -98,7 +100,7 @@ export const SEOHead: React.FC<SEOHeadProps> = ({
       <meta name="twitter:card" content={twitterCard} />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
-      <meta name="twitter:image" content={image} />
+      <meta name="twitter:image" content={imageUrl} />
       <meta name="twitter:url" content={currentUrl} />
       {video && <meta name="twitter:player" content={video} />}
       {video && videoWidth && <meta name="twitter:player:width" content={videoWidth} />}
@@ -107,7 +109,7 @@ export const SEOHead: React.FC<SEOHeadProps> = ({
       {/* JSON-LD structured data */}
       {jsonLd && (
         <script type="application/ld+json">
-          {JSON.stringify(jsonLd)}
+          {JSON.stringify(jsonLd).replace(/</g, '\\u003c')}
         </script>
       )}
     </Helmet>

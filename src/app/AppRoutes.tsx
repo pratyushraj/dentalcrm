@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useLocation, useParams } from "react-router-dom";
 import { SessionContextProvider } from "@/contexts/SessionContext";
 import { SidebarProvider } from "@/contexts/SidebarContext";
 import AddToHomeScreen from "@/components/mobile/AddToHomeScreen";
@@ -41,6 +41,12 @@ const RefundPolicyPage = lazy(() => import("@/pages/RefundPolicyPage"));
 const ShippingPolicyPage = lazy(() => import("@/pages/ShippingPolicyPage"));
 const ContactUsPage = lazy(() => import("@/pages/ContactUsPage"));
 const NotFoundPage = lazy(() => import("@/pages/NotFoundPage"));
+
+function LegacyBlogArticleRedirect() {
+  const { slug } = useParams<{ slug: string }>();
+  const { search, hash } = useLocation();
+  return <Navigate to={`/blog/${encodeURIComponent(slug ?? '')}${search}${hash}`} replace />;
+}
 
 export default function AppRoutes() {
   return (
@@ -170,7 +176,7 @@ export default function AppRoutes() {
 
           {/* Legacy Redirects for SEO Continuity */}
           <Route path="/yourdentist/blog" element={<Navigate to="/blog" replace />} />
-          <Route path="/yourdentist/blog/:slug" element={<Navigate to="/blog" replace />} />
+          <Route path="/yourdentist/blog/:slug" element={<LegacyBlogArticleRedirect />} />
 
           <Route path="/dental-trends" element={<LazyRoute><DentalTrendFinder /></LazyRoute>} />
           <Route path="/dentist-proposal" element={<LazyRoute><ContentWorkspace /></LazyRoute>} />

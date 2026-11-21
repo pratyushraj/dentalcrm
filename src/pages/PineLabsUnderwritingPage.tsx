@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { supabase } from '@/lib/supabase';
 import { SEOHead } from '@/components/seo/SEOHead';
+import { CLINIC_PREVIEW_ROBOTS, clinicLinkPreview, readClinicPreviewIdentity } from '@/lib/clinicLinkPreview.js';
 import {
   ShieldCheck,
   Building2,
@@ -403,21 +404,19 @@ export default function PineLabsUnderwritingPage() {
       )
     : null;
 
-  const unauthTitle = spotlightClinic
-    ? `${spotlightClinic.clinic_name} (${spotlightClinic.doctor_name}) • Verified Underwriting Dossier | Clinaza`
-    : "Pine Labs Underwriting Portal | Clinaza Sub-Merchant Desk";
-
-  const unauthDescription = spotlightClinic
-    ? `Verified Sub-Merchant KYC Dossier for ${spotlightClinic.clinic_name} (${spotlightClinic.city}) for Pine Labs Plural underwriting. Doctor: ${spotlightClinic.doctor_name} • PAN: ${spotlightClinic.pan}.`
-    : "Dedicated underwriting and KYC verification portal for Advaita Parmar and Pine Labs risk operations.";
+  const targetClinic = activeDossier || spotlightClinic;
+  const preview = clinicLinkPreview('underwriting', targetClinic ? {
+    clinic: targetClinic.clinic_name,
+    doctor: targetClinic.doctor_name,
+    city: targetClinic.city,
+  } : readClinicPreviewIdentity(searchParams));
 
   if (!isAuthenticated) {
     return (
       <div className="min-h-screen bg-slate-50 text-slate-900 flex items-center justify-center p-4">
         <SEOHead
-          title={unauthTitle}
-          description={unauthDescription}
-          image="https://www.clinaza.in/og-plural-underwriting.png"
+          {...preview}
+          robots={CLINIC_PREVIEW_ROBOTS}
         />
         <div className="max-w-md w-full bg-white border border-slate-200 rounded-3xl p-8 shadow-xl space-y-6">
           <div className="flex items-center justify-between pb-4 border-b border-slate-100">
@@ -480,21 +479,11 @@ export default function PineLabsUnderwritingPage() {
     );
   }
 
-  const targetClinic = activeDossier || spotlightClinic;
-  const seoTitle = targetClinic
-    ? `${targetClinic.clinic_name} (${targetClinic.doctor_name}) • Verified Underwriting Dossier | Clinaza`
-    : "Clinaza × Pine Labs Plural | Sub-Merchant Underwriting Desk";
-
-  const seoDescription = targetClinic
-    ? `Verified Sub-Merchant KYC & Underwriting Dossier for ${targetClinic.clinic_name} (${targetClinic.city}). Settlement: ${targetClinic.bank.bank_name} A/c • Doctor PAN: ${targetClinic.pan} • ${targetClinic.is_signed ? 'Signed & Stamped' : 'Ready to Sign'}.`
-    : "Exclusive underwriting portal for Pine Labs Plural risk operations. Access verified doctor KYC, cancelled cheques, and auto-filled MAF templates.";
-
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col font-sans">
       <SEOHead
-        title={seoTitle}
-        description={seoDescription}
-        image="https://www.clinaza.in/og-plural-underwriting.png"
+        {...preview}
+        robots={CLINIC_PREVIEW_ROBOTS}
       />
 
       {/* ── TOP INSTITUTIONAL BAR ── */}

@@ -589,7 +589,7 @@ export const BLOGS_PART1 = [
     readTime: "5 min read",
     publishDate: "August 24, 2026",
     author: "Clinaza Partner Team",
-    summary: "Learn how dental clinics in India partner with Clinaza and RBI-regulated NBFCs to offer point-of-care EMI financing with a simple one-time onboarding fee of ₹999.",
+    summary: "Clinics can offer flexible patient EMIs through Clinaza for ₹999 one time, with ₹0 AMC and ₹0 monthly subscription fees.",
     featuredImage: "/assets/yourdentist/clinic_in_action.jpg",
     metaDescription: "Want to offer EMI financing at your dental clinic? Learn how Clinaza helps clinics offer point-of-care patient financing with zero credit risk.",
     faqs: [
@@ -599,7 +599,7 @@ export const BLOGS_PART1 = [
       },
       {
         question: "Is there any setup fee for dental clinics?",
-        answer: "Clinaza charges a nominal one-time onboarding fee of ₹999 for clinic onboarding and lending gateway setup, with zero monthly subscriptions."
+        answer: "Clinaza charges ₹999 one time for clinic verification, doctor KYC review and gateway activation. AMC and monthly subscription fees are both ₹0."
       }
     ],
     content: (
@@ -610,11 +610,12 @@ export const BLOGS_PART1 = [
 
         <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Why Top Clinics Partner With Clinaza</h2>
         <ul className="list-disc pl-6 space-y-3 text-neutral-700">
-          <li><strong>₹999 One-Time Setup:</strong> Nominal one-time onboarding fee with zero recurring monthly subscription charges.</li>
+          <li><strong>₹999 one-time activation:</strong> Covers clinic verification, doctor KYC review and gateway setup. ₹0 AMC and ₹0 monthly subscription fees.</li>
           <li><strong>Zero EMI Collection Burden:</strong> Monthly repayments are collected directly by NBFCs via e-NACH auto-debit.</li>
           <li><strong>Instant Point-of-Care Assessment:</strong> Quick 2-minute digital pre-check on mobile devices.</li>
-          <li><strong>Higher Conversion on High-Ticket Plans:</strong> Make ₹50,000–₹3,00,000 procedures affordable.</li>
+          <li><strong>Upfront clinic payout:</strong> Approved payments settle directly to the clinic on a T+1 schedule. The lender handles patient repayments.</li>
         </ul>
+        <p><a href="/clinic-onboarding" className="font-semibold text-[#0867E8] underline">Start clinic onboarding</a></p>
       </div>
     )
   },
@@ -869,47 +870,45 @@ export const BLOGS_PART1 = [
     readTime: "5 min read",
     publishDate: "September 4, 2026",
     author: "Clinaza Medical Desk",
-    summary: "Complete guide on how PRODENT Patna offers Flexible-EMI patient financing for dental implants, clear aligners, braces, and root canals powered by Clinaza.",
+    summary: "Planning dental care at PRODENT Patna? Learn what to ask at reception about flexible monthly payments for your treatment estimate.",
     featuredImage: "/assets/yourdentist/clinic_in_action.jpg",
-    metaDescription: "PRODENT Patna offers low-interest EMI financing for dental treatments (₹30,000 to ₹3,00,000) powered by Clinaza. Learn eligibility & application steps.",
+    metaDescription: "Planning treatment at PRODENT Patna? Learn how to ask about flexible monthly payments and compare the lender’s terms before applying.",
     faqs: [
       {
         question: "Does PRODENT Patna offer EMI for dental treatment?",
-        answer: "Yes, PRODENT Patna (Anandpuri, West Boring Canal Rd) offers point-of-care EMI patient financing powered by Clinaza for treatments ranging from ₹30,000 to ₹3,00,000."
+        answer: "Ask PRODENT reception whether Clinaza financing is available for your treatment. The lender determines eligibility and offers terms after reviewing the application."
       },
       {
         question: "What treatments at PRODENT Patna can be done on EMI?",
-        answer: "Dental implants, clear aligners, ceramic braces, full-mouth rehab, crowns & bridges, and cosmetic smile makeovers can be converted into 3–24 month EMIs."
+        answer: "You can ask about financing for implants, clear aligners, braces or other planned treatments. The clinic can confirm whether the checkout supports your estimate."
       },
       {
         question: "How do I apply for EMI at PRODENT Patna?",
-        answer: "You can check eligibility in under 2 minutes at PRODENT clinic checkout or apply online at clinaza.in/apply using your Aadhaar/PAN and mobile number."
+        answer: "Ask for a written treatment estimate and a secure checkout link from reception. Use the link to check lender eligibility on your phone."
       }
     ],
     content: (
       <div className="space-y-6">
         <p className="text-lg leading-relaxed text-neutral-700">
-          <strong>PRODENT Patna</strong> (located at West Boring Canal Rd, Anandpuri) has partnered with <strong>Clinaza</strong> to make advanced dental treatments affordable for every patient through zero-cost and flexible monthly EMI financing.
+          <strong>PRODENT Patna</strong> is in Anandpuri, off West Boring Canal Road. Ask the reception desk about Clinaza’s flexible monthly EMI options for your written treatment estimate.
         </p>
         
         <h2 className="text-xl font-bold text-neutral-900">Why Patients Choose EMI at PRODENT Patna</h2>
         <p className="text-neutral-700 leading-relaxed">
-          High-ticket dental procedures like dental implants, invisible aligners, and full-mouth rehabilitation often require upfront payments. With Clinaza's point-of-care financing at PRODENT, patients can break treatment estimates into manageable monthly installments from ₹2,500/month.
+          A written treatment estimate gives you a starting point for comparing monthly payments. Check the lender’s interest rate, processing fees and total repayment before agreeing to an offer.
         </p>
 
         <div className="bg-emerald-50 border border-emerald-200 p-5 rounded-2xl space-y-2">
-          <h3 className="text-base font-bold text-emerald-900">Key Highlights of PRODENT Patna EMI:</h3>
+          <h3 className="text-base font-bold text-emerald-900">What to confirm at reception</h3>
           <ul className="list-disc pl-5 text-sm text-emerald-800 space-y-1 font-medium">
-            <li>Loan Amounts: ₹30,000 to ₹3,00,000</li>
-            <li>Flexible Tenures: 3, 6, 9, 12, 18 &amp; 24 months</li>
-            <li>100% Digital &amp; Paperless Eligibility Check in 2 Minutes</li>
-            <li>Zero Clinic Processing Fees for Patients</li>
+            <li>Whether your treatment and estimate qualify for an eligibility check</li>
+            <li>Which repayment terms and fees the lender quotes for that estimate</li>
           </ul>
         </div>
 
-        <h2 className="text-xl font-bold text-neutral-900">Official Partner Feature</h2>
+        <h2 className="text-xl font-bold text-neutral-900">Find PRODENT in Patna</h2>
         <p className="text-neutral-700 leading-relaxed">
-          Read PRODENT Patna's official feature article on their website: <a href="https://www.prodentpatna.com/blog/no-cost-emi-dental-treatments-patna.html" target="_blank" rel="noopener noreferrer" className="text-emerald-700 font-bold underline">PRODENT Patna — Easy EMI Dental Treatments Guide</a>.
+          View <a href="https://www.prodentpatna.com/" target="_blank" rel="noopener noreferrer" className="text-emerald-700 font-bold underline">PRODENT’s website</a> for clinic information or <a href="/cities/patna" className="text-emerald-700 font-bold underline">compare dental EMI options in Patna</a>.
         </p>
 
         <div className="pt-4">
@@ -929,21 +928,21 @@ export const BLOGS_PART1 = [
     author: "Clinaza Medical Desk",
     summary: "Complete guide on Clinaza point-of-care patient financing at YOUR DENTIST Patna led by Dr. Aryan Parmar in Patliputra Colony.",
     featuredImage: "/assets/yourdentist/clinic_in_action.jpg",
-    metaDescription: "YOUR DENTIST Patna offers instant flexible EMI financing for dental implants, aligners & smile makeovers powered by Clinaza. Apply online in 2 minutes.",
+    metaDescription: "Planning implants or aligners at YOUR DENTIST in New Patliputra Colony? Learn how to ask about flexible monthly EMI and check lender terms.",
     faqs: [
       {
         question: "Is EMI financing available at YOUR DENTIST Patna?",
-        answer: "Yes, YOUR DENTIST Patna (Dr. Aryan Parmar, Patliputra Colony) is an official Clinaza Featured Partner offering 0% and low-interest EMI options for dental care."
+        answer: "Ask YOUR DENTIST Patna in New Patliputra Colony about flexible monthly EMIs for your treatment estimate. The lender determines eligibility, rates and repayment terms."
       },
       {
         question: "What documents are required for dental EMI at YOUR DENTIST Patna?",
-        answer: "Only PAN card, Aadhaar card, and mobile number registered with bank account are needed for instant digital approval."
+        answer: "Have your PAN, Aadhaar and mobile number ready for the digital eligibility check. The lender will tell you if it needs more information."
       }
     ],
     content: (
       <div className="space-y-6">
         <p className="text-lg leading-relaxed text-neutral-700">
-          <strong>YOUR DENTIST Patna</strong> (led by Dr. Aryan Parmar in Patliputra Colony) is Clinaza's premier featured dental partner in Patna. Patients can access instant, easy EMI financing for implants, aligners, and root canals directly at checkout.
+          <strong>YOUR DENTIST Patna</strong>, led by Dr. Aryan Parmar in New Patliputra Colony, covers implants, aligners and root canals. Ask reception if your treatment estimate is eligible for flexible monthly EMIs through Clinaza.
         </p>
 
         <h2 className="text-xl font-bold text-neutral-900">Treatments Eligible for EMI at YOUR DENTIST Patna</h2>
@@ -954,9 +953,9 @@ export const BLOGS_PART1 = [
           <li><strong>Smile Makeovers &amp; Veneers</strong> — Custom packages on EMI</li>
         </ul>
 
-        <h2 className="text-xl font-bold text-neutral-900">Official Partner Feature</h2>
+        <h2 className="text-xl font-bold text-neutral-900">Find YOUR DENTIST in Patna</h2>
         <p className="text-neutral-700 leading-relaxed">
-          Read YOUR DENTIST Patna's official feature guide: <a href="https://www.yourdentistpatna.in/blog/clinaza-patient-financing-dental-emi-patna" target="_blank" rel="noopener noreferrer" className="text-emerald-700 font-bold underline">YOUR DENTIST Patna — Clinaza Patient Financing Guide</a>.
+          View the <a href="https://www.yourdentistpatna.in/" target="_blank" rel="noopener noreferrer" className="text-emerald-700 font-bold underline">YOUR DENTIST clinic website</a> or <a href="/cities/patna" className="text-emerald-700 font-bold underline">compare dental EMI options in Patna</a>.
         </p>
 
         <div className="pt-4">
@@ -1427,7 +1426,7 @@ export const BLOGS_PART1 = [
         <div className="bg-neutral-900 text-white p-6 rounded-2xl my-6 text-center space-y-3">
           <h3 className="text-lg font-bold">Are You a Dental Clinic Owner?</h3>
           <p className="text-xs text-neutral-300 max-w-lg mx-auto">
-            Enable point-of-care patient EMI financing at your front desk with zero clinic setup fees or software charges.
+            Activate patient financing at your front desk for ₹999 one time, with ₹0 AMC and ₹0 monthly fees.
           </p>
           <a
             href="/clinic-onboarding"
@@ -1446,7 +1445,7 @@ export const BLOGS_PART1 = [
     readTime: "5 min read",
     publishDate: "September 6, 2026",
     author: "Clinaza Product Desk",
-    summary: "Discover how Clinaza's 100% free dental CRM helps clinic owners reactivate old patients, automate WhatsApp appointment reminders, and track treatment follow-ups with zero setup fees.",
+    summary: "Discover how Clinaza's dental CRM helps clinic owners reactivate old patients, automate WhatsApp appointment reminders, and track treatment follow-ups with a ₹999 one-time digital activation and ₹0 recurring AMC.",
     featuredImage: "/assets/yourdentist/clinic_in_action.jpg",
     metaDescription: "Looking for a free dental CRM in India? Clinaza offers 100% free patient reactivation, WhatsApp reminders, and treatment follow-up software for clinics.",
     faqs: [
@@ -1505,17 +1504,18 @@ export const BLOGS_PART1 = [
     {
     slug: "how-to-offer-emi-to-dental-patients-india",
     title: "How to Offer EMI to Dental Patients in India: Complete Clinic Owner Guide (2026)",
+    seoTitle: "How to Offer EMI to Dental Patients in India | Clinaza",
     category: "Clinic Management",
     readTime: "7 min read",
     publishDate: "September 6, 2026",
     author: "Clinaza Growth Desk",
-    summary: "Step-by-step guide for dental clinic owners in India on how to offer flexible and low-cost monthly EMI options to patients without NBFC tie-up hassle or clinic collection risk.",
+    summary: "Learn how to offer flexible patient EMIs at your clinic. Activate the digital desk for ₹999 one time, with ₹0 AMC and ₹0 monthly subscription fees.",
     featuredImage: "/assets/yourdentist/clinic_in_action.jpg",
-    metaDescription: "Learn how dental clinics in India can offer instant patient EMI financing at front desk with zero credit risk, 100% upfront payout & 13+ partner NBFCs.",
+    metaDescription: "Set up patient EMI at your dental clinic for ₹999 one time, with ₹0 AMC and ₹0 monthly fees. Compare checkout options and see how T+1 payouts work.",
     faqs: [
       {
         question: "How can my dental clinic offer EMI to patients in India?",
-        answer: "By partnering with an embedded healthcare financing network like Clinaza. Your clinic receives a unique checkout link and POS QR code where patients can complete a 2-minute digital KYC and get instant loan approval from RBI-regulated NBFCs."
+        answer: "With Clinaza, your front desk shares a secure checkout link or displays a dynamic QR code on its screen. The patient checks eligibility on their phone, and the lender decides approval and terms."
       },
       {
         question: "Does the clinic have any liability if the patient defaults on their EMI?",
@@ -1523,17 +1523,17 @@ export const BLOGS_PART1 = [
       },
       {
         question: "What is the clinic onboarding fee for Clinaza financing?",
-        answer: "Clinaza charges a nominal one-time onboarding fee of ₹999 for clinic onboarding and lending gateway integration, with zero monthly subscription fees for clinics across India."
+        answer: "Clinaza charges ₹999 one time for clinic verification, doctor KYC review and gateway activation. AMC and monthly subscription fees are both ₹0."
       }
     ],
     content: (
       <div className="space-y-6">
         <p className="text-lg leading-relaxed text-neutral-700">
-          In India, over <strong>35% of recommended high-value dental treatments</strong> (such as implants, clear aligners, and full-mouth rehabilitations) get postponed or dropped entirely due to upfront cost shock. For a typical clinic, this represents an annual revenue leakage of ₹15 Lakhs to ₹40 Lakhs.
+          A patient can agree to an implant or aligner plan and still need time to arrange the full payment. A <strong>flexible monthly EMI option</strong> gives your front desk another way to discuss the cost while the patient is still at the clinic.
         </p>
 
         <p className="text-neutral-700 leading-relaxed">
-          Offering <strong>point-of-care EMI financing</strong> at your clinic reception turns a hesitant ₹80,000 quote into an affordable ₹3,500/month decision that patients approve on the spot.
+          The patient reviews the lender’s offer, and your clinic receives the approved payment on a T+1 schedule. The lender manages repayments and collections.
         </p>
 
         <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Why Direct Bank Tie-ups Are Impractical for Solo Clinics</h2>
@@ -1550,7 +1550,12 @@ export const BLOGS_PART1 = [
               <tr>
                 <td className="px-4 py-3 font-semibold">Setup Cost</td>
                 <td className="px-4 py-3 text-red-500">₹25,000+ Setup / Security Deposit</td>
-                <td className="px-4 py-3 text-green-600 font-bold">₹0 Free Lifetime Setup</td>
+                <td className="px-4 py-3 text-green-600 font-bold">₹999 one-time digital desk activation</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-semibold">Recurring Fees</td>
+                <td className="px-4 py-3">Depends on the bank agreement</td>
+                <td className="px-4 py-3 text-green-600 font-bold">₹0 AMC and ₹0 monthly subscription</td>
               </tr>
               <tr>
                 <td className="px-4 py-3 font-semibold">Minimum Volume Quota</td>
@@ -1558,9 +1563,9 @@ export const BLOGS_PART1 = [
                 <td className="px-4 py-3 text-green-600 font-bold">Zero minimum monthly quotas</td>
               </tr>
               <tr>
-                <td className="px-4 py-3 font-semibold">Approval Speed</td>
+                <td className="px-4 py-3 font-semibold">Eligibility and Approval</td>
                 <td className="px-4 py-3 text-red-500">2–4 business days</td>
-                <td className="px-4 py-3 text-green-600 font-bold">Instant (Under 2 Minutes)</td>
+                <td className="px-4 py-3 text-green-600 font-bold">Digital eligibility check, with final approval by the lender</td>
               </tr>
               <tr>
                 <td className="px-4 py-3 font-semibold">Lender Variety</td>
@@ -1573,19 +1578,19 @@ export const BLOGS_PART1 = [
 
         <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">3 Steps to Enable Patient EMI in Your Clinic</h2>
         <ol className="list-decimal pl-6 space-y-3 text-neutral-700">
-          <li><strong>Register Your Clinic:</strong> Sign up for free at <a href="/clinic-onboarding" className="text-[#0867E8] font-bold underline">clinaza.in</a> in under 2 minutes.</li>
-          <li><strong>Receive Your Clinic Portal:</strong> Access your digital checkout widget, treatment estimation builder, and clinic QR standee.</li>
+          <li><strong>Register your clinic:</strong> Start at <a href="/clinic-onboarding" className="text-[#0867E8] font-bold underline">clinic onboarding</a> and pay the ₹999 one-time activation fee.</li>
+          <li><strong>Complete verification:</strong> Submit the requested clinic and doctor documents for bank verification and Pine Labs underwriting. Your digital desk activates after approval.</li>
           <li><strong>Offer at Checkout:</strong> When presenting treatment plans above ₹30,000, share your Clinaza link. The patient checks eligibility instantly on their phone.</li>
         </ol>
 
         <div className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-6 rounded-2xl my-8 text-center space-y-3">
           <h3 className="text-lg font-bold">Start Offering EMI at Your Clinic Today</h3>
-          <p className="text-sm text-blue-100 max-w-lg mx-auto">Join 500+ dental clinics across India scaling case acceptance with ₹0 setup fees.</p>
+          <p className="text-sm text-blue-100 max-w-lg mx-auto">₹999 one-time activation. ₹0 AMC and ₹0 monthly subscription fees.</p>
           <a
             href="/clinic-onboarding"
             className="inline-block bg-white text-blue-600 font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md"
           >
-            Partner With Clinaza (Free) →
+            Start clinic onboarding
           </a>
         </div>
       </div>
@@ -1988,17 +1993,17 @@ export const BLOGS_PART1 = [
           <li><strong>Free Verified Clinic Landing Profile</strong> with doctor bio, treatments offered, and contact details.</li>
           <li><strong>Embedded easy EMI Patient Financing Engine</strong> to offer instant treatment loans (₹30,000–₹3,00,000) with zero credit risk to your practice.</li>
           <li><strong>Free Smart WhatsApp Patient Reactivation CRM</strong> to re-engage past checkups and overdue cleaning visits.</li>
-          <li><strong>Physical Clinic QR Standees & Branding Kit</strong> shipped directly to your clinic desk.</li>
+          <li><strong>Digital checkout desk</strong> with secure payment links and on-screen QR checkout after verification.</li>
         </ul>
 
         <div className="bg-gradient-to-r from-[#0867E8] to-blue-700 text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
-          <h3 className="text-lg font-bold">Get Your Free Clinic Digital Profile & EMI Standee</h3>
-          <p className="text-xs text-blue-100 max-w-lg mx-auto">Join hundreds of dental practices across India offering point-of-care patient financing for ₹0 setup fee.</p>
+          <h3 className="text-lg font-bold">Set Up Your Clinic’s Digital Checkout</h3>
+          <p className="text-xs text-blue-100 max-w-lg mx-auto">₹999 one-time activation. ₹0 AMC and ₹0 monthly subscription fees.</p>
           <a
             href="/clinic-onboarding"
             className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md"
           >
-            Claim Free Clinic Profile Now →
+            Start clinic onboarding
           </a>
         </div>
       </div>
@@ -2572,7 +2577,7 @@ export const BLOGS_PART1 = [
 
         <div className="bg-gradient-to-r from-[#0867E8] to-blue-700 text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
           <h3 className="text-lg font-bold">Partner With Clinaza For Patient Financing</h3>
-          <p className="text-xs text-blue-100 max-w-lg mx-auto">Enable your clinic to offer ₹30,000 to ₹3,00,000 patient EMI financing at zero merchant onboarding fees.</p>
+          <p className="text-xs text-blue-100 max-w-lg mx-auto">Activate flexible patient EMIs for ₹999 one time, with ₹0 AMC and ₹0 monthly fees.</p>
           <a
             href="/clinic-onboarding"
             className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md"
@@ -2959,7 +2964,7 @@ export const BLOGS_PART1 = [
 
         <div className="bg-gradient-to-r from-[#0867E8] to-blue-700 text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
           <h3 className="text-lg font-bold">Partner With Clinaza For Patient Treatment EMIs</h3>
-          <p className="text-xs text-blue-100 max-w-lg mx-auto">Enable your dental practice to offer instant ₹30,000 to ₹3,00,000 easy EMIs to patients with zero merchant onboarding fees.</p>
+          <p className="text-xs text-blue-100 max-w-lg mx-auto">Activate flexible patient EMIs for ₹999 one time, with ₹0 AMC and ₹0 monthly fees.</p>
           <a
             href="/clinic-onboarding"
             className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md"
@@ -2972,14 +2977,15 @@ export const BLOGS_PART1 = [
   },
     {
     slug: "how-to-offer-0-percent-emi-in-dental-clinic-india",
-    title: "How to Offer flexible EMI in Your Dental Clinic in India (2026 Guide for Dentists)",
+    title: "How to Offer Flexible EMI in Your Dental Clinic in India",
+    seoTitle: "Flexible Patient EMI at Your Dental Clinic | Clinaza",
     category: "Practice Finance",
     readTime: "8 min read",
     publishDate: "September 8, 2026",
     author: "Clinaza Practice Growth Team",
-    summary: "Discover how dental clinics in India can offer zero-cost and low-interest EMIs (₹30K–₹3L) to patients. Eliminate treatment drop-offs for implants, aligners, and crowns with zero merchant onboarding fees.",
+    summary: "Learn how reception staff can share a digital checkout link and help patients check eligibility for flexible monthly EMIs on implants, aligners and crowns.",
     featuredImage: "/assets/yourdentist/clinic_in_action.jpg",
-    metaDescription: "Learn how dental clinics in India offer flexible EMI financing (₹30K–₹3L) at checkout. Boost high-ticket case acceptance with zero merchant onboarding fees.",
+    metaDescription: "Learn how to offer flexible patient EMI at your dental clinic. Clinaza charges ₹999 for one-time activation, with ₹0 AMC and ₹0 monthly fees.",
     faqs: [
       {
         question: "How can a dental clinic offer easy EMI to patients in India?",
@@ -2987,7 +2993,7 @@ export const BLOGS_PART1 = [
       },
       {
         question: "Does the dental clinic bear the credit default risk if a patient fails to pay their EMI?",
-        answer: "No. The lending partner assumes 100% of the credit underwriting and collection risk. The clinic receives the treatment payment directly into its bank account upon procedure confirmation."
+        answer: "No. The lender handles patient repayments and collections. Approved treatment payments go to the clinic’s bank account on a T+1 schedule."
       },
       {
         question: "What treatments can be financed under clinic easy EMI?",
@@ -2995,17 +3001,17 @@ export const BLOGS_PART1 = [
       },
       {
         question: "How much does it cost a clinic to join Clinaza?",
-        answer: "Clinaza offers zero upfront setup fees, zero recurring software subscription fees, and no monthly minimum volume commitments for registered dental practices."
+        answer: "Clinaza charges ₹999 one time for clinic verification, doctor KYC review and gateway activation. AMC and monthly subscription fees are both ₹0."
       }
     ],
     content: (
       <div className="space-y-6">
         <p className="text-lg leading-relaxed text-neutral-700">
-          In private dental practice, the number one barrier between diagnosis and treatment execution is not clinical fear—it is <strong>price friction</strong>. When presented with a treatment estimate of ₹45,000 for clear aligners or ₹1,20,000 for multiple dental implants, over 55% of patients hesitate, request time to "think about it," and often never return.
+          When you quote ₹45,000 for clear aligners, some patients need time to arrange the payment. Your receptionist can share a secure link so the patient can check whether a lender offers a monthly plan for the estimate.
         </p>
 
         <p className="text-neutral-700 leading-relaxed">
-          Forward-thinking dental practices in India eliminate this bottleneck by offering <strong>Point-of-Care easy EMI financing</strong>. Here is how you can set up instant patient financing at your clinic front desk in under 24 hours.
+          <strong>Point-of-care financing</strong> starts with that eligibility check. Give patients time to read the lender’s offer, including their total repayment and monthly installment.
         </p>
 
         <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Why Lump-Sum Pricing Hurts Dental Case Acceptance</h2>
@@ -3013,13 +3019,13 @@ export const BLOGS_PART1 = [
           <div className="bg-red-50 border border-red-200 p-5 rounded-2xl space-y-2">
             <h4 className="font-bold text-red-900 text-sm">❌ The Old Way (Lump Sum)</h4>
             <p className="text-xs text-red-800">
-              "Doctor, ₹1,50,000 is too high right now. Let me discuss with family and get back to you next month." (80% case drop-off).
+              “Doctor, ₹1,50,000 is too high right now. Let me discuss it with my family.”
             </p>
           </div>
           <div className="bg-emerald-50 border border-emerald-200 p-5 rounded-2xl space-y-2">
             <h4 className="font-bold text-emerald-900 text-sm">✅ The Clinaza EMI Way</h4>
             <p className="text-xs text-emerald-800">
-              "You can start your smile transformation today for just ₹6,500 per month on easy EMI. Approval takes 2 minutes." (40%+ increase in immediate approvals).
+              “I can send you a secure link to check eligibility for monthly payments. The lender will show your rate and total cost before you decide.”
             </p>
           </div>
         </div>
@@ -3039,7 +3045,7 @@ export const BLOGS_PART1 = [
           <div className="bg-white border border-slate-200 p-5 rounded-2xl space-y-2 shadow-sm">
             <span className="text-xl font-black text-[#0867E8]">03</span>
             <h4 className="font-bold text-neutral-900 text-sm">Direct Clinic Payout</h4>
-            <p className="text-xs text-slate-600">The lending partner settles the procedure amount directly to the clinic bank account with zero credit default risk.</p>
+            <p className="text-xs text-slate-600">The clinic receives approved payments on a T+1 schedule. The lender takes responsibility for patient repayments and collections.</p>
           </div>
         </div>
 
@@ -3047,13 +3053,13 @@ export const BLOGS_PART1 = [
         <div className="bg-slate-900 text-white p-7 rounded-3xl space-y-4 my-8 shadow-xl">
           <div className="flex items-center gap-2">
             <span className="px-3 py-1 bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 text-xs font-bold rounded-full">
-              ⚡ 100% Free Clinic Onboarding
+              ₹999 One-Time Digital Activation
             </span>
             <span className="text-xs text-slate-400 font-mono">No POS Machine Required</span>
           </div>
           <h3 className="text-xl font-bold">Start Offering easy EMIs at Your Clinic Today</h3>
           <p className="text-xs text-slate-300 leading-relaxed">
-            Join hundreds of dental clinics in India using Clinaza to boost high-ticket implant and aligner case acceptance. Includes free clinic CRM and automated WhatsApp recalls.
+            ₹0 AMC and ₹0 monthly subscription fees. Once your clinic clears verification and underwriting, your front desk can share payment links or display checkout QR codes on-screen.
           </p>
           <div className="flex flex-wrap gap-3 pt-2">
             <a
@@ -3489,7 +3495,7 @@ export const BLOGS_PART1 = [
           </div>
           <h3 className="text-xl font-bold">Start Writing Digital Prescriptions for Free</h3>
           <p className="text-xs text-slate-300 leading-relaxed">
-            Create your free clinic account in 30 seconds. Get full access to digital patient charting, prescription generator, WhatsApp recalls, and point-of-care EMI financing.
+            Create a free account to use digital charting and prescriptions. Patient financing requires a separate ₹999 one-time activation, with ₹0 AMC and ₹0 monthly fees.
           </p>
           <div className="flex flex-wrap gap-3 pt-2">
             <a
@@ -3975,7 +3981,7 @@ export const BLOGS_PART1 = [
 
         <div className="bg-gradient-to-r from-[#0867E8] to-blue-700 text-white p-6 rounded-2xl my-8 text-center space-y-3 shadow-lg">
           <h3 className="text-lg font-bold">Partner With Clinaza For Patient Treatment EMIs</h3>
-          <p className="text-xs text-blue-100 max-w-lg mx-auto">Enable your clinic to offer ₹30,000 to ₹3,00,000 patient EMI financing at zero merchant onboarding fees.</p>
+          <p className="text-xs text-blue-100 max-w-lg mx-auto">Activate flexible patient EMIs for ₹999 one time, with ₹0 AMC and ₹0 monthly fees.</p>
           <a
             href="/clinic-onboarding"
             className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-md"

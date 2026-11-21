@@ -1,10 +1,22 @@
 import React, { useState } from 'react';
-import { useParams, Link, Navigate } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { getCityBySlug, CITIES, CityData } from '@/data/cities';
 import { SEOHead } from '@/components/seo/SEOHead';
 import { ShieldCheck, CheckCircle2, ArrowRight, Building2 } from 'lucide-react';
 import { PatientEligibilityModal } from '@/components/PatientEligibilityModal';
 import { ClinicCityFinder } from '@/components/ClinicCityFinder';
+import NotFoundPage from './NotFoundPage';
+
+const cityMetadata: Partial<Record<string, { title: string; description: string }>> = {
+  kochi: {
+    title: 'Braces & Dental Treatment Cost in Kochi (From ₹1,200/mo) | Clinaza',
+    description: 'Compare braces cost in Kochi (₹18K–₹50K) & dental implants on EMI. Explore easy monthly financing (₹30K–₹3L) at top clinics with 2-min instant approval.',
+  },
+  patna: {
+    title: 'Dental Treatment on EMI in Patna | Clinaza',
+    description: 'Explore dental EMI in Patna with guides to PRODENT and YOUR DENTIST. Learn what to ask the clinic before financing implants, braces or aligners.',
+  },
+};
 
 export default function CityLandingPage() {
   const { city } = useParams<{ city: string }>();
@@ -12,9 +24,8 @@ export default function CityLandingPage() {
   const [isEligibilityOpen, setIsEligibilityOpen] = useState(false);
   const [eligibilityCity, setEligibilityCity] = useState(cityData?.name || '');
 
-  // If city slug not found redirect to homepage
-  if (!cityData) {
-    return <Navigate to="/" replace />;
+  if (!city || !cityData) {
+    return <NotFoundPage />;
   }
 
   const { name, state, tier } = cityData;
@@ -24,13 +35,10 @@ export default function CityLandingPage() {
       ? `Dental Treatment EMI Financing in ${name}`
       : `Affordable Dental EMI Plans for Patients in ${name}`;
 
-  const metaTitle = city === 'kochi'
-    ? `Braces & Dental Treatment Cost in Kochi (From ₹1,200/mo) | Clinaza`
-    : `Best Dental Treatment EMI Plans in ${name} | Clinaza`;
-
-  const metaDescription = city === 'kochi'
-    ? `Compare braces cost in Kochi (₹18K–₹50K) & dental implants on EMI. Explore easy monthly financing (₹30K–₹3L) at top clinics with 2-min instant approval.`
-    : `Compare dental costs in ${name}. Explore easy EMI options (₹30K–₹3L) for dental implants, braces, aligners & RCT at top clinics. Fast 2-min approval.`;
+  const { title: metaTitle, description: metaDescription } = cityMetadata[city] ?? {
+    title: `Best Dental Treatment EMI Plans in ${name} | Clinaza`,
+    description: `Compare dental costs in ${name}. Explore easy EMI options (₹30K–₹3L) for dental implants, braces, aligners & RCT at top clinics. Fast 2-min approval.`,
+  };
 
   const breadcrumbSchema = {
     '@context': 'https://schema.org',
@@ -253,7 +261,7 @@ export default function CityLandingPage() {
           <div className="max-w-3xl mx-auto text-center space-y-1">
             <p className="text-2xl font-black text-[#0867E8]">₹999 One-Time Onboarding Fee</p>
             <p className="text-xs font-bold text-[#0B2450]">
-              One-time setup for {name} dental clinics including counter QR kit. No recurring monthly subscriptions.
+              Covers clinic verification, doctor KYC review and digital checkout activation. ₹0 AMC and ₹0 monthly subscription fees.
             </p>
           </div>
         </section>
@@ -295,6 +303,31 @@ export default function CityLandingPage() {
           </p>
         </section>
 
+        {city === 'patna' && (
+          <section aria-labelledby="patna-clinic-guides" className="max-w-4xl mx-auto px-4 sm:px-6 py-10 space-y-5">
+            <div className="space-y-2">
+              <h2 id="patna-clinic-guides" className="text-2xl font-black text-[#0B2450]">Dental EMI guides for Patna clinics</h2>
+              <p className="text-sm leading-relaxed text-slate-700">
+                Before you book, ask reception if EMI is available for your planned treatment. Get a written estimate, then compare the lender’s monthly installment, total repayment and any processing fee.
+              </p>
+            </div>
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <li className="bg-white border border-slate-200 rounded-2xl p-5 space-y-2">
+                <h3 className="font-bold">
+                  <Link to="/blog/clinaza-patient-financing-your-dentist-patna" className="text-[#0867E8] underline underline-offset-2">YOUR DENTIST Patna EMI guide</Link>
+                </h3>
+                <p className="text-sm leading-relaxed text-slate-700">New Patliputra Colony. Ask about payment options when getting an estimate for implants or clear aligners.</p>
+              </li>
+              <li className="bg-white border border-slate-200 rounded-2xl p-5 space-y-2">
+                <h3 className="font-bold">
+                  <Link to="/blog/no-cost-emi-dental-treatments-prodent-patna" className="text-[#0867E8] underline underline-offset-2">PRODENT Patna EMI guide</Link>
+                </h3>
+                <p className="text-sm leading-relaxed text-slate-700">Anandpuri, West Boring Canal Road. Ask the clinic to confirm its current financing options and the treatment amount that can be financed.</p>
+              </li>
+            </ul>
+          </section>
+        )}
+
         {/* How It Works */}
         <section className="py-12 px-4 sm:px-6 bg-[#F7FAFC] border-y border-slate-200/60">
           <div className="max-w-4xl mx-auto space-y-8">
@@ -326,8 +359,8 @@ export default function CityLandingPage() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {[
-              { title: '₹999 One-Time Setup', desc: 'One-time clinic onboarding & lending gateway integration. No monthly charges.' },
-              { title: 'No EMI Collection Burden', desc: 'EMIs auto-debited by NBFC. Clinic has zero collection risk.' },
+              { title: '₹999 One-Time Setup', desc: 'Clinic verification and gateway activation. ₹0 AMC and ₹0 monthly subscription fees.' },
+              { title: 'T+1 Clinic Settlement', desc: 'Approved payments settle to the clinic on a T+1 schedule. The lender handles repayments and collections.' },
               { title: 'RBI-Regulated Partners', desc: 'All financing provided by licensed banks and NBFCs.' },
               { title: 'Convert High-Ticket Cases', desc: 'Turn ₹50,000+ treatment hesitations into immediate appointments.' },
             ].map((item, i) => (
@@ -359,7 +392,7 @@ export default function CityLandingPage() {
               },
               {
                 q: `Is there any fee for dental clinics in ${name} to join Clinaza?`,
-                a: `Clinaza charges a nominal one-time onboarding fee of ₹999 for dental clinics in ${name}, which includes clinic onboarding and lending gateway setup. There are zero monthly subscriptions and zero EMI collection responsibilities for your clinic.`,
+                a: `Clinics in ${name} pay ₹999 one time for clinic verification, doctor KYC review and gateway activation. AMC and monthly subscription fees are both ₹0.`,
               },
             ].map((faq, i) => (
               <div key={i} className="bg-white border border-slate-200 p-5 rounded-2xl space-y-2 shadow-sm">
@@ -383,7 +416,7 @@ export default function CityLandingPage() {
             patna: [
               { label: 'Implants in Patna', slug: 'dental-implants-cost-patna-emi', title: 'Dental Implants Cost in Patna: Full Breakdown + EMI Options' },
               { label: 'Braces in Patna', slug: 'best-dentist-in-patna-for-braces', title: 'Best Dentist in Patna for Braces: Ultimate Patient Guide' },
-              { label: 'Best Clinics', slug: 'best-dental-clinics-in-patna', title: 'Best Dental Clinics in Patna 2026: Ratings & EMI Options' },
+              { label: 'Best Clinics', slug: 'best-dental-clinic-patna', title: 'Best Dental Clinics in Patna 2026: Ratings & EMI Options' },
               { label: 'Teeth Gap', slug: 'gap-closure-cost-in-patna', title: 'Teeth Gap Closure Cost in Patna: Treatments Compared' },
             ],
             chennai: [

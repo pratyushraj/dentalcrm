@@ -3,6 +3,7 @@ import { useSearchParams, Link } from 'react-router-dom';
 import { supabase } from '@/lib/supabase';
 import { emailNotificationService } from '@/services/emailNotificationService';
 import { SEOHead } from '@/components/seo/SEOHead';
+import { CLINIC_PREVIEW_ROBOTS, clinicLinkPreview, readClinicPreviewIdentity } from '@/lib/clinicLinkPreview.js';
 import { toast } from 'sonner';
 import { analytics } from '@/utils/analytics';
 import {
@@ -443,9 +444,9 @@ export default function ClinicKycUploadPage() {
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 font-sans selection:bg-[#0867E8] selection:text-white pb-24 relative overflow-hidden">
-      <SEOHead 
-        title="Link Clinic Bank Account for Patient Payouts — Clinaza"
-        description="Secure clinic bank account linking and verification portal to receive direct T+1 patient treatment payouts."
+      <SEOHead
+        {...clinicLinkPreview('kyc', readClinicPreviewIdentity(searchParams))}
+        robots={CLINIC_PREVIEW_ROBOTS}
       />
 
       {/* Atmospheric Ambient Background Canvas */}
@@ -553,7 +554,7 @@ export default function ClinicKycUploadPage() {
                 </li>
                 <li className="flex items-start gap-2.5">
                   <CheckCircle2 size={15} className="text-emerald-600 shrink-0 mt-0.5" />
-                  <span><strong>Acrylic Countertop Standee:</strong> Laser-printed with your clinic logo and custom EMI QR, couriered within 48h.</span>
+                  <span><strong>Digital Checkout Desk:</strong> Secure payment links and dynamic on-screen QR checkout activate after KYC approval.</span>
                 </li>
                 <li className="flex items-start gap-2.5">
                   <CheckCircle2 size={15} className="text-emerald-600 shrink-0 mt-0.5" />

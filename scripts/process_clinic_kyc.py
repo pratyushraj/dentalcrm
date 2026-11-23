@@ -399,17 +399,21 @@ def main():
         print(f"  ✓ Generated Consolidated 6-Page Doctor Signing PDF: {signing_pdf.name}")
 
     # Copy source KYC documents into target_dir for the full package
+    def safe_copy(src_path, dst_path):
+        if Path(src_path).resolve() != Path(dst_path).resolve():
+            shutil.copyfile(src_path, dst_path)
+
     if args.cheque_img and os.path.exists(args.cheque_img):
         ext = Path(args.cheque_img).suffix
-        shutil.copyfile(args.cheque_img, target_dir / f"Cancelled_Cheque_{slug}{ext}")
+        safe_copy(args.cheque_img, target_dir / f"Cancelled_Cheque_{slug}{ext}")
     if args.pan_img and os.path.exists(args.pan_img):
         ext = Path(args.pan_img).suffix
-        shutil.copyfile(args.pan_img, target_dir / f"Doctor_PAN_Card_{slug}{ext}")
+        safe_copy(args.pan_img, target_dir / f"Doctor_PAN_Card_{slug}{ext}")
     if args.aadhaar_img and os.path.exists(args.aadhaar_img):
         ext = Path(args.aadhaar_img).suffix
-        shutil.copyfile(args.aadhaar_img, target_dir / f"Doctor_Aadhaar_Card_{slug}{ext}")
+        safe_copy(args.aadhaar_img, target_dir / f"Doctor_Aadhaar_Card_{slug}{ext}")
     if args.udyam_pdf and os.path.exists(args.udyam_pdf):
-        shutil.copyfile(args.udyam_pdf, target_dir / f"Udyam_Registration_Certificate_{slug}.pdf")
+        safe_copy(args.udyam_pdf, target_dir / f"Udyam_Registration_Certificate_{slug}.pdf")
 
     # 5. Build ZIP Bundle
     zip_path = target_dir / f"{slug}_Complete_KYC_Dossier.zip"

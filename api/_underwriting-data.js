@@ -390,6 +390,54 @@ export const VERIFIED_DOSSIERS = [
     },
     is_signed: false,
     status: 'Action Required • Awaiting Signed MAF from Dr. Saravan Kumar'
+  },
+  {
+    id: 'dentacare',
+    clinic_name: 'Denta Care Multispeciality',
+    legal_name: 'DENTA CARE MULTISPECIALITY CLINIC',
+    doctor_name: 'Dr. Sumedha Y G',
+    dob: '06/04/1995',
+    pan: 'EYLPS5253N',
+    aadhaar: '8403 4470 1681',
+    phone: '+91 99002 61000',
+    email: 'dentacaremalleswaram@gmail.com',
+    city: 'Bengaluru, Karnataka',
+    pincode: '560003',
+    address: 'No 130, 1st Floor, 17th Cross, 8th Main Road, Malleshwaram, Bengaluru, Karnataka - 560003',
+    residential_address: 'No C-404, Skyline Beverly Park, Amruthahalli Main Road, Amruthahalli, Bengaluru, Karnataka - 560092',
+    specialties: ['Cosmetic Dentistry', 'Implantology', 'Orthodontics', 'Endodontics', 'Restorative Dentistry'],
+    submission_badge: '100% Ready for Underwriting • All 5 Documents Verified',
+    readiness: 'ready',
+    missing_items: [],
+    bank: {
+      bank_name: 'Saraswat Co-operative Bank Ltd.',
+      account_holder: 'SUMEDHA Y G',
+      account_number: '610000008014529',
+      account_type: 'Current Account',
+      ifsc: 'SRCB0000321',
+      branch: 'Malleshwaram, Bengaluru - 560003',
+      micr: '560088003',
+      cheque_no: '080351'
+    },
+    business_proof: {
+      type: 'KPME Clinical Establishment Registration',
+      number: 'BLU15148ALDEN',
+      category: 'Clinical Establishment (Karnataka KPME / MCC 8021)',
+      date: 'Valid till 21/06/2031'
+    },
+    docs: {
+      signing_pdf: '/docs/kyc/dentacare/Plural_MAF_and_Doctor_KYC_Signing_Dossier_dentacare.pdf',
+      zip_bundle: '/docs/kyc/dentacare/dentacare_Complete_KYC_Dossier.zip',
+      maf_excel: '/docs/kyc/dentacare/Plural_MAF_BO_PEP_dentacare.xlsx',
+      gst_declaration_pdf: '/docs/kyc/dentacare/GST_Exemption_Declaration_dentacare.pdf',
+      cancelled_cheque: '/docs/kyc/dentacare/Cancelled_Cheque_dentacare.jpg',
+      doctor_pan: '/docs/kyc/dentacare/Doctor_PAN_Card_dentacare.jpg',
+      aadhaar_front: '/docs/kyc/dentacare/Doctor_Aadhaar_Card_dentacare.jpg',
+      establishment_reg: '/docs/kyc/dentacare/KPME_Registration_Certificate_dentacare.pdf',
+      council_reg: '/docs/kyc/dentacare/KSDC_Registration_Certificate_dentacare.pdf'
+    },
+    is_signed: false,
+    status: 'Ready for Underwriting • Awaiting Doctor Digital Signature'
   }
 ];
 

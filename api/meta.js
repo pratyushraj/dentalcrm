@@ -27,6 +27,7 @@ const knownClinics = new Map([
   ['amitha-dental', { clinic: 'Dr. Amitha Family Dental Care', doctor: 'Dr. Amitha G', city: 'Bengaluru, Karnataka' }],
   ['krishna-dental', { clinic: 'Krishna Dental Clinic', doctor: 'Dr. Saravan Kumar Vemula', city: 'Chilakaluripet, Guntur, Andhra Pradesh' }],
   ['elara-ivf', { clinic: 'Elara IVF', doctor: 'Gajendra Singh Chouhan', city: 'Jodhpur, Rajasthan' }],
+  ['dentacare', { clinic: 'Denta Care Multispeciality', doctor: 'Dr. Sumedha Y G', city: 'Bengaluru, Karnataka' }],
 ]);
 
 const entities = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };

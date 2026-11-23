@@ -472,16 +472,16 @@ export default function PineLabsUnderwritingPage() {
             </div>
           </Link>
 
-          <span className="text-slate-300 hidden sm:inline">&bull;</span>
+          <span className="w-px h-5 bg-slate-200 hidden sm:inline-block" />
 
-          <div className="hidden sm:flex items-center gap-2 bg-slate-50 px-2.5 py-1 rounded-xl shadow-2xs border border-slate-200">
+          <div className="hidden sm:flex items-center gap-2 bg-slate-50 px-2.5 h-9 rounded-xl shadow-2xs border border-slate-200">
             <span className="text-[9.5px] font-black text-slate-500 tracking-wider">GATEWAY:</span>
             <img src="/assets/plural_by_pinelabs_transparent.png" alt="Plural by Pine Labs" className="h-3.5 w-auto object-contain" />
           </div>
         </div>
 
-        <div className="flex items-center gap-3">
-          <div className="hidden md:flex items-center gap-2 text-[11px] bg-slate-50 px-3 py-1.5 rounded-xl border border-slate-200">
+        <div className="flex items-center gap-2.5">
+          <div className="hidden md:flex items-center gap-2 text-[11px] bg-slate-50 px-3 h-9 rounded-xl border border-slate-200">
             <span className="text-slate-500">Desk Lead:</span>
             <span className="font-bold text-slate-800">Advaita Parmar</span>
             <span className="text-slate-300">&bull;</span>
@@ -492,7 +492,7 @@ export default function PineLabsUnderwritingPage() {
 
           <button
             onClick={() => setShowSensitivePii(!showSensitivePii)}
-            className="flex items-center gap-1.5 text-[11px] font-bold text-slate-600 hover:text-slate-900 px-3 py-1.5 rounded-lg border border-slate-200 hover:bg-slate-100 transition-colors cursor-pointer"
+            className="flex items-center gap-1.5 text-[11px] font-bold text-slate-600 hover:text-slate-900 px-3 h-9 rounded-xl border border-slate-200 hover:bg-slate-50 transition-colors cursor-pointer"
             title={showSensitivePii ? "Mask sensitive PII (Aadhaar & Bank)" : "Reveal sensitive PII"}
           >
             {showSensitivePii ? <EyeOff size={13} className="text-amber-600" /> : <Eye size={13} className="text-slate-500" />}
@@ -501,7 +501,7 @@ export default function PineLabsUnderwritingPage() {
 
           <button
             onClick={handleLockDesk}
-            className="flex items-center gap-1.5 text-[11px] font-bold text-slate-600 hover:text-slate-900 px-3 py-1.5 rounded-lg border border-slate-200 hover:bg-slate-100 transition-colors cursor-pointer"
+            className="flex items-center gap-1.5 text-[11px] font-bold text-slate-600 hover:text-slate-900 px-3 h-9 rounded-xl border border-slate-200 hover:bg-slate-50 transition-colors cursor-pointer"
           >
             <Lock size={12} />
             <span>Lock Desk</span>
@@ -555,12 +555,12 @@ export default function PineLabsUnderwritingPage() {
                   <RefreshCw size={14} className={isLoadingDossiers ? 'animate-spin text-[#0867E8]' : ''} />
                 </button>
 
-                <div className="relative flex-1 sm:w-64 sm:flex-initial min-w-[200px]">
+                <div className="relative flex-1 sm:w-72 lg:w-80 sm:flex-initial min-w-[200px]">
                   <Search size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
                   <input
                     type="text"
                     aria-label="Search clinics by name, doctor, city, bank, or PAN"
-                    placeholder="Search clinic, doctor, city, bank, PAN..."
+                    placeholder="Search clinic, doctor, PAN, bank..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     className="w-full pl-9 pr-8 py-2.5 rounded-xl bg-slate-50 sm:bg-white border border-slate-300 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-2xs"
@@ -579,17 +579,21 @@ export default function PineLabsUnderwritingPage() {
             </div>
 
             {/* ── READINESS FILTER TABS & SORTING ── */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-1 pb-1">
-              <div role="tablist" aria-label="Underwriting readiness filter" className="flex flex-wrap items-center gap-2">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 pt-1 pb-1">
+              <div
+                role="tablist"
+                aria-label="Underwriting readiness filter"
+                className="inline-flex items-center gap-1.5 p-1 bg-slate-100/90 rounded-2xl border border-slate-200/80 overflow-x-auto scrollbar-none shrink-0"
+              >
                 <button
                   role="tab"
                   aria-selected={filterTab === 'all'}
                   aria-controls="underwriting-queue-panel"
                   onClick={() => setFilterTab('all')}
-                  className={`flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                  className={`flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer shrink-0 whitespace-nowrap ${
                     filterTab === 'all'
                       ? 'bg-slate-900 text-white shadow-2xs'
-                      : 'bg-slate-100 text-slate-600 hover:bg-slate-200/70 hover:text-slate-900 border border-slate-200'
+                      : 'text-slate-600 hover:text-slate-900 hover:bg-white/60'
                   }`}
                 >
                   <span>All Clinics</span>
@@ -605,16 +609,16 @@ export default function PineLabsUnderwritingPage() {
                   aria-selected={filterTab === 'ready'}
                   aria-controls="underwriting-queue-panel"
                   onClick={() => setFilterTab('ready')}
-                  className={`flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                  className={`flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer shrink-0 whitespace-nowrap ${
                     filterTab === 'ready'
                       ? 'bg-emerald-600 text-white shadow-2xs'
-                      : 'bg-emerald-50 text-emerald-800 border border-emerald-200 hover:bg-emerald-100'
+                      : 'text-emerald-800 hover:bg-emerald-50/80'
                   }`}
                 >
                   <CheckCircle2 size={13} className={filterTab === 'ready' ? 'text-white' : 'text-emerald-600'} />
                   <span>100% Ready for MID</span>
                   <span className={`text-[10px] px-1.5 py-0.5 rounded-md font-black ${
-                    filterTab === 'ready' ? 'bg-white/20 text-white' : 'bg-emerald-200/70 text-emerald-900'
+                    filterTab === 'ready' ? 'bg-white/20 text-white' : 'bg-emerald-100 text-emerald-800'
                   }`}>
                     {readyCount}
                   </span>
@@ -625,16 +629,16 @@ export default function PineLabsUnderwritingPage() {
                   aria-selected={filterTab === 'pending'}
                   aria-controls="underwriting-queue-panel"
                   onClick={() => setFilterTab('pending')}
-                  className={`flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                  className={`flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer shrink-0 whitespace-nowrap ${
                     filterTab === 'pending'
                       ? 'bg-amber-600 text-white shadow-2xs'
-                      : 'bg-amber-50 text-amber-800 border border-amber-200 hover:bg-amber-100'
+                      : 'text-amber-800 hover:bg-amber-50/80'
                   }`}
                 >
                   <AlertCircle size={13} className={filterTab === 'pending' ? 'text-white' : 'text-amber-600'} />
                   <span>Pending Items</span>
                   <span className={`text-[10px] px-1.5 py-0.5 rounded-md font-black ${
-                    filterTab === 'pending' ? 'bg-white/20 text-white' : 'bg-amber-200/70 text-amber-900'
+                    filterTab === 'pending' ? 'bg-white/20 text-white' : 'bg-amber-100 text-amber-800'
                   }`}>
                     {pendingCount}
                   </span>
@@ -642,8 +646,8 @@ export default function PineLabsUnderwritingPage() {
               </div>
 
               {/* Sort Dropdown */}
-              <div className="flex items-center gap-2 self-start sm:self-auto text-xs shrink-0">
-                <div className="flex items-center gap-1.5 bg-slate-50 hover:bg-slate-100/80 border border-slate-200 px-3 py-1.5 rounded-xl shadow-2xs transition-colors">
+              <div className="flex items-center gap-2 self-start md:self-auto text-xs shrink-0">
+                <div className="flex items-center gap-1.5 bg-slate-50 hover:bg-slate-100/80 border border-slate-200 px-3 py-1.5 rounded-xl shadow-2xs transition-colors h-9">
                   <ArrowUpDown size={13} className="text-slate-400 shrink-0" />
                   <label htmlFor="underwriting-sort" className="text-slate-500 font-bold text-[11px] cursor-pointer">Sort:</label>
                   <select
@@ -814,17 +818,20 @@ export default function PineLabsUnderwritingPage() {
                       )}
                     </div>
 
-                    {/* Bottom Action Bar: Status Pill on Left, Primary CTA on Right */}
+                    {/* Bottom Action Bar: Verification Status & Primary CTA */}
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-3.5 border-t border-slate-100">
-                      <div className="w-fit">
-                        <span className={`text-[11px] font-black uppercase px-3 py-1.5 rounded-xl border tracking-wider inline-flex items-center gap-1.5 ${
-                          isPending
-                            ? 'bg-amber-50 text-amber-800 border-amber-300'
-                            : 'bg-emerald-50 text-emerald-700 border-emerald-300'
-                        }`}>
-                          {isPending ? <AlertCircle size={13} className="text-amber-600" /> : <CheckCircle2 size={13} className="text-emerald-600" />}
-                          <span>{dossier.status}</span>
-                        </span>
+                      <div className="flex items-center gap-2">
+                        {isPending ? (
+                          <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-amber-800 bg-amber-50/80 px-2.5 py-1 rounded-lg border border-amber-200">
+                            <AlertCircle size={13} className="text-amber-600 shrink-0" />
+                            <span>Awaiting Signatures / KYC Documents</span>
+                          </span>
+                        ) : (
+                          <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-700 bg-emerald-50/80 px-2.5 py-1 rounded-lg border border-emerald-200">
+                            <CheckCircle2 size={13} className="text-emerald-600 shrink-0" />
+                            <span>All KYC Verified • Ready for MID Setup</span>
+                          </span>
+                        )}
                       </div>
 
                       <button
@@ -832,7 +839,7 @@ export default function PineLabsUnderwritingPage() {
                           e.stopPropagation();
                           handleSelectClinic(dossier.id);
                         }}
-                        className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-bold rounded-xl shadow-md shadow-blue-500/20 transition-all cursor-pointer whitespace-nowrap group-hover:scale-102"
+                        className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-bold rounded-xl shadow-md shadow-blue-500/20 transition-all cursor-pointer whitespace-nowrap group-hover:scale-102"
                       >
                         <span>Review Documents &amp; Dossier</span>
                         <ChevronRight size={15} className="group-hover:translate-x-0.5 transition-transform" />

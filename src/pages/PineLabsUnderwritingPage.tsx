@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useLayoutEffect, useMemo } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { SEOHead } from '@/components/seo/SEOHead';
 import { CLINIC_PREVIEW_ROBOTS, clinicLinkPreview, readClinicPreviewIdentity } from '@/lib/clinicLinkPreview.js';
@@ -38,6 +38,7 @@ import {
   ArrowUpDown
 } from 'lucide-react';
 import { toast } from 'sonner';
+import './underwriting.css';
 
 // Verified Sub-Merchant KYC Dossiers for Pine Labs Plural Underwriting
 export interface VerifiedDossier {
@@ -130,7 +131,8 @@ export default function PineLabsUnderwritingPage() {
   const fetchDossiers = async (accessPin?: string) => {
     setIsLoadingDossiers(true);
     try {
-      const query = accessPin ? `?access=${encodeURIComponent(accessPin)}` : '';
+      const credentialType = searchParams.get('access') ? 'access' : 'token';
+      const query = accessPin ? `?${credentialType}=${encodeURIComponent(accessPin)}` : '';
       const storedToken = sessionStorage.getItem('plural_uw_token');
       const headers: Record<string, string> = {};
       if (storedToken) {
@@ -153,12 +155,15 @@ export default function PineLabsUnderwritingPage() {
           return true;
         }
       } else {
-        if (!accessPin) {
+        if (res.status === 401 || res.status === 429) {
           setIsAuthenticated(false);
+          setAllDossiers([]);
+          setPinError(res.status === 429 ? 'Too many login attempts. Please try again later.' : 'Please enter a valid partner access PIN.');
           sessionStorage.removeItem('plural_underwriting_auth');
           sessionStorage.removeItem('plural_auth_timestamp');
           sessionStorage.removeItem('plural_uw_token');
         }
+        if (res.status >= 500) toast.error('Clinic applications could not be loaded. Please refresh to retry.');
       }
     } catch (err) {
       console.error('Failed to load underwriting dossiers:', err);
@@ -171,15 +176,11 @@ export default function PineLabsUnderwritingPage() {
   // Immediate token scrubbing from URL bar & auto-session initialization
   useEffect(() => {
     if (tokenParam) {
-      fetchDossiers(tokenParam).then((success) => {
-        if (success) {
-          const cleanParams = new URLSearchParams(window.location.search);
-          cleanParams.delete('access');
-          cleanParams.delete('token');
-          const newQuery = cleanParams.toString();
-          const newUrl = window.location.pathname + (newQuery ? `?${newQuery}` : '');
-          window.history.replaceState({}, '', newUrl);
-        }
+      fetchDossiers(tokenParam).then(() => {
+        const cleanParams = new URLSearchParams(window.location.search);
+        cleanParams.delete('access');
+        cleanParams.delete('token');
+        setSearchParams(cleanParams, { replace: true });
       });
     } else if (isAuthenticated && allDossiers.length === 0) {
       fetchDossiers();
@@ -196,7 +197,7 @@ export default function PineLabsUnderwritingPage() {
   const maskAccountNo = (val: string) => {
     if (showSensitivePii) return val;
     const clean = (val || '').replace(/\s+/g, '');
-    if (clean.length < 4) return val;
+    if (!/\d{4}$/.test(clean)) return val;
     return `•••• •••• ${clean.slice(-4)}`;
   };
 
@@ -246,19 +247,16 @@ export default function PineLabsUnderwritingPage() {
 
   const isActiveReady = isClinicFullyReady(activeDossier);
 
-  const resetScrollTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    document.getElementById('root')?.scrollTo({ top: 0, behavior: 'smooth' });
-    document.documentElement?.scrollTo({ top: 0, behavior: 'smooth' });
-    document.body?.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+  useLayoutEffect(() => {
+    document.getElementById('root')?.scrollTo({ top: 0, behavior: 'instant' });
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, [activeDossier?.id]);
 
   const handleSelectClinic = (id: string) => {
     setSelectedDossierId(id);
     const nextParams = new URLSearchParams(searchParams);
     nextParams.set('clinic', id);
     setSearchParams(nextParams);
-    resetScrollTop();
   };
 
   const handleBackToQueue = () => {
@@ -266,7 +264,6 @@ export default function PineLabsUnderwritingPage() {
     const nextParams = new URLSearchParams(searchParams);
     nextParams.delete('clinic');
     setSearchParams(nextParams);
-    resetScrollTop();
   };
 
   const readyCount = useMemo(() => allDossiers.filter((d) => isClinicFullyReady(d)).length, [allDossiers]);
@@ -387,7 +384,7 @@ export default function PineLabsUnderwritingPage() {
 
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen bg-slate-50 text-slate-900 flex items-center justify-center p-4">
+      <div className="underwriting-desk min-h-screen bg-slate-50 text-slate-900 flex items-center justify-center p-4">
         <SEOHead
           {...preview}
           robots={CLINIC_PREVIEW_ROBOTS}
@@ -476,7 +473,7 @@ export default function PineLabsUnderwritingPage() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col font-sans">
+    <div className="underwriting-desk min-h-screen bg-slate-50 text-slate-900 flex flex-col font-sans">
       <SEOHead
         {...preview}
         robots={CLINIC_PREVIEW_ROBOTS}
@@ -490,9 +487,9 @@ export default function PineLabsUnderwritingPage() {
             <div>
               <div className="flex items-center gap-1.5">
                 <span className="text-sm font-black tracking-widest text-slate-900">CLINAZA</span>
-                <span className="text-[9px] bg-blue-50 text-[#0867E8] font-extrabold px-1.5 py-0.5 rounded border border-blue-200">HealthPay</span>
+                <span className="hidden sm:inline text-[9px] bg-blue-50 text-[#0867E8] font-extrabold px-1.5 py-0.5 rounded border border-blue-200">HealthPay</span>
               </div>
-              <p className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Sub-Merchant Aggregator</p>
+              <p className="hidden sm:block text-[10px] text-slate-500 font-bold uppercase tracking-wider">Sub-Merchant Aggregator</p>
             </div>
           </Link>
 
@@ -653,7 +650,7 @@ export default function PineLabsUnderwritingPage() {
               <div
                 role="tablist"
                 aria-label="Underwriting readiness filter"
-                className="inline-flex items-center gap-1.5 p-1 bg-slate-100/90 rounded-2xl border border-slate-200/80 overflow-x-auto scrollbar-none [&::-webkit-scrollbar]:hidden [scrollbar-width:none] [-ms-overflow-style:none] shrink-0"
+                className="grid grid-cols-3 sm:inline-flex items-center gap-1 p-1 bg-slate-100/90 rounded-2xl border border-slate-200/80 w-full sm:w-auto"
               >
                 <button
                   role="tab"
@@ -1016,33 +1013,39 @@ export default function PineLabsUnderwritingPage() {
 
                 <div className="flex flex-wrap items-center gap-2.5">
                   <a
-                    href={activeDossier.docs.signing_pdf}
+                    href={activeDossier.docs.signing_pdf || undefined}
+                    aria-disabled={!activeDossier.docs.signing_pdf}
+                    tabIndex={activeDossier.docs.signing_pdf ? undefined : -1}
                     download={`Plural_MAF_and_Doctor_KYC_Signing_Dossier_${activeDossier.clinic_name.replace(/\s+/g, '_')}.pdf`}
                     className="inline-flex items-center gap-2 px-4 py-2.5 min-h-[44px] bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-xs font-black uppercase tracking-wider rounded-xl shadow-md shadow-emerald-600/20 transition-all cursor-pointer active:scale-98"
                     title={activeDossier.is_signed ? "Download verified signed doctor dossier" : "Download consolidated official MAF + Doctor PAN & Aadhaar signing dossier"}
                   >
                     <FileCheck size={16} />
-                    <span>{activeDossier.is_signed ? 'Doctor Signed PDF (Verified)' : 'Doctor Signing PDF'}</span>
+                    <span>{!activeDossier.docs.signing_pdf ? 'Signing PDF Pending' : activeDossier.is_signed ? 'Doctor Signed PDF (Verified)' : 'Doctor Signing PDF'}</span>
                   </a>
 
                   <a
-                    href={activeDossier.docs.maf_excel}
+                    href={activeDossier.docs.maf_excel || undefined}
+                    aria-disabled={!activeDossier.docs.maf_excel}
+                    tabIndex={activeDossier.docs.maf_excel ? undefined : -1}
                     download={`Plural_MAF_BO_PEP_${activeDossier.clinic_name.replace(/\s+/g, '_')}.xlsx`}
                     className="inline-flex items-center gap-2 px-3.5 py-2.5 min-h-[44px] bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-black uppercase tracking-wider rounded-xl shadow-md shadow-blue-500/20 transition-all cursor-pointer active:scale-98"
                     title="Download Pine Labs MAF Excel"
                   >
                     <FileSpreadsheet size={16} />
-                    <span>Download MAF Excel</span>
+                    <span>{activeDossier.docs.maf_excel ? 'Download MAF Excel' : 'MAF Excel Pending'}</span>
                   </a>
 
                   <a
-                    href={activeDossier.docs.zip_bundle}
+                    href={activeDossier.docs.zip_bundle || undefined}
+                    aria-disabled={!activeDossier.docs.zip_bundle}
+                    tabIndex={activeDossier.docs.zip_bundle ? undefined : -1}
                     download={`${activeDossier.clinic_name.replace(/\s+/g, '_')}_Complete_KYC_Dossier.zip`}
                     className="inline-flex items-center gap-2 px-3.5 py-2.5 min-h-[44px] bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-xl border border-slate-300 transition-all cursor-pointer active:scale-98"
                     title="Download all raw KYC documents in a ZIP package"
                   >
                     <FolderDown size={15} />
-                    <span>Full ZIP</span>
+                    <span>{activeDossier.docs.zip_bundle ? 'Full ZIP' : 'ZIP Pending'}</span>
                   </a>
                 </div>
               </div>

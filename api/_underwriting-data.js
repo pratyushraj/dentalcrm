@@ -44,7 +44,7 @@ export const VERIFIED_DOSSIERS = [
       zip_bundle: '/docs/kyc/elara_ivf/Elara_IVF_Complete_KYC_Dossier.zip',
       maf_excel: '/docs/kyc/elara_ivf/Plural_MAF_BO_PEP_Elara_IVF.xlsx',
       gst_certificate: '/docs/kyc/elara_ivf/elara_ivf_gst_certificate.pdf',
-      board_resolution: '/docs/kyc/elara_ivf/BR_Signed.pdf',
+      board_resolution: '/docs/kyc/elara_ivf/elara_ivf_board_resolution_signed.pdf',
       cancelled_cheque: '/docs/kyc/elara_ivf/elara_ivf_cancelled_cheque.jpeg',
       doctor_pan: '/docs/kyc/elara_ivf/gajendra_singh_chouhan_pan.jpg',
       aadhaar_front: '/docs/kyc/elara_ivf/gajendra_singh_chouhan_aadhaar_front_back.jpg',
@@ -89,7 +89,7 @@ export const VERIFIED_DOSSIERS = [
       date: '06/05/2026'
     },
     docs: {
-      signing_pdf: 'https://sqqocqujxlgoxbcnfbfb.supabase.co/storage/v1/object/public/clinic-documents/vasantha_dental/Signed_Doctor_KYC_Dossier_Dr_V_Siddardha_Chaitanya.pdf',
+      signing_pdf: '/docs/kyc/vasantha_dental/Signed_Doctor_KYC_Dossier_Dr_V_Siddardha_Chaitanya.pdf',
       zip_bundle: '/docs/kyc/vasantha_dental/Vasantha_Dental_Complete_KYC_Dossier.zip',
       maf_excel: '/docs/kyc/vasantha_dental/Plural_MAF_BO_PEP_Vasantha_Dental.xlsx',
       gst_declaration_pdf: '/docs/kyc/vasantha_dental/GST_Exemption_Declaration_vasantha_dental.pdf',
@@ -99,7 +99,7 @@ export const VERIFIED_DOSSIERS = [
       udyam_pdf: '/docs/kyc/vasantha_dental/vasantha_dental_udyam_certificate.pdf',
       establishment_reg: '/docs/kyc/vasantha_dental/vasantha_dental_ap_establishment_registration.jpg',
       dental_council_reg: '/docs/kyc/vasantha_dental/dr_siddardha_chaitanya_dental_council_registration.jpg',
-      courier_receipt: 'https://sqqocqujxlgoxbcnfbfb.supabase.co/storage/v1/object/public/clinic-documents/vasantha_dental/dtdc_courier_receipt_vasantha_dental.jpg',
+      courier_receipt: '/docs/kyc/vasantha_dental/dtdc_courier_receipt_vasantha_dental.jpg',
       courier_awb: 'DTDC AWB: N11002335698'
     },
     is_signed: true,
@@ -140,8 +140,8 @@ export const VERIFIED_DOSSIERS = [
       date: '18/06/2020'
     },
     docs: {
-      signing_pdf: 'https://sqqocqujxlgoxbcnfbfb.supabase.co/storage/v1/object/public/clinic-documents/hear_one/Signed_Doctor_KYC_Dossier_Dr_Angiras_Vishnu.pdf',
-      zip_bundle: 'https://sqqocqujxlgoxbcnfbfb.supabase.co/storage/v1/object/public/clinic-documents/hear_one/Hear_One_Complete_KYC_Dossier.zip',
+      signing_pdf: '/docs/kyc/hear_one/Signed_Doctor_KYC_Dossier_Dr_Angiras_Vishnu.pdf',
+      zip_bundle: '/docs/kyc/hear_one/Hear_One_Complete_KYC_Dossier.zip',
       maf_excel: '/docs/kyc/hear_one/Plural_MAF_BO_PEP_Hear_One.xlsx',
       gst_declaration_pdf: '/docs/kyc/hear_one/GST_Exemption_Declaration_hear_one.pdf',
       cancelled_cheque: '/docs/kyc/hear_one/hear_one_cancelled_cheque.jpg',
@@ -188,7 +188,7 @@ export const VERIFIED_DOSSIERS = [
       date: '11/09/2024'
     },
     docs: {
-      signing_pdf: 'https://sqqocqujxlgoxbcnfbfb.supabase.co/storage/v1/object/public/clinic-documents/nitya_dental/Signed_Doctor_KYC_Dossier_Dr_Bhanu_Prakash_Singh.pdf',
+      signing_pdf: '/docs/kyc/nitya_dental/Signed_Doctor_KYC_Dossier_Dr_Bhanu_Prakash_Singh.pdf',
       zip_bundle: '/docs/kyc/nitya_dental/Nitya_Dental_Complete_KYC_Dossier.zip',
       maf_excel: '/docs/kyc/nitya_dental/Plural_MAF_BO_PEP_Nitya_Dental.xlsx',
       gst_declaration_pdf: '/docs/kyc/nitya_dental/GST_Exemption_Declaration_nitya_dental.pdf',
@@ -236,16 +236,16 @@ export const VERIFIED_DOSSIERS = [
       date: '15/10/2024'
     },
     docs: {
-      signing_pdf: 'https://sqqocqujxlgoxbcnfbfb.supabase.co/storage/v1/object/public/clinic-documents/exldentist_clinic/Signed_Doctor_KYC_Signing_Dossier_Dr_Priyanka_Kumar.pdf',
-      zip_bundle: 'https://sqqocqujxlgoxbcnfbfb.supabase.co/storage/v1/object/public/clinic-documents/exldentist_clinic/Exldentist_Clinic_Complete_KYC_Dossier.zip',
-      maf_excel: 'https://sqqocqujxlgoxbcnfbfb.supabase.co/storage/v1/object/public/clinic-documents/exldentist_clinic/Plural_MAF_BO_PEP_Exldentist_Clinic.xlsx',
-      gst_declaration_pdf: 'https://sqqocqujxlgoxbcnfbfb.supabase.co/storage/v1/object/public/clinic-documents/exldentist_clinic/Signed_GST_Exemption_Declaration_exldentist_clinic.pdf',
-      cancelled_cheque: 'https://sqqocqujxlgoxbcnfbfb.supabase.co/storage/v1/object/public/clinic-documents/exldentist_clinic/exldentist_cancelled_cheque.jpg',
-      doctor_pan: 'https://sqqocqujxlgoxbcnfbfb.supabase.co/storage/v1/object/public/clinic-documents/exldentist_clinic/dr_priyanka_kumar_pan.jpg',
-      aadhaar_front: 'https://sqqocqujxlgoxbcnfbfb.supabase.co/storage/v1/object/public/clinic-documents/exldentist_clinic/dr_priyanka_kumar_aadhaar.jpg',
-      aadhaar_back: 'https://sqqocqujxlgoxbcnfbfb.supabase.co/storage/v1/object/public/clinic-documents/exldentist_clinic/dr_priyanka_kumar_aadhaar_back.jpg',
-      dental_council_reg: 'https://sqqocqujxlgoxbcnfbfb.supabase.co/storage/v1/object/public/clinic-documents/exldentist_clinic/dr_priyanka_kumar_dental_council_registration.jpg',
-      udyam_pdf: 'https://sqqocqujxlgoxbcnfbfb.supabase.co/storage/v1/object/public/clinic-documents/exldentist_clinic/exldentist_udyam_certificate.jpg'
+      signing_pdf: '/docs/kyc/exldentist_clinic/Signed_Doctor_KYC_Signing_Dossier_Dr_Priyanka_Kumar.pdf',
+      zip_bundle: '/docs/kyc/exldentist_clinic/Exldentist_Clinic_Complete_KYC_Dossier.zip',
+      maf_excel: '/docs/kyc/exldentist_clinic/Plural_MAF_BO_PEP_Exldentist_Clinic.xlsx',
+      gst_declaration_pdf: '/docs/kyc/exldentist_clinic/Signed_GST_Exemption_Declaration_exldentist_clinic.pdf',
+      cancelled_cheque: '/docs/kyc/exldentist_clinic/exldentist_cancelled_cheque.jpg',
+      doctor_pan: '/docs/kyc/exldentist_clinic/dr_priyanka_kumar_pan.jpg',
+      aadhaar_front: '/docs/kyc/exldentist_clinic/dr_priyanka_kumar_aadhaar.jpg',
+      aadhaar_back: '/docs/kyc/exldentist_clinic/dr_priyanka_kumar_aadhaar_back.jpg',
+      dental_council_reg: '/docs/kyc/exldentist_clinic/dr_priyanka_kumar_dental_council_registration.jpg',
+      udyam_pdf: '/docs/kyc/exldentist_clinic/exldentist_udyam_certificate.jpg'
     },
     is_signed: true,
     status: '100% Ready for Pine Labs Plural Sub-Merchant MID Issuance'
@@ -285,7 +285,7 @@ export const VERIFIED_DOSSIERS = [
       date: '11/11/2024'
     },
     docs: {
-      signing_pdf: 'https://sqqocqujxlgoxbcnfbfb.supabase.co/storage/v1/object/public/clinic-documents/impressions_dental/Signed_Doctor_KYC_Dossier_Dr_Dushyant_Soni.pdf',
+      signing_pdf: '/docs/kyc/impressions_dental/Signed_Doctor_KYC_Dossier_Dr_Dushyant_Soni.pdf',
       zip_bundle: '/docs/kyc/impressions_dental/impressions_dental_Complete_KYC_Dossier.zip',
       maf_excel: '/docs/kyc/impressions_dental/Plural_MAF_BO_PEP_impressions_dental.xlsx',
       gst_declaration_pdf: '/docs/kyc/impressions_dental/GST_Exemption_Declaration_impressions_dental.pdf',

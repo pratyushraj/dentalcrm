@@ -1,4 +1,5 @@
 import { createHmac, timingSafeEqual, randomBytes } from 'crypto';
+import { supabaseRequest } from './_supabase.js';
 
 // Strictly derive accepted PINs from environment variables - zero hardcoded fallback in git
 export function getAcceptedPins() {
@@ -9,49 +10,41 @@ export function getAcceptedPins() {
 }
 
 // Strictly derive session secret from environment variables
-const runtimeSecret = randomBytes(32).toString('hex');
 export function getSessionSecret() {
   if (process.env.UNDERWRITING_SESSION_SECRET) {
     return process.env.UNDERWRITING_SESSION_SECRET;
   }
-  if (process.env.NODE_ENV === 'production' && !process.env.UNDERWRITING_SESSION_SECRET) {
-    console.warn('WARNING: UNDERWRITING_SESSION_SECRET is not configured in production. Using ephemeral session secret.');
-  }
-  return runtimeSecret;
+  throw new Error('Underwriting session secret is not configured');
 }
 
 export const SESSION_TTL_MS = 8 * 60 * 60 * 1000; // 8 hours
 
-// Shared in-memory rate limiting for brute-force protection
-const failedAttempts = new Map();
-const RATE_LIMIT_MAX = 10;
-const RATE_LIMIT_WINDOW_MS = 15 * 60 * 1000; // 15 mins
-
-export function isRateLimited(ip) {
-  if (!ip) return false;
-  const now = Date.now();
-  const record = failedAttempts.get(ip);
-  if (!record) return false;
-  if (now - record.startTime > RATE_LIMIT_WINDOW_MS) {
-    failedAttempts.delete(ip);
+// Postgres serializes attempts for each hashed IP across all serverless instances.
+export async function authenticatePin(req, res, pin) {
+  try {
+    const ip = req.headers['x-forwarded-for']?.split(',')[0]?.trim() || req.socket?.remoteAddress || 'unknown';
+    const key = createHmac('sha256', getSessionSecret()).update(ip).digest('hex');
+    const response = await supabaseRequest('/rest/v1/rpc/consume_underwriting_login_attempt', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ p_key: key }),
+    });
+    if (!response.ok) throw new Error('Login rate limiter is unavailable');
+    const result = await response.json();
+    if (!result.allowed) {
+      res.setHeader('Retry-After', String(result.retry_after));
+      res.status(429).json({ error: 'Too many login attempts. Please try again in 15 minutes.' });
+      return false;
+    }
+    if (!verifyPin(pin)) {
+      res.status(401).json({ authenticated: false, error: 'Invalid partner access PIN.' });
+      return false;
+    }
+    return true;
+  } catch {
+    res.status(503).json({ authenticated: false, error: 'Partner access is temporarily unavailable. Please try again shortly.' });
     return false;
   }
-  return record.count >= RATE_LIMIT_MAX;
-}
-
-export function recordFailedAttempt(ip) {
-  if (!ip) return;
-  const now = Date.now();
-  const record = failedAttempts.get(ip);
-  if (!record || now - record.startTime > RATE_LIMIT_WINDOW_MS) {
-    failedAttempts.set(ip, { count: 1, startTime: now });
-  } else {
-    record.count += 1;
-  }
-}
-
-export function resetFailedAttempts(ip) {
-  if (ip) failedAttempts.delete(ip);
 }
 
 export function verifyPin(inputPin) {
@@ -59,8 +52,7 @@ export function verifyPin(inputPin) {
   const trimmed = inputPin.trim();
   const accepted = getAcceptedPins();
   if (accepted.length === 0) {
-    console.error('CRITICAL: No underwriting PIN configured in environment.');
-    return false;
+    throw new Error('Underwriting access PIN is not configured');
   }
   for (const validPin of accepted) {
     const bufA = Buffer.from(trimmed, 'utf8');
@@ -97,7 +89,7 @@ export function verifySessionToken(token) {
       return null;
     }
     const payload = JSON.parse(Buffer.from(b64Payload, 'base64url').toString('utf8'));
-    if (payload.exp && payload.exp > Date.now()) {
+    if (payload.role === 'underwriter' && Number.isFinite(payload.exp) && payload.exp > Date.now()) {
       return payload;
     }
   } catch {
@@ -113,7 +105,8 @@ export function parseCookies(cookieHeader) {
   for (const item of items) {
     const parts = item.split('=');
     if (parts.length >= 2) {
-      cookies[parts[0].trim()] = decodeURIComponent(parts.slice(1).join('=').trim());
+      try { cookies[parts[0].trim()] = decodeURIComponent(parts.slice(1).join('=').trim()); }
+      catch { /* Ignore malformed cookies. */ }
     }
   }
   return cookies;

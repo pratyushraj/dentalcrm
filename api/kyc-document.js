@@ -1,12 +1,10 @@
 import { readFile, stat } from 'node:fs/promises';
-import { join, resolve, normalize, basename, extname } from 'node:path';
+import { resolve, normalize, basename, extname, sep } from 'node:path';
+import { supabaseRequest, getServerSupabaseConfig } from './_supabase.js';
 import {
-  verifyPin,
+  authenticatePin,
   createSessionToken,
   verifySessionToken,
-  isRateLimited,
-  recordFailedAttempt,
-  resetFailedAttempts,
   parseCookies,
   setSessionCookie
 } from './_auth.js';
@@ -24,6 +22,7 @@ const MIME_TYPES = {
 const ALLOWED_EXTS = new Set(Object.keys(MIME_TYPES));
 
 export default async function handler(req, res) {
+  res.setHeader('Cache-Control', 'private, no-store');
   res.setHeader('X-Content-Type-Options', 'nosniff');
   res.setHeader('X-Frame-Options', 'SAMEORIGIN');
   res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
@@ -33,8 +32,6 @@ export default async function handler(req, res) {
     res.setHeader('Allow', 'GET, HEAD');
     return res.status(405).json({ error: 'Method not allowed' });
   }
-
-  const clientIp = req.headers['x-forwarded-for']?.split(',')[0]?.trim() || req.socket?.remoteAddress || 'unknown';
 
   // 1. Authenticate Request
   const cookies = parseCookies(req.headers.cookie);
@@ -47,22 +44,10 @@ export default async function handler(req, res) {
   let session = null;
 
   if (accessParam) {
-    if (isRateLimited(clientIp)) {
-      return res.status(429).json({
-        error: 'Too many failed login attempts. Please wait 15 minutes before trying again.'
-      });
-    }
-    if (verifyPin(accessParam)) {
-      resetFailedAttempts(clientIp);
-      const newToken = createSessionToken('underwriter');
-      setSessionCookie(res, newToken);
-      session = { role: 'underwriter' };
-    } else {
-      recordFailedAttempt(clientIp);
-      return res.status(401).json({
-        error: 'Unauthorized: Invalid access PIN.'
-      });
-    }
+    if (!await authenticatePin(req, res, accessParam)) return;
+    const newToken = createSessionToken('underwriter');
+    setSessionCookie(res, newToken);
+    session = { role: 'underwriter' };
   } else {
     const candidateToken = cookies.clinaza_uw_session || bearerToken || customHeaderToken || queryToken;
     session = verifySessionToken(candidateToken);
@@ -76,7 +61,7 @@ export default async function handler(req, res) {
 
   // 2. Validate Requested File Path
   const rawFile = (req.query.file || '').toString().trim();
-  if (!rawFile || rawFile.includes('\0') || rawFile.includes('..')) {
+  if (!rawFile || /[\u0000-\u001f\\]/.test(rawFile) || rawFile.includes('..')) {
     return res.status(400).json({ error: 'Invalid document file path' });
   }
 
@@ -98,7 +83,7 @@ export default async function handler(req, res) {
 
   for (const baseDir of searchDirs) {
     const candidate = resolve(baseDir, sanitized);
-    if (!candidate.startsWith(baseDir)) continue; // Traversal guard
+    if (!candidate.startsWith(baseDir + sep)) continue;
     try {
       const s = await stat(candidate);
       if (s.isFile()) {
@@ -113,18 +98,12 @@ export default async function handler(req, res) {
 
   // 4. Fallback to Supabase Storage if not on disk
   if (!resolvedPath) {
-    const supabaseUrl = process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL;
-    const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY || process.env.VITE_SUPABASE_ANON_KEY;
-    if (supabaseUrl && supabaseKey) {
       try {
-        const signEndpoint = `${supabaseUrl}/storage/v1/object/sign/clinic-documents/${sanitized}`;
-        const signRes = await fetch(signEndpoint, {
+        const { url: supabaseUrl } = getServerSupabaseConfig();
+        const path = sanitized.split('/').map(encodeURIComponent).join('/');
+        const signRes = await supabaseRequest(`/storage/v1/object/sign/clinic-documents/${path}`, {
           method: 'POST',
-          headers: {
-            apikey: supabaseKey,
-            Authorization: `Bearer ${supabaseKey}`,
-            'Content-Type': 'application/json'
-          },
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ expiresIn: 120 })
         });
         if (signRes.ok) {
@@ -138,8 +117,6 @@ export default async function handler(req, res) {
       } catch (err) {
         console.error('Supabase signed URL error:', err.message);
       }
-    }
-
     return res.status(404).json({ error: 'Requested KYC document not found.' });
   }
 

@@ -1,5 +1,6 @@
 import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
+import { supabaseRequest } from './_supabase.js';
 import {
   CLINIC_PREVIEW_ROBOTS,
   clinicLinkPreview,
@@ -87,27 +88,17 @@ async function resolveClinicIdentity(clinicRef, searchParams) {
     if (known) return known;
 
     try {
-      const supabaseUrl = process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL;
-      const supabaseKey = process.env.SUPABASE_ANON_KEY || process.env.VITE_SUPABASE_ANON_KEY;
-      if (supabaseUrl && supabaseKey) {
-        const isUuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(clinicRef);
-        const query = isUuid ? `id=eq.${clinicRef}` : `clinic_name=ilike.%${encodeURIComponent(clinicRef)}%`;
-        const res = await fetch(`${supabaseUrl}/rest/v1/clinic_onboardings?${query}&select=clinic_name,doctor_name,city&limit=1`, {
-          headers: {
-            apikey: supabaseKey,
-            Authorization: `Bearer ${supabaseKey}`
-          },
-          signal: AbortSignal.timeout(3000)
-        });
-        if (res.ok) {
-          const rows = await res.json();
-          if (rows && rows[0]?.clinic_name) {
-            return {
-              clinic: rows[0].clinic_name,
-              doctor: rows[0].doctor_name || '',
-              city: rows[0].city || ''
-            };
-          }
+      const isUuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(clinicRef);
+      const query = isUuid ? `id=eq.${clinicRef}` : `clinic_name=ilike.%${encodeURIComponent(clinicRef)}%`;
+      const res = await supabaseRequest(`/rest/v1/clinic_onboardings?${query}&select=clinic_name,doctor_name,city&limit=1`);
+      if (res.ok) {
+        const rows = await res.json();
+        if (rows && rows[0]?.clinic_name) {
+          return {
+            clinic: rows[0].clinic_name,
+            doctor: rows[0].doctor_name || '',
+            city: rows[0].city || ''
+          };
         }
       }
     } catch {

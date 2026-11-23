@@ -1,54 +1,37 @@
 import {
-  verifyPin,
+  authenticatePin,
   createSessionToken,
   verifySessionToken,
-  isRateLimited,
-  recordFailedAttempt,
-  resetFailedAttempts,
   parseCookies,
   setSessionCookie,
   clearSessionCookie,
   SESSION_TTL_MS
 } from './_auth.js';
 import { VERIFIED_DOSSIERS } from './_underwriting-data.js';
+import { supabaseRequest, protectedDocumentUrl } from './_supabase.js';
 
 async function fetchDynamicOnboardedDossiers() {
-  const supabaseUrl = process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL;
-  const supabaseKey = process.env.SUPABASE_ANON_KEY || process.env.VITE_SUPABASE_ANON_KEY;
-  if (!supabaseUrl || !supabaseKey) return [];
-
   try {
-    const res = await fetch(
-      `${supabaseUrl}/rest/v1/clinic_onboardings?order=created_at.desc&limit=25`,
-      {
-        headers: {
-          apikey: supabaseKey,
-          Authorization: `Bearer ${supabaseKey}`
-        },
-        signal: AbortSignal.timeout(3500)
-      }
-    );
-    if (!res.ok) return [];
+    const res = await supabaseRequest('/rest/v1/clinic_onboardings?order=created_at.desc&limit=1000');
+    if (!res.ok) throw new Error('Clinic applications could not be loaded');
     const rows = await res.json();
     if (!Array.isArray(rows)) return [];
 
-    const existingIds = new Set(VERIFIED_DOSSIERS.map((d) => d.id.toLowerCase()));
     const dynamicDossiers = [];
 
     for (const r of rows) {
       if (!r.id || !r.clinic_name) continue;
-      const lowerId = r.id.toLowerCase();
-      // Skip if already in hardcoded / verified dossiers
-      if (existingIds.has(lowerId)) continue;
+      const legacy = VERIFIED_DOSSIERS.find(d => d.id === r.id || d.clinic_name.toLowerCase() === r.clinic_name.trim().toLowerCase());
+      // Database updates take precedence over legacy verified records.
+      if (legacy && !r.underwriting_dossier) continue;
 
       const clinicName = (r.clinic_name || 'Clinic').trim();
       const doctorName = (r.doctor_name || 'Doctor').trim();
       const city = (r.city || 'India').trim();
 
-      dynamicDossiers.push({
-        id: r.id,
+      const dossier = {
         clinic_name: clinicName,
-        legal_name: `${clinicName.toUpperCase()} (Sole Proprietorship)`,
+        legal_name: clinicName,
         doctor_name: doctorName,
         dob: 'Under Verification',
         pan: 'Under Verification',
@@ -88,18 +71,41 @@ async function fetchDynamicOnboardedDossiers() {
           aadhaar_front: ''
         },
         is_signed: false,
-        status: 'Action Required • Awaiting Doctor KYC & Cancelled Cheque'
+        status: 'Action Required • Awaiting Doctor KYC & Cancelled Cheque',
+      };
+      const stored = r.underwriting_dossier || {};
+      dynamicDossiers.push({
+        ...dossier,
+        ...legacy,
+        ...stored,
+        id: legacy?.id || r.id,
+        bank: { ...dossier.bank, ...legacy?.bank, ...stored.bank },
+        business_proof: { ...dossier.business_proof, ...legacy?.business_proof, ...stored.business_proof },
+        docs: { ...dossier.docs, ...legacy?.docs, ...stored.docs },
       });
     }
 
     return dynamicDossiers;
   } catch (err) {
     console.error('Failed to load dynamic clinic onboardings:', err.message);
-    return [];
+    throw err;
   }
 }
 
+async function loadDossiers() {
+  const dynamic = await fetchDynamicOnboardedDossiers();
+  const dossiers = new Map(VERIFIED_DOSSIERS.map(d => [d.id, d]));
+  for (const dossier of dynamic) dossiers.set(dossier.id, dossier);
+  return [...dossiers.values()].map(dossier => ({
+    ...dossier,
+    docs: Object.fromEntries(Object.entries(dossier.docs || {}).map(([name, value]) => [
+      name, name === 'courier_awb' ? value : protectedDocumentUrl(value),
+    ])),
+  }));
+}
+
 export default async function handler(req, res) {
+  res.setHeader('Cache-Control', 'private, no-store');
   res.setHeader('X-Content-Type-Options', 'nosniff');
   res.setHeader('X-Frame-Options', 'SAMEORIGIN');
   res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
@@ -109,32 +115,25 @@ export default async function handler(req, res) {
     return res.status(204).end();
   }
 
-  const clientIp = req.headers['x-forwarded-for']?.split(',')[0]?.trim() || req.socket?.remoteAddress || 'unknown';
-
   if (req.method === 'POST') {
     const body = req.body || {};
-    const { action, pin } = typeof body === 'string' ? JSON.parse(body || '{}') : body;
+    let parsed;
+    try { parsed = typeof body === 'string' ? JSON.parse(body || '{}') : body; }
+    catch { return res.status(400).json({ error: 'Invalid request body' }); }
+    const { action, pin } = parsed || {};
 
     if (action === 'logout') {
       clearSessionCookie(res);
       return res.status(200).json({ success: true, loggedOut: true });
     }
 
-    if (isRateLimited(clientIp)) {
-      return res.status(429).json({
-        success: false,
-        error: 'Too many failed login attempts. Please wait 15 minutes before trying again.'
-      });
-    }
-
-    if (verifyPin(pin)) {
-      resetFailedAttempts(clientIp);
+    if (!await authenticatePin(req, res, pin)) return;
+    try {
       const token = createSessionToken('underwriter');
       setSessionCookie(res, token);
       res.setHeader('Cache-Control', 'private, no-cache, no-store, must-revalidate');
 
-      const dynamicDossiers = await fetchDynamicOnboardedDossiers();
-      const allDossiers = [...VERIFIED_DOSSIERS, ...dynamicDossiers];
+      const allDossiers = await loadDossiers();
 
       return res.status(200).json({
         success: true,
@@ -143,13 +142,8 @@ export default async function handler(req, res) {
         expiresAt: Date.now() + SESSION_TTL_MS,
         dossiers: allDossiers
       });
-    } else {
-      recordFailedAttempt(clientIp);
-      return res.status(401).json({
-        success: false,
-        authenticated: false,
-        error: 'Invalid access PIN. Contact Underwriting Desk Support at ops@clinaza.in.'
-      });
+    } catch {
+      return res.status(503).json({ error: 'Clinic applications are temporarily unavailable. Please retry.' });
     }
   }
 
@@ -165,25 +159,10 @@ export default async function handler(req, res) {
 
     // Check query PIN access (e.g. ?access=...) with rate limiting
     if (accessParam) {
-      if (isRateLimited(clientIp)) {
-        return res.status(429).json({
-          authenticated: false,
-          error: 'Too many failed login attempts. Please wait 15 minutes before trying again.'
-        });
-      }
-
-      if (verifyPin(accessParam)) {
-        resetFailedAttempts(clientIp);
-        const newToken = createSessionToken('underwriter');
-        setSessionCookie(res, newToken);
-        session = { role: 'underwriter' };
-      } else {
-        recordFailedAttempt(clientIp);
-        return res.status(401).json({
-          authenticated: false,
-          error: 'Unauthorized: Invalid access PIN.'
-        });
-      }
+      if (!await authenticatePin(req, res, accessParam)) return;
+      const newToken = createSessionToken('underwriter');
+      setSessionCookie(res, newToken);
+      session = { role: 'underwriter' };
     } else {
       const candidateToken = cookies.clinaza_uw_session || bearerToken || customHeaderToken || queryToken;
       session = verifySessionToken(candidateToken);
@@ -199,13 +178,11 @@ export default async function handler(req, res) {
     res.setHeader('Cache-Control', 'private, no-cache, no-store, must-revalidate');
     res.setHeader('X-Robots-Tag', 'noindex, nofollow, noarchive');
 
-    const dynamicDossiers = await fetchDynamicOnboardedDossiers();
-    const allDossiers = [...VERIFIED_DOSSIERS, ...dynamicDossiers];
-
-    return res.status(200).json({
-      authenticated: true,
-      dossiers: allDossiers
-    });
+    try {
+      return res.status(200).json({ authenticated: true, dossiers: await loadDossiers() });
+    } catch {
+      return res.status(503).json({ error: 'Clinic applications are temporarily unavailable. Please retry.' });
+    }
   }
 
   res.setHeader('Allow', 'GET, POST, OPTIONS');

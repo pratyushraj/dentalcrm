@@ -308,7 +308,7 @@ def main():
     args = parser.parse_args()
 
     slug = args.slug.lower().replace(" ", "_")
-    target_dir = REPO_ROOT / f"public/docs/kyc/{slug}"
+    target_dir = REPO_ROOT / f"private/docs/kyc/{slug}"
     target_dir.mkdir(parents=True, exist_ok=True)
 
     print(f"⚡ Processing Sub-Merchant KYC for [{args.clinic_name or slug}]...")

@@ -108,9 +108,9 @@ const VERIFIED_DOSSIERS: VerifiedDossier[] = [
     address: 'Floor No. 6, CYB-5, Dream Heights, Shastri Nagar, RIICO Heavy Industrial Area (Near Marwari Catalysts), Jodhpur, Rajasthan - 342003',
     residential_address: 'A 30, Arvind Nagar, Golf Link Road, Jodhpur Residency Road, Rajasthan - 342011',
     specialties: ['Reproductive Medicine', 'In Vitro Fertilization (IVF)', 'ICSI & Fertility Care', 'Daycare Clinical Procedures'],
-    submission_badge: '100% Ready for MID • Corporate KYC Verified',
-    readiness: 'ready',
-    missing_items: [],
+    submission_badge: 'Action Required • Director MAF Signature Awaited',
+    readiness: 'pending',
+    missing_items: ['Signed & Stamped Director MAF Form'],
     bank: {
       bank_name: 'Kotak Mahindra Bank',
       account_holder: 'ELARA IVF PRIVATE LIMITED',
@@ -138,8 +138,8 @@ const VERIFIED_DOSSIERS: VerifiedDossier[] = [
       establishment_reg: '/docs/kyc/elara_ivf/elara_ivf_certificate_of_incorporation.pdf',
       udyam_pdf: '/docs/kyc/elara_ivf/elara_ivf_gst_certificate.pdf'
     },
-    is_signed: true,
-    status: '100% Complete Corporate Pack • Ready for Pine Labs MID'
+    is_signed: false,
+    status: 'Action Required • Awaiting Signed MAF from Director Chouhan'
   },
   {
     id: 'vasantha-dental',
@@ -351,9 +351,9 @@ const VERIFIED_DOSSIERS: VerifiedDossier[] = [
     address: 'Plot No. 119, Shri Krishna Nagar, Nahar Road Chopasani, Jodhpur, Rajasthan - 342008',
     residential_address: 'Plot No. 119, Nahar Road, Opp Balaji Hospital, Shri Krishna Nagar, Jodhpur, Rajasthan - 342008',
     specialties: ['Dental Implants', 'Full Mouth Rehabilitation', 'Cosmetic Dentistry', 'Laser & Restorations'],
-    submission_badge: '100% Ready for MID • All Documents Verified',
-    readiness: 'ready',
-    missing_items: [],
+    submission_badge: 'Action Required • Doctor MAF Signature Awaited',
+    readiness: 'pending',
+    missing_items: ['Signed & Stamped Doctor MAF Dossier'],
     bank: {
       bank_name: 'HDFC Bank',
       account_holder: 'IMPRESSIONS DENTAL CLINIC',
@@ -381,7 +381,7 @@ const VERIFIED_DOSSIERS: VerifiedDossier[] = [
       udyam_pdf: '/docs/kyc/impressions_dental/impressions_dental_udyam_certificate.pdf'
     },
     is_signed: false,
-    status: '100% Complete • HDFC Cheque & Udyam Verified'
+    status: 'Action Required • Awaiting Signed MAF from Dr. Dushyant Soni'
   },
   {
     id: 'amitha-dental',
@@ -398,9 +398,9 @@ const VERIFIED_DOSSIERS: VerifiedDossier[] = [
     address: 'No. 90 and 91, 6th Cross, Double Road, MCECHS Layout, Hegde Nagar, Bangalore, Karnataka - 560077',
     residential_address: 'No. 563, 10th Cross, MCECHS Layout, R K Hegde Nagar, Dr. S R K Nagar Post, Bengaluru, Karnataka - 560077',
     specialties: ['Dental Implants', 'Clear Aligners', 'Full Mouth Rehabilitation', 'Zirconia Crowns & Ortho'],
-    submission_badge: 'Action Required • Cancelled Cheque Pending',
+    submission_badge: 'Action Required • Cheque & MAF Sign Pending',
     readiness: 'pending',
-    missing_items: ['Settlement Bank Cancelled Cheque'],
+    missing_items: ['Settlement Bank Cancelled Cheque', 'Signed & Stamped Doctor MAF Dossier'],
     bank: {
       bank_name: 'Current Account (Under Bank Linking)',
       account_holder: 'DR. AMITHA FAMILY DENTAL CARE',
@@ -428,7 +428,7 @@ const VERIFIED_DOSSIERS: VerifiedDossier[] = [
       establishment_reg: '/docs/kyc/amitha_dental/dr_amitha_kpme_certificate.jpg'
     },
     is_signed: false,
-    status: 'Action Required • Awaiting Cancelled Cheque from Doctor'
+    status: 'Action Required • Awaiting Cancelled Cheque & MAF Signature'
   },
   {
     id: 'krishna-dental',
@@ -445,9 +445,9 @@ const VERIFIED_DOSSIERS: VerifiedDossier[] = [
     address: 'Redla Bazzar, Opp Aryavyshya Kalyana Mandapam, Pasumuru Post, Chilakaluripeta, Guntur Dist, Andhra Pradesh - 522616',
     residential_address: '12-206/12, Purushotha Patnam, Chilakaluripet, Guntur, Andhra Pradesh - 522616',
     specialties: ['Dental Implants', 'Oral Surgery', 'Root Canal Treatments', 'Zirconia Crowns & Orthodontics'],
-    submission_badge: '100% Ready for MID • All Documents Verified',
-    readiness: 'ready',
-    missing_items: [],
+    submission_badge: 'Action Required • Doctor MAF Signature Awaited',
+    readiness: 'pending',
+    missing_items: ['Signed & Stamped Doctor MAF Dossier'],
     bank: {
       bank_name: 'State Bank of India',
       account_holder: 'KRISHNA DENTAL CLINIC',
@@ -475,7 +475,7 @@ const VERIFIED_DOSSIERS: VerifiedDossier[] = [
       establishment_reg: '/docs/kyc/krishna_dental/Udyam_Registration_Certificate_krishna_dental.pdf'
     },
     is_signed: false,
-    status: '100% Complete • SBI Cheque & Udyam Verified'
+    status: 'Action Required • Awaiting Signed MAF from Dr. Saravan Kumar'
   }
 ];
 
@@ -560,6 +560,9 @@ export default function PineLabsUnderwritingPage() {
     }
   }, [clinicParam]);
 
+  // Strict Invariant: A clinic is 100% Ready for MID ONLY IF all KYC proofs are verified AND the MAF is physically/digitally signed
+  const isClinicFullyReady = (d: VerifiedDossier | null) => Boolean(d && (d.readiness || 'ready') === 'ready' && d.is_signed);
+
   const activeDossier = selectedDossierId
     ? allDossiers.find(
         (d) =>
@@ -569,6 +572,8 @@ export default function PineLabsUnderwritingPage() {
           d.clinic_name.toLowerCase().includes(selectedDossierId.toLowerCase())
       ) || null
     : null;
+
+  const isActiveReady = isClinicFullyReady(activeDossier);
 
   const handleSelectClinic = (id: string) => {
     setSelectedDossierId(id);
@@ -586,13 +591,14 @@ export default function PineLabsUnderwritingPage() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const readyCount = useMemo(() => allDossiers.filter((d) => (d.readiness || 'ready') === 'ready').length, [allDossiers]);
-  const pendingCount = useMemo(() => allDossiers.filter((d) => d.readiness === 'pending').length, [allDossiers]);
+  const readyCount = useMemo(() => allDossiers.filter((d) => isClinicFullyReady(d)).length, [allDossiers]);
+  const pendingCount = useMemo(() => allDossiers.filter((d) => !isClinicFullyReady(d)).length, [allDossiers]);
 
   const filteredDossiers = allDossiers.filter((d) => {
+    const isReady = isClinicFullyReady(d);
     // 1. Readiness Filter Tab
-    if (filterTab === 'ready' && d.readiness === 'pending') return false;
-    if (filterTab === 'pending' && (d.readiness || 'ready') !== 'pending') return false;
+    if (filterTab === 'ready' && !isReady) return false;
+    if (filterTab === 'pending' && isReady) return false;
 
     // 2. Search query filter
     const q = searchQuery.toLowerCase().trim();
@@ -895,7 +901,7 @@ export default function PineLabsUnderwritingPage() {
             {/* ── CLINIC CARDS LIST (FULL-WIDTH BALANCED FLOW) ── */}
             <div className="space-y-4">
               {filteredDossiers.map((dossier) => {
-                const isPending = dossier.readiness === 'pending';
+                const isPending = !isClinicFullyReady(dossier);
                 return (
                   <div
                     key={dossier.id}
@@ -1089,7 +1095,7 @@ export default function PineLabsUnderwritingPage() {
                 <span className="text-[11px] text-slate-500 font-bold hidden lg:inline whitespace-nowrap">Switch Clinic:</span>
                 {allDossiers.map((d) => {
                   const isSelected = d.id === activeDossier.id;
-                  const isReady = d.readiness !== 'pending';
+                  const isReady = isClinicFullyReady(d);
                   return (
                     <button
                       key={d.id}
@@ -1113,22 +1119,22 @@ export default function PineLabsUnderwritingPage() {
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-100">
                 <div className="flex items-center gap-3.5">
                   <div className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 border ${
-                    activeDossier.readiness === 'pending'
+                    !isActiveReady
                       ? 'bg-amber-50 border-amber-200 text-amber-600'
                       : 'bg-emerald-50 border-emerald-200 text-emerald-600'
                   }`}>
-                    {activeDossier.readiness === 'pending' ? <AlertCircle size={24} /> : <CheckCircle2 size={24} />}
+                    {!isActiveReady ? <AlertCircle size={24} /> : <CheckCircle2 size={24} />}
                   </div>
                   <div>
                     <div className="flex items-center gap-2">
                       <h2 className="text-xl font-black text-slate-900">{activeDossier.clinic_name}</h2>
                       <span className={`text-[10px] font-black uppercase px-2 py-0.5 rounded-md border flex items-center gap-1 ${
-                        activeDossier.readiness === 'pending'
+                        !isActiveReady
                           ? 'bg-amber-50 text-amber-800 border-amber-300'
                           : 'bg-emerald-50 text-emerald-800 border-emerald-300'
                       }`}>
-                        {activeDossier.readiness === 'pending' ? <AlertCircle size={11} className="text-amber-600" /> : <CheckCircle2 size={11} className="text-emerald-600" />}
-                        <span>{activeDossier.readiness === 'pending' ? 'Action Required' : '100% Ready for MID'}</span>
+                        {!isActiveReady ? <AlertCircle size={11} className="text-amber-600" /> : <CheckCircle2 size={11} className="text-emerald-600" />}
+                        <span>{!isActiveReady ? 'Action Required • MAF Signature or Docs Pending' : '100% Ready for MID • MAF Signed'}</span>
                       </span>
                     </div>
                     <p className="text-xs text-slate-500">

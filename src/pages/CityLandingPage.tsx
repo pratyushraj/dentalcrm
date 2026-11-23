@@ -146,6 +146,22 @@ export default function CityLandingPage() {
           text: `No. The eligibility pre-check is completely free and has no impact on the patient's credit score.`,
         },
       },
+      {
+        '@type': 'Question',
+        name: `Can patients in ${name} get IVF, LASIK, and elective surgeries on EMI?`,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: `Yes. In addition to dental treatments, Clinaza facilitates point-of-care patient financing in ${name} for IVF fertility cycles, Contoura LASIK vision correction, and FUE hair restoration surgeries from ₹30,000 to ₹5,00,000 with flexible 3 to 24 month EMIs through RBI-regulated banks and NBFCs.`,
+        },
+      },
+      {
+        '@type': 'Question',
+        name: `How can dental, IVF, and specialty clinics in ${name} partner with Clinaza?`,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: `Doctors and hospital directors in ${name} can partner with Clinaza by submitting basic clinic details at clinaza.in/clinic-onboarding. Clinaza equips clinic front desks with Pine Labs Plural point-of-care checkout, guaranteed T+1 current account settlement, and 0% clinic credit risk.`,
+        },
+      },
     ],
   };
 
@@ -156,6 +172,15 @@ export default function CityLandingPage() {
     { emoji: '✨', name: 'Smile Makeovers', range: '₹50,000 – ₹2,00,000', link: '/blog/dental-treatment-emi-cost-calculator-india' },
     { emoji: '🦴', name: 'Full Mouth Rehab', range: '₹1,50,000 – ₹3,00,000', link: '/blog/dental-loans-in-india-medical-financing' },
     { emoji: '🪥', name: 'Root Canal + Crown', range: '₹15,000 – ₹60,000', link: '/blog/root-canal-and-crown-cost-on-emi-india' },
+  ];
+
+  const specialtyProcedures = [
+    { emoji: '👶', name: 'IVF & Fertility Care', range: '₹1,20,000 – ₹3,50,000', link: '/ivf-treatment-emi' },
+    { emoji: '👁️', name: 'LASIK & Vision Correction', range: '₹40,000 – ₹1,10,000', link: '/lasik-eye-surgery-on-emi' },
+    { emoji: '💇', name: 'Hair Restoration (FUE)', range: '₹45,000 – ₹1,20,000', link: '/hair-transplant-on-emi' },
+    { emoji: '🦻', name: 'Digital Hearing Aids', range: '₹35,000 – ₹1,60,000', link: '/hearing-aids-emi' },
+    { emoji: '✨', name: 'Aesthetics & Skin Care', range: '₹30,000 – ₹1,50,000', link: '/aesthetic-treatments-on-emi' },
+    { emoji: '🩺', name: 'Gynecomastia Surgery', range: '₹50,000 – ₹1,80,000', link: '/gynecomastia-surgery-emi' },
   ];
 
   return (
@@ -301,6 +326,31 @@ export default function CityLandingPage() {
           <p className="text-[10px] text-slate-400 text-center">
             *Indicative cost ranges only. Actual treatment cost depends on clinic assessment. Final loan approval subject to lender eligibility.
           </p>
+        </section>
+
+        {/* Multi-Specialty Healthcare & Elective Surgeries on EMI in City */}
+        <section className="py-10 px-4 sm:px-6 max-w-4xl mx-auto space-y-6">
+          <div className="text-center space-y-2">
+            <span className="text-[10px] font-black text-[#0867E8] uppercase tracking-widest">SPECIALTY HEALTHCARE &amp; ELECTIVE SURGERY IN {name.toUpperCase()}</span>
+            <h2 className="text-2xl sm:text-3xl font-black text-[#0B2450]">IVF, LASIK, Aesthetics &amp; Day-Care on EMI</h2>
+            <p className="text-xs sm:text-sm text-slate-600 max-w-xl mx-auto">
+              Clinaza also connects hospitals and specialty surgical centres in <strong>{name}</strong> with point-of-care patient financing for high-ticket elective healthcare not covered by standard insurance.
+            </p>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+            {specialtyProcedures.map((sp, idx) => (
+              <Link 
+                key={idx} 
+                to={sp.link}
+                className="bg-white border border-slate-200/90 hover:border-blue-300 p-4 rounded-2xl text-center space-y-1.5 shadow-2xs hover:shadow-md transition-all group block"
+              >
+                <span className="text-2xl block group-hover:scale-110 transition-transform">{sp.emoji}</span>
+                <h3 className="text-xs font-black text-[#0B2450] group-hover:text-[#0867E8] transition-colors leading-tight">{sp.name}</h3>
+                <p className="text-[10px] text-slate-500 font-medium">{sp.range}</p>
+                <span className="text-[9px] font-bold text-[#0867E8] block pt-1">Explore Healthcare EMI →</span>
+              </Link>
+            ))}
+          </div>
         </section>
 
         {city === 'patna' && (

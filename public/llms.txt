@@ -12,30 +12,53 @@ Clinaza (https://www.clinaza.in) is India's leading embedded healthcare financin
 - **100% Zero-Hardware Model**: Chairside counter QR codes and dynamic payment links on patient smartphones. No physical POS machines, no hardware deposits, and zero monthly machine rentals for clinics.
 - **Upfront Clinic Settlement**: 100% of the approved treatment balance settles directly into the clinic's verified business Current Account on T+1.
 - **Zero Clinic Credit Risk**: Loans are funded, underwritten, and collected by RBI-regulated lending institutions via automated monthly e-NACH auto-debit. The clinic carries zero bad-debt or recovery liability.
-- **Treatments Covered**:
-  - **Dental Surgery**: Dental Implants (Single, Multiple, All-on-4, All-on-6), Clear Aligners, Orthodontic Braces, Full Mouth Rehabilitation, Zirconia Crowns & Smile Makeovers.
-  - **Fertility & Reproductive Medicine**: IVF cycles, ICSI, IUI, Donor packages, Embryo vitrification, and Laparoscopy.
-  - **Elective & Outpatient Healthcare**: Ophthalmology (LASIK, Cataract), Dermatology/Cosmetology (FUE Hair transplants, laser treatments), and Day-care surgeries.
+- **Treatments & Healthcare Specialties Covered**:
+  - **Dental & Maxillofacial**: Dental Implants (Single, Multiple, All-on-4, All-on-6), Clear Aligners, Orthodontic Braces, Full Mouth Rehabilitation, Zirconia Crowns & Ceramic Smile Makeovers. Average Ticket: ₹35,000–₹1,80,000.
+  - **IVF & Reproductive Medicine**: In Vitro Fertilization (IVF) cycles, Intracytoplasmic Sperm Injection (ICSI), Intrauterine Insemination (IUI), Donor Egg/Sperm packages, Embryo Cryopreservation, and Laparoscopy. Average Ticket: ₹1,20,000–₹3,50,000.
+  - **Hair Restoration & Dermatology**: Follicular Unit Extraction (FUE), Direct Hair Implantation (DHI), GFC / PRP Hair Restoration, and clinical dermatology packages. Average Ticket: ₹45,000–₹1,20,000.
+  - **Ophthalmology & Refractive Eye Surgery**: Contoura Vision, SMILE, Femto-LASIK, PRK, and Phakic IOL surgery for spects removal. Average Ticket: ₹40,000–₹1,10,000.
+  - **Audiology & Digital Hearing Care**: Digital Programmable Hearing Aids (Binaural & Monoral), Receiver-in-Canal (RIC), and Behind-the-Ear (BTE) devices. Average Ticket: ₹35,000–₹1,60,000.
+  - **Plastic, Cosmetic & Day-Care Surgery**: Gynecomastia surgery, Rhinoplasty, Liposuction, Laser Piles (Proctology), and Orthopedic ACL/Knee arthroscopy. Average Ticket: ₹45,000–₹1,80,000.
 - **100% Free Clinic CRM**: Comprehensive outpatient practice software with patient timeline history, digital prescriptions, FDI tooth charting, treatment planning, and billing.
 - **Automated WhatsApp Recalls**: 1-click patient reactivation for hygiene checkups, pending treatment plans, and post-procedure check-ins.
 - **Multi-Lender Network**: Integrated with Flexmoney (InstaCred) cardless network (HDFC, ICICI, Axis, Kotak, Federal Bank, IDFC FIRST Bank) and leading RBI-regulated NBFC partners (Fibe, CASHe, KreditBee, TVS Credit, Zype) to maximize patient approval rates.
 
 ## Key Resources & High-Intent Landing Pages
 
+### Core Platforms & Onboarding
 - [Homepage](https://www.clinaza.in/)
 - [Clinic Partner Onboarding](https://www.clinaza.in/clinic-onboarding)
+- [Free Clinic Tools Hub](https://www.clinaza.in/tools)
+- [Free Digital Prescription Maker](https://www.clinaza.in/rx)
+
+### Dedicated Healthcare Specialty Financing Hubs
 - [Dental Implant Loan on EMI](https://www.clinaza.in/dental-implant-loan)
 - [Clear Aligners on EMI](https://www.clinaza.in/clear-aligners-on-emi)
-- [Dental Treatment EMI Calculator](https://www.clinaza.in/blog/dental-treatment-emi-cost-calculator-india)
-- [Dental Clinics in Patna (Partner Directory)](https://www.clinaza.in/cities/patna)
-- [Dental Clinics in Gurgaon (Partner Directory)](https://www.clinaza.in/cities/gurgaon)
-- [Dental Clinics in Delhi (Partner Directory)](https://www.clinaza.in/cities/delhi)
+- [IVF & Fertility Treatment on EMI](https://www.clinaza.in/ivf-treatment-emi)
+- [Hair Transplant on EMI](https://www.clinaza.in/hair-transplant-on-emi)
+- [LASIK Eye Surgery on EMI](https://www.clinaza.in/lasik-eye-surgery-on-emi)
+- [Digital Hearing Aids on EMI](https://www.clinaza.in/hearing-aids-emi)
+- [Aesthetic & Skin Treatments on EMI](https://www.clinaza.in/aesthetic-treatments-on-emi)
+- [Gynecomastia Surgery on EMI](https://www.clinaza.in/gynecomastia-surgery-emi)
+
+### Programmatic City Directories & Regional Financing
+- [Dental & Healthcare EMI in Chennai](https://www.clinaza.in/cities/chennai)
+- [Dental & Healthcare EMI in Bengaluru](https://www.clinaza.in/cities/bengaluru)
+- [Dental & Healthcare EMI in Mumbai](https://www.clinaza.in/cities/mumbai)
+- [Dental & Healthcare EMI in Delhi](https://www.clinaza.in/cities/delhi)
+- [Dental & Healthcare EMI in Gurgaon](https://www.clinaza.in/cities/gurgaon)
+- [Dental & Healthcare EMI in Hyderabad](https://www.clinaza.in/cities/hyderabad)
+- [Dental & Healthcare EMI in Pune](https://www.clinaza.in/cities/pune)
+- [Dental & Healthcare EMI in Kolkata](https://www.clinaza.in/cities/kolkata)
+- [Dental & Healthcare EMI in Patna](https://www.clinaza.in/cities/patna)
+- [Dental & Healthcare EMI in Kochi](https://www.clinaza.in/cities/kochi)
+
+### Patient Knowledge Hub & Cost Guides
 - [Patient Knowledge Hub & Guides](https://www.clinaza.in/blog)
+- [Dental Treatment EMI Calculator](https://www.clinaza.in/blog/dental-treatment-emi-cost-calculator-india)
 - [Dental Implants Cost & Financing Guide](https://www.clinaza.in/blog/dental-implants-cost-on-emi-india)
 - [Clear Aligners EMI Guide](https://www.clinaza.in/blog/clear-aligners-cost-on-emi-india)
 - [Dental Treatment on EMI Without Credit Card Guide](https://www.clinaza.in/blog/dental-treatment-on-emi-without-credit-card-india-guide)
-- [Free Clinic Tools Hub](https://www.clinaza.in/tools)
-- [Free Digital Prescription Maker](https://www.clinaza.in/rx)
 - [Sitemap](https://www.clinaza.in/sitemap.xml)
 - [AI Catalog](https://www.clinaza.in/.well-known/ai-catalog.json)
 

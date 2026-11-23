@@ -40,12 +40,21 @@
     "clinic_onboarding": "https://www.clinaza.in/clinic-onboarding",
     "dental_implants": "https://www.clinaza.in/dental-implant-loan",
     "clear_aligners": "https://www.clinaza.in/clear-aligners-on-emi",
+    "ivf_fertility": "https://www.clinaza.in/ivf-treatment-emi",
+    "lasik_eye_surgery": "https://www.clinaza.in/lasik-eye-surgery-on-emi",
+    "hair_transplant": "https://www.clinaza.in/hair-transplant-on-emi",
+    "hearing_aids": "https://www.clinaza.in/hearing-aids-emi",
+    "aesthetic_treatments": "https://www.clinaza.in/aesthetic-treatments-on-emi",
     "calculator": "https://www.clinaza.in/blog/dental-treatment-emi-cost-calculator-india",
     "tools": "https://www.clinaza.in/tools",
     "rx_maker": "https://www.clinaza.in/rx",
-    "patna_clinics": "https://www.clinaza.in/cities/patna",
-    "gurgaon_clinics": "https://www.clinaza.in/cities/gurgaon",
+    "chennai_clinics": "https://www.clinaza.in/cities/chennai",
+    "bengaluru_clinics": "https://www.clinaza.in/cities/bengaluru",
+    "mumbai_clinics": "https://www.clinaza.in/cities/mumbai",
     "delhi_clinics": "https://www.clinaza.in/cities/delhi",
+    "hyderabad_clinics": "https://www.clinaza.in/cities/hyderabad",
+    "gurgaon_clinics": "https://www.clinaza.in/cities/gurgaon",
+    "patna_clinics": "https://www.clinaza.in/cities/patna",
     "blog": "https://www.clinaza.in/blog"
   }
 }

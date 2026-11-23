@@ -55,6 +55,36 @@ export default function HairTransplantEmiPage() {
         "name": "Dermatology"
       },
       "description": "Hair follicle graft harvesting and micro-implantation for male and female pattern baldness and hairline restoration."
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Can I get a hair transplant on EMI in India?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Patients can finance FUE, DHI, and robotic hair restoration procedures from ₹30,000 to ₹2,50,000 with flexible monthly EMIs starting from ~11.5% p.a. through RBI-regulated lenders with 2-minute instant approval."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I finance a hair transplant without a credit card in India?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Cardless aesthetic EMIs are available via Aadhaar and PAN OTP across leading RBI-regulated NBFC partners and bank cardless networks with zero physical paperwork."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How can hair restoration and dermatology clinics partner with Clinaza?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Hair transplant surgeons and dermatologists can onboard at clinaza.in/clinic-onboarding to equip front desks with Pine Labs Plural point-of-care patient checkout, guaranteed T+1 current account settlement, and 0% clinic credit risk."
+          }
+        }
+      ]
     }
   ];
 

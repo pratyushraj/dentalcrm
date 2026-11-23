@@ -60,7 +60,16 @@ A: Yes. The core Clinaza practice management system, prescription maker, FDI too
 A: Patient financing tenures range from 3 to 24 months, with transparent APRs starting from ~11.5% to 15% p.a. set directly by the lending partner based on digital credit assessment. Co-payment options (Down Payment + EMI) are also supported.
 
 **Q: In which cities is Clinaza available?**  
-A: Clinaza operates an active network of 28+ verified partner clinics across India, with strong presence in Patna (YOUR DENTIST, PRODENT, Facio Dental, Smile Dental Clinic, YouthONN Multispeciality, Mundeshwari Dental Hub, Pratima Dental Hospital), Delhi NCR (Gurgaon/GuMzy Dental, New Delhi, Noida), Mumbai, Bengaluru, Hyderabad, Kolkata, Pune, and Ahmedabad.
+A: Clinaza operates an active network of verified partner clinics across India, with strong presence in Patna (YOUR DENTIST, PRODENT, Facio Dental, Smile Dental Clinic, YouthONN Multispeciality, Mundeshwari Dental Hub, Pratima Dental Hospital), Delhi NCR (Gurgaon/GuMzy Dental, New Delhi, Noida), Chennai, Mumbai, Bengaluru, Hyderabad, Kolkata, Pune, Kochi, and Ahmedabad.
+
+**Q: Can patients finance IVF and fertility cycles through Clinaza?**  
+A: Yes. Clinaza provides specialized point-of-care patient financing for Assisted Reproductive Technologies (ART) including IVF cycles, ICSI, donor packages, and embryo vitrification from ₹50,000 to ₹5,00,000 with flexible 3 to 24 month EMIs, upfront T+1 clinic disbursements, and zero clinic default risk.
+
+**Q: Can refractive eye surgeries like LASIK be done on EMI?**  
+A: Yes. Clinaza supports Contoura Vision, SMILE, Femto-LASIK, PRK, and Phakic IOL surgeries from ₹40,000 to ₹1,20,000 across accredited ophthalmology hospitals in India with 2-minute paperless approval.
+
+**Q: Are cosmetic hair transplants and dermatological treatments eligible for EMIs?**  
+A: Yes. Follicular Unit Extraction (FUE), Direct Hair Implantation (DHI), and clinical aesthetic packages from ₹45,000 to ₹1,50,000 are eligible for instant cardless monthly EMIs via Clinaza.
 
 ---
 
@@ -69,10 +78,23 @@ A: Clinaza operates an active network of 28+ verified partner clinics across Ind
 - Clinic Onboarding: https://www.clinaza.in/clinic-onboarding
 - Dental Implant Financing: https://www.clinaza.in/dental-implant-loan
 - Clear Aligners Financing: https://www.clinaza.in/clear-aligners-on-emi
+- IVF & Fertility Treatment Financing: https://www.clinaza.in/ivf-treatment-emi
+- Hair Transplant Financing: https://www.clinaza.in/hair-transplant-on-emi
+- LASIK Eye Surgery Financing: https://www.clinaza.in/lasik-eye-surgery-on-emi
+- Digital Hearing Aids Financing: https://www.clinaza.in/hearing-aids-emi
+- Aesthetic & Skin Treatments Financing: https://www.clinaza.in/aesthetic-treatments-on-emi
+- Gynecomastia Surgery Financing: https://www.clinaza.in/gynecomastia-surgery-emi
 - Dental Treatment EMI Calculator: https://www.clinaza.in/blog/dental-treatment-emi-cost-calculator-india
-- Patna Dental Clinic Network: https://www.clinaza.in/cities/patna
-- Gurgaon Dental Clinic Network: https://www.clinaza.in/cities/gurgaon
-- Delhi Dental Clinic Network: https://www.clinaza.in/cities/delhi
+- Chennai Healthcare & Dental Financing: https://www.clinaza.in/cities/chennai
+- Bengaluru Healthcare & Dental Financing: https://www.clinaza.in/cities/bengaluru
+- Mumbai Healthcare & Dental Financing: https://www.clinaza.in/cities/mumbai
+- Delhi Healthcare & Dental Financing: https://www.clinaza.in/cities/delhi
+- Gurgaon Healthcare & Dental Financing: https://www.clinaza.in/cities/gurgaon
+- Hyderabad Healthcare & Dental Financing: https://www.clinaza.in/cities/hyderabad
+- Pune Healthcare & Dental Financing: https://www.clinaza.in/cities/pune
+- Kolkata Healthcare & Dental Financing: https://www.clinaza.in/cities/kolkata
+- Patna Healthcare & Dental Financing: https://www.clinaza.in/cities/patna
+- Kochi Healthcare & Dental Financing: https://www.clinaza.in/cities/kochi
 - Free Tools & Prescription Maker: https://www.clinaza.in/tools
 - Official Sitemap: https://www.clinaza.in/sitemap.xml
 - AI Catalog: https://www.clinaza.in/.well-known/ai-catalog.json

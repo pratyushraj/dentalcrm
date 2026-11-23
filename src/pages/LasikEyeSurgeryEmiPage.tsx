@@ -55,6 +55,36 @@ export default function LasikEyeSurgeryEmiPage() {
         "name": "Ophthalmology"
       },
       "description": "Refractive corneal laser eye surgery for vision correction of myopia, hyperopia, and astigmatism using Femtosecond and Excimer laser platforms."
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Can I get LASIK eye surgery on EMI in India?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Patients can finance Contoura Vision, SMILE, and Femto-LASIK eye surgeries from ₹30,000 to ₹2,00,000 with flexible 3 to 24 month EMIs starting from ~11.5% p.a. through RBI-regulated lenders with 2-minute instant approval."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I get a LASIK loan without a credit card (Cardless EMI)?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Cardless medical EMIs for vision correction are available across leading RBI-regulated NBFC partners and bank cardless networks using just your Aadhaar and PAN OTP."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do eye hospitals and refractive centres partner with Clinaza?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ophthalmologists and eye hospitals can onboard at clinaza.in/clinic-onboarding to equip reception counters with Pine Labs Plural point-of-care financing, guaranteed T+1 current account payouts, and 0% hospital credit risk."
+          }
+        }
+      ]
     }
   ];
 

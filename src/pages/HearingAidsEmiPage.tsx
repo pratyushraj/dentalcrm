@@ -55,6 +55,36 @@ export default function HearingAidsEmiPage() {
         "name": "Otolaryngology"
       },
       "description": "Pure tone audiometry testing, digital hearing aid programming, and prescription fitting for sensorineural and conductive hearing impairment."
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Can I buy digital hearing aids on EMI in India?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Patients and families can finance premium digital hearing aids (Phonak, Oticon, Signia, Widex, Resound) from ₹25,000 to ₹3,50,000 with flexible monthly EMIs starting from ~11.5% p.a. through RBI-regulated lenders with 2-minute instant approval."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can senior citizens get hearing aids on EMI without a credit card?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Cardless hearing healthcare EMIs are available for patients and family co-applicants using basic Aadhaar and PAN OTP verification with zero paperwork."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How can audiology and hearing care clinics partner with Clinaza?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Audiologists and ENT clinics can onboard at clinaza.in/clinic-onboarding to equip front desks with Pine Labs Plural point-of-care patient checkout, guaranteed T+1 current account settlement, and 0% clinic credit risk."
+          }
+        }
+      ]
     }
   ];
 

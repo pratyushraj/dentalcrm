@@ -55,6 +55,36 @@ export default function IvfTreatmentEmiPage() {
         "name": "Obstetrics & Gynecology"
       },
       "description": "Assisted reproductive technology (ART) procedure including ovarian stimulation, egg retrieval, fertilization, and embryo transfer."
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Can I pay for IVF treatment in monthly EMIs in India?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Clinaza enables couples to finance IVF cycles, ICSI, and fertility treatments from ₹50,000 to ₹5,00,000 with flexible 3 to 24 month EMIs starting from ~11.5% p.a. through RBI-regulated banks and NBFCs with instant 2-minute paperless digital approval."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can couples get an IVF loan without a credit card in India?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Cardless fertility EMIs are available via Aadhaar and PAN OTP verification across leading RBI-regulated NBFC partners. No credit card or physical loan paperwork is required."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does an IVF centre partner with Clinaza for patient financing?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Fertility centres and ART hospitals can onboard at clinaza.in/clinic-onboarding. Clinaza equips your front desk with Pine Labs Plural point-of-care checkout, guaranteed T+1 settlement to the hospital current account, and 0% hospital credit risk."
+          }
+        }
+      ]
     }
   ];
 

@@ -444,7 +444,7 @@ export default function PineLabsUnderwritingPage() {
           </form>
 
           <p className="text-[11px] text-center text-slate-400">
-            Institutional Aggregator MID: <span className="font-mono text-slate-700 font-bold">111077</span> • ₹0 Setup / ₹0 AMC
+            Institutional Aggregator MID: <span className="font-mono text-slate-700 font-bold">111077</span>
           </p>
         </div>
       </div>

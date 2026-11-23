@@ -225,7 +225,7 @@ def fill_maf_excel(data: dict, out_xlsx: str):
         ws_maf["B24"] = data["phone"].replace("+91", "").replace(" ", "")
         ws_maf["B25"] = data["email"]
         ws_maf["B28"] = "Clinic Reception Desk"
-        ws_maf["B29"] = data["phone"].replace("+91", "").replace(" ", "")
+        ws_maf["B29"] = data.get("alt_phone", data["phone"]).replace("+91", "").replace(" ", "")
         ws_maf["B30"] = data.get("alt_email", data["email"])
 
         # Settlements Reports (Columns D-E)
@@ -238,7 +238,7 @@ def fill_maf_excel(data: dict, out_xlsx: str):
         ws_maf["D28"] = "Alternate Name -"
         ws_maf["E28"] = "Clinic Accounts Desk"
         ws_maf["D29"] = "Alternate Contact no. -"
-        ws_maf["E29"] = data["phone"].replace("+91", "").replace(" ", "")
+        ws_maf["E29"] = data.get("alt_phone", data["phone"]).replace("+91", "").replace(" ", "")
         ws_maf["D30"] = "Alternate Email ID -"
         ws_maf["E30"] = data.get("alt_email", data["email"])
         ws_maf["B33"] = "https://clinaza.in"
@@ -306,7 +306,9 @@ def main():
     parser.add_argument("--dob", help="Doctor DOB (DD/MM/YYYY)", default="01/01/1990")
     parser.add_argument("--aadhaar", help="Doctor Aadhaar Number")
     parser.add_argument("--phone", help="Doctor Mobile Number", default="+91 99999 99999")
+    parser.add_argument("--alt-phone", help="Alternate / Clinic Mobile Number", default=None)
     parser.add_argument("--email", help="Doctor Email", default="contact@clinaza.in")
+    parser.add_argument("--alt-email", help="Alternate Email", default=None)
     parser.add_argument("--city", help="Clinic City", default="India")
     parser.add_argument("--state", help="Clinic State", default="India")
     parser.add_argument("--pincode", help="Pincode", default="500001")
@@ -337,7 +339,9 @@ def main():
         'pan': args.pan or "ABCDE1234F",
         'aadhaar': args.aadhaar or "0000 0000 0000",
         'phone': args.phone,
+        'alt_phone': args.alt_phone or args.phone,
         'email': args.email,
+        'alt_email': args.alt_email or args.email,
         'city': args.city,
         'state': args.state,
         'pincode': args.pincode,

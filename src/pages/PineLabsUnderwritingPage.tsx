@@ -551,8 +551,8 @@ export default function PineLabsUnderwritingPage() {
     toast.info('Underwriting Desk locked successfully');
   };
 
-  // Clinic list state - initialized with bundled clinics and refreshed from Supabase
-  const [clinics, setClinics] = useState<ClinicRecord[]>(() => (onboardedClinics as any) || []);
+  // Clinic list state - initialized with verified clinics and refreshed from Supabase
+  const [clinics, setClinics] = useState<ClinicRecord[]>([]);
   const [loading, setLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [filterTab, setFilterTab] = useState<'all' | 'ready' | 'pending'>('all');
@@ -599,13 +599,14 @@ export default function PineLabsUnderwritingPage() {
           (cleanId === 'c1b4ab14-e0a4-4a60-9a86-ebedc9616675' && d.id === 'hear-one')
       );
       
-      if (!alreadyExists && c.clinic_name) {
+      const hasKyc = c.has_cancelled_cheque === 'Yes' || (c.business_proof_type && c.business_proof_type.toLowerCase().includes('kyc'));
+      const isSigned = Boolean(c.business_proof_type && c.business_proof_type.toLowerCase().includes('signed'));
+      
+      // Only include dynamic onboarding submissions that have actually completed KYC & cheque upload
+      if (!alreadyExists && c.clinic_name && (hasKyc || isSigned) && c.has_cancelled_cheque === 'Yes') {
         const folderName = c.id;
         const cleanClinic = c.clinic_name.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
         const storageBase = `https://sqqocqujxlgoxbcnfbfb.supabase.co/storage/v1/object/public/clinic-documents/${folderName}`;
-        
-        const hasKyc = c.has_cancelled_cheque === 'Yes' || (c.business_proof_type && c.business_proof_type.toLowerCase().includes('kyc'));
-        const isSigned = Boolean(c.business_proof_type && c.business_proof_type.toLowerCase().includes('signed'));
         
         list.push({
           id: c.id,

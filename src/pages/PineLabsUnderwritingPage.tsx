@@ -477,6 +477,7 @@ export default function PineLabsUnderwritingPage() {
           <div className="hidden sm:flex items-center gap-2 bg-slate-50 px-2.5 h-9 rounded-xl shadow-2xs border border-slate-200">
             <span className="text-[9.5px] font-black text-slate-500 tracking-wider">GATEWAY:</span>
             <img src="/assets/plural_by_pinelabs_transparent.png" alt="Plural by Pine Labs" className="h-3.5 w-auto object-contain" />
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse ml-0.5" />
           </div>
         </div>
 
@@ -522,7 +523,7 @@ export default function PineLabsUnderwritingPage() {
               <div className="min-w-0">
                 <div className="flex items-center gap-2.5 flex-wrap">
                   <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse shrink-0" />
-                  <h2 className="text-lg sm:text-xl font-black text-slate-900 tracking-tight whitespace-nowrap">
+                  <h2 className="text-lg sm:text-xl font-black text-[#0B2450] tracking-tight whitespace-nowrap">
                     Applications Ready for Underwriting ({filteredDossiers.length})
                   </h2>
                   <span className="text-[10px] font-black uppercase px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-700 border border-emerald-300 shrink-0">
@@ -575,6 +576,69 @@ export default function PineLabsUnderwritingPage() {
                     </button>
                   )}
                 </div>
+              </div>
+            </div>
+
+            {/* ── UNDERWRITING EXECUTIVE KPI SUMMARY (LANDING PAGE STATSBAR PATTERN) ── */}
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-slate-200/90 rounded-2xl overflow-hidden border border-slate-200/90 shadow-[0_2px_12px_rgba(15,23,42,0.03)]">
+              {/* Tile 1: 100% Ready for MID */}
+              <div className="bg-white p-3.5 sm:p-4 text-left transition-colors hover:bg-slate-50/50">
+                <div className="flex items-center justify-between">
+                  <span className="text-[10px] font-extrabold uppercase tracking-wider text-slate-500">Ready for MID</span>
+                  <span className="flex items-center justify-center w-6 h-6 rounded-lg bg-emerald-50 text-emerald-600 border border-emerald-200">
+                    <CheckCircle2 size={13} />
+                  </span>
+                </div>
+                <div className="mt-1.5 flex items-baseline gap-1.5">
+                  <span className="text-xl sm:text-2xl font-black text-emerald-700 tabular-nums">{readyCount}</span>
+                  <span className="text-xs font-bold text-slate-400">/ {allDossiers.length} Clinics</span>
+                </div>
+                <p className="text-[11px] text-slate-500 mt-0.5 font-medium leading-tight">Doctor Signed Dossiers Complete</p>
+              </div>
+
+              {/* Tile 2: Action Required / Pending Items */}
+              <div className="bg-white p-3.5 sm:p-4 text-left transition-colors hover:bg-slate-50/50">
+                <div className="flex items-center justify-between">
+                  <span className="text-[10px] font-extrabold uppercase tracking-wider text-slate-500">Pending Follow-Up</span>
+                  <span className="flex items-center justify-center w-6 h-6 rounded-lg bg-amber-50 text-amber-700 border border-amber-200">
+                    <AlertCircle size={13} />
+                  </span>
+                </div>
+                <div className="mt-1.5 flex items-baseline gap-1.5">
+                  <span className="text-xl sm:text-2xl font-black text-amber-700 tabular-nums">{pendingCount}</span>
+                  <span className="text-xs font-bold text-slate-400">Clinics</span>
+                </div>
+                <p className="text-[11px] text-slate-500 mt-0.5 font-medium leading-tight">Awaiting Cheque / Signature</p>
+              </div>
+
+              {/* Tile 3: Guaranteed T+1 Settlements */}
+              <div className="bg-white p-3.5 sm:p-4 text-left transition-colors hover:bg-slate-50/50">
+                <div className="flex items-center justify-between">
+                  <span className="text-[10px] font-extrabold uppercase tracking-wider text-slate-500">Settlement Cycle</span>
+                  <span className="flex items-center justify-center w-6 h-6 rounded-lg bg-blue-50 text-[#0867E8] border border-blue-200">
+                    <Landmark size={13} />
+                  </span>
+                </div>
+                <div className="mt-1.5 flex items-baseline gap-1.5">
+                  <span className="text-xl sm:text-2xl font-black text-[#0B2450]">T+1</span>
+                  <span className="text-xs font-bold text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200">Guaranteed</span>
+                </div>
+                <p className="text-[11px] text-slate-500 mt-0.5 font-medium leading-tight">Direct Current Account RTGS/NEFT</p>
+              </div>
+
+              {/* Tile 4: Nodal Infrastructure */}
+              <div className="bg-white p-3.5 sm:p-4 text-left transition-colors hover:bg-slate-50/50">
+                <div className="flex items-center justify-between">
+                  <span className="text-[10px] font-extrabold uppercase tracking-wider text-slate-500">Nodal Gateway</span>
+                  <span className="flex items-center justify-center w-6 h-6 rounded-lg bg-slate-100 text-slate-700 border border-slate-200">
+                    <ShieldCheck size={13} />
+                  </span>
+                </div>
+                <div className="mt-1.5 flex items-baseline gap-1.5">
+                  <span className="text-base sm:text-lg font-black text-[#0B2450] tracking-tight">Plural</span>
+                  <span className="text-[10.5px] font-bold text-slate-500">by Pine Labs</span>
+                </div>
+                <p className="text-[11px] text-slate-500 mt-0.5 font-medium leading-tight">Institutional Sub-Merchant Rail</p>
               </div>
             </div>
 
@@ -690,7 +754,7 @@ export default function PineLabsUnderwritingPage() {
                   <div
                     key={dossier.id}
                     onClick={() => handleSelectClinic(dossier.id)}
-                    className="group bg-white hover:bg-slate-50/50 border border-slate-200 hover:border-[#0867E8]/60 rounded-2xl p-4 sm:p-6 transition-all shadow-xs hover:shadow-md cursor-pointer space-y-4"
+                    className="group bg-white hover:bg-slate-50/60 border border-slate-200/90 hover:border-[#0867E8]/50 rounded-2xl p-4 sm:p-6 transition-all duration-300 shadow-[0_4px_20px_rgba(15,23,42,0.03)] hover:shadow-[0_8px_25px_rgba(15,23,42,0.07)] cursor-pointer space-y-4"
                   >
                     {/* Clinic Identity & Header */}
                     <div className="flex items-start gap-3.5">
@@ -703,7 +767,7 @@ export default function PineLabsUnderwritingPage() {
                       </div>
                       <div className="min-w-0 flex-1">
                         <div className="flex flex-wrap items-center gap-2">
-                          <h3 className="text-base sm:text-lg font-black text-slate-900 group-hover:text-[#0867E8] transition-colors">
+                          <h3 className="text-base sm:text-lg font-black text-[#0B2450] group-hover:text-[#0867E8] transition-colors">
                             {dossier.clinic_name}
                           </h3>
                           <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 border border-slate-200 shrink-0">
@@ -839,7 +903,7 @@ export default function PineLabsUnderwritingPage() {
                           e.stopPropagation();
                           handleSelectClinic(dossier.id);
                         }}
-                        className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-bold rounded-xl shadow-md shadow-blue-500/20 transition-all cursor-pointer whitespace-nowrap group-hover:scale-102"
+                        className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-[#0867E8] hover:bg-[#0756C7] active:scale-[0.98] text-white text-xs font-bold rounded-xl shadow-[0_4px_16px_rgba(8,103,232,0.22)] hover:shadow-[0_6px_20px_rgba(8,103,232,0.32)] transition-all cursor-pointer whitespace-nowrap group-hover:scale-[1.01]"
                       >
                         <span>Review Documents &amp; Dossier</span>
                         <ChevronRight size={15} className="group-hover:translate-x-0.5 transition-transform" />
@@ -896,7 +960,7 @@ export default function PineLabsUnderwritingPage() {
             </div>
 
             {/* Focused Clinic Underwriting Dossier Card */}
-            <div className="rounded-3xl bg-white border border-slate-200 p-6 sm:p-7 shadow-sm space-y-6">
+            <div className="rounded-3xl bg-white border border-slate-200/90 p-6 sm:p-7 shadow-[0_4px_25px_rgba(15,23,42,0.04)] space-y-6">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-100">
                 <div className="flex items-center gap-3.5">
                   <div className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 border ${
@@ -908,7 +972,7 @@ export default function PineLabsUnderwritingPage() {
                   </div>
                   <div>
                     <div className="flex items-center gap-2">
-                      <h2 className="text-xl font-black text-slate-900">{activeDossier.clinic_name}</h2>
+                      <h2 className="text-xl font-black text-[#0B2450]">{activeDossier.clinic_name}</h2>
                       <span className={`text-[10px] font-black uppercase px-2 py-0.5 rounded-md border flex items-center gap-1 ${
                         !isActiveReady
                           ? 'bg-amber-50 text-amber-800 border-amber-300'
@@ -1008,7 +1072,7 @@ export default function PineLabsUnderwritingPage() {
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
                 {/* Col 1: Entity & Doctor Details */}
                 <div className="bg-slate-50/80 rounded-2xl p-4 border border-slate-200 space-y-3">
-                  <h3 className="text-xs font-extrabold uppercase tracking-wider text-slate-700 flex items-center gap-2">
+                  <h3 className="text-xs font-extrabold uppercase tracking-wider text-[#0B2450] flex items-center gap-2">
                     <UserCheck size={14} className="text-[#0867E8]" />
                     <span>Doctor &amp; Entity Identity</span>
                   </h3>
@@ -1056,7 +1120,7 @@ export default function PineLabsUnderwritingPage() {
 
                 {/* Col 2: Bank Settlement Details (from Cancelled Cheque) */}
                 <div className="bg-slate-50/80 rounded-2xl p-4 border border-slate-200 space-y-3">
-                  <h3 className="text-xs font-extrabold uppercase tracking-wider text-slate-700 flex items-center gap-2">
+                  <h3 className="text-xs font-extrabold uppercase tracking-wider text-[#0B2450] flex items-center gap-2">
                     <Landmark size={14} className="text-emerald-600" />
                     <span>Settlement Bank Account</span>
                   </h3>
@@ -1107,7 +1171,7 @@ export default function PineLabsUnderwritingPage() {
 
                 {/* Col 3: Direct KYC Document Access */}
                 <div className="bg-slate-50/80 rounded-2xl p-4 border border-slate-200 space-y-2.5">
-                  <h3 className="text-xs font-extrabold uppercase tracking-wider text-slate-700 flex items-center gap-2">
+                  <h3 className="text-xs font-extrabold uppercase tracking-wider text-[#0B2450] flex items-center gap-2">
                     <FileText size={14} className="text-amber-600" />
                     <span>Verified KYC Documents</span>
                   </h3>

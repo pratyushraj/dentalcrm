@@ -3,8 +3,24 @@ name: SEO Drift & Integrity Monitor
 on:
   push:
     branches: [ main ]
+    paths:
+      - 'src/components/seo/**'
+      - 'src/data/blogs*'
+      - 'src/pages/CityLandingPage.tsx'
+      - 'src/pages/FreeToolsHub.tsx'
+      - 'scripts/prerender.mjs'
+      - 'scripts/seo-drift.mjs'
+      - '.github/workflows/seo-drift.yml'
   pull_request:
     branches: [ main ]
+    paths:
+      - 'src/components/seo/**'
+      - 'src/data/blogs*'
+      - 'src/pages/CityLandingPage.tsx'
+      - 'src/pages/FreeToolsHub.tsx'
+      - 'scripts/prerender.mjs'
+      - 'scripts/seo-drift.mjs'
+      - '.github/workflows/seo-drift.yml'
   workflow_dispatch:
 
 jobs:

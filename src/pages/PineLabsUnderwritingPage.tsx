@@ -545,6 +545,16 @@ export default function PineLabsUnderwritingPage() {
                   <span>Download Master ZIP (All Clinics)</span>
                 </a>
 
+                <button
+                  onClick={() => fetchDossiers()}
+                  disabled={isLoadingDossiers}
+                  className="p-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 hover:text-slate-900 border border-slate-300 shadow-2xs transition-all cursor-pointer shrink-0"
+                  title="Refresh Underwriting Queue"
+                  aria-label="Refresh Underwriting Queue"
+                >
+                  <RefreshCw size={14} className={isLoadingDossiers ? 'animate-spin text-[#0867E8]' : ''} />
+                </button>
+
                 <div className="relative flex-1 sm:w-64 sm:flex-initial min-w-[200px]">
                   <Search size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
                   <input

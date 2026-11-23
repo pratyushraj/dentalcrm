@@ -152,7 +152,7 @@ const VERIFIED_DOSSIERS: VerifiedDossier[] = [
     address: 'D.No 1-56-23, Bank of India Lane, Sector 2, MVP Colony, Visakhapatnam, Andhra Pradesh - 530017',
     residential_address: 'D.No 10-33, G-2, Visalakshi Nagar, Kailasagiri Circle, Visakhapatnam, Andhra Pradesh - 530043',
     specialties: ['General Dentistry', 'Dental Implants', 'Oral Surgery'],
-    submission_badge: '100% Ready for MID • All Documents Verified',
+    submission_badge: '100% Ready for MID • Doctor Signed Dossier',
     readiness: 'ready',
     missing_items: [],
     bank: {
@@ -172,7 +172,7 @@ const VERIFIED_DOSSIERS: VerifiedDossier[] = [
       date: '06/05/2026'
     },
     docs: {
-      signing_pdf: '/docs/kyc/vasantha_dental/Plural_MAF_and_Doctor_KYC_Signing_Dossier_Vasantha_Dental.pdf',
+      signing_pdf: 'https://sqqocqujxlgoxbcnfbfb.supabase.co/storage/v1/object/public/clinic-documents/vasantha_dental/Signed_Doctor_KYC_Dossier_Dr_V_Siddardha_Chaitanya.pdf',
       zip_bundle: '/docs/kyc/vasantha_dental/Vasantha_Dental_Complete_KYC_Dossier.zip',
       maf_excel: '/docs/kyc/vasantha_dental/Plural_MAF_BO_PEP_Vasantha_Dental.xlsx',
       gst_declaration_pdf: '/docs/kyc/vasantha_dental/GST_Exemption_Declaration_vasantha_dental.pdf',
@@ -183,7 +183,8 @@ const VERIFIED_DOSSIERS: VerifiedDossier[] = [
       establishment_reg: '/docs/kyc/vasantha_dental/vasantha_dental_ap_establishment_registration.jpg',
       dental_council_reg: '/docs/kyc/vasantha_dental/dr_siddardha_chaitanya_dental_council_registration.jpg'
     },
-    status: '100% Complete • Ready for Sub-Merchant MID'
+    is_signed: true,
+    status: 'Doctor Signed & Verified • Ready for MID'
   },
   {
     id: 'c1b4ab14-e0a4-4a60-9a86-ebedc9616675',
@@ -248,7 +249,7 @@ const VERIFIED_DOSSIERS: VerifiedDossier[] = [
     address: 'Shop No. 48, Minal Gate No. 1, J. K. Road, Raj Capital, Block No. 2, Bhopal, Madhya Pradesh - 462023',
     residential_address: 'House No. 2-H, Shri Ram Chandra Hights, Ayodhya By Pass Road, Huzur, Ayodhya Nagar, Bhopal, Madhya Pradesh - 462041',
     specialties: ['Dental Implants', 'Cosmetic Dentistry', 'Laser & Hair', 'Clear Aligners', 'Root Canal'],
-    submission_badge: '100% Ready for MID • All Documents Verified',
+    submission_badge: '100% Ready for MID • Doctor Signed Dossier',
     readiness: 'ready',
     missing_items: [],
     bank: {
@@ -268,7 +269,7 @@ const VERIFIED_DOSSIERS: VerifiedDossier[] = [
       date: '11/09/2024'
     },
     docs: {
-      signing_pdf: '/docs/kyc/nitya_dental/Plural_MAF_and_Doctor_KYC_Signing_Dossier_Nitya_Dental.pdf',
+      signing_pdf: 'https://sqqocqujxlgoxbcnfbfb.supabase.co/storage/v1/object/public/clinic-documents/nitya_dental/Signed_Doctor_KYC_Dossier_Dr_Bhanu_Prakash_Singh.pdf',
       zip_bundle: '/docs/kyc/nitya_dental/Nitya_Dental_Complete_KYC_Dossier.zip',
       maf_excel: '/docs/kyc/nitya_dental/Plural_MAF_BO_PEP_Nitya_Dental.xlsx',
       gst_declaration_pdf: '/docs/kyc/nitya_dental/GST_Exemption_Declaration_nitya_dental.pdf',
@@ -278,7 +279,8 @@ const VERIFIED_DOSSIERS: VerifiedDossier[] = [
       aadhaar_back: '/docs/kyc/nitya_dental/dr_bhanu_prakash_aadhaar_back.jpg',
       establishment_reg: '/docs/kyc/nitya_dental/nitya_dental_establishment_registration.jpg'
     },
-    status: '100% Complete • Ready for Sub-Merchant MID'
+    is_signed: true,
+    status: 'Doctor Signed & Verified • Ready for MID'
   },
   {
     id: 'exldentist-clinic',

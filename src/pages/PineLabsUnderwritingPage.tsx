@@ -34,7 +34,8 @@ import {
   Archive,
   FileCheck,
   X,
-  Truck
+  Truck,
+  ArrowUpDown
 } from 'lucide-react';
 import { toast } from 'sonner';
 
@@ -544,6 +545,7 @@ export default function PineLabsUnderwritingPage() {
 
   const [searchQuery, setSearchQuery] = useState('');
   const [filterTab, setFilterTab] = useState<'all' | 'ready' | 'pending'>('all');
+  const [sortBy, setSortBy] = useState<'ready-first' | 'pending-first' | 'name' | 'city'>('ready-first');
   
   // Selected clinic state: null = View 1 (Queue), string = View 2 (Clinic Dossier & Docs)
   const [selectedDossierId, setSelectedDossierId] = useState<string | null>(() => clinicParam);
@@ -594,24 +596,50 @@ export default function PineLabsUnderwritingPage() {
   const readyCount = useMemo(() => allDossiers.filter((d) => isClinicFullyReady(d)).length, [allDossiers]);
   const pendingCount = useMemo(() => allDossiers.filter((d) => !isClinicFullyReady(d)).length, [allDossiers]);
 
-  const filteredDossiers = allDossiers.filter((d) => {
-    const isReady = isClinicFullyReady(d);
-    // 1. Readiness Filter Tab
-    if (filterTab === 'ready' && !isReady) return false;
-    if (filterTab === 'pending' && isReady) return false;
+  const filteredDossiers = useMemo(() => {
+    return allDossiers
+      .filter((d) => {
+        const isReady = isClinicFullyReady(d);
+        // 1. Readiness Filter Tab
+        if (filterTab === 'ready' && !isReady) return false;
+        if (filterTab === 'pending' && isReady) return false;
 
-    // 2. Search query filter
-    const q = searchQuery.toLowerCase().trim();
-    if (!q) return true;
-    return (
-      d.clinic_name.toLowerCase().includes(q) ||
-      d.doctor_name.toLowerCase().includes(q) ||
-      d.city.toLowerCase().includes(q) ||
-      d.bank.bank_name.toLowerCase().includes(q) ||
-      d.bank.account_number.includes(q) ||
-      d.pan.toLowerCase().includes(q)
-    );
-  });
+        // 2. Search query filter
+        const q = searchQuery.toLowerCase().trim();
+        if (!q) return true;
+        return (
+          d.clinic_name.toLowerCase().includes(q) ||
+          d.doctor_name.toLowerCase().includes(q) ||
+          d.city.toLowerCase().includes(q) ||
+          d.bank.bank_name.toLowerCase().includes(q) ||
+          d.bank.account_number.includes(q) ||
+          d.pan.toLowerCase().includes(q)
+        );
+      })
+      .sort((a, b) => {
+        if (sortBy === 'ready-first') {
+          const aReady = isClinicFullyReady(a);
+          const bReady = isClinicFullyReady(b);
+          if (aReady && !bReady) return -1;
+          if (!aReady && bReady) return 1;
+          return a.clinic_name.localeCompare(b.clinic_name);
+        }
+        if (sortBy === 'pending-first') {
+          const aPending = !isClinicFullyReady(a);
+          const bPending = !isClinicFullyReady(b);
+          if (aPending && !bPending) return -1;
+          if (!aPending && bPending) return 1;
+          return a.clinic_name.localeCompare(b.clinic_name);
+        }
+        if (sortBy === 'name') {
+          return a.clinic_name.localeCompare(b.clinic_name);
+        }
+        if (sortBy === 'city') {
+          return a.city.localeCompare(b.city);
+        }
+        return 0;
+      });
+  }, [allDossiers, filterTab, searchQuery, sortBy]);
   const [previewDocUrl, setPreviewDocUrl] = useState<string | null>(null);
   const [previewDocTitle, setPreviewDocTitle] = useState<string>('');
 
@@ -836,66 +864,87 @@ export default function PineLabsUnderwritingPage() {
               </div>
             </div>
 
-            {/* ── READINESS FILTER TABS ── */}
-            <div role="tablist" aria-label="Underwriting readiness filter" className="flex flex-wrap items-center gap-2 pt-1 pb-1">
-              <button
-                role="tab"
-                aria-selected={filterTab === 'all'}
-                aria-controls="underwriting-queue-panel"
-                onClick={() => setFilterTab('all')}
-                className={`flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
-                  filterTab === 'all'
-                    ? 'bg-slate-900 text-white shadow-2xs'
-                    : 'bg-slate-100 text-slate-600 hover:bg-slate-200/70 hover:text-slate-900 border border-slate-200'
-                }`}
-              >
-                <span>All Clinics</span>
-                <span className={`text-[10px] px-1.5 py-0.5 rounded-md font-black ${
-                  filterTab === 'all' ? 'bg-white/20 text-white' : 'bg-slate-200 text-slate-700'
-                }`}>
-                  {allDossiers.length}
-                </span>
-              </button>
+            {/* ── READINESS FILTER TABS & SORTING ── */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-1 pb-1">
+              <div role="tablist" aria-label="Underwriting readiness filter" className="flex flex-wrap items-center gap-2">
+                <button
+                  role="tab"
+                  aria-selected={filterTab === 'all'}
+                  aria-controls="underwriting-queue-panel"
+                  onClick={() => setFilterTab('all')}
+                  className={`flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                    filterTab === 'all'
+                      ? 'bg-slate-900 text-white shadow-2xs'
+                      : 'bg-slate-100 text-slate-600 hover:bg-slate-200/70 hover:text-slate-900 border border-slate-200'
+                  }`}
+                >
+                  <span>All Clinics</span>
+                  <span className={`text-[10px] px-1.5 py-0.5 rounded-md font-black ${
+                    filterTab === 'all' ? 'bg-white/20 text-white' : 'bg-slate-200 text-slate-700'
+                  }`}>
+                    {allDossiers.length}
+                  </span>
+                </button>
 
-              <button
-                role="tab"
-                aria-selected={filterTab === 'ready'}
-                aria-controls="underwriting-queue-panel"
-                onClick={() => setFilterTab('ready')}
-                className={`flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
-                  filterTab === 'ready'
-                    ? 'bg-emerald-600 text-white shadow-2xs'
-                    : 'bg-emerald-50 text-emerald-800 border border-emerald-200 hover:bg-emerald-100'
-                }`}
-              >
-                <CheckCircle2 size={13} className={filterTab === 'ready' ? 'text-white' : 'text-emerald-600'} />
-                <span>100% Ready for MID</span>
-                <span className={`text-[10px] px-1.5 py-0.5 rounded-md font-black ${
-                  filterTab === 'ready' ? 'bg-white/20 text-white' : 'bg-emerald-200/70 text-emerald-900'
-                }`}>
-                  {readyCount}
-                </span>
-              </button>
+                <button
+                  role="tab"
+                  aria-selected={filterTab === 'ready'}
+                  aria-controls="underwriting-queue-panel"
+                  onClick={() => setFilterTab('ready')}
+                  className={`flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                    filterTab === 'ready'
+                      ? 'bg-emerald-600 text-white shadow-2xs'
+                      : 'bg-emerald-50 text-emerald-800 border border-emerald-200 hover:bg-emerald-100'
+                  }`}
+                >
+                  <CheckCircle2 size={13} className={filterTab === 'ready' ? 'text-white' : 'text-emerald-600'} />
+                  <span>100% Ready for MID</span>
+                  <span className={`text-[10px] px-1.5 py-0.5 rounded-md font-black ${
+                    filterTab === 'ready' ? 'bg-white/20 text-white' : 'bg-emerald-200/70 text-emerald-900'
+                  }`}>
+                    {readyCount}
+                  </span>
+                </button>
 
-              <button
-                role="tab"
-                aria-selected={filterTab === 'pending'}
-                aria-controls="underwriting-queue-panel"
-                onClick={() => setFilterTab('pending')}
-                className={`flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
-                  filterTab === 'pending'
-                    ? 'bg-amber-600 text-white shadow-2xs'
-                    : 'bg-amber-50 text-amber-800 border border-amber-200 hover:bg-amber-100'
-                }`}
-              >
-                <AlertCircle size={13} className={filterTab === 'pending' ? 'text-white' : 'text-amber-600'} />
-                <span>Pending Items</span>
-                <span className={`text-[10px] px-1.5 py-0.5 rounded-md font-black ${
-                  filterTab === 'pending' ? 'bg-white/20 text-white' : 'bg-amber-200/70 text-amber-900'
-                }`}>
-                  {pendingCount}
-                </span>
-              </button>
+                <button
+                  role="tab"
+                  aria-selected={filterTab === 'pending'}
+                  aria-controls="underwriting-queue-panel"
+                  onClick={() => setFilterTab('pending')}
+                  className={`flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                    filterTab === 'pending'
+                      ? 'bg-amber-600 text-white shadow-2xs'
+                      : 'bg-amber-50 text-amber-800 border border-amber-200 hover:bg-amber-100'
+                  }`}
+                >
+                  <AlertCircle size={13} className={filterTab === 'pending' ? 'text-white' : 'text-amber-600'} />
+                  <span>Pending Items</span>
+                  <span className={`text-[10px] px-1.5 py-0.5 rounded-md font-black ${
+                    filterTab === 'pending' ? 'bg-white/20 text-white' : 'bg-amber-200/70 text-amber-900'
+                  }`}>
+                    {pendingCount}
+                  </span>
+                </button>
+              </div>
+
+              {/* Sort Dropdown */}
+              <div className="flex items-center gap-2 self-start sm:self-auto text-xs shrink-0">
+                <div className="flex items-center gap-1.5 bg-slate-50 hover:bg-slate-100/80 border border-slate-200 px-3 py-1.5 rounded-xl shadow-2xs transition-colors">
+                  <ArrowUpDown size={13} className="text-slate-400 shrink-0" />
+                  <label htmlFor="underwriting-sort" className="text-slate-500 font-bold text-[11px] cursor-pointer">Sort:</label>
+                  <select
+                    id="underwriting-sort"
+                    value={sortBy}
+                    onChange={(e) => setSortBy(e.target.value as any)}
+                    className="bg-transparent text-slate-800 font-bold focus:outline-none cursor-pointer text-xs pr-1 border-none"
+                  >
+                    <option value="ready-first">100% Ready First</option>
+                    <option value="pending-first">Pending Items First</option>
+                    <option value="name">Clinic Name (A–Z)</option>
+                    <option value="city">City (A–Z)</option>
+                  </select>
+                </div>
+              </div>
             </div>
 
             {/* ── CLINIC CARDS LIST (FULL-WIDTH BALANCED FLOW) ── */}

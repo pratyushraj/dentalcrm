@@ -110,8 +110,10 @@ export default async function handler(req, res) {
           const signData = await signRes.json();
           const signedUrl = signData.signedURL ? `${supabaseUrl}/storage/v1${signData.signedURL}` : signData.signedUrl;
           if (signedUrl) {
+            const destination = new URL(signedUrl);
+            if (req.query.download === '1') destination.searchParams.set('download', basename(sanitized));
             res.setHeader('Cache-Control', 'private, no-cache, no-store, must-revalidate');
-            return res.redirect(302, signedUrl);
+            return res.redirect(302, destination.href);
           }
         }
       } catch (err) {
@@ -127,7 +129,8 @@ export default async function handler(req, res) {
   res.setHeader('Content-Type', mimeType);
   res.setHeader('Content-Length', fileStat.size);
   res.setHeader('Cache-Control', 'private, no-cache, no-store, must-revalidate');
-  res.setHeader('Content-Disposition', `inline; filename="${fileName}"`);
+  const disposition = req.query.download === '1' ? 'attachment' : 'inline';
+  res.setHeader('Content-Disposition', `${disposition}; filename="${fileName}"`);
 
   if (req.method === 'HEAD') {
     return res.status(200).end();

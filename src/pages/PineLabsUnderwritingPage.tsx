@@ -558,7 +558,7 @@ export default function PineLabsUnderwritingPage() {
 
               <div className="flex flex-wrap sm:flex-nowrap items-center gap-2.5 w-full lg:w-auto shrink-0">
                 <a
-                  href="/docs/kyc/Clinaza_All_Clinics_Complete_KYC_Dossiers.zip"
+                  href="/docs/kyc/Clinaza_All_Clinics_Complete_KYC_Dossiers.zip?download=1"
                   download="Clinaza_All_Clinics_Complete_KYC_Dossiers.zip"
                   className="inline-flex items-center justify-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold transition-all shadow-2xs whitespace-nowrap cursor-pointer shrink-0"
                   title="Download All 8 Clinic KYC Packages in 1 Consolidated ZIP Archive"
@@ -1013,7 +1013,7 @@ export default function PineLabsUnderwritingPage() {
 
                 <div className="flex flex-wrap items-center gap-2.5">
                   <a
-                    href={activeDossier.docs.signing_pdf || undefined}
+                    href={activeDossier.docs.signing_pdf ? `${activeDossier.docs.signing_pdf}?download=1` : undefined}
                     aria-disabled={!activeDossier.docs.signing_pdf}
                     tabIndex={activeDossier.docs.signing_pdf ? undefined : -1}
                     download={`Plural_MAF_and_Doctor_KYC_Signing_Dossier_${activeDossier.clinic_name.replace(/\s+/g, '_')}.pdf`}
@@ -1025,7 +1025,7 @@ export default function PineLabsUnderwritingPage() {
                   </a>
 
                   <a
-                    href={activeDossier.docs.maf_excel || undefined}
+                    href={activeDossier.docs.maf_excel ? `${activeDossier.docs.maf_excel}?download=1` : undefined}
                     aria-disabled={!activeDossier.docs.maf_excel}
                     tabIndex={activeDossier.docs.maf_excel ? undefined : -1}
                     download={`Plural_MAF_BO_PEP_${activeDossier.clinic_name.replace(/\s+/g, '_')}.xlsx`}
@@ -1037,7 +1037,7 @@ export default function PineLabsUnderwritingPage() {
                   </a>
 
                   <a
-                    href={activeDossier.docs.zip_bundle || undefined}
+                    href={activeDossier.docs.zip_bundle ? `${activeDossier.docs.zip_bundle}?download=1` : undefined}
                     aria-disabled={!activeDossier.docs.zip_bundle}
                     tabIndex={activeDossier.docs.zip_bundle ? undefined : -1}
                     download={`${activeDossier.clinic_name.replace(/\s+/g, '_')}_Complete_KYC_Dossier.zip`}

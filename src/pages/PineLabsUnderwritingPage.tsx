@@ -647,7 +647,7 @@ export default function PineLabsUnderwritingPage() {
               <div
                 role="tablist"
                 aria-label="Underwriting readiness filter"
-                className="inline-flex items-center gap-1.5 p-1 bg-slate-100/90 rounded-2xl border border-slate-200/80 overflow-x-auto scrollbar-none shrink-0"
+                className="inline-flex items-center gap-1.5 p-1 bg-slate-100/90 rounded-2xl border border-slate-200/80 overflow-x-auto scrollbar-none [&::-webkit-scrollbar]:hidden [scrollbar-width:none] [-ms-overflow-style:none] shrink-0"
               >
                 <button
                   role="tab"
@@ -936,7 +936,7 @@ export default function PineLabsUnderwritingPage() {
               </div>
 
               {/* Quick Clinic Switcher Pills */}
-              <div className="flex items-center gap-2 overflow-x-auto max-w-full pb-1 scrollbar-none" style={{ WebkitOverflowScrolling: 'touch' }}>
+              <div className="flex items-center gap-2 overflow-x-auto max-w-full pb-1 scrollbar-none [&::-webkit-scrollbar]:hidden [scrollbar-width:none] [-ms-overflow-style:none]" style={{ WebkitOverflowScrolling: 'touch' }}>
                 <span className="text-[11px] text-slate-500 font-bold hidden lg:inline whitespace-nowrap">Switch Clinic:</span>
                 {allDossiers.map((d) => {
                   const isSelected = d.id === activeDossier.id;

@@ -257,10 +257,17 @@ def fill_maf_excel(data: dict, out_xlsx: str):
         if data.get("bank_ifsc"):
             ws_maf["F49"] = data["bank_ifsc"]
 
+        # Signature & Entity Stamp Block
+        ws_maf["A56"] = f"For {data['clinic_name']} (Sole Proprietorship)"
+        ws_maf["B57"] = data["doctor_name"].upper()
+        ws_maf["B58"] = "PROPRIETOR"
+
     # Explicit cells in Final BO
     if "Final BO" in wb.sheetnames:
         ws_bo = wb["Final BO"]
         ws_bo["B4"] = f"Name of the Merchant: {data['legal_name']} (Sole Proprietorship)"
+        if ws_bo["B6"].value and isinstance(ws_bo["B6"].value, str):
+            ws_bo["B6"] = ws_bo["B6"].value.replace("________________________________(name of the entity)", f"{data['clinic_name']} (Sole Proprietorship)")
         ws_bo["C9"] = data["doctor_name"].upper()
         ws_bo["D9"] = data.get("dob", "01/01/1990")
         ws_bo["E9"] = "Indian - Pan Card"
@@ -271,6 +278,10 @@ def fill_maf_excel(data: dict, out_xlsx: str):
         ws_bo["H9"] = f"XXXX-XXXX-{last4}"
         ws_bo["I9"] = data.get("residential_address", data["address"])
         ws_bo["J9"] = "100%"
+        # Signature Block
+        ws_bo["B34"] = f"For {data['clinic_name']} (Sole Proprietorship)"
+        ws_bo["B37"] = f"Authorised Signatory Name: {data['doctor_name'].upper()}"
+        ws_bo["B38"] = "Designation: PROPRIETOR"
 
     # Explicit cells in Final LIST & PEP
     if "Final LIST & PEP" in wb.sheetnames:
@@ -279,6 +290,10 @@ def fill_maf_excel(data: dict, out_xlsx: str):
         ws_pep["D5"] = "PROPRIETOR"
         ws_pep["C22"] = data["doctor_name"].upper()
         ws_pep["D22"] = "PROPRIETOR / 100% BENEFICIAL OWNER"
+        # Signature Block
+        ws_pep["B28"] = f"For {data['clinic_name']} (Sole Proprietorship)"
+        ws_pep["B30"] = f"Authorised Signatory Name: {data['doctor_name'].upper()}"
+        ws_pep["B32"] = "Designation: PROPRIETOR"
 
     wb.save(out_xlsx)
 

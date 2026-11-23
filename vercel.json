@@ -158,6 +158,10 @@
       "destination": "/api/kyc-document?file=:path*"
     },
     {
+      "source": "/api/whatsapp-helper/:action",
+      "destination": "/api/whatsapp-helper?action=:action"
+    },
+    {
       "source": "/api/webhook/:provider",
       "destination": "/api/webhook?provider=:provider"
     },

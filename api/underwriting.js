@@ -10,7 +10,7 @@ import {
   clearSessionCookie,
   SESSION_TTL_MS
 } from './_auth.js';
-import { VERIFIED_DOSSIERS } from './underwriting-data.js';
+import { VERIFIED_DOSSIERS } from './_underwriting-data.js';
 
 async function fetchDynamicOnboardedDossiers() {
   const supabaseUrl = process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL;

@@ -41,6 +41,8 @@ export async function authenticatePin(req, res, pin) {
       res.status(401).json({ authenticated: false, error: 'Invalid partner access PIN.' });
       return false;
     }
+    // Clear rate limit record on successful verification so legitimate partners are never locked out
+    supabaseRequest(`/rest/v1/underwriting_login_attempts?key_hash=eq.${key}`, { method: 'DELETE' }).catch(() => {});
     return true;
   } catch {
     res.status(503).json({ authenticated: false, error: 'Partner access is temporarily unavailable. Please try again shortly.' });

@@ -215,9 +215,9 @@ export const VERIFIED_DOSSIERS = [
     address: 'Flat No. 7702, Basement, 77th Avenue, DLF Phase 4, Gurugram, Haryana - 122009',
     residential_address: 'Flat No. 7702, 77th Avenue, DLF Phase 4, Gurugram, Haryana - 122009',
     specialties: ['Preventive Dentistry', 'Aesthetic & Cosmetic Dentistry', 'Dental Restorations', 'Root Canal Therapy'],
-    submission_badge: 'Action Required • Aadhaar Back Pending',
-    readiness: 'pending',
-    missing_items: ['Aadhaar Card (Back Side with Address)'],
+    submission_badge: '100% Ready for MID • Doctor Signed Dossier',
+    readiness: 'ready',
+    missing_items: [],
     bank: {
       bank_name: 'Axis Bank',
       account_holder: 'EXLDENTIST CLINIC',
@@ -242,11 +242,12 @@ export const VERIFIED_DOSSIERS = [
       cancelled_cheque: 'https://sqqocqujxlgoxbcnfbfb.supabase.co/storage/v1/object/public/clinic-documents/exldentist_clinic/exldentist_cancelled_cheque.jpg',
       doctor_pan: 'https://sqqocqujxlgoxbcnfbfb.supabase.co/storage/v1/object/public/clinic-documents/exldentist_clinic/dr_priyanka_kumar_pan.jpg',
       aadhaar_front: 'https://sqqocqujxlgoxbcnfbfb.supabase.co/storage/v1/object/public/clinic-documents/exldentist_clinic/dr_priyanka_kumar_aadhaar.jpg',
+      aadhaar_back: 'https://sqqocqujxlgoxbcnfbfb.supabase.co/storage/v1/object/public/clinic-documents/exldentist_clinic/dr_priyanka_kumar_aadhaar_back.jpg',
       dental_council_reg: 'https://sqqocqujxlgoxbcnfbfb.supabase.co/storage/v1/object/public/clinic-documents/exldentist_clinic/dr_priyanka_kumar_dental_council_registration.jpg',
       udyam_pdf: 'https://sqqocqujxlgoxbcnfbfb.supabase.co/storage/v1/object/public/clinic-documents/exldentist_clinic/exldentist_udyam_certificate.jpg'
     },
     is_signed: true,
-    status: 'Action Required • Awaiting Doctor Aadhaar Back Card'
+    status: '100% Ready for Pine Labs Plural Sub-Merchant MID Issuance'
   },
   {
     id: 'impressions-dental',

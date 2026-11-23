@@ -11,6 +11,11 @@ Disallow: /api/
 Disallow: /deck
 Disallow: /dentist-proposal
 Disallow: /dental-trends
+Disallow: /partner/underwriting
+Disallow: /partner/underwriting/
+Disallow: /underwriting
+Disallow: /pinelabs-portal
+Disallow: /docs/kyc/
 
 # Search Engine Crawlers
 User-agent: Googlebot
@@ -20,51 +25,101 @@ Disallow: /api/
 Disallow: /deck
 Disallow: /dentist-proposal
 Disallow: /dental-trends
+Disallow: /partner/underwriting
+Disallow: /partner/underwriting/
+Disallow: /underwriting
+Disallow: /pinelabs-portal
+Disallow: /docs/kyc/
 
 User-agent: Bingbot
 Allow: /
 Disallow: /reactivation/
+Disallow: /partner/underwriting
+Disallow: /partner/underwriting/
+Disallow: /underwriting
+Disallow: /pinelabs-portal
+Disallow: /docs/kyc/
 
 # AI Search & LLM Web Crawlers (OpenAI, Anthropic, Perplexity, Google)
 User-agent: GPTBot
 Allow: /
 Disallow: /reactivation/
 Disallow: /api/
+Disallow: /partner/underwriting
+Disallow: /partner/underwriting/
+Disallow: /underwriting
+Disallow: /pinelabs-portal
+Disallow: /docs/kyc/
 
 User-agent: ClaudeBot
 Allow: /
 Disallow: /reactivation/
 Disallow: /api/
+Disallow: /partner/underwriting
+Disallow: /partner/underwriting/
+Disallow: /underwriting
+Disallow: /pinelabs-portal
+Disallow: /docs/kyc/
 
 User-agent: PerplexityBot
 Allow: /
 Disallow: /reactivation/
 Disallow: /api/
+Disallow: /partner/underwriting
+Disallow: /partner/underwriting/
+Disallow: /underwriting
+Disallow: /pinelabs-portal
+Disallow: /docs/kyc/
 
 User-agent: Google-Extended
 Allow: /
 Disallow: /reactivation/
 Disallow: /api/
+Disallow: /partner/underwriting
+Disallow: /partner/underwriting/
+Disallow: /underwriting
+Disallow: /pinelabs-portal
+Disallow: /docs/kyc/
 
 User-agent: Applebot-Extended
 Allow: /
 Disallow: /reactivation/
 Disallow: /api/
+Disallow: /partner/underwriting
+Disallow: /partner/underwriting/
+Disallow: /underwriting
+Disallow: /pinelabs-portal
+Disallow: /docs/kyc/
 
 User-agent: Amazonbot
 Allow: /
 Disallow: /reactivation/
 Disallow: /api/
+Disallow: /partner/underwriting
+Disallow: /partner/underwriting/
+Disallow: /underwriting
+Disallow: /pinelabs-portal
+Disallow: /docs/kyc/
 
 User-agent: cohere-ai
 Allow: /
 Disallow: /reactivation/
 Disallow: /api/
+Disallow: /partner/underwriting
+Disallow: /partner/underwriting/
+Disallow: /underwriting
+Disallow: /pinelabs-portal
+Disallow: /docs/kyc/
 
 User-agent: OAI-SearchBot
 Allow: /
 Disallow: /reactivation/
 Disallow: /api/
+Disallow: /partner/underwriting
+Disallow: /partner/underwriting/
+Disallow: /underwriting
+Disallow: /pinelabs-portal
+Disallow: /docs/kyc/
 
 # Social Media Previews
 User-agent: facebookexternalhit

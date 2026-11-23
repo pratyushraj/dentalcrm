@@ -102,6 +102,10 @@ scratch/
 !public/videos/**/*.mp4
 !public/videos/*.mp4
 
+scripts/outreach/
+retarget_high_intent_clickers.json
+public/docs/clinaza_opened_emails_master.csv
+
 # Outreach local data and scripts
 send_*.py
 *dispatch_results*.json

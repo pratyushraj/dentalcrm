@@ -60,12 +60,12 @@ ws_maf['B25'] = "contact@clinaza.in"
 ws_maf['E25'] = "pratyushraj@outlook.com"
 
 # Row 28 - 30: Alternate Contact Details
-ws_maf['B28'] = "Clinaza Support Desk"
-ws_maf['E28'] = "Clinaza Accounts"
+ws_maf['B28'] = "Clinic Reception Desk"
+ws_maf['E28'] = "Clinic Accounts Desk"
 ws_maf['B29'] = None
 ws_maf['E29'] = None
-ws_maf['B30'] = "support@clinaza.in"
-ws_maf['E30'] = "support@clinaza.in"
+ws_maf['B30'] = "clinic-reception@example.com"
+ws_maf['E30'] = "clinic-accounts@example.com"
 
 # Row 32: Business Entity Type & Business Type
 ws_maf['B32'] = "Proprietorship"

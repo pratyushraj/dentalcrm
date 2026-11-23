@@ -73,8 +73,13 @@ def build_signing_pages(pan_img: str, aadhaar_img: str, pan: str, doctor_name: s
     with PILImage.open(pan_img) as img:
         w, h = img.size
         aspect = h / w
-        target_w = 125 * mm
-        target_h = target_w * aspect
+        max_h = 135 * mm
+        if 125 * mm * aspect > max_h:
+            target_h = max_h
+            target_w = target_h / aspect
+        else:
+            target_w = 125 * mm
+            target_h = target_w * aspect
     story_pan.append(Image(pan_img, width=target_w, height=target_h))
     story_pan.append(Spacer(1, 14*mm))
     story_pan.append(Paragraph('<b>Self-Attestation &amp; Verification Declaration:</b>', sign_style))
@@ -96,8 +101,13 @@ def build_signing_pages(pan_img: str, aadhaar_img: str, pan: str, doctor_name: s
     with PILImage.open(aadhaar_img) as img:
         w, h = img.size
         aspect = h / w
-        target_w = 110 * mm
-        target_h = target_w * aspect
+        max_h = 135 * mm
+        if 110 * mm * aspect > max_h:
+            target_h = max_h
+            target_w = target_h / aspect
+        else:
+            target_w = 110 * mm
+            target_h = target_w * aspect
     story_aadh.append(Image(aadhaar_img, width=target_w, height=target_h))
     story_aadh.append(Spacer(1, 10*mm))
     story_aadh.append(Paragraph('<b>Self-Attestation &amp; Verification Declaration:</b>', sign_style))
@@ -210,6 +220,15 @@ def fill_maf_excel(data: dict, out_xlsx: str):
     # Explicit cells in Final MAF
     if "Final MAF" in wb.sheetnames:
         ws_maf = wb["Final MAF"]
+        # Primary Correspondence (Columns A-B)
+        ws_maf["B23"] = data["doctor_name"]
+        ws_maf["B24"] = data["phone"].replace("+91", "").replace(" ", "")
+        ws_maf["B25"] = data["email"]
+        ws_maf["B28"] = "Clinic Reception Desk"
+        ws_maf["B29"] = data["phone"].replace("+91", "").replace(" ", "")
+        ws_maf["B30"] = data.get("alt_email", data["email"])
+
+        # Settlements Reports (Columns D-E)
         ws_maf["D23"] = "Primary Name -"
         ws_maf["E23"] = data["doctor_name"]
         ws_maf["D24"] = "Primary Contact no. -"
@@ -218,7 +237,8 @@ def fill_maf_excel(data: dict, out_xlsx: str):
         ws_maf["E25"] = data["email"]
         ws_maf["D28"] = "Alternate Name -"
         ws_maf["E28"] = "Clinic Accounts Desk"
-        ws_maf["B30"] = data.get("alt_email", data["email"])
+        ws_maf["D29"] = "Alternate Contact no. -"
+        ws_maf["E29"] = data["phone"].replace("+91", "").replace(" ", "")
         ws_maf["D30"] = "Alternate Email ID -"
         ws_maf["E30"] = data.get("alt_email", data["email"])
         ws_maf["B33"] = "https://clinaza.in"
@@ -321,7 +341,7 @@ def main():
     print(f"  ✓ Auto-filled Pine Labs MAF: {maf_xlsx.name}")
 
     # 2. Convert Excel to PDF via LibreOffice
-    tmp_maf_pdf = Path(f"/tmp/Plural_MAF_{slug}.pdf")
+    tmp_maf_pdf = Path(f"/tmp/Plural_MAF_BO_PEP_{slug}.pdf")
     soffice_bin = "/opt/homebrew/bin/soffice" if os.path.exists("/opt/homebrew/bin/soffice") else "soffice"
     subprocess.run([soffice_bin, "--headless", "--convert-to", "pdf", str(maf_xlsx), "--outdir", "/tmp"], check=True, stdout=subprocess.DEVNULL)
 
@@ -377,6 +397,19 @@ def main():
             merger.write(f)
         shutil.copyfile(signing_pdf, DOWNLOADS_DIR / signing_pdf.name)
         print(f"  ✓ Generated Consolidated 6-Page Doctor Signing PDF: {signing_pdf.name}")
+
+    # Copy source KYC documents into target_dir for the full package
+    if args.cheque_img and os.path.exists(args.cheque_img):
+        ext = Path(args.cheque_img).suffix
+        shutil.copyfile(args.cheque_img, target_dir / f"Cancelled_Cheque_{slug}{ext}")
+    if args.pan_img and os.path.exists(args.pan_img):
+        ext = Path(args.pan_img).suffix
+        shutil.copyfile(args.pan_img, target_dir / f"Doctor_PAN_Card_{slug}{ext}")
+    if args.aadhaar_img and os.path.exists(args.aadhaar_img):
+        ext = Path(args.aadhaar_img).suffix
+        shutil.copyfile(args.aadhaar_img, target_dir / f"Doctor_Aadhaar_Card_{slug}{ext}")
+    if args.udyam_pdf and os.path.exists(args.udyam_pdf):
+        shutil.copyfile(args.udyam_pdf, target_dir / f"Udyam_Registration_Certificate_{slug}.pdf")
 
     # 5. Build ZIP Bundle
     zip_path = target_dir / f"{slug}_Complete_KYC_Dossier.zip"

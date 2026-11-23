@@ -26,6 +26,7 @@ import {
   ChevronLeft,
   ArrowLeft,
   Eye,
+  EyeOff,
   ArrowUpRight,
   Sparkles,
   RefreshCw,
@@ -69,6 +70,8 @@ export interface VerifiedDossier {
   residential_address: string;
   specialties: string[];
   submission_badge: string;
+  readiness?: 'ready' | 'pending';
+  missing_items?: string[];
   bank: {
     bank_name: string;
     account_holder: string;
@@ -104,6 +107,54 @@ export interface VerifiedDossier {
 
 const VERIFIED_DOSSIERS: VerifiedDossier[] = [
   {
+    id: 'elara-ivf',
+    clinic_name: 'Elara IVF',
+    legal_name: 'ELARA IVF PRIVATE LIMITED',
+    doctor_name: 'Gajendra Singh Chouhan',
+    dob: '04/08/1975',
+    pan: 'AAJCE6053H',
+    aadhaar: '3596 1163 5054',
+    phone: '+91 90011 61115',
+    email: 'info@elaraivf.com',
+    city: 'Jodhpur, Rajasthan',
+    pincode: '342003',
+    address: 'Floor No. 6, CYB-5, Dream Heights, Shastri Nagar, RIICO Heavy Industrial Area (Near Marwari Catalysts), Jodhpur, Rajasthan - 342003',
+    residential_address: 'A 30, Arvind Nagar, Golf Link Road, Jodhpur Residency Road, Rajasthan - 342011',
+    specialties: ['Reproductive Medicine', 'In Vitro Fertilization (IVF)', 'ICSI & Fertility Care', 'Daycare Clinical Procedures'],
+    submission_badge: '100% Ready for MID • Corporate KYC Verified',
+    readiness: 'ready',
+    missing_items: [],
+    bank: {
+      bank_name: 'Kotak Mahindra Bank',
+      account_holder: 'ELARA IVF PRIVATE LIMITED',
+      account_number: '9001161115',
+      account_type: 'Current Account',
+      ifsc: 'KKBK0000279',
+      branch: 'Commercial Complex Branch, Jodhpur - 342012',
+      micr: '342485002',
+      cheque_no: '000001'
+    },
+    business_proof: {
+      type: 'Certificate of Incorporation (MCA)',
+      number: 'U86202RJ2026PTC112940',
+      category: 'Private Limited Company (Healthcare / MCC 8099)',
+      date: '30/03/2026'
+    },
+    docs: {
+      signing_pdf: '/docs/kyc/elara_ivf/Plural_MAF_and_Doctor_KYC_Signing_Dossier_Elara_IVF.pdf',
+      zip_bundle: '/docs/kyc/elara_ivf/Elara_IVF_Complete_KYC_Dossier.zip',
+      maf_excel: '/docs/kyc/elara_ivf/Plural_MAF_BO_PEP_Elara_IVF.xlsx',
+      gst_declaration_pdf: '/docs/kyc/elara_ivf/elara_ivf_gst_certificate.pdf',
+      cancelled_cheque: '/docs/kyc/elara_ivf/elara_ivf_cancelled_cheque.jpeg',
+      doctor_pan: '/docs/kyc/elara_ivf/gajendra_singh_chouhan_pan.jpg',
+      aadhaar_front: '/docs/kyc/elara_ivf/gajendra_singh_chouhan_aadhaar_front_back.jpg',
+      establishment_reg: '/docs/kyc/elara_ivf/elara_ivf_certificate_of_incorporation.pdf',
+      udyam_pdf: '/docs/kyc/elara_ivf/elara_ivf_gst_certificate.pdf'
+    },
+    is_signed: true,
+    status: '100% Complete Corporate Pack • Ready for Pine Labs MID'
+  },
+  {
     id: 'vasantha-dental',
     clinic_name: 'Vasantha Dental Clinic & Implant Center',
     legal_name: 'VASANTHA DENTAL CLINIC AND IMPLANT CENTER (Sole Proprietorship)',
@@ -118,7 +169,9 @@ const VERIFIED_DOSSIERS: VerifiedDossier[] = [
     address: 'D.No 1-56-23, Bank of India Lane, Sector 2, MVP Colony, Visakhapatnam, Andhra Pradesh - 530017',
     residential_address: 'D.No 10-33, G-2, Visalakshi Nagar, Kailasagiri Circle, Visakhapatnam, Andhra Pradesh - 530043',
     specialties: ['General Dentistry', 'Dental Implants', 'Oral Surgery'],
-    submission_badge: 'Latest Submission • Nov 19',
+    submission_badge: '100% Ready for MID • All Documents Verified',
+    readiness: 'ready',
+    missing_items: [],
     bank: {
       bank_name: 'Bank of India (BOI)',
       account_holder: 'VASANTHA DENTAL CLINIC AND IMPLANT CENTER',
@@ -147,7 +200,7 @@ const VERIFIED_DOSSIERS: VerifiedDossier[] = [
       establishment_reg: '/docs/kyc/vasantha_dental/vasantha_dental_ap_establishment_registration.jpg',
       dental_council_reg: '/docs/kyc/vasantha_dental/dr_siddardha_chaitanya_dental_council_registration.jpg'
     },
-    status: 'Ready for Sub-Merchant MID'
+    status: '100% Complete • Ready for Sub-Merchant MID'
   },
   {
     id: 'c1b4ab14-e0a4-4a60-9a86-ebedc9616675',
@@ -164,7 +217,9 @@ const VERIFIED_DOSSIERS: VerifiedDossier[] = [
     address: 'Near Civil Station, X/10 (F), Kakkanad, Ernakulam, Kerala - 682030',
     residential_address: 'Kidangaziyath Mana, West Chalakudy, Chalakudi H.O, Thrissur, Kerala - 680307',
     specialties: ['Audiology & Speech Rehab', 'Daycare Healthcare', 'ENT Allied Services'],
-    submission_badge: 'Verified Submission • Nov 19',
+    submission_badge: '100% Ready for MID • Doctor Signed Dossier',
+    readiness: 'ready',
+    missing_items: [],
     bank: {
       bank_name: 'Bank of Baroda',
       account_holder: 'HEAR ONE',
@@ -210,7 +265,9 @@ const VERIFIED_DOSSIERS: VerifiedDossier[] = [
     address: 'Shop No. 48, Minal Gate No. 1, J. K. Road, Raj Capital, Block No. 2, Bhopal, Madhya Pradesh - 462023',
     residential_address: 'House No. 2-H, Shri Ram Chandra Hights, Ayodhya By Pass Road, Huzur, Ayodhya Nagar, Bhopal, Madhya Pradesh - 462041',
     specialties: ['Dental Implants', 'Cosmetic Dentistry', 'Laser & Hair', 'Clear Aligners', 'Root Canal'],
-    submission_badge: 'Fresh Submission • Nov 19',
+    submission_badge: '100% Ready for MID • All Documents Verified',
+    readiness: 'ready',
+    missing_items: [],
     bank: {
       bank_name: 'HDFC Bank',
       account_holder: 'NITYA DENTAL AND COSMETIC CLINIC',
@@ -238,7 +295,7 @@ const VERIFIED_DOSSIERS: VerifiedDossier[] = [
       aadhaar_back: '/docs/kyc/nitya_dental/dr_bhanu_prakash_aadhaar_back.jpg',
       establishment_reg: '/docs/kyc/nitya_dental/nitya_dental_establishment_registration.jpg'
     },
-    status: 'Ready for Sub-Merchant MID'
+    status: '100% Complete • Ready for Sub-Merchant MID'
   },
   {
     id: 'exldentist-clinic',
@@ -255,7 +312,9 @@ const VERIFIED_DOSSIERS: VerifiedDossier[] = [
     address: 'Flat No. 7702, Basement, 77th Avenue, DLF Phase 4, Gurugram, Haryana - 122009',
     residential_address: 'Flat No. 7702, 77th Avenue, DLF Phase 4, Gurugram, Haryana - 122009',
     specialties: ['Preventive Dentistry', 'Aesthetic & Cosmetic Dentistry', 'Dental Restorations', 'Root Canal Therapy'],
-    submission_badge: 'Fresh Submission • Nov 19',
+    submission_badge: 'Action Required • Aadhaar Back Pending',
+    readiness: 'pending',
+    missing_items: ['Aadhaar Card (Back Side with Address)'],
     bank: {
       bank_name: 'Axis Bank',
       account_holder: 'EXLDENTIST CLINIC',
@@ -284,7 +343,7 @@ const VERIFIED_DOSSIERS: VerifiedDossier[] = [
       udyam_pdf: 'https://sqqocqujxlgoxbcnfbfb.supabase.co/storage/v1/object/public/clinic-documents/exldentist_clinic/exldentist_udyam_certificate.jpg'
     },
     is_signed: true,
-    status: 'Signed & Ready for MID'
+    status: 'Action Required • Awaiting Doctor Aadhaar Back Card'
   },
   {
     id: 'impressions-dental',
@@ -301,7 +360,9 @@ const VERIFIED_DOSSIERS: VerifiedDossier[] = [
     address: 'Plot No. 119, Shri Krishna Nagar, Nahar Road Chopasani, Jodhpur, Rajasthan - 342008',
     residential_address: 'Plot No. 119, Nahar Road, Opp Balaji Hospital, Shri Krishna Nagar, Jodhpur, Rajasthan - 342008',
     specialties: ['Dental Implants', 'Full Mouth Rehabilitation', 'Cosmetic Dentistry', 'Laser & Restorations'],
-    submission_badge: 'Complete 3/3 Docs • HDFC Current A/c Verified',
+    submission_badge: '100% Ready for MID • All Documents Verified',
+    readiness: 'ready',
+    missing_items: [],
     bank: {
       bank_name: 'HDFC Bank',
       account_holder: 'IMPRESSIONS DENTAL CLINIC',
@@ -346,7 +407,9 @@ const VERIFIED_DOSSIERS: VerifiedDossier[] = [
     address: 'No. 90 and 91, 6th Cross, Double Road, MCECHS Layout, Hegde Nagar, Bangalore, Karnataka - 560077',
     residential_address: 'No. 563, 10th Cross, MCECHS Layout, R K Hegde Nagar, Dr. S R K Nagar Post, Bengaluru, Karnataka - 560077',
     specialties: ['Dental Implants', 'Clear Aligners', 'Full Mouth Rehabilitation', 'Zirconia Crowns & Ortho'],
-    submission_badge: 'Fresh Submission • Nov 21',
+    submission_badge: 'Action Required • Cancelled Cheque Pending',
+    readiness: 'pending',
+    missing_items: ['Settlement Bank Cancelled Cheque'],
     bank: {
       bank_name: 'Current Account (Under Bank Linking)',
       account_holder: 'DR. AMITHA FAMILY DENTAL CARE',
@@ -374,7 +437,7 @@ const VERIFIED_DOSSIERS: VerifiedDossier[] = [
       establishment_reg: '/docs/kyc/amitha_dental/dr_amitha_kpme_certificate.jpg'
     },
     is_signed: false,
-    status: 'KPME & Doctor KYC Verified • Cheque Pending'
+    status: 'Action Required • Awaiting Cancelled Cheque from Doctor'
   },
   {
     id: 'krishna-dental',
@@ -391,7 +454,9 @@ const VERIFIED_DOSSIERS: VerifiedDossier[] = [
     address: 'Redla Bazzar, Opp Aryavyshya Kalyana Mandapam, Pasumuru Post, Chilakaluripeta, Guntur Dist, Andhra Pradesh - 522616',
     residential_address: '12-206/12, Purushotha Patnam, Chilakaluripet, Guntur, Andhra Pradesh - 522616',
     specialties: ['Dental Implants', 'Oral Surgery', 'Root Canal Treatments', 'Zirconia Crowns & Orthodontics'],
-    submission_badge: 'Complete 3/3 Docs • SBI Current A/c Verified',
+    submission_badge: '100% Ready for MID • All Documents Verified',
+    readiness: 'ready',
+    missing_items: [],
     bank: {
       bank_name: 'State Bank of India',
       account_holder: 'KRISHNA DENTAL CLINIC',
@@ -433,15 +498,64 @@ export default function PineLabsUnderwritingPage() {
 
   // Partner authentication
   const [isAuthenticated, setIsAuthenticated] = useState(() => {
-    return tokenParam === 'plural2026' || sessionStorage.getItem('plural_underwriting_auth') === '1';
+    const auth = sessionStorage.getItem('plural_underwriting_auth');
+    const authTime = sessionStorage.getItem('plural_auth_timestamp');
+    if (auth === '1' && authTime) {
+      const elapsedHours = (Date.now() - parseInt(authTime, 10)) / (1000 * 60 * 60);
+      if (elapsedHours > 4) {
+        sessionStorage.removeItem('plural_underwriting_auth');
+        sessionStorage.removeItem('plural_auth_timestamp');
+        return false;
+      }
+      return true;
+    }
+    return tokenParam === 'plural2026';
   });
   const [pinInput, setPinInput] = useState('');
   const [pinError, setPinError] = useState(false);
+  const [showSensitivePii, setShowSensitivePii] = useState(false);
+
+  // Clean up token parameter from browser address bar immediately so it is never exposed in browser history or copy-pastes
+  useEffect(() => {
+    if (tokenParam === 'plural2026') {
+      sessionStorage.setItem('plural_underwriting_auth', '1');
+      sessionStorage.setItem('plural_auth_timestamp', Date.now().toString());
+      setIsAuthenticated(true);
+      const cleanParams = new URLSearchParams(window.location.search);
+      cleanParams.delete('access');
+      cleanParams.delete('token');
+      const newQuery = cleanParams.toString();
+      const newUrl = window.location.pathname + (newQuery ? `?${newQuery}` : '');
+      window.history.replaceState({}, '', newUrl);
+    }
+  }, [tokenParam]);
+
+  const maskAadhaar = (val: string) => {
+    if (showSensitivePii) return val;
+    const clean = (val || '').replace(/\s+/g, '');
+    if (clean.length < 4) return val;
+    return `•••• •••• ${clean.slice(-4)}`;
+  };
+
+  const maskAccountNo = (val: string) => {
+    if (showSensitivePii) return val;
+    const clean = (val || '').replace(/\s+/g, '');
+    if (clean.length < 4) return val;
+    return `•••• •••• ${clean.slice(-4)}`;
+  };
+
+  const handleLockDesk = () => {
+    sessionStorage.removeItem('plural_underwriting_auth');
+    sessionStorage.removeItem('plural_auth_timestamp');
+    setIsAuthenticated(false);
+    toast.info('Underwriting Desk locked successfully');
+  };
 
   // Clinic list state - initialized with bundled clinics and refreshed from Supabase
   const [clinics, setClinics] = useState<ClinicRecord[]>(() => (onboardedClinics as any) || []);
   const [loading, setLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [filterTab, setFilterTab] = useState<'all' | 'ready' | 'pending'>('all');
   
   // Selected clinic state: null = View 1 (Queue), string = View 2 (Clinic Dossier & Docs)
   const [selectedDossierId, setSelectedDossierId] = useState<string | null>(() => clinicParam);
@@ -535,6 +649,8 @@ export default function PineLabsUnderwritingPage() {
             aadhaar_front: `${storageBase}/aadhaar_${cleanClinic}.jpg`
           },
           is_signed: isSigned,
+          readiness: (isSigned || (hasKyc && c.has_cancelled_cheque === 'Yes')) ? 'ready' : 'pending',
+          missing_items: c.has_cancelled_cheque !== 'Yes' ? ['Cancelled Cheque / Bank Account Proof'] : [],
           status: isSigned
             ? 'Doctor Signed & Verified • Ready for MID'
             : hasKyc
@@ -580,7 +696,15 @@ export default function PineLabsUnderwritingPage() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const readyCount = useMemo(() => allDossiers.filter((d) => (d.readiness || 'ready') === 'ready').length, [allDossiers]);
+  const pendingCount = useMemo(() => allDossiers.filter((d) => d.readiness === 'pending').length, [allDossiers]);
+
   const filteredDossiers = allDossiers.filter((d) => {
+    // 1. Readiness Filter Tab
+    if (filterTab === 'ready' && d.readiness === 'pending') return false;
+    if (filterTab === 'pending' && (d.readiness || 'ready') !== 'pending') return false;
+
+    // 2. Search query filter
     const q = searchQuery.toLowerCase().trim();
     if (!q) return true;
     return (
@@ -599,6 +723,7 @@ export default function PineLabsUnderwritingPage() {
     e.preventDefault();
     if (pinInput.trim() === 'plural2026' || pinInput.trim() === 'clinaza2024') {
       sessionStorage.setItem('plural_underwriting_auth', '1');
+      sessionStorage.setItem('plural_auth_timestamp', Date.now().toString());
       setIsAuthenticated(true);
       setPinError(false);
       toast.success('Welcome to Pine Labs Underwriting Desk');
@@ -738,13 +863,20 @@ export default function PineLabsUnderwritingPage() {
           </div>
 
           <button
-            onClick={() => {
-              sessionStorage.removeItem('plural_underwriting_auth');
-              setIsAuthenticated(false);
-            }}
-            className="text-[11px] font-bold text-slate-600 hover:text-slate-900 px-3 py-1.5 rounded-lg border border-slate-200 hover:bg-slate-100 transition-colors cursor-pointer"
+            onClick={() => setShowSensitivePii(!showSensitivePii)}
+            className="flex items-center gap-1.5 text-[11px] font-bold text-slate-600 hover:text-slate-900 px-3 py-1.5 rounded-lg border border-slate-200 hover:bg-slate-100 transition-colors cursor-pointer"
+            title={showSensitivePii ? "Mask sensitive PII (Aadhaar & Bank)" : "Reveal sensitive PII"}
           >
-            Lock Desk
+            {showSensitivePii ? <EyeOff size={13} className="text-amber-600" /> : <Eye size={13} className="text-slate-500" />}
+            <span>{showSensitivePii ? 'Mask PII' : 'Reveal PII'}</span>
+          </button>
+
+          <button
+            onClick={handleLockDesk}
+            className="flex items-center gap-1.5 text-[11px] font-bold text-slate-600 hover:text-slate-900 px-3 py-1.5 rounded-lg border border-slate-200 hover:bg-slate-100 transition-colors cursor-pointer"
+          >
+            <Lock size={12} />
+            <span>Lock Desk</span>
           </button>
         </div>
       </header>
@@ -774,7 +906,17 @@ export default function PineLabsUnderwritingPage() {
                 </p>
               </div>
 
-              <div className="w-full sm:w-auto shrink-0">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 w-full sm:w-auto shrink-0">
+                <a
+                  href="/docs/kyc/Clinaza_All_Clinics_Complete_KYC_Dossiers.zip"
+                  download="Clinaza_All_Clinics_Complete_KYC_Dossiers.zip"
+                  className="inline-flex items-center justify-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold transition-all shadow-2xs whitespace-nowrap cursor-pointer"
+                  title="Download All 8 Clinic KYC Packages in 1 Consolidated ZIP Archive"
+                >
+                  <FolderDown size={14} className="text-emerald-400" />
+                  <span>Download Master ZIP (All Clinics)</span>
+                </a>
+
                 <div className="relative">
                   <Search size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
                   <input
@@ -782,15 +924,69 @@ export default function PineLabsUnderwritingPage() {
                     placeholder="Search clinic, doctor, city, bank..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full sm:w-72 pl-9 pr-3.5 py-2.5 rounded-xl bg-slate-50 sm:bg-white border border-slate-300 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-2xs"
+                    className="w-full sm:w-64 pl-9 pr-3.5 py-2.5 rounded-xl bg-slate-50 sm:bg-white border border-slate-300 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-2xs"
                   />
                 </div>
               </div>
             </div>
 
+            {/* ── READINESS FILTER TABS ── */}
+            <div className="flex flex-wrap items-center gap-2 pt-1 pb-1">
+              <button
+                onClick={() => setFilterTab('all')}
+                className={`flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                  filterTab === 'all'
+                    ? 'bg-slate-900 text-white shadow-2xs'
+                    : 'bg-slate-100 text-slate-600 hover:bg-slate-200/70 hover:text-slate-900 border border-slate-200'
+                }`}
+              >
+                <span>All Clinics</span>
+                <span className={`text-[10px] px-1.5 py-0.5 rounded-md font-black ${
+                  filterTab === 'all' ? 'bg-white/20 text-white' : 'bg-slate-200 text-slate-700'
+                }`}>
+                  {allDossiers.length}
+                </span>
+              </button>
+
+              <button
+                onClick={() => setFilterTab('ready')}
+                className={`flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                  filterTab === 'ready'
+                    ? 'bg-emerald-600 text-white shadow-2xs'
+                    : 'bg-emerald-50 text-emerald-800 border border-emerald-200 hover:bg-emerald-100'
+                }`}
+              >
+                <CheckCircle2 size={13} className={filterTab === 'ready' ? 'text-white' : 'text-emerald-600'} />
+                <span>100% Ready for MID</span>
+                <span className={`text-[10px] px-1.5 py-0.5 rounded-md font-black ${
+                  filterTab === 'ready' ? 'bg-white/20 text-white' : 'bg-emerald-200/70 text-emerald-900'
+                }`}>
+                  {readyCount}
+                </span>
+              </button>
+
+              <button
+                onClick={() => setFilterTab('pending')}
+                className={`flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                  filterTab === 'pending'
+                    ? 'bg-amber-600 text-white shadow-2xs'
+                    : 'bg-amber-50 text-amber-800 border border-amber-200 hover:bg-amber-100'
+                }`}
+              >
+                <AlertCircle size={13} className={filterTab === 'pending' ? 'text-white' : 'text-amber-600'} />
+                <span>Pending Items</span>
+                <span className={`text-[10px] px-1.5 py-0.5 rounded-md font-black ${
+                  filterTab === 'pending' ? 'bg-white/20 text-white' : 'bg-amber-200/70 text-amber-900'
+                }`}>
+                  {pendingCount}
+                </span>
+              </button>
+            </div>
+
             {/* ── CLINIC CARDS LIST (FULL-WIDTH BALANCED FLOW) ── */}
             <div className="space-y-4">
               {filteredDossiers.map((dossier) => {
+                const isPending = dossier.readiness === 'pending';
                 return (
                   <div
                     key={dossier.id}
@@ -799,7 +995,11 @@ export default function PineLabsUnderwritingPage() {
                   >
                     {/* Clinic Identity & Header */}
                     <div className="flex items-start gap-3.5">
-                      <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-blue-50 border border-blue-200 text-[#0867E8] font-bold flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform shadow-2xs">
+                      <div className={`w-11 h-11 sm:w-12 sm:h-12 rounded-2xl font-bold flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform shadow-2xs border ${
+                        isPending
+                          ? 'bg-amber-50 border-amber-200 text-amber-700'
+                          : 'bg-blue-50 border-blue-200 text-[#0867E8]'
+                      }`}>
                         <Building2 size={22} />
                       </div>
                       <div className="min-w-0 flex-1">
@@ -810,8 +1010,13 @@ export default function PineLabsUnderwritingPage() {
                           <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 border border-slate-200 shrink-0">
                             {dossier.city.split(',')[0]}
                           </span>
-                          <span className="text-[10px] font-black uppercase px-2 py-0.5 rounded-md bg-amber-50 text-amber-700 border border-amber-300 shrink-0">
-                            {dossier.submission_badge}
+                          <span className={`text-[10px] font-black uppercase px-2 py-0.5 rounded-md border shrink-0 flex items-center gap-1 ${
+                            isPending
+                              ? 'bg-amber-50 text-amber-800 border-amber-300'
+                              : 'bg-emerald-50 text-emerald-800 border-emerald-300'
+                          }`}>
+                            {isPending ? <AlertCircle size={11} className="text-amber-600" /> : <CheckCircle2 size={11} className="text-emerald-600" />}
+                            <span>{dossier.submission_badge}</span>
                           </span>
                         </div>
                         {/* Clean Non-Redundant Subtitle (Doctor + Legal Entity + Phone) */}
@@ -820,6 +1025,22 @@ export default function PineLabsUnderwritingPage() {
                         </p>
                       </div>
                     </div>
+
+                    {/* Pending Documents Alert Strip (if action required) */}
+                    {isPending && dossier.missing_items && dossier.missing_items.length > 0 && (
+                      <div className="bg-amber-50/90 border border-amber-200 rounded-xl px-3.5 py-2 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
+                        <div className="flex flex-wrap items-center gap-2">
+                          <span className="font-extrabold text-amber-900 text-[10.5px] uppercase tracking-wider flex items-center gap-1">
+                            <AlertCircle size={12} className="text-amber-600" />
+                            <span>Pending for MID:</span>
+                          </span>
+                          <span className="font-bold text-amber-950 text-[11px] bg-white px-2 py-0.5 rounded border border-amber-300 shadow-2xs">
+                            {dossier.missing_items.join(', ')}
+                          </span>
+                        </div>
+                        <span className="text-[10px] text-amber-700 font-semibold hidden sm:inline">Follow-up ongoing with clinic</span>
+                      </div>
+                    )}
 
                     {/* Settlement Bank Details - Full Width Structured Strip */}
                     <div className="bg-slate-50/80 rounded-xl p-3 sm:px-4 sm:py-3 border border-slate-200 text-xs">
@@ -832,7 +1053,7 @@ export default function PineLabsUnderwritingPage() {
                         <div className="flex items-center gap-1">
                           <span className="text-slate-500 text-[11px]">A/C:</span>
                           <span className="font-mono font-bold text-slate-800 bg-white px-1.5 py-0.5 rounded border border-slate-200 text-[11px] whitespace-nowrap">
-                            {dossier.bank.account_number}
+                            {maskAccountNo(dossier.bank.account_number)}
                           </span>
                         </div>
                         <span className="hidden sm:inline text-slate-300">&bull;</span>
@@ -861,8 +1082,13 @@ export default function PineLabsUnderwritingPage() {
                     {/* Bottom Action Bar: Status Pill on Left, Primary CTA on Right */}
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-3.5 border-t border-slate-100">
                       <div className="w-fit">
-                        <span className="text-[11px] font-black uppercase px-3 py-1.5 rounded-xl bg-emerald-50 text-emerald-700 border border-emerald-300 tracking-wider inline-block">
-                          {dossier.status}
+                        <span className={`text-[11px] font-black uppercase px-3 py-1.5 rounded-xl border tracking-wider inline-flex items-center gap-1.5 ${
+                          isPending
+                            ? 'bg-amber-50 text-amber-800 border-amber-300'
+                            : 'bg-emerald-50 text-emerald-700 border-emerald-300'
+                        }`}>
+                          {isPending ? <AlertCircle size={13} className="text-amber-600" /> : <CheckCircle2 size={13} className="text-emerald-600" />}
+                          <span>{dossier.status}</span>
                         </span>
                       </div>
 
@@ -936,14 +1162,23 @@ export default function PineLabsUnderwritingPage() {
             <div className="rounded-3xl bg-white border border-slate-200 p-6 sm:p-7 shadow-sm space-y-6">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-100">
                 <div className="flex items-center gap-3.5">
-                  <div className="w-12 h-12 rounded-2xl bg-amber-50 border border-amber-200 text-amber-600 flex items-center justify-center shrink-0">
-                    <Sparkles size={24} />
+                  <div className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 border ${
+                    activeDossier.readiness === 'pending'
+                      ? 'bg-amber-50 border-amber-200 text-amber-600'
+                      : 'bg-emerald-50 border-emerald-200 text-emerald-600'
+                  }`}>
+                    {activeDossier.readiness === 'pending' ? <AlertCircle size={24} /> : <CheckCircle2 size={24} />}
                   </div>
                   <div>
                     <div className="flex items-center gap-2">
                       <h2 className="text-xl font-black text-slate-900">{activeDossier.clinic_name}</h2>
-                      <span className="text-[10px] font-black uppercase px-2 py-0.5 rounded-md bg-amber-50 text-amber-700 border border-amber-300">
-                        {activeDossier.submission_badge}
+                      <span className={`text-[10px] font-black uppercase px-2 py-0.5 rounded-md border flex items-center gap-1 ${
+                        activeDossier.readiness === 'pending'
+                          ? 'bg-amber-50 text-amber-800 border-amber-300'
+                          : 'bg-emerald-50 text-emerald-800 border-emerald-300'
+                      }`}>
+                        {activeDossier.readiness === 'pending' ? <AlertCircle size={11} className="text-amber-600" /> : <CheckCircle2 size={11} className="text-emerald-600" />}
+                        <span>{activeDossier.readiness === 'pending' ? 'Action Required' : '100% Ready for MID'}</span>
                       </span>
                     </div>
                     <p className="text-xs text-slate-500">
@@ -983,11 +1218,54 @@ export default function PineLabsUnderwritingPage() {
                     <span>Full ZIP</span>
                   </a>
 
-                  <span className="text-[11px] font-bold px-3 py-1.5 rounded-xl bg-emerald-50 text-emerald-700 border border-emerald-300">
+                  <span className={`text-[11px] font-bold px-3 py-1.5 rounded-xl border ${
+                    activeDossier.readiness === 'pending'
+                      ? 'bg-amber-50 text-amber-800 border-amber-300'
+                      : 'bg-emerald-50 text-emerald-700 border-emerald-300'
+                  }`}>
                     Status: {activeDossier.status}
                   </span>
                 </div>
               </div>
+
+              {/* Dedicated Underwriting Readiness & Checklist Banner */}
+              {activeDossier.readiness === 'pending' ? (
+                <div className="bg-amber-50/80 border border-amber-300 rounded-2xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+                  <div className="flex items-start gap-2.5">
+                    <div className="w-8 h-8 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center shrink-0 mt-0.5">
+                      <AlertCircle size={16} />
+                    </div>
+                    <div>
+                      <span className="font-extrabold text-amber-950 block text-xs">1 Action Required for Sub-Merchant MID Activation:</span>
+                      <p className="text-amber-900 text-[11.5px] mt-0.5">
+                        Missing document: <strong className="underline">{activeDossier.missing_items?.join(', ')}</strong>. Underwriters may proceed with preliminary PAN/account verification, but final Pine Labs terminal MID will map once this document is attached.
+                      </p>
+                    </div>
+                  </div>
+                  <div className="shrink-0 flex items-center gap-1.5 bg-white/90 px-3 py-1.5 rounded-xl border border-amber-200 text-amber-900 font-bold text-[11px] shadow-2xs">
+                    <Clock size={13} className="text-amber-600" />
+                    <span>Doctor Follow-Up Ongoing</span>
+                  </div>
+                </div>
+              ) : (
+                <div className="bg-emerald-50/70 border border-emerald-200 rounded-2xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center shrink-0">
+                      <CheckCircle2 size={16} />
+                    </div>
+                    <div>
+                      <span className="font-extrabold text-emerald-950 block text-xs">All Mandatory Documents Verified (100% Ready)</span>
+                      <p className="text-emerald-800 text-[11.5px] mt-0.5">
+                        Doctor PAN, Aadhaar (Front &amp; Back), Cancelled Cheque, Business Establishment Proof, and 3-sheet Pine Labs MAF Excel are complete and validated.
+                      </p>
+                    </div>
+                  </div>
+                  <div className="shrink-0 flex items-center gap-1.5 bg-emerald-100/80 text-emerald-900 px-3 py-1.5 rounded-xl font-black text-[11px] border border-emerald-300">
+                    <CheckCircle2 size={13} className="text-emerald-700" />
+                    <span>Eligible for Instant MID</span>
+                  </div>
+                </div>
+              )}
 
               {/* 3-Column Dossier Breakdown */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
@@ -1021,7 +1299,16 @@ export default function PineLabsUnderwritingPage() {
                     </div>
                     <div>
                       <span className="text-slate-500 block text-[10.5px]">Aadhaar Number:</span>
-                      <span className="font-mono font-bold text-slate-800">{activeDossier.aadhaar}</span>
+                      <div className="flex items-center gap-2">
+                        <span className="font-mono font-bold text-slate-800">{maskAadhaar(activeDossier.aadhaar)}</span>
+                        <button
+                          onClick={() => setShowSensitivePii(!showSensitivePii)}
+                          className="p-1 hover:bg-slate-200 rounded text-slate-400 hover:text-slate-700 transition-colors cursor-pointer"
+                          title={showSensitivePii ? "Mask Aadhaar" : "Reveal Aadhaar"}
+                        >
+                          {showSensitivePii ? <EyeOff size={12} /> : <Eye size={12} />}
+                        </button>
+                      </div>
                     </div>
                     <div>
                       <span className="text-slate-500 block text-[10.5px]">Operating Clinic Address:</span>
@@ -1049,7 +1336,7 @@ export default function PineLabsUnderwritingPage() {
                     <div className="flex items-center justify-between">
                       <div>
                         <span className="text-slate-500 block text-[10.5px]">Current Account No:</span>
-                        <span className="font-mono font-bold text-slate-900 text-sm bg-slate-200/70 px-2 py-0.5 rounded">{activeDossier.bank.account_number}</span>
+                        <span className="font-mono font-bold text-slate-900 text-sm bg-slate-200/70 px-2 py-0.5 rounded">{maskAccountNo(activeDossier.bank.account_number)}</span>
                       </div>
                       <button
                         onClick={() => copyToClipboard(activeDossier.bank.account_number, 'Account Number')}
@@ -1099,10 +1386,12 @@ export default function PineLabsUnderwritingPage() {
                         </div>
                         <div className="text-left">
                           <span className="font-extrabold text-slate-900 text-[12px] block group-hover:text-emerald-700 transition-colors">
-                            {activeDossier.is_signed ? 'Doctor Signed Dossier (PDF)' : 'Doctor Signing Dossier (PDF)'}
+                            {activeDossier.id === 'elara-ivf' ? 'Signed Board Resolution (PDF)' : activeDossier.is_signed ? 'Doctor Signed Dossier (PDF)' : 'Doctor Signing Dossier (PDF)'}
                           </span>
                           <span className="text-[10px] text-emerald-700 font-semibold">
-                            {activeDossier.is_signed
+                            {activeDossier.id === 'elara-ivf'
+                              ? 'Pine Labs Arrangement Authorized • 3 Directors Signed (Corporate Resolution)'
+                              : activeDossier.is_signed
                               ? 'Official MAF + GST Exemption + PAN + Aadhaar • Signed & Stamped (6 Pages Verified)'
                               : 'Official MAF + GST Exemption + PAN + Aadhaar • Ready to Sign'}
                           </span>
@@ -1167,7 +1456,7 @@ export default function PineLabsUnderwritingPage() {
                       <div className="flex items-center gap-2">
                         <CreditCard size={14} className="text-sky-600" />
                         <span className="font-bold text-slate-800 group-hover:text-blue-600 transition-colors">
-                          Doctor Aadhaar (Front &amp; Back)
+                          {activeDossier.docs.aadhaar_back || activeDossier.id === 'elara-ivf' ? 'Doctor Aadhaar (Front & Back)' : 'Doctor Aadhaar Card'}
                         </span>
                       </div>
                       <ExternalLink size={13} className="text-slate-400 group-hover:text-slate-600" />
@@ -1182,7 +1471,7 @@ export default function PineLabsUnderwritingPage() {
                       <div className="flex items-center gap-2">
                         <FileText size={14} className="text-amber-600" />
                         <span className="font-bold text-slate-800 group-hover:text-blue-600 transition-colors">
-                          Udyam Registration Certificate
+                          {activeDossier.id === 'elara-ivf' ? 'GST Registration Certificate' : 'Udyam Registration Certificate'}
                         </span>
                       </div>
                       <ExternalLink size={13} className="text-slate-400 group-hover:text-slate-600" />
@@ -1198,7 +1487,7 @@ export default function PineLabsUnderwritingPage() {
                         <div className="flex items-center gap-2">
                           <ShieldCheck size={14} className="text-indigo-600" />
                           <span className="font-bold text-slate-800 group-hover:text-blue-600 transition-colors">
-                            Medical Establishment Registration
+                            {activeDossier.business_proof.type || 'Medical Establishment Registration'}
                           </span>
                         </div>
                         <ExternalLink size={13} className="text-slate-400 group-hover:text-slate-600" />

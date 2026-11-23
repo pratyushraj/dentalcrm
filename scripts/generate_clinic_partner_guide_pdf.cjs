@@ -797,7 +797,7 @@ const htmlContent = `<!DOCTYPE html>
         <div>
           <span class="plan-tag tag-blue">Complete Practice Suite &bull; All Included</span>
           <div class="plan-price">₹999 <span class="price-sub">One-Time Onboarding &bull; Zero Recurring AMC Ever</span></div>
-          <div class="plan-sub">Everything your clinic needs: full practice software, patient EMI financing gateway &amp; reception acrylic standee.</div>
+          <div class="plan-sub">Everything your clinic needs: full practice software, patient EMI financing gateway &amp; paperless digital checkout desk.</div>
         </div>
         <div class="allinone-badge">
           <div class="badge-title">ALL-IN-ONE</div>
@@ -812,10 +812,10 @@ const htmlContent = `<!DOCTYPE html>
           <li>✓ <strong>WhatsApp Rx Prescriptions:</strong> 1-click digital prescriptions sent directly to patient phones.</li>
         </ul>
         <ul class="plan-features">
-          <li>✓ <strong>Custom Acrylic Standee:</strong> Laser-printed reception QR standee with clinic logo &amp; doctor name.</li>
+          <li>✓ <strong>Digital Checkout Desk:</strong> Secure payment links and dynamic on-screen QR checkout for reception.</li>
           <li>✓ <strong>Front-Desk Pitch Cards:</strong> Ready-made 10-second conversion cards for reception staff.</li>
           <li>✓ <strong>Dedicated Relationship Manager:</strong> Priority onboarding &amp; direct WhatsApp support desk.</li>
-          <li>✓ <strong>Subsidized Platform Setup:</strong> ₹999 covers standee laser fabrication &amp; express courier delivery.</li>
+          <li>✓ <strong>One-Time Digital Activation:</strong> ₹999 covers clinic verification, doctor KYC underwriting, and gateway activation.</li>
         </ul>
       </div>
     </div>
@@ -884,7 +884,7 @@ const htmlContent = `<!DOCTYPE html>
       </div>
       <div class="act-info">
         <h3>Activate Your Clinic in 3 Simple Steps</h3>
-        <p>Scan the Razorpay QR code with any UPI app to order your custom reception acrylic standee and activate your clinic financing portal.</p>
+        <p>Scan the Razorpay QR code with any UPI app to activate your paperless clinic financing portal and digital reception desk.</p>
         
         <div class="payment-steps">
           <div class="step-pill">

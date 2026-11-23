@@ -25,6 +25,7 @@ const knownClinics = new Map([
   ['impressions-dental', { clinic: 'Impressions Dental Clinic', doctor: 'Dr. Dushyant Soni', city: 'Jodhpur, Rajasthan' }],
   ['amitha-dental', { clinic: 'Dr. Amitha Family Dental Care', doctor: 'Dr. Amitha G', city: 'Bengaluru, Karnataka' }],
   ['krishna-dental', { clinic: 'Krishna Dental Clinic', doctor: 'Dr. Saravan Kumar Vemula', city: 'Chilakaluripet, Guntur, Andhra Pradesh' }],
+  ['elara-ivf', { clinic: 'Elara IVF', doctor: 'Gajendra Singh Chouhan', city: 'Jodhpur, Rajasthan' }],
 ]);
 
 const entities = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };

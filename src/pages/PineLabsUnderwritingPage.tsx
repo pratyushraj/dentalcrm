@@ -1,9 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
-import { supabase } from '@/lib/supabase';
 import { SEOHead } from '@/components/seo/SEOHead';
 import { CLINIC_PREVIEW_ROBOTS, clinicLinkPreview, readClinicPreviewIdentity } from '@/lib/clinicLinkPreview.js';
-import onboardedClinics from '@/data/onboarded_clinics.json';
 import {
   ShieldCheck,
   Building2,
@@ -37,21 +35,6 @@ import {
   FileCheck
 } from 'lucide-react';
 import { toast } from 'sonner';
-
-interface ClinicRecord {
-  id: string;
-  clinic_name: string;
-  doctor_name: string | null;
-  city: string;
-  phone: string;
-  email: string | null;
-  has_current_account: string | null;
-  business_proof_type: string | null;
-  has_cancelled_cheque: string | null;
-  specialties: string[] | null;
-  source: string | null;
-  created_at: string;
-}
 
 // Verified Sub-Merchant KYC Dossiers for Pine Labs Plural Underwriting
 export interface VerifiedDossier {
@@ -551,118 +534,16 @@ export default function PineLabsUnderwritingPage() {
     toast.info('Underwriting Desk locked successfully');
   };
 
-  // Clinic list state - initialized with verified clinics and refreshed from Supabase
-  const [clinics, setClinics] = useState<ClinicRecord[]>([]);
-  const [loading, setLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [filterTab, setFilterTab] = useState<'all' | 'ready' | 'pending'>('all');
   
   // Selected clinic state: null = View 1 (Queue), string = View 2 (Clinic Dossier & Docs)
   const [selectedDossierId, setSelectedDossierId] = useState<string | null>(() => clinicParam);
 
-  const fetchClinics = async () => {
-    setLoading(true);
-    try {
-      const { data, error } = await supabase
-        .from('clinic_onboardings')
-        .select('*')
-        .order('created_at', { ascending: false });
-
-      if (error) throw error;
-      if (data && data.length > 0) {
-        setClinics(data);
-      }
-    } catch (err: any) {
-      console.error('Failed to load clinic list from Supabase:', err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  // Fetch immediately on mount (for OpenGraph & unauth previews) and on auth
-  useEffect(() => {
-    fetchClinics();
-  }, [isAuthenticated]);
-
-  // Merge static pilot dossiers with dynamic Supabase clinic onboardings
+  // Sub-Merchant Underwriting Desk displays strictly the verified clinic dossiers with compiled Pine Labs documentation
   const allDossiers: VerifiedDossier[] = useMemo(() => {
-    const list: VerifiedDossier[] = [...VERIFIED_DOSSIERS];
-    
-    for (const c of clinics) {
-      const cleanName = (c.clinic_name || '').toLowerCase().trim();
-      const cleanId = (c.id || '').toLowerCase().trim();
-      
-      const alreadyExists = list.some(
-        (d) =>
-          d.id.toLowerCase() === cleanId ||
-          d.clinic_name.toLowerCase().trim() === cleanName ||
-          (cleanId === 'c1b4ab14-e0a4-4a60-9a86-ebedc9616675' && d.id === 'hear-one')
-      );
-      
-      const hasKyc = c.has_cancelled_cheque === 'Yes' || (c.business_proof_type && c.business_proof_type.toLowerCase().includes('kyc'));
-      const isSigned = Boolean(c.business_proof_type && c.business_proof_type.toLowerCase().includes('signed'));
-      
-      // Only include dynamic onboarding submissions that have actually completed KYC & cheque upload
-      if (!alreadyExists && c.clinic_name && (hasKyc || isSigned) && c.has_cancelled_cheque === 'Yes') {
-        const folderName = c.id;
-        const cleanClinic = c.clinic_name.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
-        const storageBase = `https://sqqocqujxlgoxbcnfbfb.supabase.co/storage/v1/object/public/clinic-documents/${folderName}`;
-        
-        list.push({
-          id: c.id,
-          clinic_name: c.clinic_name,
-          legal_name: `${c.clinic_name.toUpperCase()} (Sole Proprietorship)`,
-          doctor_name: c.doctor_name || 'Doctor / Director',
-          dob: 'As per PAN Verification',
-          pan: 'Verified on Desk',
-          aadhaar: 'Verified on Desk',
-          phone: c.phone || 'Not Specified',
-          email: c.email || 'accounts@clinaza.in',
-          city: c.city || 'India',
-          pincode: 'PIN as per CPV',
-          address: c.city || 'India',
-          residential_address: c.city || 'India',
-          specialties: Array.isArray(c.specialties) && c.specialties.length > 0 ? c.specialties : ['Dental Surgery', 'MCC 8021'],
-          submission_badge: isSigned ? 'Doctor Signed Dossier' : hasKyc ? 'KYC Uploaded • In Review' : 'New Application',
-          bank: {
-            bank_name: 'Current Account (Under Verification)',
-            account_holder: c.doctor_name || c.clinic_name,
-            account_number: '•••• •••• ' + (c.phone ? c.phone.replace(/\D/g, '').slice(-4) : '0000'),
-            account_type: 'Current Account',
-            ifsc: 'Under Verification',
-            branch: c.city || 'India',
-            micr: 'Verified',
-            cheque_no: 'Verified'
-          },
-          business_proof: {
-            type: c.business_proof_type || 'Clinical Establishment / GST',
-            number: 'Verified on Desk',
-            category: 'Healthcare Clinical Establishment (MCC 8021)',
-            date: c.created_at ? new Date(c.created_at).toLocaleDateString('en-GB') : '2026'
-          },
-          docs: {
-            signing_pdf: `${storageBase}/Signed_Doctor_KYC_Dossier_${cleanClinic}.pdf`,
-            zip_bundle: `${storageBase}/${cleanClinic}_Complete_KYC_Dossier.zip`,
-            maf_excel: `/docs/kyc/Plural_MAF_BO_PEP.xlsx`,
-            gst_declaration_pdf: `${storageBase}/Signed_GST_Exemption_Declaration_${cleanClinic}.pdf`,
-            cancelled_cheque: `${storageBase}/cheque_${cleanClinic}.jpg`,
-            doctor_pan: `${storageBase}/pan_${cleanClinic}.jpg`,
-            aadhaar_front: `${storageBase}/aadhaar_${cleanClinic}.jpg`
-          },
-          is_signed: isSigned,
-          readiness: (isSigned || (hasKyc && c.has_cancelled_cheque === 'Yes')) ? 'ready' : 'pending',
-          missing_items: c.has_cancelled_cheque !== 'Yes' ? ['Cancelled Cheque / Bank Account Proof'] : [],
-          status: isSigned
-            ? 'Doctor Signed & Verified • Ready for MID'
-            : hasKyc
-            ? 'KYC Uploaded • Ready for Underwriting'
-            : 'Pending Document Upload'
-        });
-      }
-    }
-    
-    return list;
-  }, [clinics]);
+    return [...VERIFIED_DOSSIERS];
+  }, []);
 
   // Sync state if URL parameter changes
   useEffect(() => {

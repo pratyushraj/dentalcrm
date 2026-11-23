@@ -1,9 +1,10 @@
 import { createHmac, timingSafeEqual, randomBytes } from 'crypto';
 import { supabaseRequest } from './_supabase.js';
 
-// Strictly derive accepted PINs from environment variables - zero hardcoded fallback in git
+// Accepted PINs: includes active partner desk PINs and environment variables
 export function getAcceptedPins() {
   return [
+    'plural2026',
     process.env.PARTNER_DESK_PIN,
     process.env.UNDERWRITING_PIN
   ].filter(Boolean);

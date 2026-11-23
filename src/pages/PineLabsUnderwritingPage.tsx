@@ -32,7 +32,8 @@ import {
   FolderDown,
   ArrowDownToLine,
   Archive,
-  FileCheck
+  FileCheck,
+  X
 } from 'lucide-react';
 import { toast } from 'sonner';
 
@@ -805,18 +806,31 @@ export default function PineLabsUnderwritingPage() {
                   <Search size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
                   <input
                     type="text"
-                    placeholder="Search clinic, doctor, city, bank..."
+                    aria-label="Search clinics by name, doctor, city, bank, or PAN"
+                    placeholder="Search clinic, doctor, city, bank, PAN..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full sm:w-64 pl-9 pr-3.5 py-2.5 rounded-xl bg-slate-50 sm:bg-white border border-slate-300 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-2xs"
+                    className="w-full sm:w-64 pl-9 pr-8 py-2.5 rounded-xl bg-slate-50 sm:bg-white border border-slate-300 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-2xs"
                   />
+                  {searchQuery && (
+                    <button
+                      onClick={() => setSearchQuery('')}
+                      aria-label="Clear search"
+                      className="absolute right-2.5 top-1/2 -translate-y-1/2 p-0.5 rounded-full hover:bg-slate-200 text-slate-400 hover:text-slate-600 transition-colors"
+                    >
+                      <X size={13} />
+                    </button>
+                  )}
                 </div>
               </div>
             </div>
 
             {/* ── READINESS FILTER TABS ── */}
-            <div className="flex flex-wrap items-center gap-2 pt-1 pb-1">
+            <div role="tablist" aria-label="Underwriting readiness filter" className="flex flex-wrap items-center gap-2 pt-1 pb-1">
               <button
+                role="tab"
+                aria-selected={filterTab === 'all'}
+                aria-controls="underwriting-queue-panel"
                 onClick={() => setFilterTab('all')}
                 className={`flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                   filterTab === 'all'
@@ -833,6 +847,9 @@ export default function PineLabsUnderwritingPage() {
               </button>
 
               <button
+                role="tab"
+                aria-selected={filterTab === 'ready'}
+                aria-controls="underwriting-queue-panel"
                 onClick={() => setFilterTab('ready')}
                 className={`flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                   filterTab === 'ready'
@@ -850,6 +867,9 @@ export default function PineLabsUnderwritingPage() {
               </button>
 
               <button
+                role="tab"
+                aria-selected={filterTab === 'pending'}
+                aria-controls="underwriting-queue-panel"
                 onClick={() => setFilterTab('pending')}
                 className={`flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                   filterTab === 'pending'
@@ -939,6 +959,17 @@ export default function PineLabsUnderwritingPage() {
                           <span className="font-mono font-bold text-slate-800 bg-white px-1.5 py-0.5 rounded border border-slate-200 text-[11px] whitespace-nowrap">
                             {maskAccountNo(dossier.bank.account_number)}
                           </span>
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              copyToClipboard(dossier.bank.account_number, `${dossier.clinic_name} Account Number`);
+                            }}
+                            title="Copy Account Number"
+                            aria-label={`Copy account number for ${dossier.clinic_name}`}
+                            className="p-1 hover:bg-slate-200 text-slate-400 hover:text-slate-700 rounded transition-colors"
+                          >
+                            <Copy size={11} />
+                          </button>
                         </div>
                         <span className="hidden sm:inline text-slate-300">&bull;</span>
                         <div className="flex items-center gap-1">
@@ -946,6 +977,17 @@ export default function PineLabsUnderwritingPage() {
                           <span className="font-mono font-bold text-blue-700 bg-blue-50 px-1.5 py-0.5 rounded border border-blue-200 text-[11px] whitespace-nowrap">
                             {dossier.bank.ifsc}
                           </span>
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              copyToClipboard(dossier.bank.ifsc, `${dossier.clinic_name} IFSC`);
+                            }}
+                            title="Copy IFSC"
+                            aria-label={`Copy IFSC for ${dossier.clinic_name}`}
+                            className="p-1 hover:bg-slate-200 text-slate-400 hover:text-slate-700 rounded transition-colors"
+                          >
+                            <Copy size={11} />
+                          </button>
                         </div>
                       </div>
                     </div>
@@ -955,6 +997,17 @@ export default function PineLabsUnderwritingPage() {
                       <div className="inline-flex items-center gap-1.5 bg-blue-50 text-[#0867E8] border border-blue-200 px-2.5 py-1 rounded-xl text-[11px] font-bold">
                         <UserCheck size={13} />
                         <span>Doctor PAN: {dossier.pan}</span>
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            copyToClipboard(dossier.pan, `${dossier.doctor_name} PAN`);
+                          }}
+                          title="Copy Doctor PAN"
+                          aria-label={`Copy doctor PAN for ${dossier.doctor_name}`}
+                          className="p-0.5 hover:bg-blue-100 rounded text-blue-500 hover:text-blue-800 transition-colors"
+                        >
+                          <Copy size={11} />
+                        </button>
                       </div>
 
                       <div className="inline-flex items-center gap-1.5 bg-teal-50 text-teal-700 border border-teal-200 px-2.5 py-1 rounded-xl text-[11px] font-bold">
@@ -1020,21 +1073,22 @@ export default function PineLabsUnderwritingPage() {
               </div>
 
               {/* Quick Clinic Switcher Pills */}
-              <div className="flex items-center gap-2 overflow-x-auto max-w-full pb-1">
+              <div className="flex items-center gap-2 overflow-x-auto max-w-full pb-1 scrollbar-none" style={{ WebkitOverflowScrolling: 'touch' }}>
                 <span className="text-[11px] text-slate-500 font-bold hidden lg:inline whitespace-nowrap">Switch Clinic:</span>
-                {allDossiers.slice(0, 8).map((d) => {
+                {allDossiers.map((d) => {
                   const isSelected = d.id === activeDossier.id;
+                  const isReady = d.readiness !== 'pending';
                   return (
                     <button
                       key={d.id}
                       onClick={() => handleSelectClinic(d.id)}
-                      className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 border ${
+                      className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 border whitespace-nowrap shrink-0 ${
                         isSelected
                           ? 'bg-blue-50 border-[#0867E8] text-[#0867E8] ring-1 ring-blue-500/20'
                           : 'bg-slate-50 hover:bg-slate-100 border-slate-200 text-slate-600'
                       }`}
                     >
-                      <span className={`w-1.5 h-1.5 rounded-full ${isSelected ? 'bg-[#0867E8]' : 'bg-slate-400'}`} />
+                      <span className={`w-2 h-2 rounded-full shrink-0 ${isReady ? 'bg-emerald-500' : 'bg-amber-500'}`} />
                       <span>{d.clinic_name.split(' ')[0]}</span>
                     </button>
                   );

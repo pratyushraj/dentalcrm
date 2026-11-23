@@ -4,7 +4,8 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "functions": {
-    "api/meta.js": { "includeFiles": "dist/_app.html" }
+    "api/meta.js": { "includeFiles": "dist/_app.html" },
+    "api/kyc-document.js": { "includeFiles": "private/docs/kyc/**" }
   },
   "headers": [
     {
@@ -152,6 +153,10 @@
     { "source": "/reactivation", "destination": "/reactivation/customers", "permanent": true }
   ],
   "rewrites": [
+    {
+      "source": "/docs/kyc/:path*",
+      "destination": "/api/kyc-document?file=:path*"
+    },
     {
       "source": "/api/webhook/:provider",
       "destination": "/api/webhook?provider=:provider"

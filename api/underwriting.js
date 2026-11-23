@@ -1,118 +1,102 @@
-import { createHmac, timingSafeEqual, randomBytes } from 'crypto';
+import {
+  verifyPin,
+  createSessionToken,
+  verifySessionToken,
+  isRateLimited,
+  recordFailedAttempt,
+  resetFailedAttempts,
+  parseCookies,
+  setSessionCookie,
+  clearSessionCookie,
+  SESSION_TTL_MS
+} from './_auth.js';
 import { VERIFIED_DOSSIERS } from './underwriting-data.js';
 
-const ACCEPTED_PINS = [
-  process.env.PARTNER_DESK_PIN,
-  process.env.UNDERWRITING_PIN,
-  'plural2026',
-  'clinaza2024'
-].filter(Boolean);
+async function fetchDynamicOnboardedDossiers() {
+  const supabaseUrl = process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL;
+  const supabaseKey = process.env.SUPABASE_ANON_KEY || process.env.VITE_SUPABASE_ANON_KEY;
+  if (!supabaseUrl || !supabaseKey) return [];
 
-const SESSION_SECRET = process.env.UNDERWRITING_SESSION_SECRET || 'clinaza-plural-risk-underwriting-secret-key-2026';
-const SESSION_TTL_MS = 8 * 60 * 60 * 1000; // 8 hours
-
-// Simple in-memory rate limiting for brute-force protection
-const failedAttempts = new Map();
-const RATE_LIMIT_MAX = 10;
-const RATE_LIMIT_WINDOW_MS = 15 * 60 * 1000; // 15 mins
-
-function isRateLimited(ip) {
-  if (!ip) return false;
-  const now = Date.now();
-  const record = failedAttempts.get(ip);
-  if (!record) return false;
-  if (now - record.startTime > RATE_LIMIT_WINDOW_MS) {
-    failedAttempts.delete(ip);
-    return false;
-  }
-  return record.count >= RATE_LIMIT_MAX;
-}
-
-function recordFailedAttempt(ip) {
-  if (!ip) return;
-  const now = Date.now();
-  const record = failedAttempts.get(ip);
-  if (!record || now - record.startTime > RATE_LIMIT_WINDOW_MS) {
-    failedAttempts.set(ip, { count: 1, startTime: now });
-  } else {
-    record.count += 1;
-  }
-}
-
-function resetFailedAttempts(ip) {
-  if (ip) failedAttempts.delete(ip);
-}
-
-function verifyPin(inputPin) {
-  if (typeof inputPin !== 'string' || !inputPin.trim()) return false;
-  const trimmed = inputPin.trim();
-  for (const validPin of ACCEPTED_PINS) {
-    const bufA = Buffer.from(trimmed, 'utf8');
-    const bufB = Buffer.from(validPin, 'utf8');
-    if (bufA.length === bufB.length && timingSafeEqual(bufA, bufB)) {
-      return true;
-    }
-  }
-  return false;
-}
-
-function createSessionToken(role = 'underwriter') {
-  const payload = JSON.stringify({
-    role,
-    iat: Date.now(),
-    exp: Date.now() + SESSION_TTL_MS,
-    nonce: randomBytes(8).toString('hex')
-  });
-  const b64Payload = Buffer.from(payload).toString('base64url');
-  const signature = createHmac('sha256', SESSION_SECRET).update(b64Payload).digest('base64url');
-  return `${b64Payload}.${signature}`;
-}
-
-function verifySessionToken(token) {
-  if (!token || typeof token !== 'string') return null;
-  const parts = token.split('.');
-  if (parts.length !== 2) return null;
-  const [b64Payload, sig] = parts;
   try {
-    const expectedSig = createHmac('sha256', SESSION_SECRET).update(b64Payload).digest('base64url');
-    const bufA = Buffer.from(sig, 'utf8');
-    const bufB = Buffer.from(expectedSig, 'utf8');
-    if (bufA.length !== bufB.length || !timingSafeEqual(bufA, bufB)) {
-      return null;
+    const res = await fetch(
+      `${supabaseUrl}/rest/v1/clinic_onboardings?order=created_at.desc&limit=25`,
+      {
+        headers: {
+          apikey: supabaseKey,
+          Authorization: `Bearer ${supabaseKey}`
+        },
+        signal: AbortSignal.timeout(3500)
+      }
+    );
+    if (!res.ok) return [];
+    const rows = await res.json();
+    if (!Array.isArray(rows)) return [];
+
+    const existingIds = new Set(VERIFIED_DOSSIERS.map((d) => d.id.toLowerCase()));
+    const dynamicDossiers = [];
+
+    for (const r of rows) {
+      if (!r.id || !r.clinic_name) continue;
+      const lowerId = r.id.toLowerCase();
+      // Skip if already in hardcoded / verified dossiers
+      if (existingIds.has(lowerId)) continue;
+
+      const clinicName = (r.clinic_name || 'Clinic').trim();
+      const doctorName = (r.doctor_name || 'Doctor').trim();
+      const city = (r.city || 'India').trim();
+
+      dynamicDossiers.push({
+        id: r.id,
+        clinic_name: clinicName,
+        legal_name: `${clinicName.toUpperCase()} (Sole Proprietorship)`,
+        doctor_name: doctorName,
+        dob: 'Under Verification',
+        pan: 'Under Verification',
+        aadhaar: 'Under Verification',
+        phone: r.phone || 'Under Verification',
+        email: r.email || 'Under Verification',
+        city: city,
+        pincode: 'Under Verification',
+        address: `${city}, India`,
+        residential_address: `${city}, India`,
+        specialties: ['General Dentistry', 'Patient Healthcare Financing'],
+        submission_badge: 'Action Required • KYC Verification Pending',
+        readiness: 'pending',
+        missing_items: ['Doctor PAN & Aadhaar Self-Attestation', 'Settlement Bank Cancelled Cheque', 'Signed Doctor MAF Form'],
+        bank: {
+          bank_name: 'Current Account (Under Bank Linking)',
+          account_holder: clinicName.toUpperCase(),
+          account_number: 'Pending Cheque Upload',
+          account_type: 'Current Account',
+          ifsc: 'Under Verification',
+          branch: city,
+          micr: 'Under Verification',
+          cheque_no: 'Pending Cheque Upload'
+        },
+        business_proof: {
+          type: r.business_proof_type || 'Clinical Establishment Proof',
+          number: 'Under Verification',
+          category: 'Healthcare Clinical Establishment',
+          date: new Date(r.created_at || Date.now()).toLocaleDateString('en-GB')
+        },
+        docs: {
+          signing_pdf: '',
+          zip_bundle: '',
+          maf_excel: '',
+          cancelled_cheque: '',
+          doctor_pan: '',
+          aadhaar_front: ''
+        },
+        is_signed: false,
+        status: 'Action Required • Awaiting Doctor KYC & Cancelled Cheque'
+      });
     }
-    const payload = JSON.parse(Buffer.from(b64Payload, 'base64url').toString('utf8'));
-    if (payload.exp && payload.exp > Date.now()) {
-      return payload;
-    }
-  } catch {
-    return null;
+
+    return dynamicDossiers;
+  } catch (err) {
+    console.error('Failed to load dynamic clinic onboardings:', err.message);
+    return [];
   }
-  return null;
-}
-
-function parseCookies(cookieHeader) {
-  const cookies = {};
-  if (!cookieHeader) return cookies;
-  const items = cookieHeader.split(';');
-  for (const item of items) {
-    const parts = item.split('=');
-    if (parts.length >= 2) {
-      cookies[parts[0].trim()] = decodeURIComponent(parts.slice(1).join('=').trim());
-    }
-  }
-  return cookies;
-}
-
-function setSessionCookie(res, token) {
-  const isProd = process.env.NODE_ENV === 'production' || process.env.VERCEL_ENV === 'production';
-  const cookie = `clinaza_uw_session=${token}; Path=/; Max-Age=28800; HttpOnly; SameSite=Lax${isProd ? '; Secure' : ''}`;
-  res.setHeader('Set-Cookie', cookie);
-}
-
-function clearSessionCookie(res) {
-  const isProd = process.env.NODE_ENV === 'production' || process.env.VERCEL_ENV === 'production';
-  const cookie = `clinaza_uw_session=; Path=/; Max-Age=0; HttpOnly; SameSite=Lax${isProd ? '; Secure' : ''}`;
-  res.setHeader('Set-Cookie', cookie);
 }
 
 export default async function handler(req, res) {
@@ -148,12 +132,16 @@ export default async function handler(req, res) {
       const token = createSessionToken('underwriter');
       setSessionCookie(res, token);
       res.setHeader('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+
+      const dynamicDossiers = await fetchDynamicOnboardedDossiers();
+      const allDossiers = [...VERIFIED_DOSSIERS, ...dynamicDossiers];
+
       return res.status(200).json({
         success: true,
         authenticated: true,
         token,
         expiresAt: Date.now() + SESSION_TTL_MS,
-        dossiers: VERIFIED_DOSSIERS
+        dossiers: allDossiers
       });
     } else {
       recordFailedAttempt(clientIp);
@@ -175,11 +163,27 @@ export default async function handler(req, res) {
 
     let session = null;
 
-    // Check query PIN access (e.g. ?access=plural2026) for seamless partner access
-    if (accessParam && verifyPin(accessParam)) {
-      const newToken = createSessionToken('underwriter');
-      setSessionCookie(res, newToken);
-      session = { role: 'underwriter' };
+    // Check query PIN access (e.g. ?access=...) with rate limiting
+    if (accessParam) {
+      if (isRateLimited(clientIp)) {
+        return res.status(429).json({
+          authenticated: false,
+          error: 'Too many failed login attempts. Please wait 15 minutes before trying again.'
+        });
+      }
+
+      if (verifyPin(accessParam)) {
+        resetFailedAttempts(clientIp);
+        const newToken = createSessionToken('underwriter');
+        setSessionCookie(res, newToken);
+        session = { role: 'underwriter' };
+      } else {
+        recordFailedAttempt(clientIp);
+        return res.status(401).json({
+          authenticated: false,
+          error: 'Unauthorized: Invalid access PIN.'
+        });
+      }
     } else {
       const candidateToken = cookies.clinaza_uw_session || bearerToken || customHeaderToken || queryToken;
       session = verifySessionToken(candidateToken);
@@ -194,9 +198,13 @@ export default async function handler(req, res) {
 
     res.setHeader('Cache-Control', 'private, no-cache, no-store, must-revalidate');
     res.setHeader('X-Robots-Tag', 'noindex, nofollow, noarchive');
+
+    const dynamicDossiers = await fetchDynamicOnboardedDossiers();
+    const allDossiers = [...VERIFIED_DOSSIERS, ...dynamicDossiers];
+
     return res.status(200).json({
       authenticated: true,
-      dossiers: VERIFIED_DOSSIERS
+      dossiers: allDossiers
     });
   }
 

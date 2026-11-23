@@ -81,6 +81,43 @@ function renderHead(shell, meta, canonical, previewUrl) {
     .replace(/<\/head>/i, () => `${tags}\n</head>`));
 }
 
+async function resolveClinicIdentity(clinicRef, searchParams) {
+  if (clinicRef) {
+    const known = knownClinics.get(clinicRef);
+    if (known) return known;
+
+    try {
+      const supabaseUrl = process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL;
+      const supabaseKey = process.env.SUPABASE_ANON_KEY || process.env.VITE_SUPABASE_ANON_KEY;
+      if (supabaseUrl && supabaseKey) {
+        const isUuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(clinicRef);
+        const query = isUuid ? `id=eq.${clinicRef}` : `clinic_name=ilike.%${encodeURIComponent(clinicRef)}%`;
+        const res = await fetch(`${supabaseUrl}/rest/v1/clinic_onboardings?${query}&select=clinic_name,doctor_name,city&limit=1`, {
+          headers: {
+            apikey: supabaseKey,
+            Authorization: `Bearer ${supabaseKey}`
+          },
+          signal: AbortSignal.timeout(3000)
+        });
+        if (res.ok) {
+          const rows = await res.json();
+          if (rows && rows[0]?.clinic_name) {
+            return {
+              clinic: rows[0].clinic_name,
+              doctor: rows[0].doctor_name || '',
+              city: rows[0].city || ''
+            };
+          }
+        }
+      }
+    } catch {
+      // Fall through to query parameter reading
+    }
+  }
+
+  return readClinicPreviewIdentity(searchParams);
+}
+
 export default async function handler(req, res) {
   res.setHeader('Cache-Control', 'private, no-store');
   res.setHeader('X-Robots-Tag', CLINIC_PREVIEW_ROBOTS);
@@ -98,7 +135,7 @@ export default async function handler(req, res) {
   if (!route) return res.status(404).end();
 
   const clinicRef = url.searchParams.get('clinic')?.trim().toLowerCase();
-  const identity = knownClinics.get(clinicRef) ?? readClinicPreviewIdentity(url.searchParams);
+  const identity = await resolveClinicIdentity(clinicRef, url.searchParams);
   const meta = clinicLinkPreview(route.kind, identity);
   const canonical = new URL(route.canonical ?? route.path, origin).href;
   const previewUrl = new URL(route.path, origin);

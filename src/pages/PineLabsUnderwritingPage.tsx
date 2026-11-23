@@ -79,6 +79,8 @@ export interface VerifiedDossier {
     zip_bundle: string;
     maf_excel: string;
     gst_declaration_pdf?: string;
+    gst_certificate?: string;
+    board_resolution?: string;
     cancelled_cheque: string;
     doctor_pan: string;
     aadhaar_front: string;
@@ -244,12 +246,19 @@ export default function PineLabsUnderwritingPage() {
 
   const isActiveReady = isClinicFullyReady(activeDossier);
 
+  const resetScrollTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    document.getElementById('root')?.scrollTo({ top: 0, behavior: 'smooth' });
+    document.documentElement?.scrollTo({ top: 0, behavior: 'smooth' });
+    document.body?.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   const handleSelectClinic = (id: string) => {
     setSelectedDossierId(id);
     const nextParams = new URLSearchParams(searchParams);
     nextParams.set('clinic', id);
     setSearchParams(nextParams);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    resetScrollTop();
   };
 
   const handleBackToQueue = () => {
@@ -257,7 +266,7 @@ export default function PineLabsUnderwritingPage() {
     const nextParams = new URLSearchParams(searchParams);
     nextParams.delete('clinic');
     setSearchParams(nextParams);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    resetScrollTop();
   };
 
   const readyCount = useMemo(() => allDossiers.filter((d) => isClinicFullyReady(d)).length, [allDossiers]);
@@ -346,9 +355,16 @@ export default function PineLabsUnderwritingPage() {
     }
   };
 
-  const copyToClipboard = (text: string, label: string) => {
-    navigator.clipboard?.writeText(text);
-    toast.success(`${label} copied to clipboard!`);
+  const copyToClipboard = async (text: string, label: string) => {
+    try {
+      if (!navigator.clipboard?.writeText) {
+        throw new Error('Clipboard API not available');
+      }
+      await navigator.clipboard.writeText(text);
+      toast.success(`${label} copied to clipboard!`);
+    } catch {
+      toast.error(`Could not copy ${label}. Please copy manually.`);
+    }
   };
 
   // Clinic-specific dynamic SEO & Open Graph preview for WhatsApp unfurls
@@ -395,7 +411,7 @@ export default function PineLabsUnderwritingPage() {
             <div className="w-12 h-12 rounded-2xl bg-blue-50 border border-blue-200 text-[#0867E8] flex items-center justify-center mx-auto mb-2">
               <Lock size={22} />
             </div>
-            <h2 className="text-xl font-extrabold text-slate-900">Underwriting Desk Access</h2>
+            <h1 className="text-xl font-extrabold text-slate-900">Pine Labs Underwriting Desk</h1>
             <p className="text-xs text-slate-500 leading-relaxed">
               Confidential partner portal for Advaita Parmar &amp; Pine Labs Risk Team. Enter your access PIN:
             </p>
@@ -403,22 +419,30 @@ export default function PineLabsUnderwritingPage() {
 
           <form onSubmit={handleLogin} className="space-y-4">
             <div>
+              <label htmlFor="partner-access-pin" className="block text-xs font-bold text-slate-700 mb-1.5 text-left">
+                Partner Access PIN
+              </label>
               <input
+                id="partner-access-pin"
+                name="partnerAccessPin"
                 type="password"
                 placeholder="Enter Partner Access PIN"
+                aria-label="Partner Access PIN"
+                aria-invalid={Boolean(pinError)}
+                aria-describedby={pinError ? "pin-error-msg" : undefined}
                 value={pinInput}
                 onChange={(e) => {
                   setPinInput(e.target.value);
                   if (pinError) setPinError(null);
                 }}
                 disabled={isSubmittingPin}
-                className={`w-full px-4 py-3 rounded-xl bg-slate-50 border text-slate-900 text-sm focus:outline-none focus:bg-white focus:ring-2 focus:ring-blue-500 transition-all ${
+                className={`w-full px-4 py-3 min-h-[44px] rounded-xl bg-slate-50 border text-slate-900 text-sm focus:outline-none focus:bg-white focus:ring-2 focus:ring-blue-500 transition-all ${
                   pinError ? 'border-rose-400 focus:ring-rose-400 bg-rose-50/30' : 'border-slate-300'
                 }`}
                 autoFocus
               />
               {pinError && (
-                <p className="text-xs text-rose-600 font-medium mt-1.5 flex items-center gap-1">
+                <p id="pin-error-msg" role="alert" className="text-xs text-rose-600 font-medium mt-1.5 flex items-center gap-1">
                   <AlertCircle size={12} className="shrink-0" /> <span>{pinError}</span>
                 </p>
               )}
@@ -427,7 +451,7 @@ export default function PineLabsUnderwritingPage() {
             <button
               type="submit"
               disabled={isSubmittingPin}
-              className="w-full py-3 bg-[#0867E8] hover:bg-[#0756C7] disabled:opacity-75 text-white text-xs font-black uppercase tracking-wider rounded-xl transition-all shadow-md shadow-blue-500/25 active:scale-98 cursor-pointer flex items-center justify-center gap-2"
+              className="w-full py-3 min-h-[44px] bg-[#0867E8] hover:bg-[#0756C7] disabled:opacity-75 text-white text-xs font-black uppercase tracking-wider rounded-xl transition-all shadow-md shadow-blue-500/25 active:scale-98 cursor-pointer flex items-center justify-center gap-2"
             >
               {isSubmittingPin ? (
                 <>
@@ -523,9 +547,9 @@ export default function PineLabsUnderwritingPage() {
               <div className="min-w-0">
                 <div className="flex items-center gap-2.5 flex-wrap">
                   <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse shrink-0" />
-                  <h2 className="text-lg sm:text-xl font-black text-[#0B2450] tracking-tight whitespace-nowrap">
-                    Applications Ready for Underwriting ({filteredDossiers.length})
-                  </h2>
+                  <h1 className="text-lg sm:text-xl font-black text-[#0B2450] tracking-tight">
+                    Underwriting Applications ({filteredDossiers.length})
+                  </h1>
                   <span className="text-[10px] font-black uppercase px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-700 border border-emerald-300 shrink-0">
                     Pine Labs Nodal Review
                   </span>
@@ -636,13 +660,14 @@ export default function PineLabsUnderwritingPage() {
                   aria-selected={filterTab === 'all'}
                   aria-controls="underwriting-queue-panel"
                   onClick={() => setFilterTab('all')}
-                  className={`flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer shrink-0 whitespace-nowrap ${
+                  className={`flex items-center gap-1.5 sm:gap-2 px-3 sm:px-3.5 py-2 min-h-[38px] rounded-xl text-xs font-bold transition-all cursor-pointer shrink-0 whitespace-nowrap ${
                     filterTab === 'all'
                       ? 'bg-slate-900 text-white shadow-2xs'
                       : 'text-slate-600 hover:text-slate-900 hover:bg-white/60'
                   }`}
                 >
-                  <span>All Clinics</span>
+                  <span className="sm:hidden">All</span>
+                  <span className="hidden sm:inline">All Clinics</span>
                   <span className={`text-[10px] px-1.5 py-0.5 rounded-md font-black ${
                     filterTab === 'all' ? 'bg-white/20 text-white' : 'bg-slate-200 text-slate-700'
                   }`}>
@@ -655,14 +680,15 @@ export default function PineLabsUnderwritingPage() {
                   aria-selected={filterTab === 'ready'}
                   aria-controls="underwriting-queue-panel"
                   onClick={() => setFilterTab('ready')}
-                  className={`flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer shrink-0 whitespace-nowrap ${
+                  className={`flex items-center gap-1.5 sm:gap-2 px-3 sm:px-3.5 py-2 min-h-[38px] rounded-xl text-xs font-bold transition-all cursor-pointer shrink-0 whitespace-nowrap ${
                     filterTab === 'ready'
                       ? 'bg-emerald-600 text-white shadow-2xs'
                       : 'text-emerald-800 hover:bg-emerald-50/80'
                   }`}
                 >
                   <CheckCircle2 size={13} className={filterTab === 'ready' ? 'text-white' : 'text-emerald-600'} />
-                  <span>100% Ready for MID</span>
+                  <span className="sm:hidden">Ready</span>
+                  <span className="hidden sm:inline">100% Ready for MID</span>
                   <span className={`text-[10px] px-1.5 py-0.5 rounded-md font-black ${
                     filterTab === 'ready' ? 'bg-white/20 text-white' : 'bg-emerald-100 text-emerald-800'
                   }`}>
@@ -675,14 +701,15 @@ export default function PineLabsUnderwritingPage() {
                   aria-selected={filterTab === 'pending'}
                   aria-controls="underwriting-queue-panel"
                   onClick={() => setFilterTab('pending')}
-                  className={`flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer shrink-0 whitespace-nowrap ${
+                  className={`flex items-center gap-1.5 sm:gap-2 px-3 sm:px-3.5 py-2 min-h-[38px] rounded-xl text-xs font-bold transition-all cursor-pointer shrink-0 whitespace-nowrap ${
                     filterTab === 'pending'
                       ? 'bg-amber-600 text-white shadow-2xs'
                       : 'text-amber-800 hover:bg-amber-50/80'
                   }`}
                 >
                   <AlertCircle size={13} className={filterTab === 'pending' ? 'text-white' : 'text-amber-600'} />
-                  <span>Pending Items</span>
+                  <span className="sm:hidden">Pending</span>
+                  <span className="hidden sm:inline">Pending Items</span>
                   <span className={`text-[10px] px-1.5 py-0.5 rounded-md font-black ${
                     filterTab === 'pending' ? 'bg-white/20 text-white' : 'bg-amber-100 text-amber-800'
                   }`}>
@@ -739,65 +766,69 @@ export default function PineLabsUnderwritingPage() {
                     className="group bg-white hover:bg-slate-50/60 border border-slate-200/90 hover:border-[#0867E8]/50 rounded-2xl p-4 sm:p-6 transition-all duration-300 shadow-[0_4px_20px_rgba(15,23,42,0.03)] hover:shadow-[0_8px_25px_rgba(15,23,42,0.07)] cursor-pointer space-y-4"
                   >
                     {/* Clinic Identity & Header */}
-                    <div className="flex items-start gap-3.5">
-                      <div className={`w-11 h-11 sm:w-12 sm:h-12 rounded-2xl font-bold flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform shadow-2xs border ${
-                        isPending
-                          ? 'bg-amber-50 border-amber-200 text-amber-700'
-                          : 'bg-blue-50 border-blue-200 text-[#0867E8]'
-                      }`}>
-                        <Building2 size={22} />
-                      </div>
-                      <div className="min-w-0 flex-1">
-                        <div className="flex flex-wrap items-center gap-2">
-                          <h3 className="text-base sm:text-lg font-black text-[#0B2450] group-hover:text-[#0867E8] transition-colors">
-                            {dossier.clinic_name}
-                          </h3>
-                          <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 border border-slate-200 shrink-0">
-                            {dossier.city.split(',')[0]}
-                          </span>
-                          <span className={`text-[10px] font-black uppercase px-2 py-0.5 rounded-md border shrink-0 flex items-center gap-1 ${
-                            isPending
-                              ? 'bg-amber-50 text-amber-800 border-amber-300'
-                              : 'bg-emerald-50 text-emerald-800 border-emerald-300'
-                          }`}>
-                            {isPending ? <AlertCircle size={11} className="text-amber-600" /> : <CheckCircle2 size={11} className="text-emerald-600" />}
-                            <span>{dossier.submission_badge}</span>
-                          </span>
+                    <div className="flex items-start justify-between gap-3.5">
+                      <div className="flex items-start gap-3.5 min-w-0">
+                        <div className={`w-11 h-11 sm:w-12 sm:h-12 rounded-2xl font-bold flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform shadow-2xs border ${
+                          isPending
+                            ? 'bg-amber-50 border-amber-200 text-amber-700'
+                            : 'bg-blue-50 border-blue-200 text-[#0867E8]'
+                        }`}>
+                          <Building2 size={22} />
                         </div>
-                        {/* Clean Non-Redundant Subtitle (Doctor + Legal Entity + Phone) */}
-                        <p className="text-xs text-slate-600 mt-1 leading-relaxed">
-                          <strong>{dossier.doctor_name}</strong> &bull; {dossier.legal_name} &bull; {dossier.phone}
-                        </p>
+                        <div className="min-w-0 flex-1">
+                          <div className="flex flex-wrap items-center gap-2">
+                            <h3 className="text-base sm:text-lg font-black text-[#0B2450] group-hover:text-[#0867E8] transition-colors">
+                              {dossier.clinic_name}
+                            </h3>
+                            <span className="text-xs font-bold px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 border border-slate-200 shrink-0">
+                              {dossier.city.split(',')[0]}
+                            </span>
+                          </div>
+                          {/* Clean Subtitle (Doctor + Legal Entity + Phone) */}
+                          <p className="text-xs sm:text-sm text-slate-600 mt-1 leading-relaxed">
+                            <strong>{dossier.doctor_name}</strong> &bull; {dossier.legal_name} &bull; {dossier.phone}
+                          </p>
+                        </div>
                       </div>
+
+                      {/* Unified Single Readiness Badge */}
+                      <span className={`text-xs font-bold px-2.5 py-1 rounded-xl border shrink-0 flex items-center gap-1.5 ${
+                        isPending
+                          ? 'bg-amber-50 text-amber-800 border-amber-300'
+                          : 'bg-emerald-50 text-emerald-800 border-emerald-300'
+                      }`}>
+                        {isPending ? <AlertCircle size={13} className="text-amber-600" /> : <CheckCircle2 size={13} className="text-emerald-600" />}
+                        <span>{isPending ? `Action Required (${dossier.missing_items?.length || 1} Pending)` : '100% Ready for MID'}</span>
+                      </span>
                     </div>
 
                     {/* Pending Documents Alert Strip (if action required) */}
                     {isPending && dossier.missing_items && dossier.missing_items.length > 0 && (
-                      <div className="bg-amber-50/90 border border-amber-200 rounded-xl px-3.5 py-2 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
+                      <div className="bg-amber-50/90 border border-amber-200 rounded-xl px-3.5 py-2.5 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
                         <div className="flex flex-wrap items-center gap-2">
-                          <span className="font-extrabold text-amber-900 text-[10.5px] uppercase tracking-wider flex items-center gap-1">
-                            <AlertCircle size={12} className="text-amber-600" />
-                            <span>Pending for MID:</span>
+                          <span className="font-extrabold text-amber-900 text-xs uppercase tracking-wider flex items-center gap-1.5">
+                            <AlertCircle size={13} className="text-amber-600" />
+                            <span>Missing for MID:</span>
                           </span>
-                          <span className="font-bold text-amber-950 text-[11px] bg-white px-2 py-0.5 rounded border border-amber-300 shadow-2xs">
+                          <span className="font-bold text-amber-950 text-xs bg-white px-2 py-0.5 rounded border border-amber-300 shadow-2xs">
                             {dossier.missing_items.join(', ')}
                           </span>
                         </div>
-                        <span className="text-[10px] text-amber-700 font-semibold hidden sm:inline">Follow-up ongoing with clinic</span>
+                        <span className="text-xs text-amber-700 font-semibold hidden sm:inline">Follow-up ongoing with clinic</span>
                       </div>
                     )}
 
                     {/* Settlement Bank Details - Full Width Structured Strip */}
-                    <div className="bg-slate-50/80 rounded-xl p-3 sm:px-4 sm:py-3 border border-slate-200 text-xs">
-                      <div className="flex flex-wrap items-center gap-2">
+                    <div className="bg-slate-50/80 rounded-xl p-3 sm:px-4 sm:py-3 border border-slate-200 text-xs sm:text-sm">
+                      <div className="flex flex-wrap items-center gap-2.5">
                         <div className="flex items-center gap-1.5 font-bold text-slate-900">
-                          <Landmark size={14} className="text-emerald-600 shrink-0" />
+                          <Landmark size={15} className="text-emerald-600 shrink-0" />
                           <span className="whitespace-nowrap">{dossier.bank.bank_name}</span>
                         </div>
                         <span className="hidden sm:inline text-slate-300">&bull;</span>
-                        <div className="flex items-center gap-1">
-                          <span className="text-slate-500 text-[11px]">A/C:</span>
-                          <span className="font-mono font-bold text-slate-800 bg-white px-1.5 py-0.5 rounded border border-slate-200 text-[11px] whitespace-nowrap">
+                        <div className="flex items-center gap-1.5">
+                          <span className="text-slate-500 text-xs">A/C:</span>
+                          <span className="font-mono font-bold text-slate-800 bg-white px-2 py-0.5 rounded border border-slate-200 text-xs whitespace-nowrap">
                             {maskAccountNo(dossier.bank.account_number)}
                           </span>
                           <button
@@ -807,15 +838,15 @@ export default function PineLabsUnderwritingPage() {
                             }}
                             title="Copy Account Number"
                             aria-label={`Copy account number for ${dossier.clinic_name}`}
-                            className="p-1 hover:bg-slate-200 text-slate-400 hover:text-slate-700 rounded transition-colors"
+                            className="w-7 h-7 flex items-center justify-center hover:bg-slate-200 text-slate-400 hover:text-slate-700 rounded-lg transition-colors cursor-pointer"
                           >
-                            <Copy size={11} />
+                            <Copy size={13} />
                           </button>
                         </div>
                         <span className="hidden sm:inline text-slate-300">&bull;</span>
-                        <div className="flex items-center gap-1">
-                          <span className="text-slate-500 text-[11px]">IFSC:</span>
-                          <span className="font-mono font-bold text-blue-700 bg-blue-50 px-1.5 py-0.5 rounded border border-blue-200 text-[11px] whitespace-nowrap">
+                        <div className="flex items-center gap-1.5">
+                          <span className="text-slate-500 text-xs">IFSC:</span>
+                          <span className="font-mono font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded border border-blue-200 text-xs whitespace-nowrap">
                             {dossier.bank.ifsc}
                           </span>
                           <button
@@ -825,9 +856,9 @@ export default function PineLabsUnderwritingPage() {
                             }}
                             title="Copy IFSC"
                             aria-label={`Copy IFSC for ${dossier.clinic_name}`}
-                            className="p-1 hover:bg-slate-200 text-slate-400 hover:text-slate-700 rounded transition-colors"
+                            className="w-7 h-7 flex items-center justify-center hover:bg-slate-200 text-slate-400 hover:text-slate-700 rounded-lg transition-colors cursor-pointer"
                           >
-                            <Copy size={11} />
+                            <Copy size={13} />
                           </button>
                         </div>
                       </div>
@@ -835,8 +866,8 @@ export default function PineLabsUnderwritingPage() {
 
                     {/* Verification Badges */}
                     <div className="flex flex-wrap items-center gap-2 text-xs">
-                      <div className="inline-flex items-center gap-1.5 bg-blue-50 text-[#0867E8] border border-blue-200 px-2.5 py-1 rounded-xl text-[11px] font-bold">
-                        <UserCheck size={13} />
+                      <div className="inline-flex items-center gap-1.5 bg-blue-50 text-[#0867E8] border border-blue-200 px-3 py-1.5 rounded-xl text-xs font-bold">
+                        <UserCheck size={14} />
                         <span>Doctor PAN: {dossier.pan}</span>
                         <button
                           onClick={(e) => {
@@ -845,39 +876,29 @@ export default function PineLabsUnderwritingPage() {
                           }}
                           title="Copy Doctor PAN"
                           aria-label={`Copy doctor PAN for ${dossier.doctor_name}`}
-                          className="p-0.5 hover:bg-blue-100 rounded text-blue-500 hover:text-blue-800 transition-colors"
+                          className="w-6 h-6 flex items-center justify-center hover:bg-blue-100 rounded text-blue-500 hover:text-blue-800 transition-colors cursor-pointer ml-0.5"
                         >
-                          <Copy size={11} />
+                          <Copy size={12} />
                         </button>
                       </div>
 
-                      <div className="inline-flex items-center gap-1.5 bg-teal-50 text-teal-700 border border-teal-200 px-2.5 py-1 rounded-xl text-[11px] font-bold">
-                        <FileCheck size={13} />
+                      <div className="inline-flex items-center gap-1.5 bg-teal-50 text-teal-700 border border-teal-200 px-3 py-1.5 rounded-xl text-xs font-bold">
+                        <FileCheck size={14} />
                         <span>{dossier.is_signed ? 'Doctor Signed PDF (Verified)' : 'Doctor Signing PDF Ready'}</span>
                       </div>
 
                       {dossier.docs.courier_awb && (
-                        <div className="inline-flex items-center gap-1.5 bg-purple-50 text-purple-700 border border-purple-200 px-2.5 py-1 rounded-xl text-[11px] font-bold">
-                          <Truck size={13} className="text-purple-600" />
+                        <div className="inline-flex items-center gap-1.5 bg-purple-50 text-purple-700 border border-purple-200 px-3 py-1.5 rounded-xl text-xs font-bold">
+                          <Truck size={14} className="text-purple-600" />
                           <span>Hardcopy In Transit ({dossier.docs.courier_awb})</span>
                         </div>
                       )}
                     </div>
 
                     {/* Bottom Action Bar: Verification Status & Primary CTA */}
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-3.5 border-t border-slate-100">
-                      <div className="flex items-center gap-2">
-                        {isPending ? (
-                          <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-amber-800 bg-amber-50/80 px-2.5 py-1 rounded-lg border border-amber-200">
-                            <AlertCircle size={13} className="text-amber-600 shrink-0" />
-                            <span>Awaiting Signatures / KYC Documents</span>
-                          </span>
-                        ) : (
-                          <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-700 bg-emerald-50/80 px-2.5 py-1 rounded-lg border border-emerald-200">
-                            <CheckCircle2 size={13} className="text-emerald-600 shrink-0" />
-                            <span>All KYC Verified • Ready for MID Setup</span>
-                          </span>
-                        )}
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-3 border-t border-slate-100">
+                      <div className="text-xs text-slate-500 font-medium">
+                        {isPending ? 'Preliminary risk review in progress • MID pending final documents' : 'All mandatory KYC verified • Ready for MID mapping'}
                       </div>
 
                       <button
@@ -885,7 +906,7 @@ export default function PineLabsUnderwritingPage() {
                           e.stopPropagation();
                           handleSelectClinic(dossier.id);
                         }}
-                        className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-[#0867E8] hover:bg-[#0756C7] active:scale-[0.98] text-white text-xs font-bold rounded-xl shadow-[0_4px_16px_rgba(8,103,232,0.22)] hover:shadow-[0_6px_20px_rgba(8,103,232,0.32)] transition-all cursor-pointer whitespace-nowrap group-hover:scale-[1.01]"
+                        className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 min-h-[44px] bg-[#0867E8] hover:bg-[#0756C7] active:scale-[0.98] text-white text-xs font-bold rounded-xl shadow-[0_4px_16px_rgba(8,103,232,0.22)] hover:shadow-[0_6px_20px_rgba(8,103,232,0.32)] transition-all cursor-pointer whitespace-nowrap group-hover:scale-[1.01]"
                       >
                         <span>Review Documents &amp; Dossier</span>
                         <ChevronRight size={15} className="group-hover:translate-x-0.5 transition-transform" />
@@ -907,34 +928,57 @@ export default function PineLabsUnderwritingPage() {
               <div className="flex items-center gap-3">
                 <button
                   onClick={handleBackToQueue}
-                  className="inline-flex items-center gap-2 px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold rounded-xl transition-all cursor-pointer border border-slate-300 shadow-2xs hover:scale-102"
+                  className="inline-flex items-center gap-2 px-3.5 py-2 min-h-[40px] bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold rounded-xl transition-all cursor-pointer border border-slate-300 shadow-2xs active:scale-98"
                 >
-                  <ArrowLeft size={14} />
+                  <ArrowLeft size={15} />
                   <span>Back to Applications Queue</span>
                 </button>
                 <span className="text-slate-300 hidden sm:inline">&bull;</span>
                 <span className="text-xs text-slate-500 font-medium hidden sm:inline">Viewing Dossier:</span>
-                <span className="text-xs font-black text-slate-900">{activeDossier.clinic_name}</span>
+                <span className="text-xs font-black text-slate-900 hidden sm:inline">{activeDossier.clinic_name}</span>
               </div>
 
-              {/* Quick Clinic Switcher Pills */}
-              <div className="flex items-center gap-2 overflow-x-auto max-w-full pb-1 scrollbar-none [&::-webkit-scrollbar]:hidden [scrollbar-width:none] [-ms-overflow-style:none]" style={{ WebkitOverflowScrolling: 'touch' }}>
-                <span className="text-[11px] text-slate-500 font-bold hidden lg:inline whitespace-nowrap">Switch Clinic:</span>
+              {/* Mobile Clinic Switcher Dropdown (sm:hidden) */}
+              <div className="sm:hidden w-full">
+                <label htmlFor="mobile-clinic-switcher" className="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1">
+                  Switch Clinic Dossier:
+                </label>
+                <select
+                  id="mobile-clinic-switcher"
+                  value={activeDossier.id}
+                  onChange={(e) => handleSelectClinic(e.target.value)}
+                  className="w-full px-3 py-2.5 min-h-[44px] bg-slate-50 border border-slate-300 rounded-xl text-xs font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-2xs cursor-pointer"
+                >
+                  {allDossiers.map((d) => (
+                    <option key={d.id} value={d.id}>
+                      {isClinicFullyReady(d) ? '✓ ' : '⚠ '}{d.clinic_name} ({d.city.split(',')[0]})
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              {/* Desktop Quick Clinic Switcher Pills (hidden sm:flex) */}
+              <div className="hidden sm:flex items-center gap-2 overflow-x-auto max-w-full pb-1 scrollbar-none [&::-webkit-scrollbar]:hidden [scrollbar-width:none] [-ms-overflow-style:none]">
+                <span className="text-xs text-slate-500 font-bold hidden lg:inline whitespace-nowrap">Switch Clinic:</span>
                 {allDossiers.map((d) => {
                   const isSelected = d.id === activeDossier.id;
                   const isReady = isClinicFullyReady(d);
+                  const shortName = d.clinic_name
+                    .replace(/^Dr\.\s+/i, '')
+                    .replace(/\s+(Multispeciality|Speciality|Family|Cosmetic|Implant|Center|Care).*$/i, '')
+                    .trim() || d.clinic_name;
                   return (
                     <button
                       key={d.id}
                       onClick={() => handleSelectClinic(d.id)}
-                      className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 border whitespace-nowrap shrink-0 ${
+                      className={`px-3 py-1.5 min-h-[36px] rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 border whitespace-nowrap shrink-0 ${
                         isSelected
                           ? 'bg-blue-50 border-[#0867E8] text-[#0867E8] ring-1 ring-blue-500/20'
                           : 'bg-slate-50 hover:bg-slate-100 border-slate-200 text-slate-600'
                       }`}
                     >
                       <span className={`w-2 h-2 rounded-full shrink-0 ${isReady ? 'bg-emerald-500' : 'bg-amber-500'}`} />
-                      <span>{d.clinic_name.split(' ')[0]}</span>
+                      <span>{shortName}</span>
                     </button>
                   );
                 })}
@@ -942,10 +986,10 @@ export default function PineLabsUnderwritingPage() {
             </div>
 
             {/* Focused Clinic Underwriting Dossier Card */}
-            <div className="rounded-3xl bg-white border border-slate-200/90 p-6 sm:p-7 shadow-[0_4px_25px_rgba(15,23,42,0.04)] space-y-6">
+            <div className="rounded-3xl bg-white border border-slate-200/90 p-5 sm:p-7 shadow-[0_4px_25px_rgba(15,23,42,0.04)] space-y-6">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-100">
-                <div className="flex items-center gap-3.5">
-                  <div className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 border ${
+                <div className="flex items-start sm:items-center gap-3.5">
+                  <div className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 border mt-0.5 sm:mt-0 ${
                     !isActiveReady
                       ? 'bg-amber-50 border-amber-200 text-amber-600'
                       : 'bg-emerald-50 border-emerald-200 text-emerald-600'
@@ -953,18 +997,18 @@ export default function PineLabsUnderwritingPage() {
                     {!isActiveReady ? <AlertCircle size={24} /> : <CheckCircle2 size={24} />}
                   </div>
                   <div>
-                    <div className="flex items-center gap-2">
-                      <h2 className="text-xl font-black text-[#0B2450]">{activeDossier.clinic_name}</h2>
-                      <span className={`text-[10px] font-black uppercase px-2 py-0.5 rounded-md border flex items-center gap-1 ${
+                    <div className="flex flex-wrap items-center gap-2">
+                      <h1 className="text-xl sm:text-2xl font-black text-[#0B2450]">{activeDossier.clinic_name}</h1>
+                      <span className={`text-xs font-black uppercase px-2.5 py-0.5 rounded-md border flex items-center gap-1 shrink-0 ${
                         !isActiveReady
                           ? 'bg-amber-50 text-amber-800 border-amber-300'
                           : 'bg-emerald-50 text-emerald-800 border-emerald-300'
                       }`}>
-                        {!isActiveReady ? <AlertCircle size={11} className="text-amber-600" /> : <CheckCircle2 size={11} className="text-emerald-600" />}
-                        <span>{!isActiveReady ? 'Action Required • MAF Signature or Docs Pending' : '100% Ready for MID • MAF Signed'}</span>
+                        {!isActiveReady ? <AlertCircle size={12} className="text-amber-600" /> : <CheckCircle2 size={12} className="text-emerald-600" />}
+                        <span>{!isActiveReady ? 'Action Required • Docs Pending' : '100% Ready for MID • MAF Signed'}</span>
                       </span>
                     </div>
-                    <p className="text-xs text-slate-500">
+                    <p className="text-xs sm:text-sm text-slate-500 mt-1">
                       {activeDossier.doctor_name} &bull; {activeDossier.city} &bull; {activeDossier.phone}
                     </p>
                   </div>
@@ -974,58 +1018,52 @@ export default function PineLabsUnderwritingPage() {
                   <a
                     href={activeDossier.docs.signing_pdf}
                     download={`Plural_MAF_and_Doctor_KYC_Signing_Dossier_${activeDossier.clinic_name.replace(/\s+/g, '_')}.pdf`}
-                    className="inline-flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-xs font-black uppercase tracking-wider rounded-xl shadow-md shadow-emerald-600/20 transition-all cursor-pointer active:scale-98"
+                    className="inline-flex items-center gap-2 px-4 py-2.5 min-h-[44px] bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-xs font-black uppercase tracking-wider rounded-xl shadow-md shadow-emerald-600/20 transition-all cursor-pointer active:scale-98"
                     title={activeDossier.is_signed ? "Download verified signed doctor dossier" : "Download consolidated official MAF + Doctor PAN & Aadhaar signing dossier"}
                   >
-                    <FileCheck size={15} />
+                    <FileCheck size={16} />
                     <span>{activeDossier.is_signed ? 'Doctor Signed PDF (Verified)' : 'Doctor Signing PDF'}</span>
                   </a>
 
                   <a
                     href={activeDossier.docs.maf_excel}
                     download={`Plural_MAF_BO_PEP_${activeDossier.clinic_name.replace(/\s+/g, '_')}.xlsx`}
-                    className="inline-flex items-center gap-2 px-3.5 py-2.5 bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-black uppercase tracking-wider rounded-xl shadow-md shadow-blue-500/20 transition-all cursor-pointer active:scale-98"
+                    className="inline-flex items-center gap-2 px-3.5 py-2.5 min-h-[44px] bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-black uppercase tracking-wider rounded-xl shadow-md shadow-blue-500/20 transition-all cursor-pointer active:scale-98"
                     title="Download Pine Labs MAF Excel"
                   >
-                    <FileSpreadsheet size={15} />
+                    <FileSpreadsheet size={16} />
                     <span>Download MAF Excel</span>
                   </a>
 
                   <a
                     href={activeDossier.docs.zip_bundle}
                     download={`${activeDossier.clinic_name.replace(/\s+/g, '_')}_Complete_KYC_Dossier.zip`}
-                    className="inline-flex items-center gap-2 px-3.5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-xl border border-slate-300 transition-all cursor-pointer active:scale-98"
+                    className="inline-flex items-center gap-2 px-3.5 py-2.5 min-h-[44px] bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-xl border border-slate-300 transition-all cursor-pointer active:scale-98"
                     title="Download all raw KYC documents in a ZIP package"
                   >
-                    <FolderDown size={14} />
+                    <FolderDown size={15} />
                     <span>Full ZIP</span>
                   </a>
-
-                  <span className={`text-[11px] font-bold px-3 py-1.5 rounded-xl border ${
-                    activeDossier.readiness === 'pending'
-                      ? 'bg-amber-50 text-amber-800 border-amber-300'
-                      : 'bg-emerald-50 text-emerald-700 border-emerald-300'
-                  }`}>
-                    Status: {activeDossier.status}
-                  </span>
                 </div>
               </div>
 
               {/* Dedicated Underwriting Readiness & Checklist Banner */}
               {activeDossier.readiness === 'pending' ? (
-                <div className="bg-amber-50/80 border border-amber-300 rounded-2xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
-                  <div className="flex items-start gap-2.5">
-                    <div className="w-8 h-8 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center shrink-0 mt-0.5">
-                      <AlertCircle size={16} />
+                <div className="bg-amber-50/90 border border-amber-300 rounded-2xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs sm:text-sm">
+                  <div className="flex items-start gap-3">
+                    <div className="w-9 h-9 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center shrink-0 mt-0.5">
+                      <AlertCircle size={18} />
                     </div>
                     <div>
-                      <span className="font-extrabold text-amber-950 block text-xs">1 Action Required for Sub-Merchant MID Activation:</span>
-                      <p className="text-amber-900 text-[11.5px] mt-0.5">
-                        Missing document: <strong className="underline">{activeDossier.missing_items?.join(', ')}</strong>. Underwriters may proceed with preliminary PAN/account verification, but final Pine Labs terminal MID will map once this document is attached.
+                      <span className="font-extrabold text-amber-950 block text-xs sm:text-sm">
+                        {activeDossier.missing_items?.length || 1} Action{(activeDossier.missing_items?.length || 1) > 1 ? 's' : ''} Required for Sub-Merchant MID Activation:
+                      </span>
+                      <p className="text-amber-900 text-xs mt-1 leading-relaxed">
+                        Missing document{(activeDossier.missing_items?.length || 1) > 1 ? 's' : ''}: <strong className="underline">{activeDossier.missing_items?.join(', ')}</strong>. Underwriters may proceed with preliminary PAN/account review; final Pine Labs terminal MID will map once attached.
                       </p>
                     </div>
                   </div>
-                  <div className="shrink-0 flex items-center gap-1.5 bg-white/90 px-3 py-1.5 rounded-xl border border-amber-200 text-amber-900 font-bold text-[11px] shadow-2xs">
+                  <div className="shrink-0 flex items-center gap-1.5 bg-white/90 px-3 py-1.5 rounded-xl border border-amber-200 text-amber-900 font-bold text-xs shadow-2xs">
                     <Clock size={13} className="text-amber-600" />
                     <span>Doctor Follow-Up Ongoing</span>
                   </div>
@@ -1143,176 +1181,231 @@ export default function PineLabsUnderwritingPage() {
                       </button>
                     </div>
                     <div>
-                      <span className="text-slate-500 block text-[10.5px]">Cheque Verification:</span>
-                      <span className="text-emerald-700 font-bold flex items-center gap-1">
-                        <CheckCircle2 size={12} /> "CANCELLED" written &bull; MICR {activeDossier.bank.micr}
-                      </span>
+                      <span className="text-slate-500 block text-xs">Cheque Verification:</span>
+                      {activeDossier.docs.cancelled_cheque && activeDossier.bank.micr && activeDossier.bank.micr !== 'Under Verification' && !activeDossier.missing_items?.some(i => i.toLowerCase().includes('cheque')) ? (
+                        <span className="text-emerald-700 font-bold text-xs flex items-center gap-1.5 mt-0.5">
+                          <CheckCircle2 size={13} className="text-emerald-600" /> "CANCELLED" verified &bull; MICR {activeDossier.bank.micr}
+                        </span>
+                      ) : (
+                        <span className="text-amber-700 font-bold text-xs flex items-center gap-1.5 mt-0.5">
+                          <AlertCircle size={13} className="text-amber-600 shrink-0" /> Awaiting Cancelled Cheque &bull; Bank Linking Pending
+                        </span>
+                      )}
                     </div>
                   </div>
                 </div>
 
                 {/* Col 3: Direct KYC Document Access */}
-                <div className="bg-slate-50/80 rounded-2xl p-4 border border-slate-200 space-y-2.5">
-                  <h3 className="text-xs font-extrabold uppercase tracking-wider text-[#0B2450] flex items-center gap-2">
-                    <FileText size={14} className="text-amber-600" />
-                    <span>Verified KYC Documents</span>
-                  </h3>
-                  <div className="space-y-2">
-                    <a
-                      href={activeDossier.docs.signing_pdf}
-                      download={`Plural_MAF_and_Doctor_KYC_Signing_Dossier_${activeDossier.clinic_name.replace(/\s+/g, '_')}.pdf`}
-                      className="w-full flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-emerald-50 via-teal-50/60 to-blue-50/60 border-2 border-emerald-500/50 hover:border-emerald-600 transition-all text-xs group cursor-pointer shadow-xs mb-2.5"
-                    >
-                      <div className="flex items-center gap-2.5">
-                        <div className="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0">
-                          <FileCheck size={16} />
-                        </div>
-                        <div className="text-left">
-                          <span className="font-extrabold text-slate-900 text-[12px] block group-hover:text-emerald-700 transition-colors">
-                            {activeDossier.id === 'elara-ivf' ? 'Signed Board Resolution (PDF)' : activeDossier.is_signed ? 'Doctor Signed Dossier (PDF)' : 'Doctor Signing Dossier (PDF)'}
-                          </span>
-                          <span className="text-[10px] text-emerald-700 font-semibold">
-                            {activeDossier.id === 'elara-ivf'
-                              ? 'Pine Labs Arrangement Authorized • 3 Directors Signed (Corporate Resolution)'
-                              : activeDossier.is_signed
-                              ? 'Official MAF + GST Exemption + PAN + Aadhaar • Signed & Stamped (6 Pages Verified)'
-                              : 'Official MAF + GST Exemption + PAN + Aadhaar • Ready to Sign'}
-                          </span>
-                        </div>
-                      </div>
-                      <ArrowDownToLine size={15} className="text-emerald-600 group-hover:translate-y-0.5 transition-transform" />
-                    </a>
+                <div className="bg-slate-50/80 rounded-2xl p-4 border border-slate-200 space-y-3">
+                  <div className="flex items-center justify-between">
+                    <h3 className="text-xs font-extrabold uppercase tracking-wider text-[#0B2450] flex items-center gap-2">
+                      <FileText size={15} className="text-amber-600" />
+                      <span>Supporting KYC Documents</span>
+                    </h3>
+                    <span className="text-[11px] font-bold text-slate-400">Authentic Underwriting Records</span>
+                  </div>
 
-                    {activeDossier.docs.gst_declaration_pdf && (
+                  <div className="space-y-2">
+                    {/* GST Document (Exemption Declaration vs Registration Certificate) */}
+                    {activeDossier.docs.gst_certificate ? (
+                      <a
+                        href={activeDossier.docs.gst_certificate}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full min-h-[44px] flex items-center justify-between p-3 rounded-xl bg-white border border-slate-200 hover:border-emerald-400 hover:bg-emerald-50/30 transition-all text-xs group cursor-pointer shadow-2xs"
+                      >
+                        <div className="flex items-center gap-2.5">
+                          <FileText size={15} className="text-emerald-600 shrink-0" />
+                          <div>
+                            <span className="font-bold text-slate-800 group-hover:text-emerald-700 transition-colors block text-xs">
+                              GST Registration Certificate
+                            </span>
+                            <span className="text-[11px] text-slate-500 font-medium">Active Corporate GSTIN Verified</span>
+                          </div>
+                        </div>
+                        <ExternalLink size={14} className="text-slate-400 group-hover:text-slate-600 shrink-0" />
+                      </a>
+                    ) : activeDossier.docs.gst_declaration_pdf ? (
                       <a
                         href={activeDossier.docs.gst_declaration_pdf}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-full flex items-center justify-between p-2.5 rounded-xl bg-white border border-slate-200 hover:border-emerald-400 hover:bg-emerald-50/30 transition-all text-xs group cursor-pointer shadow-2xs"
+                        className="w-full min-h-[44px] flex items-center justify-between p-3 rounded-xl bg-white border border-slate-200 hover:border-emerald-400 hover:bg-emerald-50/30 transition-all text-xs group cursor-pointer shadow-2xs"
                       >
-                        <div className="flex items-center gap-2">
-                          <FileText size={14} className="text-emerald-600" />
-                          <span className="font-bold text-slate-800 group-hover:text-emerald-700 transition-colors">
-                            {activeDossier.is_signed ? 'GST Exemption Declaration (Signed & Stamped)' : 'GST Exemption Declaration (Sec 23)'}
-                          </span>
+                        <div className="flex items-center gap-2.5">
+                          <FileText size={15} className="text-emerald-600 shrink-0" />
+                          <div>
+                            <span className="font-bold text-slate-800 group-hover:text-emerald-700 transition-colors block text-xs">
+                              {activeDossier.is_signed ? 'GST Exemption Declaration (Signed & Stamped)' : 'GST Exemption Declaration (Sec 23)'}
+                            </span>
+                            <span className="text-[11px] text-slate-500 font-medium">Healthcare Services Statutory Exemption</span>
+                          </div>
                         </div>
-                        <ExternalLink size={13} className="text-slate-400 group-hover:text-slate-600" />
+                        <ExternalLink size={14} className="text-slate-400 group-hover:text-slate-600 shrink-0" />
+                      </a>
+                    ) : null}
+
+                    {/* Board Resolution (for corporate entities like Elara) */}
+                    {activeDossier.docs.board_resolution && (
+                      <a
+                        href={activeDossier.docs.board_resolution}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full min-h-[44px] flex items-center justify-between p-3 rounded-xl bg-white border border-slate-200 hover:border-indigo-400 hover:bg-indigo-50/30 transition-all text-xs group cursor-pointer shadow-2xs"
+                      >
+                        <div className="flex items-center gap-2.5">
+                          <FileCheck size={15} className="text-indigo-600 shrink-0" />
+                          <div>
+                            <span className="font-bold text-slate-800 group-hover:text-indigo-700 transition-colors block text-xs">
+                              Signed Board Resolution
+                            </span>
+                            <span className="text-[11px] text-slate-500 font-medium">Pine Labs Multi-Director Authorization</span>
+                          </div>
+                        </div>
+                        <ExternalLink size={14} className="text-slate-400 group-hover:text-slate-600 shrink-0" />
                       </a>
                     )}
 
-                    <a
-                      href={activeDossier.docs.cancelled_cheque}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-full flex items-center justify-between p-2.5 rounded-xl bg-white border border-slate-200 hover:border-blue-400 hover:bg-blue-50/30 transition-all text-xs group cursor-pointer shadow-2xs"
-                    >
-                      <div className="flex items-center gap-2">
-                        <Landmark size={14} className="text-emerald-600" />
-                        <span className="font-bold text-slate-800 group-hover:text-blue-600 transition-colors">
-                          Bank Cancelled Cheque
+                    {/* Bank Cancelled Cheque (with real status verification!) */}
+                    {activeDossier.docs.cancelled_cheque ? (
+                      <a
+                        href={activeDossier.docs.cancelled_cheque}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full min-h-[44px] flex items-center justify-between p-3 rounded-xl bg-white border border-slate-200 hover:border-blue-400 hover:bg-blue-50/30 transition-all text-xs group cursor-pointer shadow-2xs"
+                      >
+                        <div className="flex items-center gap-2.5">
+                          <Landmark size={15} className="text-emerald-600 shrink-0" />
+                          <div>
+                            <span className="font-bold text-slate-800 group-hover:text-blue-600 transition-colors block text-xs">
+                              Bank Cancelled Cheque
+                            </span>
+                            <span className="text-[11px] text-slate-500 font-medium">{activeDossier.bank.bank_name} &bull; A/C Verified</span>
+                          </div>
+                        </div>
+                        <ExternalLink size={14} className="text-slate-400 group-hover:text-slate-600 shrink-0" />
+                      </a>
+                    ) : (
+                      <div className="w-full min-h-[44px] flex items-center justify-between p-3 rounded-xl bg-amber-50/60 border border-amber-200 text-xs">
+                        <div className="flex items-center gap-2.5">
+                          <Landmark size={15} className="text-amber-600 shrink-0" />
+                          <div>
+                            <span className="font-bold text-amber-900 block text-xs">
+                              Bank Cancelled Cheque
+                            </span>
+                            <span className="text-[11px] text-amber-700 font-medium">Awaiting Cheque Upload from Clinic</span>
+                          </div>
+                        </div>
+                        <span className="text-[10.5px] font-bold text-amber-800 bg-amber-100/90 px-2 py-0.5 rounded border border-amber-200">
+                          Action Required
                         </span>
                       </div>
-                      <ExternalLink size={13} className="text-slate-400 group-hover:text-slate-600" />
-                    </a>
+                    )}
 
-                    <a
-                      href={activeDossier.docs.doctor_pan}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-full flex items-center justify-between p-2.5 rounded-xl bg-white border border-slate-200 hover:border-blue-400 hover:bg-blue-50/30 transition-all text-xs group cursor-pointer shadow-2xs"
-                    >
-                      <div className="flex items-center gap-2">
-                        <UserCheck size={14} className="text-[#0867E8]" />
-                        <span className="font-bold text-slate-800 group-hover:text-blue-600 transition-colors">
-                          Doctor PAN Card
-                        </span>
-                      </div>
-                      <ExternalLink size={13} className="text-slate-400 group-hover:text-slate-600" />
-                    </a>
+                    {/* Doctor PAN */}
+                    {activeDossier.docs.doctor_pan && (
+                      <a
+                        href={activeDossier.docs.doctor_pan}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full min-h-[44px] flex items-center justify-between p-3 rounded-xl bg-white border border-slate-200 hover:border-blue-400 hover:bg-blue-50/30 transition-all text-xs group cursor-pointer shadow-2xs"
+                      >
+                        <div className="flex items-center gap-2.5">
+                          <UserCheck size={15} className="text-[#0867E8] shrink-0" />
+                          <div>
+                            <span className="font-bold text-slate-800 group-hover:text-blue-600 transition-colors block text-xs">
+                              Doctor PAN Card
+                            </span>
+                            <span className="text-[11px] text-slate-500 font-medium">PAN: {activeDossier.pan}</span>
+                          </div>
+                        </div>
+                        <ExternalLink size={14} className="text-slate-400 group-hover:text-slate-600 shrink-0" />
+                      </a>
+                    )}
 
-                    <a
-                      href={activeDossier.docs.aadhaar_front}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-full flex items-center justify-between p-2.5 rounded-xl bg-white border border-slate-200 hover:border-blue-400 hover:bg-blue-50/30 transition-all text-xs group cursor-pointer shadow-2xs"
-                    >
-                      <div className="flex items-center gap-2">
-                        <CreditCard size={14} className="text-sky-600" />
-                        <span className="font-bold text-slate-800 group-hover:text-blue-600 transition-colors">
-                          {activeDossier.docs.aadhaar_back || activeDossier.id === 'elara-ivf' ? 'Doctor Aadhaar (Front & Back)' : 'Doctor Aadhaar Card'}
-                        </span>
-                      </div>
-                      <ExternalLink size={13} className="text-slate-400 group-hover:text-slate-600" />
-                    </a>
+                    {/* Doctor Aadhaar */}
+                    {activeDossier.docs.aadhaar_front && (
+                      <a
+                        href={activeDossier.docs.aadhaar_front}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full min-h-[44px] flex items-center justify-between p-3 rounded-xl bg-white border border-slate-200 hover:border-blue-400 hover:bg-blue-50/30 transition-all text-xs group cursor-pointer shadow-2xs"
+                      >
+                        <div className="flex items-center gap-2.5">
+                          <CreditCard size={15} className="text-sky-600 shrink-0" />
+                          <div>
+                            <span className="font-bold text-slate-800 group-hover:text-blue-600 transition-colors block text-xs">
+                              {activeDossier.docs.aadhaar_back || activeDossier.id === 'elara-ivf' ? 'Doctor Aadhaar (Front & Back)' : 'Doctor Aadhaar Card'}
+                            </span>
+                            <span className="text-[11px] text-slate-500 font-medium">Identity &amp; Address Proof Verified</span>
+                          </div>
+                        </div>
+                        <ExternalLink size={14} className="text-slate-400 group-hover:text-slate-600 shrink-0" />
+                      </a>
+                    )}
 
-                    <a
-                      href={activeDossier.docs.udyam_pdf}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-full flex items-center justify-between p-2.5 rounded-xl bg-white border border-slate-200 hover:border-blue-400 hover:bg-blue-50/30 transition-all text-xs group cursor-pointer shadow-2xs"
-                    >
-                      <div className="flex items-center gap-2">
-                        <FileText size={14} className="text-amber-600" />
-                        <span className="font-bold text-slate-800 group-hover:text-blue-600 transition-colors">
-                          {activeDossier.id === 'elara-ivf' ? 'GST Registration Certificate' : 'Udyam Registration Certificate'}
-                        </span>
-                      </div>
-                      <ExternalLink size={13} className="text-slate-400 group-hover:text-slate-600" />
-                    </a>
-
+                    {/* Establishment Registration */}
                     {activeDossier.docs.establishment_reg && (
                       <a
                         href={activeDossier.docs.establishment_reg}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-full flex items-center justify-between p-2.5 rounded-xl bg-white border border-slate-200 hover:border-blue-400 hover:bg-blue-50/30 transition-all text-xs group cursor-pointer shadow-2xs"
+                        className="w-full min-h-[44px] flex items-center justify-between p-3 rounded-xl bg-white border border-slate-200 hover:border-blue-400 hover:bg-blue-50/30 transition-all text-xs group cursor-pointer shadow-2xs"
                       >
-                        <div className="flex items-center gap-2">
-                          <ShieldCheck size={14} className="text-indigo-600" />
-                          <span className="font-bold text-slate-800 group-hover:text-blue-600 transition-colors">
-                            {activeDossier.business_proof.type || 'Medical Establishment Registration'}
-                          </span>
+                        <div className="flex items-center gap-2.5">
+                          <Building2 size={15} className="text-indigo-600 shrink-0" />
+                          <div>
+                            <span className="font-bold text-slate-800 group-hover:text-blue-600 transition-colors block text-xs">
+                              {activeDossier.business_proof.type}
+                            </span>
+                            <span className="text-[11px] text-slate-500 font-medium">Reg No: {activeDossier.business_proof.number}</span>
+                          </div>
                         </div>
-                        <ExternalLink size={13} className="text-slate-400 group-hover:text-slate-600" />
+                        <ExternalLink size={14} className="text-slate-400 group-hover:text-slate-600 shrink-0" />
                       </a>
                     )}
 
+                    {/* Dental Council Registration */}
                     {activeDossier.docs.dental_council_reg && (
                       <a
                         href={activeDossier.docs.dental_council_reg}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-full flex items-center justify-between p-2.5 rounded-xl bg-white border border-slate-200 hover:border-blue-400 hover:bg-blue-50/30 transition-all text-xs group cursor-pointer shadow-2xs"
+                        className="w-full min-h-[44px] flex items-center justify-between p-3 rounded-xl bg-white border border-slate-200 hover:border-blue-400 hover:bg-blue-50/30 transition-all text-xs group cursor-pointer shadow-2xs"
                       >
-                        <div className="flex items-center gap-2">
-                          <CheckCircle2 size={14} className="text-teal-600" />
-                          <span className="font-bold text-slate-800 group-hover:text-blue-600 transition-colors">
-                            State Dental Council Registration
-                          </span>
+                        <div className="flex items-center gap-2.5">
+                          <ShieldCheck size={15} className="text-emerald-600 shrink-0" />
+                          <div>
+                            <span className="font-bold text-slate-800 group-hover:text-blue-600 transition-colors block text-xs">
+                              State Dental Council Registration
+                            </span>
+                            <span className="text-[11px] text-slate-500 font-medium">Official Medical Council Certificate</span>
+                          </div>
                         </div>
-                        <ExternalLink size={13} className="text-slate-400 group-hover:text-slate-600" />
+                        <ExternalLink size={14} className="text-slate-400 group-hover:text-slate-600 shrink-0" />
                       </a>
                     )}
 
+                    {/* Courier Receipt */}
                     {activeDossier.docs.courier_receipt && (
                       <a
                         href={activeDossier.docs.courier_receipt}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-full flex items-center justify-between p-2.5 rounded-xl bg-purple-50/60 border border-purple-200 hover:border-purple-400 hover:bg-purple-100/50 transition-all text-xs group cursor-pointer shadow-2xs"
+                        className="w-full min-h-[44px] flex items-center justify-between p-3 rounded-xl bg-purple-50/60 border border-purple-200 hover:border-purple-400 hover:bg-purple-100/50 transition-all text-xs group cursor-pointer shadow-2xs"
                       >
-                        <div className="flex items-center gap-2">
-                          <Truck size={14} className="text-purple-600" />
+                        <div className="flex items-center gap-2.5">
+                          <Truck size={15} className="text-purple-600 shrink-0" />
                           <div className="text-left">
-                            <span className="font-bold text-slate-900 group-hover:text-purple-700 transition-colors block">
+                            <span className="font-bold text-slate-900 group-hover:text-purple-700 transition-colors block text-xs">
                               DTDC Physical Hardcopy Courier Receipt
                             </span>
-                            <span className="text-[10px] text-purple-700 font-mono font-semibold">
+                            <span className="text-[11px] text-purple-700 font-mono font-semibold">
                               {activeDossier.docs.courier_awb} &bull; Consignee: Akhilesh Dhuriya (Pine Labs Noida)
                             </span>
                           </div>
                         </div>
-                        <ExternalLink size={13} className="text-purple-500 group-hover:text-purple-700" />
+                        <ExternalLink size={14} className="text-purple-500 group-hover:text-purple-700 shrink-0" />
                       </a>
                     )}
                   </div>

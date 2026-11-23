@@ -43,7 +43,8 @@ export const VERIFIED_DOSSIERS = [
       signing_pdf: '/docs/kyc/elara_ivf/Plural_MAF_and_Doctor_KYC_Signing_Dossier_Elara_IVF.pdf',
       zip_bundle: '/docs/kyc/elara_ivf/Elara_IVF_Complete_KYC_Dossier.zip',
       maf_excel: '/docs/kyc/elara_ivf/Plural_MAF_BO_PEP_Elara_IVF.xlsx',
-      gst_declaration_pdf: '/docs/kyc/elara_ivf/elara_ivf_gst_certificate.pdf',
+      gst_certificate: '/docs/kyc/elara_ivf/elara_ivf_gst_certificate.pdf',
+      board_resolution: '/docs/kyc/elara_ivf/BR_Signed.pdf',
       cancelled_cheque: '/docs/kyc/elara_ivf/elara_ivf_cancelled_cheque.jpeg',
       doctor_pan: '/docs/kyc/elara_ivf/gajendra_singh_chouhan_pan.jpg',
       aadhaar_front: '/docs/kyc/elara_ivf/gajendra_singh_chouhan_aadhaar_front_back.jpg',
@@ -335,7 +336,7 @@ export const VERIFIED_DOSSIERS = [
       zip_bundle: '/docs/kyc/amitha_dental/amitha_dental_Complete_KYC_Dossier.zip',
       maf_excel: '/docs/kyc/amitha_dental/Plural_MAF_BO_PEP_amitha_dental.xlsx',
       gst_declaration_pdf: '/docs/kyc/amitha_dental/GST_Exemption_Declaration_amitha_dental.pdf',
-      cancelled_cheque: '/docs/kyc/amitha_dental/dr_amitha_kpme_certificate.jpg',
+      cancelled_cheque: '',
       doctor_pan: '/docs/kyc/amitha_dental/dr_amitha_pan.jpg',
       aadhaar_front: '/docs/kyc/amitha_dental/dr_amitha_aadhaar.jpg',
       establishment_reg: '/docs/kyc/amitha_dental/dr_amitha_kpme_certificate.jpg'

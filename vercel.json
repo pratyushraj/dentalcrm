@@ -99,6 +99,19 @@
       ]
     },
     {
+      "source": "/api/underwriting(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow, noarchive"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "private, no-cache, no-store, must-revalidate"
+        }
+      ]
+    },
+    {
       "source": "/:page(_app|404|admin/clinics|partner-pipeline|deck|review/assist|dental-trends|dentist-proposal|emi/callback|costing|reactivation/[^/]+)",
       "headers": [
         {

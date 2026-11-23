@@ -93,434 +93,96 @@ export interface VerifiedDossier {
   status: string;
 }
 
-const VERIFIED_DOSSIERS: VerifiedDossier[] = [
-  {
-    id: 'elara-ivf',
-    clinic_name: 'Elara IVF',
-    legal_name: 'ELARA IVF PRIVATE LIMITED',
-    doctor_name: 'Gajendra Singh Chouhan',
-    dob: '04/08/1975',
-    pan: 'AAJCE6053H',
-    aadhaar: '3596 1163 5054',
-    phone: '+91 90011 61115',
-    email: 'info@elaraivf.com',
-    city: 'Jodhpur, Rajasthan',
-    pincode: '342003',
-    address: 'Floor No. 6, CYB-5, Dream Heights, Shastri Nagar, RIICO Heavy Industrial Area (Near Marwari Catalysts), Jodhpur, Rajasthan - 342003',
-    residential_address: 'A 30, Arvind Nagar, Golf Link Road, Jodhpur Residency Road, Rajasthan - 342011',
-    specialties: ['Reproductive Medicine', 'In Vitro Fertilization (IVF)', 'ICSI & Fertility Care', 'Daycare Clinical Procedures'],
-    submission_badge: 'Action Required • Director MAF Signature Awaited',
-    readiness: 'pending',
-    missing_items: ['Signed & Stamped Director MAF Form'],
-    bank: {
-      bank_name: 'Kotak Mahindra Bank',
-      account_holder: 'ELARA IVF PRIVATE LIMITED',
-      account_number: '9001161115',
-      account_type: 'Current Account',
-      ifsc: 'KKBK0000279',
-      branch: 'Commercial Complex Branch, Jodhpur - 342012',
-      micr: '342485002',
-      cheque_no: '000001'
-    },
-    business_proof: {
-      type: 'Certificate of Incorporation (MCA)',
-      number: 'U86202RJ2026PTC112940',
-      category: 'Private Limited Company (Healthcare / MCC 8099)',
-      date: '30/03/2026'
-    },
-    docs: {
-      signing_pdf: '/docs/kyc/elara_ivf/Plural_MAF_and_Doctor_KYC_Signing_Dossier_Elara_IVF.pdf',
-      zip_bundle: '/docs/kyc/elara_ivf/Elara_IVF_Complete_KYC_Dossier.zip',
-      maf_excel: '/docs/kyc/elara_ivf/Plural_MAF_BO_PEP_Elara_IVF.xlsx',
-      gst_declaration_pdf: '/docs/kyc/elara_ivf/elara_ivf_gst_certificate.pdf',
-      cancelled_cheque: '/docs/kyc/elara_ivf/elara_ivf_cancelled_cheque.jpeg',
-      doctor_pan: '/docs/kyc/elara_ivf/gajendra_singh_chouhan_pan.jpg',
-      aadhaar_front: '/docs/kyc/elara_ivf/gajendra_singh_chouhan_aadhaar_front_back.jpg',
-      establishment_reg: '/docs/kyc/elara_ivf/elara_ivf_certificate_of_incorporation.pdf',
-      udyam_pdf: '/docs/kyc/elara_ivf/elara_ivf_gst_certificate.pdf'
-    },
-    is_signed: false,
-    status: 'Action Required • Awaiting Signed MAF from Director Chouhan'
-  },
-  {
-    id: 'vasantha-dental',
-    clinic_name: 'Vasantha Dental Clinic & Implant Center',
-    legal_name: 'VASANTHA DENTAL CLINIC AND IMPLANT CENTER (Sole Proprietorship)',
-    doctor_name: 'Dr. V Siddardha Chaitanya',
-    dob: '03/08/1984',
-    pan: 'AIVPV7704K',
-    aadhaar: '2777 8569 7017',
-    phone: '+91 79896 96670',
-    email: 'Drchaitu.2011@gmail.com',
-    city: 'Visakhapatnam, Andhra Pradesh',
-    pincode: '530017',
-    address: 'D.No 1-56-23, Bank of India Lane, Sector 2, MVP Colony, Visakhapatnam, Andhra Pradesh - 530017',
-    residential_address: 'D.No 10-33, G-2, Visalakshi Nagar, Kailasagiri Circle, Visakhapatnam, Andhra Pradesh - 530043',
-    specialties: ['General Dentistry', 'Dental Implants', 'Oral Surgery'],
-    submission_badge: '100% Ready for MID • Doctor Signed Dossier',
-    readiness: 'ready',
-    missing_items: [],
-    bank: {
-      bank_name: 'Bank of India (BOI)',
-      account_holder: 'VASANTHA DENTAL CLINIC AND IMPLANT CENTER',
-      account_number: '560320110000200',
-      account_type: 'Current Account',
-      ifsc: 'BKID0005603',
-      branch: 'MVP COLONY Branch, Visakhapatnam, Andhra Pradesh - 530017',
-      micr: '530013008',
-      cheque_no: '1045107'
-    },
-    business_proof: {
-      type: 'Udyam Registration Certificate',
-      number: 'UDYAM-AP-10-0132936',
-      category: 'Micro - Services',
-      date: '06/05/2026'
-    },
-    docs: {
-      signing_pdf: 'https://sqqocqujxlgoxbcnfbfb.supabase.co/storage/v1/object/public/clinic-documents/vasantha_dental/Signed_Doctor_KYC_Dossier_Dr_V_Siddardha_Chaitanya.pdf',
-      zip_bundle: '/docs/kyc/vasantha_dental/Vasantha_Dental_Complete_KYC_Dossier.zip',
-      maf_excel: '/docs/kyc/vasantha_dental/Plural_MAF_BO_PEP_Vasantha_Dental.xlsx',
-      gst_declaration_pdf: '/docs/kyc/vasantha_dental/GST_Exemption_Declaration_vasantha_dental.pdf',
-      cancelled_cheque: '/docs/kyc/vasantha_dental/vasantha_dental_cancelled_cheque.jpg',
-      doctor_pan: '/docs/kyc/vasantha_dental/dr_siddardha_chaitanya_pan.jpg',
-      aadhaar_front: '/docs/kyc/vasantha_dental/dr_siddardha_chaitanya_aadhaar.jpg',
-      udyam_pdf: '/docs/kyc/vasantha_dental/vasantha_dental_udyam_certificate.pdf',
-      establishment_reg: '/docs/kyc/vasantha_dental/vasantha_dental_ap_establishment_registration.jpg',
-      dental_council_reg: '/docs/kyc/vasantha_dental/dr_siddardha_chaitanya_dental_council_registration.jpg',
-      courier_receipt: 'https://sqqocqujxlgoxbcnfbfb.supabase.co/storage/v1/object/public/clinic-documents/vasantha_dental/dtdc_courier_receipt_vasantha_dental.jpg',
-      courier_awb: 'DTDC AWB: N11002335698'
-    },
-    is_signed: true,
-    status: 'Doctor Signed & Verified • Ready for MID'
-  },
-  {
-    id: 'c1b4ab14-e0a4-4a60-9a86-ebedc9616675',
-    clinic_name: 'HEAR ONE',
-    legal_name: 'HEAR ONE (Sole Proprietorship)',
-    doctor_name: 'Dr. Angiras Vishnu',
-    dob: '16/02/1991',
-    pan: 'AZHPV0033E',
-    aadhaar: '4451 2414 5591',
-    phone: '+91 85478 32924',
-    email: 'info@hearone.in',
-    city: 'Kakkanad, Ernakulam, Kerala',
-    pincode: '682030',
-    address: 'Near Civil Station, X/10 (F), Kakkanad, Ernakulam, Kerala - 682030',
-    residential_address: 'Kidangaziyath Mana, West Chalakudy, Chalakudi H.O, Thrissur, Kerala - 680307',
-    specialties: ['Audiology & Speech Rehab', 'Daycare Healthcare', 'ENT Allied Services'],
-    submission_badge: '100% Ready for MID • Doctor Signed Dossier',
-    readiness: 'ready',
-    missing_items: [],
-    bank: {
-      bank_name: 'Bank of Baroda',
-      account_holder: 'HEAR ONE',
-      account_number: '30580200000228',
-      account_type: 'Current Account',
-      ifsc: 'BARB0KAKKAN',
-      branch: 'Opp. Civil Station, Kinfra Road, Kakkanad, Kochi 682030',
-      micr: '682012009',
-      cheque_no: '000012'
-    },
-    business_proof: {
-      type: 'Udyam Registration Certificate',
-      number: 'UDYAM-KL-02-0000127',
-      category: 'Micro - Services',
-      date: '18/06/2020'
-    },
-    docs: {
-      signing_pdf: 'https://sqqocqujxlgoxbcnfbfb.supabase.co/storage/v1/object/public/clinic-documents/hear_one/Signed_Doctor_KYC_Dossier_Dr_Angiras_Vishnu.pdf',
-      zip_bundle: 'https://sqqocqujxlgoxbcnfbfb.supabase.co/storage/v1/object/public/clinic-documents/hear_one/Hear_One_Complete_KYC_Dossier.zip',
-      maf_excel: '/docs/kyc/hear_one/Plural_MAF_BO_PEP_Hear_One.xlsx',
-      gst_declaration_pdf: '/docs/kyc/hear_one/GST_Exemption_Declaration_hear_one.pdf',
-      cancelled_cheque: '/docs/kyc/hear_one/hear_one_cancelled_cheque.jpg',
-      doctor_pan: '/docs/kyc/hear_one/dr_angiras_vishnu_pan.jpg',
-      aadhaar_front: '/docs/kyc/hear_one/dr_angiras_vishnu_aadhaar_front.jpg',
-      aadhaar_back: '/docs/kyc/hear_one/dr_angiras_vishnu_aadhaar_back.jpg',
-      udyam_pdf: '/docs/kyc/hear_one/hear_one_udyam_certificate.pdf'
-    },
-    is_signed: true,
-    status: 'Doctor Signed & Verified • Ready for MID'
-  },
-  {
-    id: 'nitya-dental',
-    clinic_name: 'Nitya Dental & Cosmetic Clinic',
-    legal_name: 'NITYA DENTAL AND COSMETIC CLINIC (Sole Proprietorship)',
-    doctor_name: 'Dr. Bhanu Prakash Singh',
-    dob: '25/12/1986',
-    pan: 'BZUPS9855B',
-    aadhaar: 'VID: 9104 2807 6329 2177 (XXXX 6013)',
-    phone: '+91 89890 14483',
-    email: 'bcds143@gmail.com',
-    city: 'Bhopal, Madhya Pradesh',
-    pincode: '462023',
-    address: 'Shop No. 48, Minal Gate No. 1, J. K. Road, Raj Capital, Block No. 2, Bhopal, Madhya Pradesh - 462023',
-    residential_address: 'House No. 2-H, Shri Ram Chandra Hights, Ayodhya By Pass Road, Huzur, Ayodhya Nagar, Bhopal, Madhya Pradesh - 462041',
-    specialties: ['Dental Implants', 'Cosmetic Dentistry', 'Laser & Hair', 'Clear Aligners', 'Root Canal'],
-    submission_badge: '100% Ready for MID • Doctor Signed Dossier',
-    readiness: 'ready',
-    missing_items: [],
-    bank: {
-      bank_name: 'HDFC Bank',
-      account_holder: 'NITYA DENTAL AND COSMETIC CLINIC',
-      account_number: '50200096846950',
-      account_type: 'Current Account',
-      ifsc: 'HDFC0008228',
-      branch: 'STAR SQUARE, Kasturba Nagar, Bhopal - 462023',
-      micr: '462240032',
-      cheque_no: '000002'
-    },
-    business_proof: {
-      type: 'Shop & Establishment Registration',
-      number: 'BHOP240911SE006766',
-      category: 'Labour Dept, Bhopal',
-      date: '11/09/2024'
-    },
-    docs: {
-      signing_pdf: 'https://sqqocqujxlgoxbcnfbfb.supabase.co/storage/v1/object/public/clinic-documents/nitya_dental/Signed_Doctor_KYC_Dossier_Dr_Bhanu_Prakash_Singh.pdf',
-      zip_bundle: '/docs/kyc/nitya_dental/Nitya_Dental_Complete_KYC_Dossier.zip',
-      maf_excel: '/docs/kyc/nitya_dental/Plural_MAF_BO_PEP_Nitya_Dental.xlsx',
-      gst_declaration_pdf: '/docs/kyc/nitya_dental/GST_Exemption_Declaration_nitya_dental.pdf',
-      cancelled_cheque: '/docs/kyc/nitya_dental/nitya_dental_cancelled_cheque.jpg',
-      doctor_pan: '/docs/kyc/nitya_dental/dr_bhanu_prakash_pan.jpg',
-      aadhaar_front: '/docs/kyc/nitya_dental/dr_bhanu_prakash_aadhaar_front.jpg',
-      aadhaar_back: '/docs/kyc/nitya_dental/dr_bhanu_prakash_aadhaar_back.jpg',
-      establishment_reg: '/docs/kyc/nitya_dental/nitya_dental_establishment_registration.jpg'
-    },
-    is_signed: true,
-    status: 'Doctor Signed & Verified • Ready for MID'
-  },
-  {
-    id: 'exldentist-clinic',
-    clinic_name: 'Exldentist Clinic',
-    legal_name: 'EXLDENTIST CLINIC (Sole Proprietorship)',
-    doctor_name: 'Dr. Priyanka Kumar',
-    dob: '03/05/1981',
-    pan: 'AEKPB4894H',
-    aadhaar: '2507 3633 1374',
-    phone: '+91 99101 19555',
-    email: 'kumarpriyankaa@gmail.com',
-    city: 'Gurugram, Haryana',
-    pincode: '122009',
-    address: 'Flat No. 7702, Basement, 77th Avenue, DLF Phase 4, Gurugram, Haryana - 122009',
-    residential_address: 'Flat No. 7702, 77th Avenue, DLF Phase 4, Gurugram, Haryana - 122009',
-    specialties: ['Preventive Dentistry', 'Aesthetic & Cosmetic Dentistry', 'Dental Restorations', 'Root Canal Therapy'],
-    submission_badge: 'Action Required • Aadhaar Back Pending',
-    readiness: 'pending',
-    missing_items: ['Aadhaar Card (Back Side with Address)'],
-    bank: {
-      bank_name: 'Axis Bank',
-      account_holder: 'EXLDENTIST CLINIC',
-      account_number: '920020052899970',
-      account_type: 'Current Account',
-      ifsc: 'UTIB0000131',
-      branch: 'DLF Gurgaon Branch, Haryana - 122002',
-      micr: '110211019',
-      cheque_no: '000029'
-    },
-    business_proof: {
-      type: 'Udyam Registration Certificate',
-      number: 'UDYAM-HR-05-0120345',
-      category: 'Micro - Services',
-      date: '15/10/2024'
-    },
-    docs: {
-      signing_pdf: 'https://sqqocqujxlgoxbcnfbfb.supabase.co/storage/v1/object/public/clinic-documents/exldentist_clinic/Signed_Doctor_KYC_Signing_Dossier_Dr_Priyanka_Kumar.pdf',
-      zip_bundle: 'https://sqqocqujxlgoxbcnfbfb.supabase.co/storage/v1/object/public/clinic-documents/exldentist_clinic/Exldentist_Clinic_Complete_KYC_Dossier.zip',
-      maf_excel: 'https://sqqocqujxlgoxbcnfbfb.supabase.co/storage/v1/object/public/clinic-documents/exldentist_clinic/Plural_MAF_BO_PEP_Exldentist_Clinic.xlsx',
-      gst_declaration_pdf: 'https://sqqocqujxlgoxbcnfbfb.supabase.co/storage/v1/object/public/clinic-documents/exldentist_clinic/Signed_GST_Exemption_Declaration_exldentist_clinic.pdf',
-      cancelled_cheque: 'https://sqqocqujxlgoxbcnfbfb.supabase.co/storage/v1/object/public/clinic-documents/exldentist_clinic/exldentist_cancelled_cheque.jpg',
-      doctor_pan: 'https://sqqocqujxlgoxbcnfbfb.supabase.co/storage/v1/object/public/clinic-documents/exldentist_clinic/dr_priyanka_kumar_pan.jpg',
-      aadhaar_front: 'https://sqqocqujxlgoxbcnfbfb.supabase.co/storage/v1/object/public/clinic-documents/exldentist_clinic/dr_priyanka_kumar_aadhaar.jpg',
-      dental_council_reg: 'https://sqqocqujxlgoxbcnfbfb.supabase.co/storage/v1/object/public/clinic-documents/exldentist_clinic/dr_priyanka_kumar_dental_council_registration.jpg',
-      udyam_pdf: 'https://sqqocqujxlgoxbcnfbfb.supabase.co/storage/v1/object/public/clinic-documents/exldentist_clinic/exldentist_udyam_certificate.jpg'
-    },
-    is_signed: true,
-    status: 'Action Required • Awaiting Doctor Aadhaar Back Card'
-  },
-  {
-    id: 'impressions-dental',
-    clinic_name: 'Impressions Dental Clinic',
-    legal_name: 'IMPRESSIONS DENTAL CLINIC (Sole Proprietorship)',
-    doctor_name: 'Dr. Dushyant Soni',
-    dob: '05/12/1982',
-    pan: 'BMEPS1952G',
-    aadhaar: '2871 6120 8712',
-    phone: '+91 94131 45672',
-    email: 'dushyantsoni5@gmail.com',
-    city: 'Jodhpur, Rajasthan',
-    pincode: '342008',
-    address: 'Plot No. 119, Shri Krishna Nagar, Nahar Road Chopasani, Jodhpur, Rajasthan - 342008',
-    residential_address: 'Plot No. 119, Nahar Road, Opp Balaji Hospital, Shri Krishna Nagar, Jodhpur, Rajasthan - 342008',
-    specialties: ['Dental Implants', 'Full Mouth Rehabilitation', 'Cosmetic Dentistry', 'Laser & Restorations'],
-    submission_badge: 'Action Required • Doctor MAF Signature Awaited',
-    readiness: 'pending',
-    missing_items: ['Signed & Stamped Doctor MAF Dossier'],
-    bank: {
-      bank_name: 'HDFC Bank',
-      account_holder: 'IMPRESSIONS DENTAL CLINIC',
-      account_number: '50200099811004',
-      account_type: 'Current Account',
-      ifsc: 'HDFC0000142',
-      branch: 'Sardarpura, Jodhpur (0142)',
-      micr: '342240002',
-      cheque_no: '000097'
-    },
-    business_proof: {
-      type: 'Udyam Registration Certificate',
-      number: 'UDYAM-RJ-22-0141614',
-      category: 'Micro - Services',
-      date: '11/11/2024'
-    },
-    docs: {
-      signing_pdf: '/docs/kyc/impressions_dental/Plural_MAF_and_Doctor_KYC_Signing_Dossier_impressions_dental.pdf',
-      zip_bundle: '/docs/kyc/impressions_dental/impressions_dental_Complete_KYC_Dossier.zip',
-      maf_excel: '/docs/kyc/impressions_dental/Plural_MAF_BO_PEP_impressions_dental.xlsx',
-      gst_declaration_pdf: '/docs/kyc/impressions_dental/GST_Exemption_Declaration_impressions_dental.pdf',
-      cancelled_cheque: '/docs/kyc/impressions_dental/Cancelled_Cheque_impressions_dental.jpeg',
-      doctor_pan: '/docs/kyc/impressions_dental/dr_dushyant_soni_pan.jpg',
-      aadhaar_front: '/docs/kyc/impressions_dental/dr_dushyant_soni_aadhaar.jpg',
-      udyam_pdf: '/docs/kyc/impressions_dental/impressions_dental_udyam_certificate.pdf'
-    },
-    is_signed: false,
-    status: 'Action Required • Awaiting Signed MAF from Dr. Dushyant Soni'
-  },
-  {
-    id: 'amitha-dental',
-    clinic_name: 'Dr. Amitha Family Dental Care',
-    legal_name: 'DR. AMITHA FAMILY DENTAL CARE (Sole Proprietorship)',
-    doctor_name: 'Dr. Amitha G',
-    dob: '01/05/1986',
-    pan: 'CEXPG0906G',
-    aadhaar: '7536 4100 6720',
-    phone: '+91 99454 22014',
-    email: 'info@dramithadental.com',
-    city: 'Bengaluru, Karnataka',
-    pincode: '560077',
-    address: 'No. 90 and 91, 6th Cross, Double Road, MCECHS Layout, Hegde Nagar, Bangalore, Karnataka - 560077',
-    residential_address: 'No. 563, 10th Cross, MCECHS Layout, R K Hegde Nagar, Dr. S R K Nagar Post, Bengaluru, Karnataka - 560077',
-    specialties: ['Dental Implants', 'Clear Aligners', 'Full Mouth Rehabilitation', 'Zirconia Crowns & Ortho'],
-    submission_badge: 'Action Required • Cheque & MAF Sign Pending',
-    readiness: 'pending',
-    missing_items: ['Settlement Bank Cancelled Cheque', 'Signed & Stamped Doctor MAF Dossier'],
-    bank: {
-      bank_name: 'Current Account (Under Bank Linking)',
-      account_holder: 'DR. AMITHA FAMILY DENTAL CARE',
-      account_number: 'Pending Cheque Upload',
-      account_type: 'Current Account',
-      ifsc: 'Under Verification',
-      branch: 'Bengaluru Urban, Karnataka',
-      micr: 'Under Verification',
-      cheque_no: 'Pending Cheque Upload'
-    },
-    business_proof: {
-      type: 'KPME Registration Certificate',
-      number: 'BLU05843ALDEN',
-      category: 'Dental Lab or Clinic (KPME Act 2018)',
-      date: '09/11/2023'
-    },
-    docs: {
-      signing_pdf: '/docs/kyc/amitha_dental/Plural_MAF_and_Doctor_KYC_Signing_Dossier_amitha_dental.pdf',
-      zip_bundle: '/docs/kyc/amitha_dental/amitha_dental_Complete_KYC_Dossier.zip',
-      maf_excel: '/docs/kyc/amitha_dental/Plural_MAF_BO_PEP_amitha_dental.xlsx',
-      gst_declaration_pdf: '/docs/kyc/amitha_dental/GST_Exemption_Declaration_amitha_dental.pdf',
-      cancelled_cheque: '/docs/kyc/amitha_dental/dr_amitha_kpme_certificate.jpg',
-      doctor_pan: '/docs/kyc/amitha_dental/dr_amitha_pan.jpg',
-      aadhaar_front: '/docs/kyc/amitha_dental/dr_amitha_aadhaar.jpg',
-      establishment_reg: '/docs/kyc/amitha_dental/dr_amitha_kpme_certificate.jpg'
-    },
-    is_signed: false,
-    status: 'Action Required • Awaiting Cancelled Cheque & MAF Signature'
-  },
-  {
-    id: 'krishna-dental',
-    clinic_name: 'Krishna Dental Clinic',
-    legal_name: 'KRISHNA DENTAL CLINIC (Sole Proprietorship)',
-    doctor_name: 'Dr. Saravan Kumar Vemula',
-    dob: '11/12/1991',
-    pan: 'BBRPV8925N',
-    aadhaar: '3337 0525 4877',
-    phone: '+91 93939 88929',
-    email: 'krishnadentalcpt@gmail.com',
-    city: 'Chilakaluripet, Guntur, Andhra Pradesh',
-    pincode: '522616',
-    address: 'Redla Bazzar, Opp Aryavyshya Kalyana Mandapam, Pasumuru Post, Chilakaluripeta, Guntur Dist, Andhra Pradesh - 522616',
-    residential_address: '12-206/12, Purushotha Patnam, Chilakaluripet, Guntur, Andhra Pradesh - 522616',
-    specialties: ['Dental Implants', 'Oral Surgery', 'Root Canal Treatments', 'Zirconia Crowns & Orthodontics'],
-    submission_badge: 'Action Required • Doctor MAF Signature Awaited',
-    readiness: 'pending',
-    missing_items: ['Signed & Stamped Doctor MAF Dossier'],
-    bank: {
-      bank_name: 'State Bank of India',
-      account_holder: 'KRISHNA DENTAL CLINIC',
-      account_number: '42028265432',
-      account_type: 'Current Account',
-      ifsc: 'SBIN0020507',
-      branch: 'Kalamandir Centre, Chilakaluripet (20507)',
-      micr: '522002405',
-      cheque_no: '000647'
-    },
-    business_proof: {
-      type: 'Udyam Registration Certificate',
-      number: 'UDYAM-AP-04-0025994',
-      category: 'Hospital Activities (NIC 86100)',
-      date: '18/07/2022'
-    },
-    docs: {
-      signing_pdf: '/docs/kyc/krishna_dental/Plural_MAF_and_Doctor_KYC_Signing_Dossier_krishna_dental.pdf',
-      zip_bundle: '/docs/kyc/krishna_dental/krishna_dental_Complete_KYC_Dossier.zip',
-      maf_excel: '/docs/kyc/krishna_dental/Plural_MAF_BO_PEP_krishna_dental.xlsx',
-      gst_declaration_pdf: '/docs/kyc/krishna_dental/GST_Exemption_Declaration_krishna_dental.pdf',
-      cancelled_cheque: '/docs/kyc/krishna_dental/Cancelled_Cheque_krishna_dental.jpeg',
-      doctor_pan: '/docs/kyc/krishna_dental/Doctor_PAN_Card_krishna_dental.jpeg',
-      aadhaar_front: '/docs/kyc/krishna_dental/Doctor_Aadhaar_Card_krishna_dental.jpeg',
-      establishment_reg: '/docs/kyc/krishna_dental/Udyam_Registration_Certificate_krishna_dental.pdf'
-    },
-    is_signed: false,
-    status: 'Action Required • Awaiting Signed MAF from Dr. Saravan Kumar'
-  }
-];
-
-// Backwards-compatibility alias
-const SPOTLIGHT_CLINIC = VERIFIED_DOSSIERS[0];
+// Note: Confidential KYC dossiers are served securely via authenticated /api/underwriting API
 
 export default function PineLabsUnderwritingPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const tokenParam = searchParams.get('access') || searchParams.get('token');
   const clinicParam = searchParams.get('clinic');
 
-  // Partner authentication
-  const [isAuthenticated, setIsAuthenticated] = useState(() => {
+  const [allDossiers, setAllDossiers] = useState<VerifiedDossier[]>([]);
+  const [isLoadingDossiers, setIsLoadingDossiers] = useState(false);
+  const [isSubmittingPin, setIsSubmittingPin] = useState(false);
+  const [pinInput, setPinInput] = useState('');
+  const [pinError, setPinError] = useState<string | null>(null);
+  const [showSensitivePii, setShowSensitivePii] = useState(false);
+
+  // Partner authentication state
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => {
     const auth = sessionStorage.getItem('plural_underwriting_auth');
     const authTime = sessionStorage.getItem('plural_auth_timestamp');
     if (auth === '1' && authTime) {
       const elapsedHours = (Date.now() - parseInt(authTime, 10)) / (1000 * 60 * 60);
-      if (elapsedHours > 4) {
+      if (elapsedHours > 8) {
         sessionStorage.removeItem('plural_underwriting_auth');
         sessionStorage.removeItem('plural_auth_timestamp');
+        sessionStorage.removeItem('plural_uw_token');
         return false;
       }
       return true;
     }
-    return tokenParam === 'plural2026';
+    return Boolean(tokenParam);
   });
-  const [pinInput, setPinInput] = useState('');
-  const [pinError, setPinError] = useState(false);
-  const [showSensitivePii, setShowSensitivePii] = useState(false);
 
-  // Clean up token parameter from browser address bar immediately so it is never exposed in browser history or copy-pastes
-  useEffect(() => {
-    if (tokenParam === 'plural2026') {
-      sessionStorage.setItem('plural_underwriting_auth', '1');
-      sessionStorage.setItem('plural_auth_timestamp', Date.now().toString());
-      setIsAuthenticated(true);
-      const cleanParams = new URLSearchParams(window.location.search);
-      cleanParams.delete('access');
-      cleanParams.delete('token');
-      const newQuery = cleanParams.toString();
-      const newUrl = window.location.pathname + (newQuery ? `?${newQuery}` : '');
-      window.history.replaceState({}, '', newUrl);
+  // Secure Server-Side Dossier Fetching
+  const fetchDossiers = async (accessPin?: string) => {
+    setIsLoadingDossiers(true);
+    try {
+      const query = accessPin ? `?access=${encodeURIComponent(accessPin)}` : '';
+      const storedToken = sessionStorage.getItem('plural_uw_token');
+      const headers: Record<string, string> = {};
+      if (storedToken) {
+        headers['Authorization'] = `Bearer ${storedToken}`;
+      }
+      const res = await fetch(`/api/underwriting${query}`, {
+        headers,
+        credentials: 'include'
+      });
+      if (res.ok) {
+        const data = await res.json();
+        if (data.dossiers && Array.isArray(data.dossiers)) {
+          setAllDossiers(data.dossiers);
+          setIsAuthenticated(true);
+          sessionStorage.setItem('plural_underwriting_auth', '1');
+          sessionStorage.setItem('plural_auth_timestamp', Date.now().toString());
+          if (data.token) {
+            sessionStorage.setItem('plural_uw_token', data.token);
+          }
+          return true;
+        }
+      } else {
+        if (!accessPin) {
+          setIsAuthenticated(false);
+          sessionStorage.removeItem('plural_underwriting_auth');
+          sessionStorage.removeItem('plural_auth_timestamp');
+          sessionStorage.removeItem('plural_uw_token');
+        }
+      }
+    } catch (err) {
+      console.error('Failed to load underwriting dossiers:', err);
+    } finally {
+      setIsLoadingDossiers(false);
     }
-  }, [tokenParam]);
+    return false;
+  };
+
+  // Immediate token scrubbing from URL bar & auto-session initialization
+  useEffect(() => {
+    if (tokenParam) {
+      fetchDossiers(tokenParam).then((success) => {
+        if (success) {
+          const cleanParams = new URLSearchParams(window.location.search);
+          cleanParams.delete('access');
+          cleanParams.delete('token');
+          const newQuery = cleanParams.toString();
+          const newUrl = window.location.pathname + (newQuery ? `?${newQuery}` : '');
+          window.history.replaceState({}, '', newUrl);
+        }
+      });
+    } else if (isAuthenticated && allDossiers.length === 0) {
+      fetchDossiers();
+    }
+  }, [tokenParam, isAuthenticated]);
 
   const maskAadhaar = (val: string) => {
     if (showSensitivePii) return val;
@@ -536,10 +198,20 @@ export default function PineLabsUnderwritingPage() {
     return `•••• •••• ${clean.slice(-4)}`;
   };
 
-  const handleLockDesk = () => {
+  const handleLockDesk = async () => {
+    try {
+      await fetch('/api/underwriting', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ action: 'logout' })
+      });
+    } catch (_) {}
     sessionStorage.removeItem('plural_underwriting_auth');
     sessionStorage.removeItem('plural_auth_timestamp');
+    sessionStorage.removeItem('plural_uw_token');
     setIsAuthenticated(false);
+    setAllDossiers([]);
     toast.info('Underwriting Desk locked successfully');
   };
 
@@ -549,11 +221,6 @@ export default function PineLabsUnderwritingPage() {
   
   // Selected clinic state: null = View 1 (Queue), string = View 2 (Clinic Dossier & Docs)
   const [selectedDossierId, setSelectedDossierId] = useState<string | null>(() => clinicParam);
-
-  // Sub-Merchant Underwriting Desk displays strictly the verified clinic dossiers with compiled Pine Labs documentation
-  const allDossiers: VerifiedDossier[] = useMemo(() => {
-    return [...VERIFIED_DOSSIERS];
-  }, []);
 
   // Sync state if URL parameter changes
   useEffect(() => {
@@ -643,16 +310,39 @@ export default function PineLabsUnderwritingPage() {
   const [previewDocUrl, setPreviewDocUrl] = useState<string | null>(null);
   const [previewDocTitle, setPreviewDocTitle] = useState<string>('');
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (pinInput.trim() === 'plural2026' || pinInput.trim() === 'clinaza2024') {
-      sessionStorage.setItem('plural_underwriting_auth', '1');
-      sessionStorage.setItem('plural_auth_timestamp', Date.now().toString());
-      setIsAuthenticated(true);
-      setPinError(false);
-      toast.success('Welcome to Pine Labs Underwriting Desk');
-    } else {
-      setPinError(true);
+    const pin = pinInput.trim();
+    if (!pin) {
+      setPinError('Please enter the partner access PIN.');
+      return;
+    }
+    setIsSubmittingPin(true);
+    setPinError(null);
+    try {
+      const res = await fetch('/api/underwriting', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ pin })
+      });
+      const data = await res.json();
+      if (res.ok && data.success) {
+        setAllDossiers(data.dossiers || []);
+        setIsAuthenticated(true);
+        sessionStorage.setItem('plural_underwriting_auth', '1');
+        sessionStorage.setItem('plural_auth_timestamp', Date.now().toString());
+        if (data.token) {
+          sessionStorage.setItem('plural_uw_token', data.token);
+        }
+        toast.success('Welcome to Pine Labs Underwriting Desk');
+      } else {
+        setPinError(data.error || 'Invalid access PIN. Contact Underwriting Desk Support at ops@clinaza.in.');
+      }
+    } catch (err) {
+      setPinError('Connection error. Please try again.');
+    } finally {
+      setIsSubmittingPin(false);
     }
   };
 
@@ -715,9 +405,13 @@ export default function PineLabsUnderwritingPage() {
             <div>
               <input
                 type="password"
-                placeholder="Enter Desk PIN (e.g. plural2026)"
+                placeholder="Enter Partner Access PIN"
                 value={pinInput}
-                onChange={(e) => setPinInput(e.target.value)}
+                onChange={(e) => {
+                  setPinInput(e.target.value);
+                  if (pinError) setPinError(null);
+                }}
+                disabled={isSubmittingPin}
                 className={`w-full px-4 py-3 rounded-xl bg-slate-50 border text-slate-900 text-sm focus:outline-none focus:bg-white focus:ring-2 focus:ring-blue-500 transition-all ${
                   pinError ? 'border-rose-400 focus:ring-rose-400 bg-rose-50/30' : 'border-slate-300'
                 }`}
@@ -725,17 +419,27 @@ export default function PineLabsUnderwritingPage() {
               />
               {pinError && (
                 <p className="text-xs text-rose-600 font-medium mt-1.5 flex items-center gap-1">
-                  <AlertCircle size={12} /> Invalid access PIN. Contact Pratyush Raj (+91 7292984244).
+                  <AlertCircle size={12} className="shrink-0" /> <span>{pinError}</span>
                 </p>
               )}
             </div>
 
             <button
               type="submit"
-              className="w-full py-3 bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-black uppercase tracking-wider rounded-xl transition-all shadow-md shadow-blue-500/25 active:scale-98 cursor-pointer flex items-center justify-center gap-2"
+              disabled={isSubmittingPin}
+              className="w-full py-3 bg-[#0867E8] hover:bg-[#0756C7] disabled:opacity-75 text-white text-xs font-black uppercase tracking-wider rounded-xl transition-all shadow-md shadow-blue-500/25 active:scale-98 cursor-pointer flex items-center justify-center gap-2"
             >
-              <span>Unlock Underwriting Desk</span>
-              <ArrowUpRight size={14} />
+              {isSubmittingPin ? (
+                <>
+                  <RefreshCw size={14} className="animate-spin" />
+                  <span>Verifying Credentials...</span>
+                </>
+              ) : (
+                <>
+                  <span>Unlock Underwriting Desk</span>
+                  <ArrowUpRight size={14} />
+                </>
+              )}
             </button>
           </form>
 
@@ -949,7 +653,24 @@ export default function PineLabsUnderwritingPage() {
 
             {/* ── CLINIC CARDS LIST (FULL-WIDTH BALANCED FLOW) ── */}
             <div className="space-y-4">
-              {filteredDossiers.map((dossier) => {
+              {isLoadingDossiers && allDossiers.length === 0 ? (
+                <div className="bg-white border border-slate-200 rounded-2xl p-12 text-center space-y-3 shadow-xs">
+                  <RefreshCw size={28} className="animate-spin text-[#0867E8] mx-auto" />
+                  <p className="text-sm font-bold text-slate-800">Authenticating &amp; Loading Sub-Merchant Dossiers...</p>
+                  <p className="text-xs text-slate-400">Verifying Pine Labs partner session credentials</p>
+                </div>
+              ) : filteredDossiers.length === 0 ? (
+                <div className="bg-white border border-slate-200 rounded-2xl p-12 text-center space-y-3 shadow-xs">
+                  <p className="text-sm font-bold text-slate-800">No clinics found matching criteria</p>
+                  <button
+                    onClick={() => { setSearchQuery(''); setFilterTab('all'); }}
+                    className="text-xs font-bold text-[#0867E8] hover:underline cursor-pointer"
+                  >
+                    Reset search &amp; filters
+                  </button>
+                </div>
+              ) : (
+                filteredDossiers.map((dossier) => {
                 const isPending = !isClinicFullyReady(dossier);
                 return (
                   <div
@@ -1109,13 +830,7 @@ export default function PineLabsUnderwritingPage() {
                     </div>
                   </div>
                 );
-              })}
-
-              {filteredDossiers.length === 0 && (
-                <div className="text-center py-12 text-slate-500 text-xs bg-slate-50 rounded-2xl border border-slate-200">
-                  No verified clinic application matching "{searchQuery}".
-                </div>
-              )}
+              }))}
             </div>
           </div>
         ) : (

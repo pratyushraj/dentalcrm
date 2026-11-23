@@ -579,10 +579,16 @@ export default function PineLabsUnderwritingPage() {
               </div>
             </div>
 
-            {/* ── UNDERWRITING EXECUTIVE KPI SUMMARY (LANDING PAGE STATSBAR PATTERN) ── */}
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-slate-200/90 rounded-2xl overflow-hidden border border-slate-200/90 shadow-[0_2px_12px_rgba(15,23,42,0.03)]">
+            {/* ── UNDERWRITING EXECUTIVE KPI SUMMARY ── */}
+            <div className="grid grid-cols-2 gap-px bg-slate-200/90 rounded-2xl overflow-hidden border border-slate-200/90 shadow-[0_2px_12px_rgba(15,23,42,0.03)]">
               {/* Tile 1: 100% Ready for MID */}
-              <div className="bg-white p-3.5 sm:p-4 text-left transition-colors hover:bg-slate-50/50">
+              <button
+                type="button"
+                onClick={() => setFilterTab(filterTab === 'ready' ? 'all' : 'ready')}
+                className={`p-3.5 sm:p-4 text-left transition-all cursor-pointer ${
+                  filterTab === 'ready' ? 'bg-emerald-50/60 ring-2 ring-inset ring-emerald-500' : 'bg-white hover:bg-slate-50/70'
+                }`}
+              >
                 <div className="flex items-center justify-between">
                   <span className="text-[10px] font-extrabold uppercase tracking-wider text-slate-500">Ready for MID</span>
                   <span className="flex items-center justify-center w-6 h-6 rounded-lg bg-emerald-50 text-emerald-600 border border-emerald-200">
@@ -594,10 +600,16 @@ export default function PineLabsUnderwritingPage() {
                   <span className="text-xs font-bold text-slate-400">/ {allDossiers.length} Clinics</span>
                 </div>
                 <p className="text-[11px] text-slate-500 mt-0.5 font-medium leading-tight">Doctor Signed Dossiers Complete</p>
-              </div>
+              </button>
 
               {/* Tile 2: Action Required / Pending Items */}
-              <div className="bg-white p-3.5 sm:p-4 text-left transition-colors hover:bg-slate-50/50">
+              <button
+                type="button"
+                onClick={() => setFilterTab(filterTab === 'pending' ? 'all' : 'pending')}
+                className={`p-3.5 sm:p-4 text-left transition-all cursor-pointer ${
+                  filterTab === 'pending' ? 'bg-amber-50/60 ring-2 ring-inset ring-amber-500' : 'bg-white hover:bg-slate-50/70'
+                }`}
+              >
                 <div className="flex items-center justify-between">
                   <span className="text-[10px] font-extrabold uppercase tracking-wider text-slate-500">Pending Follow-Up</span>
                   <span className="flex items-center justify-center w-6 h-6 rounded-lg bg-amber-50 text-amber-700 border border-amber-200">
@@ -609,37 +621,7 @@ export default function PineLabsUnderwritingPage() {
                   <span className="text-xs font-bold text-slate-400">Clinics</span>
                 </div>
                 <p className="text-[11px] text-slate-500 mt-0.5 font-medium leading-tight">Awaiting Cheque / Signature</p>
-              </div>
-
-              {/* Tile 3: Guaranteed T+1 Settlements */}
-              <div className="bg-white p-3.5 sm:p-4 text-left transition-colors hover:bg-slate-50/50">
-                <div className="flex items-center justify-between">
-                  <span className="text-[10px] font-extrabold uppercase tracking-wider text-slate-500">Settlement Cycle</span>
-                  <span className="flex items-center justify-center w-6 h-6 rounded-lg bg-blue-50 text-[#0867E8] border border-blue-200">
-                    <Landmark size={13} />
-                  </span>
-                </div>
-                <div className="mt-1.5 flex items-baseline gap-1.5">
-                  <span className="text-xl sm:text-2xl font-black text-[#0B2450]">T+1</span>
-                  <span className="text-xs font-bold text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200">Guaranteed</span>
-                </div>
-                <p className="text-[11px] text-slate-500 mt-0.5 font-medium leading-tight">Direct Current Account RTGS/NEFT</p>
-              </div>
-
-              {/* Tile 4: Nodal Infrastructure */}
-              <div className="bg-white p-3.5 sm:p-4 text-left transition-colors hover:bg-slate-50/50">
-                <div className="flex items-center justify-between">
-                  <span className="text-[10px] font-extrabold uppercase tracking-wider text-slate-500">Nodal Gateway</span>
-                  <span className="flex items-center justify-center w-6 h-6 rounded-lg bg-slate-100 text-slate-700 border border-slate-200">
-                    <ShieldCheck size={13} />
-                  </span>
-                </div>
-                <div className="mt-1.5 flex items-baseline gap-1.5">
-                  <span className="text-base sm:text-lg font-black text-[#0B2450] tracking-tight">Plural</span>
-                  <span className="text-[10.5px] font-bold text-slate-500">by Pine Labs</span>
-                </div>
-                <p className="text-[11px] text-slate-500 mt-0.5 font-medium leading-tight">Institutional Sub-Merchant Rail</p>
-              </div>
+              </button>
             </div>
 
             {/* ── READINESS FILTER TABS & SORTING ── */}

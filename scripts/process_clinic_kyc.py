@@ -202,7 +202,9 @@ def fill_maf_excel(data: dict, out_xlsx: str):
         "Pratyush Raj": data['doctor_name'],
         "7292984244": data['phone'].replace("+91", "").replace(" ", ""),
         "pratyushraj@outlook.com": data['email'],
-        "support@clinaza.in": data.get('alt_email', data['email'])
+        "support@clinaza.in": data.get('alt_email', data['email']),
+        "800024": str(data['pincode']),
+        "UDYAM-BR-26-0005161": data.get('business_id', 'KPME: BLU15148ALDEN')
     }
 
     for s in wb.sheetnames:
@@ -220,6 +222,12 @@ def fill_maf_excel(data: dict, out_xlsx: str):
     # Explicit cells in Final MAF
     if "Final MAF" in wb.sheetnames:
         ws_maf = wb["Final MAF"]
+        # PIN Codes and Business Identifier
+        ws_maf["F7"] = str(data["pincode"])
+        ws_maf["F10"] = str(data["pincode"])
+        ws_maf["D12"] = "GST Exempt / Healthcare Services (Notification No. 12/2017)"
+        ws_maf["F12"] = data.get("business_id") or data.get("udyam") or "KPME: BLU15148ALDEN"
+
         # Primary Correspondence (Columns A-B)
         ws_maf["B23"] = data["doctor_name"]
         ws_maf["B24"] = data["phone"].replace("+91", "").replace(" ", "")
@@ -322,6 +330,7 @@ def main():
     parser.add_argument("--pan-img", help="Path to Doctor PAN image")
     parser.add_argument("--aadhaar-img", help="Path to Doctor Aadhaar image")
     parser.add_argument("--udyam-pdf", help="Path to Udyam Registration PDF")
+    parser.add_argument("--business-id", help="Business Identifier (e.g. KPME or Udyam)", default=None)
     args = parser.parse_args()
 
     slug = args.slug.lower().replace(" ", "_")
@@ -348,6 +357,7 @@ def main():
         'address': args.address,
         'residential_address': args.residential_address or args.address,
         'bank_name': args.bank_name,
+        'business_id': args.business_id,
         'bank_account_name': args.bank_account_name or (args.clinic_name or "Partner Clinic"),
         'bank_account_no': args.bank_account_no or "000000000000",
         'bank_ifsc': args.bank_ifsc or "BANK0000001"

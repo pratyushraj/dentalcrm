@@ -33,7 +33,8 @@ import {
   ArrowDownToLine,
   Archive,
   FileCheck,
-  X
+  X,
+  Truck
 } from 'lucide-react';
 import { toast } from 'sonner';
 
@@ -84,6 +85,8 @@ export interface VerifiedDossier {
     udyam_pdf?: string;
     establishment_reg?: string;
     dental_council_reg?: string;
+    courier_receipt?: string;
+    courier_awb?: string;
   };
   is_signed?: boolean;
   status: string;
@@ -182,7 +185,9 @@ const VERIFIED_DOSSIERS: VerifiedDossier[] = [
       aadhaar_front: '/docs/kyc/vasantha_dental/dr_siddardha_chaitanya_aadhaar.jpg',
       udyam_pdf: '/docs/kyc/vasantha_dental/vasantha_dental_udyam_certificate.pdf',
       establishment_reg: '/docs/kyc/vasantha_dental/vasantha_dental_ap_establishment_registration.jpg',
-      dental_council_reg: '/docs/kyc/vasantha_dental/dr_siddardha_chaitanya_dental_council_registration.jpg'
+      dental_council_reg: '/docs/kyc/vasantha_dental/dr_siddardha_chaitanya_dental_council_registration.jpg',
+      courier_receipt: 'https://sqqocqujxlgoxbcnfbfb.supabase.co/storage/v1/object/public/clinic-documents/vasantha_dental/dtdc_courier_receipt_vasantha_dental.jpg',
+      courier_awb: 'DTDC AWB: N11002335698'
     },
     is_signed: true,
     status: 'Doctor Signed & Verified • Ready for MID'
@@ -1014,6 +1019,13 @@ export default function PineLabsUnderwritingPage() {
                         <FileCheck size={13} />
                         <span>{dossier.is_signed ? 'Doctor Signed PDF (Verified)' : 'Doctor Signing PDF Ready'}</span>
                       </div>
+
+                      {dossier.docs.courier_awb && (
+                        <div className="inline-flex items-center gap-1.5 bg-purple-50 text-purple-700 border border-purple-200 px-2.5 py-1 rounded-xl text-[11px] font-bold">
+                          <Truck size={13} className="text-purple-600" />
+                          <span>Hardcopy In Transit ({dossier.docs.courier_awb})</span>
+                        </div>
+                      )}
                     </div>
 
                     {/* Bottom Action Bar: Status Pill on Left, Primary CTA on Right */}
@@ -1446,6 +1458,28 @@ export default function PineLabsUnderwritingPage() {
                           </span>
                         </div>
                         <ExternalLink size={13} className="text-slate-400 group-hover:text-slate-600" />
+                      </a>
+                    )}
+
+                    {activeDossier.docs.courier_receipt && (
+                      <a
+                        href={activeDossier.docs.courier_receipt}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full flex items-center justify-between p-2.5 rounded-xl bg-purple-50/60 border border-purple-200 hover:border-purple-400 hover:bg-purple-100/50 transition-all text-xs group cursor-pointer shadow-2xs"
+                      >
+                        <div className="flex items-center gap-2">
+                          <Truck size={14} className="text-purple-600" />
+                          <div className="text-left">
+                            <span className="font-bold text-slate-900 group-hover:text-purple-700 transition-colors block">
+                              DTDC Physical Hardcopy Courier Receipt
+                            </span>
+                            <span className="text-[10px] text-purple-700 font-mono font-semibold">
+                              {activeDossier.docs.courier_awb} &bull; Consignee: Akhilesh Dhuriya (Pine Labs Noida)
+                            </span>
+                          </div>
+                        </div>
+                        <ExternalLink size={13} className="text-purple-500 group-hover:text-purple-700" />
                       </a>
                     )}
                   </div>

@@ -264,9 +264,9 @@ export const VERIFIED_DOSSIERS = [
     address: 'Plot No. 119, Shri Krishna Nagar, Nahar Road Chopasani, Jodhpur, Rajasthan - 342008',
     residential_address: 'Plot No. 119, Nahar Road, Opp Balaji Hospital, Shri Krishna Nagar, Jodhpur, Rajasthan - 342008',
     specialties: ['Dental Implants', 'Full Mouth Rehabilitation', 'Cosmetic Dentistry', 'Laser & Restorations'],
-    submission_badge: 'Action Required • Doctor MAF Signature Awaited',
-    readiness: 'pending',
-    missing_items: ['Signed & Stamped Doctor MAF Dossier'],
+    submission_badge: '100% Ready for MID • Doctor Signed Dossier',
+    readiness: 'ready',
+    missing_items: [],
     bank: {
       bank_name: 'HDFC Bank',
       account_holder: 'IMPRESSIONS DENTAL CLINIC',
@@ -284,7 +284,7 @@ export const VERIFIED_DOSSIERS = [
       date: '11/11/2024'
     },
     docs: {
-      signing_pdf: '/docs/kyc/impressions_dental/Plural_MAF_and_Doctor_KYC_Signing_Dossier_impressions_dental.pdf',
+      signing_pdf: 'https://sqqocqujxlgoxbcnfbfb.supabase.co/storage/v1/object/public/clinic-documents/impressions_dental/Signed_Doctor_KYC_Dossier_Dr_Dushyant_Soni.pdf',
       zip_bundle: '/docs/kyc/impressions_dental/impressions_dental_Complete_KYC_Dossier.zip',
       maf_excel: '/docs/kyc/impressions_dental/Plural_MAF_BO_PEP_impressions_dental.xlsx',
       gst_declaration_pdf: '/docs/kyc/impressions_dental/GST_Exemption_Declaration_impressions_dental.pdf',
@@ -293,8 +293,8 @@ export const VERIFIED_DOSSIERS = [
       aadhaar_front: '/docs/kyc/impressions_dental/dr_dushyant_soni_aadhaar.jpg',
       udyam_pdf: '/docs/kyc/impressions_dental/impressions_dental_udyam_certificate.pdf'
     },
-    is_signed: false,
-    status: 'Action Required • Awaiting Signed MAF from Dr. Dushyant Soni'
+    is_signed: true,
+    status: '100% Ready for Pine Labs Plural Sub-Merchant MID Issuance'
   },
   {
     id: 'amitha-dental',

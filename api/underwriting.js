@@ -92,16 +92,23 @@ async function fetchDynamicOnboardedDossiers() {
   }
 }
 
+function hasDocuments(dossier) {
+  const docs = dossier.docs || {};
+  return Object.entries(docs).some(([name, value]) => name !== 'courier_awb' && typeof value === 'string' && value.trim().length > 0);
+}
+
 async function loadDossiers() {
   const dynamic = await fetchDynamicOnboardedDossiers();
   const dossiers = new Map(VERIFIED_DOSSIERS.map(d => [d.id, d]));
   for (const dossier of dynamic) dossiers.set(dossier.id, dossier);
-  return [...dossiers.values()].map(dossier => ({
-    ...dossier,
-    docs: Object.fromEntries(Object.entries(dossier.docs || {}).map(([name, value]) => [
-      name, name === 'courier_awb' ? value : protectedDocumentUrl(value),
-    ])),
-  }));
+  return [...dossiers.values()]
+    .filter(hasDocuments)
+    .map(dossier => ({
+      ...dossier,
+      docs: Object.fromEntries(Object.entries(dossier.docs || {}).map(([name, value]) => [
+        name, name === 'courier_awb' ? value : protectedDocumentUrl(value),
+      ])),
+    }));
 }
 
 export default async function handler(req, res) {

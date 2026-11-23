@@ -145,7 +145,11 @@ export default function PineLabsUnderwritingPage() {
       if (res.ok) {
         const data = await res.json();
         if (data.dossiers && Array.isArray(data.dossiers)) {
-          setAllDossiers(data.dossiers);
+          const withDocs = data.dossiers.filter((d: VerifiedDossier) => {
+            const docs = d.docs || {};
+            return Object.entries(docs).some(([k, v]) => k !== 'courier_awb' && typeof v === 'string' && v.trim().length > 0);
+          });
+          setAllDossiers(withDocs);
           setIsAuthenticated(true);
           sessionStorage.setItem('plural_underwriting_auth', '1');
           sessionStorage.setItem('plural_auth_timestamp', Date.now().toString());

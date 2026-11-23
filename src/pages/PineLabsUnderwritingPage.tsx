@@ -481,7 +481,7 @@ export default function PineLabsUnderwritingPage() {
         </div>
 
         <div className="flex items-center gap-2.5">
-          <div className="hidden md:flex items-center gap-2 text-[11px] bg-slate-50 px-3 h-9 rounded-xl border border-slate-200">
+          <div className="hidden lg:flex items-center gap-2 text-[11px] bg-slate-50 px-3 h-9 rounded-xl border border-slate-200">
             <span className="text-slate-500">Desk Lead:</span>
             <span className="font-bold text-slate-800">Advaita Parmar</span>
             <span className="text-slate-300">&bull;</span>
@@ -579,7 +579,7 @@ export default function PineLabsUnderwritingPage() {
             </div>
 
             {/* ── READINESS FILTER TABS & SORTING ── */}
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 pt-1 pb-1">
+            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3 pt-1 pb-1">
               <div
                 role="tablist"
                 aria-label="Underwriting readiness filter"
@@ -646,7 +646,7 @@ export default function PineLabsUnderwritingPage() {
               </div>
 
               {/* Sort Dropdown */}
-              <div className="flex items-center gap-2 self-start md:self-auto text-xs shrink-0">
+              <div className="flex items-center gap-2 self-start lg:self-auto text-xs shrink-0">
                 <div className="flex items-center gap-1.5 bg-slate-50 hover:bg-slate-100/80 border border-slate-200 px-3 py-1.5 rounded-xl shadow-2xs transition-colors h-9">
                   <ArrowUpDown size={13} className="text-slate-400 shrink-0" />
                   <label htmlFor="underwriting-sort" className="text-slate-500 font-bold text-[11px] cursor-pointer">Sort:</label>
@@ -1005,7 +1005,7 @@ export default function PineLabsUnderwritingPage() {
               )}
 
               {/* 3-Column Dossier Breakdown */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
                 {/* Col 1: Entity & Doctor Details */}
                 <div className="bg-slate-50/80 rounded-2xl p-4 border border-slate-200 space-y-3">
                   <h3 className="text-xs font-extrabold uppercase tracking-wider text-slate-700 flex items-center gap-2">

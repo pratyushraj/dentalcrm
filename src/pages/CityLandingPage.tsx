@@ -69,7 +69,7 @@ export default function CityLandingPage() {
     '@context': 'https://schema.org',
     '@type': 'FinancialService',
     name: `Clinaza Dental Financing — ${name}`,
-    description: `Point-of-care dental treatment EMI financing network serving clinics and patients in ${name}, ${state}.`,
+    description: `Clinaza is onboarding clinics for dental payment and financing technology in ${name}, ${state}. Patient financing is not live yet.`,
     url: `https://www.clinaza.in/cities/${city}`,
     logo: 'https://www.clinaza.in/assets/clinaza-logo.jpg',
     areaServed: {
@@ -89,34 +89,6 @@ export default function CityLandingPage() {
     },
   };
 
-  const financialProductSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'FinancialProduct',
-    name: `Clinaza Dental Treatment EMI Financing — ${name}`,
-    description: `Point-of-care patient medical loan and treatment financing for dental implants, braces, aligners, and crowns in ${name}, ${state}.`,
-    provider: {
-      '@type': 'Organization',
-      name: 'Clinaza Technologies',
-      url: 'https://www.clinaza.in',
-    },
-    areaServed: {
-      '@type': 'City',
-      name: name,
-    },
-    amount: {
-      '@type': 'MonetaryAmount',
-      currency: 'INR',
-      minValue: 30000,
-      maxValue: 500000,
-    },
-    annualPercentageRate: {
-      '@type': 'QuantitativeValue',
-      minValue: 11.5,
-      maxValue: 16.0,
-      unitText: 'PERCENT',
-    },
-    feesAndCommissionsSpecification: 'Zero paper documentation fees. Transparent processing fees through RBI-regulated NBFC partners.',
-  };
 
   const faqSchema = {
     '@context': 'https://schema.org',
@@ -197,7 +169,7 @@ export default function CityLandingPage() {
           `clear aligners ${name.toLowerCase()} emi`,
         ]}
         canonicalUrl={`https://www.clinaza.in/cities/${city}`}
-        jsonLd={[breadcrumbSchema, medicalFinancingSchema, financialProductSchema, faqSchema]}
+        jsonLd={[breadcrumbSchema, medicalFinancingSchema, faqSchema]}
       />
 
       {/* Atmospheric ambient fintech canvas */}

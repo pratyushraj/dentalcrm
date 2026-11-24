@@ -51,6 +51,44 @@ export default function AclKneeSurgeryEmiPage() {
       "procedureType": "SurgicalProcedure",
       "bodyLocation": "Knee Joint",
       "status": "Available"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Can I use Clinaza if my mediclaim rejected my sports injury claim?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Absolutely. Many patients turn to Clinaza after facing cashless rejection due to alleged pre-existing conditions or sports clauses. We approve your loan in 2 minutes so your surgery can proceed without delay."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does this financing cover meniscus repair and shoulder arthroscopy too?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Our sports orthopedic financing covers ACL, PCL, MCL, meniscus root repairs, shoulder Bankart repairs, and rotator cuff tear reconstructions."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the repayment tenure and interest rate?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Tenures range from 6 to 18 months, with indicative interest rates starting from ~11.5% p.a. via our network of RBI-regulated NBFC partners."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can my family member apply for me if I am a student or athlete?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Any immediate earning family member (parent, spouse, sibling) can apply as the primary applicant to finance your procedure."
+          }
+        }
+      ]
     }
   ];
 

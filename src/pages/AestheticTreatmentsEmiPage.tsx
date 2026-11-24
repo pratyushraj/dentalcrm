@@ -33,6 +33,21 @@ export default function AestheticTreatmentsEmiPage() {
     (Math.pow(1 + monthlyRate, tenure) - 1)
   );
 
+  const FAQS = [
+    {
+      q: 'Can I get aesthetic skin treatments on monthly EMI?',
+      a: 'Yes. Clinaza allows patients to finance clinical dermatology and cosmetic treatments from ₹20,000 to ₹2,50,000 with flexible 3 to 18 month EMIs across verified partner aesthetic clinics.'
+    },
+    {
+      q: 'Does health insurance cover cosmetic dermatology?',
+      a: 'No. Clinical skin rejuvenation and aesthetic dermatology are classified as elective lifestyle procedures and are excluded from all standard retail health insurance in India, making point-of-care EMI the primary choice.'
+    },
+    {
+      q: 'Can I apply without a credit card?',
+      a: 'Yes. Cardless aesthetic EMIs are available via instant PAN and Aadhaar OTP verification across leading RBI-regulated NBFC partners with 2-minute digital approval.'
+    }
+  ];
+
   const aestheticSchema = [
     {
       "@context": "https://schema.org",
@@ -58,6 +73,18 @@ export default function AestheticTreatmentsEmiPage() {
         "unitText": "PERCENT"
       },
       "feesAndCommissionsSpecification": "Zero physical paperwork. Instant digital approval across 16+ banks & RBI-regulated NBFC partners."
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": FAQS.map(faq => ({
+        "@type": "Question",
+        "name": faq.q,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": faq.a
+        }
+      }))
     }
   ];
 
@@ -485,6 +512,31 @@ export default function AestheticTreatmentsEmiPage() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Frequently Asked Questions */}
+      <section className="py-8 px-4 max-w-5xl mx-auto w-full">
+        <div className="text-center sm:text-left mb-6">
+          <span className="text-[10px] font-black uppercase tracking-widest text-[#0867E8] bg-blue-50 px-2.5 py-1 rounded-full border border-blue-200">
+            PATIENT QUESTIONS &amp; FINANCING GUIDELINES
+          </span>
+          <h2 className="text-xl sm:text-2xl font-black text-[#0B2450] mt-2">
+            Frequently Asked Questions About Aesthetic &amp; Derma EMI
+          </h2>
+        </div>
+        <div className="grid gap-3">
+          {FAQS.map((faq, idx) => (
+            <details key={idx} className="group bg-white rounded-xl border border-slate-200 p-4 open:border-blue-400 transition-colors">
+              <summary className="font-bold text-sm text-slate-900 cursor-pointer list-none flex items-center justify-between gap-3">
+                <span>{faq.q}</span>
+                <span className="text-slate-400 group-open:rotate-180 transition-transform text-xs">▼</span>
+              </summary>
+              <p className="mt-3 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-3">
+                {faq.a}
+              </p>
+            </details>
+          ))}
         </div>
       </section>
 

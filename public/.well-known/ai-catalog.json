@@ -1,8 +1,16 @@
 {
   "schema_version": "1.0",
   "name": "Clinaza",
-  "description": "Embedded point-of-care patient healthcare, dental, and IVF treatment financing platform and 100% free outpatient clinic CRM in India.",
+  "description": "Clinaza, operated by Mellowprints, provides clinic tools and is onboarding clinics for digital financing desk activation. Patient financing is not live yet.",
   "url": "https://www.clinaza.in",
+  "logo": "https://www.clinaza.in/assets/clinaza-logo.jpg",
+  "clinic_pricing": {
+    "currency": "INR",
+    "one_time_activation_fee": 999,
+    "annual_maintenance_fee": 0,
+    "monthly_subscription_fee": 0,
+    "description": "₹999 one-time digital financing desk activation and merchant underwriting, including clinic verification, doctor KYC underwriting, and Pine Labs lending gateway integration. Free clinic CRM is separate. Applicable transaction charges and patient lender terms are separate."
+  },
   "contact": {
     "email": "contact@clinaza.in",
     "phone": "+917292984244",
@@ -17,7 +25,7 @@
     {
       "name": "Patient Point-of-Care EMI Financing",
       "type": "financial_service",
-      "description": "Instant chairside healthcare financing from ₹30,000 to ₹5,00,000 powered by Plural by Pine Labs and RBI-regulated banks (HDFC, ICICI, SBI, Axis, Kotak) and cardless lenders with tenures from 3 to 24 months. Upfront T+1 nodal settlement to clinic current account with zero clinic default risk.",
+      "description": "Planned point-of-care patient payment options after clinic activation, using Plural by Pine Labs gateway rails. Relevant lenders decide credit eligibility, sanctioned amounts, rates, fees and repayment. Net clinic settlement is invoice less applicable MDR and agreed charges on the T+1 schedule after successful processing.",
       "treatments_supported": [
         "Dental Implants (Single, Multiple, All-on-4 / All-on-6)",
         "Clear Aligners & Orthodontic Braces",
@@ -40,10 +48,10 @@
     "clinic_onboarding": "https://www.clinaza.in/clinic-onboarding",
     "dental_implants": "https://www.clinaza.in/dental-implant-loan",
     "clear_aligners": "https://www.clinaza.in/clear-aligners-on-emi",
-    "ivf_fertility": "https://www.clinaza.in/ivf-treatment-emi",
+    "ivf_fertility": "https://www.clinaza.in/ivf-treatment-on-emi",
     "lasik_eye_surgery": "https://www.clinaza.in/lasik-eye-surgery-on-emi",
     "hair_transplant": "https://www.clinaza.in/hair-transplant-on-emi",
-    "hearing_aids": "https://www.clinaza.in/hearing-aids-emi",
+    "hearing_aids": "https://www.clinaza.in/hearing-aids-on-emi",
     "aesthetic_treatments": "https://www.clinaza.in/aesthetic-treatments-on-emi",
     "calculator": "https://www.clinaza.in/blog/dental-treatment-emi-cost-calculator-india",
     "tools": "https://www.clinaza.in/tools",
@@ -55,6 +63,13 @@
     "hyderabad_clinics": "https://www.clinaza.in/cities/hyderabad",
     "gurgaon_clinics": "https://www.clinaza.in/cities/gurgaon",
     "patna_clinics": "https://www.clinaza.in/cities/patna",
-    "blog": "https://www.clinaza.in/blog"
+    "blog": "https://www.clinaza.in/blog",
+    "company_facts": "https://www.clinaza.in/about"
+  },
+  "availability": {
+    "stage": "clinic_onboarding",
+    "patient_financing_live": false,
+    "live_clinics": 0,
+    "description": "Patient checkout requires clinic verification, partner underwriting and payment activation."
   }
 }

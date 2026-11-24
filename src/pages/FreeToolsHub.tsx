@@ -1308,7 +1308,7 @@ export default function FreeToolsHub() {
                       Want automated WhatsApp Google reviews &amp; patient EMI financing at your clinic?
                     </h4>
                     <p className="text-xs text-slate-600">
-                      Clinaza powers instant patient financing and automated review collection for 500+ clinics across India.
+                      Clinaza provides clinic tools and is onboarding clinics for digital financing desk activation. Patient financing is not live yet.
                     </p>
                   </div>
                   <div className="flex flex-col sm:flex-row gap-2.5 shrink-0 w-full sm:w-auto">
@@ -1322,7 +1322,7 @@ export default function FreeToolsHub() {
                       to="/clinic-onboarding"
                       className="px-5 py-2.5 bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-black uppercase tracking-wider rounded-xl transition-all text-center shadow-md"
                     >
-                      Onboard Clinic Free
+                      Activate Clinic · ₹999 Once
                     </Link>
                   </div>
                 </div>

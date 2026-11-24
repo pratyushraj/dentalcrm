@@ -1,146 +1,39 @@
 #!/usr/bin/env node
-/**
- * Automated SEO Drift Monitor
- * Validates critical production routes for HTTP 200, non-fallback titles,
- * meta descriptions, and presence of essential schema elements.
- */
+import { readFile } from 'node:fs/promises';
+import { resolve, join } from 'node:path';
+import { assertRenderedPage } from './lib/seo-html.mjs';
 
-const BASE_URL = process.env.BASE_URL || 'https://www.clinaza.in';
-
-const CHECKS = [
-  {
-    path: '/',
-    expectedTitleSnippet: 'Clinaza',
-    expectedDescSnippet: 'patient'
-  },
-  {
-    path: '/tools',
-    expectedTitleSnippet: 'Free Dental Tools',
-    expectedDescSnippet: 'utilities',
-    expectedH1Snippet: 'Free Dental Practice Utilities'
-  },
-  {
-    path: '/cities/delhi',
-    expectedTitleSnippet: 'Delhi',
-    expectedDescSnippet: 'Delhi',
-    expectedH1Snippet: 'Delhi'
-  },
-  {
-    path: '/blog/dental-loans-in-india-medical-financing',
-    expectedTitleSnippet: 'Dental Loans in India',
-    expectedDescSnippet: 'dental implant loan',
-    expectedH1Snippet: 'Dental Loans in India'
-  },
-  {
-    path: '/blog/gap-closure-cost-in-patna',
-    expectedTitleSnippet: 'Teeth Gap Filling Cost',
-    expectedDescSnippet: 'Teeth gaping treatment price',
-    expectedH1Snippet: 'Teeth Gap Filling Cost'
-  },
-  {
-    path: '/dental-implant-loan',
-    expectedTitleSnippet: 'Dental Implant Loan',
-    expectedDescSnippet: 'dental implant loan',
-    expectedH1Snippet: 'Dental Implant Loans'
-  },
-  {
-    path: '/clear-aligners-on-emi',
-    expectedTitleSnippet: 'Clear Aligners Cost on EMI',
-    expectedDescSnippet: 'flexible monthly financing',
-    expectedH1Snippet: 'Clear Invisible Aligners'
-  }
+const site = 'https://www.clinaza.in';
+const source = process.env.SEO_DIST_DIR;
+const base = process.env.BASE_URL || site;
+const routes = [
+  '/', '/about', '/dental-implant-loan', '/clear-aligners-on-emi',
+  '/ivf-treatment-on-emi', '/lasik-eye-surgery-on-emi', '/hair-transplant-on-emi',
+  '/aesthetic-treatments-on-emi', '/gynecomastia-surgery-on-emi', '/hearing-aids-on-emi',
+  '/piles-laser-surgery-on-emi', '/maternity-delivery-on-emi', '/tools', '/cities/delhi',
+  '/blog/dental-loans-in-india-medical-financing',
 ];
-
-async function runDriftCheck() {
-  console.log(`[seo-drift] Running verification against ${BASE_URL}...\n`);
-  let passed = 0;
-  let failed = 0;
-
-  for (const check of CHECKS) {
-    const url = `${BASE_URL}${check.path}`;
-    let success = false;
-    for (let attempt = 1; attempt <= 3; attempt++) {
-      try {
-        const res = await fetch(url, {
-          headers: {
-            'Cache-Control': 'no-cache',
-            'User-Agent': 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html) Clinaza-SEO-Monitor'
-          }
-        });
-        if (res.status !== 200) {
-          if (attempt < 3) { await new Promise(r => setTimeout(r, 5000)); continue; }
-          console.error(`❌ [FAIL] ${check.path} -> Status: ${res.status} (Expected 200)`);
-          failed++;
-          break;
-        }
-
-        const html = await res.text();
-        const titleMatch = html.match(/<title>([^<]*)<\/title>/i);
-        const title = titleMatch ? titleMatch[1] : '';
-
-        const descMatch = html.match(/<meta[^>]*?\bname=["']description["'][^>]*?\bcontent=["']([^"']*)["']/i) ||
-                          html.match(/<meta[^>]*?\bcontent=["']([^"']*)["'][^>]*?\bname=["']description["']/i);
-        const desc = descMatch ? descMatch[1] : '';
-
-        const hasSpecificTitle = title.toLowerCase().includes(check.expectedTitleSnippet.toLowerCase());
-        const isSpaShell = title.toLowerCase().includes('clinaza') && html.includes('id="root"');
-
-        if (!hasSpecificTitle && !isSpaShell) {
-          if (attempt < 3) { await new Promise(r => setTimeout(r, 5000)); continue; }
-          console.error(`❌ [FAIL] ${check.path} -> Title mismatch:\n  Got: "${title}"\n  Expected snippet: "${check.expectedTitleSnippet}"`);
-          failed++;
-          break;
-        }
-
-        const hasSpecificDesc = desc.toLowerCase().includes(check.expectedDescSnippet.toLowerCase());
-        if (!hasSpecificDesc && !isSpaShell) {
-          if (attempt < 3) { await new Promise(r => setTimeout(r, 5000)); continue; }
-          console.error(`❌ [FAIL] ${check.path} -> Description mismatch:\n  Got: "${desc}"\n  Expected snippet: "${check.expectedDescSnippet}"`);
-          failed++;
-          break;
-        }
-
-        if (check.expectedH1Snippet && !isSpaShell) {
-          const h1Match = html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i);
-          const h1 = h1Match ? h1Match[1].replace(/<[^>]*>/g, '').trim() : '';
-          if (!h1 || !h1.toLowerCase().includes(check.expectedH1Snippet.toLowerCase())) {
-            if (attempt < 3) { await new Promise(r => setTimeout(r, 5000)); continue; }
-            console.error(`❌ [FAIL] ${check.path} -> H1 mismatch or missing:\n  Got: "${h1}"\n  Expected snippet: "${check.expectedH1Snippet}"`);
-            failed++;
-            break;
-          }
-        }
-
-        if (isSpaShell && !hasSpecificTitle) {
-          console.log(`✅ [PASS (SPA)] ${check.path}`);
-          console.log(`   Served via Clinaza React SPA Shell: "${title.slice(0, 70)}..."`);
-        } else {
-          console.log(`✅ [PASS] ${check.path}`);
-          console.log(`   Title: "${title.slice(0, 70)}..."`);
-        }
-        console.log(`   Title: "${title.slice(0, 70)}..."`);
-        passed++;
-        success = true;
-        break;
-      } catch (err) {
-        if (attempt < 3) {
-          await new Promise(r => setTimeout(r, 5000));
-          continue;
-        }
-        console.error(`❌ [ERROR] ${check.path} -> ${err.message}`);
-        failed++;
-        break;
-      }
+let failures = 0;
+for (const route of routes) {
+  try {
+    let html;
+    if (source) {
+      html = await readFile(join(resolve(source), route === '/' ? 'index.html' : route.slice(1) + '.html'), 'utf8');
+    } else {
+      const response = await fetch(base + route, {
+        signal: AbortSignal.timeout(20000),
+        headers: { 'User-Agent': 'Clinaza-SEO-Monitor/2.0', 'Cache-Control': 'no-cache' },
+      });
+      if (response.status !== 200) throw new Error('HTTP ' + response.status);
+      if (/noindex|none/i.test(response.headers.get('x-robots-tag') || '')) throw new Error('X-Robots-Tag prevents indexing');
+      html = await response.text();
     }
-  }
-
-  console.log(`\n========================================`);
-  console.log(`SEO Drift Results: ${passed} Passed, ${failed} Failed`);
-  console.log(`========================================`);
-
-  if (failed > 0) {
-    process.exit(1);
+    const result = assertRenderedPage(html, { route, site });
+    console.log('[PASS] ' + route + ' (' + result.wordCount + ' words) - ' + result.title);
+  } catch (error) {
+    failures++;
+    console.error('[FAIL] ' + route + ': ' + error.message);
   }
 }
-
-runDriftCheck();
+console.log('SEO integrity: ' + (routes.length - failures) + ' passed, ' + failures + ' failed.');
+if (failures) process.exitCode = 1;

@@ -62,10 +62,10 @@ export default function HearingAidsEmiPage() {
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "Can I buy digital hearing aids on EMI in India?",
+          "name": "Does health insurance cover digital hearing aids in India?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. Patients and families can finance premium digital hearing aids (Phonak, Oticon, Signia, Widex, Resound) from ₹25,000 to ₹3,50,000 with flexible monthly EMIs starting from ~11.5% p.a. through RBI-regulated lenders with 2-minute instant approval."
+            "text": "No. Standard health insurance (Mediclaim) policies in India strictly exclude external sensory aids and hearing prosthetics under standard IRDAI exclusion terms, making Clinaza point-of-care EMI the primary financing choice."
           }
         },
         {
@@ -78,10 +78,18 @@ export default function HearingAidsEmiPage() {
         },
         {
           "@type": "Question",
-          "name": "How can audiology and hearing care clinics partner with Clinaza?",
+          "name": "Can a son or daughter apply on behalf of their elderly parents?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Audiologists and ENT clinics can onboard at clinaza.in/clinic-onboarding to equip front desks with Pine Labs Plural point-of-care patient checkout, guaranteed T+1 current account settlement, and 0% clinic credit risk."
+            "text": "Yes. Working family members can easily apply as the primary borrower or co-applicant to secure immediate device sanction for senior parents."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are follow-up audiology programming sessions included?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Partner audiology clinics bundle the complete device package, including manufacturer warranty (2–4 years) and lifetime digital tuning visits."
           }
         }
       ]
@@ -400,6 +408,13 @@ export default function HearingAidsEmiPage() {
               <h3 className="font-bold text-sm text-slate-900">Does health insurance cover digital hearing aids in India?</h3>
               <p className="text-xs text-slate-600 leading-relaxed">
                 No. Standard health insurance (Mediclaim) policies in India strictly exclude external sensory aids and hearing prosthetics under standard IRDAI exclusion terms, making Clinaza point-of-care EMI the primary financing choice.
+              </p>
+            </div>
+
+            <div className="p-4 rounded-2xl bg-slate-50 border border-slate-100 space-y-2">
+              <h3 className="font-bold text-sm text-slate-900">Can senior citizens get hearing aids on EMI without a credit card?</h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Yes. Cardless hearing healthcare EMIs are available for patients and family co-applicants using basic Aadhaar and PAN OTP verification with zero paperwork.
               </p>
             </div>
 

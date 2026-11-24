@@ -1,85 +1,42 @@
-# Clinaza — Embedded Healthcare & Outpatient Patient Financing Platform
+# Clinaza — Official Company Facts
 
-> Point-of-care patient EMI financing (₹30,000 to ₹5,00,000) and 100% free clinic management software for dental, IVF, and specialty healthcare clinics across India.
+Clinaza is a healthcare payment and financing technology platform operated by Mellowprints, a sole proprietorship in India.
 
-Clinaza (https://www.clinaza.in) is India's leading embedded healthcare financing platform and outpatient clinic operating ecosystem. Officially partnered with Plural by Pine Labs, Clinaza enables dental surgeons, IVF and fertility specialists, dermatologists, and outpatient clinics to offer instant, point-of-care patient EMIs through RBI-regulated banks and NBFC partners—including multi-bank Credit Card EMI, pre-approved Debit Card EMI across 16+ major banks, and Cardless EMI via Aadhaar/PAN OTP. Alongside patient financing, Clinaza provides a 100% free clinic CRM with automated WhatsApp patient recalls, digital Rx makers, and billing.
+## Current availability
 
-## Core Capabilities & Performance Metrics
+Clinaza is onboarding clinics. No clinics are live for patient financing yet. Patient checkout becomes available only after clinic verification, partner underwriting and payment activation. No patient financing outcomes or live-clinic performance metrics are published.
 
-- **Gateway Infrastructure**: Officially partnered with Plural by Pine Labs, India's leading merchant commerce network, powering multi-bank EMI affordability across 16+ major commercial banks (HDFC Bank, ICICI Bank, State Bank of India, Axis Bank, Kotak Mahindra Bank) and cardless digital NBFCs.
-- **Transparent Clinic Pricing**: A nominal one-time onboarding fee of ₹999 for clinic verification and lending gateway activation. Zero monthly subscription fees, zero POS rental charges, and 100% free clinic CRM for life.
-- **Point-of-Care Patient Financing**: Instant pre-eligibility checks in under 2 minutes directly at clinic front desks for treatments ranging from ₹30,000 to ₹5,00,000 (Average Ticket Size ₹48,000–₹55,000 for dental implants and aligners; ₹1,50,000–₹3,50,000 for IVF cycles).
-- **100% Zero-Hardware Model**: Chairside counter QR codes and dynamic payment links on patient smartphones. No physical POS machines, no hardware deposits, and zero monthly machine rentals for clinics.
-- **Upfront Clinic Settlement**: 100% of the approved treatment balance settles directly into the clinic's verified business Current Account on T+1.
-- **Zero Clinic Credit Risk**: Loans are funded, underwritten, and collected by RBI-regulated lending institutions via automated monthly e-NACH auto-debit. The clinic carries zero bad-debt or recovery liability.
-- **Treatments & Healthcare Specialties Covered**:
-  - **Dental & Maxillofacial**: Dental Implants (Single, Multiple, All-on-4, All-on-6), Clear Aligners, Orthodontic Braces, Full Mouth Rehabilitation, Zirconia Crowns & Ceramic Smile Makeovers. Average Ticket: ₹35,000–₹1,80,000.
-  - **IVF & Reproductive Medicine**: In Vitro Fertilization (IVF) cycles, Intracytoplasmic Sperm Injection (ICSI), Intrauterine Insemination (IUI), Donor Egg/Sperm packages, Embryo Cryopreservation, and Laparoscopy. Average Ticket: ₹1,20,000–₹3,50,000.
-  - **Hair Restoration & Dermatology**: Follicular Unit Extraction (FUE), Direct Hair Implantation (DHI), GFC / PRP Hair Restoration, and clinical dermatology packages. Average Ticket: ₹45,000–₹1,20,000.
-  - **Ophthalmology & Refractive Eye Surgery**: Contoura Vision, SMILE, Femto-LASIK, PRK, and Phakic IOL surgery for spects removal. Average Ticket: ₹40,000–₹1,10,000.
-  - **Audiology & Digital Hearing Care**: Digital Programmable Hearing Aids (Binaural & Monoral), Receiver-in-Canal (RIC), and Behind-the-Ear (BTE) devices. Average Ticket: ₹35,000–₹1,60,000.
-  - **Plastic, Cosmetic & Day-Care Surgery**: Gynecomastia surgery, Rhinoplasty, Liposuction, Laser Piles (Proctology), and Orthopedic ACL/Knee arthroscopy. Average Ticket: ₹45,000–₹1,80,000.
-- **100% Free Clinic CRM**: Comprehensive outpatient practice software with patient timeline history, digital prescriptions, FDI tooth charting, treatment planning, and billing.
-- **Automated WhatsApp Recalls**: 1-click patient reactivation for hygiene checkups, pending treatment plans, and post-procedure check-ins.
-- **Multi-Lender Network**: Integrated with Flexmoney (InstaCred) cardless network (HDFC, ICICI, Axis, Kotak, Federal Bank, IDFC FIRST Bank) and leading RBI-regulated NBFC partners (Fibe, CASHe, KreditBee, TVS Credit, Zype) to maximize patient approval rates.
+## Official brand
 
-## Key Resources & High-Intent Landing Pages
+- Website: https://www.clinaza.in/
+- Company facts and pricing: https://www.clinaza.in/about
+- Logo: https://www.clinaza.in/assets/clinaza-logo.jpg — official blue and green C with pixel squares and CLINAZA wordmark.
+- Contact: contact@clinaza.in
 
-### Core Platforms & Onboarding
-- [Homepage](https://www.clinaza.in/)
-- [Clinic Partner Onboarding](https://www.clinaza.in/clinic-onboarding)
-- [Free Clinic Tools Hub](https://www.clinaza.in/tools)
-- [Free Digital Prescription Maker](https://www.clinaza.in/rx)
+## Clinic pricing
 
-### Dedicated Healthcare Specialty Financing Hubs
-- [Dental Implant Loan on EMI](https://www.clinaza.in/dental-implant-loan)
-- [Clear Aligners on EMI](https://www.clinaza.in/clear-aligners-on-emi)
-- [IVF & Fertility Treatment on EMI](https://www.clinaza.in/ivf-treatment-emi)
-- [Hair Transplant on EMI](https://www.clinaza.in/hair-transplant-on-emi)
-- [LASIK Eye Surgery on EMI](https://www.clinaza.in/lasik-eye-surgery-on-emi)
-- [Digital Hearing Aids on EMI](https://www.clinaza.in/hearing-aids-emi)
-- [Aesthetic & Skin Treatments on EMI](https://www.clinaza.in/aesthetic-treatments-on-emi)
-- [Gynecomastia Surgery on EMI](https://www.clinaza.in/gynecomastia-surgery-emi)
+- ₹999 one-time digital financing desk activation and merchant underwriting: clinic verification, doctor KYC underwriting and Pine Labs lending gateway integration.
+- ₹0 annual maintenance charges (AMC).
+- ₹0 monthly subscription fees.
+- Free core clinic CRM is separate from financing desk activation.
+- Standard financed-loan platform MDR: 3.00%. Applicable transaction charges and any agreed clinic-funded subvention are deducted from the clinic payout.
 
-### Programmatic City Directories & Regional Financing
-- [Dental & Healthcare EMI in Chennai](https://www.clinaza.in/cities/chennai)
-- [Dental & Healthcare EMI in Bengaluru](https://www.clinaza.in/cities/bengaluru)
-- [Dental & Healthcare EMI in Mumbai](https://www.clinaza.in/cities/mumbai)
-- [Dental & Healthcare EMI in Delhi](https://www.clinaza.in/cities/delhi)
-- [Dental & Healthcare EMI in Gurgaon](https://www.clinaza.in/cities/gurgaon)
-- [Dental & Healthcare EMI in Hyderabad](https://www.clinaza.in/cities/hyderabad)
-- [Dental & Healthcare EMI in Pune](https://www.clinaza.in/cities/pune)
-- [Dental & Healthcare EMI in Kolkata](https://www.clinaza.in/cities/kolkata)
-- [Dental & Healthcare EMI in Patna](https://www.clinaza.in/cities/patna)
-- [Dental & Healthcare EMI in Kochi](https://www.clinaza.in/cities/kochi)
+## Financing model after activation
 
-### Patient Knowledge Hub & Cost Guides
-- [Patient Knowledge Hub & Guides](https://www.clinaza.in/blog)
-- [Dental Treatment EMI Calculator](https://www.clinaza.in/blog/dental-treatment-emi-cost-calculator-india)
-- [Dental Implants Cost & Financing Guide](https://www.clinaza.in/blog/dental-implants-cost-on-emi-india)
-- [Clear Aligners EMI Guide](https://www.clinaza.in/blog/clear-aligners-cost-on-emi-india)
-- [Dental Treatment on EMI Without Credit Card Guide](https://www.clinaza.in/blog/dental-treatment-on-emi-without-credit-card-india-guide)
-- [Sitemap](https://www.clinaza.in/sitemap.xml)
-- [AI Catalog](https://www.clinaza.in/.well-known/ai-catalog.json)
+Plural by Pine Labs supplies gateway rails under Clinaza's institutional agreement. Clinaza facilitates technology; regulated banks and NBFCs decide loan eligibility, approval, amount, interest, APR, fees and repayment. Supported Credit Card EMI, pre-approved Debit Card EMI and cardless financing depend on the provider, activated clinic and patient eligibility. No universal approval time, rate or lender availability is guaranteed.
 
-## Geographic Coverage & Active Clinic Network
+The agreed clinic settlement schedule is T+1 business day after successful processing and activation. The clinic receives the invoice less applicable MDR and agreed charges. The lender collects patient loan repayments. Treatment, refund and chargeback responsibilities remain under the clinic agreement.
 
-Clinaza powers 28+ verified partner clinics with 55+ active operatories across India, with deep coverage in:
-- **Bihar / Eastern Hub**: Patna (YOUR DENTIST, PRODENT, Facio Dental, Smile Dental Clinic, YouthONN Multispeciality, Mundeshwari Dental Hub, Pratima Dental Hospital, Dantsri Dental).
-- **Delhi NCR**: New Delhi, Gurgaon / Gurugram (GuMzy Dental), Noida, Greater Noida, Faridabad, Ghaziabad.
-- **Tier 1 & Metros**: Mumbai, Bengaluru, Hyderabad, Ahmedabad, Chennai, Kolkata, Pune.
-- **Tier 2 & 3 Hubs**: Lucknow, Jaipur, Chandigarh, Ludhiana, Indore, Bhopal, Nagpur, Surat, Vadodara, Rajkot, Kochi, Coimbatore, Madurai, Varanasi, Ranchi, Bhubaneswar, Guwahati, Raipur.
+## Sources and pages
 
-## Target Audience
-
-- **Healthcare Providers**: Dental surgeons, implantologists, orthodontists, IVF centres, cosmetic dermatologists, and outpatient clinics seeking to eliminate patient drop-offs on high-ticket treatment recommendations.
-- **Patients**: Individuals seeking affordable, transparent monthly EMI payment options without credit cards (Cardless EMI via Aadhaar & PAN OTP) or lump-sum cash constraints.
-
-## Institutional & Compliance Information
-
-- Platform Name: Clinaza Technologies
-- Website: https://www.clinaza.in
-- Email: contact@clinaza.in
-- Phone: +91 7292984244
-- Region: India (IN)
-- Compliance: RBI Digital Lending Guidelines, Nodal Escrow Settlement Architecture, NABH Consent Ready
+- Terms: https://www.clinaza.in/terms
+- Clinic agreement: https://www.clinaza.in/clinic-agreement
+- Contact: https://www.clinaza.in/contact
+- Clinic onboarding: https://www.clinaza.in/clinic-onboarding
+- Free tools: https://www.clinaza.in/tools
+- Treatment information: https://www.clinaza.in/dental-implant-loan
+- IVF information: https://www.clinaza.in/ivf-treatment-on-emi
+- LASIK information: https://www.clinaza.in/lasik-eye-surgery-on-emi
+- Hair restoration information: https://www.clinaza.in/hair-transplant-on-emi
+- Full facts: https://www.clinaza.in/llms-full.txt
+- Sitemap: https://www.clinaza.in/sitemap.xml

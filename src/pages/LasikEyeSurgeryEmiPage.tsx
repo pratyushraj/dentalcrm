@@ -62,18 +62,42 @@ export default function LasikEyeSurgeryEmiPage() {
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "Can I get LASIK eye surgery on EMI in India?",
+          "name": "Does health insurance cover LASIK eye surgery in India?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. Patients can finance Contoura Vision, SMILE, and Femto-LASIK eye surgeries from ₹30,000 to ₹2,00,000 with flexible 3 to 24 month EMIs starting from ~11.5% p.a. through RBI-regulated lenders with 2-minute instant approval."
+            "text": "Under IRDAI regulations, retail health insurance (Mediclaim) excludes refractive surgery unless refractive power in either eye is -7.5 diopters or higher. Elective vision correction (-1D to -6D) is out-of-pocket, making Clinaza point-of-care EMI the preferred option."
           }
         },
         {
           "@type": "Question",
-          "name": "Can I get a LASIK loan without a credit card (Cardless EMI)?",
+          "name": "Can I get LASIK eye surgery on EMI without a credit card (Cardless EMI)?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. Cardless medical EMIs for vision correction are available across leading RBI-regulated NBFC partners and bank cardless networks using just your Aadhaar and PAN OTP."
+            "text": "Yes. Cardless medical EMIs for vision correction are available across leading RBI-regulated NBFC partners and bank cardless networks using just your Aadhaar and PAN OTP with 2-minute instant digital verification."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What documents are needed to apply for a LASIK EMI loan?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Only your PAN card, Aadhaar card, and an active bank account with net banking/UPI autopay are needed. Approvals are completed digitally in 2 minutes at the hospital billing desk."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are the interest rates and repayment tenures?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Interest rates range from ~1.0% to 1.5% per month (~11.5% to 15.0% p.a. reducing balance) through RBI-regulated lending partners, with repayment tenures of 3, 6, 9, 12, 18, and 24 months."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I foreclose or pay off my loan early?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Under RBI guidelines, retail personal loans carry flexible prepayment and foreclosure terms with zero or minimal charges depending on the regulated lending partner."
           }
         },
         {
@@ -412,6 +436,13 @@ export default function LasikEyeSurgeryEmiPage() {
             </div>
 
             <div className="p-4 rounded-2xl bg-slate-50 border border-slate-100 space-y-2">
+              <h3 className="font-bold text-sm text-slate-900">Can I get LASIK eye surgery on EMI without a credit card (Cardless EMI)?</h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Yes. Cardless medical EMIs for vision correction are available across leading RBI-regulated NBFC partners and bank cardless networks using just your Aadhaar and PAN OTP with 2-minute instant digital verification.
+              </p>
+            </div>
+
+            <div className="p-4 rounded-2xl bg-slate-50 border border-slate-100 space-y-2">
               <h3 className="font-bold text-sm text-slate-900">What documents are needed to apply for a LASIK EMI loan?</h3>
               <p className="text-xs text-slate-600 leading-relaxed">
                 Only your PAN card, Aadhaar card, and an active bank account with net banking/UPI autopay are needed. Approvals are completed digitally in 2 minutes at the hospital billing desk.
@@ -419,9 +450,23 @@ export default function LasikEyeSurgeryEmiPage() {
             </div>
 
             <div className="p-4 rounded-2xl bg-slate-50 border border-slate-100 space-y-2">
+              <h3 className="font-bold text-sm text-slate-900">What are the interest rates and repayment tenures?</h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Interest rates range from ~1.0% to 1.5% per month (~11.5% to 15.0% p.a. reducing balance) through RBI-regulated lending partners, with repayment tenures of 3, 6, 9, 12, 18, and 24 months.
+              </p>
+            </div>
+
+            <div className="p-4 rounded-2xl bg-slate-50 border border-slate-100 space-y-2">
               <h3 className="font-bold text-sm text-slate-900">Can I foreclose or pay off my loan early?</h3>
               <p className="text-xs text-slate-600 leading-relaxed">
                 Yes. Under RBI guidelines, retail personal loans carry flexible prepayment and foreclosure terms with zero or minimal charges depending on the regulated lending partner.
+              </p>
+            </div>
+
+            <div className="p-4 rounded-2xl bg-slate-50 border border-slate-100 space-y-2">
+              <h3 className="font-bold text-sm text-slate-900">How do eye hospitals and refractive centres partner with Clinaza?</h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Ophthalmologists and eye hospitals can onboard at clinaza.in/clinic-onboarding to equip reception counters with Pine Labs Plural point-of-care financing, guaranteed T+1 current account payouts, and 0% hospital credit risk.
               </p>
             </div>
           </div>

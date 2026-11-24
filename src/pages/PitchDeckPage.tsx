@@ -519,9 +519,9 @@ export default function PitchDeckPage() {
                 <div className="bg-gradient-to-br from-slate-900 to-[#0B2450] text-white p-6 rounded-2xl flex flex-col justify-between space-y-4">
                   <div className="space-y-2">
                     <div className="text-xs font-bold text-emerald-400 uppercase tracking-widest">PATIENT & CLINIC PRINCIPLES</div>
-                    <h4 className="text-xl font-bold text-white">₹0 Fee to Dental Clinics</h4>
+                    <h4 className="text-xl font-bold text-white">₹999 One-Time Activation</h4>
                     <p className="text-xs text-slate-300 leading-relaxed">
-                      Clinaza does NOT charge clinics any financing setup or subscription fee. The lender charges the borrower according to approved loan terms.
+                      Clinics pay ₹999 once for digital desk activation, clinic verification and merchant underwriting. ₹0 AMC and ₹0 monthly subscription fees. Financing and transaction charges follow the approved terms.
                     </p>
                   </div>
 

@@ -123,6 +123,7 @@
     }
   ],
   "redirects": [
+    { "source": "/pricing", "destination": "/about#pricing", "permanent": true },
     { "source": "/dental-implants-loan", "destination": "/dental-implant-loan", "permanent": true },
     { "source": "/clear-aligners-cost-on-emi", "destination": "/clear-aligners-on-emi", "permanent": true },
     { "source": "/:alias(aesthetics-emi|aesthetics|derma-emi)", "destination": "/aesthetic-treatments-on-emi", "permanent": true },

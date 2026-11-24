@@ -161,8 +161,8 @@ export default function ClinicAgreementPage() {
                 </tr>
                 <tr className="hover:bg-slate-50">
                   <td className="p-3 font-semibold text-slate-900">Settlement Payout Cycle</td>
-                  <td className="p-3 font-bold text-[#0867E8]">T+1 / T+2 Business Days</td>
-                  <td className="p-3 text-slate-600">Direct Nodal Bank NEFT / RTGS transfer into clinic current account.</td>
+                  <td className="p-3 font-bold text-[#0867E8]">T+1 Business Day</td>
+                  <td className="p-3 text-slate-600">Net settlement to the verified clinic account after successful processing and underwriting activation.</td>
                 </tr>
               </tbody>
             </table>

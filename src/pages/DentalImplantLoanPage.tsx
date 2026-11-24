@@ -20,6 +20,25 @@ export default function DentalImplantLoanPage() {
     (Math.pow(1 + monthlyRate, tenure) - 1)
   );
 
+  const FAQS = [
+    {
+      q: 'Can I get dental implants on monthly EMI in India?',
+      a: 'Yes. Through Clinaza partner clinics, patients can finance single, multiple, and full-mouth implants from ₹25,000 to ₹5,00,000 with flexible monthly installments across 16+ banks and RBI-regulated NBFCs with zero clinic credit risk.'
+    },
+    {
+      q: 'Can I get a dental implant loan without a credit card (Cardless EMI)?',
+      a: 'Yes. Clinaza offers Cardless medical EMIs using only your Aadhaar and PAN OTP verification with instant 2-minute digital approval right at the clinic front desk.'
+    },
+    {
+      q: 'Does health insurance cover dental implants in India?',
+      a: 'Standard retail health insurance policies in India exclude dental implants as elective cosmetic or prosthetic procedures unless caused by acute accidental trauma. Clinaza point-of-care patient EMI is the preferred out-of-pocket alternative.'
+    },
+    {
+      q: 'How does the clinic receive payment?',
+      a: 'Clinaza partners with Pine Labs Plural to disburse 100% of the procedure invoice directly into your clinic current account on a guaranteed T+1 business day settlement cycle with 0% clinic credit risk.'
+    }
+  ];
+
   const implantLoanSchema = [
     {
       "@context": "https://schema.org",
@@ -45,6 +64,18 @@ export default function DentalImplantLoanPage() {
         "unitText": "PERCENT"
       },
       "feesAndCommissionsSpecification": "Zero paperwork fee. Instant pre-approval via RBI-regulated NBFC partners."
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": FAQS.map(faq => ({
+        "@type": "Question",
+        "name": faq.q,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": faq.a
+        }
+      }))
     }
   ];
 
@@ -345,6 +376,31 @@ export default function DentalImplantLoanPage() {
             <p>
               In India, single dental implants in 2026 cost between <strong>₹25,000 and ₹70,000</strong>, while full-mouth implant rehabilitations (All-on-4 and All-on-6) range from <strong>₹1,80,000 to ₹5,50,000</strong>. Through Clinaza partner clinics, patients can finance 100% of treatment costs with <strong>₹0 upfront down payment</strong>, zero paper documents, and monthly installments starting from <strong>₹1,290/month</strong> over 3 to 24 months via RBI-regulated lending institutions with 2-minute digital pre-approval.
             </p>
+          </div>
+
+          {/* Frequently Asked Questions */}
+          <div className="pt-6 space-y-4">
+            <div className="text-center sm:text-left">
+              <span className="text-[10px] font-black uppercase tracking-widest text-[#0867E8] bg-blue-50 px-2.5 py-1 rounded-full border border-blue-200">
+                PATIENT QUESTIONS &amp; FINANCING GUIDELINES
+              </span>
+              <h2 className="text-xl sm:text-2xl font-black text-[#0B2450] mt-2">
+                Frequently Asked Questions About Dental Implant Loans
+              </h2>
+            </div>
+            <div className="grid gap-3">
+              {FAQS.map((faq, idx) => (
+                <details key={idx} className="group bg-white rounded-xl border border-slate-200 p-4 open:border-blue-400 transition-colors">
+                  <summary className="font-bold text-sm text-slate-900 cursor-pointer list-none flex items-center justify-between gap-3">
+                    <span>{faq.q}</span>
+                    <span className="text-slate-400 group-open:rotate-180 transition-transform text-xs">▼</span>
+                  </summary>
+                  <p className="mt-3 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-3">
+                    {faq.a}
+                  </p>
+                </details>
+              ))}
+            </div>
           </div>
         </section>
 

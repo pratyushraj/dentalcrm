@@ -62,10 +62,10 @@ export default function HairTransplantEmiPage() {
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "Can I get a hair transplant on EMI in India?",
+          "name": "Does health insurance cover hair transplant surgery in India?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. Patients can finance FUE, DHI, and robotic hair restoration procedures from ₹30,000 to ₹2,50,000 with flexible monthly EMIs starting from ~11.5% p.a. through RBI-regulated lenders with 2-minute instant approval."
+            "text": "No. Standard health insurance (Mediclaim) policies strictly exclude hair restoration because it is classified as elective aesthetic surgery. Only reconstruction following traumatic burn injuries may occasionally be considered, making point-of-care EMI the primary choice for patients."
           }
         },
         {
@@ -78,10 +78,18 @@ export default function HairTransplantEmiPage() {
         },
         {
           "@type": "Question",
-          "name": "How can hair restoration and dermatology clinics partner with Clinaza?",
+          "name": "What documents are needed to apply for a hair restoration loan?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Hair transplant surgeons and dermatologists can onboard at clinaza.in/clinic-onboarding to equip front desks with Pine Labs Plural point-of-care patient checkout, guaranteed T+1 current account settlement, and 0% clinic credit risk."
+            "text": "You only need your PAN card, Aadhaar card, and an active bank account with mobile net banking or UPI autopay. Approvals are completed digitally in 2 minutes right at the clinic reception."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I pay off my loan early without penalties?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Under RBI lending guidelines, retail medical personal loans feature flexible foreclosure and partial prepayment terms through licensed NBFC partners."
           }
         }
       ]
@@ -400,6 +408,13 @@ export default function HairTransplantEmiPage() {
               <h3 className="font-bold text-sm text-slate-900">Does health insurance cover hair transplant surgery in India?</h3>
               <p className="text-xs text-slate-600 leading-relaxed">
                 No. Standard health insurance (Mediclaim) policies strictly exclude hair restoration because it is classified as elective aesthetic surgery. Only reconstruction following traumatic burn injuries may occasionally be considered, making point-of-care EMI the primary choice for patients.
+              </p>
+            </div>
+
+            <div className="p-4 rounded-2xl bg-slate-50 border border-slate-100 space-y-2">
+              <h3 className="font-bold text-sm text-slate-900">Can I finance a hair transplant without a credit card in India?</h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Yes. Cardless aesthetic EMIs are available via Aadhaar and PAN OTP across leading RBI-regulated NBFC partners and bank cardless networks with zero physical paperwork.
               </p>
             </div>
 

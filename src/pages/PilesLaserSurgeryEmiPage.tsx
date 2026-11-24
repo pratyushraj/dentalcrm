@@ -55,6 +55,36 @@ export default function PilesLaserSurgeryEmiPage() {
         "name": "Colorectal Surgery"
       },
       "description": "Minimally invasive 1470nm diode laser ablation of hemorrhoidal cushions, anal fistula tracts, and sphincter-sparing fissurectomies."
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Does health insurance cover laser piles surgery in India?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "While traditional open hemorrhoidectomy is covered by health insurance, many private TPAs impose low room-rent sub-limits, require 24-hour mandatory hospitalization, or dispute advanced laser fiber consumable costs, leaving patients with out-of-pocket bills. Clinaza EMI provides transparent financing for the full laser package."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What documents are needed to apply for a proctology loan?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You only need your PAN card, Aadhaar card, and an active bank account with mobile net banking or UPI autopay. Approvals are completed digitally in 2 minutes right at the hospital admission desk."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I pay off my loan early without penalties?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Under RBI lending guidelines, retail medical personal loans feature flexible foreclosure and partial prepayment terms through licensed NBFC partners."
+          }
+        }
+      ]
     }
   ];
 

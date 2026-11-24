@@ -1070,7 +1070,7 @@ export const BLOGS_PART1 = [
       },
       {
         question: "Does offering EMI help dental clinics get more patients?",
-        answer: "Yes — significantly. Clinics offering EMI financing through Clinaza report 35–60% higher case acceptance for high-value treatments like implants, full-mouth rehabilitation, and clear aligners. Financing removes the #1 barrier to treatment acceptance."
+        answer: "Monthly payment options may help eligible patients manage treatment costs. Clinaza is onboarding clinics and has no live financing results or measured case-acceptance improvements to report yet."
       }
     ],
     content: (
@@ -1203,7 +1203,7 @@ export const BLOGS_PART1 = [
 
         <h2 className="text-2xl font-bold text-neutral-900 mt-10 mb-4">5. Patient Financing — The Hidden Marketing Weapon</h2>
         <p className="text-neutral-700 leading-relaxed">
-          When patients cannot afford Rs 60,000 upfront for a dental implant, they delay treatment. When you offer <strong>Rs 2,800/month for 24 months</strong>, the same patient books immediately. Clinics using Clinaza report <strong>35–60% higher case acceptance</strong> for high-value treatments.
+          Monthly payments may help an eligible patient manage a large treatment bill. Any repayment example is illustrative and depends on approved lender terms. Clinaza is onboarding clinics; no live financing conversion results are available yet.
         </p>
 
         <div className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-6 rounded-2xl my-8">
@@ -1432,7 +1432,7 @@ export const BLOGS_PART1 = [
             href="/clinic-onboarding"
             className="inline-block bg-white text-slate-900 font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-slate-100 transition-colors shadow-md"
           >
-            Onboard Your Clinic Free →
+            Activate Your Clinic · ₹999 Once →
           </a>
         </div>
       </div>
@@ -1973,15 +1973,14 @@ export const BLOGS_PART1 = [
         {/* Featured Case Study Spotlight */}
         <div className="bg-emerald-50/80 border border-emerald-200 p-5 rounded-2xl space-y-2 my-6">
           <div className="flex items-center gap-2">
-            <span className="px-2 py-0.5 bg-emerald-600 text-white text-[9px] font-black uppercase tracking-wider rounded-md">Live Clinic Example</span>
-            <h4 className="text-sm font-bold text-[#0B2450]">YOUR DENTIST — Patliputra Colony, Patna</h4>
+            <span className="px-2 py-0.5 bg-emerald-600 text-white text-[9px] font-black uppercase tracking-wider rounded-md">Illustrative Clinic Workflow</span>
+            <h4 className="text-sm font-bold text-[#0B2450]">Planning a clinic payment desk</h4>
           </div>
           <p className="text-xs text-slate-600 leading-relaxed">
-            By combining high-ranking SEO patient guides, 3D CBCT procedure highlights, and Clinaza easy EMI checkout options, <strong>Dr. Aryan Parmar</strong> converted previously hesitant high-ticket implant and braces inquiries into confirmed treatments.
+            A clinic can combine useful treatment information, clear contact details and payment explanations in its patient journey. Clinaza financing requires completed clinic onboarding and activation; this is not a report of completed financing or treatment results.
           </p>
           <div className="text-[11px] font-semibold text-emerald-800 flex flex-wrap gap-3 pt-1">
-            <span>📍 Patliputra Colony, Patna</span>
-            <span>📞 062014 78033</span>
+            <span>Clinic onboarding is in progress</span>
           </div>
         </div>
 
@@ -2269,7 +2268,7 @@ export const BLOGS_PART1 = [
       },
       {
         question: "How does automated WhatsApp patient recall increase dental clinic revenue?",
-        answer: "Automated WhatsApp recalls re-engage dormant patients who haven't visited for scaling, root canal follow-ups, or aligner checkups. Clinics using Clinaza report a 32% recovery rate of dormant patients without manual receptionist calling."
+        answer: "WhatsApp recalls can help a clinic follow up with patients due for checkups or planned treatment. Clinaza has no verified clinic recovery-rate results to publish yet."
       },
       {
         question: "Can dental clinic software help offer treatment EMIs to patients?",
@@ -2719,7 +2718,7 @@ export const BLOGS_PART1 = [
       },
       {
         question: "How do WhatsApp patient recalls increase clinic revenue?",
-        answer: "Automated WhatsApp recalls target past patients due for scaling, crown cementation, or aligner checkups. Clinics using Clinaza recover an average of ₹45,000 to ₹1,20,000 in monthly revenue from existing patient lists without paying for new ads."
+        answer: "WhatsApp recalls can support follow-up with patients due for scaling, crown cementation or aligner checkups. Results depend on the clinic and patient response; Clinaza has no verified monthly revenue outcomes to publish yet."
       },
       {
         question: "Why does offering patient EMI financing increase dental case acceptance?",

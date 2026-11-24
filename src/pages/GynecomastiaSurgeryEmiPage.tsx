@@ -55,6 +55,36 @@ export default function GynecomastiaSurgeryEmiPage() {
         "name": "Plastic Surgery"
       },
       "description": "Surgical removal of glandular breast tissue and subcutaneous fat in males utilizing micro-liposuction and direct gland excision."
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Does health insurance cover gynecomastia surgery in India?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Standard health insurance (Mediclaim) policies in India strictly exclude gynecomastia correction, categorizing it as an elective cosmetic procedure. Only rare cases accompanied by severe endocrine pathology and biopsied neoplastic lesions are eligible for review, making point-of-care EMI the primary financing option for patients."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What documents are needed to apply for a cosmetic surgery loan?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You only need your PAN card, Aadhaar card, and an active bank account with mobile net banking or UPI autopay. Approvals are completed digitally in 2 minutes right at the clinic reception."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I pay off my loan early without penalties?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Under RBI lending guidelines, retail medical personal loans feature flexible foreclosure and partial prepayment terms through licensed NBFC partners."
+          }
+        }
+      ]
     }
   ];
 

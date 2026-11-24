@@ -38,6 +38,7 @@ import { emailNotificationService } from '../services/emailNotificationService';
 import { easycredService } from '../services/easycredService';
 import { toast } from 'sonner';
 import { SEOHead } from '@/components/seo/SEOHead';
+import { FINANCING_IS_LIVE, FINANCING_STATUS } from '@/lib/financingAvailability';
 import { CITIES } from '@/data/cities';
 import { TaglineReveal } from '@/components/TaglineReveal';
 import { ClinicCityFinder } from '@/components/ClinicCityFinder';
@@ -346,6 +347,10 @@ export default function CrmHomepage() {
   };
   const handlePatientEligibilitySubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!FINANCING_IS_LIVE) {
+      toast.info(FINANCING_STATUS);
+      return;
+    }
     if (!patientData.name || !patientData.mobile) {
       toast.error('Please fill in required fields');
       return;
@@ -459,23 +464,28 @@ export default function CrmHomepage() {
   const comprehensiveFaqs: FAQItem[] = [
     {
       category: 'clinics',
+      q: 'Is Clinaza patient financing live?',
+      a: 'Clinaza is currently onboarding clinics. No clinics are live for patient financing yet. Patient checkout becomes available only after clinic verification, partner underwriting and payment activation.'
+    },
+    {
+      category: 'clinics',
       q: 'How does Clinaza help private dental clinics increase treatment acceptance?',
-      a: 'Over 60% of high-ticket dental cases (implants, aligners, full-mouth rehab) drop out at the reception desk due to price shock. Clinaza enables clinic front desks to instantly prescribe flexible monthly EMIs via SMS or WhatsApp link, converting hesitant patients on the spot without manual paperwork.'
+      a: 'Clinaza is onboarding clinics for a digital financing desk designed to let eligible patients explore monthly payment options. Financing availability depends on clinic activation and lender approval. Clinaza has no live patient financing outcomes to report yet.'
     },
     {
       category: 'clinics',
       q: 'Does the clinic bear any credit default risk or patient non-payment liability?',
-      a: 'Zero credit risk on the clinic. Clinaza operates on a 100% non-recourse model. Loans are underwritten, funded, serviced, and collected directly by RBI-registered banks and NBFC partners. The clinic receives full payment and has no liability if a patient misses an installment.'
+      a: 'Under the planned non-recourse financing model, the lender funds and collects the patient loan. The clinic receives the invoice less applicable MDR and agreed charges and does not collect loan repayments. Treatment, refund and chargeback responsibilities remain under the clinic agreement.'
     },
     {
       category: 'clinics',
       q: 'How fast does the clinic receive treatment funds in its bank account?',
-      a: 'Clinaza disburses 100% of the approved treatment invoice directly into your clinic’s verified current account on a guaranteed T+1 business day cycle, processed through Plural by Pine Labs.'
+      a: 'After clinic activation and successful transaction processing, the agreed settlement schedule is T+1 business day through Plural by Pine Labs. The clinic receives the invoice less applicable MDR and agreed charges. Clinaza patient financing is not live yet.'
     },
     {
       category: 'clinics',
       q: 'What is the onboarding fee for dental clinics?',
-      a: 'Clinaza charges a nominal one-time onboarding fee of ₹999 for clinic onboarding and lending gateway integration. There are zero recurring monthly subscriptions, zero software maintenance fees, and zero hidden charges.'
+      a: 'Clinaza charges ₹999 one-time activation for the digital financing desk, clinic verification, doctor KYC underwriting, and Pine Labs lending gateway integration. There are ₹0 annual maintenance charges (AMC) and ₹0 monthly subscription fees. Patient financing is subject to lender terms and applicable transaction charges.'
     },
     {
       category: 'clinics',
@@ -485,7 +495,7 @@ export default function CrmHomepage() {
     {
       category: 'patients',
       q: 'Can patients get treatment on EMI without a credit card (Cardless EMI)?',
-      a: 'Yes. Clinaza powers Cardless EMIs in partnership with leading RBI-regulated cardless healthcare lenders. Patients without a credit card only need a valid PAN and Aadhaar OTP to split treatments into monthly EMIs. Additionally, Credit Card EMI across 16+ banks, Debit Card EMI, and Down Payment + EMI hybrid options are fully supported.'
+      a: 'Cardless financing is a planned option where supported by an activated clinic and the relevant provider. Credit Card EMI and pre-approved Debit Card EMI have different eligibility requirements. No patient financing is live yet; options and documentation must be confirmed at activation and checkout.'
     },
     {
       category: 'patients',
@@ -505,7 +515,7 @@ export default function CrmHomepage() {
     {
       category: 'patients',
       q: 'What repayment tenures and interest rates are available?',
-      a: 'Patients can choose flexible tenures from 3 to 24 months. Interest rates start from ~11.5% to 15% p.a., determined directly by the regulated lending partner based on the patient’s credit and cashflow assessment.'
+      a: 'After financing is activated, the lender determines available tenures, interest, APR and fees for each eligible patient. Patients must review the Key Facts Statement and approved loan terms. Illustrative EMI calculations are not approved offers.'
     },
     {
       category: 'patients',
@@ -515,7 +525,7 @@ export default function CrmHomepage() {
     {
       category: 'compliance',
       q: 'Who powers Clinaza’s payment and patient EMI financing gateway?',
-      a: 'Clinaza is officially partnered with Plural by Pine Labs, India’s leading omnichannel merchant commerce network. Through this partnership, Clinaza equips private dental and specialty clinics with instant point-of-care patient financing across 16+ major banks, paperless cardless medical loans, and low-fee front-desk UPI collections — with all treatment payouts deposited directly into the clinic’s current account on a guaranteed T+1 settlement cycle.'
+      a: 'Plural by Pine Labs supplies the gateway rails under Clinaza’s institutional agreement. Clinics are currently being verified and onboarded. Patient financing and payment options become available only after the relevant underwriting and activation are complete.'
     },
     {
       category: 'compliance',
@@ -541,7 +551,7 @@ export default function CrmHomepage() {
     <div className="min-h-screen bg-white text-[#0B2450] font-jakarta antialiased overflow-x-hidden selection:bg-[#0867E8] selection:text-white">
       <SEOHead
         title="Clinaza — Point-of-Care Patient Financing & Healthcare EMIs India"
-        description="Enable instant 2-minute paperless patient treatment financing & EMIs (₹30K–₹5L) across 16+ major banks for dental, IVF & surgery clinics. Direct T+1 settlement with zero default risk."
+        description="Paperless patient EMIs for dental, IVF & healthcare clinics. ₹999 one-time activation, ₹0 AMC and ₹0 monthly subscription fees. T+1 clinic settlement."
         keywords={[
           'clinaza', 'clinaza patient financing', 'clinaza healthpay', 'clinaza healthcare emi',
           'point of care patient financing', 'dental treatment on emi', 'dental implants emi',
@@ -556,10 +566,18 @@ export default function CrmHomepage() {
           {
             "@context": "https://schema.org",
             "@type": "Organization",
+            "@id": "https://www.clinaza.in/#organization",
             "name": "Clinaza Technologies",
             "alternateName": "Clinaza",
             "url": "https://www.clinaza.in/",
-            "logo": "https://www.clinaza.in/assets/clinaza-logo.jpg",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://www.clinaza.in/assets/clinaza-logo.jpg",
+              "contentUrl": "https://www.clinaza.in/assets/clinaza-logo.jpg",
+              "width": 1024,
+              "height": 1024,
+              "caption": "Clinaza official blue and green C logo"
+            },
             "sameAs": [
               "https://www.instagram.com/clinaza.in",
               "https://twitter.com/clinazain",
@@ -588,6 +606,19 @@ export default function CrmHomepage() {
               "@type": "OfferCatalog",
               "name": "Dental & Specialty Healthcare Patient Financing Plans",
               "itemListElement": [
+                {
+                  "@type": "Offer",
+                  "name": "Clinic digital financing desk activation",
+                  "url": "https://www.clinaza.in/clinic-onboarding",
+                  "price": "999",
+                  "priceCurrency": "INR",
+                  "description": "₹999 one-time activation and merchant underwriting. ₹0 AMC and ₹0 monthly subscription fees. Applicable transaction charges are separate.",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Clinic digital financing desk activation",
+                    "description": "Clinic verification, doctor KYC underwriting, and Pine Labs lending gateway integration."
+                  }
+                },
                 {
                   "@type": "Offer",
                   "itemOffered": {
@@ -637,30 +668,6 @@ export default function CrmHomepage() {
           },
           {
             "@context": "https://schema.org",
-            "@type": "LoanOrCredit",
-            "name": "Clinaza Healthcare Patient Financing",
-            "description": "Instant point-of-care patient EMI financing from ₹30,000 to ₹5,00,000 across 16+ major banks with direct T+1 clinic settlements and zero default recourse.",
-            "provider": {
-              "@type": "FinancialService",
-              "name": "Clinaza & Plural by Pine Labs",
-              "url": "https://www.clinaza.in/"
-            },
-            "amount": {
-              "@type": "MonetaryAmount",
-              "currency": "INR",
-              "minValue": 30000,
-              "maxValue": 500000
-            },
-            "loanTerm": {
-              "@type": "QuantitativeValue",
-              "minValue": 3,
-              "maxValue": 24,
-              "unitCode": "MON"
-            },
-            "currency": "INR"
-          },
-          {
-            "@context": "https://schema.org",
             "@type": "BreadcrumbList",
             "itemListElement": [
               {
@@ -686,7 +693,7 @@ export default function CrmHomepage() {
           {
             "@context": "https://schema.org",
             "@type": "SoftwareApplication",
-            "name": "Clinaza Dental CRM & Patient Financing",
+            "name": "Clinaza Free Clinic CRM",
             "operatingSystem": "Web, iOS, Android (PWA)",
             "applicationCategory": "BusinessApplication",
             "offers": {
@@ -694,7 +701,7 @@ export default function CrmHomepage() {
               "price": "0",
               "priceCurrency": "INR"
             },
-            "description": "100% Free Dental Clinic Management CRM in India with automated WhatsApp patient recalls, digital FDI tooth charting, digital prescriptions, and point-of-care patient EMI financing.",
+            "description": "Free core clinic management software for patient records, digital prescriptions and follow-up workflows. Financing desk activation is a separate ₹999 one-time service; patient financing is not live yet.",
             "url": "https://www.clinaza.in/",
             "author": {
               "@type": "Organization",
@@ -702,121 +709,6 @@ export default function CrmHomepage() {
               "url": "https://www.clinaza.in"
             }
           },
-          {
-            "@context": "https://schema.org",
-            "@type": "FinancialService",
-            "name": "Clinaza",
-            "description": "Embedded patient financing infrastructure enabling healthcare clinics & hospitals to offer point-of-care EMI loans.",
-            "url": "https://www.clinaza.in/",
-            "logo": "https://www.clinaza.in/assets/clinaza-logo.jpg",
-            "image": "https://www.clinaza.in/og-clinaza.png",
-            "areaServed": "IN",
-            "serviceType": "Healthcare Patient Financing Infrastructure"
-          },
-          {
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": [
-              {
-                "@type": "Question",
-                "name": "Who powers Clinaza's payment and patient EMI financing gateway?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Clinaza is officially partnered with Plural by Pine Labs, India’s leading omnichannel merchant commerce network, providing multi-bank Credit Card EMIs, Debit Card EMIs, cardless healthcare financing, and low-fee UPI with direct T+1 clinic settlements."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "What is Clinaza?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Clinaza is an embedded healthcare patient financing platform that connects clinics with RBI-regulated Banks and NBFCs, allowing patients to pay for high-ticket treatments in flexible monthly EMIs."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "How does Clinaza patient financing work?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Clinaza connects clinic patients directly with regulated lending partners to offer flexible monthly EMI options for treatments ranging from ₹30,000 to ₹5,00,000 with 2-minute paperless digital KYC."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Which treatments are eligible for EMI?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "High-value planned procedures ranging from ₹30,000 to ₹5,00,000 including Dental Implants, Clear Aligners, Braces, Crowns, Orthopaedic surgeries, IVF/Fertility, and LASIK/Ophthalmology."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Does the clinic bear any credit risk?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Zero credit risk on the clinic. The loan is funded, serviced, and collected directly by regulated lending institutions via automated monthly e-NACH auto-debit."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "What is the onboarding fee for clinics?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Clinaza charges a nominal one-time onboarding fee of ₹999 for clinic onboarding and lending gateway integration. There are zero recurring monthly subscriptions."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "What documents does the patient need?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Basic digital KYC: PAN card, Aadhaar card (eKYC), proof of income (salary slip, bank statement, or ITR), and bank account details for e-NACH auto-debit setup."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Can patients get treatment on EMI without a credit card (Cardless EMI)?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Yes. Clinaza powers Cardless EMIs in partnership with leading RBI-regulated cardless healthcare lenders (powered by RBI-regulated banking and NBFC institutions). Patients without a credit card only need a valid PAN and Aadhaar OTP to split treatments into monthly EMIs. Additionally, Credit Card EMI across 21+ banks, Debit Card EMI, and Down Payment + EMI options are fully supported."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Are IVF and fertility treatments eligible for monthly EMI financing?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Yes. Clinaza covers high-ticket IVF cycles, ICSI, IUI, and reproductive healthcare packages from ₹50,000 to ₹5,00,000 with upfront clinic disbursement and flexible 3 to 24 month repayment tenures."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Which clinics in Patna offer Clinaza EMI financing?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Clinaza partner clinics in Patna include YOUR DENTIST Patna, PRODENT, Facio Dental, Smile Dental Clinic, Smile Point Dental Care, YouthONN Multispeciality Dental, Mundeshwari Dental Hub, and Pratima Dental Hospital among others."
-                }
-              }
-            ]
-          },
-          {
-            "@context": "https://schema.org",
-            "@type": "ItemList",
-            "name": "Clinaza Partner Dental Clinics",
-            "description": "Dental clinics across India offering Clinaza point-of-care EMI patient financing",
-            "itemListElement": [
-              { "@type": "ListItem", "position": 1, "name": "YOUR DENTIST Patna", "url": "https://www.clinaza.in/cities/patna" },
-              { "@type": "ListItem", "position": 2, "name": "PRODENT Patna", "url": "https://www.clinaza.in/cities/patna" },
-              { "@type": "ListItem", "position": 3, "name": "GuMzy Dental Gurgaon", "url": "https://www.clinaza.in/cities/gurgaon" },
-              { "@type": "ListItem", "position": 4, "name": "Facio Dental Patna", "url": "https://www.clinaza.in/cities/patna" },
-              { "@type": "ListItem", "position": 5, "name": "Smile Dental Clinic Patna", "url": "https://www.clinaza.in/cities/patna" },
-              { "@type": "ListItem", "position": 6, "name": "Smile Point Dental Care Patna", "url": "https://www.clinaza.in/cities/patna" },
-              { "@type": "ListItem", "position": 7, "name": "YouthONN Multispeciality Dental Patna", "url": "https://www.clinaza.in/cities/patna" },
-              { "@type": "ListItem", "position": 8, "name": "Mundeshwari Dental Hub & Implant Patna", "url": "https://www.clinaza.in/cities/patna" },
-              { "@type": "ListItem", "position": 9, "name": "Pratima Dental Hospital Patna", "url": "https://www.clinaza.in/cities/patna" },
-              { "@type": "ListItem", "position": 10, "name": "Dantsri Dental Hospital Jhanjharpur", "url": "https://www.instagram.com/dantsri_dental/" }
-            ]
-          }
         ]}
       />
 
@@ -926,7 +818,7 @@ export default function CrmHomepage() {
                 <span className="text-[10px] font-extrabold text-[#0867E8] uppercase tracking-wider">OFFICIAL GATEWAY PARTNER:</span>
                 <span className="text-[11px] font-bold text-slate-800">Plural by Pine Labs</span>
                 <span className="text-slate-300 hidden sm:inline">&bull;</span>
-                <span className="text-[10px] font-bold text-slate-500 hidden sm:inline">16+ Banks &bull; 35+ EMI Modes</span>
+                <span className="text-[10px] font-bold text-slate-500 hidden sm:inline">Clinics Currently Onboarding</span>
               </div>
 
               {/* H1 Headline */}
@@ -939,7 +831,7 @@ export default function CrmHomepage() {
 
               {/* Balanced Subhead */}
               <p className="text-sm sm:text-base md:text-lg text-slate-600 font-normal leading-relaxed max-w-xl [text-wrap:pretty]">
-                Empower patients with instant 2-minute paperless EMIs across <strong className="text-[#0B2450] font-semibold">16+ major banks</strong> for treatments from ₹30,000 to ₹5,00,000. Upfront disbursement directly to your clinic current account on a guaranteed T+1 settlement cycle.
+                Clinaza is onboarding clinics for paperless patient payment options through Plural by Pine Labs. Patient financing is not live yet. Clinic verification, partner underwriting and payment activation must be completed before patient checkout is available.
               </p>
 
               {/* Primary Call-to-Actions */}
@@ -951,7 +843,7 @@ export default function CrmHomepage() {
                   <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-2xl" aria-hidden="true">
                     <div className="w-20 h-full bg-gradient-to-r from-transparent via-white/35 to-transparent absolute top-0 -left-20 animate-cta-sheen" />
                   </div>
-                  <span className="relative z-10">Onboard Clinic &bull; ₹999 Setup</span>
+                  <span className="relative z-10">Activate Clinic &bull; ₹999 Once</span>
                   <ArrowRight size={15} className="relative z-10" />
                 </Link>
                 <button
@@ -1533,7 +1425,7 @@ export default function CrmHomepage() {
                         <div>
                           <h4 className="text-base font-extrabold text-[#0B2450]">Treatment Starts Immediately &bull; T+1 Bank Settlement</h4>
                           <p className="text-xs sm:text-sm text-slate-600 mt-1 leading-relaxed">
-                            Upon OTP sanction, treatment starts right away. The lending partner transfers 100% of the procedure fee directly into the clinic's current account on a guaranteed T+1 settlement cycle. Repayment collection is handled 100% by the bank.
+                            After activation and lender approval, the clinic receives the treatment invoice less applicable MDR and agreed charges on the T+1 settlement schedule. The lender handles patient loan repayments. This is an illustrative workflow, not a completed transaction.
                           </p>
                         </div>
                       </div>
@@ -1683,7 +1575,7 @@ export default function CrmHomepage() {
                     to="/clinic-onboarding"
                     className="w-full py-3 bg-white hover:bg-slate-100 text-[#0B2450] text-xs font-extrabold uppercase tracking-wider rounded-xl transition-all flex items-center justify-center gap-1.5 shadow-md active:scale-95"
                   >
-                    <span>Onboard Clinic &bull; ₹999 Setup</span>
+                    <span>Activate Clinic &bull; ₹999 Once</span>
                     <ArrowRight size={13} />
                   </Link>
                 </div>
@@ -1914,7 +1806,7 @@ export default function CrmHomepage() {
                           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-[9.5px] text-slate-300 pt-1 border-t border-white/10">
                             <span className="flex items-center gap-1 text-emerald-400 font-semibold">
                               <CheckCircle2 size={11} className="shrink-0" />
-                              <span>₹999 setup fee recovered on Day 1 (Case #1)</span>
+                              <span>₹999 activation fee recovered on Day 1 (Case #1)</span>
                             </span>
                             <span className="text-slate-400">100% Non-Recourse &bull; T+1 Payout</span>
                           </div>
@@ -1924,7 +1816,7 @@ export default function CrmHomepage() {
                           to="/clinic-onboarding"
                           className="w-full py-3 bg-[#0867E8] hover:bg-[#0756C7] text-white text-xs font-extrabold uppercase tracking-wider rounded-xl transition-all flex items-center justify-center gap-1.5 shadow-lg active:scale-95 cursor-pointer relative z-10"
                         >
-                          <span>Claim Clinic Territory &bull; ₹999 Setup</span>
+                          <span>Activate Clinic &bull; ₹999 Once</span>
                           <ArrowRight size={13} />
                         </Link>
                       </div>
@@ -2442,23 +2334,23 @@ export default function CrmHomepage() {
                   badgeColor: 'bg-blue-50 text-[#0867E8] border-blue-200',
                   category: 'Dental Care', 
                   treatments: 'Implants, Aligners, Crowns & Full Mouth Rehab',
-                  link: '/blog/dental-implants-cost-on-emi-india',
+                  link: '/dental-implant-loan',
                   popular: '₹45K – ₹2.5L'
                 },
                 { 
                   icon: Sparkles,
                   badgeColor: 'bg-amber-50 text-amber-700 border-amber-200',
-                  category: 'Aesthetics & Hair', 
-                  treatments: 'GFC, PRP, HIFU, HIEMT, Botox & Hair Transplants',
-                  link: '/aesthetic-treatments-on-emi',
+                  category: 'Hair & Aesthetics', 
+                  treatments: 'Hair Transplants, PRP, HIFU, Botox & Skin Care',
+                  link: '/hair-transplant-on-emi',
                   popular: '₹25K – ₹1.8L'
                 },
                 { 
                   icon: Eye,
                   badgeColor: 'bg-emerald-50 text-[#0f7a75] border-emerald-200',
                   category: 'Ophthalmology', 
-                  treatments: 'Contoura Vision, SMILE, ICL & Cataract Lenses',
-                  link: '/blog/lasik-eye-surgery-cost-on-emi-india-guide',
+                  treatments: 'Contoura Vision, SMILE, Femto-LASIK & ICL Lenses',
+                  link: '/lasik-eye-surgery-on-emi',
                   popular: '₹40K – ₹1.2L'
                 },
                 { 
@@ -2466,16 +2358,16 @@ export default function CrmHomepage() {
                   badgeColor: 'bg-purple-50 text-purple-700 border-purple-200',
                   category: 'IVF & Fertility', 
                   treatments: 'IVF Cycles, ICSI, IUI & Egg Freezing Packages',
-                  link: '/blog/ivf-cost-on-emi-fertility-treatment-financing-india',
+                  link: '/ivf-treatment-on-emi',
                   popular: '₹1.2L – ₹3.5L'
                 },
                 { 
                   icon: Activity,
                   badgeColor: 'bg-indigo-50 text-indigo-700 border-indigo-200',
-                  category: 'Orthopaedics & Surgeries', 
-                  treatments: 'Knee Replacement, Bariatric, ACL & Daycare Surgeries',
-                  link: '/blog/knee-replacement-surgery-cost-on-emi-india',
-                  popular: '₹80K – ₹4.0L'
+                  category: 'Cosmetic & Surgeries', 
+                  treatments: 'Gynecomastia, Laser Piles, Hearing Aids & ACL Surgery',
+                  link: '/gynecomastia-surgery-on-emi',
+                  popular: '₹45K – ₹2.5L'
                 }
               ].map((cat, idx) => {
                 const IconComponent = cat.icon;
@@ -2505,6 +2397,41 @@ export default function CrmHomepage() {
                   </Link>
                 );
               })}
+            </div>
+
+            {/* Quick Access to Dedicated Treatment EMI Portals */}
+            <div className="pt-4 border-t border-slate-100 flex flex-wrap items-center justify-center gap-2 text-xs">
+              <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider pr-1">All Treatments on EMI:</span>
+              <Link to="/dental-implant-loan" className="px-3 py-1.5 rounded-full bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 text-slate-700 hover:text-[#0867E8] font-semibold transition-all">
+                Dental Implants
+              </Link>
+              <Link to="/clear-aligners-on-emi" className="px-3 py-1.5 rounded-full bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 text-slate-700 hover:text-[#0867E8] font-semibold transition-all">
+                Clear Aligners
+              </Link>
+              <Link to="/lasik-eye-surgery-on-emi" className="px-3 py-1.5 rounded-full bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 text-slate-700 hover:text-[#0867E8] font-semibold transition-all">
+                LASIK Eye Surgery
+              </Link>
+              <Link to="/hair-transplant-on-emi" className="px-3 py-1.5 rounded-full bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 text-slate-700 hover:text-[#0867E8] font-semibold transition-all">
+                Hair Transplant
+              </Link>
+              <Link to="/ivf-treatment-on-emi" className="px-3 py-1.5 rounded-full bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 text-slate-700 hover:text-[#0867E8] font-semibold transition-all">
+                IVF Treatment
+              </Link>
+              <Link to="/gynecomastia-surgery-on-emi" className="px-3 py-1.5 rounded-full bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 text-slate-700 hover:text-[#0867E8] font-semibold transition-all">
+                Gynecomastia Surgery
+              </Link>
+              <Link to="/hearing-aids-on-emi" className="px-3 py-1.5 rounded-full bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 text-slate-700 hover:text-[#0867E8] font-semibold transition-all">
+                Digital Hearing Aids
+              </Link>
+              <Link to="/piles-laser-surgery-on-emi" className="px-3 py-1.5 rounded-full bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 text-slate-700 hover:text-[#0867E8] font-semibold transition-all">
+                Laser Piles Surgery
+              </Link>
+              <Link to="/maternity-delivery-on-emi" className="px-3 py-1.5 rounded-full bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 text-slate-700 hover:text-[#0867E8] font-semibold transition-all">
+                Maternity Delivery
+              </Link>
+              <Link to="/aesthetic-treatments-on-emi" className="px-3 py-1.5 rounded-full bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 text-slate-700 hover:text-[#0867E8] font-semibold transition-all">
+                Aesthetics &amp; Derma
+              </Link>
             </div>
           </FadeIn>
         </section>
@@ -2567,7 +2494,7 @@ export default function CrmHomepage() {
                       {
                         feature: 'Lender Matching & Approval',
                         traditional: 'Single-lender integration. Narrow credit policies reject over 50% of walk-in patients.',
-                        clinaza: 'Intelligent Multi-Lender BRE. Matches patient profile across 55+ banks & NBFCs, driving 76%+ approval rates.',
+                        clinaza: 'Planned provider eligibility checks after clinic activation. Approval depends on each lender; no live approval-rate data is available yet.',
                         highlight: true
                       },
                       {
@@ -2619,18 +2546,18 @@ export default function CrmHomepage() {
           <FadeIn className="max-w-5xl mx-auto space-y-8">
             <div className="text-center space-y-2">
               <span className="text-[10px] font-black text-[#0f7a75] uppercase tracking-widest">FOR CLINIC OWNERS</span>
-              <h2 className="text-2xl sm:text-4xl font-black text-[#0B2450]">Why Clinics Use Clinaza</h2>
+              <h2 className="text-2xl sm:text-4xl font-black text-[#0B2450]">What Clinics Can Activate</h2>
             </div>
 
-            {/* Prominent ₹999 One-Time Onboarding Fee Highlight Badge */}
+            {/* Clinic activation pricing */}
             <div className="bg-gradient-to-r from-blue-50/80 via-emerald-50/50 to-blue-50/80 border border-blue-200/90 p-5 rounded-2xl text-center max-w-2xl mx-auto shadow-2xs">
-              <span className="text-2xl font-black text-[#0867E8] block">₹999 One-Time Onboarding Fee</span>
-              <p className="text-xs font-bold text-[#0B2450] mt-1">One-time clinic onboarding &amp; lending gateway integration. Zero recurring monthly subscriptions.</p>
+              <span className="text-2xl font-black text-[#0867E8] block">₹999 One-Time Activation</span>
+              <p className="text-xs font-bold text-[#0B2450] mt-1">Digital financing desk, clinic verification &amp; merchant underwriting. ₹0 AMC &amp; ₹0 monthly subscription fees.</p>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-left">
               {[
-                { title: '₹999 One-Time Setup', desc: 'One-time clinic onboarding & lending gateway integration. Zero recurring monthly fees.' },
+                { title: '₹999 One-Time Activation', desc: 'Clinic verification, doctor KYC underwriting & lending gateway integration. ₹0 AMC and ₹0 monthly subscription fees.' },
                 { title: 'Free Clinic CRM & EMR Portal', desc: '100% free patient reactivation & treatment follow-up portal for life.' },
                 { title: 'No EMI Collection Burden', desc: 'No chasing patients for repayments — handled entirely by NBFC.' },
                 { title: 'Financing by Partners', desc: 'All loans funded and serviced by RBI-regulated lenders.' },
@@ -2649,240 +2576,12 @@ export default function CrmHomepage() {
           </FadeIn>
         </section>
 
-        {/* ── 8. ONBOARDED PARTNER CLINICS NETWORK (SLIDESHOW CAROUSEL) ── */}
-        <section aria-label="Onboarded Partner Clinics" className="py-14 sm:py-18 px-4 sm:px-6 bg-gradient-to-b from-[#F7FAFC] to-slate-100 border-y border-slate-200/60 overflow-hidden relative">
-          <div className="max-w-5xl mx-auto space-y-8 text-center">
-            <div className="space-y-2">
-              <span className="text-[10px] font-black text-[#0f7a75] uppercase tracking-widest flex items-center justify-center gap-1.5">
-                <Building2 size={16} /> TRUSTED MULTI-SPECIALTY CLINIC NETWORK
-              </span>
-              <h2 className="text-2xl sm:text-4xl font-black text-[#0B2450]">Onboarded Partner Clinics</h2>
-              <p className="text-xs sm:text-sm text-slate-600 max-w-xl mx-auto">
-                Leading dental, aesthetic, fertility, and surgical clinics offering instant point-of-care patient EMI financing powered by Clinaza.
-              </p>
-            </div>
-
-            {/* Continuous Smooth Slideshow Container */}
-            <div className="relative overflow-hidden py-4 px-2 bg-white/80 backdrop-blur-md rounded-3xl border border-slate-200/90 shadow-sm group">
-              {/* Fade Edges */}
-              <div className="absolute left-0 inset-y-0 w-12 sm:w-20 bg-gradient-to-r from-[#F7FAFC] via-[#F7FAFC]/80 to-transparent z-10 pointer-events-none" />
-              <div className="absolute right-0 inset-y-0 w-12 sm:w-20 bg-gradient-to-l from-[#F7FAFC] via-[#F7FAFC]/80 to-transparent z-10 pointer-events-none" />
-
-              <div className="flex w-max gap-4 animate-marquee-slow group-hover:[animation-play-state:paused] focus-within:[animation-play-state:paused] motion-reduce:animate-none">
-                {(() => {
-                  const clinicsList = [
-                    {
-                      name: 'YOUR DENTIST Patna',
-                      location: 'Patliputra Colony, Patna',
-                      phone: '062014 78033',
-                      rating: '5.0 ★ (Primary Partner)',
-                      specialties: 'Implants, Braces & Aligners',
-                      link: 'https://www.yourdentistpatna.in/blog/clinaza-patient-financing-dental-emi-patna',
-                      isExternal: true,
-                      accent: 'border-emerald-400 bg-white shadow-sm',
-                      badge: 'Featured Center',
-                      badgeColor: 'bg-emerald-600 text-white'
-                    },
-                    {
-                      name: 'Lagom by Ami Aesthetic & Wellness',
-                      location: 'Umayanalloor, Kollam, Kerala',
-                      phone: 'Verified Partner Desk',
-                      rating: '5.0 ★ (Verified Partner)',
-                      specialties: 'GFC, PRP, HIFU & Wellness',
-                      link: '/aesthetic-treatments-on-emi',
-                      accent: 'border-amber-300 bg-white shadow-sm',
-                      badge: 'Aesthetics Partner',
-                      badgeColor: 'bg-amber-600 text-white'
-                    },
-                    {
-                      name: 'PRODENT',
-                      location: 'West Boring Canal Rd, Anandpuri, Patna',
-                      phone: '084290 57093',
-                      rating: '4.9 ★ (95 reviews)',
-                      specialties: 'Multispeciality Dental Clinic',
-                      link: 'https://www.prodentpatna.com/blog/no-cost-emi-dental-treatments-patna.html',
-                      isExternal: true,
-                      accent: 'border-slate-200 bg-white shadow-sm',
-                      badge: 'Partner Clinic',
-                      badgeColor: 'bg-slate-100 text-slate-700 border border-slate-200'
-                    },
-                    {
-                      name: 'Aura Fertility & IVF Centre',
-                      location: 'Indiranagar, Bengaluru, Karnataka',
-                      phone: 'Direct Partner Desk',
-                      rating: '4.9 ★ (180 reviews)',
-                      specialties: 'IVF Cycles, ICSI & Egg Freezing',
-                      link: '/clinic-onboarding?category=ivf',
-                      accent: 'border-purple-300 bg-white shadow-sm',
-                      badge: 'Fertility Partner',
-                      badgeColor: 'bg-purple-600 text-white'
-                    },
-                    {
-                      name: 'GuMzy Dental',
-                      location: 'Sector 56, Gurgaon, Haryana',
-                      phone: 'Direct Partner Desk',
-                      rating: '5.0 ★ (30 reviews)',
-                      specialties: 'Painless RCT & Aesthetics',
-                      link: '/cities/gurgaon',
-                      accent: 'border-slate-200 bg-white shadow-sm',
-                      badge: 'Partner Clinic',
-                      badgeColor: 'bg-slate-100 text-slate-700 border border-slate-200'
-                    },
-                    {
-                      name: 'ClearVision Eye & Laser Hospital',
-                      location: 'Andheri West, Mumbai, Maharashtra',
-                      phone: 'Direct Partner Desk',
-                      rating: '4.9 ★ (240 reviews)',
-                      specialties: 'Contoura Vision & Blade-Free LASIK',
-                      link: '/clinic-onboarding?category=lasik',
-                      accent: 'border-emerald-300 bg-white shadow-sm',
-                      badge: 'Eye Care Partner',
-                      badgeColor: 'bg-emerald-600 text-white'
-                    },
-                    {
-                      name: 'Facio Dental',
-                      location: 'Boring Road, Patna, Bihar',
-                      phone: 'Direct Partner Desk',
-                      rating: '4.5 ★ (417 reviews)',
-                      specialties: 'Complex Orthodontics & Surgery',
-                      link: '/cities/patna',
-                      accent: 'border-slate-200 bg-white shadow-sm',
-                      badge: 'Partner Clinic',
-                      badgeColor: 'bg-slate-100 text-slate-700 border border-slate-200'
-                    },
-                    {
-                      name: 'Smile Dental Clinic',
-                      location: 'Pillar 39, Ashok Rajpath, Patna',
-                      phone: '062028 26097',
-                      rating: '5.0 ★ (104 reviews)',
-                      specialties: 'Dental Implants & Scaling',
-                      link: '/cities/patna',
-                      accent: 'border-slate-200 bg-white shadow-sm',
-                      badge: 'Partner Clinic',
-                      badgeColor: 'bg-slate-100 text-slate-700 border border-slate-200'
-                    },
-                    {
-                      name: 'Smile Point Dental Care',
-                      location: 'Kankarbagh, Patna, Bihar',
-                      phone: 'Direct Partner Desk',
-                      rating: '4.9 ★ (308 reviews)',
-                      specialties: 'Painless RCT & Advanced Care',
-                      link: '/cities/patna',
-                      accent: 'border-slate-200 bg-white shadow-sm',
-                      badge: 'Partner Clinic',
-                      badgeColor: 'bg-slate-100 text-slate-700 border border-slate-200'
-                    },
-                    {
-                      name: 'YouthONN Multispeciality',
-                      location: 'Nehru Nagar Rd, Patliputra, Patna',
-                      phone: '077397 46086',
-                      rating: '5.0 ★ (133 reviews)',
-                      specialties: 'Multispeciality Dental Care',
-                      link: '/cities/patna',
-                      accent: 'border-slate-200 bg-white shadow-sm',
-                      badge: 'Partner Clinic',
-                      badgeColor: 'bg-slate-100 text-slate-700 border border-slate-200'
-                    },
-                    {
-                      name: 'Mundeshwari Dental Hub',
-                      location: 'Rajeev Nagar Main Rd, Patna',
-                      phone: '085441 65535',
-                      rating: '5.0 ★ (153 reviews)',
-                      specialties: 'Implant Centre & Surgery',
-                      link: '/cities/patna',
-                      accent: 'border-slate-200 bg-white shadow-sm',
-                      badge: 'Partner Clinic',
-                      badgeColor: 'bg-slate-100 text-slate-700 border border-slate-200'
-                    },
-                    {
-                      name: 'Pratima Dental Hospital',
-                      location: 'Ashiana - Digha Rd, Patna',
-                      phone: '074628 36028',
-                      rating: '4.8 ★ (113 reviews)',
-                      specialties: 'Hospital & Cosmetic Dentistry',
-                      link: '/cities/patna',
-                      accent: 'border-slate-200 bg-white shadow-sm',
-                      badge: 'Partner Clinic',
-                      badgeColor: 'bg-slate-100 text-slate-700 border border-slate-200'
-                    },
-                    {
-                      name: 'Dantsri Dental Hospital',
-                      location: 'Janta College Rd, Jhanjharpur, Bihar',
-                      phone: '083402 20139',
-                      rating: '5.0 ★ (@dantsri_dental)',
-                      specialties: 'Implants, Smile Design & RCT',
-                      link: 'https://www.instagram.com/dantsri_dental/',
-                      isExternal: true,
-                      accent: 'border-pink-200 bg-white shadow-sm',
-                      badge: 'Instagram Partner',
-                      badgeColor: 'bg-gradient-to-r from-pink-500 to-rose-500 text-white'
-                    }
-                  ];
-                  return [...clinicsList, ...clinicsList].map((clinic, idx) => (
-                  <div 
-                    key={idx} 
-                    className={`w-[280px] sm:w-[320px] shrink-0 p-4 sm:p-5 rounded-2xl border ${clinic.accent} space-y-3 flex flex-col justify-between transition-all hover:border-[#0867E8]/40 hover:shadow-md text-left`}
-                  >
-                    <div className="space-y-2">
-                      <div className="flex items-start justify-between gap-2">
-                        <div>
-                          <h3 className="text-sm font-bold text-[#0B2450] leading-snug">{clinic.name}</h3>
-                          <p className="text-[11px] font-medium text-slate-500 flex items-center gap-1 mt-0.5">
-                            <MapPin size={12} className="text-[#0f7a75] shrink-0" /> {clinic.location}
-                          </p>
-                        </div>
-                        <span className={`text-[9px] font-bold px-2 py-0.5 rounded-full shrink-0 ${clinic.badgeColor}`}>
-                          {clinic.badge}
-                        </span>
-                      </div>
-
-                      <div className="pt-2 border-t border-slate-100 text-[11px] space-y-1">
-                        <p className="text-slate-600"><span className="font-bold text-[#0B2450]">Rating:</span> {clinic.rating}</p>
-                        <p className="text-slate-500"><span className="font-bold text-[#0B2450]">Phone / Contact:</span> {clinic.phone}</p>
-                        <p className="text-slate-500"><span className="font-bold text-[#0B2450]">Services:</span> {clinic.specialties}</p>
-                      </div>
-                    </div>
-
-                    <div className="pt-2 border-t border-slate-100 flex items-center justify-between">
-                      <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200/80 px-2.5 py-1 rounded-lg">
-                        ✓ EMI Accepted
-                      </span>
-                      {clinic.isExternal ? (
-                        <a href={clinic.link} target="_blank" rel="noopener noreferrer" className="text-[10px] font-bold text-[#0867E8] hover:underline flex items-center gap-0.5">
-                          Read Case &rarr;
-                        </a>
-                      ) : (
-                        <Link to={clinic.link} className="text-[10px] font-bold text-[#0867E8] hover:underline flex items-center gap-0.5">
-                          Check EMI &rarr;
-                        </Link>
-                      )}
-                    </div>
-                  </div>
-                ));
-                })()}
-              </div>
-            </div>
-
-            {/* Interactive Clinic / Pincode Finder Widget */}
-            <div className="pt-8 max-w-4xl mx-auto w-full">
-              <ClinicCityFinder
-                onCheckEligibility={(cityName) => {
-                  setPatientData((prev) => ({ ...prev, city: cityName }));
-                  setShowEligibilityModal(true);
-                }}
-              />
-            </div>
-
-            <div className="pt-4 flex flex-wrap items-center justify-center gap-2 text-xs font-bold text-slate-500">
-              <span>Explore Clinaza partner network in 50+ cities:</span>
-              <div className="flex items-center gap-2">
-                {['Patna', 'Delhi', 'Mumbai', 'Bengaluru', 'Hyderabad', 'Pune'].map(c => (
-                  <Link key={c} to={`/cities/${c.toLowerCase()}`} className="text-[#0867E8] hover:underline font-bold">
-                    {c}
-                  </Link>
-                ))}
-              </div>
-            </div>
+        <section aria-labelledby="clinic-onboarding-status" className="border-y border-slate-200 bg-slate-50 px-4 py-12 sm:px-6">
+          <div className="mx-auto max-w-5xl space-y-4">
+            <p className="text-xs font-bold uppercase tracking-widest text-[#0867E8]">Clinic onboarding</p>
+            <h2 id="clinic-onboarding-status" className="text-2xl font-bold text-[#0B2450] sm:text-3xl">Preparing clinics for digital patient financing</h2>
+            <p className="max-w-3xl text-base leading-relaxed text-slate-600">Clinaza is currently onboarding clinics. No clinics are live for patient financing yet. Each clinic must complete verification, partner underwriting and payment activation before patient checkout becomes available.</p>
+            <Link to="/about#pricing" className="inline-flex min-h-11 items-center font-bold text-[#0867E8] underline underline-offset-4">View clinic activation pricing and process</Link>
           </div>
         </section>
 
@@ -2901,7 +2600,13 @@ export default function CrmHomepage() {
                 <X size={20} />
               </button>
 
-              {isFinancingSuccess ? (
+              {!FINANCING_IS_LIVE ? (
+                <div className="space-y-4 py-4">
+                  <h2 className="text-xl font-bold text-[#0B2450]">Patient financing is not live yet</h2>
+                  <p className="text-sm leading-relaxed text-slate-600">Clinaza is onboarding clinics. Patient applications will open after clinic verification, partner underwriting and payment activation.</p>
+                  <Link to="/about#financing" className="inline-flex min-h-11 items-center font-bold text-[#0867E8] underline">Read how activation works</Link>
+                </div>
+              ) : isFinancingSuccess ? (
                 /* ── IN-APP SEAMLESS CARE-PASS OVERLAY (IMPROVEMENT 1) ── */
                 <div className="space-y-4 py-1 animate-in zoom-in-95 duration-200 overflow-y-auto pr-0.5">
                   {/* Header Status Card */}
@@ -3104,7 +2809,7 @@ export default function CrmHomepage() {
                       Find Matching Lenders →
                     </button>
                     <p className="text-[10px] text-slate-500 text-center leading-relaxed">
-                      Your information will be securely queried live against Clinaza partnered bank/NBFC APIs with your consent.
+                      Patient financing is not live yet. This preview does not represent a lender approval.
                     </p>
                   </form>
                 </>
@@ -3260,7 +2965,7 @@ export default function CrmHomepage() {
             {/* Modern Partner CTA card */}
             <div className="text-center space-y-3">
               <span className="text-[11px] font-black text-[#0867E8] uppercase tracking-widest bg-blue-50 border border-blue-200 px-3 py-1 rounded-full inline-block">
-                {formType === 'clinic' ? 'DIRECT CLINIC DISBURSEMENT LIVE' : 'NBFC & LENDER PARTNERSHIP'}
+                {formType === 'clinic' ? 'CLINIC ONBOARDING IN PROGRESS' : 'NBFC & LENDER PARTNERSHIP'}
               </span>
               <h2 className="text-xl sm:text-3xl font-black text-[#0B2450] tracking-tight leading-snug">
                 {formType === 'clinic' ? 'Activate Point-of-Care Patient Financing For Your Clinic' : 'Partner with Clinaza as a Capital Provider'}
@@ -3335,7 +3040,7 @@ export default function CrmHomepage() {
 
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-4 text-xs text-slate-500 pt-2 border-t border-slate-200/60">
                   <span className="flex items-center gap-1.5 text-[11px] sm:text-xs font-medium text-slate-600">
-                    <ShieldCheck size={14} className="text-emerald-600 shrink-0" /> 55+ Regulated Banking & NBFC Rails
+                    <ShieldCheck size={14} className="text-emerald-600 shrink-0" /> Gateway &amp; Lending Partner Activation
                   </span>
                   <span className="hidden sm:inline text-slate-300">&bull;</span>
                   <a
@@ -3571,6 +3276,9 @@ export default function CrmHomepage() {
                   </Link>
                 </li>
                 <li>
+                  <Link to="/about" className="hover:text-[#0867E8] font-semibold text-slate-700 transition-colors">
+                    About Clinaza &amp; Pricing
+                  </Link>
                   <Link to="/terms" className="hover:text-[#0867E8] font-semibold text-slate-700 transition-colors">
                     Terms of Service
                   </Link>
@@ -3690,6 +3398,34 @@ export default function CrmHomepage() {
             </div>
           </div>
 
+          {/* Treatment EMI Landing Pages Quick Links Strip */}
+          <div className="pt-6 border-t border-slate-100 space-y-2 text-left">
+            <h4 className="text-xs font-black uppercase tracking-wider text-[#0B2450]">
+              Patient Treatment Financing &amp; Healthcare EMIs
+            </h4>
+            <div className="flex flex-wrap gap-x-4 gap-y-1.5 text-xs text-slate-600">
+              <Link to="/dental-implant-loan" className="hover:text-[#0867E8] transition-colors">Dental Implants on EMI</Link>
+              <span className="text-slate-300">&bull;</span>
+              <Link to="/clear-aligners-on-emi" className="hover:text-[#0867E8] transition-colors">Clear Aligners Cost EMI</Link>
+              <span className="text-slate-300">&bull;</span>
+              <Link to="/lasik-eye-surgery-on-emi" className="hover:text-[#0867E8] transition-colors">LASIK Eye Surgery EMI</Link>
+              <span className="text-slate-300">&bull;</span>
+              <Link to="/hair-transplant-on-emi" className="hover:text-[#0867E8] transition-colors">Hair Transplant EMI</Link>
+              <span className="text-slate-300">&bull;</span>
+              <Link to="/ivf-treatment-on-emi" className="hover:text-[#0867E8] transition-colors">IVF &amp; Fertility Loan</Link>
+              <span className="text-slate-300">&bull;</span>
+              <Link to="/gynecomastia-surgery-on-emi" className="hover:text-[#0867E8] transition-colors">Gynecomastia Surgery EMI</Link>
+              <span className="text-slate-300">&bull;</span>
+              <Link to="/hearing-aids-on-emi" className="hover:text-[#0867E8] transition-colors">Digital Hearing Aids EMI</Link>
+              <span className="text-slate-300">&bull;</span>
+              <Link to="/piles-laser-surgery-on-emi" className="hover:text-[#0867E8] transition-colors">Laser Piles Surgery EMI</Link>
+              <span className="text-slate-300">&bull;</span>
+              <Link to="/maternity-delivery-on-emi" className="hover:text-[#0867E8] transition-colors">Maternity &amp; Delivery Hospital EMI</Link>
+              <span className="text-slate-300">&bull;</span>
+              <Link to="/aesthetic-treatments-on-emi" className="hover:text-[#0867E8] transition-colors">Aesthetics &amp; Derma Financing</Link>
+            </div>
+          </div>
+
           {/* Bottom Copyright, Legal Entity & Compliance Strip */}
           <div className="pt-6 pb-6 sm:pb-2 border-t border-slate-200 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-500 font-sans">
             <div className="text-center md:text-left space-y-1">
@@ -3703,6 +3439,7 @@ export default function CrmHomepage() {
             <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-xs font-medium text-slate-600">
               <Link to="/clinic-agreement" className="hover:text-[#0867E8] font-semibold text-[#0867E8] transition-colors whitespace-nowrap">Clinic Agreement</Link>
               <span className="text-slate-300">&bull;</span>
+              <Link to="/about" className="hover:text-[#0867E8] transition-colors whitespace-nowrap">About &amp; Pricing</Link>
               <Link to="/terms" className="hover:text-[#0867E8] transition-colors whitespace-nowrap">Terms of Service</Link>
               <span className="text-slate-300">&bull;</span>
               <Link to="/privacy" className="hover:text-[#0867E8] transition-colors whitespace-nowrap">Privacy Policy</Link>

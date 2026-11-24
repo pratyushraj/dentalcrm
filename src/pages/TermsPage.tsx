@@ -59,8 +59,8 @@ export default function TermsPage() {
           <ul className="list-disc pl-5 space-y-1.5">
             <li><strong>Digital Desk Activation &amp; Underwriting Fee:</strong> A nominal one-time digital desk activation and underwriting fee of <strong>₹999</strong> covers clinic verification, doctor KYC underwriting, and multi-bank lending gateway integration. Zero Annual Maintenance Charges (AMC) and zero monthly subscription fees.</li>
             <li><strong>Zero Annual Maintenance Charges (AMC):</strong> Clinics are not subject to recurring monthly hardware rental fees or unexpected annual maintenance dues.</li>
-            <li><strong>Merchant Discount Rate (MDR):</strong> Transactions processed through digital channels are subject to standard payment gateway and affordability MDR as specified in the merchant onboarding schedule (typically 1.85% to 2.10% for card transactions, or zero clinic deduction when patient-borne convenience mode is selected).</li>
-            <li><strong>Payout Timeline:</strong> Approved treatment funds are settled directly into the clinic's registered current/savings bank account on a standard <strong>T+1 / T+2 business day schedule</strong>.</li>
+            <li><strong>Merchant Discount Rate (MDR):</strong> The standard patient financing platform MDR is 3.00% of the financed amount. Other payment methods follow the charges in the clinic agreement. Clinic payouts are net of applicable MDR, agreed subvention and any other agreed charges.</li>
+            <li><strong>Payout Timeline:</strong> After clinic verification, underwriting activation and successful transaction processing, the agreed settlement schedule is <strong>T+1 business day</strong> to the clinic's verified bank account. Clinaza is currently onboarding clinics; patient financing is not live yet.</li>
           </ul>
         </section>
 

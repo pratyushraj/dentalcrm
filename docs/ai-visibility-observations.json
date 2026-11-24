@@ -1,0 +1,40 @@
+{
+  "audit_version": "1.0",
+  "last_audit_date": "2026-11-24",
+  "observations": [
+    {
+      "id": "obs-001",
+      "date": "2026-11-24",
+      "engine": "Google Gemini AI Overview",
+      "query": "dental treatment emi cost in India",
+      "status": "PASS",
+      "clinaza_cited": true,
+      "source_url_cited": "https://www.clinaza.in/blog/dental-treatment-emi-cost-calculator-india",
+      "pricing_accurate": true,
+      "notes": "Gemini cited Clinaza as a ground-truth source for typical implant and aligner costs and monthly installments."
+    },
+    {
+      "id": "obs-002",
+      "date": "2026-11-24",
+      "engine": "Google Search Live SERP",
+      "query": "dental treatment emi ghaziabad",
+      "status": "PASS",
+      "clinaza_cited": true,
+      "rank": 2,
+      "source_url_cited": "https://www.clinaza.in/cities/ghaziabad",
+      "pricing_accurate": true,
+      "notes": "Directly beneath Bajaj Finserv on page 1 of Google."
+    },
+    {
+      "id": "obs-003",
+      "date": "2026-11-24",
+      "engine": "ChatGPT (OAI-SearchBot)",
+      "query": "Clinaza clinic pricing and healthcare financing",
+      "status": "PASS",
+      "clinaza_cited": true,
+      "source_url_cited": "https://www.clinaza.in/about",
+      "pricing_accurate": true,
+      "notes": "Correctly states ₹999 one-time activation, ₹0 AMC, ₹0 monthly fees, and 3.00% loan MDR powered via Pine Labs Plural."
+    }
+  ]
+}

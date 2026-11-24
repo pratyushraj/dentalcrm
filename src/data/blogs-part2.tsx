@@ -293,7 +293,7 @@ export const BLOGS_PART2 = [
           <p className="text-xs text-blue-100 max-w-lg mx-auto">Get instant pre-approval for ₹30,000 to ₹3,00,000 in under 2 minutes with zero collateral.</p>
           <div className="flex flex-wrap items-center justify-center gap-3 pt-1">
             <a
-              href="/#calculator"
+              href="/lasik-eye-surgery-on-emi#calculator"
               className="inline-block bg-white text-[#0867E8] font-bold text-xs uppercase tracking-wider px-5 py-2.5 rounded-xl hover:bg-blue-50 transition-colors shadow-md"
             >
               Calculate LASIK EMI →
@@ -630,7 +630,7 @@ export const BLOGS_PART2 = [
   },
     {
     slug: "gynecomastia-surgery-cost-on-emi-india",
-    title: "Gynecomastia Surgery Cost on EMI in India 2025 — Complete Guide",
+    title: "Gynecomastia Surgery Cost on EMI in India (2026 Guide)",
     category: "Medical EMI",
     readTime: "7 min read",
     publishDate: "2026-09-08",
@@ -650,7 +650,7 @@ export const BLOGS_PART2 = [
         <p className="text-lg">Gynecomastia — enlarged male breast tissue — affects 40–60% of men at some point in their lives and can cause significant embarrassment and psychological distress. Despite being extremely common, most men suffer in silence because they're unaware that surgery exists or assume it's unaffordable. Clinaza makes gynecomastia surgery accessible with easy EMI starting from just ₹2,500 per month.</p>
         <p>Whether your condition involves predominantly glandular tissue (requiring excision) or fatty enlargement (treatable with liposuction alone), Clinaza's financing covers the full procedure cost with instant approval — no branch visit, no collateral, no embarrassment.</p>
 
-        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Gynecomastia Surgery Cost in India 2025</h2>
+        <h2 className="text-2xl font-bold text-neutral-900 mt-8 mb-4">Gynecomastia Surgery Cost in India (2026 Pricing Breakdown)</h2>
         <div className="overflow-x-auto rounded-xl border border-neutral-200 shadow-sm">
           <table className="w-full text-sm">
             <thead className="bg-neutral-50 text-neutral-600 uppercase text-xs tracking-wide">
@@ -1113,7 +1113,7 @@ export const BLOGS_PART2 = [
 
         <div className="bg-slate-900 text-white p-6 rounded-2xl my-8 space-y-4">
           <h3 className="text-lg font-bold">Upgrade from Excel to Free Cloud Dental EMR Today</h3>
-          <p className="text-sm text-slate-300">Join over 1,200+ clinics using Clinaza to manage appointments, billing, digital Rx, and patient recalls with zero monthly fees.</p>
+          <p className="text-sm text-slate-300">Explore Clinaza clinic tools and the onboarding process. Financing desk activation costs ₹999 once, with ₹0 AMC and ₹0 monthly subscription fees. Patient financing is not live yet.</p>
           <a href="/reactivation/login" className="inline-block bg-[#0867E8] text-white font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl hover:bg-blue-600 transition-colors">Launch Free Doctor Portal →</a>
         </div>
       </div>
@@ -1749,7 +1749,7 @@ export const BLOGS_PART2 = [
       },
       {
         question: "Is Clinaza's clinic management CRM really free?",
-        answer: "Yes, Clinaza provides 100% free patient reactivation, digital prescriptions, recall automations, and EMI integration forever."
+        answer: "Yes, Clinaza provides free patient reactivation, digital prescriptions, and recall automations. Activating the clinic's digital financing desk costs ₹999 once for clinic verification, doctor KYC underwriting, and lending gateway integration, with ₹0 AMC and ₹0 monthly subscription fees."
       }
     ],
     content: (

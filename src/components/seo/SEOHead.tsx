@@ -1,5 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import { useLocation } from 'react-router-dom';
+import { FINANCING_IS_LIVE, FINANCING_STATUS, isPublicFinancingPath } from '@/lib/financingAvailability';
 
 interface SEOHeadProps {
   title: string; // 55-60 characters
@@ -46,6 +47,9 @@ export const SEOHead: React.FC<SEOHeadProps> = ({
   videoHeight = '1280',
 }) => {
   const location = useLocation();
+  if (!FINANCING_IS_LIVE && isPublicFinancingPath(location.pathname) && !robots.includes('noindex')) {
+    description = `${FINANCING_STATUS} ${description}`;
+  }
   const baseUrl = 'https://www.clinaza.in';
   // Ensure canonical URL is always normalized to www.clinaza.in to prevent canonical domain split in search engines
   const canonical = new URL(canonicalUrl || location.pathname, baseUrl);

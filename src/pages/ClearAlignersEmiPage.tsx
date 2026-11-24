@@ -20,6 +20,21 @@ export default function ClearAlignersEmiPage() {
     (Math.pow(1 + monthlyRate, tenure) - 1)
   );
 
+  const FAQS = [
+    {
+      q: 'Can I get clear aligners on EMI without a credit card?',
+      a: 'Yes. Clinaza cardless orthodontic EMI allows you to split your aligner treatment using only your PAN card and Aadhaar OTP with instant 2-minute digital pre-approval.'
+    },
+    {
+      q: 'How long does clear aligner treatment take?',
+      a: 'Most mild-to-moderate orthodontic cases complete in 6 to 14 months, with visible smile alignment improvements within the first 8 weeks.'
+    },
+    {
+      q: 'Does health insurance cover invisible aligners in India?',
+      a: 'No. Standard retail Mediclaim policies in India exclude orthodontic teeth straightening as elective cosmetic treatment, making Clinaza point-of-care patient EMI the preferred financing option.'
+    }
+  ];
+
   const alignerSchema = [
     {
       "@context": "https://schema.org",
@@ -45,6 +60,18 @@ export default function ClearAlignersEmiPage() {
         "unitText": "PERCENT"
       },
       "feesAndCommissionsSpecification": "Zero paperwork fees. Fast digital sanction through RBI-regulated NBFC partners."
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": FAQS.map(faq => ({
+        "@type": "Question",
+        "name": faq.q,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": faq.a
+        }
+      }))
     }
   ];
 
@@ -352,6 +379,31 @@ export default function ClearAlignersEmiPage() {
             <p>
               In India, clear invisible aligners in 2026 range from <strong>₹35,000</strong> for mild front-tooth spacing up to <strong>₹2,50,000</strong> for complex Invisalign treatments. At Clinaza partner orthodontic practices, patients can finance treatments with <strong>₹0 upfront down payment</strong>, zero paper documents, and monthly EMIs starting from <strong>₹1,790/month</strong> over 6 to 24 months through RBI-regulated financial institutions with instant 2-minute digital pre-approval.
             </p>
+          </div>
+
+          {/* Frequently Asked Questions */}
+          <div className="pt-6 space-y-4">
+            <div className="text-center sm:text-left">
+              <span className="text-[10px] font-black uppercase tracking-widest text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">
+                PATIENT QUESTIONS &amp; FINANCING GUIDELINES
+              </span>
+              <h2 className="text-xl sm:text-2xl font-black text-[#0B2450] mt-2">
+                Frequently Asked Questions About Clear Aligners on EMI
+              </h2>
+            </div>
+            <div className="grid gap-3">
+              {FAQS.map((faq, idx) => (
+                <details key={idx} className="group bg-white rounded-xl border border-slate-200 p-4 open:border-emerald-400 transition-colors">
+                  <summary className="font-bold text-sm text-slate-900 cursor-pointer list-none flex items-center justify-between gap-3">
+                    <span>{faq.q}</span>
+                    <span className="text-slate-400 group-open:rotate-180 transition-transform text-xs">▼</span>
+                  </summary>
+                  <p className="mt-3 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-3">
+                    {faq.a}
+                  </p>
+                </details>
+              ))}
+            </div>
           </div>
         </section>
 

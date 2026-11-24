@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useId } from 'react';
+import { Link } from 'react-router-dom';
 import { 
   X, 
   Shield, 
@@ -15,6 +16,7 @@ import { toast } from 'sonner';
 import { emailNotificationService } from '@/services/emailNotificationService';
 import { easycredService } from '@/services/easycredService';
 import { analytics } from '@/utils/analytics';
+import { FINANCING_IS_LIVE, FINANCING_STATUS } from '@/lib/financingAvailability';
 
 interface PatientEligibilityModalProps {
   isOpen: boolean;
@@ -43,6 +45,16 @@ export const PatientEligibilityModal: React.FC<PatientEligibilityModalProps> = (
   const [countdown, setCountdown] = useState(5);
   const [copied, setCopied] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
+  const availabilityDialogRef = useRef<HTMLDialogElement>(null);
+  const availabilityTitleId = useId();
+  const availabilityDescriptionId = useId();
+
+  useEffect(() => {
+    const dialog = availabilityDialogRef.current;
+    if (FINANCING_IS_LIVE || !dialog) return;
+    if (isOpen && !dialog.open) dialog.showModal();
+    if (!isOpen && dialog.open) dialog.close();
+  }, [isOpen]);
 
   // Sync defaultCity if changed when modal opens
   useEffect(() => {
@@ -53,7 +65,7 @@ export const PatientEligibilityModal: React.FC<PatientEligibilityModalProps> = (
 
   // Auto-redirect timer with pause/resume control
   useEffect(() => {
-    if (isSuccess && customerLink && !isPaused) {
+    if (FINANCING_IS_LIVE && isSuccess && customerLink && !isPaused) {
       if (countdown > 0) {
         const timer = setTimeout(() => setCountdown(countdown - 1), 1000);
         return () => clearTimeout(timer);
@@ -63,10 +75,9 @@ export const PatientEligibilityModal: React.FC<PatientEligibilityModalProps> = (
     }
   }, [isSuccess, customerLink, countdown, isPaused]);
 
-  if (!isOpen) return null;
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!FINANCING_IS_LIVE) return;
     if (!name.trim() || !mobile.trim()) {
       toast.error('Please provide your name and mobile number');
       return;
@@ -150,6 +161,48 @@ export const PatientEligibilityModal: React.FC<PatientEligibilityModalProps> = (
     setIsPaused(false);
     onClose();
   };
+
+  if (!FINANCING_IS_LIVE) {
+    return (
+      <dialog
+        ref={availabilityDialogRef}
+        aria-labelledby={availabilityTitleId}
+        aria-describedby={availabilityDescriptionId}
+        onClose={onClose}
+        className="fixed inset-0 m-auto max-h-[90vh] w-[calc(100%-2rem)] max-w-lg overflow-y-auto overscroll-contain rounded-2xl border border-slate-200 bg-white p-6 text-left text-slate-900 shadow-xl backdrop:overflow-hidden backdrop:overscroll-contain backdrop:bg-slate-950/50 sm:p-8"
+      >
+        <h1 id={availabilityTitleId} className="text-2xl font-bold leading-tight text-[#0B2450]">Patient financing is not live yet</h1>
+        <p id={availabilityDescriptionId} className="mt-4 text-base leading-relaxed text-slate-700">{FINANCING_STATUS}</p>
+        <p className="mt-3 text-sm leading-relaxed text-slate-600">Patient applications can begin only after clinic verification, partner underwriting and payment activation.</p>
+        <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+          <Link
+            to="/clinic-onboarding"
+            onClick={() => availabilityDialogRef.current?.close()}
+            className="inline-flex min-h-11 items-center justify-center rounded-lg bg-[#0867E8] px-4 py-3 text-sm font-semibold text-white hover:bg-[#0757c5] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#0867E8]"
+          >
+            Clinic onboarding
+          </Link>
+          <Link
+            to="/about#financing"
+            onClick={() => availabilityDialogRef.current?.close()}
+            className="inline-flex min-h-11 items-center justify-center rounded-lg border border-slate-200 px-4 py-3 text-sm font-semibold text-[#0867E8] hover:bg-slate-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#0867E8]"
+          >
+            How activation works
+          </Link>
+          <button
+            type="button"
+            autoFocus
+            onClick={() => availabilityDialogRef.current?.close()}
+            className="inline-flex min-h-11 items-center justify-center rounded-lg px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#0867E8]"
+          >
+            Close
+          </button>
+        </div>
+      </dialog>
+    );
+  }
+
+  if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 z-[999] flex items-center justify-center p-3 sm:p-4 bg-slate-950/75 backdrop-blur-md animate-in fade-in duration-200">

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { BLOGS } from '@/data/blogs';
 import { SEOHead } from '@/components/seo/SEOHead';
@@ -37,6 +37,42 @@ export default function BlogArticlePage() {
   };
 
   const defaultTreatment = getDefaultTreatment(article.title, article.category);
+
+  // Map treatment name to direct landing page URL
+  const getTreatmentLandingUrl = (treatment: string) => {
+    switch (treatment) {
+      case 'LASIK / Contoura Vision Eye Surgery': return '/lasik-eye-surgery-on-emi';
+      case 'Gynecomastia / Male Chest Reduction': return '/gynecomastia-surgery-on-emi';
+      case 'Hair Transplant (FUE / DHI)': return '/hair-transplant-on-emi';
+      case 'IVF & Fertility Treatment': return '/ivf-treatment-on-emi';
+      case 'Digital Hearing Aids (Audiology)': return '/hearing-aids-on-emi';
+      case 'Laser Piles & Daycare Surgery': return '/piles-laser-surgery-on-emi';
+      case 'Maternity & Normal / C-Section Delivery': return '/maternity-delivery-on-emi';
+      case 'Kidney Stone Laser & Urology Surgery': return '/kidney-stone-laser-surgery-on-emi';
+      case 'Knee Arthroscopy & ACL Sports Surgery': return '/acl-knee-surgery-on-emi';
+      case 'Clear Aligners': return '/clear-aligners-on-emi';
+      default: return '/dental-implant-loan';
+    }
+  };
+
+  const treatmentLandingUrl = getTreatmentLandingUrl(defaultTreatment);
+
+  // Relevant related articles recommendation
+  const relatedArticles = useMemo(() => {
+    const candidates = BLOGS.filter(b => b && b.slug && b.slug !== article.slug);
+    
+    // Score candidates based on treatment matching
+    const scored = candidates.map(candidate => {
+      let score = 0;
+      const candTreatment = getDefaultTreatment(candidate.title, candidate.category);
+      if (candTreatment === defaultTreatment) score += 20;
+      if (candidate.category === article.category) score += 10;
+      return { blog: candidate, score };
+    });
+
+    scored.sort((a, b) => b.score - a.score);
+    return scored.slice(0, 4).map(s => s.blog);
+  }, [article, defaultTreatment]);
 
   // Helper: convert "June 24, 2026" → "2026-06-24"
   const toIsoDate = (dateStr: string): string => {
@@ -332,16 +368,27 @@ export default function BlogArticlePage() {
 
         {/* Related Articles Interlinking Block */}
         <section className="bg-white border border-neutral-200/80 rounded-2xl p-6 space-y-4">
-          <h3 className="text-sm font-bold text-neutral-900 uppercase tracking-wider">Related Growth &amp; Patient Guides</h3>
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-neutral-100 pb-3">
+            <h3 className="text-sm font-bold text-neutral-900 uppercase tracking-wider">Related Healthcare &amp; Financing Guides</h3>
+            {treatmentLandingUrl && (
+              <Link 
+                to={treatmentLandingUrl} 
+                className="text-xs font-bold text-[#0867E8] hover:underline inline-flex items-center gap-1"
+              >
+                <span>View {defaultTreatment} on EMI</span>
+                <span>&rarr;</span>
+              </Link>
+            )}
+          </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-            {BLOGS.filter(b => b && b.slug && b.slug !== article.slug).slice(0, 4).map((b) => (
+            {relatedArticles.map((b) => (
               <Link 
                 key={b.slug}
                 to={`/blog/${b.slug}`}
-                className="p-3 bg-neutral-50 hover:bg-[#5b72ff]/5 border border-neutral-100 hover:border-[#5b72ff]/30 rounded-xl transition-all block group"
+                className="p-3 bg-neutral-50 hover:bg-[#0867E8]/5 border border-neutral-100 hover:border-[#0867E8]/30 rounded-xl transition-all block group"
               >
-                <span className="text-[10px] font-bold text-[#5b72ff] uppercase block mb-1">{b.category}</span>
-                <span className="font-bold text-neutral-800 group-hover:text-[#5b72ff] transition-colors line-clamp-2">{b.title}</span>
+                <span className="text-[10px] font-bold text-[#0867E8] uppercase block mb-1">{b.category}</span>
+                <span className="font-bold text-neutral-800 group-hover:text-[#0867E8] transition-colors line-clamp-2">{b.title}</span>
               </Link>
             ))}
           </div>

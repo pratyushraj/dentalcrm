@@ -245,7 +245,9 @@ export const VERIFIED_DOSSIERS = [
       aadhaar_front: '/docs/kyc/exldentist_clinic/dr_priyanka_kumar_aadhaar.jpg',
       aadhaar_back: '/docs/kyc/exldentist_clinic/dr_priyanka_kumar_aadhaar_back.jpg',
       dental_council_reg: '/docs/kyc/exldentist_clinic/dr_priyanka_kumar_dental_council_registration.jpg',
-      udyam_pdf: '/docs/kyc/exldentist_clinic/exldentist_udyam_certificate.jpg'
+      udyam_pdf: '/docs/kyc/exldentist_clinic/exldentist_udyam_certificate.jpg',
+      courier_receipt: '/docs/kyc/exldentist_clinic/dtdc_courier_receipt_exldentist_clinic.jpg',
+      courier_awb: 'DTDC AWB: Z5003197552'
     },
     is_signed: true,
     status: '100% Ready for Pine Labs Plural Sub-Merchant MID Issuance'

@@ -51,6 +51,44 @@ export default function KidneyStoneSurgeryEmiPage() {
       "procedureType": "SurgicalProcedure",
       "bodyLocation": "Kidney and Urinary Tract",
       "status": "Available"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is laser kidney stone surgery (RIRS) covered under insurance?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "While hospital room and surgeon charges are generally covered by health insurance, disposable laser fibers, ureteral access sheaths, and DJ stent removals are frequently rejected or capped under policy sub-limits. Clinaza finances the entire uncovered out-of-pocket amount."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the turnaround time for surgery loan approval?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Our automated digital verification approves patients in less than 2 minutes. The hospital billing counter receives immediate credit confirmation, enabling same-day admission."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I get financing for ZSR circumcision?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. ZSR Circumcision (stapler circumcision) is widely financed on Clinaza with monthly EMIs starting around ~₹3,100 per month."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What documents do I need to submit?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Just your PAN card number and mobile OTP verification for bank statement review. No physical papers, collateral, or medical checkups required."
+          }
+        }
+      ]
     }
   ];
 

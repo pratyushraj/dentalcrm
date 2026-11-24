@@ -62,10 +62,10 @@ export default function IvfTreatmentEmiPage() {
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "Can I pay for IVF treatment in monthly EMIs in India?",
+          "name": "Does health insurance cover IVF or ICSI cycles in India?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. Clinaza enables couples to finance IVF cycles, ICSI, and fertility treatments from ₹50,000 to ₹5,00,000 with flexible 3 to 24 month EMIs starting from ~11.5% p.a. through RBI-regulated banks and NBFCs with instant 2-minute paperless digital approval."
+            "text": "Standard retail health insurance policies in India exclude infertility investigations, IVF cycles, and ART procedures under standard IRDAI exclusion guidelines. Only select premium corporate group covers provide capped maternity riders, making Clinaza point-of-care patient EMI the primary financing vehicle."
           }
         },
         {
@@ -78,10 +78,18 @@ export default function IvfTreatmentEmiPage() {
         },
         {
           "@type": "Question",
-          "name": "How does an IVF centre partner with Clinaza for patient financing?",
+          "name": "Can either spouse apply for the fertility treatment loan?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Fertility centres and ART hospitals can onboard at clinaza.in/clinic-onboarding. Clinaza equips your front desk with Pine Labs Plural point-of-care checkout, guaranteed T+1 settlement to the hospital current account, and 0% hospital credit risk."
+            "text": "Yes. Either the husband or wife (or both as co-applicants) can apply for the medical loan to maximize sanction limits. Approvals require only Aadhaar, PAN card, and net banking/UPI verification."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are medication costs included in the financing?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. The sanctioned loan amount covers both hospital cycle charges (egg retrieval, embryology, embryo transfer) and hormonal stimulation injection pharmacy packages."
           }
         }
       ]
@@ -400,6 +408,13 @@ export default function IvfTreatmentEmiPage() {
               <h3 className="font-bold text-sm text-slate-900">Does health insurance cover IVF or ICSI cycles in India?</h3>
               <p className="text-xs text-slate-600 leading-relaxed">
                 Standard retail health insurance policies in India exclude infertility investigations, IVF cycles, and ART procedures under standard IRDAI exclusion guidelines. Only select premium corporate group covers provide capped maternity riders, making Clinaza point-of-care patient EMI the primary financing vehicle.
+              </p>
+            </div>
+
+            <div className="p-4 rounded-2xl bg-slate-50 border border-slate-100 space-y-2">
+              <h3 className="font-bold text-sm text-slate-900">Can couples get an IVF loan without a credit card in India?</h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Yes. Cardless fertility EMIs are available via Aadhaar and PAN OTP verification across leading RBI-regulated NBFC partners. No credit card or physical loan paperwork is required.
               </p>
             </div>
 

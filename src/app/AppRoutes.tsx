@@ -5,6 +5,8 @@ import AddToHomeScreen from "@/components/mobile/AddToHomeScreen";
 import { ReactivationRoutes } from "./routes/reactivationRoutes";
 import { lazy } from "react";
 import { LazyRoute } from "./routes/routeElements";
+import { FinancingAvailabilityNotice } from "@/components/seo/FinancingAvailabilityNotice";
+import { FINANCING_IS_LIVE, isPublicFinancingPath } from "@/lib/financingAvailability";
 
 const DentalTrendFinder = lazy(() => import("@/pages/DentalTrendFinder"));
 const ContentWorkspace = lazy(() => import("@/pages/ContentWorkspace"));
@@ -40,6 +42,7 @@ const PrivacyPolicyPage = lazy(() => import("@/pages/PrivacyPolicyPage"));
 const RefundPolicyPage = lazy(() => import("@/pages/RefundPolicyPage"));
 const ShippingPolicyPage = lazy(() => import("@/pages/ShippingPolicyPage"));
 const ContactUsPage = lazy(() => import("@/pages/ContactUsPage"));
+const AboutClinazaPage = lazy(() => import("@/pages/AboutClinazaPage"));
 const NotFoundPage = lazy(() => import("@/pages/NotFoundPage"));
 
 function LegacyBlogArticleRedirect() {
@@ -49,9 +52,12 @@ function LegacyBlogArticleRedirect() {
 }
 
 export default function AppRoutes() {
+  const { pathname } = useLocation();
+  const showFinancingStatus = !FINANCING_IS_LIVE && isPublicFinancingPath(pathname);
   return (
     <SessionContextProvider>
       <SidebarProvider>
+        {showFinancingStatus && <FinancingAvailabilityNotice />}
         <Routes>
           {/* Root page - Pure CRM homepage */}
           <Route 
@@ -64,6 +70,8 @@ export default function AppRoutes() {
           />
 
           {/* Dental Implant & Clear Aligner Loan Dedicated Pages */}
+          <Route path="/about" element={<LazyRoute><AboutClinazaPage /></LazyRoute>} />
+          <Route path="/pricing" element={<Navigate to="/about#pricing" replace />} />
           <Route path="/dental-implant-loan" element={<LazyRoute><DentalImplantLoanPage /></LazyRoute>} />
           <Route path="/dental-implants-loan" element={<Navigate to="/dental-implant-loan" replace />} />
           <Route path="/clear-aligners-on-emi" element={<LazyRoute><ClearAlignersEmiPage /></LazyRoute>} />
@@ -199,6 +207,9 @@ export default function AppRoutes() {
           <Route path="/delivery-policy" element={<Navigate to="/shipping-policy" replace />} />
           <Route path="/contact" element={<LazyRoute><ContactUsPage /></LazyRoute>} />
           <Route path="/contact-us" element={<Navigate to="/contact" replace />} />
+          <Route path="/about" element={<LazyRoute><AboutClinazaPage /></LazyRoute>} />
+          <Route path="/about-us" element={<Navigate to="/about" replace />} />
+          <Route path="/pricing" element={<Navigate to="/about#pricing" replace />} />
 
           {/* Direct Login Alias */}
           <Route path="/login" element={<Navigate to="/reactivation/login" replace />} />

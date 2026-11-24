@@ -2165,7 +2165,7 @@ export const BLOGS_PART3 = [
         <div className="p-6 bg-slate-900 text-white rounded-2xl my-8 text-center space-y-3">
           <h3 className="text-xl font-bold text-white">Activate Point-of-Care Patient Financing at Your Clinic</h3>
           <p className="text-xs text-slate-300 max-w-md mx-auto">
-            Join 50+ accredited dental clinics across India. Zero clinic signup fees, zero software charges, and same-day settlement.
+            Clinaza is onboarding clinics. ₹999 one-time activation, ₹0 AMC and ₹0 monthly subscription fees. Patient financing requires verification, partner underwriting and activation.
           </p>
           <a
             href="/clinic-onboarding"

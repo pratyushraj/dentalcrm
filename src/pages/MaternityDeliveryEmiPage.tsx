@@ -51,6 +51,44 @@ export default function MaternityDeliveryEmiPage() {
       "procedureType": "SurgicalProcedure",
       "bodyLocation": "Pelvis",
       "status": "Available"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Can I use Clinaza alongside my corporate health insurance?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes! If your corporate policy pays ₹40,000 towards your delivery, you can use Clinaza financing specifically for the remaining out-of-pocket balance (e.g. ₹60,000) so you pay zero cash on discharge day."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What documents are required to approve maternity EMI?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Only your PAN card, Aadhaar-linked OTP verification, and 3 months digital bank statement. No physical paperwork, collateral, or medical history underwriting required."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can the father or family member apply on behalf of the mother?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Either the mother, father, or a direct family member with salaried or business income can be the primary applicant."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does this cover sudden emergency C-sections?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Our digital desk operates 24/7 with instant pre-approvals in under 2 minutes, ensuring zero delays during unplanned surgeries or room shifts."
+          }
+        }
+      ]
     }
   ];
 

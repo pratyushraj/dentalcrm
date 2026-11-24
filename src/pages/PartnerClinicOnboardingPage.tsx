@@ -216,7 +216,7 @@ export default function PartnerClinicOnboardingPage() {
     initiateRazorpayPayment({
       amount: RAZORPAY_CONFIG.kitAmount,
       name: 'CLINAZA',
-      description: `Clinic Kit & Lifetime CRM: ${form.clinicName || 'Partner Clinic'}`,
+      description: `One-Time Digital Desk Activation: ${form.clinicName || 'Partner Clinic'}`,
       prefill: {
         name: form.doctorName || form.clinicName,
         email: form.email,
@@ -239,7 +239,7 @@ export default function PartnerClinicOnboardingPage() {
             amount: RAZORPAY_CONFIG.kitAmount
           });
 
-          await emailNotificationService.sendNotification(`🎉 ₹999 Clinic Kit Paid via Razorpay: ${form.clinicName}`, {
+          await emailNotificationService.sendNotification(`🎉 ₹999 Clinic Activation Paid via Razorpay: ${form.clinicName}`, {
             'Payment ID': res.razorpay_payment_id,
             'Order ID': res.razorpay_order_id || 'N/A',
             'Clinic Name': form.clinicName,
@@ -597,14 +597,14 @@ export default function PartnerClinicOnboardingPage() {
                   <div className="md:col-span-7 space-y-4">
                     <div>
                       <span className="inline-block bg-blue-50 border border-blue-200 text-[#0867E8] text-[10px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full mb-1.5">
-                        One-Time Clinic Kit Activation
+                        One-Time Digital Desk Activation
                       </span>
                       <div className="flex items-baseline gap-2">
                         <span className="text-3xl font-black text-[#0B2450]">₹999</span>
-                        <span className="text-xs font-bold text-slate-500">One-Time Only &bull; Zero AMC Lifetime</span>
+                        <span className="text-xs font-bold text-slate-500">One-Time Activation &bull; ₹0 AMC &bull; ₹0 Monthly Fees</span>
                       </div>
                       <p className="text-xs text-slate-600 mt-1">
-                        Includes custom reception acrylic QR standee, full Practice Cloud CRM, and front-desk patient healthcare EMI activation.
+                        Includes clinic verification, doctor KYC underwriting, and Pine Labs lending gateway integration for your digital financing desk.
                       </p>
                     </div>
 
@@ -612,7 +612,7 @@ export default function PartnerClinicOnboardingPage() {
                     <ul className="space-y-2 text-xs text-slate-700 border-t border-b border-slate-100 py-3">
                       <li className="flex items-start gap-2">
                         <Check size={14} className="text-emerald-600 shrink-0 mt-0.5" />
-                        <span><strong>Custom Acrylic QR Standee:</strong> Laser-printed with your clinic logo.</span>
+                        <span><strong>Digital Financing Desk:</strong> Secure payment links and on-screen QR checkout.</span>
                       </li>
                       <li className="flex items-start gap-2">
                         <Check size={14} className="text-emerald-600 shrink-0 mt-0.5" />
@@ -672,7 +672,7 @@ export default function PartnerClinicOnboardingPage() {
                     </div>
                   </div>
 
-                  {/* Right: Countertop QR Standee Card */}
+                  {/* Activation payment QR */}
                   <div className="md:col-span-5 bg-slate-50 border border-slate-200 rounded-xl p-4 text-center space-y-2">
                     <div className="bg-white p-2.5 rounded-lg border border-slate-200/90 shadow-2xs inline-block">
                       <img 
@@ -797,7 +797,7 @@ export default function PartnerClinicOnboardingPage() {
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 text-xs text-slate-600">
                 <div className="flex items-center gap-2.5">
                   <Check size={14} className="text-emerald-600 shrink-0" />
-                  <span><strong>₹999 One-Time</strong> Setup Fee</span>
+                  <span><strong>₹999 One-Time</strong> Activation</span>
                 </div>
                 <div className="flex items-center gap-2.5">
                   <Check size={14} className="text-emerald-600 shrink-0" />
@@ -826,7 +826,7 @@ export default function PartnerClinicOnboardingPage() {
                 </div>
                 <div className="bg-white rounded-xl p-3 border border-slate-200/60 shadow-2xs space-y-1.5">
                   <div className="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 font-black text-[10px] flex items-center justify-center mx-auto">3</div>
-                  <div className="text-[11px] font-bold text-[#0B2450] leading-tight">Get QR Standee</div>
+                  <div className="text-[11px] font-bold text-[#0B2450] leading-tight">Activate Digital Desk</div>
                   <div className="text-[9.5px] text-slate-500 leading-tight">T+1 EMI payouts</div>
                 </div>
               </div>
@@ -915,7 +915,7 @@ export default function PartnerClinicOnboardingPage() {
                     <div className="text-[9.5px] text-[#0867E8] font-black uppercase tracking-wider">Action Needed</div>
                   </div>
                   <div className="bg-slate-100/60 border border-slate-200/60 rounded-xl p-2 opacity-60 space-y-0.5">
-                    <div className="text-[10px] font-bold text-slate-500 leading-tight">3. Standee</div>
+                    <div className="text-[10px] font-bold text-slate-500 leading-tight">3. Digital Desk</div>
                     <div className="text-[9.5px] text-slate-400">After KYC</div>
                   </div>
                 </div>
@@ -987,7 +987,7 @@ export default function PartnerClinicOnboardingPage() {
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 text-xs text-slate-600">
                 <div className="flex items-center gap-2.5">
                   <Check size={14} className="text-emerald-600 shrink-0" />
-                  <span><strong>₹999 One-Time</strong> Setup Fee</span>
+                  <span><strong>₹999 One-Time</strong> Activation</span>
                 </div>
                 <div className="flex items-center gap-2.5">
                   <Check size={14} className="text-emerald-600 shrink-0" />

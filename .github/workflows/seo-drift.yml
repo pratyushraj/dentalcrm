@@ -11,6 +11,7 @@ on:
       - 'scripts/lib/seo-html.mjs'
       - 'index.html'
       - 'package*.json'
+      - 'pnpm-lock.yaml'
       - 'vercel.json'
       - '.github/workflows/seo-drift.yml'
   pull_request:
@@ -21,21 +22,24 @@ on:
 jobs:
   public-html:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
       - uses: actions/setup-node@v4
         with:
-          node-version: 24
-          cache: npm
-      - run: npm ci
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
       - name: Reject shell and indexing regressions
         run: node --test scripts/seo-html.test.mjs
       - name: Build rendered production pages
-        run: npm run build
+        run: pnpm run build
         env:
           VERCEL: '1'
       - name: Validate public HTML without JavaScript
-        run: npm run seo:drift
+        run: pnpm run seo:drift
         env:
           SEO_DIST_DIR: dist

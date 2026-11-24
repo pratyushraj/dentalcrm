@@ -393,8 +393,8 @@ export const VERIFIED_DOSSIERS = [
   },
   {
     id: 'dentacare',
-    clinic_name: 'Denta Care Multispeciality',
-    legal_name: 'DENTA CARE MULTISPECIALITY CLINIC',
+    clinic_name: 'Dentacare Multispeciality Clinic',
+    legal_name: 'DENTACARE MULTISPECIALITY CLINIC',
     doctor_name: 'Dr. Sumedha Y G',
     dob: '06/04/1995',
     pan: 'EYLPS5253N',
@@ -407,7 +407,7 @@ export const VERIFIED_DOSSIERS = [
     address: 'No 130, 1st Floor, 17th Cross, 8th Main Road, Malleshwaram, Bengaluru, Karnataka - 560055',
     residential_address: 'No C-404, Skyline Beverly Park, Amruthahalli Main Road, Amruthahalli, Bengaluru, Karnataka - 560092',
     specialties: ['Cosmetic Dentistry', 'Implantology', 'Orthodontics', 'Endodontics', 'Restorative Dentistry'],
-    submission_badge: '100% Ready for Underwriting • All 5 Documents Verified',
+    submission_badge: '100% Ready for MID • Doctor Signed & Stamped Dossier Received',
     readiness: 'ready',
     missing_items: [],
     bank: {
@@ -437,8 +437,8 @@ export const VERIFIED_DOSSIERS = [
       establishment_reg: '/docs/kyc/dentacare/KPME_Registration_Certificate_dentacare.pdf',
       council_reg: '/docs/kyc/dentacare/KSDC_Registration_Certificate_dentacare.pdf'
     },
-    is_signed: false,
-    status: 'Ready for Underwriting • Awaiting Doctor Digital Signature'
+    is_signed: true,
+    status: '100% Ready for MID Issuance • Doctor Signed & Stamped Dossier Complete'
   }
 ];
 
